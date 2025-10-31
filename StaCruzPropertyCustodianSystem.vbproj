@@ -37,14 +37,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
-  </PropertyGroup>
-  <PropertyGroup>
     <OptionCompare>Binary</OptionCompare>
-  </PropertyGroup>
-  <PropertyGroup>
     <OptionStrict>Off</OptionStrict>
-  </PropertyGroup>
-  <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
@@ -59,27 +53,32 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
   </ItemGroup>
+  <!-- STAFF FORMS -->
   <ItemGroup>
-    <Import Include="Microsoft.VisualBasic" />
-    <Import Include="System" />
-    <Import Include="System.Collections" />
-    <Import Include="System.Collections.Generic" />
-    <Import Include="System.Data" />
-    <Import Include="System.Drawing" />
-    <Import Include="System.Diagnostics" />
-    <Import Include="System.Windows.Forms" />
-    <Import Include="System.Linq" />
-    <Import Include="System.Xml.Linq" />
-    <Import Include="System.Threading.Tasks" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- ===== STAFF FORMS ===== -->
+    <Compile Include="Forms\Login\login.Designer.vb">
+      <DependentUpon>login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Login\login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Register\StaffRegister.Designer.vb">
+      <DependentUpon>StaffRegister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Register\StaffRegister.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Staff\frmProfile.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Staff\frmProfile.Designer.vb">
       <DependentUpon>frmProfile.vb</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Login\login.resx">
+      <DependentUpon>login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Register\StaffRegister.resx">
+      <DependentUpon>StaffRegister.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Staff\frmProfile.resx">
       <DependentUpon>frmProfile.vb</DependentUpon>
     </EmbeddedResource>
@@ -101,7 +100,39 @@
     <EmbeddedResource Include="Forms\Staff\StaffDashboard.resx">
       <DependentUpon>StaffDashboard.vb</DependentUpon>
     </EmbeddedResource>
-    <!-- ===== DEFAULT PROJECT FILES ===== -->
+  </ItemGroup>
+  <!-- ===== ADMIN FORM ===== -->
+  <ItemGroup>
+    <Compile Include="Forms\Admin\AdminDashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminDashboard.Designer.vb">
+      <DependentUpon>AdminDashboard.vb</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\AdminDashboard.resx">
+      <DependentUpon>AdminDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <!-- DEFAULT PROJECT FILES -->
+  <ItemGroup>
+    <Compile Include="Forms\Staff\StaffLogin.Designer.vb">
+      <DependentUpon>StaffLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\StaffLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\SuperAdminDashboard.Designer.vb">
+      <DependentUpon>SuperAdminDashboard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\SuperAdminDashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserAccess\UserLevel.Designer.vb">
+      <DependentUpon>UserLevel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserAccess\UserLevel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -118,25 +149,68 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <!-- ===== CUSTOM CONTROLS ===== -->
+  </ItemGroup>
+  <!-- CUSTOM CONTROLS -->
+  <ItemGroup>
     <Compile Include="Resources\Controls\RoundedButton.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Resources\Controls\RoundedPanel.vb">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="Forms\Staff\StaffLogin.resx">
+      <DependentUpon>StaffLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserAccess\UserLevel.resx">
+      <DependentUpon>UserLevel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Controls\RoundedButton.resx">
       <DependentUpon>RoundedButton.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <!-- RESOURCES -->
   <ItemGroup>
+    <None Include="Resources\Images\logo-removebg-preview %281%29.png" />
+    <None Include="Resources\Images\logo2-removebg-preview.png" />
+    <None Include="Resources\Images\logo1-removebg-preview.png" />
+    <None Include="Resources\Images\BG1.png" />
+    <None Include="Resources\Images\BG.png" />
+    <None Include="Resources\Images\si_user-fill.png" />
+    <None Include="Resources\Images\si_user-fill %283%29.png" />
+    <None Include="Resources\Images\icSubmit.png" />
+    <None Include="Resources\Images\icStaff.png" />
+    <None Include="Resources\Images\icRequest.png" />
+    <None Include="Resources\Images\icPerson.png" />
+    <None Include="Resources\Images\icon_usermanagement.png" />
+    <None Include="Resources\Images\icon_suppliesmanagement.png" />
+    <None Include="Resources\Images\icon_search.png" />
+    <None Include="Resources\Images\icon_propertymanagement.png" />
+    <None Include="Resources\Images\icon_dashboard.png" />
+    <None Include="Resources\Images\icLogout.png" />
+    <None Include="Resources\Images\icDepartment.png" />
+    <None Include="Resources\Images\icDefault.png" />
+    <None Include="Resources\Images\hugeicons_property-edit.png" />
+    <None Include="Resources\Images\Group 5.png" />
+    <None Include="Resources\Images\clarity_internet-of-things-solid.png" />
+    <None Include="Resources\Images\icon_propertyrequest.png" />
+    <None Include="Resources\Images\icon_maintenance.png" />
+    <None Include="Resources\Images\icon_reports.png" />
+    <None Include="Resources\Images\icon_SystemConfiguration.png" />
+    <None Include="Resources\Images\icon_logout.png" />
+    <None Include="Resources\Images\profile.png" />
+    <None Include="Resources\Images\icon_search1.png" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Resources\Images\574641165_841620561884149_5934190666791988971_n-removebg-preview %281%29.png" />
+    <None Include="Resources\Images\574641165_841620561884149_5934190666791988971_n-removebg-preview %281%291.png" />
+    <None Include="Resources\Images\background.png" />
+    <Content Include="Resources\Images\basil_logout-solid.png" />
   </ItemGroup>
+  <!-- NONE FILES -->
   <ItemGroup>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -149,14 +223,9 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <!-- FOLDERS -->
   <ItemGroup>
-    <Folder Include="Forms\Admin\" />
-    <Folder Include="Forms\Login\" />
-    <Folder Include="Forms\SuperAdmin\" />
     <Folder Include="Resources\Fonts\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\Images\basil_logout-solid.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

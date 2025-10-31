@@ -1,13 +1,25 @@
-﻿Imports StaCruzPropertyCustodianSystem.Resources.Controls
-
-
+﻿Imports System
+Imports System.Drawing
+Imports System.Windows.Forms
 Imports System.Linq
+Imports StaCruzPropertyCustodianSystem.Resources.Controls
+
 Public Class StaffDashboard
-    Inherits System.Windows.Forms.Form
+    Inherits Form
 
     Private isSidebarExpanded As Boolean = True
     Private sidebarExpandedWidth As Integer = 250
     Private sidebarCollapsedWidth As Integer = 60
+
+    ' Sidebar animation timer is already declared in Designer as WithEvents
+    ' Friend WithEvents tmrSidebar As Timer
+
+    Private Sub StaffDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Set timer interval
+        tmrSidebar.Interval = 1
+        SetActiveButton(btnDashboard)
+        pnlFormLoader.Visible = False
+    End Sub
 
     Private Sub tmrSidebar_Tick(sender As Object, e As EventArgs) Handles tmrSidebar.Tick
         If isSidebarExpanded Then
@@ -41,6 +53,7 @@ Public Class StaffDashboard
         Dim colorActive As Color = Color.FromArgb(70, 90, 120)
         Dim colorDefault As Color = Color.FromArgb(35, 40, 60)
 
+        ' Reset all buttons
         btnDashboard.BackColor = colorDefault
         btnProfile.BackColor = colorDefault
         btnPropertyRequest.BackColor = colorDefault
@@ -49,6 +62,7 @@ Public Class StaffDashboard
         btnBorrowedItem.BackColor = colorDefault
         btnReports.BackColor = colorDefault
 
+        ' Highlight active button
         activeBtn.BackColor = colorActive
     End Sub
 
@@ -56,11 +70,6 @@ Public Class StaffDashboard
         If Not tmrSidebar.Enabled Then
             tmrSidebar.Start()
         End If
-    End Sub
-
-    Private Sub StaffDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetActiveButton(btnDashboard)
-        pnlFormLoader.Visible = False
     End Sub
 
     Private Sub pnlSidebar_Click(sender As Object, e As EventArgs) Handles pnlSidebar.Click
@@ -101,15 +110,19 @@ Public Class StaffDashboard
         If Not isSidebarExpanded Then ToggleSidebar()
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles comboMonth.Click
+    Private Sub comboMonth_Click(sender As Object, e As EventArgs) Handles comboMonth.Click
+        ' Optional click logic
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        ' Optional logic for ComboBox1
     End Sub
 
     Private Sub pnlFormLoader_Paint(sender As Object, e As PaintEventArgs) Handles pnlFormLoader.Paint
+        ' Optional paint logic
     End Sub
 
+    ' Load a form inside pnlFormLoader
     Private Sub loadFormIntoPanel(ByVal formToLoad As Form)
         If pnlFormLoader.Controls.Count > 0 Then pnlFormLoader.Controls.Clear()
         formToLoad.TopLevel = False
@@ -120,4 +133,5 @@ Public Class StaffDashboard
         pnlFormLoader.Visible = True
         pnlFormLoader.BringToFront()
     End Sub
+
 End Class

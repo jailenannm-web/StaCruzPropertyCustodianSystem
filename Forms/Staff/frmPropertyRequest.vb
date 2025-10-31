@@ -1,7 +1,7 @@
-﻿Imports StaCruzPropertyCustodianSystem.Resources.Controls
-
-
-
+﻿Imports System
+Imports System.Windows.Forms
+Imports Microsoft.VisualBasic
+Imports StaCruzPropertyCustodianSystem.Resources.Controls
 
 Public Class frmPropertyRequest
     Inherits System.Windows.Forms.Form

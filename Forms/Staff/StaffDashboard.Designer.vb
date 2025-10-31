@@ -1,4 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿Imports System
+Imports System.Drawing
+Imports System.Windows.Forms
+Imports StaCruzPropertyCustodianSystem.Resources.Controls
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class StaffDashboard
     Inherits System.Windows.Forms.Form
 

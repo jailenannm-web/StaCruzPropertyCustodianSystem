@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36616.10 d17.14
+VisualStudioVersion = 17.14.36616.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "StaCruzPropertyCustodianSystem", "StaCruzPropertyCustodianSystem.vbproj", "{5BA19DCE-6BE5-45B8-AADD-D54CAC6DE401}"
 EndProject
