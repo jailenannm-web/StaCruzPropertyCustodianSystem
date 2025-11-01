@@ -1,11 +1,6 @@
 ﻿Imports System
 Imports System.Windows.Forms
-Imports Microsoft.VisualBasic
-Imports StaCruzPropertyCustodianSystem.Resources.Controls
-
 Public Class frmPropertyRequest
-    Inherits System.Windows.Forms.Form
-
     Private Sub frmPropertyRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub

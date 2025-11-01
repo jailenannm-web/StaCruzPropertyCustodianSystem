@@ -1,8 +1,8 @@
 ﻿Imports System
+Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
-Imports StaCruzPropertyCustodianSystem.Resources.Controls
-
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class StaffDashboard
     Inherits System.Windows.Forms.Form
@@ -31,10 +31,6 @@ Partial Class StaffDashboard
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(StaffDashboard))
         Me.tmrSidebar = New System.Windows.Forms.Timer(Me.components)
         Me.pnlMain = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.comboMonth = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.txtPersonalHistory = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlHistoryContainer = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
@@ -43,6 +39,12 @@ Partial Class StaffDashboard
         Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnRequestProperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.pnlFormLoader = New System.Windows.Forms.Panel()
+        Me.comboMonth = New System.Windows.Forms.Label()
+        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.icStaff = New System.Windows.Forms.PictureBox()
         Me.btnLogout = New System.Windows.Forms.Button()
@@ -57,6 +59,9 @@ Partial Class StaffDashboard
         Me.pnlMain.SuspendLayout()
         Me.pnlHistoryContainer.SuspendLayout()
         CType(Me.dgvHistory, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlFormLoader.SuspendLayout()
+        Me.RoundedPanel2.SuspendLayout()
+        Me.RoundedPanel1.SuspendLayout()
         Me.pnlSidebar.SuspendLayout()
         CType(Me.icStaff, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -67,16 +72,11 @@ Partial Class StaffDashboard
         '
         'pnlMain
         '
-        Me.pnlMain.Controls.Add(Me.Label2)
-        Me.pnlMain.Controls.Add(Me.comboMonth)
-        Me.pnlMain.Controls.Add(Me.ComboBox2)
-        Me.pnlMain.Controls.Add(Me.ComboBox1)
         Me.pnlMain.Controls.Add(Me.txtPersonalHistory)
         Me.pnlMain.Controls.Add(Me.Label1)
         Me.pnlMain.Controls.Add(Me.pnlHistoryContainer)
         Me.pnlMain.Controls.Add(Me.RoundedButton2)
         Me.pnlMain.Controls.Add(Me.RoundedButton1)
-        Me.pnlMain.Controls.Add(Me.btnRequestProperty)
         Me.pnlMain.Controls.Add(Me.pnlFormLoader)
         Me.pnlMain.CornerRadius = 15
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
@@ -85,50 +85,10 @@ Partial Class StaffDashboard
         Me.pnlMain.Size = New System.Drawing.Size(1103, 749)
         Me.pnlMain.TabIndex = 1
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Leelawadee", 9.75!)
-        Me.Label2.Location = New System.Drawing.Point(770, 267)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(85, 15)
-        Me.Label2.TabIndex = 11
-        Me.Label2.Text = "Filter by year:"
-        '
-        'comboMonth
-        '
-        Me.comboMonth.AutoSize = True
-        Me.comboMonth.Font = New System.Drawing.Font("Leelawadee", 9.75!)
-        Me.comboMonth.Location = New System.Drawing.Point(524, 267)
-        Me.comboMonth.Name = "comboMonth"
-        Me.comboMonth.Size = New System.Drawing.Size(97, 15)
-        Me.comboMonth.TabIndex = 10
-        Me.comboMonth.Text = "Filter by month:"
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.BackColor = System.Drawing.Color.FromArgb(27, 60, 83)
-        Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(861, 263)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox2.TabIndex = 9
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.BackColor = System.Drawing.Color.FromArgb(27, 60, 83)
-        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(618, 265)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 8
-        '
         'txtPersonalHistory
         '
         Me.txtPersonalHistory.AutoSize = True
-        Me.txtPersonalHistory.Font = New System.Drawing.Font("Leelawadee", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.txtPersonalHistory.Font = New System.Drawing.Font("Leelawadee", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPersonalHistory.Location = New System.Drawing.Point(90, 257)
         Me.txtPersonalHistory.Name = "txtPersonalHistory"
         Me.txtPersonalHistory.Size = New System.Drawing.Size(260, 25)
@@ -138,7 +98,7 @@ Partial Class StaffDashboard
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Leelawadee", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.Label1.Font = New System.Drawing.Font("Leelawadee", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(90, 89)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(140, 25)
@@ -147,7 +107,7 @@ Partial Class StaffDashboard
         '
         'pnlHistoryContainer
         '
-        Me.pnlHistoryContainer.BackColor = System.Drawing.Color.FromArgb(27, 60, 83)
+        Me.pnlHistoryContainer.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.pnlHistoryContainer.Controls.Add(Me.dgvHistory)
         Me.pnlHistoryContainer.CornerRadius = 20
         Me.pnlHistoryContainer.Location = New System.Drawing.Point(79, 296)
@@ -160,16 +120,16 @@ Partial Class StaffDashboard
         Me.dgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvHistory.Location = New System.Drawing.Point(0, 0)
         Me.dgvHistory.Name = "dgvHistory"
-        Me.dgvHistory.Size = New System.Drawing.Size(920, 383)
+        Me.dgvHistory.Size = New System.Drawing.Size(917, 380)
         Me.dgvHistory.TabIndex = 0
         '
         'RoundedButton2
         '
-        Me.RoundedButton2.BackColor = System.Drawing.Color.FromArgb(27, 60, 83)
+        Me.RoundedButton2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.RoundedButton2.CornerRadius = 15
         Me.RoundedButton2.FlatAppearance.BorderSize = 0
         Me.RoundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton2.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton2.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RoundedButton2.ForeColor = System.Drawing.Color.White
         Me.RoundedButton2.Location = New System.Drawing.Point(738, 134)
         Me.RoundedButton2.Name = "RoundedButton2"
@@ -180,11 +140,11 @@ Partial Class StaffDashboard
         '
         'RoundedButton1
         '
-        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(27, 60, 83)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.RoundedButton1.CornerRadius = 15
         Me.RoundedButton1.FlatAppearance.BorderSize = 0
         Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton1.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RoundedButton1.ForeColor = System.Drawing.Color.White
         Me.RoundedButton1.Location = New System.Drawing.Point(417, 134)
         Me.RoundedButton1.Name = "RoundedButton1"
@@ -195,13 +155,13 @@ Partial Class StaffDashboard
         '
         'btnRequestProperty
         '
-        Me.btnRequestProperty.BackColor = System.Drawing.Color.FromArgb(27, 60, 83)
+        Me.btnRequestProperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnRequestProperty.CornerRadius = 15
         Me.btnRequestProperty.FlatAppearance.BorderSize = 0
         Me.btnRequestProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRequestProperty.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.btnRequestProperty.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRequestProperty.ForeColor = System.Drawing.Color.White
-        Me.btnRequestProperty.Location = New System.Drawing.Point(89, 123)
+        Me.btnRequestProperty.Location = New System.Drawing.Point(95, 134)
         Me.btnRequestProperty.Name = "btnRequestProperty"
         Me.btnRequestProperty.Size = New System.Drawing.Size(261, 80)
         Me.btnRequestProperty.TabIndex = 2
@@ -210,15 +170,81 @@ Partial Class StaffDashboard
         '
         'pnlFormLoader
         '
+        Me.pnlFormLoader.Controls.Add(Me.comboMonth)
+        Me.pnlFormLoader.Controls.Add(Me.RoundedPanel2)
+        Me.pnlFormLoader.Controls.Add(Me.Label2)
+        Me.pnlFormLoader.Controls.Add(Me.RoundedPanel1)
+        Me.pnlFormLoader.Controls.Add(Me.btnRequestProperty)
         Me.pnlFormLoader.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlFormLoader.Location = New System.Drawing.Point(0, 0)
         Me.pnlFormLoader.Name = "pnlFormLoader"
         Me.pnlFormLoader.Size = New System.Drawing.Size(1103, 749)
         Me.pnlFormLoader.TabIndex = 12
         '
+        'comboMonth
+        '
+        Me.comboMonth.AutoSize = True
+        Me.comboMonth.Font = New System.Drawing.Font("Leelawadee", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.comboMonth.Location = New System.Drawing.Point(485, 267)
+        Me.comboMonth.Name = "comboMonth"
+        Me.comboMonth.Size = New System.Drawing.Size(107, 15)
+        Me.comboMonth.TabIndex = 10
+        Me.comboMonth.Text = "Filter by month:"
+        '
+        'RoundedPanel2
+        '
+        Me.RoundedPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedPanel2.Controls.Add(Me.ComboBox2)
+        Me.RoundedPanel2.CornerRadius = 20
+        Me.RoundedPanel2.Location = New System.Drawing.Point(826, 261)
+        Me.RoundedPanel2.Name = "RoundedPanel2"
+        Me.RoundedPanel2.Size = New System.Drawing.Size(137, 27)
+        Me.RoundedPanel2.TabIndex = 10
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(8, 3)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox2.TabIndex = 9
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Leelawadee", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(734, 267)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(92, 15)
+        Me.Label2.TabIndex = 11
+        Me.Label2.Text = "Filter by year:"
+        '
+        'RoundedPanel1
+        '
+        Me.RoundedPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedPanel1.Controls.Add(Me.ComboBox1)
+        Me.RoundedPanel1.CornerRadius = 20
+        Me.RoundedPanel1.Location = New System.Drawing.Point(592, 261)
+        Me.RoundedPanel1.Name = "RoundedPanel1"
+        Me.RoundedPanel1.Size = New System.Drawing.Size(137, 27)
+        Me.RoundedPanel1.TabIndex = 9
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar
+        Me.ComboBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(8, 3)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.TabIndex = 8
+        '
         'pnlSidebar
         '
-        Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(27, 60, 83)
+        Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.pnlSidebar.Controls.Add(Me.icStaff)
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Controls.Add(Me.btnReports)
@@ -239,7 +265,7 @@ Partial Class StaffDashboard
         '
         'icStaff
         '
-        Me.icStaff.Image = Image.FromFile("Resources\Images\icStaff.png")
+        Me.icStaff.Image = My.Resources.Resources.icStaff
         Me.icStaff.Location = New System.Drawing.Point(74, 31)
         Me.icStaff.Name = "icStaff"
         Me.icStaff.Size = New System.Drawing.Size(97, 83)
@@ -250,12 +276,12 @@ Partial Class StaffDashboard
         'btnLogout
         '
         Me.btnLogout.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnLogout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(27, 60, 70)
+        Me.btnLogout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.btnLogout.FlatAppearance.BorderSize = 2
         Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLogout.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnLogout.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnLogout.Image = Image.FromFile("Resources\Images\icLogout.png")
+        Me.btnLogout.Image = My.Resources.Resources.icLogout
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnLogout.Location = New System.Drawing.Point(12, 551)
         Me.btnLogout.Name = "btnLogout"
@@ -268,10 +294,10 @@ Partial Class StaffDashboard
         'btnReports
         '
         Me.btnReports.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnReports.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(27, 60, 70)
+        Me.btnReports.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.btnReports.FlatAppearance.BorderSize = 2
         Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReports.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnReports.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReports.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnReports.Image = CType(resources.GetObject("btnReports.Image"), System.Drawing.Image)
         Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -286,10 +312,10 @@ Partial Class StaffDashboard
         'btnBorrowedItem
         '
         Me.btnBorrowedItem.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnBorrowedItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(27, 60, 70)
+        Me.btnBorrowedItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.btnBorrowedItem.FlatAppearance.BorderSize = 2
         Me.btnBorrowedItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBorrowedItem.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnBorrowedItem.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBorrowedItem.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnBorrowedItem.Image = CType(resources.GetObject("btnBorrowedItem.Image"), System.Drawing.Image)
         Me.btnBorrowedItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -304,10 +330,10 @@ Partial Class StaffDashboard
         'btnMyRequest
         '
         Me.btnMyRequest.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnMyRequest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(27, 60, 70)
+        Me.btnMyRequest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.btnMyRequest.FlatAppearance.BorderSize = 2
         Me.btnMyRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMyRequest.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnMyRequest.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMyRequest.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnMyRequest.Image = CType(resources.GetObject("btnMyRequest.Image"), System.Drawing.Image)
         Me.btnMyRequest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -322,10 +348,10 @@ Partial Class StaffDashboard
         'btnViewInventory
         '
         Me.btnViewInventory.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnViewInventory.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(27, 60, 70)
+        Me.btnViewInventory.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.btnViewInventory.FlatAppearance.BorderSize = 2
         Me.btnViewInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnViewInventory.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnViewInventory.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnViewInventory.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnViewInventory.Image = CType(resources.GetObject("btnViewInventory.Image"), System.Drawing.Image)
         Me.btnViewInventory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -340,12 +366,12 @@ Partial Class StaffDashboard
         'btnPropertyRequest
         '
         Me.btnPropertyRequest.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnPropertyRequest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(27, 60, 70)
+        Me.btnPropertyRequest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.btnPropertyRequest.FlatAppearance.BorderSize = 2
         Me.btnPropertyRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPropertyRequest.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnPropertyRequest.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPropertyRequest.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnPropertyRequest.Image = CType(resources.GetObject("btnPropertyRequest.Image"), System.Drawing.Image)
+        Me.btnPropertyRequest.Image = My.Resources.Resources.icRequest
         Me.btnPropertyRequest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnPropertyRequest.Location = New System.Drawing.Point(12, 266)
         Me.btnPropertyRequest.Name = "btnPropertyRequest"
@@ -358,12 +384,12 @@ Partial Class StaffDashboard
         'btnProfile
         '
         Me.btnProfile.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnProfile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(27, 60, 70)
+        Me.btnProfile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.btnProfile.FlatAppearance.BorderSize = 2
         Me.btnProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnProfile.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnProfile.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnProfile.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnProfile.Image = CType(resources.GetObject("btnProfile.Image"), System.Drawing.Image)
+        Me.btnProfile.Image = My.Resources.Resources.icPerson
         Me.btnProfile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnProfile.Location = New System.Drawing.Point(12, 209)
         Me.btnProfile.Name = "btnProfile"
@@ -376,12 +402,12 @@ Partial Class StaffDashboard
         'btnDashboard
         '
         Me.btnDashboard.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnDashboard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(27, 60, 70)
+        Me.btnDashboard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.btnDashboard.FlatAppearance.BorderSize = 2
         Me.btnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDashboard.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnDashboard.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDashboard.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnDashboard.Image = CType(resources.GetObject("btnDashboard.Image"), System.Drawing.Image)
+        Me.btnDashboard.Image = My.Resources.Resources.icDefault
         Me.btnDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDashboard.Location = New System.Drawing.Point(12, 152)
         Me.btnDashboard.Name = "btnDashboard"
@@ -394,27 +420,34 @@ Partial Class StaffDashboard
         'txtStaff
         '
         Me.txtStaff.AutoSize = True
-        Me.txtStaff.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.txtStaff.Font = New System.Drawing.Font("Leelawadee", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStaff.ForeColor = System.Drawing.Color.White
-        Me.txtStaff.Location = New System.Drawing.Point(86, 117)
+        Me.txtStaff.Location = New System.Drawing.Point(100, 120)
         Me.txtStaff.Name = "txtStaff"
-        Me.txtStaff.Size = New System.Drawing.Size(77, 23)
+        Me.txtStaff.Size = New System.Drawing.Size(47, 15)
         Me.txtStaff.TabIndex = 1
-        Me.txtStaff.Text = "Staff"
+        Me.txtStaff.Text = "Staff 1"
         '
         'StaffDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.AntiqueWhite
         Me.ClientSize = New System.Drawing.Size(1370, 749)
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.pnlSidebar)
+        Me.ForeColor = System.Drawing.Color.Black
         Me.Name = "StaffDashboard"
         Me.Text = "StaffDashboard"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlMain.ResumeLayout(False)
         Me.pnlMain.PerformLayout()
         Me.pnlHistoryContainer.ResumeLayout(False)
         CType(Me.dgvHistory, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlFormLoader.ResumeLayout(False)
+        Me.pnlFormLoader.PerformLayout()
+        Me.RoundedPanel2.ResumeLayout(False)
+        Me.RoundedPanel1.ResumeLayout(False)
         Me.pnlSidebar.ResumeLayout(False)
         Me.pnlSidebar.PerformLayout()
         CType(Me.icStaff, System.ComponentModel.ISupportInitialize).EndInit()
@@ -422,10 +455,9 @@ Partial Class StaffDashboard
 
     End Sub
 
-    Friend WithEvents tmrSidebar As Timer
-    Friend WithEvents pnlMain As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents icStaff As PictureBox
+    Friend WithEvents btnDashboard As Button
+    Friend WithEvents txtStaff As Label
     Friend WithEvents btnLogout As Button
     Friend WithEvents btnReports As Button
     Friend WithEvents btnBorrowedItem As Button
@@ -433,18 +465,21 @@ Partial Class StaffDashboard
     Friend WithEvents btnViewInventory As Button
     Friend WithEvents btnPropertyRequest As Button
     Friend WithEvents btnProfile As Button
-    Friend WithEvents btnDashboard As Button
-    Friend WithEvents txtStaff As Label
-    Friend WithEvents pnlFormLoader As Panel
+    Friend WithEvents icStaff As PictureBox
+    Friend WithEvents tmrSidebar As Timer
+    Friend WithEvents pnlMain As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents btnRequestProperty As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents btnRequestProperty As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtPersonalHistory As Label
     Friend WithEvents pnlHistoryContainer As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents dgvHistory As DataGridView
-    Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents txtPersonalHistory As Label
+    Friend WithEvents dgvHistory As DataGridView
     Friend WithEvents comboMonth As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents pnlFormLoader As Panel
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
 End Class

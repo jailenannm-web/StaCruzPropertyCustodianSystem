@@ -1,4 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿Imports System
+Imports System.ComponentModel
+Imports System.Drawing
+Imports System.Drawing.Drawing2D
+Imports System.Windows.Forms
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmProfile
     Inherits System.Windows.Forms.Form
 
@@ -38,9 +43,9 @@ Partial Class frmProfile
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-        Me.RoundedPanel4 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-        Me.RoundedPanel5 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+        Me.RoundedPanel3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel4 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel5 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         txtFullName = New System.Windows.Forms.TextBox()
         txtContact = New System.Windows.Forms.TextBox()
         txtEmail = New System.Windows.Forms.TextBox()
@@ -280,24 +285,20 @@ Partial Class frmProfile
 
     End Sub
 
-    Friend WithEvents lblProfile As System.Windows.Forms.Label
-    Friend WithEvents lblFullName As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents lblPosition As System.Windows.Forms.Label
-    Friend WithEvents lblContact As System.Windows.Forms.Label
-    Friend WithEvents lblEmail As System.Windows.Forms.Label
-    Friend WithEvents lblAssignedDep As System.Windows.Forms.Label
-
+    Friend WithEvents lblProfile As Label
+    Friend WithEvents lblFullName As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblPosition As Label
+    Friend WithEvents lblContact As Label
+    Friend WithEvents lblEmail As Label
+    Friend WithEvents lblAssignedDep As Label
     Friend WithEvents btnEdit As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnUpdate As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-
-    Public WithEvents comboPosition As System.Windows.Forms.ComboBox
-    Public WithEvents comboAssigned As System.Windows.Forms.ComboBox
-
+    Public WithEvents comboPosition As ComboBox
+    Public WithEvents comboAssigned As ComboBox
     Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents RoundedPanel4 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents RoundedPanel5 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-
 End Class

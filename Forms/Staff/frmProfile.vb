@@ -1,16 +1,11 @@
 ﻿Imports System
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
-Imports StaCruzPropertyCustodianSystem.Resources.Controls
-
-
 
 Public Class frmProfile
-    Inherits System.Windows.Forms.Form
-
-    Private txtFullName As TextBox
-    Private txtContact As TextBox
-    Private txtEmail As TextBox
+    Private txtFullName As Object
+    Private txtContact As Object
+    Private txtEmail As Object
 
     Private Sub frmProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -26,20 +21,26 @@ Public Class frmProfile
         txtContact.ReadOnly = False
         txtEmail.ReadOnly = False
 
-        ' Enable ComboBoxes
+        ' Use .Enabled = True for ComboBoxes
         comboPosition.Enabled = True
         comboAssigned.Enabled = True
+        ' (Add any other comboboxes here, like comboAssigned)
+        ' comboAssigned.Enabled = True 
 
+        ' Focus the first box
         txtFullName.Focus()
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        ' --- 1. Add SQL UPDATE logic here later ---
+        ' --- 1. Add your SQL UPDATE code here ---
+        ' (Save the data from txtFullName.Text, comboPosition.Text, etc.)
 
-        ' --- 2. Lock inputs again ---
+        ' --- 2. Make them ReadOnly/Disabled again after saving ---
         txtFullName.ReadOnly = True
         txtContact.ReadOnly = True
         txtEmail.ReadOnly = True
+
+        ' Use .Enabled = False to lock ComboBoxes
         comboPosition.Enabled = False
         comboAssigned.Enabled = False
 
