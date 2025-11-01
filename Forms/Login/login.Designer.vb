@@ -36,9 +36,6 @@ Partial Class Login
         '
         'Panel1
         '
-        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.btn_Login)
@@ -48,10 +45,11 @@ Partial Class Login
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.txb_Username)
-        Me.Panel1.Location = New System.Drawing.Point(1325, 46)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel1.Location = New System.Drawing.Point(1145, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(779, 1007)
+        Me.Panel1.Size = New System.Drawing.Size(779, 1097)
         Me.Panel1.TabIndex = 4
         '
         'Label1
@@ -71,8 +69,8 @@ Partial Class Login
         Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Login.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Login.ForeColor = System.Drawing.Color.White
-        Me.btn_Login.Location = New System.Drawing.Point(467, 828)
-        Me.btn_Login.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Login.Location = New System.Drawing.Point(467, 918)
+        Me.btn_Login.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Login.Name = "btn_Login"
         Me.btn_Login.Size = New System.Drawing.Size(203, 60)
         Me.btn_Login.TabIndex = 7
@@ -84,8 +82,8 @@ Partial Class Login
         Me.btn_Cancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_Cancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(101, 828)
-        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Cancel.Location = New System.Drawing.Point(101, 918)
+        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(205, 60)
         Me.btn_Cancel.TabIndex = 6
@@ -97,20 +95,21 @@ Partial Class Login
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(259, 465)
+        Me.Label6.Location = New System.Drawing.Point(295, 511)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(211, 46)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "Username"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'txb_Password
         '
         Me.txb_Password.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txb_Password.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Password.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Password.Location = New System.Drawing.Point(125, 601)
-        Me.txb_Password.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txb_Password.Location = New System.Drawing.Point(125, 654)
+        Me.txb_Password.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Password.Multiline = True
         Me.txb_Password.Name = "txb_Password"
         Me.txb_Password.Size = New System.Drawing.Size(512, 52)
@@ -130,20 +129,21 @@ Partial Class Login
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label8.Location = New System.Drawing.Point(273, 656)
+        Me.Label8.Location = New System.Drawing.Point(302, 710)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(204, 46)
         Me.Label8.TabIndex = 2
         Me.Label8.Text = "Password"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'txb_Username
         '
         Me.txb_Username.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txb_Username.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Username.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Username.Location = New System.Drawing.Point(125, 410)
-        Me.txb_Username.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txb_Username.Location = New System.Drawing.Point(125, 455)
+        Me.txb_Username.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Username.Multiline = True
         Me.txb_Username.Name = "txb_Username"
         Me.txb_Username.Size = New System.Drawing.Size(512, 52)
@@ -153,11 +153,15 @@ Partial Class Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.BG1
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1924, 1097)
         Me.Controls.Add(Me.Panel1)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Login"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Login"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)

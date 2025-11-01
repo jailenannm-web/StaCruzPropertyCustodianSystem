@@ -167,7 +167,7 @@ Partial Class UserLevel
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "UserLevel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form1"
+        Me.Text = "UserAccess"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
