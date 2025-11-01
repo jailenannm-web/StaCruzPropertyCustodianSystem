@@ -65,9 +65,9 @@ Partial Class StaffRegister
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(845, 29)
+        Me.Panel1.Location = New System.Drawing.Point(310, 25)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1042, 957)
+        Me.Panel1.Size = New System.Drawing.Size(1045, 961)
         Me.Panel1.TabIndex = 0
         '
         'btn_Login
@@ -248,7 +248,7 @@ Partial Class StaffRegister
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.BG1
-        Me.ClientSize = New System.Drawing.Size(1924, 1061)
+        Me.ClientSize = New System.Drawing.Size(1614, 1061)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "StaffRegister"
         Me.Text = "Register"

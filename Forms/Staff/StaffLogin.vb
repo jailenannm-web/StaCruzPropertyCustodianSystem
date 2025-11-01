@@ -13,10 +13,11 @@ Public Class StaffLogin
     End Sub
 
     ' Login button click (you can add your login logic here)
-    Private Sub btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
-        ' Example: Check username/password (replace with your logic)
+    Private Sub btn_Login_Click(sender As Object, e As EventArgs)
+        ' Example: Check username/password (replace with your logic) 
         Dim username As String = txb_Username.Text
-        Dim password As String = Txb_Password.Text
+        Dim password As String = txb_Password.Text
+
 
         ' TODO: Add actual authentication here
 
@@ -27,11 +28,15 @@ Public Class StaffLogin
     End Sub
 
     ' Cancel button click
+
+
     Private Sub btn_Cancel_Click(sender As Object, e As EventArgs) Handles btn_Cancel.Click
-        ' Go back to general User form
-        Dim loginForm As New StaffLogin()
-        loginForm.Show()  ' This is OK because StaffLogin is a Form
-        Me.Close()       ' Close the StaffLogin form
+        Dim userLevelForm As New UserLevel()
+        userLevelForm.Show()
+        Me.Close()
     End Sub
 
+    Private Sub btn_Login_Click_1(sender As Object, e As EventArgs) Handles btn_Login.Click
+
+    End Sub
 End Class

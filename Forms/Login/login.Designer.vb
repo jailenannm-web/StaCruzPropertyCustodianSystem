@@ -47,9 +47,9 @@ Partial Class Login
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.txb_Username)
         Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Location = New System.Drawing.Point(1252, 27)
+        Me.Panel2.Location = New System.Drawing.Point(988, 33)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(646, 944)
+        Me.Panel2.Size = New System.Drawing.Size(584, 818)
         Me.Panel2.TabIndex = 1
         '
         'Button2
@@ -57,7 +57,7 @@ Partial Class Login
         Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.Button2.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(364, 718)
+        Me.Button2.Location = New System.Drawing.Point(359, 627)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(152, 49)
         Me.Button2.TabIndex = 7
@@ -68,7 +68,7 @@ Partial Class Login
         '
         Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(120, 718)
+        Me.btn_Cancel.Location = New System.Drawing.Point(85, 627)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(154, 49)
         Me.btn_Cancel.TabIndex = 6
@@ -80,7 +80,7 @@ Partial Class Login
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(60, 461)
+        Me.Label4.Location = New System.Drawing.Point(203, 332)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(197, 56)
         Me.Label4.TabIndex = 5
@@ -90,10 +90,10 @@ Partial Class Login
         '
         Me.Txb_Password.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.Txb_Password.Font = New System.Drawing.Font("Poppins", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Txb_Password.Location = New System.Drawing.Point(263, 584)
+        Me.Txb_Password.Location = New System.Drawing.Point(103, 442)
         Me.Txb_Password.Multiline = True
         Me.Txb_Password.Name = "Txb_Password"
-        Me.Txb_Password.Size = New System.Drawing.Size(242, 42)
+        Me.Txb_Password.Size = New System.Drawing.Size(384, 42)
         Me.Txb_Password.TabIndex = 4
         '
         'Label3
@@ -109,7 +109,7 @@ Partial Class Login
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(71, 584)
+        Me.Label2.Location = New System.Drawing.Point(214, 487)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(186, 56)
         Me.Label2.TabIndex = 2
@@ -119,10 +119,10 @@ Partial Class Login
         '
         Me.txb_Username.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Username.Font = New System.Drawing.Font("Poppins", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Username.Location = New System.Drawing.Point(263, 461)
+        Me.txb_Username.Location = New System.Drawing.Point(103, 287)
         Me.txb_Username.Multiline = True
         Me.txb_Username.Name = "txb_Username"
-        Me.txb_Username.Size = New System.Drawing.Size(242, 42)
+        Me.txb_Username.Size = New System.Drawing.Size(384, 42)
         Me.txb_Username.TabIndex = 1
         '
         'Label1
@@ -130,7 +130,7 @@ Partial Class Login
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Poppins ExtraBold", 60.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(162, 204)
+        Me.Label1.Location = New System.Drawing.Point(149, 76)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(309, 141)
         Me.Label1.TabIndex = 0
@@ -141,7 +141,7 @@ Partial Class Login
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.BG1
-        Me.ClientSize = New System.Drawing.Size(1924, 1061)
+        Me.ClientSize = New System.Drawing.Size(1614, 891)
         Me.Controls.Add(Me.Panel2)
         Me.Name = "Login"
         Me.Text = "login"
@@ -161,6 +161,5 @@ Partial Class Login
     Friend WithEvents Button2 As Button
     Friend WithEvents btn_Cancel As Button
     Friend WithEvents btn_Login As Button
-
 
 End Class

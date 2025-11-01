@@ -121,10 +121,10 @@
     <Compile Include="Forms\Staff\StaffLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\SuperAdminDashboard.Designer.vb">
-      <DependentUpon>SuperAdminDashboard.vb</DependentUpon>
+    <Compile Include="Forms\SuperAdmin\DashBoard.Designer.vb">
+      <DependentUpon>DashBoard.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\SuperAdminDashboard.vb">
+    <Compile Include="Forms\SuperAdmin\DashBoard.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\UserAccess\UserLevel.Designer.vb">
@@ -160,6 +160,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\Staff\StaffLogin.resx">
       <DependentUpon>StaffLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\DashBoard.resx">
+      <DependentUpon>DashBoard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserAccess\UserLevel.resx">
       <DependentUpon>UserLevel.vb</DependentUpon>

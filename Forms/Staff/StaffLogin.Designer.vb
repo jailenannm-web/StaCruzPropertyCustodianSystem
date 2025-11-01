@@ -25,52 +25,52 @@ Partial Class StaffLogin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btn_Login = New System.Windows.Forms.Button()
         Me.btn_Cancel = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Txb_Password = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txb_Password = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.txb_Username = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel2.SuspendLayout()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(222, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.btn_Login)
-        Me.Panel2.Controls.Add(Me.btn_Cancel)
-        Me.Panel2.Controls.Add(Me.Label4)
-        Me.Panel2.Controls.Add(Me.Txb_Password)
-        Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Controls.Add(Me.txb_Username)
-        Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Location = New System.Drawing.Point(1246, 30)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(646, 944)
-        Me.Panel2.TabIndex = 2
         '
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Poppins", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.Label5.Location = New System.Drawing.Point(77, 628)
+        Me.Label5.Location = New System.Drawing.Point(171, 530)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(287, 23)
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "Doesn’t have an account? Register here"
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Controls.Add(Me.btn_Login)
+        Me.Panel1.Controls.Add(Me.btn_Cancel)
+        Me.Panel1.Controls.Add(Me.Label6)
+        Me.Panel1.Controls.Add(Me.txb_Password)
+        Me.Panel1.Controls.Add(Me.Label7)
+        Me.Panel1.Controls.Add(Me.Label8)
+        Me.Panel1.Controls.Add(Me.txb_Username)
+        Me.Panel1.Controls.Add(Me.Label9)
+        Me.Panel1.Location = New System.Drawing.Point(986, 33)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(584, 818)
+        Me.Panel1.TabIndex = 3
         '
         'btn_Login
         '
         Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Login.ForeColor = System.Drawing.Color.White
-        Me.btn_Login.Location = New System.Drawing.Point(353, 718)
+        Me.btn_Login.Location = New System.Drawing.Point(359, 627)
         Me.btn_Login.Name = "btn_Login"
         Me.btn_Login.Size = New System.Drawing.Size(152, 49)
         Me.btn_Login.TabIndex = 7
@@ -81,97 +81,97 @@ Partial Class StaffLogin
         '
         Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(120, 718)
+        Me.btn_Cancel.Location = New System.Drawing.Point(85, 627)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(154, 49)
         Me.btn_Cancel.TabIndex = 6
         Me.btn_Cancel.Text = "Cancel"
         Me.btn_Cancel.UseVisualStyleBackColor = True
         '
-        'Label4
+        'Label6
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(60, 461)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(197, 56)
-        Me.Label4.TabIndex = 5
-        Me.Label4.Text = "Username"
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label6.Location = New System.Drawing.Point(203, 332)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(197, 56)
+        Me.Label6.TabIndex = 5
+        Me.Label6.Text = "Username"
         '
-        'Txb_Password
+        'txb_Password
         '
-        Me.Txb_Password.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.Txb_Password.Font = New System.Drawing.Font("Poppins", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Txb_Password.Location = New System.Drawing.Point(263, 584)
-        Me.Txb_Password.Multiline = True
-        Me.Txb_Password.Name = "Txb_Password"
-        Me.Txb_Password.Size = New System.Drawing.Size(242, 42)
-        Me.Txb_Password.TabIndex = 4
+        Me.txb_Password.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txb_Password.Font = New System.Drawing.Font("Poppins", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_Password.Location = New System.Drawing.Point(103, 442)
+        Me.txb_Password.Multiline = True
+        Me.txb_Password.Name = "txb_Password"
+        Me.txb_Password.Size = New System.Drawing.Size(384, 42)
+        Me.txb_Password.TabIndex = 4
         '
-        'Label3
+        'Label7
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(170, 567)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(0, 13)
-        Me.Label3.TabIndex = 3
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(170, 567)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(0, 13)
+        Me.Label7.TabIndex = 3
         '
-        'Label2
+        'Label8
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(71, 584)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(186, 56)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Password"
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label8.Location = New System.Drawing.Point(214, 487)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(186, 56)
+        Me.Label8.TabIndex = 2
+        Me.Label8.Text = "Password"
         '
         'txb_Username
         '
         Me.txb_Username.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Username.Font = New System.Drawing.Font("Poppins", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Username.Location = New System.Drawing.Point(263, 461)
+        Me.txb_Username.Location = New System.Drawing.Point(103, 287)
         Me.txb_Username.Multiline = True
         Me.txb_Username.Name = "txb_Username"
-        Me.txb_Username.Size = New System.Drawing.Size(242, 42)
+        Me.txb_Username.Size = New System.Drawing.Size(384, 42)
         Me.txb_Username.TabIndex = 1
         '
-        'Label1
+        'Label9
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins ExtraBold", 60.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(162, 204)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(309, 141)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "LOGIN"
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Poppins ExtraBold", 60.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label9.Location = New System.Drawing.Point(149, 76)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(309, 141)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "LOGIN"
         '
         'StaffLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = My.Resources.Resources.BG1
-        Me.ClientSize = New System.Drawing.Size(1921, 1061)
-        Me.Controls.Add(Me.Panel2)
+        Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.BG1
+        Me.ClientSize = New System.Drawing.Size(1614, 891)
+        Me.Controls.Add(Me.Panel1)
         Me.Name = "StaffLogin"
         Me.Text = "StaffLogin"
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Panel1 As Panel
     Friend WithEvents btn_Login As Button
     Friend WithEvents btn_Cancel As Button
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Txb_Password As TextBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txb_Password As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
     Friend WithEvents txb_Username As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents Label9 As Label
 End Class

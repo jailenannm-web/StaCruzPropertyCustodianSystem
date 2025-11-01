@@ -22,4 +22,11 @@ Public Class StaffRegister
         Me.Close()
     End Sub
 
+    Private Sub btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
+        Dim loginForm As New Login()
+        Login.Show()
+        Me.Hide()
+    End Sub
+
+
 End Class

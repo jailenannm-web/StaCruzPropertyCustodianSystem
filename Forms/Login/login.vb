@@ -11,7 +11,7 @@ Public Class Login
         ' TODO: Add authentication logic for SuperAdmin/Admin
         ' Example: If username = "superadmin" Then open SuperAdminDashboard
         If username = "superadmin" Then
-            Dim dashboard As New SuperAdminDashboard()
+            Dim dashboard As New AdminDashboard()
             dashboard.Show()
             Me.Close()
         ElseIf username = "admin" Then
@@ -29,5 +29,6 @@ Public Class Login
         userLevelForm.Show()
         Me.Close()
     End Sub
+
 
 End Class
