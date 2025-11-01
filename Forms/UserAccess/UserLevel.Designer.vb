@@ -76,7 +76,7 @@ Partial Class UserLevel
         Me.Panel1.Controls.Add(Me.btn_Admin)
         Me.Panel1.Controls.Add(Me.btn_SuperAdmin)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(807, 32)
+        Me.Panel1.Location = New System.Drawing.Point(962, 34)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(584, 818)
         Me.Panel1.TabIndex = 0
@@ -96,7 +96,7 @@ Partial Class UserLevel
         Me.btn_Staff.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Staff.Font = New System.Drawing.Font("Poppins", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Staff.ForeColor = System.Drawing.Color.White
-        Me.btn_Staff.Location = New System.Drawing.Point(121, 628)
+        Me.btn_Staff.Location = New System.Drawing.Point(109, 630)
         Me.btn_Staff.Name = "btn_Staff"
         Me.btn_Staff.Size = New System.Drawing.Size(373, 75)
         Me.btn_Staff.TabIndex = 3
@@ -108,7 +108,7 @@ Partial Class UserLevel
         Me.btn_Admin.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Admin.Font = New System.Drawing.Font("Poppins", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Admin.ForeColor = System.Drawing.Color.White
-        Me.btn_Admin.Location = New System.Drawing.Point(121, 497)
+        Me.btn_Admin.Location = New System.Drawing.Point(109, 489)
         Me.btn_Admin.Name = "btn_Admin"
         Me.btn_Admin.Size = New System.Drawing.Size(373, 75)
         Me.btn_Admin.TabIndex = 2
@@ -120,7 +120,7 @@ Partial Class UserLevel
         Me.btn_SuperAdmin.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_SuperAdmin.Font = New System.Drawing.Font("Poppins", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_SuperAdmin.ForeColor = System.Drawing.Color.White
-        Me.btn_SuperAdmin.Location = New System.Drawing.Point(121, 365)
+        Me.btn_SuperAdmin.Location = New System.Drawing.Point(109, 345)
         Me.btn_SuperAdmin.Name = "btn_SuperAdmin"
         Me.btn_SuperAdmin.Size = New System.Drawing.Size(373, 75)
         Me.btn_SuperAdmin.TabIndex = 1
@@ -142,7 +142,7 @@ Partial Class UserLevel
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.BG1
-        Me.ClientSize = New System.Drawing.Size(1426, 1061)
+        Me.ClientSize = New System.Drawing.Size(1614, 891)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)

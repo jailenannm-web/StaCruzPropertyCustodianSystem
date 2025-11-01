@@ -17,19 +17,19 @@ Public Class UserLevel
     End Sub
 
     Private Sub btn_SuperAdmin_Click(sender As Object, e As EventArgs) Handles btn_SuperAdmin.Click
-        Dim superAdminForm As New login()
-        login.Show()
+        Dim superAdminForm As New SuperAdmin_Login()
+        superAdminForm.Show()
         Me.Hide()
     End Sub
 
     Private Sub btn_Admin_Click(sender As Object, e As EventArgs) Handles btn_Admin.Click
-        Dim adminForm As New login()
-        login.Show()
+        Dim adminForm As New Login()
+        Login.Show()
         Me.Hide()
     End Sub
 
     Private Sub btn_Staff_Click(sender As Object, e As EventArgs) Handles btn_Staff.Click
-        Dim adminForm As New login()
+        Dim adminForm As New Login()
         StaffLogin.Show()
         Me.Hide()
     End Sub

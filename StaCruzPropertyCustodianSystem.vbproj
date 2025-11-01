@@ -55,10 +55,22 @@
   </ItemGroup>
   <!-- STAFF FORMS -->
   <ItemGroup>
-    <Compile Include="Forms\Login\login.Designer.vb">
-      <DependentUpon>login.vb</DependentUpon>
+    <Compile Include="Forms\Login\Login.Designer.vb">
+      <DependentUpon>Login.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Login\login.vb">
+    <Compile Include="Forms\Login\Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Login\SuperAdmin_Login.Designer.vb">
+      <DependentUpon>SuperAdmin_Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Login\SuperAdmin_Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Logout\logout.Designer.vb">
+      <DependentUpon>logout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Logout\logout.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Register\StaffRegister.Designer.vb">
@@ -85,8 +97,14 @@
     <Compile Include="Forms\Staff\frmProfile.Designer.vb">
       <DependentUpon>frmProfile.vb</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\Login\login.resx">
-      <DependentUpon>login.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Login\Login.resx">
+      <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Login\SuperAdmin_Login.resx">
+      <DependentUpon>SuperAdmin_Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Logout\logout.resx">
+      <DependentUpon>logout.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Register\StaffRegister.resx">
       <DependentUpon>StaffRegister.vb</DependentUpon>
@@ -157,10 +175,58 @@
     <Compile Include="Forms\Staff\StaffLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\SuperAdminDashboard.Designer.vb">
-      <DependentUpon>SuperAdminDashboard.vb</DependentUpon>
+    <Compile Include="Forms\SuperAdmin\DashBoard.Designer.vb">
+      <DependentUpon>DashBoard.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\SuperAdminDashboard.vb">
+    <Compile Include="Forms\SuperAdmin\DashBoard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\DepartmentManagement.Designer.vb">
+      <DependentUpon>DepartmentManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\DepartmentManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\MaintenanceManagement.Designer.vb">
+      <DependentUpon>MaintenanceManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\MaintenanceManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\PropertyManagement.Designer.vb">
+      <DependentUpon>PropertyManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\PropertyManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\PropertyRequestManagement.Designer.vb">
+      <DependentUpon>PropertyRequestManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\PropertyRequestManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Report.Designer.vb">
+      <DependentUpon>Report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Supplies Management.Designer.vb">
+      <DependentUpon>Supplies Management.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Supplies Management.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\SystemConfiguration.Designer.vb">
+      <DependentUpon>SystemConfiguration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\SystemConfiguration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\UserManagement.Designer.vb">
+      <DependentUpon>UserManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\UserManagement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\UserAccess\UserLevel.Designer.vb">
@@ -196,6 +262,33 @@
     </Compile>
     <EmbeddedResource Include="Forms\Staff\StaffLogin.resx">
       <DependentUpon>StaffLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\DashBoard.resx">
+      <DependentUpon>DashBoard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\DepartmentManagement.resx">
+      <DependentUpon>DepartmentManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\MaintenanceManagement.resx">
+      <DependentUpon>MaintenanceManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\PropertyManagement.resx">
+      <DependentUpon>PropertyManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\PropertyRequestManagement.resx">
+      <DependentUpon>PropertyRequestManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Report.resx">
+      <DependentUpon>Report.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Supplies Management.resx">
+      <DependentUpon>Supplies Management.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\SystemConfiguration.resx">
+      <DependentUpon>SystemConfiguration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\UserManagement.resx">
+      <DependentUpon>UserManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserAccess\UserLevel.resx">
       <DependentUpon>UserLevel.vb</DependentUpon>
