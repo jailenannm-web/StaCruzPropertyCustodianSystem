@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class DashBoard
+Partial Class Supplies_Management
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -52,10 +52,10 @@ Partial Class DashBoard
         Me.Panel1.Controls.Add(Me.btn_UserManagement)
         Me.Panel1.Controls.Add(Me.btn_DashBoard)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Location = New System.Drawing.Point(1, 1)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(323, 767)
-        Me.Panel1.TabIndex = 0
+        Me.Panel1.TabIndex = 13
         '
         'btn_Logout
         '
@@ -203,23 +203,22 @@ Partial Class DashBoard
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(348, 23)
+        Me.Label2.Location = New System.Drawing.Point(349, 24)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(208, 56)
-        Me.Label2.TabIndex = 12
-        Me.Label2.Text = "DashBoard"
+        Me.Label2.Size = New System.Drawing.Size(399, 56)
+        Me.Label2.TabIndex = 14
+        Me.Label2.Text = "Supplies Management"
         '
-        'DashBoard
+        'Supplies_Management
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1614, 891)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel1)
-        Me.ForeColor = System.Drawing.Color.White
-        Me.Name = "DashBoard"
-        Me.Text = "DashBoard"
+        Me.Controls.Add(Me.Label2)
+        Me.Name = "Supplies_Management"
+        Me.Text = "Supplies_Management"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -228,8 +227,6 @@ Partial Class DashBoard
     End Sub
 
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents btn_DashBoard As System.Windows.Forms.Button
     Friend WithEvents btn_Logout As System.Windows.Forms.Button
     Friend WithEvents btn_SystemConfiguration As System.Windows.Forms.Button
     Friend WithEvents btn_Reports As System.Windows.Forms.Button
@@ -239,5 +236,7 @@ Partial Class DashBoard
     Friend WithEvents btn_SuppliesManagement As System.Windows.Forms.Button
     Friend WithEvents btn_PropertyManagement As System.Windows.Forms.Button
     Friend WithEvents btn_UserManagement As System.Windows.Forms.Button
+    Friend WithEvents btn_DashBoard As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
 End Class
