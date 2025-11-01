@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.StaCruzPropertyCustodianSystem.AdminDashboard
+            Me.MainForm = Global.StaCruzPropertyCustodianSystem.UserLevel
         End Sub
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
