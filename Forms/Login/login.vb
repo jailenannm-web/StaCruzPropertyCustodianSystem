@@ -1,4 +1,6 @@
 ﻿Imports System
+Imports System.Drawing
+Imports System.Windows.Forms
 
 Public Class Login
 
@@ -42,6 +44,52 @@ Public Class Login
     End Sub
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Make form full screen but not covering taskbar
+        Me.Bounds = Screen.FromHandle(Me.Handle).WorkingArea
 
+        ' Apply placeholders
+        SetPlaceholder(txb_Username, "Username")
+        SetPlaceholder(txb_Password, "Password", True)
+    End Sub
+
+    ' === Placeholder setup ===
+    Private Sub SetPlaceholder(textBox As TextBox, placeholder As String, Optional isPassword As Boolean = False)
+        If String.IsNullOrWhiteSpace(textBox.Text) Then
+            textBox.ForeColor = Color.Gray
+            textBox.Text = placeholder
+            If isPassword Then textBox.UseSystemPasswordChar = False
+        End If
+    End Sub
+
+    Private Sub RemovePlaceholder(textBox As TextBox, placeholder As String, Optional isPassword As Boolean = False)
+        If textBox.Text = placeholder Then
+            textBox.Text = ""
+            textBox.ForeColor = Color.Black
+            If isPassword Then textBox.UseSystemPasswordChar = True
+        End If
+    End Sub
+
+    Private Sub PanelCard_Paint(sender As Object, e As Windows.Forms.PaintEventArgs)
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub txb_Username_GotFocus(sender As Object, e As EventArgs) Handles txb_Username.GotFocus
+        RemovePlaceholder(txb_Username, "Username")
+    End Sub
+
+    Private Sub txb_Username_LostFocus(sender As Object, e As EventArgs) Handles txb_Username.LostFocus
+        SetPlaceholder(txb_Username, "Username")
+    End Sub
+
+    Private Sub txb_Password_GotFocus(sender As Object, e As EventArgs) Handles txb_Password.GotFocus
+        RemovePlaceholder(txb_Password, "Password", True)
+    End Sub
+
+    Private Sub txb_Password_LostFocus(sender As Object, e As EventArgs) Handles txb_Password.LostFocus
+        SetPlaceholder(txb_Password, "Password", True)
     End Sub
 End Class
