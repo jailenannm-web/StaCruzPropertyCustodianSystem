@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class DashBoard
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class DashBoard
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btn_Logout = New System.Windows.Forms.Button()
@@ -35,6 +35,14 @@ Partial Class DashBoard
         Me.btn_DashBoard = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.btn_Add = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+        Me.btn_AddUser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+        Me.txb_Username = New System.Windows.Forms.TextBox()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+        Me.btn_AddSupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+        Me.btn_GenerateReport = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+        Me.comboCategory = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -201,13 +209,120 @@ Partial Class DashBoard
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Poppins", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.Label2.Location = New System.Drawing.Point(348, 23)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(208, 56)
+        Me.Label2.Size = New System.Drawing.Size(312, 84)
         Me.Label2.TabIndex = 12
         Me.Label2.Text = "DashBoard"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Poppins Medium", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(329, 145)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(121, 48)
+        Me.Label3.TabIndex = 14
+        Me.Label3.Text = "Search"
+        '
+        'btn_Add
+        '
+        Me.btn_Add.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Add.CornerRadius = 15
+        Me.btn_Add.FlatAppearance.BorderSize = 0
+        Me.btn_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_Add.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Add.ForeColor = System.Drawing.Color.White
+        Me.btn_Add.Location = New System.Drawing.Point(980, 145)
+        Me.btn_Add.Name = "btn_Add"
+        Me.btn_Add.Size = New System.Drawing.Size(143, 37)
+        Me.btn_Add.TabIndex = 15
+        Me.btn_Add.Text = "Add Property"
+        Me.btn_Add.UseVisualStyleBackColor = False
+        '
+        'btn_AddUser
+        '
+        Me.btn_AddUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_AddUser.CornerRadius = 15
+        Me.btn_AddUser.FlatAppearance.BorderSize = 0
+        Me.btn_AddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_AddUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_AddUser.ForeColor = System.Drawing.Color.White
+        Me.btn_AddUser.Location = New System.Drawing.Point(1141, 145)
+        Me.btn_AddUser.Name = "btn_AddUser"
+        Me.btn_AddUser.Size = New System.Drawing.Size(138, 37)
+        Me.btn_AddUser.TabIndex = 16
+        Me.btn_AddUser.Text = "Add User"
+        Me.btn_AddUser.UseVisualStyleBackColor = False
+        '
+        'txb_Username
+        '
+        Me.txb_Username.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.txb_Username.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txb_Username.Font = New System.Drawing.Font("Poppins", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_Username.ForeColor = System.Drawing.Color.White
+        Me.txb_Username.Location = New System.Drawing.Point(450, 145)
+        Me.txb_Username.Multiline = True
+        Me.txb_Username.Name = "txb_Username"
+        Me.txb_Username.Size = New System.Drawing.Size(332, 34)
+        Me.txb_Username.TabIndex = 17
+        '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatAppearance.BorderSize = 0
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RoundedButton1.ForeColor = System.Drawing.Color.White
+        Me.RoundedButton1.Location = New System.Drawing.Point(811, 144)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(136, 37)
+        Me.RoundedButton1.TabIndex = 18
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'btn_AddSupply
+        '
+        Me.btn_AddSupply.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_AddSupply.CornerRadius = 15
+        Me.btn_AddSupply.FlatAppearance.BorderSize = 0
+        Me.btn_AddSupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_AddSupply.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_AddSupply.ForeColor = System.Drawing.Color.White
+        Me.btn_AddSupply.Location = New System.Drawing.Point(1299, 145)
+        Me.btn_AddSupply.Name = "btn_AddSupply"
+        Me.btn_AddSupply.Size = New System.Drawing.Size(138, 37)
+        Me.btn_AddSupply.TabIndex = 19
+        Me.btn_AddSupply.Text = "Add Supply"
+        Me.btn_AddSupply.UseVisualStyleBackColor = False
+        '
+        'btn_GenerateReport
+        '
+        Me.btn_GenerateReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_GenerateReport.CornerRadius = 15
+        Me.btn_GenerateReport.FlatAppearance.BorderSize = 0
+        Me.btn_GenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_GenerateReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_GenerateReport.ForeColor = System.Drawing.Color.White
+        Me.btn_GenerateReport.Location = New System.Drawing.Point(1452, 145)
+        Me.btn_GenerateReport.Name = "btn_GenerateReport"
+        Me.btn_GenerateReport.Size = New System.Drawing.Size(160, 37)
+        Me.btn_GenerateReport.TabIndex = 20
+        Me.btn_GenerateReport.Text = "Generate Report"
+        Me.btn_GenerateReport.UseVisualStyleBackColor = False
+        '
+        'comboCategory
+        '
+        Me.comboCategory.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.comboCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.comboCategory.FormattingEnabled = True
+        Me.comboCategory.Location = New System.Drawing.Point(811, 155)
+        Me.comboCategory.Name = "comboCategory"
+        Me.comboCategory.Size = New System.Drawing.Size(131, 21)
+        Me.comboCategory.TabIndex = 21
         '
         'DashBoard
         '
@@ -215,11 +330,21 @@ Partial Class DashBoard
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1614, 891)
+        Me.ControlBox = False
+        Me.Controls.Add(Me.comboCategory)
+        Me.Controls.Add(Me.btn_GenerateReport)
+        Me.Controls.Add(Me.btn_AddSupply)
+        Me.Controls.Add(Me.RoundedButton1)
+        Me.Controls.Add(Me.txb_Username)
+        Me.Controls.Add(Me.btn_AddUser)
+        Me.Controls.Add(Me.btn_Add)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.Color.White
         Me.Name = "DashBoard"
-        Me.Text = "DashBoard"
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
+        Me.Text = "D"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -240,4 +365,13 @@ Partial Class DashBoard
     Friend WithEvents btn_PropertyManagement As System.Windows.Forms.Button
     Friend WithEvents btn_UserManagement As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents btn_Add As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btn_AddUser As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+
+    Friend WithEvents txb_Username As System.Windows.Forms.TextBox
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btn_AddSupply As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btn_GenerateReport As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents comboCategory As System.Windows.Forms.ComboBox
 End Class

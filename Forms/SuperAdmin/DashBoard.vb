@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Drawing
 Imports System.Windows.Forms
 
 Public Class DashBoard
@@ -52,4 +53,13 @@ Public Class DashBoard
 
     End Sub
 
+
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub comboCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboCategory.SelectedIndexChanged
+
+    End Sub
 End Class

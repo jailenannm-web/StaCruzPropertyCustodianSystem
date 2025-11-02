@@ -51,4 +51,8 @@ Public Class frmInventory
     Private Sub dgvInventory_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvInventory.CellContentClick
 
     End Sub
+
+    Private Sub RoundedButton1_Click(sender As Object, e As EventArgs)
+
+    End Sub
 End Class
