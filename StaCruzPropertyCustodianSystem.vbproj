@@ -55,6 +55,60 @@
   </ItemGroup>
   <!-- STAFF FORMS -->
   <ItemGroup>
+    <Compile Include="Forms\Admin\AdminDashboard.Designer.vb">
+      <DependentUpon>AdminDashboard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AdminDashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\EditUser.Designer.vb">
+      <DependentUpon>EditUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\EditUser.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_AddSupply.Designer.vb">
+      <DependentUpon>UC_AddSupply.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_AddSupply.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_DepartmentManagement.Designer.vb">
+      <DependentUpon>UC_DepartmentManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_DepartmentManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_MaintenanceManagement.Designer.vb">
+      <DependentUpon>UC_MaintenanceManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_MaintenanceManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_PropertyManagement.Designer.vb">
+      <DependentUpon>UC_PropertyManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_PropertyManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_PropertyRequestManagement.Designer.vb">
+      <DependentUpon>UC_PropertyRequestManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_PropertyRequestManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_Reports.Designer.vb">
+      <DependentUpon>UC_Reports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_Reports.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_UserManagement.Designer.vb">
+      <DependentUpon>UC_UserManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_UserManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Login\Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -97,6 +151,33 @@
     <Compile Include="Forms\Staff\frmProfile.Designer.vb">
       <DependentUpon>frmProfile.vb</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Admin\AdminDashboard.resx">
+      <DependentUpon>AdminDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\EditUser.resx">
+      <DependentUpon>EditUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_AddSupply.resx">
+      <DependentUpon>UC_AddSupply.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_DepartmentManagement.resx">
+      <DependentUpon>UC_DepartmentManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_MaintenanceManagement.resx">
+      <DependentUpon>UC_MaintenanceManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_PropertyManagement.resx">
+      <DependentUpon>UC_PropertyManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_PropertyRequestManagement.resx">
+      <DependentUpon>UC_PropertyRequestManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_Reports.resx">
+      <DependentUpon>UC_Reports.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_UserManagement.resx">
+      <DependentUpon>UC_UserManagement.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Login\Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
@@ -156,17 +237,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <!-- ===== ADMIN FORM ===== -->
-  <ItemGroup>
-    <Compile Include="Forms\Admin\AdminDashboard.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Admin\AdminDashboard.Designer.vb">
-      <DependentUpon>AdminDashboard.vb</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Forms\Admin\AdminDashboard.resx">
-      <DependentUpon>AdminDashboard.vb</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <!-- DEFAULT PROJECT FILES -->
   <ItemGroup>
     <Compile Include="Forms\Staff\StaffLogin.Designer.vb">
