@@ -36,15 +36,15 @@ Public Class StaffRegister
 
     End Sub
 
-    Private Sub txb_ContactNumber_TextChanged(sender As Object, e As EventArgs) Handles txb_ContactNumber.TextChanged
+    Private Sub txb_ContactNumber_TextChanged(sender As Object, e As EventArgs) Handles txb_LastName.TextChanged
 
     End Sub
 
-    Private Sub txb_Address_TextChanged(sender As Object, e As EventArgs) Handles txb_Address.TextChanged
+    Private Sub txb_Address_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub txb_Password_TextChanged(sender As Object, e As EventArgs) Handles txb_Password.TextChanged
+    Private Sub txb_Password_TextChanged(sender As Object, e As EventArgs) Handles txb_DepartmentID.TextChanged
 
     End Sub
 
@@ -56,7 +56,7 @@ Public Class StaffRegister
 
     End Sub
 
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles txb_Password.TextChanged
 
     End Sub
 
@@ -64,11 +64,11 @@ Public Class StaffRegister
 
     End Sub
 
-    Private Sub TextBox8_TextChanged(sender As Object, e As EventArgs) Handles TextBox8.TextChanged
+    Private Sub TextBox8_TextChanged(sender As Object, e As EventArgs) Handles txb_ContactNumber.TextChanged
 
     End Sub
 
-    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
+    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles txb_HouseNoStreet.TextChanged
 
     End Sub
 
@@ -77,6 +77,10 @@ Public Class StaffRegister
     End Sub
 
     Private Sub Label12_Click(sender As Object, e As EventArgs) Handles Label12.Click
+
+    End Sub
+
+    Private Sub ComboBox4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Barangay.SelectedIndexChanged
 
     End Sub
 End Class

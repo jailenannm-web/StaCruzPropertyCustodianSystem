@@ -28,7 +28,6 @@ Partial Class SuperAdmin_Login
         Me.btn_Cancel = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txb_Password = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txb_Username = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -43,13 +42,12 @@ Partial Class SuperAdmin_Login
         Me.Panel1.Controls.Add(Me.btn_Cancel)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.txb_Password)
-        Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.txb_Username)
         Me.Panel1.Controls.Add(Me.Label9)
-        Me.Panel1.Location = New System.Drawing.Point(991, 27)
+        Me.Panel1.Location = New System.Drawing.Point(1338, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(584, 818)
+        Me.Panel1.Size = New System.Drawing.Size(589, 1062)
         Me.Panel1.TabIndex = 5
         '
         'Label1
@@ -67,7 +65,7 @@ Partial Class SuperAdmin_Login
         Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Login.ForeColor = System.Drawing.Color.White
-        Me.btn_Login.Location = New System.Drawing.Point(359, 627)
+        Me.btn_Login.Location = New System.Drawing.Point(379, 751)
         Me.btn_Login.Name = "btn_Login"
         Me.btn_Login.Size = New System.Drawing.Size(152, 49)
         Me.btn_Login.TabIndex = 7
@@ -78,7 +76,7 @@ Partial Class SuperAdmin_Login
         '
         Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(85, 627)
+        Me.btn_Cancel.Location = New System.Drawing.Point(105, 751)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(154, 49)
         Me.btn_Cancel.TabIndex = 6
@@ -87,12 +85,11 @@ Partial Class SuperAdmin_Login
         '
         'Label6
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Font = New System.Drawing.Font("Poppins", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(203, 332)
+        Me.Label6.Location = New System.Drawing.Point(116, 368)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(197, 56)
+        Me.Label6.Size = New System.Drawing.Size(147, 40)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "Username"
         '
@@ -100,28 +97,19 @@ Partial Class SuperAdmin_Login
         '
         Me.txb_Password.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Password.Font = New System.Drawing.Font("Poppins", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Password.Location = New System.Drawing.Point(103, 442)
+        Me.txb_Password.Location = New System.Drawing.Point(123, 566)
         Me.txb_Password.Multiline = True
         Me.txb_Password.Name = "txb_Password"
         Me.txb_Password.Size = New System.Drawing.Size(384, 42)
         Me.txb_Password.TabIndex = 4
         '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(170, 567)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(0, 13)
-        Me.Label7.TabIndex = 3
-        '
         'Label8
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Poppins", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Font = New System.Drawing.Font("Poppins", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label8.Location = New System.Drawing.Point(214, 487)
+        Me.Label8.Location = New System.Drawing.Point(116, 522)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(186, 56)
+        Me.Label8.Size = New System.Drawing.Size(186, 41)
         Me.Label8.TabIndex = 2
         Me.Label8.Text = "Password"
         '
@@ -129,7 +117,7 @@ Partial Class SuperAdmin_Login
         '
         Me.txb_Username.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Username.Font = New System.Drawing.Font("Poppins", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Username.Location = New System.Drawing.Point(103, 287)
+        Me.txb_Username.Location = New System.Drawing.Point(123, 411)
         Me.txb_Username.Multiline = True
         Me.txb_Username.Name = "txb_Username"
         Me.txb_Username.Size = New System.Drawing.Size(384, 42)
@@ -150,8 +138,9 @@ Partial Class SuperAdmin_Login
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.BG1
-        Me.ClientSize = New System.Drawing.Size(1614, 891)
+        Me.ClientSize = New System.Drawing.Size(1523, 839)
         Me.Controls.Add(Me.Panel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "SuperAdmin_Login"
         Me.Text = "SuperAdmin_Login"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -166,7 +155,6 @@ Partial Class SuperAdmin_Login
     Friend WithEvents btn_Cancel As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents txb_Password As System.Windows.Forms.TextBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents txb_Username As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
