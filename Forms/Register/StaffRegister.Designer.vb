@@ -27,7 +27,7 @@ Partial Class StaffRegister
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txb_ContactNumber = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.txb_Password = New System.Windows.Forms.TextBox()
+        Me.pa = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txb_EmployeeID = New System.Windows.Forms.TextBox()
         Me.txb_HouseNoStreet = New System.Windows.Forms.TextBox()
@@ -70,7 +70,7 @@ Partial Class StaffRegister
         Me.Panel1.Controls.Add(Me.cb_Position)
         Me.Panel1.Controls.Add(Me.txb_ContactNumber)
         Me.Panel1.Controls.Add(Me.Label16)
-        Me.Panel1.Controls.Add(Me.txb_Password)
+        Me.Panel1.Controls.Add(Me.pa)
         Me.Panel1.Controls.Add(Me.Label11)
         Me.Panel1.Controls.Add(Me.txb_EmployeeID)
         Me.Panel1.Controls.Add(Me.txb_HouseNoStreet)
@@ -122,15 +122,15 @@ Partial Class StaffRegister
         Me.Label16.TabIndex = 41
         Me.Label16.Text = "Contact Number"
         '
-        'txb_Password
+        'pa
         '
-        Me.txb_Password.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_Password.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Password.Location = New System.Drawing.Point(1297, 659)
-        Me.txb_Password.Multiline = True
-        Me.txb_Password.Name = "txb_Password"
-        Me.txb_Password.Size = New System.Drawing.Size(337, 34)
-        Me.txb_Password.TabIndex = 40
+        Me.pa.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.pa.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pa.Location = New System.Drawing.Point(1297, 659)
+        Me.pa.Multiline = True
+        Me.pa.Name = "pa"
+        Me.pa.Size = New System.Drawing.Size(337, 34)
+        Me.pa.TabIndex = 40
         '
         'Label11
         '
@@ -478,7 +478,7 @@ Partial Class StaffRegister
     Friend WithEvents Label13 As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents Label15 As Label
-    Friend WithEvents txb_Password As TextBox
+    Friend WithEvents pa As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents txb_EmployeeID As TextBox
     Friend WithEvents txb_HouseNoStreet As TextBox

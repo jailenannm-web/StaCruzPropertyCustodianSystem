@@ -42,12 +42,12 @@ Partial Class DashBoard
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.btn_Add = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-        Me.btn_AddUser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+        Me.btn_Add = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btn_AddUser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.txb_Username = New System.Windows.Forms.TextBox()
-        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-        Me.btn_AddSupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-        Me.btn_GenerateReport = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btn_AddSupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btn_GenerateReport = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.comboCategory = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()

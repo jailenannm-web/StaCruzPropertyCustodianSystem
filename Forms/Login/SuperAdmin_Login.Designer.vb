@@ -138,7 +138,7 @@ Partial Class SuperAdmin_Login
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.BG1
-        Me.ClientSize = New System.Drawing.Size(1523, 839)
+        Me.ClientSize = New System.Drawing.Size(1927, 1062)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "SuperAdmin_Login"

@@ -56,7 +56,7 @@ Public Class StaffRegister
 
     End Sub
 
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles txb_Password.TextChanged
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles pa.TextChanged
 
     End Sub
 
