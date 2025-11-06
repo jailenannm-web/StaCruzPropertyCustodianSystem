@@ -1,5 +1,10 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class AuditReport
+﻿Imports System
+Imports System.ComponentModel
+Imports System.Drawing
+Imports System.Drawing.Drawing2D
+Imports System.Windows.Forms
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class PropertyCard
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +27,7 @@ Partial Class AuditReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.propertyCard = New System.Windows.Forms.Label()
+        Me.lblPropertyCard = New System.Windows.Forms.Label()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.pcEntityName = New System.Windows.Forms.TextBox()
         Me.entityName = New System.Windows.Forms.Label()
@@ -59,8 +64,8 @@ Partial Class AuditReport
         Me.pcQuantity2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pcAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pcRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pc_btn_Save = New AdminDashboard.RoundedButton()
-        Me.pc_btn_Cancel = New AdminDashboard.RoundedButton()
+        Me.pc_btn_Save = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.pc_btn_Cancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Panel16.SuspendLayout()
         Me.Panel15.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -77,15 +82,15 @@ Partial Class AuditReport
         '
         'propertyCard
         '
-        Me.propertyCard.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.lblPropertyCard.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.propertyCard.AutoSize = True
-        Me.propertyCard.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertyCard.Location = New System.Drawing.Point(499, 52)
-        Me.propertyCard.Name = "propertyCard"
-        Me.propertyCard.Size = New System.Drawing.Size(200, 44)
-        Me.propertyCard.TabIndex = 37
-        Me.propertyCard.Text = "Property Card"
+        Me.lblPropertyCard.AutoSize = True
+        Me.lblPropertyCard.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPropertyCard.Location = New System.Drawing.Point(499, 52)
+        Me.lblPropertyCard.Name = "propertyCard"
+        Me.lblPropertyCard.Size = New System.Drawing.Size(200, 44)
+        Me.lblPropertyCard.TabIndex = 37
+        Me.lblPropertyCard.Text = "Property Card"
         '
         'Panel16
         '
@@ -476,7 +481,7 @@ Partial Class AuditReport
         Me.pc_btn_Cancel.Text = "Cancel"
         Me.pc_btn_Cancel.UseVisualStyleBackColor = True
         '
-        'AuditReport
+        'PropertyCard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -486,8 +491,8 @@ Partial Class AuditReport
         Me.Controls.Add(Me.Panel16)
         Me.Controls.Add(Me.Panel15)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.propertyCard)
-        Me.Name = "AuditReport"
+        Me.Controls.Add(Me.lblPropertyCard)
+        Me.Name = "PropertyCard"
         Me.Text = "PropertyCard"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel16.ResumeLayout(False)
@@ -517,7 +522,7 @@ Partial Class AuditReport
 
     End Sub
 
-    Friend WithEvents propertyCard As Label
+    Friend WithEvents lblPropertyCard As Label
     Friend WithEvents Panel16 As Panel
     Friend WithEvents pcEntityName As TextBox
     Friend WithEvents entityName As Label
@@ -554,6 +559,6 @@ Partial Class AuditReport
     Friend WithEvents pcQuantity2 As DataGridViewTextBoxColumn
     Friend WithEvents pcAmount As DataGridViewTextBoxColumn
     Friend WithEvents pcRemarks As DataGridViewTextBoxColumn
-    Friend WithEvents pc_btn_Save As RoundedButton
-    Friend WithEvents pc_btn_Cancel As RoundedButton
+    Friend WithEvents pc_btn_Save As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents pc_btn_Cancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

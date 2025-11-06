@@ -1,4 +1,9 @@
-﻿Public Class BorrowingAndReturnSlip
+﻿Imports System.Windows.Forms
+Imports System.Linq
+Imports System
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Public Class BorrowingAndReturnSlip
     Private Sub Label16_Click(sender As Object, e As System.EventArgs) Handles Label16.Click
 
     End Sub

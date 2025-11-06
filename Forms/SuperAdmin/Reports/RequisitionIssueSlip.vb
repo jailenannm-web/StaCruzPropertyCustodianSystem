@@ -1,4 +1,14 @@
-﻿Public Class RequisitionIssueSlip
+﻿Imports System.Windows.Forms
+Imports System.Linq
+Imports System
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+
+Partial Public Class RequisitionIssueSlip
+    Public Sub New()
+        InitializeComponent()
+    End Sub
+
     Private Sub admin_label_Reports_Click(sender As Object, e As EventArgs) Handles admin_label_Reports.Click
 
     End Sub

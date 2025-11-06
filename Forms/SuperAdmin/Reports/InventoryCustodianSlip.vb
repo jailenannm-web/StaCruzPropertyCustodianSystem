@@ -1,4 +1,9 @@
-﻿Public Class InventoryCustodianSlip
+﻿Imports System.Windows.Forms
+Imports System.Linq
+Imports System
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Public Class InventoryCustodianSlip
     Private Sub TextBox119_TextChanged(sender As Object, e As System.EventArgs)
 
     End Sub

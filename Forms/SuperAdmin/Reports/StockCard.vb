@@ -1,4 +1,9 @@
-﻿Public Class StockCard1
+﻿Imports System.Windows.Forms
+Imports System.Linq
+Imports System
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Public Class StockCard1
     Private Sub Label8_Click(sender As Object, e As System.EventArgs) Handles Label8.Click
 
     End Sub

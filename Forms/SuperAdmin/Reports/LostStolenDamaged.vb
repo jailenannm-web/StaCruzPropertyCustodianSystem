@@ -1,4 +1,13 @@
-﻿Public Class LostStolenDamaged
+﻿Imports System.Windows.Forms
+Imports System.Linq
+Imports System
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Partial Public Class LostStolenDamaged
+    Public Sub New()
+        InitializeComponent()
+    End Sub
+
     Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
 
     End Sub

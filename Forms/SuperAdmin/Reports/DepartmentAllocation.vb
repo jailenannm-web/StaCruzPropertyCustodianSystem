@@ -1,4 +1,9 @@
-﻿Public Class DepartmentAllocation
+﻿Imports System.Windows.Forms
+Imports System.Linq
+Imports System
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Public Class DepartmentAllocation
     Private Sub Label27_Click(sender As Object, e As System.EventArgs)
 
     End Sub
@@ -23,7 +28,7 @@
 
     End Sub
 
-    Private Sub Label20_Click(sender As Object, e As System.EventArgs) 
+    Private Sub Label20_Click(sender As Object, e As System.EventArgs)
 
     End Sub
 
@@ -31,7 +36,7 @@
 
     End Sub
 
-    Private Sub Label21_Click(sender As Object, e As System.EventArgs) 
+    Private Sub Label21_Click(sender As Object, e As System.EventArgs)
 
     End Sub
 
@@ -39,7 +44,7 @@
 
     End Sub
 
-    Private Sub Label7_Click(sender As Object, e As System.EventArgs) 
+    Private Sub Label7_Click(sender As Object, e As System.EventArgs)
 
     End Sub
 End Class

@@ -118,14 +118,14 @@ Partial Class SADashboard
         loadFormIntoPanel(New SAPropertyRequestManagement())
     End Sub
 
-    Private Sub btnMaintenanceManagement_Click(sender As Object, e As EventArgs) Handles btnMaintenanceManagement.Click
+    Private Sub btnMaintenance_Click(sender As Object, e As EventArgs) Handles btnMaintenanceManagement.Click
 
         ' --- This code changes the active button color ---
         SetActiveButton(btnMaintenanceManagement)
 
         ' --- THIS IS THE NEW CODE ---
         ' Load your new profile form
-        loadFormIntoPanel(New SAMaintenenanceManagement())
+        loadFormIntoPanel(New SAMaintenace())
     End Sub
 
     Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
