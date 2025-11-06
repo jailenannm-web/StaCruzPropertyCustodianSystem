@@ -11,11 +11,11 @@
 
     End Sub
 
-    Private Sub Label13_Click(sender As Object, e As System.EventArgs) Handles Label13.Click
+    Private Sub Label13_Click(sender As Object, e As System.EventArgs)
 
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
+    Private Sub Panel1_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs)
 
     End Sub
 
@@ -28,6 +28,14 @@
     End Sub
 
     Private Sub Label30_Click(sender As Object, e As System.EventArgs) Handles Label30.Click
+
+    End Sub
+
+    Private Sub TextBox2_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox2.TextChanged
+
+    End Sub
+
+    Private Sub StockCard1_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

@@ -37,6 +37,31 @@ Partial Class SADashboard
         Dim lblRecentPRopertyRequests As System.Windows.Forms.Label
         Dim lblSystemAlerts As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SADashboard))
+        Me.lblSuperAdmin = New System.Windows.Forms.Label()
+        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.pnlFormLoader = New System.Windows.Forms.Panel()
+        Me.RoundedPanel11 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel14 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel13 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel12 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel9 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel8 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel10 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel7 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel6 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel5 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel4 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel3 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.btnGenerateReports = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAddSupply = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAddUser = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAddProperty = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.comboFilter = New System.Windows.Forms.ComboBox()
+        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.txtboxSearch = New System.Windows.Forms.TextBox()
+        Me.lblPropertyCustodian = New System.Windows.Forms.Label()
         Me.icStaff = New System.Windows.Forms.PictureBox()
         Me.btnReports = New System.Windows.Forms.Button()
         Me.btnMaintenanceManagement = New System.Windows.Forms.Button()
@@ -46,33 +71,8 @@ Partial Class SADashboard
         Me.btnPropertyManagement = New System.Windows.Forms.Button()
         Me.btnUserManagement = New System.Windows.Forms.Button()
         Me.btnDashboard = New System.Windows.Forms.Button()
-        Me.lblSuperAdmin = New System.Windows.Forms.Label()
-        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.btnSystemConfig = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.pnlFormLoader = New System.Windows.Forms.Panel()
-        Me.RoundedPanel11 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel14 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel13 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel12 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel9 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel8 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel10 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel7 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel6 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel5 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel4 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.btnGenerateReports = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAddSupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAddUser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAddProperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.comboFilter = New System.Windows.Forms.ComboBox()
-        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.txtboxSearch = New System.Windows.Forms.TextBox()
-        Me.lblPropertyCustodian = New System.Windows.Forms.Label()
         lblTotalProperty = New System.Windows.Forms.Label()
         lblTotalSupplies = New System.Windows.Forms.Label()
         lblPendingRequest = New System.Windows.Forms.Label()
@@ -82,7 +82,6 @@ Partial Class SADashboard
         lblRequestTrends = New System.Windows.Forms.Label()
         lblRecentPRopertyRequests = New System.Windows.Forms.Label()
         lblSystemAlerts = New System.Windows.Forms.Label()
-        CType(Me.icStaff, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSidebar.SuspendLayout()
         Me.pnlFormLoader.SuspendLayout()
         Me.RoundedPanel11.SuspendLayout()
@@ -95,6 +94,7 @@ Partial Class SADashboard
         Me.RoundedPanel3.SuspendLayout()
         Me.RoundedPanel2.SuspendLayout()
         Me.RoundedPanel1.SuspendLayout()
+        CType(Me.icStaff, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblTotalProperty
@@ -196,178 +196,15 @@ Partial Class SADashboard
         lblSystemAlerts.TabIndex = 49
         lblSystemAlerts.Text = "System Alerts"
         '
-        'icStaff
-        '
-        Me.icStaff.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.icStaff.Image = CType(resources.GetObject("icStaff.Image"), System.Drawing.Image)
-        Me.icStaff.Location = New System.Drawing.Point(74, 32)
-        Me.icStaff.Name = "icStaff"
-        Me.icStaff.Size = New System.Drawing.Size(97, 83)
-        Me.icStaff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.icStaff.TabIndex = 20
-        Me.icStaff.TabStop = False
-        '
-        'btnReports
-        '
-        Me.btnReports.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnReports.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnReports.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnReports.FlatAppearance.BorderSize = 2
-        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReports.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReports.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnReports.Image = CType(resources.GetObject("btnReports.Image"), System.Drawing.Image)
-        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(12, 552)
-        Me.btnReports.Name = "btnReports"
-        Me.btnReports.Size = New System.Drawing.Size(238, 51)
-        Me.btnReports.TabIndex = 19
-        Me.btnReports.Text = "Reports"
-        Me.btnReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnReports.UseVisualStyleBackColor = False
-        '
-        'btnMaintenanceManagement
-        '
-        Me.btnMaintenanceManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnMaintenanceManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnMaintenanceManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnMaintenanceManagement.FlatAppearance.BorderSize = 2
-        Me.btnMaintenanceManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMaintenanceManagement.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMaintenanceManagement.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnMaintenanceManagement.Image = CType(resources.GetObject("btnMaintenanceManagement.Image"), System.Drawing.Image)
-        Me.btnMaintenanceManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMaintenanceManagement.Location = New System.Drawing.Point(12, 495)
-        Me.btnMaintenanceManagement.Name = "btnMaintenanceManagement"
-        Me.btnMaintenanceManagement.Size = New System.Drawing.Size(238, 51)
-        Me.btnMaintenanceManagement.TabIndex = 18
-        Me.btnMaintenanceManagement.Text = "Maintenance Management"
-        Me.btnMaintenanceManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnMaintenanceManagement.UseVisualStyleBackColor = False
-        '
-        'btnPropertyRequestManagement
-        '
-        Me.btnPropertyRequestManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnPropertyRequestManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnPropertyRequestManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnPropertyRequestManagement.FlatAppearance.BorderSize = 2
-        Me.btnPropertyRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPropertyRequestManagement.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPropertyRequestManagement.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnPropertyRequestManagement.Image = CType(resources.GetObject("btnPropertyRequestManagement.Image"), System.Drawing.Image)
-        Me.btnPropertyRequestManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPropertyRequestManagement.Location = New System.Drawing.Point(12, 438)
-        Me.btnPropertyRequestManagement.Name = "btnPropertyRequestManagement"
-        Me.btnPropertyRequestManagement.Size = New System.Drawing.Size(238, 51)
-        Me.btnPropertyRequestManagement.TabIndex = 17
-        Me.btnPropertyRequestManagement.Text = "Property Request Management"
-        Me.btnPropertyRequestManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnPropertyRequestManagement.UseVisualStyleBackColor = False
-        '
-        'btnDepartmentManagement
-        '
-        Me.btnDepartmentManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnDepartmentManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnDepartmentManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnDepartmentManagement.FlatAppearance.BorderSize = 2
-        Me.btnDepartmentManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDepartmentManagement.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDepartmentManagement.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnDepartmentManagement.Image = CType(resources.GetObject("btnDepartmentManagement.Image"), System.Drawing.Image)
-        Me.btnDepartmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDepartmentManagement.Location = New System.Drawing.Point(12, 381)
-        Me.btnDepartmentManagement.Name = "btnDepartmentManagement"
-        Me.btnDepartmentManagement.Size = New System.Drawing.Size(238, 51)
-        Me.btnDepartmentManagement.TabIndex = 16
-        Me.btnDepartmentManagement.Text = "Department Management"
-        Me.btnDepartmentManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnDepartmentManagement.UseVisualStyleBackColor = False
-        '
-        'btnSuppliesManagement
-        '
-        Me.btnSuppliesManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnSuppliesManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnSuppliesManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnSuppliesManagement.FlatAppearance.BorderSize = 2
-        Me.btnSuppliesManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSuppliesManagement.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSuppliesManagement.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnSuppliesManagement.Image = CType(resources.GetObject("btnSuppliesManagement.Image"), System.Drawing.Image)
-        Me.btnSuppliesManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSuppliesManagement.Location = New System.Drawing.Point(12, 324)
-        Me.btnSuppliesManagement.Name = "btnSuppliesManagement"
-        Me.btnSuppliesManagement.Size = New System.Drawing.Size(238, 51)
-        Me.btnSuppliesManagement.TabIndex = 15
-        Me.btnSuppliesManagement.Text = "Supplies Management"
-        Me.btnSuppliesManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnSuppliesManagement.UseVisualStyleBackColor = False
-        '
-        'btnPropertyManagement
-        '
-        Me.btnPropertyManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnPropertyManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnPropertyManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnPropertyManagement.FlatAppearance.BorderSize = 2
-        Me.btnPropertyManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPropertyManagement.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPropertyManagement.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnPropertyManagement.Image = CType(resources.GetObject("btnPropertyManagement.Image"), System.Drawing.Image)
-        Me.btnPropertyManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPropertyManagement.Location = New System.Drawing.Point(12, 267)
-        Me.btnPropertyManagement.Name = "btnPropertyManagement"
-        Me.btnPropertyManagement.Size = New System.Drawing.Size(238, 51)
-        Me.btnPropertyManagement.TabIndex = 14
-        Me.btnPropertyManagement.Text = "Property Management"
-        Me.btnPropertyManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnPropertyManagement.UseVisualStyleBackColor = False
-        '
-        'btnUserManagement
-        '
-        Me.btnUserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnUserManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnUserManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnUserManagement.FlatAppearance.BorderSize = 2
-        Me.btnUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUserManagement.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUserManagement.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnUserManagement.Image = CType(resources.GetObject("btnUserManagement.Image"), System.Drawing.Image)
-        Me.btnUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUserManagement.Location = New System.Drawing.Point(12, 210)
-        Me.btnUserManagement.Name = "btnUserManagement"
-        Me.btnUserManagement.Size = New System.Drawing.Size(238, 51)
-        Me.btnUserManagement.TabIndex = 13
-        Me.btnUserManagement.Text = "User Management"
-        Me.btnUserManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnUserManagement.UseVisualStyleBackColor = False
-        '
-        'btnDashboard
-        '
-        Me.btnDashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnDashboard.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnDashboard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnDashboard.FlatAppearance.BorderSize = 2
-        Me.btnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDashboard.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDashboard.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnDashboard.Image = CType(resources.GetObject("btnDashboard.Image"), System.Drawing.Image)
-        Me.btnDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDashboard.Location = New System.Drawing.Point(12, 153)
-        Me.btnDashboard.Name = "btnDashboard"
-        Me.btnDashboard.Size = New System.Drawing.Size(238, 51)
-        Me.btnDashboard.TabIndex = 12
-        Me.btnDashboard.Text = "Dashboard"
-        Me.btnDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnDashboard.UseVisualStyleBackColor = False
-        '
         'lblSuperAdmin
         '
         Me.lblSuperAdmin.AutoSize = True
         Me.lblSuperAdmin.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.lblSuperAdmin.Font = New System.Drawing.Font("Leelawadee", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSuperAdmin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSuperAdmin.ForeColor = System.Drawing.Color.White
         Me.lblSuperAdmin.Location = New System.Drawing.Point(80, 118)
         Me.lblSuperAdmin.Name = "lblSuperAdmin"
-        Me.lblSuperAdmin.Size = New System.Drawing.Size(81, 15)
+        Me.lblSuperAdmin.Size = New System.Drawing.Size(90, 16)
         Me.lblSuperAdmin.TabIndex = 11
         Me.lblSuperAdmin.Text = "Superadmin"
         '
@@ -384,44 +221,6 @@ Partial Class SADashboard
         Me.pnlSidebar.Name = "pnlSidebar"
         Me.pnlSidebar.Size = New System.Drawing.Size(267, 749)
         Me.pnlSidebar.TabIndex = 21
-        '
-        'btnSystemConfig
-        '
-        Me.btnSystemConfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnSystemConfig.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnSystemConfig.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnSystemConfig.FlatAppearance.BorderSize = 2
-        Me.btnSystemConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSystemConfig.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSystemConfig.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnSystemConfig.Image = CType(resources.GetObject("btnSystemConfig.Image"), System.Drawing.Image)
-        Me.btnSystemConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSystemConfig.Location = New System.Drawing.Point(12, 609)
-        Me.btnSystemConfig.Name = "btnSystemConfig"
-        Me.btnSystemConfig.Size = New System.Drawing.Size(238, 51)
-        Me.btnSystemConfig.TabIndex = 22
-        Me.btnSystemConfig.Text = "System Configuration"
-        Me.btnSystemConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnSystemConfig.UseVisualStyleBackColor = False
-        '
-        'btnLogout
-        '
-        Me.btnLogout.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnLogout.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnLogout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnLogout.FlatAppearance.BorderSize = 2
-        Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLogout.Font = New System.Drawing.Font("Leelawadee", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogout.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
-        Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(12, 666)
-        Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(238, 51)
-        Me.btnLogout.TabIndex = 22
-        Me.btnLogout.Text = "Logout"
-        Me.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnLogout.UseVisualStyleBackColor = False
         '
         'Panel1
         '
@@ -450,7 +249,7 @@ Partial Class SADashboard
         Me.pnlFormLoader.Controls.Add(Me.comboFilter)
         Me.pnlFormLoader.Controls.Add(Me.RoundedPanel1)
         Me.pnlFormLoader.Controls.Add(Me.lblPropertyCustodian)
-        Me.pnlFormLoader.Location = New System.Drawing.Point(269, 0)
+        Me.pnlFormLoader.Location = New System.Drawing.Point(302, 12)
         Me.pnlFormLoader.Name = "pnlFormLoader"
         Me.pnlFormLoader.Size = New System.Drawing.Size(1100, 746)
         Me.pnlFormLoader.TabIndex = 22
@@ -589,7 +388,7 @@ Partial Class SADashboard
         Me.btnGenerateReports.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnGenerateReports.CornerRadius = 15
         Me.btnGenerateReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGenerateReports.Font = New System.Drawing.Font("Leelawadee", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGenerateReports.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGenerateReports.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnGenerateReports.Location = New System.Drawing.Point(943, 63)
         Me.btnGenerateReports.Name = "btnGenerateReports"
@@ -604,7 +403,7 @@ Partial Class SADashboard
         Me.btnAddSupply.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnAddSupply.CornerRadius = 15
         Me.btnAddSupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddSupply.Font = New System.Drawing.Font("Leelawadee", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddSupply.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddSupply.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnAddSupply.Location = New System.Drawing.Point(651, 63)
         Me.btnAddSupply.Name = "btnAddSupply"
@@ -619,7 +418,7 @@ Partial Class SADashboard
         Me.btnAddUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnAddUser.CornerRadius = 15
         Me.btnAddUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddUser.Font = New System.Drawing.Font("Leelawadee", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddUser.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnAddUser.Location = New System.Drawing.Point(797, 63)
         Me.btnAddUser.Name = "btnAddUser"
@@ -634,7 +433,7 @@ Partial Class SADashboard
         Me.btnAddProperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnAddProperty.CornerRadius = 15
         Me.btnAddProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddProperty.Font = New System.Drawing.Font("Leelawadee", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddProperty.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddProperty.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnAddProperty.Location = New System.Drawing.Point(505, 63)
         Me.btnAddProperty.Name = "btnAddProperty"
@@ -677,12 +476,213 @@ Partial Class SADashboard
         'lblPropertyCustodian
         '
         Me.lblPropertyCustodian.AutoSize = True
-        Me.lblPropertyCustodian.Font = New System.Drawing.Font("Leelawadee", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPropertyCustodian.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPropertyCustodian.Location = New System.Drawing.Point(16, 16)
         Me.lblPropertyCustodian.Name = "lblPropertyCustodian"
-        Me.lblPropertyCustodian.Size = New System.Drawing.Size(203, 25)
+        Me.lblPropertyCustodian.Size = New System.Drawing.Size(214, 25)
         Me.lblPropertyCustodian.TabIndex = 7
         Me.lblPropertyCustodian.Text = "Property Custodian"
+        '
+        'icStaff
+        '
+        Me.icStaff.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.icStaff.Image = CType(resources.GetObject("icStaff.Image"), System.Drawing.Image)
+        Me.icStaff.Location = New System.Drawing.Point(74, 32)
+        Me.icStaff.Name = "icStaff"
+        Me.icStaff.Size = New System.Drawing.Size(97, 83)
+        Me.icStaff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.icStaff.TabIndex = 20
+        Me.icStaff.TabStop = False
+        '
+        'btnReports
+        '
+        Me.btnReports.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnReports.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnReports.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnReports.FlatAppearance.BorderSize = 2
+        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReports.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReports.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnReports.Image = CType(resources.GetObject("btnReports.Image"), System.Drawing.Image)
+        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReports.Location = New System.Drawing.Point(12, 552)
+        Me.btnReports.Name = "btnReports"
+        Me.btnReports.Size = New System.Drawing.Size(238, 51)
+        Me.btnReports.TabIndex = 19
+        Me.btnReports.Text = "Reports"
+        Me.btnReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnReports.UseVisualStyleBackColor = False
+        '
+        'btnMaintenanceManagement
+        '
+        Me.btnMaintenanceManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnMaintenanceManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnMaintenanceManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnMaintenanceManagement.FlatAppearance.BorderSize = 2
+        Me.btnMaintenanceManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnMaintenanceManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMaintenanceManagement.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnMaintenanceManagement.Image = CType(resources.GetObject("btnMaintenanceManagement.Image"), System.Drawing.Image)
+        Me.btnMaintenanceManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnMaintenanceManagement.Location = New System.Drawing.Point(12, 495)
+        Me.btnMaintenanceManagement.Name = "btnMaintenanceManagement"
+        Me.btnMaintenanceManagement.Size = New System.Drawing.Size(238, 51)
+        Me.btnMaintenanceManagement.TabIndex = 18
+        Me.btnMaintenanceManagement.Text = "Maintenance Management"
+        Me.btnMaintenanceManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnMaintenanceManagement.UseVisualStyleBackColor = False
+        '
+        'btnPropertyRequestManagement
+        '
+        Me.btnPropertyRequestManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnPropertyRequestManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnPropertyRequestManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnPropertyRequestManagement.FlatAppearance.BorderSize = 2
+        Me.btnPropertyRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPropertyRequestManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPropertyRequestManagement.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnPropertyRequestManagement.Image = CType(resources.GetObject("btnPropertyRequestManagement.Image"), System.Drawing.Image)
+        Me.btnPropertyRequestManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnPropertyRequestManagement.Location = New System.Drawing.Point(12, 438)
+        Me.btnPropertyRequestManagement.Name = "btnPropertyRequestManagement"
+        Me.btnPropertyRequestManagement.Size = New System.Drawing.Size(238, 51)
+        Me.btnPropertyRequestManagement.TabIndex = 17
+        Me.btnPropertyRequestManagement.Text = "Property Request Management"
+        Me.btnPropertyRequestManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnPropertyRequestManagement.UseVisualStyleBackColor = False
+        '
+        'btnDepartmentManagement
+        '
+        Me.btnDepartmentManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnDepartmentManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnDepartmentManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnDepartmentManagement.FlatAppearance.BorderSize = 2
+        Me.btnDepartmentManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDepartmentManagement.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnDepartmentManagement.Image = CType(resources.GetObject("btnDepartmentManagement.Image"), System.Drawing.Image)
+        Me.btnDepartmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDepartmentManagement.Location = New System.Drawing.Point(12, 381)
+        Me.btnDepartmentManagement.Name = "btnDepartmentManagement"
+        Me.btnDepartmentManagement.Size = New System.Drawing.Size(238, 51)
+        Me.btnDepartmentManagement.TabIndex = 16
+        Me.btnDepartmentManagement.Text = "Department Management"
+        Me.btnDepartmentManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDepartmentManagement.UseVisualStyleBackColor = False
+        '
+        'btnSuppliesManagement
+        '
+        Me.btnSuppliesManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnSuppliesManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnSuppliesManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnSuppliesManagement.FlatAppearance.BorderSize = 2
+        Me.btnSuppliesManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSuppliesManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSuppliesManagement.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnSuppliesManagement.Image = CType(resources.GetObject("btnSuppliesManagement.Image"), System.Drawing.Image)
+        Me.btnSuppliesManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSuppliesManagement.Location = New System.Drawing.Point(12, 324)
+        Me.btnSuppliesManagement.Name = "btnSuppliesManagement"
+        Me.btnSuppliesManagement.Size = New System.Drawing.Size(238, 51)
+        Me.btnSuppliesManagement.TabIndex = 15
+        Me.btnSuppliesManagement.Text = "Supplies Management"
+        Me.btnSuppliesManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSuppliesManagement.UseVisualStyleBackColor = False
+        '
+        'btnPropertyManagement
+        '
+        Me.btnPropertyManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnPropertyManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnPropertyManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnPropertyManagement.FlatAppearance.BorderSize = 2
+        Me.btnPropertyManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPropertyManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPropertyManagement.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnPropertyManagement.Image = CType(resources.GetObject("btnPropertyManagement.Image"), System.Drawing.Image)
+        Me.btnPropertyManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnPropertyManagement.Location = New System.Drawing.Point(12, 267)
+        Me.btnPropertyManagement.Name = "btnPropertyManagement"
+        Me.btnPropertyManagement.Size = New System.Drawing.Size(238, 51)
+        Me.btnPropertyManagement.TabIndex = 14
+        Me.btnPropertyManagement.Text = "Property Management"
+        Me.btnPropertyManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnPropertyManagement.UseVisualStyleBackColor = False
+        '
+        'btnUserManagement
+        '
+        Me.btnUserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnUserManagement.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnUserManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnUserManagement.FlatAppearance.BorderSize = 2
+        Me.btnUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUserManagement.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnUserManagement.Image = CType(resources.GetObject("btnUserManagement.Image"), System.Drawing.Image)
+        Me.btnUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUserManagement.Location = New System.Drawing.Point(12, 210)
+        Me.btnUserManagement.Name = "btnUserManagement"
+        Me.btnUserManagement.Size = New System.Drawing.Size(238, 51)
+        Me.btnUserManagement.TabIndex = 13
+        Me.btnUserManagement.Text = "User Management"
+        Me.btnUserManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnUserManagement.UseVisualStyleBackColor = False
+        '
+        'btnDashboard
+        '
+        Me.btnDashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnDashboard.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnDashboard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnDashboard.FlatAppearance.BorderSize = 2
+        Me.btnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDashboard.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDashboard.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnDashboard.Image = CType(resources.GetObject("btnDashboard.Image"), System.Drawing.Image)
+        Me.btnDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDashboard.Location = New System.Drawing.Point(12, 153)
+        Me.btnDashboard.Name = "btnDashboard"
+        Me.btnDashboard.Size = New System.Drawing.Size(238, 51)
+        Me.btnDashboard.TabIndex = 12
+        Me.btnDashboard.Text = "Dashboard"
+        Me.btnDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDashboard.UseVisualStyleBackColor = False
+        '
+        'btnSystemConfig
+        '
+        Me.btnSystemConfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnSystemConfig.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnSystemConfig.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnSystemConfig.FlatAppearance.BorderSize = 2
+        Me.btnSystemConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSystemConfig.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSystemConfig.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnSystemConfig.Image = CType(resources.GetObject("btnSystemConfig.Image"), System.Drawing.Image)
+        Me.btnSystemConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSystemConfig.Location = New System.Drawing.Point(12, 609)
+        Me.btnSystemConfig.Name = "btnSystemConfig"
+        Me.btnSystemConfig.Size = New System.Drawing.Size(238, 51)
+        Me.btnSystemConfig.TabIndex = 22
+        Me.btnSystemConfig.Text = "System Configuration"
+        Me.btnSystemConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSystemConfig.UseVisualStyleBackColor = False
+        '
+        'btnLogout
+        '
+        Me.btnLogout.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnLogout.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnLogout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnLogout.FlatAppearance.BorderSize = 2
+        Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLogout.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogout.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
+        Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnLogout.Location = New System.Drawing.Point(12, 666)
+        Me.btnLogout.Name = "btnLogout"
+        Me.btnLogout.Size = New System.Drawing.Size(238, 51)
+        Me.btnLogout.TabIndex = 22
+        Me.btnLogout.Text = "Logout"
+        Me.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnLogout.UseVisualStyleBackColor = False
         '
         'SADashboard
         '
@@ -704,7 +704,6 @@ Partial Class SADashboard
         Me.Name = "SADashboard"
         Me.Text = "SADashboard"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.icStaff, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlSidebar.ResumeLayout(False)
         Me.pnlSidebar.PerformLayout()
         Me.pnlFormLoader.ResumeLayout(False)
@@ -729,6 +728,7 @@ Partial Class SADashboard
         Me.RoundedPanel2.PerformLayout()
         Me.RoundedPanel1.ResumeLayout(False)
         Me.RoundedPanel1.PerformLayout()
+        CType(Me.icStaff, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

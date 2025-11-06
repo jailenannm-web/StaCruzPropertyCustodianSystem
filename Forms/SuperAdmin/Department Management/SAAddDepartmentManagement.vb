@@ -12,7 +12,11 @@ Public Class SAAddDepartmentManagement
 
     End Sub
 
-    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles txtNoofEmployees.TextChanged
+    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles txb_NoofEmployees.TextChanged
+
+    End Sub
+
+    Private Sub lblContactNumber_Click(sender As Object, e As EventArgs) Handles lblContactNumber.Click
 
     End Sub
 End Class

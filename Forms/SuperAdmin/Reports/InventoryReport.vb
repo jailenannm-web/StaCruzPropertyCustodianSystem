@@ -3,23 +3,27 @@
 
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As System.EventArgs) Handles Label2.Click
+    Private Sub Label2_Click(sender As Object, e As System.EventArgs)
 
     End Sub
 
-    Private Sub TextBox10_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox10.TextChanged
+    Private Sub TextBox10_TextChanged(sender As Object, e As System.EventArgs)
 
     End Sub
 
-    Private Sub TextBox12_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox12.TextChanged
+    Private Sub TextBox12_TextChanged(sender As Object, e As System.EventArgs)
 
     End Sub
 
-    Private Sub TextBox14_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox14.TextChanged
+    Private Sub TextBox14_TextChanged(sender As Object, e As System.EventArgs)
 
     End Sub
 
     Private Sub InventoryReport_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Label15_Click(sender As Object, e As System.EventArgs)
 
     End Sub
 End Class
