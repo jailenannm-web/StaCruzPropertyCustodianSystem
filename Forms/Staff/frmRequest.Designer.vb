@@ -48,7 +48,7 @@ Partial Class frmRequest
         Me.ConditionUponReturn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UpdatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.icStaff = New System.Windows.Forms.PictureBox()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnReports = New System.Windows.Forms.Button()
@@ -390,7 +390,7 @@ Partial Class frmRequest
     Friend WithEvents ConditionUponReturn As DataGridViewTextBoxColumn
     Friend WithEvents CreatedAt As DataGridViewTextBoxColumn
     Friend WithEvents UpdatedAt As DataGridViewTextBoxColumn
-    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents icStaff As PictureBox
     Friend WithEvents btnLogout As Button
     Friend WithEvents btnReports As Button

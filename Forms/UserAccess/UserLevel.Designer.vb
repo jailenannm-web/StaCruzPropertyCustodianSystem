@@ -174,7 +174,3 @@ Partial Class UserLevel
     Friend WithEvents Label5 As Label
 End Class
 
-Friend Class RoundedPanel
-    Public Sub New()
-    End Sub
-End Class

@@ -23,7 +23,7 @@ Partial Class SAMaintenace
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SAMaintenace))
-        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblSuperAdmin = New System.Windows.Forms.Label()
         Me.btnSystemConfig = New System.Windows.Forms.Button()
@@ -416,7 +416,7 @@ Partial Class SAMaintenace
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents btnSystemConfig As System.Windows.Forms.Button
     Friend WithEvents btnLogout As System.Windows.Forms.Button
     Friend WithEvents Panel1 As System.Windows.Forms.Panel

@@ -287,10 +287,28 @@
     <Compile Include="Forms\SuperAdmin\Reports\InventoryReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\LostStolenDamaged.Designer.vb">
+      <DependentUpon>LostStolenDamaged.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\LostStolenDamaged.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\MaintenanceReport.Designer.vb">
       <DependentUpon>MaintenanceReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\MaintenanceReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyCard.Designer.vb">
+      <DependentUpon>PropertyCard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyCard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\RequisitionIssueSlip.Designer.vb">
+      <DependentUpon>RequisitionIssueSlip.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\RequisitionIssueSlip.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\StockCard.Designer.vb">
@@ -438,8 +456,17 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\InventoryReport.resx">
       <DependentUpon>InventoryReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\LostStolenDamaged.resx">
+      <DependentUpon>LostStolenDamaged.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\MaintenanceReport.resx">
       <DependentUpon>MaintenanceReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyCard.resx">
+      <DependentUpon>PropertyCard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\RequisitionIssueSlip.resx">
+      <DependentUpon>RequisitionIssueSlip.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\StockCard.resx">
       <DependentUpon>StockCard.vb</DependentUpon>

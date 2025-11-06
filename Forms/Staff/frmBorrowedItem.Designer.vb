@@ -29,7 +29,7 @@ Partial Class frmBorrowedItem
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBorrowedItem))
         Me.lblBorrowed = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.icStaff = New System.Windows.Forms.PictureBox()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnReports = New System.Windows.Forms.Button()
@@ -310,7 +310,7 @@ Partial Class frmBorrowedItem
     Friend WithEvents Description As DataGridViewTextBoxColumn
     Friend WithEvents UnitOfMeasure As DataGridViewTextBoxColumn
     Friend WithEvents ExpirationDate As DataGridViewTextBoxColumn
-    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents icStaff As PictureBox
     Friend WithEvents btnLogout As Button
     Friend WithEvents btnReports As Button

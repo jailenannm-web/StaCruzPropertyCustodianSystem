@@ -35,7 +35,7 @@ Partial Class frmPropertyRequest
         Me.lblEmail = New System.Windows.Forms.Label()
         Me.lblContactNumber = New System.Windows.Forms.Label()
         Me.lblDepartmentName = New System.Windows.Forms.Label()
-        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.icStaff = New System.Windows.Forms.PictureBox()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnReports = New System.Windows.Forms.Button()
@@ -405,7 +405,7 @@ Partial Class frmPropertyRequest
     Friend WithEvents lblEmail As Label
     Friend WithEvents lblContactNumber As Label
     Friend WithEvents lblDepartmentName As Label
-    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents icStaff As PictureBox
     Friend WithEvents btnLogout As Button
     Friend WithEvents btnReports As Button

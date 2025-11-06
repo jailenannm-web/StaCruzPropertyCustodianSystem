@@ -34,8 +34,8 @@ Partial Class SAPropertyRequestManagement
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -45,14 +45,14 @@ Partial Class SAPropertyRequestManagement
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.lblUserManagement = New System.Windows.Forms.Label()
-        Me.btnUpdate = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.btnSystemConfig = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
-        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.RequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -585,8 +585,8 @@ Partial Class SAPropertyRequestManagement
     Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button7 As Button
-    Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Button11 As Button
     Friend WithEvents Button12 As Button
     Friend WithEvents Panel3 As Panel
@@ -596,14 +596,14 @@ Partial Class SAPropertyRequestManagement
     Friend WithEvents Label1 As Label
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents lblUserManagement As Label
-    Friend WithEvents btnUpdate As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnUpdate As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Button9 As Button
     Friend WithEvents Button10 As Button
     Friend WithEvents btnSystemConfig As Button
     Friend WithEvents btnLogout As Button
-    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Button8 As Button
     Friend WithEvents RequestID As DataGridViewTextBoxColumn
     Friend WithEvents UserID As DataGridViewTextBoxColumn
