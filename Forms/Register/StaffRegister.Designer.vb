@@ -25,6 +25,10 @@ Partial Class StaffRegister
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cb_Barangay = New System.Windows.Forms.ComboBox()
+        Me.cb_Municipality = New System.Windows.Forms.ComboBox()
+        Me.cb_Province = New System.Windows.Forms.ComboBox()
+        Me.cb_Position = New System.Windows.Forms.ComboBox()
         Me.txb_ContactNumber = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pa = New System.Windows.Forms.TextBox()
@@ -54,10 +58,6 @@ Partial Class StaffRegister
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cb_Position = New System.Windows.Forms.ComboBox()
-        Me.cb_Province = New System.Windows.Forms.ComboBox()
-        Me.cb_Municipality = New System.Windows.Forms.ComboBox()
-        Me.cb_Barangay = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -97,28 +97,75 @@ Partial Class StaffRegister
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(42, 33)
+        Me.Panel1.Location = New System.Drawing.Point(52, 41)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1849, 1020)
+        Me.Panel1.Size = New System.Drawing.Size(2311, 1275)
         Me.Panel1.TabIndex = 0
+        '
+        'cb_Barangay
+        '
+        Me.cb_Barangay.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb_Barangay.FormattingEnabled = True
+        Me.cb_Barangay.Items.AddRange(New Object() {"Binanuaan", "Caawigan", "Cahabaan", "Calintaan", "Del Carmen", "Gabon", "Itomang", "Poblacion", "San Francisco", "San Isidro", "San Jose", "San Nicolas", "Santa Cruz", "Santa Elena", "Santo Niño"})
+        Me.cb_Barangay.Location = New System.Drawing.Point(1621, 615)
+        Me.cb_Barangay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cb_Barangay.Name = "cb_Barangay"
+        Me.cb_Barangay.Size = New System.Drawing.Size(420, 44)
+        Me.cb_Barangay.TabIndex = 46
+        '
+        'cb_Municipality
+        '
+        Me.cb_Municipality.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb_Municipality.FormattingEnabled = True
+        Me.cb_Municipality.Items.AddRange(New Object() {"Daet", "Basud", "Capalonga", "Jose Panganiban", "Labo", "Mercedes", "Paracale", "San Lorenzo Ruiz", "San Vicente", "Santa Elena", "Talisay", "Vinzons"})
+        Me.cb_Municipality.Location = New System.Drawing.Point(1621, 502)
+        Me.cb_Municipality.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cb_Municipality.Name = "cb_Municipality"
+        Me.cb_Municipality.Size = New System.Drawing.Size(420, 44)
+        Me.cb_Municipality.TabIndex = 45
+        '
+        'cb_Province
+        '
+        Me.cb_Province.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb_Province.FormattingEnabled = True
+        Me.cb_Province.Items.AddRange(New Object() {"Albay", "Camarines Norte", "Camarines Sur", "Catanduanes", "Masbate", "Sorsogon"})
+        Me.cb_Province.Location = New System.Drawing.Point(1621, 394)
+        Me.cb_Province.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cb_Province.Name = "cb_Province"
+        Me.cb_Province.Size = New System.Drawing.Size(420, 44)
+        Me.cb_Province.TabIndex = 44
+        '
+        'cb_Position
+        '
+        Me.cb_Position.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb_Position.FormattingEnabled = True
+        Me.cb_Position.Items.AddRange(New Object() {"Super Admin", "Admin", "Staff"})
+        Me.cb_Position.Location = New System.Drawing.Point(600, 596)
+        Me.cb_Position.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cb_Position.Name = "cb_Position"
+        Me.cb_Position.Size = New System.Drawing.Size(432, 44)
+        Me.cb_Position.TabIndex = 43
         '
         'txb_ContactNumber
         '
         Me.txb_ContactNumber.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_ContactNumber.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_ContactNumber.Location = New System.Drawing.Point(480, 732)
+        Me.txb_ContactNumber.Location = New System.Drawing.Point(600, 915)
+        Me.txb_ContactNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_ContactNumber.Multiline = True
         Me.txb_ContactNumber.Name = "txb_ContactNumber"
-        Me.txb_ContactNumber.Size = New System.Drawing.Size(346, 34)
+        Me.txb_ContactNumber.Size = New System.Drawing.Size(432, 42)
         Me.txb_ContactNumber.TabIndex = 42
         '
         'Label16
         '
         Me.Label16.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label16.Location = New System.Drawing.Point(262, 732)
+        Me.Label16.Location = New System.Drawing.Point(328, 915)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(218, 34)
+        Me.Label16.Size = New System.Drawing.Size(272, 42)
         Me.Label16.TabIndex = 41
         Me.Label16.Text = "Contact Number"
         '
@@ -126,19 +173,21 @@ Partial Class StaffRegister
         '
         Me.pa.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.pa.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pa.Location = New System.Drawing.Point(1297, 659)
+        Me.pa.Location = New System.Drawing.Point(1621, 824)
+        Me.pa.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.pa.Multiline = True
         Me.pa.Name = "pa"
-        Me.pa.Size = New System.Drawing.Size(337, 34)
+        Me.pa.Size = New System.Drawing.Size(421, 42)
         Me.pa.TabIndex = 40
         '
         'Label11
         '
         Me.Label11.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(1084, 659)
+        Me.Label11.Location = New System.Drawing.Point(1355, 824)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(136, 34)
+        Me.Label11.Size = New System.Drawing.Size(170, 42)
         Me.Label11.TabIndex = 39
         Me.Label11.Text = "Password"
         '
@@ -146,49 +195,54 @@ Partial Class StaffRegister
         '
         Me.txb_EmployeeID.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_EmployeeID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_EmployeeID.Location = New System.Drawing.Point(480, 649)
+        Me.txb_EmployeeID.Location = New System.Drawing.Point(600, 811)
+        Me.txb_EmployeeID.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_EmployeeID.Multiline = True
         Me.txb_EmployeeID.Name = "txb_EmployeeID"
-        Me.txb_EmployeeID.Size = New System.Drawing.Size(346, 34)
+        Me.txb_EmployeeID.Size = New System.Drawing.Size(432, 42)
         Me.txb_EmployeeID.TabIndex = 38
         '
         'txb_HouseNoStreet
         '
         Me.txb_HouseNoStreet.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_HouseNoStreet.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_HouseNoStreet.Location = New System.Drawing.Point(1297, 569)
+        Me.txb_HouseNoStreet.Location = New System.Drawing.Point(1621, 711)
+        Me.txb_HouseNoStreet.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_HouseNoStreet.Multiline = True
         Me.txb_HouseNoStreet.Name = "txb_HouseNoStreet"
-        Me.txb_HouseNoStreet.Size = New System.Drawing.Size(337, 34)
+        Me.txb_HouseNoStreet.Size = New System.Drawing.Size(421, 42)
         Me.txb_HouseNoStreet.TabIndex = 37
         '
         'txb_UserName
         '
         Me.txb_UserName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_UserName.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_UserName.Location = New System.Drawing.Point(1297, 231)
+        Me.txb_UserName.Location = New System.Drawing.Point(1621, 289)
+        Me.txb_UserName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_UserName.Multiline = True
         Me.txb_UserName.Name = "txb_UserName"
-        Me.txb_UserName.Size = New System.Drawing.Size(337, 34)
+        Me.txb_UserName.Size = New System.Drawing.Size(421, 42)
         Me.txb_UserName.TabIndex = 33
         '
         'txb_Email
         '
         Me.txb_Email.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Email.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Email.Location = New System.Drawing.Point(1297, 158)
+        Me.txb_Email.Location = New System.Drawing.Point(1621, 198)
+        Me.txb_Email.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_Email.Multiline = True
         Me.txb_Email.Name = "txb_Email"
-        Me.txb_Email.Size = New System.Drawing.Size(337, 34)
+        Me.txb_Email.Size = New System.Drawing.Size(421, 42)
         Me.txb_Email.TabIndex = 32
         '
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label9.Location = New System.Drawing.Point(1084, 405)
+        Me.Label9.Location = New System.Drawing.Point(1355, 506)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(171, 34)
+        Me.Label9.Size = New System.Drawing.Size(214, 42)
         Me.Label9.TabIndex = 28
         Me.Label9.Text = "Municipality"
         '
@@ -196,9 +250,10 @@ Partial Class StaffRegister
         '
         Me.Label10.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(1092, 231)
+        Me.Label10.Location = New System.Drawing.Point(1365, 289)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(150, 34)
+        Me.Label10.Size = New System.Drawing.Size(188, 42)
         Me.Label10.TabIndex = 27
         Me.Label10.Text = "User Name"
         '
@@ -206,9 +261,10 @@ Partial Class StaffRegister
         '
         Me.Label12.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label12.Location = New System.Drawing.Point(1084, 575)
+        Me.Label12.Location = New System.Drawing.Point(1355, 719)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(219, 34)
+        Me.Label12.Size = New System.Drawing.Size(274, 42)
         Me.Label12.TabIndex = 20
         Me.Label12.Text = "House No. Street"
         '
@@ -216,9 +272,10 @@ Partial Class StaffRegister
         '
         Me.Label13.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label13.Location = New System.Drawing.Point(1084, 317)
+        Me.Label13.Location = New System.Drawing.Point(1355, 396)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(207, 34)
+        Me.Label13.Size = New System.Drawing.Size(259, 42)
         Me.Label13.TabIndex = 19
         Me.Label13.Text = "Province"
         '
@@ -226,9 +283,10 @@ Partial Class StaffRegister
         '
         Me.Label14.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label14.Location = New System.Drawing.Point(1084, 494)
+        Me.Label14.Location = New System.Drawing.Point(1355, 618)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(136, 34)
+        Me.Label14.Size = New System.Drawing.Size(170, 42)
         Me.Label14.TabIndex = 18
         Me.Label14.Text = "Barangay"
         '
@@ -236,9 +294,10 @@ Partial Class StaffRegister
         '
         Me.Label15.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label15.Location = New System.Drawing.Point(1092, 158)
+        Me.Label15.Location = New System.Drawing.Point(1365, 198)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(150, 34)
+        Me.Label15.Size = New System.Drawing.Size(188, 42)
         Me.Label15.TabIndex = 17
         Me.Label15.Text = "Email"
         '
@@ -247,9 +306,10 @@ Partial Class StaffRegister
         Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Login.ForeColor = System.Drawing.Color.White
-        Me.btn_Login.Location = New System.Drawing.Point(1004, 870)
+        Me.btn_Login.Location = New System.Drawing.Point(1255, 1088)
+        Me.btn_Login.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btn_Login.Name = "btn_Login"
-        Me.btn_Login.Size = New System.Drawing.Size(190, 46)
+        Me.btn_Login.Size = New System.Drawing.Size(238, 58)
         Me.btn_Login.TabIndex = 16
         Me.btn_Login.Text = "Login"
         Me.btn_Login.UseVisualStyleBackColor = False
@@ -258,9 +318,10 @@ Partial Class StaffRegister
         '
         Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(661, 870)
+        Me.btn_Cancel.Location = New System.Drawing.Point(826, 1088)
+        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btn_Cancel.Name = "btn_Cancel"
-        Me.btn_Cancel.Size = New System.Drawing.Size(191, 46)
+        Me.btn_Cancel.Size = New System.Drawing.Size(239, 58)
         Me.btn_Cancel.TabIndex = 15
         Me.btn_Cancel.Text = "Cancel"
         Me.btn_Cancel.UseVisualStyleBackColor = True
@@ -269,19 +330,21 @@ Partial Class StaffRegister
         '
         Me.txb_DepartmentID.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_DepartmentID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepartmentID.Location = New System.Drawing.Point(480, 565)
+        Me.txb_DepartmentID.Location = New System.Drawing.Point(600, 706)
+        Me.txb_DepartmentID.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_DepartmentID.Multiline = True
         Me.txb_DepartmentID.Name = "txb_DepartmentID"
-        Me.txb_DepartmentID.Size = New System.Drawing.Size(346, 34)
+        Me.txb_DepartmentID.Size = New System.Drawing.Size(432, 42)
         Me.txb_DepartmentID.TabIndex = 13
         '
         'Label8
         '
         Me.Label8.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label8.Location = New System.Drawing.Point(262, 397)
+        Me.Label8.Location = New System.Drawing.Point(328, 496)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(114, 34)
+        Me.Label8.Size = New System.Drawing.Size(142, 42)
         Me.Label8.TabIndex = 12
         Me.Label8.Text = "Suffix"
         '
@@ -289,9 +352,10 @@ Partial Class StaffRegister
         '
         Me.Label7.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label7.Location = New System.Drawing.Point(262, 225)
+        Me.Label7.Location = New System.Drawing.Point(328, 281)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(195, 34)
+        Me.Label7.Size = New System.Drawing.Size(244, 42)
         Me.Label7.TabIndex = 11
         Me.Label7.Text = "Middle Name"
         '
@@ -299,49 +363,54 @@ Partial Class StaffRegister
         '
         Me.txb_Suffix.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Suffix.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Suffix.Location = New System.Drawing.Point(480, 397)
+        Me.txb_Suffix.Location = New System.Drawing.Point(600, 496)
+        Me.txb_Suffix.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_Suffix.Multiline = True
         Me.txb_Suffix.Name = "txb_Suffix"
-        Me.txb_Suffix.Size = New System.Drawing.Size(346, 34)
+        Me.txb_Suffix.Size = New System.Drawing.Size(432, 42)
         Me.txb_Suffix.TabIndex = 9
         '
         'txb_LastName
         '
         Me.txb_LastName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_LastName.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_LastName.Location = New System.Drawing.Point(480, 311)
+        Me.txb_LastName.Location = New System.Drawing.Point(600, 389)
+        Me.txb_LastName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_LastName.Multiline = True
         Me.txb_LastName.Name = "txb_LastName"
-        Me.txb_LastName.Size = New System.Drawing.Size(346, 34)
+        Me.txb_LastName.Size = New System.Drawing.Size(432, 42)
         Me.txb_LastName.TabIndex = 8
         '
         'txb_MiddleName
         '
         Me.txb_MiddleName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_MiddleName.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_MiddleName.Location = New System.Drawing.Point(480, 225)
+        Me.txb_MiddleName.Location = New System.Drawing.Point(600, 281)
+        Me.txb_MiddleName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_MiddleName.Multiline = True
         Me.txb_MiddleName.Name = "txb_MiddleName"
-        Me.txb_MiddleName.Size = New System.Drawing.Size(346, 34)
+        Me.txb_MiddleName.Size = New System.Drawing.Size(432, 42)
         Me.txb_MiddleName.TabIndex = 7
         '
         'txb_FirstName
         '
         Me.txb_FirstName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_FirstName.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_FirstName.Location = New System.Drawing.Point(480, 152)
+        Me.txb_FirstName.Location = New System.Drawing.Point(600, 190)
+        Me.txb_FirstName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txb_FirstName.Multiline = True
         Me.txb_FirstName.Name = "txb_FirstName"
-        Me.txb_FirstName.Size = New System.Drawing.Size(346, 34)
+        Me.txb_FirstName.Size = New System.Drawing.Size(432, 42)
         Me.txb_FirstName.TabIndex = 6
         '
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(262, 649)
+        Me.Label6.Location = New System.Drawing.Point(328, 811)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(212, 34)
+        Me.Label6.Size = New System.Drawing.Size(265, 42)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "Employee I.D"
         '
@@ -349,9 +418,10 @@ Partial Class StaffRegister
         '
         Me.Label5.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(262, 565)
+        Me.Label5.Location = New System.Drawing.Point(328, 706)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(212, 34)
+        Me.Label5.Size = New System.Drawing.Size(265, 42)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "Department I.D"
         '
@@ -359,9 +429,10 @@ Partial Class StaffRegister
         '
         Me.Label4.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(262, 311)
+        Me.Label4.Location = New System.Drawing.Point(328, 389)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(184, 34)
+        Me.Label4.Size = New System.Drawing.Size(230, 42)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Last Name"
         '
@@ -369,9 +440,10 @@ Partial Class StaffRegister
         '
         Me.Label3.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(262, 479)
+        Me.Label3.Location = New System.Drawing.Point(328, 599)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(134, 34)
+        Me.Label3.Size = New System.Drawing.Size(168, 42)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Position"
         '
@@ -379,9 +451,10 @@ Partial Class StaffRegister
         '
         Me.Label2.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(262, 152)
+        Me.Label2.Location = New System.Drawing.Point(328, 190)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(184, 34)
+        Me.Label2.Size = New System.Drawing.Size(230, 42)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "First Name"
         '
@@ -389,62 +462,24 @@ Partial Class StaffRegister
         '
         Me.Label1.Font = New System.Drawing.Font("Poppins", 41.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(783, 28)
+        Me.Label1.Location = New System.Drawing.Point(979, 35)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(310, 64)
+        Me.Label1.Size = New System.Drawing.Size(388, 80)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "REGISTER"
         '
-        'cb_Position
-        '
-        Me.cb_Position.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cb_Position.FormattingEnabled = True
-        Me.cb_Position.Items.AddRange(New Object() {"Super Admin", "Admin", "Staff"})
-        Me.cb_Position.Location = New System.Drawing.Point(480, 477)
-        Me.cb_Position.Name = "cb_Position"
-        Me.cb_Position.Size = New System.Drawing.Size(346, 36)
-        Me.cb_Position.TabIndex = 43
-        '
-        'cb_Province
-        '
-        Me.cb_Province.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cb_Province.FormattingEnabled = True
-        Me.cb_Province.Items.AddRange(New Object() {"Albay", "Camarines Norte", "Camarines Sur", "Catanduanes", "Masbate", "Sorsogon"})
-        Me.cb_Province.Location = New System.Drawing.Point(1297, 315)
-        Me.cb_Province.Name = "cb_Province"
-        Me.cb_Province.Size = New System.Drawing.Size(337, 36)
-        Me.cb_Province.TabIndex = 44
-        '
-        'cb_Municipality
-        '
-        Me.cb_Municipality.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cb_Municipality.FormattingEnabled = True
-        Me.cb_Municipality.Items.AddRange(New Object() {"Daet", "Basud", "Capalonga", "Jose Panganiban", "Labo", "Mercedes", "Paracale", "San Lorenzo Ruiz", "San Vicente", "Santa Elena", "Talisay", "Vinzons"})
-        Me.cb_Municipality.Location = New System.Drawing.Point(1297, 402)
-        Me.cb_Municipality.Name = "cb_Municipality"
-        Me.cb_Municipality.Size = New System.Drawing.Size(337, 36)
-        Me.cb_Municipality.TabIndex = 45
-        '
-        'cb_Barangay
-        '
-        Me.cb_Barangay.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cb_Barangay.FormattingEnabled = True
-        Me.cb_Barangay.Items.AddRange(New Object() {"Binanuaan", "Caawigan", "Cahabaan", "Calintaan", "Del Carmen", "Gabon", "Itomang", "Poblacion", "San Francisco", "San Isidro", "San Jose", "San Nicolas", "Santa Cruz", "Santa Elena", "Santo Niño"})
-        Me.cb_Barangay.Location = New System.Drawing.Point(1297, 492)
-        Me.cb_Barangay.Name = "cb_Barangay"
-        Me.cb_Barangay.Size = New System.Drawing.Size(337, 36)
-        Me.cb_Barangay.TabIndex = 46
-        '
         'StaffRegister
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.BG1
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1539, 878)
+        Me.ClientSize = New System.Drawing.Size(1924, 1098)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "StaffRegister"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Register"

@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Collections.Generic
 Imports System.Drawing
 Imports System.Windows.Forms
 
@@ -9,8 +10,8 @@ Public Class Login
         Me.Bounds = Screen.FromHandle(Me.Handle).WorkingArea
 
         ' Apply placeholders
-        SetPlaceholder(txb_Username, "")
-        SetPlaceholder(txb_Password, "", True)
+        SetPlaceholder(txb_Username, "Username")
+        SetPlaceholder(txb_Password, "Password", True)
     End Sub
 
     ' === Placeholder setup ===
@@ -54,7 +55,47 @@ Public Class Login
         SetPlaceholder(txb_Password, "Password", True)
     End Sub
 
+    ' Added login button click handler with database validation
+    Private Sub btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
+        ' Validate input fields
+        If String.IsNullOrWhiteSpace(txb_Username.Text) OrElse txb_Username.Text = "Username" Then
+            MessageBox.Show("Please enter your username.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txb_Username.Focus()
+            Return
+        End If
 
+        If String.IsNullOrWhiteSpace(txb_Password.Text) OrElse txb_Password.Text = "Password" Then
+            MessageBox.Show("Please enter your password.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txb_Password.Focus()
+            Return
+        End If
+
+        ' Validate admin credentials against database
+        Dim username As String = txb_Username.Text
+        Dim password As String = txb_Password.Text
+
+        Dim adminData As Dictionary(Of String, String) = DatabaseConnection.ValidateAdminLogin(username, password)
+
+        If adminData.Count > 0 Then
+            ' Login successful
+            My.Settings.LoggedInuser = username
+            My.Settings.Save()
+
+            MessageBox.Show("Login successful! Welcome, " & adminData("first_name") & ".", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            ' Open Admin Dashboard
+            Dim adminDashboard As New AdminDashboard()
+            adminDashboard.Show()
+            Me.Close()
+        Else
+            MessageBox.Show("Invalid username or password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txb_Username.Clear()
+            txb_Password.Clear()
+            txb_Username.Focus()
+        End If
+    End Sub
+
+    ' Added cancel button handler
     Private Sub btn_Cancel_Click(sender As Object, e As EventArgs) Handles btn_Cancel.Click
         Dim userLevelForm As New UserLevel()
         userLevelForm.Show()
