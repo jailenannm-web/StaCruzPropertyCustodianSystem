@@ -159,6 +159,12 @@
     <Compile Include="Forms\Admin\UC_UserManagement.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\frmConfig.Designer.vb">
+      <DependentUpon>frmConfig.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmConfig.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Login\Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -228,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UC_UserManagement.resx">
       <DependentUpon>UC_UserManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmConfig.resx">
+      <DependentUpon>frmConfig.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Login\Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

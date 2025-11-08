@@ -3,10 +3,13 @@ Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
+Imports System.Configuration
+
 
 Public Class DatabaseConnection
-    ' Connection string from App.config
-    Private Shared connectionString As String = "Server=localhost;Database=teamcruzim;Uid=root;Pwd=;"
+    ' Connection string retrieved dynamically from App.config
+    Private Shared ReadOnly connectionString As String = ConfigurationManager.ConnectionStrings("MySQLConnection").ConnectionString
+
 
     ''' <summary>
     ''' Get a new MySQL connection
