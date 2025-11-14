@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.StaCruzPropertyCustodianSystem.DepartmentAllocation
+            Me.MainForm = Global.StaCruzPropertyCustodianSystem.frmConfig
         End Sub
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _

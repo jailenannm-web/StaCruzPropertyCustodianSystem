@@ -12,7 +12,7 @@ Public Class frmConfig
             ' Try to open the connection
             Using conn As New MySqlConnection(connStr)
                 conn.Open()
-                MessageBox.Show("✅ Connection Successful! Connected to stacruz_property_db.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Connected to teamcruzim successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End Using
 
         Catch ex As Exception
