@@ -308,7 +308,7 @@ Partial Class UC_AddSupply
         Me.uc_um_adminprofile.Name = "uc_um_adminprofile"
         Me.uc_um_adminprofile.Size = New System.Drawing.Size(348, 50)
         Me.uc_um_adminprofile.TabIndex = 23
-        Me.uc_um_adminprofile.Text = "Property Management"
+        Me.uc_um_adminprofile.Text = "Add Supply"
         '
         'UC_AddSupply
         '

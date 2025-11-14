@@ -52,18 +52,20 @@ Partial Class SAPropertyManagement
         Me.pnlSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.pnlSearch.Controls.Add(Me.txtSearch)
         Me.pnlSearch.CornerRadius = 20
-        Me.pnlSearch.Location = New System.Drawing.Point(46, 107)
+        Me.pnlSearch.Location = New System.Drawing.Point(61, 132)
+        Me.pnlSearch.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.pnlSearch.Name = "pnlSearch"
-        Me.pnlSearch.Size = New System.Drawing.Size(613, 30)
+        Me.pnlSearch.Size = New System.Drawing.Size(817, 37)
         Me.pnlSearch.TabIndex = 13
         '
         'txtSearch
         '
         Me.txtSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtSearch.Location = New System.Drawing.Point(165, 10)
+        Me.txtSearch.Location = New System.Drawing.Point(220, 12)
+        Me.txtSearch.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(435, 13)
+        Me.txtSearch.Size = New System.Drawing.Size(580, 15)
         Me.txtSearch.TabIndex = 0
         '
         'btnAddSupply
@@ -71,11 +73,12 @@ Partial Class SAPropertyManagement
         Me.btnAddSupply.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.btnAddSupply.CornerRadius = 15
         Me.btnAddSupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddSupply.Font = New System.Drawing.Font("Leelawadee", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddSupply.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddSupply.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAddSupply.Location = New System.Drawing.Point(955, 632)
+        Me.btnAddSupply.Location = New System.Drawing.Point(1273, 778)
+        Me.btnAddSupply.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAddSupply.Name = "btnAddSupply"
-        Me.btnAddSupply.Size = New System.Drawing.Size(94, 31)
+        Me.btnAddSupply.Size = New System.Drawing.Size(125, 38)
         Me.btnAddSupply.TabIndex = 16
         Me.btnAddSupply.Text = "Add Supply"
         Me.btnAddSupply.UseVisualStyleBackColor = False
@@ -85,11 +88,12 @@ Partial Class SAPropertyManagement
         Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.btnEdit.CornerRadius = 15
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEdit.Font = New System.Drawing.Font("Leelawadee", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(830, 632)
+        Me.btnEdit.Location = New System.Drawing.Point(1107, 778)
+        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(94, 31)
+        Me.btnEdit.Size = New System.Drawing.Size(125, 38)
         Me.btnEdit.TabIndex = 15
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
@@ -97,20 +101,23 @@ Partial Class SAPropertyManagement
         'lblPropertyManagement
         '
         Me.lblPropertyManagement.AutoSize = True
-        Me.lblPropertyManagement.Font = New System.Drawing.Font("Leelawadee", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPropertyManagement.Location = New System.Drawing.Point(40, 48)
+        Me.lblPropertyManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPropertyManagement.Location = New System.Drawing.Point(53, 59)
+        Me.lblPropertyManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPropertyManagement.Name = "lblPropertyManagement"
-        Me.lblPropertyManagement.Size = New System.Drawing.Size(304, 32)
+        Me.lblPropertyManagement.Size = New System.Drawing.Size(371, 39)
         Me.lblPropertyManagement.TabIndex = 14
         Me.lblPropertyManagement.Text = "Property Management"
         '
         'dgvPropertyManagement
         '
         Me.dgvPropertyManagement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPropertyManagement.Location = New System.Drawing.Point(12, 3)
+        Me.dgvPropertyManagement.Location = New System.Drawing.Point(16, 4)
+        Me.dgvPropertyManagement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dgvPropertyManagement.Name = "dgvPropertyManagement"
+        Me.dgvPropertyManagement.RowHeadersWidth = 51
         Me.dgvPropertyManagement.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.dgvPropertyManagement.Size = New System.Drawing.Size(1019, 455)
+        Me.dgvPropertyManagement.Size = New System.Drawing.Size(1359, 560)
         Me.dgvPropertyManagement.TabIndex = 9
         '
         'pnlDgvPropertyManagement
@@ -118,9 +125,10 @@ Partial Class SAPropertyManagement
         Me.pnlDgvPropertyManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.pnlDgvPropertyManagement.Controls.Add(Me.dgvPropertyManagement)
         Me.pnlDgvPropertyManagement.CornerRadius = 20
-        Me.pnlDgvPropertyManagement.Location = New System.Drawing.Point(37, 165)
+        Me.pnlDgvPropertyManagement.Location = New System.Drawing.Point(49, 203)
+        Me.pnlDgvPropertyManagement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.pnlDgvPropertyManagement.Name = "pnlDgvPropertyManagement"
-        Me.pnlDgvPropertyManagement.Size = New System.Drawing.Size(1031, 461)
+        Me.pnlDgvPropertyManagement.Size = New System.Drawing.Size(1375, 567)
         Me.pnlDgvPropertyManagement.TabIndex = 17
         '
         'pnlCategories
@@ -128,9 +136,10 @@ Partial Class SAPropertyManagement
         Me.pnlCategories.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.pnlCategories.Controls.Add(Me.comboCategoris)
         Me.pnlCategories.CornerRadius = 20
-        Me.pnlCategories.Location = New System.Drawing.Point(734, 107)
+        Me.pnlCategories.Location = New System.Drawing.Point(979, 132)
+        Me.pnlCategories.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.pnlCategories.Name = "pnlCategories"
-        Me.pnlCategories.Size = New System.Drawing.Size(133, 30)
+        Me.pnlCategories.Size = New System.Drawing.Size(177, 37)
         Me.pnlCategories.TabIndex = 18
         '
         'comboCategoris
@@ -139,9 +148,10 @@ Partial Class SAPropertyManagement
         Me.comboCategoris.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.comboCategoris.FormattingEnabled = True
-        Me.comboCategoris.Location = New System.Drawing.Point(13, 4)
+        Me.comboCategoris.Location = New System.Drawing.Point(17, 5)
+        Me.comboCategoris.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.comboCategoris.Name = "comboCategoris"
-        Me.comboCategoris.Size = New System.Drawing.Size(111, 21)
+        Me.comboCategoris.Size = New System.Drawing.Size(147, 24)
         Me.comboCategoris.TabIndex = 0
         '
         'pnlStatus
@@ -149,9 +159,10 @@ Partial Class SAPropertyManagement
         Me.pnlStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.pnlStatus.Controls.Add(Me.comboStatus)
         Me.pnlStatus.CornerRadius = 20
-        Me.pnlStatus.Location = New System.Drawing.Point(935, 107)
+        Me.pnlStatus.Location = New System.Drawing.Point(1247, 132)
+        Me.pnlStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.pnlStatus.Name = "pnlStatus"
-        Me.pnlStatus.Size = New System.Drawing.Size(133, 30)
+        Me.pnlStatus.Size = New System.Drawing.Size(177, 37)
         Me.pnlStatus.TabIndex = 19
         '
         'comboStatus
@@ -160,37 +171,40 @@ Partial Class SAPropertyManagement
         Me.comboStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.comboStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.comboStatus.FormattingEnabled = True
-        Me.comboStatus.Location = New System.Drawing.Point(11, 5)
+        Me.comboStatus.Location = New System.Drawing.Point(15, 6)
+        Me.comboStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.comboStatus.Name = "comboStatus"
-        Me.comboStatus.Size = New System.Drawing.Size(111, 21)
+        Me.comboStatus.Size = New System.Drawing.Size(147, 24)
         Me.comboStatus.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Leelawadee", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(665, 116)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(887, 143)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(72, 15)
+        Me.Label1.Size = New System.Drawing.Size(100, 20)
         Me.Label1.TabIndex = 20
         Me.Label1.Text = "Categories"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Leelawadee", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(884, 117)
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(1179, 144)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 15)
+        Me.Label2.Size = New System.Drawing.Size(63, 20)
         Me.Label2.TabIndex = 21
         Me.Label2.Text = "Status"
         '
         'SAPropertyManagement
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.AntiqueWhite
-        Me.ClientSize = New System.Drawing.Size(1104, 710)
+        Me.ClientSize = New System.Drawing.Size(1472, 874)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.pnlStatus)
@@ -201,6 +215,7 @@ Partial Class SAPropertyManagement
         Me.Controls.Add(Me.lblPropertyManagement)
         Me.Controls.Add(Me.pnlDgvPropertyManagement)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "SAPropertyManagement"
         Me.Text = "SAPropertyManagement"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

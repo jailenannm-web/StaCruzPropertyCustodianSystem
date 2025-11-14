@@ -83,8 +83,8 @@ Public Class AdminDashboard
 
     ' Properties Button
     Private Sub admin_btn_properties_Click(sender As Object, e As EventArgs) Handles admin_btn_properties.Click
-        ' Load your properties UserControl
-        ' LoadUserControl(New UC_Properties())
+        ' Load the property management UserControl which shows supplies
+        LoadUserControl(New UC_PropertyManagement())
     End Sub
 
     ' Pending Requests Button
@@ -126,6 +126,12 @@ Public Class AdminDashboard
         LoadUserControl(New UC_DepartmentManagement())
     End Sub
 
+    ' Added new button handler for Supplies Management if separate
+    Private Sub admin_btn_SuppliesManagement_Click(sender As Object, e As EventArgs) Handles admin_btn_SuppliesManagement.Click
+        ' Load property management which shows all supplies
+        LoadUserControl(New UC_PropertyManagement())
+    End Sub
+
     Private Sub admin_PanelMain_Paint(sender As Object, e As PaintEventArgs) Handles admin_PanelMain.Paint
 
     End Sub
@@ -136,6 +142,10 @@ Public Class AdminDashboard
 
     Private Sub admin_btn_reports_Click(sender As Object, e As EventArgs) Handles admin_btn_reports.Click
         LoadUserControl(New UC_Reports())
+    End Sub
+
+    Private Sub admin_PanelSidebar_Paint(sender As Object, e As PaintEventArgs) Handles admin_PanelSidebar.Paint
+
     End Sub
 
     ' Other controls (PictureBoxes, Panels, etc.) can be added similarly

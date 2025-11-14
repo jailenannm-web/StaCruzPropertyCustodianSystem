@@ -96,12 +96,13 @@ Partial Class AdminDashboard
         'admin_btn_Logout
         '
         Me.admin_btn_Logout.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_Logout.CornerRadius = 15
         Me.admin_btn_Logout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_Logout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_Logout.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_Logout.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_Logout.Image = My.Resources.Resources.icon_logout
+        Me.admin_btn_Logout.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_logout
         Me.admin_btn_Logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.admin_btn_Logout.Location = New System.Drawing.Point(24, 931)
         Me.admin_btn_Logout.Margin = New System.Windows.Forms.Padding(4)
@@ -114,12 +115,13 @@ Partial Class AdminDashboard
         'admin_btn_reports
         '
         Me.admin_btn_reports.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_reports.CornerRadius = 15
         Me.admin_btn_reports.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_reports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_reports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_reports.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_reports.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_reports.Image = My.Resources.Resources.icon_reports
+        Me.admin_btn_reports.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_reports
         Me.admin_btn_reports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.admin_btn_reports.Location = New System.Drawing.Point(24, 795)
         Me.admin_btn_reports.Margin = New System.Windows.Forms.Padding(4)
@@ -132,12 +134,13 @@ Partial Class AdminDashboard
         'admin_btn_MaintenanceManagement
         '
         Me.admin_btn_MaintenanceManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_MaintenanceManagement.CornerRadius = 15
         Me.admin_btn_MaintenanceManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_MaintenanceManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_MaintenanceManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_MaintenanceManagement.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_MaintenanceManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_MaintenanceManagement.Image = My.Resources.Resources.icon_maintenance
+        Me.admin_btn_MaintenanceManagement.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_maintenance
         Me.admin_btn_MaintenanceManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.admin_btn_MaintenanceManagement.Location = New System.Drawing.Point(24, 716)
         Me.admin_btn_MaintenanceManagement.Margin = New System.Windows.Forms.Padding(4)
@@ -151,12 +154,13 @@ Partial Class AdminDashboard
         'admin_btn_PropertyRequestManagement
         '
         Me.admin_btn_PropertyRequestManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_PropertyRequestManagement.CornerRadius = 15
         Me.admin_btn_PropertyRequestManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_PropertyRequestManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_PropertyRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_PropertyRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_PropertyRequestManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_PropertyRequestManagement.Image = My.Resources.Resources.icon_propertyrequest
+        Me.admin_btn_PropertyRequestManagement.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_propertyrequest
         Me.admin_btn_PropertyRequestManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.admin_btn_PropertyRequestManagement.Location = New System.Drawing.Point(24, 624)
         Me.admin_btn_PropertyRequestManagement.Margin = New System.Windows.Forms.Padding(4)
@@ -169,12 +173,13 @@ Partial Class AdminDashboard
         'admin_btn_DepartmentManagement
         '
         Me.admin_btn_DepartmentManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_DepartmentManagement.CornerRadius = 15
         Me.admin_btn_DepartmentManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_DepartmentManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_DepartmentManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_DepartmentManagement.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_DepartmentManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_DepartmentManagement.Image = My.Resources.Resources.icon_propertymanagement
+        Me.admin_btn_DepartmentManagement.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_propertymanagement
         Me.admin_btn_DepartmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.admin_btn_DepartmentManagement.Location = New System.Drawing.Point(24, 546)
         Me.admin_btn_DepartmentManagement.Margin = New System.Windows.Forms.Padding(4)
@@ -188,12 +193,13 @@ Partial Class AdminDashboard
         'admin_btn_SuppliesManagement
         '
         Me.admin_btn_SuppliesManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_SuppliesManagement.CornerRadius = 15
         Me.admin_btn_SuppliesManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_SuppliesManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_SuppliesManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_SuppliesManagement.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_SuppliesManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_SuppliesManagement.Image = My.Resources.Resources.icon_suppliesmanagement
+        Me.admin_btn_SuppliesManagement.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_suppliesmanagement
         Me.admin_btn_SuppliesManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.admin_btn_SuppliesManagement.Location = New System.Drawing.Point(24, 468)
         Me.admin_btn_SuppliesManagement.Margin = New System.Windows.Forms.Padding(4)
@@ -207,12 +213,13 @@ Partial Class AdminDashboard
         'admin_btn_PropertyManagement
         '
         Me.admin_btn_PropertyManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_PropertyManagement.CornerRadius = 15
         Me.admin_btn_PropertyManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_PropertyManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_PropertyManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_PropertyManagement.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_PropertyManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_PropertyManagement.Image = My.Resources.Resources.icon_propertymanagement
+        Me.admin_btn_PropertyManagement.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_propertymanagement
         Me.admin_btn_PropertyManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.admin_btn_PropertyManagement.Location = New System.Drawing.Point(24, 391)
         Me.admin_btn_PropertyManagement.Margin = New System.Windows.Forms.Padding(4)
@@ -226,12 +233,13 @@ Partial Class AdminDashboard
         'admin_btn_UserManagement
         '
         Me.admin_btn_UserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_UserManagement.CornerRadius = 15
         Me.admin_btn_UserManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_UserManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_UserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_UserManagement.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_UserManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_UserManagement.Image = My.Resources.Resources.icon_usermanagement
+        Me.admin_btn_UserManagement.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_usermanagement
         Me.admin_btn_UserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.admin_btn_UserManagement.Location = New System.Drawing.Point(24, 316)
         Me.admin_btn_UserManagement.Margin = New System.Windows.Forms.Padding(4)
@@ -244,12 +252,13 @@ Partial Class AdminDashboard
         'admin_btn_dashboard
         '
         Me.admin_btn_dashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_dashboard.CornerRadius = 15
         Me.admin_btn_dashboard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_dashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_dashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_dashboard.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_dashboard.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_dashboard.Image = My.Resources.Resources.icon_dashboard
+        Me.admin_btn_dashboard.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_dashboard
         Me.admin_btn_dashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.admin_btn_dashboard.Location = New System.Drawing.Point(24, 238)
         Me.admin_btn_dashboard.Margin = New System.Windows.Forms.Padding(4)
@@ -275,7 +284,7 @@ Partial Class AdminDashboard
         'admin_picProfile
         '
         Me.admin_picProfile.BackColor = System.Drawing.Color.Transparent
-        Me.admin_picProfile.Image = My.Resources.Resources.profile
+        Me.admin_picProfile.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.profile
         Me.admin_picProfile.Location = New System.Drawing.Point(100, 55)
         Me.admin_picProfile.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_picProfile.Name = "admin_picProfile"
@@ -328,9 +337,9 @@ Partial Class AdminDashboard
         Me.admin_panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.admin_panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.admin_panel1.CornerRadius = 10
         Me.admin_panel1.Controls.Add(Me.admin_label_quickaccess)
         Me.admin_panel1.Controls.Add(Me.TableLayoutPanel2)
+        Me.admin_panel1.CornerRadius = 10
         Me.admin_panel1.Location = New System.Drawing.Point(47, 433)
         Me.admin_panel1.Name = "admin_panel1"
         Me.admin_panel1.Size = New System.Drawing.Size(998, 171)
@@ -383,6 +392,7 @@ Partial Class AdminDashboard
         'admin_btn_hello
         '
         Me.admin_btn_hello.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_hello.CornerRadius = 15
         Me.admin_btn_hello.Dock = System.Windows.Forms.DockStyle.Fill
         Me.admin_btn_hello.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_hello.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -401,6 +411,7 @@ Partial Class AdminDashboard
         'admin_btn_viewallprop
         '
         Me.admin_btn_viewallprop.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_viewallprop.CornerRadius = 15
         Me.admin_btn_viewallprop.Dock = System.Windows.Forms.DockStyle.Fill
         Me.admin_btn_viewallprop.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_viewallprop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -419,6 +430,7 @@ Partial Class AdminDashboard
         'admin_btn_updateinventory
         '
         Me.admin_btn_updateinventory.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_updateinventory.CornerRadius = 15
         Me.admin_btn_updateinventory.Dock = System.Windows.Forms.DockStyle.Fill
         Me.admin_btn_updateinventory.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_updateinventory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -437,6 +449,7 @@ Partial Class AdminDashboard
         'admin_btn_generatereport
         '
         Me.admin_btn_generatereport.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_generatereport.CornerRadius = 15
         Me.admin_btn_generatereport.Dock = System.Windows.Forms.DockStyle.Fill
         Me.admin_btn_generatereport.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_generatereport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -495,6 +508,7 @@ Partial Class AdminDashboard
         'admin_btn_properties
         '
         Me.admin_btn_properties.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_properties.CornerRadius = 15
         Me.admin_btn_properties.Dock = System.Windows.Forms.DockStyle.Fill
         Me.admin_btn_properties.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_properties.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -514,6 +528,7 @@ Partial Class AdminDashboard
         'admin_btn_NeedsRepair
         '
         Me.admin_btn_NeedsRepair.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_NeedsRepair.CornerRadius = 15
         Me.admin_btn_NeedsRepair.Dock = System.Windows.Forms.DockStyle.Fill
         Me.admin_btn_NeedsRepair.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_NeedsRepair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -533,6 +548,7 @@ Partial Class AdminDashboard
         'admin_btn_PendingRequests
         '
         Me.admin_btn_PendingRequests.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_PendingRequests.CornerRadius = 15
         Me.admin_btn_PendingRequests.Dock = System.Windows.Forms.DockStyle.Fill
         Me.admin_btn_PendingRequests.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_PendingRequests.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -552,6 +568,7 @@ Partial Class AdminDashboard
         'admin_btn_Borrowed
         '
         Me.admin_btn_Borrowed.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_btn_Borrowed.CornerRadius = 15
         Me.admin_btn_Borrowed.Dock = System.Windows.Forms.DockStyle.Fill
         Me.admin_btn_Borrowed.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_Borrowed.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -570,7 +587,7 @@ Partial Class AdminDashboard
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = My.Resources.Resources.icon_search1
+        Me.PictureBox1.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
         Me.PictureBox1.Location = New System.Drawing.Point(37, 106)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
@@ -599,7 +616,7 @@ Partial Class AdminDashboard
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
         '
-        'Dashboard
+        'AdminDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -609,7 +626,7 @@ Partial Class AdminDashboard
         Me.Controls.Add(Me.admin_PanelMain)
         Me.Controls.Add(Me.admin_PanelSidebar)
         Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.Name = "Dashboard"
+        Me.Name = "AdminDashboard"
         Me.Text = "Admin Dashboard"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.admin_PanelSidebar.ResumeLayout(False)

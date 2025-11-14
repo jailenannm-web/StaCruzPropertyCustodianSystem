@@ -1,7 +1,8 @@
-﻿Imports System.Linq
-Imports System
-Imports System.Windows.Forms
+﻿Imports System
+Imports System.Data
 Imports System.Drawing
+Imports System.Linq
+Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Partial Class SADashboard
     Private tmrSidebar As Object
@@ -14,7 +15,8 @@ Partial Class SADashboard
     End Sub
 
     Private Sub SADashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        ' Load supply statistics when dashboard loads
+        LoadSupplyStats()
     End Sub
 
 
@@ -50,17 +52,28 @@ Partial Class SADashboard
         activeBtn.BackColor = colorActive
     End Sub
 
+    ' Added method to display supply statistics on dashboard
+    Private Sub LoadSupplyStats()
+        Try
+            ' Get all supplies from database
+            Dim suppliesTable As DataTable = DatabaseConnection.GetAllSupplies()
 
+            ' Display in dashboard (you'll need to add labels/controls for this)
+            ' Example: lblTotalSupplies.Text = suppliesTable.Rows.Count.ToString()
+            System.Diagnostics.Debug.WriteLine("[v0] Dashboard - Total Supplies: " & suppliesTable.Rows.Count)
 
+            ' You can also calculate low stock items
+            Dim lowStockCount As Integer = 0
+            For Each row As DataRow In suppliesTable.Rows
+                If row("Status").ToString() = "Low Stock" Then
+                    lowStockCount += 1
+                End If
+            Next
 
-    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
-
-        ' --- This code changes the active button color ---
-        SetActiveButton(btnUserManagement)
-
-        ' --- THIS IS THE NEW CODE ---
-        ' Load your new profile form
-        loadFormIntoPanel(New SAUserManagement())
+            System.Diagnostics.Debug.WriteLine("[v0] Dashboard - Low Stock Items: " & lowStockCount)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadSupplyStats Error: " & ex.Message)
+        End Try
     End Sub
 
     Public Sub loadFormIntoPanel(ByVal formToLoad As Form)
@@ -86,6 +99,17 @@ Partial Class SADashboard
         pnlFormLoader.Visible = True
         pnlFormLoader.BringToFront() ' Make sure it's on top of pnlMain
     End Sub
+
+    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
+
+        ' --- This code changes the active button color ---
+        SetActiveButton(btnUserManagement)
+
+        ' --- THIS IS THE NEW CODE ---
+        ' Load your new profile form
+        loadFormIntoPanel(New SAUserManagement())
+    End Sub
+
 
     Private Sub btnPropertyManagement_Click(sender As Object, e As EventArgs) Handles btnPropertyManagement.Click
 
@@ -161,4 +185,3 @@ Partial Class SADashboard
         loadFormIntoPanel(New SASuppliesManagement())
     End Sub
 End Class
-
