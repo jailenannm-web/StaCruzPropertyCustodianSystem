@@ -59,6 +59,26 @@ Public Class UC_AddSupply
             If success Then
                 ' Clear form fields after successful add
                 ClearForm()
+                
+                ' Refresh the Property Management data grid
+                Dim parentForm As Control = Me.Parent
+                While parentForm IsNot Nothing
+                    If TypeOf parentForm Is UC_PropertyManagement Then
+                        CType(parentForm, UC_PropertyManagement).LoadSuppliesData()
+                        Exit While
+                    End If
+                    parentForm = parentForm.Parent
+                End While
+                
+                ' Also try to refresh if parent is a form with Property Management control
+                If Me.Parent IsNot Nothing Then
+                    For Each ctrl As Control In Me.Parent.Controls
+                        If TypeOf ctrl Is UC_PropertyManagement Then
+                            CType(ctrl, UC_PropertyManagement).LoadSuppliesData()
+                        End If
+                    Next
+                End If
+                
                 ' Notify parent form to refresh data
                 Me.Parent.Controls.Remove(Me)
                 MessageBox.Show("Supply added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)

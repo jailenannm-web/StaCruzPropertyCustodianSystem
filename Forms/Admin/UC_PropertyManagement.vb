@@ -49,22 +49,23 @@ Public Class UC_PropertyManagement
     End Sub
 
     ' Added method to load supplies from database
-    Private Sub LoadSuppliesData()
+    Public Sub LoadSuppliesData()
         Try
             pm_table.Rows.Clear()
             Dim dt As DataTable = DatabaseConnection.GetAllSupplies()
 
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
+                    ' Use correct column names from GetAllSupplies (SupplyID, SupplyName, Category, etc.)
                     pm_table.Rows.Add(
-                        row("supply_id").ToString(),
-                        row("name").ToString(),
-                        row("category").ToString(),
-                        row("stock").ToString(),
-                        row("unit_cost").ToString(),
-                        row("total_value").ToString(),
-                        row("status").ToString(),
-                        row("location").ToString(),
+                        If(IsDBNull(row("SupplyID")), "", row("SupplyID").ToString()),
+                        If(IsDBNull(row("SupplyName")), "", row("SupplyName").ToString()),
+                        If(IsDBNull(row("Category")), "", row("Category").ToString()),
+                        If(IsDBNull(row("QuantityInStock")), "0", row("QuantityInStock").ToString()),
+                        If(IsDBNull(row("UnitCost")), "0.00", row("UnitCost").ToString()),
+                        If(IsDBNull(row("TotalValue")), "0.00", row("TotalValue").ToString()),
+                        If(IsDBNull(row("Status")), "", row("Status").ToString()),
+                        If(IsDBNull(row("Location")), "", row("Location").ToString()),
                         "Edit"
                     )
                 Next
@@ -74,7 +75,7 @@ Public Class UC_PropertyManagement
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading supplies: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("[v0] Load Supplies Error: " & ex.Message)
+            System.Diagnostics.Debug.WriteLine("[v0] Load Supplies Error: " & ex.Message & vbCrLf & ex.StackTrace)
         End Try
     End Sub
 
