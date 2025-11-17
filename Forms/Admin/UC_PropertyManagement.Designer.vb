@@ -21,7 +21,7 @@ Partial Class UC_PropertyManagement
         Me.UnitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LocationColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.admin_label_PM = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -72,7 +72,7 @@ Partial Class UC_PropertyManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pm_table.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SupplyID, Me.colName, Me.Category, Me.Stock, Me.UnitCost, Me.TotalValue, Me.Status, Me.Location, Me.Action})
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SupplyID, Me.colName, Me.Category, Me.Stock, Me.UnitCost, Me.TotalValue, Me.Status, Me.LocationColumn, Me.Action})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(37, 196)
         Me.pm_table.Name = "pm_table"
@@ -130,12 +130,12 @@ Partial Class UC_PropertyManagement
         Me.Status.Name = "Status"
         Me.Status.Width = 125
         '
-        'Location
+        'LocationColumn
         '
-        Me.Location.HeaderText = "Location"
-        Me.Location.MinimumWidth = 6
-        Me.Location.Name = "Location"
-        Me.Location.Width = 125
+        Me.LocationColumn.HeaderText = "Location"
+        Me.LocationColumn.MinimumWidth = 6
+        Me.LocationColumn.Name = "LocationColumn"
+        Me.LocationColumn.Width = 125
         '
         'Action
         '
@@ -241,7 +241,7 @@ Partial Class UC_PropertyManagement
     Friend WithEvents UnitCost As DataGridViewTextBoxColumn
     Friend WithEvents TotalValue As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents Location As DataGridViewTextBoxColumn
+    Friend WithEvents LocationColumn As DataGridViewTextBoxColumn
     Friend WithEvents Action As DataGridViewTextBoxColumn
     Friend WithEvents admin_label_PM As Label
     Friend WithEvents PictureBox1 As PictureBox

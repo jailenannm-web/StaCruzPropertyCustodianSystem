@@ -28,7 +28,7 @@ Partial Class SAAddSuppliesManagement
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SAAddSuppliesManagement))
-        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LocationColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CustodianID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WarrantyDetail = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LifeSpan = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -75,10 +75,10 @@ Partial Class SAAddSuppliesManagement
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Location
+        'LocationColumn
         '
-        Me.Location.HeaderText = "Location"
-        Me.Location.Name = "Location"
+        Me.LocationColumn.HeaderText = "Location"
+        Me.LocationColumn.Name = "LocationColumn"
         '
         'CustodianID
         '
@@ -239,7 +239,7 @@ Partial Class SAAddSuppliesManagement
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertID, Me.PropertyName, Me.Category, Me.Description, Me.SerialNumber, Me.AcquisitionDate, Me.AcquisitionCost, Me.Supplier, Me.ConditionStatus, Me.Location, Me.CustodianID, Me.WarrantyDetail, Me.LifeSpan, Me.DepreciationValue, Me.DisposalDate})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertID, Me.PropertyName, Me.Category, Me.Description, Me.SerialNumber, Me.AcquisitionDate, Me.AcquisitionCost, Me.Supplier, Me.ConditionStatus, Me.LocationColumn, Me.CustodianID, Me.WarrantyDetail, Me.LifeSpan, Me.DepreciationValue, Me.DisposalDate})
         Me.DataGridView1.Location = New System.Drawing.Point(314, 152)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(1057, 459)
@@ -573,7 +573,7 @@ Partial Class SAAddSuppliesManagement
     End Sub
 
     Friend WithEvents Button4 As Button
-    Friend WithEvents Location As DataGridViewTextBoxColumn
+    Friend WithEvents LocationColumn As DataGridViewTextBoxColumn
     Friend WithEvents CustodianID As DataGridViewTextBoxColumn
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button

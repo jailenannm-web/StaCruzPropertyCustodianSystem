@@ -36,7 +36,7 @@ Partial Class UC_PropertyRequestManagement
         Me.UnitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LocationColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -59,7 +59,7 @@ Partial Class UC_PropertyRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_table1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SupplyID, Me.colName, Me.Category, Me.Stock, Me.UnitCost, Me.TotalValue, Me.Status, Me.Location, Me.Action})
+        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SupplyID, Me.colName, Me.Category, Me.Stock, Me.UnitCost, Me.TotalValue, Me.Status, Me.LocationColumn, Me.Action})
         Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.prm_table1.Location = New System.Drawing.Point(45, 116)
         Me.prm_table1.Name = "prm_table1"
@@ -117,12 +117,12 @@ Partial Class UC_PropertyRequestManagement
         Me.Status.Name = "Status"
         Me.Status.Width = 125
         '
-        'Location
+        'LocationColumn
         '
-        Me.Location.HeaderText = "Location"
-        Me.Location.MinimumWidth = 6
-        Me.Location.Name = "Location"
-        Me.Location.Width = 125
+        Me.LocationColumn.HeaderText = "Location"
+        Me.LocationColumn.MinimumWidth = 6
+        Me.LocationColumn.Name = "LocationColumn"
+        Me.LocationColumn.Width = 125
         '
         'Action
         '
@@ -169,7 +169,7 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents UnitCost As DataGridViewTextBoxColumn
     Friend WithEvents TotalValue As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents Location As DataGridViewTextBoxColumn
+    Friend WithEvents LocationColumn As DataGridViewTextBoxColumn
     Friend WithEvents Action As DataGridViewTextBoxColumn
     Friend WithEvents prm_btn_update As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

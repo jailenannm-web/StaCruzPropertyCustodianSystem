@@ -63,7 +63,7 @@ Partial Class SAAddPropertyManagement
         Me.AcquisitionCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ConditionStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LocationColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CustodianID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WarrantyDetail = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LifeSpan = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -393,7 +393,7 @@ Partial Class SAAddPropertyManagement
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertID, Me.PropertyName, Me.Category, Me.Description, Me.SerialNumber, Me.AcquisitionDate, Me.AcquisitionCost, Me.Supplier, Me.ConditionStatus, Me.Location, Me.CustodianID, Me.WarrantyDetail, Me.LifeSpan, Me.DepreciationValue, Me.DisposalDate})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertID, Me.PropertyName, Me.Category, Me.Description, Me.SerialNumber, Me.AcquisitionDate, Me.AcquisitionCost, Me.Supplier, Me.ConditionStatus, Me.LocationColumn, Me.CustodianID, Me.WarrantyDetail, Me.LifeSpan, Me.DepreciationValue, Me.DisposalDate})
         Me.DataGridView1.Location = New System.Drawing.Point(298, 152)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(1057, 459)
@@ -513,10 +513,10 @@ Partial Class SAAddPropertyManagement
         Me.ConditionStatus.HeaderText = "Condition Status"
         Me.ConditionStatus.Name = "ConditionStatus"
         '
-        'Location
+        'LocationColumn
         '
-        Me.Location.HeaderText = "Location"
-        Me.Location.Name = "Location"
+        Me.LocationColumn.HeaderText = "Location"
+        Me.LocationColumn.Name = "LocationColumn"
         '
         'CustodianID
         '
@@ -606,7 +606,7 @@ Partial Class SAAddPropertyManagement
     Friend WithEvents AcquisitionCost As DataGridViewTextBoxColumn
     Friend WithEvents Supplier As DataGridViewTextBoxColumn
     Friend WithEvents ConditionStatus As DataGridViewTextBoxColumn
-    Friend WithEvents Location As DataGridViewTextBoxColumn
+    Friend WithEvents LocationColumn As DataGridViewTextBoxColumn
     Friend WithEvents CustodianID As DataGridViewTextBoxColumn
     Friend WithEvents WarrantyDetail As DataGridViewTextBoxColumn
     Friend WithEvents LifeSpan As DataGridViewTextBoxColumn
