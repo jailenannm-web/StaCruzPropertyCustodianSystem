@@ -56,7 +56,7 @@ Public Class DatabaseConnection
                 ' If configuration failed or connection string is empty, use default fallback
                 If String.IsNullOrEmpty(baseConnStr) Then
                     System.Diagnostics.Debug.WriteLine("[v0] Using fallback connection string (ConfigurationManager unavailable)")
-                    baseConnStr = "Server=localhost;Database=teamcruzim;Uid=root;Pwd=;AllowZeroDateTime=true;SslMode=None;ConnectionTimeout=10;DefaultCommandTimeout=30"
+                    baseConnStr = "Server=localhost;Port=3306;Database=teamcruzim;Uid=root;Pwd=;Replication=False;AllowLoadLocalInfile=False;AllowUserVariables=True;AllowZeroDateTime=True;ConvertZeroDateTime=True;SslMode=None;ConnectionTimeout=10;DefaultCommandTimeout=30"
                 End If
 
                 ' Build connection string manually to avoid ReplicationManager initialization issues
@@ -1367,7 +1367,7 @@ Public Class DatabaseConnection
             End While
 
             ' Check if supply ID already exists
-            Dim checkQuery As String = "SELECT COUNT(*) FROM supplies WHERE SupplyID = @supplyID"
+            Dim checkQuery As String = "SELECT COUNT(*) FROM supplies WHERE supply_id = @supplyID"
             Using checkCmd As New MySqlCommand(checkQuery, conn)
                 checkCmd.Parameters.AddWithValue("@supplyID", supplyID)
                 Dim count As Integer = CInt(checkCmd.ExecuteScalar())
@@ -1379,10 +1379,11 @@ Public Class DatabaseConnection
             End Using
 
             ' Updated INSERT to match actual SQL schema column names
-            Dim query As String = "INSERT INTO supplies (SupplyID, SupplyName, Category, QuantityInStock, UnitCost, " &
-                                 "TotalValue, Status, Location, Description, UnitOfMeasure, ReorderLevel, Supplier, AcquisitionDate) " &
-                                 "VALUES (@supplyID, @supplyName, @category, @stock, @unitCost, @totalValue, @status, " &
-                                 "@location, @description, @uom, @reorderLevel, @supplier, NOW())"
+            Dim query As String = "INSERT INTO supplies (" &
+                                   "supply_id, supply_name, category, quantity_in_stock, unit_cost, status, location, " &
+                                   "description, unit_of_measure, reorder_level, supplier_name, acquisition_date, supplier_contact) " &
+                                   "VALUES (@supplyID, @supplyName, @category, @stock, @unitCost, @status, @location, " &
+                                   "@description, @uom, @reorderLevel, @supplierName, NOW(), @supplierContact)"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@supplyID", supplyID)
@@ -1396,7 +1397,8 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@description", description)
                 cmd.Parameters.AddWithValue("@uom", uom)
                 cmd.Parameters.AddWithValue("@reorderLevel", reorderLevel)
-                cmd.Parameters.AddWithValue("@supplier", supplierID)
+                cmd.Parameters.AddWithValue("@supplierName", If(String.IsNullOrWhiteSpace(supplierID), "Unknown Supplier", supplierID))
+                cmd.Parameters.AddWithValue("@supplierContact", "")
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
 
@@ -4495,9 +4497,22 @@ Public Class DatabaseConnection
             End If
 
             ' Build query with optional filters
-            Dim query As String = "SELECT supply_id, supply_name, category, description, unit_of_measure, " &
-                                 "quantity_in_stock, reorder_level, supplier_name, supplier_contact, unit_cost, " &
-                                 "total_value, acquisition_date, expiration_date, location, status " &
+            Dim query As String = "SELECT " &
+                                 "supply_id AS SupplyID, " &
+                                 "supply_name AS SupplyName, " &
+                                 "category AS Category, " &
+                                 "description AS Description, " &
+                                 "unit_of_measure AS UnitOfMeasure, " &
+                                 "quantity_in_stock AS QuantityInStock, " &
+                                 "reorder_level AS ReorderLevel, " &
+                                 "supplier_name AS SupplierName, " &
+                                 "supplier_contact AS SupplierContact, " &
+                                 "unit_cost AS UnitCost, " &
+                                 "total_value AS TotalValue, " &
+                                 "acquisition_date AS AcquisitionDate, " &
+                                 "expiration_date AS ExpirationDate, " &
+                                 "location AS Location, " &
+                                 "status AS Status " &
                                  "FROM supplies WHERE 1=1"
 
             If Not String.IsNullOrEmpty(category) Then
