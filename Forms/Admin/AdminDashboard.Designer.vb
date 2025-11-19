@@ -31,36 +31,40 @@ Partial Class AdminDashboard
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.admin_PanelSidebar = New System.Windows.Forms.Panel()
-        Me.admin_btn_Logout = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_reports = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_MaintenanceManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_PropertyRequestManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_DepartmentManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_SuppliesManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_PropertyManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_UserManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_dashboard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_Logout = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_reports = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_MaintenanceManagement = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_PropertyRequestManagement = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_DepartmentManagement = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_SuppliesManagement = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_PropertyManagement = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_UserManagement = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_dashboard = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_TitleProfile = New System.Windows.Forms.Label()
         Me.admin_picProfile = New System.Windows.Forms.PictureBox()
         Me.admin_PanelMain = New System.Windows.Forms.Panel()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
-        Me.admin_panel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.admin_panel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.admin_panel2 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.admin_panel1 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.admin_label_quickaccess = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.admin_btn_hello = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_viewallprop = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_updateinventory = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_generatereport = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_hello = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_viewallprop = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_updateinventory = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_generatereport = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_panelcontainer = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.admin_btn_properties = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_NeedsRepair = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_PendingRequests = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_Borrowed = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.admin_txtbox_search = New System.Windows.Forms.TextBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.admin_panel_PendingRequests = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.RoundedPanel3 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.admin_panel_borrowed = New System.Windows.Forms.Label()
         Me.admin_PanelSidebar.SuspendLayout()
         CType(Me.admin_picProfile, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.admin_PanelMain.SuspendLayout()
@@ -69,6 +73,10 @@ Partial Class AdminDashboard
         Me.admin_panelcontainer.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.admin_panel_PendingRequests.SuspendLayout
+        Me.RoundedPanel1.SuspendLayout
+        Me.RoundedPanel2.SuspendLayout
+        Me.RoundedPanel3.SuspendLayout
         Me.SuspendLayout()
         '
         'admin_PanelSidebar
@@ -327,9 +335,9 @@ Partial Class AdminDashboard
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.admin_panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.admin_panel2.CornerRadius = 10
-        Me.admin_panel2.Location = New System.Drawing.Point(47, 641)
+        Me.admin_panel2.Location = New System.Drawing.Point(47, 624)
         Me.admin_panel2.Name = "admin_panel2"
-        Me.admin_panel2.Size = New System.Drawing.Size(998, 389)
+        Me.admin_panel2.Size = New System.Drawing.Size(998, 406)
         Me.admin_panel2.TabIndex = 19
         '
         'admin_panel1
@@ -470,9 +478,9 @@ Partial Class AdminDashboard
         Me.admin_panelcontainer.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.admin_panelcontainer.Controls.Add(Me.TableLayoutPanel1)
-        Me.admin_panelcontainer.Location = New System.Drawing.Point(37, 170)
+        Me.admin_panelcontainer.Location = New System.Drawing.Point(47, 152)
         Me.admin_panelcontainer.Name = "admin_panelcontainer"
-        Me.admin_panelcontainer.Size = New System.Drawing.Size(1018, 244)
+        Me.admin_panelcontainer.Size = New System.Drawing.Size(998, 269)
         Me.admin_panelcontainer.TabIndex = 16
         '
         'TableLayoutPanel1
@@ -484,11 +492,11 @@ Partial Class AdminDashboard
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.admin_btn_properties, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.admin_btn_NeedsRepair, 3, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.admin_btn_PendingRequests, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.admin_btn_Borrowed, 2, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 10)
+        Me.TableLayoutPanel1.Controls.Add(Me.RoundedPanel3, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.RoundedPanel2, 3, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.RoundedPanel1, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.admin_panel_PendingRequests, 1, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 4)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(10)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
@@ -502,88 +510,8 @@ Partial Class AdminDashboard
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 224.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 224.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 224.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1018, 224)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(998, 265)
         Me.TableLayoutPanel1.TabIndex = 15
-        '
-        'admin_btn_properties
-        '
-        Me.admin_btn_properties.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.admin_btn_properties.CornerRadius = 15
-        Me.admin_btn_properties.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.admin_btn_properties.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_properties.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_properties.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_properties.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_btn_properties.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_properties.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_properties.Location = New System.Drawing.Point(10, 10)
-        Me.admin_btn_properties.Margin = New System.Windows.Forms.Padding(10)
-        Me.admin_btn_properties.Name = "admin_btn_properties"
-        Me.admin_btn_properties.Size = New System.Drawing.Size(234, 204)
-        Me.admin_btn_properties.TabIndex = 11
-        Me.admin_btn_properties.Text = "Total Properties"
-        Me.admin_btn_properties.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.admin_btn_properties.UseVisualStyleBackColor = False
-        '
-        'admin_btn_NeedsRepair
-        '
-        Me.admin_btn_NeedsRepair.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.admin_btn_NeedsRepair.CornerRadius = 15
-        Me.admin_btn_NeedsRepair.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.admin_btn_NeedsRepair.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_NeedsRepair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_NeedsRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_NeedsRepair.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_btn_NeedsRepair.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_NeedsRepair.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_NeedsRepair.Location = New System.Drawing.Point(772, 10)
-        Me.admin_btn_NeedsRepair.Margin = New System.Windows.Forms.Padding(10)
-        Me.admin_btn_NeedsRepair.Name = "admin_btn_NeedsRepair"
-        Me.admin_btn_NeedsRepair.Size = New System.Drawing.Size(236, 204)
-        Me.admin_btn_NeedsRepair.TabIndex = 14
-        Me.admin_btn_NeedsRepair.Text = "Needs Repair"
-        Me.admin_btn_NeedsRepair.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.admin_btn_NeedsRepair.UseVisualStyleBackColor = False
-        '
-        'admin_btn_PendingRequests
-        '
-        Me.admin_btn_PendingRequests.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.admin_btn_PendingRequests.CornerRadius = 15
-        Me.admin_btn_PendingRequests.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.admin_btn_PendingRequests.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_PendingRequests.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_PendingRequests.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_PendingRequests.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_btn_PendingRequests.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_PendingRequests.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_PendingRequests.Location = New System.Drawing.Point(264, 10)
-        Me.admin_btn_PendingRequests.Margin = New System.Windows.Forms.Padding(10)
-        Me.admin_btn_PendingRequests.Name = "admin_btn_PendingRequests"
-        Me.admin_btn_PendingRequests.Size = New System.Drawing.Size(234, 204)
-        Me.admin_btn_PendingRequests.TabIndex = 12
-        Me.admin_btn_PendingRequests.Text = "Pending Requests"
-        Me.admin_btn_PendingRequests.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.admin_btn_PendingRequests.UseVisualStyleBackColor = False
-        '
-        'admin_btn_Borrowed
-        '
-        Me.admin_btn_Borrowed.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.admin_btn_Borrowed.CornerRadius = 15
-        Me.admin_btn_Borrowed.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.admin_btn_Borrowed.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_Borrowed.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_Borrowed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_Borrowed.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_btn_Borrowed.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_Borrowed.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_Borrowed.Location = New System.Drawing.Point(518, 10)
-        Me.admin_btn_Borrowed.Margin = New System.Windows.Forms.Padding(10)
-        Me.admin_btn_Borrowed.Name = "admin_btn_Borrowed"
-        Me.admin_btn_Borrowed.Size = New System.Drawing.Size(234, 204)
-        Me.admin_btn_Borrowed.TabIndex = 13
-        Me.admin_btn_Borrowed.Text = "Borrowed/Returned"
-        Me.admin_btn_Borrowed.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.admin_btn_Borrowed.UseVisualStyleBackColor = False
         '
         'PictureBox1
         '
@@ -616,6 +544,102 @@ Partial Class AdminDashboard
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
         '
+        'admin_panel_PendingRequests
+        '
+        Me.admin_panel_PendingRequests.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.admin_panel_PendingRequests.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_panel_PendingRequests.Controls.Add(Me.Label1)
+        Me.admin_panel_PendingRequests.CornerRadius = 20
+        Me.admin_panel_PendingRequests.Location = New System.Drawing.Point(252, 3)
+        Me.admin_panel_PendingRequests.Name = "admin_panel_PendingRequests"
+        Me.admin_panel_PendingRequests.Size = New System.Drawing.Size(243, 259)
+        Me.admin_panel_PendingRequests.TabIndex = 22
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(12, 12)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(167, 30)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Pending Requests"
+        '
+        'RoundedPanel1
+        '
+        Me.RoundedPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.RoundedPanel1.Controls.Add(Me.admin_panel_borrowed)
+        Me.RoundedPanel1.CornerRadius = 20
+        Me.RoundedPanel1.Location = New System.Drawing.Point(501, 3)
+        Me.RoundedPanel1.Name = "RoundedPanel1"
+        Me.RoundedPanel1.Size = New System.Drawing.Size(243, 259)
+        Me.RoundedPanel1.TabIndex = 23
+        '
+        'RoundedPanel2
+        '
+        Me.RoundedPanel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.RoundedPanel2.Controls.Add(Me.Label2)
+        Me.RoundedPanel2.CornerRadius = 20
+        Me.RoundedPanel2.Location = New System.Drawing.Point(750, 3)
+        Me.RoundedPanel2.Name = "RoundedPanel2"
+        Me.RoundedPanel2.Size = New System.Drawing.Size(245, 259)
+        Me.RoundedPanel2.TabIndex = 24
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
+        Me.Label2.ForeColor = System.Drawing.Color.White
+        Me.Label2.Location = New System.Drawing.Point(12, 12)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(127, 30)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Needs Repair"
+        '
+        'RoundedPanel3
+        '
+        Me.RoundedPanel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.RoundedPanel3.Controls.Add(Me.Label3)
+        Me.RoundedPanel3.CornerRadius = 20
+        Me.RoundedPanel3.Location = New System.Drawing.Point(3, 3)
+        Me.RoundedPanel3.Name = "RoundedPanel3"
+        Me.RoundedPanel3.Size = New System.Drawing.Size(243, 259)
+        Me.RoundedPanel3.TabIndex = 23
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
+        Me.Label3.ForeColor = System.Drawing.Color.White
+        Me.Label3.Location = New System.Drawing.Point(12, 12)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(150, 30)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "Total Properties"
+        '
+        'admin_panel_borrowed
+        '
+        Me.admin_panel_borrowed.AutoSize = True
+        Me.admin_panel_borrowed.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
+        Me.admin_panel_borrowed.ForeColor = System.Drawing.Color.White
+        Me.admin_panel_borrowed.Location = New System.Drawing.Point(12, 12)
+        Me.admin_panel_borrowed.Name = "admin_panel_borrowed"
+        Me.admin_panel_borrowed.Size = New System.Drawing.Size(183, 30)
+        Me.admin_panel_borrowed.TabIndex = 0
+        Me.admin_panel_borrowed.Text = "Borrowed/Returned"
+        '
         'AdminDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -640,6 +664,14 @@ Partial Class AdminDashboard
         Me.admin_panelcontainer.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.admin_panel_PendingRequests.ResumeLayout(False)
+        Me.admin_panel_PendingRequests.PerformLayout
+        Me.RoundedPanel1.ResumeLayout(False)
+        Me.RoundedPanel1.PerformLayout
+        Me.RoundedPanel2.ResumeLayout(False)
+        Me.RoundedPanel2.PerformLayout
+        Me.RoundedPanel3.ResumeLayout(False)
+        Me.RoundedPanel3.PerformLayout
         Me.ResumeLayout(False)
 
     End Sub
@@ -659,10 +691,6 @@ Partial Class AdminDashboard
     Friend WithEvents admin_txtbox_search As TextBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents admin_btn_properties As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_PendingRequests As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_Borrowed As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_NeedsRepair As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents admin_panelcontainer As Panel
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
@@ -674,4 +702,12 @@ Partial Class AdminDashboard
     Friend WithEvents admin_panel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents admin_panel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents admin_label_Dashboard As Label
+    Friend WithEvents admin_panel_PendingRequests As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents Label1 As Label
+    Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents Label3 As Label
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents Label2 As Label
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents admin_panel_borrowed As Label
 End Class

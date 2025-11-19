@@ -82,13 +82,13 @@ Public Class AdminDashboard
     End Sub
 
     ' Properties Button
-    Private Sub admin_btn_properties_Click(sender As Object, e As EventArgs) Handles admin_btn_properties.Click
+    Private Sub admin_btn_properties_Click(sender As Object, e As EventArgs)
         ' Load the property management UserControl which shows supplies
         LoadUserControl(New UC_PropertyManagement())
     End Sub
 
     ' Pending Requests Button
-    Private Sub admin_btn_PendingRequests_Click(sender As Object, e As EventArgs) Handles admin_btn_PendingRequests.Click
+    Private Sub admin_btn_PendingRequests_Click(sender As Object, e As EventArgs)
         ' Load your pending requests UserControl
         ' LoadUserControl(New UC_PendingRequests())
     End Sub
@@ -145,6 +145,10 @@ Public Class AdminDashboard
     End Sub
 
     Private Sub admin_PanelSidebar_Paint(sender As Object, e As PaintEventArgs) Handles admin_PanelSidebar.Paint
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs)
 
     End Sub
 
