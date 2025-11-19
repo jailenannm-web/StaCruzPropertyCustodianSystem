@@ -1241,10 +1241,7 @@ Partial Class AdminDashboard
     Friend WithEvents admin_btn_viewallprop As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_btn_updateinventory As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_btn_generatereport As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents admin_label_quickaccess As Label
-    Friend WithEvents admin_panel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents admin_panel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents admin_label_Dashboard As Label
     Friend WithEvents admin_panel_PendingRequests As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label1 As Label
     Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
@@ -1253,4 +1250,5 @@ Partial Class AdminDashboard
     Friend WithEvents Label2 As Label
     Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents admin_panel_borrowed As Label
+    Friend WithEvents RoundedPanel12 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
 End Class
