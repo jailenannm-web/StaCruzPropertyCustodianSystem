@@ -1486,6 +1486,189 @@ Public Class DatabaseConnection
         Return stats
     End Function
 
+    ''' <summary>
+    ''' Aggregate all high-level values required by the Admin dashboard
+    ''' </summary>
+    Public Shared Function GetAdminDashboardSummary() As Dictionary(Of String, Integer)
+        Dim summary As New Dictionary(Of String, Integer)(StringComparer.OrdinalIgnoreCase) From {
+            {"total_properties", 0},
+            {"total_supplies", 0},
+            {"pending_requests", 0},
+            {"approved_requests", 0},
+            {"declined_requests", 0},
+            {"borrowed_items", 0},
+            {"returned_items", 0},
+            {"needs_repair", 0},
+            {"maintenance_alerts", 0},
+            {"warranty_alerts", 0}
+        }
+
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return summary
+            If Not SafeOpenConnection(conn) Then Return summary
+
+            Dim query As String =
+                "SELECT " &
+                "(SELECT COUNT(*) FROM properties) AS total_properties, " &
+                "(SELECT COUNT(*) FROM supplies) AS total_supplies, " &
+                "(SELECT COUNT(*) FROM property_requests WHERE status = 'pending') AS pending_requests, " &
+                "(SELECT COUNT(*) FROM property_requests WHERE status = 'approved') AS approved_requests, " &
+                "(SELECT COUNT(*) FROM property_requests WHERE status = 'rejected') AS declined_requests, " &
+                "(SELECT COUNT(*) FROM property_requests WHERE status IN ('approved','released')) AS borrowed_items, " &
+                "(SELECT COUNT(*) FROM property_requests WHERE status = 'returned') AS returned_items, " &
+                "(SELECT COUNT(*) FROM properties WHERE condition_status = 'needs repair') AS needs_repair, " &
+                "(SELECT COUNT(*) FROM maintenance WHERE status IN ('pending','ongoing') " &
+                "   OR (next_schedule IS NOT NULL AND next_schedule <= DATE_ADD(CURDATE(), INTERVAL 7 DAY))) AS maintenance_alerts, " &
+                "(SELECT COUNT(*) FROM maintenance WHERE warranty_status = 'expired') AS warranty_alerts"
+
+            Using cmd As New MySqlCommand(query, conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        summary("total_properties") = SafeGetInt(reader, "total_properties")
+                        summary("total_supplies") = SafeGetInt(reader, "total_supplies")
+                        summary("pending_requests") = SafeGetInt(reader, "pending_requests")
+                        summary("approved_requests") = SafeGetInt(reader, "approved_requests")
+                        summary("declined_requests") = SafeGetInt(reader, "declined_requests")
+                        summary("borrowed_items") = SafeGetInt(reader, "borrowed_items")
+                        summary("returned_items") = SafeGetInt(reader, "returned_items")
+                        summary("needs_repair") = SafeGetInt(reader, "needs_repair")
+                        summary("maintenance_alerts") = SafeGetInt(reader, "maintenance_alerts")
+                        summary("warranty_alerts") = SafeGetInt(reader, "warranty_alerts")
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetAdminDashboardSummary Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        Return summary
+    End Function
+
+    Public Shared Function GetPropertyCountsByCategory() As DataTable
+        Dim query As String = "SELECT IFNULL(category, 'Uncategorized') AS label, COUNT(*) AS total " &
+                              "FROM properties GROUP BY category ORDER BY label"
+        Return ExecuteLookupDataTable(query)
+    End Function
+
+    Public Shared Function GetSupplyCountsByCategory() As DataTable
+        Dim query As String = "SELECT IFNULL(category, 'Uncategorized') AS label, COUNT(*) AS total " &
+                              "FROM supplies GROUP BY category ORDER BY label"
+        Return ExecuteLookupDataTable(query)
+    End Function
+
+    Public Shared Function GetSupplyStatusCounts() As DataTable
+        Dim query As String = "SELECT IFNULL(status, 'unspecified') AS label, COUNT(*) AS total " &
+                              "FROM supplies GROUP BY status ORDER BY status"
+        Return ExecuteLookupDataTable(query)
+    End Function
+
+    Public Shared Function GetPropertyStatusCounts() As DataTable
+        Dim query As String = "SELECT IFNULL(status, 'unspecified') AS label, COUNT(*) AS total " &
+                              "FROM properties GROUP BY status ORDER BY status"
+        Return ExecuteLookupDataTable(query)
+    End Function
+
+    Public Shared Function GetPropertyConditionCounts() As DataTable
+        Dim query As String = "SELECT IFNULL(condition_status, 'unspecified') AS label, COUNT(*) AS total " &
+                              "FROM properties GROUP BY condition_status ORDER BY condition_status"
+        Return ExecuteLookupDataTable(query)
+    End Function
+
+    Public Shared Function GetMaintenanceStatusCounts() As DataTable
+        Dim query As String = "SELECT IFNULL(status, 'unspecified') AS label, COUNT(*) AS total " &
+                              "FROM maintenance GROUP BY status ORDER BY status"
+        Return ExecuteLookupDataTable(query)
+    End Function
+
+    Public Shared Function GetRequestStatusCounts() As DataTable
+        Dim query As String = "SELECT IFNULL(status, 'unspecified') AS label, COUNT(*) AS total " &
+                              "FROM property_requests GROUP BY status ORDER BY status"
+        Return ExecuteLookupDataTable(query)
+    End Function
+
+    Public Shared Function GetDepartmentInventoryDistribution() As DataTable
+        Dim query As String = "SELECT IFNULL(d.department_name, 'Unassigned') AS label, COUNT(*) AS total " &
+                              "FROM properties p " &
+                              "LEFT JOIN departments d ON p.department_id = d.department_id " &
+                              "GROUP BY label ORDER BY label"
+        Return ExecuteLookupDataTable(query)
+    End Function
+
+    Public Shared Function GetBorrowingTrendData(monthsBack As Integer) As DataTable
+        Dim sanitizedMonths As Integer = Math.Max(1, Math.Min(24, monthsBack))
+        Dim fromDate As Date = Date.Today.AddMonths(-sanitizedMonths)
+
+        Dim query As String = "SELECT DATE_FORMAT(request_date, '%b %Y') AS label, COUNT(*) AS total " &
+                              "FROM property_requests " &
+                              "WHERE request_date >= @fromDate " &
+                              "GROUP BY DATE_FORMAT(request_date, '%Y-%m') " &
+                              "ORDER BY DATE_FORMAT(request_date, '%Y-%m')"
+
+        Dim parameters As New Dictionary(Of String, Object) From {
+            {"@fromDate", fromDate}
+        }
+
+        Return ExecuteLookupDataTable(query, parameters)
+    End Function
+
+    Public Shared Function GetSupplyInventoryBreakdown() As DataTable
+        Dim query As String = "SELECT IFNULL(category, 'Uncategorized') AS label, SUM(quantity_in_stock) AS total " &
+                              "FROM supplies GROUP BY category ORDER BY label"
+        Return ExecuteLookupDataTable(query)
+    End Function
+
+    Private Shared Function ExecuteLookupDataTable(query As String,
+                                                   Optional parameters As Dictionary(Of String, Object) = Nothing) As DataTable
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return dt
+            If Not SafeOpenConnection(conn) Then Return dt
+
+            Using cmd As New MySqlCommand(query, conn)
+                If parameters IsNot Nothing Then
+                    For Each kvp In parameters
+                        cmd.Parameters.AddWithValue(kvp.Key, kvp.Value)
+                    Next
+                End If
+
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] ExecuteLookupDataTable Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        Return dt
+    End Function
+
+    Private Shared Function SafeGetInt(reader As MySqlDataReader, columnName As String) As Integer
+        If reader Is Nothing Then Return 0
+        Dim ordinal As Integer = reader.GetOrdinal(columnName)
+        If ordinal < 0 OrElse reader.IsDBNull(ordinal) Then Return 0
+        Return Convert.ToInt32(reader.GetValue(ordinal))
+    End Function
+
     ' =====================================================
     ' PROPERTY MANAGEMENT FUNCTIONS (Fixed Assets)
     ' =====================================================

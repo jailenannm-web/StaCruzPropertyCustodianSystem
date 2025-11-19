@@ -1,8 +1,12 @@
-﻿Imports System.Drawing.Drawing2D
+﻿Imports System
+Imports System.Collections.Generic
+Imports System.Data
 Imports System.Diagnostics
-Imports System
 Imports System.Drawing
+Imports System.Drawing.Drawing2D
+Imports System.Threading.Tasks
 Imports System.Windows.Forms
+Imports System.Windows.Forms.DataVisualization.Charting
 Imports Microsoft.VisualBasic
 Imports StaCruzPropertyCustodianSystem.Resources.Controls
 
@@ -10,13 +14,16 @@ Imports StaCruzPropertyCustodianSystem.Resources.Controls
 Public Class AdminDashboard
     ' Currently loaded UserControl
     Private currentUC As UserControl = Nothing
+    Private _isDashboardLoading As Boolean
 
     ' ----------------------
     ' Form Load
     ' ----------------------
-    Private Sub AdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Async Sub AdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Make profile picture circular
         MakeProfileCircular()
+        ConfigureQuickAccessButtons()
+        Await LoadDashboardAsync()
     End Sub
 
     Private Sub MakeProfileCircular()
@@ -52,6 +59,156 @@ Public Class AdminDashboard
         End Try
     End Sub
 
+    Private Sub ConfigureQuickAccessButtons()
+        admin_btn_hello.Text = "Property"
+        admin_btn_updateinventory.Text = "Supplies"
+        admin_btn_generatereport.Text = "Reports"
+        admin_btn_viewallprop.Text = "Maintenance"
+
+        admin_panel_PendingRequests.Cursor = Cursors.Hand
+        Label1.Cursor = Cursors.Hand
+        Label5.Cursor = Cursors.Hand
+    End Sub
+
+    Private Async Function LoadDashboardAsync() As Task
+        If _isDashboardLoading Then Return
+        _isDashboardLoading = True
+        Cursor = Cursors.WaitCursor
+
+        Try
+            Dim summaryTask = Task.Run(Function() DatabaseConnection.GetAdminDashboardSummary())
+            Dim propertyCategoryTask = Task.Run(Function() DatabaseConnection.GetPropertyCountsByCategory())
+            Dim supplyBreakdownTask = Task.Run(Function() DatabaseConnection.GetSupplyInventoryBreakdown())
+            Dim requestStatusTask = Task.Run(Function() DatabaseConnection.GetRequestStatusCounts())
+            Dim supplyStatusTask = Task.Run(Function() DatabaseConnection.GetSupplyStatusCounts())
+            Dim propertyConditionTask = Task.Run(Function() DatabaseConnection.GetPropertyConditionCounts())
+            Dim maintenanceStatusTask = Task.Run(Function() DatabaseConnection.GetMaintenanceStatusCounts())
+            Dim requestTrendTask = Task.Run(Function() DatabaseConnection.GetBorrowingTrendData(6))
+            Dim departmentUsageTask = Task.Run(Function() DatabaseConnection.GetDepartmentInventoryDistribution())
+
+            Await Task.WhenAll(summaryTask, propertyCategoryTask, supplyBreakdownTask, requestStatusTask,
+                               supplyStatusTask, propertyConditionTask, maintenanceStatusTask,
+                               requestTrendTask, departmentUsageTask)
+
+            Dim summary = summaryTask.Result
+            UpdateSummaryCards(summary)
+
+            BindChartData(SAChart_TotalProperty, propertyCategoryTask.Result, SeriesChartType.StackedBar)
+            BindChartData(SAChart_TotalSupplies, supplyBreakdownTask.Result, SeriesChartType.StackedBar100)
+            BindChartData(SAChart_PendingRequest, requestStatusTask.Result, SeriesChartType.Pie)
+            BindChartData(SAChart_InventoryStatusOverview, supplyStatusTask.Result, SeriesChartType.Doughnut)
+            BindChartData(SAChart_PropertyConditionStatus, propertyConditionTask.Result, SeriesChartType.StackedBar)
+            BindChartData(SAChart_ScheduleMaintenance, maintenanceStatusTask.Result, SeriesChartType.Pie)
+            BindChartData(SAChart_RequestTrends, requestTrendTask.Result, SeriesChartType.Line, showValueLabels:=False)
+            BindChartData(SAChart_RecentPropertyRequests, departmentUsageTask.Result, SeriesChartType.Column)
+            BindChartData(SAChart_SystemAlerts, BuildAlertsData(summary), SeriesChartType.Pie)
+        Catch ex As Exception
+            Debug.WriteLine("Dashboard load error: " & ex.Message)
+            MessageBox.Show("Unable to load dashboard data. Please try again or check the database connection.",
+                            "Dashboard", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Finally
+            Cursor = Cursors.Default
+            _isDashboardLoading = False
+        End Try
+    End Function
+
+    Private Sub UpdateSummaryCards(summary As Dictionary(Of String, Integer))
+        If summary Is Nothing Then Return
+
+        Label4.Text = SafeSummaryRead(summary, "total_properties").ToString("N0")
+        Label5.Text = SafeSummaryRead(summary, "pending_requests").ToString("N0")
+        Label6.Text = $"{SafeSummaryRead(summary, "borrowed_items"):N0} / {SafeSummaryRead(summary, "returned_items"):N0}"
+        Label2.Text = SafeSummaryRead(summary, "needs_repair").ToString("N0")
+
+        ApplyChartTitle(SAChart_TotalSupplies, $"Total Supplies: {SafeSummaryRead(summary, "total_supplies"):N0}")
+        ApplyChartTitle(SAChart_PendingRequest,
+                        $"Pending/Approved/Declined: {SafeSummaryRead(summary, "pending_requests"):N0}/" &
+                        $"{SafeSummaryRead(summary, "approved_requests"):N0}/{SafeSummaryRead(summary, "declined_requests"):N0}")
+        ApplyChartTitle(SAChart_ScheduleMaintenance,
+                        $"Open Maintenance Alerts: {SafeSummaryRead(summary, "maintenance_alerts"):N0}")
+        ApplyChartTitle(SAChart_SystemAlerts,
+                        $"Warranty Alerts: {SafeSummaryRead(summary, "warranty_alerts"):N0}")
+    End Sub
+
+    Private Sub ApplyChartTitle(chart As Chart, titleText As String)
+        If chart Is Nothing Then Return
+        chart.Titles.Clear()
+        chart.Titles.Add(titleText)
+    End Sub
+
+    Private Sub BindChartData(chart As Chart,
+                              data As DataTable,
+                              chartType As SeriesChartType,
+                              Optional showValueLabels As Boolean = True,
+                              Optional emptyLabel As String = "No data available")
+        If chart Is Nothing Then Return
+
+        If chart.Series.Count = 0 Then
+            chart.Series.Add(New Series("Series1"))
+        End If
+
+        Dim series = chart.Series(0)
+        series.Points.Clear()
+        series.ChartType = chartType
+        series.IsValueShownAsLabel = showValueLabels
+        series.ToolTip = "#VALX: #VALY{N0}"
+
+        Dim hasLegend As Boolean = chart.Legends.Count > 0
+
+        If data Is Nothing OrElse data.Rows.Count = 0 Then
+            Dim idx = series.Points.AddY(0)
+            Dim point = series.Points(idx)
+            point.AxisLabel = emptyLabel
+            point.Label = emptyLabel
+            If hasLegend Then chart.Legends(0).Enabled = False
+            Return
+        End If
+
+        For Each row As DataRow In data.Rows
+            Dim total As Double
+            Double.TryParse(row("total").ToString(), total)
+            Dim idx = series.Points.AddXY(row("label").ToString(), total)
+            Dim point = series.Points(idx)
+            point.ToolTip = $"{row("label")}: {total:N0}"
+            If showValueLabels Then
+                point.Label = total.ToString("N0")
+            Else
+                point.Label = ""
+            End If
+        Next
+
+        If chartType = SeriesChartType.Line Then
+            series.MarkerStyle = MarkerStyle.Circle
+            series.MarkerSize = 7
+            If chart.ChartAreas.Count > 0 Then
+                chart.ChartAreas(0).AxisX.Interval = 1
+            End If
+        End If
+
+        If hasLegend Then
+            chart.Legends(0).Enabled = True
+        End If
+    End Sub
+
+    Private Function BuildAlertsData(summary As Dictionary(Of String, Integer)) As DataTable
+        Dim dt As New DataTable()
+        dt.Columns.Add("label", GetType(String))
+        dt.Columns.Add("total", GetType(Integer))
+
+        dt.Rows.Add("Maintenance Alerts", SafeSummaryRead(summary, "maintenance_alerts"))
+        dt.Rows.Add("Warranty Alerts", SafeSummaryRead(summary, "warranty_alerts"))
+
+        Return dt
+    End Function
+
+    Private Shared Function SafeSummaryRead(summary As Dictionary(Of String, Integer), key As String) As Integer
+        If summary Is Nothing Then Return 0
+        If summary.ContainsKey(key) Then
+            Return summary(key)
+        End If
+        Return 0
+    End Function
+
     ' ----------------------
     ' Handle Form Resize
     ' ----------------------
@@ -76,9 +233,8 @@ Public Class AdminDashboard
     End Sub
 
     ' Dashboard Button (optional example)
-    Private Sub admin_btn_dashboard_Click(sender As Object, e As EventArgs) Handles admin_btn_dashboard.Click
-        ' Load the dashboard UserControl if you have one
-        ' LoadUserControl(New UC_Dashboard())
+    Private Async Sub admin_btn_dashboard_Click(sender As Object, e As EventArgs) Handles admin_btn_dashboard.Click
+        Await LoadDashboardAsync()
     End Sub
 
     ' Properties Button
@@ -116,6 +272,26 @@ Public Class AdminDashboard
     ' Quick Access Label Click
     Private Sub admin_label_quickaccess_Click(sender As Object, e As EventArgs) Handles admin_label_quickaccess.Click
         ' Optional: open quick access panel
+    End Sub
+
+    Private Sub admin_btn_hello_Click(sender As Object, e As EventArgs) Handles admin_btn_hello.Click
+        admin_btn_PropertyManagement.PerformClick()
+    End Sub
+
+    Private Sub admin_btn_updateinventory_Click(sender As Object, e As EventArgs) Handles admin_btn_updateinventory.Click
+        admin_btn_SuppliesManagement.PerformClick()
+    End Sub
+
+    Private Sub admin_btn_generatereport_Click(sender As Object, e As EventArgs) Handles admin_btn_generatereport.Click
+        admin_btn_reports.PerformClick()
+    End Sub
+
+    Private Sub admin_btn_viewallprop_Click(sender As Object, e As EventArgs) Handles admin_btn_viewallprop.Click
+        admin_btn_MaintenanceManagement.PerformClick()
+    End Sub
+
+    Private Sub PendingRequestsCard_Click(sender As Object, e As EventArgs) Handles admin_panel_PendingRequests.Click, Label1.Click, Label5.Click
+        admin_btn_PropertyRequestManagement.PerformClick()
     End Sub
 
     Private Sub admin_btn_PropertyManagement_Click(sender As Object, e As EventArgs) Handles admin_btn_PropertyManagement.Click

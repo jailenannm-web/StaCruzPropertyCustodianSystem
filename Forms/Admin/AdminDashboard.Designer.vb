@@ -66,6 +66,15 @@ Partial Class AdminDashboard
         Dim ChartArea18 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend18 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series18 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        lblSystemAlerts = New System.Windows.Forms.Label()
+        lblRequestTrends = New System.Windows.Forms.Label()
+        lblScheduleMaintenance = New System.Windows.Forms.Label()
+        Label10 = New System.Windows.Forms.Label()
+        lblPendingRequest = New System.Windows.Forms.Label()
+        lblPropertyConditionStatus = New System.Windows.Forms.Label()
+        lblInventoryStatusOverview = New System.Windows.Forms.Label()
+        lblTotalSupplies = New System.Windows.Forms.Label()
+        lblTotalProperty = New System.Windows.Forms.Label()
         Me.admin_PanelSidebar = New System.Windows.Forms.Panel()
         Me.admin_btn_Logout = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_btn_reports = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -113,27 +122,19 @@ Partial Class AdminDashboard
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
-        Me.admin_panel2 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.admin_panel1 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.admin_panel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.admin_panel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.admin_label_quickaccess = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.admin_btn_hello = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_viewallprop = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_updateinventory = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_generatereport = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_hello = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_viewallprop = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_updateinventory = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_generatereport = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_panelcontainer = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.admin_txtbox_search = New System.Windows.Forms.TextBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.admin_panel_PendingRequests = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.RoundedPanel3 = New StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.admin_panel_borrowed = New System.Windows.Forms.Label()
         Me.admin_PanelSidebar.SuspendLayout()
         CType(Me.admin_picProfile, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.admin_PanelMain.SuspendLayout()
@@ -1235,20 +1236,46 @@ Partial Class AdminDashboard
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents admin_label_Dashboard As Label
     Friend WithEvents admin_panel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents admin_panel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents admin_panelcontainer As Panel
     Friend WithEvents admin_label_quickaccess As Label
+    Friend WithEvents admin_panel_PendingRequests As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents admin_panel_borrowed As Label
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
     Friend WithEvents admin_btn_hello As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_btn_viewallprop As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_btn_updateinventory As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_btn_generatereport As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents admin_panel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents admin_panel_PendingRequests As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label1 As Label
-    Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents Label3 As Label
-    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label2 As Label
-    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents admin_panel_borrowed As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel4 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel5 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel6 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel7 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel8 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel9 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel10 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel11 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents RoundedPanel12 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel13 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel14 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents SAChart_SystemAlerts As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents SAChart_RequestTrends As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents SAChart_ScheduleMaintenance As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents SAChart_RecentPropertyRequests As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents SAChart_PendingRequest As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents SAChart_PropertyConditionStatus As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents SAChart_InventoryStatusOverview As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents SAChart_TotalSupplies As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents SAChart_TotalProperty As System.Windows.Forms.DataVisualization.Charting.Chart
 End Class
