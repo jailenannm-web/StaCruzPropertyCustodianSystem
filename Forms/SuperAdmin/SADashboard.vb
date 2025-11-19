@@ -184,4 +184,12 @@ Partial Class SADashboard
         ' Load your new profile form
         loadFormIntoPanel(New SASuppliesManagement())
     End Sub
+
+    Private Sub SAChart_TotalSupplies_Click(sender As Object, e As EventArgs) Handles SAChart_TotalSupplies.Click
+
+    End Sub
+
+    Private Sub RoundedPanel9_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel9.Paint
+
+    End Sub
 End Class
