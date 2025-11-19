@@ -152,6 +152,14 @@ Public Class AdminDashboard
 
     End Sub
 
+    Private Sub Label8_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel12_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel12.Paint
+
+    End Sub
+
     ' Other controls (PictureBoxes, Panels, etc.) can be added similarly
 
 End Class
