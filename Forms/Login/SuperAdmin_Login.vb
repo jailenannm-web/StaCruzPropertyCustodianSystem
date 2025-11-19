@@ -5,11 +5,7 @@ Imports System.Windows.Forms
 Public Class SuperAdmin_Login
 
     ' Added complete login functionality for SuperAdmin
-    Private Sub SuperAdmin_Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Set up placeholder text for username and password fields
-        SetPlaceholder(txb_Username, "Username")
-        SetPlaceholder(txb_Password, "Password", True)
-    End Sub
+
 
     Private Sub SetPlaceholder(textBox As TextBox, placeholder As String, Optional isPassword As Boolean = False)
         If String.IsNullOrWhiteSpace(textBox.Text) Then
@@ -89,4 +85,7 @@ Public Class SuperAdmin_Login
         Me.Close()
     End Sub
 
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
 End Class

@@ -35,6 +35,9 @@ Partial Class StaffLogin
         Me.txb_Password = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txb_Username = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -63,7 +66,7 @@ Partial Class StaffLogin
         Me.Panel1.Controls.Add(Me.txb_Username)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel1.Location = New System.Drawing.Point(1145, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(779, 1098)
         Me.Panel1.TabIndex = 4
@@ -111,7 +114,7 @@ Partial Class StaffLogin
         Me.btn_Login.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Login.ForeColor = System.Drawing.Color.White
         Me.btn_Login.Location = New System.Drawing.Point(468, 918)
-        Me.btn_Login.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Login.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Login.Name = "btn_Login"
         Me.btn_Login.Size = New System.Drawing.Size(202, 60)
         Me.btn_Login.TabIndex = 7
@@ -123,7 +126,7 @@ Partial Class StaffLogin
         Me.btn_Cancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Cancel.Location = New System.Drawing.Point(101, 918)
-        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(205, 60)
         Me.btn_Cancel.TabIndex = 6
@@ -135,7 +138,7 @@ Partial Class StaffLogin
         Me.txb_Password.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Password.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txb_Password.Location = New System.Drawing.Point(125, 654)
-        Me.txb_Password.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txb_Password.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Password.Multiline = True
         Me.txb_Password.Name = "txb_Password"
         Me.txb_Password.Size = New System.Drawing.Size(512, 52)
@@ -155,11 +158,48 @@ Partial Class StaffLogin
         Me.txb_Username.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_Username.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txb_Username.Location = New System.Drawing.Point(125, 455)
-        Me.txb_Username.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txb_Username.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Username.Multiline = True
         Me.txb_Username.Name = "txb_Username"
         Me.txb_Username.Size = New System.Drawing.Size(512, 52)
         Me.txb_Username.TabIndex = 1
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
+        Me.Label4.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.logo2_removebg_preview
+        Me.Label4.Location = New System.Drawing.Point(380, 263)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(398, 328)
+        Me.Label4.TabIndex = 7
+        Me.Label4.Text = "."
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label3
+        '
+        Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Poppins", 50.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(113, 711)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(932, 112)
+        Me.Label3.TabIndex = 6
+        Me.Label3.Text = " CUSTODIAN SYSTEM"
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Poppins", 50.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label2.Location = New System.Drawing.Point(120, 591)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(925, 142)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "STA CRUZ PROPERTY"
         '
         'StaffLogin
         '
@@ -169,9 +209,12 @@ Partial Class StaffLogin
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.BG1
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1924, 1098)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "StaffLogin"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "StaffLogin"
@@ -191,4 +234,7 @@ Partial Class StaffLogin
     Friend WithEvents Label1 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
 End Class

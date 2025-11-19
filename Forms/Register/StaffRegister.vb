@@ -114,8 +114,8 @@ Public Class StaffRegister
     End Sub
 
     Private Sub btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
-        Dim loginForm As New Login()
-        loginForm.Show()
+        Dim StaffForm As New StaffLogin()
+        StaffLogin.Show()
         Me.Hide()
     End Sub
 
@@ -160,6 +160,90 @@ Public Class StaffRegister
     End Sub
 
     Private Sub ComboBox4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Position.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cb_Barangay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Barangay.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cb_Municipality_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Municipality.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cb_Province_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Province.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txb_EmployeeID_TextChanged(sender As Object, e As EventArgs) Handles txb_EmployeeID.TextChanged
+
+    End Sub
+
+    Private Sub txb_UserName_TextChanged(sender As Object, e As EventArgs) Handles txb_UserName.TextChanged
+
+    End Sub
+
+    Private Sub txb_Email_TextChanged(sender As Object, e As EventArgs) Handles txb_Email.TextChanged
+
+    End Sub
+
+    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
+
+    End Sub
+
+    Private Sub Label14_Click(sender As Object, e As EventArgs) Handles Label14.Click
+
+    End Sub
+
+    Private Sub Label15_Click(sender As Object, e As EventArgs) Handles Label15.Click
+
+    End Sub
+
+    Private Sub txb_DepartmentID_TextChanged(sender As Object, e As EventArgs) Handles txb_DepartmentID.TextChanged
+
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
+    End Sub
+
+    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+
+    End Sub
+
+    Private Sub txb_Suffix_TextChanged(sender As Object, e As EventArgs) Handles txb_Suffix.TextChanged
+
+    End Sub
+
+    Private Sub txb_LastName_TextChanged(sender As Object, e As EventArgs) Handles txb_LastName.TextChanged
+
+    End Sub
+
+    Private Sub txb_MiddleName_TextChanged(sender As Object, e As EventArgs) Handles txb_MiddleName.TextChanged
+
+    End Sub
+
+    Private Sub txb_FirstName_TextChanged(sender As Object, e As EventArgs) Handles txb_FirstName.TextChanged
+
+    End Sub
+
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
     End Sub
 End Class

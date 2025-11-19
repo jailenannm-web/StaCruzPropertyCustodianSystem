@@ -9,9 +9,7 @@ Public Class Login
         ' Make form full screen but not covering taskbar
         Me.Bounds = Screen.FromHandle(Me.Handle).WorkingArea
 
-        ' Apply placeholders
-        SetPlaceholder(txb_Username, "Username")
-        SetPlaceholder(txb_Password, "Password", True)
+
     End Sub
 
     ' === Placeholder setup ===
@@ -102,4 +100,11 @@ Public Class Login
         Me.Hide()
     End Sub
 
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+
+    End Sub
 End Class
