@@ -270,23 +270,23 @@ Public Class AdminDashboard
     End Sub
 
     ' Quick Access Label Click
-    Private Sub admin_label_quickaccess_Click(sender As Object, e As EventArgs) Handles admin_label_quickaccess.Click
+    Private Sub admin_label_quickaccess_Click(sender As Object, e As EventArgs)
         ' Optional: open quick access panel
     End Sub
 
-    Private Sub admin_btn_hello_Click(sender As Object, e As EventArgs) Handles admin_btn_hello.Click
+    Private Sub admin_btn_hello_Click(sender As Object, e As EventArgs)
         admin_btn_PropertyManagement.PerformClick()
     End Sub
 
-    Private Sub admin_btn_updateinventory_Click(sender As Object, e As EventArgs) Handles admin_btn_updateinventory.Click
+    Private Sub admin_btn_updateinventory_Click(sender As Object, e As EventArgs)
         admin_btn_SuppliesManagement.PerformClick()
     End Sub
 
-    Private Sub admin_btn_generatereport_Click(sender As Object, e As EventArgs) Handles admin_btn_generatereport.Click
+    Private Sub admin_btn_generatereport_Click(sender As Object, e As EventArgs)
         admin_btn_reports.PerformClick()
     End Sub
 
-    Private Sub admin_btn_viewallprop_Click(sender As Object, e As EventArgs) Handles admin_btn_viewallprop.Click
+    Private Sub admin_btn_viewallprop_Click(sender As Object, e As EventArgs)
         admin_btn_MaintenanceManagement.PerformClick()
     End Sub
 
@@ -332,7 +332,27 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub RoundedPanel12_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel12.Paint
+    Private Sub RoundedPanel12_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub TableLayoutPanel4_Paint(sender As Object, e As PaintEventArgs) 
+
+    End Sub
+
+    Private Sub SAChart_RequestTrends_Click(sender As Object, e As EventArgs) Handles SAChart_RequestTrends.Click
+
+    End Sub
+
+    Private Sub SAChart_SystemAlerts_Click(sender As Object, e As EventArgs) Handles SAChart_SystemAlerts.Click
+
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
 
     End Sub
 

@@ -30,21 +30,8 @@ Partial Class EditUser
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.uc_um_edituser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.uc_um_adminprofile = New System.Windows.Forms.Label()
-        Me.um_edituser_fullname = New System.Windows.Forms.Label()
-        Me.um_edituser_txtboxfirst = New System.Windows.Forms.TextBox()
-        Me.um_edituser_lastname = New System.Windows.Forms.Label()
-        Me.um_edituser_txtboxfull = New System.Windows.Forms.TextBox()
-        Me.um_useredit_txtboxposition = New System.Windows.Forms.Label()
-        Me.um_edituser_txtboxPosition = New System.Windows.Forms.TextBox()
-        Me.um_edituser_txtboxEmail = New System.Windows.Forms.Label()
-        Me.um_edituser_email = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.um_edituser_txtboxcontact = New System.Windows.Forms.TextBox()
-        Me.um_edituser_txtboxdepartment = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.um_edituser_txtboxUsername = New System.Windows.Forms.Label()
-        Me.um_edituser_Username = New System.Windows.Forms.TextBox()
+        Me.um_edituser_save = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.um_edituser_backbtn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.um_edituser_txtboxCreated = New System.Windows.Forms.TextBox()
         Me.um_edituser_txtStatus = New System.Windows.Forms.Label()
@@ -59,8 +46,21 @@ Partial Class EditUser
         Me.um_edituser_txtboxUserAddress = New System.Windows.Forms.TextBox()
         Me.um_edituser_Password = New System.Windows.Forms.Label()
         Me.um_edituser_txtboxPassword = New System.Windows.Forms.TextBox()
-        Me.um_edituser_backbtn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.um_edituser_save = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.um_edituser_txtboxUsername = New System.Windows.Forms.Label()
+        Me.um_edituser_Username = New System.Windows.Forms.TextBox()
+        Me.um_edituser_txtboxEmail = New System.Windows.Forms.Label()
+        Me.um_edituser_email = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.um_edituser_txtboxcontact = New System.Windows.Forms.TextBox()
+        Me.um_edituser_txtboxdepartment = New System.Windows.Forms.Label()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.um_useredit_txtboxposition = New System.Windows.Forms.Label()
+        Me.um_edituser_txtboxPosition = New System.Windows.Forms.TextBox()
+        Me.um_edituser_lastname = New System.Windows.Forms.Label()
+        Me.um_edituser_txtboxfull = New System.Windows.Forms.TextBox()
+        Me.um_edituser_fullname = New System.Windows.Forms.Label()
+        Me.um_edituser_txtboxfirst = New System.Windows.Forms.TextBox()
+        Me.uc_um_adminprofile = New System.Windows.Forms.Label()
         Me.uc_um_edituser.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -70,7 +70,6 @@ Partial Class EditUser
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.uc_um_edituser.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.uc_um_edituser.CornerRadius = 20
         Me.uc_um_edituser.Controls.Add(Me.um_edituser_save)
         Me.uc_um_edituser.Controls.Add(Me.um_edituser_backbtn)
         Me.uc_um_edituser.Controls.Add(Me.Label1)
@@ -102,213 +101,35 @@ Partial Class EditUser
         Me.uc_um_edituser.Controls.Add(Me.um_edituser_fullname)
         Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxfirst)
         Me.uc_um_edituser.Controls.Add(Me.uc_um_adminprofile)
+        Me.uc_um_edituser.CornerRadius = 20
         Me.uc_um_edituser.Location = New System.Drawing.Point(38, 41)
         Me.uc_um_edituser.Name = "uc_um_edituser"
         Me.uc_um_edituser.Size = New System.Drawing.Size(1216, 737)
         Me.uc_um_edituser.TabIndex = 0
         '
-        'uc_um_adminprofile
+        'um_edituser_save
         '
-        Me.uc_um_adminprofile.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_adminprofile.AutoSize = True
-        Me.uc_um_adminprofile.Font = New System.Drawing.Font("Poppins", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_adminprofile.ForeColor = System.Drawing.Color.White
-        Me.uc_um_adminprofile.Location = New System.Drawing.Point(501, 39)
-        Me.uc_um_adminprofile.Name = "uc_um_adminprofile"
-        Me.uc_um_adminprofile.Size = New System.Drawing.Size(215, 50)
-        Me.uc_um_adminprofile.TabIndex = 23
-        Me.uc_um_adminprofile.Text = "Admin Profile"
+        Me.um_edituser_save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_save.CornerRadius = 15
+        Me.um_edituser_save.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_save.Location = New System.Drawing.Point(1036, 660)
+        Me.um_edituser_save.Name = "um_edituser_save"
+        Me.um_edituser_save.Size = New System.Drawing.Size(119, 32)
+        Me.um_edituser_save.TabIndex = 54
+        Me.um_edituser_save.Text = "Save"
+        Me.um_edituser_save.UseVisualStyleBackColor = True
         '
-        'um_edituser_fullname
+        'um_edituser_backbtn
         '
-        Me.um_edituser_fullname.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_fullname.AutoSize = True
-        Me.um_edituser_fullname.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_fullname.ForeColor = System.Drawing.Color.White
-        Me.um_edituser_fullname.Location = New System.Drawing.Point(172, 130)
-        Me.um_edituser_fullname.Name = "um_edituser_fullname"
-        Me.um_edituser_fullname.Size = New System.Drawing.Size(106, 30)
-        Me.um_edituser_fullname.TabIndex = 26
-        Me.um_edituser_fullname.Text = "First Name"
-        '
-        'um_edituser_txtboxfirst
-        '
-        Me.um_edituser_txtboxfirst.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxfirst.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.um_edituser_txtboxfirst.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_txtboxfirst.ForeColor = System.Drawing.Color.LightGray
-        Me.um_edituser_txtboxfirst.Location = New System.Drawing.Point(302, 130)
-        Me.um_edituser_txtboxfirst.MaxLength = 100
-        Me.um_edituser_txtboxfirst.Name = "um_edituser_txtboxfirst"
-        Me.um_edituser_txtboxfirst.Size = New System.Drawing.Size(258, 27)
-        Me.um_edituser_txtboxfirst.TabIndex = 25
-        Me.um_edituser_txtboxfirst.Text = "Enter Full Name"
-        '
-        'um_edituser_lastname
-        '
-        Me.um_edituser_lastname.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_lastname.AutoSize = True
-        Me.um_edituser_lastname.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_lastname.ForeColor = System.Drawing.Color.White
-        Me.um_edituser_lastname.Location = New System.Drawing.Point(172, 186)
-        Me.um_edituser_lastname.Name = "um_edituser_lastname"
-        Me.um_edituser_lastname.Size = New System.Drawing.Size(105, 30)
-        Me.um_edituser_lastname.TabIndex = 28
-        Me.um_edituser_lastname.Text = "Last Name"
-        '
-        'um_edituser_txtboxfull
-        '
-        Me.um_edituser_txtboxfull.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxfull.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.um_edituser_txtboxfull.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_txtboxfull.ForeColor = System.Drawing.Color.LightGray
-        Me.um_edituser_txtboxfull.Location = New System.Drawing.Point(302, 186)
-        Me.um_edituser_txtboxfull.MaxLength = 100
-        Me.um_edituser_txtboxfull.Name = "um_edituser_txtboxfull"
-        Me.um_edituser_txtboxfull.Size = New System.Drawing.Size(258, 27)
-        Me.um_edituser_txtboxfull.TabIndex = 27
-        Me.um_edituser_txtboxfull.Text = "Enter Last Name"
-        '
-        'um_useredit_txtboxposition
-        '
-        Me.um_useredit_txtboxposition.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_useredit_txtboxposition.AutoSize = True
-        Me.um_useredit_txtboxposition.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_useredit_txtboxposition.ForeColor = System.Drawing.Color.White
-        Me.um_useredit_txtboxposition.Location = New System.Drawing.Point(172, 240)
-        Me.um_useredit_txtboxposition.Name = "um_useredit_txtboxposition"
-        Me.um_useredit_txtboxposition.Size = New System.Drawing.Size(82, 30)
-        Me.um_useredit_txtboxposition.TabIndex = 30
-        Me.um_useredit_txtboxposition.Text = "Position"
-        '
-        'um_edituser_txtboxPosition
-        '
-        Me.um_edituser_txtboxPosition.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxPosition.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.um_edituser_txtboxPosition.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_txtboxPosition.ForeColor = System.Drawing.Color.LightGray
-        Me.um_edituser_txtboxPosition.Location = New System.Drawing.Point(302, 240)
-        Me.um_edituser_txtboxPosition.MaxLength = 100
-        Me.um_edituser_txtboxPosition.Name = "um_edituser_txtboxPosition"
-        Me.um_edituser_txtboxPosition.Size = New System.Drawing.Size(258, 27)
-        Me.um_edituser_txtboxPosition.TabIndex = 29
-        Me.um_edituser_txtboxPosition.Text = "Enter Position"
-        '
-        'um_edituser_txtboxEmail
-        '
-        Me.um_edituser_txtboxEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxEmail.AutoSize = True
-        Me.um_edituser_txtboxEmail.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_txtboxEmail.ForeColor = System.Drawing.Color.White
-        Me.um_edituser_txtboxEmail.Location = New System.Drawing.Point(172, 401)
-        Me.um_edituser_txtboxEmail.Name = "um_edituser_txtboxEmail"
-        Me.um_edituser_txtboxEmail.Size = New System.Drawing.Size(62, 30)
-        Me.um_edituser_txtboxEmail.TabIndex = 36
-        Me.um_edituser_txtboxEmail.Text = "Email"
-        '
-        'um_edituser_email
-        '
-        Me.um_edituser_email.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_email.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.um_edituser_email.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_email.ForeColor = System.Drawing.Color.LightGray
-        Me.um_edituser_email.Location = New System.Drawing.Point(302, 401)
-        Me.um_edituser_email.MaxLength = 100
-        Me.um_edituser_email.Name = "um_edituser_email"
-        Me.um_edituser_email.Size = New System.Drawing.Size(258, 27)
-        Me.um_edituser_email.TabIndex = 35
-        Me.um_edituser_email.Text = "Enter Email "
-        '
-        'Label2
-        '
-        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(172, 347)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(158, 30)
-        Me.Label2.TabIndex = 34
-        Me.Label2.Text = "Contact Number"
-        '
-        'um_edituser_txtboxcontact
-        '
-        Me.um_edituser_txtboxcontact.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxcontact.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.um_edituser_txtboxcontact.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_txtboxcontact.ForeColor = System.Drawing.Color.LightGray
-        Me.um_edituser_txtboxcontact.Location = New System.Drawing.Point(336, 347)
-        Me.um_edituser_txtboxcontact.MaxLength = 100
-        Me.um_edituser_txtboxcontact.Name = "um_edituser_txtboxcontact"
-        Me.um_edituser_txtboxcontact.Size = New System.Drawing.Size(224, 27)
-        Me.um_edituser_txtboxcontact.TabIndex = 33
-        Me.um_edituser_txtboxcontact.Text = "Enter Contact Number"
-        '
-        'um_edituser_txtboxdepartment
-        '
-        Me.um_edituser_txtboxdepartment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxdepartment.AutoSize = True
-        Me.um_edituser_txtboxdepartment.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_txtboxdepartment.ForeColor = System.Drawing.Color.White
-        Me.um_edituser_txtboxdepartment.Location = New System.Drawing.Point(172, 293)
-        Me.um_edituser_txtboxdepartment.Name = "um_edituser_txtboxdepartment"
-        Me.um_edituser_txtboxdepartment.Size = New System.Drawing.Size(119, 30)
-        Me.um_edituser_txtboxdepartment.TabIndex = 32
-        Me.um_edituser_txtboxdepartment.Text = "Department"
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.TextBox4.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.ForeColor = System.Drawing.Color.LightGray
-        Me.TextBox4.Location = New System.Drawing.Point(302, 293)
-        Me.TextBox4.MaxLength = 100
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(258, 27)
-        Me.TextBox4.TabIndex = 31
-        Me.TextBox4.Text = "Enter Department"
-        '
-        'um_edituser_txtboxUsername
-        '
-        Me.um_edituser_txtboxUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxUsername.AutoSize = True
-        Me.um_edituser_txtboxUsername.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_txtboxUsername.ForeColor = System.Drawing.Color.White
-        Me.um_edituser_txtboxUsername.Location = New System.Drawing.Point(172, 453)
-        Me.um_edituser_txtboxUsername.Name = "um_edituser_txtboxUsername"
-        Me.um_edituser_txtboxUsername.Size = New System.Drawing.Size(102, 30)
-        Me.um_edituser_txtboxUsername.TabIndex = 38
-        Me.um_edituser_txtboxUsername.Text = "Username"
-        '
-        'um_edituser_Username
-        '
-        Me.um_edituser_Username.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_Username.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.um_edituser_Username.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_Username.ForeColor = System.Drawing.Color.LightGray
-        Me.um_edituser_Username.Location = New System.Drawing.Point(302, 453)
-        Me.um_edituser_Username.MaxLength = 100
-        Me.um_edituser_Username.Name = "um_edituser_Username"
-        Me.um_edituser_Username.Size = New System.Drawing.Size(258, 27)
-        Me.um_edituser_Username.TabIndex = 37
-        Me.um_edituser_Username.Text = "Enter Username"
+        Me.um_edituser_backbtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_backbtn.CornerRadius = 15
+        Me.um_edituser_backbtn.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_backbtn.Location = New System.Drawing.Point(71, 660)
+        Me.um_edituser_backbtn.Name = "um_edituser_backbtn"
+        Me.um_edituser_backbtn.Size = New System.Drawing.Size(119, 32)
+        Me.um_edituser_backbtn.TabIndex = 53
+        Me.um_edituser_backbtn.Text = "Back"
+        Me.um_edituser_backbtn.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -499,31 +320,213 @@ Partial Class EditUser
         Me.um_edituser_txtboxPassword.TabIndex = 39
         Me.um_edituser_txtboxPassword.Text = "Enter Password"
         '
-        'um_edituser_backbtn
+        'um_edituser_txtboxUsername
         '
-        Me.um_edituser_backbtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_backbtn.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_backbtn.Location = New System.Drawing.Point(71, 660)
-        Me.um_edituser_backbtn.Name = "um_edituser_backbtn"
-        Me.um_edituser_backbtn.Size = New System.Drawing.Size(119, 32)
-        Me.um_edituser_backbtn.TabIndex = 53
-        Me.um_edituser_backbtn.Text = "Back"
-        Me.um_edituser_backbtn.UseVisualStyleBackColor = True
+        Me.um_edituser_txtboxUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxUsername.AutoSize = True
+        Me.um_edituser_txtboxUsername.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_txtboxUsername.ForeColor = System.Drawing.Color.White
+        Me.um_edituser_txtboxUsername.Location = New System.Drawing.Point(172, 453)
+        Me.um_edituser_txtboxUsername.Name = "um_edituser_txtboxUsername"
+        Me.um_edituser_txtboxUsername.Size = New System.Drawing.Size(102, 30)
+        Me.um_edituser_txtboxUsername.TabIndex = 38
+        Me.um_edituser_txtboxUsername.Text = "Username"
         '
-        'um_edituser_save
+        'um_edituser_Username
         '
-        Me.um_edituser_save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_save.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_save.Location = New System.Drawing.Point(1036, 660)
-        Me.um_edituser_save.Name = "um_edituser_save"
-        Me.um_edituser_save.Size = New System.Drawing.Size(119, 32)
-        Me.um_edituser_save.TabIndex = 54
-        Me.um_edituser_save.Text = "Save"
-        Me.um_edituser_save.UseVisualStyleBackColor = True
+        Me.um_edituser_Username.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_Username.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.um_edituser_Username.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_Username.ForeColor = System.Drawing.Color.LightGray
+        Me.um_edituser_Username.Location = New System.Drawing.Point(302, 453)
+        Me.um_edituser_Username.MaxLength = 100
+        Me.um_edituser_Username.Name = "um_edituser_Username"
+        Me.um_edituser_Username.Size = New System.Drawing.Size(258, 27)
+        Me.um_edituser_Username.TabIndex = 37
+        Me.um_edituser_Username.Text = "Enter Username"
+        '
+        'um_edituser_txtboxEmail
+        '
+        Me.um_edituser_txtboxEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxEmail.AutoSize = True
+        Me.um_edituser_txtboxEmail.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_txtboxEmail.ForeColor = System.Drawing.Color.White
+        Me.um_edituser_txtboxEmail.Location = New System.Drawing.Point(172, 401)
+        Me.um_edituser_txtboxEmail.Name = "um_edituser_txtboxEmail"
+        Me.um_edituser_txtboxEmail.Size = New System.Drawing.Size(62, 30)
+        Me.um_edituser_txtboxEmail.TabIndex = 36
+        Me.um_edituser_txtboxEmail.Text = "Email"
+        '
+        'um_edituser_email
+        '
+        Me.um_edituser_email.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_email.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.um_edituser_email.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_email.ForeColor = System.Drawing.Color.LightGray
+        Me.um_edituser_email.Location = New System.Drawing.Point(302, 401)
+        Me.um_edituser_email.MaxLength = 100
+        Me.um_edituser_email.Name = "um_edituser_email"
+        Me.um_edituser_email.Size = New System.Drawing.Size(258, 27)
+        Me.um_edituser_email.TabIndex = 35
+        Me.um_edituser_email.Text = "Enter Email "
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.White
+        Me.Label2.Location = New System.Drawing.Point(172, 347)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(158, 30)
+        Me.Label2.TabIndex = 34
+        Me.Label2.Text = "Contact Number"
+        '
+        'um_edituser_txtboxcontact
+        '
+        Me.um_edituser_txtboxcontact.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxcontact.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.um_edituser_txtboxcontact.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_txtboxcontact.ForeColor = System.Drawing.Color.LightGray
+        Me.um_edituser_txtboxcontact.Location = New System.Drawing.Point(336, 347)
+        Me.um_edituser_txtboxcontact.MaxLength = 100
+        Me.um_edituser_txtboxcontact.Name = "um_edituser_txtboxcontact"
+        Me.um_edituser_txtboxcontact.Size = New System.Drawing.Size(224, 27)
+        Me.um_edituser_txtboxcontact.TabIndex = 33
+        Me.um_edituser_txtboxcontact.Text = "Enter Contact Number"
+        '
+        'um_edituser_txtboxdepartment
+        '
+        Me.um_edituser_txtboxdepartment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxdepartment.AutoSize = True
+        Me.um_edituser_txtboxdepartment.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_txtboxdepartment.ForeColor = System.Drawing.Color.White
+        Me.um_edituser_txtboxdepartment.Location = New System.Drawing.Point(172, 293)
+        Me.um_edituser_txtboxdepartment.Name = "um_edituser_txtboxdepartment"
+        Me.um_edituser_txtboxdepartment.Size = New System.Drawing.Size(119, 30)
+        Me.um_edituser_txtboxdepartment.TabIndex = 32
+        Me.um_edituser_txtboxdepartment.Text = "Department"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.TextBox4.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.ForeColor = System.Drawing.Color.LightGray
+        Me.TextBox4.Location = New System.Drawing.Point(302, 293)
+        Me.TextBox4.MaxLength = 100
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(258, 27)
+        Me.TextBox4.TabIndex = 31
+        Me.TextBox4.Text = "Enter Department"
+        '
+        'um_useredit_txtboxposition
+        '
+        Me.um_useredit_txtboxposition.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_useredit_txtboxposition.AutoSize = True
+        Me.um_useredit_txtboxposition.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_useredit_txtboxposition.ForeColor = System.Drawing.Color.White
+        Me.um_useredit_txtboxposition.Location = New System.Drawing.Point(172, 240)
+        Me.um_useredit_txtboxposition.Name = "um_useredit_txtboxposition"
+        Me.um_useredit_txtboxposition.Size = New System.Drawing.Size(82, 30)
+        Me.um_useredit_txtboxposition.TabIndex = 30
+        Me.um_useredit_txtboxposition.Text = "Position"
+        '
+        'um_edituser_txtboxPosition
+        '
+        Me.um_edituser_txtboxPosition.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxPosition.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.um_edituser_txtboxPosition.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_txtboxPosition.ForeColor = System.Drawing.Color.LightGray
+        Me.um_edituser_txtboxPosition.Location = New System.Drawing.Point(302, 240)
+        Me.um_edituser_txtboxPosition.MaxLength = 100
+        Me.um_edituser_txtboxPosition.Name = "um_edituser_txtboxPosition"
+        Me.um_edituser_txtboxPosition.Size = New System.Drawing.Size(258, 27)
+        Me.um_edituser_txtboxPosition.TabIndex = 29
+        Me.um_edituser_txtboxPosition.Text = "Enter Position"
+        '
+        'um_edituser_lastname
+        '
+        Me.um_edituser_lastname.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_lastname.AutoSize = True
+        Me.um_edituser_lastname.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_lastname.ForeColor = System.Drawing.Color.White
+        Me.um_edituser_lastname.Location = New System.Drawing.Point(172, 186)
+        Me.um_edituser_lastname.Name = "um_edituser_lastname"
+        Me.um_edituser_lastname.Size = New System.Drawing.Size(105, 30)
+        Me.um_edituser_lastname.TabIndex = 28
+        Me.um_edituser_lastname.Text = "Last Name"
+        '
+        'um_edituser_txtboxfull
+        '
+        Me.um_edituser_txtboxfull.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxfull.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.um_edituser_txtboxfull.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_txtboxfull.ForeColor = System.Drawing.Color.LightGray
+        Me.um_edituser_txtboxfull.Location = New System.Drawing.Point(302, 186)
+        Me.um_edituser_txtboxfull.MaxLength = 100
+        Me.um_edituser_txtboxfull.Name = "um_edituser_txtboxfull"
+        Me.um_edituser_txtboxfull.Size = New System.Drawing.Size(258, 27)
+        Me.um_edituser_txtboxfull.TabIndex = 27
+        Me.um_edituser_txtboxfull.Text = "Enter Last Name"
+        '
+        'um_edituser_fullname
+        '
+        Me.um_edituser_fullname.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_fullname.AutoSize = True
+        Me.um_edituser_fullname.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_fullname.ForeColor = System.Drawing.Color.White
+        Me.um_edituser_fullname.Location = New System.Drawing.Point(172, 130)
+        Me.um_edituser_fullname.Name = "um_edituser_fullname"
+        Me.um_edituser_fullname.Size = New System.Drawing.Size(106, 30)
+        Me.um_edituser_fullname.TabIndex = 26
+        Me.um_edituser_fullname.Text = "First Name"
+        '
+        'um_edituser_txtboxfirst
+        '
+        Me.um_edituser_txtboxfirst.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxfirst.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.um_edituser_txtboxfirst.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_txtboxfirst.ForeColor = System.Drawing.Color.LightGray
+        Me.um_edituser_txtboxfirst.Location = New System.Drawing.Point(302, 130)
+        Me.um_edituser_txtboxfirst.MaxLength = 100
+        Me.um_edituser_txtboxfirst.Name = "um_edituser_txtboxfirst"
+        Me.um_edituser_txtboxfirst.Size = New System.Drawing.Size(258, 27)
+        Me.um_edituser_txtboxfirst.TabIndex = 25
+        Me.um_edituser_txtboxfirst.Text = "Enter Full Name"
+        '
+        'uc_um_adminprofile
+        '
+        Me.uc_um_adminprofile.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.uc_um_adminprofile.AutoSize = True
+        Me.uc_um_adminprofile.Font = New System.Drawing.Font("Poppins", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.uc_um_adminprofile.ForeColor = System.Drawing.Color.White
+        Me.uc_um_adminprofile.Location = New System.Drawing.Point(501, 39)
+        Me.uc_um_adminprofile.Name = "uc_um_adminprofile"
+        Me.uc_um_adminprofile.Size = New System.Drawing.Size(215, 50)
+        Me.uc_um_adminprofile.TabIndex = 23
+        Me.uc_um_adminprofile.Text = "Admin Profile"
         '
         'EditUser
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.Controls.Add(Me.uc_um_edituser)
         Me.Name = "EditUser"
         Me.Size = New System.Drawing.Size(1303, 827)

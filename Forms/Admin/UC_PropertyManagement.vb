@@ -83,13 +83,13 @@ Public Class UC_PropertyManagement
         ' Optional for future clickable cells
     End Sub
 
-    Private Sub pm_btn_Update_Click(sender As Object, e As EventArgs) Handles pm_btn_Update.Click
+    Private Sub pm_btn_Update_Click(sender As Object, e As EventArgs) 
         ' Refresh data from database
         LoadSuppliesData()
         MessageBox.Show("Data refreshed from database.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
-    Private Sub pm_btn_AddSupply_Click(sender As Object, e As EventArgs) Handles pm_btn_AddSupply.Click
+    Private Sub pm_btn_AddSupply_Click(sender As Object, e As EventArgs) 
         Dim addSupplyUC As New UC_AddSupply()
         Me.Parent.Controls.Add(addSupplyUC)
         addSupplyUC.BringToFront()

@@ -89,7 +89,7 @@ Partial Class UC_Reports
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = My.Resources.Resources.icon_search1
+        Me.PictureBox1.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
         Me.PictureBox1.Location = New System.Drawing.Point(59, 120)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
@@ -133,6 +133,7 @@ Partial Class UC_Reports
         'rpt_genbtn_StockCard
         '
         Me.rpt_genbtn_StockCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_StockCard.CornerRadius = 15
         Me.rpt_genbtn_StockCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_StockCard.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_StockCard.ForeColor = System.Drawing.Color.White
@@ -146,6 +147,7 @@ Partial Class UC_Reports
         'reports_prevbtn_StockCard
         '
         Me.reports_prevbtn_StockCard.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_StockCard.CornerRadius = 15
         Me.reports_prevbtn_StockCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_StockCard.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_StockCard.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -159,6 +161,7 @@ Partial Class UC_Reports
         'rpt_genbtn_PropertyCard
         '
         Me.rpt_genbtn_PropertyCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_PropertyCard.CornerRadius = 15
         Me.rpt_genbtn_PropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_PropertyCard.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_PropertyCard.ForeColor = System.Drawing.Color.White
@@ -172,6 +175,7 @@ Partial Class UC_Reports
         'reports_prevbtn_PropertyCard
         '
         Me.reports_prevbtn_PropertyCard.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_PropertyCard.CornerRadius = 15
         Me.reports_prevbtn_PropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_PropertyCard.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_PropertyCard.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -185,6 +189,7 @@ Partial Class UC_Reports
         'rpt_genbtn_MaintenanceRepair
         '
         Me.rpt_genbtn_MaintenanceRepair.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_MaintenanceRepair.CornerRadius = 15
         Me.rpt_genbtn_MaintenanceRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_MaintenanceRepair.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_MaintenanceRepair.ForeColor = System.Drawing.Color.White
@@ -198,6 +203,7 @@ Partial Class UC_Reports
         'reports_prevbtn_MaintenanceRepair
         '
         Me.reports_prevbtn_MaintenanceRepair.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_MaintenanceRepair.CornerRadius = 15
         Me.reports_prevbtn_MaintenanceRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_MaintenanceRepair.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_MaintenanceRepair.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -211,6 +217,7 @@ Partial Class UC_Reports
         'rpt_genbtn_RequisitionSlip
         '
         Me.rpt_genbtn_RequisitionSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_RequisitionSlip.CornerRadius = 15
         Me.rpt_genbtn_RequisitionSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_RequisitionSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_RequisitionSlip.ForeColor = System.Drawing.Color.White
@@ -224,6 +231,7 @@ Partial Class UC_Reports
         'reports_prevbtn_RequisitionSlip
         '
         Me.reports_prevbtn_RequisitionSlip.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_RequisitionSlip.CornerRadius = 15
         Me.reports_prevbtn_RequisitionSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_RequisitionSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_RequisitionSlip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -266,13 +274,14 @@ Partial Class UC_Reports
         '
         'reports_requisitionSlip
         '
-        Me.reports_requisitionSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_requisitionSlip.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_requisitionSlip.CornerRadius = 5
         Me.reports_requisitionSlip.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_requisitionSlip.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_requisitionSlip.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_requisitionSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_requisitionSlip.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_requisitionSlip.ForeColor = System.Drawing.Color.White
+        Me.reports_requisitionSlip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_requisitionSlip.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_requisitionSlip.Location = New System.Drawing.Point(10, 10)
         Me.reports_requisitionSlip.Margin = New System.Windows.Forms.Padding(10)
@@ -285,13 +294,14 @@ Partial Class UC_Reports
         '
         'reports_StockCard
         '
-        Me.reports_StockCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_StockCard.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_StockCard.CornerRadius = 5
         Me.reports_StockCard.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_StockCard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_StockCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_StockCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_StockCard.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_StockCard.ForeColor = System.Drawing.Color.White
+        Me.reports_StockCard.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_StockCard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_StockCard.Location = New System.Drawing.Point(862, 10)
         Me.reports_StockCard.Margin = New System.Windows.Forms.Padding(10)
@@ -304,13 +314,14 @@ Partial Class UC_Reports
         '
         'reports_MaintenanceRepair
         '
-        Me.reports_MaintenanceRepair.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_MaintenanceRepair.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_MaintenanceRepair.CornerRadius = 5
         Me.reports_MaintenanceRepair.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_MaintenanceRepair.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_MaintenanceRepair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_MaintenanceRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_MaintenanceRepair.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_MaintenanceRepair.ForeColor = System.Drawing.Color.White
+        Me.reports_MaintenanceRepair.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_MaintenanceRepair.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_MaintenanceRepair.Location = New System.Drawing.Point(294, 10)
         Me.reports_MaintenanceRepair.Margin = New System.Windows.Forms.Padding(10)
@@ -323,13 +334,14 @@ Partial Class UC_Reports
         '
         'reports_PropertyCard
         '
-        Me.reports_PropertyCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_PropertyCard.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_PropertyCard.CornerRadius = 5
         Me.reports_PropertyCard.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_PropertyCard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_PropertyCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_PropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_PropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_PropertyCard.ForeColor = System.Drawing.Color.White
+        Me.reports_PropertyCard.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_PropertyCard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_PropertyCard.Location = New System.Drawing.Point(578, 10)
         Me.reports_PropertyCard.Margin = New System.Windows.Forms.Padding(10)
@@ -361,6 +373,7 @@ Partial Class UC_Reports
         'rpt_genbtn_LostDamage
         '
         Me.rpt_genbtn_LostDamage.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_LostDamage.CornerRadius = 15
         Me.rpt_genbtn_LostDamage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_LostDamage.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_LostDamage.ForeColor = System.Drawing.Color.White
@@ -374,6 +387,7 @@ Partial Class UC_Reports
         'reports_prevbtn_LostDamage
         '
         Me.reports_prevbtn_LostDamage.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_LostDamage.CornerRadius = 15
         Me.reports_prevbtn_LostDamage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_LostDamage.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_LostDamage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -387,6 +401,7 @@ Partial Class UC_Reports
         'rpt_genbtn_BorrowingReturnSlip
         '
         Me.rpt_genbtn_BorrowingReturnSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_BorrowingReturnSlip.CornerRadius = 15
         Me.rpt_genbtn_BorrowingReturnSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_BorrowingReturnSlip.ForeColor = System.Drawing.Color.White
@@ -400,6 +415,7 @@ Partial Class UC_Reports
         'reports_prevbtn_BorrowingReturnSlip
         '
         Me.reports_prevbtn_BorrowingReturnSlip.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_BorrowingReturnSlip.CornerRadius = 15
         Me.reports_prevbtn_BorrowingReturnSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_BorrowingReturnSlip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -413,6 +429,7 @@ Partial Class UC_Reports
         'rpt_genbtn_InventorySummary
         '
         Me.rpt_genbtn_InventorySummary.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_InventorySummary.CornerRadius = 15
         Me.rpt_genbtn_InventorySummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_InventorySummary.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_InventorySummary.ForeColor = System.Drawing.Color.White
@@ -426,6 +443,7 @@ Partial Class UC_Reports
         'reports_prevbtn_InventorySummary
         '
         Me.reports_prevbtn_InventorySummary.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_InventorySummary.CornerRadius = 15
         Me.reports_prevbtn_InventorySummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_InventorySummary.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_InventorySummary.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -439,6 +457,7 @@ Partial Class UC_Reports
         'rpt_genbtn_InventoryCustodianSlip
         '
         Me.rpt_genbtn_InventoryCustodianSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_InventoryCustodianSlip.CornerRadius = 15
         Me.rpt_genbtn_InventoryCustodianSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_InventoryCustodianSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_InventoryCustodianSlip.ForeColor = System.Drawing.Color.White
@@ -452,6 +471,7 @@ Partial Class UC_Reports
         'reports_prevbtn_InventoryCustodianSip
         '
         Me.reports_prevbtn_InventoryCustodianSip.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_InventoryCustodianSip.CornerRadius = 15
         Me.reports_prevbtn_InventoryCustodianSip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_InventoryCustodianSip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_InventoryCustodianSip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -494,13 +514,14 @@ Partial Class UC_Reports
         '
         'reports_InventoryCustodianSlip
         '
-        Me.reports_InventoryCustodianSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_InventoryCustodianSlip.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_InventoryCustodianSlip.CornerRadius = 5
         Me.reports_InventoryCustodianSlip.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_InventoryCustodianSlip.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_InventoryCustodianSlip.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_InventoryCustodianSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_InventoryCustodianSlip.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_InventoryCustodianSlip.ForeColor = System.Drawing.Color.White
+        Me.reports_InventoryCustodianSlip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_InventoryCustodianSlip.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_InventoryCustodianSlip.Location = New System.Drawing.Point(10, 10)
         Me.reports_InventoryCustodianSlip.Margin = New System.Windows.Forms.Padding(10)
@@ -513,13 +534,14 @@ Partial Class UC_Reports
         '
         'reports_LostDamage
         '
-        Me.reports_LostDamage.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_LostDamage.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_LostDamage.CornerRadius = 5
         Me.reports_LostDamage.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_LostDamage.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_LostDamage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_LostDamage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_LostDamage.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_LostDamage.ForeColor = System.Drawing.Color.White
+        Me.reports_LostDamage.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_LostDamage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_LostDamage.Location = New System.Drawing.Point(862, 10)
         Me.reports_LostDamage.Margin = New System.Windows.Forms.Padding(10)
@@ -532,13 +554,14 @@ Partial Class UC_Reports
         '
         'reports_InventorySummary
         '
-        Me.reports_InventorySummary.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_InventorySummary.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_InventorySummary.CornerRadius = 5
         Me.reports_InventorySummary.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_InventorySummary.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_InventorySummary.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_InventorySummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_InventorySummary.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_InventorySummary.ForeColor = System.Drawing.Color.White
+        Me.reports_InventorySummary.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_InventorySummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_InventorySummary.Location = New System.Drawing.Point(294, 10)
         Me.reports_InventorySummary.Margin = New System.Windows.Forms.Padding(10)
@@ -551,13 +574,14 @@ Partial Class UC_Reports
         '
         'reports_BorrowingReturnSlip
         '
-        Me.reports_BorrowingReturnSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_BorrowingReturnSlip.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_BorrowingReturnSlip.CornerRadius = 5
         Me.reports_BorrowingReturnSlip.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_BorrowingReturnSlip.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_BorrowingReturnSlip.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_BorrowingReturnSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_BorrowingReturnSlip.ForeColor = System.Drawing.Color.White
+        Me.reports_BorrowingReturnSlip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_BorrowingReturnSlip.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_BorrowingReturnSlip.Location = New System.Drawing.Point(578, 10)
         Me.reports_BorrowingReturnSlip.Margin = New System.Windows.Forms.Padding(10)
@@ -585,6 +609,7 @@ Partial Class UC_Reports
         'rpt_genbtn_AnnualProperty
         '
         Me.rpt_genbtn_AnnualProperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_AnnualProperty.CornerRadius = 15
         Me.rpt_genbtn_AnnualProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_AnnualProperty.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_AnnualProperty.ForeColor = System.Drawing.Color.White
@@ -598,6 +623,7 @@ Partial Class UC_Reports
         'reports_prevbtn_AnnualProperty
         '
         Me.reports_prevbtn_AnnualProperty.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_AnnualProperty.CornerRadius = 15
         Me.reports_prevbtn_AnnualProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_AnnualProperty.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_AnnualProperty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -611,6 +637,7 @@ Partial Class UC_Reports
         'rpt_genbtn_DeptAllocation
         '
         Me.rpt_genbtn_DeptAllocation.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_DeptAllocation.CornerRadius = 15
         Me.rpt_genbtn_DeptAllocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rpt_genbtn_DeptAllocation.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rpt_genbtn_DeptAllocation.ForeColor = System.Drawing.Color.White
@@ -624,6 +651,7 @@ Partial Class UC_Reports
         'reports_prevbtn_DeptAllocation
         '
         Me.reports_prevbtn_DeptAllocation.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_DeptAllocation.CornerRadius = 15
         Me.reports_prevbtn_DeptAllocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_prevbtn_DeptAllocation.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_prevbtn_DeptAllocation.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -664,13 +692,14 @@ Partial Class UC_Reports
         '
         'reports_DepartmentAllocation
         '
-        Me.reports_DepartmentAllocation.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_DepartmentAllocation.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_DepartmentAllocation.CornerRadius = 5
         Me.reports_DepartmentAllocation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_DepartmentAllocation.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_DepartmentAllocation.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_DepartmentAllocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_DepartmentAllocation.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_DepartmentAllocation.ForeColor = System.Drawing.Color.White
+        Me.reports_DepartmentAllocation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_DepartmentAllocation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_DepartmentAllocation.Location = New System.Drawing.Point(10, 10)
         Me.reports_DepartmentAllocation.Margin = New System.Windows.Forms.Padding(10)
@@ -683,13 +712,14 @@ Partial Class UC_Reports
         '
         'reports_AnnualProperty
         '
-        Me.reports_AnnualProperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_AnnualProperty.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_AnnualProperty.CornerRadius = 5
         Me.reports_AnnualProperty.Dock = System.Windows.Forms.DockStyle.Fill
         Me.reports_AnnualProperty.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.reports_AnnualProperty.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.reports_AnnualProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.reports_AnnualProperty.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_AnnualProperty.ForeColor = System.Drawing.Color.White
+        Me.reports_AnnualProperty.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_AnnualProperty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.reports_AnnualProperty.Location = New System.Drawing.Point(294, 10)
         Me.reports_AnnualProperty.Margin = New System.Windows.Forms.Padding(10)
@@ -704,7 +734,6 @@ Partial Class UC_Reports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoScroll = True
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.admin_panelcontainer)

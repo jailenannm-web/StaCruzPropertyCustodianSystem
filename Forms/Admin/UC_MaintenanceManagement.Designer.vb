@@ -8,7 +8,7 @@ Partial Class UC_MaintenanceManagement
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,7 +25,7 @@ Partial Class UC_MaintenanceManagement
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.admin_label_MaintenanceManagement = New System.Windows.Forms.Label()
         Me.mm_table1 = New System.Windows.Forms.DataGridView()
@@ -36,7 +36,6 @@ Partial Class UC_MaintenanceManagement
         Me.Warranty = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.mm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.mm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -115,28 +114,13 @@ Partial Class UC_MaintenanceManagement
         Me.Action.Name = "Action"
         Me.Action.Width = 125
         '
-        'mm_btn_update
-        '
-        Me.mm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.mm_btn_update.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.mm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.mm_btn_update.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mm_btn_update.ForeColor = System.Drawing.Color.White
-        Me.mm_btn_update.Location = New System.Drawing.Point(781, 645)
-        Me.mm_btn_update.Name = "mm_btn_update"
-        Me.mm_btn_update.Size = New System.Drawing.Size(180, 42)
-        Me.mm_btn_update.TabIndex = 58
-        Me.mm_btn_update.Text = "Update"
-        Me.mm_btn_update.UseVisualStyleBackColor = False
-        '
-        'MaintenanceManagement
+        'UC_MaintenanceManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.mm_btn_update)
         Me.Controls.Add(Me.mm_table1)
         Me.Controls.Add(Me.admin_label_MaintenanceManagement)
-        Me.Name = "MaintenanceManagement"
+        Me.Name = "UC_MaintenanceManagement"
         Me.Size = New System.Drawing.Size(1014, 741)
         CType(Me.mm_table1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -153,5 +137,4 @@ Partial Class UC_MaintenanceManagement
     Friend WithEvents Warranty As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
     Friend WithEvents Action As DataGridViewTextBoxColumn
-    Friend WithEvents mm_btn_update As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

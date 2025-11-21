@@ -32,25 +32,16 @@ Partial Class UC_DepartmentManagement
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
-        Me.dm_btn_AddDepartment = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.dm_label_ExistingDept = New System.Windows.Forms.Label()
-        Me.dm_panel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.dm_panel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.dm_panel3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.dm_panelContainer = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.dm_label_TotalDepartment = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.dm_labelActiveDept = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.dm_labelTotalEmployee = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.dm_labelTotalBudget = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.dm_panelContainer.SuspendLayout()
-        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = My.Resources.Resources.icon_search1
+        Me.PictureBox1.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
         Me.PictureBox1.Location = New System.Drawing.Point(43, 114)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
@@ -109,20 +100,6 @@ Partial Class UC_DepartmentManagement
         Me.pm_cbobx_categ.TabIndex = 36
         Me.pm_cbobx_categ.Text = "Categories"
         '
-        'dm_btn_AddDepartment
-        '
-        Me.dm_btn_AddDepartment.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dm_btn_AddDepartment.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.dm_btn_AddDepartment.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.dm_btn_AddDepartment.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
-        Me.dm_btn_AddDepartment.ForeColor = System.Drawing.Color.White
-        Me.dm_btn_AddDepartment.Location = New System.Drawing.Point(1022, 56)
-        Me.dm_btn_AddDepartment.Name = "dm_btn_AddDepartment"
-        Me.dm_btn_AddDepartment.Size = New System.Drawing.Size(184, 41)
-        Me.dm_btn_AddDepartment.TabIndex = 40
-        Me.dm_btn_AddDepartment.Text = "Add Department"
-        Me.dm_btn_AddDepartment.UseVisualStyleBackColor = False
-        '
         'dm_label_ExistingDept
         '
         Me.dm_label_ExistingDept.AutoSize = True
@@ -132,42 +109,6 @@ Partial Class UC_DepartmentManagement
         Me.dm_label_ExistingDept.Size = New System.Drawing.Size(190, 30)
         Me.dm_label_ExistingDept.TabIndex = 41
         Me.dm_label_ExistingDept.Text = "Existing Department"
-        '
-        'dm_panel1
-        '
-        Me.dm_panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dm_panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.dm_panel1.CornerRadius = 20
-        Me.dm_panel1.Location = New System.Drawing.Point(43, 201)
-        Me.dm_panel1.Name = "dm_panel1"
-        Me.dm_panel1.Size = New System.Drawing.Size(1163, 130)
-        Me.dm_panel1.TabIndex = 42
-        '
-        'dm_panel2
-        '
-        Me.dm_panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dm_panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.dm_panel2.CornerRadius = 20
-        Me.dm_panel2.Location = New System.Drawing.Point(43, 337)
-        Me.dm_panel2.Name = "dm_panel2"
-        Me.dm_panel2.Size = New System.Drawing.Size(1163, 130)
-        Me.dm_panel2.TabIndex = 43
-        '
-        'dm_panel3
-        '
-        Me.dm_panel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dm_panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.dm_panel3.CornerRadius = 20
-        Me.dm_panel3.Location = New System.Drawing.Point(43, 473)
-        Me.dm_panel3.Name = "dm_panel3"
-        Me.dm_panel3.Size = New System.Drawing.Size(1163, 130)
-        Me.dm_panel3.TabIndex = 44
         '
         'dm_panelContainer
         '
@@ -188,10 +129,6 @@ Partial Class UC_DepartmentManagement
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.dm_label_TotalDepartment, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.dm_labelActiveDept, 3, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.dm_labelTotalEmployee, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.dm_labelTotalBudget, 2, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 10)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(10)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -209,92 +146,12 @@ Partial Class UC_DepartmentManagement
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1163, 178)
         Me.TableLayoutPanel1.TabIndex = 15
         '
-        'dm_label_TotalDepartment
-        '
-        Me.dm_label_TotalDepartment.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.dm_label_TotalDepartment.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dm_label_TotalDepartment.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.dm_label_TotalDepartment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.dm_label_TotalDepartment.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.dm_label_TotalDepartment.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dm_label_TotalDepartment.ForeColor = System.Drawing.Color.White
-        Me.dm_label_TotalDepartment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.dm_label_TotalDepartment.Location = New System.Drawing.Point(10, 10)
-        Me.dm_label_TotalDepartment.Margin = New System.Windows.Forms.Padding(10)
-        Me.dm_label_TotalDepartment.Name = "dm_label_TotalDepartment"
-        Me.dm_label_TotalDepartment.Size = New System.Drawing.Size(270, 158)
-        Me.dm_label_TotalDepartment.TabIndex = 11
-        Me.dm_label_TotalDepartment.Text = "Total Department"
-        Me.dm_label_TotalDepartment.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.dm_label_TotalDepartment.UseVisualStyleBackColor = False
-        '
-        'dm_labelActiveDept
-        '
-        Me.dm_labelActiveDept.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.dm_labelActiveDept.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dm_labelActiveDept.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.dm_labelActiveDept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.dm_labelActiveDept.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.dm_labelActiveDept.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dm_labelActiveDept.ForeColor = System.Drawing.Color.White
-        Me.dm_labelActiveDept.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.dm_labelActiveDept.Location = New System.Drawing.Point(880, 10)
-        Me.dm_labelActiveDept.Margin = New System.Windows.Forms.Padding(10)
-        Me.dm_labelActiveDept.Name = "dm_labelActiveDept"
-        Me.dm_labelActiveDept.Size = New System.Drawing.Size(273, 158)
-        Me.dm_labelActiveDept.TabIndex = 14
-        Me.dm_labelActiveDept.Text = "Active Department"
-        Me.dm_labelActiveDept.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.dm_labelActiveDept.UseVisualStyleBackColor = False
-        '
-        'dm_labelTotalEmployee
-        '
-        Me.dm_labelTotalEmployee.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.dm_labelTotalEmployee.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dm_labelTotalEmployee.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.dm_labelTotalEmployee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.dm_labelTotalEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.dm_labelTotalEmployee.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dm_labelTotalEmployee.ForeColor = System.Drawing.Color.White
-        Me.dm_labelTotalEmployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.dm_labelTotalEmployee.Location = New System.Drawing.Point(300, 10)
-        Me.dm_labelTotalEmployee.Margin = New System.Windows.Forms.Padding(10)
-        Me.dm_labelTotalEmployee.Name = "dm_labelTotalEmployee"
-        Me.dm_labelTotalEmployee.Size = New System.Drawing.Size(270, 158)
-        Me.dm_labelTotalEmployee.TabIndex = 12
-        Me.dm_labelTotalEmployee.Text = "Total Employee"
-        Me.dm_labelTotalEmployee.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.dm_labelTotalEmployee.UseVisualStyleBackColor = False
-        '
-        'dm_labelTotalBudget
-        '
-        Me.dm_labelTotalBudget.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.dm_labelTotalBudget.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dm_labelTotalBudget.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.dm_labelTotalBudget.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.dm_labelTotalBudget.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.dm_labelTotalBudget.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dm_labelTotalBudget.ForeColor = System.Drawing.Color.White
-        Me.dm_labelTotalBudget.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.dm_labelTotalBudget.Location = New System.Drawing.Point(590, 10)
-        Me.dm_labelTotalBudget.Margin = New System.Windows.Forms.Padding(10)
-        Me.dm_labelTotalBudget.Name = "dm_labelTotalBudget"
-        Me.dm_labelTotalBudget.Size = New System.Drawing.Size(270, 158)
-        Me.dm_labelTotalBudget.TabIndex = 13
-        Me.dm_labelTotalBudget.Text = "Total Budget"
-        Me.dm_labelTotalBudget.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.dm_labelTotalBudget.UseVisualStyleBackColor = False
-        '
         'UC_DepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.dm_panelContainer)
-        Me.Controls.Add(Me.dm_panel3)
-        Me.Controls.Add(Me.dm_panel2)
-        Me.Controls.Add(Me.dm_panel1)
         Me.Controls.Add(Me.dm_label_ExistingDept)
-        Me.Controls.Add(Me.dm_btn_AddDepartment)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.pm_txtbox_search)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
@@ -304,7 +161,6 @@ Partial Class UC_DepartmentManagement
         Me.Size = New System.Drawing.Size(1253, 804)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.dm_panelContainer.ResumeLayout(False)
-        Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -315,15 +171,7 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents admin_label_DepartmentManagement As Label
     Friend WithEvents pm_cbobx_status As ComboBox
     Friend WithEvents pm_cbobx_categ As ComboBox
-    Friend WithEvents dm_btn_AddDepartment As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents dm_label_ExistingDept As Label
-    Friend WithEvents dm_panel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents dm_panel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents dm_panel3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents dm_panelContainer As Panel
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents dm_label_TotalDepartment As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents dm_labelActiveDept As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents dm_labelTotalEmployee As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents dm_labelTotalBudget As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

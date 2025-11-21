@@ -26,8 +26,6 @@ Partial Class UC_PropertyManagement
         Me.admin_label_PM = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pm_txtbox_search = New System.Windows.Forms.TextBox()
-        Me.pm_btn_AddSupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.pm_btn_Update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -44,11 +42,11 @@ Partial Class UC_PropertyManagement
         Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
         Me.pm_cbobx_categ.Location = New System.Drawing.Point(882, 115)
         Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
-        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 33)
+        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 38)
         Me.pm_cbobx_categ.TabIndex = 28
         Me.pm_cbobx_categ.Text = "Categories"
         '
@@ -61,7 +59,7 @@ Partial Class UC_PropertyManagement
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
         Me.pm_cbobx_status.Location = New System.Drawing.Point(1057, 115)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
-        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 33)
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 38)
         Me.pm_cbobx_status.TabIndex = 27
         Me.pm_cbobx_status.Text = "Status"
         '
@@ -70,7 +68,7 @@ Partial Class UC_PropertyManagement
         Me.pm_table.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_table.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.pm_table.BackgroundColor = System.Drawing.SystemColors.ButtonFace
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SupplyID, Me.colName, Me.Category, Me.Stock, Me.UnitCost, Me.TotalValue, Me.Status, Me.LocationColumn, Me.Action})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -150,7 +148,7 @@ Partial Class UC_PropertyManagement
         Me.admin_label_PM.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_label_PM.Location = New System.Drawing.Point(29, 44)
         Me.admin_label_PM.Name = "admin_label_PM"
-        Me.admin_label_PM.Size = New System.Drawing.Size(344, 48)
+        Me.admin_label_PM.Size = New System.Drawing.Size(414, 58)
         Me.admin_label_PM.TabIndex = 32
         Me.admin_label_PM.Text = "Property Management"
         '
@@ -174,45 +172,13 @@ Partial Class UC_PropertyManagement
         Me.pm_txtbox_search.ForeColor = System.Drawing.Color.White
         Me.pm_txtbox_search.Location = New System.Drawing.Point(87, 115)
         Me.pm_txtbox_search.Name = "pm_txtbox_search"
-        Me.pm_txtbox_search.Size = New System.Drawing.Size(741, 28)
+        Me.pm_txtbox_search.Size = New System.Drawing.Size(741, 33)
         Me.pm_txtbox_search.TabIndex = 33
         Me.pm_txtbox_search.Text = "Search"
         Me.pm_txtbox_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'pm_btn_AddSupply
-        '
-        Me.pm_btn_AddSupply.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pm_btn_AddSupply.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.pm_btn_AddSupply.CornerRadius = 15
-        Me.pm_btn_AddSupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_btn_AddSupply.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pm_btn_AddSupply.ForeColor = System.Drawing.Color.White
-        Me.pm_btn_AddSupply.Location = New System.Drawing.Point(1022, 687)
-        Me.pm_btn_AddSupply.Name = "pm_btn_AddSupply"
-        Me.pm_btn_AddSupply.Size = New System.Drawing.Size(180, 42)
-        Me.pm_btn_AddSupply.TabIndex = 55
-        Me.pm_btn_AddSupply.Text = "Add Supply"
-        Me.pm_btn_AddSupply.UseVisualStyleBackColor = False
-        '
-        'pm_btn_Update
-        '
-        Me.pm_btn_Update.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pm_btn_Update.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.pm_btn_Update.CornerRadius = 15
-        Me.pm_btn_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_btn_Update.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pm_btn_Update.ForeColor = System.Drawing.Color.White
-        Me.pm_btn_Update.Location = New System.Drawing.Point(808, 687)
-        Me.pm_btn_Update.Name = "pm_btn_Update"
-        Me.pm_btn_Update.Size = New System.Drawing.Size(180, 42)
-        Me.pm_btn_Update.TabIndex = 56
-        Me.pm_btn_Update.Text = "Update"
-        Me.pm_btn_Update.UseVisualStyleBackColor = False
-        '
         'UC_PropertyManagement
         '
-        Me.Controls.Add(Me.pm_btn_Update)
-        Me.Controls.Add(Me.pm_btn_AddSupply)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.pm_txtbox_search)
         Me.Controls.Add(Me.admin_label_PM)
@@ -246,6 +212,4 @@ Partial Class UC_PropertyManagement
     Friend WithEvents admin_label_PM As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents pm_txtbox_search As TextBox
-    Friend WithEvents pm_btn_AddSupply As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents pm_btn_Update As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class
