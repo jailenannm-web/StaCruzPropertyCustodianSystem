@@ -119,7 +119,7 @@ Public Class SADepartmentManagement
         pnlFormLoader.BringToFront() ' Make sure it's on top of pnlMain
     End Sub
 
-    Private Sub RoundedPanel2_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel2.Paint
+    Private Sub RoundedPanel2_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 End Class

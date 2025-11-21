@@ -23,6 +23,7 @@ Partial Class SAMaintenace
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblUserManagement = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,20 +39,34 @@ Partial Class SAMaintenace
         Me.CustodianID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PropertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MaintenanceID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblUserManagement
         '
         Me.lblUserManagement.AutoSize = True
         Me.lblUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserManagement.Location = New System.Drawing.Point(396, 50)
+        Me.lblUserManagement.Location = New System.Drawing.Point(30, 54)
         Me.lblUserManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUserManagement.Name = "lblUserManagement"
         Me.lblUserManagement.Size = New System.Drawing.Size(203, 39)
         Me.lblUserManagement.TabIndex = 41
         Me.lblUserManagement.Text = "Maintenace"
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MaintenanceID, Me.PropertyID, Me.CustodianID, Me.ServiceDate, Me.ServiceType, Me.Description, Me.ServiceProvider, Me.ProviderContact, Me.Cost, Me.NextSchedule, Me.WarrantyStatus, Me.TechnicianAssigned, Me.Status, Me.Remarks, Me.CreatedAt})
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.Size = New System.Drawing.Size(1511, 824)
+        Me.DataGridView1.TabIndex = 42
         '
         'CreatedAt
         '
@@ -158,50 +173,63 @@ Partial Class SAMaintenace
         Me.MaintenanceID.Name = "MaintenanceID"
         Me.MaintenanceID.Width = 125
         '
-        'DataGridView1
+        'Panel1
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MaintenanceID, Me.PropertyID, Me.CustodianID, Me.ServiceDate, Me.ServiceType, Me.Description, Me.ServiceProvider, Me.ProviderContact, Me.Cost, Me.NextSchedule, Me.WarrantyStatus, Me.TechnicianAssigned, Me.Status, Me.Remarks, Me.CreatedAt})
-        Me.DataGridView1.Location = New System.Drawing.Point(404, 220)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1131, 510)
-        Me.DataGridView1.TabIndex = 42
+        Me.Panel1.Location = New System.Drawing.Point(45, 455)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(200, 100)
+        Me.Panel1.TabIndex = 43
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.DataGridView1)
+        Me.Panel2.Location = New System.Drawing.Point(37, 120)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1515, 813)
+        Me.Panel2.TabIndex = 44
         '
         'SAMaintenace
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1577, 988)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(1564, 988)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lblUserManagement)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MinimizeBox = False
         Me.Name = "SAMaintenace"
         Me.Text = "SAMaintenace"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents lblUserManagement As System.Windows.Forms.Label
-    Friend WithEvents CreatedAt As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Remarks As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TechnicianAssigned As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents WarrantyStatus As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NextSchedule As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Cost As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProviderContact As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ServiceProvider As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Description As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ServiceType As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ServiceDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CustodianID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PropertyID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MaintenanceID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents MaintenanceID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PropertyID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CustodianID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ServiceDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ServiceType As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Description As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ServiceProvider As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ProviderContact As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cost As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NextSchedule As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents WarrantyStatus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TechnicianAssigned As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Remarks As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CreatedAt As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
 End Class

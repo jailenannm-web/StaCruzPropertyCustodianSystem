@@ -107,4 +107,8 @@ Public Class UC_PropertyManagement
                                End Sub
         timer.Start()
     End Sub
+
+    Private Sub admin_label_PM_Click(sender As Object, e As EventArgs) Handles admin_label_PM.Click
+
+    End Sub
 End Class
