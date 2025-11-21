@@ -48,11 +48,7 @@ Public Class StaffLogin
     End Sub
 
     ' Cancel button click
-    Private Sub btn_Cancel_Click(sender As Object, e As EventArgs) Handles btn_Cancel.Click
-        Dim userLevelForm As New UserLevel()
-        userLevelForm.Show()
-        Me.Close()
-    End Sub
+
 
     Private Sub txb_Password_TextChanged(sender As Object, e As EventArgs) Handles txb_Password.TextChanged
 

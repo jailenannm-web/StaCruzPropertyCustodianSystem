@@ -86,24 +86,12 @@ Public Class StaffRegister
         If DatabaseConnection.RegisterStaff(firstName, lastName, email, contactNumber, address, departmentID, username, password, position) Then
             MessageBox.Show("Registration successful! You can now login with your new account.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            ' Return to login form based on position
-            If position = "Super Admin" Then
-                Dim superAdminLogin As New SuperAdmin_Login()
-                superAdminLogin.Show()
-            ElseIf position = "Admin" Then
-                ' Route to appropriate admin login form (use Login form for Admin)
-                Dim adminLogin As New Login()
-                adminLogin.Show()
-            Else
-                Dim staffLogin As New StaffLogin()
+
+            Dim staffLogin As New StaffLogin()
                 staffLogin.Show()
             End If
             Me.Close()
-        Else
-            ' Show error if registration failed
-            System.Diagnostics.Debug.WriteLine("[v0] Registration failed for user: " & username)
-            MessageBox.Show("Registration failed. Please check the error message above and try again.", "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+
     End Sub
 
     ' Cancel button click

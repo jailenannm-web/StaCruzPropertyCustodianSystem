@@ -170,18 +170,6 @@
     <Compile Include="Forms\frmConfig.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Login\Login.Designer.vb">
-      <DependentUpon>Login.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Login\Login.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Login\SuperAdmin_Login.Designer.vb">
-      <DependentUpon>SuperAdmin_Login.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Login\SuperAdmin_Login.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\Logout\logout.Designer.vb">
       <DependentUpon>logout.vb</DependentUpon>
     </Compile>
@@ -244,12 +232,6 @@
     <EmbeddedResource Include="Forms\frmConfig.resx">
       <DependentUpon>frmConfig.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Login\Login.resx">
-      <DependentUpon>Login.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Login\SuperAdmin_Login.resx">
-      <DependentUpon>SuperAdmin_Login.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Logout\logout.resx">
       <DependentUpon>logout.vb</DependentUpon>
     </EmbeddedResource>
@@ -305,10 +287,10 @@
   <!-- ===== ADMIN FORM ===== -->
   <!-- DEFAULT PROJECT FILES -->
   <ItemGroup>
-    <Compile Include="Forms\Staff\StaffLogin.Designer.vb">
+    <Compile Include="Forms\Login\StaffLogin.Designer.vb">
       <DependentUpon>StaffLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Staff\StaffLogin.vb">
+    <Compile Include="Forms\Login\StaffLogin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\AddMaintenance.Designer.vb">
@@ -467,12 +449,6 @@
     <Compile Include="Forms\SuperAdmin\UserManagement\SAUserManagement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UserAccess\UserLevel.Designer.vb">
-      <DependentUpon>UserLevel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UserAccess\UserLevel.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -498,7 +474,7 @@
     <Compile Include="Resources\Controls\RoundedPanel.vb">
       <SubType>Component</SubType>
     </Compile>
-    <EmbeddedResource Include="Forms\Staff\StaffLogin.resx">
+    <EmbeddedResource Include="Forms\Login\StaffLogin.resx">
       <DependentUpon>StaffLogin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\AddMaintenance.resx">
@@ -578,9 +554,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\UserManagement\SAUserManagement.resx">
       <DependentUpon>SAUserManagement.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserAccess\UserLevel.resx">
-      <DependentUpon>UserLevel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Controls\RoundedButton.resx">
       <DependentUpon>RoundedButton.vb</DependentUpon>
