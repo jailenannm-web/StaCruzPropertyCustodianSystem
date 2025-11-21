@@ -48,7 +48,7 @@ Partial Class UC_PropertyManagement
         Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
         Me.pm_cbobx_categ.Location = New System.Drawing.Point(882, 115)
         Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
-        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 33)
+        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 38)
         Me.pm_cbobx_categ.TabIndex = 28
         Me.pm_cbobx_categ.Text = "Categories"
         '
@@ -61,7 +61,7 @@ Partial Class UC_PropertyManagement
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
         Me.pm_cbobx_status.Location = New System.Drawing.Point(1057, 115)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
-        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 33)
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 38)
         Me.pm_cbobx_status.TabIndex = 27
         Me.pm_cbobx_status.Text = "Status"
         '
@@ -150,7 +150,7 @@ Partial Class UC_PropertyManagement
         Me.admin_label_PM.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_label_PM.Location = New System.Drawing.Point(29, 44)
         Me.admin_label_PM.Name = "admin_label_PM"
-        Me.admin_label_PM.Size = New System.Drawing.Size(344, 48)
+        Me.admin_label_PM.Size = New System.Drawing.Size(414, 58)
         Me.admin_label_PM.TabIndex = 32
         Me.admin_label_PM.Text = "Property Management"
         '
@@ -174,7 +174,7 @@ Partial Class UC_PropertyManagement
         Me.pm_txtbox_search.ForeColor = System.Drawing.Color.White
         Me.pm_txtbox_search.Location = New System.Drawing.Point(87, 115)
         Me.pm_txtbox_search.Name = "pm_txtbox_search"
-        Me.pm_txtbox_search.Size = New System.Drawing.Size(741, 28)
+        Me.pm_txtbox_search.Size = New System.Drawing.Size(741, 33)
         Me.pm_txtbox_search.TabIndex = 33
         Me.pm_txtbox_search.Text = "Search"
         Me.pm_txtbox_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center

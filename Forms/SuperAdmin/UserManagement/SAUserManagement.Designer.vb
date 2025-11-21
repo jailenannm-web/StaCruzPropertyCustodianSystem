@@ -8,7 +8,7 @@ Partial Class SAUserManagement
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,15 +25,10 @@ Partial Class SAUserManagement
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SAUserManagement))
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.lblUserManagement = New System.Windows.Forms.Label()
-        Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MiddleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,30 +45,189 @@ Partial Class SAUserManagement
         Me.Barangay = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HouseNoStreet = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Password = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.Button12 = New System.Windows.Forms.Button()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.btnSystemConfig = New System.Windows.Forms.Button()
-        Me.btnLogout = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.lblSuperAdmin = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlSidebar.SuspendLayout
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.RoundedPanel2.SuspendLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'lblUserManagement
+        '
+        Me.lblUserManagement.AutoSize = True
+        Me.lblUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUserManagement.Location = New System.Drawing.Point(130, 71)
+        Me.lblUserManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblUserManagement.Name = "lblUserManagement"
+        Me.lblUserManagement.Size = New System.Drawing.Size(311, 39)
+        Me.lblUserManagement.TabIndex = 3
+        Me.lblUserManagement.Text = "User Management"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(218, 151)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(729, 41)
+        Me.TextBox1.TabIndex = 11
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FirstName, Me.MiddleName, Me.LastName, Me.Suffix, Me.Position, Me.DepartmentID, Me.EmployeeID, Me.ContactNumber, Me.Email, Me.UserName, Me.Provence, Me.Municipality, Me.Barangay, Me.HouseNoStreet, Me.Password})
+        Me.DataGridView1.Location = New System.Drawing.Point(137, 230)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.Size = New System.Drawing.Size(1383, 815)
+        Me.DataGridView1.TabIndex = 13
+        '
+        'FirstName
+        '
+        Me.FirstName.HeaderText = "First Name"
+        Me.FirstName.MinimumWidth = 6
+        Me.FirstName.Name = "FirstName"
+        Me.FirstName.Width = 125
+        '
+        'MiddleName
+        '
+        Me.MiddleName.HeaderText = "Middle Name"
+        Me.MiddleName.MinimumWidth = 6
+        Me.MiddleName.Name = "MiddleName"
+        Me.MiddleName.Width = 125
+        '
+        'LastName
+        '
+        Me.LastName.HeaderText = "LastName"
+        Me.LastName.MinimumWidth = 6
+        Me.LastName.Name = "LastName"
+        Me.LastName.Width = 125
+        '
+        'Suffix
+        '
+        Me.Suffix.HeaderText = "Suffix"
+        Me.Suffix.MinimumWidth = 6
+        Me.Suffix.Name = "Suffix"
+        Me.Suffix.Width = 125
+        '
+        'Position
+        '
+        Me.Position.HeaderText = "Position"
+        Me.Position.MinimumWidth = 6
+        Me.Position.Name = "Position"
+        Me.Position.Width = 125
+        '
+        'DepartmentID
+        '
+        Me.DepartmentID.HeaderText = "Department I.D"
+        Me.DepartmentID.MinimumWidth = 6
+        Me.DepartmentID.Name = "DepartmentID"
+        Me.DepartmentID.Width = 125
+        '
+        'EmployeeID
+        '
+        Me.EmployeeID.HeaderText = "Employee I.D"
+        Me.EmployeeID.MinimumWidth = 6
+        Me.EmployeeID.Name = "EmployeeID"
+        Me.EmployeeID.Width = 125
+        '
+        'ContactNumber
+        '
+        Me.ContactNumber.HeaderText = "Contact Number"
+        Me.ContactNumber.MinimumWidth = 6
+        Me.ContactNumber.Name = "ContactNumber"
+        Me.ContactNumber.Width = 125
+        '
+        'Email
+        '
+        Me.Email.HeaderText = "Email"
+        Me.Email.MinimumWidth = 6
+        Me.Email.Name = "Email"
+        Me.Email.Width = 125
+        '
+        'UserName
+        '
+        Me.UserName.HeaderText = "User Name"
+        Me.UserName.MinimumWidth = 6
+        Me.UserName.Name = "UserName"
+        Me.UserName.Width = 125
+        '
+        'Provence
+        '
+        Me.Provence.HeaderText = "Provence"
+        Me.Provence.MinimumWidth = 6
+        Me.Provence.Name = "Provence"
+        Me.Provence.Width = 125
+        '
+        'Municipality
+        '
+        Me.Municipality.HeaderText = "Municipality"
+        Me.Municipality.MinimumWidth = 6
+        Me.Municipality.Name = "Municipality"
+        Me.Municipality.Width = 125
+        '
+        'Barangay
+        '
+        Me.Barangay.HeaderText = "Barangay"
+        Me.Barangay.MinimumWidth = 6
+        Me.Barangay.Name = "Barangay"
+        Me.Barangay.Width = 125
+        '
+        'HouseNoStreet
+        '
+        Me.HouseNoStreet.HeaderText = "House No. Street"
+        Me.HouseNoStreet.MinimumWidth = 6
+        Me.HouseNoStreet.Name = "HouseNoStreet"
+        Me.HouseNoStreet.Width = 125
+        '
+        'Password
+        '
+        Me.Password.HeaderText = "Password"
+        Me.Password.MinimumWidth = 6
+        Me.Password.Name = "Password"
+        Me.Password.Width = 125
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(158, 151)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 41)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 15
+        Me.PictureBox2.TabStop = False
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnUpdate.CornerRadius = 5
+        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdate.Location = New System.Drawing.Point(1364, 150)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(135, 47)
+        Me.btnUpdate.TabIndex = 4
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = False
+        '
+        'btnDelete
+        '
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnDelete.CornerRadius = 5
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Location = New System.Drawing.Point(1184, 150)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(134, 47)
+        Me.btnDelete.TabIndex = 1
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = False
         '
         'btnAdd
         '
@@ -82,491 +236,34 @@ Partial Class SAUserManagement
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(889, 113)
+        Me.btnAdd.Location = New System.Drawing.Point(989, 151)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(102, 35)
+        Me.btnAdd.Size = New System.Drawing.Size(148, 46)
         Me.btnAdd.TabIndex = 0
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
-        'btnDelete
-        '
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
-        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1026, 112)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(101, 36)
-        Me.btnDelete.TabIndex = 1
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = False
-        '
-        'lblUserManagement
-        '
-        Me.lblUserManagement.AutoSize = True
-        Me.lblUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserManagement.Location = New System.Drawing.Point(283, 44)
-        Me.lblUserManagement.Name = "lblUserManagement"
-        Me.lblUserManagement.Size = New System.Drawing.Size(251, 31)
-        Me.lblUserManagement.TabIndex = 3
-        Me.lblUserManagement.Text = "User Management"
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnUpdate.CornerRadius = 15
-        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdate.Location = New System.Drawing.Point(1170, 112)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(101, 38)
-        Me.btnUpdate.TabIndex = 4
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = False
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(365, 113)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(493, 35)
-        Me.TextBox1.TabIndex = 11
-        '
-        'Label1
-        '
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(285, 124)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(74, 26)
-        Me.Label1.TabIndex = 12
-        Me.Label1.Text = "Search"
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FirstName, Me.MiddleName, Me.LastName, Me.Suffix, Me.Position, Me.DepartmentID, Me.EmployeeID, Me.ContactNumber, Me.Email, Me.UserName, Me.Provence, Me.Municipality, Me.Barangay, Me.HouseNoStreet, Me.Password})
-        Me.DataGridView1.Location = New System.Drawing.Point(298, 176)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(993, 434)
-        Me.DataGridView1.TabIndex = 13
-        '
-        'FirstName
-        '
-        Me.FirstName.HeaderText = "First Name"
-        Me.FirstName.Name = "FirstName"
-        '
-        'MiddleName
-        '
-        Me.MiddleName.HeaderText = "Middle Name"
-        Me.MiddleName.Name = "MiddleName"
-        '
-        'LastName
-        '
-        Me.LastName.HeaderText = "LastName"
-        Me.LastName.Name = "LastName"
-        '
-        'Suffix
-        '
-        Me.Suffix.HeaderText = "Suffix"
-        Me.Suffix.Name = "Suffix"
-        '
-        'Position
-        '
-        Me.Position.HeaderText = "Position"
-        Me.Position.Name = "Position"
-        '
-        'DepartmentID
-        '
-        Me.DepartmentID.HeaderText = "Department I.D"
-        Me.DepartmentID.Name = "DepartmentID"
-        '
-        'EmployeeID
-        '
-        Me.EmployeeID.HeaderText = "Employee I.D"
-        Me.EmployeeID.Name = "EmployeeID"
-        '
-        'ContactNumber
-        '
-        Me.ContactNumber.HeaderText = "Contact Number"
-        Me.ContactNumber.Name = "ContactNumber"
-        '
-        'Email
-        '
-        Me.Email.HeaderText = "Email"
-        Me.Email.Name = "Email"
-        '
-        'UserName
-        '
-        Me.UserName.HeaderText = "User Name"
-        Me.UserName.Name = "UserName"
-        '
-        'Provence
-        '
-        Me.Provence.HeaderText = "Provence"
-        Me.Provence.Name = "Provence"
-        '
-        'Municipality
-        '
-        Me.Municipality.HeaderText = "Municipality"
-        Me.Municipality.Name = "Municipality"
-        '
-        'Barangay
-        '
-        Me.Barangay.HeaderText = "Barangay"
-        Me.Barangay.Name = "Barangay"
-        '
-        'HouseNoStreet
-        '
-        Me.HouseNoStreet.HeaderText = "House No. Street"
-        Me.HouseNoStreet.Name = "HouseNoStreet"
-        '
-        'Password
-        '
-        Me.Password.HeaderText = "Password"
-        Me.Password.Name = "Password"
-        '
-        'pnlSidebar
-        '
-        Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.pnlSidebar.Controls.Add(Me.PictureBox1)
-        Me.pnlSidebar.Controls.Add(Me.Button3)
-        Me.pnlSidebar.Controls.Add(Me.Button4)
-        Me.pnlSidebar.Controls.Add(Me.Button5)
-        Me.pnlSidebar.Controls.Add(Me.Button6)
-        Me.pnlSidebar.Controls.Add(Me.Button7)
-        Me.pnlSidebar.Controls.Add(Me.Button8)
-        Me.pnlSidebar.Controls.Add(Me.Button9)
-        Me.pnlSidebar.Controls.Add(Me.Button10)
-        Me.pnlSidebar.Controls.Add(Me.RoundedPanel2)
-        Me.pnlSidebar.Controls.Add(Me.btnSystemConfig)
-        Me.pnlSidebar.Controls.Add(Me.btnLogout)
-        Me.pnlSidebar.Controls.Add(Me.Panel1)
-        Me.pnlSidebar.Controls.Add(Me.lblSuperAdmin)
-        Me.pnlSidebar.CornerRadius = 20
-        Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
-        Me.pnlSidebar.Name = "pnlSidebar"
-        Me.pnlSidebar.Size = New System.Drawing.Size(267, 741)
-        Me.pnlSidebar.TabIndex = 138
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(74, 32)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(97, 83)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 32
-        Me.PictureBox1.TabStop = False
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button3.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button3.FlatAppearance.BorderSize = 2
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button3.Location = New System.Drawing.Point(12, 552)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(238, 51)
-        Me.Button3.TabIndex = 31
-        Me.Button3.Text = "Reports"
-        Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'Button4
-        '
-        Me.Button4.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button4.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button4.FlatAppearance.BorderSize = 2
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button4.Location = New System.Drawing.Point(12, 495)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(238, 51)
-        Me.Button4.TabIndex = 30
-        Me.Button4.Text = "Maintenance Management"
-        Me.Button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button4.UseVisualStyleBackColor = False
-        '
-        'Button5
-        '
-        Me.Button5.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button5.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button5.FlatAppearance.BorderSize = 2
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button5.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button5.Location = New System.Drawing.Point(12, 438)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(238, 51)
-        Me.Button5.TabIndex = 29
-        Me.Button5.Text = "Property Request Management"
-        Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button5.UseVisualStyleBackColor = False
-        '
-        'Button6
-        '
-        Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button6.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button6.FlatAppearance.BorderSize = 2
-        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button6.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button6.Location = New System.Drawing.Point(12, 381)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(238, 51)
-        Me.Button6.TabIndex = 28
-        Me.Button6.Text = "Department Management"
-        Me.Button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button6.UseVisualStyleBackColor = False
-        '
-        'Button7
-        '
-        Me.Button7.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button7.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button7.FlatAppearance.BorderSize = 2
-        Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button7.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
-        Me.Button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button7.Location = New System.Drawing.Point(12, 324)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(238, 51)
-        Me.Button7.TabIndex = 27
-        Me.Button7.Text = "Supplies Management"
-        Me.Button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button7.UseVisualStyleBackColor = False
-        '
-        'Button8
-        '
-        Me.Button8.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button8.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button8.FlatAppearance.BorderSize = 2
-        Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button8.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
-        Me.Button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button8.Location = New System.Drawing.Point(12, 267)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(238, 51)
-        Me.Button8.TabIndex = 26
-        Me.Button8.Text = "Property Management"
-        Me.Button8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button8.UseVisualStyleBackColor = False
-        '
-        'Button9
-        '
-        Me.Button9.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button9.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button9.FlatAppearance.BorderSize = 2
-        Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button9.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
-        Me.Button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button9.Location = New System.Drawing.Point(12, 210)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(238, 51)
-        Me.Button9.TabIndex = 25
-        Me.Button9.Text = "User Management"
-        Me.Button9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button9.UseVisualStyleBackColor = False
-        '
-        'Button10
-        '
-        Me.Button10.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button10.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button10.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button10.FlatAppearance.BorderSize = 2
-        Me.Button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button10.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
-        Me.Button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button10.Location = New System.Drawing.Point(12, 153)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(238, 51)
-        Me.Button10.TabIndex = 24
-        Me.Button10.Text = "Dashboard"
-        Me.Button10.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button10.UseVisualStyleBackColor = False
-        '
-        'RoundedPanel2
-        '
-        Me.RoundedPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedPanel2.Controls.Add(Me.Button11)
-        Me.RoundedPanel2.Controls.Add(Me.Button12)
-        Me.RoundedPanel2.Controls.Add(Me.Panel3)
-        Me.RoundedPanel2.Controls.Add(Me.Label2)
-        Me.RoundedPanel2.CornerRadius = 20
-        Me.RoundedPanel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RoundedPanel2.Location = New System.Drawing.Point(0, 0)
-        Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(267, 741)
-        Me.RoundedPanel2.TabIndex = 33
-        '
-        'Button11
-        '
-        Me.Button11.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button11.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button11.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button11.FlatAppearance.BorderSize = 2
-        Me.Button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button11.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button11.Image = CType(resources.GetObject("Button11.Image"), System.Drawing.Image)
-        Me.Button11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button11.Location = New System.Drawing.Point(12, 609)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(238, 51)
-        Me.Button11.TabIndex = 22
-        Me.Button11.Text = "System Configuration"
-        Me.Button11.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button11.UseVisualStyleBackColor = False
-        '
-        'Button12
-        '
-        Me.Button12.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button12.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.Button12.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Button12.FlatAppearance.BorderSize = 2
-        Me.Button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button12.ForeColor = System.Drawing.Color.FloralWhite
-        Me.Button12.Image = CType(resources.GetObject("Button12.Image"), System.Drawing.Image)
-        Me.Button12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button12.Location = New System.Drawing.Point(12, 666)
-        Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(238, 51)
-        Me.Button12.TabIndex = 22
-        Me.Button12.Text = "Logout"
-        Me.Button12.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button12.UseVisualStyleBackColor = False
-        '
-        'Panel3
-        '
-        Me.Panel3.Location = New System.Drawing.Point(269, 0)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1103, 749)
-        Me.Panel3.TabIndex = 23
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(80, 118)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(90, 16)
-        Me.Label2.TabIndex = 11
-        Me.Label2.Text = "Superadmin"
-        '
-        'btnSystemConfig
-        '
-        Me.btnSystemConfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnSystemConfig.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnSystemConfig.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnSystemConfig.FlatAppearance.BorderSize = 2
-        Me.btnSystemConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSystemConfig.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSystemConfig.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnSystemConfig.Image = CType(resources.GetObject("btnSystemConfig.Image"), System.Drawing.Image)
-        Me.btnSystemConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSystemConfig.Location = New System.Drawing.Point(12, 614)
-        Me.btnSystemConfig.Name = "btnSystemConfig"
-        Me.btnSystemConfig.Size = New System.Drawing.Size(238, 51)
-        Me.btnSystemConfig.TabIndex = 22
-        Me.btnSystemConfig.Text = "System Configuration"
-        Me.btnSystemConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnSystemConfig.UseVisualStyleBackColor = False
-        '
-        'btnLogout
-        '
-        Me.btnLogout.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnLogout.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnLogout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnLogout.FlatAppearance.BorderSize = 2
-        Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLogout.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogout.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
-        Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(12, 666)
-        Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(238, 51)
-        Me.btnLogout.TabIndex = 22
-        Me.btnLogout.Text = "Logout"
-        Me.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnLogout.UseVisualStyleBackColor = False
-        '
-        'Panel1
-        '
-        Me.Panel1.Location = New System.Drawing.Point(269, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1103, 749)
-        Me.Panel1.TabIndex = 23
-        '
-        'lblSuperAdmin
-        '
-        Me.lblSuperAdmin.AutoSize = True
-        Me.lblSuperAdmin.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.lblSuperAdmin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSuperAdmin.ForeColor = System.Drawing.Color.White
-        Me.lblSuperAdmin.Location = New System.Drawing.Point(80, 118)
-        Me.lblSuperAdmin.Name = "lblSuperAdmin"
-        Me.lblSuperAdmin.Size = New System.Drawing.Size(90, 16)
-        Me.lblSuperAdmin.TabIndex = 11
-        Me.lblSuperAdmin.Text = "Superadmin"
-        '
         'SAUserManagement
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(246, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(222, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1330, 741)
-        Me.Controls.Add(Me.pnlSidebar)
+        Me.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ClientSize = New System.Drawing.Size(1773, 1080)
+        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.lblUserManagement)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnAdd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "SAUserManagement"
         Me.Text = "SAUserManagement"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlSidebar.ResumeLayout(False)
-        Me.pnlSidebar.PerformLayout
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.RoundedPanel2.ResumeLayout(False)
-        Me.RoundedPanel2.PerformLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -577,7 +274,6 @@ Partial Class SAUserManagement
     Friend WithEvents lblUserManagement As Label
     Friend WithEvents btnUpdate As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label1 As Label
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents FirstName As DataGridViewTextBoxColumn
     Friend WithEvents MiddleName As DataGridViewTextBoxColumn
@@ -594,23 +290,5 @@ Partial Class SAUserManagement
     Friend WithEvents Barangay As DataGridViewTextBoxColumn
     Friend WithEvents HouseNoStreet As DataGridViewTextBoxColumn
     Friend WithEvents Password As DataGridViewTextBoxColumn
-    Friend WithEvents pnlSidebar As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button6 As Button
-    Friend WithEvents Button7 As Button
-    Friend WithEvents Button8 As Button
-    Friend WithEvents Button9 As Button
-    Friend WithEvents Button10 As Button
-    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents Button11 As Button
-    Friend WithEvents Button12 As Button
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents Label2 As Label
-    Friend WithEvents btnSystemConfig As Button
-    Friend WithEvents btnLogout As Button
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents lblSuperAdmin As Label
+    Friend WithEvents PictureBox2 As PictureBox
 End Class

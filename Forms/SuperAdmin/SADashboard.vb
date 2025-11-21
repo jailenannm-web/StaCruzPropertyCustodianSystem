@@ -196,4 +196,8 @@ Partial Class SADashboard
     Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
+
+    Private Sub RoundedPanel11_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel11.Paint
+
+    End Sub
 End Class

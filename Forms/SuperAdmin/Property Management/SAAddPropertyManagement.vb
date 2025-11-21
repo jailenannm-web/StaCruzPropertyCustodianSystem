@@ -20,7 +20,7 @@ Public Class SAAddPropertyManagement
 
     End Sub
 
-    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
+    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
@@ -36,11 +36,11 @@ Public Class SAAddPropertyManagement
 
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+    Private Sub Label1_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -48,75 +48,75 @@ Public Class SAAddPropertyManagement
 
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub lblSuperAdmin_Click(sender As Object, e As EventArgs) Handles lblSuperAdmin.Click
+    Private Sub lblSuperAdmin_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub RoundedPanel2_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel2.Paint
+    Private Sub RoundedPanel2_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+    Private Sub Label2_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+    Private Sub Button7_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+    Private Sub Button8_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+    Private Sub Button9_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+    Private Sub Button10_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+    Private Sub Button11_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+    Private Sub Button12_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub btnSystemConfig_Click(sender As Object, e As EventArgs) Handles btnSystemConfig.Click
+    Private Sub btnSystemConfig_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class
