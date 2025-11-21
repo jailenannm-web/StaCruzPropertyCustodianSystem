@@ -2,7 +2,7 @@
 Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 
-Namespace StaCruzPropertyCustodianSystem.Resources.Controls
+Namespace Resources.Controls
     Public Class RoundedPanel
         Inherits Panel
 
