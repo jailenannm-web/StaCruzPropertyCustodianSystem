@@ -54,7 +54,7 @@ Partial Class UC_MaintenanceManagement
         Me.mm_table1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.mm_table1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.mm_table1.BackgroundColor = System.Drawing.SystemColors.ButtonFace
         Me.mm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.mm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.LogID, Me.mmProperty, Me.RepairDescription, Me.DateReported, Me.Warranty, Me.Status, Me.Action})
         Me.mm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))

@@ -110,6 +110,18 @@
   <!-- STAFF FORMS -->
   <ItemGroup>
     <Compile Include="DatabaseConnection.vb" />
+    <Compile Include="Forms\Admin\AddDepartment.Designer.vb">
+      <DependentUpon>AddDepartment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddDepartment.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AddProperty.Designer.vb">
+      <DependentUpon>AddProperty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddProperty.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Admin\AdminDashboard.Designer.vb">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
     </Compile>
@@ -120,6 +132,12 @@
       <DependentUpon>EditUser.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Admin\EditUser.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_PropertyManagement1.Designer.vb">
+      <DependentUpon>UC_PropertyManagement1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_PropertyManagement1.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Admin\UC_AddSupply.Designer.vb">
@@ -202,11 +220,20 @@
     </Compile>
     <Compile Include="PasswordHelper.vb" />
     <Compile Include="Settings.vb" />
+    <EmbeddedResource Include="Forms\Admin\AddDepartment.resx">
+      <DependentUpon>AddDepartment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AddProperty.resx">
+      <DependentUpon>AddProperty.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\EditUser.resx">
       <DependentUpon>EditUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_PropertyManagement1.resx">
+      <DependentUpon>UC_PropertyManagement1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UC_AddSupply.resx">
       <DependentUpon>UC_AddSupply.vb</DependentUpon>
