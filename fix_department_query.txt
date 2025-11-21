@@ -1,0 +1,14 @@
+FIX FOR DatabaseConnection.vb - GetAllDepartments Function
+
+Replace lines 4961-4972 with:
+
+            ' Select all 15 attributes as specified in requirements
+            Dim query As String = "SELECT d.department_id, d.department_name, d.head_of_department, " &
+                                 "d.contact_number, d.email, d.location, d.no_of_employees, d.department_code, " &
+                                 "d.office_hours, d.established_date, d.parent_department_id, d.status, " &
+                                 "d.budget_allocation, d.created_at, d.updated_at " &
+                                 "FROM departments d " &
+                                 "ORDER BY d.department_name"
+
+This will fix the error: "Column 'office_hours' does not belong to table"
+

@@ -1,0 +1,11 @@
+@echo off
+REM This script will fix the DatabaseConnection.vb file
+REM Make sure you have a backup before running this
+
+echo Applying fix to DatabaseConnection.vb...
+
+REM Create a temporary file with the fix
+powershell -Command "$file = 'DatabaseConnection.vb'; $content = [System.IO.File]::ReadAllText($file); $oldPattern = 'Dim query As String = \"SELECT d.department_id, d.department_name, d.head_of_department, \" &`r`n                                 \"d.contact_number, d.email, d.location, d.department_code, \" &`r`n                                 \"d.no_of_employees, d.budget_allocation, d.status, \" &`r`n                                 \"COUNT\(DISTINCT sa.staff_id\) AS actual_employee_count, \" &`r`n                                 \"COUNT\(DISTINCT p.property_id\) AS property_count \" &`r`n                                 \"FROM departments d \" &`r`n                                 \"LEFT JOIN staff_accounts sa ON d.department_id = sa.department_id AND sa.status = ''active'' \" &`r`n                                 \"LEFT JOIN properties p ON d.department_id = p.department_id AND p.status = ''active'' \" &`r`n                                 \"GROUP BY d.department_id, d.department_name, d.head_of_department, \" &`r`n                                 \"d.contact_number, d.email, d.location, d.department_code, \" &`r`n                                 \"d.no_of_employees, d.budget_allocation, d.status \" &`r`n                                 \"ORDER BY d.department_name\"'; $newText = '            '' Select all 15 attributes as specified in requirements`r`n            Dim query As String = \"SELECT d.department_id, d.department_name, d.head_of_department, \" &`r`n                                 \"d.contact_number, d.email, d.location, d.no_of_employees, d.department_code, \" &`r`n                                 \"d.office_hours, d.established_date, d.parent_department_id, d.status, \" &`r`n                                 \"d.budget_allocation, d.created_at, d.updated_at \" &`r`n                                 \"FROM departments d \" &`r`n                                 \"ORDER BY d.department_name\"'; $content = $content -replace $oldPattern, $newText; [System.IO.File]::WriteAllText($file, $content); Write-Host 'Fix applied successfully!'"
+
+pause
+

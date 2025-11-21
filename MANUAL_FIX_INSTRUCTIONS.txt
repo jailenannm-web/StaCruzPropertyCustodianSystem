@@ -1,0 +1,55 @@
+================================================================================
+MANUAL FIX FOR DatabaseConnection.vb - GetAllDepartments Function
+================================================================================
+
+STEP 1: Open DatabaseConnection.vb in your code editor
+
+STEP 2: Find the GetAllDepartments function (around line 4952)
+
+STEP 3: Locate this code block (around lines 4961-4972):
+
+            Dim query As String = "SELECT d.department_id, d.department_name, d.head_of_department, " &
+                                 "d.contact_number, d.email, d.location, d.department_code, " &
+                                 "d.no_of_employees, d.budget_allocation, d.status, " &
+                                 "COUNT(DISTINCT sa.staff_id) AS actual_employee_count, " &
+                                 "COUNT(DISTINCT p.property_id) AS property_count " &
+                                 "FROM departments d " &
+                                 "LEFT JOIN staff_accounts sa ON d.department_id = sa.department_id AND sa.status = 'active' " &
+                                 "LEFT JOIN properties p ON d.department_id = p.department_id AND p.status = 'active' " &
+                                 "GROUP BY d.department_id, d.department_name, d.head_of_department, " &
+                                 "d.contact_number, d.email, d.location, d.department_code, " &
+                                 "d.no_of_employees, d.budget_allocation, d.status " &
+                                 "ORDER BY d.department_name"
+
+STEP 4: REPLACE the entire block above with this:
+
+            ' Select all 15 attributes as specified in requirements
+            Dim query As String = "SELECT d.department_id, d.department_name, d.head_of_department, " &
+                                 "d.contact_number, d.email, d.location, d.no_of_employees, d.department_code, " &
+                                 "d.office_hours, d.established_date, d.parent_department_id, d.status, " &
+                                 "d.budget_allocation, d.created_at, d.updated_at " &
+                                 "FROM departments d " &
+                                 "ORDER BY d.department_name"
+
+STEP 5: Save the file
+
+STEP 6: Rebuild your project
+
+================================================================================
+WHAT THIS FIX DOES:
+================================================================================
+- Removes unnecessary JOINs with staff_accounts and properties tables
+- Removes the GROUP BY clause (not needed)
+- Adds the missing columns: office_hours, established_date, parent_department_id, 
+  created_at, updated_at
+- Reorders columns to match the expected order
+- Simplifies the query for better performance
+
+================================================================================
+AFTER APPLYING THIS FIX:
+================================================================================
+The error "Column 'office_hours' does not belong to table" will be resolved.
+The Department Management module will display all 15 attributes correctly.
+
+================================================================================
+

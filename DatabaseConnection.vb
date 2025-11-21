@@ -4213,7 +4213,8 @@ Public Class DatabaseConnection
     ''' Get all properties with optional filtering (ENHANCED)
     ''' </summary>
     Public Shared Function GetAllProperties(Optional custodianID As Integer? = Nothing, Optional conditionStatus As String = "",
-                                           Optional category As String = "", Optional departmentID As Integer? = Nothing) As DataTable
+                                           Optional category As String = "", Optional departmentID As Integer? = Nothing,
+                                           Optional status As String = "") As DataTable
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing
         Try
@@ -4222,12 +4223,13 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            ' Build query with optional filters
+            ' Build query with optional filters - includes all required fields
             Dim query As String = "SELECT p.property_id, p.property_name, p.category, p.serial_number, " &
-                                 "p.acquisition_date, p.acquisition_cost, p.condition_status, p.location, " &
-                                 "p.status, p.depreciation_value, p.life_span, " &
-                                 "CONCAT(u.first_name, ' ', u.last_name) AS custodian_name, " &
-                                 "d.department_name " &
+                                 "p.supplier_name, p.condition_status, p.acquisition_cost, " &
+                                 "p.acquisition_date, p.warranty_details, " &
+                                 "CONCAT(u.first_name, ' ', u.last_name) AS assigned_employee, " &
+                                 "d.department_name AS assigned_department, p.location, p.status, " &
+                                 "p.created_at, p.updated_at " &
                                  "FROM properties p " &
                                  "LEFT JOIN users u ON p.custodian_id = u.user_id " &
                                  "LEFT JOIN departments d ON p.department_id = d.department_id " &
@@ -4955,18 +4957,12 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
 
             If Not SafeOpenConnection(conn) Then Return dt
-
+            ' Select all 15 attributes as specified in requirements
             Dim query As String = "SELECT d.department_id, d.department_name, d.head_of_department, " &
-                                 "d.contact_number, d.email, d.location, d.department_code, " &
-                                 "d.no_of_employees, d.budget_allocation, d.status, " &
-                                 "COUNT(DISTINCT sa.staff_id) AS actual_employee_count, " &
-                                 "COUNT(DISTINCT p.property_id) AS property_count " &
+                                 "d.contact_number, d.email, d.location, d.no_of_employees, d.department_code, " &
+                                 "d.office_hours, d.established_date, d.parent_department_id, d.status, " &
+                                 "d.budget_allocation, d.created_at, d.updated_at " &
                                  "FROM departments d " &
-                                 "LEFT JOIN staff_accounts sa ON d.department_id = sa.department_id AND sa.status = 'active' " &
-                                 "LEFT JOIN properties p ON d.department_id = p.department_id AND p.status = 'active' " &
-                                 "GROUP BY d.department_id, d.department_name, d.head_of_department, " &
-                                 "d.contact_number, d.email, d.location, d.department_code, " &
-                                 "d.no_of_employees, d.budget_allocation, d.status " &
                                  "ORDER BY d.department_name"
 
             Using cmd As New MySqlCommand(query, conn)

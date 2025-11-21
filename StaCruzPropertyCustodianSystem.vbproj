@@ -158,10 +158,10 @@
     <Compile Include="Forms\Admin\UC_MaintenanceManagement.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Admin\UC_PropertyManagement.Designer.vb">
-      <DependentUpon>UC_PropertyManagement.vb</DependentUpon>
+    <Compile Include="Forms\Admin\UC_SupplyManagement.Designer.vb">
+      <DependentUpon>UC_SupplyManagement.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Admin\UC_PropertyManagement.vb">
+    <Compile Include="Forms\Admin\UC_SupplyManagement.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Admin\UC_PropertyRequestManagement.Designer.vb">
@@ -244,8 +244,8 @@
     <EmbeddedResource Include="Forms\Admin\UC_MaintenanceManagement.resx">
       <DependentUpon>UC_MaintenanceManagement.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Admin\UC_PropertyManagement.resx">
-      <DependentUpon>UC_PropertyManagement.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Admin\UC_SupplyManagement.resx">
+      <DependentUpon>UC_SupplyManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UC_PropertyRequestManagement.resx">
       <DependentUpon>UC_PropertyRequestManagement.vb</DependentUpon>
