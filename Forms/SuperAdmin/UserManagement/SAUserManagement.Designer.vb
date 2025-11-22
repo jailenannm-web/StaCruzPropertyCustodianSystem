@@ -61,7 +61,7 @@ Partial Class SAUserManagement
         Me.lblUserManagement.Location = New System.Drawing.Point(130, 71)
         Me.lblUserManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUserManagement.Name = "lblUserManagement"
-        Me.lblUserManagement.Size = New System.Drawing.Size(349, 60)
+        Me.lblUserManagement.Size = New System.Drawing.Size(335, 58)
         Me.lblUserManagement.TabIndex = 3
         Me.lblUserManagement.Text = "User Management"
         '
@@ -223,7 +223,7 @@ Partial Class SAUserManagement
         'btnAdd
         '
         Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
+        Me.btnAdd.CornerRadius = 5
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight

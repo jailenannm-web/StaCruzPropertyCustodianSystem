@@ -6,6 +6,7 @@ Imports Microsoft.VisualBasic
 Public Class SADepartmentManagement
     Private pnlFormLoader As Object
 
+
     Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
@@ -122,4 +123,18 @@ Public Class SADepartmentManagement
     Private Sub RoundedPanel2_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Dim deptForm As New SAAddDepartmentManagement()
+
+        pnlFormLoader.Controls.Clear()
+
+        deptForm.TopLevel = False
+        deptForm.FormBorderStyle = FormBorderStyle.None
+        deptForm.Dock = DockStyle.Fill
+
+        pnlFormLoader.Controls.Add(deptForm)
+        deptForm.Show()
+    End Sub
+
 End Class

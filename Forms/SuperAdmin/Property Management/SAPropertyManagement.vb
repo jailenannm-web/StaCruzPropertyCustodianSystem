@@ -7,11 +7,11 @@ Imports Microsoft.VisualBasic
 Public Class SAPropertyManagement
     Private pnlFormLoader As Object
 
-    Private Sub RoundedPanel4_Paint(sender As Object, e As PaintEventArgs) Handles pnlStatus.Paint
+    Private Sub RoundedPanel4_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+    Private Sub Label2_Click(sender As Object, e As EventArgs)
 
     End Sub
 

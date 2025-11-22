@@ -27,7 +27,6 @@ Partial Class SAPropertyRequestManagement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.lblUserManagement = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.RequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -46,31 +45,24 @@ Partial Class SAPropertyRequestManagement
         Me.ConditionUponReturn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UpdatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(219, 153)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(656, 41)
-        Me.TextBox1.TabIndex = 159
         '
         'lblUserManagement
         '
         Me.lblUserManagement.AutoSize = True
-        Me.lblUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUserManagement.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold)
+        Me.lblUserManagement.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.lblUserManagement.Location = New System.Drawing.Point(144, 74)
         Me.lblUserManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUserManagement.Name = "lblUserManagement"
-        Me.lblUserManagement.Size = New System.Drawing.Size(515, 39)
+        Me.lblUserManagement.Size = New System.Drawing.Size(550, 58)
         Me.lblUserManagement.TabIndex = 158
         Me.lblUserManagement.Text = "Property Request Management"
         '
@@ -197,60 +189,69 @@ Partial Class SAPropertyRequestManagement
         Me.UpdatedAt.Name = "UpdatedAt"
         Me.UpdatedAt.Width = 125
         '
-        'PictureBox1
+        'PictureBox2
         '
-        Me.PictureBox1.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox1.Location = New System.Drawing.Point(153, 153)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(63, 41)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 160
-        Me.PictureBox1.TabStop = False
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(146, 151)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 163
+        Me.PictureBox2.TabStop = False
         '
-        'btnAdd
+        'TextBox1
         '
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
-        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1046, 157)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(136, 37)
-        Me.btnAdd.TabIndex = 155
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = False
+        Me.TextBox1.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(211, 151)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(729, 42)
+        Me.TextBox1.TabIndex = 162
         '
         'btnUpdate
         '
-        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnUpdate.CornerRadius = 15
+        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnUpdate.CornerRadius = 5
         Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdate.Font = New System.Drawing.Font("Poppins", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdate.Location = New System.Drawing.Point(1396, 153)
+        Me.btnUpdate.Location = New System.Drawing.Point(1377, 146)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(135, 41)
-        Me.btnUpdate.TabIndex = 157
+        Me.btnUpdate.Size = New System.Drawing.Size(135, 47)
+        Me.btnUpdate.TabIndex = 161
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = False
         '
         'btnDelete
         '
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnDelete.CornerRadius = 5
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1229, 156)
+        Me.btnDelete.Location = New System.Drawing.Point(1197, 146)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(135, 38)
-        Me.btnDelete.TabIndex = 156
+        Me.btnDelete.Size = New System.Drawing.Size(134, 47)
+        Me.btnDelete.TabIndex = 160
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
+        '
+        'btnAdd
+        '
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnAdd.CornerRadius = 5
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAdd.Location = New System.Drawing.Point(1002, 147)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(148, 46)
+        Me.btnAdd.TabIndex = 159
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = False
         '
         'SAPropertyRequestManagement
         '
@@ -258,12 +259,12 @@ Partial Class SAPropertyRequestManagement
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.ClientSize = New System.Drawing.Size(1773, 1080)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.lblUserManagement)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.lblUserManagement)
         Me.Controls.Add(Me.DataGridView1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(4)
@@ -271,16 +272,12 @@ Partial Class SAPropertyRequestManagement
         Me.Text = "SAPropertyRequestManagement"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents lblUserManagement As Label
-    Friend WithEvents btnUpdate As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents RequestID As DataGridViewTextBoxColumn
     Friend WithEvents UserID As DataGridViewTextBoxColumn
@@ -298,5 +295,9 @@ Partial Class SAPropertyRequestManagement
     Friend WithEvents ConditionUponReturn As DataGridViewTextBoxColumn
     Friend WithEvents CreatedAt As DataGridViewTextBoxColumn
     Friend WithEvents UpdatedAt As DataGridViewTextBoxColumn
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents btnUpdate As Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
 End Class

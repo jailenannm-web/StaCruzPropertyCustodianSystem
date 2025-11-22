@@ -34,9 +34,9 @@ Partial Class SASystemConfiguration
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlStatus = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.comboStatus = New System.Windows.Forms.ComboBox()
         Me.pnlCategories = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.comboCategoris = New System.Windows.Forms.ComboBox()
+        Me.combostatus = New System.Windows.Forms.ComboBox()
         CType(Me.dgvSystemConfiguration, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlStatus.SuspendLayout()
@@ -46,18 +46,19 @@ Partial Class SASystemConfiguration
         'lblSystemConfig
         '
         Me.lblSystemConfig.AutoSize = True
-        Me.lblSystemConfig.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSystemConfig.Location = New System.Drawing.Point(188, 50)
+        Me.lblSystemConfig.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold)
+        Me.lblSystemConfig.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblSystemConfig.Location = New System.Drawing.Point(158, 114)
         Me.lblSystemConfig.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSystemConfig.Name = "lblSystemConfig"
-        Me.lblSystemConfig.Size = New System.Drawing.Size(362, 39)
+        Me.lblSystemConfig.Size = New System.Drawing.Size(395, 58)
         Me.lblSystemConfig.TabIndex = 50
         Me.lblSystemConfig.Text = "System Configuration"
         '
         'dgvSystemConfiguration
         '
         Me.dgvSystemConfiguration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSystemConfiguration.Location = New System.Drawing.Point(185, 216)
+        Me.dgvSystemConfiguration.Location = New System.Drawing.Point(155, 280)
         Me.dgvSystemConfiguration.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvSystemConfiguration.Name = "dgvSystemConfiguration"
         Me.dgvSystemConfiguration.RowHeadersWidth = 51
@@ -67,7 +68,7 @@ Partial Class SASystemConfiguration
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(181, 136)
+        Me.PictureBox2.Location = New System.Drawing.Point(151, 200)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(58, 41)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -77,7 +78,7 @@ Partial Class SASystemConfiguration
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(241, 136)
+        Me.TextBox1.Location = New System.Drawing.Point(211, 200)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(729, 41)
@@ -86,54 +87,44 @@ Partial Class SASystemConfiguration
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(1291, 146)
+        Me.Label2.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.Label2.Location = New System.Drawing.Point(1261, 210)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 20)
+        Me.Label2.Size = New System.Drawing.Size(66, 30)
         Me.Label2.TabIndex = 156
         Me.Label2.Text = "Status"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(983, 148)
+        Me.Label1.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.Label1.Location = New System.Drawing.Point(953, 212)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(100, 20)
+        Me.Label1.Size = New System.Drawing.Size(106, 30)
         Me.Label1.TabIndex = 155
         Me.Label1.Text = "Categories"
         '
         'pnlStatus
         '
         Me.pnlStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.pnlStatus.Controls.Add(Me.comboStatus)
+        Me.pnlStatus.Controls.Add(Me.combostatus)
         Me.pnlStatus.CornerRadius = 5
-        Me.pnlStatus.Location = New System.Drawing.Point(1359, 139)
+        Me.pnlStatus.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.pnlStatus.Location = New System.Drawing.Point(1329, 203)
         Me.pnlStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlStatus.Name = "pnlStatus"
         Me.pnlStatus.Size = New System.Drawing.Size(177, 37)
         Me.pnlStatus.TabIndex = 154
-        '
-        'comboStatus
-        '
-        Me.comboStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.comboStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboStatus.FormattingEnabled = True
-        Me.comboStatus.Location = New System.Drawing.Point(14, 9)
-        Me.comboStatus.Margin = New System.Windows.Forms.Padding(4)
-        Me.comboStatus.Name = "comboStatus"
-        Me.comboStatus.Size = New System.Drawing.Size(147, 24)
-        Me.comboStatus.TabIndex = 0
         '
         'pnlCategories
         '
         Me.pnlCategories.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.pnlCategories.Controls.Add(Me.comboCategoris)
         Me.pnlCategories.CornerRadius = 5
-        Me.pnlCategories.Location = New System.Drawing.Point(1091, 141)
+        Me.pnlCategories.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.pnlCategories.Location = New System.Drawing.Point(1061, 205)
         Me.pnlCategories.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlCategories.Name = "pnlCategories"
         Me.pnlCategories.Size = New System.Drawing.Size(177, 37)
@@ -143,13 +134,27 @@ Partial Class SASystemConfiguration
         '
         Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.comboCategoris.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.comboCategoris.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
         Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.comboCategoris.FormattingEnabled = True
-        Me.comboCategoris.Location = New System.Drawing.Point(13, 8)
+        Me.comboCategoris.Location = New System.Drawing.Point(19, 7)
         Me.comboCategoris.Margin = New System.Windows.Forms.Padding(4)
         Me.comboCategoris.Name = "comboCategoris"
-        Me.comboCategoris.Size = New System.Drawing.Size(147, 24)
+        Me.comboCategoris.Size = New System.Drawing.Size(144, 23)
         Me.comboCategoris.TabIndex = 0
+        '
+        'combostatus
+        '
+        Me.combostatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.combostatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.combostatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
+        Me.combostatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.combostatus.FormattingEnabled = True
+        Me.combostatus.Location = New System.Drawing.Point(16, 7)
+        Me.combostatus.Margin = New System.Windows.Forms.Padding(4)
+        Me.combostatus.Name = "combostatus"
+        Me.combostatus.Size = New System.Drawing.Size(144, 23)
+        Me.combostatus.TabIndex = 1
         '
         'SASystemConfiguration
         '
@@ -166,7 +171,7 @@ Partial Class SASystemConfiguration
         Me.Controls.Add(Me.dgvSystemConfiguration)
         Me.Controls.Add(Me.lblSystemConfig)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "SASystemConfiguration"
         Me.Text = "SASystemConfiguration"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -185,7 +190,7 @@ Partial Class SASystemConfiguration
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents pnlStatus As Resources.Controls.RoundedPanel
-    Friend WithEvents comboStatus As ComboBox
     Friend WithEvents pnlCategories As Resources.Controls.RoundedPanel
     Friend WithEvents comboCategoris As ComboBox
+    Friend WithEvents combostatus As ComboBox
 End Class
