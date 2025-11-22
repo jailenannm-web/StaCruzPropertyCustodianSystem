@@ -49,7 +49,7 @@ Partial Class frmReports
         Me.btnRequestReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRequestReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnRequestReport.Location = New System.Drawing.Point(597, 497)
-        Me.btnRequestReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRequestReport.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRequestReport.Name = "btnRequestReport"
         Me.btnRequestReport.Size = New System.Drawing.Size(453, 80)
         Me.btnRequestReport.TabIndex = 5
@@ -65,7 +65,7 @@ Partial Class frmReports
         Me.btnBorrowReturn.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBorrowReturn.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnBorrowReturn.Location = New System.Drawing.Point(597, 357)
-        Me.btnBorrowReturn.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnBorrowReturn.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBorrowReturn.Name = "btnBorrowReturn"
         Me.btnBorrowReturn.Size = New System.Drawing.Size(453, 80)
         Me.btnBorrowReturn.TabIndex = 4
@@ -81,7 +81,7 @@ Partial Class frmReports
         Me.btnRequisitionSlip.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRequisitionSlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnRequisitionSlip.Location = New System.Drawing.Point(595, 225)
-        Me.btnRequisitionSlip.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRequisitionSlip.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRequisitionSlip.Name = "btnRequisitionSlip"
         Me.btnRequisitionSlip.Size = New System.Drawing.Size(453, 80)
         Me.btnRequisitionSlip.TabIndex = 3
@@ -92,14 +92,14 @@ Partial Class frmReports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.AntiqueWhite
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1387, 788)
         Me.Controls.Add(Me.btnRequestReport)
         Me.Controls.Add(Me.btnBorrowReturn)
         Me.Controls.Add(Me.btnRequisitionSlip)
         Me.Controls.Add(Me.lblReports)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmReports"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "frmReports"

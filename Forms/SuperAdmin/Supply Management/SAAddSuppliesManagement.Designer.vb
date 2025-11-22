@@ -27,14 +27,6 @@ Partial Class SAAddSuppliesManagement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.LocationColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CustodianID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WarrantyDetail = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LifeSpan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DisposalDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ConditionStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DepreciationValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -49,64 +41,16 @@ Partial Class SAAddSuppliesManagement
         Me.SerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AcquisitionDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AcquisitionCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ConditionStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LocationColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CustodianID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WarrantyDetail = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LifeSpan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DepreciationValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DisposalDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'LocationColumn
-        '
-        Me.LocationColumn.HeaderText = "Location"
-        Me.LocationColumn.MinimumWidth = 6
-        Me.LocationColumn.Name = "LocationColumn"
-        Me.LocationColumn.Width = 125
-        '
-        'CustodianID
-        '
-        Me.CustodianID.HeaderText = "Custodian I.D"
-        Me.CustodianID.MinimumWidth = 6
-        Me.CustodianID.Name = "CustodianID"
-        Me.CustodianID.Width = 125
-        '
-        'WarrantyDetail
-        '
-        Me.WarrantyDetail.HeaderText = "Warranty Detail"
-        Me.WarrantyDetail.MinimumWidth = 6
-        Me.WarrantyDetail.Name = "WarrantyDetail"
-        Me.WarrantyDetail.Width = 125
-        '
-        'LifeSpan
-        '
-        Me.LifeSpan.HeaderText = "LifeSpan"
-        Me.LifeSpan.MinimumWidth = 6
-        Me.LifeSpan.Name = "LifeSpan"
-        Me.LifeSpan.Width = 125
-        '
-        'DisposalDate
-        '
-        Me.DisposalDate.HeaderText = "Disposa lDate"
-        Me.DisposalDate.MinimumWidth = 6
-        Me.DisposalDate.Name = "DisposalDate"
-        Me.DisposalDate.Width = 125
-        '
-        'ConditionStatus
-        '
-        Me.ConditionStatus.HeaderText = "Condition Status"
-        Me.ConditionStatus.MinimumWidth = 6
-        Me.ConditionStatus.Name = "ConditionStatus"
-        Me.ConditionStatus.Width = 125
-        '
-        'DepreciationValue
-        '
-        Me.DepreciationValue.HeaderText = "Depreciation Value"
-        Me.DepreciationValue.MinimumWidth = 6
-        Me.DepreciationValue.Name = "DepreciationValue"
-        Me.DepreciationValue.Width = 125
-        '
-        'Supplier
-        '
-        Me.Supplier.HeaderText = "Supplier"
-        Me.Supplier.MinimumWidth = 6
-        Me.Supplier.Name = "Supplier"
-        Me.Supplier.Width = 125
         '
         'btnAdd
         '
@@ -151,7 +95,7 @@ Partial Class SAAddSuppliesManagement
         Me.lblUserManagement.Location = New System.Drawing.Point(416, 34)
         Me.lblUserManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUserManagement.Name = "lblUserManagement"
-        Me.lblUserManagement.Size = New System.Drawing.Size(404, 60)
+        Me.lblUserManagement.Size = New System.Drawing.Size(390, 58)
         Me.lblUserManagement.TabIndex = 150
         Me.lblUserManagement.Text = "Supply Mamagement"
         '
@@ -198,7 +142,7 @@ Partial Class SAAddSuppliesManagement
         '
         'PropertID
         '
-        Me.PropertID.HeaderText = "Propert I.D"
+        Me.PropertID.HeaderText = "Property I.D"
         Me.PropertID.MinimumWidth = 6
         Me.PropertID.Name = "PropertID"
         Me.PropertID.Width = 125
@@ -245,6 +189,62 @@ Partial Class SAAddSuppliesManagement
         Me.AcquisitionCost.Name = "AcquisitionCost"
         Me.AcquisitionCost.Width = 125
         '
+        'Supplier
+        '
+        Me.Supplier.HeaderText = "Supplier"
+        Me.Supplier.MinimumWidth = 6
+        Me.Supplier.Name = "Supplier"
+        Me.Supplier.Width = 125
+        '
+        'ConditionStatus
+        '
+        Me.ConditionStatus.HeaderText = "Condition Status"
+        Me.ConditionStatus.MinimumWidth = 6
+        Me.ConditionStatus.Name = "ConditionStatus"
+        Me.ConditionStatus.Width = 125
+        '
+        'LocationColumn
+        '
+        Me.LocationColumn.HeaderText = "Location"
+        Me.LocationColumn.MinimumWidth = 6
+        Me.LocationColumn.Name = "LocationColumn"
+        Me.LocationColumn.Width = 125
+        '
+        'CustodianID
+        '
+        Me.CustodianID.HeaderText = "Custodian I.D"
+        Me.CustodianID.MinimumWidth = 6
+        Me.CustodianID.Name = "CustodianID"
+        Me.CustodianID.Width = 125
+        '
+        'WarrantyDetail
+        '
+        Me.WarrantyDetail.HeaderText = "Warranty Detail"
+        Me.WarrantyDetail.MinimumWidth = 6
+        Me.WarrantyDetail.Name = "WarrantyDetail"
+        Me.WarrantyDetail.Width = 125
+        '
+        'LifeSpan
+        '
+        Me.LifeSpan.HeaderText = "LifeSpan"
+        Me.LifeSpan.MinimumWidth = 6
+        Me.LifeSpan.Name = "LifeSpan"
+        Me.LifeSpan.Width = 125
+        '
+        'DepreciationValue
+        '
+        Me.DepreciationValue.HeaderText = "Depreciation Value"
+        Me.DepreciationValue.MinimumWidth = 6
+        Me.DepreciationValue.Name = "DepreciationValue"
+        Me.DepreciationValue.Width = 125
+        '
+        'DisposalDate
+        '
+        Me.DisposalDate.HeaderText = "Disposa lDate"
+        Me.DisposalDate.MinimumWidth = 6
+        Me.DisposalDate.Name = "DisposalDate"
+        Me.DisposalDate.Width = 125
+        '
         'SAAddSuppliesManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -268,14 +268,6 @@ Partial Class SAAddSuppliesManagement
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents LocationColumn As DataGridViewTextBoxColumn
-    Friend WithEvents CustodianID As DataGridViewTextBoxColumn
-    Friend WithEvents WarrantyDetail As DataGridViewTextBoxColumn
-    Friend WithEvents LifeSpan As DataGridViewTextBoxColumn
-    Friend WithEvents DisposalDate As DataGridViewTextBoxColumn
-    Friend WithEvents ConditionStatus As DataGridViewTextBoxColumn
-    Friend WithEvents DepreciationValue As DataGridViewTextBoxColumn
-    Friend WithEvents Supplier As DataGridViewTextBoxColumn
     Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Label1 As Label
     Friend WithEvents TextBox1 As TextBox
@@ -290,4 +282,12 @@ Partial Class SAAddSuppliesManagement
     Friend WithEvents SerialNumber As DataGridViewTextBoxColumn
     Friend WithEvents AcquisitionDate As DataGridViewTextBoxColumn
     Friend WithEvents AcquisitionCost As DataGridViewTextBoxColumn
+    Friend WithEvents Supplier As DataGridViewTextBoxColumn
+    Friend WithEvents ConditionStatus As DataGridViewTextBoxColumn
+    Friend WithEvents LocationColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CustodianID As DataGridViewTextBoxColumn
+    Friend WithEvents WarrantyDetail As DataGridViewTextBoxColumn
+    Friend WithEvents LifeSpan As DataGridViewTextBoxColumn
+    Friend WithEvents DepreciationValue As DataGridViewTextBoxColumn
+    Friend WithEvents DisposalDate As DataGridViewTextBoxColumn
 End Class

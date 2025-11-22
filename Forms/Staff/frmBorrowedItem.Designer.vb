@@ -31,32 +31,39 @@ Partial Class frmBorrowedItem
         Me.PropertyName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitOfMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ExpirationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnitofMeasurement = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BorrowQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BorrowDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ExpecteReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Condition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblBorrowed
         '
         Me.lblBorrowed.AutoSize = True
-        Me.lblBorrowed.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBorrowed.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBorrowed.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.lblBorrowed.Location = New System.Drawing.Point(397, 38)
+        Me.lblBorrowed.Location = New System.Drawing.Point(79, 31)
         Me.lblBorrowed.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblBorrowed.Name = "lblBorrowed"
-        Me.lblBorrowed.Size = New System.Drawing.Size(393, 52)
+        Me.lblBorrowed.Size = New System.Drawing.Size(331, 58)
         Me.lblBorrowed.TabIndex = 1
         Me.lblBorrowed.Text = "My Borrowed Item"
         '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertyName, Me.Category, Me.Description, Me.UnitOfMeasure, Me.ExpirationDate})
-        Me.DataGridView1.Location = New System.Drawing.Point(407, 144)
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertyName, Me.Category, Me.Description, Me.UnitofMeasurement, Me.BorrowQuantity, Me.BorrowDate, Me.ExpecteReturnDate, Me.Status, Me.Condition})
+        Me.DataGridView1.Location = New System.Drawing.Point(79, 172)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(678, 653)
+        Me.DataGridView1.Size = New System.Drawing.Size(1491, 868)
         Me.DataGridView1.TabIndex = 2
         '
         'PropertyName
@@ -80,26 +87,75 @@ Partial Class frmBorrowedItem
         Me.Description.Name = "Description"
         Me.Description.Width = 125
         '
-        'UnitOfMeasure
+        'UnitofMeasurement
         '
-        Me.UnitOfMeasure.HeaderText = "Unit Of Measure"
-        Me.UnitOfMeasure.MinimumWidth = 6
-        Me.UnitOfMeasure.Name = "UnitOfMeasure"
-        Me.UnitOfMeasure.Width = 125
+        Me.UnitofMeasurement.HeaderText = "Unit of Measurement"
+        Me.UnitofMeasurement.MinimumWidth = 6
+        Me.UnitofMeasurement.Name = "UnitofMeasurement"
+        Me.UnitofMeasurement.Width = 125
         '
-        'ExpirationDate
+        'BorrowQuantity
         '
-        Me.ExpirationDate.HeaderText = "Expiration Date"
-        Me.ExpirationDate.MinimumWidth = 6
-        Me.ExpirationDate.Name = "ExpirationDate"
-        Me.ExpirationDate.Width = 125
+        Me.BorrowQuantity.HeaderText = "Borrow Quantity"
+        Me.BorrowQuantity.MinimumWidth = 6
+        Me.BorrowQuantity.Name = "BorrowQuantity"
+        Me.BorrowQuantity.Width = 125
+        '
+        'BorrowDate
+        '
+        Me.BorrowDate.HeaderText = "Borrow Date"
+        Me.BorrowDate.MinimumWidth = 6
+        Me.BorrowDate.Name = "BorrowDate"
+        Me.BorrowDate.Width = 125
+        '
+        'ExpecteReturnDate
+        '
+        Me.ExpecteReturnDate.HeaderText = "Expected Return Date"
+        Me.ExpecteReturnDate.MinimumWidth = 6
+        Me.ExpecteReturnDate.Name = "ExpecteReturnDate"
+        Me.ExpecteReturnDate.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
+        '
+        'Condition
+        '
+        Me.Condition.HeaderText = "Condition"
+        Me.Condition.MinimumWidth = 6
+        Me.Condition.Name = "Condition"
+        Me.Condition.Width = 125
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(69, 95)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 41)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 161
+        Me.PictureBox2.TabStop = False
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(134, 95)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(775, 41)
+        Me.TextBox1.TabIndex = 160
         '
         'frmBorrowedItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.AntiqueWhite
-        Me.ClientSize = New System.Drawing.Size(1465, 827)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(1652, 1222)
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.lblBorrowed)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -108,6 +164,7 @@ Partial Class frmBorrowedItem
         Me.Text = "frmBorrowedItem"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -118,6 +175,12 @@ Partial Class frmBorrowedItem
     Friend WithEvents PropertyName As DataGridViewTextBoxColumn
     Friend WithEvents Category As DataGridViewTextBoxColumn
     Friend WithEvents Description As DataGridViewTextBoxColumn
-    Friend WithEvents UnitOfMeasure As DataGridViewTextBoxColumn
-    Friend WithEvents ExpirationDate As DataGridViewTextBoxColumn
+    Friend WithEvents UnitofMeasurement As DataGridViewTextBoxColumn
+    Friend WithEvents BorrowQuantity As DataGridViewTextBoxColumn
+    Friend WithEvents BorrowDate As DataGridViewTextBoxColumn
+    Friend WithEvents ExpecteReturnDate As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents Condition As DataGridViewTextBoxColumn
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents TextBox1 As TextBox
 End Class

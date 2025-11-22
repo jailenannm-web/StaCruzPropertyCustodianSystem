@@ -251,7 +251,7 @@ Public Class UC_DepartmentManagement
         End If
     End Sub
 
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) 
         If admin_deptmanagement.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a department to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return

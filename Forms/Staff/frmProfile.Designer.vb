@@ -55,12 +55,13 @@ Partial Class frmProfile
         '
         txtFullName.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         txtFullName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        txtFullName.Font = New System.Drawing.Font("Leelawadee", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        txtFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         txtFullName.ForeColor = System.Drawing.SystemColors.Window
-        txtFullName.Location = New System.Drawing.Point(346, 178)
+        txtFullName.Location = New System.Drawing.Point(461, 219)
+        txtFullName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         txtFullName.Multiline = True
         txtFullName.Name = "txtFullName"
-        txtFullName.Size = New System.Drawing.Size(426, 29)
+        txtFullName.Size = New System.Drawing.Size(568, 36)
         txtFullName.TabIndex = 9
         AddHandler txtFullName.TextChanged, AddressOf Me.txtbxName_TextChanged
         '
@@ -68,90 +69,99 @@ Partial Class frmProfile
         '
         txtContact.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         txtContact.BorderStyle = System.Windows.Forms.BorderStyle.None
-        txtContact.Font = New System.Drawing.Font("Leelawadee", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        txtContact.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         txtContact.ForeColor = System.Drawing.SystemColors.Window
-        txtContact.Location = New System.Drawing.Point(104, 384)
+        txtContact.Location = New System.Drawing.Point(139, 473)
+        txtContact.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         txtContact.Name = "txtContact"
-        txtContact.Size = New System.Drawing.Size(252, 29)
+        txtContact.Size = New System.Drawing.Size(336, 34)
         txtContact.TabIndex = 12
         '
         'txtEmail
         '
         txtEmail.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None
-        txtEmail.Font = New System.Drawing.Font("Leelawadee", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         txtEmail.ForeColor = System.Drawing.SystemColors.Window
-        txtEmail.Location = New System.Drawing.Point(733, 384)
+        txtEmail.Location = New System.Drawing.Point(977, 473)
+        txtEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         txtEmail.Name = "txtEmail"
-        txtEmail.Size = New System.Drawing.Size(237, 29)
+        txtEmail.Size = New System.Drawing.Size(316, 34)
         txtEmail.TabIndex = 13
         '
         'lblProfile
         '
         Me.lblProfile.AutoSize = True
-        Me.lblProfile.Font = New System.Drawing.Font("Leelawadee", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProfile.Location = New System.Drawing.Point(491, 48)
+        Me.lblProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProfile.Location = New System.Drawing.Point(655, 59)
+        Me.lblProfile.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblProfile.Name = "lblProfile"
-        Me.lblProfile.Size = New System.Drawing.Size(129, 41)
+        Me.lblProfile.Size = New System.Drawing.Size(153, 52)
         Me.lblProfile.TabIndex = 0
         Me.lblProfile.Text = "Profile"
         '
         'lblFullName
         '
         Me.lblFullName.AutoSize = True
-        Me.lblFullName.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFullName.Location = New System.Drawing.Point(499, 142)
+        Me.lblFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFullName.Location = New System.Drawing.Point(665, 175)
+        Me.lblFullName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFullName.Name = "lblFullName"
-        Me.lblFullName.Size = New System.Drawing.Size(101, 23)
+        Me.lblFullName.Size = New System.Drawing.Size(133, 29)
         Me.lblFullName.TabIndex = 1
         Me.lblFullName.Text = "Full Name"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Leelawadee", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(493, 235)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(657, 289)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 25)
+        Me.Label1.Size = New System.Drawing.Size(0, 31)
         Me.Label1.TabIndex = 2
         '
         'lblPosition
         '
         Me.lblPosition.AutoSize = True
-        Me.lblPosition.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPosition.Location = New System.Drawing.Point(499, 237)
+        Me.lblPosition.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPosition.Location = New System.Drawing.Point(665, 292)
+        Me.lblPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(85, 23)
+        Me.lblPosition.Size = New System.Drawing.Size(108, 29)
         Me.lblPosition.TabIndex = 3
         Me.lblPosition.Text = "Position"
         '
         'lblContact
         '
         Me.lblContact.AutoSize = True
-        Me.lblContact.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblContact.Location = New System.Drawing.Point(187, 347)
+        Me.lblContact.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblContact.Location = New System.Drawing.Point(249, 427)
+        Me.lblContact.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblContact.Name = "lblContact"
-        Me.lblContact.Size = New System.Drawing.Size(79, 23)
+        Me.lblContact.Size = New System.Drawing.Size(101, 29)
         Me.lblContact.TabIndex = 4
         Me.lblContact.Text = "Contact"
         '
         'lblEmail
         '
         Me.lblEmail.AutoSize = True
-        Me.lblEmail.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEmail.Location = New System.Drawing.Point(833, 347)
+        Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmail.Location = New System.Drawing.Point(1111, 427)
+        Me.lblEmail.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEmail.Name = "lblEmail"
-        Me.lblEmail.Size = New System.Drawing.Size(59, 23)
+        Me.lblEmail.Size = New System.Drawing.Size(79, 29)
         Me.lblEmail.TabIndex = 5
         Me.lblEmail.Text = "Email"
         '
         'lblAssignedDep
         '
         Me.lblAssignedDep.AutoSize = True
-        Me.lblAssignedDep.Font = New System.Drawing.Font("Leelawadee", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAssignedDep.Location = New System.Drawing.Point(425, 480)
+        Me.lblAssignedDep.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAssignedDep.Location = New System.Drawing.Point(567, 591)
+        Me.lblAssignedDep.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblAssignedDep.Name = "lblAssignedDep"
-        Me.lblAssignedDep.Size = New System.Drawing.Size(264, 23)
+        Me.lblAssignedDep.Size = New System.Drawing.Size(340, 29)
         Me.lblAssignedDep.TabIndex = 6
         Me.lblAssignedDep.Text = "Assigned Department/Office"
         '
@@ -159,24 +169,26 @@ Partial Class frmProfile
         '
         Me.comboPosition.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.comboPosition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.comboPosition.Font = New System.Drawing.Font("Leelawadee", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.comboPosition.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.comboPosition.ForeColor = System.Drawing.SystemColors.Window
         Me.comboPosition.FormattingEnabled = True
-        Me.comboPosition.Location = New System.Drawing.Point(346, 280)
+        Me.comboPosition.Location = New System.Drawing.Point(461, 345)
+        Me.comboPosition.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.comboPosition.Name = "comboPosition"
-        Me.comboPosition.Size = New System.Drawing.Size(426, 27)
+        Me.comboPosition.Size = New System.Drawing.Size(567, 33)
         Me.comboPosition.TabIndex = 10
         '
         'comboAssigned
         '
         Me.comboAssigned.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.comboAssigned.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.comboAssigned.Font = New System.Drawing.Font("Leelawadee", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.comboAssigned.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.comboAssigned.ForeColor = System.Drawing.SystemColors.Window
         Me.comboAssigned.FormattingEnabled = True
-        Me.comboAssigned.Location = New System.Drawing.Point(408, 522)
+        Me.comboAssigned.Location = New System.Drawing.Point(544, 642)
+        Me.comboAssigned.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.comboAssigned.Name = "comboAssigned"
-        Me.comboAssigned.Size = New System.Drawing.Size(308, 27)
+        Me.comboAssigned.Size = New System.Drawing.Size(409, 33)
         Me.comboAssigned.TabIndex = 11
         '
         'btnUpdate
@@ -184,11 +196,12 @@ Partial Class frmProfile
         Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnUpdate.CornerRadius = 20
         Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.Font = New System.Drawing.Font("Leelawadee", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdate.ForeColor = System.Drawing.Color.White
-        Me.btnUpdate.Location = New System.Drawing.Point(918, 630)
+        Me.btnUpdate.Location = New System.Drawing.Point(1224, 775)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(85, 34)
+        Me.btnUpdate.Size = New System.Drawing.Size(113, 42)
         Me.btnUpdate.TabIndex = 8
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = False
@@ -198,11 +211,12 @@ Partial Class frmProfile
         Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnEdit.CornerRadius = 20
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEdit.Font = New System.Drawing.Font("Leelawadee", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.Color.White
-        Me.btnEdit.Location = New System.Drawing.Point(785, 630)
+        Me.btnEdit.Location = New System.Drawing.Point(1047, 775)
+        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(87, 34)
+        Me.btnEdit.Size = New System.Drawing.Size(116, 42)
         Me.btnEdit.TabIndex = 7
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
@@ -211,53 +225,58 @@ Partial Class frmProfile
         '
         Me.RoundedPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.RoundedPanel1.CornerRadius = 20
-        Me.RoundedPanel1.Location = New System.Drawing.Point(333, 168)
+        Me.RoundedPanel1.Location = New System.Drawing.Point(444, 207)
+        Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(452, 47)
+        Me.RoundedPanel1.Size = New System.Drawing.Size(603, 58)
         Me.RoundedPanel1.TabIndex = 14
         '
         'RoundedPanel2
         '
         Me.RoundedPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.RoundedPanel2.CornerRadius = 20
-        Me.RoundedPanel2.Location = New System.Drawing.Point(333, 271)
+        Me.RoundedPanel2.Location = New System.Drawing.Point(444, 334)
+        Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(452, 47)
+        Me.RoundedPanel2.Size = New System.Drawing.Size(603, 58)
         Me.RoundedPanel2.TabIndex = 15
         '
         'RoundedPanel3
         '
         Me.RoundedPanel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.RoundedPanel3.CornerRadius = 20
-        Me.RoundedPanel3.Location = New System.Drawing.Point(716, 373)
+        Me.RoundedPanel3.Location = New System.Drawing.Point(955, 459)
+        Me.RoundedPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RoundedPanel3.Name = "RoundedPanel3"
-        Me.RoundedPanel3.Size = New System.Drawing.Size(269, 47)
+        Me.RoundedPanel3.Size = New System.Drawing.Size(359, 58)
         Me.RoundedPanel3.TabIndex = 16
         '
         'RoundedPanel4
         '
         Me.RoundedPanel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.RoundedPanel4.CornerRadius = 20
-        Me.RoundedPanel4.Location = New System.Drawing.Point(98, 373)
+        Me.RoundedPanel4.Location = New System.Drawing.Point(131, 459)
+        Me.RoundedPanel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RoundedPanel4.Name = "RoundedPanel4"
-        Me.RoundedPanel4.Size = New System.Drawing.Size(265, 47)
+        Me.RoundedPanel4.Size = New System.Drawing.Size(353, 58)
         Me.RoundedPanel4.TabIndex = 17
         '
         'RoundedPanel5
         '
         Me.RoundedPanel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.RoundedPanel5.CornerRadius = 20
-        Me.RoundedPanel5.Location = New System.Drawing.Point(395, 510)
+        Me.RoundedPanel5.Location = New System.Drawing.Point(527, 628)
+        Me.RoundedPanel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RoundedPanel5.Name = "RoundedPanel5"
-        Me.RoundedPanel5.Size = New System.Drawing.Size(328, 47)
+        Me.RoundedPanel5.Size = New System.Drawing.Size(437, 58)
         Me.RoundedPanel5.TabIndex = 18
         '
         'frmProfile
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.AntiqueWhite
-        Me.ClientSize = New System.Drawing.Size(1072, 718)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(1429, 884)
         Me.Controls.Add(txtContact)
         Me.Controls.Add(Me.comboAssigned)
         Me.Controls.Add(Me.comboPosition)
@@ -278,6 +297,7 @@ Partial Class frmProfile
         Me.Controls.Add(Me.RoundedPanel4)
         Me.Controls.Add(Me.RoundedPanel5)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "frmProfile"
         Me.Text = "frmProfile"
         Me.ResumeLayout(False)

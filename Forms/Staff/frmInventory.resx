@@ -117,22 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAnZJREFUWEftmNFt4zAMhjtCN2hHyAg3QjdIR8gGvQ3aDdoNchtkBD8WaCvx7V5p
-        O7H86ANdu1D+SD5JltPDIR8gIIFp+TdJUbSuri5cmA9zcd3wx92BP+7H8fn/bYW238Ke33+YPT2aSpOp
-        dOcbTaXZ1LSVF8A5Fof5bdXWtENRgYPOJnrwJApIGcT8eovzZ0Fy0ufNPsysnsRjkhot0+2BaSW/D6w2
-        bem+z1SaJa/xWbMQoc68LPVOBKG9C3mBhvXLyRyV7tqa1mifjKl0gQ8wrDZoF4KIdrw4Z6ka7Z4e7Ikl
-        5KHe9MFM182pA0giiLbByAJAj0ouol0KTsF79Yh2wTS1ej7yKqufaDOHPo9lcVrPSKoQDq8S2uRAcv84
-        cuoJbf4KenXJQg7e5ejchRW7iFdHJL1sx0QtYEl+++a2ome0yclQztJSoW9QrJvr3LuMAzsVGta/8LoX
-        yc/ksCQCZazA615QbNf+vkGb3EDfEb5GUGyujWAKEBvuWclRW+w5ctauPtKl4XUvuDpTm5ZQsPpEVQPB
-        Xp0SIryeE4xk9AaEjXb0rhKBqdXWfpZEFm0mwbed1RFNgD1IVL7aYEeUpUEGMILRKTCCHdHsBhnAxj6q
-        vrrAN5camENwe6A1zBufq4irQf4UnNAkDzg82pmK8qwJbGyGEX1Y0X+mn0bqa745DjgCt+Bj0WrjW3yS
-        MnLvhMhlBHs+o7/GkC6FCBvEeW1lyE7lsMkr2HdYETyswxGPA/IJFkbRjsXnH54TnLMIHhEB/XdUSdv+
-        XKvU1JS6kP/jGVjHNFnuzio4B/+F4KW7vlmAYJq9sy1NL7jUu39e6IXv4g++nWz+IWgVpQAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
+  <metadata name="PropertID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="PropertyName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Category.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Description.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="SerialNumber.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="AcquisitionDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="AcquisitionCost.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Supplier.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ConditionStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="CustodianID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="WarrantyDetail.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="LifeSpan.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DepreciationValue.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DisposalDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

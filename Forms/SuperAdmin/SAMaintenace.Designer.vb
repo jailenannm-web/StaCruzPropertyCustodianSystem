@@ -24,21 +24,21 @@ Partial Class SAMaintenace
     Private Sub InitializeComponent()
         Me.lblUserManagement = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TechnicianAssigned = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WarrantyStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NextSchedule = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProviderContact = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ServiceProvider = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ServiceType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ServiceDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CustodianID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PropertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MaintenanceID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PropertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CustodianID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ServiceDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ServiceType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ServiceProvider = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProviderContact = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NextSchedule = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WarrantyStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TechnicianAssigned = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -56,11 +56,11 @@ Partial Class SAMaintenace
         'lblUserManagement
         '
         Me.lblUserManagement.AutoSize = True
-        Me.lblUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUserManagement.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUserManagement.Location = New System.Drawing.Point(147, 74)
         Me.lblUserManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUserManagement.Name = "lblUserManagement"
-        Me.lblUserManagement.Size = New System.Drawing.Size(203, 39)
+        Me.lblUserManagement.Size = New System.Drawing.Size(235, 60)
         Me.lblUserManagement.TabIndex = 41
         Me.lblUserManagement.Text = "Maintenace"
         '
@@ -76,96 +76,12 @@ Partial Class SAMaintenace
         Me.DataGridView1.Size = New System.Drawing.Size(1372, 856)
         Me.DataGridView1.TabIndex = 42
         '
-        'CreatedAt
+        'MaintenanceID
         '
-        Me.CreatedAt.HeaderText = "Created At"
-        Me.CreatedAt.MinimumWidth = 6
-        Me.CreatedAt.Name = "CreatedAt"
-        Me.CreatedAt.Width = 125
-        '
-        'Remarks
-        '
-        Me.Remarks.HeaderText = "Remarks"
-        Me.Remarks.MinimumWidth = 6
-        Me.Remarks.Name = "Remarks"
-        Me.Remarks.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status "
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
-        '
-        'TechnicianAssigned
-        '
-        Me.TechnicianAssigned.HeaderText = "Technician Assigned"
-        Me.TechnicianAssigned.MinimumWidth = 6
-        Me.TechnicianAssigned.Name = "TechnicianAssigned"
-        Me.TechnicianAssigned.Width = 125
-        '
-        'WarrantyStatus
-        '
-        Me.WarrantyStatus.HeaderText = "Warranty Status"
-        Me.WarrantyStatus.MinimumWidth = 6
-        Me.WarrantyStatus.Name = "WarrantyStatus"
-        Me.WarrantyStatus.Width = 125
-        '
-        'NextSchedule
-        '
-        Me.NextSchedule.HeaderText = "Next Schedule"
-        Me.NextSchedule.MinimumWidth = 6
-        Me.NextSchedule.Name = "NextSchedule"
-        Me.NextSchedule.Width = 125
-        '
-        'Cost
-        '
-        Me.Cost.HeaderText = "Cost"
-        Me.Cost.MinimumWidth = 6
-        Me.Cost.Name = "Cost"
-        Me.Cost.Width = 125
-        '
-        'ProviderContact
-        '
-        Me.ProviderContact.HeaderText = "Provider Contact"
-        Me.ProviderContact.MinimumWidth = 6
-        Me.ProviderContact.Name = "ProviderContact"
-        Me.ProviderContact.Width = 125
-        '
-        'ServiceProvider
-        '
-        Me.ServiceProvider.HeaderText = "Service Provider"
-        Me.ServiceProvider.MinimumWidth = 6
-        Me.ServiceProvider.Name = "ServiceProvider"
-        Me.ServiceProvider.Width = 125
-        '
-        'Description
-        '
-        Me.Description.HeaderText = "Description"
-        Me.Description.MinimumWidth = 6
-        Me.Description.Name = "Description"
-        Me.Description.Width = 125
-        '
-        'ServiceType
-        '
-        Me.ServiceType.HeaderText = "Service Type"
-        Me.ServiceType.MinimumWidth = 6
-        Me.ServiceType.Name = "ServiceType"
-        Me.ServiceType.Width = 125
-        '
-        'ServiceDate
-        '
-        Me.ServiceDate.HeaderText = "Service Date"
-        Me.ServiceDate.MinimumWidth = 6
-        Me.ServiceDate.Name = "ServiceDate"
-        Me.ServiceDate.Width = 125
-        '
-        'CustodianID
-        '
-        Me.CustodianID.HeaderText = "CustodianID"
-        Me.CustodianID.MinimumWidth = 6
-        Me.CustodianID.Name = "CustodianID"
-        Me.CustodianID.Width = 125
+        Me.MaintenanceID.HeaderText = "MaintenanceID"
+        Me.MaintenanceID.MinimumWidth = 6
+        Me.MaintenanceID.Name = "MaintenanceID"
+        Me.MaintenanceID.Width = 125
         '
         'PropertyID
         '
@@ -174,12 +90,96 @@ Partial Class SAMaintenace
         Me.PropertyID.Name = "PropertyID"
         Me.PropertyID.Width = 125
         '
-        'MaintenanceID
+        'CustodianID
         '
-        Me.MaintenanceID.HeaderText = "MaintenanceID"
-        Me.MaintenanceID.MinimumWidth = 6
-        Me.MaintenanceID.Name = "MaintenanceID"
-        Me.MaintenanceID.Width = 125
+        Me.CustodianID.HeaderText = "CustodianID"
+        Me.CustodianID.MinimumWidth = 6
+        Me.CustodianID.Name = "CustodianID"
+        Me.CustodianID.Width = 125
+        '
+        'ServiceDate
+        '
+        Me.ServiceDate.HeaderText = "Service Date"
+        Me.ServiceDate.MinimumWidth = 6
+        Me.ServiceDate.Name = "ServiceDate"
+        Me.ServiceDate.Width = 125
+        '
+        'ServiceType
+        '
+        Me.ServiceType.HeaderText = "Service Type"
+        Me.ServiceType.MinimumWidth = 6
+        Me.ServiceType.Name = "ServiceType"
+        Me.ServiceType.Width = 125
+        '
+        'Description
+        '
+        Me.Description.HeaderText = "Description"
+        Me.Description.MinimumWidth = 6
+        Me.Description.Name = "Description"
+        Me.Description.Width = 125
+        '
+        'ServiceProvider
+        '
+        Me.ServiceProvider.HeaderText = "Service Provider"
+        Me.ServiceProvider.MinimumWidth = 6
+        Me.ServiceProvider.Name = "ServiceProvider"
+        Me.ServiceProvider.Width = 125
+        '
+        'ProviderContact
+        '
+        Me.ProviderContact.HeaderText = "Provider Contact"
+        Me.ProviderContact.MinimumWidth = 6
+        Me.ProviderContact.Name = "ProviderContact"
+        Me.ProviderContact.Width = 125
+        '
+        'Cost
+        '
+        Me.Cost.HeaderText = "Cost"
+        Me.Cost.MinimumWidth = 6
+        Me.Cost.Name = "Cost"
+        Me.Cost.Width = 125
+        '
+        'NextSchedule
+        '
+        Me.NextSchedule.HeaderText = "Next Schedule"
+        Me.NextSchedule.MinimumWidth = 6
+        Me.NextSchedule.Name = "NextSchedule"
+        Me.NextSchedule.Width = 125
+        '
+        'WarrantyStatus
+        '
+        Me.WarrantyStatus.HeaderText = "Warranty Status"
+        Me.WarrantyStatus.MinimumWidth = 6
+        Me.WarrantyStatus.Name = "WarrantyStatus"
+        Me.WarrantyStatus.Width = 125
+        '
+        'TechnicianAssigned
+        '
+        Me.TechnicianAssigned.HeaderText = "Technician Assigned"
+        Me.TechnicianAssigned.MinimumWidth = 6
+        Me.TechnicianAssigned.Name = "TechnicianAssigned"
+        Me.TechnicianAssigned.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status "
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
+        '
+        'Remarks
+        '
+        Me.Remarks.HeaderText = "Remarks"
+        Me.Remarks.MinimumWidth = 6
+        Me.Remarks.Name = "Remarks"
+        Me.Remarks.Width = 125
+        '
+        'CreatedAt
+        '
+        Me.CreatedAt.HeaderText = "Created At"
+        Me.CreatedAt.MinimumWidth = 6
+        Me.CreatedAt.Name = "CreatedAt"
+        Me.CreatedAt.Width = 125
         '
         'PictureBox2
         '
