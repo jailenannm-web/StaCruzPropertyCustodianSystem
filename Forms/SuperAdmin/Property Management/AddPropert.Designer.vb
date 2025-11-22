@@ -55,6 +55,7 @@ Partial Class AddPropert
         Me.Label14 = New System.Windows.Forms.Label()
         Me.btn_Login = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.txb_UpdateAt = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'btnSave
@@ -438,6 +439,7 @@ Partial Class AddPropert
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.btn_Login)
         Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.txb_UpdateAt)
         Me.Name = "AddPropert"
         Me.Text = "AddPropert"
         Me.RoundedPanel1.ResumeLayout(False)
@@ -486,4 +488,10 @@ Partial Class AddPropert
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents btn_Login As System.Windows.Forms.Button
     Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents txb_UpdateAt As System.Windows.Forms.TextBox
+    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents no_of_employees_numeric As System.Windows.Forms.NumericUpDown
 End Class

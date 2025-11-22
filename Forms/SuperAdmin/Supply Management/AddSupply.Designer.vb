@@ -60,6 +60,37 @@ Partial Class AddSupply
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
+        Me.txb_UnitOfMeasure = New System.Windows.Forms.TextBox()
+        Me.txb_UnitCost = New System.Windows.Forms.TextBox()
+        Me.txb_TotalValue = New System.Windows.Forms.TextBox()
+        Me.txb_SupplyID = New System.Windows.Forms.TextBox()
+        Me.txb_Status = New System.Windows.Forms.TextBox()
+        Me.txb_ReorderLevel = New System.Windows.Forms.TextBox()
+        Me.txb_QuantityInStock = New System.Windows.Forms.TextBox()
+        Me.txb_Location = New System.Windows.Forms.TextBox()
+        Me.txb_ExpirationDate = New System.Windows.Forms.TextBox()
+        Me.txb_Description = New System.Windows.Forms.TextBox()
+        Me.txb_Category = New System.Windows.Forms.TextBox()
+        Me.txb_CustodianID = New System.Windows.Forms.TextBox()
+        Me.txb_SupplyName = New System.Windows.Forms.TextBox()
+        Me.txb_AcquisitionDate = New System.Windows.Forms.TextBox()
+        Me.txb_SupplierID = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         acquisitionDate = New System.Windows.Forms.Label()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -490,4 +521,35 @@ Partial Class AddSupply
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents instructions As System.Windows.Forms.Label
+    Friend WithEvents txb_UnitOfMeasure As System.Windows.Forms.TextBox
+    Friend WithEvents txb_UnitCost As System.Windows.Forms.TextBox
+    Friend WithEvents txb_TotalValue As System.Windows.Forms.TextBox
+    Friend WithEvents txb_SupplyID As System.Windows.Forms.TextBox
+    Friend WithEvents txb_Status As System.Windows.Forms.TextBox
+    Friend WithEvents txb_ReorderLevel As System.Windows.Forms.TextBox
+    Friend WithEvents txb_QuantityInStock As System.Windows.Forms.TextBox
+    Friend WithEvents txb_Location As System.Windows.Forms.TextBox
+    Friend WithEvents txb_ExpirationDate As System.Windows.Forms.TextBox
+    Friend WithEvents txb_Description As System.Windows.Forms.TextBox
+    Friend WithEvents txb_Category As System.Windows.Forms.TextBox
+    Friend WithEvents txb_CustodianID As System.Windows.Forms.TextBox
+    Friend WithEvents txb_SupplyName As System.Windows.Forms.TextBox
+    Friend WithEvents txb_AcquisitionDate As System.Windows.Forms.TextBox
+    Friend WithEvents txb_SupplierID As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
 End Class

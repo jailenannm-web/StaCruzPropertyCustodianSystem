@@ -56,6 +56,35 @@ Partial Class AddUser
         Me.um_edituser_txtboxfirst = New System.Windows.Forms.TextBox()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
+        Me.txb_UserName = New System.Windows.Forms.TextBox()
+        Me.txb_Password = New System.Windows.Forms.TextBox()
+        Me.txb_Email = New System.Windows.Forms.TextBox()
+        Me.txb_Suffix = New System.Windows.Forms.TextBox()
+        Me.txb_MiddleName = New System.Windows.Forms.TextBox()
+        Me.txb_LastName = New System.Windows.Forms.TextBox()
+        Me.txb_ContactNumber = New System.Windows.Forms.TextBox()
+        Me.txb_EmployeeID = New System.Windows.Forms.TextBox()
+        Me.txb_DepartmentID = New System.Windows.Forms.TextBox()
+        Me.txb_FirstName = New System.Windows.Forms.TextBox()
+        Me.txb_HouseNoStreet = New System.Windows.Forms.TextBox()
+        Me.btn_Login = New System.Windows.Forms.Button()
+        Me.btn_Cancel = New System.Windows.Forms.Button()
+        Me.cb_Province = New System.Windows.Forms.ComboBox()
+        Me.cb_Municipality = New System.Windows.Forms.ComboBox()
+        Me.cb_Barangay = New System.Windows.Forms.ComboBox()
+        Me.cb_Position = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.uc_um_edituser.SuspendLayout()
         Me.RoundedPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -476,4 +505,33 @@ Partial Class AddUser
     Friend WithEvents um_edituser_txtboxfirst As System.Windows.Forms.TextBox
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents instructions As System.Windows.Forms.Label
+    Friend WithEvents txb_UserName As System.Windows.Forms.TextBox
+    Friend WithEvents txb_Password As System.Windows.Forms.TextBox
+    Friend WithEvents txb_Email As System.Windows.Forms.TextBox
+    Friend WithEvents txb_Suffix As System.Windows.Forms.TextBox
+    Friend WithEvents txb_MiddleName As System.Windows.Forms.TextBox
+    Friend WithEvents txb_LastName As System.Windows.Forms.TextBox
+    Friend WithEvents txb_ContactNumber As System.Windows.Forms.TextBox
+    Friend WithEvents txb_EmployeeID As System.Windows.Forms.TextBox
+    Friend WithEvents txb_DepartmentID As System.Windows.Forms.TextBox
+    Friend WithEvents txb_FirstName As System.Windows.Forms.TextBox
+    Friend WithEvents txb_HouseNoStreet As System.Windows.Forms.TextBox
+    Friend WithEvents btn_Login As System.Windows.Forms.Button
+    Friend WithEvents btn_Cancel As System.Windows.Forms.Button
+    Friend WithEvents cb_Province As System.Windows.Forms.ComboBox
+    Friend WithEvents cb_Municipality As System.Windows.Forms.ComboBox
+    Friend WithEvents cb_Barangay As System.Windows.Forms.ComboBox
+    Friend WithEvents cb_Position As System.Windows.Forms.ComboBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
 End Class

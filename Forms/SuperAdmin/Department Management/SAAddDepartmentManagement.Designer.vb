@@ -62,6 +62,39 @@ Partial Class SAAddDepartmentManagement
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
+        Me.txb_UpdateAt = New System.Windows.Forms.TextBox()
+        Me.txb_CreatedAt = New System.Windows.Forms.TextBox()
+        Me.txb_BudgetAllocation = New System.Windows.Forms.TextBox()
+        Me.txb_Status = New System.Windows.Forms.TextBox()
+        Me.txb_ParentDep = New System.Windows.Forms.TextBox()
+        Me.txb_EstablishedDate = New System.Windows.Forms.TextBox()
+        Me.txb_OfficeHour = New System.Windows.Forms.TextBox()
+        Me.txb_Location = New System.Windows.Forms.TextBox()
+        Me.txb_Email = New System.Windows.Forms.TextBox()
+        Me.txb_DepCode = New System.Windows.Forms.TextBox()
+        Me.txb_NoofEmployees = New System.Windows.Forms.TextBox()
+        Me.txb_Number = New System.Windows.Forms.TextBox()
+        Me.txb_ContactNumber = New System.Windows.Forms.TextBox()
+        Me.txb_DepartmentName = New System.Windows.Forms.TextBox()
+        Me.txb_DepartmentID = New System.Windows.Forms.TextBox()
+        Me.btn_Login = New System.Windows.Forms.Button()
+        Me.btn_Cancel = New System.Windows.Forms.Button()
+        Me.lblDepartmentManagement = New System.Windows.Forms.Label()
+        Me.lblDepartmentName = New System.Windows.Forms.Label()
+        Me.lblHeadofDepartment = New System.Windows.Forms.Label()
+        Me.lblContactNumber = New System.Windows.Forms.Label()
+        Me.lblEmail = New System.Windows.Forms.Label()
+        Me.lblLocation = New System.Windows.Forms.Label()
+        Me.lblNoofEmployees = New System.Windows.Forms.Label()
+        Me.lblDepartmentCode = New System.Windows.Forms.Label()
+        Me.lblUpdateAt = New System.Windows.Forms.Label()
+        Me.lblCreatedAt = New System.Windows.Forms.Label()
+        Me.lbBudgetAllocation = New System.Windows.Forms.Label()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.lblParentDepartment = New System.Windows.Forms.Label()
+        Me.lblEstablishedDate = New System.Windows.Forms.Label()
+        Me.lblOfficeHour = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.no_of_employees_numeric, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RoundedPanel1.SuspendLayout()
@@ -509,4 +542,37 @@ Partial Class SAAddDepartmentManagement
     Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents admin_label_DepartmentManagement As Label
+    Friend WithEvents txb_UpdateAt As TextBox
+    Friend WithEvents txb_CreatedAt As TextBox
+    Friend WithEvents txb_BudgetAllocation As TextBox
+    Friend WithEvents txb_Status As TextBox
+    Friend WithEvents txb_ParentDep As TextBox
+    Friend WithEvents txb_EstablishedDate As TextBox
+    Friend WithEvents txb_OfficeHour As TextBox
+    Friend WithEvents txb_Location As TextBox
+    Friend WithEvents txb_Email As TextBox
+    Friend WithEvents txb_DepCode As TextBox
+    Friend WithEvents txb_NoofEmployees As TextBox
+    Friend WithEvents txb_Number As TextBox
+    Friend WithEvents txb_ContactNumber As TextBox
+    Friend WithEvents txb_DepartmentName As TextBox
+    Friend WithEvents txb_DepartmentID As TextBox
+    Friend WithEvents btn_Login As Button
+    Friend WithEvents btn_Cancel As Button
+    Friend WithEvents lblDepartmentManagement As Label
+    Friend WithEvents lblDepartmentName As Label
+    Friend WithEvents lblHeadofDepartment As Label
+    Friend WithEvents lblContactNumber As Label
+    Friend WithEvents lblEmail As Label
+    Friend WithEvents lblLocation As Label
+    Friend WithEvents lblNoofEmployees As Label
+    Friend WithEvents lblDepartmentCode As Label
+    Friend WithEvents lblUpdateAt As Label
+    Friend WithEvents lblCreatedAt As Label
+    Friend WithEvents lbBudgetAllocation As Label
+    Friend WithEvents lblStatus As Label
+    Friend WithEvents lblParentDepartment As Label
+    Friend WithEvents lblEstablishedDate As Label
+    Friend WithEvents lblOfficeHour As Label
+    Friend WithEvents Label1 As Label
 End Class

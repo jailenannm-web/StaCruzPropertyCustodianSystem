@@ -53,6 +53,7 @@ Partial Class UC_DepartmentManagement
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -320,6 +321,7 @@ Partial Class UC_DepartmentManagement
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Controls.Add(Me.pm_cbobx_status)
         Me.Controls.Add(Me.pm_cbobx_categ)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "UC_DepartmentManagement"
         Me.Size = New System.Drawing.Size(1253, 804)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -355,4 +357,5 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents created_at As DataGridViewTextBoxColumn
     Friend WithEvents updated_at As DataGridViewTextBoxColumn
     Friend WithEvents btnEdit As Resources.Controls.RoundedButton
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 End Class
