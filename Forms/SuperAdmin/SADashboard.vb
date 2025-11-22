@@ -207,4 +207,164 @@ Partial Class SADashboard
         logout.Show()   ' Show the register form
         Me.Hide()            ' Hide current login form instead of closing it
     End Sub
+
+    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
+
+    End Sub
+
+    Private Sub lblPropertyCustodian_Click(sender As Object, e As EventArgs) Handles lblPropertyCustodian.Click
+
+    End Sub
+
+    Private Sub lblScheduleMaintenance_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblPropertyConditionStatus_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblInventoryStatusOverview_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblPendingRequest_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblTotalSupplies_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblTotalProperty_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblRequestTrends_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblRecentPRopertyRequests_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblSystemAlerts_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel1.Paint
+
+    End Sub
+
+    Private Sub RoundedPanel9_Paint_1(sender As Object, e As PaintEventArgs) Handles RoundedPanel9.Paint
+
+    End Sub
+
+    Private Sub SAChart_RecentPropertyRequests_Click(sender As Object, e As EventArgs) Handles SAChart_RecentPropertyRequests.Click
+
+    End Sub
+
+    Private Sub RoundedPanel5_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel5.Paint
+
+    End Sub
+
+    Private Sub SAChart_ScheduleMaintenance_Click(sender As Object, e As EventArgs) Handles SAChart_ScheduleMaintenance.Click
+
+    End Sub
+
+    Private Sub RoundedPanel4_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel4.Paint
+
+    End Sub
+
+    Private Sub SAChart_PendingRequest_Click(sender As Object, e As EventArgs) Handles SAChart_PendingRequest.Click
+
+    End Sub
+
+    Private Sub RoundedPanel3_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel3.Paint
+
+    End Sub
+
+    Private Sub SAChart_TotalSupplies_Click_1(sender As Object, e As EventArgs) Handles SAChart_TotalSupplies.Click
+
+    End Sub
+
+    Private Sub RoundedPanel2_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel2.Paint
+
+    End Sub
+
+    Private Sub SAChart_TotalProperty_Click(sender As Object, e As EventArgs) Handles SAChart_TotalProperty.Click
+
+    End Sub
+
+    Private Sub RoundedPanel8_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel8.Paint
+
+    End Sub
+
+    Private Sub SAChart_RequestTrends_Click(sender As Object, e As EventArgs) Handles SAChart_RequestTrends.Click
+
+    End Sub
+
+    Private Sub RoundedPanel6_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel6.Paint
+
+    End Sub
+
+    Private Sub SAChart_InventoryStatusOverview_Click(sender As Object, e As EventArgs) Handles SAChart_InventoryStatusOverview.Click
+
+    End Sub
+
+    Private Sub RoundedPanel10_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel10.Paint
+
+    End Sub
+
+    Private Sub SAChart_PropertyConditionStatus_Click(sender As Object, e As EventArgs) Handles SAChart_PropertyConditionStatus.Click
+
+    End Sub
+
+    Private Sub SAChart_SystemAlerts_Click(sender As Object, e As EventArgs) Handles SAChart_SystemAlerts.Click
+
+    End Sub
+
+    Private Sub RoundedPanel1_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel1.Paint
+
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub txtboxSearch_TextChanged(sender As Object, e As EventArgs) Handles txtboxSearch.TextChanged
+
+    End Sub
+
+    Private Sub comboFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboFilter.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub btnAddProperty_Click(sender As Object, e As EventArgs) Handles btnAddProperty.Click
+
+    End Sub
+
+    Private Sub btnAddSupply_Click(sender As Object, e As EventArgs) Handles btnAddSupply.Click
+
+    End Sub
+
+    Private Sub btnAddUser_Click(sender As Object, e As EventArgs) Handles btnAddUser.Click
+
+    End Sub
+
+    Private Sub btnGenerateReports_Click(sender As Object, e As EventArgs) Handles btnGenerateReports.Click
+
+    End Sub
+
+    Private Sub icStaff_Click(sender As Object, e As EventArgs) Handles icStaff.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub lblSuperAdmin_Click(sender As Object, e As EventArgs) Handles lblSuperAdmin.Click
+
+    End Sub
 End Class

@@ -128,11 +128,11 @@ Public Class SAReportsManagement
 
     End Sub
 
-    Private Sub btnGenerateOISR_Click(sender As Object, e As EventArgs) Handles btnGenerateOISR.Click
+    Private Sub btnGenerateOISR_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub btnPreviewOISR_Click(sender As Object, e As EventArgs) Handles btnPreviewOISR.Click
+    Private Sub btnPreviewOISR_Click(sender As Object, e As EventArgs)
 
     End Sub
 

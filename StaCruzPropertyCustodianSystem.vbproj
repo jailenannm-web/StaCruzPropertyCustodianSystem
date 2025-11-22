@@ -122,12 +122,16 @@
     <Compile Include="Forms\Admin\AddProperty.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Admin\AddPropertyRequest.Designer.vb">
+      <DependentUpon>AddPropertyRequest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddPropertyRequest.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Admin\AddSupply.Designer.vb">
       <DependentUpon>AddSupply.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Admin\AddSupply.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Admin\AddSupply.vb" />
     <Compile Include="Forms\Admin\AdminDashboard.Designer.vb">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
     </Compile>
@@ -224,6 +228,12 @@
     <Compile Include="Forms\Staff\frmProfile.Designer.vb">
       <DependentUpon>frmProfile.vb</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SuperAdmin\Property Management\SAAddProperty.Designer.vb">
+      <DependentUpon>SAAddProperty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Property Management\SAAddProperty.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PasswordHelper.vb" />
     <Compile Include="Settings.vb" />
     <EmbeddedResource Include="Forms\Admin\AddDepartment.resx">
@@ -231,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AddProperty.resx">
       <DependentUpon>AddProperty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AddPropertyRequest.resx">
+      <DependentUpon>AddPropertyRequest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
@@ -326,16 +339,10 @@
     <Compile Include="Forms\Login\StaffLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\AddMaintenance.Designer.vb">
+    <Compile Include="Forms\SuperAdmin\Maintenance\AddMaintenance.Designer.vb">
       <DependentUpon>AddMaintenance.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\AddMaintenance.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Property Management\AddPropert.Designer.vb">
-      <DependentUpon>AddPropert.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Property Management\AddPropert.vb">
+    <Compile Include="Forms\SuperAdmin\Maintenance\AddMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\AuditReport.Designer.vb">
@@ -404,16 +411,10 @@
     <Compile Include="Forms\SuperAdmin\Department Management\SAAddDepartmentManagement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\SAMaintenace.Designer.vb">
+    <Compile Include="Forms\SuperAdmin\Maintenance\SAMaintenace.Designer.vb">
       <DependentUpon>SAMaintenace.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\SAMaintenace.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Supply Management\AddSupply.Designer.vb">
-      <DependentUpon>AddSupply.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Supply Management\AddSupply.vb">
+    <Compile Include="Forms\SuperAdmin\Maintenance\SAMaintenace.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Supply Management\SAAddSuppliesManagement.Designer.vb">
@@ -504,11 +505,11 @@
     <EmbeddedResource Include="Forms\Login\StaffLogin.resx">
       <DependentUpon>StaffLogin.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\AddMaintenance.resx">
+    <EmbeddedResource Include="Forms\SuperAdmin\Maintenance\AddMaintenance.resx">
       <DependentUpon>AddMaintenance.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Property Management\AddPropert.resx">
-      <DependentUpon>AddPropert.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\SuperAdmin\Property Management\SAAddProperty.resx">
+      <DependentUpon>SAAddProperty.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\AuditReport.resx">
       <DependentUpon>AuditReport.vb</DependentUpon>
@@ -543,11 +544,8 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Department Management\SAAddDepartmentManagement.resx">
       <DependentUpon>SAAddDepartmentManagement.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\SAMaintenace.resx">
+    <EmbeddedResource Include="Forms\SuperAdmin\Maintenance\SAMaintenace.resx">
       <DependentUpon>SAMaintenace.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Supply Management\AddSupply.resx">
-      <DependentUpon>AddSupply.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Supply Management\SAAddSuppliesManagement.resx">
       <DependentUpon>SAAddSuppliesManagement.vb</DependentUpon>

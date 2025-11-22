@@ -28,11 +28,6 @@ Partial Class SASuppliesManagement
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblSuppliesManagement = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.comboCategoris = New System.Windows.Forms.ComboBox()
         Me.btnAddSupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
@@ -51,9 +46,18 @@ Partial Class SASuppliesManagement
         Me.LifeSpan = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DepreciationValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DisposalDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.comboStatus = New System.Windows.Forms.ComboBox()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnlStatus = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.combostatus = New System.Windows.Forms.ComboBox()
+        Me.pnlCategories = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.comboCategoris = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlStatus.SuspendLayout()
+        Me.pnlCategories.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSuppliesManagement
@@ -63,62 +67,9 @@ Partial Class SASuppliesManagement
         Me.lblSuppliesManagement.Location = New System.Drawing.Point(131, 73)
         Me.lblSuppliesManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSuppliesManagement.Name = "lblSuppliesManagement"
-        Me.lblSuppliesManagement.Size = New System.Drawing.Size(420, 60)
+        Me.lblSuppliesManagement.Size = New System.Drawing.Size(404, 58)
         Me.lblSuppliesManagement.TabIndex = 23
         Me.lblSuppliesManagement.Text = "Supplies Management"
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(136, 150)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(58, 41)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 152
-        Me.PictureBox2.TabStop = False
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Poppins Light", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(201, 150)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(729, 52)
-        Me.TextBox1.TabIndex = 151
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(1285, 161)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(81, 36)
-        Me.Label2.TabIndex = 150
-        Me.Label2.Text = "Status"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(938, 161)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(129, 36)
-        Me.Label1.TabIndex = 149
-        Me.Label1.Text = "Categories"
-        '
-        'comboCategoris
-        '
-        Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboCategoris.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboCategoris.FormattingEnabled = True
-        Me.comboCategoris.Location = New System.Drawing.Point(1074, 157)
-        Me.comboCategoris.Margin = New System.Windows.Forms.Padding(4)
-        Me.comboCategoris.Name = "comboCategoris"
-        Me.comboCategoris.Size = New System.Drawing.Size(147, 37)
-        Me.comboCategoris.TabIndex = 0
         '
         'btnAddSupply
         '
@@ -266,17 +217,96 @@ Partial Class SASuppliesManagement
         Me.DisposalDate.Name = "DisposalDate"
         Me.DisposalDate.Width = 125
         '
-        'comboStatus
+        'PictureBox2
         '
-        Me.comboStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.comboStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboStatus.FormattingEnabled = True
-        Me.comboStatus.Location = New System.Drawing.Point(1374, 157)
-        Me.comboStatus.Margin = New System.Windows.Forms.Padding(4)
-        Me.comboStatus.Name = "comboStatus"
-        Me.comboStatus.Size = New System.Drawing.Size(147, 37)
-        Me.comboStatus.TabIndex = 0
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(156, 165)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 41)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 164
+        Me.PictureBox2.TabStop = False
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(216, 165)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(729, 41)
+        Me.TextBox1.TabIndex = 163
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.Label2.Location = New System.Drawing.Point(1266, 175)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(66, 30)
+        Me.Label2.TabIndex = 162
+        Me.Label2.Text = "Status"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.Label1.Location = New System.Drawing.Point(953, 173)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(106, 30)
+        Me.Label1.TabIndex = 161
+        Me.Label1.Text = "Categories"
+        '
+        'pnlStatus
+        '
+        Me.pnlStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.pnlStatus.Controls.Add(Me.combostatus)
+        Me.pnlStatus.CornerRadius = 5
+        Me.pnlStatus.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.pnlStatus.Location = New System.Drawing.Point(1334, 168)
+        Me.pnlStatus.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlStatus.Name = "pnlStatus"
+        Me.pnlStatus.Size = New System.Drawing.Size(177, 37)
+        Me.pnlStatus.TabIndex = 160
+        '
+        'combostatus
+        '
+        Me.combostatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.combostatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.combostatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
+        Me.combostatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.combostatus.FormattingEnabled = True
+        Me.combostatus.Location = New System.Drawing.Point(16, 7)
+        Me.combostatus.Margin = New System.Windows.Forms.Padding(4)
+        Me.combostatus.Name = "combostatus"
+        Me.combostatus.Size = New System.Drawing.Size(144, 23)
+        Me.combostatus.TabIndex = 1
+        '
+        'pnlCategories
+        '
+        Me.pnlCategories.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.pnlCategories.Controls.Add(Me.comboCategoris)
+        Me.pnlCategories.CornerRadius = 5
+        Me.pnlCategories.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.pnlCategories.Location = New System.Drawing.Point(1066, 170)
+        Me.pnlCategories.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlCategories.Name = "pnlCategories"
+        Me.pnlCategories.Size = New System.Drawing.Size(177, 37)
+        Me.pnlCategories.TabIndex = 159
+        '
+        'comboCategoris
+        '
+        Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.comboCategoris.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.comboCategoris.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
+        Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.comboCategoris.FormattingEnabled = True
+        Me.comboCategoris.Location = New System.Drawing.Point(19, 7)
+        Me.comboCategoris.Margin = New System.Windows.Forms.Padding(4)
+        Me.comboCategoris.Name = "comboCategoris"
+        Me.comboCategoris.Size = New System.Drawing.Size(144, 23)
+        Me.comboCategoris.TabIndex = 0
         '
         'SASuppliesManagement
         '
@@ -284,13 +314,13 @@ Partial Class SASuppliesManagement
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.ClientSize = New System.Drawing.Size(1773, 1080)
-        Me.Controls.Add(Me.comboStatus)
-        Me.Controls.Add(Me.comboCategoris)
-        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.pnlStatus)
+        Me.Controls.Add(Me.pnlCategories)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnAddSupply)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.lblSuppliesManagement)
@@ -298,8 +328,10 @@ Partial Class SASuppliesManagement
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "SASuppliesManagement"
         Me.Text = "SASuppliesManagement"
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlStatus.ResumeLayout(False)
+        Me.pnlCategories.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -307,11 +339,6 @@ Partial Class SASuppliesManagement
     Friend WithEvents btnAddSupply As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnEdit As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents lblSuppliesManagement As Label
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents comboCategoris As ComboBox
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents PropertID As DataGridViewTextBoxColumn
     Friend WithEvents PropertyName As DataGridViewTextBoxColumn
@@ -328,5 +355,12 @@ Partial Class SASuppliesManagement
     Friend WithEvents LifeSpan As DataGridViewTextBoxColumn
     Friend WithEvents DepreciationValue As DataGridViewTextBoxColumn
     Friend WithEvents DisposalDate As DataGridViewTextBoxColumn
-    Friend WithEvents comboStatus As ComboBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents pnlStatus As Resources.Controls.RoundedPanel
+    Friend WithEvents combostatus As ComboBox
+    Friend WithEvents pnlCategories As Resources.Controls.RoundedPanel
+    Friend WithEvents comboCategoris As ComboBox
 End Class

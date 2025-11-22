@@ -10,7 +10,7 @@ Partial Class EditUser
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -27,14 +27,12 @@ Partial Class EditUser
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
         Me.uc_um_edituser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.um_edituser_save = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.um_edituser_backbtn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.um_edituser_txtboxCreated = New System.Windows.Forms.TextBox()
         Me.um_edituser_txtStatus = New System.Windows.Forms.Label()
@@ -63,6 +61,8 @@ Partial Class EditUser
         Me.um_edituser_txtboxfull = New System.Windows.Forms.TextBox()
         Me.um_edituser_fullname = New System.Windows.Forms.Label()
         Me.um_edituser_txtboxfirst = New System.Windows.Forms.TextBox()
+        Me.um_edituser_save = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.um_edituser_backbtn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel1.SuspendLayout()
         Me.uc_um_edituser.SuspendLayout()
         Me.SuspendLayout()
@@ -137,32 +137,6 @@ Partial Class EditUser
         Me.uc_um_edituser.Name = "uc_um_edituser"
         Me.uc_um_edituser.Size = New System.Drawing.Size(1305, 456)
         Me.uc_um_edituser.TabIndex = 0
-        '
-        'um_edituser_save
-        '
-        Me.um_edituser_save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_save.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.um_edituser_save.CornerRadius = 15
-        Me.um_edituser_save.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_save.Location = New System.Drawing.Point(1086, 788)
-        Me.um_edituser_save.Name = "um_edituser_save"
-        Me.um_edituser_save.Size = New System.Drawing.Size(137, 36)
-        Me.um_edituser_save.TabIndex = 54
-        Me.um_edituser_save.Text = "Save"
-        Me.um_edituser_save.UseVisualStyleBackColor = False
-        '
-        'um_edituser_backbtn
-        '
-        Me.um_edituser_backbtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_backbtn.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.um_edituser_backbtn.CornerRadius = 15
-        Me.um_edituser_backbtn.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.um_edituser_backbtn.Location = New System.Drawing.Point(143, 788)
-        Me.um_edituser_backbtn.Name = "um_edituser_backbtn"
-        Me.um_edituser_backbtn.Size = New System.Drawing.Size(119, 36)
-        Me.um_edituser_backbtn.TabIndex = 53
-        Me.um_edituser_backbtn.Text = "Back"
-        Me.um_edituser_backbtn.UseVisualStyleBackColor = False
         '
         'Label1
         '
@@ -541,6 +515,32 @@ Partial Class EditUser
         Me.um_edituser_txtboxfirst.Size = New System.Drawing.Size(347, 27)
         Me.um_edituser_txtboxfirst.TabIndex = 25
         Me.um_edituser_txtboxfirst.Text = "Enter Full Name"
+        '
+        'um_edituser_save
+        '
+        Me.um_edituser_save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_save.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.um_edituser_save.CornerRadius = 15
+        Me.um_edituser_save.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_save.Location = New System.Drawing.Point(1086, 788)
+        Me.um_edituser_save.Name = "um_edituser_save"
+        Me.um_edituser_save.Size = New System.Drawing.Size(137, 36)
+        Me.um_edituser_save.TabIndex = 54
+        Me.um_edituser_save.Text = "Save"
+        Me.um_edituser_save.UseVisualStyleBackColor = False
+        '
+        'um_edituser_backbtn
+        '
+        Me.um_edituser_backbtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_backbtn.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.um_edituser_backbtn.CornerRadius = 15
+        Me.um_edituser_backbtn.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.um_edituser_backbtn.Location = New System.Drawing.Point(143, 788)
+        Me.um_edituser_backbtn.Name = "um_edituser_backbtn"
+        Me.um_edituser_backbtn.Size = New System.Drawing.Size(119, 36)
+        Me.um_edituser_backbtn.TabIndex = 53
+        Me.um_edituser_backbtn.Text = "Back"
+        Me.um_edituser_backbtn.UseVisualStyleBackColor = False
         '
         'EditUser
         '
