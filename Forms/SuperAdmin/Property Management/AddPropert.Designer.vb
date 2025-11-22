@@ -22,450 +22,507 @@ Partial Class AddPropert
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.cb_Barangay = New System.Windows.Forms.ComboBox()
-        Me.cb_Municipality = New System.Windows.Forms.ComboBox()
-        Me.txb_Disposal = New System.Windows.Forms.TextBox()
-        Me.cb_Province = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cb_Position = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txb_ContactNumber = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txb_EmployeeID = New System.Windows.Forms.TextBox()
-        Me.txb_FirstName = New System.Windows.Forms.TextBox()
-        Me.txb_HouseNoStreet = New System.Windows.Forms.TextBox()
-        Me.txb_MiddleName = New System.Windows.Forms.TextBox()
-        Me.txb_UserName = New System.Windows.Forms.TextBox()
-        Me.txb_LastName = New System.Windows.Forms.TextBox()
-        Me.txb_Email = New System.Windows.Forms.TextBox()
-        Me.txb_Suffix = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.txb_DepartmentID = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.btn_Cancel = New System.Windows.Forms.Button()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.btn_Login = New System.Windows.Forms.Button()
-        Me.Label15 = New System.Windows.Forms.Label()
+        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
+        Me.instructions = New System.Windows.Forms.Label()
+        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.categoryCmbo = New System.Windows.Forms.ComboBox()
+        Me.conditionStatusCmbo = New System.Windows.Forms.ComboBox()
+        Me.no_of_employees_numeric = New System.Windows.Forms.NumericUpDown()
+        Me.supplierTxt = New System.Windows.Forms.TextBox()
+        Me.serialNumberTxt = New System.Windows.Forms.TextBox()
+        Me.propertyNameTxt = New System.Windows.Forms.TextBox()
+        Me.cost = New System.Windows.Forms.Label()
+        Me.conditionStatus = New System.Windows.Forms.Label()
+        Me.supplier = New System.Windows.Forms.Label()
+        Me.serialNumber = New System.Windows.Forms.Label()
+        Me.property_Category = New System.Windows.Forms.Label()
+        Me.property_name = New System.Windows.Forms.Label()
+        Me.assignedDepartment = New System.Windows.Forms.Label()
+        Me.location = New System.Windows.Forms.Label()
+        Me.remarks = New System.Windows.Forms.Label()
+        Me.remarks_txt = New System.Windows.Forms.TextBox()
+        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.datePurchasedDate = New System.Windows.Forms.DateTimePicker()
+        Me.warrantyExpirationDate = New System.Windows.Forms.DateTimePicker()
+        Me.assignedEmployeeTxt = New System.Windows.Forms.TextBox()
+        Me.assignedDeparmentCmbo = New System.Windows.Forms.ComboBox()
+        Me.propertyLocation = New System.Windows.Forms.TextBox()
+        Me.assignedEmployee = New System.Windows.Forms.Label()
+        Me.date_purchased = New System.Windows.Forms.Label()
+        Me.warrantyExpiration = New System.Windows.Forms.Label()
+        Me.RoundedPanel1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        CType(Me.no_of_employees_numeric, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RoundedPanel2.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'cb_Barangay
-        '
-        Me.cb_Barangay.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cb_Barangay.FormattingEnabled = True
-        Me.cb_Barangay.Items.AddRange(New Object() {"Binanuaan", "Caawigan", "Cahabaan", "Calintaan", "Del Carmen", "Gabon", "Itomang", "Poblacion", "San Francisco", "San Isidro", "San Jose", "San Nicolas", "Santa Cruz", "Santa Elena", "Santo Niño"})
-        Me.cb_Barangay.Location = New System.Drawing.Point(1107, 447)
-        Me.cb_Barangay.Name = "cb_Barangay"
-        Me.cb_Barangay.Size = New System.Drawing.Size(337, 36)
-        Me.cb_Barangay.TabIndex = 79
-        '
-        'cb_Municipality
-        '
-        Me.cb_Municipality.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cb_Municipality.FormattingEnabled = True
-        Me.cb_Municipality.Items.AddRange(New Object() {"Daet", "Basud", "Capalonga", "Jose Panganiban", "Labo", "Mercedes", "Paracale", "San Lorenzo Ruiz", "San Vicente", "Santa Elena", "Talisay", "Vinzons"})
-        Me.cb_Municipality.Location = New System.Drawing.Point(1107, 357)
-        Me.cb_Municipality.Name = "cb_Municipality"
-        Me.cb_Municipality.Size = New System.Drawing.Size(337, 36)
-        Me.cb_Municipality.TabIndex = 78
-        '
-        'txb_Disposal
-        '
-        Me.txb_Disposal.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_Disposal.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Disposal.Location = New System.Drawing.Point(1107, 614)
-        Me.txb_Disposal.Multiline = True
-        Me.txb_Disposal.Name = "txb_Disposal"
-        Me.txb_Disposal.Size = New System.Drawing.Size(337, 34)
-        Me.txb_Disposal.TabIndex = 73
-        '
-        'cb_Province
-        '
-        Me.cb_Province.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cb_Province.FormattingEnabled = True
-        Me.cb_Province.Items.AddRange(New Object() {"Albay", "Camarines Norte", "Camarines Sur", "Catanduanes", "Masbate", "Sorsogon"})
-        Me.cb_Province.Location = New System.Drawing.Point(1107, 270)
-        Me.cb_Province.Name = "cb_Province"
-        Me.cb_Province.Size = New System.Drawing.Size(337, 36)
-        Me.cb_Province.TabIndex = 77
-        '
-        'Label1
-        '
-        Me.Label1.Font = New System.Drawing.Font("Poppins", 41.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(593, -17)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(472, 82)
-        Me.Label1.TabIndex = 47
-        Me.Label1.Text = "Add Property"
-        '
-        'cb_Position
-        '
-        Me.cb_Position.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cb_Position.FormattingEnabled = True
-        Me.cb_Position.Items.AddRange(New Object() {"Super Admin", "Admin", "Staff"})
-        Me.cb_Position.Location = New System.Drawing.Point(290, 432)
-        Me.cb_Position.Name = "cb_Position"
-        Me.cb_Position.Size = New System.Drawing.Size(346, 36)
-        Me.cb_Position.TabIndex = 76
-        '
-        'Label2
-        '
-        Me.Label2.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(72, 107)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(184, 34)
-        Me.Label2.TabIndex = 48
-        Me.Label2.Text = "Property I.D"
-        '
-        'txb_ContactNumber
-        '
-        Me.txb_ContactNumber.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_ContactNumber.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_ContactNumber.Location = New System.Drawing.Point(290, 687)
-        Me.txb_ContactNumber.Multiline = True
-        Me.txb_ContactNumber.Name = "txb_ContactNumber"
-        Me.txb_ContactNumber.Size = New System.Drawing.Size(346, 34)
-        Me.txb_ContactNumber.TabIndex = 75
-        '
-        'Label3
-        '
-        Me.Label3.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(72, 434)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(195, 34)
-        Me.Label3.TabIndex = 49
-        Me.Label3.Text = "Serial Number"
-        '
-        'Label16
-        '
-        Me.Label16.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label16.Location = New System.Drawing.Point(72, 687)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(218, 34)
-        Me.Label16.TabIndex = 74
-        Me.Label16.Text = "Supplier"
-        '
-        'Label4
-        '
-        Me.Label4.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(72, 266)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(184, 34)
-        Me.Label4.TabIndex = 50
-        Me.Label4.Text = "Category"
-        '
-        'Label5
-        '
-        Me.Label5.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(72, 520)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(227, 34)
-        Me.Label5.TabIndex = 51
-        Me.Label5.Text = "Acquisition Date"
-        '
-        'Label11
-        '
-        Me.Label11.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(894, 614)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(136, 34)
-        Me.Label11.TabIndex = 72
-        Me.Label11.Text = "Disposal Date"
-        '
-        'Label6
-        '
-        Me.Label6.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(72, 604)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(212, 34)
-        Me.Label6.TabIndex = 52
-        Me.Label6.Text = "Acquisition Cost"
-        '
-        'txb_EmployeeID
-        '
-        Me.txb_EmployeeID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_EmployeeID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_EmployeeID.Location = New System.Drawing.Point(290, 604)
-        Me.txb_EmployeeID.Multiline = True
-        Me.txb_EmployeeID.Name = "txb_EmployeeID"
-        Me.txb_EmployeeID.Size = New System.Drawing.Size(346, 34)
-        Me.txb_EmployeeID.TabIndex = 71
-        '
-        'txb_FirstName
-        '
-        Me.txb_FirstName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_FirstName.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_FirstName.Location = New System.Drawing.Point(290, 107)
-        Me.txb_FirstName.Multiline = True
-        Me.txb_FirstName.Name = "txb_FirstName"
-        Me.txb_FirstName.Size = New System.Drawing.Size(346, 34)
-        Me.txb_FirstName.TabIndex = 53
-        '
-        'txb_HouseNoStreet
-        '
-        Me.txb_HouseNoStreet.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_HouseNoStreet.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_HouseNoStreet.Location = New System.Drawing.Point(1107, 524)
-        Me.txb_HouseNoStreet.Multiline = True
-        Me.txb_HouseNoStreet.Name = "txb_HouseNoStreet"
-        Me.txb_HouseNoStreet.Size = New System.Drawing.Size(337, 34)
-        Me.txb_HouseNoStreet.TabIndex = 70
-        '
-        'txb_MiddleName
-        '
-        Me.txb_MiddleName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_MiddleName.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_MiddleName.Location = New System.Drawing.Point(290, 180)
-        Me.txb_MiddleName.Multiline = True
-        Me.txb_MiddleName.Name = "txb_MiddleName"
-        Me.txb_MiddleName.Size = New System.Drawing.Size(346, 34)
-        Me.txb_MiddleName.TabIndex = 54
-        '
-        'txb_UserName
-        '
-        Me.txb_UserName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_UserName.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_UserName.Location = New System.Drawing.Point(1107, 186)
-        Me.txb_UserName.Multiline = True
-        Me.txb_UserName.Name = "txb_UserName"
-        Me.txb_UserName.Size = New System.Drawing.Size(337, 34)
-        Me.txb_UserName.TabIndex = 69
-        '
-        'txb_LastName
-        '
-        Me.txb_LastName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_LastName.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_LastName.Location = New System.Drawing.Point(290, 266)
-        Me.txb_LastName.Multiline = True
-        Me.txb_LastName.Name = "txb_LastName"
-        Me.txb_LastName.Size = New System.Drawing.Size(346, 34)
-        Me.txb_LastName.TabIndex = 55
-        '
-        'txb_Email
-        '
-        Me.txb_Email.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_Email.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Email.Location = New System.Drawing.Point(1107, 113)
-        Me.txb_Email.Multiline = True
-        Me.txb_Email.Name = "txb_Email"
-        Me.txb_Email.Size = New System.Drawing.Size(337, 34)
-        Me.txb_Email.TabIndex = 68
-        '
-        'txb_Suffix
-        '
-        Me.txb_Suffix.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_Suffix.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Suffix.Location = New System.Drawing.Point(290, 352)
-        Me.txb_Suffix.Multiline = True
-        Me.txb_Suffix.Name = "txb_Suffix"
-        Me.txb_Suffix.Size = New System.Drawing.Size(346, 34)
-        Me.txb_Suffix.TabIndex = 56
-        '
-        'Label9
-        '
-        Me.Label9.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label9.Location = New System.Drawing.Point(894, 360)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(171, 34)
-        Me.Label9.TabIndex = 67
-        Me.Label9.Text = "Warranty Details"
-        '
-        'Label7
-        '
-        Me.Label7.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label7.Location = New System.Drawing.Point(72, 180)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(195, 34)
-        Me.Label7.TabIndex = 57
-        Me.Label7.Text = "Property Name"
-        '
-        'Label10
-        '
-        Me.Label10.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(894, 186)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(150, 34)
-        Me.Label10.TabIndex = 66
-        Me.Label10.Text = "Location"
-        '
-        'Label8
-        '
-        Me.Label8.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label8.Location = New System.Drawing.Point(72, 352)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(168, 34)
-        Me.Label8.TabIndex = 58
-        Me.Label8.Text = "Description"
-        '
-        'Label12
-        '
-        Me.Label12.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label12.Location = New System.Drawing.Point(894, 530)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(219, 34)
-        Me.Label12.TabIndex = 65
-        Me.Label12.Text = "Depreciation Value"
-        '
-        'txb_DepartmentID
-        '
-        Me.txb_DepartmentID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_DepartmentID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepartmentID.Location = New System.Drawing.Point(290, 520)
-        Me.txb_DepartmentID.Multiline = True
-        Me.txb_DepartmentID.Name = "txb_DepartmentID"
-        Me.txb_DepartmentID.Size = New System.Drawing.Size(346, 34)
-        Me.txb_DepartmentID.TabIndex = 59
-        '
-        'Label13
-        '
-        Me.Label13.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label13.Location = New System.Drawing.Point(894, 272)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(207, 34)
-        Me.Label13.TabIndex = 64
-        Me.Label13.Text = "Custodian I.D "
-        '
-        'btn_Cancel
-        '
-        Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(471, 825)
-        Me.btn_Cancel.Name = "btn_Cancel"
-        Me.btn_Cancel.Size = New System.Drawing.Size(191, 46)
-        Me.btn_Cancel.TabIndex = 60
-        Me.btn_Cancel.Text = "Cancel"
-        Me.btn_Cancel.UseVisualStyleBackColor = True
-        '
-        'Label14
-        '
-        Me.Label14.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label14.Location = New System.Drawing.Point(894, 449)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(136, 34)
-        Me.Label14.TabIndex = 63
-        Me.Label14.Text = "Life Span"
-        '
-        'btn_Login
-        '
-        Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Login.ForeColor = System.Drawing.Color.White
-        Me.btn_Login.Location = New System.Drawing.Point(814, 825)
-        Me.btn_Login.Name = "btn_Login"
-        Me.btn_Login.Size = New System.Drawing.Size(190, 46)
-        Me.btn_Login.TabIndex = 61
-        Me.btn_Login.Text = "Add"
-        Me.btn_Login.UseVisualStyleBackColor = False
-        '
-        'Label15
-        '
-        Me.Label15.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label15.Location = New System.Drawing.Point(894, 113)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(136, 34)
-        Me.Label15.TabIndex = 62
-        Me.Label15.Text = "Condition Status"
+        'btnSave
+        '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnSave.CornerRadius = 15
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSave.Location = New System.Drawing.Point(1445, 723)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(145, 34)
+        Me.btnSave.TabIndex = 159
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
+        'admin_label_DepartmentManagement
+        '
+        Me.admin_label_DepartmentManagement.AutoSize = True
+        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(316, 93)
+        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(251, 58)
+        Me.admin_label_DepartmentManagement.TabIndex = 156
+        Me.admin_label_DepartmentManagement.Text = "Add Property"
+        '
+        'instructions
+        '
+        Me.instructions.AutoSize = True
+        Me.instructions.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.instructions.Location = New System.Drawing.Point(18, 24)
+        Me.instructions.Name = "instructions"
+        Me.instructions.Size = New System.Drawing.Size(317, 26)
+        Me.instructions.TabIndex = 40
+        Me.instructions.Text = "Fill the required department information."
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnCancel.CornerRadius = 15
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Location = New System.Drawing.Point(1292, 723)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
+        Me.btnCancel.TabIndex = 160
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'RoundedPanel1
+        '
+        Me.RoundedPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel1.Controls.Add(Me.instructions)
+        Me.RoundedPanel1.CornerRadius = 5
+        Me.RoundedPanel1.Location = New System.Drawing.Point(326, 154)
+        Me.RoundedPanel1.Name = "RoundedPanel1"
+        Me.RoundedPanel1.Size = New System.Drawing.Size(1264, 72)
+        Me.RoundedPanel1.TabIndex = 157
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.categoryCmbo)
+        Me.Panel1.Controls.Add(Me.conditionStatusCmbo)
+        Me.Panel1.Controls.Add(Me.no_of_employees_numeric)
+        Me.Panel1.Controls.Add(Me.supplierTxt)
+        Me.Panel1.Controls.Add(Me.serialNumberTxt)
+        Me.Panel1.Controls.Add(Me.propertyNameTxt)
+        Me.Panel1.Controls.Add(Me.cost)
+        Me.Panel1.Controls.Add(Me.conditionStatus)
+        Me.Panel1.Controls.Add(Me.supplier)
+        Me.Panel1.Controls.Add(Me.serialNumber)
+        Me.Panel1.Controls.Add(Me.property_Category)
+        Me.Panel1.Controls.Add(Me.property_name)
+        Me.Panel1.Location = New System.Drawing.Point(67, 18)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(553, 382)
+        Me.Panel1.TabIndex = 64
+        '
+        'categoryCmbo
+        '
+        Me.categoryCmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.categoryCmbo.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.categoryCmbo.FormattingEnabled = True
+        Me.categoryCmbo.Location = New System.Drawing.Point(256, 95)
+        Me.categoryCmbo.Name = "categoryCmbo"
+        Me.categoryCmbo.Size = New System.Drawing.Size(254, 34)
+        Me.categoryCmbo.TabIndex = 71
+        '
+        'conditionStatusCmbo
+        '
+        Me.conditionStatusCmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.conditionStatusCmbo.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.conditionStatusCmbo.FormattingEnabled = True
+        Me.conditionStatusCmbo.Location = New System.Drawing.Point(256, 248)
+        Me.conditionStatusCmbo.Name = "conditionStatusCmbo"
+        Me.conditionStatusCmbo.Size = New System.Drawing.Size(254, 34)
+        Me.conditionStatusCmbo.TabIndex = 70
+        '
+        'no_of_employees_numeric
+        '
+        Me.no_of_employees_numeric.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.no_of_employees_numeric.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.no_of_employees_numeric.Location = New System.Drawing.Point(256, 309)
+        Me.no_of_employees_numeric.Name = "no_of_employees_numeric"
+        Me.no_of_employees_numeric.Size = New System.Drawing.Size(254, 30)
+        Me.no_of_employees_numeric.TabIndex = 69
+        '
+        'supplierTxt
+        '
+        Me.supplierTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supplierTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.supplierTxt.Location = New System.Drawing.Point(256, 198)
+        Me.supplierTxt.Name = "supplierTxt"
+        Me.supplierTxt.Size = New System.Drawing.Size(254, 30)
+        Me.supplierTxt.TabIndex = 67
+        '
+        'serialNumberTxt
+        '
+        Me.serialNumberTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.serialNumberTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.serialNumberTxt.Location = New System.Drawing.Point(256, 147)
+        Me.serialNumberTxt.Name = "serialNumberTxt"
+        Me.serialNumberTxt.Size = New System.Drawing.Size(254, 30)
+        Me.serialNumberTxt.TabIndex = 66
+        '
+        'propertyNameTxt
+        '
+        Me.propertyNameTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.propertyNameTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.propertyNameTxt.Location = New System.Drawing.Point(256, 44)
+        Me.propertyNameTxt.Name = "propertyNameTxt"
+        Me.propertyNameTxt.Size = New System.Drawing.Size(254, 30)
+        Me.propertyNameTxt.TabIndex = 64
+        '
+        'cost
+        '
+        Me.cost.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cost.AutoSize = True
+        Me.cost.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cost.Location = New System.Drawing.Point(42, 313)
+        Me.cost.Name = "cost"
+        Me.cost.Size = New System.Drawing.Size(47, 26)
+        Me.cost.TabIndex = 63
+        Me.cost.Text = "Cost"
+        '
+        'conditionStatus
+        '
+        Me.conditionStatus.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.conditionStatus.AutoSize = True
+        Me.conditionStatus.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.conditionStatus.Location = New System.Drawing.Point(42, 256)
+        Me.conditionStatus.Name = "conditionStatus"
+        Me.conditionStatus.Size = New System.Drawing.Size(138, 26)
+        Me.conditionStatus.TabIndex = 62
+        Me.conditionStatus.Text = "Condition Status"
+        '
+        'supplier
+        '
+        Me.supplier.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supplier.AutoSize = True
+        Me.supplier.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.supplier.Location = New System.Drawing.Point(42, 201)
+        Me.supplier.Name = "supplier"
+        Me.supplier.Size = New System.Drawing.Size(74, 26)
+        Me.supplier.TabIndex = 61
+        Me.supplier.Text = "Supplier"
+        '
+        'serialNumber
+        '
+        Me.serialNumber.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.serialNumber.AutoSize = True
+        Me.serialNumber.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.serialNumber.Location = New System.Drawing.Point(42, 151)
+        Me.serialNumber.Name = "serialNumber"
+        Me.serialNumber.Size = New System.Drawing.Size(119, 26)
+        Me.serialNumber.TabIndex = 60
+        Me.serialNumber.Text = "Serial Number"
+        '
+        'property_Category
+        '
+        Me.property_Category.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.property_Category.AutoSize = True
+        Me.property_Category.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.property_Category.Location = New System.Drawing.Point(42, 98)
+        Me.property_Category.Name = "property_Category"
+        Me.property_Category.Size = New System.Drawing.Size(82, 26)
+        Me.property_Category.TabIndex = 59
+        Me.property_Category.Text = "Category"
+        '
+        'property_name
+        '
+        Me.property_name.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.property_name.AutoSize = True
+        Me.property_name.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.property_name.Location = New System.Drawing.Point(42, 47)
+        Me.property_name.Name = "property_name"
+        Me.property_name.Size = New System.Drawing.Size(124, 26)
+        Me.property_name.TabIndex = 58
+        Me.property_name.Text = "Property Name"
+        '
+        'assignedDepartment
+        '
+        Me.assignedDepartment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.assignedDepartment.AutoSize = True
+        Me.assignedDepartment.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.assignedDepartment.Location = New System.Drawing.Point(44, 204)
+        Me.assignedDepartment.Name = "assignedDepartment"
+        Me.assignedDepartment.Size = New System.Drawing.Size(175, 26)
+        Me.assignedDepartment.TabIndex = 49
+        Me.assignedDepartment.Text = "Assigned Department"
+        '
+        'location
+        '
+        Me.location.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.location.AutoSize = True
+        Me.location.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.location.Location = New System.Drawing.Point(44, 256)
+        Me.location.Name = "location"
+        Me.location.Size = New System.Drawing.Size(76, 26)
+        Me.location.TabIndex = 50
+        Me.location.Text = "Location"
+        '
+        'remarks
+        '
+        Me.remarks.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.remarks.AutoSize = True
+        Me.remarks.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.remarks.Location = New System.Drawing.Point(44, 313)
+        Me.remarks.Name = "remarks"
+        Me.remarks.Size = New System.Drawing.Size(77, 26)
+        Me.remarks.TabIndex = 51
+        Me.remarks.Text = "Remarks"
+        '
+        'remarks_txt
+        '
+        Me.remarks_txt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.remarks_txt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.remarks_txt.Location = New System.Drawing.Point(242, 308)
+        Me.remarks_txt.Name = "remarks_txt"
+        Me.remarks_txt.Size = New System.Drawing.Size(238, 30)
+        Me.remarks_txt.TabIndex = 58
+        '
+        'RoundedPanel2
+        '
+        Me.RoundedPanel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel2.Controls.Add(Me.Panel2)
+        Me.RoundedPanel2.Controls.Add(Me.Panel1)
+        Me.RoundedPanel2.CornerRadius = 5
+        Me.RoundedPanel2.Location = New System.Drawing.Point(326, 246)
+        Me.RoundedPanel2.Name = "RoundedPanel2"
+        Me.RoundedPanel2.Size = New System.Drawing.Size(1264, 425)
+        Me.RoundedPanel2.TabIndex = 158
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.datePurchasedDate)
+        Me.Panel2.Controls.Add(Me.warrantyExpirationDate)
+        Me.Panel2.Controls.Add(Me.assignedEmployeeTxt)
+        Me.Panel2.Controls.Add(Me.assignedDeparmentCmbo)
+        Me.Panel2.Controls.Add(Me.propertyLocation)
+        Me.Panel2.Controls.Add(Me.assignedEmployee)
+        Me.Panel2.Controls.Add(Me.date_purchased)
+        Me.Panel2.Controls.Add(Me.warrantyExpiration)
+        Me.Panel2.Controls.Add(Me.assignedDepartment)
+        Me.Panel2.Controls.Add(Me.location)
+        Me.Panel2.Controls.Add(Me.remarks)
+        Me.Panel2.Controls.Add(Me.remarks_txt)
+        Me.Panel2.Location = New System.Drawing.Point(655, 18)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(537, 382)
+        Me.Panel2.TabIndex = 65
+        '
+        'datePurchasedDate
+        '
+        Me.datePurchasedDate.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.datePurchasedDate.Location = New System.Drawing.Point(242, 44)
+        Me.datePurchasedDate.Name = "datePurchasedDate"
+        Me.datePurchasedDate.Size = New System.Drawing.Size(238, 30)
+        Me.datePurchasedDate.TabIndex = 68
+        '
+        'warrantyExpirationDate
+        '
+        Me.warrantyExpirationDate.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.warrantyExpirationDate.Location = New System.Drawing.Point(242, 102)
+        Me.warrantyExpirationDate.Name = "warrantyExpirationDate"
+        Me.warrantyExpirationDate.Size = New System.Drawing.Size(238, 30)
+        Me.warrantyExpirationDate.TabIndex = 67
+        '
+        'assignedEmployeeTxt
+        '
+        Me.assignedEmployeeTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.assignedEmployeeTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.assignedEmployeeTxt.Location = New System.Drawing.Point(242, 147)
+        Me.assignedEmployeeTxt.Name = "assignedEmployeeTxt"
+        Me.assignedEmployeeTxt.Size = New System.Drawing.Size(238, 30)
+        Me.assignedEmployeeTxt.TabIndex = 66
+        '
+        'assignedDeparmentCmbo
+        '
+        Me.assignedDeparmentCmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.assignedDeparmentCmbo.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.assignedDeparmentCmbo.FormattingEnabled = True
+        Me.assignedDeparmentCmbo.Location = New System.Drawing.Point(242, 201)
+        Me.assignedDeparmentCmbo.Name = "assignedDeparmentCmbo"
+        Me.assignedDeparmentCmbo.Size = New System.Drawing.Size(238, 34)
+        Me.assignedDeparmentCmbo.TabIndex = 65
+        '
+        'propertyLocation
+        '
+        Me.propertyLocation.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.propertyLocation.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.propertyLocation.Location = New System.Drawing.Point(242, 252)
+        Me.propertyLocation.Name = "propertyLocation"
+        Me.propertyLocation.Size = New System.Drawing.Size(238, 30)
+        Me.propertyLocation.TabIndex = 64
+        '
+        'assignedEmployee
+        '
+        Me.assignedEmployee.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.assignedEmployee.AutoSize = True
+        Me.assignedEmployee.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.assignedEmployee.Location = New System.Drawing.Point(44, 151)
+        Me.assignedEmployee.Name = "assignedEmployee"
+        Me.assignedEmployee.Size = New System.Drawing.Size(158, 26)
+        Me.assignedEmployee.TabIndex = 48
+        Me.assignedEmployee.Text = "Assigned Employee"
+        '
+        'date_purchased
+        '
+        Me.date_purchased.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.date_purchased.AutoSize = True
+        Me.date_purchased.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.date_purchased.Location = New System.Drawing.Point(44, 47)
+        Me.date_purchased.Name = "date_purchased"
+        Me.date_purchased.Size = New System.Drawing.Size(132, 26)
+        Me.date_purchased.TabIndex = 46
+        Me.date_purchased.Text = "Date Purchased"
+        '
+        'warrantyExpiration
+        '
+        Me.warrantyExpiration.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.warrantyExpiration.AutoSize = True
+        Me.warrantyExpiration.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.warrantyExpiration.Location = New System.Drawing.Point(44, 98)
+        Me.warrantyExpiration.Name = "warrantyExpiration"
+        Me.warrantyExpiration.Size = New System.Drawing.Size(160, 26)
+        Me.warrantyExpiration.TabIndex = 47
+        Me.warrantyExpiration.Text = "Warranty Expiration"
         '
         'AddPropert
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1516, 906)
-        Me.Controls.Add(Me.cb_Barangay)
-        Me.Controls.Add(Me.cb_Municipality)
-        Me.Controls.Add(Me.txb_Disposal)
-        Me.Controls.Add(Me.cb_Province)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cb_Position)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.txb_ContactNumber)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.txb_EmployeeID)
-        Me.Controls.Add(Me.txb_FirstName)
-        Me.Controls.Add(Me.txb_HouseNoStreet)
-        Me.Controls.Add(Me.txb_MiddleName)
-        Me.Controls.Add(Me.txb_UserName)
-        Me.Controls.Add(Me.txb_LastName)
-        Me.Controls.Add(Me.txb_Email)
-        Me.Controls.Add(Me.txb_Suffix)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.txb_DepartmentID)
-        Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.btn_Cancel)
-        Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.btn_Login)
-        Me.Controls.Add(Me.Label15)
+        Me.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ClientSize = New System.Drawing.Size(1924, 1055)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.admin_label_DepartmentManagement)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.RoundedPanel1)
+        Me.Controls.Add(Me.RoundedPanel2)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "AddPropert"
         Me.Text = "AddPropert"
+        Me.RoundedPanel1.ResumeLayout(False)
+        Me.RoundedPanel1.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        CType(Me.no_of_employees_numeric, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.RoundedPanel2.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents cb_Barangay As System.Windows.Forms.ComboBox
-    Friend WithEvents cb_Municipality As System.Windows.Forms.ComboBox
-    Friend WithEvents txb_Disposal As System.Windows.Forms.TextBox
-    Friend WithEvents cb_Province As System.Windows.Forms.ComboBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents cb_Position As System.Windows.Forms.ComboBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents txb_ContactNumber As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents txb_EmployeeID As System.Windows.Forms.TextBox
-    Friend WithEvents txb_FirstName As System.Windows.Forms.TextBox
-    Friend WithEvents txb_HouseNoStreet As System.Windows.Forms.TextBox
-    Friend WithEvents txb_MiddleName As System.Windows.Forms.TextBox
-    Friend WithEvents txb_UserName As System.Windows.Forms.TextBox
-    Friend WithEvents txb_LastName As System.Windows.Forms.TextBox
-    Friend WithEvents txb_Email As System.Windows.Forms.TextBox
-    Friend WithEvents txb_Suffix As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents txb_DepartmentID As System.Windows.Forms.TextBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents btn_Cancel As System.Windows.Forms.Button
-    Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents btn_Login As System.Windows.Forms.Button
-    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents btnSave As Resources.Controls.RoundedButton
+    Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
+    Friend WithEvents instructions As System.Windows.Forms.Label
+    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents categoryCmbo As System.Windows.Forms.ComboBox
+    Friend WithEvents conditionStatusCmbo As System.Windows.Forms.ComboBox
+    Friend WithEvents no_of_employees_numeric As System.Windows.Forms.NumericUpDown
+    Friend WithEvents supplierTxt As System.Windows.Forms.TextBox
+    Friend WithEvents serialNumberTxt As System.Windows.Forms.TextBox
+    Friend WithEvents propertyNameTxt As System.Windows.Forms.TextBox
+    Friend WithEvents cost As System.Windows.Forms.Label
+    Friend WithEvents conditionStatus As System.Windows.Forms.Label
+    Friend WithEvents supplier As System.Windows.Forms.Label
+    Friend WithEvents serialNumber As System.Windows.Forms.Label
+    Friend WithEvents property_Category As System.Windows.Forms.Label
+    Friend WithEvents property_name As System.Windows.Forms.Label
+    Friend WithEvents assignedDepartment As System.Windows.Forms.Label
+    Friend WithEvents location As System.Windows.Forms.Label
+    Friend WithEvents remarks As System.Windows.Forms.Label
+    Friend WithEvents remarks_txt As System.Windows.Forms.TextBox
+    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents datePurchasedDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents warrantyExpirationDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents assignedEmployeeTxt As System.Windows.Forms.TextBox
+    Friend WithEvents assignedDeparmentCmbo As System.Windows.Forms.ComboBox
+    Friend WithEvents propertyLocation As System.Windows.Forms.TextBox
+    Friend WithEvents assignedEmployee As System.Windows.Forms.Label
+    Friend WithEvents date_purchased As System.Windows.Forms.Label
+    Friend WithEvents warrantyExpiration As System.Windows.Forms.Label
 End Class

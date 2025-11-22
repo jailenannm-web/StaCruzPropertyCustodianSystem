@@ -1,0 +1,104 @@
+================================================================================
+MANUAL FIX REQUIRED - AddDepartment Errors
+================================================================================
+
+You have 2 errors that need to be fixed manually:
+
+1. "Too many arguments" - The form is calling AddDepartment with 12 parameters
+   but the database function only accepts 8 parameters.
+
+2. "'vbCrLf' is not declared" - Need to replace vbCrLf with Environment.NewLine
+
+================================================================================
+FIX 1: Forms/Admin/AddDepartment.vb
+================================================================================
+
+LOCATION: Line 143
+
+FIND:
+                officeHours
+            )
+
+REPLACE WITH:
+                officeHours,
+                establishedDate,
+                parentDeptID,
+                statusValue
+            )
+
+================================================================================
+FIX 2: Forms/Admin/AddDepartment.vb  
+================================================================================
+
+LOCATION: Line 163 (if it still has vbCrLf)
+
+FIND:
+            System.Diagnostics.Debug.WriteLine("[v0] Add Department Error: " & ex.Message & vbCrLf & ex.StackTrace)
+
+REPLACE WITH:
+            System.Diagnostics.Debug.WriteLine("[v0] Add Department Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+
+================================================================================
+FIX 3: DatabaseConnection.vb - Function Signature
+================================================================================
+
+LOCATION: Line 4996
+
+FIND:
+                                        Optional budgetAllocation As Decimal = 0) As Boolean
+
+REPLACE WITH:
+                                        Optional budgetAllocation As Decimal = 0, Optional officeHours As String = "",
+                                        Optional establishedDate As Date? = Nothing, Optional parentDepartmentID As Integer? = Nothing,
+                                        Optional status As String = "active") As Boolean
+
+================================================================================
+FIX 4: DatabaseConnection.vb - INSERT Query
+================================================================================
+
+LOCATION: Lines 5026-5029
+
+FIND:
+            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
+                                 "contact_number, email, no_of_employees, budget_allocation, status) " &
+                                 "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
+                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, 'active')"
+
+REPLACE WITH:
+            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
+                                 "contact_number, email, no_of_employees, budget_allocation, status, " &
+                                 "office_hours, established_date, parent_department_id) " &
+                                 "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
+                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, @status, " &
+                                 "@officeHours, @establishedDate, @parentDepartmentID)"
+
+================================================================================
+FIX 5: DatabaseConnection.vb - Add Parameters
+================================================================================
+
+LOCATION: After line 5039
+
+FIND:
+                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+
+REPLACE WITH:
+                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+                cmd.Parameters.AddWithValue("@status", status)
+                cmd.Parameters.AddWithValue("@officeHours", If(String.IsNullOrEmpty(officeHours), DBNull.Value, officeHours))
+                cmd.Parameters.AddWithValue("@establishedDate", If(establishedDate.HasValue, establishedDate.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@parentDepartmentID", If(parentDepartmentID.HasValue, parentDepartmentID.Value, DBNull.Value))
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+
+================================================================================
+AFTER APPLYING THESE FIXES:
+================================================================================
+- The "Too many arguments" error will be resolved
+- The "vbCrLf" error will be resolved  
+- All 15 department attributes will be saved correctly
+- The Add Department form will work properly
+
+================================================================================
+

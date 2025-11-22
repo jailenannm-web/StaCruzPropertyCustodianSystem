@@ -22,449 +22,589 @@ Partial Class AddSupply
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txb_Status = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txb_UnitCost = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txb_SupplierID = New System.Windows.Forms.TextBox()
-        Me.txb_SupplyID = New System.Windows.Forms.TextBox()
-        Me.txb_CustodianID = New System.Windows.Forms.TextBox()
-        Me.txb_SupplyName = New System.Windows.Forms.TextBox()
-        Me.txb_AcquisitionDate = New System.Windows.Forms.TextBox()
-        Me.txb_Category = New System.Windows.Forms.TextBox()
-        Me.txb_TotalValue = New System.Windows.Forms.TextBox()
-        Me.txb_Description = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.txb_ReorderLevel = New System.Windows.Forms.TextBox()
+        Dim acquisitionDate As System.Windows.Forms.Label
         Me.btn_Cancel = New System.Windows.Forms.Button()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.btn_Login = New System.Windows.Forms.Button()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.txb_UnitOfMeasure = New System.Windows.Forms.TextBox()
-        Me.txb_Location = New System.Windows.Forms.TextBox()
-        Me.txb_ExpirationDate = New System.Windows.Forms.TextBox()
-        Me.txb_QuantityInStock = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.acquisitionDatePicker = New System.Windows.Forms.DateTimePicker()
+        Me.expirationDatePicker = New System.Windows.Forms.DateTimePicker()
+        Me.totalValueTxt = New System.Windows.Forms.TextBox()
+        Me.statusCombo = New System.Windows.Forms.ComboBox()
+        Me.locationTxt = New System.Windows.Forms.TextBox()
+        Me.reorderLevel = New System.Windows.Forms.Label()
+        Me.warrantyExpiration = New System.Windows.Forms.Label()
+        Me.expirationDate = New System.Windows.Forms.Label()
+        Me.location = New System.Windows.Forms.Label()
+        Me.custodianID = New System.Windows.Forms.Label()
+        Me.custodianIDtxt = New System.Windows.Forms.TextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.categoryCmbo = New System.Windows.Forms.ComboBox()
+        Me.unitOfMeasureCombo = New System.Windows.Forms.ComboBox()
+        Me.no_of_employees_numeric = New System.Windows.Forms.NumericUpDown()
+        Me.descriptionTxt = New System.Windows.Forms.TextBox()
+        Me.supplyNameTxt = New System.Windows.Forms.TextBox()
+        Me.supplyIDTxt = New System.Windows.Forms.TextBox()
+        Me.quantityInStock = New System.Windows.Forms.Label()
+        Me.unitOfMeasure = New System.Windows.Forms.Label()
+        Me.description = New System.Windows.Forms.Label()
+        Me.category = New System.Windows.Forms.Label()
+        Me.supply_Name = New System.Windows.Forms.Label()
+        Me.supplyID = New System.Windows.Forms.Label()
+        Me.unitCost = New System.Windows.Forms.Label()
+        Me.totalValue = New System.Windows.Forms.Label()
+        Me.supplierIDTxt = New System.Windows.Forms.TextBox()
+        Me.reorderLevelTxt = New System.Windows.Forms.TextBox()
+        Me.status = New System.Windows.Forms.Label()
+        Me.unitCostTxt = New System.Windows.Forms.TextBox()
+        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
+        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.instructions = New System.Windows.Forms.Label()
+        acquisitionDate = New System.Windows.Forms.Label()
+        Me.RoundedPanel2.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        CType(Me.no_of_employees_numeric, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RoundedPanel1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txb_Status
-        '
-        Me.txb_Status.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_Status.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Status.Location = New System.Drawing.Point(1023, 617)
-        Me.txb_Status.Multiline = True
-        Me.txb_Status.Name = "txb_Status"
-        Me.txb_Status.Size = New System.Drawing.Size(337, 34)
-        Me.txb_Status.TabIndex = 106
-        '
-        'Label1
-        '
-        Me.Label1.Font = New System.Drawing.Font("Poppins", 41.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(543, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(472, 82)
-        Me.Label1.TabIndex = 80
-        Me.Label1.Text = "Add Supply"
-        '
-        'Label2
-        '
-        Me.Label2.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(72, 133)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(212, 34)
-        Me.Label2.TabIndex = 81
-        Me.Label2.Text = "Supply I.D"
-        '
-        'txb_UnitCost
-        '
-        Me.txb_UnitCost.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_UnitCost.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_UnitCost.Location = New System.Drawing.Point(1023, 132)
-        Me.txb_UnitCost.Multiline = True
-        Me.txb_UnitCost.Name = "txb_UnitCost"
-        Me.txb_UnitCost.Size = New System.Drawing.Size(337, 34)
-        Me.txb_UnitCost.TabIndex = 108
-        '
-        'Label3
-        '
-        Me.Label3.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(72, 460)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(212, 34)
-        Me.Label3.TabIndex = 82
-        Me.Label3.Text = "Unit Of Measure"
-        '
-        'Label16
-        '
-        Me.Label16.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label16.Location = New System.Drawing.Point(796, 132)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(218, 34)
-        Me.Label16.TabIndex = 107
-        Me.Label16.Text = "Unit Cost"
-        '
-        'Label4
-        '
-        Me.Label4.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(72, 292)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(184, 34)
-        Me.Label4.TabIndex = 83
-        Me.Label4.Text = "Category"
-        '
-        'Label5
-        '
-        Me.Label5.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(72, 617)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(195, 34)
-        Me.Label5.TabIndex = 84
-        Me.Label5.Text = "Reorder Level "
-        '
-        'Label11
-        '
-        Me.Label11.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(796, 617)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(136, 34)
-        Me.Label11.TabIndex = 105
-        Me.Label11.Text = "Status"
-        '
-        'Label6
-        '
-        Me.Label6.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(72, 689)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(212, 34)
-        Me.Label6.TabIndex = 85
-        Me.Label6.Text = "Supplier I.D"
-        '
-        'txb_SupplierID
-        '
-        Me.txb_SupplierID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_SupplierID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_SupplierID.Location = New System.Drawing.Point(290, 689)
-        Me.txb_SupplierID.Multiline = True
-        Me.txb_SupplierID.Name = "txb_SupplierID"
-        Me.txb_SupplierID.Size = New System.Drawing.Size(346, 34)
-        Me.txb_SupplierID.TabIndex = 104
-        '
-        'txb_SupplyID
-        '
-        Me.txb_SupplyID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_SupplyID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_SupplyID.Location = New System.Drawing.Point(290, 133)
-        Me.txb_SupplyID.Multiline = True
-        Me.txb_SupplyID.Name = "txb_SupplyID"
-        Me.txb_SupplyID.Size = New System.Drawing.Size(346, 34)
-        Me.txb_SupplyID.TabIndex = 86
-        '
-        'txb_CustodianID
-        '
-        Me.txb_CustodianID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_CustodianID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_CustodianID.Location = New System.Drawing.Point(1023, 533)
-        Me.txb_CustodianID.Multiline = True
-        Me.txb_CustodianID.Name = "txb_CustodianID"
-        Me.txb_CustodianID.Size = New System.Drawing.Size(337, 34)
-        Me.txb_CustodianID.TabIndex = 103
-        '
-        'txb_SupplyName
-        '
-        Me.txb_SupplyName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_SupplyName.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_SupplyName.Location = New System.Drawing.Point(290, 206)
-        Me.txb_SupplyName.Multiline = True
-        Me.txb_SupplyName.Name = "txb_SupplyName"
-        Me.txb_SupplyName.Size = New System.Drawing.Size(346, 34)
-        Me.txb_SupplyName.TabIndex = 87
-        '
-        'txb_AcquisitionDate
-        '
-        Me.txb_AcquisitionDate.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_AcquisitionDate.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_AcquisitionDate.Location = New System.Drawing.Point(1023, 281)
-        Me.txb_AcquisitionDate.Multiline = True
-        Me.txb_AcquisitionDate.Name = "txb_AcquisitionDate"
-        Me.txb_AcquisitionDate.Size = New System.Drawing.Size(337, 34)
-        Me.txb_AcquisitionDate.TabIndex = 102
-        '
-        'txb_Category
-        '
-        Me.txb_Category.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_Category.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Category.Location = New System.Drawing.Point(290, 292)
-        Me.txb_Category.Multiline = True
-        Me.txb_Category.Name = "txb_Category"
-        Me.txb_Category.Size = New System.Drawing.Size(346, 34)
-        Me.txb_Category.TabIndex = 88
-        '
-        'txb_TotalValue
-        '
-        Me.txb_TotalValue.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_TotalValue.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_TotalValue.Location = New System.Drawing.Point(1023, 200)
-        Me.txb_TotalValue.Multiline = True
-        Me.txb_TotalValue.Name = "txb_TotalValue"
-        Me.txb_TotalValue.Size = New System.Drawing.Size(337, 34)
-        Me.txb_TotalValue.TabIndex = 101
-        '
-        'txb_Description
-        '
-        Me.txb_Description.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_Description.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Description.Location = New System.Drawing.Point(290, 378)
-        Me.txb_Description.Multiline = True
-        Me.txb_Description.Name = "txb_Description"
-        Me.txb_Description.Size = New System.Drawing.Size(346, 34)
-        Me.txb_Description.TabIndex = 89
-        '
-        'Label9
-        '
-        Me.Label9.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label9.Location = New System.Drawing.Point(796, 363)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(207, 34)
-        Me.Label9.TabIndex = 100
-        Me.Label9.Text = "Expiration Date"
-        '
-        'Label7
-        '
-        Me.Label7.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label7.Location = New System.Drawing.Point(72, 206)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(195, 34)
-        Me.Label7.TabIndex = 90
-        Me.Label7.Text = "Supply Name"
-        '
-        'Label10
-        '
-        Me.Label10.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(796, 281)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(219, 34)
-        Me.Label10.TabIndex = 99
-        Me.Label10.Text = "Acquisition Date"
-        '
-        'Label8
-        '
-        Me.Label8.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label8.Location = New System.Drawing.Point(72, 378)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(168, 34)
-        Me.Label8.TabIndex = 91
-        Me.Label8.Text = "Description"
-        '
-        'Label12
-        '
-        Me.Label12.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label12.Location = New System.Drawing.Point(796, 533)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(219, 34)
-        Me.Label12.TabIndex = 98
-        Me.Label12.Text = "Custodian I.D"
-        '
-        'txb_ReorderLevel
-        '
-        Me.txb_ReorderLevel.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_ReorderLevel.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_ReorderLevel.Location = New System.Drawing.Point(290, 617)
-        Me.txb_ReorderLevel.Multiline = True
-        Me.txb_ReorderLevel.Name = "txb_ReorderLevel"
-        Me.txb_ReorderLevel.Size = New System.Drawing.Size(346, 34)
-        Me.txb_ReorderLevel.TabIndex = 92
         '
         'btn_Cancel
         '
         Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(471, 851)
+        Me.btn_Cancel.Location = New System.Drawing.Point(628, 1047)
+        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btn_Cancel.Name = "btn_Cancel"
-        Me.btn_Cancel.Size = New System.Drawing.Size(191, 46)
+        Me.btn_Cancel.Size = New System.Drawing.Size(255, 57)
         Me.btn_Cancel.TabIndex = 93
         Me.btn_Cancel.Text = "Cancel"
         Me.btn_Cancel.UseVisualStyleBackColor = True
-        '
-        'Label14
-        '
-        Me.Label14.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label14.Location = New System.Drawing.Point(796, 452)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(136, 34)
-        Me.Label14.TabIndex = 96
-        Me.Label14.Text = "Location"
         '
         'btn_Login
         '
         Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Login.ForeColor = System.Drawing.Color.White
-        Me.btn_Login.Location = New System.Drawing.Point(814, 851)
+        Me.btn_Login.Location = New System.Drawing.Point(1085, 1047)
+        Me.btn_Login.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btn_Login.Name = "btn_Login"
-        Me.btn_Login.Size = New System.Drawing.Size(190, 46)
+        Me.btn_Login.Size = New System.Drawing.Size(253, 57)
         Me.btn_Login.TabIndex = 94
         Me.btn_Login.Text = "Add"
         Me.btn_Login.UseVisualStyleBackColor = False
         '
-        'Label15
+        'RoundedPanel2
         '
-        Me.Label15.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label15.Location = New System.Drawing.Point(796, 202)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(189, 34)
-        Me.Label15.TabIndex = 95
-        Me.Label15.Text = "Total Value"
+        Me.RoundedPanel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel2.Controls.Add(Me.Panel2)
+        Me.RoundedPanel2.Controls.Add(Me.Panel1)
+        Me.RoundedPanel2.CornerRadius = 5
+        Me.RoundedPanel2.Location = New System.Drawing.Point(215, 231)
+        Me.RoundedPanel2.Name = "RoundedPanel2"
+        Me.RoundedPanel2.Size = New System.Drawing.Size(1264, 526)
+        Me.RoundedPanel2.TabIndex = 118
         '
-        'txb_UnitOfMeasure
+        'Panel2
         '
-        Me.txb_UnitOfMeasure.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_UnitOfMeasure.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_UnitOfMeasure.Location = New System.Drawing.Point(290, 460)
-        Me.txb_UnitOfMeasure.Multiline = True
-        Me.txb_UnitOfMeasure.Name = "txb_UnitOfMeasure"
-        Me.txb_UnitOfMeasure.Size = New System.Drawing.Size(346, 34)
-        Me.txb_UnitOfMeasure.TabIndex = 113
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.unitCostTxt)
+        Me.Panel2.Controls.Add(Me.status)
+        Me.Panel2.Controls.Add(Me.totalValue)
+        Me.Panel2.Controls.Add(Me.acquisitionDatePicker)
+        Me.Panel2.Controls.Add(Me.unitCost)
+        Me.Panel2.Controls.Add(Me.expirationDatePicker)
+        Me.Panel2.Controls.Add(Me.totalValueTxt)
+        Me.Panel2.Controls.Add(Me.statusCombo)
+        Me.Panel2.Controls.Add(Me.locationTxt)
+        Me.Panel2.Controls.Add(acquisitionDate)
+        Me.Panel2.Controls.Add(Me.expirationDate)
+        Me.Panel2.Controls.Add(Me.location)
+        Me.Panel2.Controls.Add(Me.custodianID)
+        Me.Panel2.Controls.Add(Me.custodianIDtxt)
+        Me.Panel2.Location = New System.Drawing.Point(655, 18)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(537, 483)
+        Me.Panel2.TabIndex = 65
         '
-        'txb_Location
+        'acquisitionDatePicker
         '
-        Me.txb_Location.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_Location.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Location.Location = New System.Drawing.Point(1023, 452)
-        Me.txb_Location.Multiline = True
-        Me.txb_Location.Name = "txb_Location"
-        Me.txb_Location.Size = New System.Drawing.Size(337, 34)
-        Me.txb_Location.TabIndex = 114
+        Me.acquisitionDatePicker.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.acquisitionDatePicker.Location = New System.Drawing.Point(242, 147)
+        Me.acquisitionDatePicker.Name = "acquisitionDatePicker"
+        Me.acquisitionDatePicker.Size = New System.Drawing.Size(238, 30)
+        Me.acquisitionDatePicker.TabIndex = 68
         '
-        'txb_ExpirationDate
+        'expirationDatePicker
         '
-        Me.txb_ExpirationDate.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_ExpirationDate.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_ExpirationDate.Location = New System.Drawing.Point(1023, 363)
-        Me.txb_ExpirationDate.Multiline = True
-        Me.txb_ExpirationDate.Name = "txb_ExpirationDate"
-        Me.txb_ExpirationDate.Size = New System.Drawing.Size(337, 34)
-        Me.txb_ExpirationDate.TabIndex = 115
+        Me.expirationDatePicker.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.expirationDatePicker.Location = New System.Drawing.Point(242, 197)
+        Me.expirationDatePicker.Name = "expirationDatePicker"
+        Me.expirationDatePicker.Size = New System.Drawing.Size(238, 30)
+        Me.expirationDatePicker.TabIndex = 67
         '
-        'txb_QuantityInStock
+        'totalValueTxt
         '
-        Me.txb_QuantityInStock.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_QuantityInStock.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_QuantityInStock.Location = New System.Drawing.Point(290, 537)
-        Me.txb_QuantityInStock.Multiline = True
-        Me.txb_QuantityInStock.Name = "txb_QuantityInStock"
-        Me.txb_QuantityInStock.Size = New System.Drawing.Size(346, 34)
-        Me.txb_QuantityInStock.TabIndex = 117
+        Me.totalValueTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.totalValueTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.totalValueTxt.Location = New System.Drawing.Point(242, 94)
+        Me.totalValueTxt.Name = "totalValueTxt"
+        Me.totalValueTxt.Size = New System.Drawing.Size(238, 30)
+        Me.totalValueTxt.TabIndex = 66
         '
-        'Label13
+        'statusCombo
         '
-        Me.Label13.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label13.Location = New System.Drawing.Point(72, 537)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(222, 34)
-        Me.Label13.TabIndex = 116
-        Me.Label13.Text = "Quantity In Stock"
+        Me.statusCombo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.statusCombo.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.statusCombo.FormattingEnabled = True
+        Me.statusCombo.Location = New System.Drawing.Point(242, 355)
+        Me.statusCombo.Name = "statusCombo"
+        Me.statusCombo.Size = New System.Drawing.Size(238, 34)
+        Me.statusCombo.TabIndex = 65
+        '
+        'locationTxt
+        '
+        Me.locationTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.locationTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.locationTxt.Location = New System.Drawing.Point(242, 253)
+        Me.locationTxt.Name = "locationTxt"
+        Me.locationTxt.Size = New System.Drawing.Size(238, 30)
+        Me.locationTxt.TabIndex = 64
+        '
+        'acquisitionDate
+        '
+        acquisitionDate.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        acquisitionDate.AutoSize = True
+        acquisitionDate.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        acquisitionDate.Location = New System.Drawing.Point(44, 151)
+        acquisitionDate.Name = "acquisitionDate"
+        acquisitionDate.Size = New System.Drawing.Size(135, 26)
+        acquisitionDate.TabIndex = 48
+        acquisitionDate.Text = "Acquisition Date"
+        '
+        'reorderLevel
+        '
+        Me.reorderLevel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.reorderLevel.AutoSize = True
+        Me.reorderLevel.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reorderLevel.Location = New System.Drawing.Point(42, 374)
+        Me.reorderLevel.Name = "reorderLevel"
+        Me.reorderLevel.Size = New System.Drawing.Size(111, 26)
+        Me.reorderLevel.TabIndex = 46
+        Me.reorderLevel.Text = "Reorder Level"
+        '
+        'warrantyExpiration
+        '
+        Me.warrantyExpiration.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.warrantyExpiration.AutoSize = True
+        Me.warrantyExpiration.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.warrantyExpiration.Location = New System.Drawing.Point(42, 425)
+        Me.warrantyExpiration.Name = "warrantyExpiration"
+        Me.warrantyExpiration.Size = New System.Drawing.Size(93, 26)
+        Me.warrantyExpiration.TabIndex = 47
+        Me.warrantyExpiration.Text = "Supplier ID"
+        '
+        'expirationDate
+        '
+        Me.expirationDate.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.expirationDate.AutoSize = True
+        Me.expirationDate.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.expirationDate.Location = New System.Drawing.Point(44, 204)
+        Me.expirationDate.Name = "expirationDate"
+        Me.expirationDate.Size = New System.Drawing.Size(125, 26)
+        Me.expirationDate.TabIndex = 49
+        Me.expirationDate.Text = "Expiration Date"
+        '
+        'location
+        '
+        Me.location.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.location.AutoSize = True
+        Me.location.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.location.Location = New System.Drawing.Point(44, 256)
+        Me.location.Name = "location"
+        Me.location.Size = New System.Drawing.Size(76, 26)
+        Me.location.TabIndex = 50
+        Me.location.Text = "Location"
+        '
+        'custodianID
+        '
+        Me.custodianID.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.custodianID.AutoSize = True
+        Me.custodianID.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.custodianID.Location = New System.Drawing.Point(44, 312)
+        Me.custodianID.Name = "custodianID"
+        Me.custodianID.Size = New System.Drawing.Size(110, 26)
+        Me.custodianID.TabIndex = 51
+        Me.custodianID.Text = "Custodian ID"
+        '
+        'custodianIDtxt
+        '
+        Me.custodianIDtxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.custodianIDtxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.custodianIDtxt.Location = New System.Drawing.Point(242, 307)
+        Me.custodianIDtxt.Name = "custodianIDtxt"
+        Me.custodianIDtxt.Size = New System.Drawing.Size(238, 30)
+        Me.custodianIDtxt.TabIndex = 58
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.reorderLevelTxt)
+        Me.Panel1.Controls.Add(Me.supplierIDTxt)
+        Me.Panel1.Controls.Add(Me.categoryCmbo)
+        Me.Panel1.Controls.Add(Me.unitOfMeasureCombo)
+        Me.Panel1.Controls.Add(Me.no_of_employees_numeric)
+        Me.Panel1.Controls.Add(Me.descriptionTxt)
+        Me.Panel1.Controls.Add(Me.supplyNameTxt)
+        Me.Panel1.Controls.Add(Me.supplyIDTxt)
+        Me.Panel1.Controls.Add(Me.quantityInStock)
+        Me.Panel1.Controls.Add(Me.unitOfMeasure)
+        Me.Panel1.Controls.Add(Me.reorderLevel)
+        Me.Panel1.Controls.Add(Me.warrantyExpiration)
+        Me.Panel1.Controls.Add(Me.description)
+        Me.Panel1.Controls.Add(Me.category)
+        Me.Panel1.Controls.Add(Me.supply_Name)
+        Me.Panel1.Controls.Add(Me.supplyID)
+        Me.Panel1.Location = New System.Drawing.Point(67, 18)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(553, 483)
+        Me.Panel1.TabIndex = 64
+        '
+        'categoryCmbo
+        '
+        Me.categoryCmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.categoryCmbo.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.categoryCmbo.FormattingEnabled = True
+        Me.categoryCmbo.Location = New System.Drawing.Point(256, 148)
+        Me.categoryCmbo.Name = "categoryCmbo"
+        Me.categoryCmbo.Size = New System.Drawing.Size(254, 34)
+        Me.categoryCmbo.TabIndex = 71
+        '
+        'unitOfMeasureCombo
+        '
+        Me.unitOfMeasureCombo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.unitOfMeasureCombo.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.unitOfMeasureCombo.FormattingEnabled = True
+        Me.unitOfMeasureCombo.Location = New System.Drawing.Point(256, 248)
+        Me.unitOfMeasureCombo.Name = "unitOfMeasureCombo"
+        Me.unitOfMeasureCombo.Size = New System.Drawing.Size(254, 34)
+        Me.unitOfMeasureCombo.TabIndex = 70
+        '
+        'no_of_employees_numeric
+        '
+        Me.no_of_employees_numeric.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.no_of_employees_numeric.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.no_of_employees_numeric.Location = New System.Drawing.Point(256, 308)
+        Me.no_of_employees_numeric.Name = "no_of_employees_numeric"
+        Me.no_of_employees_numeric.Size = New System.Drawing.Size(254, 30)
+        Me.no_of_employees_numeric.TabIndex = 69
+        '
+        'descriptionTxt
+        '
+        Me.descriptionTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.descriptionTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.descriptionTxt.Location = New System.Drawing.Point(256, 197)
+        Me.descriptionTxt.Name = "descriptionTxt"
+        Me.descriptionTxt.Size = New System.Drawing.Size(254, 30)
+        Me.descriptionTxt.TabIndex = 67
+        '
+        'supplyNameTxt
+        '
+        Me.supplyNameTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supplyNameTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.supplyNameTxt.Location = New System.Drawing.Point(256, 94)
+        Me.supplyNameTxt.Name = "supplyNameTxt"
+        Me.supplyNameTxt.Size = New System.Drawing.Size(254, 30)
+        Me.supplyNameTxt.TabIndex = 66
+        '
+        'supplyIDTxt
+        '
+        Me.supplyIDTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supplyIDTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.supplyIDTxt.Location = New System.Drawing.Point(256, 44)
+        Me.supplyIDTxt.Name = "supplyIDTxt"
+        Me.supplyIDTxt.Size = New System.Drawing.Size(254, 30)
+        Me.supplyIDTxt.TabIndex = 64
+        '
+        'quantityInStock
+        '
+        Me.quantityInStock.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.quantityInStock.AutoSize = True
+        Me.quantityInStock.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.quantityInStock.Location = New System.Drawing.Point(42, 313)
+        Me.quantityInStock.Name = "quantityInStock"
+        Me.quantityInStock.Size = New System.Drawing.Size(139, 26)
+        Me.quantityInStock.TabIndex = 63
+        Me.quantityInStock.Text = "Quantity in Stock"
+        '
+        'unitOfMeasure
+        '
+        Me.unitOfMeasure.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.unitOfMeasure.AutoSize = True
+        Me.unitOfMeasure.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.unitOfMeasure.Location = New System.Drawing.Point(42, 256)
+        Me.unitOfMeasure.Name = "unitOfMeasure"
+        Me.unitOfMeasure.Size = New System.Drawing.Size(129, 26)
+        Me.unitOfMeasure.TabIndex = 62
+        Me.unitOfMeasure.Text = "Unit of Measure"
+        '
+        'description
+        '
+        Me.description.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.description.AutoSize = True
+        Me.description.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.description.Location = New System.Drawing.Point(42, 201)
+        Me.description.Name = "description"
+        Me.description.Size = New System.Drawing.Size(98, 26)
+        Me.description.TabIndex = 61
+        Me.description.Text = "Description"
+        '
+        'category
+        '
+        Me.category.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.category.AutoSize = True
+        Me.category.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.category.Location = New System.Drawing.Point(42, 151)
+        Me.category.Name = "category"
+        Me.category.Size = New System.Drawing.Size(82, 26)
+        Me.category.TabIndex = 60
+        Me.category.Text = "Category"
+        '
+        'supply_Name
+        '
+        Me.supply_Name.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supply_Name.AutoSize = True
+        Me.supply_Name.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.supply_Name.Location = New System.Drawing.Point(42, 98)
+        Me.supply_Name.Name = "supply_Name"
+        Me.supply_Name.Size = New System.Drawing.Size(112, 26)
+        Me.supply_Name.TabIndex = 59
+        Me.supply_Name.Text = "Supply Name"
+        '
+        'supplyID
+        '
+        Me.supplyID.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supplyID.AutoSize = True
+        Me.supplyID.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.supplyID.Location = New System.Drawing.Point(42, 47)
+        Me.supplyID.Name = "supplyID"
+        Me.supplyID.Size = New System.Drawing.Size(82, 26)
+        Me.supplyID.TabIndex = 58
+        Me.supplyID.Text = "Supply ID"
+        '
+        'unitCost
+        '
+        Me.unitCost.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.unitCost.AutoSize = True
+        Me.unitCost.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.unitCost.Location = New System.Drawing.Point(44, 47)
+        Me.unitCost.Name = "unitCost"
+        Me.unitCost.Size = New System.Drawing.Size(80, 26)
+        Me.unitCost.TabIndex = 72
+        Me.unitCost.Text = "Unit Cost"
+        '
+        'totalValue
+        '
+        Me.totalValue.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.totalValue.AutoSize = True
+        Me.totalValue.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.totalValue.Location = New System.Drawing.Point(44, 98)
+        Me.totalValue.Name = "totalValue"
+        Me.totalValue.Size = New System.Drawing.Size(96, 26)
+        Me.totalValue.TabIndex = 73
+        Me.totalValue.Text = "Total Value"
+        '
+        'supplierIDTxt
+        '
+        Me.supplierIDTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supplierIDTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.supplierIDTxt.Location = New System.Drawing.Point(256, 422)
+        Me.supplierIDTxt.Name = "supplierIDTxt"
+        Me.supplierIDTxt.Size = New System.Drawing.Size(254, 30)
+        Me.supplierIDTxt.TabIndex = 72
+        '
+        'reorderLevelTxt
+        '
+        Me.reorderLevelTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.reorderLevelTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reorderLevelTxt.Location = New System.Drawing.Point(256, 368)
+        Me.reorderLevelTxt.Name = "reorderLevelTxt"
+        Me.reorderLevelTxt.Size = New System.Drawing.Size(254, 30)
+        Me.reorderLevelTxt.TabIndex = 73
+        '
+        'status
+        '
+        Me.status.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.status.AutoSize = True
+        Me.status.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.status.Location = New System.Drawing.Point(44, 363)
+        Me.status.Name = "status"
+        Me.status.Size = New System.Drawing.Size(59, 26)
+        Me.status.TabIndex = 74
+        Me.status.Text = "Status"
+        '
+        'unitCostTxt
+        '
+        Me.unitCostTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.unitCostTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.unitCostTxt.Location = New System.Drawing.Point(242, 47)
+        Me.unitCostTxt.Name = "unitCostTxt"
+        Me.unitCostTxt.Size = New System.Drawing.Size(238, 30)
+        Me.unitCostTxt.TabIndex = 75
+        '
+        'admin_label_DepartmentManagement
+        '
+        Me.admin_label_DepartmentManagement.AutoSize = True
+        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(212, 85)
+        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(222, 58)
+        Me.admin_label_DepartmentManagement.TabIndex = 158
+        Me.admin_label_DepartmentManagement.Text = "Add Supply"
+        '
+        'RoundedPanel1
+        '
+        Me.RoundedPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel1.Controls.Add(Me.instructions)
+        Me.RoundedPanel1.CornerRadius = 5
+        Me.RoundedPanel1.Location = New System.Drawing.Point(212, 146)
+        Me.RoundedPanel1.Name = "RoundedPanel1"
+        Me.RoundedPanel1.Size = New System.Drawing.Size(1264, 72)
+        Me.RoundedPanel1.TabIndex = 159
+        '
+        'instructions
+        '
+        Me.instructions.AutoSize = True
+        Me.instructions.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.instructions.Location = New System.Drawing.Point(18, 24)
+        Me.instructions.Name = "instructions"
+        Me.instructions.Size = New System.Drawing.Size(278, 26)
+        Me.instructions.TabIndex = 40
+        Me.instructions.Text = "Fill the required supply information."
         '
         'AddSupply
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1516, 906)
-        Me.Controls.Add(Me.txb_QuantityInStock)
-        Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.txb_ExpirationDate)
-        Me.Controls.Add(Me.txb_Location)
-        Me.Controls.Add(Me.txb_UnitOfMeasure)
-        Me.Controls.Add(Me.txb_Status)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.txb_UnitCost)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.txb_SupplierID)
-        Me.Controls.Add(Me.txb_SupplyID)
-        Me.Controls.Add(Me.txb_CustodianID)
-        Me.Controls.Add(Me.txb_SupplyName)
-        Me.Controls.Add(Me.txb_AcquisitionDate)
-        Me.Controls.Add(Me.txb_Category)
-        Me.Controls.Add(Me.txb_TotalValue)
-        Me.Controls.Add(Me.txb_Description)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.txb_ReorderLevel)
+        Me.ClientSize = New System.Drawing.Size(1924, 1055)
+        Me.Controls.Add(Me.admin_label_DepartmentManagement)
+        Me.Controls.Add(Me.RoundedPanel1)
+        Me.Controls.Add(Me.RoundedPanel2)
         Me.Controls.Add(Me.btn_Cancel)
-        Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.btn_Login)
-        Me.Controls.Add(Me.Label15)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "AddSupply"
         Me.Text = "AddSupply"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.RoundedPanel2.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        CType(Me.no_of_employees_numeric, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.RoundedPanel1.ResumeLayout(False)
+        Me.RoundedPanel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents txb_Status As System.Windows.Forms.TextBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents txb_UnitCost As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents txb_SupplierID As System.Windows.Forms.TextBox
-    Friend WithEvents txb_SupplyID As System.Windows.Forms.TextBox
-    Friend WithEvents txb_CustodianID As System.Windows.Forms.TextBox
-    Friend WithEvents txb_SupplyName As System.Windows.Forms.TextBox
-    Friend WithEvents txb_AcquisitionDate As System.Windows.Forms.TextBox
-    Friend WithEvents txb_Category As System.Windows.Forms.TextBox
-    Friend WithEvents txb_TotalValue As System.Windows.Forms.TextBox
-    Friend WithEvents txb_Description As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents txb_ReorderLevel As System.Windows.Forms.TextBox
     Friend WithEvents btn_Cancel As System.Windows.Forms.Button
-    Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents btn_Login As System.Windows.Forms.Button
-    Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents txb_UnitOfMeasure As System.Windows.Forms.TextBox
-    Friend WithEvents txb_Location As System.Windows.Forms.TextBox
-    Friend WithEvents txb_ExpirationDate As System.Windows.Forms.TextBox
-    Friend WithEvents txb_QuantityInStock As System.Windows.Forms.TextBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents acquisitionDatePicker As System.Windows.Forms.DateTimePicker
+    Friend WithEvents expirationDatePicker As System.Windows.Forms.DateTimePicker
+    Friend WithEvents totalValueTxt As System.Windows.Forms.TextBox
+    Friend WithEvents statusCombo As System.Windows.Forms.ComboBox
+    Friend WithEvents locationTxt As System.Windows.Forms.TextBox
+    Friend WithEvents reorderLevel As System.Windows.Forms.Label
+    Friend WithEvents warrantyExpiration As System.Windows.Forms.Label
+    Friend WithEvents expirationDate As System.Windows.Forms.Label
+    Friend WithEvents location As System.Windows.Forms.Label
+    Friend WithEvents custodianID As System.Windows.Forms.Label
+    Friend WithEvents custodianIDtxt As System.Windows.Forms.TextBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents categoryCmbo As System.Windows.Forms.ComboBox
+    Friend WithEvents unitOfMeasureCombo As System.Windows.Forms.ComboBox
+    Friend WithEvents no_of_employees_numeric As System.Windows.Forms.NumericUpDown
+    Friend WithEvents descriptionTxt As System.Windows.Forms.TextBox
+    Friend WithEvents supplyNameTxt As System.Windows.Forms.TextBox
+    Friend WithEvents supplyIDTxt As System.Windows.Forms.TextBox
+    Friend WithEvents quantityInStock As System.Windows.Forms.Label
+    Friend WithEvents unitOfMeasure As System.Windows.Forms.Label
+    Friend WithEvents description As System.Windows.Forms.Label
+    Friend WithEvents category As System.Windows.Forms.Label
+    Friend WithEvents supply_Name As System.Windows.Forms.Label
+    Friend WithEvents supplyID As System.Windows.Forms.Label
+    Friend WithEvents totalValue As System.Windows.Forms.Label
+    Friend WithEvents unitCost As System.Windows.Forms.Label
+    Friend WithEvents reorderLevelTxt As System.Windows.Forms.TextBox
+    Friend WithEvents supplierIDTxt As System.Windows.Forms.TextBox
+    Friend WithEvents unitCostTxt As System.Windows.Forms.TextBox
+    Friend WithEvents status As System.Windows.Forms.Label
+    Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
+    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents instructions As System.Windows.Forms.Label
 End Class

@@ -122,6 +122,12 @@
     <Compile Include="Forms\Admin\AddProperty.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Admin\AddSupply.Designer.vb">
+      <DependentUpon>AddSupply.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddSupply.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Admin\AdminDashboard.Designer.vb">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
     </Compile>
@@ -398,12 +404,6 @@
     <Compile Include="Forms\SuperAdmin\Department Management\SAAddDepartmentManagement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Property Management\SAAddPropertyManagement.Designer.vb">
-      <DependentUpon>SAAddPropertyManagement.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Property Management\SAAddPropertyManagement.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\SuperAdmin\SAMaintenace.Designer.vb">
       <DependentUpon>SAMaintenace.vb</DependentUpon>
     </Compile>
@@ -542,9 +542,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Department Management\SAAddDepartmentManagement.resx">
       <DependentUpon>SAAddDepartmentManagement.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Property Management\SAAddPropertyManagement.resx">
-      <DependentUpon>SAAddPropertyManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\SAMaintenace.resx">
       <DependentUpon>SAMaintenace.vb</DependentUpon>

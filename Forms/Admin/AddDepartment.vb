@@ -1,6 +1,7 @@
 ﻿Imports System
 Imports System.Windows.Forms
 Imports System.Text.RegularExpressions
+Imports Microsoft.VisualBasic
 
 Public Class AddDepartment
     Inherits UserControl
@@ -125,8 +126,8 @@ Public Class AddDepartment
             statusValue = status_cmbo.SelectedItem.ToString()
         End If
 
-        ' Get established date
-        Dim establishedDate As Date = established_date_date.Value.Date
+        ' Get established date (make it nullable to match function signature)
+        Dim establishedDate As Date? = established_date_date.Value.Date
 
         Try
             ' Call the enhanced AddDepartment function with all fields
@@ -160,7 +161,7 @@ Public Class AddDepartment
             End If
         Catch ex As Exception
             MessageBox.Show("Error adding department: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("[v0] Add Department Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] Add Department Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

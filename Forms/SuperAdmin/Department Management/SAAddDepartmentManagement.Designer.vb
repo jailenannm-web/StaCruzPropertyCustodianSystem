@@ -8,7 +8,7 @@ Partial Class SAAddDepartmentManagement
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,472 +25,547 @@ Partial Class SAAddDepartmentManagement
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblDepartmentManagement = New System.Windows.Forms.Label()
-        Me.lblDepartmentName = New System.Windows.Forms.Label()
-        Me.lblHeadofDepartment = New System.Windows.Forms.Label()
-        Me.lblContactNumber = New System.Windows.Forms.Label()
-        Me.lblEmail = New System.Windows.Forms.Label()
-        Me.lblLocation = New System.Windows.Forms.Label()
-        Me.lblNoofEmployees = New System.Windows.Forms.Label()
-        Me.lblDepartmentCode = New System.Windows.Forms.Label()
-        Me.txb_DepartmentName = New System.Windows.Forms.TextBox()
-        Me.txb_ContactNumber = New System.Windows.Forms.TextBox()
-        Me.txb_Number = New System.Windows.Forms.TextBox()
-        Me.txb_Email = New System.Windows.Forms.TextBox()
-        Me.txb_Location = New System.Windows.Forms.TextBox()
-        Me.txb_NoofEmployees = New System.Windows.Forms.TextBox()
-        Me.txb_DepCode = New System.Windows.Forms.TextBox()
-        Me.txb_UpdateAt = New System.Windows.Forms.TextBox()
-        Me.txb_CreatedAt = New System.Windows.Forms.TextBox()
-        Me.txb_BudgetAllocation = New System.Windows.Forms.TextBox()
-        Me.txb_Status = New System.Windows.Forms.TextBox()
-        Me.txb_ParentDep = New System.Windows.Forms.TextBox()
-        Me.txb_EstablishedDate = New System.Windows.Forms.TextBox()
-        Me.txb_OfficeHour = New System.Windows.Forms.TextBox()
-        Me.lblUpdateAt = New System.Windows.Forms.Label()
-        Me.lblCreatedAt = New System.Windows.Forms.Label()
-        Me.lbBudgetAllocation = New System.Windows.Forms.Label()
-        Me.lblStatus = New System.Windows.Forms.Label()
-        Me.lblParentDepartment = New System.Windows.Forms.Label()
-        Me.lblEstablishedDate = New System.Windows.Forms.Label()
-        Me.lblOfficeHour = New System.Windows.Forms.Label()
-        Me.txb_DepartmentID = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.btn_Cancel = New System.Windows.Forms.Button()
-        Me.btn_Login = New System.Windows.Forms.Button()
+        Me.components = New System.ComponentModel.Container()
+        Me.location_txt = New System.Windows.Forms.TextBox()
+        Me.email_txt = New System.Windows.Forms.TextBox()
+        Me.contact_number_txt = New System.Windows.Forms.TextBox()
+        Me.head_of_department_txt = New System.Windows.Forms.TextBox()
+        Me.department_name_txt = New System.Windows.Forms.TextBox()
+        Me.established_date = New System.Windows.Forms.Label()
+        Me.parent_department_id_txt = New System.Windows.Forms.TextBox()
+        Me.department_code = New System.Windows.Forms.Label()
+        Me.status_cmbo = New System.Windows.Forms.ComboBox()
+        Me.location = New System.Windows.Forms.Label()
+        Me.email = New System.Windows.Forms.Label()
+        Me.office_hours = New System.Windows.Forms.Label()
+        Me.office_hours_cmbo = New System.Windows.Forms.ComboBox()
+        Me.parent_department_id = New System.Windows.Forms.Label()
+        Me.established_date_date = New System.Windows.Forms.DateTimePicker()
+        Me.status = New System.Windows.Forms.Label()
+        Me.no_of_employees = New System.Windows.Forms.Label()
+        Me.contact_number = New System.Windows.Forms.Label()
+        Me.head_of_department = New System.Windows.Forms.Label()
+        Me.department_name = New System.Windows.Forms.Label()
+        Me.instructions = New System.Windows.Forms.Label()
+        Me.department_code_Code = New System.Windows.Forms.TextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.no_of_employees_numeric = New System.Windows.Forms.NumericUpDown()
+        Me.budget_allocation = New System.Windows.Forms.Label()
+        Me.budget_allocation_txt = New System.Windows.Forms.TextBox()
+        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
+        Me.Panel1.SuspendLayout()
+        CType(Me.no_of_employees_numeric, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RoundedPanel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.RoundedPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblDepartmentManagement
-        '
-        Me.lblDepartmentManagement.AutoSize = True
-        Me.lblDepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDepartmentManagement.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblDepartmentManagement.Location = New System.Drawing.Point(597, 24)
-        Me.lblDepartmentManagement.Name = "lblDepartmentManagement"
-        Me.lblDepartmentManagement.Size = New System.Drawing.Size(341, 31)
-        Me.lblDepartmentManagement.TabIndex = 49
-        Me.lblDepartmentManagement.Text = "Department Management"
-        '
-        'lblDepartmentName
-        '
-        Me.lblDepartmentName.AutoSize = True
-        Me.lblDepartmentName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDepartmentName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblDepartmentName.Location = New System.Drawing.Point(166, 161)
-        Me.lblDepartmentName.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblDepartmentName.Name = "lblDepartmentName"
-        Me.lblDepartmentName.Size = New System.Drawing.Size(178, 24)
-        Me.lblDepartmentName.TabIndex = 50
-        Me.lblDepartmentName.Text = "Department Name"
-        '
-        'lblHeadofDepartment
-        '
-        Me.lblHeadofDepartment.AutoSize = True
-        Me.lblHeadofDepartment.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeadofDepartment.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblHeadofDepartment.Location = New System.Drawing.Point(166, 221)
-        Me.lblHeadofDepartment.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblHeadofDepartment.Name = "lblHeadofDepartment"
-        Me.lblHeadofDepartment.Size = New System.Drawing.Size(196, 24)
-        Me.lblHeadofDepartment.TabIndex = 51
-        Me.lblHeadofDepartment.Text = "Head of Department"
-        '
-        'lblContactNumber
-        '
-        Me.lblContactNumber.AutoSize = True
-        Me.lblContactNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblContactNumber.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblContactNumber.Location = New System.Drawing.Point(166, 281)
-        Me.lblContactNumber.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblContactNumber.Name = "lblContactNumber"
-        Me.lblContactNumber.Size = New System.Drawing.Size(161, 24)
-        Me.lblContactNumber.TabIndex = 52
-        Me.lblContactNumber.Text = "Contact Number"
-        '
-        'lblEmail
-        '
-        Me.lblEmail.AutoSize = True
-        Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEmail.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblEmail.Location = New System.Drawing.Point(166, 341)
-        Me.lblEmail.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblEmail.Name = "lblEmail"
-        Me.lblEmail.Size = New System.Drawing.Size(62, 24)
-        Me.lblEmail.TabIndex = 53
-        Me.lblEmail.Text = "Email"
-        '
-        'lblLocation
-        '
-        Me.lblLocation.AutoSize = True
-        Me.lblLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLocation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblLocation.Location = New System.Drawing.Point(166, 401)
-        Me.lblLocation.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblLocation.Name = "lblLocation"
-        Me.lblLocation.Size = New System.Drawing.Size(89, 24)
-        Me.lblLocation.TabIndex = 54
-        Me.lblLocation.Text = "Location"
-        '
-        'lblNoofEmployees
-        '
-        Me.lblNoofEmployees.AutoSize = True
-        Me.lblNoofEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNoofEmployees.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblNoofEmployees.Location = New System.Drawing.Point(166, 461)
-        Me.lblNoofEmployees.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblNoofEmployees.Name = "lblNoofEmployees"
-        Me.lblNoofEmployees.Size = New System.Drawing.Size(170, 24)
-        Me.lblNoofEmployees.TabIndex = 55
-        Me.lblNoofEmployees.Text = "No of Employees"
-        '
-        'lblDepartmentCode
-        '
-        Me.lblDepartmentCode.AutoSize = True
-        Me.lblDepartmentCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDepartmentCode.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblDepartmentCode.Location = New System.Drawing.Point(166, 521)
-        Me.lblDepartmentCode.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblDepartmentCode.Name = "lblDepartmentCode"
-        Me.lblDepartmentCode.Size = New System.Drawing.Size(173, 24)
-        Me.lblDepartmentCode.TabIndex = 56
-        Me.lblDepartmentCode.Text = "Department Code"
-        '
-        'txb_DepartmentName
-        '
-        Me.txb_DepartmentName.BackColor = System.Drawing.Color.White
-        Me.txb_DepartmentName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepartmentName.Location = New System.Drawing.Point(389, 163)
-        Me.txb_DepartmentName.Name = "txb_DepartmentName"
-        Me.txb_DepartmentName.Size = New System.Drawing.Size(264, 26)
-        Me.txb_DepartmentName.TabIndex = 57
-        '
-        'txb_ContactNumber
-        '
-        Me.txb_ContactNumber.BackColor = System.Drawing.Color.White
-        Me.txb_ContactNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_ContactNumber.Location = New System.Drawing.Point(389, 223)
-        Me.txb_ContactNumber.Name = "txb_ContactNumber"
-        Me.txb_ContactNumber.Size = New System.Drawing.Size(264, 26)
-        Me.txb_ContactNumber.TabIndex = 58
-        '
-        'txb_Number
-        '
-        Me.txb_Number.BackColor = System.Drawing.Color.White
-        Me.txb_Number.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Number.Location = New System.Drawing.Point(389, 285)
-        Me.txb_Number.Name = "txb_Number"
-        Me.txb_Number.Size = New System.Drawing.Size(264, 26)
-        Me.txb_Number.TabIndex = 59
-        '
-        'txb_Email
-        '
-        Me.txb_Email.BackColor = System.Drawing.Color.White
-        Me.txb_Email.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Email.Location = New System.Drawing.Point(389, 343)
-        Me.txb_Email.Name = "txb_Email"
-        Me.txb_Email.Size = New System.Drawing.Size(264, 26)
-        Me.txb_Email.TabIndex = 60
-        '
-        'txb_Location
-        '
-        Me.txb_Location.BackColor = System.Drawing.Color.White
-        Me.txb_Location.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Location.Location = New System.Drawing.Point(389, 403)
-        Me.txb_Location.Name = "txb_Location"
-        Me.txb_Location.Size = New System.Drawing.Size(264, 26)
-        Me.txb_Location.TabIndex = 61
-        '
-        'txb_NoofEmployees
-        '
-        Me.txb_NoofEmployees.BackColor = System.Drawing.Color.White
-        Me.txb_NoofEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_NoofEmployees.Location = New System.Drawing.Point(389, 463)
-        Me.txb_NoofEmployees.Name = "txb_NoofEmployees"
-        Me.txb_NoofEmployees.Size = New System.Drawing.Size(264, 26)
-        Me.txb_NoofEmployees.TabIndex = 62
-        '
-        'txb_DepCode
-        '
-        Me.txb_DepCode.BackColor = System.Drawing.Color.White
-        Me.txb_DepCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepCode.Location = New System.Drawing.Point(389, 523)
-        Me.txb_DepCode.Name = "txb_DepCode"
-        Me.txb_DepCode.Size = New System.Drawing.Size(264, 26)
-        Me.txb_DepCode.TabIndex = 63
-        '
-        'txb_UpdateAt
-        '
-        Me.txb_UpdateAt.BackColor = System.Drawing.Color.White
-        Me.txb_UpdateAt.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_UpdateAt.Location = New System.Drawing.Point(931, 466)
-        Me.txb_UpdateAt.Name = "txb_UpdateAt"
-        Me.txb_UpdateAt.Size = New System.Drawing.Size(264, 26)
-        Me.txb_UpdateAt.TabIndex = 77
-        '
-        'txb_CreatedAt
-        '
-        Me.txb_CreatedAt.BackColor = System.Drawing.Color.White
-        Me.txb_CreatedAt.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_CreatedAt.Location = New System.Drawing.Point(931, 406)
-        Me.txb_CreatedAt.Name = "txb_CreatedAt"
-        Me.txb_CreatedAt.Size = New System.Drawing.Size(264, 26)
-        Me.txb_CreatedAt.TabIndex = 76
-        '
-        'txb_BudgetAllocation
-        '
-        Me.txb_BudgetAllocation.BackColor = System.Drawing.Color.White
-        Me.txb_BudgetAllocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_BudgetAllocation.Location = New System.Drawing.Point(931, 346)
-        Me.txb_BudgetAllocation.Name = "txb_BudgetAllocation"
-        Me.txb_BudgetAllocation.Size = New System.Drawing.Size(264, 26)
-        Me.txb_BudgetAllocation.TabIndex = 75
-        '
-        'txb_Status
-        '
-        Me.txb_Status.BackColor = System.Drawing.Color.White
-        Me.txb_Status.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Status.Location = New System.Drawing.Point(931, 286)
-        Me.txb_Status.Name = "txb_Status"
-        Me.txb_Status.Size = New System.Drawing.Size(264, 26)
-        Me.txb_Status.TabIndex = 74
-        '
-        'txb_ParentDep
-        '
-        Me.txb_ParentDep.BackColor = System.Drawing.Color.White
-        Me.txb_ParentDep.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_ParentDep.Location = New System.Drawing.Point(931, 228)
-        Me.txb_ParentDep.Name = "txb_ParentDep"
-        Me.txb_ParentDep.Size = New System.Drawing.Size(264, 26)
-        Me.txb_ParentDep.TabIndex = 73
-        '
-        'txb_EstablishedDate
-        '
-        Me.txb_EstablishedDate.BackColor = System.Drawing.Color.White
-        Me.txb_EstablishedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_EstablishedDate.Location = New System.Drawing.Point(931, 166)
-        Me.txb_EstablishedDate.Name = "txb_EstablishedDate"
-        Me.txb_EstablishedDate.Size = New System.Drawing.Size(264, 26)
-        Me.txb_EstablishedDate.TabIndex = 72
-        '
-        'txb_OfficeHour
-        '
-        Me.txb_OfficeHour.BackColor = System.Drawing.Color.White
-        Me.txb_OfficeHour.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_OfficeHour.Location = New System.Drawing.Point(931, 106)
-        Me.txb_OfficeHour.Name = "txb_OfficeHour"
-        Me.txb_OfficeHour.Size = New System.Drawing.Size(264, 26)
-        Me.txb_OfficeHour.TabIndex = 71
-        '
-        'lblUpdateAt
-        '
-        Me.lblUpdateAt.AutoSize = True
-        Me.lblUpdateAt.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUpdateAt.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblUpdateAt.Location = New System.Drawing.Point(708, 464)
-        Me.lblUpdateAt.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblUpdateAt.Name = "lblUpdateAt"
-        Me.lblUpdateAt.Size = New System.Drawing.Size(107, 24)
-        Me.lblUpdateAt.TabIndex = 70
-        Me.lblUpdateAt.Text = " Update At"
-        '
-        'lblCreatedAt
-        '
-        Me.lblCreatedAt.AutoSize = True
-        Me.lblCreatedAt.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCreatedAt.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblCreatedAt.Location = New System.Drawing.Point(708, 404)
-        Me.lblCreatedAt.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblCreatedAt.Name = "lblCreatedAt"
-        Me.lblCreatedAt.Size = New System.Drawing.Size(108, 24)
-        Me.lblCreatedAt.TabIndex = 69
-        Me.lblCreatedAt.Text = "Created At"
-        '
-        'lbBudgetAllocation
-        '
-        Me.lbBudgetAllocation.AutoSize = True
-        Me.lbBudgetAllocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbBudgetAllocation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lbBudgetAllocation.Location = New System.Drawing.Point(708, 344)
-        Me.lbBudgetAllocation.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lbBudgetAllocation.Name = "lbBudgetAllocation"
-        Me.lbBudgetAllocation.Size = New System.Drawing.Size(174, 24)
-        Me.lbBudgetAllocation.TabIndex = 68
-        Me.lbBudgetAllocation.Text = "Budget Allocation"
-        '
-        'lblStatus
-        '
-        Me.lblStatus.AutoSize = True
-        Me.lblStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStatus.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblStatus.Location = New System.Drawing.Point(708, 284)
-        Me.lblStatus.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(66, 24)
-        Me.lblStatus.TabIndex = 67
-        Me.lblStatus.Text = "Status"
-        '
-        'lblParentDepartment
-        '
-        Me.lblParentDepartment.AutoSize = True
-        Me.lblParentDepartment.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblParentDepartment.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblParentDepartment.Location = New System.Drawing.Point(708, 224)
-        Me.lblParentDepartment.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblParentDepartment.Name = "lblParentDepartment"
-        Me.lblParentDepartment.Size = New System.Drawing.Size(183, 24)
-        Me.lblParentDepartment.TabIndex = 66
-        Me.lblParentDepartment.Text = "Parent Department"
-        '
-        'lblEstablishedDate
-        '
-        Me.lblEstablishedDate.AutoSize = True
-        Me.lblEstablishedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEstablishedDate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblEstablishedDate.Location = New System.Drawing.Point(708, 164)
-        Me.lblEstablishedDate.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblEstablishedDate.Name = "lblEstablishedDate"
-        Me.lblEstablishedDate.Size = New System.Drawing.Size(166, 24)
-        Me.lblEstablishedDate.TabIndex = 65
-        Me.lblEstablishedDate.Text = "Established Date"
-        '
-        'lblOfficeHour
-        '
-        Me.lblOfficeHour.AutoSize = True
-        Me.lblOfficeHour.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOfficeHour.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblOfficeHour.Location = New System.Drawing.Point(708, 104)
-        Me.lblOfficeHour.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.lblOfficeHour.Name = "lblOfficeHour"
-        Me.lblOfficeHour.Size = New System.Drawing.Size(116, 24)
-        Me.lblOfficeHour.TabIndex = 64
-        Me.lblOfficeHour.Text = "Office Hour"
-        '
-        'txb_DepartmentID
-        '
-        Me.txb_DepartmentID.BackColor = System.Drawing.Color.White
-        Me.txb_DepartmentID.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepartmentID.Location = New System.Drawing.Point(389, 109)
-        Me.txb_DepartmentID.Name = "txb_DepartmentID"
-        Me.txb_DepartmentID.Size = New System.Drawing.Size(264, 26)
-        Me.txb_DepartmentID.TabIndex = 81
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label1.Location = New System.Drawing.Point(166, 107)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(148, 24)
-        Me.Label1.TabIndex = 80
-        Me.Label1.Text = "Department I.D"
-        '
-        'btn_Cancel
-        '
-        Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(422, 621)
-        Me.btn_Cancel.Name = "btn_Cancel"
-        Me.btn_Cancel.Size = New System.Drawing.Size(191, 46)
-        Me.btn_Cancel.TabIndex = 82
-        Me.btn_Cancel.Text = "Cancel"
-        Me.btn_Cancel.UseVisualStyleBackColor = True
-        '
-        'btn_Login
-        '
-        Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Login.ForeColor = System.Drawing.Color.White
-        Me.btn_Login.Location = New System.Drawing.Point(765, 621)
-        Me.btn_Login.Name = "btn_Login"
-        Me.btn_Login.Size = New System.Drawing.Size(190, 46)
-        Me.btn_Login.TabIndex = 83
-        Me.btn_Login.Text = "Add"
-        Me.btn_Login.UseVisualStyleBackColor = False
+        'location_txt
+        '
+        Me.location_txt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.location_txt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.location_txt.Location = New System.Drawing.Point(256, 252)
+        Me.location_txt.Name = "location_txt"
+        Me.location_txt.Size = New System.Drawing.Size(254, 30)
+        Me.location_txt.TabIndex = 68
+        '
+        'email_txt
+        '
+        Me.email_txt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.email_txt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.email_txt.Location = New System.Drawing.Point(256, 198)
+        Me.email_txt.Name = "email_txt"
+        Me.email_txt.Size = New System.Drawing.Size(254, 30)
+        Me.email_txt.TabIndex = 67
+        '
+        'contact_number_txt
+        '
+        Me.contact_number_txt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.contact_number_txt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.contact_number_txt.Location = New System.Drawing.Point(256, 147)
+        Me.contact_number_txt.Name = "contact_number_txt"
+        Me.contact_number_txt.Size = New System.Drawing.Size(254, 30)
+        Me.contact_number_txt.TabIndex = 66
+        '
+        'head_of_department_txt
+        '
+        Me.head_of_department_txt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.head_of_department_txt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.head_of_department_txt.Location = New System.Drawing.Point(256, 95)
+        Me.head_of_department_txt.Name = "head_of_department_txt"
+        Me.head_of_department_txt.Size = New System.Drawing.Size(254, 30)
+        Me.head_of_department_txt.TabIndex = 65
+        '
+        'department_name_txt
+        '
+        Me.department_name_txt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.department_name_txt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.department_name_txt.Location = New System.Drawing.Point(256, 44)
+        Me.department_name_txt.Name = "department_name_txt"
+        Me.department_name_txt.Size = New System.Drawing.Size(254, 30)
+        Me.department_name_txt.TabIndex = 64
+        '
+        'established_date
+        '
+        Me.established_date.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.established_date.AutoSize = True
+        Me.established_date.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.established_date.ForeColor = System.Drawing.Color.Black
+        Me.established_date.Location = New System.Drawing.Point(44, 151)
+        Me.established_date.Name = "established_date"
+        Me.established_date.Size = New System.Drawing.Size(137, 26)
+        Me.established_date.TabIndex = 48
+        Me.established_date.Text = "Established Date"
+        '
+        'parent_department_id_txt
+        '
+        Me.parent_department_id_txt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.parent_department_id_txt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.parent_department_id_txt.Location = New System.Drawing.Point(242, 197)
+        Me.parent_department_id_txt.Name = "parent_department_id_txt"
+        Me.parent_department_id_txt.Size = New System.Drawing.Size(238, 30)
+        Me.parent_department_id_txt.TabIndex = 63
+        '
+        'department_code
+        '
+        Me.department_code.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.department_code.AutoSize = True
+        Me.department_code.Font = New System.Drawing.Font("Poppins", 8.25!)
+        Me.department_code.ForeColor = System.Drawing.Color.Black
+        Me.department_code.Location = New System.Drawing.Point(44, 47)
+        Me.department_code.Name = "department_code"
+        Me.department_code.Size = New System.Drawing.Size(138, 25)
+        Me.department_code.TabIndex = 46
+        Me.department_code.Text = "Department Code"
+        '
+        'status_cmbo
+        '
+        Me.status_cmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.status_cmbo.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.status_cmbo.FormattingEnabled = True
+        Me.status_cmbo.Location = New System.Drawing.Point(242, 252)
+        Me.status_cmbo.Name = "status_cmbo"
+        Me.status_cmbo.Size = New System.Drawing.Size(238, 34)
+        Me.status_cmbo.TabIndex = 62
+        '
+        'location
+        '
+        Me.location.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.location.AutoSize = True
+        Me.location.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.location.ForeColor = System.Drawing.Color.Black
+        Me.location.Location = New System.Drawing.Point(42, 256)
+        Me.location.Name = "location"
+        Me.location.Size = New System.Drawing.Size(76, 26)
+        Me.location.TabIndex = 62
+        Me.location.Text = "Location"
+        '
+        'email
+        '
+        Me.email.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.email.AutoSize = True
+        Me.email.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.email.ForeColor = System.Drawing.Color.Black
+        Me.email.Location = New System.Drawing.Point(42, 201)
+        Me.email.Name = "email"
+        Me.email.Size = New System.Drawing.Size(53, 26)
+        Me.email.TabIndex = 61
+        Me.email.Text = "Email"
+        '
+        'office_hours
+        '
+        Me.office_hours.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.office_hours.AutoSize = True
+        Me.office_hours.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.office_hours.ForeColor = System.Drawing.Color.Black
+        Me.office_hours.Location = New System.Drawing.Point(44, 98)
+        Me.office_hours.Name = "office_hours"
+        Me.office_hours.Size = New System.Drawing.Size(104, 26)
+        Me.office_hours.TabIndex = 47
+        Me.office_hours.Text = "Office Hours"
+        '
+        'office_hours_cmbo
+        '
+        Me.office_hours_cmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.office_hours_cmbo.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.office_hours_cmbo.FormattingEnabled = True
+        Me.office_hours_cmbo.Location = New System.Drawing.Point(242, 91)
+        Me.office_hours_cmbo.Name = "office_hours_cmbo"
+        Me.office_hours_cmbo.Size = New System.Drawing.Size(238, 34)
+        Me.office_hours_cmbo.TabIndex = 61
+        '
+        'parent_department_id
+        '
+        Me.parent_department_id.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.parent_department_id.AutoSize = True
+        Me.parent_department_id.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.parent_department_id.ForeColor = System.Drawing.Color.Black
+        Me.parent_department_id.Location = New System.Drawing.Point(44, 201)
+        Me.parent_department_id.Name = "parent_department_id"
+        Me.parent_department_id.Size = New System.Drawing.Size(174, 26)
+        Me.parent_department_id.TabIndex = 49
+        Me.parent_department_id.Text = "Parent Department ID"
+        '
+        'established_date_date
+        '
+        Me.established_date_date.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.established_date_date.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.established_date_date.Location = New System.Drawing.Point(242, 150)
+        Me.established_date_date.Name = "established_date_date"
+        Me.established_date_date.Size = New System.Drawing.Size(238, 30)
+        Me.established_date_date.TabIndex = 60
+        '
+        'status
+        '
+        Me.status.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.status.AutoSize = True
+        Me.status.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.status.ForeColor = System.Drawing.Color.Black
+        Me.status.Location = New System.Drawing.Point(44, 256)
+        Me.status.Name = "status"
+        Me.status.Size = New System.Drawing.Size(59, 26)
+        Me.status.TabIndex = 50
+        Me.status.Text = "Status"
+        '
+        'no_of_employees
+        '
+        Me.no_of_employees.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.no_of_employees.AutoSize = True
+        Me.no_of_employees.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.no_of_employees.ForeColor = System.Drawing.Color.Black
+        Me.no_of_employees.Location = New System.Drawing.Point(42, 313)
+        Me.no_of_employees.Name = "no_of_employees"
+        Me.no_of_employees.Size = New System.Drawing.Size(177, 26)
+        Me.no_of_employees.TabIndex = 63
+        Me.no_of_employees.Text = "Number of Employees"
+        '
+        'contact_number
+        '
+        Me.contact_number.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.contact_number.AutoSize = True
+        Me.contact_number.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.contact_number.ForeColor = System.Drawing.Color.Black
+        Me.contact_number.Location = New System.Drawing.Point(42, 151)
+        Me.contact_number.Name = "contact_number"
+        Me.contact_number.Size = New System.Drawing.Size(138, 26)
+        Me.contact_number.TabIndex = 60
+        Me.contact_number.Text = "Contact Number"
+        '
+        'head_of_department
+        '
+        Me.head_of_department.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.head_of_department.AutoSize = True
+        Me.head_of_department.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.head_of_department.ForeColor = System.Drawing.Color.Black
+        Me.head_of_department.Location = New System.Drawing.Point(42, 98)
+        Me.head_of_department.Name = "head_of_department"
+        Me.head_of_department.Size = New System.Drawing.Size(164, 26)
+        Me.head_of_department.TabIndex = 59
+        Me.head_of_department.Text = "Head of Department"
+        '
+        'department_name
+        '
+        Me.department_name.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.department_name.AutoSize = True
+        Me.department_name.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.department_name.ForeColor = System.Drawing.Color.Black
+        Me.department_name.Location = New System.Drawing.Point(42, 47)
+        Me.department_name.Name = "department_name"
+        Me.department_name.Size = New System.Drawing.Size(151, 26)
+        Me.department_name.TabIndex = 58
+        Me.department_name.Text = "Department Name"
+        '
+        'instructions
+        '
+        Me.instructions.AutoSize = True
+        Me.instructions.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.instructions.ForeColor = System.Drawing.Color.Black
+        Me.instructions.Location = New System.Drawing.Point(18, 24)
+        Me.instructions.Name = "instructions"
+        Me.instructions.Size = New System.Drawing.Size(317, 26)
+        Me.instructions.TabIndex = 40
+        Me.instructions.Text = "Fill the required department information."
+        '
+        'department_code_Code
+        '
+        Me.department_code_Code.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.department_code_Code.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.department_code_Code.Location = New System.Drawing.Point(242, 43)
+        Me.department_code_Code.Name = "department_code_Code"
+        Me.department_code_Code.Size = New System.Drawing.Size(238, 30)
+        Me.department_code_Code.TabIndex = 59
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.no_of_employees_numeric)
+        Me.Panel1.Controls.Add(Me.location_txt)
+        Me.Panel1.Controls.Add(Me.email_txt)
+        Me.Panel1.Controls.Add(Me.contact_number_txt)
+        Me.Panel1.Controls.Add(Me.head_of_department_txt)
+        Me.Panel1.Controls.Add(Me.department_name_txt)
+        Me.Panel1.Controls.Add(Me.no_of_employees)
+        Me.Panel1.Controls.Add(Me.location)
+        Me.Panel1.Controls.Add(Me.email)
+        Me.Panel1.Controls.Add(Me.contact_number)
+        Me.Panel1.Controls.Add(Me.head_of_department)
+        Me.Panel1.Controls.Add(Me.department_name)
+        Me.Panel1.Location = New System.Drawing.Point(67, 18)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(553, 382)
+        Me.Panel1.TabIndex = 64
+        '
+        'no_of_employees_numeric
+        '
+        Me.no_of_employees_numeric.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.no_of_employees_numeric.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.no_of_employees_numeric.Location = New System.Drawing.Point(256, 309)
+        Me.no_of_employees_numeric.Name = "no_of_employees_numeric"
+        Me.no_of_employees_numeric.Size = New System.Drawing.Size(254, 30)
+        Me.no_of_employees_numeric.TabIndex = 69
+        '
+        'budget_allocation
+        '
+        Me.budget_allocation.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.budget_allocation.AutoSize = True
+        Me.budget_allocation.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.budget_allocation.ForeColor = System.Drawing.Color.Black
+        Me.budget_allocation.Location = New System.Drawing.Point(44, 313)
+        Me.budget_allocation.Name = "budget_allocation"
+        Me.budget_allocation.Size = New System.Drawing.Size(145, 26)
+        Me.budget_allocation.TabIndex = 51
+        Me.budget_allocation.Text = "Budget Allocation"
+        '
+        'budget_allocation_txt
+        '
+        Me.budget_allocation_txt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.budget_allocation_txt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.budget_allocation_txt.Location = New System.Drawing.Point(242, 308)
+        Me.budget_allocation_txt.Name = "budget_allocation_txt"
+        Me.budget_allocation_txt.Size = New System.Drawing.Size(238, 30)
+        Me.budget_allocation_txt.TabIndex = 58
+        '
+        'RoundedPanel1
+        '
+        Me.RoundedPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel1.Controls.Add(Me.instructions)
+        Me.RoundedPanel1.CornerRadius = 5
+        Me.RoundedPanel1.Location = New System.Drawing.Point(297, 194)
+        Me.RoundedPanel1.Name = "RoundedPanel1"
+        Me.RoundedPanel1.Size = New System.Drawing.Size(1264, 72)
+        Me.RoundedPanel1.TabIndex = 155
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.established_date)
+        Me.Panel2.Controls.Add(Me.parent_department_id_txt)
+        Me.Panel2.Controls.Add(Me.department_code)
+        Me.Panel2.Controls.Add(Me.status_cmbo)
+        Me.Panel2.Controls.Add(Me.office_hours)
+        Me.Panel2.Controls.Add(Me.office_hours_cmbo)
+        Me.Panel2.Controls.Add(Me.parent_department_id)
+        Me.Panel2.Controls.Add(Me.established_date_date)
+        Me.Panel2.Controls.Add(Me.status)
+        Me.Panel2.Controls.Add(Me.department_code_Code)
+        Me.Panel2.Controls.Add(Me.budget_allocation)
+        Me.Panel2.Controls.Add(Me.budget_allocation_txt)
+        Me.Panel2.Location = New System.Drawing.Point(655, 18)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(537, 382)
+        Me.Panel2.TabIndex = 65
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnCancel.CornerRadius = 15
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Location = New System.Drawing.Point(1263, 803)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
+        Me.btnCancel.TabIndex = 158
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'btnSave
+        '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnSave.CornerRadius = 15
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSave.Location = New System.Drawing.Point(1416, 803)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(145, 34)
+        Me.btnSave.TabIndex = 157
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
+        'RoundedPanel2
+        '
+        Me.RoundedPanel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel2.Controls.Add(Me.Panel2)
+        Me.RoundedPanel2.Controls.Add(Me.Panel1)
+        Me.RoundedPanel2.CornerRadius = 5
+        Me.RoundedPanel2.Location = New System.Drawing.Point(297, 286)
+        Me.RoundedPanel2.Name = "RoundedPanel2"
+        Me.RoundedPanel2.Size = New System.Drawing.Size(1264, 425)
+        Me.RoundedPanel2.TabIndex = 156
+        '
+        'ContextMenuStrip2
+        '
+        Me.ContextMenuStrip2.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(61, 4)
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
+        '
+        'admin_label_DepartmentManagement
+        '
+        Me.admin_label_DepartmentManagement.AutoSize = True
+        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_label_DepartmentManagement.ForeColor = System.Drawing.Color.Black
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(287, 133)
+        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(312, 58)
+        Me.admin_label_DepartmentManagement.TabIndex = 154
+        Me.admin_label_DepartmentManagement.Text = "Add Department"
         '
         'SAAddDepartmentManagement
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1386, 788)
-        Me.Controls.Add(Me.btn_Cancel)
-        Me.Controls.Add(Me.btn_Login)
-        Me.Controls.Add(Me.txb_DepartmentID)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.txb_UpdateAt)
-        Me.Controls.Add(Me.txb_CreatedAt)
-        Me.Controls.Add(Me.txb_BudgetAllocation)
-        Me.Controls.Add(Me.txb_Status)
-        Me.Controls.Add(Me.txb_ParentDep)
-        Me.Controls.Add(Me.txb_EstablishedDate)
-        Me.Controls.Add(Me.txb_OfficeHour)
-        Me.Controls.Add(Me.lblUpdateAt)
-        Me.Controls.Add(Me.lblCreatedAt)
-        Me.Controls.Add(Me.lbBudgetAllocation)
-        Me.Controls.Add(Me.lblStatus)
-        Me.Controls.Add(Me.lblParentDepartment)
-        Me.Controls.Add(Me.lblEstablishedDate)
-        Me.Controls.Add(Me.lblOfficeHour)
-        Me.Controls.Add(Me.txb_DepCode)
-        Me.Controls.Add(Me.txb_NoofEmployees)
-        Me.Controls.Add(Me.txb_Location)
-        Me.Controls.Add(Me.txb_Email)
-        Me.Controls.Add(Me.txb_Number)
-        Me.Controls.Add(Me.txb_ContactNumber)
-        Me.Controls.Add(Me.txb_DepartmentName)
-        Me.Controls.Add(Me.lblDepartmentCode)
-        Me.Controls.Add(Me.lblNoofEmployees)
-        Me.Controls.Add(Me.lblLocation)
-        Me.Controls.Add(Me.lblEmail)
-        Me.Controls.Add(Me.lblContactNumber)
-        Me.Controls.Add(Me.lblHeadofDepartment)
-        Me.Controls.Add(Me.lblDepartmentName)
-        Me.Controls.Add(Me.lblDepartmentManagement)
+        Me.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ClientSize = New System.Drawing.Size(1848, 970)
+        Me.Controls.Add(Me.RoundedPanel1)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.RoundedPanel2)
+        Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.ForeColor = System.Drawing.SystemColors.ControlDark
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "SAAddDepartmentManagement"
         Me.Text = "SAAddDepartmentManagement"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        CType(Me.no_of_employees_numeric, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.RoundedPanel1.ResumeLayout(False)
+        Me.RoundedPanel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.RoundedPanel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents lblDepartmentManagement As Label
-    Friend WithEvents lblDepartmentName As Label
-    Friend WithEvents lblHeadofDepartment As Label
-    Friend WithEvents lblContactNumber As Label
-    Friend WithEvents lblEmail As Label
-    Friend WithEvents lblLocation As Label
-    Friend WithEvents lblNoofEmployees As Label
-    Friend WithEvents lblDepartmentCode As Label
-    Friend WithEvents txb_DepartmentName As TextBox
-    Friend WithEvents txb_ContactNumber As TextBox
-    Friend WithEvents txb_Number As TextBox
-    Friend WithEvents txb_Email As TextBox
-    Friend WithEvents txb_Location As TextBox
-    Friend WithEvents txb_NoofEmployees As TextBox
-    Friend WithEvents txb_DepCode As TextBox
-    Friend WithEvents txb_UpdateAt As TextBox
-    Friend WithEvents txb_CreatedAt As TextBox
-    Friend WithEvents txb_BudgetAllocation As TextBox
-    Friend WithEvents txb_Status As TextBox
-    Friend WithEvents txb_ParentDep As TextBox
-    Friend WithEvents txb_EstablishedDate As TextBox
-    Friend WithEvents txb_OfficeHour As TextBox
-    Friend WithEvents lblUpdateAt As Label
-    Friend WithEvents lblCreatedAt As Label
-    Friend WithEvents lbBudgetAllocation As Label
-    Friend WithEvents lblStatus As Label
-    Friend WithEvents lblParentDepartment As Label
-    Friend WithEvents lblEstablishedDate As Label
-    Friend WithEvents lblOfficeHour As Label
-    Friend WithEvents txb_DepartmentID As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents btn_Cancel As Button
-    Friend WithEvents btn_Login As Button
+    Friend WithEvents location_txt As TextBox
+    Friend WithEvents email_txt As TextBox
+    Friend WithEvents contact_number_txt As TextBox
+    Friend WithEvents head_of_department_txt As TextBox
+    Friend WithEvents department_name_txt As TextBox
+    Friend WithEvents established_date As Label
+    Friend WithEvents parent_department_id_txt As TextBox
+    Friend WithEvents department_code As Label
+    Friend WithEvents status_cmbo As ComboBox
+    Friend WithEvents location As Label
+    Friend WithEvents email As Label
+    Friend WithEvents office_hours As Label
+    Friend WithEvents office_hours_cmbo As ComboBox
+    Friend WithEvents parent_department_id As Label
+    Friend WithEvents established_date_date As DateTimePicker
+    Friend WithEvents status As Label
+    Friend WithEvents no_of_employees As Label
+    Friend WithEvents contact_number As Label
+    Friend WithEvents head_of_department As Label
+    Friend WithEvents department_name As Label
+    Friend WithEvents instructions As Label
+    Friend WithEvents department_code_Code As TextBox
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents no_of_employees_numeric As NumericUpDown
+    Friend WithEvents budget_allocation As Label
+    Friend WithEvents budget_allocation_txt As TextBox
+    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
+    Friend WithEvents btnSave As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents ContextMenuStrip2 As ContextMenuStrip
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents admin_label_DepartmentManagement As Label
 End Class

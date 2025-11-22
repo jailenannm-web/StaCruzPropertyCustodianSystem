@@ -33,15 +33,5 @@ Public Class SAPropertyManagement
         End Try
     End Sub
 
-    Private Sub btnAddSupply_Click(sender As Object, e As EventArgs) Handles btnAddSupply.Click
-        ' 1. Create a new instance of your form
-        Dim addUserForm As New SAAddPropertyManagement()
 
-        ' 2. Show it as a dialog, which pauses the code here
-        '    until the "addUserForm" is closed.
-        addUserForm.ShowDialog()
-
-        ' 3. Refresh the grid to show new supplies
-        LoadSuppliesIntoGrid()
-    End Sub
 End Class
