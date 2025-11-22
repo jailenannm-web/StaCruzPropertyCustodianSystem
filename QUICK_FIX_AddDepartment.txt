@@ -1,0 +1,76 @@
+================================================================================
+QUICK FIX FOR AddDepartment ERRORS
+================================================================================
+
+You need to make 3 manual fixes:
+
+================================================================================
+FIX 1: Forms/Admin/AddDepartment.vb - Line 143
+================================================================================
+CHANGE FROM:
+                officeHours
+            )
+
+CHANGE TO:
+                officeHours,
+                establishedDate,
+                parentDeptID,
+                statusValue
+            )
+
+================================================================================
+FIX 2: Forms/Admin/AddDepartment.vb - Line 163
+================================================================================
+CHANGE FROM:
+            System.Diagnostics.Debug.WriteLine("[v0] Add Department Error: " & ex.Message & vbCrLf & ex.StackTrace)
+
+CHANGE TO:
+            System.Diagnostics.Debug.WriteLine("[v0] Add Department Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+
+================================================================================
+FIX 3: DatabaseConnection.vb - Line 4996
+================================================================================
+CHANGE FROM:
+                                        Optional budgetAllocation As Decimal = 0) As Boolean
+
+CHANGE TO:
+                                        Optional budgetAllocation As Decimal = 0, Optional officeHours As String = "",
+                                        Optional establishedDate As Date? = Nothing, Optional parentDepartmentID As Integer? = Nothing,
+                                        Optional status As String = "active") As Boolean
+
+================================================================================
+FIX 4: DatabaseConnection.vb - Lines 5026-5029
+================================================================================
+CHANGE FROM:
+            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
+                                 "contact_number, email, no_of_employees, budget_allocation, status) " &
+                                 "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
+                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, 'active')"
+
+CHANGE TO:
+            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
+                                 "contact_number, email, no_of_employees, budget_allocation, status, " &
+                                 "office_hours, established_date, parent_department_id) " &
+                                 "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
+                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, @status, " &
+                                 "@officeHours, @establishedDate, @parentDepartmentID)"
+
+================================================================================
+FIX 5: DatabaseConnection.vb - After line 5039
+================================================================================
+CHANGE FROM:
+                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+
+CHANGE TO:
+                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+                cmd.Parameters.AddWithValue("@status", status)
+                cmd.Parameters.AddWithValue("@officeHours", If(String.IsNullOrEmpty(officeHours), DBNull.Value, officeHours))
+                cmd.Parameters.AddWithValue("@establishedDate", If(establishedDate.HasValue, establishedDate.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@parentDepartmentID", If(parentDepartmentID.HasValue, parentDepartmentID.Value, DBNull.Value))
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+
+================================================================================
+

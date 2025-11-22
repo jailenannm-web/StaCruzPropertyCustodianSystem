@@ -63,8 +63,8 @@ Public Class UC_AddSupply
                 ' Refresh the Property Management data grid
                 Dim parentForm As Control = Me.Parent
                 While parentForm IsNot Nothing
-                    If TypeOf parentForm Is UC_PropertyManagement Then
-                        CType(parentForm, UC_PropertyManagement).LoadSuppliesData()
+                    If TypeOf parentForm Is UC_SupplyManagement Then
+                        CType(parentForm, UC_SupplyManagement).LoadSuppliesData()
                         Exit While
                     End If
                     parentForm = parentForm.Parent
@@ -73,8 +73,8 @@ Public Class UC_AddSupply
                 ' Also try to refresh if parent is a form with Property Management control
                 If Me.Parent IsNot Nothing Then
                     For Each ctrl As Control In Me.Parent.Controls
-                        If TypeOf ctrl Is UC_PropertyManagement Then
-                            CType(ctrl, UC_PropertyManagement).LoadSuppliesData()
+                        If TypeOf ctrl Is UC_SupplyManagement Then
+                            CType(ctrl, UC_SupplyManagement).LoadSuppliesData()
                         End If
                     Next
                 End If

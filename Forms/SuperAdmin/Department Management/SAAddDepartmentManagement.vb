@@ -8,15 +8,15 @@ Public Class SAAddDepartmentManagement
 
     End Sub
 
-    Private Sub lblLocation_Click(sender As Object, e As EventArgs) Handles lblLocation.Click
+    Private Sub lblLocation_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles txb_NoofEmployees.TextChanged
+    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub lblContactNumber_Click(sender As Object, e As EventArgs) Handles lblContactNumber.Click
+    Private Sub lblContactNumber_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class

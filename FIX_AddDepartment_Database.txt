@@ -1,0 +1,69 @@
+================================================================================
+FIX FOR DatabaseConnection.vb - AddDepartment Function
+================================================================================
+
+LOCATION: DatabaseConnection.vb, around line 4993
+
+STEP 1: Update the function signature (around line 4993)
+================================================================================
+FIND:
+    Public Shared Function AddDepartment(departmentName As String, headOfDepartment As String, location As String,
+                                        departmentCode As String, Optional contactNumber As String = "",
+                                        Optional email As String = "", Optional noOfEmployees As Integer = 0,
+                                        Optional budgetAllocation As Decimal = 0) As Boolean
+
+REPLACE WITH:
+    Public Shared Function AddDepartment(departmentName As String, headOfDepartment As String, location As String,
+                                        departmentCode As String, Optional contactNumber As String = "",
+                                        Optional email As String = "", Optional noOfEmployees As Integer = 0,
+                                        Optional budgetAllocation As Decimal = 0, Optional officeHours As String = "",
+                                        Optional establishedDate As Date? = Nothing, Optional parentDepartmentID As Integer? = Nothing,
+                                        Optional status As String = "active") As Boolean
+
+================================================================================
+STEP 2: Update the INSERT query (around line 5026)
+================================================================================
+FIND:
+            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
+                                 "contact_number, email, no_of_employees, budget_allocation, status) " &
+                                 "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
+                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, 'active')"
+
+REPLACE WITH:
+            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
+                                 "contact_number, email, no_of_employees, budget_allocation, status, " &
+                                 "office_hours, established_date, parent_department_id) " &
+                                 "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
+                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, @status, " &
+                                 "@officeHours, @establishedDate, @parentDepartmentID)"
+
+================================================================================
+STEP 3: Add the new parameters (around line 5039, after budgetAllocation)
+================================================================================
+FIND:
+                cmd.Parameters.AddWithValue("@noOfEmployees", noOfEmployees)
+                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+
+REPLACE WITH:
+                cmd.Parameters.AddWithValue("@noOfEmployees", noOfEmployees)
+                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+                cmd.Parameters.AddWithValue("@status", status)
+                cmd.Parameters.AddWithValue("@officeHours", If(String.IsNullOrEmpty(officeHours), DBNull.Value, officeHours))
+                cmd.Parameters.AddWithValue("@establishedDate", If(establishedDate.HasValue, establishedDate.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@parentDepartmentID", If(parentDepartmentID.HasValue, parentDepartmentID.Value, DBNull.Value))
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+
+================================================================================
+WHAT THIS FIX DOES:
+================================================================================
+- Adds support for office_hours field
+- Adds support for established_date field
+- Adds support for parent_department_id field
+- Adds support for custom status (not just 'active')
+- Allows all 15 department attributes to be saved
+
+================================================================================
+

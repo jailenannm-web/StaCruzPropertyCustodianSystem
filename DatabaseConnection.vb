@@ -4213,7 +4213,8 @@ Public Class DatabaseConnection
     ''' Get all properties with optional filtering (ENHANCED)
     ''' </summary>
     Public Shared Function GetAllProperties(Optional custodianID As Integer? = Nothing, Optional conditionStatus As String = "",
-                                           Optional category As String = "", Optional departmentID As Integer? = Nothing) As DataTable
+                                           Optional category As String = "", Optional departmentID As Integer? = Nothing,
+                                           Optional status As String = "") As DataTable
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing
         Try
@@ -4222,12 +4223,13 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            ' Build query with optional filters
+            ' Build query with optional filters - includes all required fields
             Dim query As String = "SELECT p.property_id, p.property_name, p.category, p.serial_number, " &
-                                 "p.acquisition_date, p.acquisition_cost, p.condition_status, p.location, " &
-                                 "p.status, p.depreciation_value, p.life_span, " &
-                                 "CONCAT(u.first_name, ' ', u.last_name) AS custodian_name, " &
-                                 "d.department_name " &
+                                 "p.supplier_name, p.condition_status, p.acquisition_cost, " &
+                                 "p.acquisition_date, p.warranty_details, " &
+                                 "CONCAT(u.first_name, ' ', u.last_name) AS assigned_employee, " &
+                                 "d.department_name AS assigned_department, p.location, p.status, " &
+                                 "p.created_at, p.updated_at " &
                                  "FROM properties p " &
                                  "LEFT JOIN users u ON p.custodian_id = u.user_id " &
                                  "LEFT JOIN departments d ON p.department_id = d.department_id " &
@@ -4955,18 +4957,12 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
 
             If Not SafeOpenConnection(conn) Then Return dt
-
+            ' Select all 15 attributes as specified in requirements
             Dim query As String = "SELECT d.department_id, d.department_name, d.head_of_department, " &
-                                 "d.contact_number, d.email, d.location, d.department_code, " &
-                                 "d.no_of_employees, d.budget_allocation, d.status, " &
-                                 "COUNT(DISTINCT sa.staff_id) AS actual_employee_count, " &
-                                 "COUNT(DISTINCT p.property_id) AS property_count " &
+                                 "d.contact_number, d.email, d.location, d.no_of_employees, d.department_code, " &
+                                 "d.office_hours, d.established_date, d.parent_department_id, d.status, " &
+                                 "d.budget_allocation, d.created_at, d.updated_at " &
                                  "FROM departments d " &
-                                 "LEFT JOIN staff_accounts sa ON d.department_id = sa.department_id AND sa.status = 'active' " &
-                                 "LEFT JOIN properties p ON d.department_id = p.department_id AND p.status = 'active' " &
-                                 "GROUP BY d.department_id, d.department_name, d.head_of_department, " &
-                                 "d.contact_number, d.email, d.location, d.department_code, " &
-                                 "d.no_of_employees, d.budget_allocation, d.status " &
                                  "ORDER BY d.department_name"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -4997,13 +4993,26 @@ Public Class DatabaseConnection
     Public Shared Function AddDepartment(departmentName As String, headOfDepartment As String, location As String,
                                         departmentCode As String, Optional contactNumber As String = "",
                                         Optional email As String = "", Optional noOfEmployees As Integer = 0,
-                                        Optional budgetAllocation As Decimal = 0) As Boolean
+                                        Optional budgetAllocation As Decimal = 0, Optional officeHours As String = "",
+                                        Optional establishedDate As Date? = Nothing, Optional parentDepartmentID As Integer? = Nothing,
+                                        Optional status As String = "active") As Boolean
         Dim conn As MySqlConnection = Nothing
         Try
             conn = GetConnection()
-            If conn Is Nothing Then Return False
+            If conn Is Nothing Then
+                MessageBox.Show("Failed to create database connection. Please check your MySQL server is running and connection settings are correct.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
 
-            If Not SafeOpenConnection(conn) Then Return False
+            If Not SafeOpenConnection(conn) Then
+                MessageBox.Show("Cannot connect to MySQL server." & Environment.NewLine & Environment.NewLine &
+                              "Please check the following:" & Environment.NewLine &
+                              "1. Make sure MySQL/XAMPP is running" & Environment.NewLine &
+                              "2. Check if MySQL service is started (Services app)" & Environment.NewLine &
+                              "3. Verify connection settings in App.config" & Environment.NewLine &
+                              "4. Try restarting MySQL service", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
 
             ' Check for duplicate department name
             Dim checkNameQuery As String = "SELECT COUNT(*) FROM departments WHERE LOWER(department_name) = LOWER(@departmentName)"
@@ -5027,31 +5036,125 @@ Public Class DatabaseConnection
                 End If
             End Using
 
+            ' Validate parent department ID if provided
+            If parentDepartmentID.HasValue Then
+                Dim checkParentQuery As String = "SELECT COUNT(*) FROM departments WHERE department_id = @parentDepartmentID"
+                Using checkParentCmd As New MySqlCommand(checkParentQuery, conn)
+                    checkParentCmd.Parameters.AddWithValue("@parentDepartmentID", parentDepartmentID.Value)
+                    Dim parentCount As Integer = CInt(checkParentCmd.ExecuteScalar())
+                    If parentCount = 0 Then
+                        ' Get list of available department IDs to show in error message
+                        Dim availableDeptsQuery As String = "SELECT department_id, department_name FROM departments WHERE status = 'active' ORDER BY department_id"
+                        Dim availableDepts As New List(Of String)
+                        Using deptCmd As New MySqlCommand(availableDeptsQuery, conn)
+                            Using reader As MySqlDataReader = deptCmd.ExecuteReader()
+                                While reader.Read()
+                                    availableDepts.Add(reader("department_id").ToString() & " - " & reader("department_name").ToString())
+                                End While
+                                reader.Close()
+                            End Using
+                        End Using
+                        
+                        Dim errorMsg As String = "Parent Department ID " & parentDepartmentID.Value & " does not exist." & Environment.NewLine & Environment.NewLine
+                        If availableDepts.Count > 0 Then
+                            errorMsg &= "Available Parent Departments:" & Environment.NewLine
+                            errorMsg &= String.Join(Environment.NewLine, availableDepts)
+                            errorMsg &= Environment.NewLine & Environment.NewLine
+                        End If
+                        errorMsg &= "Please enter a valid parent department ID from the list above, or leave the field blank if this department has no parent."
+                        
+                        MessageBox.Show(errorMsg, "Invalid Parent Department", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return False
+                    End If
+                End Using
+            End If
+
+            ' Ensure connection is still open before executing INSERT
+            If conn.State <> ConnectionState.Open Then
+                If Not SafeOpenConnection(conn) Then
+                    MessageBox.Show("Database connection was lost. Please try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return False
+                End If
+            End If
+
             Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
-                                 "contact_number, email, no_of_employees, budget_allocation, status) " &
+                                 "contact_number, email, no_of_employees, budget_allocation, office_hours, established_date, " &
+                                 "parent_department_id, status) " &
                                  "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
-                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, 'active')"
+                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, @officeHours, @establishedDate, " &
+                                 "@parentDepartmentID, @status)"
 
             Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@departmentName", departmentName)
-                cmd.Parameters.AddWithValue("@headOfDepartment", headOfDepartment)
-                cmd.Parameters.AddWithValue("@location", location)
-                cmd.Parameters.AddWithValue("@departmentCode", departmentCode)
-                cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(contactNumber), DBNull.Value, contactNumber))
-                cmd.Parameters.AddWithValue("@email", If(String.IsNullOrEmpty(email), DBNull.Value, email))
-                cmd.Parameters.AddWithValue("@noOfEmployees", noOfEmployees)
-                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+                Try
+                    cmd.Parameters.AddWithValue("@departmentName", departmentName)
+                    cmd.Parameters.AddWithValue("@headOfDepartment", headOfDepartment)
+                    cmd.Parameters.AddWithValue("@location", location)
+                    cmd.Parameters.AddWithValue("@departmentCode", departmentCode)
+                    cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(contactNumber), DBNull.Value, contactNumber))
+                    cmd.Parameters.AddWithValue("@email", If(String.IsNullOrEmpty(email), DBNull.Value, email))
+                    cmd.Parameters.AddWithValue("@noOfEmployees", noOfEmployees)
+                    cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+                    cmd.Parameters.AddWithValue("@officeHours", If(String.IsNullOrEmpty(officeHours), DBNull.Value, officeHours))
+                    cmd.Parameters.AddWithValue("@establishedDate", If(establishedDate.HasValue, establishedDate.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@parentDepartmentID", If(parentDepartmentID.HasValue, parentDepartmentID.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@status", status)
 
-                Dim result As Integer = cmd.ExecuteNonQuery()
-                If result > 0 Then
-                    System.Diagnostics.Debug.WriteLine("[v0] Department Added Successfully: " & departmentName)
-                    MessageBox.Show("Department added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Return True
-                End If
+                    System.Diagnostics.Debug.WriteLine("[v0] Executing INSERT with parameters: Name=" & departmentName & ", Code=" & departmentCode & ", Status=" & status)
+                    Dim result As Integer = cmd.ExecuteNonQuery()
+                    If result > 0 Then
+                        System.Diagnostics.Debug.WriteLine("[v0] Department Added Successfully: " & departmentName)
+                        MessageBox.Show("Department added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Return True
+                    End If
+                Catch sqlEx As MySqlException
+                    System.Diagnostics.Debug.WriteLine("[v0] AddDepartment SQL Execution Error: " & sqlEx.Message & " | Error Number: " & sqlEx.Number & " | StackTrace: " & sqlEx.StackTrace)
+                    Dim detailedError As String = "MySQL Error " & sqlEx.Number & ": " & sqlEx.Message
+                    
+                    ' Handle specific MySQL error codes
+                    If sqlEx.Number = 1042 OrElse sqlEx.Message.Contains("Unable to connect") OrElse sqlEx.Message.Contains("specified MySQL hosts") Then
+                        detailedError = "Cannot connect to MySQL server." & Environment.NewLine & Environment.NewLine &
+                                      "Please check the following:" & Environment.NewLine &
+                                      "1. Make sure MySQL/XAMPP is running" & Environment.NewLine &
+                                      "2. Check if MySQL service is started (Services app)" & Environment.NewLine &
+                                      "3. Verify connection settings in App.config" & Environment.NewLine &
+                                      "4. Try restarting MySQL service" & Environment.NewLine & Environment.NewLine &
+                                      "Technical Details: " & sqlEx.Message
+                    ElseIf sqlEx.Number = 1062 Then
+                        detailedError &= Environment.NewLine & Environment.NewLine & "This usually means a duplicate entry (department name or code already exists)."
+                    ElseIf sqlEx.Number = 1452 Then
+                        detailedError &= Environment.NewLine & Environment.NewLine & "Foreign key constraint failed. Please check the parent department ID."
+                    End If
+                    
+                    MessageBox.Show("Database error adding department:" & Environment.NewLine & Environment.NewLine & detailedError, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return False
+                End Try
             End Using
         Catch ex As MySqlException
-            System.Diagnostics.Debug.WriteLine("[v0] AddDepartment MySQL Error: " & ex.Message)
-            MessageBox.Show("Database error adding department: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("[v0] AddDepartment MySQL Error: " & ex.Message & " | Error Number: " & ex.Number & " | StackTrace: " & ex.StackTrace)
+            Dim detailedError As String = "MySQL Error " & ex.Number & ": " & ex.Message
+            
+            ' Handle specific MySQL error codes
+            If ex.Number = 1042 OrElse ex.Message.Contains("Unable to connect") OrElse ex.Message.Contains("specified MySQL hosts") Then
+                detailedError = "Cannot connect to MySQL server." & Environment.NewLine & Environment.NewLine &
+                              "Please check the following:" & Environment.NewLine &
+                              "1. Make sure MySQL/XAMPP is running" & Environment.NewLine &
+                              "2. Check if MySQL service is started (Services app)" & Environment.NewLine &
+                              "3. Verify connection settings in App.config" & Environment.NewLine &
+                              "4. Try restarting MySQL service" & Environment.NewLine & Environment.NewLine &
+                              "Technical Details: " & ex.Message
+            ElseIf ex.Number = 1045 Then
+                detailedError = "Access denied. Invalid username or password." & Environment.NewLine & Environment.NewLine &
+                              "Please check your database credentials in App.config"
+            ElseIf ex.Number = 1049 Then
+                detailedError = "Database 'teamcruzim' does not exist." & Environment.NewLine & Environment.NewLine &
+                              "Please create the database first using the provided SQL schema file."
+            ElseIf ex.Number = 1062 Then
+                detailedError &= Environment.NewLine & Environment.NewLine & "This usually means a duplicate entry (department name or code already exists)."
+            ElseIf ex.Number = 1452 Then
+                detailedError &= Environment.NewLine & Environment.NewLine & "Foreign key constraint failed. Please check the parent department ID."
+            End If
+            
+            MessageBox.Show("Database error adding department:" & Environment.NewLine & Environment.NewLine & detailedError, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AddDepartment Exception: " & ex.Message)

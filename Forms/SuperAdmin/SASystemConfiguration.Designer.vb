@@ -27,83 +27,94 @@ Partial Class SASystemConfiguration
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.pnlSearch = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.lblSystemConfig = New System.Windows.Forms.Label()
-        Me.pnlCategories = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.comboCategoris = New System.Windows.Forms.ComboBox()
-        Me.pnlStatus = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.comboStatus = New System.Windows.Forms.ComboBox()
+        Me.dgvSystemConfiguration = New System.Windows.Forms.DataGridView()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.dgvSystemConfiguration = New System.Windows.Forms.DataGridView()
-        Me.pnlSearch.SuspendLayout()
-        Me.pnlCategories.SuspendLayout()
-        Me.pnlStatus.SuspendLayout()
-        Me.RoundedPanel1.SuspendLayout()
+        Me.pnlStatus = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.comboStatus = New System.Windows.Forms.ComboBox()
+        Me.pnlCategories = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.comboCategoris = New System.Windows.Forms.ComboBox()
         CType(Me.dgvSystemConfiguration, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlStatus.SuspendLayout()
+        Me.pnlCategories.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'pnlSearch
-        '
-        Me.pnlSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.pnlSearch.Controls.Add(Me.txtSearch)
-        Me.pnlSearch.CornerRadius = 20
-        Me.pnlSearch.Location = New System.Drawing.Point(28, 81)
-        Me.pnlSearch.Name = "pnlSearch"
-        Me.pnlSearch.Size = New System.Drawing.Size(613, 30)
-        Me.pnlSearch.TabIndex = 49
-        '
-        'txtSearch
-        '
-        Me.txtSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtSearch.Location = New System.Drawing.Point(165, 10)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(435, 13)
-        Me.txtSearch.TabIndex = 0
         '
         'lblSystemConfig
         '
         Me.lblSystemConfig.AutoSize = True
-        Me.lblSystemConfig.Font = New System.Drawing.Font("Leelawadee", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSystemConfig.Location = New System.Drawing.Point(22, 31)
+        Me.lblSystemConfig.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSystemConfig.Location = New System.Drawing.Point(188, 50)
+        Me.lblSystemConfig.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSystemConfig.Name = "lblSystemConfig"
-        Me.lblSystemConfig.Size = New System.Drawing.Size(295, 32)
+        Me.lblSystemConfig.Size = New System.Drawing.Size(362, 39)
         Me.lblSystemConfig.TabIndex = 50
         Me.lblSystemConfig.Text = "System Configuration"
         '
-        'pnlCategories
+        'dgvSystemConfiguration
         '
-        Me.pnlCategories.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.pnlCategories.Controls.Add(Me.comboCategoris)
-        Me.pnlCategories.CornerRadius = 20
-        Me.pnlCategories.Location = New System.Drawing.Point(732, 79)
-        Me.pnlCategories.Name = "pnlCategories"
-        Me.pnlCategories.Size = New System.Drawing.Size(133, 30)
-        Me.pnlCategories.TabIndex = 51
+        Me.dgvSystemConfiguration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvSystemConfiguration.Location = New System.Drawing.Point(185, 216)
+        Me.dgvSystemConfiguration.Margin = New System.Windows.Forms.Padding(4)
+        Me.dgvSystemConfiguration.Name = "dgvSystemConfiguration"
+        Me.dgvSystemConfiguration.RowHeadersWidth = 51
+        Me.dgvSystemConfiguration.Size = New System.Drawing.Size(1356, 667)
+        Me.dgvSystemConfiguration.TabIndex = 0
         '
-        'comboCategoris
+        'PictureBox2
         '
-        Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboCategoris.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboCategoris.FormattingEnabled = True
-        Me.comboCategoris.Location = New System.Drawing.Point(13, 4)
-        Me.comboCategoris.Name = "comboCategoris"
-        Me.comboCategoris.Size = New System.Drawing.Size(111, 21)
-        Me.comboCategoris.TabIndex = 0
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(181, 136)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 41)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 158
+        Me.PictureBox2.TabStop = False
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(241, 136)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(729, 41)
+        Me.TextBox1.TabIndex = 157
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(1291, 146)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(63, 20)
+        Me.Label2.TabIndex = 156
+        Me.Label2.Text = "Status"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(983, 148)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(100, 20)
+        Me.Label1.TabIndex = 155
+        Me.Label1.Text = "Categories"
         '
         'pnlStatus
         '
         Me.pnlStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.pnlStatus.Controls.Add(Me.comboStatus)
-        Me.pnlStatus.CornerRadius = 20
-        Me.pnlStatus.Location = New System.Drawing.Point(933, 79)
+        Me.pnlStatus.CornerRadius = 5
+        Me.pnlStatus.Location = New System.Drawing.Point(1359, 139)
+        Me.pnlStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlStatus.Name = "pnlStatus"
-        Me.pnlStatus.Size = New System.Drawing.Size(133, 30)
-        Me.pnlStatus.TabIndex = 52
+        Me.pnlStatus.Size = New System.Drawing.Size(177, 37)
+        Me.pnlStatus.TabIndex = 154
         '
         'comboStatus
         '
@@ -111,86 +122,70 @@ Partial Class SASystemConfiguration
         Me.comboStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.comboStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.comboStatus.FormattingEnabled = True
-        Me.comboStatus.Location = New System.Drawing.Point(11, 5)
+        Me.comboStatus.Location = New System.Drawing.Point(14, 9)
+        Me.comboStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.comboStatus.Name = "comboStatus"
-        Me.comboStatus.Size = New System.Drawing.Size(111, 21)
+        Me.comboStatus.Size = New System.Drawing.Size(147, 24)
         Me.comboStatus.TabIndex = 0
         '
-        'Label2
+        'pnlCategories
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Leelawadee", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(882, 89)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 15)
-        Me.Label2.TabIndex = 54
-        Me.Label2.Text = "Status"
+        Me.pnlCategories.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.pnlCategories.Controls.Add(Me.comboCategoris)
+        Me.pnlCategories.CornerRadius = 5
+        Me.pnlCategories.Location = New System.Drawing.Point(1091, 141)
+        Me.pnlCategories.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlCategories.Name = "pnlCategories"
+        Me.pnlCategories.Size = New System.Drawing.Size(177, 37)
+        Me.pnlCategories.TabIndex = 153
         '
-        'Label1
+        'comboCategoris
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Leelawadee", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(663, 88)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(72, 15)
-        Me.Label1.TabIndex = 53
-        Me.Label1.Text = "Categories"
-        '
-        'RoundedPanel1
-        '
-        Me.RoundedPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedPanel1.Controls.Add(Me.dgvSystemConfiguration)
-        Me.RoundedPanel1.CornerRadius = 20
-        Me.RoundedPanel1.Location = New System.Drawing.Point(28, 141)
-        Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(1038, 545)
-        Me.RoundedPanel1.TabIndex = 55
-        '
-        'dgvSystemConfiguration
-        '
-        Me.dgvSystemConfiguration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSystemConfiguration.Location = New System.Drawing.Point(18, 3)
-        Me.dgvSystemConfiguration.Name = "dgvSystemConfiguration"
-        Me.dgvSystemConfiguration.Size = New System.Drawing.Size(1017, 542)
-        Me.dgvSystemConfiguration.TabIndex = 0
+        Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.comboCategoris.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.comboCategoris.FormattingEnabled = True
+        Me.comboCategoris.Location = New System.Drawing.Point(13, 8)
+        Me.comboCategoris.Margin = New System.Windows.Forms.Padding(4)
+        Me.comboCategoris.Name = "comboCategoris"
+        Me.comboCategoris.Size = New System.Drawing.Size(147, 24)
+        Me.comboCategoris.TabIndex = 0
         '
         'SASystemConfiguration
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.AntiqueWhite
-        Me.ClientSize = New System.Drawing.Size(1104, 710)
-        Me.Controls.Add(Me.RoundedPanel1)
-        Me.Controls.Add(Me.pnlCategories)
-        Me.Controls.Add(Me.pnlStatus)
+        Me.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ClientSize = New System.Drawing.Size(1773, 1080)
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.pnlSearch)
+        Me.Controls.Add(Me.pnlStatus)
+        Me.Controls.Add(Me.pnlCategories)
+        Me.Controls.Add(Me.dgvSystemConfiguration)
         Me.Controls.Add(Me.lblSystemConfig)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "SASystemConfiguration"
         Me.Text = "SASystemConfiguration"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.pnlSearch.ResumeLayout(False)
-        Me.pnlSearch.PerformLayout()
-        Me.pnlCategories.ResumeLayout(False)
-        Me.pnlStatus.ResumeLayout(False)
-        Me.RoundedPanel1.ResumeLayout(False)
         CType(Me.dgvSystemConfiguration, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlStatus.ResumeLayout(False)
+        Me.pnlCategories.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents pnlSearch As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents txtSearch As TextBox
     Friend WithEvents lblSystemConfig As Label
-    Friend WithEvents pnlCategories As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents comboCategoris As ComboBox
-    Friend WithEvents pnlStatus As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents comboStatus As ComboBox
+    Friend WithEvents dgvSystemConfiguration As DataGridView
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents dgvSystemConfiguration As DataGridView
+    Friend WithEvents pnlStatus As Resources.Controls.RoundedPanel
+    Friend WithEvents comboStatus As ComboBox
+    Friend WithEvents pnlCategories As Resources.Controls.RoundedPanel
+    Friend WithEvents comboCategoris As ComboBox
 End Class

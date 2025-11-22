@@ -1,0 +1,51 @@
+================================================================================
+FIX FOR DatabaseConnection.vb - GetAllDepartments Function
+================================================================================
+
+LOCATION: DatabaseConnection.vb, around line 4961
+
+PROBLEM: The query is missing the required columns: office_hours, established_date, 
+         parent_department_id, created_at, and updated_at
+
+SOLUTION: Replace the query in the GetAllDepartments function
+
+================================================================================
+FIND THIS CODE (lines 4961-4972):
+================================================================================
+
+            Dim query As String = "SELECT d.department_id, d.department_name, d.head_of_department, " &
+                                 "d.contact_number, d.email, d.location, d.department_code, " &
+                                 "d.no_of_employees, d.budget_allocation, d.status, " &
+                                 "COUNT(DISTINCT sa.staff_id) AS actual_employee_count, " &
+                                 "COUNT(DISTINCT p.property_id) AS property_count " &
+                                 "FROM departments d " &
+                                 "LEFT JOIN staff_accounts sa ON d.department_id = sa.department_id AND sa.status = 'active' " &
+                                 "LEFT JOIN properties p ON d.department_id = p.department_id AND p.status = 'active' " &
+                                 "GROUP BY d.department_id, d.department_name, d.head_of_department, " &
+                                 "d.contact_number, d.email, d.location, d.department_code, " &
+                                 "d.no_of_employees, d.budget_allocation, d.status " &
+                                 "ORDER BY d.department_name"
+
+================================================================================
+REPLACE WITH THIS CODE:
+================================================================================
+
+            ' Select all 15 attributes as specified in requirements
+            Dim query As String = "SELECT d.department_id, d.department_name, d.head_of_department, " &
+                                 "d.contact_number, d.email, d.location, d.no_of_employees, d.department_code, " &
+                                 "d.office_hours, d.established_date, d.parent_department_id, d.status, " &
+                                 "d.budget_allocation, d.created_at, d.updated_at " &
+                                 "FROM departments d " &
+                                 "ORDER BY d.department_name"
+
+================================================================================
+IMPORTANT NOTES:
+================================================================================
+1. This fix removes the unnecessary JOINs and GROUP BY clause
+2. It includes all 15 required department attributes
+3. The query is simpler and more efficient
+4. After making this change, the error "Column 'office_hours' does not belong to table" 
+   will be resolved
+
+================================================================================
+

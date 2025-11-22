@@ -114,4 +114,11 @@ Public Class UC_PropertyRequestManagement
         ' Put refresh logic here (reload from file/db)
     End Sub
 
+    Private Sub prm_btn_update_Click_1(sender As Object, e As EventArgs) Handles prm_btn_update.Click
+
+    End Sub
+
+    Private Sub prm_table1_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles prm_table1.CellContentClick
+
+    End Sub
 End Class

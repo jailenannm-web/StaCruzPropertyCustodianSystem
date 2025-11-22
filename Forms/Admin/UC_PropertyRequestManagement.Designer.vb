@@ -38,6 +38,9 @@ Partial Class UC_PropertyRequestManagement
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LocationColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -131,6 +134,54 @@ Partial Class UC_PropertyRequestManagement
         Me.Action.Name = "Action"
         Me.Action.Width = 125
         '
+        'btnEdit
+        '
+        Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnEdit.CornerRadius = 15
+        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnEdit.Location = New System.Drawing.Point(957, 668)
+        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(121, 34)
+        Me.btnEdit.TabIndex = 154
+        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.UseVisualStyleBackColor = False
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnAdd.CornerRadius = 15
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAdd.Location = New System.Drawing.Point(1086, 667)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(121, 34)
+        Me.btnAdd.TabIndex = 152
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = False
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnDelete.CornerRadius = 15
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Location = New System.Drawing.Point(829, 667)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(120, 35)
+        Me.btnDelete.TabIndex = 153
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = False
+        '
         'prm_btn_update
         '
         Me.prm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -139,9 +190,9 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.prm_btn_update.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.prm_btn_update.ForeColor = System.Drawing.Color.White
-        Me.prm_btn_update.Location = New System.Drawing.Point(1038, 667)
+        Me.prm_btn_update.Location = New System.Drawing.Point(693, 667)
         Me.prm_btn_update.Name = "prm_btn_update"
-        Me.prm_btn_update.Size = New System.Drawing.Size(180, 42)
+        Me.prm_btn_update.Size = New System.Drawing.Size(129, 33)
         Me.prm_btn_update.TabIndex = 57
         Me.prm_btn_update.Text = "Update"
         Me.prm_btn_update.UseVisualStyleBackColor = False
@@ -150,6 +201,9 @@ Partial Class UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnEdit)
+        Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.prm_btn_update)
         Me.Controls.Add(Me.prm_table1)
         Me.Controls.Add(Me.admin_label_PropertyRequestManagement)
@@ -172,5 +226,8 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents Status As DataGridViewTextBoxColumn
     Friend WithEvents LocationColumn As DataGridViewTextBoxColumn
     Friend WithEvents Action As DataGridViewTextBoxColumn
-    Friend WithEvents prm_btn_update As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnEdit As Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
 End Class

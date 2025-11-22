@@ -1,0 +1,112 @@
+================================================================================
+COMPLETE FIX FOR AddDepartment ERRORS
+================================================================================
+
+ERROR 1: "Too many arguments to 'Public Shared Function AddDepartment'"
+ERROR 2: "'vbCrLf' is not declared"
+
+================================================================================
+FIX 1: Update Forms/Admin/AddDepartment.vb (around line 134-143)
+================================================================================
+FIND:
+            Dim success As Boolean = DatabaseConnection.AddDepartment(
+                department_name_txt.Text.Trim(),
+                head_of_department_txt.Text.Trim(),
+                location_txt.Text.Trim(),
+                department_code_Code.Text.Trim(),
+                If(String.IsNullOrWhiteSpace(contact_number_txt.Text), "", contact_number_txt.Text.Trim()),
+                If(String.IsNullOrWhiteSpace(email_txt.Text), "", email_txt.Text.Trim()),
+                noOfEmployees,
+                budgetAllocation,
+                officeHours
+            )
+
+REPLACE WITH:
+            Dim success As Boolean = DatabaseConnection.AddDepartment(
+                department_name_txt.Text.Trim(),
+                head_of_department_txt.Text.Trim(),
+                location_txt.Text.Trim(),
+                department_code_Code.Text.Trim(),
+                If(String.IsNullOrWhiteSpace(contact_number_txt.Text), "", contact_number_txt.Text.Trim()),
+                If(String.IsNullOrWhiteSpace(email_txt.Text), "", email_txt.Text.Trim()),
+                noOfEmployees,
+                budgetAllocation,
+                officeHours,
+                establishedDate,
+                parentDeptID,
+                statusValue
+            )
+
+================================================================================
+FIX 2: Update Forms/Admin/AddDepartment.vb (around line 163)
+================================================================================
+FIND:
+            System.Diagnostics.Debug.WriteLine("[v0] Add Department Error: " & ex.Message & vbCrLf & ex.StackTrace)
+
+REPLACE WITH:
+            System.Diagnostics.Debug.WriteLine("[v0] Add Department Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+
+================================================================================
+FIX 3: Update DatabaseConnection.vb - Function Signature (around line 4993)
+================================================================================
+FIND:
+    Public Shared Function AddDepartment(departmentName As String, headOfDepartment As String, location As String,
+                                        departmentCode As String, Optional contactNumber As String = "",
+                                        Optional email As String = "", Optional noOfEmployees As Integer = 0,
+                                        Optional budgetAllocation As Decimal = 0) As Boolean
+
+REPLACE WITH:
+    Public Shared Function AddDepartment(departmentName As String, headOfDepartment As String, location As String,
+                                        departmentCode As String, Optional contactNumber As String = "",
+                                        Optional email As String = "", Optional noOfEmployees As Integer = 0,
+                                        Optional budgetAllocation As Decimal = 0, Optional officeHours As String = "",
+                                        Optional establishedDate As Date? = Nothing, Optional parentDepartmentID As Integer? = Nothing,
+                                        Optional status As String = "active") As Boolean
+
+================================================================================
+FIX 4: Update DatabaseConnection.vb - INSERT Query (around line 5026)
+================================================================================
+FIND:
+            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
+                                 "contact_number, email, no_of_employees, budget_allocation, status) " &
+                                 "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
+                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, 'active')"
+
+REPLACE WITH:
+            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
+                                 "contact_number, email, no_of_employees, budget_allocation, status, " &
+                                 "office_hours, established_date, parent_department_id) " &
+                                 "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
+                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, @status, " &
+                                 "@officeHours, @establishedDate, @parentDepartmentID)"
+
+================================================================================
+FIX 5: Update DatabaseConnection.vb - Add Parameters (around line 5039)
+================================================================================
+FIND:
+                cmd.Parameters.AddWithValue("@noOfEmployees", noOfEmployees)
+                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+
+REPLACE WITH:
+                cmd.Parameters.AddWithValue("@noOfEmployees", noOfEmployees)
+                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
+                cmd.Parameters.AddWithValue("@status", status)
+                cmd.Parameters.AddWithValue("@officeHours", If(String.IsNullOrEmpty(officeHours), DBNull.Value, officeHours))
+                cmd.Parameters.AddWithValue("@establishedDate", If(establishedDate.HasValue, establishedDate.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@parentDepartmentID", If(parentDepartmentID.HasValue, parentDepartmentID.Value, DBNull.Value))
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+
+================================================================================
+SUMMARY
+================================================================================
+After applying these 5 fixes:
+1. The form will pass all required parameters
+2. The database function will accept all parameters
+3. The vbCrLf error will be fixed
+4. All 15 department attributes will be saved correctly
+
+================================================================================
+
