@@ -15,4 +15,8 @@ Public Class UC_DepartmentManagement
     Private Sub admin_btn_properties_Click(sender As Object, e As EventArgs) 
 
     End Sub
+
+    Private Sub pm_txtbox_search_TextChanged(sender As Object, e As EventArgs) Handles pm_txtbox_search.TextChanged
+
+    End Sub
 End Class

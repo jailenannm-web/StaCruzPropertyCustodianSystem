@@ -200,4 +200,11 @@ Partial Class SADashboard
     Private Sub RoundedPanel11_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel11.Paint
 
     End Sub
+
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        Dim logout As New logout()
+        logout.Show()   ' Show the register form
+        Me.Hide()            ' Hide current login form instead of closing it
+    End Sub
 End Class

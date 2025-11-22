@@ -65,326 +65,343 @@ Partial Class SAAddDepartmentManagement
         'lblDepartmentManagement
         '
         Me.lblDepartmentManagement.AutoSize = True
-        Me.lblDepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDepartmentManagement.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblDepartmentManagement.Location = New System.Drawing.Point(597, 24)
+        Me.lblDepartmentManagement.BackColor = System.Drawing.Color.Transparent
+        Me.lblDepartmentManagement.Font = New System.Drawing.Font("Poppins", 34.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDepartmentManagement.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblDepartmentManagement.Location = New System.Drawing.Point(572, 23)
+        Me.lblDepartmentManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDepartmentManagement.Name = "lblDepartmentManagement"
-        Me.lblDepartmentManagement.Size = New System.Drawing.Size(341, 31)
+        Me.lblDepartmentManagement.Size = New System.Drawing.Size(825, 102)
         Me.lblDepartmentManagement.TabIndex = 49
         Me.lblDepartmentManagement.Text = "Department Management"
         '
         'lblDepartmentName
         '
-        Me.lblDepartmentName.AutoSize = True
-        Me.lblDepartmentName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDepartmentName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblDepartmentName.Location = New System.Drawing.Point(166, 161)
-        Me.lblDepartmentName.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblDepartmentName.BackColor = System.Drawing.Color.Transparent
+        Me.lblDepartmentName.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDepartmentName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblDepartmentName.Location = New System.Drawing.Point(226, 231)
+        Me.lblDepartmentName.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblDepartmentName.Name = "lblDepartmentName"
-        Me.lblDepartmentName.Size = New System.Drawing.Size(178, 24)
+        Me.lblDepartmentName.Size = New System.Drawing.Size(224, 29)
         Me.lblDepartmentName.TabIndex = 50
         Me.lblDepartmentName.Text = "Department Name"
         '
         'lblHeadofDepartment
         '
-        Me.lblHeadofDepartment.AutoSize = True
-        Me.lblHeadofDepartment.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeadofDepartment.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblHeadofDepartment.Location = New System.Drawing.Point(166, 221)
-        Me.lblHeadofDepartment.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblHeadofDepartment.BackColor = System.Drawing.Color.Transparent
+        Me.lblHeadofDepartment.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeadofDepartment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblHeadofDepartment.Location = New System.Drawing.Point(226, 305)
+        Me.lblHeadofDepartment.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblHeadofDepartment.Name = "lblHeadofDepartment"
-        Me.lblHeadofDepartment.Size = New System.Drawing.Size(196, 24)
+        Me.lblHeadofDepartment.Size = New System.Drawing.Size(246, 29)
         Me.lblHeadofDepartment.TabIndex = 51
         Me.lblHeadofDepartment.Text = "Head of Department"
         '
         'lblContactNumber
         '
-        Me.lblContactNumber.AutoSize = True
-        Me.lblContactNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblContactNumber.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblContactNumber.Location = New System.Drawing.Point(166, 281)
-        Me.lblContactNumber.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblContactNumber.BackColor = System.Drawing.Color.Transparent
+        Me.lblContactNumber.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblContactNumber.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblContactNumber.Location = New System.Drawing.Point(226, 379)
+        Me.lblContactNumber.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblContactNumber.Name = "lblContactNumber"
-        Me.lblContactNumber.Size = New System.Drawing.Size(161, 24)
+        Me.lblContactNumber.Size = New System.Drawing.Size(201, 29)
         Me.lblContactNumber.TabIndex = 52
         Me.lblContactNumber.Text = "Contact Number"
         '
         'lblEmail
         '
-        Me.lblEmail.AutoSize = True
-        Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEmail.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblEmail.Location = New System.Drawing.Point(166, 341)
-        Me.lblEmail.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblEmail.BackColor = System.Drawing.Color.Transparent
+        Me.lblEmail.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblEmail.Location = New System.Drawing.Point(226, 453)
+        Me.lblEmail.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblEmail.Name = "lblEmail"
-        Me.lblEmail.Size = New System.Drawing.Size(62, 24)
+        Me.lblEmail.Size = New System.Drawing.Size(79, 29)
         Me.lblEmail.TabIndex = 53
         Me.lblEmail.Text = "Email"
         '
         'lblLocation
         '
-        Me.lblLocation.AutoSize = True
-        Me.lblLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLocation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblLocation.Location = New System.Drawing.Point(166, 401)
-        Me.lblLocation.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblLocation.BackColor = System.Drawing.Color.Transparent
+        Me.lblLocation.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLocation.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblLocation.Location = New System.Drawing.Point(226, 527)
+        Me.lblLocation.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblLocation.Name = "lblLocation"
-        Me.lblLocation.Size = New System.Drawing.Size(89, 24)
+        Me.lblLocation.Size = New System.Drawing.Size(112, 29)
         Me.lblLocation.TabIndex = 54
         Me.lblLocation.Text = "Location"
         '
         'lblNoofEmployees
         '
-        Me.lblNoofEmployees.AutoSize = True
-        Me.lblNoofEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNoofEmployees.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblNoofEmployees.Location = New System.Drawing.Point(166, 461)
-        Me.lblNoofEmployees.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblNoofEmployees.BackColor = System.Drawing.Color.Transparent
+        Me.lblNoofEmployees.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNoofEmployees.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblNoofEmployees.Location = New System.Drawing.Point(226, 600)
+        Me.lblNoofEmployees.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblNoofEmployees.Name = "lblNoofEmployees"
-        Me.lblNoofEmployees.Size = New System.Drawing.Size(170, 24)
+        Me.lblNoofEmployees.Size = New System.Drawing.Size(213, 29)
         Me.lblNoofEmployees.TabIndex = 55
         Me.lblNoofEmployees.Text = "No of Employees"
         '
         'lblDepartmentCode
         '
-        Me.lblDepartmentCode.AutoSize = True
-        Me.lblDepartmentCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDepartmentCode.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblDepartmentCode.Location = New System.Drawing.Point(166, 521)
-        Me.lblDepartmentCode.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblDepartmentCode.BackColor = System.Drawing.Color.Transparent
+        Me.lblDepartmentCode.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDepartmentCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblDepartmentCode.Location = New System.Drawing.Point(226, 674)
+        Me.lblDepartmentCode.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblDepartmentCode.Name = "lblDepartmentCode"
-        Me.lblDepartmentCode.Size = New System.Drawing.Size(173, 24)
+        Me.lblDepartmentCode.Size = New System.Drawing.Size(218, 29)
         Me.lblDepartmentCode.TabIndex = 56
         Me.lblDepartmentCode.Text = "Department Code"
         '
         'txb_DepartmentName
         '
         Me.txb_DepartmentName.BackColor = System.Drawing.Color.White
-        Me.txb_DepartmentName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepartmentName.Location = New System.Drawing.Point(389, 163)
+        Me.txb_DepartmentName.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_DepartmentName.Location = New System.Drawing.Point(524, 234)
+        Me.txb_DepartmentName.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_DepartmentName.Name = "txb_DepartmentName"
-        Me.txb_DepartmentName.Size = New System.Drawing.Size(264, 26)
+        Me.txb_DepartmentName.Size = New System.Drawing.Size(361, 42)
         Me.txb_DepartmentName.TabIndex = 57
         '
         'txb_ContactNumber
         '
         Me.txb_ContactNumber.BackColor = System.Drawing.Color.White
-        Me.txb_ContactNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_ContactNumber.Location = New System.Drawing.Point(389, 223)
+        Me.txb_ContactNumber.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_ContactNumber.Location = New System.Drawing.Point(524, 307)
+        Me.txb_ContactNumber.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_ContactNumber.Name = "txb_ContactNumber"
-        Me.txb_ContactNumber.Size = New System.Drawing.Size(264, 26)
+        Me.txb_ContactNumber.Size = New System.Drawing.Size(361, 42)
         Me.txb_ContactNumber.TabIndex = 58
         '
         'txb_Number
         '
         Me.txb_Number.BackColor = System.Drawing.Color.White
-        Me.txb_Number.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Number.Location = New System.Drawing.Point(389, 285)
+        Me.txb_Number.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_Number.Location = New System.Drawing.Point(524, 384)
+        Me.txb_Number.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Number.Name = "txb_Number"
-        Me.txb_Number.Size = New System.Drawing.Size(264, 26)
+        Me.txb_Number.Size = New System.Drawing.Size(361, 42)
         Me.txb_Number.TabIndex = 59
         '
         'txb_Email
         '
         Me.txb_Email.BackColor = System.Drawing.Color.White
-        Me.txb_Email.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Email.Location = New System.Drawing.Point(389, 343)
+        Me.txb_Email.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_Email.Location = New System.Drawing.Point(524, 455)
+        Me.txb_Email.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Email.Name = "txb_Email"
-        Me.txb_Email.Size = New System.Drawing.Size(264, 26)
+        Me.txb_Email.Size = New System.Drawing.Size(361, 42)
         Me.txb_Email.TabIndex = 60
         '
         'txb_Location
         '
         Me.txb_Location.BackColor = System.Drawing.Color.White
-        Me.txb_Location.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Location.Location = New System.Drawing.Point(389, 403)
+        Me.txb_Location.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_Location.Location = New System.Drawing.Point(524, 529)
+        Me.txb_Location.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Location.Name = "txb_Location"
-        Me.txb_Location.Size = New System.Drawing.Size(264, 26)
+        Me.txb_Location.Size = New System.Drawing.Size(361, 42)
         Me.txb_Location.TabIndex = 61
         '
         'txb_NoofEmployees
         '
         Me.txb_NoofEmployees.BackColor = System.Drawing.Color.White
-        Me.txb_NoofEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_NoofEmployees.Location = New System.Drawing.Point(389, 463)
+        Me.txb_NoofEmployees.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_NoofEmployees.Location = New System.Drawing.Point(524, 603)
+        Me.txb_NoofEmployees.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_NoofEmployees.Name = "txb_NoofEmployees"
-        Me.txb_NoofEmployees.Size = New System.Drawing.Size(264, 26)
+        Me.txb_NoofEmployees.Size = New System.Drawing.Size(361, 42)
         Me.txb_NoofEmployees.TabIndex = 62
         '
         'txb_DepCode
         '
         Me.txb_DepCode.BackColor = System.Drawing.Color.White
-        Me.txb_DepCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepCode.Location = New System.Drawing.Point(389, 523)
+        Me.txb_DepCode.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_DepCode.Location = New System.Drawing.Point(524, 677)
+        Me.txb_DepCode.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_DepCode.Name = "txb_DepCode"
-        Me.txb_DepCode.Size = New System.Drawing.Size(264, 26)
+        Me.txb_DepCode.Size = New System.Drawing.Size(361, 42)
         Me.txb_DepCode.TabIndex = 63
         '
         'txb_UpdateAt
         '
         Me.txb_UpdateAt.BackColor = System.Drawing.Color.White
-        Me.txb_UpdateAt.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_UpdateAt.Location = New System.Drawing.Point(931, 466)
+        Me.txb_UpdateAt.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_UpdateAt.Location = New System.Drawing.Point(1246, 607)
+        Me.txb_UpdateAt.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_UpdateAt.Name = "txb_UpdateAt"
-        Me.txb_UpdateAt.Size = New System.Drawing.Size(264, 26)
+        Me.txb_UpdateAt.Size = New System.Drawing.Size(361, 42)
         Me.txb_UpdateAt.TabIndex = 77
         '
         'txb_CreatedAt
         '
         Me.txb_CreatedAt.BackColor = System.Drawing.Color.White
-        Me.txb_CreatedAt.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_CreatedAt.Location = New System.Drawing.Point(931, 406)
+        Me.txb_CreatedAt.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_CreatedAt.Location = New System.Drawing.Point(1246, 533)
+        Me.txb_CreatedAt.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_CreatedAt.Name = "txb_CreatedAt"
-        Me.txb_CreatedAt.Size = New System.Drawing.Size(264, 26)
+        Me.txb_CreatedAt.Size = New System.Drawing.Size(361, 42)
         Me.txb_CreatedAt.TabIndex = 76
         '
         'txb_BudgetAllocation
         '
         Me.txb_BudgetAllocation.BackColor = System.Drawing.Color.White
-        Me.txb_BudgetAllocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_BudgetAllocation.Location = New System.Drawing.Point(931, 346)
+        Me.txb_BudgetAllocation.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_BudgetAllocation.Location = New System.Drawing.Point(1246, 459)
+        Me.txb_BudgetAllocation.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_BudgetAllocation.Name = "txb_BudgetAllocation"
-        Me.txb_BudgetAllocation.Size = New System.Drawing.Size(264, 26)
+        Me.txb_BudgetAllocation.Size = New System.Drawing.Size(361, 42)
         Me.txb_BudgetAllocation.TabIndex = 75
         '
         'txb_Status
         '
         Me.txb_Status.BackColor = System.Drawing.Color.White
-        Me.txb_Status.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Status.Location = New System.Drawing.Point(931, 286)
+        Me.txb_Status.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_Status.Location = New System.Drawing.Point(1246, 385)
+        Me.txb_Status.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Status.Name = "txb_Status"
-        Me.txb_Status.Size = New System.Drawing.Size(264, 26)
+        Me.txb_Status.Size = New System.Drawing.Size(361, 42)
         Me.txb_Status.TabIndex = 74
         '
         'txb_ParentDep
         '
         Me.txb_ParentDep.BackColor = System.Drawing.Color.White
-        Me.txb_ParentDep.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_ParentDep.Location = New System.Drawing.Point(931, 228)
+        Me.txb_ParentDep.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_ParentDep.Location = New System.Drawing.Point(1246, 314)
+        Me.txb_ParentDep.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_ParentDep.Name = "txb_ParentDep"
-        Me.txb_ParentDep.Size = New System.Drawing.Size(264, 26)
+        Me.txb_ParentDep.Size = New System.Drawing.Size(361, 42)
         Me.txb_ParentDep.TabIndex = 73
         '
         'txb_EstablishedDate
         '
         Me.txb_EstablishedDate.BackColor = System.Drawing.Color.White
-        Me.txb_EstablishedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_EstablishedDate.Location = New System.Drawing.Point(931, 166)
+        Me.txb_EstablishedDate.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_EstablishedDate.Location = New System.Drawing.Point(1246, 237)
+        Me.txb_EstablishedDate.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_EstablishedDate.Name = "txb_EstablishedDate"
-        Me.txb_EstablishedDate.Size = New System.Drawing.Size(264, 26)
+        Me.txb_EstablishedDate.Size = New System.Drawing.Size(361, 42)
         Me.txb_EstablishedDate.TabIndex = 72
         '
         'txb_OfficeHour
         '
         Me.txb_OfficeHour.BackColor = System.Drawing.Color.White
-        Me.txb_OfficeHour.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_OfficeHour.Location = New System.Drawing.Point(931, 106)
+        Me.txb_OfficeHour.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_OfficeHour.Location = New System.Drawing.Point(1246, 163)
+        Me.txb_OfficeHour.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_OfficeHour.Name = "txb_OfficeHour"
-        Me.txb_OfficeHour.Size = New System.Drawing.Size(264, 26)
+        Me.txb_OfficeHour.Size = New System.Drawing.Size(361, 42)
         Me.txb_OfficeHour.TabIndex = 71
         '
         'lblUpdateAt
         '
-        Me.lblUpdateAt.AutoSize = True
-        Me.lblUpdateAt.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUpdateAt.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblUpdateAt.Location = New System.Drawing.Point(708, 464)
-        Me.lblUpdateAt.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblUpdateAt.BackColor = System.Drawing.Color.Transparent
+        Me.lblUpdateAt.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUpdateAt.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblUpdateAt.Location = New System.Drawing.Point(999, 616)
+        Me.lblUpdateAt.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblUpdateAt.Name = "lblUpdateAt"
-        Me.lblUpdateAt.Size = New System.Drawing.Size(107, 24)
+        Me.lblUpdateAt.Size = New System.Drawing.Size(134, 29)
         Me.lblUpdateAt.TabIndex = 70
         Me.lblUpdateAt.Text = " Update At"
         '
         'lblCreatedAt
         '
-        Me.lblCreatedAt.AutoSize = True
-        Me.lblCreatedAt.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCreatedAt.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblCreatedAt.Location = New System.Drawing.Point(708, 404)
-        Me.lblCreatedAt.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblCreatedAt.BackColor = System.Drawing.Color.Transparent
+        Me.lblCreatedAt.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCreatedAt.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblCreatedAt.Location = New System.Drawing.Point(999, 542)
+        Me.lblCreatedAt.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblCreatedAt.Name = "lblCreatedAt"
-        Me.lblCreatedAt.Size = New System.Drawing.Size(108, 24)
+        Me.lblCreatedAt.Size = New System.Drawing.Size(136, 29)
         Me.lblCreatedAt.TabIndex = 69
         Me.lblCreatedAt.Text = "Created At"
         '
         'lbBudgetAllocation
         '
-        Me.lbBudgetAllocation.AutoSize = True
-        Me.lbBudgetAllocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbBudgetAllocation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lbBudgetAllocation.Location = New System.Drawing.Point(708, 344)
-        Me.lbBudgetAllocation.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lbBudgetAllocation.BackColor = System.Drawing.Color.Transparent
+        Me.lbBudgetAllocation.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbBudgetAllocation.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lbBudgetAllocation.Location = New System.Drawing.Point(999, 468)
+        Me.lbBudgetAllocation.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lbBudgetAllocation.Name = "lbBudgetAllocation"
-        Me.lbBudgetAllocation.Size = New System.Drawing.Size(174, 24)
+        Me.lbBudgetAllocation.Size = New System.Drawing.Size(218, 29)
         Me.lbBudgetAllocation.TabIndex = 68
         Me.lbBudgetAllocation.Text = "Budget Allocation"
         '
         'lblStatus
         '
-        Me.lblStatus.AutoSize = True
-        Me.lblStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStatus.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblStatus.Location = New System.Drawing.Point(708, 284)
-        Me.lblStatus.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblStatus.BackColor = System.Drawing.Color.Transparent
+        Me.lblStatus.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblStatus.Location = New System.Drawing.Point(999, 395)
+        Me.lblStatus.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(66, 24)
+        Me.lblStatus.Size = New System.Drawing.Size(85, 29)
         Me.lblStatus.TabIndex = 67
         Me.lblStatus.Text = "Status"
         '
         'lblParentDepartment
         '
-        Me.lblParentDepartment.AutoSize = True
-        Me.lblParentDepartment.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblParentDepartment.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblParentDepartment.Location = New System.Drawing.Point(708, 224)
-        Me.lblParentDepartment.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblParentDepartment.BackColor = System.Drawing.Color.Transparent
+        Me.lblParentDepartment.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblParentDepartment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblParentDepartment.Location = New System.Drawing.Point(999, 321)
+        Me.lblParentDepartment.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblParentDepartment.Name = "lblParentDepartment"
-        Me.lblParentDepartment.Size = New System.Drawing.Size(183, 24)
+        Me.lblParentDepartment.Size = New System.Drawing.Size(231, 29)
         Me.lblParentDepartment.TabIndex = 66
         Me.lblParentDepartment.Text = "Parent Department"
         '
         'lblEstablishedDate
         '
-        Me.lblEstablishedDate.AutoSize = True
-        Me.lblEstablishedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEstablishedDate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblEstablishedDate.Location = New System.Drawing.Point(708, 164)
-        Me.lblEstablishedDate.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblEstablishedDate.BackColor = System.Drawing.Color.Transparent
+        Me.lblEstablishedDate.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEstablishedDate.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblEstablishedDate.Location = New System.Drawing.Point(999, 247)
+        Me.lblEstablishedDate.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblEstablishedDate.Name = "lblEstablishedDate"
-        Me.lblEstablishedDate.Size = New System.Drawing.Size(166, 24)
+        Me.lblEstablishedDate.Size = New System.Drawing.Size(211, 29)
         Me.lblEstablishedDate.TabIndex = 65
         Me.lblEstablishedDate.Text = "Established Date"
         '
         'lblOfficeHour
         '
-        Me.lblOfficeHour.AutoSize = True
-        Me.lblOfficeHour.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOfficeHour.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblOfficeHour.Location = New System.Drawing.Point(708, 104)
-        Me.lblOfficeHour.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.lblOfficeHour.BackColor = System.Drawing.Color.Transparent
+        Me.lblOfficeHour.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblOfficeHour.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblOfficeHour.Location = New System.Drawing.Point(999, 173)
+        Me.lblOfficeHour.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.lblOfficeHour.Name = "lblOfficeHour"
-        Me.lblOfficeHour.Size = New System.Drawing.Size(116, 24)
+        Me.lblOfficeHour.Size = New System.Drawing.Size(145, 29)
         Me.lblOfficeHour.TabIndex = 64
         Me.lblOfficeHour.Text = "Office Hour"
         '
         'txb_DepartmentID
         '
         Me.txb_DepartmentID.BackColor = System.Drawing.Color.White
-        Me.txb_DepartmentID.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepartmentID.Location = New System.Drawing.Point(389, 109)
+        Me.txb_DepartmentID.Font = New System.Drawing.Font("Poppins Light", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_DepartmentID.Location = New System.Drawing.Point(524, 167)
+        Me.txb_DepartmentID.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_DepartmentID.Name = "txb_DepartmentID"
-        Me.txb_DepartmentID.Size = New System.Drawing.Size(264, 26)
+        Me.txb_DepartmentID.Size = New System.Drawing.Size(361, 42)
         Me.txb_DepartmentID.TabIndex = 81
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label1.Location = New System.Drawing.Point(166, 107)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(226, 165)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(148, 24)
+        Me.Label1.Size = New System.Drawing.Size(187, 29)
         Me.Label1.TabIndex = 80
         Me.Label1.Text = "Department I.D"
         '
@@ -392,9 +409,10 @@ Partial Class SAAddDepartmentManagement
         '
         Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(422, 621)
+        Me.btn_Cancel.Location = New System.Drawing.Point(592, 811)
+        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Cancel.Name = "btn_Cancel"
-        Me.btn_Cancel.Size = New System.Drawing.Size(191, 46)
+        Me.btn_Cancel.Size = New System.Drawing.Size(255, 57)
         Me.btn_Cancel.TabIndex = 82
         Me.btn_Cancel.Text = "Cancel"
         Me.btn_Cancel.UseVisualStyleBackColor = True
@@ -402,21 +420,26 @@ Partial Class SAAddDepartmentManagement
         'btn_Login
         '
         Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Login.FlatAppearance.BorderSize = 0
+        Me.btn_Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Login.ForeColor = System.Drawing.Color.White
-        Me.btn_Login.Location = New System.Drawing.Point(765, 621)
+        Me.btn_Login.Location = New System.Drawing.Point(1049, 811)
+        Me.btn_Login.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Login.Name = "btn_Login"
-        Me.btn_Login.Size = New System.Drawing.Size(190, 46)
+        Me.btn_Login.Size = New System.Drawing.Size(253, 57)
         Me.btn_Login.TabIndex = 83
         Me.btn_Login.Text = "Add"
         Me.btn_Login.UseVisualStyleBackColor = False
         '
         'SAAddDepartmentManagement
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1386, 788)
+        Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources._Presentation2
+        Me.ClientSize = New System.Drawing.Size(1848, 970)
         Me.Controls.Add(Me.btn_Cancel)
         Me.Controls.Add(Me.btn_Login)
         Me.Controls.Add(Me.txb_DepartmentID)
@@ -452,6 +475,7 @@ Partial Class SAAddDepartmentManagement
         Me.Controls.Add(Me.lblDepartmentManagement)
         Me.ForeColor = System.Drawing.SystemColors.ControlDark
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "SAAddDepartmentManagement"
         Me.Text = "SAAddDepartmentManagement"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

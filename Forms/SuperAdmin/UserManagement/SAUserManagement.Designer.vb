@@ -45,10 +45,10 @@ Partial Class SAUserManagement
         Me.Barangay = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HouseNoStreet = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Password = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -56,32 +56,33 @@ Partial Class SAUserManagement
         'lblUserManagement
         '
         Me.lblUserManagement.AutoSize = True
-        Me.lblUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUserManagement.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUserManagement.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.lblUserManagement.Location = New System.Drawing.Point(130, 71)
         Me.lblUserManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUserManagement.Name = "lblUserManagement"
-        Me.lblUserManagement.Size = New System.Drawing.Size(311, 39)
+        Me.lblUserManagement.Size = New System.Drawing.Size(349, 60)
         Me.lblUserManagement.TabIndex = 3
         Me.lblUserManagement.Text = "User Management"
         '
         'TextBox1
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(218, 151)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox1.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(209, 156)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(729, 41)
+        Me.TextBox1.Size = New System.Drawing.Size(729, 42)
         Me.TextBox1.TabIndex = 11
         '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FirstName, Me.MiddleName, Me.LastName, Me.Suffix, Me.Position, Me.DepartmentID, Me.EmployeeID, Me.ContactNumber, Me.Email, Me.UserName, Me.Provence, Me.Municipality, Me.Barangay, Me.HouseNoStreet, Me.Password})
-        Me.DataGridView1.Location = New System.Drawing.Point(137, 230)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DataGridView1.Location = New System.Drawing.Point(137, 228)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1383, 815)
+        Me.DataGridView1.Size = New System.Drawing.Size(1387, 815)
         Me.DataGridView1.TabIndex = 13
         '
         'FirstName
@@ -189,24 +190,14 @@ Partial Class SAUserManagement
         Me.Password.Name = "Password"
         Me.Password.Width = 125
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(158, 151)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(58, 41)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 15
-        Me.PictureBox2.TabStop = False
-        '
         'btnUpdate
         '
-        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnUpdate.CornerRadius = 5
         Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdate.Font = New System.Drawing.Font("Poppins", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdate.Location = New System.Drawing.Point(1364, 150)
+        Me.btnUpdate.Location = New System.Drawing.Point(1375, 151)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(135, 47)
@@ -216,12 +207,12 @@ Partial Class SAUserManagement
         '
         'btnDelete
         '
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnDelete.CornerRadius = 5
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1184, 150)
+        Me.btnDelete.Location = New System.Drawing.Point(1195, 151)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(134, 47)
@@ -231,18 +222,28 @@ Partial Class SAUserManagement
         '
         'btnAdd
         '
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnAdd.CornerRadius = 15
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(989, 151)
+        Me.btnAdd.Location = New System.Drawing.Point(1000, 152)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(148, 46)
         Me.btnAdd.TabIndex = 0
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(144, 156)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 15
+        Me.PictureBox2.TabStop = False
         '
         'SAUserManagement
         '
@@ -258,7 +259,7 @@ Partial Class SAUserManagement
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnAdd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "SAUserManagement"
         Me.Text = "SAUserManagement"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

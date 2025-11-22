@@ -27,11 +27,8 @@ Partial Class SAPropertyRequestManagement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.lblUserManagement = New System.Windows.Forms.Label()
-        Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.RequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,29 +47,17 @@ Partial Class SAPropertyRequestManagement
         Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UpdatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'btnAdd
-        '
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
-        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1064, 160)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(136, 37)
-        Me.btnAdd.TabIndex = 155
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = False
-        '
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(235, 156)
+        Me.TextBox1.Location = New System.Drawing.Point(219, 153)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(656, 41)
@@ -82,52 +67,22 @@ Partial Class SAPropertyRequestManagement
         '
         Me.lblUserManagement.AutoSize = True
         Me.lblUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserManagement.Location = New System.Drawing.Point(146, 74)
+        Me.lblUserManagement.Location = New System.Drawing.Point(144, 74)
         Me.lblUserManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUserManagement.Name = "lblUserManagement"
         Me.lblUserManagement.Size = New System.Drawing.Size(515, 39)
         Me.lblUserManagement.TabIndex = 158
         Me.lblUserManagement.Text = "Property Request Management"
         '
-        'btnUpdate
-        '
-        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnUpdate.CornerRadius = 15
-        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdate.Location = New System.Drawing.Point(1414, 156)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(135, 41)
-        Me.btnUpdate.TabIndex = 157
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = False
-        '
-        'btnDelete
-        '
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
-        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1247, 159)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(135, 38)
-        Me.btnDelete.TabIndex = 156
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = False
-        '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestID, Me.UserID, Me.PropertyID, Me.RequestDate, Me.Purpose, Me.Quantity, Me.Status, Me.ApprovedBy, Me.ReleaseDate, Me.ReturnDate, Me.ActualReturnedDate, Me.Remarks, Me.Penalty, Me.ConditionUponReturn, Me.CreatedAt, Me.UpdatedAt})
-        Me.DataGridView1.Location = New System.Drawing.Point(149, 226)
+        Me.DataGridView1.Location = New System.Drawing.Point(153, 229)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1409, 661)
+        Me.DataGridView1.Size = New System.Drawing.Size(1366, 832)
         Me.DataGridView1.TabIndex = 154
         '
         'RequestID
@@ -245,20 +200,64 @@ Partial Class SAPropertyRequestManagement
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox1.Location = New System.Drawing.Point(155, 156)
+        Me.PictureBox1.Location = New System.Drawing.Point(153, 153)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(63, 41)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 160
         Me.PictureBox1.TabStop = False
         '
+        'btnAdd
+        '
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnAdd.CornerRadius = 15
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAdd.Location = New System.Drawing.Point(1046, 157)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(136, 37)
+        Me.btnAdd.TabIndex = 155
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = False
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnUpdate.CornerRadius = 15
+        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdate.Location = New System.Drawing.Point(1396, 153)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(135, 41)
+        Me.btnUpdate.TabIndex = 157
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = False
+        '
+        'btnDelete
+        '
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnDelete.CornerRadius = 15
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Location = New System.Drawing.Point(1229, 156)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(135, 38)
+        Me.btnDelete.TabIndex = 156
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = False
+        '
         'SAPropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoScroll = True
         Me.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.ClientSize = New System.Drawing.Size(1831, 874)
+        Me.ClientSize = New System.Drawing.Size(1773, 1080)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.TextBox1)

@@ -48,7 +48,6 @@ Partial Class SADepartmentManagement
         Me.LifeSpan = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DepreciationValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DisposalDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,13 +55,13 @@ Partial Class SADepartmentManagement
         '
         'btnAdd
         '
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnAdd.CornerRadius = 15
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1071, 156)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAdd.Location = New System.Drawing.Point(1012, 155)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(153, 34)
         Me.btnAdd.TabIndex = 147
@@ -72,8 +71,8 @@ Partial Class SADepartmentManagement
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(224, 151)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox1.Location = New System.Drawing.Point(206, 150)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(775, 41)
         Me.TextBox1.TabIndex = 151
@@ -81,23 +80,24 @@ Partial Class SADepartmentManagement
         'lblUserManagement
         '
         Me.lblUserManagement.AutoSize = True
-        Me.lblUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserManagement.Location = New System.Drawing.Point(143, 70)
+        Me.lblUserManagement.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUserManagement.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.lblUserManagement.Location = New System.Drawing.Point(124, 70)
         Me.lblUserManagement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUserManagement.Name = "lblUserManagement"
-        Me.lblUserManagement.Size = New System.Drawing.Size(422, 39)
+        Me.lblUserManagement.Size = New System.Drawing.Size(465, 58)
         Me.lblUserManagement.TabIndex = 150
         Me.lblUserManagement.Text = "Department Management"
         '
         'btnUpdate
         '
-        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnUpdate.CornerRadius = 15
         Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdate.Location = New System.Drawing.Point(1430, 155)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnUpdate.Location = New System.Drawing.Point(1371, 154)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(152, 35)
         Me.btnUpdate.TabIndex = 149
@@ -106,13 +106,13 @@ Partial Class SADepartmentManagement
         '
         'btnDelete
         '
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnDelete.CornerRadius = 15
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1254, 155)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDelete.Location = New System.Drawing.Point(1195, 154)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(152, 35)
         Me.btnDelete.TabIndex = 148
@@ -123,11 +123,11 @@ Partial Class SADepartmentManagement
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertID, Me.PropertyName, Me.Category, Me.Description, Me.SerialNumber, Me.AcquisitionDate, Me.AcquisitionCost, Me.Supplier, Me.ConditionStatus, Me.LocationColumn, Me.CustodianID, Me.WarrantyDetail, Me.LifeSpan, Me.DepreciationValue, Me.DisposalDate})
-        Me.DataGridView1.Location = New System.Drawing.Point(146, 222)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DataGridView1.Location = New System.Drawing.Point(141, 231)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1436, 817)
+        Me.DataGridView1.Size = New System.Drawing.Size(1387, 817)
         Me.DataGridView1.TabIndex = 146
         '
         'PropertID
@@ -235,18 +235,10 @@ Partial Class SADepartmentManagement
         Me.DisposalDate.Name = "DisposalDate"
         Me.DisposalDate.Width = 125
         '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.Panel1.Location = New System.Drawing.Point(140, 222)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1442, 639)
-        Me.Panel1.TabIndex = 153
-        '
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(146, 151)
+        Me.PictureBox2.Location = New System.Drawing.Point(141, 148)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(58, 41)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -266,9 +258,8 @@ Partial Class SADepartmentManagement
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "SADepartmentManagement"
         Me.Text = "SADepartmentManagement"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -299,6 +290,5 @@ Partial Class SADepartmentManagement
     Friend WithEvents LifeSpan As DataGridViewTextBoxColumn
     Friend WithEvents DepreciationValue As DataGridViewTextBoxColumn
     Friend WithEvents DisposalDate As DataGridViewTextBoxColumn
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents PictureBox2 As PictureBox
 End Class

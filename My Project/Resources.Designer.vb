@@ -83,6 +83,66 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _Presentation() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_Presentation", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property _Presentation1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_Presentation1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property _Presentation2() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_Presentation2", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property _Presentation3() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_Presentation3", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property _Presentation4() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_Presentation4", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property _Presentation5() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_Presentation5", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property background() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("background", resourceCulture)
@@ -396,6 +456,36 @@ Namespace My.Resources
         Friend ReadOnly Property icSubmit1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("icSubmit1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property lock_icon_transparent_background_15() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("lock-icon-transparent-background-15", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property lock_icon_transparent_background_151() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("lock-icon-transparent-background-151", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property lock_icon_transparent_background_152() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("lock-icon-transparent-background-152", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

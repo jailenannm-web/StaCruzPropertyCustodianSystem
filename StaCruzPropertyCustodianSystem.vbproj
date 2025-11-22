@@ -561,6 +561,15 @@
   </ItemGroup>
   <!-- RESOURCES -->
   <ItemGroup>
+    <None Include="Resources\_Presentation5.png" />
+    <None Include="Resources\_Presentation4.png" />
+    <None Include="Resources\_Presentation3.png" />
+    <None Include="Resources\_Presentation2.png" />
+    <None Include="Resources\_Presentation1.png" />
+    <None Include="Resources\_Presentation.png" />
+    <None Include="Resources\lock-icon-transparent-background-152.jpg" />
+    <None Include="Resources\lock-icon-transparent-background-151.jpg" />
+    <None Include="Resources\lock-icon-transparent-background-15.jpg" />
     <None Include="packages.config" />
     <None Include="Resources\Images\logo-removebg-preview %281%29.png" />
     <None Include="Resources\Images\logo2-removebg-preview.png" />

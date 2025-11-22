@@ -12,7 +12,9 @@ Public Class StaffLogin
 
     ' Login button click
     Private Sub btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
-        ' Validate input fields
+        btn_Login.FlatStyle = FlatStyle.Flat ' Validate input fields
+        btn_Login.FlatAppearance.BorderSize = 0
+
         If String.IsNullOrWhiteSpace(txb_Username.Text) Then
             MessageBox.Show("Please enter your username.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txb_Username.Focus()
@@ -51,6 +53,26 @@ Public Class StaffLogin
 
 
     Private Sub txb_Password_TextChanged(sender As Object, e As EventArgs) Handles txb_Password.TextChanged
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub StaffLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class

@@ -118,127 +118,154 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="basil_logout_solid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\basil_logout-solid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\BG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BG1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\BG1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="clarity_internet_of_things_solid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\clarity_internet-of-things-solid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Group_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Group 5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hugeicons_property_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\hugeicons_property-edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icDefault" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icDefault.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icDepartment" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icDepartment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icLogout" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icLogout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_dashboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_dashboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_logout1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_maintenance1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_maintenance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_maintenance" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\icon_maintenance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_maintenance1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_maintenance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lock-icon-transparent-background-15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lock-icon-transparent-background-15.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_propertymanagement" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_propertymanagement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_propertyrequest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_propertyrequest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_propertyrequest1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_propertyrequest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_reports" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_reports.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_reports1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_reports.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_search1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_search1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_search11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_search1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_suppliesmanagement" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_suppliesmanagement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_SystemConfiguration" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_SystemConfiguration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_SystemConfiguration1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_SystemConfiguration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_usermanagement" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icon_usermanagement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icPerson" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icPerson.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icRequest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icRequest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icStaff" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icStaff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icSubmit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icSubmit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icSubmit1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\icSubmit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="logo1_removebg_preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\logo1-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="logo2_removebg_preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\logo2-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="logo_removebg_preview__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\logo-removebg-preview (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="profile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\profile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="_Presentation4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\_Presentation4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="profile1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\profile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="si_user_fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\si_user-fill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icSubmit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icSubmit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="si_user_fill__3_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\si_user-fill (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_search11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_search1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_logout1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_SystemConfiguration" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_SystemConfiguration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_574641165_841620561884149_5934190666791988971_n_removebg_preview__1_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\574641165_841620561884149_5934190666791988971_n-removebg-preview (1)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="profile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\profile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BG1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\BG1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_suppliesmanagement" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_suppliesmanagement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_574641165_841620561884149_5934190666791988971_n_removebg_preview__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\574641165_841620561884149_5934190666791988971_n-removebg-preview (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="_574641165_841620561884149_5934190666791988971_n_removebg_preview__1_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\574641165_841620561884149_5934190666791988971_n-removebg-preview (1)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_dashboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_dashboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_search1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_search1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clarity_internet_of_things_solid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\clarity_internet-of-things-solid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_SystemConfiguration1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_SystemConfiguration.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icSubmit1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icSubmit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_propertyrequest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_propertyrequest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icStaff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icStaff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_reports1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_reports.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_removebg_preview__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\logo-removebg-preview (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_Presentation2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\_Presentation2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_propertymanagement" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_propertymanagement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icPerson" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icPerson.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_Presentation3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\_Presentation3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo2_removebg_preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\logo2-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="si_user_fill" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\si_user-fill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Group_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Group 5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_reports" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_reports.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_usermanagement" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_usermanagement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icDepartment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icDepartment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lock-icon-transparent-background-151" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lock-icon-transparent-background-151.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="si_user_fill__3_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\si_user-fill (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icDefault" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icDefault.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icRequest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icRequest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_Presentation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\_Presentation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basil_logout_solid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\basil_logout-solid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hugeicons_property_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\hugeicons_property-edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_propertyrequest1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icon_propertyrequest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icLogout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\icLogout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_Presentation1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\_Presentation1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo1_removebg_preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\logo1-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lock-icon-transparent-background-152" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lock-icon-transparent-background-152.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\BG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_Presentation5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\_Presentation5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
