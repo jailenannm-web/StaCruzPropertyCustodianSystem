@@ -207,14 +207,17 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        ' Get reference to the parent dashboard form
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New UC_AddSupply())
+            ' Load the AddPropertyRequest UserControl
+            parentDashboard.LoadUserControl(New AddPropertyRequest())
         Else
-            ' Fallback: try to add to parent control
-            Dim addSupplyUC As New UC_AddSupply()
-            Me.Parent.Controls.Add(addSupplyUC)
-            addSupplyUC.BringToFront()
+            ' Fallback: add directly to the parent container
+            Dim addPropertyUC As New AddPropertyRequest()
+            Me.Parent.Controls.Add(addPropertyUC)
+            addPropertyUC.BringToFront()
         End If
     End Sub
 

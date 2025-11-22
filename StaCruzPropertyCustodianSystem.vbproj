@@ -122,6 +122,12 @@
     <Compile Include="Forms\Admin\AddProperty.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Admin\AddPropertyRequest.Designer.vb">
+      <DependentUpon>AddPropertyRequest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddPropertyRequest.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Admin\AddSupply.Designer.vb">
       <DependentUpon>AddSupply.vb</DependentUpon>
     </Compile>
@@ -231,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AddProperty.resx">
       <DependentUpon>AddProperty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AddPropertyRequest.resx">
+      <DependentUpon>AddPropertyRequest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
