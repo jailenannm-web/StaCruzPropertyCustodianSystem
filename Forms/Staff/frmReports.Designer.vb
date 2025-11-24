@@ -31,12 +31,12 @@ Partial Class frmReports
         'lblReports
         '
         Me.lblReports.AutoSize = True
-        Me.lblReports.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblReports.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblReports.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.lblReports.Location = New System.Drawing.Point(733, 78)
         Me.lblReports.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblReports.Name = "lblReports"
-        Me.lblReports.Size = New System.Drawing.Size(182, 52)
+        Me.lblReports.Size = New System.Drawing.Size(161, 60)
         Me.lblReports.TabIndex = 2
         Me.lblReports.Text = "Reports"
         '

@@ -58,18 +58,19 @@ Partial Class frmPropertyRequest
         Me.Label12 = New System.Windows.Forms.Label()
         Me.DateTimePicker5 = New System.Windows.Forms.DateTimePicker()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'txtPropertyRequest
         '
         Me.txtPropertyRequest.AutoSize = True
         Me.txtPropertyRequest.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPropertyRequest.Location = New System.Drawing.Point(758, 34)
+        Me.txtPropertyRequest.Location = New System.Drawing.Point(911, 34)
         Me.txtPropertyRequest.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.txtPropertyRequest.Name = "txtPropertyRequest"
-        Me.txtPropertyRequest.Size = New System.Drawing.Size(327, 60)
+        Me.txtPropertyRequest.Size = New System.Drawing.Size(162, 58)
         Me.txtPropertyRequest.TabIndex = 0
-        Me.txtPropertyRequest.Text = "Property Request"
+        Me.txtPropertyRequest.Text = "Request"
         '
         'btn_Cancel
         '
@@ -399,12 +400,23 @@ Partial Class frmPropertyRequest
         Me.Label13.TabIndex = 384
         Me.Label13.Text = "Update At"
         '
+        'ComboBox1
+        '
+        Me.ComboBox1.Font = New System.Drawing.Font("Poppins", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Property", "Supply"})
+        Me.ComboBox1.Location = New System.Drawing.Point(739, 37)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(174, 56)
+        Me.ComboBox1.TabIndex = 386
+        '
         'frmPropertyRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1815, 836)
+        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.DateTimePicker5)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.TextBox8)
@@ -477,4 +489,5 @@ Partial Class frmPropertyRequest
     Friend WithEvents Label12 As Label
     Friend WithEvents DateTimePicker5 As DateTimePicker
     Friend WithEvents Label13 As Label
+    Friend WithEvents ComboBox1 As ComboBox
 End Class

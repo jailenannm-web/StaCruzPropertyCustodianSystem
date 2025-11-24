@@ -178,12 +178,10 @@ Public Class StaffDashboard
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        ' If the panel is collapsed, expand it.
-        If Not isSidebarExpanded Then
-            ToggleSidebar()
-        End If
+        Dim logout As New logout()
+        logout.Show()   ' Show the register form
+        Me.Hide()            ' Hide current login form instead of closing it
     End Sub
-
     Private Sub Label2_Click(sender As Object, e As EventArgs) Handles comboMonth.Click
 
     End Sub

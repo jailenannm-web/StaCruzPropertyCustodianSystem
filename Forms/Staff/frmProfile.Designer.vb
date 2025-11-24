@@ -8,7 +8,7 @@ Partial Class frmProfile
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,300 +25,519 @@ Partial Class frmProfile
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim txtFullName As System.Windows.Forms.TextBox
-        Dim txtContact As System.Windows.Forms.TextBox
-        Dim txtEmail As System.Windows.Forms.TextBox
-        Me.lblProfile = New System.Windows.Forms.Label()
-        Me.lblFullName = New System.Windows.Forms.Label()
+        Me.btn_Cancel = New System.Windows.Forms.Button()
+        Me.btn_Login = New System.Windows.Forms.Button()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblPosition = New System.Windows.Forms.Label()
-        Me.lblContact = New System.Windows.Forms.Label()
-        Me.lblEmail = New System.Windows.Forms.Label()
-        Me.lblAssignedDep = New System.Windows.Forms.Label()
-        Me.comboPosition = New System.Windows.Forms.ComboBox()
-        Me.comboAssigned = New System.Windows.Forms.ComboBox()
-        Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel4 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedPanel5 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        txtFullName = New System.Windows.Forms.TextBox()
-        txtContact = New System.Windows.Forms.TextBox()
-        txtEmail = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'txtFullName
+        'btn_Cancel
         '
-        txtFullName.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        txtFullName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        txtFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        txtFullName.ForeColor = System.Drawing.SystemColors.Window
-        txtFullName.Location = New System.Drawing.Point(461, 219)
-        txtFullName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        txtFullName.Multiline = True
-        txtFullName.Name = "txtFullName"
-        txtFullName.Size = New System.Drawing.Size(568, 36)
-        txtFullName.TabIndex = 9
-        AddHandler txtFullName.TextChanged, AddressOf Me.txtbxName_TextChanged
+        Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Cancel.Location = New System.Drawing.Point(545, 946)
+        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Cancel.Name = "btn_Cancel"
+        Me.btn_Cancel.Size = New System.Drawing.Size(228, 58)
+        Me.btn_Cancel.TabIndex = 60
+        Me.btn_Cancel.Text = "Update"
+        Me.btn_Cancel.UseVisualStyleBackColor = True
         '
-        'txtContact
+        'btn_Login
         '
-        txtContact.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        txtContact.BorderStyle = System.Windows.Forms.BorderStyle.None
-        txtContact.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        txtContact.ForeColor = System.Drawing.SystemColors.Window
-        txtContact.Location = New System.Drawing.Point(139, 473)
-        txtContact.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        txtContact.Name = "txtContact"
-        txtContact.Size = New System.Drawing.Size(336, 34)
-        txtContact.TabIndex = 12
+        Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Login.FlatAppearance.BorderSize = 0
+        Me.btn_Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Login.ForeColor = System.Drawing.Color.Transparent
+        Me.btn_Login.Location = New System.Drawing.Point(974, 946)
+        Me.btn_Login.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Login.Name = "btn_Login"
+        Me.btn_Login.Size = New System.Drawing.Size(227, 58)
+        Me.btn_Login.TabIndex = 61
+        Me.btn_Login.Text = "Edit"
+        Me.btn_Login.UseVisualStyleBackColor = False
         '
-        'txtEmail
+        'Label31
         '
-        txtEmail.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None
-        txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        txtEmail.ForeColor = System.Drawing.SystemColors.Window
-        txtEmail.Location = New System.Drawing.Point(977, 473)
-        txtEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        txtEmail.Name = "txtEmail"
-        txtEmail.Size = New System.Drawing.Size(316, 34)
-        txtEmail.TabIndex = 13
+        Me.Label31.BackColor = System.Drawing.Color.Transparent
+        Me.Label31.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label31.Location = New System.Drawing.Point(71, 120)
+        Me.Label31.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(219, 42)
+        Me.Label31.TabIndex = 91
+        Me.Label31.Text = "User I.D"
         '
-        'lblProfile
+        'Label32
         '
-        Me.lblProfile.AutoSize = True
-        Me.lblProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProfile.Location = New System.Drawing.Point(655, 59)
-        Me.lblProfile.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblProfile.Name = "lblProfile"
-        Me.lblProfile.Size = New System.Drawing.Size(153, 52)
-        Me.lblProfile.TabIndex = 0
-        Me.lblProfile.Text = "Profile"
+        Me.Label32.BackColor = System.Drawing.Color.Transparent
+        Me.Label32.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label32.Location = New System.Drawing.Point(71, 529)
+        Me.Label32.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(157, 42)
+        Me.Label32.TabIndex = 92
+        Me.Label32.Text = "Suffix"
         '
-        'lblFullName
+        'Label33
         '
-        Me.lblFullName.AutoSize = True
-        Me.lblFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFullName.Location = New System.Drawing.Point(665, 175)
-        Me.lblFullName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblFullName.Name = "lblFullName"
-        Me.lblFullName.Size = New System.Drawing.Size(133, 29)
-        Me.lblFullName.TabIndex = 1
-        Me.lblFullName.Text = "Full Name"
+        Me.Label33.BackColor = System.Drawing.Color.Transparent
+        Me.Label33.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label33.Location = New System.Drawing.Point(71, 319)
+        Me.Label33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(233, 42)
+        Me.Label33.TabIndex = 93
+        Me.Label33.Text = "Middle Name"
+        '
+        'Label34
+        '
+        Me.Label34.BackColor = System.Drawing.Color.Transparent
+        Me.Label34.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label34.Location = New System.Drawing.Point(71, 845)
+        Me.Label34.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(261, 42)
+        Me.Label34.TabIndex = 98
+        Me.Label34.Text = "Employee I.D"
+        '
+        'Label35
+        '
+        Me.Label35.BackColor = System.Drawing.Color.Transparent
+        Me.Label35.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label35.Location = New System.Drawing.Point(71, 636)
+        Me.Label35.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(254, 42)
+        Me.Label35.TabIndex = 94
+        Me.Label35.Text = "Position"
+        '
+        'Label36
+        '
+        Me.Label36.BackColor = System.Drawing.Color.Transparent
+        Me.Label36.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label36.Location = New System.Drawing.Point(71, 741)
+        Me.Label36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(254, 42)
+        Me.Label36.TabIndex = 95
+        Me.Label36.Text = "Department I.D"
+        '
+        'Label37
+        '
+        Me.Label37.BackColor = System.Drawing.Color.Transparent
+        Me.Label37.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label37.Location = New System.Drawing.Point(71, 211)
+        Me.Label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(233, 42)
+        Me.Label37.TabIndex = 96
+        Me.Label37.Text = "First Name"
+        '
+        'Label38
+        '
+        Me.Label38.BackColor = System.Drawing.Color.Transparent
+        Me.Label38.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label38.Location = New System.Drawing.Point(71, 426)
+        Me.Label38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(181, 42)
+        Me.Label38.TabIndex = 97
+        Me.Label38.Text = "Last Name"
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label2.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label2.Location = New System.Drawing.Point(365, 120)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(219, 42)
+        Me.Label2.TabIndex = 99
+        Me.Label2.Text = "User I.D"
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label3.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(365, 529)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(157, 42)
+        Me.Label3.TabIndex = 100
+        Me.Label3.Text = "Suffix"
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
+        Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label4.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label4.Location = New System.Drawing.Point(365, 319)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(233, 42)
+        Me.Label4.TabIndex = 101
+        Me.Label4.Text = "Middle Name"
+        '
+        'Label16
+        '
+        Me.Label16.BackColor = System.Drawing.Color.Transparent
+        Me.Label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label16.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label16.Location = New System.Drawing.Point(365, 845)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(261, 42)
+        Me.Label16.TabIndex = 106
+        Me.Label16.Text = "Employee I.D"
+        '
+        'Label5
+        '
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
+        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label5.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label5.Location = New System.Drawing.Point(365, 636)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(254, 42)
+        Me.Label5.TabIndex = 102
+        Me.Label5.Text = "Position"
+        '
+        'Label6
+        '
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label6.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label6.Location = New System.Drawing.Point(365, 741)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(254, 42)
+        Me.Label6.TabIndex = 103
+        Me.Label6.Text = "Department I.D"
+        '
+        'Label7
+        '
+        Me.Label7.BackColor = System.Drawing.Color.Transparent
+        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label7.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label7.Location = New System.Drawing.Point(365, 211)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(233, 42)
+        Me.Label7.TabIndex = 104
+        Me.Label7.Text = "First Name"
+        '
+        'Label8
+        '
+        Me.Label8.BackColor = System.Drawing.Color.Transparent
+        Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label8.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label8.Location = New System.Drawing.Point(365, 426)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(181, 42)
+        Me.Label8.TabIndex = 105
+        Me.Label8.Text = "Last Name"
+        '
+        'Label11
+        '
+        Me.Label11.BackColor = System.Drawing.Color.Transparent
+        Me.Label11.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label11.Location = New System.Drawing.Point(978, 750)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(177, 42)
+        Me.Label11.TabIndex = 113
+        Me.Label11.Text = "Barangay"
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.Color.Transparent
+        Me.Label9.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label9.Location = New System.Drawing.Point(978, 430)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(203, 42)
+        Me.Label9.TabIndex = 112
+        Me.Label9.Text = "Password"
+        '
+        'Label10
+        '
+        Me.Label10.BackColor = System.Drawing.Color.Transparent
+        Me.Label10.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label10.Location = New System.Drawing.Point(978, 215)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(177, 42)
+        Me.Label10.TabIndex = 111
+        Me.Label10.Text = "Email"
+        '
+        'Label12
+        '
+        Me.Label12.BackColor = System.Drawing.Color.Transparent
+        Me.Label12.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label12.Location = New System.Drawing.Point(978, 637)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(248, 42)
+        Me.Label12.TabIndex = 110
+        Me.Label12.Text = "Municipality"
+        '
+        'Label13
+        '
+        Me.Label13.BackColor = System.Drawing.Color.Transparent
+        Me.Label13.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label13.Location = New System.Drawing.Point(978, 322)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(248, 42)
+        Me.Label13.TabIndex = 109
+        Me.Label13.Text = "User name"
+        '
+        'Label14
+        '
+        Me.Label14.BackColor = System.Drawing.Color.Transparent
+        Me.Label14.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label14.Location = New System.Drawing.Point(978, 543)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(159, 42)
+        Me.Label14.TabIndex = 108
+        Me.Label14.Text = "Province"
+        '
+        'Label15
+        '
+        Me.Label15.BackColor = System.Drawing.Color.Transparent
+        Me.Label15.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label15.Location = New System.Drawing.Point(978, 124)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(288, 42)
+        Me.Label15.TabIndex = 107
+        Me.Label15.Text = "Contact Number"
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(657, 289)
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label1.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(1326, 750)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 31)
-        Me.Label1.TabIndex = 2
+        Me.Label1.Size = New System.Drawing.Size(177, 42)
+        Me.Label1.TabIndex = 120
+        Me.Label1.Text = "Barangay"
         '
-        'lblPosition
+        'Label17
         '
-        Me.lblPosition.AutoSize = True
-        Me.lblPosition.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPosition.Location = New System.Drawing.Point(665, 292)
-        Me.lblPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(108, 29)
-        Me.lblPosition.TabIndex = 3
-        Me.lblPosition.Text = "Position"
+        Me.Label17.BackColor = System.Drawing.Color.Transparent
+        Me.Label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label17.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label17.Location = New System.Drawing.Point(1326, 430)
+        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(203, 42)
+        Me.Label17.TabIndex = 119
+        Me.Label17.Text = "Password"
         '
-        'lblContact
+        'Label18
         '
-        Me.lblContact.AutoSize = True
-        Me.lblContact.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblContact.Location = New System.Drawing.Point(249, 427)
-        Me.lblContact.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblContact.Name = "lblContact"
-        Me.lblContact.Size = New System.Drawing.Size(101, 29)
-        Me.lblContact.TabIndex = 4
-        Me.lblContact.Text = "Contact"
+        Me.Label18.BackColor = System.Drawing.Color.Transparent
+        Me.Label18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label18.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label18.Location = New System.Drawing.Point(1326, 215)
+        Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(177, 42)
+        Me.Label18.TabIndex = 118
+        Me.Label18.Text = "Email"
         '
-        'lblEmail
+        'Label19
         '
-        Me.lblEmail.AutoSize = True
-        Me.lblEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEmail.Location = New System.Drawing.Point(1111, 427)
-        Me.lblEmail.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblEmail.Name = "lblEmail"
-        Me.lblEmail.Size = New System.Drawing.Size(79, 29)
-        Me.lblEmail.TabIndex = 5
-        Me.lblEmail.Text = "Email"
+        Me.Label19.BackColor = System.Drawing.Color.Transparent
+        Me.Label19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label19.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label19.Location = New System.Drawing.Point(1326, 637)
+        Me.Label19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(248, 42)
+        Me.Label19.TabIndex = 117
+        Me.Label19.Text = "Municipality"
         '
-        'lblAssignedDep
+        'Label20
         '
-        Me.lblAssignedDep.AutoSize = True
-        Me.lblAssignedDep.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAssignedDep.Location = New System.Drawing.Point(567, 591)
-        Me.lblAssignedDep.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblAssignedDep.Name = "lblAssignedDep"
-        Me.lblAssignedDep.Size = New System.Drawing.Size(340, 29)
-        Me.lblAssignedDep.TabIndex = 6
-        Me.lblAssignedDep.Text = "Assigned Department/Office"
+        Me.Label20.BackColor = System.Drawing.Color.Transparent
+        Me.Label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label20.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label20.Location = New System.Drawing.Point(1326, 322)
+        Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(248, 42)
+        Me.Label20.TabIndex = 116
+        Me.Label20.Text = "User name"
         '
-        'comboPosition
+        'Label21
         '
-        Me.comboPosition.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.comboPosition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.comboPosition.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.comboPosition.ForeColor = System.Drawing.SystemColors.Window
-        Me.comboPosition.FormattingEnabled = True
-        Me.comboPosition.Location = New System.Drawing.Point(461, 345)
-        Me.comboPosition.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.comboPosition.Name = "comboPosition"
-        Me.comboPosition.Size = New System.Drawing.Size(567, 33)
-        Me.comboPosition.TabIndex = 10
+        Me.Label21.BackColor = System.Drawing.Color.Transparent
+        Me.Label21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label21.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label21.Location = New System.Drawing.Point(1326, 543)
+        Me.Label21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(159, 42)
+        Me.Label21.TabIndex = 115
+        Me.Label21.Text = "Province"
         '
-        'comboAssigned
+        'Label22
         '
-        Me.comboAssigned.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.comboAssigned.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.comboAssigned.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.comboAssigned.ForeColor = System.Drawing.SystemColors.Window
-        Me.comboAssigned.FormattingEnabled = True
-        Me.comboAssigned.Location = New System.Drawing.Point(544, 642)
-        Me.comboAssigned.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.comboAssigned.Name = "comboAssigned"
-        Me.comboAssigned.Size = New System.Drawing.Size(409, 33)
-        Me.comboAssigned.TabIndex = 11
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnUpdate.CornerRadius = 20
-        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.ForeColor = System.Drawing.Color.White
-        Me.btnUpdate.Location = New System.Drawing.Point(1224, 775)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(113, 42)
-        Me.btnUpdate.TabIndex = 8
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = False
-        '
-        'btnEdit
-        '
-        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnEdit.CornerRadius = 20
-        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEdit.ForeColor = System.Drawing.Color.White
-        Me.btnEdit.Location = New System.Drawing.Point(1047, 775)
-        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(116, 42)
-        Me.btnEdit.TabIndex = 7
-        Me.btnEdit.Text = "Edit"
-        Me.btnEdit.UseVisualStyleBackColor = False
-        '
-        'RoundedPanel1
-        '
-        Me.RoundedPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedPanel1.CornerRadius = 20
-        Me.RoundedPanel1.Location = New System.Drawing.Point(444, 207)
-        Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(603, 58)
-        Me.RoundedPanel1.TabIndex = 14
-        '
-        'RoundedPanel2
-        '
-        Me.RoundedPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedPanel2.CornerRadius = 20
-        Me.RoundedPanel2.Location = New System.Drawing.Point(444, 334)
-        Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(603, 58)
-        Me.RoundedPanel2.TabIndex = 15
-        '
-        'RoundedPanel3
-        '
-        Me.RoundedPanel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedPanel3.CornerRadius = 20
-        Me.RoundedPanel3.Location = New System.Drawing.Point(955, 459)
-        Me.RoundedPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.RoundedPanel3.Name = "RoundedPanel3"
-        Me.RoundedPanel3.Size = New System.Drawing.Size(359, 58)
-        Me.RoundedPanel3.TabIndex = 16
-        '
-        'RoundedPanel4
-        '
-        Me.RoundedPanel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedPanel4.CornerRadius = 20
-        Me.RoundedPanel4.Location = New System.Drawing.Point(131, 459)
-        Me.RoundedPanel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.RoundedPanel4.Name = "RoundedPanel4"
-        Me.RoundedPanel4.Size = New System.Drawing.Size(353, 58)
-        Me.RoundedPanel4.TabIndex = 17
-        '
-        'RoundedPanel5
-        '
-        Me.RoundedPanel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedPanel5.CornerRadius = 20
-        Me.RoundedPanel5.Location = New System.Drawing.Point(527, 628)
-        Me.RoundedPanel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.RoundedPanel5.Name = "RoundedPanel5"
-        Me.RoundedPanel5.Size = New System.Drawing.Size(437, 58)
-        Me.RoundedPanel5.TabIndex = 18
+        Me.Label22.BackColor = System.Drawing.Color.Transparent
+        Me.Label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label22.Font = New System.Drawing.Font("Poppins", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Label22.Location = New System.Drawing.Point(1326, 124)
+        Me.Label22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(288, 42)
+        Me.Label22.TabIndex = 114
+        Me.Label22.Text = "Contact Number"
         '
         'frmProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1429, 884)
-        Me.Controls.Add(txtContact)
-        Me.Controls.Add(Me.comboAssigned)
-        Me.Controls.Add(Me.comboPosition)
-        Me.Controls.Add(txtFullName)
-        Me.Controls.Add(Me.btnUpdate)
-        Me.Controls.Add(Me.btnEdit)
-        Me.Controls.Add(Me.lblAssignedDep)
-        Me.Controls.Add(Me.lblEmail)
-        Me.Controls.Add(Me.lblContact)
-        Me.Controls.Add(Me.lblPosition)
+        Me.ClientSize = New System.Drawing.Size(1795, 1058)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.lblFullName)
-        Me.Controls.Add(Me.lblProfile)
-        Me.Controls.Add(Me.RoundedPanel1)
-        Me.Controls.Add(Me.RoundedPanel2)
-        Me.Controls.Add(txtEmail)
-        Me.Controls.Add(Me.RoundedPanel3)
-        Me.Controls.Add(Me.RoundedPanel4)
-        Me.Controls.Add(Me.RoundedPanel5)
+        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.Label18)
+        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.Label20)
+        Me.Controls.Add(Me.Label21)
+        Me.Controls.Add(Me.Label22)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.Label14)
+        Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.Label31)
+        Me.Controls.Add(Me.Label32)
+        Me.Controls.Add(Me.Label33)
+        Me.Controls.Add(Me.Label34)
+        Me.Controls.Add(Me.Label35)
+        Me.Controls.Add(Me.Label36)
+        Me.Controls.Add(Me.Label37)
+        Me.Controls.Add(Me.Label38)
+        Me.Controls.Add(Me.btn_Cancel)
+        Me.Controls.Add(Me.btn_Login)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmProfile"
         Me.Text = "frmProfile"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents lblProfile As Label
-    Friend WithEvents lblFullName As Label
+    Friend WithEvents btn_Cancel As Button
+    Friend WithEvents btn_Login As Button
+    Friend WithEvents Label31 As Label
+    Friend WithEvents Label32 As Label
+    Friend WithEvents Label33 As Label
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label35 As Label
+    Friend WithEvents Label36 As Label
+    Friend WithEvents Label37 As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents lblPosition As Label
-    Friend WithEvents lblContact As Label
-    Friend WithEvents lblEmail As Label
-    Friend WithEvents lblAssignedDep As Label
-    Friend WithEvents btnEdit As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents btnUpdate As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Public WithEvents comboPosition As ComboBox
-    Public WithEvents comboAssigned As ComboBox
-    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedPanel4 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedPanel5 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label22 As Label
 End Class
