@@ -801,7 +801,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return result
 
             Dim query As String =
-                "SELECT staff_id, first_name, last_name, email, contact_number, department_id, username, password, status " &
+                "SELECT staff_id, first_name, last_name, email, contact_number, department_id, username, password_encrypted, status " &
                 "FROM staff_accounts WHERE LOWER(username) = LOWER(@username)"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -815,7 +815,7 @@ Public Class DatabaseConnection
                     End If
 
                     Dim status As String = reader("status").ToString()
-                    Dim storedHash As String = reader("password").ToString()
+                    Dim storedHash As String = reader("password_encrypted").ToString()
 
                     If Not String.Equals(status, "Active", StringComparison.OrdinalIgnoreCase) Then
                         System.Diagnostics.Debug.WriteLine("[v0] Staff Login Failed - Inactive account: " & username)
@@ -891,14 +891,19 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return result
 
             ' Query admin/superadmin from users table
-            Dim query As String = "SELECT user_id, first_name, last_name, email, username, user_type, password " &
-                                 "FROM users WHERE LOWER(username) = LOWER(@username) AND (user_type = 'Admin' OR user_type = 'SuperAdmin') AND status = 'Active'"
+            ' Ensure default accounts exist before attempting validation
+            InitializeDefaultAccounts()
+
+            Dim query As String = "SELECT user_id, first_name, last_name, email, username, user_type, password_encrypted " &
+                                 "FROM users WHERE LOWER(username) = LOWER(@username) " &
+                                 "AND (user_type = 'Admin' OR user_type = 'SuperAdmin') " &
+                                 "AND LOWER(status) = 'active'"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@username", username.Trim())
 
                 Using reader As MySqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
-                        Dim storedHash As String = reader("password").ToString()
+                        Dim storedHash As String = reader("password_encrypted").ToString()
 
                         If PasswordHelper.VerifyPassword(password, storedHash) Then
                             result("user_id") = reader("user_id").ToString()
@@ -1055,8 +1060,8 @@ Public Class DatabaseConnection
             If position = "Super Admin" OrElse position = "Admin" Then
                 ' Insert into users table for Admin accounts
                 Dim userType As String = If(position = "Super Admin", "SuperAdmin", "Admin")
-                Dim insertQuery As String = "INSERT INTO users (first_name, last_name, email, username, password, user_type, status, created_date) " &
-                                           "VALUES (@firstName, @lastName, @email, @username, @password, @userType, 'Active', NOW())"
+                Dim insertQuery As String = "INSERT INTO users (first_name, last_name, email, username, password_encrypted, user_type, status, created_at) " &
+                                           "VALUES (@firstName, @lastName, @email, @username, @password, @userType, 'active', NOW())"
 
                 Using cmd As New MySqlCommand(insertQuery, conn)
                     cmd.Parameters.AddWithValue("@firstName", firstName)
@@ -1079,7 +1084,7 @@ Public Class DatabaseConnection
                 End Using
             Else
                 ' Insert into staff_accounts table for Staff
-                Dim insertQuery As String = "INSERT INTO staff_accounts (first_name, last_name, email, contact_number, address, department_id, username, password, status, created_date) " &
+                Dim insertQuery As String = "INSERT INTO staff_accounts (first_name, last_name, email, contact_number, house_no_street, department_id, username, password_encrypted, status, created_at) " &
                                            "VALUES (@firstName, @lastName, @email, @contactNumber, @address, @departmentID, @username, @password, 'Active', NOW())"
 
                 Using cmd As New MySqlCommand(insertQuery, conn)
@@ -1242,7 +1247,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             ' Retrieve stored password hash to verify old password
-            Dim query As String = "SELECT password FROM users WHERE user_id = @adminID"
+            Dim query As String = "SELECT password_encrypted FROM users WHERE user_id = @adminID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
 
@@ -5364,5 +5369,107 @@ Public Class DatabaseConnection
         End Try
         Return stats
     End Function
+
+    ''' <summary>
+    ''' Initialize hardcoded SuperAdmin and Admin accounts if they don't exist
+    ''' SuperAdmin password: SuperAdmin@2025
+    ''' Admin password: Admin@2025
+    ''' </summary>
+    Public Shared Sub InitializeDefaultAccounts()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return
+
+            If Not SafeOpenConnection(conn) Then Return
+
+            ' Hardcoded credentials
+            Dim superAdminUsername As String = "superadmin"
+            Dim superAdminPassword As String = "SuperAdmin@2025"
+            Dim adminUsername As String = "admin"
+            Dim adminPassword As String = "Admin@2025"
+
+            ' Ensure SuperAdmin account exists and matches the expected credentials
+            Dim superAdminId As Object = Nothing
+            Using checkCmd As New MySqlCommand("SELECT user_id FROM users WHERE LOWER(username) = LOWER(@username) AND user_type = 'SuperAdmin' LIMIT 1", conn)
+                checkCmd.Parameters.AddWithValue("@username", superAdminUsername)
+                superAdminId = checkCmd.ExecuteScalar()
+            End Using
+
+            Dim superAdminHashValue As String = PasswordHelper.HashPassword(superAdminPassword)
+
+            If superAdminId Is Nothing OrElse superAdminId Is DBNull.Value Then
+                ' Create SuperAdmin account
+                Using insertCmd As New MySqlCommand("INSERT INTO users (first_name, last_name, email, username, password_encrypted, user_type, status, created_at) " &
+                                                    "VALUES (@firstName, @lastName, @email, @username, @password, 'SuperAdmin', 'active', NOW())", conn)
+                    insertCmd.Parameters.AddWithValue("@firstName", "Super")
+                    insertCmd.Parameters.AddWithValue("@lastName", "Administrator")
+                    insertCmd.Parameters.AddWithValue("@email", "superadmin@stacruz.edu")
+                    insertCmd.Parameters.AddWithValue("@username", superAdminUsername)
+                    insertCmd.Parameters.AddWithValue("@password", superAdminHashValue)
+                    insertCmd.ExecuteNonQuery()
+                    System.Diagnostics.Debug.WriteLine("[v0] Default SuperAdmin account created: " & superAdminUsername)
+                End Using
+            Else
+                ' Update existing SuperAdmin account to ensure credentials stay in sync
+                Using updateCmd As New MySqlCommand("UPDATE users SET first_name = @firstName, last_name = @lastName, email = @email, " &
+                                                    "password_encrypted = @password, status = 'active' WHERE user_id = @userID", conn)
+                    updateCmd.Parameters.AddWithValue("@firstName", "Super")
+                    updateCmd.Parameters.AddWithValue("@lastName", "Administrator")
+                    updateCmd.Parameters.AddWithValue("@email", "superadmin@stacruz.edu")
+                    updateCmd.Parameters.AddWithValue("@password", superAdminHashValue)
+                    updateCmd.Parameters.AddWithValue("@userID", CInt(superAdminId))
+                    updateCmd.ExecuteNonQuery()
+                    System.Diagnostics.Debug.WriteLine("[v0] Default SuperAdmin account verified/updated: " & superAdminUsername)
+                End Using
+            End If
+
+            ' Ensure Admin account exists and matches the expected credentials
+            Dim adminId As Object = Nothing
+            Using checkCmd As New MySqlCommand("SELECT user_id FROM users WHERE LOWER(username) = LOWER(@username) AND user_type = 'Admin' LIMIT 1", conn)
+                checkCmd.Parameters.AddWithValue("@username", adminUsername)
+                adminId = checkCmd.ExecuteScalar()
+            End Using
+
+            Dim adminHashValue As String = PasswordHelper.HashPassword(adminPassword)
+
+            If adminId Is Nothing OrElse adminId Is DBNull.Value Then
+                ' Create Admin account
+                Using insertCmd As New MySqlCommand("INSERT INTO users (first_name, last_name, email, username, password_encrypted, user_type, status, created_at) " &
+                                                    "VALUES (@firstName, @lastName, @email, @username, @password, 'Admin', 'active', NOW())", conn)
+                    insertCmd.Parameters.AddWithValue("@firstName", "System")
+                    insertCmd.Parameters.AddWithValue("@lastName", "Administrator")
+                    insertCmd.Parameters.AddWithValue("@email", "admin@stacruz.edu")
+                    insertCmd.Parameters.AddWithValue("@username", adminUsername)
+                    insertCmd.Parameters.AddWithValue("@password", adminHashValue)
+                    insertCmd.ExecuteNonQuery()
+                    System.Diagnostics.Debug.WriteLine("[v0] Default Admin account created: " & adminUsername)
+                End Using
+            Else
+                ' Update existing Admin account to ensure credentials stay in sync
+                Using updateCmd As New MySqlCommand("UPDATE users SET first_name = @firstName, last_name = @lastName, email = @email, " &
+                                                    "password_encrypted = @password, status = 'active' WHERE user_id = @userID", conn)
+                    updateCmd.Parameters.AddWithValue("@firstName", "System")
+                    updateCmd.Parameters.AddWithValue("@lastName", "Administrator")
+                    updateCmd.Parameters.AddWithValue("@email", "admin@stacruz.edu")
+                    updateCmd.Parameters.AddWithValue("@password", adminHashValue)
+                    updateCmd.Parameters.AddWithValue("@userID", CInt(adminId))
+                    updateCmd.ExecuteNonQuery()
+                    System.Diagnostics.Debug.WriteLine("[v0] Default Admin account verified/updated: " & adminUsername)
+                End Using
+            End If
+
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] Error initializing default accounts: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch ex As Exception
+                End Try
+            End If
+        End Try
+    End Sub
 
 End Class
