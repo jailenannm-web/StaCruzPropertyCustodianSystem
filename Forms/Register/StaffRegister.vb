@@ -36,15 +36,15 @@ Public Class StaffRegister
             Return
         End If
 
-        ' Validate position selection
-        If cb_Position.SelectedIndex = -1 OrElse String.IsNullOrWhiteSpace(cb_Position.Text) Then
-            MessageBox.Show("Please select a position (Super Admin, Admin, or Staff).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        ' Validate position selection - Only Staff can register
+        If cb_Position.SelectedIndex = -1 OrElse String.IsNullOrWhiteSpace(cb_Position.Text) OrElse cb_Position.Text <> "Staff" Then
+            MessageBox.Show("Please select Staff as your position.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             cb_Position.Focus()
             Return
         End If
 
-        ' Only validate department ID for Staff position
-        If cb_Position.Text = "Staff" AndAlso String.IsNullOrWhiteSpace(txb_DepartmentID.Text) Then
+        ' Validate department ID for Staff position
+        If String.IsNullOrWhiteSpace(txb_DepartmentID.Text) Then
             MessageBox.Show("Please enter your department ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txb_DepartmentID.Focus()
             Return
@@ -82,15 +82,16 @@ Public Class StaffRegister
         ' Add debug logging before database call
         System.Diagnostics.Debug.WriteLine("[v0] Registration Attempt - Position: " & position & ", Username: " & username)
 
-        ' Pass position parameter to RegisterStaff function
-        If DatabaseConnection.RegisterStaff(firstName, lastName, email, contactNumber, address, departmentID, username, password, position) Then
+        ' Pass position parameter to RegisterStaff function (always "Staff" for this form)
+        If DatabaseConnection.RegisterStaff(firstName, lastName, email, contactNumber, address, departmentID, username, password, "Staff") Then
             MessageBox.Show("Registration successful! You can now login with your new account.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-
+            
             Dim staffLogin As New StaffLogin()
-                staffLogin.Show()
-            End If
+            staffLogin.Show()
             Me.Close()
+        Else
+            MessageBox.Show("Registration failed. Please check your information and try again.", "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
 
     End Sub
 
