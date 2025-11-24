@@ -29,11 +29,6 @@ Partial Class UC_PropertyRequestManagement
     Private Sub InitializeComponent()
         Me.admin_label_PropertyRequestManagement = New System.Windows.Forms.Label()
         Me.prm_table1 = New System.Windows.Forms.DataGridView()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDeny = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.request_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.employee_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.department_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,6 +44,11 @@ Partial Class UC_PropertyRequestManagement
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.penalty = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updated_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDeny = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -71,12 +71,149 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.request_id, Me.employee_id, Me.department_id, Me.property_id, Me.quantity_requested, Me.purpose, Me.requestDate, Me.status, Me.approved_by, Me.approvedDate, Me.release_date, Me.return_date, Me.remarks, Me.penalty, Me.updated_at})
         Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.prm_table1.Location = New System.Drawing.Point(45, 114)
+        Me.prm_table1.Location = New System.Drawing.Point(42, 114)
         Me.prm_table1.Name = "prm_table1"
         Me.prm_table1.RowHeadersWidth = 51
         Me.prm_table1.RowTemplate.Height = 24
         Me.prm_table1.Size = New System.Drawing.Size(1162, 485)
         Me.prm_table1.TabIndex = 34
+        '
+        'request_id
+        '
+        Me.request_id.HeaderText = "Request ID"
+        Me.request_id.MinimumWidth = 6
+        Me.request_id.Name = "request_id"
+        Me.request_id.Width = 125
+        '
+        'employee_id
+        '
+        Me.employee_id.HeaderText = "Employee ID"
+        Me.employee_id.MinimumWidth = 6
+        Me.employee_id.Name = "employee_id"
+        Me.employee_id.Width = 125
+        '
+        'department_id
+        '
+        Me.department_id.HeaderText = "Department ID"
+        Me.department_id.MinimumWidth = 6
+        Me.department_id.Name = "department_id"
+        Me.department_id.Width = 125
+        '
+        'property_id
+        '
+        Me.property_id.HeaderText = "Property ID"
+        Me.property_id.MinimumWidth = 6
+        Me.property_id.Name = "property_id"
+        Me.property_id.Width = 125
+        '
+        'quantity_requested
+        '
+        Me.quantity_requested.HeaderText = "Quantity "
+        Me.quantity_requested.MinimumWidth = 6
+        Me.quantity_requested.Name = "quantity_requested"
+        Me.quantity_requested.Width = 125
+        '
+        'purpose
+        '
+        Me.purpose.HeaderText = "Purpose"
+        Me.purpose.MinimumWidth = 6
+        Me.purpose.Name = "purpose"
+        Me.purpose.Width = 125
+        '
+        'requestDate
+        '
+        Me.requestDate.HeaderText = "Request Date"
+        Me.requestDate.MinimumWidth = 6
+        Me.requestDate.Name = "requestDate"
+        Me.requestDate.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 125
+        '
+        'approved_by
+        '
+        Me.approved_by.HeaderText = "Approved by"
+        Me.approved_by.MinimumWidth = 6
+        Me.approved_by.Name = "approved_by"
+        Me.approved_by.Width = 125
+        '
+        'approvedDate
+        '
+        Me.approvedDate.HeaderText = "Approved Date"
+        Me.approvedDate.MinimumWidth = 6
+        Me.approvedDate.Name = "approvedDate"
+        Me.approvedDate.Width = 125
+        '
+        'release_date
+        '
+        Me.release_date.HeaderText = "Release Date"
+        Me.release_date.MinimumWidth = 6
+        Me.release_date.Name = "release_date"
+        Me.release_date.Width = 125
+        '
+        'return_date
+        '
+        Me.return_date.HeaderText = "Return Date"
+        Me.return_date.MinimumWidth = 6
+        Me.return_date.Name = "return_date"
+        Me.return_date.Width = 125
+        '
+        'remarks
+        '
+        Me.remarks.HeaderText = "Remarks"
+        Me.remarks.MinimumWidth = 6
+        Me.remarks.Name = "remarks"
+        Me.remarks.Width = 125
+        '
+        'penalty
+        '
+        Me.penalty.HeaderText = "Penalty"
+        Me.penalty.MinimumWidth = 6
+        Me.penalty.Name = "penalty"
+        Me.penalty.Width = 125
+        '
+        'updated_at
+        '
+        Me.updated_at.HeaderText = "Updated At"
+        Me.updated_at.MinimumWidth = 6
+        Me.updated_at.Name = "updated_at"
+        Me.updated_at.Width = 125
+        '
+        'btnApprove
+        '
+        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnApprove.CornerRadius = 15
+        Me.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnApprove.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnApprove.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnApprove.Location = New System.Drawing.Point(1083, 647)
+        Me.btnApprove.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnApprove.Name = "btnApprove"
+        Me.btnApprove.Size = New System.Drawing.Size(121, 34)
+        Me.btnApprove.TabIndex = 154
+        Me.btnApprove.Text = "Approve"
+        Me.btnApprove.UseVisualStyleBackColor = False
+        '
+        'btnDeny
+        '
+        Me.btnDeny.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDeny.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnDeny.CornerRadius = 15
+        Me.btnDeny.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeny.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeny.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeny.Location = New System.Drawing.Point(955, 646)
+        Me.btnDeny.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDeny.Name = "btnDeny"
+        Me.btnDeny.Size = New System.Drawing.Size(120, 35)
+        Me.btnDeny.TabIndex = 155
+        Me.btnDeny.Text = "Deny"
+        Me.btnDeny.UseVisualStyleBackColor = False
         '
         'btnAdd
         '
@@ -124,131 +261,6 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_btn_update.TabIndex = 57
         Me.prm_btn_update.Text = "Update"
         Me.prm_btn_update.UseVisualStyleBackColor = False
-        '
-        'btnApprove
-        '
-        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnApprove.CornerRadius = 15
-        Me.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnApprove.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnApprove.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnApprove.Location = New System.Drawing.Point(1083, 647)
-        Me.btnApprove.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnApprove.Name = "btnApprove"
-        Me.btnApprove.Size = New System.Drawing.Size(121, 34)
-        Me.btnApprove.TabIndex = 154
-        Me.btnApprove.Text = "Approve"
-        Me.btnApprove.UseVisualStyleBackColor = False
-        '
-        'btnDeny
-        '
-        Me.btnDeny.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeny.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnDeny.CornerRadius = 15
-        Me.btnDeny.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDeny.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeny.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDeny.Location = New System.Drawing.Point(955, 646)
-        Me.btnDeny.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnDeny.Name = "btnDeny"
-        Me.btnDeny.Size = New System.Drawing.Size(120, 35)
-        Me.btnDeny.TabIndex = 155
-        Me.btnDeny.Text = "Deny"
-        Me.btnDeny.UseVisualStyleBackColor = False
-        '
-        'request_id
-        '
-        Me.request_id.HeaderText = "Request ID"
-        Me.request_id.MinimumWidth = 6
-        Me.request_id.Name = "request_id"
-        '
-        'employee_id
-        '
-        Me.employee_id.HeaderText = "Employee ID"
-        Me.employee_id.MinimumWidth = 6
-        Me.employee_id.Name = "employee_id"
-        '
-        'department_id
-        '
-        Me.department_id.HeaderText = "Department ID"
-        Me.department_id.MinimumWidth = 6
-        Me.department_id.Name = "department_id"
-        '
-        'property_id
-        '
-        Me.property_id.HeaderText = "Property ID"
-        Me.property_id.MinimumWidth = 6
-        Me.property_id.Name = "property_id"
-        '
-        'quantity_requested
-        '
-        Me.quantity_requested.HeaderText = "Quantity "
-        Me.quantity_requested.MinimumWidth = 6
-        Me.quantity_requested.Name = "quantity_requested"
-        '
-        'purpose
-        '
-        Me.purpose.HeaderText = "Purpose"
-        Me.purpose.MinimumWidth = 6
-        Me.purpose.Name = "purpose"
-        '
-        'requestDate
-        '
-        Me.requestDate.HeaderText = "Request Date"
-        Me.requestDate.MinimumWidth = 6
-        Me.requestDate.Name = "requestDate"
-        Me.requestDate.Width = 125
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        '
-        'approved_by
-        '
-        Me.approved_by.HeaderText = "Approved by"
-        Me.approved_by.MinimumWidth = 6
-        Me.approved_by.Name = "approved_by"
-        '
-        'approvedDate
-        '
-        Me.approvedDate.HeaderText = "Approved Date"
-        Me.approvedDate.MinimumWidth = 6
-        Me.approvedDate.Name = "approvedDate"
-        Me.approvedDate.Width = 125
-        '
-        'release_date
-        '
-        Me.release_date.HeaderText = "Release Date"
-        Me.release_date.MinimumWidth = 6
-        Me.release_date.Name = "release_date"
-        '
-        'return_date
-        '
-        Me.return_date.HeaderText = "Return Date"
-        Me.return_date.MinimumWidth = 6
-        Me.return_date.Name = "return_date"
-        '
-        'remarks
-        '
-        Me.remarks.HeaderText = "Remarks"
-        Me.remarks.MinimumWidth = 6
-        Me.remarks.Name = "remarks"
-        '
-        'penalty
-        '
-        Me.penalty.HeaderText = "Penalty"
-        Me.penalty.MinimumWidth = 6
-        Me.penalty.Name = "penalty"
-        Me.penalty.Width = 125
-        '
-        'updated_at
-        '
-        Me.updated_at.HeaderText = "Updated At"
-        Me.updated_at.MinimumWidth = 6
-        Me.updated_at.Name = "updated_at"
         '
         'UC_PropertyRequestManagement
         '
