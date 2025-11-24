@@ -257,7 +257,7 @@ Partial Class StaffRegister
         Me.Label14.Location = New System.Drawing.Point(1154, 674)
         Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(159, 42)
+        Me.Label14.Size = New System.Drawing.Size(177, 42)
         Me.Label14.TabIndex = 18
         Me.Label14.Text = "Barangay"
         '
@@ -305,7 +305,7 @@ Partial Class StaffRegister
         Me.Label9.Location = New System.Drawing.Point(1154, 561)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(203, 42)
+        Me.Label9.Size = New System.Drawing.Size(217, 42)
         Me.Label9.TabIndex = 28
         Me.Label9.Text = "Municipality"
         '
@@ -361,7 +361,7 @@ Partial Class StaffRegister
         Me.Label11.Location = New System.Drawing.Point(1154, 881)
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(159, 42)
+        Me.Label11.Size = New System.Drawing.Size(193, 42)
         Me.Label11.TabIndex = 39
         Me.Label11.Text = "Password"
         '
