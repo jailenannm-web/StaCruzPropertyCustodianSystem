@@ -14,6 +14,12 @@ Partial Class UC_SupplyManagement
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_table = New System.Windows.Forms.DataGridView()
+        Me.admin_label_PM = New System.Windows.Forms.Label()
+        Me.pm_txtbox_search = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.SupplyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -22,13 +28,13 @@ Partial Class UC_SupplyManagement
         Me.TotalValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LocationColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.admin_label_PM = New System.Windows.Forms.Label()
-        Me.pm_txtbox_search = New System.Windows.Forms.TextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.date_received = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.expiration_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.received_by = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.created_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updated_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -73,7 +79,7 @@ Partial Class UC_SupplyManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pm_table.BackgroundColor = System.Drawing.SystemColors.ButtonFace
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SupplyID, Me.colName, Me.Category, Me.Stock, Me.UnitCost, Me.TotalValue, Me.Status, Me.LocationColumn, Me.Action})
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SupplyID, Me.colName, Me.Category, Me.Stock, Me.UnitCost, Me.TotalValue, Me.Status, Me.LocationColumn, Me.supplier, Me.date_received, Me.expiration_date, Me.received_by, Me.remarks, Me.created_at, Me.updated_at})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(39, 195)
         Me.pm_table.Name = "pm_table"
@@ -81,69 +87,6 @@ Partial Class UC_SupplyManagement
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1163, 485)
         Me.pm_table.TabIndex = 26
-        '
-        'SupplyID
-        '
-        Me.SupplyID.HeaderText = "Supply ID"
-        Me.SupplyID.MinimumWidth = 6
-        Me.SupplyID.Name = "SupplyID"
-        Me.SupplyID.Width = 125
-        '
-        'colName
-        '
-        Me.colName.HeaderText = "Name"
-        Me.colName.MinimumWidth = 6
-        Me.colName.Name = "colName"
-        Me.colName.Width = 125
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Category"
-        Me.Category.MinimumWidth = 6
-        Me.Category.Name = "Category"
-        Me.Category.Width = 125
-        '
-        'Stock
-        '
-        Me.Stock.HeaderText = "Stock"
-        Me.Stock.MinimumWidth = 6
-        Me.Stock.Name = "Stock"
-        Me.Stock.Width = 125
-        '
-        'UnitCost
-        '
-        Me.UnitCost.HeaderText = "Unit Cost"
-        Me.UnitCost.MinimumWidth = 6
-        Me.UnitCost.Name = "UnitCost"
-        Me.UnitCost.Width = 125
-        '
-        'TotalValue
-        '
-        Me.TotalValue.HeaderText = "Total Value"
-        Me.TotalValue.MinimumWidth = 6
-        Me.TotalValue.Name = "TotalValue"
-        Me.TotalValue.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
-        '
-        'LocationColumn
-        '
-        Me.LocationColumn.HeaderText = "Location"
-        Me.LocationColumn.MinimumWidth = 6
-        Me.LocationColumn.Name = "LocationColumn"
-        Me.LocationColumn.Width = 125
-        '
-        'Action
-        '
-        Me.Action.HeaderText = "Action"
-        Me.Action.MinimumWidth = 6
-        Me.Action.Name = "Action"
-        Me.Action.Width = 125
         '
         'admin_label_PM
         '
@@ -228,7 +171,97 @@ Partial Class UC_SupplyManagement
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
         '
-        'UC_PropertyManagement
+        'SupplyID
+        '
+        Me.SupplyID.HeaderText = "Supply ID"
+        Me.SupplyID.MinimumWidth = 6
+        Me.SupplyID.Name = "SupplyID"
+        '
+        'colName
+        '
+        Me.colName.HeaderText = "Name"
+        Me.colName.MinimumWidth = 6
+        Me.colName.Name = "colName"
+        '
+        'Category
+        '
+        Me.Category.HeaderText = "Category"
+        Me.Category.MinimumWidth = 6
+        Me.Category.Name = "Category"
+        '
+        'Stock
+        '
+        Me.Stock.HeaderText = "Stock"
+        Me.Stock.MinimumWidth = 6
+        Me.Stock.Name = "Stock"
+        '
+        'UnitCost
+        '
+        Me.UnitCost.HeaderText = "Unit Cost"
+        Me.UnitCost.MinimumWidth = 6
+        Me.UnitCost.Name = "UnitCost"
+        '
+        'TotalValue
+        '
+        Me.TotalValue.HeaderText = "Total Value"
+        Me.TotalValue.MinimumWidth = 6
+        Me.TotalValue.Name = "TotalValue"
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        '
+        'LocationColumn
+        '
+        Me.LocationColumn.HeaderText = "Location"
+        Me.LocationColumn.MinimumWidth = 6
+        Me.LocationColumn.Name = "LocationColumn"
+        '
+        'supplier
+        '
+        Me.supplier.HeaderText = "Supplier"
+        Me.supplier.MinimumWidth = 6
+        Me.supplier.Name = "supplier"
+        '
+        'date_received
+        '
+        Me.date_received.HeaderText = "Date Received"
+        Me.date_received.MinimumWidth = 6
+        Me.date_received.Name = "date_received"
+        '
+        'expiration_date
+        '
+        Me.expiration_date.HeaderText = "Expiration Date"
+        Me.expiration_date.MinimumWidth = 6
+        Me.expiration_date.Name = "expiration_date"
+        '
+        'received_by
+        '
+        Me.received_by.HeaderText = "Received by"
+        Me.received_by.MinimumWidth = 6
+        Me.received_by.Name = "received_by"
+        '
+        'remarks
+        '
+        Me.remarks.HeaderText = "Remarks"
+        Me.remarks.MinimumWidth = 6
+        Me.remarks.Name = "remarks"
+        '
+        'created_at
+        '
+        Me.created_at.HeaderText = "Created At"
+        Me.created_at.MinimumWidth = 6
+        Me.created_at.Name = "created_at"
+        '
+        'updated_at
+        '
+        Me.updated_at.HeaderText = "Updated At"
+        Me.updated_at.MinimumWidth = 6
+        Me.updated_at.Name = "updated_at"
+        '
+        'UC_SupplyManagement
         '
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
@@ -240,7 +273,7 @@ Partial Class UC_SupplyManagement
         Me.Controls.Add(Me.pm_cbobx_status)
         Me.Controls.Add(Me.pm_cbobx_categ)
         Me.Controls.Add(Me.admin_label_PropertyManagement)
-        Me.Name = "UC_PropertyManagement"
+        Me.Name = "UC_SupplyManagement"
         Me.Size = New System.Drawing.Size(1249, 768)
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -254,19 +287,25 @@ Partial Class UC_SupplyManagement
     Friend WithEvents pm_cbobx_categ As ComboBox
     Friend WithEvents pm_cbobx_status As ComboBox
     Friend WithEvents pm_table As DataGridView
-    Friend WithEvents SupplyID As DataGridViewTextBoxColumn
-    Friend WithEvents colName As DataGridViewTextBoxColumn  ' Renamed
-    Friend WithEvents Category As DataGridViewTextBoxColumn
-    Friend WithEvents Stock As DataGridViewTextBoxColumn
-    Friend WithEvents UnitCost As DataGridViewTextBoxColumn
-    Friend WithEvents TotalValue As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents LocationColumn As DataGridViewTextBoxColumn
-    Friend WithEvents Action As DataGridViewTextBoxColumn
     Friend WithEvents admin_label_PM As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents pm_txtbox_search As TextBox
     Friend WithEvents btnEdit As RoundedButton
     Friend WithEvents btnAdd As RoundedButton
     Friend WithEvents btnDelete As RoundedButton
+    Friend WithEvents SupplyID As DataGridViewTextBoxColumn
+    Friend WithEvents colName As DataGridViewTextBoxColumn
+    Friend WithEvents Category As DataGridViewTextBoxColumn
+    Friend WithEvents Stock As DataGridViewTextBoxColumn
+    Friend WithEvents UnitCost As DataGridViewTextBoxColumn
+    Friend WithEvents TotalValue As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents LocationColumn As DataGridViewTextBoxColumn
+    Friend WithEvents supplier As DataGridViewTextBoxColumn
+    Friend WithEvents date_received As DataGridViewTextBoxColumn
+    Friend WithEvents expiration_date As DataGridViewTextBoxColumn
+    Friend WithEvents received_by As DataGridViewTextBoxColumn
+    Friend WithEvents remarks As DataGridViewTextBoxColumn
+    Friend WithEvents created_at As DataGridViewTextBoxColumn
+    Friend WithEvents updated_at As DataGridViewTextBoxColumn
 End Class

@@ -211,13 +211,13 @@ Public Class UC_SupplyManagement
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
 
         If parentDashboard IsNot Nothing Then
-            ' Load the AddPropertyRequest UserControl
-            parentDashboard.LoadUserControl(New AddPropertyRequest())
+            ' Load the AddSupply UserControl
+            parentDashboard.LoadUserControl(New AddSupply())
         Else
             ' Fallback: add directly to the parent container
-            Dim addPropertyUC As New AddPropertyRequest()
-            Me.Parent.Controls.Add(addPropertyUC)
-            addPropertyUC.BringToFront()
+            Dim addSupplyUC As New AddSupply()
+            Me.Parent.Controls.Add(addSupplyUC)
+            addSupplyUC.BringToFront()
         End If
     End Sub
 

@@ -28,18 +28,26 @@ Partial Class UC_MaintenanceManagement
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.admin_label_MaintenanceManagement = New System.Windows.Forms.Label()
-        Me.mm_table1 = New System.Windows.Forms.DataGridView()
-        Me.LogID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.mmProperty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RepairDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateReported = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Warranty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        CType(Me.mm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.MaintenanceID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PropertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CustodianID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ServiceDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ServiceType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ServiceProvider = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProviderContact = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NextSchedule = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WarrantyStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TechnicianAssigned = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_MaintenanceManagement
@@ -52,71 +60,6 @@ Partial Class UC_MaintenanceManagement
         Me.admin_label_MaintenanceManagement.TabIndex = 34
         Me.admin_label_MaintenanceManagement.Text = "Maintenance Management"
         '
-        'mm_table1
-        '
-        Me.mm_table1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.mm_table1.BackgroundColor = System.Drawing.SystemColors.ButtonFace
-        Me.mm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.mm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.LogID, Me.mmProperty, Me.RepairDescription, Me.DateReported, Me.Warranty, Me.Status, Me.Action})
-        Me.mm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.mm_table1.Location = New System.Drawing.Point(48, 125)
-        Me.mm_table1.Name = "mm_table1"
-        Me.mm_table1.RowHeadersWidth = 51
-        Me.mm_table1.RowTemplate.Height = 24
-        Me.mm_table1.Size = New System.Drawing.Size(913, 485)
-        Me.mm_table1.TabIndex = 35
-        '
-        'LogID
-        '
-        Me.LogID.HeaderText = "Log ID"
-        Me.LogID.MinimumWidth = 6
-        Me.LogID.Name = "LogID"
-        Me.LogID.Width = 125
-        '
-        'mmProperty
-        '
-        Me.mmProperty.HeaderText = "Property"
-        Me.mmProperty.MinimumWidth = 6
-        Me.mmProperty.Name = "mmProperty"
-        Me.mmProperty.Width = 125
-        '
-        'RepairDescription
-        '
-        Me.RepairDescription.HeaderText = "Repair Description"
-        Me.RepairDescription.MinimumWidth = 6
-        Me.RepairDescription.Name = "RepairDescription"
-        Me.RepairDescription.Width = 125
-        '
-        'DateReported
-        '
-        Me.DateReported.HeaderText = "Date Reported"
-        Me.DateReported.MinimumWidth = 6
-        Me.DateReported.Name = "DateReported"
-        Me.DateReported.Width = 125
-        '
-        'Warranty
-        '
-        Me.Warranty.HeaderText = "Warranty"
-        Me.Warranty.MinimumWidth = 6
-        Me.Warranty.Name = "Warranty"
-        Me.Warranty.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
-        '
-        'Action
-        '
-        Me.Action.HeaderText = "Action"
-        Me.Action.MinimumWidth = 6
-        Me.Action.Name = "Action"
-        Me.Action.Width = 125
-        '
         'btnEdit
         '
         Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -125,7 +68,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(707, 645)
+        Me.btnEdit.Location = New System.Drawing.Point(1148, 645)
         Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(121, 34)
@@ -141,7 +84,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(836, 644)
+        Me.btnAdd.Location = New System.Drawing.Point(1277, 644)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(121, 34)
@@ -157,7 +100,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(579, 644)
+        Me.btnDelete.Location = New System.Drawing.Point(1020, 644)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(120, 35)
@@ -165,33 +108,146 @@ Partial Class UC_MaintenanceManagement
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MaintenanceID, Me.PropertyID, Me.CustodianID, Me.ServiceDate, Me.ServiceType, Me.Description, Me.ServiceProvider, Me.ProviderContact, Me.Cost, Me.NextSchedule, Me.WarrantyStatus, Me.TechnicianAssigned, Me.Status, Me.Remarks, Me.CreatedAt})
+        Me.DataGridView1.Location = New System.Drawing.Point(48, 119)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.Size = New System.Drawing.Size(1350, 518)
+        Me.DataGridView1.TabIndex = 155
+        '
+        'MaintenanceID
+        '
+        Me.MaintenanceID.HeaderText = "MaintenanceID"
+        Me.MaintenanceID.MinimumWidth = 6
+        Me.MaintenanceID.Name = "MaintenanceID"
+        '
+        'PropertyID
+        '
+        Me.PropertyID.HeaderText = "PropertyID"
+        Me.PropertyID.MinimumWidth = 6
+        Me.PropertyID.Name = "PropertyID"
+        '
+        'CustodianID
+        '
+        Me.CustodianID.HeaderText = "CustodianID"
+        Me.CustodianID.MinimumWidth = 6
+        Me.CustodianID.Name = "CustodianID"
+        '
+        'ServiceDate
+        '
+        Me.ServiceDate.HeaderText = "Service Date"
+        Me.ServiceDate.MinimumWidth = 6
+        Me.ServiceDate.Name = "ServiceDate"
+        '
+        'ServiceType
+        '
+        Me.ServiceType.HeaderText = "Service Type"
+        Me.ServiceType.MinimumWidth = 6
+        Me.ServiceType.Name = "ServiceType"
+        '
+        'Description
+        '
+        Me.Description.HeaderText = "Description"
+        Me.Description.MinimumWidth = 6
+        Me.Description.Name = "Description"
+        '
+        'ServiceProvider
+        '
+        Me.ServiceProvider.HeaderText = "Service Provider"
+        Me.ServiceProvider.MinimumWidth = 6
+        Me.ServiceProvider.Name = "ServiceProvider"
+        '
+        'ProviderContact
+        '
+        Me.ProviderContact.HeaderText = "Provider Contact"
+        Me.ProviderContact.MinimumWidth = 6
+        Me.ProviderContact.Name = "ProviderContact"
+        '
+        'Cost
+        '
+        Me.Cost.HeaderText = "Cost"
+        Me.Cost.MinimumWidth = 6
+        Me.Cost.Name = "Cost"
+        '
+        'NextSchedule
+        '
+        Me.NextSchedule.HeaderText = "Next Schedule"
+        Me.NextSchedule.MinimumWidth = 6
+        Me.NextSchedule.Name = "NextSchedule"
+        '
+        'WarrantyStatus
+        '
+        Me.WarrantyStatus.HeaderText = "Warranty Status"
+        Me.WarrantyStatus.MinimumWidth = 6
+        Me.WarrantyStatus.Name = "WarrantyStatus"
+        '
+        'TechnicianAssigned
+        '
+        Me.TechnicianAssigned.HeaderText = "Technician Assigned"
+        Me.TechnicianAssigned.MinimumWidth = 6
+        Me.TechnicianAssigned.Name = "TechnicianAssigned"
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status "
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        '
+        'Remarks
+        '
+        Me.Remarks.HeaderText = "Remarks"
+        Me.Remarks.MinimumWidth = 6
+        Me.Remarks.Name = "Remarks"
+        '
+        'CreatedAt
+        '
+        Me.CreatedAt.HeaderText = "Created At"
+        Me.CreatedAt.MinimumWidth = 6
+        Me.CreatedAt.Name = "CreatedAt"
+        '
         'UC_MaintenanceManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
-        Me.Controls.Add(Me.mm_table1)
         Me.Controls.Add(Me.admin_label_MaintenanceManagement)
         Me.Name = "UC_MaintenanceManagement"
-        Me.Size = New System.Drawing.Size(1014, 741)
-        CType(Me.mm_table1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(1455, 741)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents admin_label_MaintenanceManagement As Label
-    Friend WithEvents mm_table1 As DataGridView
-    Friend WithEvents LogID As DataGridViewTextBoxColumn
-    Friend WithEvents mmProperty As DataGridViewTextBoxColumn
-    Friend WithEvents RepairDescription As DataGridViewTextBoxColumn
-    Friend WithEvents DateReported As DataGridViewTextBoxColumn
-    Friend WithEvents Warranty As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents Action As DataGridViewTextBoxColumn
     Friend WithEvents btnEdit As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents MaintenanceID As DataGridViewTextBoxColumn
+    Friend WithEvents PropertyID As DataGridViewTextBoxColumn
+    Friend WithEvents CustodianID As DataGridViewTextBoxColumn
+    Friend WithEvents ServiceDate As DataGridViewTextBoxColumn
+    Friend WithEvents ServiceType As DataGridViewTextBoxColumn
+    Friend WithEvents Description As DataGridViewTextBoxColumn
+    Friend WithEvents ServiceProvider As DataGridViewTextBoxColumn
+    Friend WithEvents ProviderContact As DataGridViewTextBoxColumn
+    Friend WithEvents Cost As DataGridViewTextBoxColumn
+    Friend WithEvents NextSchedule As DataGridViewTextBoxColumn
+    Friend WithEvents WarrantyStatus As DataGridViewTextBoxColumn
+    Friend WithEvents TechnicianAssigned As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents Remarks As DataGridViewTextBoxColumn
+    Friend WithEvents CreatedAt As DataGridViewTextBoxColumn
 End Class

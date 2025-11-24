@@ -27,228 +27,279 @@ Partial Class UC_UserManagement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.admin_um_panel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.uc_um_edit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.uc_um_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.uc_um_UserEmail = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.uc_um_contact = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.uc_um_userposition = New System.Windows.Forms.TextBox()
-        Me.uc_um_position = New System.Windows.Forms.Label()
-        Me.uc_um_fullname = New System.Windows.Forms.Label()
-        Me.uc_um_userFullName = New System.Windows.Forms.TextBox()
-        Me.uc_um_adminprofile = New System.Windows.Forms.Label()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
-        Me.admin_um_panel1.SuspendLayout()
+        Me.pm_table = New System.Windows.Forms.DataGridView()
+        Me.userID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.firstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.middleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.suffix = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.positionUser = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.email = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.userRole = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.province = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.municipalityCity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.barangay = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.houseNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.password = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateRegistered = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.accountStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedButton2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'admin_um_panel1
-        '
-        Me.admin_um_panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.admin_um_panel1.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.admin_um_panel1.Controls.Add(Me.uc_um_edit)
-        Me.admin_um_panel1.Controls.Add(Me.uc_um_update)
-        Me.admin_um_panel1.Controls.Add(Me.uc_um_UserEmail)
-        Me.admin_um_panel1.Controls.Add(Me.Label2)
-        Me.admin_um_panel1.Controls.Add(Me.uc_um_contact)
-        Me.admin_um_panel1.Controls.Add(Me.Label1)
-        Me.admin_um_panel1.Controls.Add(Me.uc_um_userposition)
-        Me.admin_um_panel1.Controls.Add(Me.uc_um_position)
-        Me.admin_um_panel1.Controls.Add(Me.uc_um_fullname)
-        Me.admin_um_panel1.Controls.Add(Me.uc_um_userFullName)
-        Me.admin_um_panel1.Controls.Add(Me.uc_um_adminprofile)
-        Me.admin_um_panel1.CornerRadius = 20
-        Me.admin_um_panel1.Location = New System.Drawing.Point(53, 105)
-        Me.admin_um_panel1.Name = "admin_um_panel1"
-        Me.admin_um_panel1.Size = New System.Drawing.Size(984, 910)
-        Me.admin_um_panel1.TabIndex = 0
-        '
-        'uc_um_edit
-        '
-        Me.uc_um_edit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_edit.CornerRadius = 15
-        Me.uc_um_edit.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_edit.Location = New System.Drawing.Point(583, 555)
-        Me.uc_um_edit.Name = "uc_um_edit"
-        Me.uc_um_edit.Size = New System.Drawing.Size(151, 40)
-        Me.uc_um_edit.TabIndex = 32
-        Me.uc_um_edit.Text = "Edit"
-        Me.uc_um_edit.UseVisualStyleBackColor = True
-        '
-        'uc_um_update
-        '
-        Me.uc_um_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_update.CornerRadius = 15
-        Me.uc_um_update.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_update.Location = New System.Drawing.Point(763, 555)
-        Me.uc_um_update.Name = "uc_um_update"
-        Me.uc_um_update.Size = New System.Drawing.Size(151, 40)
-        Me.uc_um_update.TabIndex = 31
-        Me.uc_um_update.Text = "Update"
-        Me.uc_um_update.UseVisualStyleBackColor = True
-        '
-        'uc_um_UserEmail
-        '
-        Me.uc_um_UserEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_UserEmail.BackColor = System.Drawing.SystemColors.Window
-        Me.uc_um_UserEmail.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_UserEmail.ForeColor = System.Drawing.Color.Black
-        Me.uc_um_UserEmail.Location = New System.Drawing.Point(410, 367)
-        Me.uc_um_UserEmail.MaxLength = 30
-        Me.uc_um_UserEmail.Name = "uc_um_UserEmail"
-        Me.uc_um_UserEmail.Size = New System.Drawing.Size(258, 27)
-        Me.uc_um_UserEmail.TabIndex = 30
-        Me.uc_um_UserEmail.Text = "Enter Email Address"
-        '
-        'Label2
-        '
-        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(317, 367)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(62, 30)
-        Me.Label2.TabIndex = 29
-        Me.Label2.Text = "Email"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'uc_um_contact
-        '
-        Me.uc_um_contact.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_contact.BackColor = System.Drawing.SystemColors.Window
-        Me.uc_um_contact.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_contact.ForeColor = System.Drawing.Color.Black
-        Me.uc_um_contact.Location = New System.Drawing.Point(410, 303)
-        Me.uc_um_contact.MaxLength = 11
-        Me.uc_um_contact.Name = "uc_um_contact"
-        Me.uc_um_contact.Size = New System.Drawing.Size(258, 27)
-        Me.uc_um_contact.TabIndex = 28
-        Me.uc_um_contact.Text = "Enter Contact Number"
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(221, 303)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(158, 30)
-        Me.Label1.TabIndex = 27
-        Me.Label1.Text = "Contact Number"
-        '
-        'uc_um_userposition
-        '
-        Me.uc_um_userposition.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_userposition.BackColor = System.Drawing.SystemColors.Window
-        Me.uc_um_userposition.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_userposition.ForeColor = System.Drawing.Color.Black
-        Me.uc_um_userposition.Location = New System.Drawing.Point(410, 234)
-        Me.uc_um_userposition.MaxLength = 50
-        Me.uc_um_userposition.Name = "uc_um_userposition"
-        Me.uc_um_userposition.Size = New System.Drawing.Size(258, 27)
-        Me.uc_um_userposition.TabIndex = 26
-        Me.uc_um_userposition.Text = "Enter Position"
-        '
-        'uc_um_position
-        '
-        Me.uc_um_position.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_position.AutoSize = True
-        Me.uc_um_position.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_position.ForeColor = System.Drawing.Color.Black
-        Me.uc_um_position.Location = New System.Drawing.Point(298, 231)
-        Me.uc_um_position.Name = "uc_um_position"
-        Me.uc_um_position.Size = New System.Drawing.Size(82, 30)
-        Me.uc_um_position.TabIndex = 25
-        Me.uc_um_position.Text = "Position"
-        '
-        'uc_um_fullname
-        '
-        Me.uc_um_fullname.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_fullname.AutoSize = True
-        Me.uc_um_fullname.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_fullname.ForeColor = System.Drawing.Color.Black
-        Me.uc_um_fullname.Location = New System.Drawing.Point(280, 168)
-        Me.uc_um_fullname.Name = "uc_um_fullname"
-        Me.uc_um_fullname.Size = New System.Drawing.Size(99, 30)
-        Me.uc_um_fullname.TabIndex = 24
-        Me.uc_um_fullname.Text = "Full Name"
-        '
-        'uc_um_userFullName
-        '
-        Me.uc_um_userFullName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_userFullName.BackColor = System.Drawing.SystemColors.Window
-        Me.uc_um_userFullName.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_userFullName.ForeColor = System.Drawing.Color.Black
-        Me.uc_um_userFullName.Location = New System.Drawing.Point(410, 171)
-        Me.uc_um_userFullName.MaxLength = 100
-        Me.uc_um_userFullName.Name = "uc_um_userFullName"
-        Me.uc_um_userFullName.Size = New System.Drawing.Size(258, 27)
-        Me.uc_um_userFullName.TabIndex = 23
-        Me.uc_um_userFullName.Text = "Enter Full Name"
-        '
-        'uc_um_adminprofile
-        '
-        Me.uc_um_adminprofile.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.uc_um_adminprofile.AutoSize = True
-        Me.uc_um_adminprofile.Font = New System.Drawing.Font("Poppins", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.uc_um_adminprofile.ForeColor = System.Drawing.Color.Black
-        Me.uc_um_adminprofile.Location = New System.Drawing.Point(401, 62)
-        Me.uc_um_adminprofile.Name = "uc_um_adminprofile"
-        Me.uc_um_adminprofile.Size = New System.Drawing.Size(215, 50)
-        Me.uc_um_adminprofile.TabIndex = 22
-        Me.uc_um_adminprofile.Text = "Admin Profile"
         '
         'admin_label_Dashboard
         '
         Me.admin_label_Dashboard.AutoSize = True
         Me.admin_label_Dashboard.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_Dashboard.Location = New System.Drawing.Point(43, 31)
+        Me.admin_label_Dashboard.Location = New System.Drawing.Point(43, 53)
         Me.admin_label_Dashboard.Name = "admin_label_Dashboard"
         Me.admin_label_Dashboard.Size = New System.Drawing.Size(342, 58)
         Me.admin_label_Dashboard.TabIndex = 21
         Me.admin_label_Dashboard.Text = "User Management"
         '
+        'pm_table
+        '
+        Me.pm_table.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_table.BackgroundColor = System.Drawing.SystemColors.ButtonFace
+        Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.userID, Me.firstName, Me.middleName, Me.lastName, Me.suffix, Me.positionUser, Me.departmentID, Me.contactNumber, Me.email, Me.userRole, Me.province, Me.municipalityCity, Me.barangay, Me.houseNumber, Me.password, Me.dateRegistered, Me.accountStatus})
+        Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.pm_table.Location = New System.Drawing.Point(53, 105)
+        Me.pm_table.Name = "pm_table"
+        Me.pm_table.RowHeadersWidth = 51
+        Me.pm_table.RowTemplate.Height = 24
+        Me.pm_table.Size = New System.Drawing.Size(1270, 573)
+        Me.pm_table.TabIndex = 27
+        '
+        'userID
+        '
+        Me.userID.HeaderText = "User ID"
+        Me.userID.MinimumWidth = 6
+        Me.userID.Name = "userID"
+        Me.userID.Width = 90
+        '
+        'firstName
+        '
+        Me.firstName.HeaderText = "First Name"
+        Me.firstName.MinimumWidth = 6
+        Me.firstName.Name = "firstName"
+        Me.firstName.Width = 90
+        '
+        'middleName
+        '
+        Me.middleName.HeaderText = "Middle Name"
+        Me.middleName.MinimumWidth = 6
+        Me.middleName.Name = "middleName"
+        Me.middleName.Width = 90
+        '
+        'lastName
+        '
+        Me.lastName.HeaderText = "Last Name"
+        Me.lastName.MinimumWidth = 6
+        Me.lastName.Name = "lastName"
+        Me.lastName.Width = 90
+        '
+        'suffix
+        '
+        Me.suffix.HeaderText = "Suffix"
+        Me.suffix.MinimumWidth = 6
+        Me.suffix.Name = "suffix"
+        Me.suffix.Width = 90
+        '
+        'positionUser
+        '
+        Me.positionUser.HeaderText = "Position"
+        Me.positionUser.MinimumWidth = 6
+        Me.positionUser.Name = "positionUser"
+        Me.positionUser.Width = 90
+        '
+        'departmentID
+        '
+        Me.departmentID.HeaderText = "Department ID"
+        Me.departmentID.MinimumWidth = 6
+        Me.departmentID.Name = "departmentID"
+        Me.departmentID.Width = 90
+        '
+        'contactNumber
+        '
+        Me.contactNumber.HeaderText = "Contact Number"
+        Me.contactNumber.MinimumWidth = 6
+        Me.contactNumber.Name = "contactNumber"
+        Me.contactNumber.Width = 90
+        '
+        'email
+        '
+        Me.email.HeaderText = "Email"
+        Me.email.MinimumWidth = 6
+        Me.email.Name = "email"
+        Me.email.Width = 90
+        '
+        'userRole
+        '
+        Me.userRole.HeaderText = "User Role"
+        Me.userRole.MinimumWidth = 6
+        Me.userRole.Name = "userRole"
+        Me.userRole.Width = 90
+        '
+        'province
+        '
+        Me.province.HeaderText = "Province"
+        Me.province.MinimumWidth = 6
+        Me.province.Name = "province"
+        Me.province.Width = 90
+        '
+        'municipalityCity
+        '
+        Me.municipalityCity.HeaderText = "Municipality/City"
+        Me.municipalityCity.MinimumWidth = 6
+        Me.municipalityCity.Name = "municipalityCity"
+        Me.municipalityCity.Width = 90
+        '
+        'barangay
+        '
+        Me.barangay.HeaderText = "Barangay"
+        Me.barangay.MinimumWidth = 6
+        Me.barangay.Name = "barangay"
+        Me.barangay.Width = 90
+        '
+        'houseNumber
+        '
+        Me.houseNumber.HeaderText = "House Number"
+        Me.houseNumber.MinimumWidth = 6
+        Me.houseNumber.Name = "houseNumber"
+        Me.houseNumber.Width = 90
+        '
+        'password
+        '
+        Me.password.HeaderText = "Password"
+        Me.password.MinimumWidth = 6
+        Me.password.Name = "password"
+        Me.password.Width = 90
+        '
+        'dateRegistered
+        '
+        Me.dateRegistered.HeaderText = "Date Registered"
+        Me.dateRegistered.MinimumWidth = 6
+        Me.dateRegistered.Name = "dateRegistered"
+        Me.dateRegistered.Width = 90
+        '
+        'accountStatus
+        '
+        Me.accountStatus.HeaderText = "Account Status"
+        Me.accountStatus.MinimumWidth = 6
+        Me.accountStatus.Name = "accountStatus"
+        Me.accountStatus.Width = 90
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnCancel.CornerRadius = 15
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Location = New System.Drawing.Point(719, 709)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
+        Me.btnCancel.TabIndex = 159
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'btnSave
+        '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnSave.CornerRadius = 15
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSave.Location = New System.Drawing.Point(1178, 709)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(145, 34)
+        Me.btnSave.TabIndex = 158
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(872, 709)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(145, 34)
+        Me.RoundedButton1.TabIndex = 160
+        Me.RoundedButton1.Text = "Edit"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'RoundedButton2
+        '
+        Me.RoundedButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton2.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.RoundedButton2.CornerRadius = 15
+        Me.RoundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton2.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RoundedButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton2.Location = New System.Drawing.Point(1025, 709)
+        Me.RoundedButton2.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton2.Name = "RoundedButton2"
+        Me.RoundedButton2.Size = New System.Drawing.Size(145, 34)
+        Me.RoundedButton2.TabIndex = 161
+        Me.RoundedButton2.Text = "Save"
+        Me.RoundedButton2.UseVisualStyleBackColor = False
+        '
         'UC_UserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.RoundedButton2)
+        Me.Controls.Add(Me.RoundedButton1)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.pm_table)
         Me.Controls.Add(Me.admin_label_Dashboard)
-        Me.Controls.Add(Me.admin_um_panel1)
         Me.Name = "UC_UserManagement"
-        Me.Size = New System.Drawing.Size(1084, 1055)
-        Me.admin_um_panel1.ResumeLayout(False)
-        Me.admin_um_panel1.PerformLayout()
+        Me.Size = New System.Drawing.Size(1394, 803)
+        CType(Me.pm_table, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents admin_um_panel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents admin_label_Dashboard As Label
-    Friend WithEvents uc_um_fullname As Label
-    Friend WithEvents uc_um_userFullName As TextBox
-    Friend WithEvents uc_um_adminprofile As Label
-    Friend WithEvents uc_um_userposition As TextBox
-    Friend WithEvents uc_um_position As Label
-    Friend WithEvents uc_um_contact As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents uc_um_UserEmail As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents uc_um_update As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents uc_um_edit As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents pm_table As DataGridView
+    Friend WithEvents userID As DataGridViewTextBoxColumn
+    Friend WithEvents firstName As DataGridViewTextBoxColumn
+    Friend WithEvents middleName As DataGridViewTextBoxColumn
+    Friend WithEvents lastName As DataGridViewTextBoxColumn
+    Friend WithEvents suffix As DataGridViewTextBoxColumn
+    Friend WithEvents positionUser As DataGridViewTextBoxColumn
+    Friend WithEvents departmentID As DataGridViewTextBoxColumn
+    Friend WithEvents contactNumber As DataGridViewTextBoxColumn
+    Friend WithEvents email As DataGridViewTextBoxColumn
+    Friend WithEvents userRole As DataGridViewTextBoxColumn
+    Friend WithEvents province As DataGridViewTextBoxColumn
+    Friend WithEvents municipalityCity As DataGridViewTextBoxColumn
+    Friend WithEvents barangay As DataGridViewTextBoxColumn
+    Friend WithEvents houseNumber As DataGridViewTextBoxColumn
+    Friend WithEvents password As DataGridViewTextBoxColumn
+    Friend WithEvents dateRegistered As DataGridViewTextBoxColumn
+    Friend WithEvents accountStatus As DataGridViewTextBoxColumn
+    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
+    Friend WithEvents btnSave As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
 End Class

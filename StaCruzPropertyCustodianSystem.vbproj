@@ -116,6 +116,12 @@
     <Compile Include="Forms\Admin\AddDepartment.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Admin\AddMaintenance1.Designer.vb">
+      <DependentUpon>AddMaintenance1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddMaintenance1.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Admin\AddProperty.Designer.vb">
       <DependentUpon>AddProperty.vb</DependentUpon>
     </Compile>
@@ -131,7 +137,9 @@
     <Compile Include="Forms\Admin\AddSupply.Designer.vb">
       <DependentUpon>AddSupply.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Admin\AddSupply.vb" />
+    <Compile Include="Forms\Admin\AddSupply.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Admin\AdminDashboard.Designer.vb">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
     </Compile>
@@ -239,11 +247,17 @@
     <EmbeddedResource Include="Forms\Admin\AddDepartment.resx">
       <DependentUpon>AddDepartment.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AddMaintenance1.resx">
+      <DependentUpon>AddMaintenance1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AddProperty.resx">
       <DependentUpon>AddProperty.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AddPropertyRequest.resx">
       <DependentUpon>AddPropertyRequest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AddSupply.resx">
+      <DependentUpon>AddSupply.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
