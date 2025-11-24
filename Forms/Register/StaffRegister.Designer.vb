@@ -379,16 +379,7 @@ Partial Class StaffRegister
         '
         'cb_Position
         '
-        Me.cb_Position.AutoCompleteCustomSource.AddRange(New String() {"", "Principal l", "Principal ll", "Assistant Principal", "Administrative Officer", "School Registrar", "Finance", "Master Teacher I", "Master Teacher Il", "Master Teacher Ill", "Classroom Teacher I", "Classroom Teacher Il", "Classroom Teacher Ill", "Special Education Teacher", "English Teachers", "Math Teachers", " Science Teachers", "MAPEH Teachers", "Guidance Counselor", "ICT", "School Secretary", "Security Personnel"})
-        Me.cb_Position.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cb_Position.FormattingEnabled = True
-        Me.cb_Position.Items.AddRange(New Object() {"Super Admin", "Admin", "Staff"})
-        Me.cb_Position.Location = New System.Drawing.Point(389, 653)
-        Me.cb_Position.Margin = New System.Windows.Forms.Padding(4)
-        Me.cb_Position.Name = "cb_Position"
-        Me.cb_Position.Size = New System.Drawing.Size(421, 44)
-        Me.cb_Position.TabIndex = 43
-        '
+
         'cb_Province
         '
         Me.cb_Province.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
