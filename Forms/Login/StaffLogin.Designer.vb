@@ -64,7 +64,7 @@ Partial Class StaffLogin
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(1119, 112)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Santa Cruz Elementary School Property"
+        Me.Label2.Text = "Sta. Cruz Elementary School Property"
         '
         'txb_Username
         '

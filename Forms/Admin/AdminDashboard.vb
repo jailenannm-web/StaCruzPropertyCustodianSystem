@@ -22,7 +22,6 @@ Public Class AdminDashboard
     Private Async Sub AdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Make profile picture circular
         MakeProfileCircular()
-        ConfigureQuickAccessButtons()
         Await LoadDashboardAsync()
     End Sub
 
@@ -57,17 +56,6 @@ Public Class AdminDashboard
         Catch ex As Exception
             MessageBox.Show("Error loading UserControl: " & ex.Message)
         End Try
-    End Sub
-
-    Private Sub ConfigureQuickAccessButtons()
-        admin_btn_hello.Text = "Property"
-        admin_btn_updateinventory.Text = "Supplies"
-        admin_btn_generatereport.Text = "Reports"
-        admin_btn_viewallprop.Text = "Maintenance"
-
-        admin_panel_PendingRequests.Cursor = Cursors.Hand
-        Label1.Cursor = Cursors.Hand
-        Label5.Cursor = Cursors.Hand
     End Sub
 
     Private Async Function LoadDashboardAsync() As Task

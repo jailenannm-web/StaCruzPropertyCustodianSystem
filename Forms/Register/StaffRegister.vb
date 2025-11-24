@@ -30,15 +30,21 @@ Public Class StaffRegister
             Return
         End If
 
+        If String.IsNullOrWhiteSpace(txb_HouseNoStreet.Text) Then
+            MessageBox.Show("Please enter your address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txb_HouseNoStreet.Focus()
+            Return
+        End If
+
         ' Validate position selection
-        ' If txb_Position.SelectedIndex = -1 OrElse String.IsNullOrWhiteSpace(txb_Position.Text) Then
-        '    MessageBox.Show("Please select a position (Super Admin, Admin, or Staff).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '   txb_Position.Focus()
-        '    Return
-        '  End If
+        If cb_Position.SelectedIndex = -1 OrElse String.IsNullOrWhiteSpace(cb_Position.Text) Then
+            MessageBox.Show("Please select a position (Super Admin, Admin, or Staff).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cb_Position.Focus()
+            Return
+        End If
 
         ' Only validate department ID for Staff position
-        If txb_Position.Text = "Staff" AndAlso String.IsNullOrWhiteSpace(txb_DepartmentID.Text) Then
+        If cb_Position.Text = "Staff" AndAlso String.IsNullOrWhiteSpace(txb_DepartmentID.Text) Then
             MessageBox.Show("Please enter your department ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txb_DepartmentID.Focus()
             Return
@@ -76,9 +82,8 @@ Public Class StaffRegister
         System.Diagnostics.Debug.WriteLine("[v0] Registration Attempt - Position: " & position & ", Username: " & username)
 
         ' Pass position parameter to RegisterStaff function
-        If DatabaseConnection.RegisterStaff(firstName, lastName, email, contactNumber, departmentID, username, password, position) Then
+        If DatabaseConnection.RegisterStaff(firstName, lastName, email, contactNumber, address, departmentID, username, password, position) Then
             MessageBox.Show("Registration successful! You can now login with your new account.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
 
             Dim staffLogin As New StaffLogin()
             staffLogin.Show()

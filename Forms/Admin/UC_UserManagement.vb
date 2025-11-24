@@ -19,45 +19,21 @@ Public Class UC_UserManagement
 
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles uc_um_fullname.Click
+    Private Sub Label1_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles uc_um_userposition.TextChanged
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles uc_um_userFullName.TextChanged
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub uc_um_position_Click(sender As Object, e As EventArgs) Handles uc_um_position.Click
+    Private Sub uc_um_position_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub uc_um_edit_Click(sender As Object, e As EventArgs) Handles uc_um_edit.Click
-        ' Create the EditUser UserControl
-        Dim ucEdit As New EditUser()
 
-        ' Pass the current user data
-        ucEdit.LoadUserData(
-        uc_um_userFullName.Text,
-        uc_um_userposition.Text,
-        "user@example.com",      ' Replace with actual email
-        "username123",           ' Replace with actual username
-        "password123",           ' Replace with actual password
-        "123 Main St",           ' Replace with actual address
-        "Assignment1",           ' Replace with actual assignment
-        "EMP001",                ' Replace with actual employee ID
-        "Active",                ' Replace with actual status
-        "LastLoginInfo",         ' Replace with actual last login
-        "01/01/2025"             ' Replace with actual created date
-    )
-
-        ' Load EditUser in the Dashboard panel
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-        If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(ucEdit)
-        End If
-    End Sub
 End Class

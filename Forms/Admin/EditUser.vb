@@ -28,7 +28,6 @@ Public Class EditUser
         um_edituser_EmployeeID.Text = employeeID
         um_edituser_txtboxStatus.Text = status
         um_edituser_txtboxLogin.Text = login
-        um_edituser_txtboxCreated.Text = created
     End Sub
 
     ' Save button
@@ -43,5 +42,113 @@ Public Class EditUser
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New UC_UserManagement())
         End If
+    End Sub
+
+    Private Sub um_edituser_fullname_Click(sender As Object, e As EventArgs) Handles um_edituser_fullname.Click
+
+    End Sub
+
+    Private Sub um_edituser_txtboxfirst_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_txtboxfirst.TextChanged
+
+    End Sub
+
+    Private Sub um_edituser_Password_Click(sender As Object, e As EventArgs) Handles um_edituser_Password.Click
+
+    End Sub
+
+    Private Sub um_edituser_txtboxPassword_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_txtboxPassword.TextChanged
+
+    End Sub
+
+    Private Sub um_edituser_lastname_Click(sender As Object, e As EventArgs) Handles um_edituser_lastname.Click
+
+    End Sub
+
+    Private Sub um_edituser_txtboxfull_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_txtboxfull.TextChanged
+
+    End Sub
+
+    Private Sub um_useredit_txtboxposition_Click(sender As Object, e As EventArgs) Handles um_useredit_txtboxposition.Click
+
+    End Sub
+
+    Private Sub um_edituser_txtboxPosition_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_txtboxPosition.TextChanged
+
+    End Sub
+
+    Private Sub um_edituser_txtboxdepartment_Click(sender As Object, e As EventArgs) Handles um_edituser_txtboxdepartment.Click
+
+    End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub um_edituser_txtboxcontact_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_txtboxcontact.TextChanged
+
+    End Sub
+
+    Private Sub um_edituser_txtboxEmail_Click(sender As Object, e As EventArgs) Handles um_edituser_txtboxEmail.Click
+
+    End Sub
+
+    Private Sub um_edituser_email_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_email.TextChanged
+
+    End Sub
+
+    Private Sub um_edituser_txtboxUsername_Click(sender As Object, e As EventArgs) Handles um_edituser_txtboxUsername.Click
+
+    End Sub
+
+    Private Sub um_edituser_Username_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_Username.TextChanged
+
+    End Sub
+
+    Private Sub um_edituser_txtboxAddress_Click(sender As Object, e As EventArgs) Handles um_edituser_txtboxAddress.Click
+
+    End Sub
+
+    Private Sub um_edituser_txtboxUserAddress_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_txtboxUserAddress.TextChanged
+
+    End Sub
+
+    Private Sub um_edituser_txtboxAssignment_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_txtboxAssignment.TextChanged
+
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+
+    End Sub
+
+    Private Sub um_edituser_txtboxID_Click(sender As Object, e As EventArgs) Handles um_edituser_txtboxID.Click
+
+    End Sub
+
+    Private Sub um_edituser_EmployeeID_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_EmployeeID.TextChanged
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
+    End Sub
+
+    Private Sub um_edituser_txtboxStatus_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_txtboxStatus.TextChanged
+
+    End Sub
+
+    Private Sub um_edituser_txtStatus_Click(sender As Object, e As EventArgs) Handles um_edituser_txtStatus.Click
+
+    End Sub
+
+    Private Sub um_edituser_txtboxLogin_TextChanged(sender As Object, e As EventArgs) Handles um_edituser_txtboxLogin.TextChanged
+
+    End Sub
+
+    Private Sub uc_um_edituser_Paint(sender As Object, e As PaintEventArgs) Handles uc_um_edituser.Paint
+
     End Sub
 End Class
