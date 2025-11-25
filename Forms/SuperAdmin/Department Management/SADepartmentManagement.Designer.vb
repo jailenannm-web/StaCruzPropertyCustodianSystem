@@ -49,6 +49,7 @@ Partial Class SADepartmentManagement
         Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.MySqlDataAdapter1 = New MySql.Data.MySqlClient.MySqlDataAdapter()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -245,6 +246,13 @@ Partial Class SADepartmentManagement
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
+        'MySqlDataAdapter1
+        '
+        Me.MySqlDataAdapter1.DeleteCommand = Nothing
+        Me.MySqlDataAdapter1.InsertCommand = Nothing
+        Me.MySqlDataAdapter1.SelectCommand = Nothing
+        Me.MySqlDataAdapter1.UpdateCommand = Nothing
+        '
         'SADepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -291,4 +299,5 @@ Partial Class SADepartmentManagement
     Friend WithEvents btnUpdate As Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
+    Friend WithEvents MySqlDataAdapter1 As MySql.Data.MySqlClient.MySqlDataAdapter
 End Class
