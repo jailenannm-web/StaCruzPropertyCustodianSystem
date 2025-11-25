@@ -86,7 +86,7 @@ Public Class StaffDashboard
 
         ' --- ADD THIS LINE ---
         ' Hide the form loader panel to show your pnlMain
-        pnlFormLoader.Visible = False
+        pnlFormLoader.Visible = True
 
         ' (Your other load code... like sidebar setup)
     End Sub
@@ -104,7 +104,7 @@ Public Class StaffDashboard
         ' --- END OF CHECK ---
 
         SetActiveButton(btnDashboard)
-        pnlFormLoader.Visible = False
+        pnlFormLoader.Visible = True
 
     End Sub
 
@@ -216,7 +216,7 @@ Public Class StaffDashboard
         pnlFormLoader.BringToFront() ' Make sure it's on top of pnlMain
     End Sub
 
-    Private Sub dgvHistory_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvHistory.CellContentClick
+    Private Sub dgvHistory_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
     End Sub
 
@@ -231,5 +231,25 @@ Public Class StaffDashboard
         ' --- THIS IS THE NEW CODE ---
         ' Load your new profile form
         loadFormIntoPanel(New frmRequest())
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
+
+    End Sub
+
+    Private Sub admin_panel_borrowed_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub admin_panel_borrowed_Click_1(sender As Object, e As EventArgs) Handles admin_panel_borrowed.Click
+
+    End Sub
+
+    Private Sub RoundedPanel6_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel6.Paint
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
     End Sub
 End Class
