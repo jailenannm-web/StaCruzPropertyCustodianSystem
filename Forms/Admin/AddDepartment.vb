@@ -31,7 +31,7 @@ Public Class AddDepartment
         office_hours_cmbo.SelectedIndex = 0
 
         ' Set default established date to today
-        established_date_date.Value = DateTime.Now
+        established_date_date.Value = System.DateTime.Now
 
         ' Set default number of employees to 0
         no_of_employees_numeric.Value = 0
@@ -174,7 +174,7 @@ Public Class AddDepartment
         no_of_employees_numeric.Value = 0
         department_code_Code.Clear()
         office_hours_cmbo.SelectedIndex = 0
-        established_date_date.Value = DateTime.Now
+        established_date_date.Value = System.DateTime.Now
         parent_department_id_txt.Clear()
         status_cmbo.SelectedIndex = 0
         budget_allocation_txt.Text = "0.00"

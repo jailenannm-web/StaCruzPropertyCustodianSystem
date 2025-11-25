@@ -27,22 +27,18 @@ Partial Class SASystemConfiguration
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SASystemConfiguration))
         Me.lblSystemConfig = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.pnlStatus = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.combostatus = New System.Windows.Forms.ComboBox()
-        Me.pnlCategories = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.comboCategoris = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.pm_as_propertyman = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.PanelMenu = New System.Windows.Forms.Panel()
-        Me.btnConnection = New System.Windows.Forms.Button()
-        Me.btnCategory = New System.Windows.Forms.Button()
-        Me.btnRoles = New System.Windows.Forms.Button()
         Me.btnLogs = New System.Windows.Forms.Button()
+        Me.btnRoles = New System.Windows.Forms.Button()
+        Me.btnCategory = New System.Windows.Forms.Button()
+        Me.btnConnection = New System.Windows.Forms.Button()
         Me.DBHost = New System.Windows.Forms.Label()
         Me.txtHost = New System.Windows.Forms.TextBox()
         Me.txtPort = New System.Windows.Forms.TextBox()
@@ -88,13 +84,18 @@ Partial Class SASystemConfiguration
         Me.User = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Actionn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Message = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pnlStatus = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.combostatus = New System.Windows.Forms.ComboBox()
+        Me.pnlCategories = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.comboCategoris = New System.Windows.Forms.ComboBox()
+        Me.pm_as_propertyman = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlStatus.SuspendLayout()
-        Me.pnlCategories.SuspendLayout()
         Me.PanelMenu.SuspendLayout()
         CType(Me.dgvCategory, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvRoles, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlStatus.SuspendLayout()
+        Me.pnlCategories.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblSystemConfig
@@ -112,7 +113,7 @@ Partial Class SASystemConfiguration
         '
         'PictureBox2
         '
-        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
         Me.PictureBox2.Location = New System.Drawing.Point(564, 26)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(63, 41)
@@ -155,56 +156,6 @@ Partial Class SASystemConfiguration
         Me.Label1.TabIndex = 155
         Me.Label1.Text = "Categories"
         '
-        'pnlStatus
-        '
-        Me.pnlStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.pnlStatus.Controls.Add(Me.combostatus)
-        Me.pnlStatus.CornerRadius = 5
-        Me.pnlStatus.Font = New System.Drawing.Font("Poppins", 9.8!)
-        Me.pnlStatus.Location = New System.Drawing.Point(1263, 28)
-        Me.pnlStatus.Margin = New System.Windows.Forms.Padding(4)
-        Me.pnlStatus.Name = "pnlStatus"
-        Me.pnlStatus.Size = New System.Drawing.Size(177, 37)
-        Me.pnlStatus.TabIndex = 154
-        '
-        'combostatus
-        '
-        Me.combostatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.combostatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.combostatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.combostatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.combostatus.FormattingEnabled = True
-        Me.combostatus.Location = New System.Drawing.Point(16, 7)
-        Me.combostatus.Margin = New System.Windows.Forms.Padding(4)
-        Me.combostatus.Name = "combostatus"
-        Me.combostatus.Size = New System.Drawing.Size(144, 23)
-        Me.combostatus.TabIndex = 1
-        '
-        'pnlCategories
-        '
-        Me.pnlCategories.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.pnlCategories.Controls.Add(Me.comboCategoris)
-        Me.pnlCategories.CornerRadius = 5
-        Me.pnlCategories.Font = New System.Drawing.Font("Poppins", 9.8!)
-        Me.pnlCategories.Location = New System.Drawing.Point(1548, 30)
-        Me.pnlCategories.Margin = New System.Windows.Forms.Padding(4)
-        Me.pnlCategories.Name = "pnlCategories"
-        Me.pnlCategories.Size = New System.Drawing.Size(177, 37)
-        Me.pnlCategories.TabIndex = 153
-        '
-        'comboCategoris
-        '
-        Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboCategoris.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.comboCategoris.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboCategoris.FormattingEnabled = True
-        Me.comboCategoris.Location = New System.Drawing.Point(19, 7)
-        Me.comboCategoris.Margin = New System.Windows.Forms.Padding(4)
-        Me.comboCategoris.Name = "comboCategoris"
-        Me.comboCategoris.Size = New System.Drawing.Size(144, 23)
-        Me.comboCategoris.TabIndex = 0
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -216,18 +167,6 @@ Partial Class SASystemConfiguration
         Me.Label3.Size = New System.Drawing.Size(485, 26)
         Me.Label3.TabIndex = 159
         Me.Label3.Text = "Manage system- wide settings, connection, backups, and logs"
-        '
-        'pm_as_propertyman
-        '
-        Me.pm_as_propertyman.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_as_propertyman.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.pm_as_propertyman.CornerRadius = 20
-        Me.pm_as_propertyman.Location = New System.Drawing.Point(-13, -8)
-        Me.pm_as_propertyman.Name = "pm_as_propertyman"
-        Me.pm_as_propertyman.Size = New System.Drawing.Size(1804, 220)
-        Me.pm_as_propertyman.TabIndex = 160
         '
         'PanelMenu
         '
@@ -241,48 +180,6 @@ Partial Class SASystemConfiguration
         Me.PanelMenu.Name = "PanelMenu"
         Me.PanelMenu.Size = New System.Drawing.Size(397, 1234)
         Me.PanelMenu.TabIndex = 161
-        '
-        'btnConnection
-        '
-        Me.btnConnection.BackColor = System.Drawing.Color.DarkGray
-        Me.btnConnection.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConnection.Font = New System.Drawing.Font("Poppins", 12.8!, System.Drawing.FontStyle.Bold)
-        Me.btnConnection.ForeColor = System.Drawing.Color.White
-        Me.btnConnection.Location = New System.Drawing.Point(33, 312)
-        Me.btnConnection.Name = "btnConnection"
-        Me.btnConnection.Size = New System.Drawing.Size(305, 48)
-        Me.btnConnection.TabIndex = 9
-        Me.btnConnection.Text = "Connection Settings"
-        Me.btnConnection.UseVisualStyleBackColor = False
-        '
-        'btnCategory
-        '
-        Me.btnCategory.BackColor = System.Drawing.Color.DarkGray
-        Me.btnCategory.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCategory.Font = New System.Drawing.Font("Poppins", 15.8!, System.Drawing.FontStyle.Bold)
-        Me.btnCategory.ForeColor = System.Drawing.Color.White
-        Me.btnCategory.Location = New System.Drawing.Point(33, 412)
-        Me.btnCategory.Name = "btnCategory"
-        Me.btnCategory.Size = New System.Drawing.Size(305, 48)
-        Me.btnCategory.TabIndex = 10
-        Me.btnCategory.Text = "Category & Status"
-        Me.btnCategory.UseVisualStyleBackColor = False
-        '
-        'btnRoles
-        '
-        Me.btnRoles.BackColor = System.Drawing.Color.DarkGray
-        Me.btnRoles.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnRoles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRoles.Font = New System.Drawing.Font("Poppins", 15.8!, System.Drawing.FontStyle.Bold)
-        Me.btnRoles.ForeColor = System.Drawing.Color.White
-        Me.btnRoles.Location = New System.Drawing.Point(33, 516)
-        Me.btnRoles.Name = "btnRoles"
-        Me.btnRoles.Size = New System.Drawing.Size(305, 48)
-        Me.btnRoles.TabIndex = 11
-        Me.btnRoles.Text = "User Roles"
-        Me.btnRoles.UseVisualStyleBackColor = False
         '
         'btnLogs
         '
@@ -298,11 +195,53 @@ Partial Class SASystemConfiguration
         Me.btnLogs.Text = "Logs"
         Me.btnLogs.UseVisualStyleBackColor = False
         '
+        'btnRoles
+        '
+        Me.btnRoles.BackColor = System.Drawing.Color.DarkGray
+        Me.btnRoles.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnRoles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRoles.Font = New System.Drawing.Font("Poppins", 15.8!, System.Drawing.FontStyle.Bold)
+        Me.btnRoles.ForeColor = System.Drawing.Color.White
+        Me.btnRoles.Location = New System.Drawing.Point(33, 516)
+        Me.btnRoles.Name = "btnRoles"
+        Me.btnRoles.Size = New System.Drawing.Size(305, 48)
+        Me.btnRoles.TabIndex = 11
+        Me.btnRoles.Text = "User Roles"
+        Me.btnRoles.UseVisualStyleBackColor = False
+        '
+        'btnCategory
+        '
+        Me.btnCategory.BackColor = System.Drawing.Color.DarkGray
+        Me.btnCategory.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCategory.Font = New System.Drawing.Font("Poppins", 15.8!, System.Drawing.FontStyle.Bold)
+        Me.btnCategory.ForeColor = System.Drawing.Color.White
+        Me.btnCategory.Location = New System.Drawing.Point(33, 412)
+        Me.btnCategory.Name = "btnCategory"
+        Me.btnCategory.Size = New System.Drawing.Size(305, 48)
+        Me.btnCategory.TabIndex = 10
+        Me.btnCategory.Text = "Category & Status"
+        Me.btnCategory.UseVisualStyleBackColor = False
+        '
+        'btnConnection
+        '
+        Me.btnConnection.BackColor = System.Drawing.Color.DarkGray
+        Me.btnConnection.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConnection.Font = New System.Drawing.Font("Poppins", 12.8!, System.Drawing.FontStyle.Bold)
+        Me.btnConnection.ForeColor = System.Drawing.Color.White
+        Me.btnConnection.Location = New System.Drawing.Point(33, 312)
+        Me.btnConnection.Name = "btnConnection"
+        Me.btnConnection.Size = New System.Drawing.Size(305, 48)
+        Me.btnConnection.TabIndex = 9
+        Me.btnConnection.Text = "Connection Settings"
+        Me.btnConnection.UseVisualStyleBackColor = False
+        '
         'DBHost
         '
         Me.DBHost.AutoSize = True
         Me.DBHost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.DBHost.Location = New System.Drawing.Point(439, 277)
+        Me.DBHost.Location = New System.Drawing.Point(496, 291)
         Me.DBHost.Name = "DBHost"
         Me.DBHost.Size = New System.Drawing.Size(77, 22)
         Me.DBHost.TabIndex = 162
@@ -311,7 +250,7 @@ Partial Class SASystemConfiguration
         'txtHost
         '
         Me.txtHost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtHost.Location = New System.Drawing.Point(553, 277)
+        Me.txtHost.Location = New System.Drawing.Point(610, 291)
         Me.txtHost.Name = "txtHost"
         Me.txtHost.Size = New System.Drawing.Size(303, 28)
         Me.txtHost.TabIndex = 163
@@ -319,7 +258,7 @@ Partial Class SASystemConfiguration
         'txtPort
         '
         Me.txtPort.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtPort.Location = New System.Drawing.Point(553, 351)
+        Me.txtPort.Location = New System.Drawing.Point(610, 365)
         Me.txtPort.Name = "txtPort"
         Me.txtPort.Size = New System.Drawing.Size(303, 28)
         Me.txtPort.TabIndex = 165
@@ -328,7 +267,7 @@ Partial Class SASystemConfiguration
         '
         Me.port.AutoSize = True
         Me.port.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.port.Location = New System.Drawing.Point(438, 354)
+        Me.port.Location = New System.Drawing.Point(495, 368)
         Me.port.Name = "port"
         Me.port.Size = New System.Drawing.Size(73, 22)
         Me.port.TabIndex = 164
@@ -337,7 +276,7 @@ Partial Class SASystemConfiguration
         'txtDBName
         '
         Me.txtDBName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtDBName.Location = New System.Drawing.Point(553, 416)
+        Me.txtDBName.Location = New System.Drawing.Point(610, 430)
         Me.txtDBName.Name = "txtDBName"
         Me.txtDBName.Size = New System.Drawing.Size(303, 28)
         Me.txtDBName.TabIndex = 167
@@ -346,7 +285,7 @@ Partial Class SASystemConfiguration
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.Label5.Location = New System.Drawing.Point(438, 422)
+        Me.Label5.Location = New System.Drawing.Point(495, 436)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(87, 22)
         Me.Label5.TabIndex = 166
@@ -355,7 +294,7 @@ Partial Class SASystemConfiguration
         'txtUser
         '
         Me.txtUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtUser.Location = New System.Drawing.Point(553, 480)
+        Me.txtUser.Location = New System.Drawing.Point(610, 494)
         Me.txtUser.Name = "txtUser"
         Me.txtUser.Size = New System.Drawing.Size(303, 28)
         Me.txtUser.TabIndex = 169
@@ -364,7 +303,7 @@ Partial Class SASystemConfiguration
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.Label6.Location = New System.Drawing.Point(438, 486)
+        Me.Label6.Location = New System.Drawing.Point(495, 500)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(78, 22)
         Me.Label6.TabIndex = 168
@@ -373,7 +312,7 @@ Partial Class SASystemConfiguration
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtPassword.Location = New System.Drawing.Point(553, 557)
+        Me.txtPassword.Location = New System.Drawing.Point(610, 571)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(303, 28)
         Me.txtPassword.TabIndex = 171
@@ -382,7 +321,7 @@ Partial Class SASystemConfiguration
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.Label7.Location = New System.Drawing.Point(438, 560)
+        Me.Label7.Location = New System.Drawing.Point(495, 574)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(119, 22)
         Me.Label7.TabIndex = 170
@@ -395,7 +334,7 @@ Partial Class SASystemConfiguration
         Me.btnTestConn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnTestConn.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnTestConn.ForeColor = System.Drawing.Color.White
-        Me.btnTestConn.Location = New System.Drawing.Point(524, 616)
+        Me.btnTestConn.Location = New System.Drawing.Point(581, 630)
         Me.btnTestConn.Name = "btnTestConn"
         Me.btnTestConn.Size = New System.Drawing.Size(131, 46)
         Me.btnTestConn.TabIndex = 172
@@ -409,7 +348,7 @@ Partial Class SASystemConfiguration
         Me.btnSaveConn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveConn.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnSaveConn.ForeColor = System.Drawing.Color.White
-        Me.btnSaveConn.Location = New System.Drawing.Point(725, 616)
+        Me.btnSaveConn.Location = New System.Drawing.Point(782, 630)
         Me.btnSaveConn.Name = "btnSaveConn"
         Me.btnSaveConn.Size = New System.Drawing.Size(131, 46)
         Me.btnSaveConn.TabIndex = 173
@@ -418,14 +357,14 @@ Partial Class SASystemConfiguration
         '
         'txtCategoryName
         '
-        Me.txtCategoryName.Location = New System.Drawing.Point(1081, 316)
+        Me.txtCategoryName.Location = New System.Drawing.Point(995, 294)
         Me.txtCategoryName.Name = "txtCategoryName"
         Me.txtCategoryName.Size = New System.Drawing.Size(317, 22)
         Me.txtCategoryName.TabIndex = 174
         '
         'txtDescription
         '
-        Me.txtDescription.Location = New System.Drawing.Point(1081, 354)
+        Me.txtDescription.Location = New System.Drawing.Point(995, 332)
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(317, 22)
         Me.txtDescription.TabIndex = 175
@@ -434,14 +373,14 @@ Partial Class SASystemConfiguration
         '
         Me.cmbType.FormattingEnabled = True
         Me.cmbType.Items.AddRange(New Object() {"Category", "Status"})
-        Me.cmbType.Location = New System.Drawing.Point(1464, 316)
+        Me.cmbType.Location = New System.Drawing.Point(1378, 294)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(178, 24)
         Me.cmbType.TabIndex = 176
         '
         'btnAddCategory
         '
-        Me.btnAddCategory.Location = New System.Drawing.Point(1426, 396)
+        Me.btnAddCategory.Location = New System.Drawing.Point(1340, 374)
         Me.btnAddCategory.Name = "btnAddCategory"
         Me.btnAddCategory.Size = New System.Drawing.Size(141, 48)
         Me.btnAddCategory.TabIndex = 177
@@ -450,7 +389,7 @@ Partial Class SASystemConfiguration
         '
         'btnEditCategory
         '
-        Me.btnEditCategory.Location = New System.Drawing.Point(1583, 396)
+        Me.btnEditCategory.Location = New System.Drawing.Point(1497, 374)
         Me.btnEditCategory.Name = "btnEditCategory"
         Me.btnEditCategory.Size = New System.Drawing.Size(142, 50)
         Me.btnEditCategory.TabIndex = 178
@@ -461,7 +400,7 @@ Partial Class SASystemConfiguration
         '
         Me.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCategory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.CategoryName, Me.Type, Me.Description, Me.Status, Me.Action})
-        Me.dgvCategory.Location = New System.Drawing.Point(1081, 452)
+        Me.dgvCategory.Location = New System.Drawing.Point(995, 430)
         Me.dgvCategory.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvCategory.Name = "dgvCategory"
         Me.dgvCategory.RowHeadersWidth = 51
@@ -574,7 +513,7 @@ Partial Class SASystemConfiguration
         Me.dgvRoles.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvRoles.Name = "dgvRoles"
         Me.dgvRoles.RowHeadersWidth = 51
-        Me.dgvRoles.Size = New System.Drawing.Size(559, 237)
+        Me.dgvRoles.Size = New System.Drawing.Size(610, 237)
         Me.dgvRoles.TabIndex = 186
         '
         'RoleID
@@ -607,14 +546,14 @@ Partial Class SASystemConfiguration
         '
         'dtFrom
         '
-        Me.dtFrom.Location = New System.Drawing.Point(1363, 821)
+        Me.dtFrom.Location = New System.Drawing.Point(1404, 760)
         Me.dtFrom.Name = "dtFrom"
         Me.dtFrom.Size = New System.Drawing.Size(243, 22)
         Me.dtFrom.TabIndex = 187
         '
         'dtTo
         '
-        Me.dtTo.Location = New System.Drawing.Point(1363, 778)
+        Me.dtTo.Location = New System.Drawing.Point(1404, 717)
         Me.dtTo.Name = "dtTo"
         Me.dtTo.Size = New System.Drawing.Size(231, 22)
         Me.dtTo.TabIndex = 188
@@ -622,14 +561,14 @@ Partial Class SASystemConfiguration
         'cmbLogType
         '
         Me.cmbLogType.FormattingEnabled = True
-        Me.cmbLogType.Location = New System.Drawing.Point(1625, 776)
+        Me.cmbLogType.Location = New System.Drawing.Point(1666, 715)
         Me.cmbLogType.Name = "cmbLogType"
         Me.cmbLogType.Size = New System.Drawing.Size(121, 24)
         Me.cmbLogType.TabIndex = 189
         '
         'btnExportLogs
         '
-        Me.btnExportLogs.Location = New System.Drawing.Point(1646, 818)
+        Me.btnExportLogs.Location = New System.Drawing.Point(1687, 757)
         Me.btnExportLogs.Name = "btnExportLogs"
         Me.btnExportLogs.Size = New System.Drawing.Size(100, 48)
         Me.btnExportLogs.TabIndex = 190
@@ -640,7 +579,7 @@ Partial Class SASystemConfiguration
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.LogID, Me.DateTime, Me.User, Me.Actionn, Me.Message})
-        Me.DataGridView1.Location = New System.Drawing.Point(1095, 878)
+        Me.DataGridView1.Location = New System.Drawing.Point(1136, 817)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
@@ -682,12 +621,74 @@ Partial Class SASystemConfiguration
         Me.Message.Name = "Message"
         Me.Message.Width = 125
         '
+        'pnlStatus
+        '
+        Me.pnlStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.pnlStatus.Controls.Add(Me.combostatus)
+        Me.pnlStatus.CornerRadius = 5
+        Me.pnlStatus.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.pnlStatus.Location = New System.Drawing.Point(1263, 28)
+        Me.pnlStatus.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlStatus.Name = "pnlStatus"
+        Me.pnlStatus.Size = New System.Drawing.Size(177, 37)
+        Me.pnlStatus.TabIndex = 154
+        '
+        'combostatus
+        '
+        Me.combostatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.combostatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.combostatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
+        Me.combostatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.combostatus.FormattingEnabled = True
+        Me.combostatus.Location = New System.Drawing.Point(16, 7)
+        Me.combostatus.Margin = New System.Windows.Forms.Padding(4)
+        Me.combostatus.Name = "combostatus"
+        Me.combostatus.Size = New System.Drawing.Size(144, 23)
+        Me.combostatus.TabIndex = 1
+        '
+        'pnlCategories
+        '
+        Me.pnlCategories.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.pnlCategories.Controls.Add(Me.comboCategoris)
+        Me.pnlCategories.CornerRadius = 5
+        Me.pnlCategories.Font = New System.Drawing.Font("Poppins", 9.8!)
+        Me.pnlCategories.Location = New System.Drawing.Point(1548, 30)
+        Me.pnlCategories.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlCategories.Name = "pnlCategories"
+        Me.pnlCategories.Size = New System.Drawing.Size(177, 37)
+        Me.pnlCategories.TabIndex = 153
+        '
+        'comboCategoris
+        '
+        Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.comboCategoris.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.comboCategoris.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
+        Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.comboCategoris.FormattingEnabled = True
+        Me.comboCategoris.Location = New System.Drawing.Point(19, 7)
+        Me.comboCategoris.Margin = New System.Windows.Forms.Padding(4)
+        Me.comboCategoris.Name = "comboCategoris"
+        Me.comboCategoris.Size = New System.Drawing.Size(144, 23)
+        Me.comboCategoris.TabIndex = 0
+        '
+        'pm_as_propertyman
+        '
+        Me.pm_as_propertyman.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_as_propertyman.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.pm_as_propertyman.CornerRadius = 20
+        Me.pm_as_propertyman.Location = New System.Drawing.Point(-13, -8)
+        Me.pm_as_propertyman.Name = "pm_as_propertyman"
+        Me.pm_as_propertyman.Size = New System.Drawing.Size(1973, 220)
+        Me.pm_as_propertyman.TabIndex = 160
+        '
         'SASystemConfiguration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.ClientSize = New System.Drawing.Size(1773, 1222)
+        Me.ClientSize = New System.Drawing.Size(1942, 1222)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnExportLogs)
         Me.Controls.Add(Me.cmbLogType)
@@ -734,12 +735,12 @@ Partial Class SASystemConfiguration
         Me.Text = "SASystemConfiguration"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlStatus.ResumeLayout(False)
-        Me.pnlCategories.ResumeLayout(False)
         Me.PanelMenu.ResumeLayout(False)
         CType(Me.dgvCategory, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvRoles, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlStatus.ResumeLayout(False)
+        Me.pnlCategories.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
