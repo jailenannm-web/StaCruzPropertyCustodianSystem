@@ -84,15 +84,7 @@ Public Class StaffLogin
 
     End Sub
 
-    Private Sub StaffLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Initialize default and Admin accounts if they don't exist
-        Try
-            DatabaseConnection.InitializeDefaultAccounts()
-        Catch ex As Exception
-            ' Silently fail - accounts may already exist
-            System.Diagnostics.Debug.WriteLine("[v0] Error initializing default accounts: " & ex.Message)
-        End Try
-    End Sub
+
 
     Private Sub Label8_Click(sender As Object, e As EventArgs)
 
@@ -116,4 +108,28 @@ Public Class StaffLogin
         dashboard.Show()
         Me.Hide()
     End Sub
+    Private Sub StaffLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Initialize default accounts
+        Try
+            DatabaseConnection.InitializeDefaultAccounts()
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] Error initializing default accounts: " & ex.Message)
+        End Try
+
+        ' SECRET BUTTON HIDDEN SETTINGS
+        btnSecretConfig.Width = 20
+        btnSecretConfig.Height = 20
+        btnSecretConfig.FlatStyle = FlatStyle.Flat
+        btnSecretConfig.FlatAppearance.BorderSize = 0
+        btnSecretConfig.BackColor = Me.BackColor
+        btnSecretConfig.ForeColor = Me.BackColor
+        btnSecretConfig.Text = ""
+        btnSecretConfig.TabStop = False
+    End Sub
+    Private Sub btnSecretConfig_Click(sender As Object, e As EventArgs) Handles btnSecretConfig.Click
+        Dim cfg As New SASystemConfiguration()
+        cfg.Show()
+    End Sub
+
+
 End Class

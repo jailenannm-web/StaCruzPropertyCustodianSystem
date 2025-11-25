@@ -37,6 +37,7 @@ Partial Class StaffLogin
         Me.Label4 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.btnSecretConfig = New System.Windows.Forms.Button()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -174,6 +175,15 @@ Partial Class StaffLogin
         Me.PictureBox4.TabIndex = 14
         Me.PictureBox4.TabStop = False
         '
+        'btnSecretConfig
+        '
+        Me.btnSecretConfig.Location = New System.Drawing.Point(904, 29)
+        Me.btnSecretConfig.Name = "btnSecretConfig"
+        Me.btnSecretConfig.Size = New System.Drawing.Size(75, 23)
+        Me.btnSecretConfig.TabIndex = 15
+        Me.btnSecretConfig.Text = "Button1"
+        Me.btnSecretConfig.UseVisualStyleBackColor = True
+        '
         'StaffLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -182,6 +192,7 @@ Partial Class StaffLogin
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources._Presentation
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1924, 1222)
+        Me.Controls.Add(Me.btnSecretConfig)
         Me.Controls.Add(Me.PictureBox4)
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.Label4)
@@ -217,4 +228,5 @@ Partial Class StaffLogin
     Friend WithEvents Label6 As Label
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents btnSecretConfig As Button
 End Class
