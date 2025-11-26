@@ -52,6 +52,10 @@ Partial Class AddMaintenance
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAAddM_lblMaintenance = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         CType(Me.no_of_employees_numeric, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.RoundedPanel2.SuspendLayout()
@@ -317,6 +321,8 @@ Partial Class AddMaintenance
         Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.TextBox2)
+        Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.TextBox1)
         Me.Panel2.Controls.Add(Me.assignedEmployeeTxt)
         Me.Panel2.Controls.Add(Me.supplierTxt)
@@ -329,7 +335,7 @@ Partial Class AddMaintenance
         Me.Panel2.Controls.Add(Me.SAAddM_Warranty)
         Me.Panel2.Location = New System.Drawing.Point(740, 18)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(841, 382)
+        Me.Panel2.Size = New System.Drawing.Size(841, 403)
         Me.Panel2.TabIndex = 65
         '
         'TextBox1
@@ -350,7 +356,7 @@ Partial Class AddMaintenance
         Me.RoundedPanel2.CornerRadius = 5
         Me.RoundedPanel2.Location = New System.Drawing.Point(141, 317)
         Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(1653, 425)
+        Me.RoundedPanel2.Size = New System.Drawing.Size(1653, 446)
         Me.RoundedPanel2.TabIndex = 168
         '
         'Panel1
@@ -358,6 +364,8 @@ Partial Class AddMaintenance
         Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.ComboBox1)
+        Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.datePurchasedDate)
         Me.Panel1.Controls.Add(Me.categoryCmbo)
         Me.Panel1.Controls.Add(Me.conditionStatusCmbo)
@@ -372,7 +380,7 @@ Partial Class AddMaintenance
         Me.Panel1.Controls.Add(Me.SAAddM_MainID)
         Me.Panel1.Location = New System.Drawing.Point(46, 18)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(963, 382)
+        Me.Panel1.Size = New System.Drawing.Size(963, 403)
         Me.Panel1.TabIndex = 64
         '
         'instructions
@@ -434,6 +442,51 @@ Partial Class AddMaintenance
         Me.SAAddM_lblMaintenance.TabIndex = 166
         Me.SAAddM_lblMaintenance.Text = "Maintenance"
         '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(44, 313)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(168, 26)
+        Me.Label1.TabIndex = 69
+        Me.Label1.Text = "Assigned Technician"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox2.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(242, 313)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(542, 30)
+        Me.TextBox2.TabIndex = 70
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(42, 358)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(59, 26)
+        Me.Label2.TabIndex = 72
+        Me.Label2.Text = "Status"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(256, 359)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(441, 24)
+        Me.ComboBox1.TabIndex = 73
+        '
         'AddMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -492,4 +545,8 @@ Partial Class AddMaintenance
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents SAAddM_lblMaintenance As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
 End Class

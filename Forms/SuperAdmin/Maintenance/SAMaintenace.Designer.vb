@@ -47,6 +47,7 @@ Partial Class SAMaintenace
         Me.combostatus = New System.Windows.Forms.ComboBox()
         Me.pnlCategories = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.comboCategoris = New System.Windows.Forms.ComboBox()
+        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlStatus.SuspendLayout()
@@ -272,12 +273,28 @@ Partial Class SAMaintenace
         Me.comboCategoris.Size = New System.Drawing.Size(144, 23)
         Me.comboCategoris.TabIndex = 0
         '
+        'btnSave
+        '
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnSave.CornerRadius = 15
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSave.Location = New System.Drawing.Point(1258, 1141)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(262, 34)
+        Me.btnSave.TabIndex = 170
+        Me.btnSave.Text = "Add/Update Maintenance"
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
         'SAMaintenace
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1637, 1222)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label2)
@@ -326,4 +343,5 @@ Partial Class SAMaintenace
     Friend WithEvents combostatus As System.Windows.Forms.ComboBox
     Friend WithEvents pnlCategories As Resources.Controls.RoundedPanel
     Friend WithEvents comboCategoris As System.Windows.Forms.ComboBox
+    Friend WithEvents btnSave As Resources.Controls.RoundedButton
 End Class
