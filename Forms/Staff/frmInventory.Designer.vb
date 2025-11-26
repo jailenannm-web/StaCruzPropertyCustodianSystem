@@ -49,6 +49,7 @@ Partial Class frmInventory
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblSuppliesManagement = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.btnOpenTransaction = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -85,7 +86,7 @@ Partial Class frmInventory
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1542, 863)
+        Me.DataGridView1.Size = New System.Drawing.Size(1542, 777)
         Me.DataGridView1.TabIndex = 161
         '
         'PropertID
@@ -256,12 +257,29 @@ Partial Class frmInventory
         Me.Label3.TabIndex = 162
         Me.Label3.Text = "Categories"
         '
+        'btnOpenTransaction
+        '
+        Me.btnOpenTransaction.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnOpenTransaction.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnOpenTransaction.CornerRadius = 15
+        Me.btnOpenTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnOpenTransaction.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOpenTransaction.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnOpenTransaction.Location = New System.Drawing.Point(1433, 992)
+        Me.btnOpenTransaction.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnOpenTransaction.Name = "btnOpenTransaction"
+        Me.btnOpenTransaction.Size = New System.Drawing.Size(194, 39)
+        Me.btnOpenTransaction.TabIndex = 163
+        Me.btnOpenTransaction.Text = "Open Transaction"
+        Me.btnOpenTransaction.UseVisualStyleBackColor = False
+        '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1756, 1120)
+        Me.Controls.Add(Me.btnOpenTransaction)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.comboStatus)
         Me.Controls.Add(Me.comboCategoris)
@@ -307,4 +325,5 @@ Partial Class frmInventory
     Friend WithEvents Label1 As Label
     Friend WithEvents lblSuppliesManagement As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents btnOpenTransaction As Resources.Controls.RoundedButton
 End Class

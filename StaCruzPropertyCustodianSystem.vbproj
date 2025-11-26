@@ -243,6 +243,30 @@
     <Compile Include="Forms\Staff\frmProfile.Designer.vb">
       <DependentUpon>frmProfile.vb</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Staff\PropertyTransaction.Designer.vb">
+      <DependentUpon>PropertyTransaction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\PropertyTransaction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Staff\TrnsBorrowItem.Designer.vb">
+      <DependentUpon>TrnsBorrowItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\TrnsBorrowItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Staff\TrnsRepairItem.Designer.vb">
+      <DependentUpon>TrnsRepairItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\TrnsRepairItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Staff\TrnsReturnItem.Designer.vb">
+      <DependentUpon>TrnsReturnItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\TrnsReturnItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Property Management\SAAddProperty.Designer.vb">
       <DependentUpon>SAAddProperty.vb</DependentUpon>
     </Compile>
@@ -349,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Staff\frmRequest.resx">
       <DependentUpon>frmRequest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Staff\PropertyTransaction.resx">
+      <DependentUpon>PropertyTransaction.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Staff\StaffDashboard.resx">
       <DependentUpon>StaffDashboard.vb</DependentUpon>
@@ -528,6 +555,15 @@
     </Compile>
     <EmbeddedResource Include="Forms\Login\StaffLogin.resx">
       <DependentUpon>StaffLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Staff\TrnsBorrowItem.resx">
+      <DependentUpon>TrnsBorrowItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Staff\TrnsRepairItem.resx">
+      <DependentUpon>TrnsRepairItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Staff\TrnsReturnItem.resx">
+      <DependentUpon>TrnsReturnItem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Maintenance\AddMaintenance.resx">
       <DependentUpon>AddMaintenance.vb</DependentUpon>

@@ -405,7 +405,7 @@ Partial Class frmPropertyRequest
         Me.ComboBox1.Font = New System.Drawing.Font("Poppins", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Property", "Supply"})
-        Me.ComboBox1.Location = New System.Drawing.Point(739, 37)
+        Me.ComboBox1.Location = New System.Drawing.Point(739, 34)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(174, 56)
         Me.ComboBox1.TabIndex = 386
