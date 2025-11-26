@@ -5,7 +5,7 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Imports StaCruzPropertyCustodianSystem.Resources.Controls
-Public Class EditUser
+Public Class AddUserManagement
     Inherits UserControl
 
     Public Sub New()

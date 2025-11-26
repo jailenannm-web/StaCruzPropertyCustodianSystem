@@ -688,7 +688,7 @@ Partial Class SASystemConfiguration
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.ClientSize = New System.Drawing.Size(1942, 1222)
+        Me.ClientSize = New System.Drawing.Size(1942, 1102)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnExportLogs)
         Me.Controls.Add(Me.cmbLogType)
