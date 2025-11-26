@@ -6,4 +6,9 @@
     Private Sub DataGridView1_CellContentClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As System.EventArgs) Handles btnSave.Click
+        Dim addForm As New AddMaintenance()
+        addForm.Show()
+    End Sub
 End Class
