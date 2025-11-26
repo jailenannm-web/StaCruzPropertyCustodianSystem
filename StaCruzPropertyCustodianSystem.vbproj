@@ -291,10 +291,10 @@
     <Compile Include="Forms\SuperAdmin\Property Management\SAAddProperty.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuancevb.Designer.vb">
-      <DependentUpon>PropertyIssuancevb.vb</DependentUpon>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.Designer.vb">
+      <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuancevb.vb">
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PasswordHelper.vb" />
@@ -628,8 +628,8 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyCard.resx">
       <DependentUpon>PropertyCard.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyIssuancevb.resx">
-      <DependentUpon>PropertyIssuancevb.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyIssuance.resx">
+      <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\RequisitionIssueSlip.resx">
       <DependentUpon>RequisitionIssueSlip.vb</DependentUpon>
