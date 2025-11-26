@@ -141,11 +141,23 @@
     <Compile Include="Forms\Admin\AddSupply.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Admin\AddUserManagement.Designer.vb">
+      <DependentUpon>AddUserManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddUserManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Admin\AdminDashboard.Designer.vb">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Admin\AdminDashboard.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\EditPropertyManagement.Designer.vb">
+      <DependentUpon>EditPropertyManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\EditPropertyManagement.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Admin\EditUser.Designer.vb">
       <DependentUpon>EditUser.vb</DependentUpon>
@@ -199,6 +211,12 @@
       <DependentUpon>UC_UserManagement.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Admin\UC_UserManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\ViewDepartmentSupply.Designer.vb">
+      <DependentUpon>ViewDepartmentSupply.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\ViewDepartmentSupply.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\frmConfig.Designer.vb">
@@ -272,8 +290,14 @@
     <EmbeddedResource Include="Forms\Admin\AddSupply.resx">
       <DependentUpon>AddSupply.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AddUserManagement.resx">
+      <DependentUpon>AddUserManagement.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\EditPropertyManagement.resx">
+      <DependentUpon>EditPropertyManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\EditUser.resx">
       <DependentUpon>EditUser.vb</DependentUpon>
@@ -301,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UC_UserManagement.resx">
       <DependentUpon>UC_UserManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\ViewDepartmentSupply.resx">
+      <DependentUpon>ViewDepartmentSupply.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmConfig.resx">
       <DependentUpon>frmConfig.vb</DependentUpon>

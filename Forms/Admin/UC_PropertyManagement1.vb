@@ -66,8 +66,8 @@ Public Class UC_PropertyManagement1
         ' Populate category filter
         pm_cbobx_categ.Items.Clear()
         pm_cbobx_categ.Items.Add("All Categories")
-        pm_cbobx_categ.Items.AddRange(New String() {"Furniture", "Equipment", "Office Supplies", "IT Equipment", 
-                                                    "Laboratory Apparatus", "Books and Publications", 
+        pm_cbobx_categ.Items.AddRange(New String() {"Furniture", "Equipment", "Office Supplies", "IT Equipment",
+                                                    "Laboratory Apparatus", "Books and Publications",
                                                     "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"})
         pm_cbobx_categ.SelectedIndex = 0
 
@@ -186,11 +186,11 @@ Public Class UC_PropertyManagement1
         Try
             propertyManagementGrid.Rows.Clear()
             Dim filteredRows = originalData.AsEnumerable().Where(Function(row)
-                Dim name As String = If(IsDBNull(row("property_name")), "", row("property_name").ToString().ToLower())
-                Dim category As String = If(IsDBNull(row("category")), "", row("category").ToString().ToLower())
-                Dim status As String = If(IsDBNull(row("status")), "", row("status").ToString().ToLower())
-                Return name.Contains(searchText) OrElse category.Contains(searchText) OrElse status.Contains(searchText)
-            End Function)
+                                                                     Dim name As String = If(IsDBNull(row("property_name")), "", row("property_name").ToString().ToLower())
+                                                                     Dim category As String = If(IsDBNull(row("category")), "", row("category").ToString().ToLower())
+                                                                     Dim status As String = If(IsDBNull(row("status")), "", row("status").ToString().ToLower())
+                                                                     Return name.Contains(searchText) OrElse category.Contains(searchText) OrElse status.Contains(searchText)
+                                                                 End Function)
 
             For Each row As DataRow In filteredRows
                 Dim warrantyExp As String = ""
@@ -228,27 +228,53 @@ Public Class UC_PropertyManagement1
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         If propertyManagementGrid.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a property to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Please select a property to edit.", "No Selection",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        Dim selectedRow As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
-        If selectedRow.Cells("propertyID").Value Is Nothing Then
-            MessageBox.Show("Invalid property selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
+        Dim row As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
 
-        Dim propertyIDStr As String = selectedRow.Cells("propertyID").Value.ToString()
+        ' Validate property ID
         Dim propertyID As Integer
-        If Not Integer.TryParse(propertyIDStr, propertyID) Then
-            MessageBox.Show("Invalid property ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        If Not Integer.TryParse(row.Cells("propertyID").Value.ToString(), propertyID) Then
+            MessageBox.Show("Invalid Property ID.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        ' Open edit form (you'll need to create UC_EditProperty or modify AddProperty to support edit mode)
-        MessageBox.Show("Edit functionality - Property ID: " & propertyID.ToString(), "Edit Property", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        ' TODO: Implement edit form
+        ' Create the EDIT USER CONTROL
+        Dim editForm As New EditPropertyManagement()
+
+        ' Load selected data into edit form
+        editForm.LoadPropertyData(
+        propertyID,
+        row.Cells("propertyName").Value.ToString(),
+        row.Cells("category").Value.ToString(),
+        row.Cells("serialNumber").Value.ToString(),
+        row.Cells("supplier").Value.ToString(),
+        row.Cells("condition_status").Value.ToString(),
+        Decimal.Parse(row.Cells("cost").Value.ToString()),
+        Date.Parse(row.Cells("datePurchased").Value.ToString()),
+        Date.Parse(row.Cells("warrantyExpiration").Value.ToString()),
+        row.Cells("assignedEmployee").Value.ToString(),
+        row.Cells("assignedDepartment").Value.ToString(),
+        row.Cells("location").Value.ToString(),
+        row.Cells("status").Value.ToString(),
+        Date.Now,          ' date created (if you have the column)
+        Date.Now           ' date updated (placeholder)
+    )
+
+        ' LOAD THE USER CONTROL TO DASHBOARD
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(editForm)
+        Else
+            MessageBox.Show("Error: Dashboard not found.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
+
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If propertyManagementGrid.SelectedRows.Count = 0 Then
