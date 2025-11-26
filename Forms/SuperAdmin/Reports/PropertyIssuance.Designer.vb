@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class txb_Name
+Partial Class PropertyIssuance
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class txb_Name
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Name = New System.Windows.Forms.Label()
+        Me.lblName = New System.Windows.Forms.Label()
         Me.txb_Department = New System.Windows.Forms.TextBox()
         Me.fundCluster = New System.Windows.Forms.Label()
         Me.EmployeeNo = New System.Windows.Forms.TextBox()
@@ -35,16 +35,16 @@ Partial Class txb_Name
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Name
+        'lblName
         '
-        Me.Name.AutoSize = True
-        Me.Name.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Name.Location = New System.Drawing.Point(381, 221)
-        Me.Name.Name = "Name"
-        Me.Name.Size = New System.Drawing.Size(47, 22)
-        Me.Name.TabIndex = 38
-        Me.Name.Text = "Name"
-        Me.Name.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblName.AutoSize = True
+        Me.lblName.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblName.Location = New System.Drawing.Point(381, 221)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(47, 22)
+        Me.lblName.TabIndex = 38
+        Me.lblName.Text = "Name"
+        Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'txb_Department
         '
@@ -127,26 +127,26 @@ Partial Class txb_Name
         Me.txtname.Size = New System.Drawing.Size(331, 22)
         Me.txtname.TabIndex = 55
         '
-        'txb_Name
+        'PropertyIssuance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1569, 942)
         Me.Controls.Add(Me.txtname)
-        Me.Controls.Add(Me.Name)
+        Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.EmployeeNo)
         Me.Controls.Add(Me.txb_Department)
         Me.Controls.Add(Me.fundCluster)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Name = "txtname"
+        Me.Name = "PropertyIssuance"
         Me.Text = "PropertyIssuance.vb"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Name As System.Windows.Forms.Label
+
     Friend WithEvents txb_Department As System.Windows.Forms.TextBox
     Friend WithEvents fundCluster As System.Windows.Forms.Label
     Friend WithEvents EmployeeNo As System.Windows.Forms.TextBox
@@ -156,4 +156,5 @@ Partial Class txb_Name
     Friend WithEvents Sign As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DateInssuance As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtname As System.Windows.Forms.TextBox
+    Friend WithEvents lblName As System.Windows.Forms.Label
 End Class

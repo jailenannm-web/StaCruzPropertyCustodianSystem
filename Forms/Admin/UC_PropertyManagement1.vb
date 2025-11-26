@@ -248,22 +248,22 @@ Public Class UC_PropertyManagement1
 
         ' Load selected data into edit form
         editForm.LoadPropertyData(
-        propertyID,
-        row.Cells("propertyName").Value.ToString(),
-        row.Cells("category").Value.ToString(),
-        row.Cells("serialNumber").Value.ToString(),
-        row.Cells("supplier").Value.ToString(),
-        row.Cells("condition_status").Value.ToString(),
-        Decimal.Parse(row.Cells("cost").Value.ToString()),
-        Date.Parse(row.Cells("datePurchased").Value.ToString()),
-        Date.Parse(row.Cells("warrantyExpiration").Value.ToString()),
-        row.Cells("assignedEmployee").Value.ToString(),
-        row.Cells("assignedDepartment").Value.ToString(),
-        row.Cells("location").Value.ToString(),
-        row.Cells("status").Value.ToString(),
-        Date.Now,          ' date created (if you have the column)
-        Date.Now           ' date updated (placeholder)
-    )
+            propertyID,
+            row.Cells("propertyName").Value.ToString(),
+            row.Cells("category").Value.ToString(),
+            row.Cells("serialNumber").Value.ToString(),
+            row.Cells("supplier").Value.ToString(),
+            row.Cells("condition_status").Value.ToString(),
+            Decimal.Parse(row.Cells("cost").Value.ToString()),
+            ParseDateCell(row.Cells("datePurchased").Value),
+            ParseDateCell(row.Cells("warrantyExpiration").Value, Date.Today.AddYears(1)),
+            row.Cells("assignedEmployee").Value.ToString(),
+            row.Cells("assignedDepartment").Value.ToString(),
+            row.Cells("location").Value.ToString(),
+            row.Cells("status").Value.ToString(),
+            ParseDateCell(GetCellValueOrNothing(row, "dateCreated"), Date.Now),
+            ParseDateCell(GetCellValueOrNothing(row, "dateUpdated"), Date.Now)
+        )
 
         ' LOAD THE USER CONTROL TO DASHBOARD
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
@@ -274,7 +274,6 @@ Public Class UC_PropertyManagement1
                         MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
-
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If propertyManagementGrid.SelectedRows.Count = 0 Then
@@ -317,5 +316,24 @@ Public Class UC_PropertyManagement1
             End Try
         End If
     End Sub
+
+    Private Function ParseDateCell(cellValue As Object, Optional fallback As Date? = Nothing) As Date
+        Dim parsed As Date
+        If cellValue IsNot Nothing Then
+            Dim stringValue As String = cellValue.ToString().Trim()
+            If Not String.IsNullOrEmpty(stringValue) AndAlso Date.TryParse(stringValue, parsed) Then
+                Return parsed
+            End If
+        End If
+
+        Return If(fallback.HasValue, fallback.Value, Date.Today)
+    End Function
+
+    Private Function GetCellValueOrNothing(row As DataGridViewRow, columnName As String) As Object
+        If propertyManagementGrid.Columns.Contains(columnName) Then
+            Return row.Cells(columnName).Value
+        End If
+        Return Nothing
+    End Function
 
 End Class

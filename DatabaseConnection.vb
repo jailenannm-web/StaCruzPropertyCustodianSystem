@@ -3291,7 +3291,8 @@ Public Class DatabaseConnection
             Dim query As New StringBuilder()
             query.Append("SELECT user_id, first_name, middle_name, last_name, suffix, position, ")
             query.Append("department_id, contact_number, email, username, user_type, status, ")
-            query.Append("employee_id, date_assigned, last_login, created_at ")
+            query.Append("employee_id, date_assigned, last_login, created_at, ")
+            query.Append("house_no_street, barangay, municipality, province_city ")
             query.Append("FROM users WHERE user_type IN ('Admin','SuperAdmin')")
 
             If Not String.IsNullOrEmpty(statusFilter) Then query.Append(" AND status = @status")
@@ -3327,6 +3328,47 @@ Public Class DatabaseConnection
         End Try
 
         Return dt
+    End Function
+
+    ''' <summary>
+    ''' Retrieve minimal admin context (id/type/username) using username stored in session.
+    ''' </summary>
+    Public Shared Function GetAdminContextByUsername(username As String) As Dictionary(Of String, String)
+        Dim context As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+        If String.IsNullOrWhiteSpace(username) Then
+            Return context
+        End If
+
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return context
+            If Not SafeOpenConnection(conn) Then Return context
+
+            Dim query As String = "SELECT user_id, username, user_type FROM users WHERE LOWER(username) = LOWER(@username) LIMIT 1"
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@username", username.Trim())
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        context("user_id") = reader("user_id").ToString()
+                        context("username") = reader("username").ToString()
+                        context("user_type") = reader("user_type").ToString()
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetAdminContextByUsername Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        Return context
     End Function
 
     ''' <summary>
