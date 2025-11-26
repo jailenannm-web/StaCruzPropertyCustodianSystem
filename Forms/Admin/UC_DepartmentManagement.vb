@@ -326,6 +326,11 @@ Public Class UC_DepartmentManagement
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            Dim addForm As New ViewDepartmentSupply()
 
+            parentDashboard.LoadUserControl(addForm)
+        End If
     End Sub
 End Class

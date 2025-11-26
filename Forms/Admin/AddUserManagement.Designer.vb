@@ -358,7 +358,7 @@ Partial Class AddUserManagement
         Me.userID.Location = New System.Drawing.Point(262, 55)
         Me.userID.MaxLength = 100
         Me.userID.Name = "userID"
-        Me.userID.Size = New System.Drawing.Size(289, 27)
+        Me.userID.Size = New System.Drawing.Size(53, 27)
         Me.userID.TabIndex = 53
         '
         'um_edituser_txtStatus

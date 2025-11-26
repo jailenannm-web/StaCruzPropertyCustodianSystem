@@ -33,6 +33,7 @@ Partial Class EditUser
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
         Me.uc_um_edituser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.suffixAdmin = New System.Windows.Forms.ComboBox()
         Me.statusAdmin = New System.Windows.Forms.ComboBox()
         Me.dateRegistered = New System.Windows.Forms.DateTimePicker()
         Me.houseNumber = New System.Windows.Forms.TextBox()
@@ -70,7 +71,6 @@ Partial Class EditUser
         Me.firstName = New System.Windows.Forms.TextBox()
         Me.um_edituser_save = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.um_edituser_backbtn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.suffixAdmin = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel1.SuspendLayout()
         Me.uc_um_edituser.SuspendLayout()
         Me.SuspendLayout()
@@ -153,6 +153,16 @@ Partial Class EditUser
         Me.uc_um_edituser.Name = "uc_um_edituser"
         Me.uc_um_edituser.Size = New System.Drawing.Size(1305, 575)
         Me.uc_um_edituser.TabIndex = 0
+        '
+        'suffixAdmin
+        '
+        Me.suffixAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.suffixAdmin.FormattingEnabled = True
+        Me.suffixAdmin.Location = New System.Drawing.Point(264, 268)
+        Me.suffixAdmin.Name = "suffixAdmin"
+        Me.suffixAdmin.Size = New System.Drawing.Size(345, 24)
+        Me.suffixAdmin.TabIndex = 71
         '
         'statusAdmin
         '
@@ -337,7 +347,7 @@ Partial Class EditUser
         Me.userID.Location = New System.Drawing.Point(262, 55)
         Me.userID.MaxLength = 100
         Me.userID.Name = "userID"
-        Me.userID.Size = New System.Drawing.Size(347, 27)
+        Me.userID.Size = New System.Drawing.Size(284, 27)
         Me.userID.TabIndex = 53
         '
         'um_edituser_txtStatus
@@ -612,16 +622,6 @@ Partial Class EditUser
         Me.um_edituser_backbtn.TabIndex = 53
         Me.um_edituser_backbtn.Text = "Back"
         Me.um_edituser_backbtn.UseVisualStyleBackColor = False
-        '
-        'suffixAdmin
-        '
-        Me.suffixAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.suffixAdmin.FormattingEnabled = True
-        Me.suffixAdmin.Location = New System.Drawing.Point(264, 268)
-        Me.suffixAdmin.Name = "suffixAdmin"
-        Me.suffixAdmin.Size = New System.Drawing.Size(345, 24)
-        Me.suffixAdmin.TabIndex = 71
         '
         'EditUser
         '
