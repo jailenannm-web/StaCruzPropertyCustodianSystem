@@ -53,6 +53,7 @@ Partial Class UC_DepartmentManagement
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnView = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -306,10 +307,27 @@ Partial Class UC_DepartmentManagement
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1163, 178)
         Me.TableLayoutPanel1.TabIndex = 15
         '
+        'btnView
+        '
+        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnView.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnView.CornerRadius = 15
+        Me.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnView.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnView.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnView.Location = New System.Drawing.Point(956, 710)
+        Me.btnView.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(121, 34)
+        Me.btnView.TabIndex = 151
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = False
+        '
         'UC_DepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.admin_deptmanagement)
@@ -355,4 +373,5 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents created_at As DataGridViewTextBoxColumn
     Friend WithEvents updated_at As DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents btnView As Resources.Controls.RoundedButton
 End Class

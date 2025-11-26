@@ -23,7 +23,7 @@ Partial Class frmReports
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblReports = New System.Windows.Forms.Label()
-        Me.btnRequestReport = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Essuance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnBorrowReturn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnRequisitionSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.SuspendLayout()
@@ -40,21 +40,21 @@ Partial Class frmReports
         Me.lblReports.TabIndex = 2
         Me.lblReports.Text = "Reports"
         '
-        'btnRequestReport
+        'Essuance
         '
-        Me.btnRequestReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnRequestReport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnRequestReport.CornerRadius = 30
-        Me.btnRequestReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRequestReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRequestReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnRequestReport.Location = New System.Drawing.Point(597, 497)
-        Me.btnRequestReport.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnRequestReport.Name = "btnRequestReport"
-        Me.btnRequestReport.Size = New System.Drawing.Size(453, 80)
-        Me.btnRequestReport.TabIndex = 5
-        Me.btnRequestReport.Text = "Request Report"
-        Me.btnRequestReport.UseVisualStyleBackColor = False
+        Me.Essuance.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Essuance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Essuance.CornerRadius = 30
+        Me.Essuance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Essuance.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Essuance.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Essuance.Location = New System.Drawing.Point(597, 497)
+        Me.Essuance.Margin = New System.Windows.Forms.Padding(4)
+        Me.Essuance.Name = "Essuance"
+        Me.Essuance.Size = New System.Drawing.Size(453, 80)
+        Me.Essuance.TabIndex = 5
+        Me.Essuance.Text = "Property Issuance Report"
+        Me.Essuance.UseVisualStyleBackColor = False
         '
         'btnBorrowReturn
         '
@@ -62,7 +62,7 @@ Partial Class frmReports
         Me.btnBorrowReturn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnBorrowReturn.CornerRadius = 30
         Me.btnBorrowReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBorrowReturn.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBorrowReturn.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBorrowReturn.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnBorrowReturn.Location = New System.Drawing.Point(597, 357)
         Me.btnBorrowReturn.Margin = New System.Windows.Forms.Padding(4)
@@ -78,7 +78,7 @@ Partial Class frmReports
         Me.btnRequisitionSlip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnRequisitionSlip.CornerRadius = 30
         Me.btnRequisitionSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRequisitionSlip.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRequisitionSlip.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRequisitionSlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnRequisitionSlip.Location = New System.Drawing.Point(595, 225)
         Me.btnRequisitionSlip.Margin = New System.Windows.Forms.Padding(4)
@@ -94,7 +94,7 @@ Partial Class frmReports
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1387, 788)
-        Me.Controls.Add(Me.btnRequestReport)
+        Me.Controls.Add(Me.Essuance)
         Me.Controls.Add(Me.btnBorrowReturn)
         Me.Controls.Add(Me.btnRequisitionSlip)
         Me.Controls.Add(Me.lblReports)
@@ -112,5 +112,5 @@ Partial Class frmReports
     Friend WithEvents lblReports As System.Windows.Forms.Label
     Friend WithEvents btnRequisitionSlip As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnBorrowReturn As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents btnRequestReport As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents Essuance As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

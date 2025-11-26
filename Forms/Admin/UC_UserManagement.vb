@@ -11,7 +11,6 @@ Public Class UC_UserManagement
     Public Sub New()
         InitializeComponent()
 
-        ' Make this UserControl automatically fill the parent panel
         Me.Dock = DockStyle.Fill
     End Sub
 
@@ -35,5 +34,18 @@ Public Class UC_UserManagement
 
     End Sub
 
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(New AddUserManagement())
+        End If
+    End Sub
+
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(New EditUser())
+        End If
+    End Sub
 
 End Class
