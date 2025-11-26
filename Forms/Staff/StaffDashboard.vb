@@ -8,65 +8,9 @@ Public Class StaffDashboard
     Private sidebarExpandedWidth As Integer = 250
     Private sidebarCollapsedWidth As Integer = 60
 
-    Private Sub tmrSidebar_Tick(sender As Object, e As EventArgs) Handles tmrSidebar.Tick
-
-        If isSidebarExpanded Then
-            ' --- COLLAPSE ---
-            pnlSidebar.Width -= 20
-
-            If pnlSidebar.Width <= sidebarCollapsedWidth Then
-                ' Stop the animation
-                pnlSidebar.Width = sidebarCollapsedWidth
-                isSidebarExpanded = False
-                tmrSidebar.Stop()
-
-                ' --- HIDE TEXT ---
-                For Each btn As Button In pnlSidebar.Controls.OfType(Of Button)()
-                    btn.Text = ""
-                    btn.ImageAlign = ContentAlignment.MiddleCenter
-                Next
-            End If
-        Else
-            ' --- EXPAND ---
-            pnlSidebar.Width += 20
-
-            If pnlSidebar.Width >= sidebarExpandedWidth Then
-                ' Stop the animation
-                pnlSidebar.Width = sidebarExpandedWidth
-                isSidebarExpanded = True
-                tmrSidebar.Stop()
-
-                ' --- SHOW TEXT ---
-                For Each btn As Button In pnlSidebar.Controls.OfType(Of Button)()
-                    If btn.Tag IsNot Nothing Then
-                        btn.Text = btn.Tag.ToString()
-                    End If
-                    btn.ImageAlign = ContentAlignment.MiddleLeft
-                Next
-            End If
-        End If
-
-    End Sub
 
     Private Sub SetActiveButton(ByVal activeBtn As Button)
-        ' Define your colors
-        Dim colorActive As Color = Color.FromArgb(70, 90, 120) ' Your lighter blue
-        Dim colorDefault As Color = Color.FromArgb(35, 40, 60) ' Your dark blue
 
-        ' --- 1. Reset ALL buttons to the default color ---
-        ' Make sure to add all your menu buttons to this list
-        ' (I'm guessing their names, update them if they are different)
-        btnDashboard.BackColor = colorDefault
-        btnProfile.BackColor = colorDefault
-        btnPropertyRequest.BackColor = colorDefault
-        btnViewInventory.BackColor = colorDefault
-        btnMyRequest.BackColor = colorDefault
-        btnBorrowedItem.BackColor = colorDefault
-        btnReports.BackColor = colorDefault
-        ' Add any other buttons you have...
-
-        ' --- 2. Set the ONE active button to the new color ---
-        activeBtn.BackColor = colorActive
     End Sub
 
     Private Sub ToggleSidebar()
@@ -250,6 +194,10 @@ Public Class StaffDashboard
     End Sub
 
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
 
     End Sub
 End Class

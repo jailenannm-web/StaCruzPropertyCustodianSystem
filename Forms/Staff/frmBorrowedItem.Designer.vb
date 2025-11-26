@@ -63,7 +63,7 @@ Partial Class frmBorrowedItem
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1178, 868)
+        Me.DataGridView1.Size = New System.Drawing.Size(1498, 868)
         Me.DataGridView1.TabIndex = 2
         '
         'PropertyName
