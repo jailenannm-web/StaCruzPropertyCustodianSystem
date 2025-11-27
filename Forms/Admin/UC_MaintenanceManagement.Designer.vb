@@ -128,90 +128,105 @@ Partial Class UC_MaintenanceManagement
         Me.MaintenanceID.HeaderText = "MaintenanceID"
         Me.MaintenanceID.MinimumWidth = 6
         Me.MaintenanceID.Name = "MaintenanceID"
+        Me.MaintenanceID.Width = 125
         '
         'PropertyID
         '
         Me.PropertyID.HeaderText = "PropertyID"
         Me.PropertyID.MinimumWidth = 6
         Me.PropertyID.Name = "PropertyID"
+        Me.PropertyID.Width = 125
         '
         'CustodianID
         '
         Me.CustodianID.HeaderText = "CustodianID"
         Me.CustodianID.MinimumWidth = 6
         Me.CustodianID.Name = "CustodianID"
+        Me.CustodianID.Width = 125
         '
         'ServiceDate
         '
         Me.ServiceDate.HeaderText = "Service Date"
         Me.ServiceDate.MinimumWidth = 6
         Me.ServiceDate.Name = "ServiceDate"
+        Me.ServiceDate.Width = 125
         '
         'ServiceType
         '
         Me.ServiceType.HeaderText = "Service Type"
         Me.ServiceType.MinimumWidth = 6
         Me.ServiceType.Name = "ServiceType"
+        Me.ServiceType.Width = 125
         '
         'Description
         '
         Me.Description.HeaderText = "Description"
         Me.Description.MinimumWidth = 6
         Me.Description.Name = "Description"
+        Me.Description.Width = 125
         '
         'ServiceProvider
         '
         Me.ServiceProvider.HeaderText = "Service Provider"
         Me.ServiceProvider.MinimumWidth = 6
         Me.ServiceProvider.Name = "ServiceProvider"
+        Me.ServiceProvider.Width = 125
         '
         'ProviderContact
         '
         Me.ProviderContact.HeaderText = "Provider Contact"
         Me.ProviderContact.MinimumWidth = 6
         Me.ProviderContact.Name = "ProviderContact"
+        Me.ProviderContact.Width = 125
         '
         'Cost
         '
         Me.Cost.HeaderText = "Cost"
         Me.Cost.MinimumWidth = 6
         Me.Cost.Name = "Cost"
+        Me.Cost.Width = 125
         '
         'NextSchedule
         '
         Me.NextSchedule.HeaderText = "Next Schedule"
         Me.NextSchedule.MinimumWidth = 6
         Me.NextSchedule.Name = "NextSchedule"
+        Me.NextSchedule.Width = 125
         '
         'WarrantyStatus
         '
         Me.WarrantyStatus.HeaderText = "Warranty Status"
         Me.WarrantyStatus.MinimumWidth = 6
         Me.WarrantyStatus.Name = "WarrantyStatus"
+        Me.WarrantyStatus.Width = 125
         '
         'TechnicianAssigned
         '
         Me.TechnicianAssigned.HeaderText = "Technician Assigned"
         Me.TechnicianAssigned.MinimumWidth = 6
         Me.TechnicianAssigned.Name = "TechnicianAssigned"
+        Me.TechnicianAssigned.Width = 125
         '
         'Status
         '
         Me.Status.HeaderText = "Status "
         Me.Status.MinimumWidth = 6
         Me.Status.Name = "Status"
+        Me.Status.Width = 125
         '
         'Remarks
         '
         Me.Remarks.HeaderText = "Remarks"
         Me.Remarks.MinimumWidth = 6
         Me.Remarks.Name = "Remarks"
+        Me.Remarks.Width = 125
         '
         'CreatedAt
         '
         Me.CreatedAt.HeaderText = "Created At"
         Me.CreatedAt.MinimumWidth = 6
         Me.CreatedAt.Name = "CreatedAt"
+        Me.CreatedAt.Width = 125
         '
         'UC_MaintenanceManagement
         '

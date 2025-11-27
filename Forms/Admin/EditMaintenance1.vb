@@ -1,7 +1,7 @@
 ﻿Imports System
 Imports System.Windows.Forms
 
-Public Class AddMaintenance1
+Public Class EditMaintenance1
     Inherits UserControl
 
     Public Sub New()

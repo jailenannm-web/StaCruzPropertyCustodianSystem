@@ -49,6 +49,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -67,7 +68,7 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_table1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.prm_table1.BackgroundColor = System.Drawing.SystemColors.ButtonFace
+        Me.prm_table1.BackgroundColor = System.Drawing.Color.White
         Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.request_id, Me.employee_id, Me.department_id, Me.property_id, Me.quantity_requested, Me.purpose, Me.requestDate, Me.status, Me.approved_by, Me.approvedDate, Me.release_date, Me.return_date, Me.remarks, Me.penalty, Me.updated_at})
         Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
@@ -75,7 +76,7 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_table1.Name = "prm_table1"
         Me.prm_table1.RowHeadersWidth = 51
         Me.prm_table1.RowTemplate.Height = 24
-        Me.prm_table1.Size = New System.Drawing.Size(1162, 485)
+        Me.prm_table1.Size = New System.Drawing.Size(1162, 573)
         Me.prm_table1.TabIndex = 34
         '
         'request_id
@@ -191,7 +192,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnApprove.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnApprove.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnApprove.Location = New System.Drawing.Point(1083, 647)
+        Me.btnApprove.Location = New System.Drawing.Point(1083, 695)
         Me.btnApprove.Margin = New System.Windows.Forms.Padding(4)
         Me.btnApprove.Name = "btnApprove"
         Me.btnApprove.Size = New System.Drawing.Size(121, 34)
@@ -207,7 +208,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnDeny.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeny.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDeny.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDeny.Location = New System.Drawing.Point(955, 646)
+        Me.btnDeny.Location = New System.Drawing.Point(955, 694)
         Me.btnDeny.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeny.Name = "btnDeny"
         Me.btnDeny.Size = New System.Drawing.Size(120, 35)
@@ -217,55 +218,71 @@ Partial Class UC_PropertyRequestManagement
         '
         'btnAdd
         '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.btnAdd.CornerRadius = 15
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(826, 648)
+        Me.btnAdd.Location = New System.Drawing.Point(1111, 70)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(121, 34)
+        Me.btnAdd.Size = New System.Drawing.Size(93, 33)
         Me.btnAdd.TabIndex = 152
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
         'btnDelete
         '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.btnDelete.CornerRadius = 15
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(700, 647)
+        Me.btnDelete.Location = New System.Drawing.Point(1010, 70)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(120, 35)
+        Me.btnDelete.Size = New System.Drawing.Size(93, 33)
         Me.btnDelete.TabIndex = 153
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
         '
         'prm_btn_update
         '
-        Me.prm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.prm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_btn_update.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.prm_btn_update.CornerRadius = 15
         Me.prm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.prm_btn_update.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.prm_btn_update.ForeColor = System.Drawing.Color.White
-        Me.prm_btn_update.Location = New System.Drawing.Point(564, 649)
+        Me.prm_btn_update.Location = New System.Drawing.Point(811, 70)
         Me.prm_btn_update.Name = "prm_btn_update"
-        Me.prm_btn_update.Size = New System.Drawing.Size(129, 33)
+        Me.prm_btn_update.Size = New System.Drawing.Size(93, 33)
         Me.prm_btn_update.TabIndex = 57
         Me.prm_btn_update.Text = "Update"
         Me.prm_btn_update.UseVisualStyleBackColor = False
+        '
+        'assign
+        '
+        Me.assign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.assign.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.assign.CornerRadius = 15
+        Me.assign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.assign.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.assign.ForeColor = System.Drawing.Color.White
+        Me.assign.Location = New System.Drawing.Point(910, 70)
+        Me.assign.Name = "assign"
+        Me.assign.Size = New System.Drawing.Size(93, 33)
+        Me.assign.TabIndex = 156
+        Me.assign.Text = "Assign"
+        Me.assign.UseVisualStyleBackColor = False
         '
         'UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.assign)
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnDeny)
         Me.Controls.Add(Me.btnAdd)
@@ -303,4 +320,5 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents remarks As DataGridViewTextBoxColumn
     Friend WithEvents penalty As DataGridViewTextBoxColumn
     Friend WithEvents updated_at As DataGridViewTextBoxColumn
+    Friend WithEvents assign As Resources.Controls.RoundedButton
 End Class

@@ -200,4 +200,8 @@ Public Class EditUser
             combo.Text = value
         End If
     End Sub
+
+    Private Sub uc_um_edituser_Paint(sender As Object, e As PaintEventArgs) Handles uc_um_edituser.Paint
+
+    End Sub
 End Class
