@@ -297,7 +297,7 @@ Partial Class AdminDashboard
         Me.admin_PanelSidebar.Location = New System.Drawing.Point(0, 0)
         Me.admin_PanelSidebar.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_PanelSidebar.Name = "admin_PanelSidebar"
-        Me.admin_PanelSidebar.Size = New System.Drawing.Size(340, 1131)
+        Me.admin_PanelSidebar.Size = New System.Drawing.Size(340, 1033)
         Me.admin_PanelSidebar.TabIndex = 1
         '
         'admin_btn_Logout
@@ -511,8 +511,6 @@ Partial Class AdminDashboard
         '
         'admin_PanelMain
         '
-        Me.admin_PanelMain.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.admin_PanelMain.AutoScroll = True
         Me.admin_PanelMain.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.admin_PanelMain.Controls.Add(Me.TableLayoutPanel4)
@@ -521,10 +519,11 @@ Partial Class AdminDashboard
         Me.admin_PanelMain.Controls.Add(Me.admin_label_Dashboard)
         Me.admin_PanelMain.Controls.Add(Me.PictureBox1)
         Me.admin_PanelMain.Controls.Add(Me.admin_txtbox_search)
-        Me.admin_PanelMain.Location = New System.Drawing.Point(340, 1)
+        Me.admin_PanelMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.admin_PanelMain.Location = New System.Drawing.Point(340, 0)
         Me.admin_PanelMain.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_PanelMain.Name = "admin_PanelMain"
-        Me.admin_PanelMain.Size = New System.Drawing.Size(1547, 1130)
+        Me.admin_PanelMain.Size = New System.Drawing.Size(1229, 1033)
         Me.admin_PanelMain.TabIndex = 3
         '
         'TableLayoutPanel4
@@ -552,7 +551,7 @@ Partial Class AdminDashboard
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1381, 852)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1066, 676)
         Me.TableLayoutPanel4.TabIndex = 60
         '
         'RoundedPanel11
@@ -564,10 +563,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel11.Controls.Add(Me.SAChart_SystemAlerts)
         Me.RoundedPanel11.Controls.Add(lblSystemAlerts)
         Me.RoundedPanel11.CornerRadius = 5
-        Me.RoundedPanel11.Location = New System.Drawing.Point(930, 578)
+        Me.RoundedPanel11.Location = New System.Drawing.Point(720, 460)
         Me.RoundedPanel11.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel11.Name = "RoundedPanel11"
-        Me.RoundedPanel11.Size = New System.Drawing.Size(441, 264)
+        Me.RoundedPanel11.Size = New System.Drawing.Size(336, 206)
         Me.RoundedPanel11.TabIndex = 70
         '
         'SAChart_SystemAlerts
@@ -589,7 +588,7 @@ Partial Class AdminDashboard
         Series1.Legend = "Legend1"
         Series1.Name = "Series1"
         Me.SAChart_SystemAlerts.Series.Add(Series1)
-        Me.SAChart_SystemAlerts.Size = New System.Drawing.Size(351, 192)
+        Me.SAChart_SystemAlerts.Size = New System.Drawing.Size(246, 131)
         Me.SAChart_SystemAlerts.TabIndex = 57
         Me.SAChart_SystemAlerts.Text = "Chart9"
         '
@@ -602,10 +601,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel13.Controls.Add(Me.SAChart_RecentPropertyRequests)
         Me.RoundedPanel13.Controls.Add(Label10)
         Me.RoundedPanel13.CornerRadius = 5
-        Me.RoundedPanel13.Location = New System.Drawing.Point(10, 578)
+        Me.RoundedPanel13.Location = New System.Drawing.Point(10, 460)
         Me.RoundedPanel13.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel13.Name = "RoundedPanel13"
-        Me.RoundedPanel13.Size = New System.Drawing.Size(440, 264)
+        Me.RoundedPanel13.Size = New System.Drawing.Size(335, 206)
         Me.RoundedPanel13.TabIndex = 69
         '
         'SAChart_RecentPropertyRequests
@@ -620,14 +619,14 @@ Partial Class AdminDashboard
         Me.SAChart_RecentPropertyRequests.ChartAreas.Add(ChartArea2)
         Legend2.Name = "Legend1"
         Me.SAChart_RecentPropertyRequests.Legends.Add(Legend2)
-        Me.SAChart_RecentPropertyRequests.Location = New System.Drawing.Point(28, 52)
+        Me.SAChart_RecentPropertyRequests.Location = New System.Drawing.Point(36, 56)
         Me.SAChart_RecentPropertyRequests.Name = "SAChart_RecentPropertyRequests"
         Series2.ChartArea = "ChartArea1"
         Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
         Series2.Legend = "Legend1"
         Series2.Name = "Series1"
         Me.SAChart_RecentPropertyRequests.Series.Add(Series2)
-        Me.SAChart_RecentPropertyRequests.Size = New System.Drawing.Size(368, 196)
+        Me.SAChart_RecentPropertyRequests.Size = New System.Drawing.Size(263, 131)
         Me.SAChart_RecentPropertyRequests.TabIndex = 54
         Me.SAChart_RecentPropertyRequests.Text = "Chart7"
         '
@@ -640,10 +639,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel7.Controls.Add(Me.SAChart_PendingRequest)
         Me.RoundedPanel7.Controls.Add(lblPendingRequest)
         Me.RoundedPanel7.CornerRadius = 5
-        Me.RoundedPanel7.Location = New System.Drawing.Point(930, 10)
+        Me.RoundedPanel7.Location = New System.Drawing.Point(720, 10)
         Me.RoundedPanel7.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel7.Name = "RoundedPanel7"
-        Me.RoundedPanel7.Size = New System.Drawing.Size(441, 264)
+        Me.RoundedPanel7.Size = New System.Drawing.Size(336, 205)
         Me.RoundedPanel7.TabIndex = 68
         '
         'SAChart_PendingRequest
@@ -666,7 +665,7 @@ Partial Class AdminDashboard
         Series3.Legend = "Legend1"
         Series3.Name = "Series1"
         Me.SAChart_PendingRequest.Series.Add(Series3)
-        Me.SAChart_PendingRequest.Size = New System.Drawing.Size(311, 198)
+        Me.SAChart_PendingRequest.Size = New System.Drawing.Size(206, 143)
         Me.SAChart_PendingRequest.TabIndex = 52
         Me.SAChart_PendingRequest.Text = "Chart3"
         '
@@ -679,10 +678,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel6.Controls.Add(Me.SAChart_TotalSupplies)
         Me.RoundedPanel6.Controls.Add(lblTotalSupplies)
         Me.RoundedPanel6.CornerRadius = 5
-        Me.RoundedPanel6.Location = New System.Drawing.Point(470, 10)
+        Me.RoundedPanel6.Location = New System.Drawing.Point(365, 10)
         Me.RoundedPanel6.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel6.Name = "RoundedPanel6"
-        Me.RoundedPanel6.Size = New System.Drawing.Size(440, 264)
+        Me.RoundedPanel6.Size = New System.Drawing.Size(335, 205)
         Me.RoundedPanel6.TabIndex = 67
         '
         'SAChart_TotalSupplies
@@ -704,7 +703,7 @@ Partial Class AdminDashboard
         Series4.Legend = "Legend1"
         Series4.Name = "Series1"
         Me.SAChart_TotalSupplies.Series.Add(Series4)
-        Me.SAChart_TotalSupplies.Size = New System.Drawing.Size(356, 198)
+        Me.SAChart_TotalSupplies.Size = New System.Drawing.Size(251, 143)
         Me.SAChart_TotalSupplies.TabIndex = 51
         Me.SAChart_TotalSupplies.Text = "Chart2"
         '
@@ -717,10 +716,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel12.Controls.Add(Me.SAChart_RequestTrends)
         Me.RoundedPanel12.Controls.Add(lblRequestTrends)
         Me.RoundedPanel12.CornerRadius = 5
-        Me.RoundedPanel12.Location = New System.Drawing.Point(470, 578)
+        Me.RoundedPanel12.Location = New System.Drawing.Point(365, 460)
         Me.RoundedPanel12.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel12.Name = "RoundedPanel12"
-        Me.RoundedPanel12.Size = New System.Drawing.Size(440, 264)
+        Me.RoundedPanel12.Size = New System.Drawing.Size(335, 206)
         Me.RoundedPanel12.TabIndex = 65
         '
         'SAChart_RequestTrends
@@ -741,7 +740,7 @@ Partial Class AdminDashboard
         Series5.Legend = "Legend1"
         Series5.Name = "Series1"
         Me.SAChart_RequestTrends.Series.Add(Series5)
-        Me.SAChart_RequestTrends.Size = New System.Drawing.Size(374, 192)
+        Me.SAChart_RequestTrends.Size = New System.Drawing.Size(269, 131)
         Me.SAChart_RequestTrends.TabIndex = 56
         Me.SAChart_RequestTrends.Text = "Chart8"
         '
@@ -754,10 +753,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel8.Controls.Add(Me.SAChart_ScheduleMaintenance)
         Me.RoundedPanel8.Controls.Add(lblScheduleMaintenance)
         Me.RoundedPanel8.CornerRadius = 5
-        Me.RoundedPanel8.Location = New System.Drawing.Point(930, 294)
+        Me.RoundedPanel8.Location = New System.Drawing.Point(720, 235)
         Me.RoundedPanel8.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel8.Name = "RoundedPanel8"
-        Me.RoundedPanel8.Size = New System.Drawing.Size(441, 264)
+        Me.RoundedPanel8.Size = New System.Drawing.Size(336, 205)
         Me.RoundedPanel8.TabIndex = 63
         '
         'SAChart_ScheduleMaintenance
@@ -780,7 +779,7 @@ Partial Class AdminDashboard
         Series6.Legend = "Legend1"
         Series6.Name = "Series1"
         Me.SAChart_ScheduleMaintenance.Series.Add(Series6)
-        Me.SAChart_ScheduleMaintenance.Size = New System.Drawing.Size(318, 203)
+        Me.SAChart_ScheduleMaintenance.Size = New System.Drawing.Size(213, 148)
         Me.SAChart_ScheduleMaintenance.TabIndex = 55
         Me.SAChart_ScheduleMaintenance.Text = "Chart6"
         '
@@ -793,10 +792,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel9.Controls.Add(Me.SAChart_PropertyConditionStatus)
         Me.RoundedPanel9.Controls.Add(lblPropertyConditionStatus)
         Me.RoundedPanel9.CornerRadius = 5
-        Me.RoundedPanel9.Location = New System.Drawing.Point(470, 294)
+        Me.RoundedPanel9.Location = New System.Drawing.Point(365, 235)
         Me.RoundedPanel9.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel9.Name = "RoundedPanel9"
-        Me.RoundedPanel9.Size = New System.Drawing.Size(440, 264)
+        Me.RoundedPanel9.Size = New System.Drawing.Size(335, 205)
         Me.RoundedPanel9.TabIndex = 62
         '
         'SAChart_PropertyConditionStatus
@@ -818,7 +817,7 @@ Partial Class AdminDashboard
         Series7.Legend = "Legend1"
         Series7.Name = "Series1"
         Me.SAChart_PropertyConditionStatus.Series.Add(Series7)
-        Me.SAChart_PropertyConditionStatus.Size = New System.Drawing.Size(356, 197)
+        Me.SAChart_PropertyConditionStatus.Size = New System.Drawing.Size(251, 142)
         Me.SAChart_PropertyConditionStatus.TabIndex = 51
         Me.SAChart_PropertyConditionStatus.Text = "Chart5"
         '
@@ -831,10 +830,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel10.Controls.Add(Me.SAChart_InventoryStatusOverview)
         Me.RoundedPanel10.Controls.Add(lblInventoryStatusOverview)
         Me.RoundedPanel10.CornerRadius = 5
-        Me.RoundedPanel10.Location = New System.Drawing.Point(10, 294)
+        Me.RoundedPanel10.Location = New System.Drawing.Point(10, 235)
         Me.RoundedPanel10.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel10.Name = "RoundedPanel10"
-        Me.RoundedPanel10.Size = New System.Drawing.Size(440, 264)
+        Me.RoundedPanel10.Size = New System.Drawing.Size(335, 205)
         Me.RoundedPanel10.TabIndex = 61
         '
         'SAChart_InventoryStatusOverview
@@ -855,7 +854,7 @@ Partial Class AdminDashboard
         Series8.Legend = "Legend1"
         Series8.Name = "Series1"
         Me.SAChart_InventoryStatusOverview.Series.Add(Series8)
-        Me.SAChart_InventoryStatusOverview.Size = New System.Drawing.Size(345, 200)
+        Me.SAChart_InventoryStatusOverview.Size = New System.Drawing.Size(240, 145)
         Me.SAChart_InventoryStatusOverview.TabIndex = 52
         Me.SAChart_InventoryStatusOverview.Text = "Chart4"
         '
@@ -871,7 +870,7 @@ Partial Class AdminDashboard
         Me.RoundedPanel5.Location = New System.Drawing.Point(10, 10)
         Me.RoundedPanel5.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel5.Name = "RoundedPanel5"
-        Me.RoundedPanel5.Size = New System.Drawing.Size(440, 264)
+        Me.RoundedPanel5.Size = New System.Drawing.Size(335, 205)
         Me.RoundedPanel5.TabIndex = 58
         '
         'SAChart_TotalProperty
@@ -892,7 +891,7 @@ Partial Class AdminDashboard
         Series9.Legend = "Legend1"
         Series9.Name = "Series1"
         Me.SAChart_TotalProperty.Series.Add(Series9)
-        Me.SAChart_TotalProperty.Size = New System.Drawing.Size(345, 198)
+        Me.SAChart_TotalProperty.Size = New System.Drawing.Size(240, 143)
         Me.SAChart_TotalProperty.TabIndex = 49
         Me.SAChart_TotalProperty.Text = "Chart1"
         '
@@ -901,9 +900,9 @@ Partial Class AdminDashboard
         Me.Panel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel3.Location = New System.Drawing.Point(81, 322)
+        Me.Panel3.Location = New System.Drawing.Point(60, 299)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1381, 1048)
+        Me.Panel3.Size = New System.Drawing.Size(1097, 696)
         Me.Panel3.TabIndex = 60
         '
         'Panel1
@@ -911,9 +910,9 @@ Partial Class AdminDashboard
         Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.TableLayoutPanel3)
-        Me.Panel1.Location = New System.Drawing.Point(81, 144)
+        Me.Panel1.Location = New System.Drawing.Point(60, 144)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1381, 140)
+        Me.Panel1.Size = New System.Drawing.Size(1095, 140)
         Me.Panel1.TabIndex = 58
         '
         'TableLayoutPanel3
@@ -934,7 +933,7 @@ Partial Class AdminDashboard
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1350, 120)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1064, 120)
         Me.TableLayoutPanel3.TabIndex = 21
         '
         'RoundedPanel2
@@ -946,10 +945,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel2.Controls.Add(Me.Label2)
         Me.RoundedPanel2.Controls.Add(Me.Label7)
         Me.RoundedPanel2.CornerRadius = 5
-        Me.RoundedPanel2.Location = New System.Drawing.Point(1014, 10)
+        Me.RoundedPanel2.Location = New System.Drawing.Point(802, 10)
         Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(326, 100)
+        Me.RoundedPanel2.Size = New System.Drawing.Size(252, 100)
         Me.RoundedPanel2.TabIndex = 24
         '
         'Label2
@@ -989,7 +988,7 @@ Partial Class AdminDashboard
         Me.RoundedPanel3.Location = New System.Drawing.Point(10, 10)
         Me.RoundedPanel3.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel3.Name = "RoundedPanel3"
-        Me.RoundedPanel3.Size = New System.Drawing.Size(339, 100)
+        Me.RoundedPanel3.Size = New System.Drawing.Size(263, 100)
         Me.RoundedPanel3.TabIndex = 23
         '
         'Label4
@@ -1026,10 +1025,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel1.Controls.Add(Me.Label6)
         Me.RoundedPanel1.Controls.Add(Me.admin_panel_borrowed)
         Me.RoundedPanel1.CornerRadius = 5
-        Me.RoundedPanel1.Location = New System.Drawing.Point(706, 10)
+        Me.RoundedPanel1.Location = New System.Drawing.Point(559, 10)
         Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(10)
         Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(288, 100)
+        Me.RoundedPanel1.Size = New System.Drawing.Size(223, 100)
         Me.RoundedPanel1.TabIndex = 23
         '
         'Label6
@@ -1066,10 +1065,10 @@ Partial Class AdminDashboard
         Me.admin_panel_PendingRequests.Controls.Add(Me.Label5)
         Me.admin_panel_PendingRequests.Controls.Add(Me.Label1)
         Me.admin_panel_PendingRequests.CornerRadius = 5
-        Me.admin_panel_PendingRequests.Location = New System.Drawing.Point(369, 10)
+        Me.admin_panel_PendingRequests.Location = New System.Drawing.Point(293, 10)
         Me.admin_panel_PendingRequests.Margin = New System.Windows.Forms.Padding(10)
         Me.admin_panel_PendingRequests.Name = "admin_panel_PendingRequests"
-        Me.admin_panel_PendingRequests.Size = New System.Drawing.Size(317, 100)
+        Me.admin_panel_PendingRequests.Size = New System.Drawing.Size(246, 100)
         Me.admin_panel_PendingRequests.TabIndex = 22
         '
         'Label5
@@ -1127,7 +1126,7 @@ Partial Class AdminDashboard
         Me.admin_txtbox_search.ForeColor = System.Drawing.Color.White
         Me.admin_txtbox_search.Location = New System.Drawing.Point(127, 95)
         Me.admin_txtbox_search.Name = "admin_txtbox_search"
-        Me.admin_txtbox_search.Size = New System.Drawing.Size(1335, 33)
+        Me.admin_txtbox_search.Size = New System.Drawing.Size(1017, 33)
         Me.admin_txtbox_search.TabIndex = 0
         Me.admin_txtbox_search.Text = "Search"
         Me.admin_txtbox_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1167,7 +1166,7 @@ Partial Class AdminDashboard
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(245, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(228, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1902, 1033)
+        Me.ClientSize = New System.Drawing.Size(1569, 1033)
         Me.Controls.Add(Me.admin_PanelMain)
         Me.Controls.Add(Me.admin_PanelSidebar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
