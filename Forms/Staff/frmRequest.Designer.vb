@@ -49,6 +49,8 @@ Partial Class frmRequest
         Me.UpdatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.btn_Cancel = New System.Windows.Forms.Button()
+        Me.btn_Request = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -207,12 +209,39 @@ Partial Class frmRequest
         Me.TextBox1.Size = New System.Drawing.Size(775, 41)
         Me.TextBox1.TabIndex = 156
         '
+        'btn_Cancel
+        '
+        Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Cancel.Location = New System.Drawing.Point(1257, 1041)
+        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Cancel.Name = "btn_Cancel"
+        Me.btn_Cancel.Size = New System.Drawing.Size(156, 52)
+        Me.btn_Cancel.TabIndex = 158
+        Me.btn_Cancel.Text = "Cancel"
+        Me.btn_Cancel.UseVisualStyleBackColor = True
+        '
+        'btn_Request
+        '
+        Me.btn_Request.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Request.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Request.ForeColor = System.Drawing.Color.White
+        Me.btn_Request.Location = New System.Drawing.Point(1431, 1041)
+        Me.btn_Request.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Request.Name = "btn_Request"
+        Me.btn_Request.Size = New System.Drawing.Size(168, 52)
+        Me.btn_Request.TabIndex = 159
+        Me.btn_Request.Text = "Add Request"
+        Me.btn_Request.UseVisualStyleBackColor = False
+        '
         'frmRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1942, 1222)
+        Me.ClientSize = New System.Drawing.Size(1942, 1121)
+        Me.Controls.Add(Me.btn_Cancel)
+        Me.Controls.Add(Me.btn_Request)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.DataGridView1)
@@ -249,4 +278,6 @@ Partial Class frmRequest
     Friend WithEvents UpdatedAt As DataGridViewTextBoxColumn
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents btn_Cancel As Button
+    Friend WithEvents btn_Request As Button
 End Class
