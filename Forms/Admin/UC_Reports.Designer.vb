@@ -127,7 +127,7 @@ Partial Class UC_Reports
         Me.admin_panelcontainer.Controls.Add(Me.TableLayoutPanel1)
         Me.admin_panelcontainer.Location = New System.Drawing.Point(63, 185)
         Me.admin_panelcontainer.Name = "admin_panelcontainer"
-        Me.admin_panelcontainer.Size = New System.Drawing.Size(1565, 290)
+        Me.admin_panelcontainer.Size = New System.Drawing.Size(1578, 290)
         Me.admin_panelcontainer.TabIndex = 38
         '
         'rpt_genbtn_StockCard
@@ -244,6 +244,8 @@ Partial Class UC_Reports
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TableLayoutPanel1.ColumnCount = 4
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
@@ -267,7 +269,7 @@ Partial Class UC_Reports
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1565, 237)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1578, 237)
         Me.TableLayoutPanel1.TabIndex = 15
         '
         'reports_requisitionSlip
@@ -284,7 +286,7 @@ Partial Class UC_Reports
         Me.reports_requisitionSlip.Location = New System.Drawing.Point(10, 10)
         Me.reports_requisitionSlip.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_requisitionSlip.Name = "reports_requisitionSlip"
-        Me.reports_requisitionSlip.Size = New System.Drawing.Size(371, 217)
+        Me.reports_requisitionSlip.Size = New System.Drawing.Size(374, 217)
         Me.reports_requisitionSlip.TabIndex = 11
         Me.reports_requisitionSlip.Text = "Requisition and Issue Slip"
         Me.reports_requisitionSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -301,10 +303,10 @@ Partial Class UC_Reports
         Me.reports_StockCard.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_StockCard.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_StockCard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_StockCard.Location = New System.Drawing.Point(1183, 10)
+        Me.reports_StockCard.Location = New System.Drawing.Point(1192, 10)
         Me.reports_StockCard.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_StockCard.Name = "reports_StockCard"
-        Me.reports_StockCard.Size = New System.Drawing.Size(372, 217)
+        Me.reports_StockCard.Size = New System.Drawing.Size(376, 217)
         Me.reports_StockCard.TabIndex = 14
         Me.reports_StockCard.Text = "Stock Card"
         Me.reports_StockCard.TextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -321,10 +323,10 @@ Partial Class UC_Reports
         Me.reports_MaintenanceRepair.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_MaintenanceRepair.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_MaintenanceRepair.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_MaintenanceRepair.Location = New System.Drawing.Point(401, 10)
+        Me.reports_MaintenanceRepair.Location = New System.Drawing.Point(404, 10)
         Me.reports_MaintenanceRepair.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_MaintenanceRepair.Name = "reports_MaintenanceRepair"
-        Me.reports_MaintenanceRepair.Size = New System.Drawing.Size(371, 217)
+        Me.reports_MaintenanceRepair.Size = New System.Drawing.Size(374, 217)
         Me.reports_MaintenanceRepair.TabIndex = 12
         Me.reports_MaintenanceRepair.Text = "Maintenance and Repair Report"
         Me.reports_MaintenanceRepair.TextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -341,10 +343,10 @@ Partial Class UC_Reports
         Me.reports_PropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_PropertyCard.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_PropertyCard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_PropertyCard.Location = New System.Drawing.Point(792, 10)
+        Me.reports_PropertyCard.Location = New System.Drawing.Point(798, 10)
         Me.reports_PropertyCard.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_PropertyCard.Name = "reports_PropertyCard"
-        Me.reports_PropertyCard.Size = New System.Drawing.Size(371, 217)
+        Me.reports_PropertyCard.Size = New System.Drawing.Size(374, 217)
         Me.reports_PropertyCard.TabIndex = 13
         Me.reports_PropertyCard.Text = "Property Card"
         Me.reports_PropertyCard.TextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -352,9 +354,7 @@ Partial Class UC_Reports
         '
         'Panel1
         '
-        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Panel1.Controls.Add(Me.rpt_genbtn_LostDamage)
         Me.Panel1.Controls.Add(Me.reports_prevbtn_LostDamage)
         Me.Panel1.Controls.Add(Me.rpt_genbtn_BorrowingReturnSlip)
@@ -366,7 +366,7 @@ Partial Class UC_Reports
         Me.Panel1.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel1.Location = New System.Drawing.Point(63, 478)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1565, 290)
+        Me.Panel1.Size = New System.Drawing.Size(1578, 290)
         Me.Panel1.TabIndex = 47
         '
         'rpt_genbtn_LostDamage
@@ -483,6 +483,8 @@ Partial Class UC_Reports
         '
         'TableLayoutPanel2
         '
+        Me.TableLayoutPanel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TableLayoutPanel2.ColumnCount = 4
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
@@ -506,7 +508,7 @@ Partial Class UC_Reports
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1565, 237)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1568, 237)
         Me.TableLayoutPanel2.TabIndex = 15
         '
         'reports_InventoryCustodianSlip
@@ -523,7 +525,7 @@ Partial Class UC_Reports
         Me.reports_InventoryCustodianSlip.Location = New System.Drawing.Point(10, 10)
         Me.reports_InventoryCustodianSlip.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_InventoryCustodianSlip.Name = "reports_InventoryCustodianSlip"
-        Me.reports_InventoryCustodianSlip.Size = New System.Drawing.Size(371, 217)
+        Me.reports_InventoryCustodianSlip.Size = New System.Drawing.Size(372, 217)
         Me.reports_InventoryCustodianSlip.TabIndex = 11
         Me.reports_InventoryCustodianSlip.Text = "Inventory Custodian Slip"
         Me.reports_InventoryCustodianSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -540,7 +542,7 @@ Partial Class UC_Reports
         Me.reports_LostDamage.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_LostDamage.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_LostDamage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_LostDamage.Location = New System.Drawing.Point(1183, 10)
+        Me.reports_LostDamage.Location = New System.Drawing.Point(1186, 10)
         Me.reports_LostDamage.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_LostDamage.Name = "reports_LostDamage"
         Me.reports_LostDamage.Size = New System.Drawing.Size(372, 217)
@@ -560,10 +562,10 @@ Partial Class UC_Reports
         Me.reports_InventorySummary.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_InventorySummary.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_InventorySummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_InventorySummary.Location = New System.Drawing.Point(401, 10)
+        Me.reports_InventorySummary.Location = New System.Drawing.Point(402, 10)
         Me.reports_InventorySummary.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_InventorySummary.Name = "reports_InventorySummary"
-        Me.reports_InventorySummary.Size = New System.Drawing.Size(371, 217)
+        Me.reports_InventorySummary.Size = New System.Drawing.Size(372, 217)
         Me.reports_InventorySummary.TabIndex = 12
         Me.reports_InventorySummary.Text = "Official Inventory Summary Report"
         Me.reports_InventorySummary.TextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -580,10 +582,10 @@ Partial Class UC_Reports
         Me.reports_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_BorrowingReturnSlip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_BorrowingReturnSlip.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_BorrowingReturnSlip.Location = New System.Drawing.Point(792, 10)
+        Me.reports_BorrowingReturnSlip.Location = New System.Drawing.Point(794, 10)
         Me.reports_BorrowingReturnSlip.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_BorrowingReturnSlip.Name = "reports_BorrowingReturnSlip"
-        Me.reports_BorrowingReturnSlip.Size = New System.Drawing.Size(371, 217)
+        Me.reports_BorrowingReturnSlip.Size = New System.Drawing.Size(372, 217)
         Me.reports_BorrowingReturnSlip.TabIndex = 13
         Me.reports_BorrowingReturnSlip.Text = "Borrowing and Return Slip Report"
         Me.reports_BorrowingReturnSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -591,9 +593,7 @@ Partial Class UC_Reports
         '
         'Panel2
         '
-        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Panel2.Controls.Add(Me.rpt_genbtn_AnnualProperty)
         Me.Panel2.Controls.Add(Me.reports_prevbtn_AnnualProperty)
         Me.Panel2.Controls.Add(Me.rpt_genbtn_DeptAllocation)
@@ -601,7 +601,7 @@ Partial Class UC_Reports
         Me.Panel2.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel2.Location = New System.Drawing.Point(63, 771)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1565, 290)
+        Me.Panel2.Size = New System.Drawing.Size(1578, 290)
         Me.Panel2.TabIndex = 48
         '
         'rpt_genbtn_AnnualProperty
@@ -683,7 +683,7 @@ Partial Class UC_Reports
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1565, 237)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1568, 237)
         Me.TableLayoutPanel3.TabIndex = 15
         '
         'reports_DepartmentAllocation
@@ -700,7 +700,7 @@ Partial Class UC_Reports
         Me.reports_DepartmentAllocation.Location = New System.Drawing.Point(10, 10)
         Me.reports_DepartmentAllocation.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_DepartmentAllocation.Name = "reports_DepartmentAllocation"
-        Me.reports_DepartmentAllocation.Size = New System.Drawing.Size(371, 217)
+        Me.reports_DepartmentAllocation.Size = New System.Drawing.Size(372, 217)
         Me.reports_DepartmentAllocation.TabIndex = 11
         Me.reports_DepartmentAllocation.Text = "Department Allocation Report"
         Me.reports_DepartmentAllocation.TextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -717,10 +717,10 @@ Partial Class UC_Reports
         Me.reports_AnnualProperty.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.reports_AnnualProperty.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.reports_AnnualProperty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_AnnualProperty.Location = New System.Drawing.Point(401, 10)
+        Me.reports_AnnualProperty.Location = New System.Drawing.Point(402, 10)
         Me.reports_AnnualProperty.Margin = New System.Windows.Forms.Padding(10)
         Me.reports_AnnualProperty.Name = "reports_AnnualProperty"
-        Me.reports_AnnualProperty.Size = New System.Drawing.Size(371, 217)
+        Me.reports_AnnualProperty.Size = New System.Drawing.Size(372, 217)
         Me.reports_AnnualProperty.TabIndex = 12
         Me.reports_AnnualProperty.Text = "Annual Property Custodian Report"
         Me.reports_AnnualProperty.TextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -738,7 +738,7 @@ Partial Class UC_Reports
         Me.Controls.Add(Me.adminreports_txtbox_search)
         Me.Controls.Add(Me.admin_label_Reports)
         Me.Name = "UC_Reports"
-        Me.Size = New System.Drawing.Size(1713, 1322)
+        Me.Size = New System.Drawing.Size(1713, 1115)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.admin_panelcontainer.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
