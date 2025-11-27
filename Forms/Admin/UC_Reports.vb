@@ -30,38 +30,58 @@ Public Class UC_Reports
     '==============================
     Private Sub reports_prevbtn_RequisitionSlip_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_RequisitionSlip.Click
         PreviewReport("Requisition and Issue Slip")
+        Dim addForm As New RequisitionIssueSlip()
+        addForm.Show()
+
+
     End Sub
 
     Private Sub reports_prevbtn_MaintenanceRepair_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_MaintenanceRepair.Click
         PreviewReport("Maintenance and Repair Report")
+        Dim addForm As New MaintenanceReport()
+        addForm.Show()
     End Sub
 
     Private Sub reports_prevbtn_PropertyCard_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_PropertyCard.Click
         PreviewReport("Property Card")
+        Dim addForm As New PropertyCard()
+        addForm.Show()
     End Sub
 
     Private Sub reports_prevbtn_InventoryCustodianSlip_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_InventoryCustodianSip.Click
         PreviewReport("Inventory Custodian Slip")
+        Dim addForm As New InventoryCustodianSlip()
+        addForm.Show()
     End Sub
 
     Private Sub reports_prevbtn_InventorySummary_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_InventorySummary.Click
         PreviewReport("Official Inventory Summary Report")
+        Dim addForm As New InventoryReport()
+        addForm.Show()
     End Sub
 
     Private Sub reports_prevbtn_BorrowingReturnSlip_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_BorrowingReturnSlip.Click
         PreviewReport("Borrowing and Return Slip")
+        Dim addForm As New BorrowingAndReturnSlip()
+        addForm.Show()
     End Sub
 
     Private Sub reports_prevbtn_LostDamage_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_LostDamage.Click
         PreviewReport("Lost/Damaged Property Certificate")
+        Dim addForm As New LostStolenDamaged()
+        addForm.Show()
     End Sub
 
     Private Sub reports_prevbtn_DeptAllocation_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_DeptAllocation.Click
         PreviewReport("Department Allocation Report")
+        Dim addForm As New DepartmentAllocation()
+        addForm.Show()
     End Sub
 
     Private Sub reports_prevbtn_AnnualProperty_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_AnnualProperty.Click
         PreviewReport("Annual Property Custodian Report")
+        Dim addForm As New AuditReport()
+        addForm.Show()
     End Sub
 
 
@@ -116,4 +136,7 @@ Public Class UC_Reports
         MsgBox("Generating: " & reportName, vbInformation)
     End Sub
 
+    Private Sub UC_Reports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

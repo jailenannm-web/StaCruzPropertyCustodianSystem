@@ -28,9 +28,6 @@ Partial Class UC_PropertyManagement1
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.propertyManagementGrid = New System.Windows.Forms.DataGridView()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.propertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.propertyName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,6 +44,9 @@ Partial Class UC_PropertyManagement1
         Me.dateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateUpdated = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -61,7 +61,7 @@ Partial Class UC_PropertyManagement1
         Me.pm_txtbox_search.ForeColor = System.Drawing.Color.White
         Me.pm_txtbox_search.Location = New System.Drawing.Point(115, 126)
         Me.pm_txtbox_search.Name = "pm_txtbox_search"
-        Me.pm_txtbox_search.Size = New System.Drawing.Size(701, 33)
+        Me.pm_txtbox_search.Size = New System.Drawing.Size(952, 33)
         Me.pm_txtbox_search.TabIndex = 43
         Me.pm_txtbox_search.Text = "Search"
         Me.pm_txtbox_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -83,7 +83,7 @@ Partial Class UC_PropertyManagement1
         Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(1085, 126)
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1336, 126)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
         Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 38)
         Me.pm_cbobx_status.TabIndex = 40
@@ -96,7 +96,7 @@ Partial Class UC_PropertyManagement1
         Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(910, 126)
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(1161, 126)
         Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
         Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 38)
         Me.pm_cbobx_categ.TabIndex = 41
@@ -124,56 +124,8 @@ Partial Class UC_PropertyManagement1
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
         Me.propertyManagementGrid.RowTemplate.Height = 24
-        Me.propertyManagementGrid.Size = New System.Drawing.Size(1163, 479)
+        Me.propertyManagementGrid.Size = New System.Drawing.Size(1414, 777)
         Me.propertyManagementGrid.TabIndex = 45
-        '
-        'btnEdit
-        '
-        Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnEdit.CornerRadius = 15
-        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(981, 690)
-        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(121, 34)
-        Me.btnEdit.TabIndex = 154
-        Me.btnEdit.Text = "Edit"
-        Me.btnEdit.UseVisualStyleBackColor = False
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
-        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1110, 689)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(121, 34)
-        Me.btnAdd.TabIndex = 152
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = False
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
-        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(853, 689)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(120, 35)
-        Me.btnDelete.TabIndex = 153
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = False
         '
         'propertyID
         '
@@ -287,6 +239,54 @@ Partial Class UC_PropertyManagement1
         Me.updatedBy.Name = "updatedBy"
         Me.updatedBy.Width = 125
         '
+        'btnEdit
+        '
+        Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnEdit.CornerRadius = 15
+        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnEdit.Location = New System.Drawing.Point(1232, 988)
+        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(121, 34)
+        Me.btnEdit.TabIndex = 154
+        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.UseVisualStyleBackColor = False
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnAdd.CornerRadius = 15
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAdd.Location = New System.Drawing.Point(1361, 987)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(121, 34)
+        Me.btnAdd.TabIndex = 152
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = False
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnDelete.CornerRadius = 15
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Location = New System.Drawing.Point(1104, 987)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(120, 35)
+        Me.btnDelete.TabIndex = 153
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = False
+        '
         'UC_PropertyManagement1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -301,7 +301,7 @@ Partial Class UC_PropertyManagement1
         Me.Controls.Add(Me.pm_cbobx_status)
         Me.Controls.Add(Me.pm_cbobx_categ)
         Me.Name = "UC_PropertyManagement1"
-        Me.Size = New System.Drawing.Size(1288, 775)
+        Me.Size = New System.Drawing.Size(1539, 1073)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

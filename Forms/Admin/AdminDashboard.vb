@@ -344,6 +344,178 @@ Public Class AdminDashboard
 
     End Sub
 
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
+
+    End Sub
+
+    Private Sub TableLayoutPanel4_Paint_1(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel4.Paint
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub TableLayoutPanel3_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel3.Paint
+
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub admin_panelcontainer_Paint(sender As Object, e As PaintEventArgs) Handles admin_panelcontainer.Paint
+
+    End Sub
+
+    Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel1.Paint
+
+    End Sub
+
+    Private Sub ContextMenuStrip1_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening
+
+    End Sub
+
+    Private Sub RoundedPanel11_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel11.Paint
+
+    End Sub
+
+    Private Sub lblSystemAlerts_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel13_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel13.Paint
+
+    End Sub
+
+    Private Sub SAChart_RecentPropertyRequests_Click(sender As Object, e As EventArgs) Handles SAChart_RecentPropertyRequests.Click
+
+    End Sub
+
+    Private Sub Label10_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel7_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel7.Paint
+
+    End Sub
+
+    Private Sub SAChart_PendingRequest_Click(sender As Object, e As EventArgs) Handles SAChart_PendingRequest.Click
+
+    End Sub
+
+    Private Sub lblPendingRequest_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel6_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel6.Paint
+
+    End Sub
+
+    Private Sub SAChart_TotalSupplies_Click(sender As Object, e As EventArgs) Handles SAChart_TotalSupplies.Click
+
+    End Sub
+
+    Private Sub lblTotalSupplies_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel12_Paint_1(sender As Object, e As PaintEventArgs) Handles RoundedPanel12.Paint
+
+    End Sub
+
+    Private Sub lblRequestTrends_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel8_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel8.Paint
+
+    End Sub
+
+    Private Sub SAChart_ScheduleMaintenance_Click(sender As Object, e As EventArgs) Handles SAChart_ScheduleMaintenance.Click
+
+    End Sub
+
+    Private Sub lblScheduleMaintenance_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel9_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel9.Paint
+
+    End Sub
+
+    Private Sub SAChart_PropertyConditionStatus_Click(sender As Object, e As EventArgs) Handles SAChart_PropertyConditionStatus.Click
+
+    End Sub
+
+    Private Sub lblPropertyConditionStatus_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel10_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel10.Paint
+
+    End Sub
+
+    Private Sub SAChart_InventoryStatusOverview_Click(sender As Object, e As EventArgs) Handles SAChart_InventoryStatusOverview.Click
+
+    End Sub
+
+    Private Sub lblInventoryStatusOverview_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel5_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel5.Paint
+
+    End Sub
+
+    Private Sub SAChart_TotalProperty_Click(sender As Object, e As EventArgs) Handles SAChart_TotalProperty.Click
+
+    End Sub
+
+    Private Sub lblTotalProperty_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedPanel2_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel2.Paint
+
+    End Sub
+
+    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+
+    End Sub
+
+    Private Sub RoundedPanel3_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel3.Paint
+
+    End Sub
+
+    Private Sub Label4_Click_1(sender As Object, e As EventArgs) Handles Label4.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub RoundedPanel1_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel1.Paint
+
+    End Sub
+
+    Private Sub admin_panel_borrowed_Click(sender As Object, e As EventArgs) Handles admin_panel_borrowed.Click
+
+    End Sub
+
+    Private Sub admin_panel_PendingRequests_Paint(sender As Object, e As PaintEventArgs) Handles admin_panel_PendingRequests.Paint
+
+    End Sub
+
+    Private Sub admin_btn_Logout_Click(sender As Object, e As EventArgs) Handles admin_btn_Logout.Click
+
+    End Sub
+
+    Private Sub admin_panel2_Paint(sender As Object, e As PaintEventArgs) Handles admin_panel2.Paint
+
+    End Sub
+
     ' Other controls (PictureBoxes, Panels, etc.) can be added similarly
 
 End Class

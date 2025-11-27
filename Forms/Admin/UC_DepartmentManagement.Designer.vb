@@ -78,7 +78,7 @@ Partial Class UC_DepartmentManagement
         Me.pm_txtbox_search.ForeColor = System.Drawing.Color.White
         Me.pm_txtbox_search.Location = New System.Drawing.Point(91, 114)
         Me.pm_txtbox_search.Name = "pm_txtbox_search"
-        Me.pm_txtbox_search.Size = New System.Drawing.Size(741, 33)
+        Me.pm_txtbox_search.Size = New System.Drawing.Size(1027, 33)
         Me.pm_txtbox_search.TabIndex = 38
         Me.pm_txtbox_search.Text = "Search"
         Me.pm_txtbox_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -100,7 +100,7 @@ Partial Class UC_DepartmentManagement
         Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(1061, 114)
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1347, 114)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
         Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 38)
         Me.pm_cbobx_status.TabIndex = 35
@@ -113,7 +113,7 @@ Partial Class UC_DepartmentManagement
         Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(886, 114)
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(1172, 114)
         Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
         Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 38)
         Me.pm_cbobx_categ.TabIndex = 36
@@ -141,7 +141,7 @@ Partial Class UC_DepartmentManagement
         Me.admin_deptmanagement.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_deptmanagement.Name = "admin_deptmanagement"
         Me.admin_deptmanagement.RowHeadersWidth = 51
-        Me.admin_deptmanagement.Size = New System.Drawing.Size(1163, 465)
+        Me.admin_deptmanagement.Size = New System.Drawing.Size(1449, 734)
         Me.admin_deptmanagement.TabIndex = 147
         '
         'department_id
@@ -257,7 +257,7 @@ Partial Class UC_DepartmentManagement
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1085, 710)
+        Me.btnAdd.Location = New System.Drawing.Point(1371, 979)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(121, 34)
@@ -273,7 +273,7 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(828, 710)
+        Me.btnDelete.Location = New System.Drawing.Point(1114, 979)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(120, 35)
@@ -304,7 +304,7 @@ Partial Class UC_DepartmentManagement
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 178.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 178.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 178.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1163, 178)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1449, 178)
         Me.TableLayoutPanel1.TabIndex = 15
         '
         'btnView
@@ -315,7 +315,7 @@ Partial Class UC_DepartmentManagement
         Me.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnView.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnView.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnView.Location = New System.Drawing.Point(956, 710)
+        Me.btnView.Location = New System.Drawing.Point(1242, 979)
         Me.btnView.Margin = New System.Windows.Forms.Padding(4)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(121, 34)
@@ -339,7 +339,7 @@ Partial Class UC_DepartmentManagement
         Me.Controls.Add(Me.pm_cbobx_categ)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "UC_DepartmentManagement"
-        Me.Size = New System.Drawing.Size(1253, 804)
+        Me.Size = New System.Drawing.Size(1539, 1073)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

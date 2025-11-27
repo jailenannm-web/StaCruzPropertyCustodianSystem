@@ -75,7 +75,7 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_table1.Name = "prm_table1"
         Me.prm_table1.RowHeadersWidth = 51
         Me.prm_table1.RowTemplate.Height = 24
-        Me.prm_table1.Size = New System.Drawing.Size(1162, 485)
+        Me.prm_table1.Size = New System.Drawing.Size(1439, 788)
         Me.prm_table1.TabIndex = 34
         '
         'request_id
@@ -191,7 +191,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnApprove.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnApprove.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnApprove.Location = New System.Drawing.Point(1083, 647)
+        Me.btnApprove.Location = New System.Drawing.Point(1360, 950)
         Me.btnApprove.Margin = New System.Windows.Forms.Padding(4)
         Me.btnApprove.Name = "btnApprove"
         Me.btnApprove.Size = New System.Drawing.Size(121, 34)
@@ -207,7 +207,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnDeny.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeny.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDeny.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDeny.Location = New System.Drawing.Point(955, 646)
+        Me.btnDeny.Location = New System.Drawing.Point(1232, 949)
         Me.btnDeny.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeny.Name = "btnDeny"
         Me.btnDeny.Size = New System.Drawing.Size(120, 35)
@@ -223,7 +223,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(826, 648)
+        Me.btnAdd.Location = New System.Drawing.Point(1103, 951)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(121, 34)
@@ -239,7 +239,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(700, 647)
+        Me.btnDelete.Location = New System.Drawing.Point(977, 950)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(120, 35)
@@ -255,7 +255,7 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.prm_btn_update.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.prm_btn_update.ForeColor = System.Drawing.Color.White
-        Me.prm_btn_update.Location = New System.Drawing.Point(564, 649)
+        Me.prm_btn_update.Location = New System.Drawing.Point(841, 952)
         Me.prm_btn_update.Name = "prm_btn_update"
         Me.prm_btn_update.Size = New System.Drawing.Size(129, 33)
         Me.prm_btn_update.TabIndex = 57
@@ -274,7 +274,7 @@ Partial Class UC_PropertyRequestManagement
         Me.Controls.Add(Me.prm_table1)
         Me.Controls.Add(Me.admin_label_PropertyRequestManagement)
         Me.Name = "UC_PropertyRequestManagement"
-        Me.Size = New System.Drawing.Size(1262, 770)
+        Me.Size = New System.Drawing.Size(1539, 1073)
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
