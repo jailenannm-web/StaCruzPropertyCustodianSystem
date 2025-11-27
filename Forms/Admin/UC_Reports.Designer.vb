@@ -29,33 +29,11 @@ Partial Class UC_Reports
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_Reports))
         Me.admin_label_Reports = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.adminreports_txtbox_search = New System.Windows.Forms.TextBox()
         Me.admin_panelcontainer = New System.Windows.Forms.Panel()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.rpt_genbtn_AnnualProperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_prevbtn_AnnualProperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.rpt_genbtn_DeptAllocation = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_prevbtn_DeptAllocation = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_DepartmentAllocation = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_AnnualProperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.rpt_genbtn_LostDamage = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_prevbtn_LostDamage = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.rpt_genbtn_BorrowingReturnSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_prevbtn_BorrowingReturnSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.rpt_genbtn_InventorySummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_prevbtn_InventorySummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.rpt_genbtn_InventoryCustodianSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_prevbtn_InventoryCustodianSip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_InventoryCustodianSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_LostDamage = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_InventorySummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.reports_BorrowingReturnSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.rpt_genbtn_StockCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.reports_prevbtn_StockCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.rpt_genbtn_PropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -64,10 +42,33 @@ Partial Class UC_Reports
         Me.reports_prevbtn_MaintenanceRepair = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.rpt_genbtn_RequisitionSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.reports_prevbtn_RequisitionSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.reports_requisitionSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.reports_StockCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.reports_MaintenanceRepair = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.reports_PropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.rpt_genbtn_LostDamage = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_prevbtn_LostDamage = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.rpt_genbtn_BorrowingReturnSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_prevbtn_BorrowingReturnSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.rpt_genbtn_InventorySummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_prevbtn_InventorySummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.rpt_genbtn_InventoryCustodianSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_prevbtn_InventoryCustodianSip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.reports_InventoryCustodianSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_LostDamage = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_InventorySummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_BorrowingReturnSlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.rpt_genbtn_AnnualProperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_prevbtn_AnnualProperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.rpt_genbtn_DeptAllocation = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_prevbtn_DeptAllocation = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.reports_DepartmentAllocation = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.reports_AnnualProperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.admin_panelcontainer.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -89,7 +90,7 @@ Partial Class UC_Reports
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(59, 120)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
@@ -128,410 +129,6 @@ Partial Class UC_Reports
         Me.admin_panelcontainer.Name = "admin_panelcontainer"
         Me.admin_panelcontainer.Size = New System.Drawing.Size(1565, 290)
         Me.admin_panelcontainer.TabIndex = 38
-        '
-        'TableLayoutPanel1
-        '
-        Me.TableLayoutPanel1.ColumnCount = 4
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.reports_requisitionSlip, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.reports_StockCard, 3, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.reports_MaintenanceRepair, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.reports_PropertyCard, 2, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 10)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(10)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1565, 237)
-        Me.TableLayoutPanel1.TabIndex = 15
-        '
-        'Panel1
-        '
-        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.Controls.Add(Me.rpt_genbtn_LostDamage)
-        Me.Panel1.Controls.Add(Me.reports_prevbtn_LostDamage)
-        Me.Panel1.Controls.Add(Me.rpt_genbtn_BorrowingReturnSlip)
-        Me.Panel1.Controls.Add(Me.reports_prevbtn_BorrowingReturnSlip)
-        Me.Panel1.Controls.Add(Me.rpt_genbtn_InventorySummary)
-        Me.Panel1.Controls.Add(Me.reports_prevbtn_InventorySummary)
-        Me.Panel1.Controls.Add(Me.rpt_genbtn_InventoryCustodianSlip)
-        Me.Panel1.Controls.Add(Me.reports_prevbtn_InventoryCustodianSip)
-        Me.Panel1.Controls.Add(Me.TableLayoutPanel2)
-        Me.Panel1.Location = New System.Drawing.Point(63, 478)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1565, 290)
-        Me.Panel1.TabIndex = 47
-        '
-        'TableLayoutPanel2
-        '
-        Me.TableLayoutPanel2.ColumnCount = 4
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.reports_InventoryCustodianSlip, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.reports_LostDamage, 3, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.reports_InventorySummary, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.reports_BorrowingReturnSlip, 2, 0)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 10)
-        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(10)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 1
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1565, 237)
-        Me.TableLayoutPanel2.TabIndex = 15
-        '
-        'Panel2
-        '
-        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel2.Controls.Add(Me.rpt_genbtn_AnnualProperty)
-        Me.Panel2.Controls.Add(Me.reports_prevbtn_AnnualProperty)
-        Me.Panel2.Controls.Add(Me.rpt_genbtn_DeptAllocation)
-        Me.Panel2.Controls.Add(Me.reports_prevbtn_DeptAllocation)
-        Me.Panel2.Controls.Add(Me.TableLayoutPanel3)
-        Me.Panel2.Location = New System.Drawing.Point(63, 771)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1565, 290)
-        Me.Panel2.TabIndex = 48
-        '
-        'TableLayoutPanel3
-        '
-        Me.TableLayoutPanel3.ColumnCount = 4
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.reports_DepartmentAllocation, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.reports_AnnualProperty, 1, 0)
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 10)
-        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(10)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RowCount = 1
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1565, 237)
-        Me.TableLayoutPanel3.TabIndex = 15
-        '
-        'rpt_genbtn_AnnualProperty
-        '
-        Me.rpt_genbtn_AnnualProperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.rpt_genbtn_AnnualProperty.CornerRadius = 15
-        Me.rpt_genbtn_AnnualProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rpt_genbtn_AnnualProperty.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rpt_genbtn_AnnualProperty.ForeColor = System.Drawing.Color.White
-        Me.rpt_genbtn_AnnualProperty.Location = New System.Drawing.Point(673, 250)
-        Me.rpt_genbtn_AnnualProperty.Name = "rpt_genbtn_AnnualProperty"
-        Me.rpt_genbtn_AnnualProperty.Size = New System.Drawing.Size(99, 37)
-        Me.rpt_genbtn_AnnualProperty.TabIndex = 42
-        Me.rpt_genbtn_AnnualProperty.Text = "Generate"
-        Me.rpt_genbtn_AnnualProperty.UseVisualStyleBackColor = False
-        '
-        'reports_prevbtn_AnnualProperty
-        '
-        Me.reports_prevbtn_AnnualProperty.BackColor = System.Drawing.Color.White
-        Me.reports_prevbtn_AnnualProperty.CornerRadius = 15
-        Me.reports_prevbtn_AnnualProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_prevbtn_AnnualProperty.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_prevbtn_AnnualProperty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.reports_prevbtn_AnnualProperty.Location = New System.Drawing.Point(568, 250)
-        Me.reports_prevbtn_AnnualProperty.Name = "reports_prevbtn_AnnualProperty"
-        Me.reports_prevbtn_AnnualProperty.Size = New System.Drawing.Size(99, 37)
-        Me.reports_prevbtn_AnnualProperty.TabIndex = 41
-        Me.reports_prevbtn_AnnualProperty.Text = "Preview"
-        Me.reports_prevbtn_AnnualProperty.UseVisualStyleBackColor = False
-        '
-        'rpt_genbtn_DeptAllocation
-        '
-        Me.rpt_genbtn_DeptAllocation.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.rpt_genbtn_DeptAllocation.CornerRadius = 15
-        Me.rpt_genbtn_DeptAllocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rpt_genbtn_DeptAllocation.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rpt_genbtn_DeptAllocation.ForeColor = System.Drawing.Color.White
-        Me.rpt_genbtn_DeptAllocation.Location = New System.Drawing.Point(285, 250)
-        Me.rpt_genbtn_DeptAllocation.Name = "rpt_genbtn_DeptAllocation"
-        Me.rpt_genbtn_DeptAllocation.Size = New System.Drawing.Size(99, 37)
-        Me.rpt_genbtn_DeptAllocation.TabIndex = 40
-        Me.rpt_genbtn_DeptAllocation.Text = "Generate"
-        Me.rpt_genbtn_DeptAllocation.UseVisualStyleBackColor = False
-        '
-        'reports_prevbtn_DeptAllocation
-        '
-        Me.reports_prevbtn_DeptAllocation.BackColor = System.Drawing.Color.White
-        Me.reports_prevbtn_DeptAllocation.CornerRadius = 15
-        Me.reports_prevbtn_DeptAllocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_prevbtn_DeptAllocation.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_prevbtn_DeptAllocation.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.reports_prevbtn_DeptAllocation.Location = New System.Drawing.Point(180, 250)
-        Me.reports_prevbtn_DeptAllocation.Name = "reports_prevbtn_DeptAllocation"
-        Me.reports_prevbtn_DeptAllocation.Size = New System.Drawing.Size(99, 37)
-        Me.reports_prevbtn_DeptAllocation.TabIndex = 39
-        Me.reports_prevbtn_DeptAllocation.Text = "Preview"
-        Me.reports_prevbtn_DeptAllocation.UseVisualStyleBackColor = False
-        '
-        'reports_DepartmentAllocation
-        '
-        Me.reports_DepartmentAllocation.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.reports_DepartmentAllocation.CornerRadius = 5
-        Me.reports_DepartmentAllocation.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.reports_DepartmentAllocation.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.reports_DepartmentAllocation.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.reports_DepartmentAllocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_DepartmentAllocation.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_DepartmentAllocation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.reports_DepartmentAllocation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_DepartmentAllocation.Location = New System.Drawing.Point(10, 10)
-        Me.reports_DepartmentAllocation.Margin = New System.Windows.Forms.Padding(10)
-        Me.reports_DepartmentAllocation.Name = "reports_DepartmentAllocation"
-        Me.reports_DepartmentAllocation.Size = New System.Drawing.Size(371, 217)
-        Me.reports_DepartmentAllocation.TabIndex = 11
-        Me.reports_DepartmentAllocation.Text = "Department Allocation Report"
-        Me.reports_DepartmentAllocation.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.reports_DepartmentAllocation.UseVisualStyleBackColor = False
-        '
-        'reports_AnnualProperty
-        '
-        Me.reports_AnnualProperty.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.reports_AnnualProperty.CornerRadius = 5
-        Me.reports_AnnualProperty.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.reports_AnnualProperty.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.reports_AnnualProperty.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.reports_AnnualProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_AnnualProperty.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_AnnualProperty.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.reports_AnnualProperty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_AnnualProperty.Location = New System.Drawing.Point(401, 10)
-        Me.reports_AnnualProperty.Margin = New System.Windows.Forms.Padding(10)
-        Me.reports_AnnualProperty.Name = "reports_AnnualProperty"
-        Me.reports_AnnualProperty.Size = New System.Drawing.Size(371, 217)
-        Me.reports_AnnualProperty.TabIndex = 12
-        Me.reports_AnnualProperty.Text = "Annual Property Custodian Report"
-        Me.reports_AnnualProperty.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.reports_AnnualProperty.UseVisualStyleBackColor = False
-        '
-        'rpt_genbtn_LostDamage
-        '
-        Me.rpt_genbtn_LostDamage.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.rpt_genbtn_LostDamage.CornerRadius = 15
-        Me.rpt_genbtn_LostDamage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rpt_genbtn_LostDamage.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rpt_genbtn_LostDamage.ForeColor = System.Drawing.Color.White
-        Me.rpt_genbtn_LostDamage.Location = New System.Drawing.Point(1456, 250)
-        Me.rpt_genbtn_LostDamage.Name = "rpt_genbtn_LostDamage"
-        Me.rpt_genbtn_LostDamage.Size = New System.Drawing.Size(99, 37)
-        Me.rpt_genbtn_LostDamage.TabIndex = 46
-        Me.rpt_genbtn_LostDamage.Text = "Generate"
-        Me.rpt_genbtn_LostDamage.UseVisualStyleBackColor = False
-        '
-        'reports_prevbtn_LostDamage
-        '
-        Me.reports_prevbtn_LostDamage.BackColor = System.Drawing.Color.White
-        Me.reports_prevbtn_LostDamage.CornerRadius = 15
-        Me.reports_prevbtn_LostDamage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_prevbtn_LostDamage.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_prevbtn_LostDamage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.reports_prevbtn_LostDamage.Location = New System.Drawing.Point(1351, 250)
-        Me.reports_prevbtn_LostDamage.Name = "reports_prevbtn_LostDamage"
-        Me.reports_prevbtn_LostDamage.Size = New System.Drawing.Size(99, 37)
-        Me.reports_prevbtn_LostDamage.TabIndex = 45
-        Me.reports_prevbtn_LostDamage.Text = "Preview"
-        Me.reports_prevbtn_LostDamage.UseVisualStyleBackColor = False
-        '
-        'rpt_genbtn_BorrowingReturnSlip
-        '
-        Me.rpt_genbtn_BorrowingReturnSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.rpt_genbtn_BorrowingReturnSlip.CornerRadius = 15
-        Me.rpt_genbtn_BorrowingReturnSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rpt_genbtn_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rpt_genbtn_BorrowingReturnSlip.ForeColor = System.Drawing.Color.White
-        Me.rpt_genbtn_BorrowingReturnSlip.Location = New System.Drawing.Point(1064, 250)
-        Me.rpt_genbtn_BorrowingReturnSlip.Name = "rpt_genbtn_BorrowingReturnSlip"
-        Me.rpt_genbtn_BorrowingReturnSlip.Size = New System.Drawing.Size(99, 37)
-        Me.rpt_genbtn_BorrowingReturnSlip.TabIndex = 44
-        Me.rpt_genbtn_BorrowingReturnSlip.Text = "Generate"
-        Me.rpt_genbtn_BorrowingReturnSlip.UseVisualStyleBackColor = False
-        '
-        'reports_prevbtn_BorrowingReturnSlip
-        '
-        Me.reports_prevbtn_BorrowingReturnSlip.BackColor = System.Drawing.Color.White
-        Me.reports_prevbtn_BorrowingReturnSlip.CornerRadius = 15
-        Me.reports_prevbtn_BorrowingReturnSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_prevbtn_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_prevbtn_BorrowingReturnSlip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.reports_prevbtn_BorrowingReturnSlip.Location = New System.Drawing.Point(959, 250)
-        Me.reports_prevbtn_BorrowingReturnSlip.Name = "reports_prevbtn_BorrowingReturnSlip"
-        Me.reports_prevbtn_BorrowingReturnSlip.Size = New System.Drawing.Size(99, 37)
-        Me.reports_prevbtn_BorrowingReturnSlip.TabIndex = 43
-        Me.reports_prevbtn_BorrowingReturnSlip.Text = "Preview"
-        Me.reports_prevbtn_BorrowingReturnSlip.UseVisualStyleBackColor = False
-        '
-        'rpt_genbtn_InventorySummary
-        '
-        Me.rpt_genbtn_InventorySummary.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.rpt_genbtn_InventorySummary.CornerRadius = 15
-        Me.rpt_genbtn_InventorySummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rpt_genbtn_InventorySummary.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rpt_genbtn_InventorySummary.ForeColor = System.Drawing.Color.White
-        Me.rpt_genbtn_InventorySummary.Location = New System.Drawing.Point(673, 250)
-        Me.rpt_genbtn_InventorySummary.Name = "rpt_genbtn_InventorySummary"
-        Me.rpt_genbtn_InventorySummary.Size = New System.Drawing.Size(99, 37)
-        Me.rpt_genbtn_InventorySummary.TabIndex = 42
-        Me.rpt_genbtn_InventorySummary.Text = "Generate"
-        Me.rpt_genbtn_InventorySummary.UseVisualStyleBackColor = False
-        '
-        'reports_prevbtn_InventorySummary
-        '
-        Me.reports_prevbtn_InventorySummary.BackColor = System.Drawing.Color.White
-        Me.reports_prevbtn_InventorySummary.CornerRadius = 15
-        Me.reports_prevbtn_InventorySummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_prevbtn_InventorySummary.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_prevbtn_InventorySummary.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.reports_prevbtn_InventorySummary.Location = New System.Drawing.Point(568, 250)
-        Me.reports_prevbtn_InventorySummary.Name = "reports_prevbtn_InventorySummary"
-        Me.reports_prevbtn_InventorySummary.Size = New System.Drawing.Size(99, 37)
-        Me.reports_prevbtn_InventorySummary.TabIndex = 41
-        Me.reports_prevbtn_InventorySummary.Text = "Preview"
-        Me.reports_prevbtn_InventorySummary.UseVisualStyleBackColor = False
-        '
-        'rpt_genbtn_InventoryCustodianSlip
-        '
-        Me.rpt_genbtn_InventoryCustodianSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.rpt_genbtn_InventoryCustodianSlip.CornerRadius = 15
-        Me.rpt_genbtn_InventoryCustodianSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rpt_genbtn_InventoryCustodianSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rpt_genbtn_InventoryCustodianSlip.ForeColor = System.Drawing.Color.White
-        Me.rpt_genbtn_InventoryCustodianSlip.Location = New System.Drawing.Point(282, 250)
-        Me.rpt_genbtn_InventoryCustodianSlip.Name = "rpt_genbtn_InventoryCustodianSlip"
-        Me.rpt_genbtn_InventoryCustodianSlip.Size = New System.Drawing.Size(99, 37)
-        Me.rpt_genbtn_InventoryCustodianSlip.TabIndex = 40
-        Me.rpt_genbtn_InventoryCustodianSlip.Text = "Generate"
-        Me.rpt_genbtn_InventoryCustodianSlip.UseVisualStyleBackColor = False
-        '
-        'reports_prevbtn_InventoryCustodianSip
-        '
-        Me.reports_prevbtn_InventoryCustodianSip.BackColor = System.Drawing.Color.White
-        Me.reports_prevbtn_InventoryCustodianSip.CornerRadius = 15
-        Me.reports_prevbtn_InventoryCustodianSip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_prevbtn_InventoryCustodianSip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_prevbtn_InventoryCustodianSip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.reports_prevbtn_InventoryCustodianSip.Location = New System.Drawing.Point(177, 250)
-        Me.reports_prevbtn_InventoryCustodianSip.Name = "reports_prevbtn_InventoryCustodianSip"
-        Me.reports_prevbtn_InventoryCustodianSip.Size = New System.Drawing.Size(99, 37)
-        Me.reports_prevbtn_InventoryCustodianSip.TabIndex = 39
-        Me.reports_prevbtn_InventoryCustodianSip.Text = "Preview"
-        Me.reports_prevbtn_InventoryCustodianSip.UseVisualStyleBackColor = False
-        '
-        'reports_InventoryCustodianSlip
-        '
-        Me.reports_InventoryCustodianSlip.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.reports_InventoryCustodianSlip.CornerRadius = 5
-        Me.reports_InventoryCustodianSlip.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.reports_InventoryCustodianSlip.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.reports_InventoryCustodianSlip.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.reports_InventoryCustodianSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_InventoryCustodianSlip.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_InventoryCustodianSlip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.reports_InventoryCustodianSlip.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_InventoryCustodianSlip.Location = New System.Drawing.Point(10, 10)
-        Me.reports_InventoryCustodianSlip.Margin = New System.Windows.Forms.Padding(10)
-        Me.reports_InventoryCustodianSlip.Name = "reports_InventoryCustodianSlip"
-        Me.reports_InventoryCustodianSlip.Size = New System.Drawing.Size(371, 217)
-        Me.reports_InventoryCustodianSlip.TabIndex = 11
-        Me.reports_InventoryCustodianSlip.Text = "Inventory Custodian Slip"
-        Me.reports_InventoryCustodianSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.reports_InventoryCustodianSlip.UseVisualStyleBackColor = False
-        '
-        'reports_LostDamage
-        '
-        Me.reports_LostDamage.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.reports_LostDamage.CornerRadius = 5
-        Me.reports_LostDamage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.reports_LostDamage.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.reports_LostDamage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.reports_LostDamage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_LostDamage.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_LostDamage.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.reports_LostDamage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_LostDamage.Location = New System.Drawing.Point(1183, 10)
-        Me.reports_LostDamage.Margin = New System.Windows.Forms.Padding(10)
-        Me.reports_LostDamage.Name = "reports_LostDamage"
-        Me.reports_LostDamage.Size = New System.Drawing.Size(372, 217)
-        Me.reports_LostDamage.TabIndex = 14
-        Me.reports_LostDamage.Text = "Lost/Damaged Property Certificate"
-        Me.reports_LostDamage.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.reports_LostDamage.UseVisualStyleBackColor = False
-        '
-        'reports_InventorySummary
-        '
-        Me.reports_InventorySummary.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.reports_InventorySummary.CornerRadius = 5
-        Me.reports_InventorySummary.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.reports_InventorySummary.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.reports_InventorySummary.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.reports_InventorySummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_InventorySummary.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_InventorySummary.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.reports_InventorySummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_InventorySummary.Location = New System.Drawing.Point(401, 10)
-        Me.reports_InventorySummary.Margin = New System.Windows.Forms.Padding(10)
-        Me.reports_InventorySummary.Name = "reports_InventorySummary"
-        Me.reports_InventorySummary.Size = New System.Drawing.Size(371, 217)
-        Me.reports_InventorySummary.TabIndex = 12
-        Me.reports_InventorySummary.Text = "Official Inventory Summary Report"
-        Me.reports_InventorySummary.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.reports_InventorySummary.UseVisualStyleBackColor = False
-        '
-        'reports_BorrowingReturnSlip
-        '
-        Me.reports_BorrowingReturnSlip.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.reports_BorrowingReturnSlip.CornerRadius = 5
-        Me.reports_BorrowingReturnSlip.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.reports_BorrowingReturnSlip.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.reports_BorrowingReturnSlip.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.reports_BorrowingReturnSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.reports_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reports_BorrowingReturnSlip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.reports_BorrowingReturnSlip.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.reports_BorrowingReturnSlip.Location = New System.Drawing.Point(792, 10)
-        Me.reports_BorrowingReturnSlip.Margin = New System.Windows.Forms.Padding(10)
-        Me.reports_BorrowingReturnSlip.Name = "reports_BorrowingReturnSlip"
-        Me.reports_BorrowingReturnSlip.Size = New System.Drawing.Size(371, 217)
-        Me.reports_BorrowingReturnSlip.TabIndex = 13
-        Me.reports_BorrowingReturnSlip.Text = "Borrowing and Return Slip Report"
-        Me.reports_BorrowingReturnSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.reports_BorrowingReturnSlip.UseVisualStyleBackColor = False
         '
         'rpt_genbtn_StockCard
         '
@@ -645,6 +242,34 @@ Partial Class UC_Reports
         Me.reports_prevbtn_RequisitionSlip.Text = "Preview"
         Me.reports_prevbtn_RequisitionSlip.UseVisualStyleBackColor = False
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 4
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.reports_requisitionSlip, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.reports_StockCard, 3, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.reports_MaintenanceRepair, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.reports_PropertyCard, 2, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 10)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(10)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1565, 237)
+        Me.TableLayoutPanel1.TabIndex = 15
+        '
         'reports_requisitionSlip
         '
         Me.reports_requisitionSlip.BackColor = System.Drawing.SystemColors.ButtonFace
@@ -725,10 +350,387 @@ Partial Class UC_Reports
         Me.reports_PropertyCard.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.reports_PropertyCard.UseVisualStyleBackColor = False
         '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.rpt_genbtn_LostDamage)
+        Me.Panel1.Controls.Add(Me.reports_prevbtn_LostDamage)
+        Me.Panel1.Controls.Add(Me.rpt_genbtn_BorrowingReturnSlip)
+        Me.Panel1.Controls.Add(Me.reports_prevbtn_BorrowingReturnSlip)
+        Me.Panel1.Controls.Add(Me.rpt_genbtn_InventorySummary)
+        Me.Panel1.Controls.Add(Me.reports_prevbtn_InventorySummary)
+        Me.Panel1.Controls.Add(Me.rpt_genbtn_InventoryCustodianSlip)
+        Me.Panel1.Controls.Add(Me.reports_prevbtn_InventoryCustodianSip)
+        Me.Panel1.Controls.Add(Me.TableLayoutPanel2)
+        Me.Panel1.Location = New System.Drawing.Point(63, 478)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1565, 290)
+        Me.Panel1.TabIndex = 47
+        '
+        'rpt_genbtn_LostDamage
+        '
+        Me.rpt_genbtn_LostDamage.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_LostDamage.CornerRadius = 15
+        Me.rpt_genbtn_LostDamage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rpt_genbtn_LostDamage.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rpt_genbtn_LostDamage.ForeColor = System.Drawing.Color.White
+        Me.rpt_genbtn_LostDamage.Location = New System.Drawing.Point(1456, 250)
+        Me.rpt_genbtn_LostDamage.Name = "rpt_genbtn_LostDamage"
+        Me.rpt_genbtn_LostDamage.Size = New System.Drawing.Size(99, 37)
+        Me.rpt_genbtn_LostDamage.TabIndex = 46
+        Me.rpt_genbtn_LostDamage.Text = "Generate"
+        Me.rpt_genbtn_LostDamage.UseVisualStyleBackColor = False
+        '
+        'reports_prevbtn_LostDamage
+        '
+        Me.reports_prevbtn_LostDamage.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_LostDamage.CornerRadius = 15
+        Me.reports_prevbtn_LostDamage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_prevbtn_LostDamage.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_prevbtn_LostDamage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_prevbtn_LostDamage.Location = New System.Drawing.Point(1351, 250)
+        Me.reports_prevbtn_LostDamage.Name = "reports_prevbtn_LostDamage"
+        Me.reports_prevbtn_LostDamage.Size = New System.Drawing.Size(99, 37)
+        Me.reports_prevbtn_LostDamage.TabIndex = 45
+        Me.reports_prevbtn_LostDamage.Text = "Preview"
+        Me.reports_prevbtn_LostDamage.UseVisualStyleBackColor = False
+        '
+        'rpt_genbtn_BorrowingReturnSlip
+        '
+        Me.rpt_genbtn_BorrowingReturnSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_BorrowingReturnSlip.CornerRadius = 15
+        Me.rpt_genbtn_BorrowingReturnSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rpt_genbtn_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rpt_genbtn_BorrowingReturnSlip.ForeColor = System.Drawing.Color.White
+        Me.rpt_genbtn_BorrowingReturnSlip.Location = New System.Drawing.Point(1064, 250)
+        Me.rpt_genbtn_BorrowingReturnSlip.Name = "rpt_genbtn_BorrowingReturnSlip"
+        Me.rpt_genbtn_BorrowingReturnSlip.Size = New System.Drawing.Size(99, 37)
+        Me.rpt_genbtn_BorrowingReturnSlip.TabIndex = 44
+        Me.rpt_genbtn_BorrowingReturnSlip.Text = "Generate"
+        Me.rpt_genbtn_BorrowingReturnSlip.UseVisualStyleBackColor = False
+        '
+        'reports_prevbtn_BorrowingReturnSlip
+        '
+        Me.reports_prevbtn_BorrowingReturnSlip.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_BorrowingReturnSlip.CornerRadius = 15
+        Me.reports_prevbtn_BorrowingReturnSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_prevbtn_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_prevbtn_BorrowingReturnSlip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_prevbtn_BorrowingReturnSlip.Location = New System.Drawing.Point(959, 250)
+        Me.reports_prevbtn_BorrowingReturnSlip.Name = "reports_prevbtn_BorrowingReturnSlip"
+        Me.reports_prevbtn_BorrowingReturnSlip.Size = New System.Drawing.Size(99, 37)
+        Me.reports_prevbtn_BorrowingReturnSlip.TabIndex = 43
+        Me.reports_prevbtn_BorrowingReturnSlip.Text = "Preview"
+        Me.reports_prevbtn_BorrowingReturnSlip.UseVisualStyleBackColor = False
+        '
+        'rpt_genbtn_InventorySummary
+        '
+        Me.rpt_genbtn_InventorySummary.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_InventorySummary.CornerRadius = 15
+        Me.rpt_genbtn_InventorySummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rpt_genbtn_InventorySummary.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rpt_genbtn_InventorySummary.ForeColor = System.Drawing.Color.White
+        Me.rpt_genbtn_InventorySummary.Location = New System.Drawing.Point(673, 250)
+        Me.rpt_genbtn_InventorySummary.Name = "rpt_genbtn_InventorySummary"
+        Me.rpt_genbtn_InventorySummary.Size = New System.Drawing.Size(99, 37)
+        Me.rpt_genbtn_InventorySummary.TabIndex = 42
+        Me.rpt_genbtn_InventorySummary.Text = "Generate"
+        Me.rpt_genbtn_InventorySummary.UseVisualStyleBackColor = False
+        '
+        'reports_prevbtn_InventorySummary
+        '
+        Me.reports_prevbtn_InventorySummary.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_InventorySummary.CornerRadius = 15
+        Me.reports_prevbtn_InventorySummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_prevbtn_InventorySummary.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_prevbtn_InventorySummary.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_prevbtn_InventorySummary.Location = New System.Drawing.Point(568, 250)
+        Me.reports_prevbtn_InventorySummary.Name = "reports_prevbtn_InventorySummary"
+        Me.reports_prevbtn_InventorySummary.Size = New System.Drawing.Size(99, 37)
+        Me.reports_prevbtn_InventorySummary.TabIndex = 41
+        Me.reports_prevbtn_InventorySummary.Text = "Preview"
+        Me.reports_prevbtn_InventorySummary.UseVisualStyleBackColor = False
+        '
+        'rpt_genbtn_InventoryCustodianSlip
+        '
+        Me.rpt_genbtn_InventoryCustodianSlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_InventoryCustodianSlip.CornerRadius = 15
+        Me.rpt_genbtn_InventoryCustodianSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rpt_genbtn_InventoryCustodianSlip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rpt_genbtn_InventoryCustodianSlip.ForeColor = System.Drawing.Color.White
+        Me.rpt_genbtn_InventoryCustodianSlip.Location = New System.Drawing.Point(282, 250)
+        Me.rpt_genbtn_InventoryCustodianSlip.Name = "rpt_genbtn_InventoryCustodianSlip"
+        Me.rpt_genbtn_InventoryCustodianSlip.Size = New System.Drawing.Size(99, 37)
+        Me.rpt_genbtn_InventoryCustodianSlip.TabIndex = 40
+        Me.rpt_genbtn_InventoryCustodianSlip.Text = "Generate"
+        Me.rpt_genbtn_InventoryCustodianSlip.UseVisualStyleBackColor = False
+        '
+        'reports_prevbtn_InventoryCustodianSip
+        '
+        Me.reports_prevbtn_InventoryCustodianSip.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_InventoryCustodianSip.CornerRadius = 15
+        Me.reports_prevbtn_InventoryCustodianSip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_prevbtn_InventoryCustodianSip.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_prevbtn_InventoryCustodianSip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_prevbtn_InventoryCustodianSip.Location = New System.Drawing.Point(177, 250)
+        Me.reports_prevbtn_InventoryCustodianSip.Name = "reports_prevbtn_InventoryCustodianSip"
+        Me.reports_prevbtn_InventoryCustodianSip.Size = New System.Drawing.Size(99, 37)
+        Me.reports_prevbtn_InventoryCustodianSip.TabIndex = 39
+        Me.reports_prevbtn_InventoryCustodianSip.Text = "Preview"
+        Me.reports_prevbtn_InventoryCustodianSip.UseVisualStyleBackColor = False
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 4
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.reports_InventoryCustodianSlip, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.reports_LostDamage, 3, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.reports_InventorySummary, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.reports_BorrowingReturnSlip, 2, 0)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 10)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(10)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1565, 237)
+        Me.TableLayoutPanel2.TabIndex = 15
+        '
+        'reports_InventoryCustodianSlip
+        '
+        Me.reports_InventoryCustodianSlip.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_InventoryCustodianSlip.CornerRadius = 5
+        Me.reports_InventoryCustodianSlip.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.reports_InventoryCustodianSlip.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.reports_InventoryCustodianSlip.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.reports_InventoryCustodianSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_InventoryCustodianSlip.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_InventoryCustodianSlip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.reports_InventoryCustodianSlip.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.reports_InventoryCustodianSlip.Location = New System.Drawing.Point(10, 10)
+        Me.reports_InventoryCustodianSlip.Margin = New System.Windows.Forms.Padding(10)
+        Me.reports_InventoryCustodianSlip.Name = "reports_InventoryCustodianSlip"
+        Me.reports_InventoryCustodianSlip.Size = New System.Drawing.Size(371, 217)
+        Me.reports_InventoryCustodianSlip.TabIndex = 11
+        Me.reports_InventoryCustodianSlip.Text = "Inventory Custodian Slip"
+        Me.reports_InventoryCustodianSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.reports_InventoryCustodianSlip.UseVisualStyleBackColor = False
+        '
+        'reports_LostDamage
+        '
+        Me.reports_LostDamage.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_LostDamage.CornerRadius = 5
+        Me.reports_LostDamage.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.reports_LostDamage.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.reports_LostDamage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.reports_LostDamage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_LostDamage.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_LostDamage.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.reports_LostDamage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.reports_LostDamage.Location = New System.Drawing.Point(1183, 10)
+        Me.reports_LostDamage.Margin = New System.Windows.Forms.Padding(10)
+        Me.reports_LostDamage.Name = "reports_LostDamage"
+        Me.reports_LostDamage.Size = New System.Drawing.Size(372, 217)
+        Me.reports_LostDamage.TabIndex = 14
+        Me.reports_LostDamage.Text = "Lost/Damaged Property Certificate"
+        Me.reports_LostDamage.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.reports_LostDamage.UseVisualStyleBackColor = False
+        '
+        'reports_InventorySummary
+        '
+        Me.reports_InventorySummary.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_InventorySummary.CornerRadius = 5
+        Me.reports_InventorySummary.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.reports_InventorySummary.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.reports_InventorySummary.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.reports_InventorySummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_InventorySummary.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_InventorySummary.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.reports_InventorySummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.reports_InventorySummary.Location = New System.Drawing.Point(401, 10)
+        Me.reports_InventorySummary.Margin = New System.Windows.Forms.Padding(10)
+        Me.reports_InventorySummary.Name = "reports_InventorySummary"
+        Me.reports_InventorySummary.Size = New System.Drawing.Size(371, 217)
+        Me.reports_InventorySummary.TabIndex = 12
+        Me.reports_InventorySummary.Text = "Official Inventory Summary Report"
+        Me.reports_InventorySummary.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.reports_InventorySummary.UseVisualStyleBackColor = False
+        '
+        'reports_BorrowingReturnSlip
+        '
+        Me.reports_BorrowingReturnSlip.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_BorrowingReturnSlip.CornerRadius = 5
+        Me.reports_BorrowingReturnSlip.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.reports_BorrowingReturnSlip.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.reports_BorrowingReturnSlip.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.reports_BorrowingReturnSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_BorrowingReturnSlip.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_BorrowingReturnSlip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.reports_BorrowingReturnSlip.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.reports_BorrowingReturnSlip.Location = New System.Drawing.Point(792, 10)
+        Me.reports_BorrowingReturnSlip.Margin = New System.Windows.Forms.Padding(10)
+        Me.reports_BorrowingReturnSlip.Name = "reports_BorrowingReturnSlip"
+        Me.reports_BorrowingReturnSlip.Size = New System.Drawing.Size(371, 217)
+        Me.reports_BorrowingReturnSlip.TabIndex = 13
+        Me.reports_BorrowingReturnSlip.Text = "Borrowing and Return Slip Report"
+        Me.reports_BorrowingReturnSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.reports_BorrowingReturnSlip.UseVisualStyleBackColor = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.rpt_genbtn_AnnualProperty)
+        Me.Panel2.Controls.Add(Me.reports_prevbtn_AnnualProperty)
+        Me.Panel2.Controls.Add(Me.rpt_genbtn_DeptAllocation)
+        Me.Panel2.Controls.Add(Me.reports_prevbtn_DeptAllocation)
+        Me.Panel2.Controls.Add(Me.TableLayoutPanel3)
+        Me.Panel2.Location = New System.Drawing.Point(63, 771)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1565, 290)
+        Me.Panel2.TabIndex = 48
+        '
+        'rpt_genbtn_AnnualProperty
+        '
+        Me.rpt_genbtn_AnnualProperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_AnnualProperty.CornerRadius = 15
+        Me.rpt_genbtn_AnnualProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rpt_genbtn_AnnualProperty.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rpt_genbtn_AnnualProperty.ForeColor = System.Drawing.Color.White
+        Me.rpt_genbtn_AnnualProperty.Location = New System.Drawing.Point(673, 250)
+        Me.rpt_genbtn_AnnualProperty.Name = "rpt_genbtn_AnnualProperty"
+        Me.rpt_genbtn_AnnualProperty.Size = New System.Drawing.Size(99, 37)
+        Me.rpt_genbtn_AnnualProperty.TabIndex = 42
+        Me.rpt_genbtn_AnnualProperty.Text = "Generate"
+        Me.rpt_genbtn_AnnualProperty.UseVisualStyleBackColor = False
+        '
+        'reports_prevbtn_AnnualProperty
+        '
+        Me.reports_prevbtn_AnnualProperty.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_AnnualProperty.CornerRadius = 15
+        Me.reports_prevbtn_AnnualProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_prevbtn_AnnualProperty.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_prevbtn_AnnualProperty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_prevbtn_AnnualProperty.Location = New System.Drawing.Point(568, 250)
+        Me.reports_prevbtn_AnnualProperty.Name = "reports_prevbtn_AnnualProperty"
+        Me.reports_prevbtn_AnnualProperty.Size = New System.Drawing.Size(99, 37)
+        Me.reports_prevbtn_AnnualProperty.TabIndex = 41
+        Me.reports_prevbtn_AnnualProperty.Text = "Preview"
+        Me.reports_prevbtn_AnnualProperty.UseVisualStyleBackColor = False
+        '
+        'rpt_genbtn_DeptAllocation
+        '
+        Me.rpt_genbtn_DeptAllocation.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.rpt_genbtn_DeptAllocation.CornerRadius = 15
+        Me.rpt_genbtn_DeptAllocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rpt_genbtn_DeptAllocation.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rpt_genbtn_DeptAllocation.ForeColor = System.Drawing.Color.White
+        Me.rpt_genbtn_DeptAllocation.Location = New System.Drawing.Point(285, 250)
+        Me.rpt_genbtn_DeptAllocation.Name = "rpt_genbtn_DeptAllocation"
+        Me.rpt_genbtn_DeptAllocation.Size = New System.Drawing.Size(99, 37)
+        Me.rpt_genbtn_DeptAllocation.TabIndex = 40
+        Me.rpt_genbtn_DeptAllocation.Text = "Generate"
+        Me.rpt_genbtn_DeptAllocation.UseVisualStyleBackColor = False
+        '
+        'reports_prevbtn_DeptAllocation
+        '
+        Me.reports_prevbtn_DeptAllocation.BackColor = System.Drawing.Color.White
+        Me.reports_prevbtn_DeptAllocation.CornerRadius = 15
+        Me.reports_prevbtn_DeptAllocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_prevbtn_DeptAllocation.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_prevbtn_DeptAllocation.ForeColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.reports_prevbtn_DeptAllocation.Location = New System.Drawing.Point(180, 250)
+        Me.reports_prevbtn_DeptAllocation.Name = "reports_prevbtn_DeptAllocation"
+        Me.reports_prevbtn_DeptAllocation.Size = New System.Drawing.Size(99, 37)
+        Me.reports_prevbtn_DeptAllocation.TabIndex = 39
+        Me.reports_prevbtn_DeptAllocation.Text = "Preview"
+        Me.reports_prevbtn_DeptAllocation.UseVisualStyleBackColor = False
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 4
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.reports_DepartmentAllocation, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.reports_AnnualProperty, 1, 0)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 10)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(10)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 1
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1565, 237)
+        Me.TableLayoutPanel3.TabIndex = 15
+        '
+        'reports_DepartmentAllocation
+        '
+        Me.reports_DepartmentAllocation.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_DepartmentAllocation.CornerRadius = 5
+        Me.reports_DepartmentAllocation.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.reports_DepartmentAllocation.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.reports_DepartmentAllocation.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.reports_DepartmentAllocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_DepartmentAllocation.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_DepartmentAllocation.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.reports_DepartmentAllocation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.reports_DepartmentAllocation.Location = New System.Drawing.Point(10, 10)
+        Me.reports_DepartmentAllocation.Margin = New System.Windows.Forms.Padding(10)
+        Me.reports_DepartmentAllocation.Name = "reports_DepartmentAllocation"
+        Me.reports_DepartmentAllocation.Size = New System.Drawing.Size(371, 217)
+        Me.reports_DepartmentAllocation.TabIndex = 11
+        Me.reports_DepartmentAllocation.Text = "Department Allocation Report"
+        Me.reports_DepartmentAllocation.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.reports_DepartmentAllocation.UseVisualStyleBackColor = False
+        '
+        'reports_AnnualProperty
+        '
+        Me.reports_AnnualProperty.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.reports_AnnualProperty.CornerRadius = 5
+        Me.reports_AnnualProperty.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.reports_AnnualProperty.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.reports_AnnualProperty.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.reports_AnnualProperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.reports_AnnualProperty.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reports_AnnualProperty.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.reports_AnnualProperty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.reports_AnnualProperty.Location = New System.Drawing.Point(401, 10)
+        Me.reports_AnnualProperty.Margin = New System.Windows.Forms.Padding(10)
+        Me.reports_AnnualProperty.Name = "reports_AnnualProperty"
+        Me.reports_AnnualProperty.Size = New System.Drawing.Size(371, 217)
+        Me.reports_AnnualProperty.TabIndex = 12
+        Me.reports_AnnualProperty.Text = "Annual Property Custodian Report"
+        Me.reports_AnnualProperty.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.reports_AnnualProperty.UseVisualStyleBackColor = False
+        '
         'UC_Reports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScroll = True
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.admin_panelcontainer)

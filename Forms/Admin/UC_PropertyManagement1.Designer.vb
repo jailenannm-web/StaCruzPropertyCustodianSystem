@@ -22,6 +22,7 @@ Partial Class UC_PropertyManagement1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_PropertyManagement1))
         Me.pm_txtbox_search = New System.Windows.Forms.TextBox()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
@@ -104,7 +105,7 @@ Partial Class UC_PropertyManagement1
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(67, 126)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
@@ -291,6 +292,7 @@ Partial Class UC_PropertyManagement1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScroll = True
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)

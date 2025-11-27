@@ -486,6 +486,7 @@ Partial Class EditMaintenance1
         Me.RoundedPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel1.AutoScroll = True
         Me.RoundedPanel1.BackColor = System.Drawing.Color.White
         Me.RoundedPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.RoundedPanel1.Controls.Add(Me.instructions)

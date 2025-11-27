@@ -68,7 +68,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(1232, 977)
+        Me.btnEdit.Location = New System.Drawing.Point(1231, 616)
         Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(121, 34)
@@ -84,7 +84,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1361, 976)
+        Me.btnAdd.Location = New System.Drawing.Point(1360, 615)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(121, 34)
@@ -100,7 +100,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1104, 976)
+        Me.btnDelete.Location = New System.Drawing.Point(1103, 615)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(120, 35)
@@ -120,7 +120,7 @@ Partial Class UC_MaintenanceManagement
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1434, 850)
+        Me.DataGridView1.Size = New System.Drawing.Size(1434, 488)
         Me.DataGridView1.TabIndex = 155
         '
         'MaintenanceID
@@ -232,13 +232,14 @@ Partial Class UC_MaintenanceManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScroll = True
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.admin_label_MaintenanceManagement)
         Me.Name = "UC_MaintenanceManagement"
-        Me.Size = New System.Drawing.Size(1539, 1073)
+        Me.Size = New System.Drawing.Size(1539, 942)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

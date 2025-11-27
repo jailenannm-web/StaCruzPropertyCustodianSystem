@@ -207,4 +207,8 @@ Public Class UC_UserManagement
         Public Property DateAssigned As Object = Nothing
         Public Property CreatedAt As Object = Nothing
     End Class
+
+    Private Sub UC_UserManagement_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
