@@ -10,16 +10,11 @@ Partial Class UC_SupplyManagement
     ' ... [Dispose method and other boilerplate remains unchanged] ...
 
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_SupplyManagement))
         Me.admin_label_PropertyManagement = New System.Windows.Forms.Label()
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_table = New System.Windows.Forms.DataGridView()
-        Me.admin_label_PM = New System.Windows.Forms.Label()
-        Me.pm_txtbox_search = New System.Windows.Forms.TextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.SupplyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -35,6 +30,12 @@ Partial Class UC_SupplyManagement
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.created_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updated_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.admin_label_PM = New System.Windows.Forms.Label()
+        Me.pm_txtbox_search = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -81,12 +82,117 @@ Partial Class UC_SupplyManagement
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SupplyID, Me.colName, Me.Category, Me.Stock, Me.UnitCost, Me.TotalValue, Me.Status, Me.LocationColumn, Me.supplier, Me.date_received, Me.expiration_date, Me.received_by, Me.remarks, Me.created_at, Me.updated_at})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.pm_table.Location = New System.Drawing.Point(39, 195)
+        Me.pm_table.Location = New System.Drawing.Point(39, 172)
         Me.pm_table.Name = "pm_table"
         Me.pm_table.RowHeadersWidth = 51
         Me.pm_table.RowTemplate.Height = 24
-        Me.pm_table.Size = New System.Drawing.Size(1163, 485)
+        Me.pm_table.Size = New System.Drawing.Size(1163, 508)
         Me.pm_table.TabIndex = 26
+        '
+        'SupplyID
+        '
+        Me.SupplyID.HeaderText = "Supply ID"
+        Me.SupplyID.MinimumWidth = 6
+        Me.SupplyID.Name = "SupplyID"
+        Me.SupplyID.Width = 125
+        '
+        'colName
+        '
+        Me.colName.HeaderText = "Name"
+        Me.colName.MinimumWidth = 6
+        Me.colName.Name = "colName"
+        Me.colName.Width = 125
+        '
+        'Category
+        '
+        Me.Category.HeaderText = "Category"
+        Me.Category.MinimumWidth = 6
+        Me.Category.Name = "Category"
+        Me.Category.Width = 125
+        '
+        'Stock
+        '
+        Me.Stock.HeaderText = "Stock"
+        Me.Stock.MinimumWidth = 6
+        Me.Stock.Name = "Stock"
+        Me.Stock.Width = 125
+        '
+        'UnitCost
+        '
+        Me.UnitCost.HeaderText = "Unit Cost"
+        Me.UnitCost.MinimumWidth = 6
+        Me.UnitCost.Name = "UnitCost"
+        Me.UnitCost.Width = 125
+        '
+        'TotalValue
+        '
+        Me.TotalValue.HeaderText = "Total Value"
+        Me.TotalValue.MinimumWidth = 6
+        Me.TotalValue.Name = "TotalValue"
+        Me.TotalValue.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
+        '
+        'LocationColumn
+        '
+        Me.LocationColumn.HeaderText = "Location"
+        Me.LocationColumn.MinimumWidth = 6
+        Me.LocationColumn.Name = "LocationColumn"
+        Me.LocationColumn.Width = 125
+        '
+        'supplier
+        '
+        Me.supplier.HeaderText = "Supplier"
+        Me.supplier.MinimumWidth = 6
+        Me.supplier.Name = "supplier"
+        Me.supplier.Width = 125
+        '
+        'date_received
+        '
+        Me.date_received.HeaderText = "Date Received"
+        Me.date_received.MinimumWidth = 6
+        Me.date_received.Name = "date_received"
+        Me.date_received.Width = 125
+        '
+        'expiration_date
+        '
+        Me.expiration_date.HeaderText = "Expiration Date"
+        Me.expiration_date.MinimumWidth = 6
+        Me.expiration_date.Name = "expiration_date"
+        Me.expiration_date.Width = 125
+        '
+        'received_by
+        '
+        Me.received_by.HeaderText = "Received by"
+        Me.received_by.MinimumWidth = 6
+        Me.received_by.Name = "received_by"
+        Me.received_by.Width = 125
+        '
+        'remarks
+        '
+        Me.remarks.HeaderText = "Remarks"
+        Me.remarks.MinimumWidth = 6
+        Me.remarks.Name = "remarks"
+        Me.remarks.Width = 125
+        '
+        'created_at
+        '
+        Me.created_at.HeaderText = "Created At"
+        Me.created_at.MinimumWidth = 6
+        Me.created_at.Name = "created_at"
+        Me.created_at.Width = 125
+        '
+        'updated_at
+        '
+        Me.updated_at.HeaderText = "Updated At"
+        Me.updated_at.MinimumWidth = 6
+        Me.updated_at.Name = "updated_at"
+        Me.updated_at.Width = 125
         '
         'admin_label_PM
         '
@@ -115,7 +221,7 @@ Partial Class UC_SupplyManagement
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(39, 115)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
@@ -171,98 +277,9 @@ Partial Class UC_SupplyManagement
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
         '
-        'SupplyID
-        '
-        Me.SupplyID.HeaderText = "Supply ID"
-        Me.SupplyID.MinimumWidth = 6
-        Me.SupplyID.Name = "SupplyID"
-        '
-        'colName
-        '
-        Me.colName.HeaderText = "Name"
-        Me.colName.MinimumWidth = 6
-        Me.colName.Name = "colName"
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Category"
-        Me.Category.MinimumWidth = 6
-        Me.Category.Name = "Category"
-        '
-        'Stock
-        '
-        Me.Stock.HeaderText = "Stock"
-        Me.Stock.MinimumWidth = 6
-        Me.Stock.Name = "Stock"
-        '
-        'UnitCost
-        '
-        Me.UnitCost.HeaderText = "Unit Cost"
-        Me.UnitCost.MinimumWidth = 6
-        Me.UnitCost.Name = "UnitCost"
-        '
-        'TotalValue
-        '
-        Me.TotalValue.HeaderText = "Total Value"
-        Me.TotalValue.MinimumWidth = 6
-        Me.TotalValue.Name = "TotalValue"
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        '
-        'LocationColumn
-        '
-        Me.LocationColumn.HeaderText = "Location"
-        Me.LocationColumn.MinimumWidth = 6
-        Me.LocationColumn.Name = "LocationColumn"
-        '
-        'supplier
-        '
-        Me.supplier.HeaderText = "Supplier"
-        Me.supplier.MinimumWidth = 6
-        Me.supplier.Name = "supplier"
-        '
-        'date_received
-        '
-        Me.date_received.HeaderText = "Date Received"
-        Me.date_received.MinimumWidth = 6
-        Me.date_received.Name = "date_received"
-        '
-        'expiration_date
-        '
-        Me.expiration_date.HeaderText = "Expiration Date"
-        Me.expiration_date.MinimumWidth = 6
-        Me.expiration_date.Name = "expiration_date"
-        '
-        'received_by
-        '
-        Me.received_by.HeaderText = "Received by"
-        Me.received_by.MinimumWidth = 6
-        Me.received_by.Name = "received_by"
-        '
-        'remarks
-        '
-        Me.remarks.HeaderText = "Remarks"
-        Me.remarks.MinimumWidth = 6
-        Me.remarks.Name = "remarks"
-        '
-        'created_at
-        '
-        Me.created_at.HeaderText = "Created At"
-        Me.created_at.MinimumWidth = 6
-        Me.created_at.Name = "created_at"
-        '
-        'updated_at
-        '
-        Me.updated_at.HeaderText = "Updated At"
-        Me.updated_at.MinimumWidth = 6
-        Me.updated_at.Name = "updated_at"
-        '
         'UC_SupplyManagement
         '
+        Me.AutoScroll = True
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)

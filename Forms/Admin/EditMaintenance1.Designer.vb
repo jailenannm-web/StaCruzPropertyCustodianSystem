@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class AddMaintenance1
+Partial Class EditMaintenance1
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
@@ -22,6 +22,9 @@ Partial Class AddMaintenance1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
@@ -53,9 +56,6 @@ Partial Class AddMaintenance1
         Me.SAAddM_MainID = New System.Windows.Forms.Label()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
-        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
-        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -63,18 +63,62 @@ Partial Class AddMaintenance1
         Me.RoundedPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnCancel.CornerRadius = 15
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Location = New System.Drawing.Point(1020, 687)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
+        Me.btnCancel.TabIndex = 178
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'btnSave
+        '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnSave.CornerRadius = 15
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSave.Location = New System.Drawing.Point(1173, 687)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(145, 34)
+        Me.btnSave.TabIndex = 177
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
+        'admin_label_DepartmentManagement
+        '
+        Me.admin_label_DepartmentManagement.AutoSize = True
+        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(81, 56)
+        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(325, 58)
+        Me.admin_label_DepartmentManagement.TabIndex = 174
+        Me.admin_label_DepartmentManagement.Text = "Edit Maintenance"
+        '
         'RoundedPanel2
         '
         Me.RoundedPanel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel2.BackColor = System.Drawing.Color.White
+        Me.RoundedPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.RoundedPanel2.Controls.Add(Me.Panel2)
         Me.RoundedPanel2.Controls.Add(Me.Panel1)
         Me.RoundedPanel2.CornerRadius = 5
-        Me.RoundedPanel2.Location = New System.Drawing.Point(32, 193)
+        Me.RoundedPanel2.Location = New System.Drawing.Point(68, 210)
         Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(1262, 459)
-        Me.RoundedPanel2.TabIndex = 171
+        Me.RoundedPanel2.Size = New System.Drawing.Size(1300, 459)
+        Me.RoundedPanel2.TabIndex = 176
         '
         'Panel2
         '
@@ -97,7 +141,7 @@ Partial Class AddMaintenance1
         Me.Panel2.Controls.Add(Me.SAAddM_Warranty)
         Me.Panel2.Location = New System.Drawing.Point(686, 18)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(526, 416)
+        Me.Panel2.Size = New System.Drawing.Size(562, 414)
         Me.Panel2.TabIndex = 65
         '
         'ComboBox2
@@ -110,7 +154,7 @@ Partial Class AddMaintenance1
         Me.ComboBox2.Items.AddRange(New Object() {"Pending", "In Progress", "For Replacement", "Waiting for Parts", "Completed", "Cancelled"})
         Me.ComboBox2.Location = New System.Drawing.Point(242, 300)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(227, 34)
+        Me.ComboBox2.Size = New System.Drawing.Size(263, 34)
         Me.ComboBox2.TabIndex = 72
         '
         'Label2
@@ -135,7 +179,7 @@ Partial Class AddMaintenance1
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(242, 198)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(227, 34)
+        Me.ComboBox1.Size = New System.Drawing.Size(263, 34)
         Me.ComboBox1.TabIndex = 70
         '
         'Label1
@@ -159,7 +203,7 @@ Partial Class AddMaintenance1
         Me.TextBox1.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(242, 43)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(227, 30)
+        Me.TextBox1.Size = New System.Drawing.Size(263, 30)
         Me.TextBox1.TabIndex = 68
         '
         'assignedEmployeeTxt
@@ -170,7 +214,7 @@ Partial Class AddMaintenance1
         Me.assignedEmployeeTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.assignedEmployeeTxt.Location = New System.Drawing.Point(242, 147)
         Me.assignedEmployeeTxt.Name = "assignedEmployeeTxt"
-        Me.assignedEmployeeTxt.Size = New System.Drawing.Size(227, 30)
+        Me.assignedEmployeeTxt.Size = New System.Drawing.Size(263, 30)
         Me.assignedEmployeeTxt.TabIndex = 66
         '
         'supplierTxt
@@ -181,7 +225,7 @@ Partial Class AddMaintenance1
         Me.supplierTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.supplierTxt.Location = New System.Drawing.Point(242, 94)
         Me.supplierTxt.Name = "supplierTxt"
-        Me.supplierTxt.Size = New System.Drawing.Size(227, 30)
+        Me.supplierTxt.Size = New System.Drawing.Size(263, 30)
         Me.supplierTxt.TabIndex = 67
         '
         'assignedDeparmentCmbo
@@ -193,7 +237,7 @@ Partial Class AddMaintenance1
         Me.assignedDeparmentCmbo.FormattingEnabled = True
         Me.assignedDeparmentCmbo.Location = New System.Drawing.Point(242, 248)
         Me.assignedDeparmentCmbo.Name = "assignedDeparmentCmbo"
-        Me.assignedDeparmentCmbo.Size = New System.Drawing.Size(227, 34)
+        Me.assignedDeparmentCmbo.Size = New System.Drawing.Size(263, 34)
         Me.assignedDeparmentCmbo.TabIndex = 65
         '
         'propertyLocation
@@ -204,7 +248,7 @@ Partial Class AddMaintenance1
         Me.propertyLocation.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.propertyLocation.Location = New System.Drawing.Point(242, 353)
         Me.propertyLocation.Name = "propertyLocation"
-        Me.propertyLocation.Size = New System.Drawing.Size(227, 30)
+        Me.propertyLocation.Size = New System.Drawing.Size(263, 30)
         Me.propertyLocation.TabIndex = 64
         '
         'SAAddM_Cost
@@ -291,7 +335,7 @@ Partial Class AddMaintenance1
         Me.Panel1.Controls.Add(Me.SAAddM_MainID)
         Me.Panel1.Location = New System.Drawing.Point(46, 18)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(572, 416)
+        Me.Panel1.Size = New System.Drawing.Size(608, 414)
         Me.Panel1.TabIndex = 64
         '
         'datePurchasedDate
@@ -311,7 +355,7 @@ Partial Class AddMaintenance1
         Me.categoryCmbo.FormattingEnabled = True
         Me.categoryCmbo.Location = New System.Drawing.Point(256, 95)
         Me.categoryCmbo.Name = "categoryCmbo"
-        Me.categoryCmbo.Size = New System.Drawing.Size(273, 34)
+        Me.categoryCmbo.Size = New System.Drawing.Size(309, 34)
         Me.categoryCmbo.TabIndex = 71
         '
         'conditionStatusCmbo
@@ -323,7 +367,7 @@ Partial Class AddMaintenance1
         Me.conditionStatusCmbo.FormattingEnabled = True
         Me.conditionStatusCmbo.Location = New System.Drawing.Point(256, 248)
         Me.conditionStatusCmbo.Name = "conditionStatusCmbo"
-        Me.conditionStatusCmbo.Size = New System.Drawing.Size(273, 34)
+        Me.conditionStatusCmbo.Size = New System.Drawing.Size(309, 34)
         Me.conditionStatusCmbo.TabIndex = 70
         '
         'no_of_employees_numeric
@@ -334,7 +378,7 @@ Partial Class AddMaintenance1
         Me.no_of_employees_numeric.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.no_of_employees_numeric.Location = New System.Drawing.Point(256, 309)
         Me.no_of_employees_numeric.Name = "no_of_employees_numeric"
-        Me.no_of_employees_numeric.Size = New System.Drawing.Size(273, 30)
+        Me.no_of_employees_numeric.Size = New System.Drawing.Size(309, 30)
         Me.no_of_employees_numeric.TabIndex = 69
         '
         'serialNumberTxt
@@ -345,7 +389,7 @@ Partial Class AddMaintenance1
         Me.serialNumberTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.serialNumberTxt.Location = New System.Drawing.Point(256, 147)
         Me.serialNumberTxt.Name = "serialNumberTxt"
-        Me.serialNumberTxt.Size = New System.Drawing.Size(273, 30)
+        Me.serialNumberTxt.Size = New System.Drawing.Size(309, 30)
         Me.serialNumberTxt.TabIndex = 66
         '
         'propertyNameTxt
@@ -356,7 +400,7 @@ Partial Class AddMaintenance1
         Me.propertyNameTxt.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.propertyNameTxt.Location = New System.Drawing.Point(256, 44)
         Me.propertyNameTxt.Name = "propertyNameTxt"
-        Me.propertyNameTxt.Size = New System.Drawing.Size(273, 30)
+        Me.propertyNameTxt.Size = New System.Drawing.Size(309, 30)
         Me.propertyNameTxt.TabIndex = 64
         '
         'SAAddM_Description
@@ -442,12 +486,15 @@ Partial Class AddMaintenance1
         Me.RoundedPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedPanel1.AutoScroll = True
+        Me.RoundedPanel1.BackColor = System.Drawing.Color.White
+        Me.RoundedPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.RoundedPanel1.Controls.Add(Me.instructions)
         Me.RoundedPanel1.CornerRadius = 5
-        Me.RoundedPanel1.Location = New System.Drawing.Point(32, 100)
+        Me.RoundedPanel1.Location = New System.Drawing.Point(68, 117)
         Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(1262, 72)
-        Me.RoundedPanel1.TabIndex = 170
+        Me.RoundedPanel1.Size = New System.Drawing.Size(1300, 72)
+        Me.RoundedPanel1.TabIndex = 175
         '
         'instructions
         '
@@ -459,49 +506,7 @@ Partial Class AddMaintenance1
         Me.instructions.TabIndex = 40
         Me.instructions.Text = "Fill the required department information."
         '
-        'admin_label_DepartmentManagement
-        '
-        Me.admin_label_DepartmentManagement.AutoSize = True
-        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(45, 39)
-        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(330, 58)
-        Me.admin_label_DepartmentManagement.TabIndex = 66
-        Me.admin_label_DepartmentManagement.Text = "Add Maintenance"
-        '
-        'btnCancel
-        '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnCancel.CornerRadius = 15
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(946, 672)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
-        Me.btnCancel.TabIndex = 173
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = False
-        '
-        'btnSave
-        '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnSave.CornerRadius = 15
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSave.Location = New System.Drawing.Point(1099, 672)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(145, 34)
-        Me.btnSave.TabIndex = 172
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = False
-        '
-        'AddMaintenance1
+        'EditMaintenance1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -510,8 +515,8 @@ Partial Class AddMaintenance1
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Controls.Add(Me.RoundedPanel2)
         Me.Controls.Add(Me.RoundedPanel1)
-        Me.Name = "AddMaintenance1"
-        Me.Size = New System.Drawing.Size(1317, 787)
+        Me.Name = "EditMaintenance1"
+        Me.Size = New System.Drawing.Size(1522, 779)
         Me.RoundedPanel2.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
@@ -525,8 +530,15 @@ Partial Class AddMaintenance1
 
     End Sub
 
+    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
+    Friend WithEvents btnSave As Resources.Controls.RoundedButton
+    Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents assignedEmployeeTxt As System.Windows.Forms.TextBox
     Friend WithEvents supplierTxt As System.Windows.Forms.TextBox
@@ -552,11 +564,4 @@ Partial Class AddMaintenance1
     Friend WithEvents SAAddM_MainID As System.Windows.Forms.Label
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents instructions As System.Windows.Forms.Label
-    Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
-    Friend WithEvents btnSave As Resources.Controls.RoundedButton
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
 End Class

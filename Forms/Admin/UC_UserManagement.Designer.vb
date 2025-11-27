@@ -266,6 +266,7 @@ Partial Class UC_UserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScroll = True
         Me.Controls.Add(Me.btndelete)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnCancel)

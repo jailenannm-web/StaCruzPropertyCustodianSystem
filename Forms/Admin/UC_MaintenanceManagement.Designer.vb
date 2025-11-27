@@ -68,7 +68,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(1148, 645)
+        Me.btnEdit.Location = New System.Drawing.Point(1231, 616)
         Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(121, 34)
@@ -84,7 +84,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1277, 644)
+        Me.btnAdd.Location = New System.Drawing.Point(1360, 615)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(121, 34)
@@ -100,7 +100,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1020, 644)
+        Me.btnDelete.Location = New System.Drawing.Point(1103, 615)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(120, 35)
@@ -120,7 +120,7 @@ Partial Class UC_MaintenanceManagement
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1350, 518)
+        Me.DataGridView1.Size = New System.Drawing.Size(1434, 488)
         Me.DataGridView1.TabIndex = 155
         '
         'MaintenanceID
@@ -128,102 +128,118 @@ Partial Class UC_MaintenanceManagement
         Me.MaintenanceID.HeaderText = "MaintenanceID"
         Me.MaintenanceID.MinimumWidth = 6
         Me.MaintenanceID.Name = "MaintenanceID"
+        Me.MaintenanceID.Width = 125
         '
         'PropertyID
         '
         Me.PropertyID.HeaderText = "PropertyID"
         Me.PropertyID.MinimumWidth = 6
         Me.PropertyID.Name = "PropertyID"
+        Me.PropertyID.Width = 125
         '
         'CustodianID
         '
         Me.CustodianID.HeaderText = "CustodianID"
         Me.CustodianID.MinimumWidth = 6
         Me.CustodianID.Name = "CustodianID"
+        Me.CustodianID.Width = 125
         '
         'ServiceDate
         '
         Me.ServiceDate.HeaderText = "Service Date"
         Me.ServiceDate.MinimumWidth = 6
         Me.ServiceDate.Name = "ServiceDate"
+        Me.ServiceDate.Width = 125
         '
         'ServiceType
         '
         Me.ServiceType.HeaderText = "Service Type"
         Me.ServiceType.MinimumWidth = 6
         Me.ServiceType.Name = "ServiceType"
+        Me.ServiceType.Width = 125
         '
         'Description
         '
         Me.Description.HeaderText = "Description"
         Me.Description.MinimumWidth = 6
         Me.Description.Name = "Description"
+        Me.Description.Width = 125
         '
         'ServiceProvider
         '
         Me.ServiceProvider.HeaderText = "Service Provider"
         Me.ServiceProvider.MinimumWidth = 6
         Me.ServiceProvider.Name = "ServiceProvider"
+        Me.ServiceProvider.Width = 125
         '
         'ProviderContact
         '
         Me.ProviderContact.HeaderText = "Provider Contact"
         Me.ProviderContact.MinimumWidth = 6
         Me.ProviderContact.Name = "ProviderContact"
+        Me.ProviderContact.Width = 125
         '
         'Cost
         '
         Me.Cost.HeaderText = "Cost"
         Me.Cost.MinimumWidth = 6
         Me.Cost.Name = "Cost"
+        Me.Cost.Width = 125
         '
         'NextSchedule
         '
         Me.NextSchedule.HeaderText = "Next Schedule"
         Me.NextSchedule.MinimumWidth = 6
         Me.NextSchedule.Name = "NextSchedule"
+        Me.NextSchedule.Width = 125
         '
         'WarrantyStatus
         '
         Me.WarrantyStatus.HeaderText = "Warranty Status"
         Me.WarrantyStatus.MinimumWidth = 6
         Me.WarrantyStatus.Name = "WarrantyStatus"
+        Me.WarrantyStatus.Width = 125
         '
         'TechnicianAssigned
         '
         Me.TechnicianAssigned.HeaderText = "Technician Assigned"
         Me.TechnicianAssigned.MinimumWidth = 6
         Me.TechnicianAssigned.Name = "TechnicianAssigned"
+        Me.TechnicianAssigned.Width = 125
         '
         'Status
         '
         Me.Status.HeaderText = "Status "
         Me.Status.MinimumWidth = 6
         Me.Status.Name = "Status"
+        Me.Status.Width = 125
         '
         'Remarks
         '
         Me.Remarks.HeaderText = "Remarks"
         Me.Remarks.MinimumWidth = 6
         Me.Remarks.Name = "Remarks"
+        Me.Remarks.Width = 125
         '
         'CreatedAt
         '
         Me.CreatedAt.HeaderText = "Created At"
         Me.CreatedAt.MinimumWidth = 6
         Me.CreatedAt.Name = "CreatedAt"
+        Me.CreatedAt.Width = 125
         '
         'UC_MaintenanceManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScroll = True
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.admin_label_MaintenanceManagement)
         Me.Name = "UC_MaintenanceManagement"
-        Me.Size = New System.Drawing.Size(1455, 741)
+        Me.Size = New System.Drawing.Size(1539, 942)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -164,6 +164,7 @@ Partial Class ViewDepartmentSupply
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScroll = True
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Name = "ViewDepartmentSupply"

@@ -1,11 +1,14 @@
 ﻿Imports System
 Imports System.Data
+Imports System.Diagnostics
 Imports System.Drawing
 Imports System.Linq
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Partial Class SADashboard
     Private tmrSidebar As Object
+    Private currentUC As UserControl = Nothing
+    Private _isDashboardLoading As Boolean
 
     Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
 
@@ -19,6 +22,27 @@ Partial Class SADashboard
         LoadSupplyStats()
     End Sub
 
+    Public Sub LoadUserControl(uc As UserControl)
+        Try
+            ' Clear previous controls
+            pnlFormLoader.Controls.Clear()
+            currentUC = uc
+
+            ' Add new UserControl
+            pnlFormLoader.Controls.Add(uc)
+            uc.Dock = DockStyle.Fill
+            uc.BringToFront()
+            uc.Focus()
+
+            ' Debug info (optional)
+            Debug.WriteLine("Loaded UC: " & uc.Name)
+            Debug.WriteLine("Panel Size: " & pnlFormLoader.ClientSize.ToString())
+            Debug.WriteLine("UC Size: " & uc.Size.ToString())
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading UserControl: " & ex.Message)
+        End Try
+    End Sub
 
 
     Private Function sidebarCollapsedWidth() As Integer
@@ -45,7 +69,7 @@ Partial Class SADashboard
         btnPropertyRequestManagement.BackColor = colorDefault
         btnMaintenanceManagement.BackColor = colorDefault
         btnReports.BackColor = colorDefault
-        btnSystemConfig.BackColor = colorDefault
+
         ' Add any other buttons you have...
 
         ' --- 2. Set the ONE active button to the new color ---
@@ -107,7 +131,7 @@ Partial Class SADashboard
 
         ' --- THIS IS THE NEW CODE ---
         ' Load your new profile form
-        loadFormIntoPanel(New SAUserManagement())
+        LoadUserControl(New UC_UserManagement())
     End Sub
 
 
@@ -118,7 +142,7 @@ Partial Class SADashboard
 
         ' --- THIS IS THE NEW CODE ---
         ' Load your new profile form
-        loadFormIntoPanel(New SAPropertyManagement())
+        LoadUserControl(New UC_PropertyManagement1())
     End Sub
 
 
@@ -129,7 +153,7 @@ Partial Class SADashboard
 
         ' --- THIS IS THE NEW CODE ---
         ' Load your new profile form
-        loadFormIntoPanel(New SADepartmentManagement())
+        LoadUserControl(New UC_DepartmentManagement())
     End Sub
 
     Private Sub btnPropertyRequestManagement_Click(sender As Object, e As EventArgs) Handles btnPropertyRequestManagement.Click
@@ -139,7 +163,7 @@ Partial Class SADashboard
 
         ' --- THIS IS THE NEW CODE ---
         ' Load your new profile form
-        loadFormIntoPanel(New SAPropertyRequestManagement())
+        LoadUserControl(New UC_PropertyRequestManagement())
     End Sub
 
     Private Sub btnMaintenance_Click(sender As Object, e As EventArgs) Handles btnMaintenanceManagement.Click
@@ -149,28 +173,14 @@ Partial Class SADashboard
 
         ' --- THIS IS THE NEW CODE ---
         ' Load your new profile form
-        loadFormIntoPanel(New SAMaintenace())
+        LoadUserControl(New UC_MaintenanceManagement())
     End Sub
 
     Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
-
-        ' --- This code changes the active button color ---
-        SetActiveButton(btnReports)
-
-        ' --- THIS IS THE NEW CODE ---
-        ' Load your new profile form
-        loadFormIntoPanel(New SAReportsManagement())
+        LoadUserControl(New UC_Reports())
     End Sub
 
-    Private Sub btnSystemConfig_Click(sender As Object, e As EventArgs) Handles btnSystemConfig.Click
 
-        ' --- This code changes the active button color ---
-        SetActiveButton(btnSystemConfig)
-
-        ' --- THIS IS THE NEW CODE ---
-        ' Load your new profile form
-        loadFormIntoPanel(New SASystemConfiguration())
-    End Sub
 
     Private Sub pnlFormLoader_Paint(sender As Object, e As PaintEventArgs) Handles pnlFormLoader.Paint
 

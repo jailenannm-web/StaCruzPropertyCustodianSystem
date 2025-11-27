@@ -33,4 +33,11 @@ Public Class UC_PropertyRequestManagement
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         MessageBox.Show("Delete request functionality here")
     End Sub
+
+    Private Sub assign_Click(sender As Object, e As EventArgs) Handles assign.Click
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(New AssignRequestManagement())
+        End If
+    End Sub
 End Class
