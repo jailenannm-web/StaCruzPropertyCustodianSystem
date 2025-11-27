@@ -35,4 +35,19 @@ Public Class UC_MaintenanceManagement
             addSupplyUC.BringToFront()
         End If
     End Sub
+
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        ' Get reference to the parent dashboard form
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+
+        If parentDashboard IsNot Nothing Then
+            ' Load the AddSupply UserControl
+            parentDashboard.LoadUserControl(New AddMaintenance1())
+        Else
+            ' Fallback: add directly to the parent container
+            Dim addSupplyUC As New EditMaintenance1()
+            Me.Parent.Controls.Add(addSupplyUC)
+            addSupplyUC.BringToFront()
+        End If
+    End Sub
 End Class
