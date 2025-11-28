@@ -297,10 +297,34 @@
     <Compile Include="Forms\Staff\TrnsReturnItem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\InspectionandAcceptanceReport.Designer.vb">
+      <DependentUpon>InspectionandAcceptanceReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\InspectionandAcceptanceReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.Designer.vb">
       <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PurchaseRequest.Designer.vb">
+      <DependentUpon>PurchaseRequest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PurchaseRequest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\ReportonthePhysicalCountProperty.Designer.vb">
+      <DependentUpon>ReportonthePhysicalCountProperty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\ReportonthePhysicalCountProperty.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\WasteMaterialsReport.Designer.vb">
+      <DependentUpon>WasteMaterialsReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\WasteMaterialsReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PasswordHelper.vb" />
@@ -577,6 +601,9 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\DepartmentAllocation.resx">
       <DependentUpon>DepartmentAllocation.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\InspectionandAcceptanceReport.resx">
+      <DependentUpon>InspectionandAcceptanceReport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\InventoryCustodianSlip.resx">
       <DependentUpon>InventoryCustodianSlip.vb</DependentUpon>
     </EmbeddedResource>
@@ -595,11 +622,20 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyIssuance.resx">
       <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PurchaseRequest.resx">
+      <DependentUpon>PurchaseRequest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\ReportonthePhysicalCountProperty.resx">
+      <DependentUpon>ReportonthePhysicalCountProperty.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\RequisitionIssueSlip.resx">
       <DependentUpon>RequisitionIssueSlip.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\StockCard.resx">
       <DependentUpon>StockCard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\WasteMaterialsReport.resx">
+      <DependentUpon>WasteMaterialsReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\SADashboard.resx">
       <DependentUpon>SADashboard.vb</DependentUpon>

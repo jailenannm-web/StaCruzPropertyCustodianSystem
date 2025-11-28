@@ -33,9 +33,6 @@ Partial Class StockCard1
         Me.Office = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Quantity2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.Quantity1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Referencre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateAndTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -53,6 +50,9 @@ Partial Class StockCard1
         Me.Label8 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label30 = New System.Windows.Forms.Label()
+        Me.DateAndTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Reference = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Quantity1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -102,25 +102,10 @@ Partial Class StockCard1
         Me.DataGridView2.Size = New System.Drawing.Size(250, 333)
         Me.DataGridView2.TabIndex = 81
         '
-        'Quantity1
-        '
-        Me.Quantity1.HeaderText = "Quantity"
-        Me.Quantity1.Name = "Quantity1"
-        '
-        'Referencre
-        '
-        Me.Referencre.HeaderText = "Referencre"
-        Me.Referencre.Name = "Referencre"
-        '
-        'DateAndTime
-        '
-        Me.DateAndTime.HeaderText = "Date"
-        Me.DateAndTime.Name = "DateAndTime"
-        '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DateAndTime, Me.Referencre, Me.Quantity1})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DateAndTime, Me.Reference, Me.Quantity1})
         Me.DataGridView1.Location = New System.Drawing.Point(236, 296)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(344, 333)
@@ -129,7 +114,7 @@ Partial Class StockCard1
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(229, 231)
         Me.Label1.Name = "Label1"
@@ -139,7 +124,7 @@ Partial Class StockCard1
         '
         'TextBox1
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(351, 198)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
@@ -148,7 +133,7 @@ Partial Class StockCard1
         '
         'TextBox3
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox3.Location = New System.Drawing.Point(351, 228)
         Me.TextBox3.Multiline = True
         Me.TextBox3.Name = "TextBox3"
@@ -158,7 +143,7 @@ Partial Class StockCard1
         'Label3
         '
         Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Black
         Me.Label3.Location = New System.Drawing.Point(814, 201)
         Me.Label3.Name = "Label3"
@@ -169,7 +154,7 @@ Partial Class StockCard1
         'Label4
         '
         Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.Black
         Me.Label4.Location = New System.Drawing.Point(814, 172)
         Me.Label4.Name = "Label4"
@@ -180,7 +165,7 @@ Partial Class StockCard1
         'TextBox4
         '
         Me.TextBox4.CausesValidation = False
-        Me.TextBox4.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox4.Location = New System.Drawing.Point(920, 165)
         Me.TextBox4.Multiline = True
         Me.TextBox4.Name = "TextBox4"
@@ -189,7 +174,7 @@ Partial Class StockCard1
         '
         'TextBox5
         '
-        Me.TextBox5.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox5.Location = New System.Drawing.Point(920, 195)
         Me.TextBox5.Multiline = True
         Me.TextBox5.Name = "TextBox5"
@@ -199,7 +184,7 @@ Partial Class StockCard1
         'Label7
         '
         Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Black
         Me.Label7.Location = New System.Drawing.Point(436, 268)
         Me.Label7.Name = "Label7"
@@ -211,7 +196,7 @@ Partial Class StockCard1
         '
         Me.Label10.BackColor = System.Drawing.Color.Transparent
         Me.Label10.CausesValidation = False
-        Me.Label10.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Black
         Me.Label10.Location = New System.Drawing.Point(685, 270)
         Me.Label10.Name = "Label10"
@@ -223,7 +208,7 @@ Partial Class StockCard1
         'Label14
         '
         Me.Label14.BackColor = System.Drawing.Color.Transparent
-        Me.Label14.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.Black
         Me.Label14.Location = New System.Drawing.Point(916, 262)
         Me.Label14.Name = "Label14"
@@ -236,7 +221,7 @@ Partial Class StockCard1
         '
         Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Back.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Back.ForeColor = System.Drawing.Color.White
         Me.btn_Back.Location = New System.Drawing.Point(607, 937)
         Me.btn_Back.Name = "btn_Back"
@@ -249,7 +234,7 @@ Partial Class StockCard1
         '
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.White
         Me.Button1.Location = New System.Drawing.Point(856, 937)
         Me.Button1.Name = "Button1"
@@ -261,7 +246,7 @@ Partial Class StockCard1
         'Label2
         '
         Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(229, 172)
         Me.Label2.Name = "Label2"
@@ -272,7 +257,7 @@ Partial Class StockCard1
         'Label8
         '
         Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.Black
         Me.Label8.Location = New System.Drawing.Point(229, 198)
         Me.Label8.Name = "Label8"
@@ -282,7 +267,7 @@ Partial Class StockCard1
         '
         'TextBox2
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox2.Location = New System.Drawing.Point(351, 169)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
@@ -293,13 +278,28 @@ Partial Class StockCard1
         'Label30
         '
         Me.Label30.BackColor = System.Drawing.Color.Transparent
-        Me.Label30.Font = New System.Drawing.Font("Poppins", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label30.ForeColor = System.Drawing.Color.Black
         Me.Label30.Location = New System.Drawing.Point(725, 89)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(182, 37)
         Me.Label30.TabIndex = 51
         Me.Label30.Text = "Stock Card"
+        '
+        'DateAndTime
+        '
+        Me.DateAndTime.HeaderText = "Date"
+        Me.DateAndTime.Name = "DateAndTime"
+        '
+        'Reference
+        '
+        Me.Reference.HeaderText = "Referencre"
+        Me.Reference.Name = "Reference"
+        '
+        'Quantity1
+        '
+        Me.Quantity1.HeaderText = "Quantity"
+        Me.Quantity1.Name = "Quantity1"
         '
         'StockCard1
         '
@@ -342,9 +342,6 @@ Partial Class StockCard1
     Friend WithEvents Office As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Quantity2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
-    Friend WithEvents Quantity1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Referencre As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DateAndTime As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
@@ -362,4 +359,7 @@ Partial Class StockCard1
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents DateAndTime As DataGridViewTextBoxColumn
+    Friend WithEvents Reference As DataGridViewTextBoxColumn
+    Friend WithEvents Quantity1 As DataGridViewTextBoxColumn
 End Class

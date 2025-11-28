@@ -238,7 +238,7 @@ Public Class AdminDashboard
     End Sub
 
     ' Search TextBox
-    Private Sub admin_txtbox_search_TextChanged(sender As Object, e As EventArgs) Handles admin_txtbox_search.TextChanged
+    Private Sub admin_txtbox_search_TextChanged(sender As Object, e As EventArgs) 
         ' Optional: Add search filtering logic here
     End Sub
 
@@ -360,7 +360,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
