@@ -50,6 +50,10 @@ Partial Class UC_UserManagement
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btndelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
+        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
+        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -262,11 +266,58 @@ Partial Class UC_UserManagement
         Me.btndelete.Text = "Delete"
         Me.btndelete.UseVisualStyleBackColor = False
         '
+        'txtSearch
+        '
+        Me.txtSearch.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(561, 73)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(230, 30)
+        Me.txtSearch.TabIndex = 162
+        '
+        'cboRoleFilter
+        '
+        Me.cboRoleFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRoleFilter.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboRoleFilter.FormattingEnabled = True
+        Me.cboRoleFilter.Location = New System.Drawing.Point(809, 72)
+        Me.cboRoleFilter.Name = "cboRoleFilter"
+        Me.cboRoleFilter.Size = New System.Drawing.Size(180, 34)
+        Me.cboRoleFilter.TabIndex = 163
+        '
+        'cboStatusFilter
+        '
+        Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatusFilter.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboStatusFilter.FormattingEnabled = True
+        Me.cboStatusFilter.Location = New System.Drawing.Point(1006, 72)
+        Me.cboStatusFilter.Name = "cboStatusFilter"
+        Me.cboStatusFilter.Size = New System.Drawing.Size(180, 34)
+        Me.cboStatusFilter.TabIndex = 164
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnRefresh.CornerRadius = 15
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRefresh.Location = New System.Drawing.Point(1204, 70)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(119, 34)
+        Me.btnRefresh.TabIndex = 165
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = False
+        '
         'UC_UserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.btnRefresh)
+        Me.Controls.Add(Me.cboStatusFilter)
+        Me.Controls.Add(Me.cboRoleFilter)
+        Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.btndelete)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnCancel)
@@ -303,4 +354,8 @@ Partial Class UC_UserManagement
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents btnEdit As Resources.Controls.RoundedButton
     Friend WithEvents btndelete As Resources.Controls.RoundedButton
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents cboRoleFilter As ComboBox
+    Friend WithEvents cboStatusFilter As ComboBox
+    Friend WithEvents btnRefresh As Resources.Controls.RoundedButton
 End Class

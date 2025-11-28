@@ -1,4 +1,6 @@
 ﻿Imports System
+Imports System.Data
+Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 
 Public Class AddUserManagement
@@ -7,6 +9,7 @@ Public Class AddUserManagement
     Private currentAdminID As Integer?
     Private currentAdminType As String = ""
     Private currentAdminUsername As String = ""
+    Private departmentDirectory As DataTable
 
     Public Sub New()
         InitializeComponent()
@@ -22,12 +25,13 @@ Public Class AddUserManagement
 
     Private Sub AddUserManagement_Load(sender As Object, e As EventArgs)
         PopulateDropdowns()
+        LoadDepartmentOptions()
         ResetForm()
     End Sub
 
     Private Sub PopulateDropdowns()
         If ComboBox1.Items.Count = 0 Then
-            ComboBox1.Items.AddRange(New Object() {"Admin", "SuperAdmin"})
+            ComboBox1.Items.AddRange(New Object() {"Admin", "SuperAdmin", "Custodian", "Staff"})
         End If
 
         If statusAdmin.Items.Count = 0 Then
@@ -37,6 +41,24 @@ Public Class AddUserManagement
         If suffixAdmin.Items.Count = 0 Then
             suffixAdmin.Items.AddRange(New Object() {"", "JR.", "SR.", "II", "III", "IV"})
         End If
+    End Sub
+
+    Private Sub LoadDepartmentOptions()
+        Try
+            departmentDirectory = DatabaseConnection.GetDepartmentLookup()
+            If departmentDirectory Is Nothing Then Return
+
+            Dim suggestions As New AutoCompleteStringCollection()
+            For Each row As DataRow In departmentDirectory.Rows
+                suggestions.Add($"{row("department_id")} - {row("department_name")}")
+            Next
+
+            departmentID.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            departmentID.AutoCompleteSource = AutoCompleteSource.CustomSource
+            departmentID.AutoCompleteCustomSource = suggestions
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadDepartmentOptions Exception: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub ResetForm()
@@ -68,11 +90,7 @@ Public Class AddUserManagement
             Return
         End If
 
-        Dim deptID As Integer? = Nothing
-        Dim deptParsed As Integer
-        If Integer.TryParse(departmentID.Text.Trim(), deptParsed) Then
-            deptID = deptParsed
-        End If
+        Dim deptID As Integer? = ResolveDepartmentId()
 
         Dim employeeCode As String = employeeID.Text.Trim()
         Dim usernameValue As String = If(String.IsNullOrWhiteSpace(employeeCode), email.Text.Trim(), employeeCode)
@@ -81,8 +99,9 @@ Public Class AddUserManagement
         End If
 
         Dim roleValue As String = GetComboValue(ComboBox1, "Admin")
+        Dim userTypeValue As String = If(String.Equals(roleValue, "SuperAdmin", StringComparison.OrdinalIgnoreCase), "SuperAdmin", "Admin")
         Dim statusValue As String = GetComboValue(statusAdmin, "Active")
-        Dim positionValue As String = GetComboValue(positionAdmin, "Administrator")
+        Dim positionValue As String = GetComboValue(positionAdmin, If(String.IsNullOrWhiteSpace(roleValue), "Administrator", roleValue))
 
         Dim success As Boolean = DatabaseConnection.AddAdminAccount(
             firstName.Text.Trim(),
@@ -101,7 +120,7 @@ Public Class AddUserManagement
             provinceCity:=GetComboValue(province),
             dateAssigned:=dateRegistered.Value,
             employeeID:=employeeCode,
-            userType:=roleValue,
+            userType:=userTypeValue,
             status:=statusValue,
             createdByID:=currentAdminID,
             createdByType:=currentAdminType,
@@ -134,11 +153,35 @@ Public Class AddUserManagement
         If String.IsNullOrWhiteSpace(firstName.Text) Then Return "First name is required."
         If String.IsNullOrWhiteSpace(lastName.Text) Then Return "Last name is required."
         If String.IsNullOrWhiteSpace(email.Text) Then Return "Email is required."
+        If Not IsValidEmail(email.Text) Then Return "Please enter a valid email address."
         If ComboBox1.SelectedIndex = -1 Then Return "Please select a user role."
         If statusAdmin.SelectedIndex = -1 Then Return "Please select an account status."
         If String.IsNullOrWhiteSpace(employeeID.Text) Then Return "Employee ID is required."
         If String.IsNullOrWhiteSpace(password.Text) Then Return "Please provide an initial password."
         Return ""
+    End Function
+
+    Private Function ResolveDepartmentId() As Integer?
+        Dim rawValue As String = departmentID.Text.Trim()
+        If String.IsNullOrWhiteSpace(rawValue) Then Return Nothing
+
+        Dim candidate As String = rawValue
+        If rawValue.Contains("-") Then
+            candidate = rawValue.Split("-"c)(0).Trim()
+        End If
+
+        Dim parsed As Integer
+        If Integer.TryParse(candidate, parsed) Then
+            Return parsed
+        End If
+
+        Return Nothing
+    End Function
+
+    Private Shared Function IsValidEmail(value As String) As Boolean
+        If String.IsNullOrWhiteSpace(value) Then Return False
+        Dim pattern As String = "^[^@\s]+@[^@\s]+\.[^@\s]+$"
+        Return Regex.IsMatch(value.Trim(), pattern, RegexOptions.IgnoreCase)
     End Function
 
     Private Shared Function GetComboValue(combo As ComboBox, Optional fallback As String = "") As String

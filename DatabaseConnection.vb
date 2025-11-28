@@ -2039,6 +2039,43 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
+    ''' Permanently remove a property/supply request when appropriate.
+    ''' </summary>
+    Public Shared Function DeletePropertyRequest(requestID As Integer,
+                                                 Optional allowForce As Boolean = False) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            Dim statusFilter As String = "pending','rejected"
+            If allowForce Then
+                statusFilter = "pending','rejected','approved','released','returned"
+            End If
+
+            Dim query As String = "DELETE FROM property_requests WHERE request_id = @requestID AND status IN ('" & statusFilter & "')"
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@requestID", requestID)
+                Dim rows = cmd.ExecuteNonQuery()
+                Return rows > 0
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] DeletePropertyRequest Exception: " & ex.Message)
+            MessageBox.Show("Unable to delete property request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
     ''' Load detailed property/supply requests with optional filters for admin dashboard
     ''' </summary>
     Public Shared Function GetDetailedPropertyRequests(Optional statusFilter As String = "",
@@ -3372,6 +3409,59 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
+    ''' Lightweight list of active admin accounts for assignment dropdowns.
+    ''' </summary>
+    Public Shared Function GetActiveUsersForAssignment(Optional allowedRoles As IEnumerable(Of String) = Nothing) As DataTable
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return dt
+            If Not SafeOpenConnection(conn) Then Return dt
+
+            Dim query As New StringBuilder()
+            query.Append("SELECT user_id, CONCAT(IFNULL(first_name,''),' ',IFNULL(last_name,'')) AS full_name, ")
+            query.Append("user_type, department_id ")
+            query.Append("FROM users WHERE status = 'Active'")
+
+            Dim roleList As List(Of String) = Nothing
+            If allowedRoles IsNot Nothing Then
+                roleList = allowedRoles.Where(Function(r) Not String.IsNullOrWhiteSpace(r)).
+                                        Select(Function(r) r.Trim()).
+                                        ToList()
+                If roleList.Count > 0 Then
+                    query.Append(" AND user_type IN (" & String.Join(",", roleList.Select(Function(_, idx) "@role" & idx)) & ")")
+                End If
+            End If
+
+            query.Append(" ORDER BY full_name")
+
+            Using cmd As New MySqlCommand(query.ToString(), conn)
+                If roleList IsNot Nothing AndAlso roleList.Count > 0 Then
+                    For i As Integer = 0 To roleList.Count - 1
+                        cmd.Parameters.AddWithValue("@role" & i, roleList(i))
+                    Next
+                End If
+
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetActiveUsersForAssignment Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return dt
+    End Function
+
+    ''' <summary>
     ''' Create a new admin or super admin account with full validation.
     ''' </summary>
     Public Shared Function AddAdminAccount(firstName As String,
@@ -3465,6 +3555,13 @@ Public Class DatabaseConnection
 
                 Dim rows As Integer = cmd.ExecuteNonQuery()
                 If rows > 0 Then
+                    If departmentID.HasValue Then
+                        Try
+                            RecalculateDepartmentHeadcount(departmentID.Value)
+                        Catch exHeadcount As Exception
+                            System.Diagnostics.Debug.WriteLine("[v0] AddAdminAccount headcount refresh failed: " & exHeadcount.Message)
+                        End Try
+                    End If
                     LogCrudAction(createdByID, createdByType, createdByName, moduleName, entityLabel, "Create",
                                   $"Created {entityLabel.ToLower()} ({username.Trim()})", ipAddress)
                     Return True
@@ -3518,6 +3615,15 @@ Public Class DatabaseConnection
             conn = GetConnection()
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
+
+            Dim previousDepartmentID As Integer? = Nothing
+            Using currentDeptCmd As New MySqlCommand("SELECT department_id FROM users WHERE user_id = @adminID LIMIT 1", conn)
+                currentDeptCmd.Parameters.AddWithValue("@adminID", adminID)
+                Dim currentDept = currentDeptCmd.ExecuteScalar()
+                If currentDept IsNot Nothing AndAlso currentDept IsNot DBNull.Value Then
+                    previousDepartmentID = Convert.ToInt32(currentDept)
+                End If
+            End Using
 
             Dim duplicateCheck As String = DetectCredentialConflict(conn, username, email, adminID, Nothing)
             If duplicateCheck = "duplicate_username" Then
@@ -3576,6 +3682,16 @@ Public Class DatabaseConnection
 
                 Dim rows As Integer = cmd.ExecuteNonQuery()
                 If rows > 0 Then
+                    Dim targetDepartments As New HashSet(Of Integer)()
+                    If previousDepartmentID.HasValue Then targetDepartments.Add(previousDepartmentID.Value)
+                    If departmentID.HasValue Then targetDepartments.Add(departmentID.Value)
+                    For Each deptId In targetDepartments
+                        Try
+                            RecalculateDepartmentHeadcount(deptId)
+                        Catch exHeadcount As Exception
+                            System.Diagnostics.Debug.WriteLine("[v0] UpdateAdminAccount headcount refresh failed: " & exHeadcount.Message)
+                        End Try
+                    Next
                     LogCrudAction(updatedByID, updatedByType, updatedByName, moduleName, entityLabel, "Update",
                                   $"Updated {entityLabel.ToLower()} ({username.Trim()})", ipAddress)
                     Return True
@@ -3717,12 +3833,28 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
+            Dim affectedDepartmentID As Integer? = Nothing
+            Using infoCmd As New MySqlCommand("SELECT department_id FROM users WHERE user_id = @adminID LIMIT 1", conn)
+                infoCmd.Parameters.AddWithValue("@adminID", adminID)
+                Dim deptValue = infoCmd.ExecuteScalar()
+                If deptValue IsNot Nothing AndAlso deptValue IsNot DBNull.Value Then
+                    affectedDepartmentID = Convert.ToInt32(deptValue)
+                End If
+            End Using
+
             Dim query As String = "DELETE FROM users WHERE user_id = @adminID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
 
                 Dim rows As Integer = cmd.ExecuteNonQuery()
                 If rows > 0 Then
+                    If affectedDepartmentID.HasValue Then
+                        Try
+                            RecalculateDepartmentHeadcount(affectedDepartmentID.Value)
+                        Catch exHeadcount As Exception
+                            System.Diagnostics.Debug.WriteLine("[v0] DeleteAdminAccount headcount refresh failed: " & exHeadcount.Message)
+                        End Try
+                    End If
                     LogCrudAction(performedByID, performedByType, performedByName, moduleName, entityLabel, "Delete",
                                   $"Deleted {entityLabel.ToLower()} #{adminID}", ipAddress)
                     Return True
@@ -4382,7 +4514,8 @@ Public Class DatabaseConnection
     Public Shared Function UpdateProperty(propertyID As Integer, propertyName As String, category As String,
                                          description As String, serialNumber As String, conditionStatus As String,
                                          location As String, custodianID As Integer?, departmentID As Integer?,
-                                         warrantyDetails As String) As Boolean
+                                         warrantyDetails As String, acquisitionDate As Date, acquisitionCost As Decimal,
+                                         supplierName As String, supplierContact As String, status As String) As Boolean
         Dim conn As MySqlConnection = Nothing
         Try
             ' Validate serial number uniqueness (excluding current property)
@@ -4401,7 +4534,8 @@ Public Class DatabaseConnection
             Dim query As String = "UPDATE properties SET property_name = @propertyName, category = @category, " &
                                  "description = @description, serial_number = @serialNumber, condition_status = @conditionStatus, " &
                                  "location = @location, custodian_id = @custodianID, department_id = @departmentID, " &
-                                 "warranty_details = @warrantyDetails, updated_at = NOW() " &
+                                 "warranty_details = @warrantyDetails, acquisition_date = @acquisitionDate, acquisition_cost = @acquisitionCost, " &
+                                 "supplier_name = @supplierName, supplier_contact = @supplierContact, status = @status, updated_at = NOW() " &
                                  "WHERE property_id = @propertyID"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -4415,6 +4549,11 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@warrantyDetails", If(String.IsNullOrEmpty(warrantyDetails), DBNull.Value, warrantyDetails))
+                cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
+                cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
+                cmd.Parameters.AddWithValue("@supplierName", supplierName)
+                cmd.Parameters.AddWithValue("@supplierContact", If(String.IsNullOrEmpty(supplierContact), DBNull.Value, supplierContact))
+                cmd.Parameters.AddWithValue("@status", status)
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -4553,6 +4692,44 @@ Public Class DatabaseConnection
                 End Try
             End If
         End Try
+    End Function
+
+    ''' <summary>
+    ''' Fetch full property information for edit screens.
+    ''' </summary>
+    Public Shared Function GetPropertyForEdit(propertyID As Integer) As DataRow
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return Nothing
+            If Not SafeOpenConnection(conn) Then Return Nothing
+
+            Dim query As String = "SELECT property_id, property_name, category, description, serial_number, supplier_name, supplier_contact, " &
+                                  "condition_status, acquisition_cost, acquisition_date, warranty_details, custodian_id, department_id, " &
+                                  "location, status, created_at, updated_at " &
+                                  "FROM properties WHERE property_id = @propertyID LIMIT 1"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@propertyID", propertyID)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetPropertyForEdit Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        If dt.Rows.Count = 0 Then Return Nothing
+        Return dt.Rows(0)
     End Function
 
     ''' <summary>
@@ -4797,6 +4974,45 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
+    ''' Get a single supply record by ID for edit forms.
+    ''' </summary>
+    Public Shared Function GetSupplyById(supplyID As String) As DataRow
+        If String.IsNullOrWhiteSpace(supplyID) Then Return Nothing
+
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return Nothing
+            If Not SafeOpenConnection(conn) Then Return Nothing
+
+            Dim query As String = "SELECT supply_id, supply_name, category, description, unit_of_measure, quantity_in_stock, reorder_level, " &
+                                  "supplier_name, supplier_contact, unit_cost, location, status, acquisition_date, expiration_date, custodian_id, department_id, remarks " &
+                                  "FROM supplies WHERE supply_id = @supplyID LIMIT 1"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@supplyID", supplyID)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetSupplyById Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        If dt.Rows.Count = 0 Then Return Nothing
+        Return dt.Rows(0)
+    End Function
+
+    ''' <summary>
     ''' Get low stock supplies (quantity &lt;= reorder level) (NEW)
     ''' </summary>
     Public Shared Function GetLowStockSupplies() As DataTable
@@ -4877,7 +5093,7 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Update supply information with automatic total value calculation (ENHANCED)
     ''' </summary>
-    Public Shared Function UpdateSupply(supplyID As Integer, supplyName As String, category As String,
+    Public Shared Function UpdateSupply(supplyID As String, supplyName As String, category As String,
                                        stock As Integer, unitCost As Decimal, status As String, location As String,
                                        Optional description As String = "", Optional reorderLevel As Integer = 0,
                                        Optional supplierName As String = "", Optional supplierContact As String = "") As Boolean
@@ -4940,7 +5156,7 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Delete supply (ENHANCED)
     ''' </summary>
-    Public Shared Function DeleteSupply(supplyID As Integer) As Boolean
+    Public Shared Function DeleteSupply(supplyID As String) As Boolean
         Dim conn As MySqlConnection = Nothing
         Try
             conn = GetConnection()
@@ -5033,6 +5249,102 @@ Public Class DatabaseConnection
         End Try
         Return dt
     End Function
+
+    ''' <summary>
+    ''' Lightweight lookup list for department pickers (optionally include inactive records).
+    ''' </summary>
+    Public Shared Function GetDepartmentLookup(Optional includeInactive As Boolean = False) As DataTable
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return dt
+            If Not SafeOpenConnection(conn) Then Return dt
+
+            Dim query As New StringBuilder()
+            query.Append("SELECT department_id, department_name, status ")
+            query.Append("FROM departments ")
+            If Not includeInactive Then
+                query.Append("WHERE status = 'active' ")
+            End If
+            query.Append("ORDER BY department_name")
+
+            Using cmd As New MySqlCommand(query.ToString(), conn)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetDepartmentLookup Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return dt
+    End Function
+
+    ''' <summary>
+    ''' Recalculate the no_of_employees column based on active admin/staff assignments.
+    ''' </summary>
+    Public Shared Sub RecalculateDepartmentHeadcount(Optional departmentID As Integer? = Nothing)
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return
+            If Not SafeOpenConnection(conn) Then Return
+
+            Dim targets As New List(Of Integer)
+            If departmentID.HasValue Then
+                targets.Add(departmentID.Value)
+            Else
+                Using loadCmd As New MySqlCommand("SELECT department_id FROM departments", conn)
+                    Using reader As MySqlDataReader = loadCmd.ExecuteReader()
+                        While reader.Read()
+                            targets.Add(Convert.ToInt32(reader("department_id")))
+                        End While
+                    End Using
+                End Using
+            End If
+
+            For Each deptId As Integer In targets
+                If deptId <= 0 Then Continue For
+
+                Dim adminCount As Integer = 0
+                Using adminCmd As New MySqlCommand("SELECT COUNT(*) FROM users WHERE department_id = @dept AND status = 'Active'", conn)
+                    adminCmd.Parameters.AddWithValue("@dept", deptId)
+                    adminCount = CInt(adminCmd.ExecuteScalar())
+                End Using
+
+                Dim staffCount As Integer = 0
+                Using staffCmd As New MySqlCommand("SELECT COUNT(*) FROM staff_accounts WHERE department_id = @dept AND status = 'active'", conn)
+                    staffCmd.Parameters.AddWithValue("@dept", deptId)
+                    staffCount = CInt(staffCmd.ExecuteScalar())
+                End Using
+
+                Dim total As Integer = adminCount + staffCount
+                Using updateCmd As New MySqlCommand("UPDATE departments SET no_of_employees = @count, updated_at = NOW() WHERE department_id = @dept", conn)
+                    updateCmd.Parameters.AddWithValue("@count", total)
+                    updateCmd.Parameters.AddWithValue("@dept", deptId)
+                    updateCmd.ExecuteNonQuery()
+                End Using
+            Next
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] RecalculateDepartmentHeadcount Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Sub
 
     ''' <summary>
     ''' Add new department (ENHANCED)
@@ -5149,6 +5461,12 @@ Public Class DatabaseConnection
                     System.Diagnostics.Debug.WriteLine("[v0] Executing INSERT with parameters: Name=" & departmentName & ", Code=" & departmentCode & ", Status=" & status)
                     Dim result As Integer = cmd.ExecuteNonQuery()
                     If result > 0 Then
+                        Try
+                            Dim insertedID As Integer = Convert.ToInt32(cmd.LastInsertedId)
+                            RecalculateDepartmentHeadcount(insertedID)
+                        Catch exId As Exception
+                            System.Diagnostics.Debug.WriteLine("[v0] AddDepartment headcount refresh failed: " & exId.Message)
+                        End Try
                         System.Diagnostics.Debug.WriteLine("[v0] Department Added Successfully: " & departmentName)
                         MessageBox.Show("Department added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         Return True
@@ -5275,6 +5593,11 @@ Public Class DatabaseConnection
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
+                    Try
+                        RecalculateDepartmentHeadcount(departmentID)
+                    Catch exHeadcount As Exception
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateDepartment headcount refresh failed: " & exHeadcount.Message)
+                    End Try
                     System.Diagnostics.Debug.WriteLine("[v0] Department Updated Successfully - ID: " & departmentID)
                     MessageBox.Show("Department updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
@@ -5338,6 +5661,11 @@ Public Class DatabaseConnection
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
+                    Try
+                        RecalculateDepartmentHeadcount(departmentID)
+                    Catch exHeadcount As Exception
+                        System.Diagnostics.Debug.WriteLine("[v0] DeleteDepartment headcount refresh failed: " & exHeadcount.Message)
+                    End Try
                     System.Diagnostics.Debug.WriteLine("[v0] Department Deleted (Inactivated) - ID: " & departmentID)
                     MessageBox.Show("Department deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
