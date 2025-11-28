@@ -297,12 +297,6 @@
     <Compile Include="Forms\Staff\TrnsReturnItem.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Property Management\SAAddProperty.Designer.vb">
-      <DependentUpon>SAAddProperty.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Property Management\SAAddProperty.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.Designer.vb">
       <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </Compile>
@@ -441,12 +435,6 @@
     <Compile Include="Forms\Login\StaffLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Maintenance\AddMaintenance.Designer.vb">
-      <DependentUpon>AddMaintenance.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Maintenance\AddMaintenance.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\AuditReport.Designer.vb">
       <DependentUpon>AuditReport.vb</DependentUpon>
     </Compile>
@@ -507,40 +495,10 @@
     <Compile Include="Forms\SuperAdmin\Reports\StockCard.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Department Management\SAAddDepartmentManagement.Designer.vb">
-      <DependentUpon>SAAddDepartmentManagement.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Department Management\SAAddDepartmentManagement.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Maintenance\SAMaintenace.Designer.vb">
-      <DependentUpon>SAMaintenace.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Maintenance\SAMaintenace.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Supply Management\SAAddSuppliesManagement.Designer.vb">
-      <DependentUpon>SAAddSuppliesManagement.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Supply Management\SAAddSuppliesManagement.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\SuperAdmin\SADashboard.Designer.vb">
       <DependentUpon>SADashboard.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\SuperAdmin\SADashboard.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Department Management\SADepartmentManagement.Designer.vb">
-      <DependentUpon>SADepartmentManagement.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Department Management\SADepartmentManagement.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Property Management\SAPropertyManagement.Designer.vb">
-      <DependentUpon>SAPropertyManagement.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Property Management\SAPropertyManagement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\SAPropertyRequestManagement.Designer.vb">
@@ -553,12 +511,6 @@
       <DependentUpon>SAReportsManagement.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\SuperAdmin\SAReportsManagement.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Supply Management\SASuppliesManagement.Designer.vb">
-      <DependentUpon>SASuppliesManagement.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Supply Management\SASuppliesManagement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\SASystemConfiguration.Designer.vb">
@@ -616,12 +568,6 @@
     <EmbeddedResource Include="Forms\Staff\TrnsReturnItem.resx">
       <DependentUpon>TrnsReturnItem.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Maintenance\AddMaintenance.resx">
-      <DependentUpon>AddMaintenance.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Property Management\SAAddProperty.resx">
-      <DependentUpon>SAAddProperty.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\AuditReport.resx">
       <DependentUpon>AuditReport.vb</DependentUpon>
     </EmbeddedResource>
@@ -655,32 +601,14 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\StockCard.resx">
       <DependentUpon>StockCard.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Department Management\SAAddDepartmentManagement.resx">
-      <DependentUpon>SAAddDepartmentManagement.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Maintenance\SAMaintenace.resx">
-      <DependentUpon>SAMaintenace.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Supply Management\SAAddSuppliesManagement.resx">
-      <DependentUpon>SAAddSuppliesManagement.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\SADashboard.resx">
       <DependentUpon>SADashboard.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Department Management\SADepartmentManagement.resx">
-      <DependentUpon>SADepartmentManagement.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Property Management\SAPropertyManagement.resx">
-      <DependentUpon>SAPropertyManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\SAPropertyRequestManagement.resx">
       <DependentUpon>SAPropertyRequestManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\SAReportsManagement.resx">
       <DependentUpon>SAReportsManagement.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Supply Management\SASuppliesManagement.resx">
-      <DependentUpon>SASuppliesManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\SASystemConfiguration.resx">
       <DependentUpon>SASystemConfiguration.vb</DependentUpon>
@@ -762,6 +690,10 @@
   </ItemGroup>
   <!-- FOLDERS -->
   <ItemGroup>
+    <Folder Include="Forms\SuperAdmin\Department Management\" />
+    <Folder Include="Forms\SuperAdmin\Maintenance\" />
+    <Folder Include="Forms\SuperAdmin\Property Management\" />
+    <Folder Include="Forms\SuperAdmin\Supply Management\" />
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
