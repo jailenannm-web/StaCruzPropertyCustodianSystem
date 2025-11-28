@@ -11,6 +11,7 @@ Public Class EditUser
     Private editingUsername As String = ""
     Private currentUserType As String = "" ' Store the current user type being edited
     Private departmentDirectory As DataTable
+    Private canManageUsers As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -22,11 +23,27 @@ Public Class EditUser
         currentAdminID = adminID
         currentAdminType = adminType
         currentAdminUsername = adminUsername
+        canManageUsers = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
+        ApplyPermissionState()
     End Sub
 
     Private Sub EditUser_Load(sender As Object, e As EventArgs)
         PopulateDropdowns()
         LoadDepartmentOptions()
+        If Not canManageUsers Then
+            canManageUsers = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
+            ApplyPermissionState()
+        End If
+    End Sub
+
+    Private Sub ApplyPermissionState()
+        If um_edituser_save IsNot Nothing Then
+            um_edituser_save.Enabled = canManageUsers
+        End If
+    End Sub
+
+    Private Sub ShowManageRestriction()
+        MessageBox.Show("You have view-only access to User Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     ' Load user data into the fields
@@ -109,6 +126,10 @@ Public Class EditUser
 
     ' Save button
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles um_edituser_save.Click
+        If Not canManageUsers Then
+            ShowManageRestriction()
+            Return
+        End If
         Dim validationMessage As String = ValidateFields()
         If Not String.IsNullOrEmpty(validationMessage) Then
             MessageBox.Show(validationMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)

@@ -32,12 +32,17 @@ Public Class StaffLogin
 
         Dim username As String = txb_Username.Text.Trim()
         Dim password As String = txb_Password.Text
+        SessionContext.Reset()
 
-        ' Try to authenticate as Admin/SuperAdmin first (checks hardcoded credentials first)
+        ' Try to authenticate as Admin/SuperAdmin/Custodian first (checks hardcoded credentials first)
         Dim adminResult As Dictionary(Of String, String) = DatabaseConnection.ValidateAdminLogin(username, password)
 
         If adminResult IsNot Nothing AndAlso adminResult.Count > 0 Then
             Dim userType As String = adminResult("user_type")
+            Dim userIDValue As Integer
+            If adminResult.ContainsKey("user_id") Then Integer.TryParse(adminResult("user_id"), userIDValue)
+
+            SessionContext.SetCurrentUser(userIDValue, username, userType)
             My.Settings.LoggedInuser = username
             My.Settings.Save()
 
@@ -47,13 +52,18 @@ Public Class StaffLogin
                 OpenDashboard(New SADashboard())
             ElseIf userType = "Admin" Then
                 OpenDashboard(New AdminDashboard())
+            ElseIf userType = "Custodian" Then
+                OpenDashboard(New StaffDashboard())
             End If
             Return
         End If
 
-        ' Try to authenticate as Staff
+        ' Try to authenticate as Staff (registered accounts only, not hardcoded Custodian)
         Dim staffResult As Dictionary(Of String, String) = DatabaseConnection.AuthenticateStaff(username, password)
         If staffResult IsNot Nothing AndAlso staffResult.Count > 0 Then
+            Dim staffID As Integer
+            If staffResult.ContainsKey("user_id") Then Integer.TryParse(staffResult("user_id"), staffID)
+            SessionContext.SetCurrentUser(staffID, username, "Staff")
             My.Settings.LoggedInuser = username
             My.Settings.Save()
 

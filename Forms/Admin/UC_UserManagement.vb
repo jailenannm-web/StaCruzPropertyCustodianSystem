@@ -12,6 +12,7 @@ Public Class UC_UserManagement
     Private currentStatusFilter As String = ""
     Private currentSearchText As String = ""
     Private isInitializingFilters As Boolean = False
+    Private canManageUsers As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -23,6 +24,8 @@ Public Class UC_UserManagement
         ConfigureGrid()
         ConfigureFilterControls()
         LoadAdminContext()
+        canManageUsers = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
+        ApplyPermissionState()
         RefreshUserTable()
     End Sub
 
@@ -43,11 +46,8 @@ Public Class UC_UserManagement
         isInitializingFilters = True
         Try
             cboRoleFilter.Items.Clear()
-            cboRoleFilter.Items.Add("All Roles")
-            cboRoleFilter.Items.Add("Admin")
-            cboRoleFilter.Items.Add("SuperAdmin")
+            cboRoleFilter.Items.Add("All Staff")
             cboRoleFilter.Items.Add("Custodian")
-            cboRoleFilter.Items.Add("Staff")
             cboRoleFilter.SelectedIndex = 0
 
             cboStatusFilter.Items.Clear()
@@ -61,6 +61,19 @@ Public Class UC_UserManagement
     End Sub
 
     Private Sub LoadAdminContext()
+        If SessionContext.CurrentUserID.HasValue Then
+            currentAdminID = SessionContext.CurrentUserID
+        End If
+
+        If Not String.IsNullOrWhiteSpace(SessionContext.CurrentRole) Then
+            currentAdminType = SessionContext.CurrentRole
+        End If
+
+        If Not String.IsNullOrWhiteSpace(SessionContext.CurrentUsername) Then
+            currentAdminUsername = SessionContext.CurrentUsername
+            Return
+        End If
+
         Dim savedUsername As String = My.Settings.LoggedInuser
         If String.IsNullOrWhiteSpace(savedUsername) Then Return
 
@@ -83,6 +96,18 @@ Public Class UC_UserManagement
         Else
             currentAdminUsername = savedUsername
         End If
+        canManageUsers = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
+        ApplyPermissionState()
+    End Sub
+
+    Private Sub ApplyPermissionState()
+        btnAdd.Enabled = canManageUsers
+        btnEdit.Enabled = canManageUsers
+        btndelete.Enabled = canManageUsers
+    End Sub
+
+    Private Sub ShowUserManagementRestriction()
+        MessageBox.Show("You have view-only access to User Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     Private Sub RefreshUserTable()
@@ -94,12 +119,19 @@ Public Class UC_UserManagement
                                  Optional statusFilter As String = "")
         Try
             pm_table.Rows.Clear()
-            ' Use GetAllUsers to get Admin, SuperAdmin, and Staff accounts
-            Dim records As DataTable = DatabaseConnection.GetAllUsers(statusFilter, roleFilter, searchKeyword)
+
+            Dim records As DataTable = DatabaseConnection.GetStaffAccounts(statusFilter, Nothing, searchKeyword)
 
             For Each record As DataRow In records.Rows
+                Dim createdValue As Object = Nothing
+                If record.Table.Columns.Contains("created_at") Then
+                    createdValue = record("created_at")
+                ElseIf record.Table.Columns.Contains("created_date") Then
+                    createdValue = record("created_date")
+                End If
+
                 Dim rowIndex As Integer = pm_table.Rows.Add(
-                    SafeValue(record, "user_id"),
+                    SafeValue(record, "staff_id"),
                     SafeValue(record, "first_name"),
                     SafeValue(record, "middle_name"),
                     SafeValue(record, "last_name"),
@@ -108,21 +140,22 @@ Public Class UC_UserManagement
                     SafeValue(record, "department_id"),
                     SafeValue(record, "contact_number"),
                     SafeValue(record, "email"),
-                    SafeValue(record, "user_type"),
-                    SafeValue(record, "province_city"),
-                    SafeValue(record, "municipality"),
-                    SafeValue(record, "barangay"),
-                    SafeValue(record, "house_no_street"),
+                    "Custodian",
+                    "",
+                    "",
+                    "",
+                    SafeValue(record, "address"),
                     "********",
-                    FormatDateValue(record("created_at")),
+                    FormatDateValue(createdValue),
                     SafeValue(record, "status")
                 )
 
                 pm_table.Rows(rowIndex).Tag = New UserRowMetadata With {
                     .Username = SafeValue(record, "username"),
                     .EmployeeID = SafeValue(record, "employee_id"),
-                    .DateAssigned = record("date_assigned"),
-                    .CreatedAt = record("created_at")
+                    .DateAssigned = Nothing,
+                    .CreatedAt = createdValue,
+                    .InternalUserType = "Staff"
                 }
             Next
         Catch ex As Exception
@@ -156,15 +189,21 @@ Public Class UC_UserManagement
     End Function
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-        If parentDashboard IsNot Nothing Then
-            Dim addForm As New AddUserManagement()
-            addForm.SetAuditContext(currentAdminID, currentAdminType, currentAdminUsername)
-            parentDashboard.LoadUserControl(addForm)
+        If Not canManageUsers Then
+            ShowUserManagementRestriction()
+            Return
         End If
+        MessageBox.Show("Custodian accounts are created through the public Register interface. Please direct staff members to the Register page on the login screen.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information)
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If Not canManageUsers Then
+            ShowUserManagementRestriction()
+            Return
+        End If
         Dim selectedRow = GetSelectedRow()
         If selectedRow Is Nothing Then Return
 
@@ -179,6 +218,10 @@ Public Class UC_UserManagement
             Date.TryParse(metadata.DateAssigned.ToString(), dateAssignedValue)
         End If
 
+        Dim internalUserType As String = If(String.IsNullOrWhiteSpace(metadata.InternalUserType),
+                                            selectedRow.Cells("userRole").Value.ToString(),
+                                            metadata.InternalUserType)
+
         editForm.LoadUserData(
             selectedRow.Cells("userID").Value.ToString(),
             selectedRow.Cells("firstName").Value.ToString(),
@@ -190,7 +233,7 @@ Public Class UC_UserManagement
             metadata.EmployeeID,
             selectedRow.Cells("contactNumber").Value.ToString(),
             selectedRow.Cells("email").Value.ToString(),
-            selectedRow.Cells("userRole").Value.ToString(),
+            internalUserType,
             selectedRow.Cells("province").Value.ToString(),
             selectedRow.Cells("municipalityCity").Value.ToString(),
             selectedRow.Cells("barangay").Value.ToString(),
@@ -208,6 +251,10 @@ Public Class UC_UserManagement
     End Sub
 
     Private Sub btndelete_Click(sender As Object, e As EventArgs) Handles btndelete.Click
+        If Not canManageUsers Then
+            ShowUserManagementRestriction()
+            Return
+        End If
         Dim selectedRow = GetSelectedRow()
         If selectedRow Is Nothing Then Return
 
@@ -218,15 +265,18 @@ Public Class UC_UserManagement
         End If
 
         Dim fullName As String = $"{selectedRow.Cells("firstName").Value} {selectedRow.Cells("lastName").Value}".Trim()
-        Dim userType As String = selectedRow.Cells("userRole").Value.ToString()
-        
-        Dim confirmation = MessageBox.Show($"Delete the account for {fullName} ({userType})? This action cannot be undone.",
+        Dim metadata As UserRowMetadata = TryCast(selectedRow.Tag, UserRowMetadata)
+        Dim effectiveUserType As String = If(metadata IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(metadata.InternalUserType),
+                                             metadata.InternalUserType,
+                                             selectedRow.Cells("userRole").Value.ToString())
+
+        Dim confirmation = MessageBox.Show($"Delete the account for {fullName} ({effectiveUserType})? This action cannot be undone.",
                                            "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If confirmation <> DialogResult.Yes Then Return
 
         ' Use unified DeleteUserAccount function that handles both Admin/SuperAdmin and Staff
         Dim success = DatabaseConnection.DeleteUserAccount(userIDValue,
-                                                           userType,
+                                                           effectiveUserType,
                                                            currentAdminID,
                                                            currentAdminType,
                                                            currentAdminUsername,
@@ -293,8 +343,10 @@ Public Class UC_UserManagement
     End Sub
 
     Private Sub pm_table_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles pm_table.CellDoubleClick
-        If e.RowIndex >= 0 Then
+        If e.RowIndex >= 0 AndAlso canManageUsers Then
             btnEdit.PerformClick()
+        ElseIf e.RowIndex >= 0 AndAlso Not canManageUsers Then
+            ShowUserManagementRestriction()
         End If
     End Sub
 
@@ -303,6 +355,7 @@ Public Class UC_UserManagement
         Public Property EmployeeID As String = ""
         Public Property DateAssigned As Object = Nothing
         Public Property CreatedAt As Object = Nothing
+        Public Property InternalUserType As String = ""
     End Class
 
     Private Sub pm_table_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles pm_table.CellContentClick

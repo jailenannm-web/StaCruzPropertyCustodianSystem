@@ -7,6 +7,7 @@ Public Class AddProperty
 
     Private departmentDirectory As DataTable
     Private custodianDirectory As DataTable
+    Private canModifyProperties As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -15,6 +16,9 @@ Public Class AddProperty
     End Sub
 
     Private Sub AddProperty_Load(sender As Object, e As EventArgs)
+        If Not EnsureModifyPermission() Then
+            Return
+        End If
         InitializeForm()
     End Sub
 
@@ -69,6 +73,9 @@ Public Class AddProperty
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If Not canModifyProperties AndAlso Not EnsureModifyPermission() Then
+            Return
+        End If
         Dim validationError = ValidateFields()
         If Not String.IsNullOrEmpty(validationError) Then
             MessageBox.Show(validationError, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -145,5 +152,15 @@ Public Class AddProperty
             Return fallback
         End If
         Return combo.SelectedItem.ToString()
+    End Function
+
+    Private Function EnsureModifyPermission() As Boolean
+        canModifyProperties = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyProperties)
+        If Not canModifyProperties Then
+            MessageBox.Show("You have view-only access to Property Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            NavigateBackToList()
+            Return False
+        End If
+        Return True
     End Function
 End Class

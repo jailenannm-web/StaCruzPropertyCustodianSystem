@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>StaCruzPropertyCustodianSystem.My.MyApplication</StartupObject>
     <RootNamespace>StaCruzPropertyCustodianSystem</RootNamespace>
-    <AssemblyName>sStaCruzPropertyCustodianSystem</AssemblyName>
+    <AssemblyName>StaCruzPropertyCustodianSystem</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>sStaCruzPropertyCustodianSystem.xml</DocumentationFile>
+    <DocumentationFile>StaCruzPropertyCustodianSystem.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -33,7 +33,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>sStaCruzPropertyCustodianSystem.xml</DocumentationFile>
+    <DocumentationFile>StaCruzPropertyCustodianSystem.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -108,8 +108,9 @@
       <HintPath>packages\ZstdSharp.Port.0.8.6\lib\net462\ZstdSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <!-- STAFF FORMS -->
+  <!-- CORE MODULES & FORMS -->
   <ItemGroup>
+    <Compile Include="SessionContext.vb" />
     <Compile Include="DatabaseConnection.vb" />
     <Compile Include="Forms\Admin\AddDepartment.Designer.vb">
       <DependentUpon>AddDepartment.vb</DependentUpon>

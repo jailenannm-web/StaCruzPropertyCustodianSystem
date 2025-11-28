@@ -5,9 +5,13 @@ Imports System.Windows.Forms
 Public Class UC_PropertyRequestManagement
     Inherits UserControl
 
+    Private canModifyRequests As Boolean = False
+
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
+        canModifyRequests = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyRequests)
+        ApplyRolePermissions()
     End Sub
 
 
@@ -23,7 +27,21 @@ Public Class UC_PropertyRequestManagement
         End If
     End Sub
 
+    Private Sub ApplyRolePermissions()
+        btnAdd.Enabled = canModifyRequests
+        btnDelete.Enabled = canModifyRequests
+        assign.Enabled = canModifyRequests
+    End Sub
+
+    Private Sub ShowRequestRestrictionMessage()
+        MessageBox.Show("You have view-only access to Property Request Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If Not canModifyRequests Then
+            ShowRequestRestrictionMessage()
+            Return
+        End If
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New AddPropertyRequest())
@@ -31,10 +49,18 @@ Public Class UC_PropertyRequestManagement
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If Not canModifyRequests Then
+            ShowRequestRestrictionMessage()
+            Return
+        End If
         MessageBox.Show("Delete request functionality here")
     End Sub
 
     Private Sub assign_Click(sender As Object, e As EventArgs) Handles assign.Click
+        If Not canModifyRequests Then
+            ShowRequestRestrictionMessage()
+            Return
+        End If
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New AssignRequestManagement())
