@@ -29,6 +29,16 @@ Partial Class UC_UserManagement
     Private Sub InitializeComponent()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
         Me.pm_table = New System.Windows.Forms.DataGridView()
+        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btndelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
+        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
+        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlusermanagement = New System.Windows.Forms.Label()
         Me.userID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.firstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.middleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -46,14 +56,6 @@ Partial Class UC_UserManagement
         Me.password = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateRegistered = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.accountStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btndelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
-        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
-        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -82,6 +84,137 @@ Partial Class UC_UserManagement
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 27
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnCancel.CornerRadius = 15
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Location = New System.Drawing.Point(719, 709)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
+        Me.btnCancel.TabIndex = 159
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnAdd.CornerRadius = 15
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAdd.Location = New System.Drawing.Point(1178, 709)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(145, 34)
+        Me.btnAdd.TabIndex = 158
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = False
+        '
+        'btnEdit
+        '
+        Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnEdit.CornerRadius = 15
+        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnEdit.Location = New System.Drawing.Point(872, 709)
+        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(145, 34)
+        Me.btnEdit.TabIndex = 160
+        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.UseVisualStyleBackColor = False
+        '
+        'btndelete
+        '
+        Me.btndelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btndelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btndelete.CornerRadius = 15
+        Me.btndelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btndelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btndelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btndelete.Location = New System.Drawing.Point(1025, 709)
+        Me.btndelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btndelete.Name = "btndelete"
+        Me.btndelete.Size = New System.Drawing.Size(145, 34)
+        Me.btndelete.TabIndex = 161
+        Me.btndelete.Text = "Delete"
+        Me.btndelete.UseVisualStyleBackColor = False
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(561, 73)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(230, 30)
+        Me.txtSearch.TabIndex = 162
+        '
+        'cboRoleFilter
+        '
+        Me.cboRoleFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRoleFilter.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboRoleFilter.FormattingEnabled = True
+        Me.cboRoleFilter.Location = New System.Drawing.Point(809, 72)
+        Me.cboRoleFilter.Name = "cboRoleFilter"
+        Me.cboRoleFilter.Size = New System.Drawing.Size(180, 34)
+        Me.cboRoleFilter.TabIndex = 163
+        '
+        'cboStatusFilter
+        '
+        Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatusFilter.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboStatusFilter.FormattingEnabled = True
+        Me.cboStatusFilter.Location = New System.Drawing.Point(1006, 72)
+        Me.cboStatusFilter.Name = "cboStatusFilter"
+        Me.cboStatusFilter.Size = New System.Drawing.Size(180, 34)
+        Me.cboStatusFilter.TabIndex = 164
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnRefresh.CornerRadius = 15
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRefresh.Location = New System.Drawing.Point(1204, 70)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(119, 34)
+        Me.btnRefresh.TabIndex = 165
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = False
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(43, 709)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.TabIndex = 167
+        Me.Label1.Text = "TOTAL:"
+        '
+        'ttlusermanagement
+        '
+        Me.ttlusermanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ttlusermanagement.AutoSize = True
+        Me.ttlusermanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ttlusermanagement.ForeColor = System.Drawing.Color.Black
+        Me.ttlusermanagement.Location = New System.Drawing.Point(194, 709)
+        Me.ttlusermanagement.Name = "ttlusermanagement"
+        Me.ttlusermanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttlusermanagement.TabIndex = 166
+        Me.ttlusermanagement.Text = "1"
         '
         'userID
         '
@@ -202,118 +335,13 @@ Partial Class UC_UserManagement
         Me.accountStatus.Name = "accountStatus"
         Me.accountStatus.Width = 90
         '
-        'btnCancel
-        '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnCancel.CornerRadius = 15
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(719, 709)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
-        Me.btnCancel.TabIndex = 159
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = False
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
-        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1178, 709)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(145, 34)
-        Me.btnAdd.TabIndex = 158
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = False
-        '
-        'btnEdit
-        '
-        Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnEdit.CornerRadius = 15
-        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(872, 709)
-        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(145, 34)
-        Me.btnEdit.TabIndex = 160
-        Me.btnEdit.Text = "Edit"
-        Me.btnEdit.UseVisualStyleBackColor = False
-        '
-        'btndelete
-        '
-        Me.btndelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btndelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btndelete.CornerRadius = 15
-        Me.btndelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btndelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btndelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btndelete.Location = New System.Drawing.Point(1025, 709)
-        Me.btndelete.Margin = New System.Windows.Forms.Padding(4)
-        Me.btndelete.Name = "btndelete"
-        Me.btndelete.Size = New System.Drawing.Size(145, 34)
-        Me.btndelete.TabIndex = 161
-        Me.btndelete.Text = "Delete"
-        Me.btndelete.UseVisualStyleBackColor = False
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearch.Location = New System.Drawing.Point(561, 73)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(230, 30)
-        Me.txtSearch.TabIndex = 162
-        '
-        'cboRoleFilter
-        '
-        Me.cboRoleFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboRoleFilter.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboRoleFilter.FormattingEnabled = True
-        Me.cboRoleFilter.Location = New System.Drawing.Point(809, 72)
-        Me.cboRoleFilter.Name = "cboRoleFilter"
-        Me.cboRoleFilter.Size = New System.Drawing.Size(180, 34)
-        Me.cboRoleFilter.TabIndex = 163
-        '
-        'cboStatusFilter
-        '
-        Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboStatusFilter.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboStatusFilter.FormattingEnabled = True
-        Me.cboStatusFilter.Location = New System.Drawing.Point(1006, 72)
-        Me.cboStatusFilter.Name = "cboStatusFilter"
-        Me.cboStatusFilter.Size = New System.Drawing.Size(180, 34)
-        Me.cboStatusFilter.TabIndex = 164
-        '
-        'btnRefresh
-        '
-        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnRefresh.CornerRadius = 15
-        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnRefresh.Location = New System.Drawing.Point(1204, 70)
-        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(119, 34)
-        Me.btnRefresh.TabIndex = 165
-        Me.btnRefresh.Text = "Refresh"
-        Me.btnRefresh.UseVisualStyleBackColor = False
-        '
         'UC_UserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ttlusermanagement)
         Me.Controls.Add(Me.btnRefresh)
         Me.Controls.Add(Me.cboStatusFilter)
         Me.Controls.Add(Me.cboRoleFilter)
@@ -333,6 +361,16 @@ Partial Class UC_UserManagement
     End Sub
     Friend WithEvents admin_label_Dashboard As Label
     Friend WithEvents pm_table As DataGridView
+    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
+    Friend WithEvents btnEdit As Resources.Controls.RoundedButton
+    Friend WithEvents btndelete As Resources.Controls.RoundedButton
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents cboRoleFilter As ComboBox
+    Friend WithEvents cboStatusFilter As ComboBox
+    Friend WithEvents btnRefresh As Resources.Controls.RoundedButton
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ttlusermanagement As Label
     Friend WithEvents userID As DataGridViewTextBoxColumn
     Friend WithEvents firstName As DataGridViewTextBoxColumn
     Friend WithEvents middleName As DataGridViewTextBoxColumn
@@ -350,12 +388,4 @@ Partial Class UC_UserManagement
     Friend WithEvents password As DataGridViewTextBoxColumn
     Friend WithEvents dateRegistered As DataGridViewTextBoxColumn
     Friend WithEvents accountStatus As DataGridViewTextBoxColumn
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
-    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
-    Friend WithEvents btnEdit As Resources.Controls.RoundedButton
-    Friend WithEvents btndelete As Resources.Controls.RoundedButton
-    Friend WithEvents txtSearch As TextBox
-    Friend WithEvents cboRoleFilter As ComboBox
-    Friend WithEvents cboStatusFilter As ComboBox
-    Friend WithEvents btnRefresh As Resources.Controls.RoundedButton
 End Class

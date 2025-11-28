@@ -3412,31 +3412,46 @@ Public Class DatabaseConnection
     ''' Lightweight list of active admin accounts for assignment dropdowns.
     ''' </summary>
     Public Shared Function GetActiveUsersForAssignment(Optional allowedRoles As IEnumerable(Of String) = Nothing) As DataTable
+
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing
+
         Try
             conn = GetConnection()
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
             Dim query As New StringBuilder()
-            query.Append("SELECT user_id, CONCAT(IFNULL(first_name,''),' ',IFNULL(last_name,'')) AS full_name, ")
+
+            query.Append("SELECT user_id, ")
+            query.Append("CONCAT(IFNULL(first_name,''),' ',IFNULL(last_name,'')) AS full_name, ")
             query.Append("user_type, department_id ")
             query.Append("FROM users WHERE status = 'Active'")
 
             Dim roleList As List(Of String) = Nothing
+
             If allowedRoles IsNot Nothing Then
-                roleList = allowedRoles.Where(Function(r) Not String.IsNullOrWhiteSpace(r)).
-                                        Select(Function(r) r.Trim()).
-                                        ToList()
+                roleList = allowedRoles _
+                .Where(Function(r) Not String.IsNullOrWhiteSpace(r)) _
+                .Select(Function(r) r.Trim()) _
+                .ToList()
+
                 If roleList.Count > 0 Then
-                    query.Append(" AND user_type IN (" & String.Join(",", roleList.Select(Function(_, idx) "@role" & idx)) & ")")
+                    query.Append(" AND user_type IN (")
+
+                    For i As Integer = 0 To roleList.Count - 1
+                        If i > 0 Then query.Append(",")
+                        query.Append("@role" & i)
+                    Next
+
+                    query.Append(")")
                 End If
             End If
 
             query.Append(" ORDER BY full_name")
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
+
                 If roleList IsNot Nothing AndAlso roleList.Count > 0 Then
                     For i As Integer = 0 To roleList.Count - 1
                         cmd.Parameters.AddWithValue("@role" & i, roleList(i))
@@ -3446,9 +3461,12 @@ Public Class DatabaseConnection
                 Using adapter As New MySqlDataAdapter(cmd)
                     adapter.Fill(dt)
                 End Using
+
             End Using
+
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] GetActiveUsersForAssignment Exception: " & ex.Message)
+
         Finally
             If conn IsNot Nothing Then
                 Try
@@ -3458,7 +3476,9 @@ Public Class DatabaseConnection
                 End Try
             End If
         End Try
+
         Return dt
+
     End Function
 
     ''' <summary>

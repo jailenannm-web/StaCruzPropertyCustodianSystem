@@ -238,11 +238,29 @@ Public Class UC_UserManagement
         currentSearchText = ""
         currentRoleFilter = ""
         currentStatusFilter = ""
-        If txtSearch IsNot Nothing Then txtSearch.Clear()
-        If cboRoleFilter IsNot Nothing AndAlso cboRoleFilter.Items.Count > 0 Then cboRoleFilter.SelectedIndex = 0
-        If cboStatusFilter Is Not Nothing AndAlso cboStatusFilter.Items.Count > 0 Then cboStatusFilter.SelectedIndex = 0
+
+        ' Make sure txtSearch is a TextBox, not an Integer!
+        If TypeOf txtSearch Is TextBox Then
+            CType(txtSearch, TextBox).Clear()
+        End If
+
+        ' Make sure cboRoleFilter is a ComboBox
+        If TypeOf cboRoleFilter Is ComboBox Then
+            If cboRoleFilter.Items.Count > 0 Then
+                cboRoleFilter.SelectedIndex = 0
+            End If
+        End If
+
+        ' Make sure cboStatusFilter is a ComboBox
+        If TypeOf cboStatusFilter Is ComboBox Then
+            If cboStatusFilter.Items.Count > 0 Then
+                cboStatusFilter.SelectedIndex = 0
+            End If
+        End If
+
         RefreshUserTable()
     End Sub
+
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         ResetFilters()
@@ -282,4 +300,11 @@ Public Class UC_UserManagement
         Public Property CreatedAt As Object = Nothing
     End Class
 
+    Private Sub pm_table_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles pm_table.CellContentClick
+
+    End Sub
+
+    Private Sub UC_UserManagement_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

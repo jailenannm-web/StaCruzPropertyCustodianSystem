@@ -38,6 +38,8 @@ Partial Class ViewDepartmentSupply
         Me.Custodian = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WarrantyStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NextMaintenanceSchedule = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttldepartmentemanagementsupply = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -160,11 +162,37 @@ Partial Class ViewDepartmentSupply
         Me.NextMaintenanceSchedule.Name = "NextMaintenanceSchedule"
         Me.NextMaintenanceSchedule.Width = 125
         '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(47, 711)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.TabIndex = 159
+        Me.Label1.Text = "TOTAL:"
+        '
+        'ttldepartmentemanagementsupply
+        '
+        Me.ttldepartmentemanagementsupply.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ttldepartmentemanagementsupply.AutoSize = True
+        Me.ttldepartmentemanagementsupply.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ttldepartmentemanagementsupply.ForeColor = System.Drawing.Color.Black
+        Me.ttldepartmentemanagementsupply.Location = New System.Drawing.Point(198, 711)
+        Me.ttldepartmentemanagementsupply.Name = "ttldepartmentemanagementsupply"
+        Me.ttldepartmentemanagementsupply.Size = New System.Drawing.Size(38, 58)
+        Me.ttldepartmentemanagementsupply.TabIndex = 158
+        Me.ttldepartmentemanagementsupply.Text = "1"
+        '
         'ViewDepartmentSupply
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ttldepartmentemanagementsupply)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Name = "ViewDepartmentSupply"
@@ -191,4 +219,6 @@ Partial Class ViewDepartmentSupply
     Friend WithEvents Custodian As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents WarrantyStatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents NextMaintenanceSchedule As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ttldepartmentemanagementsupply As System.Windows.Forms.Label
 End Class

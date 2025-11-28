@@ -48,6 +48,8 @@ Partial Class UC_PropertyManagement1
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlpropertymanagement = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -288,11 +290,37 @@ Partial Class UC_PropertyManagement1
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
         '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(69, 988)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.TabIndex = 159
+        Me.Label1.Text = "TOTAL:"
+        '
+        'ttlpropertymanagement
+        '
+        Me.ttlpropertymanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ttlpropertymanagement.AutoSize = True
+        Me.ttlpropertymanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ttlpropertymanagement.ForeColor = System.Drawing.Color.Black
+        Me.ttlpropertymanagement.Location = New System.Drawing.Point(220, 988)
+        Me.ttlpropertymanagement.Name = "ttlpropertymanagement"
+        Me.ttlpropertymanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttlpropertymanagement.TabIndex = 158
+        Me.ttlpropertymanagement.Text = "1"
+        '
         'UC_PropertyManagement1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ttlpropertymanagement)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
@@ -336,4 +364,6 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents dateCreated As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dateUpdated As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents updatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ttlpropertymanagement As System.Windows.Forms.Label
 End Class
