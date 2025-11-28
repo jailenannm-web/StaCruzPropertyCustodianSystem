@@ -120,8 +120,9 @@
       <HintPath>packages\ZstdSharp.Port.0.8.6\lib\net462\ZstdSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <!-- STAFF FORMS -->
+  <!-- CORE MODULES & FORMS -->
   <ItemGroup>
+    <Compile Include="SessionContext.vb" />
     <Compile Include="DatabaseConnection.vb" />
     <Compile Include="Forms\Admin\AddDepartment.Designer.vb">
       <DependentUpon>AddDepartment.vb</DependentUpon>

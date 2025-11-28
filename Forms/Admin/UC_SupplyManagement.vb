@@ -13,6 +13,7 @@ Public Class UC_SupplyManagement
 
     Private originalData As DataTable
     Private selectedSupplyID As Integer = -1
+    Private canModifySupplies As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -54,6 +55,10 @@ Public Class UC_SupplyManagement
         AddHandler pm_txtbox_search.LostFocus, AddressOf SearchTextBox_LostFocus
         pm_txtbox_search.Text = "Search"
 
+        ' Track role-based permissions
+        canModifySupplies = SessionContext.HasPermission(SessionContext.ModulePermission.ModifySupplies)
+        ApplyRolePermissions()
+
         ' Initialize filter dropdowns
         InitializeFilters()
 
@@ -62,6 +67,16 @@ Public Class UC_SupplyManagement
 
         ' Wire up event handlers
         AddHandler pm_table.SelectionChanged, AddressOf pm_table_SelectionChanged
+    End Sub
+
+    Private Sub ApplyRolePermissions()
+        btnAdd.Enabled = canModifySupplies
+        btnEdit.Enabled = canModifySupplies
+        btnDelete.Enabled = canModifySupplies
+    End Sub
+
+    Private Sub ShowSupplyViewOnlyWarning()
+        MessageBox.Show("You have view-only access to Supplies Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     Private Sub InitializeFilters()
@@ -207,6 +222,10 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If Not canModifySupplies Then
+            ShowSupplyViewOnlyWarning()
+            Return
+        End If
         ' Get reference to the parent dashboard form
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
 
@@ -222,6 +241,10 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If Not canModifySupplies Then
+            ShowSupplyViewOnlyWarning()
+            Return
+        End If
         If pm_table.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a supply to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -248,6 +271,10 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If Not canModifySupplies Then
+            ShowSupplyViewOnlyWarning()
+            Return
+        End If
         If pm_table.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a supply to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
