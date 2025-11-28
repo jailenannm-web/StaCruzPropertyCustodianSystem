@@ -187,12 +187,8 @@ Partial Class SADashboard
     End Sub
 
     Private Sub btnSuppliesManagement_Click(sender As Object, e As EventArgs) Handles btnSuppliesManagement.Click
-        ' --- This code changes the active button color ---
         SetActiveButton(btnSuppliesManagement)
-
-        ' --- THIS IS THE NEW CODE ---
-        ' Load your new profile form
-        loadFormIntoPanel(New SASuppliesManagement())
+        LoadUserControl(New UC_SupplyManagement())
     End Sub
 
     Private Sub SAChart_TotalSupplies_Click(sender As Object, e As EventArgs)
