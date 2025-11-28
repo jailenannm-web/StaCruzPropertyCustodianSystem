@@ -55,6 +55,8 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnView = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -324,11 +326,37 @@ Partial Class UC_DepartmentManagement
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = False
         '
+        'ttldepartmentmanagement
+        '
+        Me.ttldepartmentmanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ttldepartmentmanagement.AutoSize = True
+        Me.ttldepartmentmanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ttldepartmentmanagement.ForeColor = System.Drawing.Color.Black
+        Me.ttldepartmentmanagement.Location = New System.Drawing.Point(190, 963)
+        Me.ttldepartmentmanagement.Name = "ttldepartmentmanagement"
+        Me.ttldepartmentmanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttldepartmentmanagement.TabIndex = 152
+        Me.ttldepartmentmanagement.Text = "1"
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(39, 963)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.TabIndex = 153
+        Me.Label1.Text = "TOTAL:"
+        '
         'UC_DepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ttldepartmentmanagement)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
@@ -376,4 +404,6 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents updated_at As DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents btnView As Resources.Controls.RoundedButton
+    Friend WithEvents ttldepartmentmanagement As Label
+    Friend WithEvents Label1 As Label
 End Class

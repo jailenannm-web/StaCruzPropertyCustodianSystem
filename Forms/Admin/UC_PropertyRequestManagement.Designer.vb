@@ -50,6 +50,8 @@ Partial Class UC_PropertyRequestManagement
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -278,11 +280,37 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_btn_update.Text = "Update"
         Me.prm_btn_update.UseVisualStyleBackColor = False
         '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(47, 947)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.TabIndex = 159
+        Me.Label1.Text = "TOTAL:"
+        '
+        'ttlpropertyrequestmanagement
+        '
+        Me.ttlpropertyrequestmanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ttlpropertyrequestmanagement.AutoSize = True
+        Me.ttlpropertyrequestmanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ttlpropertyrequestmanagement.ForeColor = System.Drawing.Color.Black
+        Me.ttlpropertyrequestmanagement.Location = New System.Drawing.Point(198, 947)
+        Me.ttlpropertyrequestmanagement.Name = "ttlpropertyrequestmanagement"
+        Me.ttlpropertyrequestmanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttlpropertyrequestmanagement.TabIndex = 158
+        Me.ttlpropertyrequestmanagement.Text = "1"
+        '
         'UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ttlpropertyrequestmanagement)
         Me.Controls.Add(Me.assign)
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnDeny)
@@ -322,4 +350,6 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents penalty As DataGridViewTextBoxColumn
     Friend WithEvents updated_at As DataGridViewTextBoxColumn
     Friend WithEvents assign As Resources.Controls.RoundedButton
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ttlpropertyrequestmanagement As Label
 End Class

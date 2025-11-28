@@ -8,6 +8,10 @@ Public Class UC_UserManagement
     Private currentAdminID As Integer?
     Private currentAdminType As String = ""
     Private currentAdminUsername As String = ""
+    Private currentRoleFilter As String = ""
+    Private currentStatusFilter As String = ""
+    Private currentSearchText As String = ""
+    Private isInitializingFilters As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -17,6 +21,7 @@ Public Class UC_UserManagement
 
     Private Sub UC_UserManagement_Load(sender As Object, e As EventArgs)
         ConfigureGrid()
+        ConfigureFilterControls()
         LoadAdminContext()
         RefreshUserTable()
     End Sub
@@ -27,6 +32,32 @@ Public Class UC_UserManagement
         pm_table.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         pm_table.MultiSelect = False
         pm_table.Rows.Clear()
+        pm_table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        For Each column As DataGridViewColumn In pm_table.Columns
+            column.SortMode = DataGridViewColumnSortMode.Automatic
+        Next
+    End Sub
+
+    Private Sub ConfigureFilterControls()
+        If cboRoleFilter Is Nothing OrElse cboStatusFilter Is Nothing Then Return
+        isInitializingFilters = True
+        Try
+            cboRoleFilter.Items.Clear()
+            cboRoleFilter.Items.Add("All Roles")
+            cboRoleFilter.Items.Add("Admin")
+            cboRoleFilter.Items.Add("SuperAdmin")
+            cboRoleFilter.Items.Add("Custodian")
+            cboRoleFilter.Items.Add("Staff")
+            cboRoleFilter.SelectedIndex = 0
+
+            cboStatusFilter.Items.Clear()
+            cboStatusFilter.Items.Add("All Status")
+            cboStatusFilter.Items.Add("Active")
+            cboStatusFilter.Items.Add("Inactive")
+            cboStatusFilter.SelectedIndex = 0
+        Finally
+            isInitializingFilters = False
+        End Try
     End Sub
 
     Private Sub LoadAdminContext()
@@ -54,10 +85,16 @@ Public Class UC_UserManagement
         End If
     End Sub
 
-    Private Sub RefreshUserTable(Optional searchKeyword As String = "")
+    Private Sub RefreshUserTable()
+        RefreshUserTable(currentSearchText, currentRoleFilter, currentStatusFilter)
+    End Sub
+
+    Private Sub RefreshUserTable(Optional searchKeyword As String = "",
+                                 Optional roleFilter As String = "",
+                                 Optional statusFilter As String = "")
         Try
             pm_table.Rows.Clear()
-            Dim records As DataTable = DatabaseConnection.GetAdminAccounts("", "", searchKeyword)
+            Dim records As DataTable = DatabaseConnection.GetAdminAccounts(statusFilter, roleFilter, searchKeyword)
 
             For Each record As DataRow In records.Rows
                 Dim rowIndex As Integer = pm_table.Rows.Add(
@@ -197,8 +234,63 @@ Public Class UC_UserManagement
         End If
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub ResetFilters()
+        currentSearchText = ""
+        currentRoleFilter = ""
+        currentStatusFilter = ""
+
+        ' Make sure txtSearch is a TextBox, not an Integer!
+        If TypeOf txtSearch Is TextBox Then
+            CType(txtSearch, TextBox).Clear()
+        End If
+
+        ' Make sure cboRoleFilter is a ComboBox
+        If TypeOf cboRoleFilter Is ComboBox Then
+            If cboRoleFilter.Items.Count > 0 Then
+                cboRoleFilter.SelectedIndex = 0
+            End If
+        End If
+
+        ' Make sure cboStatusFilter is a ComboBox
+        If TypeOf cboStatusFilter Is ComboBox Then
+            If cboStatusFilter.Items.Count > 0 Then
+                cboStatusFilter.SelectedIndex = 0
+            End If
+        End If
+
         RefreshUserTable()
+    End Sub
+
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        ResetFilters()
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        currentSearchText = txtSearch.Text.Trim()
+        RefreshUserTable(currentSearchText, currentRoleFilter, currentStatusFilter)
+    End Sub
+
+    Private Sub cboRoleFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoleFilter.SelectedIndexChanged
+        If isInitializingFilters Then Return
+        currentRoleFilter = If(cboRoleFilter.SelectedIndex <= 0, "", cboRoleFilter.SelectedItem.ToString())
+        RefreshUserTable(currentSearchText, currentRoleFilter, currentStatusFilter)
+    End Sub
+
+    Private Sub cboStatusFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStatusFilter.SelectedIndexChanged
+        If isInitializingFilters Then Return
+        currentStatusFilter = If(cboStatusFilter.SelectedIndex <= 0, "", cboStatusFilter.SelectedItem.ToString())
+        RefreshUserTable(currentSearchText, currentRoleFilter, currentStatusFilter)
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        RefreshUserTable()
+    End Sub
+
+    Private Sub pm_table_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles pm_table.CellDoubleClick
+        If e.RowIndex >= 0 Then
+            btnEdit.PerformClick()
+        End If
     End Sub
 
     Private Class UserRowMetadata
@@ -207,6 +299,10 @@ Public Class UC_UserManagement
         Public Property DateAssigned As Object = Nothing
         Public Property CreatedAt As Object = Nothing
     End Class
+
+    Private Sub pm_table_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles pm_table.CellContentClick
+
+    End Sub
 
     Private Sub UC_UserManagement_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
