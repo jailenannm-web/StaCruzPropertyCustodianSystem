@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
@@ -874,31 +874,157 @@ Public Class DatabaseConnection
 
 
     ''' <summary>
-    ''' Validate admin/super admin login credentials with password hashing
+    ''' Validate admin/super admin login credentials with password hashing.
+    ''' Checks hardcoded credentials FIRST before querying the database.
     ''' </summary>
     Public Shared Function ValidateAdminLogin(username As String, password As String, Optional ipAddress As String = "") As Dictionary(Of String, String)
         Dim result As New Dictionary(Of String, String)
-        Dim conn As MySqlConnection = Nothing
-        Try
-            If String.IsNullOrEmpty(username) OrElse String.IsNullOrEmpty(password) Then
-                System.Diagnostics.Debug.WriteLine("[v0] Admin Login - Empty credentials")
+        
+        If String.IsNullOrEmpty(username) OrElse String.IsNullOrEmpty(password) Then
+            System.Diagnostics.Debug.WriteLine("[v0] Admin Login - Empty credentials")
+            Return result
+        End If
+
+        ' HARDCODED CREDENTIALS - Check these FIRST before database query
+        Dim superAdminUsername As String = "superadmin"
+        Dim superAdminPassword As String = "SuperAdmin@2025"
+        Dim adminUsername As String = "admin"
+        Dim adminPassword As String = "Admin@2025"
+
+        Dim normalizedUsername As String = username.Trim().ToLower()
+
+        ' Check hardcoded SuperAdmin credentials first
+        If normalizedUsername = superAdminUsername.ToLower() Then
+            If password = superAdminPassword Then
+                ' Ensure account exists in database and get full details
+                Dim conn As MySqlConnection = Nothing
+                Try
+                    conn = GetConnection()
+                    If conn IsNot Nothing AndAlso SafeOpenConnection(conn) Then
+                        InitializeDefaultAccounts()
+                        
+                        Dim query As String = "SELECT user_id, first_name, last_name, email, username, user_type, password_encrypted " &
+                                             "FROM users WHERE LOWER(username) = LOWER(@username) " &
+                                             "AND user_type = 'SuperAdmin' " &
+                                             "AND LOWER(status) = 'active'"
+                        Using cmd As New MySqlCommand(query, conn)
+                            cmd.Parameters.AddWithValue("@username", superAdminUsername)
+                            Dim hardcodedSuccess As Boolean = False
+                            Using reader As MySqlDataReader = cmd.ExecuteReader()
+                                If reader.Read() Then
+                                    result("user_id") = reader("user_id").ToString()
+                                    result("first_name") = reader("first_name").ToString()
+                                    result("last_name") = reader("last_name").ToString()
+                                    result("email") = reader("email").ToString()
+                                    result("username") = reader("username").ToString()
+                                    result("user_type") = "SuperAdmin"
+                                    hardcodedSuccess = True
+                                    System.Diagnostics.Debug.WriteLine("[v0] SuperAdmin Login Success (Hardcoded): " & superAdminUsername)
+                                End If
+                            End Using
+
+                            If hardcodedSuccess Then
+                                Using updateCmd As New MySqlCommand("UPDATE users SET last_login = NOW() WHERE user_id = @userID", conn)
+                                    updateCmd.Parameters.AddWithValue("@userID", result("user_id"))
+                                    updateCmd.ExecuteNonQuery()
+                                End Using
+
+                                LogActivity(CInt(result("user_id")), "SuperAdmin", result("username"), "LOGIN", "Authentication", "SuperAdmin successfully logged in", ipAddress)
+                            End If
+                        End Using
+                    End If
+                Finally
+                    If conn IsNot Nothing Then
+                        Try
+                            If conn.State = ConnectionState.Open Then conn.Close()
+                            conn.Dispose()
+                        Catch
+                        End Try
+                    End If
+                End Try
+
+                If result.Count > 0 Then Return result
+            Else
+                System.Diagnostics.Debug.WriteLine("[v0] Admin Login Failed - Invalid password for hardcoded SuperAdmin")
+                LogActivity(Nothing, "SuperAdmin", username, "LOGIN_FAILED", "Authentication", "Invalid password attempt", ipAddress)
                 Return result
             End If
+        End If
 
-            conn = GetConnection()
-            If conn Is Nothing Then Return result
+        ' Check hardcoded Admin credentials
+        If normalizedUsername = adminUsername.ToLower() Then
+            If password = adminPassword Then
+                ' Ensure account exists in database and get full details
+                Dim conn As MySqlConnection = Nothing
+                Try
+                    conn = GetConnection()
+                    If conn IsNot Nothing AndAlso SafeOpenConnection(conn) Then
+                        InitializeDefaultAccounts()
 
-            If Not SafeOpenConnection(conn) Then Return result
+                        Dim query As String = "SELECT user_id, first_name, last_name, email, username, user_type, password_encrypted " &
+                                             "FROM users WHERE LOWER(username) = LOWER(@username) " &
+                                             "AND user_type = 'Admin' " &
+                                             "AND LOWER(status) = 'active'"
+                        Using cmd As New MySqlCommand(query, conn)
+                            cmd.Parameters.AddWithValue("@username", adminUsername)
+                            Dim hardcodedAdminSuccess As Boolean = False
+                            Using reader As MySqlDataReader = cmd.ExecuteReader()
+                                If reader.Read() Then
+                                    result("user_id") = reader("user_id").ToString()
+                                    result("first_name") = reader("first_name").ToString()
+                                    result("last_name") = reader("last_name").ToString()
+                                    result("email") = reader("email").ToString()
+                                    result("username") = reader("username").ToString()
+                                    result("user_type") = "Admin"
+                                    hardcodedAdminSuccess = True
+                                    System.Diagnostics.Debug.WriteLine("[v0] Admin Login Success (Hardcoded): " & adminUsername)
+                                End If
+                            End Using
 
-            ' Query admin/superadmin from users table
-            ' Ensure default accounts exist before attempting validation
+                            If hardcodedAdminSuccess Then
+                                Using updateCmd As New MySqlCommand("UPDATE users SET last_login = NOW() WHERE user_id = @userID", conn)
+                                    updateCmd.Parameters.AddWithValue("@userID", result("user_id"))
+                                    updateCmd.ExecuteNonQuery()
+                                End Using
+
+                                LogActivity(CInt(result("user_id")), "Admin", result("username"), "LOGIN", "Authentication", "Admin successfully logged in", ipAddress)
+                            End If
+                        End Using
+                    End If
+                Finally
+                    If conn IsNot Nothing Then
+                        Try
+                            If conn.State = ConnectionState.Open Then conn.Close()
+                            conn.Dispose()
+                        Catch
+                        End Try
+                    End If
+                End Try
+                
+                If result.Count > 0 Then Return result
+            Else
+                System.Diagnostics.Debug.WriteLine("[v0] Admin Login Failed - Invalid password for hardcoded Admin")
+                LogActivity(Nothing, "Admin", username, "LOGIN_FAILED", "Authentication", "Invalid password attempt", ipAddress)
+                Return result
+            End If
+        End If
+
+        ' If not hardcoded credentials, check database for other Admin/SuperAdmin accounts
+        Dim conn2 As MySqlConnection = Nothing
+        Try
+            conn2 = GetConnection()
+            If conn2 Is Nothing Then Return result
+
+            If Not SafeOpenConnection(conn2) Then Return result
+
+            ' Ensure default accounts exist
             InitializeDefaultAccounts()
 
             Dim query As String = "SELECT user_id, first_name, last_name, email, username, user_type, password_encrypted " &
                                  "FROM users WHERE LOWER(username) = LOWER(@username) " &
                                  "AND (user_type = 'Admin' OR user_type = 'SuperAdmin') " &
                                  "AND LOWER(status) = 'active'"
-            Using cmd As New MySqlCommand(query, conn)
+            Using cmd As New MySqlCommand(query, conn2)
                 cmd.Parameters.AddWithValue("@username", username.Trim())
 
                 Using reader As MySqlDataReader = cmd.ExecuteReader()
@@ -912,7 +1038,7 @@ Public Class DatabaseConnection
                             result("email") = reader("email").ToString()
                             result("username") = reader("username").ToString()
                             result("user_type") = reader("user_type").ToString()
-                            System.Diagnostics.Debug.WriteLine("[v0] Admin Login Success: " & username & " (" & result("user_type") & ")")
+                            System.Diagnostics.Debug.WriteLine("[v0] Admin Login Success (Database): " & username & " (" & result("user_type") & ")")
                         Else
                             System.Diagnostics.Debug.WriteLine("[v0] Admin Login Failed - Invalid password: " & username)
                             LogActivity(Nothing, "Admin", username, "LOGIN_FAILED", "Authentication", "Invalid password attempt", ipAddress)
@@ -926,7 +1052,7 @@ Public Class DatabaseConnection
 
             ' If login succeeded, update last login and log activity
             If result.Count > 0 Then
-                Using updateCmd As New MySqlCommand("UPDATE users SET last_login = NOW() WHERE user_id = @userID", conn)
+                Using updateCmd As New MySqlCommand("UPDATE users SET last_login = NOW() WHERE user_id = @userID", conn2)
                     updateCmd.Parameters.AddWithValue("@userID", result("user_id"))
                     updateCmd.ExecuteNonQuery()
                 End Using
@@ -940,10 +1066,10 @@ Public Class DatabaseConnection
             System.Diagnostics.Debug.WriteLine("[v0] Admin Login Exception: " & ex.Message)
             MessageBox.Show("Error validating login: " & ex.Message, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            If conn IsNot Nothing Then
+            If conn2 IsNot Nothing Then
                 Try
-                    If conn.State = ConnectionState.Open Then conn.Close()
-                    conn.Dispose()
+                    If conn2.State = ConnectionState.Open Then conn2.Close()
+                    conn2.Dispose()
                 Catch ex As Exception
                     System.Diagnostics.Debug.WriteLine("[v0] Error closing connection in ValidateAdminLogin: " & ex.Message)
                 End Try
@@ -1056,59 +1182,44 @@ Public Class DatabaseConnection
                 Return False
             End If
 
-            ' Insert based on position
-            If position = "Super Admin" OrElse position = "Admin" Then
-                ' Insert into users table for Admin accounts
-                Dim userType As String = If(position = "Super Admin", "SuperAdmin", "Admin")
-                Dim insertQuery As String = "INSERT INTO users (first_name, last_name, email, username, password_encrypted, user_type, status, created_at) " &
-                                           "VALUES (@firstName, @lastName, @email, @username, @password, @userType, 'active', NOW())"
-
-                Using cmd As New MySqlCommand(insertQuery, conn)
-                    cmd.Parameters.AddWithValue("@firstName", firstName)
-                    cmd.Parameters.AddWithValue("@lastName", lastName)
-                    cmd.Parameters.AddWithValue("@email", email)
-                    cmd.Parameters.AddWithValue("@username", username)
-                    cmd.Parameters.AddWithValue("@password", hashedPassword)
-                    cmd.Parameters.AddWithValue("@userType", userType)
-
-                    Dim result As Integer = cmd.ExecuteNonQuery()
-                    If result > 0 Then
-                        System.Diagnostics.Debug.WriteLine("[v0] SUCCESS - " & userType & " registered: " & username)
-                        MessageBox.Show("Registration successful! Your " & userType & " account has been created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Return True
-                    Else
-                        MessageBox.Show("Registration failed. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        System.Diagnostics.Debug.WriteLine("[v0] FAILED - No rows inserted for " & userType)
-                        Return False
-                    End If
-                End Using
-            Else
-                ' Insert into staff_accounts table for Staff
-                Dim insertQuery As String = "INSERT INTO staff_accounts (first_name, last_name, email, contact_number, house_no_street, department_id, username, password_encrypted, status, created_at) " &
-                                           "VALUES (@firstName, @lastName, @email, @contactNumber, @address, @departmentID, @username, @password, 'Active', NOW())"
-
-                Using cmd As New MySqlCommand(insertQuery, conn)
-                    cmd.Parameters.AddWithValue("@firstName", firstName)
-                    cmd.Parameters.AddWithValue("@lastName", lastName)
-                    cmd.Parameters.AddWithValue("@email", email)
-                    cmd.Parameters.AddWithValue("@contactNumber", contactNumber)
-                    cmd.Parameters.AddWithValue("@address", address)
-                    cmd.Parameters.AddWithValue("@departmentID", If(String.IsNullOrEmpty(departmentID), DBNull.Value, departmentID))
-                    cmd.Parameters.AddWithValue("@username", username)
-                    cmd.Parameters.AddWithValue("@password", hashedPassword)
-
-                    Dim result As Integer = cmd.ExecuteNonQuery()
-                    If result > 0 Then
-                        System.Diagnostics.Debug.WriteLine("[v0] SUCCESS - Staff registered: " & username)
-                        MessageBox.Show("Registration successful! Your Staff account has been created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Return True
-                    Else
-                        MessageBox.Show("Registration failed. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        System.Diagnostics.Debug.WriteLine("[v0] FAILED - No rows inserted for Staff")
-                        Return False
-                    End If
-                End Using
+            ' REGISTRATION IS RESTRICTED TO STAFF ONLY
+            ' Admin and SuperAdmin accounts cannot be created through registration
+            ' They must be created by system administrators through User Management
+            
+            ' Reject any attempt to register as Admin or SuperAdmin
+            If position = "Super Admin" OrElse position = "SuperAdmin" OrElse position = "Admin" Then
+                MessageBox.Show("Registration of Admin or SuperAdmin accounts is not allowed through this interface. " &
+                               "Only Staff accounts can be registered. Please contact a system administrator if you need an Admin account.", 
+                               "Registration Restricted", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                System.Diagnostics.Debug.WriteLine("[v0] Registration Rejected - Attempted to register " & position & " account: " & username)
+                Return False
             End If
+
+            ' Insert into staff_accounts table for Staff only
+            Dim insertQuery As String = "INSERT INTO staff_accounts (first_name, last_name, email, contact_number, house_no_street, department_id, username, password_encrypted, status, created_at) " &
+                                       "VALUES (@firstName, @lastName, @email, @contactNumber, @address, @departmentID, @username, @password, 'Active', NOW())"
+
+            Using cmd As New MySqlCommand(insertQuery, conn)
+                cmd.Parameters.AddWithValue("@firstName", firstName)
+                cmd.Parameters.AddWithValue("@lastName", lastName)
+                cmd.Parameters.AddWithValue("@email", email)
+                cmd.Parameters.AddWithValue("@contactNumber", contactNumber)
+                cmd.Parameters.AddWithValue("@address", address)
+                cmd.Parameters.AddWithValue("@departmentID", If(String.IsNullOrEmpty(departmentID), DBNull.Value, departmentID))
+                cmd.Parameters.AddWithValue("@username", username)
+                cmd.Parameters.AddWithValue("@password", hashedPassword)
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+                If result > 0 Then
+                    System.Diagnostics.Debug.WriteLine("[v0] SUCCESS - Staff registered: " & username)
+                    MessageBox.Show("Registration successful! Your Staff account has been created. You can now log in with your credentials.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Return True
+                Else
+                    MessageBox.Show("Registration failed. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    System.Diagnostics.Debug.WriteLine("[v0] FAILED - No rows inserted for Staff")
+                    Return False
+                End If
+            End Using
         Catch ex As MySqlException When ex.Message.Contains("ReplicationManager")
             System.Diagnostics.Debug.WriteLine("[v0] Registration - ReplicationManager error: " & ex.Message)
             MessageBox.Show("Database connection issue during registration. Please try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -3368,6 +3479,205 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
+    ''' Retrieve ALL users (Admin, SuperAdmin, and Staff) with optional filters.
+    ''' Combines data from both users and staff_accounts tables.
+    ''' </summary>
+    Public Shared Function GetAllUsers(Optional statusFilter As String = "",
+                                       Optional roleFilter As String = "",
+                                       Optional searchKeyword As String = "") As DataTable
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return dt
+            If Not SafeOpenConnection(conn) Then Return dt
+
+            ' Create unified schema for the result table
+            dt.Columns.Add("user_id", GetType(Integer))
+            dt.Columns.Add("first_name", GetType(String))
+            dt.Columns.Add("middle_name", GetType(String))
+            dt.Columns.Add("last_name", GetType(String))
+            dt.Columns.Add("suffix", GetType(String))
+            dt.Columns.Add("position", GetType(String))
+            dt.Columns.Add("department_id", GetType(String))
+            dt.Columns.Add("contact_number", GetType(String))
+            dt.Columns.Add("email", GetType(String))
+            dt.Columns.Add("username", GetType(String))
+            dt.Columns.Add("user_type", GetType(String))
+            dt.Columns.Add("status", GetType(String))
+            dt.Columns.Add("employee_id", GetType(String))
+            dt.Columns.Add("date_assigned", GetType(Object))
+            dt.Columns.Add("last_login", GetType(Object))
+            dt.Columns.Add("created_at", GetType(Object))
+            dt.Columns.Add("house_no_street", GetType(String))
+            dt.Columns.Add("barangay", GetType(String))
+            dt.Columns.Add("municipality", GetType(String))
+            dt.Columns.Add("province_city", GetType(String))
+
+            ' Build WHERE clause conditions
+            Dim adminWhereConditions As New List(Of String)()
+            Dim staffWhereConditions As New List(Of String)()
+
+            If Not String.IsNullOrEmpty(statusFilter) Then
+                adminWhereConditions.Add("LOWER(status) = LOWER(@status)")
+                staffWhereConditions.Add("LOWER(status) = LOWER(@status)")
+            End If
+
+            If Not String.IsNullOrEmpty(roleFilter) Then
+                If roleFilter = "Admin" OrElse roleFilter = "SuperAdmin" Then
+                    adminWhereConditions.Add("user_type = @role")
+                ElseIf roleFilter = "Staff" Then
+                    ' Only query staff_accounts for Staff filter
+                End If
+            End If
+
+            If Not String.IsNullOrEmpty(searchKeyword) Then
+                Dim searchPattern As String = "%" & searchKeyword.Trim().ToLower() & "%"
+                adminWhereConditions.Add("(LOWER(first_name) LIKE @search OR LOWER(last_name) LIKE @search OR " &
+                                        "LOWER(username) LIKE @search OR LOWER(email) LIKE @search OR " &
+                                        "LOWER(COALESCE(employee_id, '')) LIKE @search)")
+                staffWhereConditions.Add("(LOWER(first_name) LIKE @search OR LOWER(last_name) LIKE @search OR " &
+                                        "LOWER(username) LIKE @search OR LOWER(email) LIKE @search)")
+            End If
+
+            ' Query Admin/SuperAdmin accounts from users table
+            Dim adminQuery As New StringBuilder()
+            adminQuery.Append("SELECT user_id, first_name, COALESCE(middle_name, '') as middle_name, last_name, ")
+            adminQuery.Append("COALESCE(suffix, '') as suffix, COALESCE(position, '') as position, ")
+            adminQuery.Append("COALESCE(department_id, '') as department_id, COALESCE(contact_number, '') as contact_number, ")
+            adminQuery.Append("email, username, user_type, status, ")
+            adminQuery.Append("COALESCE(employee_id, '') as employee_id, date_assigned, last_login, created_at, ")
+            adminQuery.Append("COALESCE(house_no_street, '') as house_no_street, COALESCE(barangay, '') as barangay, ")
+            adminQuery.Append("COALESCE(municipality, '') as municipality, COALESCE(province_city, '') as province_city ")
+            adminQuery.Append("FROM users WHERE user_type IN ('Admin','SuperAdmin')")
+
+            If adminWhereConditions.Count > 0 Then
+                adminQuery.Append(" AND " & String.Join(" AND ", adminWhereConditions))
+            End If
+
+            ' Query Staff accounts from staff_accounts table
+            Dim staffQuery As New StringBuilder()
+            staffQuery.Append("SELECT staff_id as user_id, first_name, '' as middle_name, last_name, ")
+            staffQuery.Append("'' as suffix, COALESCE(position, 'Staff') as position, ")
+            staffQuery.Append("COALESCE(CAST(department_id AS CHAR), '') as department_id, COALESCE(contact_number, '') as contact_number, ")
+            staffQuery.Append("email, username, 'Staff' as user_type, status, ")
+            staffQuery.Append("'' as employee_id, NULL as date_assigned, NULL as last_login, created_at as created_at, ")
+            staffQuery.Append("COALESCE(house_no_street, '') as house_no_street, '' as barangay, ")
+            staffQuery.Append("'' as municipality, '' as province_city ")
+            staffQuery.Append("FROM staff_accounts WHERE 1=1")
+
+            If staffWhereConditions.Count > 0 Then
+                staffQuery.Append(" AND " & String.Join(" AND ", staffWhereConditions))
+            End If
+
+            ' If role filter is set to Admin or SuperAdmin, skip staff query
+            If String.IsNullOrEmpty(roleFilter) OrElse roleFilter = "Staff" Then
+                Using cmd As New MySqlCommand(staffQuery.ToString(), conn)
+                    If Not String.IsNullOrEmpty(statusFilter) Then cmd.Parameters.AddWithValue("@status", statusFilter)
+                    If Not String.IsNullOrEmpty(searchKeyword) Then cmd.Parameters.AddWithValue("@search", "%" & searchKeyword.Trim().ToLower() & "%")
+
+                    Using adapter As New MySqlDataAdapter(cmd)
+                        Dim staffRecords As New DataTable()
+                        adapter.Fill(staffRecords)
+
+                        For Each record As DataRow In staffRecords.Rows
+                            Dim row As DataRow = dt.NewRow()
+                            row("user_id") = record("user_id")
+                            row("first_name") = SafeDbValue(record("first_name"))
+                            row("middle_name") = SafeDbValue(record("middle_name"))
+                            row("last_name") = SafeDbValue(record("last_name"))
+                            row("suffix") = SafeDbValue(record("suffix"))
+                            row("position") = SafeDbValue(record("position"))
+                            row("department_id") = SafeDbValue(record("department_id"))
+                            row("contact_number") = SafeDbValue(record("contact_number"))
+                            row("email") = SafeDbValue(record("email"))
+                            row("username") = SafeDbValue(record("username"))
+                            row("user_type") = "Staff"
+                            row("status") = SafeDbValue(record("status"))
+                            row("employee_id") = SafeDbValue(record("employee_id"))
+                            row("date_assigned") = If(record.IsNull("date_assigned"), DBNull.Value, record("date_assigned"))
+                            row("last_login") = If(record.IsNull("last_login"), DBNull.Value, record("last_login"))
+                            row("created_at") = If(record.IsNull("created_at"), DBNull.Value, record("created_at"))
+                            row("house_no_street") = SafeDbValue(record("house_no_street"))
+                            row("barangay") = SafeDbValue(record("barangay"))
+                            row("municipality") = SafeDbValue(record("municipality"))
+                            row("province_city") = SafeDbValue(record("province_city"))
+                            dt.Rows.Add(row)
+                        Next
+                    End Using
+                End Using
+            End If
+
+            ' If role filter is not set to Staff only, query admin accounts
+            If String.IsNullOrEmpty(roleFilter) OrElse roleFilter = "Admin" OrElse roleFilter = "SuperAdmin" Then
+                Using cmd As New MySqlCommand(adminQuery.ToString(), conn)
+                    If Not String.IsNullOrEmpty(statusFilter) Then cmd.Parameters.AddWithValue("@status", statusFilter)
+                    If Not String.IsNullOrEmpty(roleFilter) AndAlso (roleFilter = "Admin" OrElse roleFilter = "SuperAdmin") Then
+                        cmd.Parameters.AddWithValue("@role", roleFilter)
+                    End If
+                    If Not String.IsNullOrEmpty(searchKeyword) Then cmd.Parameters.AddWithValue("@search", "%" & searchKeyword.Trim().ToLower() & "%")
+
+                    Using adapter As New MySqlDataAdapter(cmd)
+                        Dim adminRecords As New DataTable()
+                        adapter.Fill(adminRecords)
+
+                        For Each record As DataRow In adminRecords.Rows
+                            Dim row As DataRow = dt.NewRow()
+                            row("user_id") = record("user_id")
+                            row("first_name") = SafeDbValue(record("first_name"))
+                            row("middle_name") = SafeDbValue(record("middle_name"))
+                            row("last_name") = SafeDbValue(record("last_name"))
+                            row("suffix") = SafeDbValue(record("suffix"))
+                            row("position") = SafeDbValue(record("position"))
+                            row("department_id") = SafeDbValue(record("department_id"))
+                            row("contact_number") = SafeDbValue(record("contact_number"))
+                            row("email") = SafeDbValue(record("email"))
+                            row("username") = SafeDbValue(record("username"))
+                            row("user_type") = SafeDbValue(record("user_type"))
+                            row("status") = SafeDbValue(record("status"))
+                            row("employee_id") = SafeDbValue(record("employee_id"))
+                            row("date_assigned") = If(record.IsNull("date_assigned"), DBNull.Value, record("date_assigned"))
+                            row("last_login") = If(record.IsNull("last_login"), DBNull.Value, record("last_login"))
+                            row("created_at") = If(record.IsNull("created_at"), DBNull.Value, record("created_at"))
+                            row("house_no_street") = SafeDbValue(record("house_no_street"))
+                            row("barangay") = SafeDbValue(record("barangay"))
+                            row("municipality") = SafeDbValue(record("municipality"))
+                            row("province_city") = SafeDbValue(record("province_city"))
+                            dt.Rows.Add(row)
+                        Next
+                    End Using
+                End Using
+            End If
+
+            ' Sort by created_at descending
+            Dim dv As DataView = dt.DefaultView
+            dv.Sort = "created_at DESC"
+            dt = dv.ToTable()
+
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllUsers Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        Return dt
+    End Function
+
+    ''' <summary>
+    ''' Helper function to safely get database values
+    ''' </summary>
+    Private Shared Function SafeDbValue(value As Object) As String
+        If value Is Nothing OrElse IsDBNull(value) Then Return ""
+        Return value.ToString()
+    End Function
+
+    ''' <summary>
     ''' Retrieve minimal admin context (id/type/username) using username stored in session.
     ''' </summary>
     Public Shared Function GetAdminContextByUsername(username As String) As Dictionary(Of String, String)
@@ -3883,6 +4193,347 @@ Public Class DatabaseConnection
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] DeleteAdminAccount Exception: " & ex.Message)
             MessageBox.Show("Error deleting admin account: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        Return False
+    End Function
+
+    ''' <summary>
+    ''' Delete a user account (Admin, SuperAdmin, or Staff) based on user type.
+    ''' </summary>
+    Public Shared Function DeleteUserAccount(userID As Integer,
+                                              userType As String,
+                                              performedByID As Integer?,
+                                              performedByType As String,
+                                              performedByName As String,
+                                              Optional ipAddress As String = "",
+                                              Optional moduleName As String = "User Management",
+                                              Optional entityLabel As String = "User Account") As Boolean
+        If performedByID.HasValue AndAlso performedByID.Value = userID Then
+            MessageBox.Show("You cannot delete the account that is currently logged in.", "Operation Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            Dim affectedDepartmentID As Integer? = Nothing
+            Dim query As String = ""
+
+            ' Determine which table to delete from based on user type
+            If userType = "Admin" OrElse userType = "SuperAdmin" Then
+                ' Get department_id before deletion for headcount recalculation
+                Using infoCmd As New MySqlCommand("SELECT department_id FROM users WHERE user_id = @userID LIMIT 1", conn)
+                    infoCmd.Parameters.AddWithValue("@userID", userID)
+                    Dim deptValue = infoCmd.ExecuteScalar()
+                    If deptValue IsNot Nothing AndAlso deptValue IsNot DBNull.Value Then
+                        affectedDepartmentID = Convert.ToInt32(deptValue)
+                    End If
+                End Using
+
+                query = "DELETE FROM users WHERE user_id = @userID"
+            ElseIf userType = "Staff" Then
+                ' Get department_id before deletion for headcount recalculation
+                Using infoCmd As New MySqlCommand("SELECT department_id FROM staff_accounts WHERE staff_id = @userID LIMIT 1", conn)
+                    infoCmd.Parameters.AddWithValue("@userID", userID)
+                    Dim deptValue = infoCmd.ExecuteScalar()
+                    If deptValue IsNot Nothing AndAlso deptValue IsNot DBNull.Value Then
+                        affectedDepartmentID = Convert.ToInt32(deptValue)
+                    End If
+                End Using
+
+                query = "DELETE FROM staff_accounts WHERE staff_id = @userID"
+            Else
+                MessageBox.Show("Invalid user type specified.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@userID", userID)
+
+                Dim rows As Integer = cmd.ExecuteNonQuery()
+                If rows > 0 Then
+                    If affectedDepartmentID.HasValue Then
+                        Try
+                            RecalculateDepartmentHeadcount(affectedDepartmentID.Value)
+                        Catch exHeadcount As Exception
+                            System.Diagnostics.Debug.WriteLine("[v0] DeleteUserAccount headcount refresh failed: " & exHeadcount.Message)
+                        End Try
+                    End If
+                    LogCrudAction(performedByID, performedByType, performedByName, moduleName, entityLabel, "Delete",
+                                  $"Deleted {entityLabel.ToLower()} #{userID} ({userType})", ipAddress)
+                    Return True
+                End If
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] DeleteUserAccount Exception: " & ex.Message)
+            MessageBox.Show("Error deleting user account: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        Return False
+    End Function
+
+    ''' <summary>
+    ''' Reset password for any user account (Admin, SuperAdmin, or Staff) based on user type.
+    ''' </summary>
+    Public Shared Function ResetUserPassword(userID As Integer,
+                                              userType As String,
+                                              newPassword As String,
+                                              Optional performedByID As Integer? = Nothing,
+                                              Optional performedByType As String = "",
+                                              Optional performedByName As String = "",
+                                              Optional ipAddress As String = "",
+                                              Optional moduleName As String = "User Management",
+                                              Optional entityLabel As String = "User Account") As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            Dim hashedPassword As String = PasswordHelper.HashPassword(newPassword)
+            If String.IsNullOrEmpty(hashedPassword) Then
+                MessageBox.Show("Failed to hash the password. Please try again.", "Password Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            Dim query As String = ""
+            
+            ' Determine which table to update based on user type
+            If userType = "Admin" OrElse userType = "SuperAdmin" Then
+                query = "UPDATE users SET password_encrypted = @password, updated_at = NOW() WHERE user_id = @userID"
+            ElseIf userType = "Staff" Then
+                query = "UPDATE staff_accounts SET password_encrypted = @password WHERE staff_id = @userID"
+            Else
+                MessageBox.Show("Invalid user type specified.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@password", hashedPassword)
+                cmd.Parameters.AddWithValue("@userID", userID)
+
+                Dim rows As Integer = cmd.ExecuteNonQuery()
+                If rows > 0 Then
+                    LogCrudAction(performedByID, performedByType, performedByName, moduleName, entityLabel, "Reset",
+                                  $"Reset password for {entityLabel.ToLower()} #{userID} ({userType})", ipAddress)
+                    Return True
+                End If
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] ResetUserPassword Exception: " & ex.Message)
+            MessageBox.Show("Error resetting password: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        Return False
+    End Function
+
+    ''' <summary>
+    ''' Update a user account (Admin, SuperAdmin, or Staff) based on user type.
+    ''' </summary>
+    Public Shared Function UpdateUserAccount(userID As Integer,
+                                              userType As String,
+                                              firstName As String,
+                                              lastName As String,
+                                              email As String,
+                                              username As String,
+                                              Optional middleName As String = "",
+                                              Optional suffix As String = "",
+                                              Optional position As String = "",
+                                              Optional departmentID As Integer? = Nothing,
+                                              Optional contactNumber As String = "",
+                                              Optional houseNoStreet As String = "",
+                                              Optional barangay As String = "",
+                                              Optional municipality As String = "",
+                                              Optional provinceCity As String = "",
+                                              Optional dateAssigned As Date? = Nothing,
+                                              Optional employeeID As String = "",
+                                              Optional newUserType As String = "",
+                                              Optional status As String = "Active",
+                                              Optional updatedByID As Integer? = Nothing,
+                                              Optional updatedByType As String = "",
+                                              Optional updatedByName As String = "",
+                                              Optional ipAddress As String = "",
+                                              Optional moduleName As String = "User Management",
+                                              Optional entityLabel As String = "User Account") As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            ' Check for duplicate username/email
+            Dim excludeAdminID As Integer? = Nothing
+            Dim excludeStaffID As Integer? = Nothing
+            If userType = "Admin" OrElse userType = "SuperAdmin" Then
+                excludeAdminID = userID
+            ElseIf userType = "Staff" Then
+                excludeStaffID = userID
+            End If
+            
+            Dim duplicateCheck As String = DetectCredentialConflict(conn, username, email, excludeAdminID, excludeStaffID)
+            If duplicateCheck = "duplicate_username" Then
+                MessageBox.Show("Username already exists. Please choose a different username.", "Duplicate Username", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            ElseIf duplicateCheck = "duplicate_email" Then
+                MessageBox.Show("Email already exists. Please use a different email address.", "Duplicate Email", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+
+            Dim previousDepartmentID As Integer? = Nothing
+            Dim query As String = ""
+
+            ' Build update query based on user type
+            If userType = "Admin" OrElse userType = "SuperAdmin" Then
+                ' Get previous department for headcount recalculation
+                Using infoCmd As New MySqlCommand("SELECT department_id FROM users WHERE user_id = @userID LIMIT 1", conn)
+                    infoCmd.Parameters.AddWithValue("@userID", userID)
+                    Dim deptValue = infoCmd.ExecuteScalar()
+                    If deptValue IsNot Nothing AndAlso deptValue IsNot DBNull.Value Then
+                        previousDepartmentID = Convert.ToInt32(deptValue)
+                    End If
+                End Using
+
+                Dim normalizedUserType As String = If(String.IsNullOrEmpty(newUserType), userType, If(String.Equals(newUserType, "SuperAdmin", StringComparison.OrdinalIgnoreCase), "SuperAdmin", "Admin"))
+                Dim normalizedStatus As String = If(String.Equals(status, "Inactive", StringComparison.OrdinalIgnoreCase), "inactive", "active")
+
+                query = "UPDATE users SET first_name = @firstName, middle_name = @middleName, last_name = @lastName, " &
+                       "suffix = @suffix, position = @position, department_id = @departmentID, contact_number = @contactNumber, " &
+                       "email = @email, username = @username, house_no_street = @houseNo, barangay = @barangay, " &
+                       "municipality = @municipality, province_city = @province, date_assigned = @dateAssigned, " &
+                       "employee_id = @employeeID, user_type = @userType, status = @status, updated_at = NOW() " &
+                       "WHERE user_id = @userID"
+
+                Using cmd As New MySqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@firstName", firstName.Trim())
+                    cmd.Parameters.AddWithValue("@middleName", If(String.IsNullOrWhiteSpace(middleName), DBNull.Value, middleName.Trim()))
+                    cmd.Parameters.AddWithValue("@lastName", lastName.Trim())
+                    cmd.Parameters.AddWithValue("@suffix", If(String.IsNullOrWhiteSpace(suffix), DBNull.Value, suffix.Trim()))
+                    cmd.Parameters.AddWithValue("@position", If(String.IsNullOrWhiteSpace(position), "Administrator", position.Trim()))
+                    cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrWhiteSpace(contactNumber), DBNull.Value, contactNumber.Trim()))
+                    cmd.Parameters.AddWithValue("@email", email.Trim())
+                    cmd.Parameters.AddWithValue("@username", username.Trim())
+                    cmd.Parameters.AddWithValue("@houseNo", If(String.IsNullOrWhiteSpace(houseNoStreet), DBNull.Value, houseNoStreet.Trim()))
+                    cmd.Parameters.AddWithValue("@barangay", If(String.IsNullOrWhiteSpace(barangay), DBNull.Value, barangay.Trim()))
+                    cmd.Parameters.AddWithValue("@municipality", If(String.IsNullOrWhiteSpace(municipality), DBNull.Value, municipality.Trim()))
+                    cmd.Parameters.AddWithValue("@province", If(String.IsNullOrWhiteSpace(provinceCity), DBNull.Value, provinceCity.Trim()))
+                    cmd.Parameters.AddWithValue("@dateAssigned", If(dateAssigned.HasValue, dateAssigned.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@employeeID", If(String.IsNullOrWhiteSpace(employeeID), DBNull.Value, employeeID.Trim()))
+                    cmd.Parameters.AddWithValue("@userType", normalizedUserType)
+                    cmd.Parameters.AddWithValue("@status", normalizedStatus)
+                    cmd.Parameters.AddWithValue("@userID", userID)
+
+                    Dim rows As Integer = cmd.ExecuteNonQuery()
+                    If rows > 0 Then
+                        ' Recalculate department headcount if department changed
+                        If previousDepartmentID.HasValue AndAlso previousDepartmentID <> departmentID Then
+                            Try
+                                RecalculateDepartmentHeadcount(previousDepartmentID.Value)
+                            Catch exHeadcount As Exception
+                                System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount headcount refresh failed: " & exHeadcount.Message)
+                            End Try
+                        End If
+                        If departmentID.HasValue Then
+                            Try
+                                RecalculateDepartmentHeadcount(departmentID.Value)
+                            Catch exHeadcount As Exception
+                                System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount headcount refresh failed: " & exHeadcount.Message)
+                            End Try
+                        End If
+
+                        LogCrudAction(updatedByID, updatedByType, updatedByName, moduleName, entityLabel, "Update",
+                                      $"Updated {entityLabel.ToLower()} #{userID} ({normalizedUserType})", ipAddress)
+                        Return True
+                    End If
+                End Using
+            ElseIf userType = "Staff" Then
+                ' Get previous department for headcount recalculation
+                Using infoCmd As New MySqlCommand("SELECT department_id FROM staff_accounts WHERE staff_id = @userID LIMIT 1", conn)
+                    infoCmd.Parameters.AddWithValue("@userID", userID)
+                    Dim deptValue = infoCmd.ExecuteScalar()
+                    If deptValue IsNot Nothing AndAlso deptValue IsNot DBNull.Value Then
+                        previousDepartmentID = Convert.ToInt32(deptValue)
+                    End If
+                End Using
+
+                Dim normalizedStatus As String = If(String.Equals(status, "Inactive", StringComparison.OrdinalIgnoreCase), "Inactive", "Active")
+
+                query = "UPDATE staff_accounts SET first_name = @firstName, last_name = @lastName, " &
+                       "email = @email, username = @username, contact_number = @contactNumber, " &
+                       "house_no_street = @houseNo, department_id = @departmentID, " &
+                       "position = @position, status = @status " &
+                       "WHERE staff_id = @userID"
+
+                Using cmd As New MySqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@firstName", firstName.Trim())
+                    cmd.Parameters.AddWithValue("@lastName", lastName.Trim())
+                    cmd.Parameters.AddWithValue("@email", email.Trim())
+                    cmd.Parameters.AddWithValue("@username", username.Trim())
+                    cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrWhiteSpace(contactNumber), DBNull.Value, contactNumber.Trim()))
+                    cmd.Parameters.AddWithValue("@houseNo", If(String.IsNullOrWhiteSpace(houseNoStreet), DBNull.Value, houseNoStreet.Trim()))
+                    cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@position", If(String.IsNullOrWhiteSpace(position), "Staff", position.Trim()))
+                    cmd.Parameters.AddWithValue("@status", normalizedStatus)
+                    cmd.Parameters.AddWithValue("@userID", userID)
+
+                    Dim rows As Integer = cmd.ExecuteNonQuery()
+                    If rows > 0 Then
+                        ' Recalculate department headcount if department changed
+                        If previousDepartmentID.HasValue AndAlso previousDepartmentID <> departmentID Then
+                            Try
+                                RecalculateDepartmentHeadcount(previousDepartmentID.Value)
+                            Catch exHeadcount As Exception
+                                System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount headcount refresh failed: " & exHeadcount.Message)
+                            End Try
+                        End If
+                        If departmentID.HasValue Then
+                            Try
+                                RecalculateDepartmentHeadcount(departmentID.Value)
+                            Catch exHeadcount As Exception
+                                System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount headcount refresh failed: " & exHeadcount.Message)
+                            End Try
+                        End If
+
+                        LogCrudAction(updatedByID, updatedByType, updatedByName, moduleName, entityLabel, "Update",
+                                      $"Updated {entityLabel.ToLower()} #{userID} (Staff)", ipAddress)
+                        Return True
+                    End If
+                End Using
+            Else
+                MessageBox.Show("Invalid user type specified.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount Exception: " & ex.Message)
+            MessageBox.Show("Error updating user account: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If conn IsNot Nothing Then
                 Try

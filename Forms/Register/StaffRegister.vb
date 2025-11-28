@@ -1,4 +1,5 @@
-﻿Imports System
+Imports System
+Imports System.Collections.Generic
 Imports System.Windows.Forms
 
 Public Class StaffRegister
@@ -53,20 +54,27 @@ Public Class StaffRegister
         End If
 
         ' Attempt registration
-        Dim firstName As String = txb_FirstName.Text
-        Dim lastName As String = txb_LastName.Text
-        Dim email As String = txb_Email.Text
-        Dim contactNumber As String = txb_ContactNumber.Text
-        Dim departmentID As String = txb_DepartmentID.Text
-        Dim username As String = txb_UserName.Text
+        Dim firstName As String = txb_FirstName.Text.Trim()
+        Dim lastName As String = txb_LastName.Text.Trim()
+        Dim email As String = txb_Email.Text.Trim()
+        Dim contactNumber As String = txb_ContactNumber.Text.Trim()
+        Dim departmentID As String = txb_DepartmentID.Text.Trim()
+        Dim username As String = txb_UserName.Text.Trim()
         Dim password As String = Txb_Password.Text
-        Dim position As String = txb_Position.Text
+        Dim position As String = If(String.IsNullOrWhiteSpace(txb_Position.Text), "Staff", txb_Position.Text.Trim())
+
+        ' Compose address string from location controls
+        Dim addressParts As New List(Of String)()
+        If cb_Province.SelectedItem IsNot Nothing Then addressParts.Add(cb_Province.SelectedItem.ToString())
+        If cb_Municipality.SelectedItem IsNot Nothing Then addressParts.Add(cb_Municipality.SelectedItem.ToString())
+        If cb_Barangay.SelectedItem IsNot Nothing Then addressParts.Add(cb_Barangay.SelectedItem.ToString())
+        Dim address As String = String.Join(", ", addressParts)
 
         ' Add debug logging before database call
         System.Diagnostics.Debug.WriteLine("[v0] Registration Attempt - Position: " & position & ", Username: " & username)
 
         ' Pass position parameter to RegisterStaff function
-        If DatabaseConnection.RegisterStaff(firstName, lastName, email, contactNumber, departmentID, username, password, position) Then
+        If DatabaseConnection.RegisterStaff(firstName, lastName, email, contactNumber, address, departmentID, username, password, position) Then
             MessageBox.Show("Registration successful! You can now login with your new account.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             Dim staffLogin As New StaffLogin()

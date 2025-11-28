@@ -1,6 +1,8 @@
-﻿Imports System
+Imports System
 Imports System.Collections.Generic
 Imports System.Windows.Forms
+Imports MySql.Data.MySqlClient
+Imports System.Data
 
 Public Class StaffLogin
 
@@ -31,7 +33,7 @@ Public Class StaffLogin
         Dim username As String = txb_Username.Text.Trim()
         Dim password As String = txb_Password.Text
 
-        ' Try to authenticate as Admin/SuperAdmin first
+        ' Try to authenticate as Admin/SuperAdmin first (checks hardcoded credentials first)
         Dim adminResult As Dictionary(Of String, String) = DatabaseConnection.ValidateAdminLogin(username, password)
 
         If adminResult IsNot Nothing AndAlso adminResult.Count > 0 Then
@@ -50,16 +52,17 @@ Public Class StaffLogin
         End If
 
         ' Try to authenticate as Staff
-        If DatabaseConnection.ValidateStaffLogin(username, password) Then
+        Dim staffResult As Dictionary(Of String, String) = DatabaseConnection.AuthenticateStaff(username, password)
+        If staffResult IsNot Nothing AndAlso staffResult.Count > 0 Then
             My.Settings.LoggedInuser = username
             My.Settings.Save()
 
-            MessageBox.Show("Login successful! Welcome, " & username & ".", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Login successful! Welcome, " & username & " (Staff).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             OpenDashboard(New StaffDashboard())
         Else
-            MessageBox.Show("Invalid username or password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            txb_Username.Clear()
+            ' Show generic error message - detailed checking would require accessing private methods
+            MessageBox.Show("Invalid username or password. Please check your credentials and try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txb_Password.Clear()
             txb_Username.Focus()
         End If

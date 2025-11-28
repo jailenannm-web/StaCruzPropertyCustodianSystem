@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>StaCruzPropertyCustodianSystem.My.MyApplication</StartupObject>
     <RootNamespace>StaCruzPropertyCustodianSystem</RootNamespace>
-    <AssemblyName>StaCruzPropertyCustodianSystem</AssemblyName>
+    <AssemblyName>sStaCruzPropertyCustodianSystem</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>StaCruzPropertyCustodianSystem.xml</DocumentationFile>
+    <DocumentationFile>sStaCruzPropertyCustodianSystem.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -33,7 +33,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>StaCruzPropertyCustodianSystem.xml</DocumentationFile>
+    <DocumentationFile>sStaCruzPropertyCustodianSystem.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>

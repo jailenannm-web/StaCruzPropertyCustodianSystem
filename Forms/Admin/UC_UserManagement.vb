@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Windows.Forms
 
@@ -94,7 +94,8 @@ Public Class UC_UserManagement
                                  Optional statusFilter As String = "")
         Try
             pm_table.Rows.Clear()
-            Dim records As DataTable = DatabaseConnection.GetAdminAccounts(statusFilter, roleFilter, searchKeyword)
+            ' Use GetAllUsers to get Admin, SuperAdmin, and Staff accounts
+            Dim records As DataTable = DatabaseConnection.GetAllUsers(statusFilter, roleFilter, searchKeyword)
 
             For Each record As DataRow In records.Rows
                 Dim rowIndex As Integer = pm_table.Rows.Add(
@@ -217,19 +218,23 @@ Public Class UC_UserManagement
         End If
 
         Dim fullName As String = $"{selectedRow.Cells("firstName").Value} {selectedRow.Cells("lastName").Value}".Trim()
-        Dim confirmation = MessageBox.Show($"Delete the account for {fullName}? This action cannot be undone.",
+        Dim userType As String = selectedRow.Cells("userRole").Value.ToString()
+        
+        Dim confirmation = MessageBox.Show($"Delete the account for {fullName} ({userType})? This action cannot be undone.",
                                            "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If confirmation <> DialogResult.Yes Then Return
 
-        Dim success = DatabaseConnection.DeleteAdminAccount(userIDValue,
-                                                            currentAdminID,
-                                                            currentAdminType,
-                                                            currentAdminUsername,
-                                                            "",
-                                                            "User Management",
-                                                            "User Account")
+        ' Use unified DeleteUserAccount function that handles both Admin/SuperAdmin and Staff
+        Dim success = DatabaseConnection.DeleteUserAccount(userIDValue,
+                                                           userType,
+                                                           currentAdminID,
+                                                           currentAdminType,
+                                                           currentAdminUsername,
+                                                           "",
+                                                           "User Management",
+                                                           "User Account")
         If success Then
-            MessageBox.Show("User account deleted.", "User Management", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("User account deleted successfully.", "User Management", MessageBoxButtons.OK, MessageBoxIcon.Information)
             RefreshUserTable()
         End If
     End Sub
