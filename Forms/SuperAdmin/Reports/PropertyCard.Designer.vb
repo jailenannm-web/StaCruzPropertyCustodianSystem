@@ -27,35 +27,22 @@ Partial Class PropertyCard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.pc_btn_Save = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.pc_btn_Cancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.lblPropertyCard = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.pcEntityName = New System.Windows.Forms.TextBox()
         Me.entityName = New System.Windows.Forms.Label()
         Me.Panel15 = New System.Windows.Forms.Panel()
         Me.pcFundCluster = New System.Windows.Forms.TextBox()
         Me.fundCluster = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.pcPropertyPlant = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.pcPropertyNumber = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.pcDescription = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.pcDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pcReference = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pcQuantity1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,42 +51,97 @@ Partial Class PropertyCard
         Me.pcQuantity2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pcAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pcRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pc_btn_Save = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.pc_btn_Cancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pcPropertyNumber = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.pcDescription = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.pcPropertyPlant = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.Panel1.SuspendLayout()
         Me.Panel16.SuspendLayout()
         Me.Panel15.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        Me.Panel8.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.Panel9.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel5.SuspendLayout()
+        Me.Panel8.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
-        Me.Panel9.SuspendLayout()
-        Me.Panel4.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel10.SuspendLayout()
         Me.SuspendLayout()
         '
-        'propertyCard
+        'pc_btn_Save
+        '
+        Me.pc_btn_Save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pc_btn_Save.CornerRadius = 15
+        Me.pc_btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pc_btn_Save.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pc_btn_Save.Location = New System.Drawing.Point(1008, 694)
+        Me.pc_btn_Save.Name = "pc_btn_Save"
+        Me.pc_btn_Save.Size = New System.Drawing.Size(121, 39)
+        Me.pc_btn_Save.TabIndex = 50
+        Me.pc_btn_Save.Text = "Save"
+        Me.pc_btn_Save.UseVisualStyleBackColor = True
+        '
+        'pc_btn_Cancel
+        '
+        Me.pc_btn_Cancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pc_btn_Cancel.CornerRadius = 15
+        Me.pc_btn_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pc_btn_Cancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pc_btn_Cancel.Location = New System.Drawing.Point(87, 694)
+        Me.pc_btn_Cancel.Name = "pc_btn_Cancel"
+        Me.pc_btn_Cancel.Size = New System.Drawing.Size(121, 39)
+        Me.pc_btn_Cancel.TabIndex = 51
+        Me.pc_btn_Cancel.Text = "Cancel"
+        Me.pc_btn_Cancel.UseVisualStyleBackColor = True
+        '
+        'lblPropertyCard
         '
         Me.lblPropertyCard.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPropertyCard.AutoSize = True
         Me.lblPropertyCard.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPropertyCard.Location = New System.Drawing.Point(499, 52)
-        Me.lblPropertyCard.Name = "propertyCard"
+        Me.lblPropertyCard.Name = "lblPropertyCard"
         Me.lblPropertyCard.Size = New System.Drawing.Size(200, 44)
         Me.lblPropertyCard.TabIndex = 37
         Me.lblPropertyCard.Text = "Property Card"
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.Panel16)
+        Me.Panel1.Controls.Add(Me.Panel15)
+        Me.Panel1.Controls.Add(Me.Panel2)
+        Me.Panel1.Location = New System.Drawing.Point(159, 111)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(897, 534)
+        Me.Panel1.TabIndex = 52
         '
         'Panel16
         '
         Me.Panel16.Controls.Add(Me.pcEntityName)
         Me.Panel16.Controls.Add(Me.entityName)
-        Me.Panel16.Location = New System.Drawing.Point(184, 99)
+        Me.Panel16.Location = New System.Drawing.Point(32, 12)
         Me.Panel16.Name = "Panel16"
         Me.Panel16.Size = New System.Drawing.Size(550, 29)
-        Me.Panel16.TabIndex = 49
+        Me.Panel16.TabIndex = 55
         '
         'pcEntityName
         '
@@ -126,10 +168,10 @@ Partial Class PropertyCard
         Me.Panel15.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel15.Controls.Add(Me.pcFundCluster)
         Me.Panel15.Controls.Add(Me.fundCluster)
-        Me.Panel15.Location = New System.Drawing.Point(733, 99)
+        Me.Panel15.Location = New System.Drawing.Point(581, 12)
         Me.Panel15.Name = "Panel15"
         Me.Panel15.Size = New System.Drawing.Size(289, 29)
-        Me.Panel15.TabIndex = 48
+        Me.Panel15.TabIndex = 54
         '
         'pcFundCluster
         '
@@ -151,211 +193,46 @@ Partial Class PropertyCard
         Me.fundCluster.Text = "Fund Cluster"
         Me.fundCluster.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Panel1
-        '
-        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.Panel4)
-        Me.Panel1.Controls.Add(Me.Panel9)
-        Me.Panel1.Controls.Add(Me.DataGridView1)
-        Me.Panel1.Controls.Add(Me.Panel8)
-        Me.Panel1.Controls.Add(Me.Panel6)
-        Me.Panel1.Controls.Add(Me.Panel7)
-        Me.Panel1.Controls.Add(Me.Panel5)
-        Me.Panel1.Controls.Add(Me.Panel3)
-        Me.Panel1.Controls.Add(Me.Panel2)
-        Me.Panel1.Location = New System.Drawing.Point(184, 129)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(838, 483)
-        Me.Panel1.TabIndex = 38
-        '
         'Panel2
         '
+        Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Controls.Add(Me.pcDescription)
-        Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.pcPropertyPlant)
-        Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Location = New System.Drawing.Point(-1, -1)
+        Me.Panel2.Controls.Add(Me.Panel4)
+        Me.Panel2.Controls.Add(Me.Panel9)
+        Me.Panel2.Controls.Add(Me.DataGridView1)
+        Me.Panel2.Controls.Add(Me.Panel8)
+        Me.Panel2.Controls.Add(Me.Panel6)
+        Me.Panel2.Controls.Add(Me.Panel7)
+        Me.Panel2.Controls.Add(Me.Panel5)
+        Me.Panel2.Controls.Add(Me.Panel3)
+        Me.Panel2.Controls.Add(Me.Panel10)
+        Me.Panel2.Location = New System.Drawing.Point(32, 42)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(550, 79)
-        Me.Panel2.TabIndex = 50
+        Me.Panel2.Size = New System.Drawing.Size(838, 483)
+        Me.Panel2.TabIndex = 53
         '
-        'pcPropertyPlant
+        'Panel4
         '
-        Me.pcPropertyPlant.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pcPropertyPlant.Location = New System.Drawing.Point(194, 3)
-        Me.pcPropertyPlant.Name = "pcPropertyPlant"
-        Me.pcPropertyPlant.Size = New System.Drawing.Size(347, 22)
-        Me.pcPropertyPlant.TabIndex = 43
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.Label4)
+        Me.Panel4.Location = New System.Drawing.Point(548, 77)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(142, 45)
+        Me.Panel4.TabIndex = 59
         '
-        'Label1
+        'Label4
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(3, 5)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(174, 22)
-        Me.Label1.TabIndex = 38
-        Me.Label1.Text = "Property, Plant, Equipment:"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Panel3
-        '
-        Me.Panel3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.pcPropertyNumber)
-        Me.Panel3.Controls.Add(Me.Label2)
-        Me.Panel3.Location = New System.Drawing.Point(548, -1)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(289, 79)
-        Me.Panel3.TabIndex = 51
-        '
-        'pcPropertyNumber
-        '
-        Me.pcPropertyNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pcPropertyNumber.Location = New System.Drawing.Point(124, 30)
-        Me.pcPropertyNumber.Name = "pcPropertyNumber"
-        Me.pcPropertyNumber.Size = New System.Drawing.Size(157, 22)
-        Me.pcPropertyNumber.TabIndex = 45
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(3, 31)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(115, 22)
-        Me.Label2.TabIndex = 39
-        Me.Label2.Text = "Property Number"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'pcDescription
-        '
-        Me.pcDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pcDescription.Location = New System.Drawing.Point(194, 30)
-        Me.pcDescription.Multiline = True
-        Me.pcDescription.Name = "pcDescription"
-        Me.pcDescription.Size = New System.Drawing.Size(347, 41)
-        Me.pcDescription.TabIndex = 45
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(3, 32)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(83, 22)
-        Me.Label3.TabIndex = 44
-        Me.Label3.Text = "Description:"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(9, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(76, 44)
-        Me.Label5.TabIndex = 39
-        Me.Label5.Text = "Reference/" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "PAR No.:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(13, 14)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(158, 22)
-        Me.Label6.TabIndex = 39
-        Me.Label6.Text = "Issue/Transfer/Disposal"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Panel8
-        '
-        Me.Panel8.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel8.Controls.Add(Me.Label8)
-        Me.Panel8.Location = New System.Drawing.Point(464, 77)
-        Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(85, 45)
-        Me.Panel8.TabIndex = 56
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(14, 13)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(59, 22)
-        Me.Label8.TabIndex = 39
-        Me.Label8.Text = "Balance"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pcDate, Me.pcReference, Me.pcQuantity1, Me.pcQuantity3, Me.pcOfficer, Me.pcQuantity2, Me.pcAmount, Me.pcRemarks})
-        Me.DataGridView1.Location = New System.Drawing.Point(-1, 121)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(838, 354)
-        Me.DataGridView1.TabIndex = 57
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(9, 12)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(55, 22)
-        Me.Label7.TabIndex = 39
-        Me.Label7.Text = "Receipt"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Panel5
-        '
-        Me.Panel5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel5.Controls.Add(Me.Label5)
-        Me.Panel5.Location = New System.Drawing.Point(113, 77)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(92, 45)
-        Me.Panel5.TabIndex = 53
-        '
-        'Panel6
-        '
-        Me.Panel6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel6.Controls.Add(Me.Label6)
-        Me.Panel6.Location = New System.Drawing.Point(278, 77)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(188, 45)
-        Me.Panel6.TabIndex = 55
-        '
-        'Panel7
-        '
-        Me.Panel7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel7.Controls.Add(Me.Label7)
-        Me.Panel7.Location = New System.Drawing.Point(204, 77)
-        Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(75, 45)
-        Me.Panel7.TabIndex = 54
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(43, 12)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(61, 22)
+        Me.Label4.TabIndex = 39
+        Me.Label4.Text = "Amount"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Panel9
         '
@@ -379,27 +256,20 @@ Partial Class PropertyCard
         Me.Label9.Text = "Remarks"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Panel4
+        'DataGridView1
         '
-        Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.Label4)
-        Me.Panel4.Location = New System.Drawing.Point(548, 77)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(142, 45)
-        Me.Panel4.TabIndex = 59
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(43, 12)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(61, 22)
-        Me.Label4.TabIndex = 39
-        Me.Label4.Text = "Amount"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pcDate, Me.pcReference, Me.pcQuantity1, Me.pcQuantity3, Me.pcOfficer, Me.pcQuantity2, Me.pcAmount, Me.pcRemarks})
+        Me.DataGridView1.Location = New System.Drawing.Point(-1, 121)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.RowTemplate.Height = 24
+        Me.DataGridView1.Size = New System.Drawing.Size(838, 354)
+        Me.DataGridView1.TabIndex = 57
         '
         'pcDate
         '
@@ -457,100 +327,244 @@ Partial Class PropertyCard
         Me.pcRemarks.Name = "pcRemarks"
         Me.pcRemarks.Width = 135
         '
-        'pc_btn_Save
+        'Panel8
         '
-        Me.pc_btn_Save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pc_btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pc_btn_Save.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pc_btn_Save.Location = New System.Drawing.Point(1008, 694)
-        Me.pc_btn_Save.Name = "pc_btn_Save"
-        Me.pc_btn_Save.Size = New System.Drawing.Size(121, 39)
-        Me.pc_btn_Save.TabIndex = 50
-        Me.pc_btn_Save.Text = "Save"
-        Me.pc_btn_Save.UseVisualStyleBackColor = True
+        Me.Panel8.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel8.Controls.Add(Me.Label8)
+        Me.Panel8.Location = New System.Drawing.Point(464, 77)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(85, 45)
+        Me.Panel8.TabIndex = 56
         '
-        'pc_btn_Cancel
+        'Label8
         '
-        Me.pc_btn_Cancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pc_btn_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pc_btn_Cancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pc_btn_Cancel.Location = New System.Drawing.Point(87, 694)
-        Me.pc_btn_Cancel.Name = "pc_btn_Cancel"
-        Me.pc_btn_Cancel.Size = New System.Drawing.Size(121, 39)
-        Me.pc_btn_Cancel.TabIndex = 51
-        Me.pc_btn_Cancel.Text = "Cancel"
-        Me.pc_btn_Cancel.UseVisualStyleBackColor = True
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(14, 13)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(59, 22)
+        Me.Label8.TabIndex = 39
+        Me.Label8.Text = "Balance"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Panel6
+        '
+        Me.Panel6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel6.Controls.Add(Me.Label6)
+        Me.Panel6.Location = New System.Drawing.Point(278, 77)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(188, 45)
+        Me.Panel6.TabIndex = 55
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(13, 14)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(158, 22)
+        Me.Label6.TabIndex = 39
+        Me.Label6.Text = "Issue/Transfer/Disposal"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Panel7
+        '
+        Me.Panel7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel7.Controls.Add(Me.Label7)
+        Me.Panel7.Location = New System.Drawing.Point(204, 77)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(75, 45)
+        Me.Panel7.TabIndex = 54
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(9, 12)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(55, 22)
+        Me.Label7.TabIndex = 39
+        Me.Label7.Text = "Receipt"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Panel5
+        '
+        Me.Panel5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.Label5)
+        Me.Panel5.Location = New System.Drawing.Point(113, 77)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(92, 45)
+        Me.Panel5.TabIndex = 53
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(9, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(76, 44)
+        Me.Label5.TabIndex = 39
+        Me.Label5.Text = "Reference/" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "PAR No.:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Panel3
+        '
+        Me.Panel3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.pcPropertyNumber)
+        Me.Panel3.Controls.Add(Me.Label2)
+        Me.Panel3.Location = New System.Drawing.Point(548, -1)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(289, 79)
+        Me.Panel3.TabIndex = 51
+        '
+        'pcPropertyNumber
+        '
+        Me.pcPropertyNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pcPropertyNumber.Location = New System.Drawing.Point(124, 30)
+        Me.pcPropertyNumber.Name = "pcPropertyNumber"
+        Me.pcPropertyNumber.Size = New System.Drawing.Size(157, 22)
+        Me.pcPropertyNumber.TabIndex = 45
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(3, 31)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(115, 22)
+        Me.Label2.TabIndex = 39
+        Me.Label2.Text = "Property Number"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Panel10
+        '
+        Me.Panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel10.Controls.Add(Me.pcDescription)
+        Me.Panel10.Controls.Add(Me.Label3)
+        Me.Panel10.Controls.Add(Me.pcPropertyPlant)
+        Me.Panel10.Controls.Add(Me.Label1)
+        Me.Panel10.Location = New System.Drawing.Point(-1, -1)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Size = New System.Drawing.Size(550, 79)
+        Me.Panel10.TabIndex = 50
+        '
+        'pcDescription
+        '
+        Me.pcDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pcDescription.Location = New System.Drawing.Point(194, 30)
+        Me.pcDescription.Multiline = True
+        Me.pcDescription.Name = "pcDescription"
+        Me.pcDescription.Size = New System.Drawing.Size(347, 41)
+        Me.pcDescription.TabIndex = 45
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(3, 32)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(83, 22)
+        Me.Label3.TabIndex = 44
+        Me.Label3.Text = "Description:"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'pcPropertyPlant
+        '
+        Me.pcPropertyPlant.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pcPropertyPlant.Location = New System.Drawing.Point(194, 3)
+        Me.pcPropertyPlant.Name = "pcPropertyPlant"
+        Me.pcPropertyPlant.Size = New System.Drawing.Size(347, 22)
+        Me.pcPropertyPlant.TabIndex = 43
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(3, 5)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(174, 22)
+        Me.Label1.TabIndex = 38
+        Me.Label1.Text = "Property, Plant, Equipment:"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Panel11
+        '
+        Me.Panel11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel11.Location = New System.Drawing.Point(159, 44)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(897, 61)
+        Me.Panel11.TabIndex = 53
         '
         'PropertyCard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1212, 799)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.pc_btn_Cancel)
         Me.Controls.Add(Me.pc_btn_Save)
-        Me.Controls.Add(Me.Panel16)
-        Me.Controls.Add(Me.Panel15)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lblPropertyCard)
+        Me.Controls.Add(Me.Panel11)
         Me.Name = "PropertyCard"
         Me.Text = "PropertyCard"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.Panel1.ResumeLayout(False)
         Me.Panel16.ResumeLayout(False)
         Me.Panel16.PerformLayout()
         Me.Panel15.ResumeLayout(False)
         Me.Panel15.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        Me.Panel9.ResumeLayout(False)
+        Me.Panel9.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
         Me.Panel8.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel5.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
-        Me.Panel9.ResumeLayout(False)
-        Me.Panel9.PerformLayout()
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        Me.Panel10.ResumeLayout(False)
+        Me.Panel10.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
+    Friend WithEvents pc_btn_Save As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents pc_btn_Cancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents lblPropertyCard As Label
+    Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel16 As Panel
     Friend WithEvents pcEntityName As TextBox
     Friend WithEvents entityName As Label
     Friend WithEvents Panel15 As Panel
     Friend WithEvents pcFundCluster As TextBox
     Friend WithEvents fundCluster As Label
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents pcPropertyPlant As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents pcPropertyNumber As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents pcDescription As TextBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Panel8 As Panel
-    Friend WithEvents Label8 As Label
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Panel6 As Panel
-    Friend WithEvents Panel7 As Panel
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label4 As Label
     Friend WithEvents Panel9 As Panel
     Friend WithEvents Label9 As Label
+    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents pcDate As DataGridViewTextBoxColumn
     Friend WithEvents pcReference As DataGridViewTextBoxColumn
     Friend WithEvents pcQuantity1 As DataGridViewTextBoxColumn
@@ -559,6 +573,21 @@ Partial Class PropertyCard
     Friend WithEvents pcQuantity2 As DataGridViewTextBoxColumn
     Friend WithEvents pcAmount As DataGridViewTextBoxColumn
     Friend WithEvents pcRemarks As DataGridViewTextBoxColumn
-    Friend WithEvents pc_btn_Save As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents pc_btn_Cancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents pcPropertyNumber As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Panel10 As Panel
+    Friend WithEvents pcDescription As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents pcPropertyPlant As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Panel11 As Panel
 End Class
