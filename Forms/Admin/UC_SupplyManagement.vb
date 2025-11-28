@@ -50,11 +50,6 @@ Public Class UC_SupplyManagement
         ' Auto size
         pm_table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
-        ' Initialize search placeholder
-        AddHandler pm_txtbox_search.GotFocus, AddressOf SearchTextBox_GotFocus
-        AddHandler pm_txtbox_search.LostFocus, AddressOf SearchTextBox_LostFocus
-        pm_txtbox_search.Text = "Search"
-
         ' Track role-based permissions
         canModifySupplies = SessionContext.HasPermission(SessionContext.ModulePermission.ModifySupplies)
         ApplyRolePermissions()
@@ -95,20 +90,6 @@ Public Class UC_SupplyManagement
         ' Wire up filter change events
         AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
         AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
-    End Sub
-
-    Private Sub SearchTextBox_GotFocus(sender As Object, e As EventArgs)
-        If pm_txtbox_search.Text = "Search" Then
-            pm_txtbox_search.Text = ""
-            pm_txtbox_search.ForeColor = Color.White
-        End If
-    End Sub
-
-    Private Sub SearchTextBox_LostFocus(sender As Object, e As EventArgs)
-        If String.IsNullOrWhiteSpace(pm_txtbox_search.Text) Then
-            pm_txtbox_search.Text = "Search"
-            pm_txtbox_search.ForeColor = Color.White
-        End If
     End Sub
 
     ' Added method to load supplies from database
@@ -174,52 +155,8 @@ Public Class UC_SupplyManagement
         ' Reload data with filters
         LoadSuppliesData()
         ' Reapply search if there's search text
-        If pm_txtbox_search.Text <> "Search" AndAlso Not String.IsNullOrWhiteSpace(pm_txtbox_search.Text) Then
-            ApplySearch()
-        End If
     End Sub
 
-    Private Sub pm_txtbox_search_TextChanged(sender As Object, e As EventArgs) Handles pm_txtbox_search.TextChanged
-        If pm_txtbox_search.Text <> "Search" Then
-            ApplySearch()
-        End If
-    End Sub
-
-    Private Sub ApplySearch()
-        If originalData Is Nothing Then Return
-
-        Dim searchText As String = pm_txtbox_search.Text.Trim().ToLower()
-        If String.IsNullOrEmpty(searchText) OrElse searchText = "search" Then
-            LoadSuppliesData()
-            Return
-        End If
-
-        Try
-            pm_table.Rows.Clear()
-            Dim filteredRows = originalData.AsEnumerable().Where(Function(row)
-                Dim name As String = If(IsDBNull(row("SupplyName")), "", row("SupplyName").ToString().ToLower())
-                Dim category As String = If(IsDBNull(row("Category")), "", row("Category").ToString().ToLower())
-                Dim status As String = If(IsDBNull(row("Status")), "", row("Status").ToString().ToLower())
-                Return name.Contains(searchText) OrElse category.Contains(searchText) OrElse status.Contains(searchText)
-            End Function)
-
-            For Each row As DataRow In filteredRows
-                pm_table.Rows.Add(
-                    If(IsDBNull(row("SupplyID")), "", row("SupplyID").ToString()),
-                    If(IsDBNull(row("SupplyName")), "", row("SupplyName").ToString()),
-                    If(IsDBNull(row("Category")), "", row("Category").ToString()),
-                    If(IsDBNull(row("QuantityInStock")), "0", row("QuantityInStock").ToString()),
-                    If(IsDBNull(row("UnitCost")), "0.00", Format(CDec(row("UnitCost")), "0.00")),
-                    If(IsDBNull(row("TotalValue")), "0.00", Format(CDec(row("TotalValue")), "0.00")),
-                    If(IsDBNull(row("Status")), "", row("Status").ToString()),
-                    If(IsDBNull(row("Location")), "", row("Location").ToString()),
-                    "Edit"
-                )
-            Next
-        Catch ex As Exception
-            MessageBox.Show("Error searching supplies: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If Not canModifySupplies Then

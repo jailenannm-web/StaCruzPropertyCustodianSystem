@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class UC_PropertyManagement1
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,14 +20,11 @@ Partial Class UC_PropertyManagement1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_PropertyManagement1))
-        Me.pm_txtbox_search = New System.Windows.Forms.TextBox()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.propertyManagementGrid = New System.Windows.Forms.DataGridView()
         Me.propertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.propertyName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,30 +47,14 @@ Partial Class UC_PropertyManagement1
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertymanagement = New System.Windows.Forms.Label()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'pm_txtbox_search
-        '
-        Me.pm_txtbox_search.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_txtbox_search.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.pm_txtbox_search.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pm_txtbox_search.ForeColor = System.Drawing.Color.White
-        Me.pm_txtbox_search.Location = New System.Drawing.Point(115, 126)
-        Me.pm_txtbox_search.Name = "pm_txtbox_search"
-        Me.pm_txtbox_search.Size = New System.Drawing.Size(952, 33)
-        Me.pm_txtbox_search.TabIndex = 43
-        Me.pm_txtbox_search.Text = "Search"
-        Me.pm_txtbox_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'admin_label_DepartmentManagement
         '
         Me.admin_label_DepartmentManagement.AutoSize = True
         Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(57, 55)
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(46, 65)
         Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
         Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(414, 58)
         Me.admin_label_DepartmentManagement.TabIndex = 42
@@ -82,52 +63,42 @@ Partial Class UC_PropertyManagement1
         'pm_cbobx_status
         '
         Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(1336, 126)
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1181, 84)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
-        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 38)
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
         Me.pm_cbobx_status.TabIndex = 40
         Me.pm_cbobx_status.Text = "Status"
         '
         'pm_cbobx_categ
         '
         Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(1161, 126)
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(1006, 84)
         Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
-        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 38)
+        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
         Me.pm_cbobx_categ.TabIndex = 41
         Me.pm_cbobx_categ.Text = "Categories"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(67, 126)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 44
-        Me.PictureBox1.TabStop = False
         '
         'propertyManagementGrid
         '
         Me.propertyManagementGrid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.propertyManagementGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace
+        Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
         Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyID, Me.propertyName, Me.category, Me.serialNumber, Me.supplier, Me.condition_status, Me.cost, Me.datePurchased, Me.warrantyExpiration, Me.assignedEmployee, Me.assignedDepartment, Me.location, Me.remarks, Me.dateCreated, Me.dateUpdated, Me.updatedBy})
-        Me.propertyManagementGrid.Location = New System.Drawing.Point(67, 189)
+        Me.propertyManagementGrid.Location = New System.Drawing.Point(56, 126)
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
         Me.propertyManagementGrid.RowTemplate.Height = 24
-        Me.propertyManagementGrid.Size = New System.Drawing.Size(1414, 777)
+        Me.propertyManagementGrid.Size = New System.Drawing.Size(1270, 564)
         Me.propertyManagementGrid.TabIndex = 45
         '
         'propertyID
@@ -245,15 +216,15 @@ Partial Class UC_PropertyManagement1
         'btnEdit
         '
         Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnEdit.CornerRadius = 15
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(1232, 988)
+        Me.btnEdit.Location = New System.Drawing.Point(1120, 717)
         Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(121, 34)
+        Me.btnEdit.Size = New System.Drawing.Size(99, 34)
         Me.btnEdit.TabIndex = 154
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
@@ -261,15 +232,15 @@ Partial Class UC_PropertyManagement1
         'btnAdd
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnAdd.CornerRadius = 15
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1361, 987)
+        Me.btnAdd.Location = New System.Drawing.Point(1227, 717)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(121, 34)
+        Me.btnAdd.Size = New System.Drawing.Size(99, 34)
         Me.btnAdd.TabIndex = 152
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
@@ -277,15 +248,15 @@ Partial Class UC_PropertyManagement1
         'btnDelete
         '
         Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnDelete.CornerRadius = 15
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1104, 987)
+        Me.btnDelete.Location = New System.Drawing.Point(1012, 717)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(120, 35)
+        Me.btnDelete.Size = New System.Drawing.Size(99, 35)
         Me.btnDelete.TabIndex = 153
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
@@ -296,7 +267,7 @@ Partial Class UC_PropertyManagement1
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(69, 988)
+        Me.Label1.Location = New System.Drawing.Point(46, 701)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(145, 58)
         Me.Label1.TabIndex = 159
@@ -308,7 +279,7 @@ Partial Class UC_PropertyManagement1
         Me.ttlpropertymanagement.AutoSize = True
         Me.ttlpropertymanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ttlpropertymanagement.ForeColor = System.Drawing.Color.Black
-        Me.ttlpropertymanagement.Location = New System.Drawing.Point(220, 988)
+        Me.ttlpropertymanagement.Location = New System.Drawing.Point(197, 701)
         Me.ttlpropertymanagement.Name = "ttlpropertymanagement"
         Me.ttlpropertymanagement.Size = New System.Drawing.Size(38, 58)
         Me.ttlpropertymanagement.TabIndex = 158
@@ -325,22 +296,16 @@ Partial Class UC_PropertyManagement1
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.propertyManagementGrid)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.pm_txtbox_search)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Controls.Add(Me.pm_cbobx_status)
         Me.Controls.Add(Me.pm_cbobx_categ)
         Me.Name = "UC_PropertyManagement1"
-        Me.Size = New System.Drawing.Size(1539, 1073)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents pm_txtbox_search As System.Windows.Forms.TextBox
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
     Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox
