@@ -111,6 +111,12 @@
   <!-- STAFF FORMS -->
   <ItemGroup>
     <Compile Include="DatabaseConnection.vb" />
+    <Compile Include="Forms\Admin\AddSupplyRequest.Designer.vb">
+      <DependentUpon>AddSupplyRequest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddSupplyRequest.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="SessionContext.vb" />
     <Compile Include="Forms\Admin\AddDepartment.Designer.vb">
       <DependentUpon>AddDepartment.vb</DependentUpon>
@@ -344,6 +350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AddSupply.resx">
       <DependentUpon>AddSupply.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AddSupplyRequest.resx">
+      <DependentUpon>AddSupplyRequest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AddUserManagement.resx">
       <DependentUpon>AddUserManagement.vb</DependentUpon>

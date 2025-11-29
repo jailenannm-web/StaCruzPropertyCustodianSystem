@@ -34,7 +34,7 @@ Public Class AddMaintenance1
     Private Sub admin_label_DepartmentManagement_Click(sender As Object, e As EventArgs) Handles admin_label_DepartmentManagement.Click
     End Sub
 
-    Private Sub propertyLocation_TextChanged(sender As Object, e As EventArgs) Handles propertyLocation.TextChanged
+    Private Sub propertyLocation_TextChanged(sender As Object, e As EventArgs)
     End Sub
 
     Private Sub SAAddM_NextSched_Click(sender As Object, e As EventArgs) Handles SAAddM_NextSched.Click
