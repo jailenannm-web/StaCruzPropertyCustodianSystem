@@ -63,6 +63,7 @@ Partial Class RequisitionIssueSlip
         Me.requisitionRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel21 = New System.Windows.Forms.Panel()
         Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel24 = New System.Windows.Forms.Panel()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.Panel18 = New System.Windows.Forms.Panel()
@@ -116,7 +117,6 @@ Partial Class RequisitionIssueSlip
         Me.Panel22 = New System.Windows.Forms.Panel()
         Me.Panel25 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btn_Back = New System.Windows.Forms.Button()
@@ -523,6 +523,17 @@ Partial Class RequisitionIssueSlip
         Me.Label19.TabIndex = 48
         Me.Label19.Text = "Requested by:"
         Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label10
+        '
+        Me.Label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(174, 5)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(109, 22)
+        Me.Label10.TabIndex = 48
+        Me.Label10.Text = "Received by:"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Panel24
         '
@@ -1121,17 +1132,6 @@ Partial Class RequisitionIssueSlip
         Me.Label4.Text = "Issued by:"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label10
-        '
-        Me.Label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(174, 5)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(109, 22)
-        Me.Label10.TabIndex = 48
-        Me.Label10.Text = "Received by:"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'RoundedButton1
         '
         Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1166,11 +1166,12 @@ Partial Class RequisitionIssueSlip
         '
         'btn_Back
         '
+        Me.btn_Back.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btn_Back.ForeColor = System.Drawing.Color.White
-        Me.btn_Back.Location = New System.Drawing.Point(570, 791)
+        Me.btn_Back.Location = New System.Drawing.Point(918, 853)
         Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Back.Name = "btn_Back"
         Me.btn_Back.Size = New System.Drawing.Size(112, 34)

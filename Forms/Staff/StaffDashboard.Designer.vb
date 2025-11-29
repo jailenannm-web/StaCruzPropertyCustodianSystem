@@ -61,13 +61,13 @@ Partial Class StaffDashboard
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.btnMaintenanceReq = New System.Windows.Forms.Button()
         Me.icStaff = New System.Windows.Forms.PictureBox()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnReports = New System.Windows.Forms.Button()
         Me.btnBorrowedItem = New System.Windows.Forms.Button()
         Me.btnMyRequest = New System.Windows.Forms.Button()
         Me.btnViewInventory = New System.Windows.Forms.Button()
-        Me.btnPropertyRequest = New System.Windows.Forms.Button()
         Me.btnProfile = New System.Windows.Forms.Button()
         Me.btnDashboard = New System.Windows.Forms.Button()
         Me.txtStaff = New System.Windows.Forms.Label()
@@ -407,13 +407,13 @@ Partial Class StaffDashboard
         'pnlSidebar
         '
         Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pnlSidebar.Controls.Add(Me.btnMaintenanceReq)
         Me.pnlSidebar.Controls.Add(Me.icStaff)
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Controls.Add(Me.btnReports)
         Me.pnlSidebar.Controls.Add(Me.btnBorrowedItem)
         Me.pnlSidebar.Controls.Add(Me.btnMyRequest)
         Me.pnlSidebar.Controls.Add(Me.btnViewInventory)
-        Me.pnlSidebar.Controls.Add(Me.btnPropertyRequest)
         Me.pnlSidebar.Controls.Add(Me.btnProfile)
         Me.pnlSidebar.Controls.Add(Me.btnDashboard)
         Me.pnlSidebar.Controls.Add(Me.txtStaff)
@@ -425,6 +425,25 @@ Partial Class StaffDashboard
         Me.pnlSidebar.Name = "pnlSidebar"
         Me.pnlSidebar.Size = New System.Drawing.Size(356, 922)
         Me.pnlSidebar.TabIndex = 0
+        '
+        'btnMaintenanceReq
+        '
+        Me.btnMaintenanceReq.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnMaintenanceReq.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnMaintenanceReq.FlatAppearance.BorderSize = 0
+        Me.btnMaintenanceReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnMaintenanceReq.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMaintenanceReq.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnMaintenanceReq.Image = CType(resources.GetObject("btnMaintenanceReq.Image"), System.Drawing.Image)
+        Me.btnMaintenanceReq.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnMaintenanceReq.Location = New System.Drawing.Point(16, 536)
+        Me.btnMaintenanceReq.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnMaintenanceReq.Name = "btnMaintenanceReq"
+        Me.btnMaintenanceReq.Size = New System.Drawing.Size(317, 63)
+        Me.btnMaintenanceReq.TabIndex = 11
+        Me.btnMaintenanceReq.Text = "Maintenance Request"
+        Me.btnMaintenanceReq.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnMaintenanceReq.UseVisualStyleBackColor = False
         '
         'icStaff
         '
@@ -447,7 +466,7 @@ Partial Class StaffDashboard
         Me.btnLogout.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(16, 678)
+        Me.btnLogout.Location = New System.Drawing.Point(16, 669)
         Me.btnLogout.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(317, 63)
@@ -466,7 +485,7 @@ Partial Class StaffDashboard
         Me.btnReports.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnReports.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_reports1
         Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(16, 608)
+        Me.btnReports.Location = New System.Drawing.Point(16, 598)
         Me.btnReports.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReports.Name = "btnReports"
         Me.btnReports.Size = New System.Drawing.Size(317, 63)
@@ -485,7 +504,7 @@ Partial Class StaffDashboard
         Me.btnBorrowedItem.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnBorrowedItem.Image = CType(resources.GetObject("btnBorrowedItem.Image"), System.Drawing.Image)
         Me.btnBorrowedItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnBorrowedItem.Location = New System.Drawing.Point(16, 538)
+        Me.btnBorrowedItem.Location = New System.Drawing.Point(13, 465)
         Me.btnBorrowedItem.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBorrowedItem.Name = "btnBorrowedItem"
         Me.btnBorrowedItem.Size = New System.Drawing.Size(317, 63)
@@ -504,7 +523,7 @@ Partial Class StaffDashboard
         Me.btnMyRequest.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnMyRequest.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_propertyrequest
         Me.btnMyRequest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMyRequest.Location = New System.Drawing.Point(16, 468)
+        Me.btnMyRequest.Location = New System.Drawing.Point(16, 394)
         Me.btnMyRequest.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMyRequest.Name = "btnMyRequest"
         Me.btnMyRequest.Size = New System.Drawing.Size(317, 63)
@@ -523,33 +542,14 @@ Partial Class StaffDashboard
         Me.btnViewInventory.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnViewInventory.Image = CType(resources.GetObject("btnViewInventory.Image"), System.Drawing.Image)
         Me.btnViewInventory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnViewInventory.Location = New System.Drawing.Point(16, 398)
+        Me.btnViewInventory.Location = New System.Drawing.Point(13, 323)
         Me.btnViewInventory.Margin = New System.Windows.Forms.Padding(4)
         Me.btnViewInventory.Name = "btnViewInventory"
         Me.btnViewInventory.Size = New System.Drawing.Size(317, 63)
         Me.btnViewInventory.TabIndex = 5
-        Me.btnViewInventory.Text = "View Inventory"
+        Me.btnViewInventory.Text = "Inventory"
         Me.btnViewInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnViewInventory.UseVisualStyleBackColor = False
-        '
-        'btnPropertyRequest
-        '
-        Me.btnPropertyRequest.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnPropertyRequest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnPropertyRequest.FlatAppearance.BorderSize = 0
-        Me.btnPropertyRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPropertyRequest.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPropertyRequest.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnPropertyRequest.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icSubmit
-        Me.btnPropertyRequest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPropertyRequest.Location = New System.Drawing.Point(16, 327)
-        Me.btnPropertyRequest.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnPropertyRequest.Name = "btnPropertyRequest"
-        Me.btnPropertyRequest.Size = New System.Drawing.Size(317, 63)
-        Me.btnPropertyRequest.TabIndex = 4
-        Me.btnPropertyRequest.Text = "Property Request"
-        Me.btnPropertyRequest.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnPropertyRequest.UseVisualStyleBackColor = False
         '
         'btnProfile
         '
@@ -642,7 +642,6 @@ Partial Class StaffDashboard
     Friend WithEvents btnBorrowedItem As Button
     Friend WithEvents btnMyRequest As Button
     Friend WithEvents btnViewInventory As Button
-    Friend WithEvents btnPropertyRequest As Button
     Friend WithEvents btnProfile As Button
     Friend WithEvents icStaff As PictureBox
     Friend WithEvents tmrSidebar As Timer
@@ -676,4 +675,5 @@ Partial Class StaffDashboard
     Friend WithEvents Remarks As DataGridViewTextBoxColumn
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents btnMaintenanceReq As Button
 End Class

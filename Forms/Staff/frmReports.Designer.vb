@@ -33,10 +33,10 @@ Partial Class frmReports
         Me.lblReports.AutoSize = True
         Me.lblReports.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblReports.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.lblReports.Location = New System.Drawing.Point(733, 78)
+        Me.lblReports.Location = New System.Drawing.Point(712, 78)
         Me.lblReports.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblReports.Name = "lblReports"
-        Me.lblReports.Size = New System.Drawing.Size(161, 60)
+        Me.lblReports.Size = New System.Drawing.Size(155, 58)
         Me.lblReports.TabIndex = 2
         Me.lblReports.Text = "Reports"
         '
@@ -48,12 +48,12 @@ Partial Class frmReports
         Me.Essuance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Essuance.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Essuance.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Essuance.Location = New System.Drawing.Point(597, 497)
+        Me.Essuance.Location = New System.Drawing.Point(531, 497)
         Me.Essuance.Margin = New System.Windows.Forms.Padding(4)
         Me.Essuance.Name = "Essuance"
-        Me.Essuance.Size = New System.Drawing.Size(453, 80)
+        Me.Essuance.Size = New System.Drawing.Size(535, 80)
         Me.Essuance.TabIndex = 5
-        Me.Essuance.Text = "Property Issuance Report"
+        Me.Essuance.Text = "PROPERTY ACKNOWLEDGEMENT RECEIPT"
         Me.Essuance.UseVisualStyleBackColor = False
         '
         'btnBorrowReturn
@@ -64,10 +64,10 @@ Partial Class frmReports
         Me.btnBorrowReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBorrowReturn.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBorrowReturn.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnBorrowReturn.Location = New System.Drawing.Point(597, 357)
+        Me.btnBorrowReturn.Location = New System.Drawing.Point(531, 357)
         Me.btnBorrowReturn.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBorrowReturn.Name = "btnBorrowReturn"
-        Me.btnBorrowReturn.Size = New System.Drawing.Size(453, 80)
+        Me.btnBorrowReturn.Size = New System.Drawing.Size(535, 80)
         Me.btnBorrowReturn.TabIndex = 4
         Me.btnBorrowReturn.Text = "Borrow and Return Slip"
         Me.btnBorrowReturn.UseVisualStyleBackColor = False
@@ -80,10 +80,10 @@ Partial Class frmReports
         Me.btnRequisitionSlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRequisitionSlip.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRequisitionSlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnRequisitionSlip.Location = New System.Drawing.Point(595, 225)
+        Me.btnRequisitionSlip.Location = New System.Drawing.Point(531, 226)
         Me.btnRequisitionSlip.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRequisitionSlip.Name = "btnRequisitionSlip"
-        Me.btnRequisitionSlip.Size = New System.Drawing.Size(453, 80)
+        Me.btnRequisitionSlip.Size = New System.Drawing.Size(537, 80)
         Me.btnRequisitionSlip.TabIndex = 3
         Me.btnRequisitionSlip.Text = "Requisition Slip"
         Me.btnRequisitionSlip.UseVisualStyleBackColor = False

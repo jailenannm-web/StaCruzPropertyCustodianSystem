@@ -66,18 +66,7 @@ Public Class StaffDashboard
         loadFormIntoPanel(New frmProfile())
     End Sub
 
-    Private Sub btnPropertyRequest_Click(sender As Object, e As EventArgs) Handles btnPropertyRequest.Click
-        ' --- Expands sidebar if collapsed ---
-        If Not isSidebarExpanded Then
-            ToggleSidebar()
-        End If
 
-        ' --- Highlights the active button ---
-        SetActiveButton(btnPropertyRequest) ' (Make sure this button name is in your SetActiveButton sub)
-
-        ' --- Loads the new form ---
-        loadFormIntoPanel(New frmPropertyRequest())
-    End Sub
 
     Private Sub btnViewInventory_Click(sender As Object, e As EventArgs) Handles btnViewInventory.Click
         ' --- Expands sidebar if collapsed ---
@@ -211,5 +200,97 @@ Public Class StaffDashboard
 
     Private Sub Label2_Click_1(sender As Object, e As EventArgs) Handles Label2.Click
 
+    End Sub
+
+    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
+
+    End Sub
+
+    Private Sub tmrSidebar_Tick(sender As Object, e As EventArgs) Handles tmrSidebar.Tick
+
+    End Sub
+
+    Private Sub pnlMain_Paint(sender As Object, e As PaintEventArgs) Handles pnlMain.Paint
+
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtPersonalHistory_Click(sender As Object, e As EventArgs) Handles txtPersonalHistory.Click
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+
+    End Sub
+
+    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+
+    End Sub
+
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
+
+    End Sub
+
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
+    End Sub
+
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
+    End Sub
+
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+
+    End Sub
+
+
+
+    Private Sub icStaff_Click(sender As Object, e As EventArgs) Handles icStaff.Click
+
+    End Sub
+
+    Private Sub txtStaff_Click(sender As Object, e As EventArgs) Handles txtStaff.Click
+
+    End Sub
+
+    Private Sub btnMaintenanceReq_Click(sender As Object, e As EventArgs) Handles btnMaintenanceReq.Click
+        ' --- This code expands the sidebar ---
+        If Not isSidebarExpanded Then
+            ToggleSidebar()
+        End If
+
+        ' --- This code changes the active button color ---
+        SetActiveButton(btnProfile)
+
+        ' --- THIS IS THE NEW CODE ---
+        ' Load your new profile form
+        loadFormIntoPanel(New MaintenanceRequest())
     End Sub
 End Class
