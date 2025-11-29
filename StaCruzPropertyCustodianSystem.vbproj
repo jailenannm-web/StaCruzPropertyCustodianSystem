@@ -328,12 +328,6 @@
     <Compile Include="Forms\Staff\TrnsReturnItem.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\InspectionAcceptance.Designer.vb">
-      <DependentUpon>InspectionAcceptance.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\InspectionAcceptance.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.Designer.vb">
       <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </Compile>
@@ -631,9 +625,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\MaintenanceReport.resx">
       <DependentUpon>MaintenanceReport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.resx">
-      <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyCard.resx">
       <DependentUpon>PropertyCard.vb</DependentUpon>
