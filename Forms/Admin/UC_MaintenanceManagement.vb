@@ -7,10 +7,13 @@ Imports Microsoft.VisualBasic
 Public Class UC_MaintenanceManagement
     Inherits UserControl
 
+    Private canModifyMaintenance As Boolean = False
+
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
-
+        canModifyMaintenance = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyMaintenance)
+        ApplyRoleRestrictions()
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
@@ -21,7 +24,20 @@ Public Class UC_MaintenanceManagement
 
     End Sub
 
+    Private Sub ApplyRoleRestrictions()
+        btnAdd.Enabled = canModifyMaintenance
+        btnEdit.Enabled = canModifyMaintenance
+    End Sub
+
+    Private Sub ShowMaintenanceRestriction()
+        MessageBox.Show("You have view-only access to Maintenance Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If Not canModifyMaintenance Then
+            ShowMaintenanceRestriction()
+            Return
+        End If
         ' Get reference to the parent dashboard form
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
 
@@ -37,6 +53,10 @@ Public Class UC_MaintenanceManagement
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If Not canModifyMaintenance Then
+            ShowMaintenanceRestriction()
+            Return
+        End If
         ' Get reference to the parent dashboard form
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
 

@@ -38,15 +38,15 @@ Partial Class RequisitionIssueSlip
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel11 = New System.Windows.Forms.Panel()
@@ -54,70 +54,70 @@ Partial Class RequisitionIssueSlip
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.requisitionDataGrid1 = New System.Windows.Forms.DataGridView()
-        Me.requisitionRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requisitionQuantity2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requisitionNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requisitionYes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requisitionQuantity1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requisitionParticulars = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requisitionUnit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.requisitionName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requisitionUnit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requisitionParticulars = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requisitionQuantity1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requisitionYes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requisitionNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requisitionQuantity2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requisitionRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel21 = New System.Windows.Forms.Panel()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Panel24 = New System.Windows.Forms.Panel()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.Panel18 = New System.Windows.Forms.Panel()
         Me.Panel23 = New System.Windows.Forms.Panel()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.TextBox11 = New System.Windows.Forms.TextBox()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel28 = New System.Windows.Forms.Panel()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
         Me.Panel33 = New System.Windows.Forms.Panel()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox13 = New System.Windows.Forms.TextBox()
         Me.Panel39 = New System.Windows.Forms.Panel()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Panel38 = New System.Windows.Forms.Panel()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Panel20 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.TextBox14 = New System.Windows.Forms.TextBox()
+        Me.Panel36 = New System.Windows.Forms.Panel()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Panel34 = New System.Windows.Forms.Panel()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.Panel19 = New System.Windows.Forms.Panel()
+        Me.TextBox15 = New System.Windows.Forms.TextBox()
+        Me.Panel35 = New System.Windows.Forms.Panel()
+        Me.DateTimePicker4 = New System.Windows.Forms.DateTimePicker()
+        Me.Panel32 = New System.Windows.Forms.Panel()
+        Me.TextBox21 = New System.Windows.Forms.TextBox()
+        Me.Panel31 = New System.Windows.Forms.Panel()
+        Me.TextBox20 = New System.Windows.Forms.TextBox()
+        Me.Panel30 = New System.Windows.Forms.Panel()
+        Me.TextBox19 = New System.Windows.Forms.TextBox()
+        Me.Panel29 = New System.Windows.Forms.Panel()
+        Me.DateTimePicker3 = New System.Windows.Forms.DateTimePicker()
+        Me.Panel26 = New System.Windows.Forms.Panel()
+        Me.Panel27 = New System.Windows.Forms.Panel()
+        Me.TextBox10 = New System.Windows.Forms.TextBox()
         Me.Panel14 = New System.Windows.Forms.Panel()
         Me.Panel22 = New System.Windows.Forms.Panel()
         Me.Panel25 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Panel26 = New System.Windows.Forms.Panel()
-        Me.Panel29 = New System.Windows.Forms.Panel()
-        Me.Panel30 = New System.Windows.Forms.Panel()
-        Me.Panel31 = New System.Windows.Forms.Panel()
-        Me.Panel32 = New System.Windows.Forms.Panel()
-        Me.Panel35 = New System.Windows.Forms.Panel()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.TextBox15 = New System.Windows.Forms.TextBox()
-        Me.Panel19 = New System.Windows.Forms.Panel()
-        Me.TextBox19 = New System.Windows.Forms.TextBox()
-        Me.TextBox20 = New System.Windows.Forms.TextBox()
-        Me.TextBox21 = New System.Windows.Forms.TextBox()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimePicker3 = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimePicker4 = New System.Windows.Forms.DateTimePicker()
-        Me.Panel34 = New System.Windows.Forms.Panel()
-        Me.Panel36 = New System.Windows.Forms.Panel()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Panel27 = New System.Windows.Forms.Panel()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.TextBox14 = New System.Windows.Forms.TextBox()
         Me.Panel15.SuspendLayout()
         Me.Panel16.SuspendLayout()
         Me.Panel17.SuspendLayout()
@@ -140,20 +140,20 @@ Partial Class RequisitionIssueSlip
         Me.Panel38.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel20.SuspendLayout()
-        Me.Panel6.SuspendLayout()
         Me.Panel13.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel36.SuspendLayout()
+        Me.Panel34.SuspendLayout()
+        Me.Panel19.SuspendLayout()
+        Me.Panel35.SuspendLayout()
+        Me.Panel32.SuspendLayout()
+        Me.Panel31.SuspendLayout()
+        Me.Panel30.SuspendLayout()
+        Me.Panel29.SuspendLayout()
+        Me.Panel26.SuspendLayout()
+        Me.Panel27.SuspendLayout()
         Me.Panel14.SuspendLayout()
         Me.Panel25.SuspendLayout()
-        Me.Panel26.SuspendLayout()
-        Me.Panel29.SuspendLayout()
-        Me.Panel30.SuspendLayout()
-        Me.Panel31.SuspendLayout()
-        Me.Panel32.SuspendLayout()
-        Me.Panel35.SuspendLayout()
-        Me.Panel19.SuspendLayout()
-        Me.Panel34.SuspendLayout()
-        Me.Panel36.SuspendLayout()
-        Me.Panel27.SuspendLayout()
         Me.SuspendLayout()
         '
         'admin_label_Reports
@@ -272,16 +272,21 @@ Partial Class RequisitionIssueSlip
         Me.Panel8.Size = New System.Drawing.Size(416, 56)
         Me.Panel8.TabIndex = 48
         '
-        'Label8
+        'TextBox4
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(3, 4)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(61, 22)
-        Me.Label8.TabIndex = 44
-        Me.Label8.Text = "Division:"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.TextBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox4.Location = New System.Drawing.Point(95, 28)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(312, 22)
+        Me.TextBox4.TabIndex = 46
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox5.Location = New System.Drawing.Point(95, 5)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(312, 22)
+        Me.TextBox5.TabIndex = 44
         '
         'Label7
         '
@@ -294,21 +299,16 @@ Partial Class RequisitionIssueSlip
         Me.Label7.Text = "Office:"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'TextBox5
+        'Label8
         '
-        Me.TextBox5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox5.Location = New System.Drawing.Point(95, 5)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(312, 22)
-        Me.TextBox5.TabIndex = 44
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox4.Location = New System.Drawing.Point(95, 28)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(312, 22)
-        Me.TextBox4.TabIndex = 46
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(3, 4)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(61, 22)
+        Me.Label8.TabIndex = 44
+        Me.Label8.Text = "Division:"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Panel7
         '
@@ -325,16 +325,21 @@ Partial Class RequisitionIssueSlip
         Me.Panel7.Size = New System.Drawing.Size(420, 56)
         Me.Panel7.TabIndex = 49
         '
-        'Label6
+        'TextBox2
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(3, 4)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(174, 22)
-        Me.Label6.TabIndex = 44
-        Me.Label6.Text = "Responsibility Center Code"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.TextBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox2.Location = New System.Drawing.Point(99, 28)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(312, 22)
+        Me.TextBox2.TabIndex = 46
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox3.Location = New System.Drawing.Point(204, 5)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(207, 22)
+        Me.TextBox3.TabIndex = 44
         '
         'Label5
         '
@@ -347,21 +352,16 @@ Partial Class RequisitionIssueSlip
         Me.Label5.Text = "RIS No.:"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'TextBox3
+        'Label6
         '
-        Me.TextBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox3.Location = New System.Drawing.Point(204, 5)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(207, 22)
-        Me.TextBox3.TabIndex = 44
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox2.Location = New System.Drawing.Point(99, 28)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(312, 22)
-        Me.TextBox2.TabIndex = 46
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(3, 4)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(174, 22)
+        Me.Label6.TabIndex = 44
+        Me.Label6.Text = "Responsibility Center Code"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Panel9
         '
@@ -446,47 +446,12 @@ Partial Class RequisitionIssueSlip
         Me.requisitionDataGrid1.Size = New System.Drawing.Size(835, 263)
         Me.requisitionDataGrid1.TabIndex = 57
         '
-        'requisitionRemarks
+        'requisitionName
         '
-        Me.requisitionRemarks.HeaderText = "Remarks"
-        Me.requisitionRemarks.MinimumWidth = 6
-        Me.requisitionRemarks.Name = "requisitionRemarks"
-        Me.requisitionRemarks.Width = 200
-        '
-        'requisitionQuantity2
-        '
-        Me.requisitionQuantity2.HeaderText = "Quantity"
-        Me.requisitionQuantity2.MinimumWidth = 6
-        Me.requisitionQuantity2.Name = "requisitionQuantity2"
-        Me.requisitionQuantity2.Width = 70
-        '
-        'requisitionNo
-        '
-        Me.requisitionNo.HeaderText = "No"
-        Me.requisitionNo.MinimumWidth = 6
-        Me.requisitionNo.Name = "requisitionNo"
-        Me.requisitionNo.Width = 75
-        '
-        'requisitionYes
-        '
-        Me.requisitionYes.HeaderText = "Yes"
-        Me.requisitionYes.MinimumWidth = 6
-        Me.requisitionYes.Name = "requisitionYes"
-        Me.requisitionYes.Width = 75
-        '
-        'requisitionQuantity1
-        '
-        Me.requisitionQuantity1.HeaderText = "Quantity"
-        Me.requisitionQuantity1.MinimumWidth = 6
-        Me.requisitionQuantity1.Name = "requisitionQuantity1"
-        Me.requisitionQuantity1.Width = 70
-        '
-        'requisitionParticulars
-        '
-        Me.requisitionParticulars.HeaderText = "Particulars"
-        Me.requisitionParticulars.MinimumWidth = 6
-        Me.requisitionParticulars.Name = "requisitionParticulars"
-        Me.requisitionParticulars.Width = 120
+        Me.requisitionName.HeaderText = "Name"
+        Me.requisitionName.MinimumWidth = 6
+        Me.requisitionName.Name = "requisitionName"
+        Me.requisitionName.Width = 120
         '
         'requisitionUnit
         '
@@ -495,12 +460,47 @@ Partial Class RequisitionIssueSlip
         Me.requisitionUnit.Name = "requisitionUnit"
         Me.requisitionUnit.Width = 70
         '
-        'requisitionName
+        'requisitionParticulars
         '
-        Me.requisitionName.HeaderText = "Name"
-        Me.requisitionName.MinimumWidth = 6
-        Me.requisitionName.Name = "requisitionName"
-        Me.requisitionName.Width = 120
+        Me.requisitionParticulars.HeaderText = "Particulars"
+        Me.requisitionParticulars.MinimumWidth = 6
+        Me.requisitionParticulars.Name = "requisitionParticulars"
+        Me.requisitionParticulars.Width = 120
+        '
+        'requisitionQuantity1
+        '
+        Me.requisitionQuantity1.HeaderText = "Quantity"
+        Me.requisitionQuantity1.MinimumWidth = 6
+        Me.requisitionQuantity1.Name = "requisitionQuantity1"
+        Me.requisitionQuantity1.Width = 70
+        '
+        'requisitionYes
+        '
+        Me.requisitionYes.HeaderText = "Yes"
+        Me.requisitionYes.MinimumWidth = 6
+        Me.requisitionYes.Name = "requisitionYes"
+        Me.requisitionYes.Width = 75
+        '
+        'requisitionNo
+        '
+        Me.requisitionNo.HeaderText = "No"
+        Me.requisitionNo.MinimumWidth = 6
+        Me.requisitionNo.Name = "requisitionNo"
+        Me.requisitionNo.Width = 75
+        '
+        'requisitionQuantity2
+        '
+        Me.requisitionQuantity2.HeaderText = "Quantity"
+        Me.requisitionQuantity2.MinimumWidth = 6
+        Me.requisitionQuantity2.Name = "requisitionQuantity2"
+        Me.requisitionQuantity2.Width = 70
+        '
+        'requisitionRemarks
+        '
+        Me.requisitionRemarks.HeaderText = "Remarks"
+        Me.requisitionRemarks.MinimumWidth = 6
+        Me.requisitionRemarks.Name = "requisitionRemarks"
+        Me.requisitionRemarks.Width = 200
         '
         'Panel21
         '
@@ -534,6 +534,16 @@ Partial Class RequisitionIssueSlip
         Me.Panel24.Name = "Panel24"
         Me.Panel24.Size = New System.Drawing.Size(146, 28)
         Me.Panel24.TabIndex = 71
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox8.Location = New System.Drawing.Point(3, 2)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(139, 22)
+        Me.TextBox8.TabIndex = 101
         '
         'Panel18
         '
@@ -577,6 +587,16 @@ Partial Class RequisitionIssueSlip
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(146, 28)
         Me.Panel4.TabIndex = 88
+        '
+        'TextBox11
+        '
+        Me.TextBox11.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox11.Location = New System.Drawing.Point(3, 2)
+        Me.TextBox11.Name = "TextBox11"
+        Me.TextBox11.Size = New System.Drawing.Size(139, 22)
+        Me.TextBox11.TabIndex = 102
         '
         'Panel5
         '
@@ -633,6 +653,16 @@ Partial Class RequisitionIssueSlip
         Me.Panel3.Size = New System.Drawing.Size(146, 28)
         Me.Panel3.TabIndex = 89
         '
+        'TextBox12
+        '
+        Me.TextBox12.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox12.Location = New System.Drawing.Point(3, 2)
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.Size = New System.Drawing.Size(139, 22)
+        Me.TextBox12.TabIndex = 102
+        '
         'Panel33
         '
         Me.Panel33.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -666,6 +696,16 @@ Partial Class RequisitionIssueSlip
         Me.Panel2.Size = New System.Drawing.Size(146, 28)
         Me.Panel2.TabIndex = 90
         '
+        'TextBox13
+        '
+        Me.TextBox13.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox13.Location = New System.Drawing.Point(3, 2)
+        Me.TextBox13.Name = "TextBox13"
+        Me.TextBox13.Size = New System.Drawing.Size(139, 22)
+        Me.TextBox13.TabIndex = 102
+        '
         'Panel39
         '
         Me.Panel39.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -676,6 +716,16 @@ Partial Class RequisitionIssueSlip
         Me.Panel39.Name = "Panel39"
         Me.Panel39.Size = New System.Drawing.Size(145, 28)
         Me.Panel39.TabIndex = 86
+        '
+        'TextBox7
+        '
+        Me.TextBox7.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox7.Location = New System.Drawing.Point(2, 2)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(139, 22)
+        Me.TextBox7.TabIndex = 102
         '
         'Panel38
         '
@@ -710,6 +760,15 @@ Partial Class RequisitionIssueSlip
         Me.Panel1.Size = New System.Drawing.Size(146, 28)
         Me.Panel1.TabIndex = 91
         '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(3, 2)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(139, 22)
+        Me.DateTimePicker2.TabIndex = 1
+        '
         'Panel20
         '
         Me.Panel20.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -722,6 +781,38 @@ Partial Class RequisitionIssueSlip
         Me.Panel20.Name = "Panel20"
         Me.Panel20.Size = New System.Drawing.Size(146, 28)
         Me.Panel20.TabIndex = 92
+        '
+        'Panel12
+        '
+        Me.Panel12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel12.Location = New System.Drawing.Point(147, 29)
+        Me.Panel12.Name = "Panel12"
+        Me.Panel12.Size = New System.Drawing.Size(136, 28)
+        Me.Panel12.TabIndex = 95
+        '
+        'Panel13
+        '
+        Me.Panel13.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel13.Controls.Add(Me.Label3)
+        Me.Panel13.Location = New System.Drawing.Point(147, 2)
+        Me.Panel13.Name = "Panel13"
+        Me.Panel13.Size = New System.Drawing.Size(136, 28)
+        Me.Panel13.TabIndex = 94
+        '
+        'Label3
+        '
+        Me.Label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(18, 4)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(109, 22)
+        Me.Label3.TabIndex = 48
+        Me.Label3.Text = "Issued by:"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label2
         '
@@ -775,37 +866,216 @@ Partial Class RequisitionIssueSlip
         Me.Panel6.Size = New System.Drawing.Size(838, 648)
         Me.Panel6.TabIndex = 44
         '
-        'Panel12
+        'TextBox14
         '
-        Me.Panel12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TextBox14.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel12.Location = New System.Drawing.Point(147, 29)
-        Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(136, 28)
-        Me.Panel12.TabIndex = 95
+        Me.TextBox14.Location = New System.Drawing.Point(555, 589)
+        Me.TextBox14.Name = "TextBox14"
+        Me.TextBox14.Size = New System.Drawing.Size(139, 22)
+        Me.TextBox14.TabIndex = 104
         '
-        'Panel13
+        'Panel36
         '
-        Me.Panel13.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.Panel36.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel13.Controls.Add(Me.Label3)
-        Me.Panel13.Location = New System.Drawing.Point(147, 2)
-        Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(136, 28)
-        Me.Panel13.TabIndex = 94
+        Me.Panel36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel36.Controls.Add(Me.DateTimePicker1)
+        Me.Panel36.Location = New System.Drawing.Point(262, 613)
+        Me.Panel36.Name = "Panel36"
+        Me.Panel36.Size = New System.Drawing.Size(145, 28)
+        Me.Panel36.TabIndex = 102
         '
-        'Label3
+        'DateTimePicker1
         '
-        Me.Label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(18, 4)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(109, 22)
-        Me.Label3.TabIndex = 48
-        Me.Label3.Text = "Issued by:"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.DateTimePicker1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(2, 2)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(139, 22)
+        Me.DateTimePicker1.TabIndex = 2
+        '
+        'Panel34
+        '
+        Me.Panel34.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel34.Controls.Add(Me.TextBox9)
+        Me.Panel34.Location = New System.Drawing.Point(262, 586)
+        Me.Panel34.Name = "Panel34"
+        Me.Panel34.Size = New System.Drawing.Size(145, 28)
+        Me.Panel34.TabIndex = 87
+        '
+        'TextBox9
+        '
+        Me.TextBox9.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox9.Location = New System.Drawing.Point(2, 2)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(139, 22)
+        Me.TextBox9.TabIndex = 103
+        '
+        'Panel19
+        '
+        Me.Panel19.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel19.Controls.Add(Me.TextBox15)
+        Me.Panel19.Location = New System.Drawing.Point(551, 532)
+        Me.Panel19.Name = "Panel19"
+        Me.Panel19.Size = New System.Drawing.Size(146, 28)
+        Me.Panel19.TabIndex = 103
+        '
+        'TextBox15
+        '
+        Me.TextBox15.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox15.Location = New System.Drawing.Point(3, 2)
+        Me.TextBox15.Name = "TextBox15"
+        Me.TextBox15.Size = New System.Drawing.Size(139, 22)
+        Me.TextBox15.TabIndex = 102
+        '
+        'Panel35
+        '
+        Me.Panel35.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel35.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel35.Controls.Add(Me.DateTimePicker4)
+        Me.Panel35.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.Panel35.Location = New System.Drawing.Point(696, 613)
+        Me.Panel35.Name = "Panel35"
+        Me.Panel35.Size = New System.Drawing.Size(139, 28)
+        Me.Panel35.TabIndex = 100
+        '
+        'DateTimePicker4
+        '
+        Me.DateTimePicker4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateTimePicker4.Location = New System.Drawing.Point(3, 2)
+        Me.DateTimePicker4.Name = "DateTimePicker4"
+        Me.DateTimePicker4.Size = New System.Drawing.Size(131, 22)
+        Me.DateTimePicker4.TabIndex = 1
+        '
+        'Panel32
+        '
+        Me.Panel32.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel32.Controls.Add(Me.TextBox21)
+        Me.Panel32.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.Panel32.Location = New System.Drawing.Point(696, 586)
+        Me.Panel32.Name = "Panel32"
+        Me.Panel32.Size = New System.Drawing.Size(139, 28)
+        Me.Panel32.TabIndex = 99
+        '
+        'TextBox21
+        '
+        Me.TextBox21.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox21.Location = New System.Drawing.Point(2, 2)
+        Me.TextBox21.Name = "TextBox21"
+        Me.TextBox21.Size = New System.Drawing.Size(132, 22)
+        Me.TextBox21.TabIndex = 104
+        '
+        'Panel31
+        '
+        Me.Panel31.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel31.Controls.Add(Me.TextBox20)
+        Me.Panel31.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.Panel31.Location = New System.Drawing.Point(696, 559)
+        Me.Panel31.Name = "Panel31"
+        Me.Panel31.Size = New System.Drawing.Size(139, 28)
+        Me.Panel31.TabIndex = 98
+        '
+        'TextBox20
+        '
+        Me.TextBox20.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox20.Location = New System.Drawing.Point(2, 2)
+        Me.TextBox20.Name = "TextBox20"
+        Me.TextBox20.Size = New System.Drawing.Size(132, 22)
+        Me.TextBox20.TabIndex = 104
+        '
+        'Panel30
+        '
+        Me.Panel30.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel30.Controls.Add(Me.TextBox19)
+        Me.Panel30.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.Panel30.Location = New System.Drawing.Point(696, 532)
+        Me.Panel30.Name = "Panel30"
+        Me.Panel30.Size = New System.Drawing.Size(139, 28)
+        Me.Panel30.TabIndex = 97
+        '
+        'TextBox19
+        '
+        Me.TextBox19.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox19.Location = New System.Drawing.Point(2, 2)
+        Me.TextBox19.Name = "TextBox19"
+        Me.TextBox19.Size = New System.Drawing.Size(132, 22)
+        Me.TextBox19.TabIndex = 103
+        '
+        'Panel29
+        '
+        Me.Panel29.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel29.Controls.Add(Me.DateTimePicker3)
+        Me.Panel29.Location = New System.Drawing.Point(551, 613)
+        Me.Panel29.Name = "Panel29"
+        Me.Panel29.Size = New System.Drawing.Size(146, 28)
+        Me.Panel29.TabIndex = 98
+        '
+        'DateTimePicker3
+        '
+        Me.DateTimePicker3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateTimePicker3.Location = New System.Drawing.Point(3, 2)
+        Me.DateTimePicker3.Name = "DateTimePicker3"
+        Me.DateTimePicker3.Size = New System.Drawing.Size(139, 22)
+        Me.DateTimePicker3.TabIndex = 1
+        '
+        'Panel26
+        '
+        Me.Panel26.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel26.Controls.Add(Me.Panel27)
+        Me.Panel26.Location = New System.Drawing.Point(551, 559)
+        Me.Panel26.Name = "Panel26"
+        Me.Panel26.Size = New System.Drawing.Size(146, 28)
+        Me.Panel26.TabIndex = 94
+        '
+        'Panel27
+        '
+        Me.Panel27.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel27.Controls.Add(Me.TextBox10)
+        Me.Panel27.Location = New System.Drawing.Point(-1, -1)
+        Me.Panel27.Name = "Panel27"
+        Me.Panel27.Size = New System.Drawing.Size(146, 28)
+        Me.Panel27.TabIndex = 95
+        '
+        'TextBox10
+        '
+        Me.TextBox10.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox10.Location = New System.Drawing.Point(3, 2)
+        Me.TextBox10.Name = "TextBox10"
+        Me.TextBox10.Size = New System.Drawing.Size(139, 22)
+        Me.TextBox10.TabIndex = 103
         '
         'Panel14
         '
@@ -863,276 +1133,6 @@ Partial Class RequisitionIssueSlip
         Me.Label10.Text = "Received by:"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Panel26
-        '
-        Me.Panel26.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel26.Controls.Add(Me.Panel27)
-        Me.Panel26.Location = New System.Drawing.Point(551, 559)
-        Me.Panel26.Name = "Panel26"
-        Me.Panel26.Size = New System.Drawing.Size(146, 28)
-        Me.Panel26.TabIndex = 94
-        '
-        'Panel29
-        '
-        Me.Panel29.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel29.Controls.Add(Me.DateTimePicker3)
-        Me.Panel29.Location = New System.Drawing.Point(551, 613)
-        Me.Panel29.Name = "Panel29"
-        Me.Panel29.Size = New System.Drawing.Size(146, 28)
-        Me.Panel29.TabIndex = 98
-        '
-        'Panel30
-        '
-        Me.Panel30.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel30.Controls.Add(Me.TextBox19)
-        Me.Panel30.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Panel30.Location = New System.Drawing.Point(696, 532)
-        Me.Panel30.Name = "Panel30"
-        Me.Panel30.Size = New System.Drawing.Size(139, 28)
-        Me.Panel30.TabIndex = 97
-        '
-        'Panel31
-        '
-        Me.Panel31.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel31.Controls.Add(Me.TextBox20)
-        Me.Panel31.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Panel31.Location = New System.Drawing.Point(696, 559)
-        Me.Panel31.Name = "Panel31"
-        Me.Panel31.Size = New System.Drawing.Size(139, 28)
-        Me.Panel31.TabIndex = 98
-        '
-        'Panel32
-        '
-        Me.Panel32.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel32.Controls.Add(Me.TextBox21)
-        Me.Panel32.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Panel32.Location = New System.Drawing.Point(696, 586)
-        Me.Panel32.Name = "Panel32"
-        Me.Panel32.Size = New System.Drawing.Size(139, 28)
-        Me.Panel32.TabIndex = 99
-        '
-        'Panel35
-        '
-        Me.Panel35.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel35.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel35.Controls.Add(Me.DateTimePicker4)
-        Me.Panel35.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Panel35.Location = New System.Drawing.Point(696, 613)
-        Me.Panel35.Name = "Panel35"
-        Me.Panel35.Size = New System.Drawing.Size(139, 28)
-        Me.Panel35.TabIndex = 100
-        '
-        'TextBox8
-        '
-        Me.TextBox8.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox8.Location = New System.Drawing.Point(3, 2)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(139, 22)
-        Me.TextBox8.TabIndex = 101
-        '
-        'TextBox11
-        '
-        Me.TextBox11.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox11.Location = New System.Drawing.Point(3, 2)
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(139, 22)
-        Me.TextBox11.TabIndex = 102
-        '
-        'TextBox12
-        '
-        Me.TextBox12.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox12.Location = New System.Drawing.Point(3, 2)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(139, 22)
-        Me.TextBox12.TabIndex = 102
-        '
-        'TextBox13
-        '
-        Me.TextBox13.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox13.Location = New System.Drawing.Point(3, 2)
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.Size = New System.Drawing.Size(139, 22)
-        Me.TextBox13.TabIndex = 102
-        '
-        'TextBox15
-        '
-        Me.TextBox15.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox15.Location = New System.Drawing.Point(3, 2)
-        Me.TextBox15.Name = "TextBox15"
-        Me.TextBox15.Size = New System.Drawing.Size(139, 22)
-        Me.TextBox15.TabIndex = 102
-        '
-        'Panel19
-        '
-        Me.Panel19.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel19.Controls.Add(Me.TextBox15)
-        Me.Panel19.Location = New System.Drawing.Point(551, 532)
-        Me.Panel19.Name = "Panel19"
-        Me.Panel19.Size = New System.Drawing.Size(146, 28)
-        Me.Panel19.TabIndex = 103
-        '
-        'TextBox19
-        '
-        Me.TextBox19.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox19.Location = New System.Drawing.Point(2, 2)
-        Me.TextBox19.Name = "TextBox19"
-        Me.TextBox19.Size = New System.Drawing.Size(132, 22)
-        Me.TextBox19.TabIndex = 103
-        '
-        'TextBox20
-        '
-        Me.TextBox20.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox20.Location = New System.Drawing.Point(2, 2)
-        Me.TextBox20.Name = "TextBox20"
-        Me.TextBox20.Size = New System.Drawing.Size(132, 22)
-        Me.TextBox20.TabIndex = 104
-        '
-        'TextBox21
-        '
-        Me.TextBox21.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox21.Location = New System.Drawing.Point(2, 2)
-        Me.TextBox21.Name = "TextBox21"
-        Me.TextBox21.Size = New System.Drawing.Size(132, 22)
-        Me.TextBox21.TabIndex = 104
-        '
-        'DateTimePicker2
-        '
-        Me.DateTimePicker2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DateTimePicker2.Location = New System.Drawing.Point(3, 2)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(139, 22)
-        Me.DateTimePicker2.TabIndex = 1
-        '
-        'DateTimePicker3
-        '
-        Me.DateTimePicker3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DateTimePicker3.Location = New System.Drawing.Point(3, 2)
-        Me.DateTimePicker3.Name = "DateTimePicker3"
-        Me.DateTimePicker3.Size = New System.Drawing.Size(139, 22)
-        Me.DateTimePicker3.TabIndex = 1
-        '
-        'DateTimePicker4
-        '
-        Me.DateTimePicker4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DateTimePicker4.Location = New System.Drawing.Point(3, 2)
-        Me.DateTimePicker4.Name = "DateTimePicker4"
-        Me.DateTimePicker4.Size = New System.Drawing.Size(131, 22)
-        Me.DateTimePicker4.TabIndex = 1
-        '
-        'Panel34
-        '
-        Me.Panel34.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel34.Controls.Add(Me.TextBox9)
-        Me.Panel34.Location = New System.Drawing.Point(262, 586)
-        Me.Panel34.Name = "Panel34"
-        Me.Panel34.Size = New System.Drawing.Size(145, 28)
-        Me.Panel34.TabIndex = 87
-        '
-        'Panel36
-        '
-        Me.Panel36.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel36.Controls.Add(Me.DateTimePicker1)
-        Me.Panel36.Location = New System.Drawing.Point(262, 613)
-        Me.Panel36.Name = "Panel36"
-        Me.Panel36.Size = New System.Drawing.Size(145, 28)
-        Me.Panel36.TabIndex = 102
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox7.Location = New System.Drawing.Point(2, 2)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(139, 22)
-        Me.TextBox7.TabIndex = 102
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox9.Location = New System.Drawing.Point(2, 2)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(139, 22)
-        Me.TextBox9.TabIndex = 103
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DateTimePicker1.Location = New System.Drawing.Point(2, 2)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(139, 22)
-        Me.DateTimePicker1.TabIndex = 2
-        '
-        'Panel27
-        '
-        Me.Panel27.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel27.Controls.Add(Me.TextBox10)
-        Me.Panel27.Location = New System.Drawing.Point(-1, -1)
-        Me.Panel27.Name = "Panel27"
-        Me.Panel27.Size = New System.Drawing.Size(146, 28)
-        Me.Panel27.TabIndex = 95
-        '
-        'TextBox10
-        '
-        Me.TextBox10.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox10.Location = New System.Drawing.Point(3, 2)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(139, 22)
-        Me.TextBox10.TabIndex = 103
-        '
-        'TextBox14
-        '
-        Me.TextBox14.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox14.Location = New System.Drawing.Point(555, 589)
-        Me.TextBox14.Name = "TextBox14"
-        Me.TextBox14.Size = New System.Drawing.Size(139, 22)
-        Me.TextBox14.TabIndex = 104
-        '
         'RequisitionIssueSlip
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1181,27 +1181,27 @@ Partial Class RequisitionIssueSlip
         Me.Panel38.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel20.ResumeLayout(False)
+        Me.Panel13.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
-        Me.Panel13.ResumeLayout(False)
-        Me.Panel14.ResumeLayout(False)
-        Me.Panel25.ResumeLayout(False)
-        Me.Panel26.ResumeLayout(False)
-        Me.Panel29.ResumeLayout(False)
-        Me.Panel30.ResumeLayout(False)
-        Me.Panel30.PerformLayout()
-        Me.Panel31.ResumeLayout(False)
-        Me.Panel31.PerformLayout()
-        Me.Panel32.ResumeLayout(False)
-        Me.Panel32.PerformLayout()
-        Me.Panel35.ResumeLayout(False)
-        Me.Panel19.ResumeLayout(False)
-        Me.Panel19.PerformLayout()
+        Me.Panel36.ResumeLayout(False)
         Me.Panel34.ResumeLayout(False)
         Me.Panel34.PerformLayout()
-        Me.Panel36.ResumeLayout(False)
+        Me.Panel19.ResumeLayout(False)
+        Me.Panel19.PerformLayout()
+        Me.Panel35.ResumeLayout(False)
+        Me.Panel32.ResumeLayout(False)
+        Me.Panel32.PerformLayout()
+        Me.Panel31.ResumeLayout(False)
+        Me.Panel31.PerformLayout()
+        Me.Panel30.ResumeLayout(False)
+        Me.Panel30.PerformLayout()
+        Me.Panel29.ResumeLayout(False)
+        Me.Panel26.ResumeLayout(False)
         Me.Panel27.ResumeLayout(False)
         Me.Panel27.PerformLayout()
+        Me.Panel14.ResumeLayout(False)
+        Me.Panel25.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

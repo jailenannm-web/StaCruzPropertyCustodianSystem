@@ -86,6 +86,7 @@ Partial Class StaffLogin
         Me.txb_Password.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Password.Multiline = True
         Me.txb_Password.Name = "txb_Password"
+        Me.txb_Password.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txb_Password.Size = New System.Drawing.Size(512, 52)
         Me.txb_Password.TabIndex = 4
         '
