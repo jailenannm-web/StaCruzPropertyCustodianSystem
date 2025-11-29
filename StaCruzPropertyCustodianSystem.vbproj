@@ -122,6 +122,12 @@
     <Compile Include="Forms\Admin\AddSupplyRequest.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\SuperAdmin\Supply Management\SuppliesManagement.Designer.vb">
+      <DependentUpon>SuppliesManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Supply Management\SuppliesManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SessionContext.vb" />
     <Compile Include="Forms\Admin\AddDepartment.Designer.vb">
       <DependentUpon>AddDepartment.vb</DependentUpon>
@@ -610,6 +616,9 @@
     <EmbeddedResource Include="Forms\Staff\TrnsReturnItem.resx">
       <DependentUpon>TrnsReturnItem.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Property Management\SAPropertyManagement.resx">
+      <DependentUpon>SAPropertyManagement.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\AuditReport.resx">
       <DependentUpon>AuditReport.vb</DependentUpon>
     </EmbeddedResource>
@@ -666,6 +675,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\SASystemConfiguration.resx">
       <DependentUpon>SASystemConfiguration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Supply Management\SuppliesManagement.resx">
+      <DependentUpon>SuppliesManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\UserManagement\AddUser.resx">
       <DependentUpon>AddUser.vb</DependentUpon>
@@ -746,8 +758,6 @@
   <ItemGroup>
     <Folder Include="Forms\SuperAdmin\Department Management\" />
     <Folder Include="Forms\SuperAdmin\Maintenance\" />
-    <Folder Include="Forms\SuperAdmin\Property Management\" />
-    <Folder Include="Forms\SuperAdmin\Supply Management\" />
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

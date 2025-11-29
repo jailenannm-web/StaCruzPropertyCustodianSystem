@@ -59,12 +59,12 @@ Public Class UC_PropertyManagement1
 
     Private Sub InitializeFilters()
         ' Populate category filter
-        pm_cbobx_categ.Items.Clear()
-        pm_cbobx_categ.Items.Add("All Categories")
-        pm_cbobx_categ.Items.AddRange(New String() {"Furniture", "Equipment", "Office Supplies", "IT Equipment",
+        SADashboard.Items.Clear()
+        SADashboard.Items.Add("All Categories")
+        SADashboard.Items.AddRange(New String() {"Furniture", "Equipment", "Office Supplies", "IT Equipment",
                                                     "Laboratory Apparatus", "Books and Publications",
                                                     "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"})
-        pm_cbobx_categ.SelectedIndex = 0
+        SADashboard.SelectedIndex = 0
 
         ' Populate status filter
         pm_cbobx_status.Items.Clear()
@@ -73,7 +73,7 @@ Public Class UC_PropertyManagement1
         pm_cbobx_status.SelectedIndex = 0
 
         ' Wire up filter change events
-        AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
+        AddHandler SADashboard.SelectedIndexChanged, AddressOf Filter_Changed
         AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
     End Sub
 
@@ -84,8 +84,8 @@ Public Class UC_PropertyManagement1
             Dim statusFilter As String = ""
 
             ' Get filter values
-            If pm_cbobx_categ.SelectedIndex > 0 Then
-                categoryFilter = pm_cbobx_categ.SelectedItem.ToString()
+            If SADashboard.SelectedIndex > 0 Then
+                categoryFilter = SADashboard.SelectedItem.ToString()
             End If
             If pm_cbobx_status.SelectedIndex > 0 Then
                 statusFilter = pm_cbobx_status.SelectedItem.ToString()

@@ -30,21 +30,6 @@ Partial Class UC_DepartmentManagement
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.admin_deptmanagement = New System.Windows.Forms.DataGridView()
-        Me.department_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.department_name = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.head_of_department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.contact_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.email = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.no_of_employees = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.department_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.office_hours = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.established_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.parent_department_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.budget_allocation = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.created_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updated_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
@@ -52,6 +37,13 @@ Partial Class UC_DepartmentManagement
         Me.btnView = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.DepartmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DepartmentHead = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DepartmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalProperties = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalSupplies = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -72,118 +64,13 @@ Partial Class UC_DepartmentManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.admin_deptmanagement.BackgroundColor = System.Drawing.Color.White
         Me.admin_deptmanagement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.admin_deptmanagement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.department_id, Me.department_name, Me.head_of_department, Me.contact_number, Me.email, Me.location, Me.no_of_employees, Me.department_code, Me.office_hours, Me.established_code, Me.parent_department_id, Me.status, Me.budget_allocation, Me.created_at, Me.updated_at})
+        Me.admin_deptmanagement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DepartmentName, Me.DepartmentHead, Me.DepartmentID, Me.Location, Me.TotalProperties, Me.TotalSupplies, Me.Status})
         Me.admin_deptmanagement.Location = New System.Drawing.Point(59, 116)
         Me.admin_deptmanagement.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_deptmanagement.Name = "admin_deptmanagement"
         Me.admin_deptmanagement.RowHeadersWidth = 51
         Me.admin_deptmanagement.Size = New System.Drawing.Size(1270, 573)
         Me.admin_deptmanagement.TabIndex = 147
-        '
-        'department_id
-        '
-        Me.department_id.HeaderText = "Department ID"
-        Me.department_id.MinimumWidth = 6
-        Me.department_id.Name = "department_id"
-        Me.department_id.Width = 125
-        '
-        'department_name
-        '
-        Me.department_name.HeaderText = "Department Name"
-        Me.department_name.MinimumWidth = 6
-        Me.department_name.Name = "department_name"
-        Me.department_name.Width = 125
-        '
-        'head_of_department
-        '
-        Me.head_of_department.HeaderText = "Head of Department"
-        Me.head_of_department.MinimumWidth = 6
-        Me.head_of_department.Name = "head_of_department"
-        Me.head_of_department.Width = 125
-        '
-        'contact_number
-        '
-        Me.contact_number.HeaderText = "Contact Number"
-        Me.contact_number.MinimumWidth = 6
-        Me.contact_number.Name = "contact_number"
-        Me.contact_number.Width = 125
-        '
-        'email
-        '
-        Me.email.HeaderText = "Email"
-        Me.email.MinimumWidth = 6
-        Me.email.Name = "email"
-        Me.email.Width = 125
-        '
-        'location
-        '
-        Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
-        Me.location.Name = "location"
-        Me.location.Width = 125
-        '
-        'no_of_employees
-        '
-        Me.no_of_employees.HeaderText = "Number of Employees"
-        Me.no_of_employees.MinimumWidth = 6
-        Me.no_of_employees.Name = "no_of_employees"
-        Me.no_of_employees.Width = 125
-        '
-        'department_code
-        '
-        Me.department_code.HeaderText = "Department Code"
-        Me.department_code.MinimumWidth = 6
-        Me.department_code.Name = "department_code"
-        Me.department_code.Width = 125
-        '
-        'office_hours
-        '
-        Me.office_hours.HeaderText = "Office Hours"
-        Me.office_hours.MinimumWidth = 6
-        Me.office_hours.Name = "office_hours"
-        Me.office_hours.Width = 125
-        '
-        'established_code
-        '
-        Me.established_code.HeaderText = "Established Code"
-        Me.established_code.MinimumWidth = 6
-        Me.established_code.Name = "established_code"
-        Me.established_code.Width = 125
-        '
-        'parent_department_id
-        '
-        Me.parent_department_id.HeaderText = "Parent Department ID"
-        Me.parent_department_id.MinimumWidth = 6
-        Me.parent_department_id.Name = "parent_department_id"
-        Me.parent_department_id.Width = 125
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
-        '
-        'budget_allocation
-        '
-        Me.budget_allocation.HeaderText = "Budget Allocation"
-        Me.budget_allocation.MinimumWidth = 6
-        Me.budget_allocation.Name = "budget_allocation"
-        Me.budget_allocation.Width = 125
-        '
-        'created_at
-        '
-        Me.created_at.HeaderText = "Created At"
-        Me.created_at.MinimumWidth = 6
-        Me.created_at.Name = "created_at"
-        Me.created_at.Width = 125
-        '
-        'updated_at
-        '
-        Me.updated_at.HeaderText = "Updated at"
-        Me.updated_at.MinimumWidth = 6
-        Me.updated_at.Name = "updated_at"
-        Me.updated_at.Width = 125
         '
         'ttldepartmentmanagement
         '
@@ -193,9 +80,9 @@ Partial Class UC_DepartmentManagement
         Me.ttldepartmentmanagement.ForeColor = System.Drawing.Color.Black
         Me.ttldepartmentmanagement.Location = New System.Drawing.Point(200, 705)
         Me.ttldepartmentmanagement.Name = "ttldepartmentmanagement"
-        Me.ttldepartmentmanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttldepartmentmanagement.Size = New System.Drawing.Size(47, 58)
         Me.ttldepartmentmanagement.TabIndex = 152
-        Me.ttldepartmentmanagement.Text = "1"
+        Me.ttldepartmentmanagement.Text = "0"
         '
         'Label1
         '
@@ -283,6 +170,55 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
         '
+        'DepartmentName
+        '
+        Me.DepartmentName.HeaderText = "Department Name"
+        Me.DepartmentName.MinimumWidth = 6
+        Me.DepartmentName.Name = "DepartmentName"
+        Me.DepartmentName.Width = 125
+        '
+        'DepartmentHead
+        '
+        Me.DepartmentHead.HeaderText = "Department Head"
+        Me.DepartmentHead.MinimumWidth = 6
+        Me.DepartmentHead.Name = "DepartmentHead"
+        Me.DepartmentHead.Width = 125
+        '
+        'DepartmentID
+        '
+        Me.DepartmentID.HeaderText = "Department I.D"
+        Me.DepartmentID.MinimumWidth = 6
+        Me.DepartmentID.Name = "DepartmentID"
+        Me.DepartmentID.Width = 125
+        '
+        'Location
+        '
+        Me.Location.HeaderText = "Location"
+        Me.Location.MinimumWidth = 6
+        Me.Location.Name = "Location"
+        Me.Location.Width = 125
+        '
+        'TotalProperties
+        '
+        Me.TotalProperties.HeaderText = "Total Properties"
+        Me.TotalProperties.MinimumWidth = 6
+        Me.TotalProperties.Name = "TotalProperties"
+        Me.TotalProperties.Width = 125
+        '
+        'TotalSupplies
+        '
+        Me.TotalSupplies.HeaderText = "Total Supplies"
+        Me.TotalSupplies.MinimumWidth = 6
+        Me.TotalSupplies.Name = "TotalSupplies"
+        Me.TotalSupplies.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
+        '
         'UC_DepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -307,21 +243,6 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents admin_label_DepartmentManagement As Label
     Friend WithEvents BackgroundWorker1 As BackgroundWorker
     Friend WithEvents admin_deptmanagement As DataGridView
-    Friend WithEvents department_id As DataGridViewTextBoxColumn
-    Friend WithEvents department_name As DataGridViewTextBoxColumn
-    Friend WithEvents head_of_department As DataGridViewTextBoxColumn
-    Friend WithEvents contact_number As DataGridViewTextBoxColumn
-    Friend WithEvents email As DataGridViewTextBoxColumn
-    Friend WithEvents location As DataGridViewTextBoxColumn
-    Friend WithEvents no_of_employees As DataGridViewTextBoxColumn
-    Friend WithEvents department_code As DataGridViewTextBoxColumn
-    Friend WithEvents office_hours As DataGridViewTextBoxColumn
-    Friend WithEvents established_code As DataGridViewTextBoxColumn
-    Friend WithEvents parent_department_id As DataGridViewTextBoxColumn
-    Friend WithEvents status As DataGridViewTextBoxColumn
-    Friend WithEvents budget_allocation As DataGridViewTextBoxColumn
-    Friend WithEvents created_at As DataGridViewTextBoxColumn
-    Friend WithEvents updated_at As DataGridViewTextBoxColumn
     Friend WithEvents ttldepartmentmanagement As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents pm_cbobx_status As ComboBox
@@ -329,4 +250,11 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents btnView As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents DepartmentName As DataGridViewTextBoxColumn
+    Friend WithEvents DepartmentHead As DataGridViewTextBoxColumn
+    Friend WithEvents DepartmentID As DataGridViewTextBoxColumn
+    Friend WithEvents Location As DataGridViewTextBoxColumn
+    Friend WithEvents TotalProperties As DataGridViewTextBoxColumn
+    Friend WithEvents TotalSupplies As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
 End Class
