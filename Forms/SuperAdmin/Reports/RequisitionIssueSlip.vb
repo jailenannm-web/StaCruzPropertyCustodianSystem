@@ -9,7 +9,7 @@ Partial Public Class RequisitionIssueSlip
         InitializeComponent()
     End Sub
 
-    Private Sub admin_label_Reports_Click(sender As Object, e As EventArgs) Handles admin_label_Reports.Click
+    Private Sub admin_label_Reports_Click(sender As Object, e As EventArgs)
 
     End Sub
 

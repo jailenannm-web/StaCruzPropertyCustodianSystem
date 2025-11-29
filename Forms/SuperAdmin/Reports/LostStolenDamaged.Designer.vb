@@ -106,7 +106,7 @@ Partial Class LostStolenDamaged
         Me.Label1 = New System.Windows.Forms.Label()
         Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btn_Back = New System.Windows.Forms.Button()
+        Me.RoundedButton2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Panel16.SuspendLayout()
         Me.Panel15.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -125,7 +125,7 @@ Partial Class LostStolenDamaged
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.propertyCard.AutoSize = True
         Me.propertyCard.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertyCard.Location = New System.Drawing.Point(228, 9)
+        Me.propertyCard.Location = New System.Drawing.Point(228, 18)
         Me.propertyCard.Name = "propertyCard"
         Me.propertyCard.Size = New System.Drawing.Size(804, 44)
         Me.propertyCard.TabIndex = 38
@@ -975,7 +975,7 @@ Partial Class LostStolenDamaged
         Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(895, 1019)
+        Me.RoundedButton1.Location = New System.Drawing.Point(895, 1009)
         Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
         Me.RoundedButton1.Name = "RoundedButton1"
         Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
@@ -991,7 +991,7 @@ Partial Class LostStolenDamaged
         Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCSV.Location = New System.Drawing.Point(734, 1019)
+        Me.btnCSV.Location = New System.Drawing.Point(734, 1009)
         Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCSV.Name = "btnCSV"
         Me.btnCSV.Size = New System.Drawing.Size(153, 34)
@@ -999,19 +999,21 @@ Partial Class LostStolenDamaged
         Me.btnCSV.Text = "Generate CSV File"
         Me.btnCSV.UseVisualStyleBackColor = False
         '
-        'btn_Back
+        'RoundedButton2
         '
-        Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btn_Back.ForeColor = System.Drawing.Color.White
-        Me.btn_Back.Location = New System.Drawing.Point(614, 1019)
-        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
-        Me.btn_Back.Name = "btn_Back"
-        Me.btn_Back.Size = New System.Drawing.Size(112, 34)
-        Me.btn_Back.TabIndex = 366
-        Me.btn_Back.Text = "Back"
-        Me.btn_Back.UseVisualStyleBackColor = False
+        Me.RoundedButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton2.CornerRadius = 15
+        Me.RoundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton2.Location = New System.Drawing.Point(573, 1009)
+        Me.RoundedButton2.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton2.Name = "RoundedButton2"
+        Me.RoundedButton2.Size = New System.Drawing.Size(153, 34)
+        Me.RoundedButton2.TabIndex = 369
+        Me.RoundedButton2.Text = "Back"
+        Me.RoundedButton2.UseVisualStyleBackColor = False
         '
         'LostStolenDamaged
         '
@@ -1019,9 +1021,9 @@ Partial Class LostStolenDamaged
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(1303, 1055)
+        Me.Controls.Add(Me.RoundedButton2)
         Me.Controls.Add(Me.RoundedButton1)
         Me.Controls.Add(Me.btnCSV)
-        Me.Controls.Add(Me.btn_Back)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel16)
         Me.Controls.Add(Me.Panel15)
@@ -1132,5 +1134,5 @@ Partial Class LostStolenDamaged
     Friend WithEvents Label22 As Label
     Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
     Friend WithEvents btnCSV As Resources.Controls.RoundedButton
-    Friend WithEvents btn_Back As Button
+    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
 End Class

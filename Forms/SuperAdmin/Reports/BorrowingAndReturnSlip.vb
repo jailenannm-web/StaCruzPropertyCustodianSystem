@@ -4,11 +4,11 @@ Imports System
 Imports System.Drawing
 Imports Microsoft.VisualBasic
 Public Class BorrowingAndReturnSlip
-    Private Sub Label16_Click(sender As Object, e As System.EventArgs) Handles Label16.Click
+    Private Sub Label16_Click(sender As Object, e As System.EventArgs)
 
     End Sub
 
-    Private Sub TextBox17_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox17.TextChanged
+    Private Sub TextBox17_TextChanged(sender As Object, e As System.EventArgs)
 
     End Sub
 
@@ -28,11 +28,19 @@ Public Class BorrowingAndReturnSlip
 
     End Sub
 
-    Private Sub TextBox5_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox5.TextChanged
+    Private Sub TextBox5_TextChanged(sender As Object, e As System.EventArgs)
 
     End Sub
 
-    Private Sub TextBox15_TextChanged(sender As Object, e As EventArgs) Handles TextBox15.TextChanged
+    Private Sub TextBox15_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label12_Click(sender As Object, e As EventArgs) Handles Label12.Click
+
+    End Sub
+
+    Private Sub BorrowingAndReturnSlip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class
