@@ -29,15 +29,6 @@ Partial Class UC_UserManagement
     Private Sub InitializeComponent()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
         Me.pm_table = New System.Windows.Forms.DataGridView()
-        Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
-        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ttlusermanagement = New System.Windows.Forms.Label()
-        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btndelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FullName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Position = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -46,6 +37,14 @@ Partial Class UC_UserManagement
         Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Role = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
+        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlusermanagement = New System.Windows.Forms.Label()
+        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -75,6 +74,62 @@ Partial Class UC_UserManagement
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 27
+        '
+        'UserID
+        '
+        Me.UserID.HeaderText = "User I.D"
+        Me.UserID.MinimumWidth = 6
+        Me.UserID.Name = "UserID"
+        Me.UserID.Width = 125
+        '
+        'FullName
+        '
+        Me.FullName.HeaderText = "Full Name"
+        Me.FullName.MinimumWidth = 6
+        Me.FullName.Name = "FullName"
+        Me.FullName.Width = 125
+        '
+        'Position
+        '
+        Me.Position.HeaderText = "Position"
+        Me.Position.MinimumWidth = 6
+        Me.Position.Name = "Position"
+        Me.Position.Width = 125
+        '
+        'Department
+        '
+        Me.Department.HeaderText = "Department"
+        Me.Department.MinimumWidth = 6
+        Me.Department.Name = "Department"
+        Me.Department.Width = 125
+        '
+        'EmployeeID
+        '
+        Me.EmployeeID.HeaderText = "Employee I.D"
+        Me.EmployeeID.MinimumWidth = 6
+        Me.EmployeeID.Name = "EmployeeID"
+        Me.EmployeeID.Width = 125
+        '
+        'Username
+        '
+        Me.Username.HeaderText = "Username"
+        Me.Username.MinimumWidth = 6
+        Me.Username.Name = "Username"
+        Me.Username.Width = 125
+        '
+        'Role
+        '
+        Me.Role.HeaderText = "Role"
+        Me.Role.MinimumWidth = 6
+        Me.Role.Name = "Role"
+        Me.Role.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
         '
         'cboRoleFilter
         '
@@ -138,21 +193,21 @@ Partial Class UC_UserManagement
         Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = False
         '
-        'btndelete
+        'btnDelete
         '
-        Me.btndelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btndelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btndelete.CornerRadius = 15
-        Me.btndelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btndelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btndelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btndelete.Location = New System.Drawing.Point(1011, 709)
-        Me.btndelete.Margin = New System.Windows.Forms.Padding(4)
-        Me.btndelete.Name = "btndelete"
-        Me.btndelete.Size = New System.Drawing.Size(99, 34)
-        Me.btndelete.TabIndex = 161
-        Me.btndelete.Text = "Delete"
-        Me.btndelete.UseVisualStyleBackColor = False
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnDelete.CornerRadius = 15
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Location = New System.Drawing.Point(1011, 709)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(99, 34)
+        Me.btnDelete.TabIndex = 161
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = False
         '
         'btnEdit
         '
@@ -170,22 +225,6 @@ Partial Class UC_UserManagement
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
         '
-        'btnCancel
-        '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnCancel.CornerRadius = 15
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(903, 709)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(99, 34)
-        Me.btnCancel.TabIndex = 159
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = False
-        '
         'btnAdd
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -202,62 +241,6 @@ Partial Class UC_UserManagement
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
-        'UserID
-        '
-        Me.UserID.HeaderText = "User I.D"
-        Me.UserID.MinimumWidth = 6
-        Me.UserID.Name = "UserID"
-        Me.UserID.Width = 125
-        '
-        'FullName
-        '
-        Me.FullName.HeaderText = "Full Name"
-        Me.FullName.MinimumWidth = 6
-        Me.FullName.Name = "FullName"
-        Me.FullName.Width = 125
-        '
-        'Position
-        '
-        Me.Position.HeaderText = "Position"
-        Me.Position.MinimumWidth = 6
-        Me.Position.Name = "Position"
-        Me.Position.Width = 125
-        '
-        'Department
-        '
-        Me.Department.HeaderText = "Department"
-        Me.Department.MinimumWidth = 6
-        Me.Department.Name = "Department"
-        Me.Department.Width = 125
-        '
-        'EmployeeID
-        '
-        Me.EmployeeID.HeaderText = "Employee I.D"
-        Me.EmployeeID.MinimumWidth = 6
-        Me.EmployeeID.Name = "EmployeeID"
-        Me.EmployeeID.Width = 125
-        '
-        'Username
-        '
-        Me.Username.HeaderText = "Username"
-        Me.Username.MinimumWidth = 6
-        Me.Username.Name = "Username"
-        Me.Username.Width = 125
-        '
-        'Role
-        '
-        Me.Role.HeaderText = "Role"
-        Me.Role.MinimumWidth = 6
-        Me.Role.Name = "Role"
-        Me.Role.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
-        '
         'UC_UserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -268,9 +251,8 @@ Partial Class UC_UserManagement
         Me.Controls.Add(Me.btnRefresh)
         Me.Controls.Add(Me.cboStatusFilter)
         Me.Controls.Add(Me.cboRoleFilter)
-        Me.Controls.Add(Me.btndelete)
+        Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnEdit)
-        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.pm_table)
         Me.Controls.Add(Me.admin_label_Dashboard)
@@ -283,10 +265,9 @@ Partial Class UC_UserManagement
     End Sub
     Friend WithEvents admin_label_Dashboard As Label
     Friend WithEvents pm_table As DataGridView
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents btnEdit As Resources.Controls.RoundedButton
-    Friend WithEvents btndelete As Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
     Friend WithEvents cboRoleFilter As ComboBox
     Friend WithEvents cboStatusFilter As ComboBox
     Friend WithEvents btnRefresh As Resources.Controls.RoundedButton

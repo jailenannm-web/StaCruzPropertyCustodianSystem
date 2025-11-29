@@ -58,14 +58,6 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub InitializeFilters()
-        ' Populate category filter
-        pm_cbobx_categ.Items.Clear()
-        pm_cbobx_categ.Items.Add("All Categories")
-        pm_cbobx_categ.Items.AddRange(New String() {"Furniture", "Equipment", "Office Supplies", "IT Equipment",
-                                                    "Laboratory Apparatus", "Books and Publications",
-                                                    "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"})
-        pm_cbobx_categ.SelectedIndex = 0
-
         ' Populate status filter
         pm_cbobx_status.Items.Clear()
         pm_cbobx_status.Items.Add("All Status")
@@ -73,7 +65,6 @@ Public Class UC_PropertyManagement1
         pm_cbobx_status.SelectedIndex = 0
 
         ' Wire up filter change events
-        AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
         AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
     End Sub
 
@@ -82,14 +73,6 @@ Public Class UC_PropertyManagement1
             propertyManagementGrid.Rows.Clear()
             Dim categoryFilter As String = ""
             Dim statusFilter As String = ""
-
-            ' Get filter values
-            If pm_cbobx_categ.SelectedIndex > 0 Then
-                categoryFilter = pm_cbobx_categ.SelectedItem.ToString()
-            End If
-            If pm_cbobx_status.SelectedIndex > 0 Then
-                statusFilter = pm_cbobx_status.SelectedItem.ToString()
-            End If
 
             Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, "", categoryFilter, Nothing)
             originalData = dt.Copy()
@@ -261,7 +244,74 @@ Public Class UC_PropertyManagement1
         Return Nothing
     End Function
 
+    Private Sub propertyManagementGrid_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellClick
+
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex = propertyManagementGrid.Columns("colMenu").Index Then
+            cmsActions.Show(Cursor.Position)
+        End If
+
+    End Sub
+
+    Private Sub generatePropertyCard_Click(sender As Object, e As EventArgs) Handles generatePropertyCard.Click
+        ' Check if a row is selected
+        If propertyManagementGrid.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a property first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim selectedRowGrid As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
+        Dim propertyID As Integer
+        If Not Integer.TryParse(selectedRowGrid.Cells("propertyID").Value.ToString(), propertyID) Then
+            MessageBox.Show("Invalid Property ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Find the DataRow in originalData
+        Dim rows() As DataRow = originalData.Select("property_id = " & propertyID)
+        If rows.Length = 0 Then
+            MessageBox.Show("Property data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim selectedRow As DataRow = rows(0)
+
+        ' Open PropertyCard with the selected row
+        Dim frm As New PropertyCard(selectedRow)
+        frm.Show()
+    End Sub
+
     Private Sub propertyManagementGrid_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellContentClick
 
     End Sub
+
+    Private Sub mnuAssign_Click(sender As Object, e As EventArgs) _
+    Handles msuAssign.Click
+
+        MessageBox.Show("Assign Property clicked!")
+    End Sub
+
+    Private Sub mnuDispose_Click(sender As Object, e As EventArgs) _
+    Handles mnuDispose.Click
+
+        MessageBox.Show("Dispose clicked!")
+    End Sub
+
+    Private Sub mnuLostDamaged_Click(sender As Object, e As EventArgs) _
+    Handles mnuLostDamaged.Click
+
+        MessageBox.Show("Mark Lost/Damaged clicked!")
+    End Sub
+
+    Private Sub mnuViewDetails_Click(sender As Object, e As EventArgs) _
+    Handles mnuViewDetails.Click
+
+        MessageBox.Show("View Details clicked!")
+    End Sub
+
+    Private Sub mnuPrintPARICS_Click(sender As Object, e As EventArgs) _
+    Handles mnuPrintPARICS.Click
+
+        MessageBox.Show("Print PAR/ICS clicked!")
+    End Sub
+
 End Class

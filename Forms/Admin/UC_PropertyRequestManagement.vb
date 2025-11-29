@@ -75,34 +75,6 @@ Public Class UC_PropertyRequestManagement
     ' PRINT PAR LOGIC — FULLY CONNECTED TO PROPERTYCARD
     ' ----------------------------------------------------------------------
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click
-
-        ' Ensure user selected a row
-        If prm_table1.CurrentRow Is Nothing Then
-            MessageBox.Show("Please select a request first.",
-                            "No Selection",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Get request_id
-        Dim reqID As String = prm_table1.CurrentRow.Cells("request_id").Value?.ToString()
-        If String.IsNullOrEmpty(reqID) Then
-            MessageBox.Show("The selected request has no valid request ID.",
-                            "Invalid Data",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error)
-            Return
-        End If
-
-        ' Create PropertyCard and load data
-        Dim uc As New PropertyCard()
-        uc.LoadRequestData(reqID)
-
-        ' Show PropertyCard on top of this UC
-        uc.Dock = DockStyle.Fill
-        Me.Parent.Controls.Add(uc)
-        uc.BringToFront()
     End Sub
 
     Private Sub issuePropertyCard_Click(sender As Object, e As EventArgs) Handles issuePropertyCard.Click

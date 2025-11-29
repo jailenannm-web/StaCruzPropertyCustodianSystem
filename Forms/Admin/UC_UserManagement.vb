@@ -200,7 +200,7 @@ Public Class UC_UserManagement
         End If
     End Sub
 
-    Private Sub btndelete_Click(sender As Object, e As EventArgs) Handles btndelete.Click
+    Private Sub btndelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim selectedRow = GetSelectedRow()
         If selectedRow Is Nothing Then Return
 
@@ -247,7 +247,7 @@ Public Class UC_UserManagement
         RefreshUserTable()
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
         ResetFilters()
     End Sub
 

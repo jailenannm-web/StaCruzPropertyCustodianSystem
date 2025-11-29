@@ -25,7 +25,6 @@ Partial Class UC_PropertyManagement1
         Me.components = New System.ComponentModel.Container()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
-        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.propertyManagementGrid = New System.Windows.Forms.DataGridView()
         Me.propertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.propertyName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -43,18 +42,19 @@ Partial Class UC_PropertyManagement1
         Me.dateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateUpdated = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colMenu = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertymanagement = New System.Windows.Forms.Label()
         Me.cmsActions = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuAssign = New System.Windows.Forms.ToolStripMenuItem()
-        Me.msuDispose = New System.Windows.Forms.ToolStripMenuItem()
-        Me.msuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MsuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
-        Me.msuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
-        Me.colMenu = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.msuAssign = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDispose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.generatePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         Me.SuspendLayout()
@@ -82,55 +82,7 @@ Partial Class UC_PropertyManagement1
         Me.pm_cbobx_status.TabIndex = 40
         Me.pm_cbobx_status.Text = "Status"
         '
-        'pm_cbobx_categ
-        '
-        Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(1006, 84)
-        Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
-        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
-        Me.pm_cbobx_categ.TabIndex = 41
-        Me.pm_cbobx_categ.Text = "Categories"
-        '
-        'cmsActions
-        '
-        Me.cmsActions.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cmsActions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAssign, Me.msuDispose, Me.msuLostDamaged, Me.MsuViewDetails, Me.msuPrintPARICS})
-        Me.cmsActions.Name = "cmsActions"
-        Me.cmsActions.Size = New System.Drawing.Size(231, 124)
-        '
-        'mnuAssign
-        '
-        Me.mnuAssign.Name = "mnuAssign"
-        Me.mnuAssign.Size = New System.Drawing.Size(230, 24)
-        Me.mnuAssign.Text = "Transfer Property"
-        '
-        'msuDispose
-        '
-        Me.msuDispose.Name = "msuDispose"
-        Me.msuDispose.Size = New System.Drawing.Size(230, 24)
-        Me.msuDispose.Text = "Dispose"
-        '
-        'msuLostDamaged
-        '
-        Me.msuLostDamaged.Name = "msuLostDamaged"
-        Me.msuLostDamaged.Size = New System.Drawing.Size(230, 24)
-        Me.msuLostDamaged.Text = "Lost/Damaged"
-        '
-        'MsuViewDetails
-        '
-        Me.MsuViewDetails.Name = "MsuViewDetails"
-        Me.MsuViewDetails.Size = New System.Drawing.Size(230, 24)
-        Me.MsuViewDetails.Text = "View Details"
-        '
-        'msuPrintPARICS
-        '
-        Me.msuPrintPARICS.Name = "msuPrintPARICS"
-        Me.msuPrintPARICS.Size = New System.Drawing.Size(230, 24)
-        Me.msuPrintPARICS.Text = "Print PAR/ICS"
+        'propertyManagementGrid
         '
         Me.propertyManagementGrid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
@@ -257,6 +209,15 @@ Partial Class UC_PropertyManagement1
         Me.updatedBy.Name = "updatedBy"
         Me.updatedBy.Width = 125
         '
+        'colMenu
+        '
+        Me.colMenu.HeaderText = "Actions"
+        Me.colMenu.MinimumWidth = 6
+        Me.colMenu.Name = "colMenu"
+        Me.colMenu.Text = "..."
+        Me.colMenu.UseColumnTextForButtonValue = True
+        Me.colMenu.Width = 125
+        '
         'btnEdit
         '
         Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -273,12 +234,7 @@ Partial Class UC_PropertyManagement1
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
         '
-        Me.colMenu.HeaderText = "Actions"
-        Me.colMenu.MinimumWidth = 6
-        Me.colMenu.Name = "colMenu"
-        Me.colMenu.Text = "..."
-        Me.colMenu.UseColumnTextForButtonValue = True
-        Me.colMenu.Width = 125
+        'btnAdd
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
@@ -334,11 +290,65 @@ Partial Class UC_PropertyManagement1
         Me.ttlpropertymanagement.TabIndex = 158
         Me.ttlpropertymanagement.Text = "1"
         '
+        'cmsActions
+        '
+        Me.cmsActions.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.cmsActions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.msuAssign, Me.mnuDispose, Me.mnuLostDamaged, Me.mnuViewDetails, Me.mnuPrintPARICS})
+        Me.cmsActions.Name = "cmsActions"
+        Me.cmsActions.Size = New System.Drawing.Size(211, 152)
+        '
+        'msuAssign
+        '
+        Me.msuAssign.Name = "msuAssign"
+        Me.msuAssign.Size = New System.Drawing.Size(210, 24)
+        Me.msuAssign.Text = "Transfer Property"
+        '
+        'mnuDispose
+        '
+        Me.mnuDispose.Name = "mnuDispose"
+        Me.mnuDispose.Size = New System.Drawing.Size(210, 24)
+        Me.mnuDispose.Text = "Dispose"
+        '
+        'mnuLostDamaged
+        '
+        Me.mnuLostDamaged.Name = "mnuLostDamaged"
+        Me.mnuLostDamaged.Size = New System.Drawing.Size(210, 24)
+        Me.mnuLostDamaged.Text = "Lost/Damaged"
+        '
+        'mnuViewDetails
+        '
+        Me.mnuViewDetails.Name = "mnuViewDetails"
+        Me.mnuViewDetails.Size = New System.Drawing.Size(210, 24)
+        Me.mnuViewDetails.Text = "View Details"
+        '
+        'mnuPrintPARICS
+        '
+        Me.mnuPrintPARICS.Name = "mnuPrintPARICS"
+        Me.mnuPrintPARICS.Size = New System.Drawing.Size(210, 24)
+        Me.mnuPrintPARICS.Text = "Print PAR/ICS"
+        '
+        'generatePropertyCard
+        '
+        Me.generatePropertyCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.generatePropertyCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.generatePropertyCard.CornerRadius = 15
+        Me.generatePropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.generatePropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.generatePropertyCard.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.generatePropertyCard.Location = New System.Drawing.Point(827, 717)
+        Me.generatePropertyCard.Margin = New System.Windows.Forms.Padding(4)
+        Me.generatePropertyCard.Name = "generatePropertyCard"
+        Me.generatePropertyCard.Size = New System.Drawing.Size(177, 35)
+        Me.generatePropertyCard.TabIndex = 160
+        Me.generatePropertyCard.Text = "Generate Property Card"
+        Me.generatePropertyCard.UseVisualStyleBackColor = False
+        '
         'UC_PropertyManagement1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.generatePropertyCard)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlpropertymanagement)
         Me.Controls.Add(Me.btnEdit)
@@ -347,7 +357,6 @@ Partial Class UC_PropertyManagement1
         Me.Controls.Add(Me.propertyManagementGrid)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Controls.Add(Me.pm_cbobx_status)
-        Me.Controls.Add(Me.pm_cbobx_categ)
         Me.Name = "UC_PropertyManagement1"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -358,7 +367,6 @@ Partial Class UC_PropertyManagement1
     End Sub
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
-    Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox
     Friend WithEvents propertyManagementGrid As System.Windows.Forms.DataGridView
     Friend WithEvents btnEdit As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
@@ -382,10 +390,11 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ttlpropertymanagement As System.Windows.Forms.Label
     Friend WithEvents cmsActions As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents mnuAssign As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents msuDispose As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents msuLostDamaged As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MsuViewDetails As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents msuPrintPARICS As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents msuAssign As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuDispose As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuLostDamaged As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuViewDetails As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuPrintPARICS As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents colMenu As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents generatePropertyCard As Resources.Controls.RoundedButton
 End Class

@@ -10,10 +10,23 @@ Partial Class UC_SupplyManagement
     ' ... [Dispose method and other boilerplate remains unchanged] ...
 
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.admin_label_PropertyManagement = New System.Windows.Forms.Label()
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_table = New System.Windows.Forms.DataGridView()
+        Me.admin_label_PM = New System.Windows.Forms.Label()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlSupplymanagement = New System.Windows.Forms.Label()
+        Me.cmsActions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuAssign = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDispose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
         Me.NameofRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateofRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -21,13 +34,9 @@ Partial Class UC_SupplyManagement
         Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.admin_label_PM = New System.Windows.Forms.Label()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ttlSupplymanagement = New System.Windows.Forms.Label()
+        Me.colMenu = New System.Windows.Forms.DataGridViewButtonColumn()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmsActions.SuspendLayout()
         Me.SuspendLayout()
         '
         'admin_label_PropertyManagement
@@ -70,63 +79,14 @@ Partial Class UC_SupplyManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameofRequester, Me.Department, Me.DateofRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameofRequester, Me.Department, Me.DateofRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status, Me.colMenu})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.pm_table.Location = New System.Drawing.Point(81, 133)
+        Me.pm_table.Location = New System.Drawing.Point(62, 124)
         Me.pm_table.Name = "pm_table"
         Me.pm_table.RowHeadersWidth = 51
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 26
-        '
-        'NameofRequester
-        '
-        Me.NameofRequester.HeaderText = "Name of Requester"
-        Me.NameofRequester.MinimumWidth = 6
-        Me.NameofRequester.Name = "NameofRequester"
-        Me.NameofRequester.Width = 125
-        '
-        'Department
-        '
-        Me.Department.HeaderText = "Department"
-        Me.Department.MinimumWidth = 6
-        Me.Department.Name = "Department"
-        Me.Department.Width = 125
-        '
-        'DateofRequest
-        '
-        Me.DateofRequest.HeaderText = "Date of Request"
-        Me.DateofRequest.MinimumWidth = 6
-        Me.DateofRequest.Name = "DateofRequest"
-        Me.DateofRequest.Width = 125
-        '
-        'ItemName
-        '
-        Me.ItemName.HeaderText = "Item Name"
-        Me.ItemName.MinimumWidth = 6
-        Me.ItemName.Name = "ItemName"
-        Me.ItemName.Width = 125
-        '
-        'QuantityRequested
-        '
-        Me.QuantityRequested.HeaderText = "Quantity Requested"
-        Me.QuantityRequested.MinimumWidth = 6
-        Me.QuantityRequested.Name = "QuantityRequested"
-        Me.QuantityRequested.Width = 125
-        '
-        'Purpose
-        '
-        Me.Purpose.HeaderText = "Purpose"
-        Me.Purpose.MinimumWidth = 6
-        Me.Purpose.Name = "Purpose"
-        Me.Purpose.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
         '
         'admin_label_PM
         '
@@ -210,6 +170,101 @@ Partial Class UC_SupplyManagement
         Me.ttlSupplymanagement.TabIndex = 158
         Me.ttlSupplymanagement.Text = "0"
         '
+        'cmsActions
+        '
+        Me.cmsActions.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.cmsActions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAssign, Me.mnuDispose, Me.mnuLostDamaged, Me.mnuViewDetails, Me.mnuPrintPARICS})
+        Me.cmsActions.Name = "ContextMenuStrip1"
+        Me.cmsActions.Size = New System.Drawing.Size(191, 124)
+        '
+        'mnuAssign
+        '
+        Me.mnuAssign.Name = "mnuAssign"
+        Me.mnuAssign.Size = New System.Drawing.Size(190, 24)
+        Me.mnuAssign.Text = "Transfer Property"
+        '
+        'mnuDispose
+        '
+        Me.mnuDispose.Name = "mnuDispose"
+        Me.mnuDispose.Size = New System.Drawing.Size(190, 24)
+        Me.mnuDispose.Text = "Dispose"
+        '
+        'mnuLostDamaged
+        '
+        Me.mnuLostDamaged.Name = "mnuLostDamaged"
+        Me.mnuLostDamaged.Size = New System.Drawing.Size(190, 24)
+        Me.mnuLostDamaged.Text = "Lost/Damaged"
+        '
+        'mnuViewDetails
+        '
+        Me.mnuViewDetails.Name = "mnuViewDetails"
+        Me.mnuViewDetails.Size = New System.Drawing.Size(190, 24)
+        Me.mnuViewDetails.Text = "View Details"
+        '
+        'mnuPrintPARICS
+        '
+        Me.mnuPrintPARICS.Name = "mnuPrintPARICS"
+        Me.mnuPrintPARICS.Size = New System.Drawing.Size(190, 24)
+        Me.mnuPrintPARICS.Text = "Print PAR/ICS"
+        '
+        'NameofRequester
+        '
+        Me.NameofRequester.HeaderText = "Name of Requester"
+        Me.NameofRequester.MinimumWidth = 6
+        Me.NameofRequester.Name = "NameofRequester"
+        Me.NameofRequester.Width = 125
+        '
+        'Department
+        '
+        Me.Department.HeaderText = "Department"
+        Me.Department.MinimumWidth = 6
+        Me.Department.Name = "Department"
+        Me.Department.Width = 125
+        '
+        'DateofRequest
+        '
+        Me.DateofRequest.HeaderText = "Date of Request"
+        Me.DateofRequest.MinimumWidth = 6
+        Me.DateofRequest.Name = "DateofRequest"
+        Me.DateofRequest.Width = 125
+        '
+        'ItemName
+        '
+        Me.ItemName.HeaderText = "Item Name"
+        Me.ItemName.MinimumWidth = 6
+        Me.ItemName.Name = "ItemName"
+        Me.ItemName.Width = 125
+        '
+        'QuantityRequested
+        '
+        Me.QuantityRequested.HeaderText = "Quantity Requested"
+        Me.QuantityRequested.MinimumWidth = 6
+        Me.QuantityRequested.Name = "QuantityRequested"
+        Me.QuantityRequested.Width = 125
+        '
+        'Purpose
+        '
+        Me.Purpose.HeaderText = "Purpose"
+        Me.Purpose.MinimumWidth = 6
+        Me.Purpose.Name = "Purpose"
+        Me.Purpose.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
+        '
+        'colMenu
+        '
+        Me.colMenu.HeaderText = "Actions"
+        Me.colMenu.MinimumWidth = 6
+        Me.colMenu.Name = "colMenu"
+        Me.colMenu.Text = "..."
+        Me.colMenu.UseColumnTextForButtonValue = True
+        Me.colMenu.Width = 125
+        '
         'UC_SupplyManagement
         '
         Me.AutoScroll = True
@@ -226,6 +281,7 @@ Partial Class UC_SupplyManagement
         Me.Name = "UC_SupplyManagement"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmsActions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -242,6 +298,13 @@ Partial Class UC_SupplyManagement
     Friend WithEvents btnDelete As RoundedButton
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlSupplymanagement As Label
+    Friend WithEvents cmsActions As ContextMenuStrip
+    Private components As IContainer
+    Friend WithEvents mnuAssign As ToolStripMenuItem
+    Friend WithEvents mnuDispose As ToolStripMenuItem
+    Friend WithEvents mnuLostDamaged As ToolStripMenuItem
+    Friend WithEvents mnuViewDetails As ToolStripMenuItem
+    Friend WithEvents mnuPrintPARICS As ToolStripMenuItem
     Friend WithEvents NameofRequester As DataGridViewTextBoxColumn
     Friend WithEvents Department As DataGridViewTextBoxColumn
     Friend WithEvents DateofRequest As DataGridViewTextBoxColumn
@@ -249,4 +312,5 @@ Partial Class UC_SupplyManagement
     Friend WithEvents QuantityRequested As DataGridViewTextBoxColumn
     Friend WithEvents Purpose As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents colMenu As DataGridViewButtonColumn
 End Class

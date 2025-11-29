@@ -1,7 +1,8 @@
-﻿Imports System.Drawing.Drawing2D
+﻿Imports System
+Imports System.Data
 Imports System.Diagnostics
-Imports System
 Imports System.Drawing
+Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Public Class UC_Reports
@@ -44,7 +45,17 @@ Public Class UC_Reports
 
     Private Sub reports_prevbtn_PropertyCard_Click(sender As Object, e As EventArgs) Handles reports_prevbtn_PropertyCard.Click
         PreviewReport("Property Card")
-        Dim addForm As New PropertyCard()
+
+        ' Get a sample DataRow to pass
+        Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, "", "", Nothing)
+        If dt.Rows.Count = 0 Then
+            MessageBox.Show("No properties available to preview.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim sampleRow As DataRow = dt.Rows(0) ' pick the first property as example
+
+        Dim addForm As New PropertyCard(sampleRow)
         addForm.Show()
     End Sub
 
