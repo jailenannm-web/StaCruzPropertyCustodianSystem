@@ -24,29 +24,24 @@ Partial Class UC_PropertyManagement1
     Private Sub InitializeComponent()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
-        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
+        Me.SADashboard = New System.Windows.Forms.ComboBox()
         Me.propertyManagementGrid = New System.Windows.Forms.DataGridView()
-        Me.propertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.propertyName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.serialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.condition_status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.datePurchased = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.warrantyExpiration = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.assignedEmployee = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.assignedDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateUpdated = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertymanagement = New System.Windows.Forms.Label()
+        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PropertyNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AquisitionDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AcquisitionCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AssignedTo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Condition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -73,18 +68,18 @@ Partial Class UC_PropertyManagement1
         Me.pm_cbobx_status.TabIndex = 40
         Me.pm_cbobx_status.Text = "Status"
         '
-        'pm_cbobx_categ
+        'SADashboard
         '
-        Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(1006, 84)
-        Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
-        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
-        Me.pm_cbobx_categ.TabIndex = 41
-        Me.pm_cbobx_categ.Text = "Categories"
+        Me.SADashboard.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.SADashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.SADashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.SADashboard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.SADashboard.ForeColor = System.Drawing.Color.White
+        Me.SADashboard.Location = New System.Drawing.Point(1006, 84)
+        Me.SADashboard.Name = "SADashboard"
+        Me.SADashboard.Size = New System.Drawing.Size(159, 31)
+        Me.SADashboard.TabIndex = 41
+        Me.SADashboard.Text = "Categories"
         '
         'propertyManagementGrid
         '
@@ -92,126 +87,15 @@ Partial Class UC_PropertyManagement1
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
+        Me.propertyManagementGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyID, Me.propertyName, Me.category, Me.serialNumber, Me.supplier, Me.condition_status, Me.cost, Me.datePurchased, Me.warrantyExpiration, Me.assignedEmployee, Me.assignedDepartment, Me.location, Me.remarks, Me.dateCreated, Me.dateUpdated, Me.updatedBy})
-        Me.propertyManagementGrid.Location = New System.Drawing.Point(56, 126)
+        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ItemName, Me.PropertyNumber, Me.SerialNumber, Me.AquisitionDate, Me.AcquisitionCost, Me.AssignedTo, Me.Department, Me.Location, Me.Condition, Me.Status, Me.Category})
+        Me.propertyManagementGrid.Location = New System.Drawing.Point(65, 126)
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
         Me.propertyManagementGrid.RowTemplate.Height = 24
         Me.propertyManagementGrid.Size = New System.Drawing.Size(1270, 564)
         Me.propertyManagementGrid.TabIndex = 45
-        '
-        'propertyID
-        '
-        Me.propertyID.HeaderText = "Property ID"
-        Me.propertyID.MinimumWidth = 6
-        Me.propertyID.Name = "propertyID"
-        Me.propertyID.Width = 125
-        '
-        'propertyName
-        '
-        Me.propertyName.HeaderText = "Property Name"
-        Me.propertyName.MinimumWidth = 6
-        Me.propertyName.Name = "propertyName"
-        Me.propertyName.Width = 125
-        '
-        'category
-        '
-        Me.category.HeaderText = "Category"
-        Me.category.MinimumWidth = 6
-        Me.category.Name = "category"
-        Me.category.Width = 125
-        '
-        'serialNumber
-        '
-        Me.serialNumber.HeaderText = "Serial Number"
-        Me.serialNumber.MinimumWidth = 6
-        Me.serialNumber.Name = "serialNumber"
-        Me.serialNumber.Width = 125
-        '
-        'supplier
-        '
-        Me.supplier.HeaderText = "Supplier"
-        Me.supplier.MinimumWidth = 6
-        Me.supplier.Name = "supplier"
-        Me.supplier.Width = 125
-        '
-        'condition_status
-        '
-        Me.condition_status.HeaderText = "Condition Status"
-        Me.condition_status.MinimumWidth = 6
-        Me.condition_status.Name = "condition_status"
-        Me.condition_status.Width = 125
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Cost"
-        Me.cost.MinimumWidth = 6
-        Me.cost.Name = "cost"
-        Me.cost.Width = 125
-        '
-        'datePurchased
-        '
-        Me.datePurchased.HeaderText = "Date Purchased"
-        Me.datePurchased.MinimumWidth = 6
-        Me.datePurchased.Name = "datePurchased"
-        Me.datePurchased.Width = 125
-        '
-        'warrantyExpiration
-        '
-        Me.warrantyExpiration.HeaderText = "Warranty Expiration"
-        Me.warrantyExpiration.MinimumWidth = 6
-        Me.warrantyExpiration.Name = "warrantyExpiration"
-        Me.warrantyExpiration.Width = 125
-        '
-        'assignedEmployee
-        '
-        Me.assignedEmployee.HeaderText = "Assigned Employee"
-        Me.assignedEmployee.MinimumWidth = 6
-        Me.assignedEmployee.Name = "assignedEmployee"
-        Me.assignedEmployee.Width = 125
-        '
-        'assignedDepartment
-        '
-        Me.assignedDepartment.HeaderText = "Assigned Department"
-        Me.assignedDepartment.MinimumWidth = 6
-        Me.assignedDepartment.Name = "assignedDepartment"
-        Me.assignedDepartment.Width = 125
-        '
-        'location
-        '
-        Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
-        Me.location.Name = "location"
-        Me.location.Width = 125
-        '
-        'remarks
-        '
-        Me.remarks.HeaderText = "Remarks"
-        Me.remarks.MinimumWidth = 6
-        Me.remarks.Name = "remarks"
-        Me.remarks.Width = 125
-        '
-        'dateCreated
-        '
-        Me.dateCreated.HeaderText = "Date Created"
-        Me.dateCreated.MinimumWidth = 6
-        Me.dateCreated.Name = "dateCreated"
-        Me.dateCreated.Width = 125
-        '
-        'dateUpdated
-        '
-        Me.dateUpdated.HeaderText = "Date Updated"
-        Me.dateUpdated.MinimumWidth = 6
-        Me.dateUpdated.Name = "dateUpdated"
-        Me.dateUpdated.Width = 125
-        '
-        'updatedBy
-        '
-        Me.updatedBy.HeaderText = "Updated By"
-        Me.updatedBy.MinimumWidth = 6
-        Me.updatedBy.Name = "updatedBy"
-        Me.updatedBy.Width = 125
         '
         'btnEdit
         '
@@ -281,9 +165,86 @@ Partial Class UC_PropertyManagement1
         Me.ttlpropertymanagement.ForeColor = System.Drawing.Color.Black
         Me.ttlpropertymanagement.Location = New System.Drawing.Point(197, 701)
         Me.ttlpropertymanagement.Name = "ttlpropertymanagement"
-        Me.ttlpropertymanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttlpropertymanagement.Size = New System.Drawing.Size(47, 58)
         Me.ttlpropertymanagement.TabIndex = 158
-        Me.ttlpropertymanagement.Text = "1"
+        Me.ttlpropertymanagement.Text = "0"
+        '
+        'ItemName
+        '
+        Me.ItemName.HeaderText = "Item Name"
+        Me.ItemName.MinimumWidth = 6
+        Me.ItemName.Name = "ItemName"
+        Me.ItemName.Width = 125
+        '
+        'PropertyNumber
+        '
+        Me.PropertyNumber.HeaderText = "Property Number"
+        Me.PropertyNumber.MinimumWidth = 6
+        Me.PropertyNumber.Name = "PropertyNumber"
+        Me.PropertyNumber.Width = 125
+        '
+        'SerialNumber
+        '
+        Me.SerialNumber.HeaderText = "Serial Number"
+        Me.SerialNumber.MinimumWidth = 6
+        Me.SerialNumber.Name = "SerialNumber"
+        Me.SerialNumber.Width = 125
+        '
+        'AquisitionDate
+        '
+        Me.AquisitionDate.HeaderText = "Aquisition Date"
+        Me.AquisitionDate.MinimumWidth = 6
+        Me.AquisitionDate.Name = "AquisitionDate"
+        Me.AquisitionDate.Width = 125
+        '
+        'AcquisitionCost
+        '
+        Me.AcquisitionCost.HeaderText = "Acquisition Cost"
+        Me.AcquisitionCost.MinimumWidth = 6
+        Me.AcquisitionCost.Name = "AcquisitionCost"
+        Me.AcquisitionCost.Width = 125
+        '
+        'AssignedTo
+        '
+        Me.AssignedTo.HeaderText = "Assigned To"
+        Me.AssignedTo.MinimumWidth = 6
+        Me.AssignedTo.Name = "AssignedTo"
+        Me.AssignedTo.Width = 125
+        '
+        'Department
+        '
+        Me.Department.HeaderText = "Department"
+        Me.Department.MinimumWidth = 6
+        Me.Department.Name = "Department"
+        Me.Department.Width = 125
+        '
+        'Location
+        '
+        Me.Location.HeaderText = "Location"
+        Me.Location.MinimumWidth = 6
+        Me.Location.Name = "Location"
+        Me.Location.Width = 125
+        '
+        'Condition
+        '
+        Me.Condition.HeaderText = "Condition"
+        Me.Condition.MinimumWidth = 6
+        Me.Condition.Name = "Condition"
+        Me.Condition.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
+        '
+        'Category
+        '
+        Me.Category.HeaderText = "Category"
+        Me.Category.MinimumWidth = 6
+        Me.Category.Name = "Category"
+        Me.Category.Width = 125
         '
         'UC_PropertyManagement1
         '
@@ -298,7 +259,7 @@ Partial Class UC_PropertyManagement1
         Me.Controls.Add(Me.propertyManagementGrid)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Controls.Add(Me.pm_cbobx_status)
-        Me.Controls.Add(Me.pm_cbobx_categ)
+        Me.Controls.Add(Me.SADashboard)
         Me.Name = "UC_PropertyManagement1"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -308,27 +269,22 @@ Partial Class UC_PropertyManagement1
     End Sub
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
-    Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox
+    Friend WithEvents SADashboard As System.Windows.Forms.ComboBox
     Friend WithEvents propertyManagementGrid As System.Windows.Forms.DataGridView
     Friend WithEvents btnEdit As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As Resources.Controls.RoundedButton
-    Friend WithEvents propertyID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents propertyName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents category As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents serialNumber As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents supplier As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents condition_status As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cost As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents datePurchased As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents warrantyExpiration As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents assignedEmployee As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents assignedDepartment As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents remarks As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents dateCreated As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents dateUpdated As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents updatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ttlpropertymanagement As System.Windows.Forms.Label
+    Friend WithEvents ItemName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PropertyNumber As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SerialNumber As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AquisitionDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AcquisitionCost As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AssignedTo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Department As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Location As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Condition As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Category As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
