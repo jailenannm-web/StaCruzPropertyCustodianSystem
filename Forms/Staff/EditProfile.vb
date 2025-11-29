@@ -1,25 +1,11 @@
-﻿Public Class EditProfile
-    Private Sub txb_Suffix_TextChanged(sender As Object, e As System.EventArgs) Handles txb_Suffix.TextChanged
+﻿Imports System
 
+Public Class EditProfile
+
+    Private Sub btn_Cancel_Click(sender As Object, e As System.EventArgs) Handles btn_Cancel.Click
+        Dim StaffDashboard As New StaffDashboard()
+        StaffDashboard.Show()
+        Me.Hide()
     End Sub
 
-    Private Sub txb_Position_TextChanged(sender As Object, e As System.EventArgs) Handles txb_Position.TextChanged
-
-    End Sub
-
-    Private Sub txb_EmployeeID_TextChanged(sender As Object, e As System.EventArgs) Handles txb_EmployeeID.TextChanged
-
-    End Sub
-
-    Private Sub Label5_Click(sender As Object, e As System.EventArgs) Handles Label5.Click
-
-    End Sub
-
-    Private Sub Label2_Click(sender As Object, e As System.EventArgs) Handles Label2.Click
-
-    End Sub
-
-    Private Sub Label15_Click(sender As Object, e As System.EventArgs) Handles Label15.Click
-
-    End Sub
 End Class

@@ -350,7 +350,7 @@ Partial Class StaffRegister
         Me.Label11.Location = New System.Drawing.Point(1105, 881)
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(159, 42)
+        Me.Label11.Size = New System.Drawing.Size(184, 42)
         Me.Label11.TabIndex = 39
         Me.Label11.Text = "Barangay"
         '
@@ -377,9 +377,6 @@ Partial Class StaffRegister
         Me.txb_ContactNumber.Size = New System.Drawing.Size(421, 42)
         Me.txb_ContactNumber.TabIndex = 42
         '
-        'cb_Position
-        '
-
         'cb_Province
         '
         Me.cb_Province.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

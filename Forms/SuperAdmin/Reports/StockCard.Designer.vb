@@ -8,7 +8,7 @@ Partial Class StockCard1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,7 +25,7 @@ Partial Class StockCard1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.NumberOfDaysConsume = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Quantity3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -57,6 +57,9 @@ Partial Class StockCard1
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -153,8 +156,7 @@ Partial Class StockCard1
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(188, 313)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(229, 231)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(167, 32)
         Me.Label1.TabIndex = 52
@@ -185,8 +187,7 @@ Partial Class StockCard1
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(968, 273)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Location = New System.Drawing.Point(814, 201)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(139, 30)
         Me.Label3.TabIndex = 55
@@ -197,8 +198,7 @@ Partial Class StockCard1
         Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.Label4.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(968, 241)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Location = New System.Drawing.Point(814, 172)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(91, 20)
         Me.Label4.TabIndex = 56
@@ -230,8 +230,7 @@ Partial Class StockCard1
         Me.Label7.BackColor = System.Drawing.Color.Transparent
         Me.Label7.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(464, 359)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Location = New System.Drawing.Point(436, 268)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(104, 31)
         Me.Label7.TabIndex = 61
@@ -243,8 +242,7 @@ Partial Class StockCard1
         Me.Label10.CausesValidation = False
         Me.Label10.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(796, 361)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label10.Location = New System.Drawing.Point(685, 270)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(83, 17)
         Me.Label10.TabIndex = 63
@@ -256,8 +254,7 @@ Partial Class StockCard1
         Me.Label14.BackColor = System.Drawing.Color.Transparent
         Me.Label14.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.Black
-        Me.Label14.Location = New System.Drawing.Point(1104, 351)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label14.Location = New System.Drawing.Point(916, 262)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(109, 31)
         Me.Label14.TabIndex = 67
@@ -271,7 +268,7 @@ Partial Class StockCard1
         Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Back.ForeColor = System.Drawing.Color.White
         Me.btn_Back.Location = New System.Drawing.Point(809, 1153)
-        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Back.Name = "btn_Back"
         Me.btn_Back.Size = New System.Drawing.Size(235, 52)
         Me.btn_Back.TabIndex = 78
@@ -285,7 +282,7 @@ Partial Class StockCard1
         Me.Button1.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.White
         Me.Button1.Location = New System.Drawing.Point(1141, 1153)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(235, 52)
         Me.Button1.TabIndex = 79
@@ -297,8 +294,7 @@ Partial Class StockCard1
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(188, 241)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Location = New System.Drawing.Point(229, 172)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(100, 32)
         Me.Label2.TabIndex = 0
@@ -309,8 +305,7 @@ Partial Class StockCard1
         Me.Label8.BackColor = System.Drawing.Color.Transparent
         Me.Label8.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.Black
-        Me.Label8.Location = New System.Drawing.Point(188, 280)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Location = New System.Drawing.Point(229, 198)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(120, 33)
         Me.Label8.TabIndex = 11
@@ -385,6 +380,52 @@ Partial Class StockCard1
         Me.Label6.TabIndex = 85
         Me.Label6.Text = "Fund Cluster :"
         '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(1577, 827)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
+        Me.RoundedButton1.TabIndex = 368
+        Me.RoundedButton1.Text = "Generate PDF File"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'btnCSV
+        '
+        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnCSV.CornerRadius = 15
+        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCSV.Location = New System.Drawing.Point(1416, 827)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCSV.Name = "btnCSV"
+        Me.btnCSV.Size = New System.Drawing.Size(153, 34)
+        Me.btnCSV.TabIndex = 367
+        Me.btnCSV.Text = "Generate CSV File"
+        Me.btnCSV.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.Button2.ForeColor = System.Drawing.Color.White
+        Me.Button2.Location = New System.Drawing.Point(1296, 827)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(112, 34)
+        Me.Button2.TabIndex = 366
+        Me.Button2.Text = "Back"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
         'StockCard1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -414,7 +455,7 @@ Partial Class StockCard1
         Me.Controls.Add(Me.TextBox4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label4)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "StockCard1"
         Me.Text = "StockCard1"
         CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -455,4 +496,7 @@ Partial Class StockCard1
     Friend WithEvents TextBox6 As TextBox
     Friend WithEvents TextBox7 As TextBox
     Friend WithEvents Label6 As Label
+    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents Button2 As Button
 End Class

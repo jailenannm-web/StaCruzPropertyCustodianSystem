@@ -56,7 +56,7 @@ Partial Class UC_MaintenanceManagement
         '
         Me.admin_label_MaintenanceManagement.AutoSize = True
         Me.admin_label_MaintenanceManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_MaintenanceManagement.Location = New System.Drawing.Point(38, 47)
+        Me.admin_label_MaintenanceManagement.Location = New System.Drawing.Point(48, 47)
         Me.admin_label_MaintenanceManagement.Name = "admin_label_MaintenanceManagement"
         Me.admin_label_MaintenanceManagement.Size = New System.Drawing.Size(493, 58)
         Me.admin_label_MaintenanceManagement.TabIndex = 34
@@ -65,15 +65,15 @@ Partial Class UC_MaintenanceManagement
         'btnEdit
         '
         Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnEdit.CornerRadius = 15
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(1416, 756)
+        Me.btnEdit.Location = New System.Drawing.Point(1122, 705)
         Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(121, 34)
+        Me.btnEdit.Size = New System.Drawing.Size(99, 34)
         Me.btnEdit.TabIndex = 154
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
@@ -81,15 +81,15 @@ Partial Class UC_MaintenanceManagement
         'btnAdd
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnAdd.CornerRadius = 15
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1545, 755)
+        Me.btnAdd.Location = New System.Drawing.Point(1229, 705)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(121, 34)
+        Me.btnAdd.Size = New System.Drawing.Size(99, 34)
         Me.btnAdd.TabIndex = 152
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
@@ -97,15 +97,15 @@ Partial Class UC_MaintenanceManagement
         'btnDelete
         '
         Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnDelete.CornerRadius = 15
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1288, 755)
+        Me.btnDelete.Location = New System.Drawing.Point(1015, 704)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(120, 35)
+        Me.btnDelete.Size = New System.Drawing.Size(99, 35)
         Me.btnDelete.TabIndex = 153
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
@@ -115,14 +115,15 @@ Partial Class UC_MaintenanceManagement
         Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MaintenanceID, Me.PropertyID, Me.CustodianID, Me.ServiceDate, Me.ServiceType, Me.Description, Me.ServiceProvider, Me.ProviderContact, Me.Cost, Me.NextSchedule, Me.WarrantyStatus, Me.TechnicianAssigned, Me.Status, Me.Remarks, Me.CreatedAt})
-        Me.DataGridView1.Location = New System.Drawing.Point(48, 119)
+        Me.DataGridView1.GridColor = System.Drawing.Color.White
+        Me.DataGridView1.Location = New System.Drawing.Point(58, 109)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1619, 628)
+        Me.DataGridView1.Size = New System.Drawing.Size(1270, 573)
         Me.DataGridView1.TabIndex = 155
         '
         'MaintenanceID
@@ -236,7 +237,7 @@ Partial Class UC_MaintenanceManagement
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(74, 834)
+        Me.Label1.Location = New System.Drawing.Point(48, 704)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(145, 58)
         Me.Label1.TabIndex = 157
@@ -248,7 +249,7 @@ Partial Class UC_MaintenanceManagement
         Me.ttlMaintenancemanagement.AutoSize = True
         Me.ttlMaintenancemanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ttlMaintenancemanagement.ForeColor = System.Drawing.Color.Black
-        Me.ttlMaintenancemanagement.Location = New System.Drawing.Point(225, 834)
+        Me.ttlMaintenancemanagement.Location = New System.Drawing.Point(199, 704)
         Me.ttlMaintenancemanagement.Name = "ttlMaintenancemanagement"
         Me.ttlMaintenancemanagement.Size = New System.Drawing.Size(38, 58)
         Me.ttlMaintenancemanagement.TabIndex = 156
@@ -267,7 +268,7 @@ Partial Class UC_MaintenanceManagement
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.admin_label_MaintenanceManagement)
         Me.Name = "UC_MaintenanceManagement"
-        Me.Size = New System.Drawing.Size(1724, 1082)
+        Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

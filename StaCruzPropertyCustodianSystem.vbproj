@@ -122,6 +122,18 @@
   </ItemGroup>
   <!-- CORE MODULES & FORMS -->
   <ItemGroup>
+    <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.Designer.vb">
+      <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesMaterials.Designer.vb">
+      <DependentUpon>SuppliesMaterials.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesMaterials.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SessionContext.vb" />
     <Compile Include="DatabaseConnection.vb" />
     <Compile Include="Forms\Admin\AddDepartment.Designer.vb">
@@ -314,12 +326,6 @@
       <DependentUpon>TrnsReturnItem.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Staff\TrnsReturnItem.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\InspectionAcceptance.Designer.vb">
-      <DependentUpon>InspectionAcceptance.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\InspectionAcceptance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.Designer.vb">
@@ -631,6 +637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\StockCard.resx">
       <DependentUpon>StockCard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\SuppliesMaterials.resx">
+      <DependentUpon>SuppliesMaterials.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\SADashboard.resx">
       <DependentUpon>SADashboard.vb</DependentUpon>

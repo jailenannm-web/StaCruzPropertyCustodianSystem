@@ -16,7 +16,7 @@ Public Class InventoryCustodianSlip
 
     End Sub
 
-    Private Sub TextBox2_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox2.TextChanged
+    Private Sub TextBox2_TextChanged(sender As Object, e As System.EventArgs)
 
     End Sub
 
@@ -25,6 +25,18 @@ Public Class InventoryCustodianSlip
     End Sub
 
     Private Sub InventoryCustodianSlip_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub btnCSV_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedButton2_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RoundedButton1_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class

@@ -11,7 +11,6 @@ Public Class UC_PropertyManagement1
 
     Private originalData As DataTable
     Private selectedPropertyID As Integer = -1
-    Private canModifyProperties As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -48,33 +47,14 @@ Public Class UC_PropertyManagement1
         ' Auto size
         propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
-        ' Initialize search placeholder
-        AddHandler pm_txtbox_search.GotFocus, AddressOf SearchTextBox_GotFocus
-        AddHandler pm_txtbox_search.LostFocus, AddressOf SearchTextBox_LostFocus
-        pm_txtbox_search.Text = "Search"
-
         ' Initialize filter dropdowns
         InitializeFilters()
-
-        ' Track role-based permissions
-        canModifyProperties = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyProperties)
-        ApplyRolePermissions()
 
         ' Load data from database
         LoadPropertiesData()
 
         ' Wire up event handlers
         AddHandler propertyManagementGrid.SelectionChanged, AddressOf propertyManagementGrid_SelectionChanged
-    End Sub
-
-    Private Sub ApplyRolePermissions()
-        btnAdd.Enabled = canModifyProperties
-        btnEdit.Enabled = canModifyProperties
-        btnDelete.Enabled = canModifyProperties
-    End Sub
-
-    Private Sub ShowViewOnlyWarning()
-        MessageBox.Show("You have view-only access to Property Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     Private Sub InitializeFilters()
@@ -97,20 +77,6 @@ Public Class UC_PropertyManagement1
         AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
     End Sub
 
-    Private Sub SearchTextBox_GotFocus(sender As Object, e As EventArgs)
-        If pm_txtbox_search.Text = "Search" Then
-            pm_txtbox_search.Text = ""
-            pm_txtbox_search.ForeColor = Color.White
-        End If
-    End Sub
-
-    Private Sub SearchTextBox_LostFocus(sender As Object, e As EventArgs)
-        If String.IsNullOrWhiteSpace(pm_txtbox_search.Text) Then
-            pm_txtbox_search.Text = "Search"
-            pm_txtbox_search.ForeColor = Color.White
-        End If
-    End Sub
-
     Public Sub LoadPropertiesData()
         Try
             propertyManagementGrid.Rows.Clear()
@@ -130,7 +96,6 @@ Public Class UC_PropertyManagement1
 
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
-                    ' Map database columns to grid columns
                     Dim warrantyExp As String = ""
                     If Not IsDBNull(row("warranty_details")) AndAlso Not String.IsNullOrEmpty(row("warranty_details").ToString()) Then
                         warrantyExp = row("warranty_details").ToString()
@@ -152,13 +117,13 @@ Public Class UC_PropertyManagement1
                         If(IsDBNull(row("status")), "", row("status").ToString())
                     )
                 Next
-                System.Diagnostics.Debug.WriteLine("[v0] Property Management - Loaded " & dt.Rows.Count & " properties")
+                Debug.WriteLine("[v0] Property Management - Loaded " & dt.Rows.Count & " properties")
             Else
-                System.Diagnostics.Debug.WriteLine("[v0] Property Management - No properties found")
+                Debug.WriteLine("[v0] Property Management - No properties found")
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("[v0] Load Properties Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            Debug.WriteLine("[v0] Load Properties Error: " & ex.Message & vbCrLf & ex.StackTrace)
         End Try
     End Sub
 
@@ -177,68 +142,9 @@ Public Class UC_PropertyManagement1
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
         ' Reload data with filters
         LoadPropertiesData()
-        ' Reapply search if there's search text
-        If pm_txtbox_search.Text <> "Search" AndAlso Not String.IsNullOrWhiteSpace(pm_txtbox_search.Text) Then
-            ApplySearch()
-        End If
-    End Sub
-
-    Private Sub pm_txtbox_search_TextChanged(sender As Object, e As EventArgs) Handles pm_txtbox_search.TextChanged
-        If pm_txtbox_search.Text <> "Search" Then
-            ApplySearch()
-        End If
-    End Sub
-
-    Private Sub ApplySearch()
-        If originalData Is Nothing Then Return
-
-        Dim searchText As String = pm_txtbox_search.Text.Trim().ToLower()
-        If String.IsNullOrEmpty(searchText) OrElse searchText = "search" Then
-            LoadPropertiesData()
-            Return
-        End If
-
-        Try
-            propertyManagementGrid.Rows.Clear()
-            Dim filteredRows = originalData.AsEnumerable().Where(Function(row)
-                                                                     Dim name As String = If(IsDBNull(row("property_name")), "", row("property_name").ToString().ToLower())
-                                                                     Dim category As String = If(IsDBNull(row("category")), "", row("category").ToString().ToLower())
-                                                                     Dim status As String = If(IsDBNull(row("status")), "", row("status").ToString().ToLower())
-                                                                     Return name.Contains(searchText) OrElse category.Contains(searchText) OrElse status.Contains(searchText)
-                                                                 End Function)
-
-            For Each row As DataRow In filteredRows
-                Dim warrantyExp As String = ""
-                If Not IsDBNull(row("warranty_details")) AndAlso Not String.IsNullOrEmpty(row("warranty_details").ToString()) Then
-                    warrantyExp = row("warranty_details").ToString()
-                End If
-
-                propertyManagementGrid.Rows.Add(
-                    If(IsDBNull(row("property_id")), "", row("property_id").ToString()),
-                    If(IsDBNull(row("property_name")), "", row("property_name").ToString()),
-                    If(IsDBNull(row("category")), "", row("category").ToString()),
-                    If(IsDBNull(row("serial_number")), "", row("serial_number").ToString()),
-                    If(IsDBNull(row("supplier_name")), "", row("supplier_name").ToString()),
-                    If(IsDBNull(row("condition_status")), "", row("condition_status").ToString()),
-                    If(IsDBNull(row("acquisition_cost")), "0.00", Format(CDec(row("acquisition_cost")), "0.00")),
-                    If(IsDBNull(row("acquisition_date")), "", CDate(row("acquisition_date")).ToString("yyyy-MM-dd")),
-                    warrantyExp,
-                    If(IsDBNull(row("assigned_employee")), "", row("assigned_employee").ToString()),
-                    If(IsDBNull(row("assigned_department")), "", row("assigned_department").ToString()),
-                    If(IsDBNull(row("location")), "", row("location").ToString()),
-                    If(IsDBNull(row("status")), "", row("status").ToString())
-                )
-            Next
-        Catch ex As Exception
-            MessageBox.Show("Error searching properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If Not canModifyProperties Then
-            ShowViewOnlyWarning()
-            Return
-        End If
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New AddProperty())
@@ -246,10 +152,6 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If Not canModifyProperties Then
-            ShowViewOnlyWarning()
-            Return
-        End If
         If propertyManagementGrid.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a property to edit.", "No Selection",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -299,10 +201,6 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        If Not canModifyProperties Then
-            ShowViewOnlyWarning()
-            Return
-        End If
         If propertyManagementGrid.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a property to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return

@@ -4,7 +4,7 @@ Imports System
 Imports System.Drawing
 Imports Microsoft.VisualBasic
 Public Class InventoryReport
-    Private Sub TextBox4_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox4.TextChanged
+    Private Sub TextBox4_TextChanged(sender As Object, e As System.EventArgs)
 
     End Sub
 
