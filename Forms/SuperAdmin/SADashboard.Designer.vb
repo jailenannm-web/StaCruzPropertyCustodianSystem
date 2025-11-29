@@ -91,7 +91,6 @@ Partial Class SADashboard
         Dim ChartArea9 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend9 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SADashboard))
         Me.pnlFormLoader = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.lblPropertyCustodian = New System.Windows.Forms.Label()
@@ -1364,4 +1363,12 @@ Partial Class SADashboard
     Friend WithEvents SAChart_SystemAlerts As DataVisualization.Charting.Chart
     Friend WithEvents RoundedPanel9 As Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_RecentPropertyRequests As DataVisualization.Charting.Chart
+    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents txtboxSearch As TextBox
+    Friend WithEvents comboFilter As ComboBox
+    Friend WithEvents btnAddProperty As Resources.Controls.RoundedButton
+    Friend WithEvents btnAddSupply As Resources.Controls.RoundedButton
+    Friend WithEvents btnAddUser As Resources.Controls.RoundedButton
+    Friend WithEvents btnGenerateReports As Resources.Controls.RoundedButton
 End Class

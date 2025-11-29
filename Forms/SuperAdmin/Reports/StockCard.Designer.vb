@@ -33,7 +33,14 @@ Partial Class StockCard1
         Me.Office = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Quantity2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.Quantity1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Referencre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateAndTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
@@ -375,4 +382,11 @@ Partial Class StockCard1
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents Quantity1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Referencre As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DateAndTime As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class
