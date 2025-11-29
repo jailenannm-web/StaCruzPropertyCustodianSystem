@@ -49,7 +49,8 @@ Partial Class frmInventory
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblSuppliesManagement = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnOpenTransaction = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnrequestproperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnrequestsupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -253,25 +254,41 @@ Partial Class frmInventory
         Me.Label3.Location = New System.Drawing.Point(88, 30)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(210, 58)
+        Me.Label3.Size = New System.Drawing.Size(189, 58)
         Me.Label3.TabIndex = 162
-        Me.Label3.Text = "Categories"
+        Me.Label3.Text = "Inventory"
         '
-        'btnOpenTransaction
+        'btnrequestproperty
         '
-        Me.btnOpenTransaction.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnOpenTransaction.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnOpenTransaction.CornerRadius = 15
-        Me.btnOpenTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnOpenTransaction.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOpenTransaction.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnOpenTransaction.Location = New System.Drawing.Point(1433, 992)
-        Me.btnOpenTransaction.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnOpenTransaction.Name = "btnOpenTransaction"
-        Me.btnOpenTransaction.Size = New System.Drawing.Size(194, 39)
-        Me.btnOpenTransaction.TabIndex = 163
-        Me.btnOpenTransaction.Text = "Open Transaction"
-        Me.btnOpenTransaction.UseVisualStyleBackColor = False
+        Me.btnrequestproperty.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnrequestproperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnrequestproperty.CornerRadius = 15
+        Me.btnrequestproperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnrequestproperty.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnrequestproperty.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnrequestproperty.Location = New System.Drawing.Point(1096, 1016)
+        Me.btnrequestproperty.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnrequestproperty.Name = "btnrequestproperty"
+        Me.btnrequestproperty.Size = New System.Drawing.Size(217, 39)
+        Me.btnrequestproperty.TabIndex = 164
+        Me.btnrequestproperty.Text = "Request Property"
+        Me.btnrequestproperty.UseVisualStyleBackColor = False
+        '
+        'btnrequestsupply
+        '
+        Me.btnrequestsupply.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnrequestsupply.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnrequestsupply.CornerRadius = 15
+        Me.btnrequestsupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnrequestsupply.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnrequestsupply.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnrequestsupply.Location = New System.Drawing.Point(1382, 1016)
+        Me.btnrequestsupply.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnrequestsupply.Name = "btnrequestsupply"
+        Me.btnrequestsupply.Size = New System.Drawing.Size(217, 39)
+        Me.btnrequestsupply.TabIndex = 165
+        Me.btnrequestsupply.Text = "Request Supply"
+        Me.btnrequestsupply.UseVisualStyleBackColor = False
         '
         'frmInventory
         '
@@ -279,7 +296,8 @@ Partial Class frmInventory
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1756, 1120)
-        Me.Controls.Add(Me.btnOpenTransaction)
+        Me.Controls.Add(Me.btnrequestsupply)
+        Me.Controls.Add(Me.btnrequestproperty)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.comboStatus)
         Me.Controls.Add(Me.comboCategoris)
@@ -325,5 +343,6 @@ Partial Class frmInventory
     Friend WithEvents Label1 As Label
     Friend WithEvents lblSuppliesManagement As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents btnOpenTransaction As Resources.Controls.RoundedButton
+    Friend WithEvents btnrequestproperty As Resources.Controls.RoundedButton
+    Friend WithEvents btnrequestsupply As Resources.Controls.RoundedButton
 End Class

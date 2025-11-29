@@ -89,4 +89,8 @@ Public Class AddPropertyRequest
     Private Sub TextBox3_TextChanged_1(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
 
     End Sub
+
+    Private Sub AddPropertyRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
