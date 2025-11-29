@@ -50,6 +50,13 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
+        Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.issuePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -377,7 +384,7 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents prm_table1 As DataGridView
     Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
-    Friend WithEvents btnDeny As Resources.Controls.RoundedButton
+    Friend WithEvents btnReject As Resources.Controls.RoundedButton
     Friend WithEvents request_id As DataGridViewTextBoxColumn
     Friend WithEvents employee_id As DataGridViewTextBoxColumn
     Friend WithEvents department_id As DataGridViewTextBoxColumn
@@ -396,4 +403,11 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents assign As Resources.Controls.RoundedButton
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlpropertyrequestmanagement As Label
+    Friend WithEvents NameOfRequester As DataGridViewTextBoxColumn
+    Friend WithEvents Department As DataGridViewTextBoxColumn
+    Friend WithEvents DateOfRequest As DataGridViewTextBoxColumn
+    Friend WithEvents ItemName As DataGridViewTextBoxColumn
+    Friend WithEvents QuantityRequested As DataGridViewTextBoxColumn
+    Friend WithEvents issuePropertyCard As Resources.Controls.RoundedButton
+    Friend WithEvents printPAR As Resources.Controls.RoundedButton
 End Class

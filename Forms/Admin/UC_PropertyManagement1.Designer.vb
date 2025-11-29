@@ -48,6 +48,13 @@ Partial Class UC_PropertyManagement1
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertymanagement = New System.Windows.Forms.Label()
+        Me.cmsActions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuAssign = New System.Windows.Forms.ToolStripMenuItem()
+        Me.msuDispose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.msuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MsuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
+        Me.msuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.colMenu = New System.Windows.Forms.DataGridViewButtonColumn()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         Me.SuspendLayout()
@@ -77,16 +84,16 @@ Partial Class UC_PropertyManagement1
         '
         'pm_cbobx_categ
         '
-        Me.SADashboard.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SADashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.SADashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.SADashboard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.SADashboard.ForeColor = System.Drawing.Color.White
-        Me.SADashboard.Location = New System.Drawing.Point(1006, 84)
-        Me.SADashboard.Name = "SADashboard"
-        Me.SADashboard.Size = New System.Drawing.Size(159, 31)
-        Me.SADashboard.TabIndex = 41
-        Me.SADashboard.Text = "Categories"
+        Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(1006, 84)
+        Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
+        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
+        Me.pm_cbobx_categ.TabIndex = 41
+        Me.pm_cbobx_categ.Text = "Categories"
         '
         'cmsActions
         '
@@ -107,12 +114,30 @@ Partial Class UC_PropertyManagement1
         Me.msuDispose.Size = New System.Drawing.Size(230, 24)
         Me.msuDispose.Text = "Dispose"
         '
+        'msuLostDamaged
+        '
+        Me.msuLostDamaged.Name = "msuLostDamaged"
+        Me.msuLostDamaged.Size = New System.Drawing.Size(230, 24)
+        Me.msuLostDamaged.Text = "Lost/Damaged"
+        '
+        'MsuViewDetails
+        '
+        Me.MsuViewDetails.Name = "MsuViewDetails"
+        Me.MsuViewDetails.Size = New System.Drawing.Size(230, 24)
+        Me.MsuViewDetails.Text = "View Details"
+        '
+        'msuPrintPARICS
+        '
+        Me.msuPrintPARICS.Name = "msuPrintPARICS"
+        Me.msuPrintPARICS.Size = New System.Drawing.Size(230, 24)
+        Me.msuPrintPARICS.Text = "Print PAR/ICS"
+        '
         Me.propertyManagementGrid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
         Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyID, Me.propertyName, Me.category, Me.serialNumber, Me.supplier, Me.condition_status, Me.cost, Me.datePurchased, Me.warrantyExpiration, Me.assignedEmployee, Me.assignedDepartment, Me.location, Me.remarks, Me.dateCreated, Me.dateUpdated, Me.updatedBy})
+        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyID, Me.propertyName, Me.category, Me.serialNumber, Me.supplier, Me.condition_status, Me.cost, Me.datePurchased, Me.warrantyExpiration, Me.assignedEmployee, Me.assignedDepartment, Me.location, Me.remarks, Me.dateCreated, Me.dateUpdated, Me.updatedBy, Me.colMenu})
         Me.propertyManagementGrid.Location = New System.Drawing.Point(56, 126)
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
@@ -322,7 +347,7 @@ Partial Class UC_PropertyManagement1
         Me.Controls.Add(Me.propertyManagementGrid)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Controls.Add(Me.pm_cbobx_status)
-        Me.Controls.Add(Me.SADashboard)
+        Me.Controls.Add(Me.pm_cbobx_categ)
         Me.Name = "UC_PropertyManagement1"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -356,4 +381,11 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents updatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ttlpropertymanagement As System.Windows.Forms.Label
+    Friend WithEvents cmsActions As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents mnuAssign As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents msuDispose As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents msuLostDamaged As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MsuViewDetails As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents msuPrintPARICS As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents colMenu As System.Windows.Forms.DataGridViewButtonColumn
 End Class
