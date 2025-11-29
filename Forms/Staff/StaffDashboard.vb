@@ -130,7 +130,7 @@ Public Class StaffDashboard
 
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -189,11 +189,27 @@ Public Class StaffDashboard
 
     End Sub
 
-    Private Sub RoundedPanel6_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel6.Paint
+    Private Sub RoundedPanel6_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub admin_panel_PendingRequests_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+
+    End Sub
+
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label2_Click_1(sender As Object, e As EventArgs) Handles Label2.Click
 
     End Sub
 End Class

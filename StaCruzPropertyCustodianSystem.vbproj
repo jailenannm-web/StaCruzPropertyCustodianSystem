@@ -297,6 +297,12 @@
     <Compile Include="Forms\Staff\TrnsReturnItem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountOfProperty.Designer.vb">
+      <DependentUpon>PhysicalCountOfProperty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountOfProperty.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.Designer.vb">
       <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </Compile>
@@ -588,6 +594,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\MaintenanceReport.resx">
       <DependentUpon>MaintenanceReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PhysicalCountOfProperty.resx">
+      <DependentUpon>PhysicalCountOfProperty.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyCard.resx">
       <DependentUpon>PropertyCard.vb</DependentUpon>
