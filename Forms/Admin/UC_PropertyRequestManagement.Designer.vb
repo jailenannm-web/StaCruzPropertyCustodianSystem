@@ -29,21 +29,6 @@ Partial Class UC_PropertyRequestManagement
     Private Sub InitializeComponent()
         Me.admin_label_PropertyRequestManagement = New System.Windows.Forms.Label()
         Me.prm_table1 = New System.Windows.Forms.DataGridView()
-        Me.request_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.employee_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.department_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.property_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantity_requested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requestDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.approved_by = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.approvedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.release_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.return_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.penalty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updated_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDeny = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -52,6 +37,13 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
+        Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -72,7 +64,7 @@ Partial Class UC_PropertyRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_table1.BackgroundColor = System.Drawing.Color.White
         Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.request_id, Me.employee_id, Me.department_id, Me.property_id, Me.quantity_requested, Me.purpose, Me.requestDate, Me.status, Me.approved_by, Me.approvedDate, Me.release_date, Me.return_date, Me.remarks, Me.penalty, Me.updated_at})
+        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
         Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.prm_table1.Location = New System.Drawing.Point(62, 126)
         Me.prm_table1.Name = "prm_table1"
@@ -80,111 +72,6 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_table1.RowTemplate.Height = 24
         Me.prm_table1.Size = New System.Drawing.Size(1270, 573)
         Me.prm_table1.TabIndex = 34
-        '
-        'request_id
-        '
-        Me.request_id.HeaderText = "Request ID"
-        Me.request_id.MinimumWidth = 6
-        Me.request_id.Name = "request_id"
-        Me.request_id.Width = 125
-        '
-        'employee_id
-        '
-        Me.employee_id.HeaderText = "Employee ID"
-        Me.employee_id.MinimumWidth = 6
-        Me.employee_id.Name = "employee_id"
-        Me.employee_id.Width = 125
-        '
-        'department_id
-        '
-        Me.department_id.HeaderText = "Department ID"
-        Me.department_id.MinimumWidth = 6
-        Me.department_id.Name = "department_id"
-        Me.department_id.Width = 125
-        '
-        'property_id
-        '
-        Me.property_id.HeaderText = "Property ID"
-        Me.property_id.MinimumWidth = 6
-        Me.property_id.Name = "property_id"
-        Me.property_id.Width = 125
-        '
-        'quantity_requested
-        '
-        Me.quantity_requested.HeaderText = "Quantity "
-        Me.quantity_requested.MinimumWidth = 6
-        Me.quantity_requested.Name = "quantity_requested"
-        Me.quantity_requested.Width = 125
-        '
-        'purpose
-        '
-        Me.purpose.HeaderText = "Purpose"
-        Me.purpose.MinimumWidth = 6
-        Me.purpose.Name = "purpose"
-        Me.purpose.Width = 125
-        '
-        'requestDate
-        '
-        Me.requestDate.HeaderText = "Request Date"
-        Me.requestDate.MinimumWidth = 6
-        Me.requestDate.Name = "requestDate"
-        Me.requestDate.Width = 125
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
-        '
-        'approved_by
-        '
-        Me.approved_by.HeaderText = "Approved by"
-        Me.approved_by.MinimumWidth = 6
-        Me.approved_by.Name = "approved_by"
-        Me.approved_by.Width = 125
-        '
-        'approvedDate
-        '
-        Me.approvedDate.HeaderText = "Approved Date"
-        Me.approvedDate.MinimumWidth = 6
-        Me.approvedDate.Name = "approvedDate"
-        Me.approvedDate.Width = 125
-        '
-        'release_date
-        '
-        Me.release_date.HeaderText = "Release Date"
-        Me.release_date.MinimumWidth = 6
-        Me.release_date.Name = "release_date"
-        Me.release_date.Width = 125
-        '
-        'return_date
-        '
-        Me.return_date.HeaderText = "Return Date"
-        Me.return_date.MinimumWidth = 6
-        Me.return_date.Name = "return_date"
-        Me.return_date.Width = 125
-        '
-        'remarks
-        '
-        Me.remarks.HeaderText = "Remarks"
-        Me.remarks.MinimumWidth = 6
-        Me.remarks.Name = "remarks"
-        Me.remarks.Width = 125
-        '
-        'penalty
-        '
-        Me.penalty.HeaderText = "Penalty"
-        Me.penalty.MinimumWidth = 6
-        Me.penalty.Name = "penalty"
-        Me.penalty.Width = 125
-        '
-        'updated_at
-        '
-        Me.updated_at.HeaderText = "Updated At"
-        Me.updated_at.MinimumWidth = 6
-        Me.updated_at.Name = "updated_at"
-        Me.updated_at.Width = 125
         '
         'assign
         '
@@ -300,9 +187,58 @@ Partial Class UC_PropertyRequestManagement
         Me.ttlpropertyrequestmanagement.ForeColor = System.Drawing.Color.Black
         Me.ttlpropertyrequestmanagement.Location = New System.Drawing.Point(203, 713)
         Me.ttlpropertyrequestmanagement.Name = "ttlpropertyrequestmanagement"
-        Me.ttlpropertyrequestmanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttlpropertyrequestmanagement.Size = New System.Drawing.Size(47, 58)
         Me.ttlpropertyrequestmanagement.TabIndex = 158
-        Me.ttlpropertyrequestmanagement.Text = "1"
+        Me.ttlpropertyrequestmanagement.Text = "0"
+        '
+        'NameOfRequester
+        '
+        Me.NameOfRequester.HeaderText = "Name Of Requester"
+        Me.NameOfRequester.MinimumWidth = 6
+        Me.NameOfRequester.Name = "NameOfRequester"
+        Me.NameOfRequester.Width = 125
+        '
+        'Department
+        '
+        Me.Department.HeaderText = "Department"
+        Me.Department.MinimumWidth = 6
+        Me.Department.Name = "Department"
+        Me.Department.Width = 125
+        '
+        'DateOfRequest
+        '
+        Me.DateOfRequest.HeaderText = "Date Of Request"
+        Me.DateOfRequest.MinimumWidth = 6
+        Me.DateOfRequest.Name = "DateOfRequest"
+        Me.DateOfRequest.Width = 125
+        '
+        'ItemName
+        '
+        Me.ItemName.HeaderText = "Item Name"
+        Me.ItemName.MinimumWidth = 6
+        Me.ItemName.Name = "ItemName"
+        Me.ItemName.Width = 125
+        '
+        'QuantityRequested
+        '
+        Me.QuantityRequested.HeaderText = "Quantity Requested"
+        Me.QuantityRequested.MinimumWidth = 6
+        Me.QuantityRequested.Name = "QuantityRequested"
+        Me.QuantityRequested.Width = 125
+        '
+        'Purpose
+        '
+        Me.Purpose.HeaderText = "Purpose"
+        Me.Purpose.MinimumWidth = 6
+        Me.Purpose.Name = "Purpose"
+        Me.Purpose.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
         '
         'UC_PropertyRequestManagement
         '
@@ -334,22 +270,14 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
     Friend WithEvents btnDeny As Resources.Controls.RoundedButton
-    Friend WithEvents request_id As DataGridViewTextBoxColumn
-    Friend WithEvents employee_id As DataGridViewTextBoxColumn
-    Friend WithEvents department_id As DataGridViewTextBoxColumn
-    Friend WithEvents property_id As DataGridViewTextBoxColumn
-    Friend WithEvents quantity_requested As DataGridViewTextBoxColumn
-    Friend WithEvents purpose As DataGridViewTextBoxColumn
-    Friend WithEvents requestDate As DataGridViewTextBoxColumn
-    Friend WithEvents status As DataGridViewTextBoxColumn
-    Friend WithEvents approved_by As DataGridViewTextBoxColumn
-    Friend WithEvents approvedDate As DataGridViewTextBoxColumn
-    Friend WithEvents release_date As DataGridViewTextBoxColumn
-    Friend WithEvents return_date As DataGridViewTextBoxColumn
-    Friend WithEvents remarks As DataGridViewTextBoxColumn
-    Friend WithEvents penalty As DataGridViewTextBoxColumn
-    Friend WithEvents updated_at As DataGridViewTextBoxColumn
     Friend WithEvents assign As Resources.Controls.RoundedButton
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlpropertyrequestmanagement As Label
+    Friend WithEvents NameOfRequester As DataGridViewTextBoxColumn
+    Friend WithEvents Department As DataGridViewTextBoxColumn
+    Friend WithEvents DateOfRequest As DataGridViewTextBoxColumn
+    Friend WithEvents ItemName As DataGridViewTextBoxColumn
+    Friend WithEvents QuantityRequested As DataGridViewTextBoxColumn
+    Friend WithEvents Purpose As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
 End Class

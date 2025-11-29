@@ -29,23 +29,6 @@ Partial Class UC_UserManagement
     Private Sub InitializeComponent()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
         Me.pm_table = New System.Windows.Forms.DataGridView()
-        Me.userID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.firstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.middleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.suffix = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.positionUser = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.departmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.email = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.userRole = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.province = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.municipalityCity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.barangay = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.houseNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.password = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateRegistered = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.accountStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
         Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -55,6 +38,14 @@ Partial Class UC_UserManagement
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FullName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Position = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EmployeeID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Role = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -76,7 +67,7 @@ Partial Class UC_UserManagement
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.userID, Me.firstName, Me.middleName, Me.lastName, Me.suffix, Me.positionUser, Me.departmentID, Me.contactNumber, Me.email, Me.userRole, Me.province, Me.municipalityCity, Me.barangay, Me.houseNumber, Me.password, Me.dateRegistered, Me.accountStatus})
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.UserID, Me.FullName, Me.Position, Me.Department, Me.EmployeeID, Me.Username, Me.Role, Me.Status})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(53, 114)
         Me.pm_table.Name = "pm_table"
@@ -84,125 +75,6 @@ Partial Class UC_UserManagement
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 27
-        '
-        'userID
-        '
-        Me.userID.HeaderText = "User ID"
-        Me.userID.MinimumWidth = 6
-        Me.userID.Name = "userID"
-        Me.userID.Width = 90
-        '
-        'firstName
-        '
-        Me.firstName.HeaderText = "First Name"
-        Me.firstName.MinimumWidth = 6
-        Me.firstName.Name = "firstName"
-        Me.firstName.Width = 90
-        '
-        'middleName
-        '
-        Me.middleName.HeaderText = "Middle Name"
-        Me.middleName.MinimumWidth = 6
-        Me.middleName.Name = "middleName"
-        Me.middleName.Width = 90
-        '
-        'lastName
-        '
-        Me.lastName.HeaderText = "Last Name"
-        Me.lastName.MinimumWidth = 6
-        Me.lastName.Name = "lastName"
-        Me.lastName.Width = 90
-        '
-        'suffix
-        '
-        Me.suffix.HeaderText = "Suffix"
-        Me.suffix.MinimumWidth = 6
-        Me.suffix.Name = "suffix"
-        Me.suffix.Width = 90
-        '
-        'positionUser
-        '
-        Me.positionUser.HeaderText = "Position"
-        Me.positionUser.MinimumWidth = 6
-        Me.positionUser.Name = "positionUser"
-        Me.positionUser.Width = 90
-        '
-        'departmentID
-        '
-        Me.departmentID.HeaderText = "Department ID"
-        Me.departmentID.MinimumWidth = 6
-        Me.departmentID.Name = "departmentID"
-        Me.departmentID.Width = 90
-        '
-        'contactNumber
-        '
-        Me.contactNumber.HeaderText = "Contact Number"
-        Me.contactNumber.MinimumWidth = 6
-        Me.contactNumber.Name = "contactNumber"
-        Me.contactNumber.Width = 90
-        '
-        'email
-        '
-        Me.email.HeaderText = "Email"
-        Me.email.MinimumWidth = 6
-        Me.email.Name = "email"
-        Me.email.Width = 90
-        '
-        'userRole
-        '
-        Me.userRole.HeaderText = "User Role"
-        Me.userRole.MinimumWidth = 6
-        Me.userRole.Name = "userRole"
-        Me.userRole.Width = 90
-        '
-        'province
-        '
-        Me.province.HeaderText = "Province"
-        Me.province.MinimumWidth = 6
-        Me.province.Name = "province"
-        Me.province.Width = 90
-        '
-        'municipalityCity
-        '
-        Me.municipalityCity.HeaderText = "Municipality/City"
-        Me.municipalityCity.MinimumWidth = 6
-        Me.municipalityCity.Name = "municipalityCity"
-        Me.municipalityCity.Width = 90
-        '
-        'barangay
-        '
-        Me.barangay.HeaderText = "Barangay"
-        Me.barangay.MinimumWidth = 6
-        Me.barangay.Name = "barangay"
-        Me.barangay.Width = 90
-        '
-        'houseNumber
-        '
-        Me.houseNumber.HeaderText = "House Number"
-        Me.houseNumber.MinimumWidth = 6
-        Me.houseNumber.Name = "houseNumber"
-        Me.houseNumber.Width = 90
-        '
-        'password
-        '
-        Me.password.HeaderText = "Password"
-        Me.password.MinimumWidth = 6
-        Me.password.Name = "password"
-        Me.password.Width = 90
-        '
-        'dateRegistered
-        '
-        Me.dateRegistered.HeaderText = "Date Registered"
-        Me.dateRegistered.MinimumWidth = 6
-        Me.dateRegistered.Name = "dateRegistered"
-        Me.dateRegistered.Width = 90
-        '
-        'accountStatus
-        '
-        Me.accountStatus.HeaderText = "Account Status"
-        Me.accountStatus.MinimumWidth = 6
-        Me.accountStatus.Name = "accountStatus"
-        Me.accountStatus.Width = 90
         '
         'cboRoleFilter
         '
@@ -246,9 +118,9 @@ Partial Class UC_UserManagement
         Me.ttlusermanagement.ForeColor = System.Drawing.Color.Black
         Me.ttlusermanagement.Location = New System.Drawing.Point(194, 709)
         Me.ttlusermanagement.Name = "ttlusermanagement"
-        Me.ttlusermanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttlusermanagement.Size = New System.Drawing.Size(47, 58)
         Me.ttlusermanagement.TabIndex = 166
-        Me.ttlusermanagement.Text = "1"
+        Me.ttlusermanagement.Text = "0"
         '
         'btnRefresh
         '
@@ -330,6 +202,62 @@ Partial Class UC_UserManagement
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
+        'UserID
+        '
+        Me.UserID.HeaderText = "User I.D"
+        Me.UserID.MinimumWidth = 6
+        Me.UserID.Name = "UserID"
+        Me.UserID.Width = 125
+        '
+        'FullName
+        '
+        Me.FullName.HeaderText = "Full Name"
+        Me.FullName.MinimumWidth = 6
+        Me.FullName.Name = "FullName"
+        Me.FullName.Width = 125
+        '
+        'Position
+        '
+        Me.Position.HeaderText = "Position"
+        Me.Position.MinimumWidth = 6
+        Me.Position.Name = "Position"
+        Me.Position.Width = 125
+        '
+        'Department
+        '
+        Me.Department.HeaderText = "Department"
+        Me.Department.MinimumWidth = 6
+        Me.Department.Name = "Department"
+        Me.Department.Width = 125
+        '
+        'EmployeeID
+        '
+        Me.EmployeeID.HeaderText = "Employee I.D"
+        Me.EmployeeID.MinimumWidth = 6
+        Me.EmployeeID.Name = "EmployeeID"
+        Me.EmployeeID.Width = 125
+        '
+        'Username
+        '
+        Me.Username.HeaderText = "Username"
+        Me.Username.MinimumWidth = 6
+        Me.Username.Name = "Username"
+        Me.Username.Width = 125
+        '
+        'Role
+        '
+        Me.Role.HeaderText = "Role"
+        Me.Role.MinimumWidth = 6
+        Me.Role.Name = "Role"
+        Me.Role.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
+        '
         'UC_UserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -364,21 +292,12 @@ Partial Class UC_UserManagement
     Friend WithEvents btnRefresh As Resources.Controls.RoundedButton
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlusermanagement As Label
-    Friend WithEvents userID As DataGridViewTextBoxColumn
-    Friend WithEvents firstName As DataGridViewTextBoxColumn
-    Friend WithEvents middleName As DataGridViewTextBoxColumn
-    Friend WithEvents lastName As DataGridViewTextBoxColumn
-    Friend WithEvents suffix As DataGridViewTextBoxColumn
-    Friend WithEvents positionUser As DataGridViewTextBoxColumn
-    Friend WithEvents departmentID As DataGridViewTextBoxColumn
-    Friend WithEvents contactNumber As DataGridViewTextBoxColumn
-    Friend WithEvents email As DataGridViewTextBoxColumn
-    Friend WithEvents userRole As DataGridViewTextBoxColumn
-    Friend WithEvents province As DataGridViewTextBoxColumn
-    Friend WithEvents municipalityCity As DataGridViewTextBoxColumn
-    Friend WithEvents barangay As DataGridViewTextBoxColumn
-    Friend WithEvents houseNumber As DataGridViewTextBoxColumn
-    Friend WithEvents password As DataGridViewTextBoxColumn
-    Friend WithEvents dateRegistered As DataGridViewTextBoxColumn
-    Friend WithEvents accountStatus As DataGridViewTextBoxColumn
+    Friend WithEvents UserID As DataGridViewTextBoxColumn
+    Friend WithEvents FullName As DataGridViewTextBoxColumn
+    Friend WithEvents Position As DataGridViewTextBoxColumn
+    Friend WithEvents Department As DataGridViewTextBoxColumn
+    Friend WithEvents EmployeeID As DataGridViewTextBoxColumn
+    Friend WithEvents Username As DataGridViewTextBoxColumn
+    Friend WithEvents Role As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
 End Class
