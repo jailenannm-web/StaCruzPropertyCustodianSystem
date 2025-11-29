@@ -68,17 +68,19 @@ Partial Class BorrowingAndReturnSlip
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.btn_Back = New System.Windows.Forms.Button()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
+        Me.btn_Back = New System.Windows.Forms.Button()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
         '
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.ReturnStatus, Me.borrowerSignature, Me.Column2, Me.Column3, Me.Column4, Me.Column6, Me.Remarks, Me.Column7, Me.Column8})
         Me.DataGridView1.GridColor = System.Drawing.Color.LightGray
@@ -86,7 +88,7 @@ Partial Class BorrowingAndReturnSlip
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1379, 362)
+        Me.DataGridView1.Size = New System.Drawing.Size(1379, 300)
         Me.DataGridView1.TabIndex = 347
         '
         'Column1
@@ -284,7 +286,7 @@ Partial Class BorrowingAndReturnSlip
         Me.Label8.BackColor = System.Drawing.Color.Transparent
         Me.Label8.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.Black
-        Me.Label8.Location = New System.Drawing.Point(344, 889)
+        Me.Label8.Location = New System.Drawing.Point(389, 913)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(624, 22)
@@ -294,27 +296,27 @@ Partial Class BorrowingAndReturnSlip
         'TextBox17
         '
         Me.TextBox17.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox17.Location = New System.Drawing.Point(349, 852)
+        Me.TextBox17.Location = New System.Drawing.Point(394, 852)
         Me.TextBox17.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox17.Multiline = True
         Me.TextBox17.Name = "TextBox17"
-        Me.TextBox17.Size = New System.Drawing.Size(617, 32)
+        Me.TextBox17.Size = New System.Drawing.Size(601, 32)
         Me.TextBox17.TabIndex = 334
         '
         'TextBox16
         '
         Me.TextBox16.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox16.Location = New System.Drawing.Point(349, 731)
+        Me.TextBox16.Location = New System.Drawing.Point(394, 700)
         Me.TextBox16.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox16.Multiline = True
         Me.TextBox16.Name = "TextBox16"
-        Me.TextBox16.Size = New System.Drawing.Size(615, 90)
+        Me.TextBox16.Size = New System.Drawing.Size(601, 90)
         Me.TextBox16.TabIndex = 333
         '
         'TextBox15
         '
         Me.TextBox15.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox15.Location = New System.Drawing.Point(608, 654)
+        Me.TextBox15.Location = New System.Drawing.Point(639, 612)
         Me.TextBox15.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox15.Multiline = True
         Me.TextBox15.Name = "TextBox15"
@@ -326,7 +328,7 @@ Partial Class BorrowingAndReturnSlip
         Me.Label7.BackColor = System.Drawing.Color.Transparent
         Me.Label7.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(344, 663)
+        Me.Label7.Location = New System.Drawing.Point(392, 615)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(256, 23)
@@ -338,12 +340,13 @@ Partial Class BorrowingAndReturnSlip
         Me.Label23.BackColor = System.Drawing.Color.Transparent
         Me.Label23.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label23.ForeColor = System.Drawing.Color.Black
-        Me.Label23.Location = New System.Drawing.Point(1000, 626)
+        Me.Label23.Location = New System.Drawing.Point(1043, 556)
         Me.Label23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(125, 23)
         Me.Label23.TabIndex = 330
         Me.Label23.Text = "CERTIFICATION"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TextBox14
         '
@@ -445,7 +448,7 @@ Partial Class BorrowingAndReturnSlip
         '
         'DateTimePicker1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(413, 694)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(458, 657)
         Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(264, 22)
@@ -456,7 +459,7 @@ Partial Class BorrowingAndReturnSlip
         Me.Label16.BackColor = System.Drawing.Color.Transparent
         Me.Label16.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.ForeColor = System.Drawing.Color.Black
-        Me.Label16.Location = New System.Drawing.Point(344, 826)
+        Me.Label16.Location = New System.Drawing.Point(389, 810)
         Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(621, 22)
@@ -468,7 +471,7 @@ Partial Class BorrowingAndReturnSlip
         Me.Label15.BackColor = System.Drawing.Color.Transparent
         Me.Label15.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(687, 700)
+        Me.Label15.Location = New System.Drawing.Point(732, 663)
         Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(140, 20)
@@ -480,40 +483,12 @@ Partial Class BorrowingAndReturnSlip
         Me.Label10.BackColor = System.Drawing.Color.Transparent
         Me.Label10.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(344, 697)
+        Me.Label10.Location = New System.Drawing.Point(389, 660)
         Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(61, 23)
         Me.Label10.TabIndex = 312
         Me.Label10.Text = "Day of "
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(1137, 1047)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(235, 52)
-        Me.Button1.TabIndex = 79
-        Me.Button1.Text = "Save"
-        Me.Button1.UseVisualStyleBackColor = False
-        '
-        'btn_Back
-        '
-        Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Back.ForeColor = System.Drawing.Color.White
-        Me.btn_Back.Location = New System.Drawing.Point(805, 1047)
-        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
-        Me.btn_Back.Name = "btn_Back"
-        Me.btn_Back.Size = New System.Drawing.Size(235, 52)
-        Me.btn_Back.TabIndex = 78
-        Me.btn_Back.Text = "Back"
-        Me.btn_Back.UseVisualStyleBackColor = False
         '
         'TextBox5
         '
@@ -561,12 +536,60 @@ Partial Class BorrowingAndReturnSlip
         Me.Label30.TabIndex = 51
         Me.Label30.Text = "Borrowing And Return Slip"
         '
+        'btn_Back
+        '
+        Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btn_Back.ForeColor = System.Drawing.Color.White
+        Me.btn_Back.Location = New System.Drawing.Point(1256, 1008)
+        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Back.Name = "btn_Back"
+        Me.btn_Back.Size = New System.Drawing.Size(112, 34)
+        Me.btn_Back.TabIndex = 78
+        Me.btn_Back.Text = "Back"
+        Me.btn_Back.UseVisualStyleBackColor = False
+        '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(1537, 1008)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
+        Me.RoundedButton1.TabIndex = 365
+        Me.RoundedButton1.Text = "Generate PDF File"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'btnCSV
+        '
+        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnCSV.CornerRadius = 15
+        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCSV.Location = New System.Drawing.Point(1376, 1008)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCSV.Name = "btnCSV"
+        Me.btnCSV.Size = New System.Drawing.Size(153, 34)
+        Me.btnCSV.TabIndex = 364
+        Me.btnCSV.Text = "Generate CSV File"
+        Me.btnCSV.UseVisualStyleBackColor = False
+        '
         'BorrowingAndReturnSlip
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1924, 1097)
+        Me.ClientSize = New System.Drawing.Size(1924, 1055)
+        Me.Controls.Add(Me.RoundedButton1)
+        Me.Controls.Add(Me.btnCSV)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.TextBox18)
         Me.Controls.Add(Me.TextBox4)
@@ -581,7 +604,6 @@ Partial Class BorrowingAndReturnSlip
         Me.Controls.Add(Me.TextBox13)
         Me.Controls.Add(Me.btn_Back)
         Me.Controls.Add(Me.Label18)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.DateTimePicker2)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label19)
@@ -644,8 +666,6 @@ Partial Class BorrowingAndReturnSlip
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents btn_Back As System.Windows.Forms.Button
     Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -660,4 +680,7 @@ Partial Class BorrowingAndReturnSlip
     Friend WithEvents Remarks As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents btn_Back As Button
+    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
 End Class

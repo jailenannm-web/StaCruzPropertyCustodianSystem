@@ -27,8 +27,6 @@ Partial Class PropertyCard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.pc_btn_Save = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.pc_btn_Cancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.lblPropertyCard = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel16 = New System.Windows.Forms.Panel()
@@ -68,6 +66,9 @@ Partial Class PropertyCard
         Me.pcPropertyPlant = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btn_Back = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel16.SuspendLayout()
         Me.Panel15.SuspendLayout()
@@ -82,32 +83,6 @@ Partial Class PropertyCard
         Me.Panel3.SuspendLayout()
         Me.Panel10.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'pc_btn_Save
-        '
-        Me.pc_btn_Save.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pc_btn_Save.CornerRadius = 15
-        Me.pc_btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pc_btn_Save.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pc_btn_Save.Location = New System.Drawing.Point(1008, 694)
-        Me.pc_btn_Save.Name = "pc_btn_Save"
-        Me.pc_btn_Save.Size = New System.Drawing.Size(121, 39)
-        Me.pc_btn_Save.TabIndex = 50
-        Me.pc_btn_Save.Text = "Save"
-        Me.pc_btn_Save.UseVisualStyleBackColor = True
-        '
-        'pc_btn_Cancel
-        '
-        Me.pc_btn_Cancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pc_btn_Cancel.CornerRadius = 15
-        Me.pc_btn_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pc_btn_Cancel.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pc_btn_Cancel.Location = New System.Drawing.Point(87, 694)
-        Me.pc_btn_Cancel.Name = "pc_btn_Cancel"
-        Me.pc_btn_Cancel.Size = New System.Drawing.Size(121, 39)
-        Me.pc_btn_Cancel.TabIndex = 51
-        Me.pc_btn_Cancel.Text = "Cancel"
-        Me.pc_btn_Cancel.UseVisualStyleBackColor = True
         '
         'lblPropertyCard
         '
@@ -509,14 +484,61 @@ Partial Class PropertyCard
         Me.Panel11.Size = New System.Drawing.Size(897, 61)
         Me.Panel11.TabIndex = 53
         '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(903, 665)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
+        Me.RoundedButton1.TabIndex = 368
+        Me.RoundedButton1.Text = "Generate PDF File"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'btnCSV
+        '
+        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnCSV.CornerRadius = 15
+        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCSV.Location = New System.Drawing.Point(742, 665)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCSV.Name = "btnCSV"
+        Me.btnCSV.Size = New System.Drawing.Size(153, 34)
+        Me.btnCSV.TabIndex = 367
+        Me.btnCSV.Text = "Generate CSV File"
+        Me.btnCSV.UseVisualStyleBackColor = False
+        '
+        'btn_Back
+        '
+        Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btn_Back.ForeColor = System.Drawing.Color.White
+        Me.btn_Back.Location = New System.Drawing.Point(622, 665)
+        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Back.Name = "btn_Back"
+        Me.btn_Back.Size = New System.Drawing.Size(112, 34)
+        Me.btn_Back.TabIndex = 366
+        Me.btn_Back.Text = "Back"
+        Me.btn_Back.UseVisualStyleBackColor = False
+        '
         'PropertyCard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1212, 799)
+        Me.Controls.Add(Me.RoundedButton1)
+        Me.Controls.Add(Me.btnCSV)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.pc_btn_Cancel)
-        Me.Controls.Add(Me.pc_btn_Save)
+        Me.Controls.Add(Me.btn_Back)
         Me.Controls.Add(Me.lblPropertyCard)
         Me.Controls.Add(Me.Panel11)
         Me.Name = "PropertyCard"
@@ -549,8 +571,6 @@ Partial Class PropertyCard
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents pc_btn_Save As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents pc_btn_Cancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents lblPropertyCard As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel16 As Panel
@@ -590,4 +610,7 @@ Partial Class PropertyCard
     Friend WithEvents pcPropertyPlant As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel11 As Panel
+    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents btn_Back As Button
 End Class

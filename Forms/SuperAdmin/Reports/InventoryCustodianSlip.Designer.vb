@@ -59,13 +59,16 @@ Partial Class InventoryCustodianSlip
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DateTimePicker1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(373, 961)
-        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(368, 858)
+        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(221, 22)
         Me.DateTimePicker1.TabIndex = 319
@@ -75,7 +78,7 @@ Partial Class InventoryCustodianSlip
         Me.Label16.BackColor = System.Drawing.Color.Transparent
         Me.Label16.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.ForeColor = System.Drawing.Color.Black
-        Me.Label16.Location = New System.Drawing.Point(453, 994)
+        Me.Label16.Location = New System.Drawing.Point(448, 891)
         Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(63, 31)
@@ -87,7 +90,7 @@ Partial Class InventoryCustodianSlip
         Me.Label15.BackColor = System.Drawing.Color.Transparent
         Me.Label15.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(417, 929)
+        Me.Label15.Location = New System.Drawing.Point(412, 826)
         Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(136, 20)
@@ -99,7 +102,7 @@ Partial Class InventoryCustodianSlip
         Me.Label10.BackColor = System.Drawing.Color.Transparent
         Me.Label10.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(368, 872)
+        Me.Label10.Location = New System.Drawing.Point(363, 769)
         Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(232, 23)
@@ -109,8 +112,8 @@ Partial Class InventoryCustodianSlip
         'TextBox2
         '
         Me.TextBox2.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(332, 828)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox2.Location = New System.Drawing.Point(327, 725)
+        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(307, 25)
@@ -121,7 +124,7 @@ Partial Class InventoryCustodianSlip
         Me.Label7.BackColor = System.Drawing.Color.Transparent
         Me.Label7.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(201, 828)
+        Me.Label7.Location = New System.Drawing.Point(196, 725)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(149, 21)
@@ -132,7 +135,7 @@ Partial Class InventoryCustodianSlip
         '
         Me.TextBox231.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox231.Location = New System.Drawing.Point(982, 151)
-        Me.TextBox231.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox231.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox231.Multiline = True
         Me.TextBox231.Name = "TextBox231"
         Me.TextBox231.Size = New System.Drawing.Size(381, 24)
@@ -157,7 +160,7 @@ Partial Class InventoryCustodianSlip
         Me.Button1.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.White
         Me.Button1.Location = New System.Drawing.Point(959, 1079)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(235, 52)
         Me.Button1.TabIndex = 79
@@ -171,7 +174,7 @@ Partial Class InventoryCustodianSlip
         Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Back.ForeColor = System.Drawing.Color.White
         Me.btn_Back.Location = New System.Drawing.Point(627, 1079)
-        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Back.Name = "btn_Back"
         Me.btn_Back.Size = New System.Drawing.Size(235, 52)
         Me.btn_Back.TabIndex = 78
@@ -182,7 +185,7 @@ Partial Class InventoryCustodianSlip
         '
         Me.TextBox5.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox5.Location = New System.Drawing.Point(317, 125)
-        Me.TextBox5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox5.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox5.Multiline = True
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(381, 22)
@@ -192,7 +195,7 @@ Partial Class InventoryCustodianSlip
         '
         Me.TextBox4.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox4.Location = New System.Drawing.Point(317, 148)
-        Me.TextBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox4.Multiline = True
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(381, 24)
@@ -239,10 +242,10 @@ Partial Class InventoryCustodianSlip
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Quantity, Me.Unit, Me.Amount, Me.UnitCost, Me.TotalCost, Me.Description, Me.InventoryItemNo, Me.EstematedUsefulLife})
         Me.DataGridView1.Location = New System.Drawing.Point(196, 201)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1179, 595)
+        Me.DataGridView1.Size = New System.Drawing.Size(1179, 503)
         Me.DataGridView1.TabIndex = 321
         '
         'Quantity
@@ -304,8 +307,8 @@ Partial Class InventoryCustodianSlip
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(332, 899)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox1.Location = New System.Drawing.Point(327, 796)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(307, 25)
@@ -314,7 +317,7 @@ Partial Class InventoryCustodianSlip
         'TextBox3
         '
         Me.TextBox3.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(1068, 899)
+        Me.TextBox3.Location = New System.Drawing.Point(1063, 796)
         Me.TextBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox3.Multiline = True
         Me.TextBox3.Name = "TextBox3"
@@ -323,7 +326,7 @@ Partial Class InventoryCustodianSlip
         '
         'DateTimePicker2
         '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(1109, 961)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(1104, 858)
         Me.DateTimePicker2.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(221, 22)
@@ -334,7 +337,7 @@ Partial Class InventoryCustodianSlip
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(1189, 994)
+        Me.Label1.Location = New System.Drawing.Point(1184, 891)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(63, 31)
@@ -346,7 +349,7 @@ Partial Class InventoryCustodianSlip
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(1153, 929)
+        Me.Label2.Location = New System.Drawing.Point(1148, 826)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(136, 20)
@@ -358,7 +361,7 @@ Partial Class InventoryCustodianSlip
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(1104, 872)
+        Me.Label5.Location = New System.Drawing.Point(1099, 769)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(232, 23)
@@ -368,7 +371,7 @@ Partial Class InventoryCustodianSlip
         'TextBox6
         '
         Me.TextBox6.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(1068, 828)
+        Me.TextBox6.Location = New System.Drawing.Point(1063, 725)
         Me.TextBox6.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox6.Multiline = True
         Me.TextBox6.Name = "TextBox6"
@@ -380,12 +383,58 @@ Partial Class InventoryCustodianSlip
         Me.Label6.BackColor = System.Drawing.Color.Transparent
         Me.Label6.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(937, 828)
+        Me.Label6.Location = New System.Drawing.Point(932, 725)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(149, 21)
         Me.Label6.TabIndex = 323
         Me.Label6.Text = "Received From :"
+        '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(1222, 959)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
+        Me.RoundedButton1.TabIndex = 368
+        Me.RoundedButton1.Text = "Generate PDF File"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'btnCSV
+        '
+        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnCSV.CornerRadius = 15
+        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCSV.Location = New System.Drawing.Point(1061, 959)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCSV.Name = "btnCSV"
+        Me.btnCSV.Size = New System.Drawing.Size(153, 34)
+        Me.btnCSV.TabIndex = 367
+        Me.btnCSV.Text = "Generate CSV File"
+        Me.btnCSV.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.Button2.ForeColor = System.Drawing.Color.White
+        Me.Button2.Location = New System.Drawing.Point(941, 959)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(112, 34)
+        Me.Button2.TabIndex = 366
+        Me.Button2.Text = "Back"
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'InventoryCustodianSlip
         '
@@ -393,6 +442,9 @@ Partial Class InventoryCustodianSlip
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1924, 1055)
+        Me.Controls.Add(Me.RoundedButton1)
+        Me.Controls.Add(Me.btnCSV)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.DateTimePicker2)
         Me.Controls.Add(Me.Label1)
@@ -417,7 +469,7 @@ Partial Class InventoryCustodianSlip
         Me.Controls.Add(Me.TextBox231)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label14)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "InventoryCustodianSlip"
         Me.Text = "InventoryCustodianSlip"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -457,4 +509,7 @@ Partial Class InventoryCustodianSlip
     Friend WithEvents Label5 As Label
     Friend WithEvents TextBox6 As TextBox
     Friend WithEvents Label6 As Label
+    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents Button2 As Button
 End Class

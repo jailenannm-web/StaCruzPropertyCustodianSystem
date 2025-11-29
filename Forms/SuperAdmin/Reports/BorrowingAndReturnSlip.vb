@@ -31,4 +31,8 @@ Public Class BorrowingAndReturnSlip
     Private Sub TextBox5_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox5.TextChanged
 
     End Sub
+
+    Private Sub TextBox15_TextChanged(sender As Object, e As EventArgs) Handles TextBox15.TextChanged
+
+    End Sub
 End Class

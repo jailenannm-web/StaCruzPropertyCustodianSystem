@@ -75,6 +75,12 @@ Partial Class SuppliesMaterials
         Me.Label8 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btn_Back = New System.Windows.Forms.Button()
+        Me.RoundedButton2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedButton3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel11.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -99,6 +105,9 @@ Partial Class SuppliesMaterials
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel11.BackColor = System.Drawing.Color.White
         Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel11.Controls.Add(Me.RoundedButton1)
+        Me.Panel11.Controls.Add(Me.btnCSV)
+        Me.Panel11.Controls.Add(Me.btn_Back)
         Me.Panel11.Controls.Add(Me.lblPropertyCard)
         Me.Panel11.Location = New System.Drawing.Point(365, 59)
         Me.Panel11.Name = "Panel11"
@@ -492,6 +501,7 @@ Partial Class SuppliesMaterials
         '
         Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.Panel9)
         Me.Panel2.Location = New System.Drawing.Point(365, 637)
@@ -503,6 +513,7 @@ Partial Class SuppliesMaterials
         '
         Me.Panel7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel7.BackColor = System.Drawing.Color.White
         Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel7.Controls.Add(Me.Panel8)
         Me.Panel7.Location = New System.Drawing.Point(917, 637)
@@ -668,11 +679,106 @@ Partial Class SuppliesMaterials
         Me.Label5.Text = "I hereby certify to the correctness of the above information."
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(519, 14)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
+        Me.RoundedButton1.TabIndex = 368
+        Me.RoundedButton1.Text = "Generate PDF File"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'btnCSV
+        '
+        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnCSV.CornerRadius = 15
+        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCSV.Location = New System.Drawing.Point(358, 14)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCSV.Name = "btnCSV"
+        Me.btnCSV.Size = New System.Drawing.Size(153, 34)
+        Me.btnCSV.TabIndex = 367
+        Me.btnCSV.Text = "Generate CSV File"
+        Me.btnCSV.UseVisualStyleBackColor = False
+        '
+        'btn_Back
+        '
+        Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btn_Back.ForeColor = System.Drawing.Color.White
+        Me.btn_Back.Location = New System.Drawing.Point(238, 14)
+        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Back.Name = "btn_Back"
+        Me.btn_Back.Size = New System.Drawing.Size(112, 34)
+        Me.btn_Back.TabIndex = 366
+        Me.btn_Back.Text = "Back"
+        Me.btn_Back.UseVisualStyleBackColor = False
+        '
+        'RoundedButton2
+        '
+        Me.RoundedButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton2.CornerRadius = 15
+        Me.RoundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton2.Location = New System.Drawing.Point(1125, 813)
+        Me.RoundedButton2.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton2.Name = "RoundedButton2"
+        Me.RoundedButton2.Size = New System.Drawing.Size(153, 34)
+        Me.RoundedButton2.TabIndex = 368
+        Me.RoundedButton2.Text = "Generate PDF File"
+        Me.RoundedButton2.UseVisualStyleBackColor = False
+        '
+        'RoundedButton3
+        '
+        Me.RoundedButton3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton3.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton3.CornerRadius = 15
+        Me.RoundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton3.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton3.Location = New System.Drawing.Point(964, 813)
+        Me.RoundedButton3.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton3.Name = "RoundedButton3"
+        Me.RoundedButton3.Size = New System.Drawing.Size(153, 34)
+        Me.RoundedButton3.TabIndex = 367
+        Me.RoundedButton3.Text = "Generate CSV File"
+        Me.RoundedButton3.UseVisualStyleBackColor = False
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.Button1.ForeColor = System.Drawing.Color.White
+        Me.Button1.Location = New System.Drawing.Point(844, 813)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(112, 34)
+        Me.Button1.TabIndex = 366
+        Me.Button1.Text = "Back"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
         'SuppliesMaterials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1569, 942)
+        Me.Controls.Add(Me.RoundedButton2)
+        Me.Controls.Add(Me.RoundedButton3)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.TableLayoutPanel3)
@@ -765,4 +871,10 @@ Partial Class SuppliesMaterials
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents btn_Back As System.Windows.Forms.Button
+    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton3 As Resources.Controls.RoundedButton
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
