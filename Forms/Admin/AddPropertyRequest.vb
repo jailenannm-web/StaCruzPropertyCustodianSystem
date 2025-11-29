@@ -23,5 +23,70 @@ Public Class AddPropertyRequest
         ' Add your save logic here
     End Sub
 
+    Private Sub approvedDate_ValueChanged(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TextBox6_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+
+    End Sub
+
+    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub purpose_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub request_date_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub status_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs)
+    End Sub
+
+    Private Sub TextBox8_TextChanged(sender As Object, e As EventArgs) Handles TextBox8.TextChanged
+
+    End Sub
+
+    Private Sub approved_by_Click(sender As Object, e As EventArgs) Handles approved_by.Click
+
+    End Sub
+
+    Private Sub TextBox3_TextChanged_1(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
+
+    End Sub
 End Class
