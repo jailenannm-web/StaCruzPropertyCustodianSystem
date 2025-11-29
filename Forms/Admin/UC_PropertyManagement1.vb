@@ -261,4 +261,7 @@ Public Class UC_PropertyManagement1
         Return Nothing
     End Function
 
+    Private Sub propertyManagementGrid_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellContentClick
+
+    End Sub
 End Class

@@ -516,6 +516,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    ' Other controls (PictureBoxes, Panels, etc.) can be added similarly
-
+    Private Sub btn_MaintenanceRequest_Click(sender As Object, e As EventArgs) Handles btn_MaintenanceRequest.Click
+        LoadUserControl(New UC_MaintenanceRequestManagement())
+    End Sub
 End Class

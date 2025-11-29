@@ -122,6 +122,12 @@
   </ItemGroup>
   <!-- CORE MODULES & FORMS -->
   <ItemGroup>
+    <Compile Include="Forms\Admin\UC_MaintenanceRequestManagement.Designer.vb">
+      <DependentUpon>UC_MaintenanceRequestManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_MaintenanceRequestManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.Designer.vb">
       <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
     </Compile>
@@ -368,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\EditUser.resx">
       <DependentUpon>EditUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_MaintenanceRequestManagement.resx">
+      <DependentUpon>UC_MaintenanceRequestManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UC_PropertyManagement1.resx">
       <DependentUpon>UC_PropertyManagement1.vb</DependentUpon>

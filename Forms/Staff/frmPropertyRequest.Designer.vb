@@ -27,11 +27,8 @@ Partial Class frmPropertyRequest
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.txtPropertyRequest = New System.Windows.Forms.Label()
         Me.btn_Cancel = New System.Windows.Forms.Button()
         Me.btn_Login = New System.Windows.Forms.Button()
-        Me.txt_UserID = New System.Windows.Forms.TextBox()
-        Me.lblDepartmentName = New System.Windows.Forms.Label()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -59,26 +56,17 @@ Partial Class frmPropertyRequest
         Me.DateTimePicker5 = New System.Windows.Forms.DateTimePicker()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.txt_UserID = New System.Windows.Forms.TextBox()
+        Me.lblDepartmentName = New System.Windows.Forms.Label()
+        Me.txtPropertyRequest = New System.Windows.Forms.Label()
         Me.SuspendLayout()
-        '
-        'txtPropertyRequest
-        '
-        Me.txtPropertyRequest.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.txtPropertyRequest.AutoSize = True
-        Me.txtPropertyRequest.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPropertyRequest.Location = New System.Drawing.Point(760, 5)
-        Me.txtPropertyRequest.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.txtPropertyRequest.Name = "txtPropertyRequest"
-        Me.txtPropertyRequest.Size = New System.Drawing.Size(162, 58)
-        Me.txtPropertyRequest.TabIndex = 0
-        Me.txtPropertyRequest.Text = "Request"
         '
         'btn_Cancel
         '
         Me.btn_Cancel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(687, 626)
+        Me.btn_Cancel.Location = New System.Drawing.Point(573, 702)
         Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Cancel.Name = "btn_Cancel"
         Me.btn_Cancel.Size = New System.Drawing.Size(175, 57)
@@ -92,7 +80,7 @@ Partial Class frmPropertyRequest
         Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Login.ForeColor = System.Drawing.Color.White
-        Me.btn_Login.Location = New System.Drawing.Point(951, 626)
+        Me.btn_Login.Location = New System.Drawing.Point(837, 702)
         Me.btn_Login.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Login.Name = "btn_Login"
         Me.btn_Login.Size = New System.Drawing.Size(175, 57)
@@ -100,35 +88,11 @@ Partial Class frmPropertyRequest
         Me.btn_Login.Text = "Request"
         Me.btn_Login.UseVisualStyleBackColor = False
         '
-        'txt_UserID
-        '
-        Me.txt_UserID.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.txt_UserID.BackColor = System.Drawing.Color.White
-        Me.txt_UserID.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_UserID.Location = New System.Drawing.Point(511, 124)
-        Me.txt_UserID.Margin = New System.Windows.Forms.Padding(4)
-        Me.txt_UserID.Name = "txt_UserID"
-        Me.txt_UserID.Size = New System.Drawing.Size(351, 30)
-        Me.txt_UserID.TabIndex = 92
-        '
-        'lblDepartmentName
-        '
-        Me.lblDepartmentName.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.lblDepartmentName.AutoSize = True
-        Me.lblDepartmentName.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDepartmentName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblDepartmentName.Location = New System.Drawing.Point(372, 129)
-        Me.lblDepartmentName.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
-        Me.lblDepartmentName.Name = "lblDepartmentName"
-        Me.lblDepartmentName.Size = New System.Drawing.Size(107, 26)
-        Me.lblDepartmentName.TabIndex = 85
-        Me.lblDepartmentName.Text = "Employee I.D"
-        '
         'TextBox5
         '
         Me.TextBox5.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TextBox5.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(511, 347)
+        Me.TextBox5.Location = New System.Drawing.Point(397, 423)
         Me.TextBox5.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox5.Multiline = True
         Me.TextBox5.Name = "TextBox5"
@@ -139,7 +103,7 @@ Partial Class frmPropertyRequest
         '
         Me.DateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DateTimePicker1.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Location = New System.Drawing.Point(511, 463)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(397, 539)
         Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(351, 30)
@@ -150,7 +114,7 @@ Partial Class frmPropertyRequest
         Me.TextBox1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TextBox1.BackColor = System.Drawing.Color.White
         Me.TextBox1.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(511, 179)
+        Me.TextBox1.Location = New System.Drawing.Point(397, 255)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(351, 30)
@@ -162,7 +126,7 @@ Partial Class frmPropertyRequest
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label1.Location = New System.Drawing.Point(372, 183)
+        Me.Label1.Location = New System.Drawing.Point(258, 259)
         Me.Label1.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(124, 26)
@@ -174,7 +138,7 @@ Partial Class frmPropertyRequest
         Me.TextBox2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TextBox2.BackColor = System.Drawing.Color.White
         Me.TextBox2.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(511, 239)
+        Me.TextBox2.Location = New System.Drawing.Point(397, 315)
         Me.TextBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(351, 30)
@@ -186,7 +150,7 @@ Partial Class frmPropertyRequest
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label2.Location = New System.Drawing.Point(372, 243)
+        Me.Label2.Location = New System.Drawing.Point(258, 319)
         Me.Label2.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(97, 26)
@@ -198,7 +162,7 @@ Partial Class frmPropertyRequest
         Me.TextBox3.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TextBox3.BackColor = System.Drawing.Color.White
         Me.TextBox3.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(511, 296)
+        Me.TextBox3.Location = New System.Drawing.Point(397, 372)
         Me.TextBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(351, 30)
@@ -210,7 +174,7 @@ Partial Class frmPropertyRequest
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label3.Location = New System.Drawing.Point(372, 300)
+        Me.Label3.Location = New System.Drawing.Point(258, 376)
         Me.Label3.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(76, 26)
@@ -223,7 +187,7 @@ Partial Class frmPropertyRequest
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label4.Location = New System.Drawing.Point(372, 347)
+        Me.Label4.Location = New System.Drawing.Point(258, 423)
         Me.Label4.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(74, 26)
@@ -236,7 +200,7 @@ Partial Class frmPropertyRequest
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label5.Location = New System.Drawing.Point(372, 467)
+        Me.Label5.Location = New System.Drawing.Point(258, 543)
         Me.Label5.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(111, 26)
@@ -248,7 +212,7 @@ Partial Class frmPropertyRequest
         Me.TextBox6.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TextBox6.BackColor = System.Drawing.Color.White
         Me.TextBox6.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(511, 521)
+        Me.TextBox6.Location = New System.Drawing.Point(397, 597)
         Me.TextBox6.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(351, 30)
@@ -260,7 +224,7 @@ Partial Class frmPropertyRequest
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label6.Location = New System.Drawing.Point(372, 525)
+        Me.Label6.Location = New System.Drawing.Point(258, 601)
         Me.Label6.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(131, 26)
@@ -272,7 +236,7 @@ Partial Class frmPropertyRequest
         Me.TextBox7.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TextBox7.BackColor = System.Drawing.Color.White
         Me.TextBox7.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox7.Location = New System.Drawing.Point(1095, 125)
+        Me.TextBox7.Location = New System.Drawing.Point(981, 201)
         Me.TextBox7.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(351, 30)
@@ -284,7 +248,7 @@ Partial Class frmPropertyRequest
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label7.Location = New System.Drawing.Point(946, 124)
+        Me.Label7.Location = New System.Drawing.Point(832, 200)
         Me.Label7.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(107, 26)
@@ -297,7 +261,7 @@ Partial Class frmPropertyRequest
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label8.Location = New System.Drawing.Point(946, 183)
+        Me.Label8.Location = New System.Drawing.Point(832, 259)
         Me.Label8.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(124, 26)
@@ -308,7 +272,7 @@ Partial Class frmPropertyRequest
         '
         Me.DateTimePicker2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DateTimePicker2.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker2.Location = New System.Drawing.Point(1095, 178)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(981, 254)
         Me.DateTimePicker2.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(351, 30)
@@ -319,7 +283,7 @@ Partial Class frmPropertyRequest
         Me.TextBox4.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TextBox4.BackColor = System.Drawing.Color.White
         Me.TextBox4.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(1095, 239)
+        Me.TextBox4.Location = New System.Drawing.Point(981, 315)
         Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(351, 30)
@@ -331,7 +295,7 @@ Partial Class frmPropertyRequest
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label9.Location = New System.Drawing.Point(946, 243)
+        Me.Label9.Location = New System.Drawing.Point(832, 319)
         Me.Label9.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(121, 26)
@@ -344,7 +308,7 @@ Partial Class frmPropertyRequest
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label10.Location = New System.Drawing.Point(946, 300)
+        Me.Label10.Location = New System.Drawing.Point(832, 376)
         Me.Label10.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(109, 26)
@@ -355,7 +319,7 @@ Partial Class frmPropertyRequest
         '
         Me.DateTimePicker3.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DateTimePicker3.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker3.Location = New System.Drawing.Point(1095, 295)
+        Me.DateTimePicker3.Location = New System.Drawing.Point(981, 371)
         Me.DateTimePicker3.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker3.Name = "DateTimePicker3"
         Me.DateTimePicker3.Size = New System.Drawing.Size(351, 30)
@@ -365,7 +329,7 @@ Partial Class frmPropertyRequest
         '
         Me.DateTimePicker4.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DateTimePicker4.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker4.Location = New System.Drawing.Point(1095, 347)
+        Me.DateTimePicker4.Location = New System.Drawing.Point(981, 423)
         Me.DateTimePicker4.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker4.Name = "DateTimePicker4"
         Me.DateTimePicker4.Size = New System.Drawing.Size(351, 30)
@@ -377,7 +341,7 @@ Partial Class frmPropertyRequest
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label11.Location = New System.Drawing.Point(946, 347)
+        Me.Label11.Location = New System.Drawing.Point(832, 423)
         Me.Label11.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(100, 26)
@@ -389,7 +353,7 @@ Partial Class frmPropertyRequest
         Me.TextBox8.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TextBox8.BackColor = System.Drawing.Color.White
         Me.TextBox8.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox8.Location = New System.Drawing.Point(1095, 403)
+        Me.TextBox8.Location = New System.Drawing.Point(981, 479)
         Me.TextBox8.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(351, 30)
@@ -401,7 +365,7 @@ Partial Class frmPropertyRequest
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label12.Location = New System.Drawing.Point(946, 405)
+        Me.Label12.Location = New System.Drawing.Point(832, 481)
         Me.Label12.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(77, 26)
@@ -412,7 +376,7 @@ Partial Class frmPropertyRequest
         '
         Me.DateTimePicker5.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.DateTimePicker5.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker5.Location = New System.Drawing.Point(1095, 463)
+        Me.DateTimePicker5.Location = New System.Drawing.Point(981, 539)
         Me.DateTimePicker5.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker5.Name = "DateTimePicker5"
         Me.DateTimePicker5.Size = New System.Drawing.Size(351, 30)
@@ -424,7 +388,7 @@ Partial Class frmPropertyRequest
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label13.Location = New System.Drawing.Point(946, 467)
+        Me.Label13.Location = New System.Drawing.Point(832, 543)
         Me.Label13.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(85, 26)
@@ -437,17 +401,53 @@ Partial Class frmPropertyRequest
         Me.ComboBox1.Font = New System.Drawing.Font("Poppins", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Property", "Supply"})
-        Me.ComboBox1.Location = New System.Drawing.Point(951, 5)
+        Me.ComboBox1.Location = New System.Drawing.Point(837, 81)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(174, 56)
         Me.ComboBox1.TabIndex = 386
+        '
+        'txt_UserID
+        '
+        Me.txt_UserID.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.txt_UserID.BackColor = System.Drawing.Color.White
+        Me.txt_UserID.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_UserID.Location = New System.Drawing.Point(397, 200)
+        Me.txt_UserID.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_UserID.Name = "txt_UserID"
+        Me.txt_UserID.Size = New System.Drawing.Size(351, 30)
+        Me.txt_UserID.TabIndex = 92
+        '
+        'lblDepartmentName
+        '
+        Me.lblDepartmentName.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblDepartmentName.AutoSize = True
+        Me.lblDepartmentName.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDepartmentName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.lblDepartmentName.Location = New System.Drawing.Point(258, 205)
+        Me.lblDepartmentName.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
+        Me.lblDepartmentName.Name = "lblDepartmentName"
+        Me.lblDepartmentName.Size = New System.Drawing.Size(107, 26)
+        Me.lblDepartmentName.TabIndex = 85
+        Me.lblDepartmentName.Text = "Employee I.D"
+        '
+        'txtPropertyRequest
+        '
+        Me.txtPropertyRequest.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.txtPropertyRequest.AutoSize = True
+        Me.txtPropertyRequest.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPropertyRequest.Location = New System.Drawing.Point(646, 81)
+        Me.txtPropertyRequest.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.txtPropertyRequest.Name = "txtPropertyRequest"
+        Me.txtPropertyRequest.Size = New System.Drawing.Size(162, 58)
+        Me.txtPropertyRequest.TabIndex = 0
+        Me.txtPropertyRequest.Text = "Request"
         '
         'frmPropertyRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1815, 836)
+        Me.ClientSize = New System.Drawing.Size(1587, 989)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.DateTimePicker5)
         Me.Controls.Add(Me.Label13)
@@ -489,12 +489,8 @@ Partial Class frmPropertyRequest
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtPropertyRequest As Label
     Friend WithEvents btn_Cancel As Button
     Friend WithEvents btn_Login As Button
-    Friend WithEvents txt_UserID As TextBox
-    Friend WithEvents lblDepartmentName As Label
     Friend WithEvents TextBox5 As TextBox
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents TextBox1 As TextBox
@@ -522,4 +518,7 @@ Partial Class frmPropertyRequest
     Friend WithEvents DateTimePicker5 As DateTimePicker
     Friend WithEvents Label13 As Label
     Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents txt_UserID As TextBox
+    Friend WithEvents lblDepartmentName As Label
+    Friend WithEvents txtPropertyRequest As Label
 End Class

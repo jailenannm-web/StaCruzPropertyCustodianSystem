@@ -2,7 +2,7 @@
 Imports System.Drawing
 Imports System.Windows.Forms
 
-Public Class UC_PropertyRequestManagement
+Public Class UC_MaintenanceRequestManagement
     Inherits UserControl
 
     Private canModifyRequests As Boolean = False
@@ -13,11 +13,11 @@ Public Class UC_PropertyRequestManagement
         canModifyRequests = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyRequests)
     End Sub
 
-    Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles prm_table1.CellContentClick
-        If e.RowIndex >= 0 AndAlso prm_table1.Columns.Contains("action_edit") AndAlso
-           e.ColumnIndex = prm_table1.Columns("action_edit").Index Then
+    Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellContentClick
+        If e.RowIndex >= 0 AndAlso propertyManagementGrid.Columns.Contains("action_edit") AndAlso
+           e.ColumnIndex = propertyManagementGrid.Columns("action_edit").Index Then
 
-            Dim reqID As String = prm_table1.Rows(e.RowIndex).Cells("request_id").Value?.ToString()
+            Dim reqID As String = propertyManagementGrid.Rows(e.RowIndex).Cells("request_id").Value?.ToString()
             MessageBox.Show("Edit Request: " & reqID, "Action", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             ' Example: open edit request UC
@@ -75,37 +75,6 @@ Public Class UC_PropertyRequestManagement
     ' PRINT PAR LOGIC — FULLY CONNECTED TO PROPERTYCARD
     ' ----------------------------------------------------------------------
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click
-
-        ' Ensure user selected a row
-        If prm_table1.CurrentRow Is Nothing Then
-            MessageBox.Show("Please select a request first.",
-                            "No Selection",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Get request_id
-        Dim reqID As String = prm_table1.CurrentRow.Cells("request_id").Value?.ToString()
-        If String.IsNullOrEmpty(reqID) Then
-            MessageBox.Show("The selected request has no valid request ID.",
-                            "Invalid Data",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error)
-            Return
-        End If
-
-        ' Create PropertyCard and load data
-        Dim uc As New PropertyCard()
-        uc.LoadRequestData(reqID)
-
-        ' Show PropertyCard on top of this UC
-        uc.Dock = DockStyle.Fill
-        Me.Parent.Controls.Add(uc)
-        uc.BringToFront()
-    End Sub
-
-    Private Sub issuePropertyCard_Click(sender As Object, e As EventArgs) Handles issuePropertyCard.Click
 
     End Sub
 

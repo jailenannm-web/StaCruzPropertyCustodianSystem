@@ -22,10 +22,22 @@ Partial Class UC_PropertyManagement1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
-        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.propertyManagementGrid = New System.Windows.Forms.DataGridView()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlpropertymanagement = New System.Windows.Forms.Label()
+        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
+        Me.cmsActions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuAssign = New System.Windows.Forms.ToolStripMenuItem()
+        Me.msuDispose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.msuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MsuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
+        Me.msuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
         Me.propertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.propertyName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -42,12 +54,9 @@ Partial Class UC_PropertyManagement1
         Me.dateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateUpdated = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ttlpropertymanagement = New System.Windows.Forms.Label()
+        Me.colMenu = New System.Windows.Forms.DataGridViewButtonColumn()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmsActions.SuspendLayout()
         Me.SuspendLayout()
         '
         'admin_label_DepartmentManagement
@@ -73,6 +82,93 @@ Partial Class UC_PropertyManagement1
         Me.pm_cbobx_status.TabIndex = 40
         Me.pm_cbobx_status.Text = "Status"
         '
+        'propertyManagementGrid
+        '
+        Me.propertyManagementGrid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
+        Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyID, Me.propertyName, Me.category, Me.serialNumber, Me.supplier, Me.condition_status, Me.cost, Me.datePurchased, Me.warrantyExpiration, Me.assignedEmployee, Me.assignedDepartment, Me.location, Me.remarks, Me.dateCreated, Me.dateUpdated, Me.updatedBy, Me.colMenu})
+        Me.propertyManagementGrid.Location = New System.Drawing.Point(56, 126)
+        Me.propertyManagementGrid.Name = "propertyManagementGrid"
+        Me.propertyManagementGrid.RowHeadersWidth = 51
+        Me.propertyManagementGrid.RowTemplate.Height = 24
+        Me.propertyManagementGrid.Size = New System.Drawing.Size(1270, 564)
+        Me.propertyManagementGrid.TabIndex = 45
+        '
+        'btnEdit
+        '
+        Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnEdit.CornerRadius = 15
+        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnEdit.Location = New System.Drawing.Point(1120, 717)
+        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(99, 34)
+        Me.btnEdit.TabIndex = 154
+        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.UseVisualStyleBackColor = False
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnAdd.CornerRadius = 15
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAdd.Location = New System.Drawing.Point(1227, 717)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(99, 34)
+        Me.btnAdd.TabIndex = 152
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = False
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnDelete.CornerRadius = 15
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Location = New System.Drawing.Point(1012, 717)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(99, 35)
+        Me.btnDelete.TabIndex = 153
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = False
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(46, 701)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.TabIndex = 159
+        Me.Label1.Text = "TOTAL:"
+        '
+        'ttlpropertymanagement
+        '
+        Me.ttlpropertymanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ttlpropertymanagement.AutoSize = True
+        Me.ttlpropertymanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ttlpropertymanagement.ForeColor = System.Drawing.Color.Black
+        Me.ttlpropertymanagement.Location = New System.Drawing.Point(197, 701)
+        Me.ttlpropertymanagement.Name = "ttlpropertymanagement"
+        Me.ttlpropertymanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttlpropertymanagement.TabIndex = 158
+        Me.ttlpropertymanagement.Text = "1"
+        '
         'pm_cbobx_categ
         '
         Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -86,20 +182,42 @@ Partial Class UC_PropertyManagement1
         Me.pm_cbobx_categ.TabIndex = 41
         Me.pm_cbobx_categ.Text = "Categories"
         '
-        'propertyManagementGrid
+        'cmsActions
         '
-        Me.propertyManagementGrid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
-        Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyID, Me.propertyName, Me.category, Me.serialNumber, Me.supplier, Me.condition_status, Me.cost, Me.datePurchased, Me.warrantyExpiration, Me.assignedEmployee, Me.assignedDepartment, Me.location, Me.remarks, Me.dateCreated, Me.dateUpdated, Me.updatedBy})
-        Me.propertyManagementGrid.Location = New System.Drawing.Point(56, 126)
-        Me.propertyManagementGrid.Name = "propertyManagementGrid"
-        Me.propertyManagementGrid.RowHeadersWidth = 51
-        Me.propertyManagementGrid.RowTemplate.Height = 24
-        Me.propertyManagementGrid.Size = New System.Drawing.Size(1270, 564)
-        Me.propertyManagementGrid.TabIndex = 45
+        Me.cmsActions.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.cmsActions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAssign, Me.msuDispose, Me.msuLostDamaged, Me.MsuViewDetails, Me.msuPrintPARICS})
+        Me.cmsActions.Name = "cmsActions"
+        Me.cmsActions.Size = New System.Drawing.Size(231, 124)
+        '
+        'mnuAssign
+        '
+        Me.mnuAssign.Name = "mnuAssign"
+        Me.mnuAssign.Size = New System.Drawing.Size(230, 24)
+        Me.mnuAssign.Text = "Transfer Property"
+        '
+        'msuDispose
+        '
+        Me.msuDispose.Name = "msuDispose"
+        Me.msuDispose.Size = New System.Drawing.Size(230, 24)
+        Me.msuDispose.Text = "Dispose"
+        '
+        'msuLostDamaged
+        '
+        Me.msuLostDamaged.Name = "msuLostDamaged"
+        Me.msuLostDamaged.Size = New System.Drawing.Size(230, 24)
+        Me.msuLostDamaged.Text = "Mark Lost or Damaged"
+        '
+        'MsuViewDetails
+        '
+        Me.MsuViewDetails.Name = "MsuViewDetails"
+        Me.MsuViewDetails.Size = New System.Drawing.Size(230, 24)
+        Me.MsuViewDetails.Text = "View Details"
+        '
+        'msuPrintPARICS
+        '
+        Me.msuPrintPARICS.Name = "msuPrintPARICS"
+        Me.msuPrintPARICS.Size = New System.Drawing.Size(230, 24)
+        Me.msuPrintPARICS.Text = "Print PAR/ICS"
         '
         'propertyID
         '
@@ -213,77 +331,14 @@ Partial Class UC_PropertyManagement1
         Me.updatedBy.Name = "updatedBy"
         Me.updatedBy.Width = 125
         '
-        'btnEdit
+        'colMenu
         '
-        Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnEdit.CornerRadius = 15
-        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(1120, 717)
-        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(99, 34)
-        Me.btnEdit.TabIndex = 154
-        Me.btnEdit.Text = "Edit"
-        Me.btnEdit.UseVisualStyleBackColor = False
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
-        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1227, 717)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(99, 34)
-        Me.btnAdd.TabIndex = 152
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = False
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
-        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1012, 717)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(99, 35)
-        Me.btnDelete.TabIndex = 153
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = False
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(46, 701)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(145, 58)
-        Me.Label1.TabIndex = 159
-        Me.Label1.Text = "TOTAL:"
-        '
-        'ttlpropertymanagement
-        '
-        Me.ttlpropertymanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.ttlpropertymanagement.AutoSize = True
-        Me.ttlpropertymanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ttlpropertymanagement.ForeColor = System.Drawing.Color.Black
-        Me.ttlpropertymanagement.Location = New System.Drawing.Point(197, 701)
-        Me.ttlpropertymanagement.Name = "ttlpropertymanagement"
-        Me.ttlpropertymanagement.Size = New System.Drawing.Size(38, 58)
-        Me.ttlpropertymanagement.TabIndex = 158
-        Me.ttlpropertymanagement.Text = "1"
+        Me.colMenu.HeaderText = "Actions"
+        Me.colMenu.MinimumWidth = 6
+        Me.colMenu.Name = "colMenu"
+        Me.colMenu.Text = "..."
+        Me.colMenu.UseColumnTextForButtonValue = True
+        Me.colMenu.Width = 125
         '
         'UC_PropertyManagement1
         '
@@ -302,17 +357,26 @@ Partial Class UC_PropertyManagement1
         Me.Name = "UC_PropertyManagement1"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmsActions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
-    Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox
     Friend WithEvents propertyManagementGrid As System.Windows.Forms.DataGridView
     Friend WithEvents btnEdit As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ttlpropertymanagement As System.Windows.Forms.Label
+    Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox
+    Friend WithEvents cmsActions As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents mnuAssign As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents msuDispose As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents msuLostDamaged As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MsuViewDetails As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents msuPrintPARICS As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents propertyID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents propertyName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents category As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -329,6 +393,5 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents dateCreated As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dateUpdated As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents updatedBy As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ttlpropertymanagement As System.Windows.Forms.Label
+    Friend WithEvents colMenu As System.Windows.Forms.DataGridViewButtonColumn
 End Class
