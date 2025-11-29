@@ -48,7 +48,7 @@ Partial Class StaffLogin
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Font = New System.Drawing.Font("Palatino Linotype", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(470, 499)
+        Me.Label3.Location = New System.Drawing.Point(470, 513)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(948, 101)
@@ -86,6 +86,7 @@ Partial Class StaffLogin
         Me.txb_Password.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_Password.Multiline = True
         Me.txb_Password.Name = "txb_Password"
+        Me.txb_Password.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txb_Password.Size = New System.Drawing.Size(512, 52)
         Me.txb_Password.TabIndex = 4
         '

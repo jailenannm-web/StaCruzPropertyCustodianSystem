@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
@@ -9,7 +9,9 @@ Public Class EditUser
     Private currentAdminType As String = ""
     Private currentAdminUsername As String = ""
     Private editingUsername As String = ""
+    Private currentUserType As String = "" ' Store the current user type being edited
     Private departmentDirectory As DataTable
+    Private canManageUsers As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -21,11 +23,27 @@ Public Class EditUser
         currentAdminID = adminID
         currentAdminType = adminType
         currentAdminUsername = adminUsername
+        canManageUsers = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
+        ApplyPermissionState()
     End Sub
 
     Private Sub EditUser_Load(sender As Object, e As EventArgs)
         PopulateDropdowns()
         LoadDepartmentOptions()
+        If Not canManageUsers Then
+            canManageUsers = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
+            ApplyPermissionState()
+        End If
+    End Sub
+
+    Private Sub ApplyPermissionState()
+        If um_edituser_save IsNot Nothing Then
+            um_edituser_save.Enabled = canManageUsers
+        End If
+    End Sub
+
+    Private Sub ShowManageRestriction()
+        MessageBox.Show("You have view-only access to User Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     ' Load user data into the fields
@@ -72,6 +90,7 @@ Public Class EditUser
 
         Me.dateRegistered.Value = dateRegistered
         editingUsername = username
+        currentUserType = userRole ' Store the current user type
     End Sub
 
     Private Sub PopulateDropdowns()
@@ -107,6 +126,10 @@ Public Class EditUser
 
     ' Save button
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles um_edituser_save.Click
+        If Not canManageUsers Then
+            ShowManageRestriction()
+            Return
+        End If
         Dim validationMessage As String = ValidateFields()
         If Not String.IsNullOrEmpty(validationMessage) Then
             MessageBox.Show(validationMessage, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -121,13 +144,39 @@ Public Class EditUser
 
         Dim deptID As Integer? = ResolveDepartmentId()
 
-        Dim roleValue As String = GetComboValue(ComboBox1, "Admin")
-        Dim userTypeValue As String = If(String.Equals(roleValue, "SuperAdmin", StringComparison.OrdinalIgnoreCase), "SuperAdmin", "Admin")
+        Dim roleValue As String = GetComboValue(ComboBox1, currentUserType)
+        ' Determine the new user type from dropdown
+        Dim newUserTypeValue As String = If(String.Equals(roleValue, "SuperAdmin", StringComparison.OrdinalIgnoreCase), "SuperAdmin",
+                                            If(String.Equals(roleValue, "Staff", StringComparison.OrdinalIgnoreCase), "Staff", "Admin"))
+        
+        ' Use current user type to determine which table to update (can't change Staff to Admin or vice versa in single update)
+        ' For Staff accounts, keep as Staff. For Admin/SuperAdmin, allow role changes between Admin and SuperAdmin
+        Dim tableUserType As String = currentUserType
+        If String.IsNullOrEmpty(tableUserType) Then
+            tableUserType = newUserTypeValue
+        End If
+        
+        ' If current is Staff, new type must also be Staff
+        If tableUserType = "Staff" AndAlso newUserTypeValue <> "Staff" Then
+            MessageBox.Show("Cannot change Staff account to Admin or SuperAdmin. Staff accounts must remain as Staff.", 
+                           "Role Change Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        
+        ' If current is Admin/SuperAdmin, new type must also be Admin or SuperAdmin
+        If (tableUserType = "Admin" OrElse tableUserType = "SuperAdmin") AndAlso newUserTypeValue = "Staff" Then
+            MessageBox.Show("Cannot change Admin/SuperAdmin account to Staff. Please create a new Staff account instead.", 
+                           "Role Change Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        
         Dim statusValue As String = GetComboValue(statusAdmin, "Active")
         Dim positionValue As String = GetComboValue(positionAdmin, If(String.IsNullOrWhiteSpace(roleValue), "Administrator", roleValue))
 
-        Dim updateSuccess As Boolean = DatabaseConnection.UpdateAdminAccount(
+        ' Use unified UpdateUserAccount function that handles both Admin/SuperAdmin and Staff
+        Dim updateSuccess As Boolean = DatabaseConnection.UpdateUserAccount(
             adminIDValue,
+            tableUserType, ' Use current user type to determine which table to update
             firstName.Text.Trim(),
             lastName.Text.Trim(),
             email.Text.Trim(),
@@ -143,7 +192,7 @@ Public Class EditUser
             provinceCity:=GetComboValue(province),
             dateAssigned:=dateRegistered.Value,
             employeeID:=employeeID.Text.Trim(),
-            userType:=userTypeValue,
+            newUserType:=newUserTypeValue, ' New role (only applies to Admin/SuperAdmin)
             status:=statusValue,
             updatedByID:=currentAdminID,
             updatedByType:=currentAdminType,
@@ -155,17 +204,19 @@ Public Class EditUser
 
         If updateSuccess Then
             If Not String.IsNullOrWhiteSpace(password.Text) Then
-                DatabaseConnection.ResetAdminPassword(adminIDValue,
-                                                      password.Text,
-                                                      currentAdminID,
-                                                      currentAdminType,
-                                                      currentAdminUsername,
-                                                      "",
-                                                      "User Management",
-                                                      "User Account")
+                ' Use unified ResetUserPassword function that handles both Admin/SuperAdmin and Staff
+                DatabaseConnection.ResetUserPassword(adminIDValue,
+                                                     tableUserType, ' Use current user type to determine which table to update
+                                                     password.Text,
+                                                     currentAdminID,
+                                                     currentAdminType,
+                                                     currentAdminUsername,
+                                                     "",
+                                                     "User Management",
+                                                     "User Account")
             End If
 
-            MessageBox.Show("User account updated.", "User Management",
+            MessageBox.Show("User account updated successfully.", "User Management",
                             MessageBoxButtons.OK, MessageBoxIcon.Information)
             NavigateBackToList()
         End If

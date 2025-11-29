@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Windows.Forms
 
@@ -10,7 +10,6 @@ Public Class UC_UserManagement
     Private currentAdminUsername As String = ""
     Private currentRoleFilter As String = ""
     Private currentStatusFilter As String = ""
-    Private currentSearchText As String = ""
     Private isInitializingFilters As Boolean = False
 
     Public Sub New()
@@ -86,15 +85,10 @@ Public Class UC_UserManagement
     End Sub
 
     Private Sub RefreshUserTable()
-        RefreshUserTable(currentSearchText, currentRoleFilter, currentStatusFilter)
-    End Sub
-
-    Private Sub RefreshUserTable(Optional searchKeyword As String = "",
-                                 Optional roleFilter As String = "",
-                                 Optional statusFilter As String = "")
         Try
             pm_table.Rows.Clear()
-            Dim records As DataTable = DatabaseConnection.GetAdminAccounts(statusFilter, roleFilter, searchKeyword)
+            ' No search keyword, only filters
+            Dim records As DataTable = DatabaseConnection.GetAdminAccounts(currentStatusFilter, currentRoleFilter, "")
 
             For Each record As DataRow In records.Rows
                 Dim rowIndex As Integer = pm_table.Rows.Add(
@@ -112,7 +106,7 @@ Public Class UC_UserManagement
                     SafeValue(record, "municipality"),
                     SafeValue(record, "barangay"),
                     SafeValue(record, "house_no_street"),
-                    "********",
+                    "******",
                     FormatDateValue(record("created_at")),
                     SafeValue(record, "status")
                 )
@@ -235,23 +229,15 @@ Public Class UC_UserManagement
     End Sub
 
     Private Sub ResetFilters()
-        currentSearchText = ""
         currentRoleFilter = ""
         currentStatusFilter = ""
 
-        ' Make sure txtSearch is a TextBox, not an Integer!
-        If TypeOf txtSearch Is TextBox Then
-            CType(txtSearch, TextBox).Clear()
-        End If
-
-        ' Make sure cboRoleFilter is a ComboBox
         If TypeOf cboRoleFilter Is ComboBox Then
             If cboRoleFilter.Items.Count > 0 Then
                 cboRoleFilter.SelectedIndex = 0
             End If
         End If
 
-        ' Make sure cboStatusFilter is a ComboBox
         If TypeOf cboStatusFilter Is ComboBox Then
             If cboStatusFilter.Items.Count > 0 Then
                 cboStatusFilter.SelectedIndex = 0
@@ -261,26 +247,20 @@ Public Class UC_UserManagement
         RefreshUserTable()
     End Sub
 
-
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         ResetFilters()
-    End Sub
-
-    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        currentSearchText = txtSearch.Text.Trim()
-        RefreshUserTable(currentSearchText, currentRoleFilter, currentStatusFilter)
     End Sub
 
     Private Sub cboRoleFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoleFilter.SelectedIndexChanged
         If isInitializingFilters Then Return
         currentRoleFilter = If(cboRoleFilter.SelectedIndex <= 0, "", cboRoleFilter.SelectedItem.ToString())
-        RefreshUserTable(currentSearchText, currentRoleFilter, currentStatusFilter)
+        RefreshUserTable()
     End Sub
 
     Private Sub cboStatusFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStatusFilter.SelectedIndexChanged
         If isInitializingFilters Then Return
         currentStatusFilter = If(cboStatusFilter.SelectedIndex <= 0, "", cboStatusFilter.SelectedItem.ToString())
-        RefreshUserTable(currentSearchText, currentRoleFilter, currentStatusFilter)
+        RefreshUserTable()
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
@@ -301,10 +281,6 @@ Public Class UC_UserManagement
     End Class
 
     Private Sub pm_table_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles pm_table.CellContentClick
-
-    End Sub
-
-    Private Sub UC_UserManagement_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

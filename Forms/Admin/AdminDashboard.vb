@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Diagnostics
@@ -238,7 +238,7 @@ Public Class AdminDashboard
     End Sub
 
     ' Search TextBox
-    Private Sub admin_txtbox_search_TextChanged(sender As Object, e As EventArgs) 
+    Private Sub admin_txtbox_search_TextChanged(sender As Object, e As EventArgs) Handles admin_txtbox_search.TextChanged
         ' Optional: Add search filtering logic here
     End Sub
 
@@ -324,7 +324,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub TableLayoutPanel4_Paint(sender As Object, e As PaintEventArgs) 
+    Private Sub TableLayoutPanel4_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
@@ -344,7 +344,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
@@ -352,7 +352,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
@@ -360,7 +360,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) 
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
 
     End Sub
 
