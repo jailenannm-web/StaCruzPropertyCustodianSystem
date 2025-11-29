@@ -64,31 +64,31 @@ Public Class AdminDashboard
         Cursor = Cursors.WaitCursor
 
         Try
-            Dim summaryTask = Task.Run(Function() DatabaseConnection.GetAdminDashboardSummary())
-            Dim propertyCategoryTask = Task.Run(Function() DatabaseConnection.GetPropertyCountsByCategory())
-            Dim supplyBreakdownTask = Task.Run(Function() DatabaseConnection.GetSupplyInventoryBreakdown())
-            Dim requestStatusTask = Task.Run(Function() DatabaseConnection.GetRequestStatusCounts())
-            Dim supplyStatusTask = Task.Run(Function() DatabaseConnection.GetSupplyStatusCounts())
-            Dim propertyConditionTask = Task.Run(Function() DatabaseConnection.GetPropertyConditionCounts())
-            Dim maintenanceStatusTask = Task.Run(Function() DatabaseConnection.GetMaintenanceStatusCounts())
-            Dim requestTrendTask = Task.Run(Function() DatabaseConnection.GetBorrowingTrendData(6))
-            Dim departmentUsageTask = Task.Run(Function() DatabaseConnection.GetDepartmentInventoryDistribution())
+            Dim summaryTask As Task(Of Dictionary(Of String, Integer)) = Task.Run(Function() DatabaseConnection.GetAdminDashboardSummary())
+            Dim propertyCategoryTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetPropertyCountsByCategory())
+            Dim supplyBreakdownTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetSupplyInventoryBreakdown())
+            Dim requestStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetRequestStatusCounts())
+            Dim supplyStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetSupplyStatusCounts())
+            Dim propertyConditionTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetPropertyConditionCounts())
+            Dim maintenanceStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetMaintenanceStatusCounts())
+            Dim requestTrendTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetBorrowingTrendData(6))
+            Dim departmentUsageTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetDepartmentInventoryDistribution())
 
             Await Task.WhenAll(summaryTask, propertyCategoryTask, supplyBreakdownTask, requestStatusTask,
                                supplyStatusTask, propertyConditionTask, maintenanceStatusTask,
                                requestTrendTask, departmentUsageTask)
 
-            Dim summary = summaryTask.Result
+            Dim summary = Await summaryTask
             UpdateSummaryCards(summary)
 
-            BindChartData(SAChart_TotalProperty, propertyCategoryTask.Result, SeriesChartType.StackedBar)
-            BindChartData(SAChart_TotalSupplies, supplyBreakdownTask.Result, SeriesChartType.StackedBar100)
-            BindChartData(SAChart_PendingRequest, requestStatusTask.Result, SeriesChartType.Pie)
-            BindChartData(SAChart_InventoryStatusOverview, supplyStatusTask.Result, SeriesChartType.Doughnut)
-            BindChartData(SAChart_PropertyConditionStatus, propertyConditionTask.Result, SeriesChartType.StackedBar)
-            BindChartData(SAChart_ScheduleMaintenance, maintenanceStatusTask.Result, SeriesChartType.Pie)
-            BindChartData(SAChart_RequestTrends, requestTrendTask.Result, SeriesChartType.Line, showValueLabels:=False)
-            BindChartData(SAChart_RecentPropertyRequests, departmentUsageTask.Result, SeriesChartType.Column)
+            BindChartData(SAChart_TotalProperty, Await propertyCategoryTask, SeriesChartType.StackedBar)
+            BindChartData(SAChart_TotalSupplies, Await supplyBreakdownTask, SeriesChartType.StackedBar100)
+            BindChartData(SAChart_PendingRequest, Await requestStatusTask, SeriesChartType.Pie)
+            BindChartData(SAChart_InventoryStatusOverview, Await supplyStatusTask, SeriesChartType.Doughnut)
+            BindChartData(SAChart_PropertyConditionStatus, Await propertyConditionTask, SeriesChartType.StackedBar)
+            BindChartData(SAChart_ScheduleMaintenance, Await maintenanceStatusTask, SeriesChartType.Pie)
+            BindChartData(SAChart_RequestTrends, Await requestTrendTask, SeriesChartType.Line, showValueLabels:=False)
+            BindChartData(SAChart_RecentPropertyRequests, Await departmentUsageTask, SeriesChartType.Column)
             BindChartData(SAChart_SystemAlerts, BuildAlertsData(summary), SeriesChartType.Pie)
         Catch ex As Exception
             Debug.WriteLine("Dashboard load error: " & ex.Message)
@@ -344,7 +344,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs)
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
 
     End Sub
 
@@ -352,7 +352,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
 
@@ -380,7 +380,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub lblSystemAlerts_Click(sender As Object, e As EventArgs)
+    Private Sub lblSystemAlerts_Click(sender As Object, e As EventArgs) Handles lblSystemAlerts.Click
 
     End Sub
 
@@ -392,7 +392,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub Label10_Click(sender As Object, e As EventArgs)
+    Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
 
     End Sub
 
@@ -404,7 +404,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub lblPendingRequest_Click(sender As Object, e As EventArgs)
+    Private Sub lblPendingRequest_Click(sender As Object, e As EventArgs) Handles lblPendingRequest.Click
 
     End Sub
 
@@ -416,7 +416,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub lblTotalSupplies_Click(sender As Object, e As EventArgs)
+    Private Sub lblTotalSupplies_Click(sender As Object, e As EventArgs) Handles lblTotalSupplies.Click
 
     End Sub
 
@@ -424,7 +424,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub lblRequestTrends_Click(sender As Object, e As EventArgs)
+    Private Sub lblRequestTrends_Click(sender As Object, e As EventArgs) Handles lblRequestTrends.Click
 
     End Sub
 
@@ -436,7 +436,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub lblScheduleMaintenance_Click(sender As Object, e As EventArgs)
+    Private Sub lblScheduleMaintenance_Click(sender As Object, e As EventArgs) Handles lblScheduleMaintenance.Click
 
     End Sub
 
@@ -448,7 +448,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub lblPropertyConditionStatus_Click(sender As Object, e As EventArgs)
+    Private Sub lblPropertyConditionStatus_Click(sender As Object, e As EventArgs) Handles lblPropertyConditionStatus.Click
 
     End Sub
 
@@ -460,7 +460,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub lblInventoryStatusOverview_Click(sender As Object, e As EventArgs)
+    Private Sub lblInventoryStatusOverview_Click(sender As Object, e As EventArgs) Handles lblInventoryStatusOverview.Click
 
     End Sub
 
@@ -472,7 +472,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub lblTotalProperty_Click(sender As Object, e As EventArgs)
+    Private Sub lblTotalProperty_Click(sender As Object, e As EventArgs) Handles lblTotalProperty.Click
 
     End Sub
 
@@ -516,6 +516,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    ' Other controls (PictureBoxes, Panels, etc.) can be added similarly
-
+    Private Sub btn_MaintenanceRequest_Click(sender As Object, e As EventArgs) Handles btn_MaintenanceRequest.Click
+        LoadUserControl(New UC_MaintenanceRequestManagement())
+    End Sub
 End Class

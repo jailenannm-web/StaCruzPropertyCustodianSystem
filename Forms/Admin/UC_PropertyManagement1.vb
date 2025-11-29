@@ -59,12 +59,12 @@ Public Class UC_PropertyManagement1
 
     Private Sub InitializeFilters()
         ' Populate category filter
-        SADashboard.Items.Clear()
-        SADashboard.Items.Add("All Categories")
-        SADashboard.Items.AddRange(New String() {"Furniture", "Equipment", "Office Supplies", "IT Equipment",
+        pm_cbobx_categ.Items.Clear()
+        pm_cbobx_categ.Items.Add("All Categories")
+        pm_cbobx_categ.Items.AddRange(New String() {"Furniture", "Equipment", "Office Supplies", "IT Equipment",
                                                     "Laboratory Apparatus", "Books and Publications",
                                                     "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"})
-        SADashboard.SelectedIndex = 0
+        pm_cbobx_categ.SelectedIndex = 0
 
         ' Populate status filter
         pm_cbobx_status.Items.Clear()
@@ -73,7 +73,7 @@ Public Class UC_PropertyManagement1
         pm_cbobx_status.SelectedIndex = 0
 
         ' Wire up filter change events
-        AddHandler SADashboard.SelectedIndexChanged, AddressOf Filter_Changed
+        AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
         AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
     End Sub
 
@@ -84,8 +84,8 @@ Public Class UC_PropertyManagement1
             Dim statusFilter As String = ""
 
             ' Get filter values
-            If SADashboard.SelectedIndex > 0 Then
-                categoryFilter = SADashboard.SelectedItem.ToString()
+            If pm_cbobx_categ.SelectedIndex > 0 Then
+                categoryFilter = pm_cbobx_categ.SelectedItem.ToString()
             End If
             If pm_cbobx_status.SelectedIndex > 0 Then
                 statusFilter = pm_cbobx_status.SelectedItem.ToString()
@@ -261,4 +261,7 @@ Public Class UC_PropertyManagement1
         Return Nothing
     End Function
 
+    Private Sub propertyManagementGrid_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellContentClick
+
+    End Sub
 End Class

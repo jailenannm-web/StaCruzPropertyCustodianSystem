@@ -58,6 +58,8 @@ Partial Class AddProperty
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.conditionStatusCmbo = New System.Windows.Forms.ComboBox()
+        Me.datePurchasedDate = New System.Windows.Forms.DateTimePicker()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -236,6 +238,8 @@ Partial Class AddProperty
         Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.datePurchasedDate)
+        Me.Panel1.Controls.Add(Me.conditionStatusCmbo)
         Me.Panel1.Controls.Add(Me.DateTimePicker1)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.TextBox1)
@@ -552,6 +556,28 @@ Partial Class AddProperty
         Me.Label3.TabIndex = 75
         Me.Label3.Text = "Condition"
         '
+        'conditionStatusCmbo
+        '
+        Me.conditionStatusCmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.conditionStatusCmbo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.conditionStatusCmbo.FormattingEnabled = True
+        Me.conditionStatusCmbo.Location = New System.Drawing.Point(192, 289)
+        Me.conditionStatusCmbo.Margin = New System.Windows.Forms.Padding(2)
+        Me.conditionStatusCmbo.Name = "conditionStatusCmbo"
+        Me.conditionStatusCmbo.Size = New System.Drawing.Size(192, 23)
+        Me.conditionStatusCmbo.TabIndex = 77
+        '
+        'datePurchasedDate
+        '
+        Me.datePurchasedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.datePurchasedDate.Location = New System.Drawing.Point(192, 247)
+        Me.datePurchasedDate.Margin = New System.Windows.Forms.Padding(2)
+        Me.datePurchasedDate.Name = "datePurchasedDate"
+        Me.datePurchasedDate.Size = New System.Drawing.Size(192, 21)
+        Me.datePurchasedDate.TabIndex = 78
+        '
         'AddProperty
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -613,4 +639,6 @@ Partial Class AddProperty
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents conditionStatusCmbo As System.Windows.Forms.ComboBox
+    Friend WithEvents datePurchasedDate As System.Windows.Forms.DateTimePicker
 End Class

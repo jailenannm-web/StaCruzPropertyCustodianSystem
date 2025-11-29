@@ -58,6 +58,9 @@ Partial Class AddUserManagement
         Me.lastName = New System.Windows.Forms.TextBox()
         Me.um_edituser_fullname = New System.Windows.Forms.Label()
         Me.firstName = New System.Windows.Forms.TextBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.statusAdmin = New System.Windows.Forms.ComboBox()
+        Me.password = New System.Windows.Forms.TextBox()
         Me.RoundedPanel1.SuspendLayout()
         Me.uc_um_edituser.SuspendLayout()
         Me.SuspendLayout()
@@ -160,6 +163,9 @@ Partial Class AddUserManagement
         Me.uc_um_edituser.Controls.Add(Me.lastName)
         Me.uc_um_edituser.Controls.Add(Me.um_edituser_fullname)
         Me.uc_um_edituser.Controls.Add(Me.firstName)
+        Me.uc_um_edituser.Controls.Add(Me.ComboBox1)
+        Me.uc_um_edituser.Controls.Add(Me.statusAdmin)
+        Me.uc_um_edituser.Controls.Add(Me.password)
         Me.uc_um_edituser.CornerRadius = 5
         Me.uc_um_edituser.Location = New System.Drawing.Point(42, 149)
         Me.uc_um_edituser.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
@@ -552,6 +558,42 @@ Partial Class AddUserManagement
         Me.firstName.Size = New System.Drawing.Size(218, 19)
         Me.firstName.TabIndex = 25
         '
+        'ComboBox1
+        '
+        Me.ComboBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(198, 310)
+        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(216, 21)
+        Me.ComboBox1.TabIndex = 72
+        '
+        'statusAdmin
+        '
+        Me.statusAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.statusAdmin.FormattingEnabled = True
+        Me.statusAdmin.Location = New System.Drawing.Point(198, 358)
+        Me.statusAdmin.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.statusAdmin.Name = "statusAdmin"
+        Me.statusAdmin.Size = New System.Drawing.Size(216, 21)
+        Me.statusAdmin.TabIndex = 73
+        '
+        'password
+        '
+        Me.password.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.password.BackColor = System.Drawing.SystemColors.Window
+        Me.password.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.password.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.password.Location = New System.Drawing.Point(198, 406)
+        Me.password.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.password.MaxLength = 100
+        Me.password.Name = "password"
+        Me.password.Size = New System.Drawing.Size(216, 19)
+        Me.password.TabIndex = 74
+        '
         'AddUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -609,4 +651,7 @@ Partial Class AddUserManagement
     Friend WithEvents lastName As System.Windows.Forms.TextBox
     Friend WithEvents um_edituser_fullname As System.Windows.Forms.Label
     Friend WithEvents firstName As System.Windows.Forms.TextBox
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents statusAdmin As System.Windows.Forms.ComboBox
+    Friend WithEvents password As System.Windows.Forms.TextBox
 End Class

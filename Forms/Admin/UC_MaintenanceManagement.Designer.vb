@@ -34,6 +34,7 @@ Partial Class UC_MaintenanceManagement
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlMaintenancemanagement = New System.Windows.Forms.Label()
+        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -134,11 +135,28 @@ Partial Class UC_MaintenanceManagement
         Me.ttlMaintenancemanagement.TabIndex = 156
         Me.ttlMaintenancemanagement.Text = "0"
         '
+        'btnRefresh
+        '
+        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnRefresh.CornerRadius = 15
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRefresh.Location = New System.Drawing.Point(1229, 63)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(99, 34)
+        Me.btnRefresh.TabIndex = 166
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = False
+        '
         'UC_MaintenanceManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.btnRefresh)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlMaintenancemanagement)
         Me.Controls.Add(Me.DataGridView1)
@@ -161,4 +179,5 @@ Partial Class UC_MaintenanceManagement
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlMaintenancemanagement As Label
+    Friend WithEvents btnRefresh As Resources.Controls.RoundedButton
 End Class
