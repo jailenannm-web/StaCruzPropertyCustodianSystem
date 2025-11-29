@@ -79,4 +79,12 @@ Public Class CustodianDashboard
     Private Sub admin_btn_reports_Click(sender As Object, e As EventArgs) Handles admin_btn_reports.Click
         LoadUserControl(New UC_Reports())
     End Sub
+
+    Private Sub RoundedButton2_Click(sender As Object, e As EventArgs) Handles RoundedButton2.Click
+        LoadUserControl(New AddPropertyRequest())
+    End Sub
+
+    Private Sub RoundedButton1_Click(sender As Object, e As EventArgs) Handles RoundedButton1.Click
+        LoadUserControl(New AddSupplyRequest())
+    End Sub
 End Class

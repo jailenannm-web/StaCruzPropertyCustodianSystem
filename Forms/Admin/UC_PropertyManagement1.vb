@@ -128,10 +128,14 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-        If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New AddProperty())
-        End If
+        Dim addRequest As New AddProperty()
+        addRequest.Dock = DockStyle.Fill
+
+        ' Clear previous controls
+        Me.Controls.Clear()
+
+        ' Add new user control
+        Me.Controls.Add(addRequest)
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click

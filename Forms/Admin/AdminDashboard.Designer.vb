@@ -30,6 +30,7 @@ Partial Class AdminDashboard
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminDashboard))
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
@@ -57,22 +58,24 @@ Partial Class AdminDashboard
         Dim ChartArea9 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend9 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminDashboard))
         Me.admin_PanelSidebar = New System.Windows.Forms.Panel()
+        Me.admin_btn_suppliesRequestManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btn_MaintenanceRequest = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_Logout = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_reports = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_MaintenanceManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_PropertyRequestManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_DepartmentManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_SuppliesManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_PropertyManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_UserManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_btn_dashboard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_TitleProfile = New System.Windows.Forms.Label()
         Me.admin_picProfile = New System.Windows.Forms.PictureBox()
         Me.admin_PanelMain = New System.Windows.Forms.Panel()
         Me.comboFilter = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.admin_label_Dashboard = New System.Windows.Forms.Label()
-        Me.admin_panelcontainer = New System.Windows.Forms.Panel()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.admin_txtbox_search = New System.Windows.Forms.TextBox()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -85,6 +88,7 @@ Partial Class AdminDashboard
         Me.admin_panel_PendingRequests = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.RoundedPanel11 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_SystemAlerts = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.lblSystemAlerts = New System.Windows.Forms.Label()
@@ -112,29 +116,24 @@ Partial Class AdminDashboard
         Me.RoundedPanel5 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_TotalProperty = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.lblTotalProperty = New System.Windows.Forms.Label()
-        Me.btn_MaintenanceRequest = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_Logout = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_reports = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_MaintenanceManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_PropertyRequestManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_DepartmentManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_SuppliesManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_PropertyManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_UserManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_btn_dashboard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.admin_label_Dashboard = New System.Windows.Forms.Label()
+        Me.admin_panelcontainer = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.admin_txtbox_search = New System.Windows.Forms.TextBox()
         Me.admin_panel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.admin_btn_suppliesRequestManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_PanelSidebar.SuspendLayout()
         CType(Me.admin_picProfile, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.admin_PanelMain.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
-        Me.TableLayoutPanel4.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RoundedPanel2.SuspendLayout()
         Me.RoundedPanel3.SuspendLayout()
         Me.RoundedPanel1.SuspendLayout()
         Me.admin_panel_PendingRequests.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
         Me.RoundedPanel11.SuspendLayout()
         CType(Me.SAChart_SystemAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RoundedPanel13.SuspendLayout()
@@ -153,6 +152,7 @@ Partial Class AdminDashboard
         CType(Me.SAChart_InventoryStatusOverview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RoundedPanel5.SuspendLayout()
         CType(Me.SAChart_TotalProperty, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_PanelSidebar
@@ -178,6 +178,242 @@ Partial Class AdminDashboard
         Me.admin_PanelSidebar.Name = "admin_PanelSidebar"
         Me.admin_PanelSidebar.Size = New System.Drawing.Size(380, 1055)
         Me.admin_PanelSidebar.TabIndex = 1
+        '
+        'admin_btn_suppliesRequestManagement
+        '
+        Me.admin_btn_suppliesRequestManagement.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_suppliesRequestManagement.CornerRadius = 5
+        Me.admin_btn_suppliesRequestManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_suppliesRequestManagement.FlatAppearance.BorderSize = 0
+        Me.admin_btn_suppliesRequestManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_suppliesRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_suppliesRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_suppliesRequestManagement.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_suppliesRequestManagement.Location = New System.Drawing.Point(39, 655)
+        Me.admin_btn_suppliesRequestManagement.Margin = New System.Windows.Forms.Padding(4)
+        Me.admin_btn_suppliesRequestManagement.Name = "admin_btn_suppliesRequestManagement"
+        Me.admin_btn_suppliesRequestManagement.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_suppliesRequestManagement.TabIndex = 11
+        Me.admin_btn_suppliesRequestManagement.Text = "Supplies Request Management"
+        '
+        'btn_MaintenanceRequest
+        '
+        Me.btn_MaintenanceRequest.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btn_MaintenanceRequest.CornerRadius = 5
+        Me.btn_MaintenanceRequest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.btn_MaintenanceRequest.FlatAppearance.BorderSize = 0
+        Me.btn_MaintenanceRequest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.btn_MaintenanceRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_MaintenanceRequest.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btn_MaintenanceRequest.ForeColor = System.Drawing.Color.White
+        Me.btn_MaintenanceRequest.Location = New System.Drawing.Point(39, 785)
+        Me.btn_MaintenanceRequest.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_MaintenanceRequest.Name = "btn_MaintenanceRequest"
+        Me.btn_MaintenanceRequest.Size = New System.Drawing.Size(306, 56)
+        Me.btn_MaintenanceRequest.TabIndex = 0
+        Me.btn_MaintenanceRequest.Text = "Maintenance Request Management"
+        '
+        'admin_btn_Logout
+        '
+        Me.admin_btn_Logout.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_Logout.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_btn_Logout.CornerRadius = 5
+        Me.admin_btn_Logout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_Logout.FlatAppearance.BorderSize = 0
+        Me.admin_btn_Logout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_Logout.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_Logout.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_Logout.Image = CType(resources.GetObject("admin_btn_Logout.Image"), System.Drawing.Image)
+        Me.admin_btn_Logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.admin_btn_Logout.Location = New System.Drawing.Point(39, 961)
+        Me.admin_btn_Logout.Margin = New System.Windows.Forms.Padding(5)
+        Me.admin_btn_Logout.Name = "admin_btn_Logout"
+        Me.admin_btn_Logout.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_Logout.TabIndex = 10
+        Me.admin_btn_Logout.Text = "Logout"
+        Me.admin_btn_Logout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.admin_btn_Logout.UseVisualStyleBackColor = False
+        '
+        'admin_btn_reports
+        '
+        Me.admin_btn_reports.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_reports.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_btn_reports.CornerRadius = 5
+        Me.admin_btn_reports.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_reports.FlatAppearance.BorderSize = 0
+        Me.admin_btn_reports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_reports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_reports.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_reports.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_reports.Image = CType(resources.GetObject("admin_btn_reports.Image"), System.Drawing.Image)
+        Me.admin_btn_reports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.admin_btn_reports.Location = New System.Drawing.Point(39, 850)
+        Me.admin_btn_reports.Margin = New System.Windows.Forms.Padding(5)
+        Me.admin_btn_reports.Name = "admin_btn_reports"
+        Me.admin_btn_reports.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_reports.TabIndex = 8
+        Me.admin_btn_reports.Text = "Reports"
+        Me.admin_btn_reports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.admin_btn_reports.UseVisualStyleBackColor = False
+        '
+        'admin_btn_MaintenanceManagement
+        '
+        Me.admin_btn_MaintenanceManagement.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_MaintenanceManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_btn_MaintenanceManagement.CornerRadius = 5
+        Me.admin_btn_MaintenanceManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_MaintenanceManagement.FlatAppearance.BorderSize = 0
+        Me.admin_btn_MaintenanceManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_MaintenanceManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_MaintenanceManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_MaintenanceManagement.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_MaintenanceManagement.Image = CType(resources.GetObject("admin_btn_MaintenanceManagement.Image"), System.Drawing.Image)
+        Me.admin_btn_MaintenanceManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.admin_btn_MaintenanceManagement.Location = New System.Drawing.Point(39, 720)
+        Me.admin_btn_MaintenanceManagement.Margin = New System.Windows.Forms.Padding(5)
+        Me.admin_btn_MaintenanceManagement.Name = "admin_btn_MaintenanceManagement"
+        Me.admin_btn_MaintenanceManagement.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_MaintenanceManagement.TabIndex = 7
+        Me.admin_btn_MaintenanceManagement.Text = "Maintenance Management"
+        Me.admin_btn_MaintenanceManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.admin_btn_MaintenanceManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.admin_btn_MaintenanceManagement.UseVisualStyleBackColor = False
+        '
+        'admin_btn_PropertyRequestManagement
+        '
+        Me.admin_btn_PropertyRequestManagement.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_PropertyRequestManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_btn_PropertyRequestManagement.CornerRadius = 5
+        Me.admin_btn_PropertyRequestManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_PropertyRequestManagement.FlatAppearance.BorderSize = 0
+        Me.admin_btn_PropertyRequestManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_PropertyRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_PropertyRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_PropertyRequestManagement.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_PropertyRequestManagement.Image = CType(resources.GetObject("admin_btn_PropertyRequestManagement.Image"), System.Drawing.Image)
+        Me.admin_btn_PropertyRequestManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.admin_btn_PropertyRequestManagement.Location = New System.Drawing.Point(39, 590)
+        Me.admin_btn_PropertyRequestManagement.Margin = New System.Windows.Forms.Padding(5)
+        Me.admin_btn_PropertyRequestManagement.Name = "admin_btn_PropertyRequestManagement"
+        Me.admin_btn_PropertyRequestManagement.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_PropertyRequestManagement.TabIndex = 6
+        Me.admin_btn_PropertyRequestManagement.Text = "Property Request Management"
+        Me.admin_btn_PropertyRequestManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.admin_btn_PropertyRequestManagement.UseVisualStyleBackColor = False
+        '
+        'admin_btn_DepartmentManagement
+        '
+        Me.admin_btn_DepartmentManagement.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_DepartmentManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_btn_DepartmentManagement.CornerRadius = 5
+        Me.admin_btn_DepartmentManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_DepartmentManagement.FlatAppearance.BorderSize = 0
+        Me.admin_btn_DepartmentManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_DepartmentManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_DepartmentManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_DepartmentManagement.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_DepartmentManagement.Image = CType(resources.GetObject("admin_btn_DepartmentManagement.Image"), System.Drawing.Image)
+        Me.admin_btn_DepartmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.admin_btn_DepartmentManagement.Location = New System.Drawing.Point(39, 524)
+        Me.admin_btn_DepartmentManagement.Margin = New System.Windows.Forms.Padding(5)
+        Me.admin_btn_DepartmentManagement.Name = "admin_btn_DepartmentManagement"
+        Me.admin_btn_DepartmentManagement.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_DepartmentManagement.TabIndex = 5
+        Me.admin_btn_DepartmentManagement.Text = "Department Management"
+        Me.admin_btn_DepartmentManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.admin_btn_DepartmentManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.admin_btn_DepartmentManagement.UseVisualStyleBackColor = False
+        '
+        'admin_btn_SuppliesManagement
+        '
+        Me.admin_btn_SuppliesManagement.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_SuppliesManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_btn_SuppliesManagement.CornerRadius = 5
+        Me.admin_btn_SuppliesManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_SuppliesManagement.FlatAppearance.BorderSize = 0
+        Me.admin_btn_SuppliesManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_SuppliesManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_SuppliesManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_SuppliesManagement.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_SuppliesManagement.Image = CType(resources.GetObject("admin_btn_SuppliesManagement.Image"), System.Drawing.Image)
+        Me.admin_btn_SuppliesManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.admin_btn_SuppliesManagement.Location = New System.Drawing.Point(39, 458)
+        Me.admin_btn_SuppliesManagement.Margin = New System.Windows.Forms.Padding(5)
+        Me.admin_btn_SuppliesManagement.Name = "admin_btn_SuppliesManagement"
+        Me.admin_btn_SuppliesManagement.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_SuppliesManagement.TabIndex = 4
+        Me.admin_btn_SuppliesManagement.Text = "  Supplies Management"
+        Me.admin_btn_SuppliesManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.admin_btn_SuppliesManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.admin_btn_SuppliesManagement.UseVisualStyleBackColor = False
+        '
+        'admin_btn_PropertyManagement
+        '
+        Me.admin_btn_PropertyManagement.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_PropertyManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_btn_PropertyManagement.CornerRadius = 5
+        Me.admin_btn_PropertyManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_PropertyManagement.FlatAppearance.BorderSize = 0
+        Me.admin_btn_PropertyManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_PropertyManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_PropertyManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_PropertyManagement.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_PropertyManagement.Image = CType(resources.GetObject("admin_btn_PropertyManagement.Image"), System.Drawing.Image)
+        Me.admin_btn_PropertyManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.admin_btn_PropertyManagement.Location = New System.Drawing.Point(39, 392)
+        Me.admin_btn_PropertyManagement.Margin = New System.Windows.Forms.Padding(5)
+        Me.admin_btn_PropertyManagement.Name = "admin_btn_PropertyManagement"
+        Me.admin_btn_PropertyManagement.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_PropertyManagement.TabIndex = 3
+        Me.admin_btn_PropertyManagement.Text = "Property Management"
+        Me.admin_btn_PropertyManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.admin_btn_PropertyManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.admin_btn_PropertyManagement.UseVisualStyleBackColor = False
+        '
+        'admin_btn_UserManagement
+        '
+        Me.admin_btn_UserManagement.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_UserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_btn_UserManagement.CornerRadius = 5
+        Me.admin_btn_UserManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_UserManagement.FlatAppearance.BorderSize = 0
+        Me.admin_btn_UserManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_UserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_UserManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_UserManagement.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_UserManagement.Image = CType(resources.GetObject("admin_btn_UserManagement.Image"), System.Drawing.Image)
+        Me.admin_btn_UserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.admin_btn_UserManagement.Location = New System.Drawing.Point(39, 323)
+        Me.admin_btn_UserManagement.Margin = New System.Windows.Forms.Padding(5)
+        Me.admin_btn_UserManagement.Name = "admin_btn_UserManagement"
+        Me.admin_btn_UserManagement.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_UserManagement.TabIndex = 2
+        Me.admin_btn_UserManagement.Text = "User Management"
+        Me.admin_btn_UserManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.admin_btn_UserManagement.UseVisualStyleBackColor = False
+        '
+        'admin_btn_dashboard
+        '
+        Me.admin_btn_dashboard.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_dashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_btn_dashboard.CornerRadius = 5
+        Me.admin_btn_dashboard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_dashboard.FlatAppearance.BorderSize = 0
+        Me.admin_btn_dashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_dashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_dashboard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_btn_dashboard.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_dashboard.Image = CType(resources.GetObject("admin_btn_dashboard.Image"), System.Drawing.Image)
+        Me.admin_btn_dashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.admin_btn_dashboard.Location = New System.Drawing.Point(39, 257)
+        Me.admin_btn_dashboard.Margin = New System.Windows.Forms.Padding(5)
+        Me.admin_btn_dashboard.Name = "admin_btn_dashboard"
+        Me.admin_btn_dashboard.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_dashboard.TabIndex = 0
+        Me.admin_btn_dashboard.Text = "Dashboard"
+        Me.admin_btn_dashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.admin_btn_dashboard.UseVisualStyleBackColor = False
         '
         'admin_TitleProfile
         '
@@ -272,101 +508,6 @@ Partial Class AdminDashboard
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(1369, 123)
         Me.TableLayoutPanel3.TabIndex = 21
-        '
-        'TableLayoutPanel4
-        '
-        Me.TableLayoutPanel4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel4.ColumnCount = 3
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel11, 2, 2)
-        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel13, 0, 2)
-        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel7, 2, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel6, 1, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel12, 1, 2)
-        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel8, 2, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel9, 1, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel10, 0, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel5, 0, 0)
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(80, 312)
-        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
-        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 3
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1369, 666)
-        Me.TableLayoutPanel4.TabIndex = 60
-        '
-        'admin_label_Dashboard
-        '
-        Me.admin_label_Dashboard.AutoSize = True
-        Me.admin_label_Dashboard.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_Dashboard.Location = New System.Drawing.Point(80, 78)
-        Me.admin_label_Dashboard.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.admin_label_Dashboard.Name = "admin_label_Dashboard"
-        Me.admin_label_Dashboard.Size = New System.Drawing.Size(558, 58)
-        Me.admin_label_Dashboard.TabIndex = 20
-        Me.admin_label_Dashboard.Text = "Property Custodian Dashboard"
-        '
-        'admin_panelcontainer
-        '
-        Me.admin_panelcontainer.Location = New System.Drawing.Point(0, 0)
-        Me.admin_panelcontainer.Name = "admin_panelcontainer"
-        Me.admin_panelcontainer.Size = New System.Drawing.Size(200, 100)
-        Me.admin_panelcontainer.TabIndex = 0
-        '
-        'TableLayoutPanel1
-        '
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(200, 100)
-        Me.TableLayoutPanel1.TabIndex = 0
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
-        '
-        'Panel3
-        '
-        Me.Panel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel3.Location = New System.Drawing.Point(60, 299)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1097, 696)
-        Me.Panel3.TabIndex = 60
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(81, 95)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
-        'admin_txtbox_search
-        '
-        Me.admin_txtbox_search.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.admin_txtbox_search.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.admin_txtbox_search.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_txtbox_search.ForeColor = System.Drawing.Color.White
-        Me.admin_txtbox_search.Location = New System.Drawing.Point(127, 95)
-        Me.admin_txtbox_search.Name = "admin_txtbox_search"
-        Me.admin_txtbox_search.Size = New System.Drawing.Size(1017, 33)
-        Me.admin_txtbox_search.TabIndex = 0
-        Me.admin_txtbox_search.Text = "Search"
-        Me.admin_txtbox_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'RoundedPanel2
         '
@@ -535,6 +676,34 @@ Partial Class AdminDashboard
         Me.Label1.Size = New System.Drawing.Size(167, 30)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Pending Requests"
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TableLayoutPanel4.ColumnCount = 3
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel11, 2, 2)
+        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel13, 0, 2)
+        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel7, 2, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel6, 1, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel12, 1, 2)
+        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel8, 2, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel9, 1, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel10, 0, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel5, 0, 0)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(80, 312)
+        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 3
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1369, 666)
+        Me.TableLayoutPanel4.TabIndex = 60
         '
         'RoundedPanel11
         '
@@ -994,224 +1163,72 @@ Partial Class AdminDashboard
         Me.lblTotalProperty.TabIndex = 46
         Me.lblTotalProperty.Text = "Total Property"
         '
-        'btn_MaintenanceRequest
+        'admin_label_Dashboard
         '
-        Me.btn_MaintenanceRequest.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.btn_MaintenanceRequest.CornerRadius = 5
-        Me.btn_MaintenanceRequest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.btn_MaintenanceRequest.FlatAppearance.BorderSize = 0
-        Me.btn_MaintenanceRequest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.btn_MaintenanceRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_MaintenanceRequest.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btn_MaintenanceRequest.ForeColor = System.Drawing.Color.White
-        Me.btn_MaintenanceRequest.Location = New System.Drawing.Point(39, 785)
-        Me.btn_MaintenanceRequest.Margin = New System.Windows.Forms.Padding(4)
-        Me.btn_MaintenanceRequest.Name = "btn_MaintenanceRequest"
-        Me.btn_MaintenanceRequest.Size = New System.Drawing.Size(306, 56)
-        Me.btn_MaintenanceRequest.TabIndex = 0
-        Me.btn_MaintenanceRequest.Text = "Maintenance Request Management"
+        Me.admin_label_Dashboard.AutoSize = True
+        Me.admin_label_Dashboard.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_label_Dashboard.Location = New System.Drawing.Point(80, 78)
+        Me.admin_label_Dashboard.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.admin_label_Dashboard.Name = "admin_label_Dashboard"
+        Me.admin_label_Dashboard.Size = New System.Drawing.Size(558, 58)
+        Me.admin_label_Dashboard.TabIndex = 20
+        Me.admin_label_Dashboard.Text = "Property Custodian Dashboard"
         '
-        'admin_btn_Logout
+        'admin_panelcontainer
         '
-        Me.admin_btn_Logout.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_Logout.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_Logout.CornerRadius = 5
-        Me.admin_btn_Logout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_Logout.FlatAppearance.BorderSize = 0
-        Me.admin_btn_Logout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_Logout.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_btn_Logout.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_Logout.Image = CType(resources.GetObject("admin_btn_Logout.Image"), System.Drawing.Image)
-        Me.admin_btn_Logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_Logout.Location = New System.Drawing.Point(39, 961)
-        Me.admin_btn_Logout.Margin = New System.Windows.Forms.Padding(5)
-        Me.admin_btn_Logout.Name = "admin_btn_Logout"
-        Me.admin_btn_Logout.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_Logout.TabIndex = 10
-        Me.admin_btn_Logout.Text = "Logout"
-        Me.admin_btn_Logout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.admin_btn_Logout.UseVisualStyleBackColor = False
+        Me.admin_panelcontainer.Location = New System.Drawing.Point(0, 0)
+        Me.admin_panelcontainer.Name = "admin_panelcontainer"
+        Me.admin_panelcontainer.Size = New System.Drawing.Size(200, 100)
+        Me.admin_panelcontainer.TabIndex = 0
         '
-        'admin_btn_reports
+        'TableLayoutPanel1
         '
-        Me.admin_btn_reports.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_reports.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_reports.CornerRadius = 5
-        Me.admin_btn_reports.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_reports.FlatAppearance.BorderSize = 0
-        Me.admin_btn_reports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_reports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_reports.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_btn_reports.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_reports.Image = CType(resources.GetObject("admin_btn_reports.Image"), System.Drawing.Image)
-        Me.admin_btn_reports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_reports.Location = New System.Drawing.Point(39, 850)
-        Me.admin_btn_reports.Margin = New System.Windows.Forms.Padding(5)
-        Me.admin_btn_reports.Name = "admin_btn_reports"
-        Me.admin_btn_reports.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_reports.TabIndex = 8
-        Me.admin_btn_reports.Text = "Reports"
-        Me.admin_btn_reports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.admin_btn_reports.UseVisualStyleBackColor = False
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(200, 100)
+        Me.TableLayoutPanel1.TabIndex = 0
         '
-        'admin_btn_MaintenanceManagement
+        'ContextMenuStrip1
         '
-        Me.admin_btn_MaintenanceManagement.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_MaintenanceManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_MaintenanceManagement.CornerRadius = 5
-        Me.admin_btn_MaintenanceManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_MaintenanceManagement.FlatAppearance.BorderSize = 0
-        Me.admin_btn_MaintenanceManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_MaintenanceManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_MaintenanceManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_btn_MaintenanceManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_MaintenanceManagement.Image = CType(resources.GetObject("admin_btn_MaintenanceManagement.Image"), System.Drawing.Image)
-        Me.admin_btn_MaintenanceManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_MaintenanceManagement.Location = New System.Drawing.Point(39, 720)
-        Me.admin_btn_MaintenanceManagement.Margin = New System.Windows.Forms.Padding(5)
-        Me.admin_btn_MaintenanceManagement.Name = "admin_btn_MaintenanceManagement"
-        Me.admin_btn_MaintenanceManagement.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_MaintenanceManagement.TabIndex = 7
-        Me.admin_btn_MaintenanceManagement.Text = "Maintenance Management"
-        Me.admin_btn_MaintenanceManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.admin_btn_MaintenanceManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.admin_btn_MaintenanceManagement.UseVisualStyleBackColor = False
+        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
         '
-        'admin_btn_PropertyRequestManagement
+        'Panel3
         '
-        Me.admin_btn_PropertyRequestManagement.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_PropertyRequestManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_PropertyRequestManagement.CornerRadius = 5
-        Me.admin_btn_PropertyRequestManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_PropertyRequestManagement.FlatAppearance.BorderSize = 0
-        Me.admin_btn_PropertyRequestManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_PropertyRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_PropertyRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_btn_PropertyRequestManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_PropertyRequestManagement.Image = CType(resources.GetObject("admin_btn_PropertyRequestManagement.Image"), System.Drawing.Image)
-        Me.admin_btn_PropertyRequestManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_PropertyRequestManagement.Location = New System.Drawing.Point(39, 590)
-        Me.admin_btn_PropertyRequestManagement.Margin = New System.Windows.Forms.Padding(5)
-        Me.admin_btn_PropertyRequestManagement.Name = "admin_btn_PropertyRequestManagement"
-        Me.admin_btn_PropertyRequestManagement.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_PropertyRequestManagement.TabIndex = 6
-        Me.admin_btn_PropertyRequestManagement.Text = "Property Request Management"
-        Me.admin_btn_PropertyRequestManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.admin_btn_PropertyRequestManagement.UseVisualStyleBackColor = False
+        Me.Panel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel3.Location = New System.Drawing.Point(60, 299)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(1097, 696)
+        Me.Panel3.TabIndex = 60
         '
-        'admin_btn_DepartmentManagement
+        'PictureBox1
         '
-        Me.admin_btn_DepartmentManagement.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_DepartmentManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_DepartmentManagement.CornerRadius = 5
-        Me.admin_btn_DepartmentManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_DepartmentManagement.FlatAppearance.BorderSize = 0
-        Me.admin_btn_DepartmentManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_DepartmentManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_DepartmentManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_btn_DepartmentManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_DepartmentManagement.Image = CType(resources.GetObject("admin_btn_DepartmentManagement.Image"), System.Drawing.Image)
-        Me.admin_btn_DepartmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_DepartmentManagement.Location = New System.Drawing.Point(39, 524)
-        Me.admin_btn_DepartmentManagement.Margin = New System.Windows.Forms.Padding(5)
-        Me.admin_btn_DepartmentManagement.Name = "admin_btn_DepartmentManagement"
-        Me.admin_btn_DepartmentManagement.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_DepartmentManagement.TabIndex = 5
-        Me.admin_btn_DepartmentManagement.Text = "Department Management"
-        Me.admin_btn_DepartmentManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.admin_btn_DepartmentManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.admin_btn_DepartmentManagement.UseVisualStyleBackColor = False
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(81, 95)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
         '
-        'admin_btn_SuppliesManagement
+        'admin_txtbox_search
         '
-        Me.admin_btn_SuppliesManagement.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_SuppliesManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_SuppliesManagement.CornerRadius = 5
-        Me.admin_btn_SuppliesManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_SuppliesManagement.FlatAppearance.BorderSize = 0
-        Me.admin_btn_SuppliesManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_SuppliesManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_SuppliesManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_btn_SuppliesManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_SuppliesManagement.Image = CType(resources.GetObject("admin_btn_SuppliesManagement.Image"), System.Drawing.Image)
-        Me.admin_btn_SuppliesManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_SuppliesManagement.Location = New System.Drawing.Point(39, 458)
-        Me.admin_btn_SuppliesManagement.Margin = New System.Windows.Forms.Padding(5)
-        Me.admin_btn_SuppliesManagement.Name = "admin_btn_SuppliesManagement"
-        Me.admin_btn_SuppliesManagement.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_SuppliesManagement.TabIndex = 4
-        Me.admin_btn_SuppliesManagement.Text = "  Supplies Management"
-        Me.admin_btn_SuppliesManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.admin_btn_SuppliesManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.admin_btn_SuppliesManagement.UseVisualStyleBackColor = False
-        '
-        'admin_btn_PropertyManagement
-        '
-        Me.admin_btn_PropertyManagement.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_PropertyManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_PropertyManagement.CornerRadius = 5
-        Me.admin_btn_PropertyManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_PropertyManagement.FlatAppearance.BorderSize = 0
-        Me.admin_btn_PropertyManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_PropertyManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_PropertyManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_btn_PropertyManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_PropertyManagement.Image = CType(resources.GetObject("admin_btn_PropertyManagement.Image"), System.Drawing.Image)
-        Me.admin_btn_PropertyManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_PropertyManagement.Location = New System.Drawing.Point(39, 392)
-        Me.admin_btn_PropertyManagement.Margin = New System.Windows.Forms.Padding(5)
-        Me.admin_btn_PropertyManagement.Name = "admin_btn_PropertyManagement"
-        Me.admin_btn_PropertyManagement.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_PropertyManagement.TabIndex = 3
-        Me.admin_btn_PropertyManagement.Text = "Property Management"
-        Me.admin_btn_PropertyManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.admin_btn_PropertyManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.admin_btn_PropertyManagement.UseVisualStyleBackColor = False
-        '
-        'admin_btn_UserManagement
-        '
-        Me.admin_btn_UserManagement.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_UserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_UserManagement.CornerRadius = 5
-        Me.admin_btn_UserManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_UserManagement.FlatAppearance.BorderSize = 0
-        Me.admin_btn_UserManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_UserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_UserManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_btn_UserManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_UserManagement.Image = CType(resources.GetObject("admin_btn_UserManagement.Image"), System.Drawing.Image)
-        Me.admin_btn_UserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_UserManagement.Location = New System.Drawing.Point(39, 323)
-        Me.admin_btn_UserManagement.Margin = New System.Windows.Forms.Padding(5)
-        Me.admin_btn_UserManagement.Name = "admin_btn_UserManagement"
-        Me.admin_btn_UserManagement.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_UserManagement.TabIndex = 2
-        Me.admin_btn_UserManagement.Text = "User Management"
-        Me.admin_btn_UserManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.admin_btn_UserManagement.UseVisualStyleBackColor = False
-        '
-        'admin_btn_dashboard
-        '
-        Me.admin_btn_dashboard.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_dashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_dashboard.CornerRadius = 5
-        Me.admin_btn_dashboard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_dashboard.FlatAppearance.BorderSize = 0
-        Me.admin_btn_dashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_dashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_dashboard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_btn_dashboard.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_dashboard.Image = CType(resources.GetObject("admin_btn_dashboard.Image"), System.Drawing.Image)
-        Me.admin_btn_dashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_dashboard.Location = New System.Drawing.Point(39, 257)
-        Me.admin_btn_dashboard.Margin = New System.Windows.Forms.Padding(5)
-        Me.admin_btn_dashboard.Name = "admin_btn_dashboard"
-        Me.admin_btn_dashboard.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_dashboard.TabIndex = 0
-        Me.admin_btn_dashboard.Text = "Dashboard"
-        Me.admin_btn_dashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.admin_btn_dashboard.UseVisualStyleBackColor = False
+        Me.admin_txtbox_search.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.admin_txtbox_search.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.admin_txtbox_search.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_txtbox_search.ForeColor = System.Drawing.Color.White
+        Me.admin_txtbox_search.Location = New System.Drawing.Point(127, 95)
+        Me.admin_txtbox_search.Name = "admin_txtbox_search"
+        Me.admin_txtbox_search.Size = New System.Drawing.Size(1017, 33)
+        Me.admin_txtbox_search.TabIndex = 0
+        Me.admin_txtbox_search.Text = "Search"
+        Me.admin_txtbox_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'admin_panel2
         '
@@ -1220,23 +1237,6 @@ Partial Class AdminDashboard
         Me.admin_panel2.Name = "admin_panel2"
         Me.admin_panel2.Size = New System.Drawing.Size(200, 100)
         Me.admin_panel2.TabIndex = 0
-        '
-        'admin_btn_suppliesRequestManagement
-        '
-        Me.admin_btn_suppliesRequestManagement.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.admin_btn_suppliesRequestManagement.CornerRadius = 5
-        Me.admin_btn_suppliesRequestManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.admin_btn_suppliesRequestManagement.FlatAppearance.BorderSize = 0
-        Me.admin_btn_suppliesRequestManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.admin_btn_suppliesRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_suppliesRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_btn_suppliesRequestManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_suppliesRequestManagement.Location = New System.Drawing.Point(39, 655)
-        Me.admin_btn_suppliesRequestManagement.Margin = New System.Windows.Forms.Padding(4)
-        Me.admin_btn_suppliesRequestManagement.Name = "admin_btn_suppliesRequestManagement"
-        Me.admin_btn_suppliesRequestManagement.Size = New System.Drawing.Size(306, 56)
-        Me.admin_btn_suppliesRequestManagement.TabIndex = 11
-        Me.admin_btn_suppliesRequestManagement.Text = "Supplies Request Management"
         '
         'AdminDashboard
         '
@@ -1259,8 +1259,6 @@ Partial Class AdminDashboard
         Me.admin_PanelMain.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
-        Me.TableLayoutPanel4.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RoundedPanel2.ResumeLayout(False)
         Me.RoundedPanel2.PerformLayout()
         Me.RoundedPanel3.ResumeLayout(False)
@@ -1269,6 +1267,7 @@ Partial Class AdminDashboard
         Me.RoundedPanel1.PerformLayout()
         Me.admin_panel_PendingRequests.ResumeLayout(False)
         Me.admin_panel_PendingRequests.PerformLayout()
+        Me.TableLayoutPanel4.ResumeLayout(False)
         Me.RoundedPanel11.ResumeLayout(False)
         Me.RoundedPanel11.PerformLayout()
         CType(Me.SAChart_SystemAlerts, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1296,6 +1295,7 @@ Partial Class AdminDashboard
         Me.RoundedPanel5.ResumeLayout(False)
         Me.RoundedPanel5.PerformLayout()
         CType(Me.SAChart_TotalProperty, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

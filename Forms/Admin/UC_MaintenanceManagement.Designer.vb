@@ -31,11 +31,6 @@ Partial Class UC_MaintenanceManagement
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ttlMaintenancemanagement = New System.Windows.Forms.Label()
-        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.maintenanceID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.diagnosis = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,6 +40,12 @@ Partial Class UC_MaintenanceManagement
         Me.technician = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlMaintenancemanagement = New System.Windows.Forms.Label()
+        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -105,78 +106,6 @@ Partial Class UC_MaintenanceManagement
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.Size = New System.Drawing.Size(1270, 573)
         Me.DataGridView1.TabIndex = 155
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(48, 704)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(145, 58)
-        Me.Label1.TabIndex = 157
-        Me.Label1.Text = "TOTAL:"
-        '
-        'ttlMaintenancemanagement
-        '
-        Me.ttlMaintenancemanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.ttlMaintenancemanagement.AutoSize = True
-        Me.ttlMaintenancemanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ttlMaintenancemanagement.ForeColor = System.Drawing.Color.Black
-        Me.ttlMaintenancemanagement.Location = New System.Drawing.Point(199, 704)
-        Me.ttlMaintenancemanagement.Name = "ttlMaintenancemanagement"
-        Me.ttlMaintenancemanagement.Size = New System.Drawing.Size(47, 58)
-        Me.ttlMaintenancemanagement.TabIndex = 156
-        Me.ttlMaintenancemanagement.Text = "0"
-        '
-        'btnRefresh
-        '
-        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnRefresh.CornerRadius = 15
-        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnRefresh.Location = New System.Drawing.Point(993, 63)
-        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(99, 34)
-        Me.btnRefresh.TabIndex = 166
-        Me.btnRefresh.Text = "Refresh"
-        Me.btnRefresh.UseVisualStyleBackColor = False
-        '
-        'RoundedButton1
-        '
-        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton1.CornerRadius = 15
-        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(1100, 63)
-        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
-        Me.RoundedButton1.Name = "RoundedButton1"
-        Me.RoundedButton1.Size = New System.Drawing.Size(228, 35)
-        Me.RoundedButton1.TabIndex = 167
-        Me.RoundedButton1.Text = "Generate Maintenance Report"
-        Me.RoundedButton1.UseVisualStyleBackColor = False
-        '
-        'btnReject
-        '
-        Me.btnReject.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnReject.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnReject.CornerRadius = 15
-        Me.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReject.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnReject.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReject.Location = New System.Drawing.Point(1122, 704)
-        Me.btnReject.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnReject.Name = "btnReject"
-        Me.btnReject.Size = New System.Drawing.Size(99, 34)
-        Me.btnReject.TabIndex = 168
-        Me.btnReject.Text = "Reject"
-        Me.btnReject.UseVisualStyleBackColor = False
         '
         'maintenanceID
         '
@@ -241,11 +170,100 @@ Partial Class UC_MaintenanceManagement
         Me.status.Name = "status"
         Me.status.Width = 125
         '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(48, 704)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.TabIndex = 157
+        Me.Label1.Text = "TOTAL:"
+        '
+        'ttlMaintenancemanagement
+        '
+        Me.ttlMaintenancemanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ttlMaintenancemanagement.AutoSize = True
+        Me.ttlMaintenancemanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ttlMaintenancemanagement.ForeColor = System.Drawing.Color.Black
+        Me.ttlMaintenancemanagement.Location = New System.Drawing.Point(199, 704)
+        Me.ttlMaintenancemanagement.Name = "ttlMaintenancemanagement"
+        Me.ttlMaintenancemanagement.Size = New System.Drawing.Size(47, 58)
+        Me.ttlMaintenancemanagement.TabIndex = 156
+        Me.ttlMaintenancemanagement.Text = "0"
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnRefresh.CornerRadius = 15
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRefresh.Location = New System.Drawing.Point(993, 63)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(99, 34)
+        Me.btnRefresh.TabIndex = 166
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = False
+        '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(1100, 63)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(228, 35)
+        Me.RoundedButton1.TabIndex = 167
+        Me.RoundedButton1.Text = "Generate Maintenance Report"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'btnReject
+        '
+        Me.btnReject.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReject.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnReject.CornerRadius = 15
+        Me.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReject.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnReject.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReject.Location = New System.Drawing.Point(1122, 704)
+        Me.btnReject.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnReject.Name = "btnReject"
+        Me.btnReject.Size = New System.Drawing.Size(99, 34)
+        Me.btnReject.TabIndex = 168
+        Me.btnReject.Text = "Reject"
+        Me.btnReject.UseVisualStyleBackColor = False
+        '
+        'btnAssign
+        '
+        Me.btnAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAssign.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnAssign.CornerRadius = 15
+        Me.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAssign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnAssign.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAssign.Location = New System.Drawing.Point(898, 706)
+        Me.btnAssign.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAssign.Name = "btnAssign"
+        Me.btnAssign.Size = New System.Drawing.Size(99, 34)
+        Me.btnAssign.TabIndex = 169
+        Me.btnAssign.Text = "Assign"
+        Me.btnAssign.UseVisualStyleBackColor = False
+        '
         'UC_MaintenanceManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.btnAssign)
         Me.Controls.Add(Me.btnReject)
         Me.Controls.Add(Me.RoundedButton1)
         Me.Controls.Add(Me.btnRefresh)
@@ -272,6 +290,7 @@ Partial Class UC_MaintenanceManagement
     Friend WithEvents btnRefresh As Resources.Controls.RoundedButton
     Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
+    Friend WithEvents btnAssign As Resources.Controls.RoundedButton
     Friend WithEvents maintenanceID As DataGridViewTextBoxColumn
     Friend WithEvents itemName As DataGridViewTextBoxColumn
     Friend WithEvents diagnosis As DataGridViewTextBoxColumn

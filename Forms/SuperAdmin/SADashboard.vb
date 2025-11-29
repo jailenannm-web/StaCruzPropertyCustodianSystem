@@ -373,4 +373,13 @@ Partial Class SADashboard
     Private Sub lblSuperAdmin_Click(sender As Object, e As EventArgs) Handles lblSuperAdmin.Click
 
     End Sub
+
+    Private Sub btn_MaintenanceRequest_Click(sender As Object, e As EventArgs) Handles btn_MaintenanceRequest.Click
+
+    End Sub
+
+    Private Sub admin_btn_suppliesRequestManagement_Click(sender As Object, e As EventArgs) Handles admin_btn_suppliesRequestManagement.Click
+        SetActiveButton(admin_btn_suppliesRequestManagement)
+        LoadUserControl(New UC_SupplyManagement())
+    End Sub
 End Class
