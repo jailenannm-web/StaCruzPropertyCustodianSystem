@@ -330,35 +330,35 @@ Partial Class SADashboard
 
     End Sub
 
-    Private Sub RoundedPanel1_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel1.Paint
+    Private Sub RoundedPanel1_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub txtboxSearch_TextChanged(sender As Object, e As EventArgs) Handles txtboxSearch.TextChanged
+    Private Sub txtboxSearch_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub comboFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboFilter.SelectedIndexChanged
+    Private Sub comboFilter_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub btnAddProperty_Click(sender As Object, e As EventArgs) Handles btnAddProperty.Click
+    Private Sub btnAddProperty_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub btnAddSupply_Click(sender As Object, e As EventArgs) Handles btnAddSupply.Click
+    Private Sub btnAddSupply_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub btnAddUser_Click(sender As Object, e As EventArgs) Handles btnAddUser.Click
+    Private Sub btnAddUser_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub btnGenerateReports_Click(sender As Object, e As EventArgs) Handles btnGenerateReports.Click
+    Private Sub btnGenerateReports_Click(sender As Object, e As EventArgs)
 
     End Sub
 
