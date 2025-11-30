@@ -96,7 +96,8 @@ Public Class UC_UserManagement
         Try
             pm_table.Rows.Clear()
 
-            Dim records As DataTable = DatabaseConnection.GetAdminAccounts(currentStatusFilter, currentRoleFilter, "")
+            ' Use GetAllUsers to get both Admin/SuperAdmin (from users table) and Staff (from staff_accounts table)
+            Dim records As DataTable = DatabaseConnection.GetAllUsers(currentStatusFilter, currentRoleFilter, "")
 
             For Each record As DataRow In records.Rows
 

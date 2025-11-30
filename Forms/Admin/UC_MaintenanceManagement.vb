@@ -44,33 +44,58 @@ Public Class UC_MaintenanceManagement
     Private Sub ApplyRoleRestrictions()
         Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
         Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        btnApprove.Enabled = canModifyMaintenance
-        btnAssign.Enabled = canModifyMaintenance AndAlso isSuperAdmin
-        btnDelete.Enabled = isSuperAdmin
-        btnReject.Enabled = canModifyMaintenance
+        ' Super Admin can do all actions, Admin can only Approve/Reject
+        If btnApprove IsNot Nothing Then btnApprove.Enabled = (isSuperAdmin OrElse isAdmin)
+        If btnAssign IsNot Nothing Then btnAssign.Enabled = isSuperAdmin
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = isSuperAdmin
+        If btnReject IsNot Nothing Then btnReject.Enabled = (isSuperAdmin OrElse isAdmin)
     End Sub
 
     Private Sub ShowMaintenanceRestriction()
         MessageBox.Show("You have view-only access to Maintenance Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
-        If Not canModifyMaintenance Then
+    Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        Dim isAdmin As Boolean = SessionContext.IsAdmin()
+        If Not (isSuperAdmin OrElse isAdmin) Then
             ShowMaintenanceRestriction()
             Return
         End If
-        ' Get reference to the parent dashboard form
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
 
-        If parentDashboard IsNot Nothing Then
-            ' Load the AddSupply UserControl
-            parentDashboard.LoadUserControl(New AddMaintenance1())
-        Else
-            ' Fallback: add directly to the parent container
-            Dim addSupplyUC As New AddMaintenance1()
-            Me.Parent.Controls.Add(addSupplyUC)
-            addSupplyUC.BringToFront()
+        If DataGridView1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a maintenance record to approve.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
         End If
+
+        Try
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
+            Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
+
+            If currentStatus = "completed" OrElse currentStatus = "approved" Then
+                MessageBox.Show("This maintenance record is already approved/completed.", "Already Processed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+
+            ' Update maintenance status to approved/completed
+            If DatabaseConnection.UpdateMaintenanceEntry(maintenanceID, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, "Completed", Nothing, Nothing, Nothing) Then
+                MessageBox.Show("Maintenance record approved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                LoadMaintenanceData()
+            Else
+                MessageBox.Show("Failed to approve maintenance record. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error approving maintenance record: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs)
@@ -107,7 +132,9 @@ Public Class UC_MaintenanceManagement
     End Sub
 
     Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
-        If Not canModifyMaintenance Then
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        Dim isAdmin As Boolean = SessionContext.IsAdmin()
+        If Not (isSuperAdmin OrElse isAdmin) Then
             ShowMaintenanceRestriction()
             Return
         End If
@@ -135,7 +162,8 @@ Public Class UC_MaintenanceManagement
     End Sub
 
     Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
-        If Not canModifyMaintenance Then
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        If Not isSuperAdmin Then
             ShowMaintenanceRestriction()
             Return
         End If

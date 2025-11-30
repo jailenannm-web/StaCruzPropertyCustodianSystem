@@ -26,6 +26,26 @@ Public Class StaffDashboard
 
 
     Private Sub StaffDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Verify session is still valid
+        If Not SessionContext.CurrentUserID.HasValue OrElse SessionContext.CurrentUserID.Value <= 0 Then
+            ' Try to restore session from settings if available
+            If Not String.IsNullOrEmpty(My.Settings.LoggedInuser) Then
+                ' Session was lost, redirect to login
+                MessageBox.Show("Your session has expired. Please log in again.", "Session Expired", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Dim loginForm As New StaffLogin()
+                loginForm.Show()
+                Me.Close()
+                Return
+            Else
+                ' No saved session, redirect to login
+                MessageBox.Show("Please log in to continue.", "Login Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Dim loginForm As New StaffLogin()
+                loginForm.Show()
+                Me.Close()
+                Return
+            End If
+        End If
+
         ' Set Dashboard as the active button on startup
         SetActiveButton(btnDashboard)
 

@@ -3,6 +3,8 @@ Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
+Imports System.Linq
+
 
 Public Class UC_PropertyRequestManagement
     Inherits UserControl
@@ -82,6 +84,20 @@ Public Class UC_PropertyRequestManagement
             prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             prm_table1.ReadOnly = True
             prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            
+            ' Update total count
+            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                ' Find the total label control - adjust name if needed
+                Dim totalLabel As Label = TryCast(Me.Controls.Find("ttlpropertymanagement", True).FirstOrDefault(), Label)
+                If totalLabel IsNot Nothing Then
+                    totalLabel.Text = "TOTAL: " & dt.Rows.Count.ToString()
+                End If
+            Else
+                Dim totalLabel As Label = TryCast(Me.Controls.Find("ttlpropertymanagement", True).FirstOrDefault(), Label)
+                If totalLabel IsNot Nothing Then
+                    totalLabel.Text = "TOTAL: 0"
+                End If
+            End If
         Catch ex As Exception
             MessageBox.Show("Error loading property requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -90,9 +106,10 @@ Public Class UC_PropertyRequestManagement
     Private Sub ApplyPermissionState()
         Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
         Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        If btnApprove IsNot Nothing Then btnApprove.Enabled = canModifyRequests
-        If btnReject IsNot Nothing Then btnReject.Enabled = canModifyRequests
-        If assign IsNot Nothing Then assign.Enabled = canModifyRequests AndAlso isSuperAdmin
+        ' Super Admin can do all actions, Admin can only Approve/Reject
+        If btnApprove IsNot Nothing Then btnApprove.Enabled = (isSuperAdmin OrElse isAdmin)
+        If btnReject IsNot Nothing Then btnReject.Enabled = (isSuperAdmin OrElse isAdmin)
+        If assign IsNot Nothing Then assign.Enabled = isSuperAdmin
         If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = isSuperAdmin
     End Sub
 

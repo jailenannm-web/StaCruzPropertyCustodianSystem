@@ -186,6 +186,86 @@ CREATE TABLE custodians (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =====================================================
+-- 7. PROPERTY_REQUESTS TABLE
+-- =====================================================
+CREATE TABLE property_requests (
+    request_id          INT AUTO_INCREMENT PRIMARY KEY,
+    requester_name      VARCHAR(200) NOT NULL,
+    department_id       INT,
+    date_of_request     DATE NOT NULL,
+    item_name           VARCHAR(200) NOT NULL,
+    quantity_requested INT NOT NULL DEFAULT 1,
+    purpose             TEXT,
+    status              ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending',
+    approved_by         INT,
+    approved_date       DATE,
+    remarks             TEXT,
+    created_at          DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at          DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id) ON DELETE SET NULL,
+    FOREIGN KEY (approved_by) REFERENCES users(user_id) ON DELETE SET NULL,
+    INDEX idx_prop_req_status (status),
+    INDEX idx_prop_req_date (date_of_request),
+    INDEX idx_prop_req_department (department_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- 8. SUPPLIES_REQUESTS TABLE
+-- =====================================================
+CREATE TABLE supplies_requests (
+    request_id          INT AUTO_INCREMENT PRIMARY KEY,
+    requester_name      VARCHAR(200) NOT NULL,
+    department_id       INT,
+    date_of_request     DATE NOT NULL,
+    item_name           VARCHAR(200) NOT NULL,
+    quantity_requested INT NOT NULL DEFAULT 1,
+    purpose             TEXT,
+    status              ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending',
+    approved_by         INT,
+    approved_date       DATE,
+    remarks             TEXT,
+    created_at          DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at          DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id) ON DELETE SET NULL,
+    FOREIGN KEY (approved_by) REFERENCES users(user_id) ON DELETE SET NULL,
+    INDEX idx_supply_req_status (status),
+    INDEX idx_supply_req_date (date_of_request),
+    INDEX idx_supply_req_department (department_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- 9. MAINTENANCE_REQUESTS TABLE
+-- =====================================================
+CREATE TABLE maintenance_requests (
+    request_id          INT AUTO_INCREMENT PRIMARY KEY,
+    date_requested      DATE NOT NULL,
+    item_name           VARCHAR(200) NOT NULL,
+    property_number     VARCHAR(100),
+    serial_number       VARCHAR(100),
+    department_id       INT,
+    location            VARCHAR(200),
+    condition_before    ENUM('Good', 'Needs Repair', 'Damaged') DEFAULT 'Good',
+    type_of_issue       ENUM('Repair', 'Replace', 'Servicing') NOT NULL,
+    problem_description TEXT,
+    status              ENUM('Pending', 'Approved', 'Rejected', 'In Progress', 'Completed') DEFAULT 'Pending',
+    assigned_technician VARCHAR(200),
+    target_date         DATE,
+    completion_date     DATE,
+    requested_by        INT,
+    approved_by         INT,
+    approved_date       DATE,
+    remarks             TEXT,
+    created_at          DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at          DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id) ON DELETE SET NULL,
+    FOREIGN KEY (requested_by) REFERENCES users(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (approved_by) REFERENCES users(user_id) ON DELETE SET NULL,
+    INDEX idx_maint_req_status (status),
+    INDEX idx_maint_req_date (date_requested),
+    INDEX idx_maint_req_department (department_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
 -- SAMPLE DATA INSERTIONS
 -- =====================================================
 
@@ -223,6 +303,21 @@ INSERT INTO maintenance (property_item_name, serial_number, location, department
 INSERT INTO custodians (user_id, department_id, assigned_property_count, assigned_supply_count, specialization, certification, date_assigned, status) VALUES
 (3, 2, 2, 0, 'Property Management', 'Property Custodian Certification', '2024-01-01', 'Active'),
 (2, 1, 3, 2, 'IT Equipment Management', 'IT Asset Management Certification', '2024-01-01', 'Active');
+
+-- Property Requests
+INSERT INTO property_requests (requester_name, department_id, date_of_request, item_name, quantity_requested, purpose, status) VALUES
+('Pedro Alvarez Reyes', 1, '2024-06-01', 'Desktop Computer', 1, 'For office work', 'Pending'),
+('Ana Lopez Garcia', 3, '2024-06-02', 'Office Chair', 2, 'New employees', 'Pending');
+
+-- Supply Requests
+INSERT INTO supplies_requests (requester_name, department_id, date_of_request, item_name, quantity_requested, purpose, status) VALUES
+('Pedro Alvarez Reyes', 1, '2024-06-01', 'Bond Paper A4', 10, 'For printing documents', 'Pending'),
+('Maria Cruz Santos', 2, '2024-06-02', 'Printer Ink', 2, 'Replacement cartridges', 'Pending');
+
+-- Maintenance Requests
+INSERT INTO maintenance_requests (date_requested, item_name, property_number, serial_number, department_id, location, condition_before, type_of_issue, problem_description, status, requested_by) VALUES
+('2024-06-01', 'Office Chair', 'PROP-002', 'SN-CHAIR-2024-001', 2, 'Admin Office', 'Needs Repair', 'Repair', 'Wobbly base, broken caster wheel', 'Pending', 4),
+('2024-06-02', 'Desktop Computer', 'PROP-001', 'SN-DELL-2024-001', 1, 'IT Office', 'Good', 'Servicing', 'Annual maintenance check', 'Pending', 4);
 
 -- =====================================================
 -- END OF FIXED SCHEMA

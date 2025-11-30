@@ -95,9 +95,12 @@ Public Class UC_MaintenanceRequestManagement
     End Sub
 
     Private Sub ApplyPermissionState()
-        If btnApprove IsNot Nothing Then btnApprove.Enabled = canModifyRequests
-        If btnReject IsNot Nothing Then btnReject.Enabled = canModifyRequests
-        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = canModifyRequests
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        Dim isAdmin As Boolean = SessionContext.IsAdmin()
+        ' Both Super Admin and Admin can Update, Approve, and Reject
+        If btnApprove IsNot Nothing Then btnApprove.Enabled = (isSuperAdmin OrElse isAdmin)
+        If btnReject IsNot Nothing Then btnReject.Enabled = (isSuperAdmin OrElse isAdmin)
+        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = (isSuperAdmin OrElse isAdmin)
     End Sub
 
     Private Sub ShowMaintenanceRequestRestrictionMessage()
@@ -116,7 +119,9 @@ Public Class UC_MaintenanceRequestManagement
     End Sub
 
     Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
-        If Not canModifyRequests Then
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        Dim isAdmin As Boolean = SessionContext.IsAdmin()
+        If Not (isSuperAdmin OrElse isAdmin) Then
             ShowMaintenanceRequestRestrictionMessage()
             Return
         End If
@@ -160,7 +165,9 @@ Public Class UC_MaintenanceRequestManagement
     End Sub
 
     Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
-        If Not canModifyRequests Then
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        Dim isAdmin As Boolean = SessionContext.IsAdmin()
+        If Not (isSuperAdmin OrElse isAdmin) Then
             ShowMaintenanceRequestRestrictionMessage()
             Return
         End If
@@ -209,7 +216,9 @@ Public Class UC_MaintenanceRequestManagement
     End Sub
 
     Private Sub prm_btn_update_Click(sender As Object, e As EventArgs) Handles prm_btn_update.Click
-        If Not canModifyRequests Then
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        Dim isAdmin As Boolean = SessionContext.IsAdmin()
+        If Not (isSuperAdmin OrElse isAdmin) Then
             ShowMaintenanceRequestRestrictionMessage()
             Return
         End If

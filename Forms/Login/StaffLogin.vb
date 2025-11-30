@@ -53,7 +53,8 @@ Public Class StaffLogin
             ElseIf userType = "Admin" Then
                 OpenDashboard(New AdminDashboard())
             ElseIf userType = "Custodian" Then
-                OpenDashboard(New StaffDashboard())
+                ' Custodian has their own dashboard
+                OpenDashboard(New CustodianDashboard())
             End If
             Return
         End If
@@ -61,15 +62,29 @@ Public Class StaffLogin
         ' Try to authenticate as Staff (registered accounts only, not hardcoded Custodian)
         Dim staffResult As Dictionary(Of String, String) = DatabaseConnection.AuthenticateStaff(username, password)
         If staffResult IsNot Nothing AndAlso staffResult.Count > 0 Then
-            Dim staffID As Integer
-            If staffResult.ContainsKey("user_id") Then Integer.TryParse(staffResult("user_id"), staffID)
-            SessionContext.SetCurrentUser(staffID, username, "Staff")
-            My.Settings.LoggedInuser = username
-            My.Settings.Save()
+            Dim staffID As Integer = 0
+            If staffResult.ContainsKey("user_id") Then
+                If Not Integer.TryParse(staffResult("user_id"), staffID) Then
+                    ' Try staff_id if user_id parsing fails
+                    If staffResult.ContainsKey("staff_id") Then
+                        Integer.TryParse(staffResult("staff_id"), staffID)
+                    End If
+                End If
+            ElseIf staffResult.ContainsKey("staff_id") Then
+                Integer.TryParse(staffResult("staff_id"), staffID)
+            End If
+            
+            If staffID > 0 Then
+                SessionContext.SetCurrentUser(staffID, username, "Staff")
+                My.Settings.LoggedInuser = username
+                My.Settings.Save()
 
-            MessageBox.Show("Login successful! Welcome, " & username & " (Staff).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Login successful! Welcome, " & username & " (Staff).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            OpenDashboard(New StaffDashboard())
+                OpenDashboard(New StaffDashboard())
+            Else
+                MessageBox.Show("Failed to retrieve user ID. Please contact administrator.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         Else
             ' Show generic error message - detailed checking would require accessing private methods
             MessageBox.Show("Invalid username or password. Please check your credentials and try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
