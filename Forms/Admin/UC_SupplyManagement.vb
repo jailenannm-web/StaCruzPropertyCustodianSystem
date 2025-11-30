@@ -84,7 +84,7 @@ Public Class UC_SupplyManagement
         ' Populate status filter
         pm_cbobx_status.Items.Clear()
         pm_cbobx_status.Items.Add("All Status")
-        pm_cbobx_status.Items.AddRange(New String() {"active", "inactive", "low_stock", "out_of_stock", "used"})
+        pm_cbobx_status.Items.AddRange(New String() {"Available", "Low Stock", "Out of Stock"})
         pm_cbobx_status.SelectedIndex = 0
 
         ' Wire up filter change events
@@ -117,9 +117,13 @@ Public Class UC_SupplyManagement
                         If(IsDBNull(row("SupplyID")), "", row("SupplyID").ToString()),
                         If(IsDBNull(row("SupplyName")), "", row("SupplyName").ToString()),
                         If(IsDBNull(row("Category")), "", row("Category").ToString()),
+                        If(IsDBNull(row("UnitOfMeasure")), "", row("UnitOfMeasure").ToString()),
                         If(IsDBNull(row("QuantityInStock")), "0", row("QuantityInStock").ToString()),
+                        If(IsDBNull(row("AcquisitionDate")), "", CDate(row("AcquisitionDate")).ToString("yyyy-MM-dd")),
                         If(IsDBNull(row("UnitCost")), "0.00", Format(CDec(row("UnitCost")), "0.00")),
-                        If(IsDBNull(row("TotalValue")), "0.00", Format(CDec(row("TotalValue")), "0.00")),
+                        If(IsDBNull(row("Location")), "", row("Location").ToString()),
+                        If(IsDBNull(row("SupplierName")), "", row("SupplierName").ToString()),
+                        If(IsDBNull(row("Status")), "", row("Status").ToString()),
                         If(IsDBNull(row("Status")), "", row("Status").ToString()),
                         If(IsDBNull(row("Location")), "", row("Location").ToString()),
                         "Edit"

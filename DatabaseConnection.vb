@@ -149,13 +149,13 @@ Public Class DatabaseConnection
                 query.Append("SELECT p.category, p.status, COUNT(*) AS total_items, ")
                 query.Append("SUM(p.acquisition_cost) AS total_value ")
             Else
-                query.Append("SELECT p.property_id, p.property_name, p.category, p.status, p.location, ")
+                query.Append("SELECT p.property_id, p.item_name, p.category, p.status, p.location, ")
                 query.Append("p.acquisition_date, p.acquisition_cost, d.department_name, ")
                 query.Append("CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS custodian_name ")
             End If
             query.Append("FROM properties p ")
             query.Append("LEFT JOIN departments d ON p.department_id = d.department_id ")
-            query.Append("LEFT JOIN users u ON p.custodian_id = u.user_id WHERE 1=1 ")
+            query.Append("LEFT JOIN users u ON p.assigned_to = u.user_id WHERE 1=1 ")
 
             If departmentID.HasValue Then query.Append(" AND p.department_id = @departmentID ")
             If Not String.IsNullOrEmpty(category) Then query.Append(" AND p.category = @category ")
@@ -166,7 +166,7 @@ Public Class DatabaseConnection
             If groupByCategory Then
                 query.Append(" GROUP BY p.category, p.status ORDER BY p.category")
             Else
-                query.Append(" ORDER BY p.category, p.property_name")
+                query.Append(" ORDER BY p.category, p.item_name")
             End If
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
@@ -209,17 +209,15 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return dt
 
             Dim query As New StringBuilder()
-            query.Append("SELECT s.supply_id, s.supply_name, s.category, s.quantity_in_stock, s.reorder_level, ")
-            query.Append("s.unit_cost, s.total_value, s.status, s.location, d.department_name ")
-            query.Append("FROM supplies s ")
-            query.Append("LEFT JOIN departments d ON s.department_id = d.department_id WHERE 1=1 ")
+            query.Append("SELECT s.supply_id, s.item_name, s.category, s.quantity, ")
+            query.Append("s.unit_cost, s.total_cost, s.stock_status, s.location ")
+            query.Append("FROM supplies s WHERE 1=1 ")
 
             If Not String.IsNullOrEmpty(category) Then query.Append(" AND s.category = @category ")
-            If Not String.IsNullOrEmpty(status) Then query.Append(" AND s.status = @status ")
-            If includeLowStockOnly Then query.Append(" AND s.quantity_in_stock <= s.reorder_level ")
-            If departmentID.HasValue Then query.Append(" AND s.department_id = @departmentID ")
+            If Not String.IsNullOrEmpty(status) Then query.Append(" AND s.stock_status = @status ")
+            If includeLowStockOnly Then query.Append(" AND s.quantity <= 10 ")
 
-            query.Append(" ORDER BY s.category, s.supply_name")
+            query.Append(" ORDER BY s.category, s.item_name")
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
                 If Not String.IsNullOrEmpty(category) Then cmd.Parameters.AddWithValue("@category", category)
@@ -258,9 +256,9 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return dt
 
             Dim query As New StringBuilder()
-            query.Append("SELECT m.maintenance_id, p.property_name, m.service_date, m.service_type, m.description, ")
-            query.Append("m.service_provider, m.cost, m.status, m.next_schedule, m.technician_assigned ")
-            query.Append("FROM maintenance m INNER JOIN properties p ON m.property_id = p.property_id WHERE 1=1 ")
+            query.Append("SELECT m.maintenance_id, m.property_item_name, m.maintenance_date, m.type_of_maintenance, m.maintenance_details, ")
+            query.Append("m.assigned_technician, m.cost_materials_labor, m.status ")
+            query.Append("FROM maintenance m WHERE 1=1 ")
 
             If Not String.IsNullOrEmpty(status) Then query.Append(" AND m.status = @status ")
             If dateFrom.HasValue Then query.Append(" AND m.service_date >= @dateFrom ")
@@ -308,7 +306,7 @@ Public Class DatabaseConnection
             Dim query As New StringBuilder()
             query.Append("SELECT pr.request_id, pr.request_type, pr.status, pr.request_date, pr.approval_date, pr.release_date, ")
             query.Append("pr.actual_returned_date, pr.quantity, sa.first_name, sa.last_name, ")
-            query.Append("COALESCE(p.property_name, sup.supply_name) AS item_name ")
+            query.Append("COALESCE(p.item_name, sup.item_name) AS item_name ")
             query.Append("FROM property_requests pr ")
             query.Append("LEFT JOIN staff_accounts sa ON pr.user_id = sa.staff_id ")
             query.Append("LEFT JOIN properties p ON pr.property_id = p.property_id ")
@@ -359,9 +357,9 @@ Public Class DatabaseConnection
 
             Dim query As New StringBuilder()
             query.Append("SELECT u.user_id, CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS custodian_name, ")
-            query.Append("d.department_name, p.property_name AS asset_name, p.category AS asset_category, 'Property' AS asset_type ")
+            query.Append("d.department_name, p.item_name AS asset_name, p.category AS asset_category, 'Property' AS asset_type ")
             query.Append("FROM users u ")
-            query.Append("INNER JOIN properties p ON u.user_id = p.custodian_id ")
+            query.Append("INNER JOIN properties p ON u.user_id = p.assigned_to ")
             query.Append("LEFT JOIN departments d ON u.department_id = d.department_id WHERE 1=1 ")
 
             If custodianID.HasValue Then query.Append(" AND u.user_id = @custodianID ")
@@ -369,11 +367,9 @@ Public Class DatabaseConnection
 
             query.Append(" UNION ALL ")
 
-            query.Append("SELECT u.user_id, CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS custodian_name, ")
-            query.Append("d.department_name, s.supply_name AS asset_name, s.category AS asset_category, 'Supply' AS asset_type ")
-            query.Append("FROM users u ")
-            query.Append("INNER JOIN supplies s ON u.user_id = s.custodian_id ")
-            query.Append("LEFT JOIN departments d ON u.department_id = d.department_id WHERE 1=1 ")
+            query.Append("SELECT NULL AS user_id, 'Unassigned' AS custodian_name, ")
+            query.Append("'' AS department_name, s.item_name AS asset_name, s.category AS asset_category, 'Supply' AS asset_type ")
+            query.Append("FROM supplies s WHERE 1=1 ")
 
             If custodianID.HasValue Then query.Append(" AND u.user_id = @custodianID ")
             If departmentID.HasValue Then query.Append(" AND u.department_id = @departmentID ")
@@ -419,7 +415,7 @@ Public Class DatabaseConnection
             query.Append("SELECT pr.request_id, pr.request_type, pr.status, pr.request_date, pr.approval_date, ")
             query.Append("pr.release_date, pr.actual_returned_date, pr.quantity, ")
             query.Append("CONCAT(IFNULL(sa.first_name,''), ' ', IFNULL(sa.last_name,'')) AS requester_name, ")
-            query.Append("d.department_name, COALESCE(p.property_name, sup.supply_name) AS item_name ")
+            query.Append("d.department_name, COALESCE(p.item_name, sup.item_name) AS item_name ")
             query.Append("FROM property_requests pr ")
             query.Append("INNER JOIN staff_accounts sa ON pr.user_id = sa.staff_id ")
             query.Append("LEFT JOIN departments d ON sa.department_id = d.department_id ")
@@ -481,10 +477,10 @@ Public Class DatabaseConnection
             If dateTo.HasValue Then query.Append(" AND pr.request_date <= @dateTo ")
             query.Append(" UNION ALL ")
             query.Append("SELECT 'MAINTENANCE' AS entry_type, m.maintenance_id AS reference_id, m.service_date AS activity_date, ")
-            query.Append("COALESCE(m.service_provider, m.technician_assigned) AS actor_name, m.status, m.description AS remarks ")
-            query.Append("FROM maintenance m WHERE m.property_id = @propertyID ")
-            If dateFrom.HasValue Then query.Append(" AND m.service_date >= @dateFrom ")
-            If dateTo.HasValue Then query.Append(" AND m.service_date <= @dateTo ")
+            query.Append("m.assigned_technician AS actor_name, m.status, m.maintenance_details AS remarks ")
+            query.Append("FROM maintenance m WHERE m.property_item_name LIKE @propertyID ")
+            If dateFrom.HasValue Then query.Append(" AND m.maintenance_date >= @dateFrom ")
+            If dateTo.HasValue Then query.Append(" AND m.maintenance_date <= @dateTo ")
             query.Append(") AS combined ORDER BY activity_date ASC, entry_type")
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
@@ -568,7 +564,7 @@ Public Class DatabaseConnection
             Dim query As New StringBuilder()
             query.Append("SELECT pr.request_id, pr.request_type, pr.status, ")
             query.Append("COALESCE(pr.approval_date, pr.release_date, pr.actual_returned_date, pr.request_date) AS event_date, ")
-            query.Append("COALESCE(p.property_name, sup.supply_name) AS item_name, pr.quantity, pr.remarks, ")
+            query.Append("COALESCE(p.item_name, sup.supply_name) AS item_name, pr.quantity, pr.remarks, ")
             query.Append("CASE ")
             query.Append(" WHEN pr.status = 'approved' THEN 'Your request has been approved.' ")
             query.Append(" WHEN pr.status = 'rejected' THEN 'Your request has been denied.' ")
@@ -990,8 +986,8 @@ Public Class DatabaseConnection
             End If
 
             If account.Count = 0 Then
-                Using insertCmd As New MySqlCommand("INSERT INTO users (first_name, last_name, email, username, password_encrypted, user_type, status, created_at) " &
-                                                    "VALUES (@firstName, @lastName, @email, @username, @password, @userType, 'active', NOW())", conn)
+                Using insertCmd As New MySqlCommand("INSERT INTO users (first_name, last_name, email, username, password_encrypted, role, status, created_at) " &
+                                                    "VALUES (@firstName, @lastName, @email, @username, @password, @userType, 'Active', NOW())", conn)
                     insertCmd.Parameters.AddWithValue("@firstName", firstName)
                     insertCmd.Parameters.AddWithValue("@lastName", lastName)
                     insertCmd.Parameters.AddWithValue("@email", email)
@@ -1002,7 +998,7 @@ Public Class DatabaseConnection
                 End Using
             Else
                 Using updateCmd As New MySqlCommand("UPDATE users SET first_name = @firstName, last_name = @lastName, email = @email, " &
-                                                    "password_encrypted = @password, user_type = @userType, status = 'active' WHERE user_id = @userID", conn)
+                                                    "password_encrypted = @password, role = @userType, status = 'Active' WHERE user_id = @userID", conn)
                     updateCmd.Parameters.AddWithValue("@firstName", firstName)
                     updateCmd.Parameters.AddWithValue("@lastName", lastName)
                     updateCmd.Parameters.AddWithValue("@email", email)
@@ -1031,7 +1027,7 @@ Public Class DatabaseConnection
 
     Private Shared Function FetchAdminAccountRecord(conn As MySqlConnection, username As String) As Dictionary(Of String, String)
         Dim account As New Dictionary(Of String, String)
-        Dim query As String = "SELECT user_id, first_name, last_name, email, username, user_type " &
+        Dim query As String = "SELECT user_id, first_name, last_name, email, username, role AS user_type " &
                               "FROM users WHERE LOWER(username) = LOWER(@username) LIMIT 1"
         Using cmd As New MySqlCommand(query, conn)
             cmd.Parameters.AddWithValue("@username", username.Trim())
@@ -1233,10 +1229,10 @@ Public Class DatabaseConnection
                     If conn IsNot Nothing AndAlso SafeOpenConnection(conn) Then
                         InitializeDefaultAccounts()
 
-                        Dim query As String = "SELECT user_id, first_name, last_name, email, username, user_type, password_encrypted " &
+                        Dim query As String = "SELECT user_id, first_name, last_name, email, username, role AS user_type, password_encrypted " &
                                              "FROM users WHERE LOWER(username) = LOWER(@username) " &
-                                             "AND user_type = 'SuperAdmin' " &
-                                             "AND LOWER(status) = 'active'"
+                                             "AND role = 'SuperAdmin' " &
+                                             "AND status = 'Active'"
                         Using cmd As New MySqlCommand(query, conn)
                             cmd.Parameters.AddWithValue("@username", superAdminUsername)
                             Dim hardcodedSuccess As Boolean = False
@@ -1291,10 +1287,10 @@ Public Class DatabaseConnection
                     If conn IsNot Nothing AndAlso SafeOpenConnection(conn) Then
                         InitializeDefaultAccounts()
 
-                        Dim query As String = "SELECT user_id, first_name, last_name, email, username, user_type, password_encrypted " &
+                        Dim query As String = "SELECT user_id, first_name, last_name, email, username, role AS user_type, password_encrypted " &
                                              "FROM users WHERE LOWER(username) = LOWER(@username) " &
-                                                         "AND user_type = 'Admin' " &
-                                             "AND LOWER(status) = 'active'"
+                                                         "AND role = 'Admin' " &
+                                             "AND status = 'Active'"
                         Using cmd As New MySqlCommand(query, conn)
                             cmd.Parameters.AddWithValue("@username", adminUsername)
                             Dim hardcodedAdminSuccess As Boolean = False
@@ -1833,25 +1829,22 @@ Public Class DatabaseConnection
 
             ' Updated INSERT to match actual SQL schema column names
             Dim query As String = "INSERT INTO supplies (" &
-                                   "supply_id, supply_name, category, quantity_in_stock, unit_cost, status, location, " &
-                                   "description, unit_of_measure, reorder_level, supplier_name, acquisition_date, supplier_contact) " &
-                                   "VALUES (@supplyID, @supplyName, @category, @stock, @unitCost, @status, @location, " &
-                                   "@description, @uom, @reorderLevel, @supplierName, NOW(), @supplierContact)"
+                                   "item_name, category, quantity, unit_cost, stock_status, location, " &
+                                   "description, unit_of_measure, supplier, date_received, total_cost) " &
+                                   "VALUES (@supplyName, @category, @stock, @unitCost, @status, @location, " &
+                                   "@description, @uom, @supplierName, NOW(), @totalValue)"
 
             Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@supplyID", supplyID)
                 cmd.Parameters.AddWithValue("@supplyName", supplyName)
                 cmd.Parameters.AddWithValue("@category", category)
                 cmd.Parameters.AddWithValue("@stock", stock)
                 cmd.Parameters.AddWithValue("@unitCost", unitCost)
                 cmd.Parameters.AddWithValue("@totalValue", totalValue)
-                cmd.Parameters.AddWithValue("@status", status)
+                cmd.Parameters.AddWithValue("@status", If(String.IsNullOrEmpty(status), "Available", status))
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@description", description)
                 cmd.Parameters.AddWithValue("@uom", uom)
-                cmd.Parameters.AddWithValue("@reorderLevel", reorderLevel)
                 cmd.Parameters.AddWithValue("@supplierName", If(String.IsNullOrWhiteSpace(supplierID), "Unknown Supplier", supplierID))
-                cmd.Parameters.AddWithValue("@supplierContact", "")
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
 
@@ -1910,13 +1903,13 @@ Public Class DatabaseConnection
             End Using
 
             ' Available supplies
-            Dim availableQuery As String = "SELECT COUNT(*) FROM supplies WHERE Status = 'Available'"
+            Dim availableQuery As String = "SELECT COUNT(*) FROM supplies WHERE stock_status = 'Available'"
             Using cmd As New MySqlCommand(availableQuery, conn)
                 stats("available_supplies") = CInt(cmd.ExecuteScalar())
             End Using
 
             ' Low stock supplies
-            Dim lowStockQuery As String = "SELECT COUNT(*) FROM supplies WHERE QuantityInStock <= ReorderLevel"
+            Dim lowStockQuery As String = "SELECT COUNT(*) FROM supplies WHERE quantity <= 10 AND stock_status = 'Available'"
             Using cmd As New MySqlCommand(lowStockQuery, conn)
                 stats("low_stock_supplies") = CInt(cmd.ExecuteScalar())
             End Using
@@ -1966,15 +1959,14 @@ Public Class DatabaseConnection
                 "SELECT " &
                 "(SELECT COUNT(*) FROM properties) AS total_properties, " &
                 "(SELECT COUNT(*) FROM supplies) AS total_supplies, " &
-                "(SELECT COUNT(*) FROM property_requests WHERE status = 'pending') AS pending_requests, " &
-                "(SELECT COUNT(*) FROM property_requests WHERE status = 'approved') AS approved_requests, " &
-                "(SELECT COUNT(*) FROM property_requests WHERE status = 'rejected') AS declined_requests, " &
+                "(SELECT COUNT(*) FROM property_requests WHERE status = 'Pending') AS pending_requests, " &
+                "(SELECT COUNT(*) FROM property_requests WHERE status = 'Approved') AS approved_requests, " &
+                "(SELECT COUNT(*) FROM property_requests WHERE status = 'Rejected') AS declined_requests, " &
                 "(SELECT COUNT(*) FROM property_requests WHERE status IN ('approved','released')) AS borrowed_items, " &
                 "(SELECT COUNT(*) FROM property_requests WHERE status = 'returned') AS returned_items, " &
-                "(SELECT COUNT(*) FROM properties WHERE condition_status = 'needs repair') AS needs_repair, " &
-                "(SELECT COUNT(*) FROM maintenance WHERE status IN ('pending','ongoing') " &
-                "   OR (next_schedule IS NOT NULL AND next_schedule <= DATE_ADD(CURDATE(), INTERVAL 7 DAY))) AS maintenance_alerts, " &
-                "(SELECT COUNT(*) FROM maintenance WHERE warranty_status = 'expired') AS warranty_alerts"
+                "(SELECT COUNT(*) FROM properties WHERE condition = 'Needs Repair') AS needs_repair, " &
+                "(SELECT COUNT(*) FROM maintenance WHERE status IN ('Ongoing','For Review')) AS maintenance_alerts, " &
+                "(SELECT COUNT(*) FROM maintenance_requests WHERE status = 'Pending') AS warranty_alerts"
 
             Using cmd As New MySqlCommand(query, conn)
                 Using reader As MySqlDataReader = cmd.ExecuteReader()
@@ -2020,8 +2012,8 @@ Public Class DatabaseConnection
     End Function
 
     Public Shared Function GetSupplyStatusCounts() As DataTable
-        Dim query As String = "SELECT IFNULL(status, 'unspecified') AS label, COUNT(*) AS total " &
-                              "FROM supplies GROUP BY status ORDER BY status"
+        Dim query As String = "SELECT IFNULL(stock_status, 'unspecified') AS label, COUNT(*) AS total " &
+                              "FROM supplies GROUP BY stock_status ORDER BY stock_status"
         Return ExecuteLookupDataTable(query)
     End Function
 
@@ -2032,8 +2024,8 @@ Public Class DatabaseConnection
     End Function
 
     Public Shared Function GetPropertyConditionCounts() As DataTable
-        Dim query As String = "SELECT IFNULL(condition_status, 'unspecified') AS label, COUNT(*) AS total " &
-                              "FROM properties GROUP BY condition_status ORDER BY condition_status"
+        Dim query As String = "SELECT IFNULL(condition, 'unspecified') AS label, COUNT(*) AS total " &
+                              "FROM properties GROUP BY condition ORDER BY condition"
         Return ExecuteLookupDataTable(query)
     End Function
 
@@ -2075,7 +2067,7 @@ Public Class DatabaseConnection
     End Function
 
     Public Shared Function GetSupplyInventoryBreakdown() As DataTable
-        Dim query As String = "SELECT IFNULL(category, 'Uncategorized') AS label, SUM(quantity_in_stock) AS total " &
+        Dim query As String = "SELECT IFNULL(category, 'Uncategorized') AS label, SUM(quantity) AS total " &
                               "FROM supplies GROUP BY category ORDER BY label"
         Return ExecuteLookupDataTable(query)
     End Function
@@ -2161,12 +2153,12 @@ Public Class DatabaseConnection
                 depreciationValue = 0
             End If
 
-            Dim query As String = "INSERT INTO properties (property_name, category, description, serial_number, " &
-                                 "acquisition_date, acquisition_cost, supplier_name, supplier_contact, condition_status, " &
-                                 "location, custodian_id, department_id, warranty_details, life_span, depreciation_value, status) " &
+            Dim query As String = "INSERT INTO properties (item_name, category, description, serial_number, " &
+                                 "acquisition_date, acquisition_cost, condition, " &
+                                 "location, assigned_to, department_id, status) " &
                                  "VALUES (@propertyName, @category, @description, @serialNumber, @acquisitionDate, " &
-                                 "@acquisitionCost, @supplierName, @supplierContact, @conditionStatus, @location, " &
-                                 "@custodianID, @departmentID, @warrantyDetails, @lifeSpan, @depreciationValue, 'active')"
+                                 "@acquisitionCost, @conditionStatus, @location, " &
+                                 "@custodianID, @departmentID, 'Active')"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@propertyName", propertyName)
@@ -2175,15 +2167,10 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrEmpty(serialNumber), DBNull.Value, serialNumber))
                 cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
                 cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
-                cmd.Parameters.AddWithValue("@supplierName", supplierName)
-                cmd.Parameters.AddWithValue("@supplierContact", If(String.IsNullOrEmpty(supplierContact), DBNull.Value, supplierContact))
                 cmd.Parameters.AddWithValue("@conditionStatus", conditionStatus)
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@warrantyDetails", If(String.IsNullOrEmpty(warrantyDetails), DBNull.Value, warrantyDetails))
-                cmd.Parameters.AddWithValue("@lifeSpan", If(lifeSpan.HasValue, lifeSpan.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@depreciationValue", depreciationValue)
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -2239,9 +2226,9 @@ Public Class DatabaseConnection
                 End Try
             End While
 
-            Dim query As String = "SELECT property_id, property_name, category, serial_number, acquisition_date, " &
-                                 "acquisition_cost, condition_status, location, status " &
-                                 "FROM properties WHERE status != 'disposed' ORDER BY acquisition_date DESC"
+            Dim query As String = "SELECT property_id, item_name, category, serial_number, acquisition_date, " &
+                                 "acquisition_cost, condition, location, status " &
+                                 "FROM properties WHERE status != 'For Disposal' AND status != 'Lost' ORDER BY acquisition_date DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.CommandTimeout = 30
@@ -2367,14 +2354,12 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT pr.request_id, CONCAT(sa.first_name, ' ', sa.last_name) AS requester_name, " &
-                                 "COALESCE(p.property_name, sup.supply_name) AS item_name, pr.request_type, " &
-                                 "pr.request_date, pr.purpose, pr.quantity, pr.status, pr.expected_return_date " &
+            Dim query As String = "SELECT pr.request_id, pr.requester_name, " &
+                                 "pr.item_name, pr.date_of_request, pr.purpose, " &
+                                 "pr.quantity_requested, pr.status, d.department_name " &
                                  "FROM property_requests pr " &
-                                 "LEFT JOIN staff_accounts sa ON pr.user_id = sa.staff_id " &
-                                 "LEFT JOIN properties p ON pr.property_id = p.property_id " &
-                                 "LEFT JOIN supplies sup ON pr.supply_id = sup.supply_id " &
-                                 "ORDER BY pr.request_date DESC"
+                                 "LEFT JOIN departments d ON pr.department_id = d.department_id " &
+                                 "ORDER BY pr.date_of_request DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.CommandTimeout = 30
@@ -2415,7 +2400,7 @@ Public Class DatabaseConnection
             query.Append("SELECT pr.request_id, pr.request_type, pr.status, pr.request_date, pr.approval_date, ")
             query.Append("pr.release_date, pr.expected_return_date, pr.actual_returned_date, pr.quantity, ")
             query.Append("pr.penalty, pr.condition_upon_return, pr.remarks, ")
-            query.Append("COALESCE(p.property_name, sup.supply_name) AS item_name, ")
+            query.Append("COALESCE(p.item_name, sup.supply_name) AS item_name, ")
             query.Append("p.serial_number, p.location AS property_location, sup.location AS supply_location ")
             query.Append("FROM property_requests pr ")
             query.Append("LEFT JOIN properties p ON pr.property_id = p.property_id ")
@@ -2551,31 +2536,23 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return dt
 
             Dim query As New System.Text.StringBuilder()
-            query.Append("SELECT pr.request_id, pr.request_type, pr.status, pr.request_date, pr.approval_date, ")
-            query.Append("pr.release_date, pr.expected_return_date, pr.actual_returned_date, pr.quantity, pr.penalty, ")
-            query.Append("pr.condition_upon_return, pr.remarks, ")
-            query.Append("CONCAT(sa.first_name, ' ', sa.last_name) AS requester_name, sa.department_id, ")
-            query.Append("COALESCE(p.property_name, sup.supply_name) AS item_name, ")
-            query.Append("p.serial_number, p.location AS property_location, sup.location AS supply_location ")
+            query.Append("SELECT pr.request_id, pr.requester_name, pr.date_of_request, ")
+            query.Append("pr.item_name, pr.quantity_requested, pr.purpose, pr.status, ")
+            query.Append("pr.approved_date, d.department_name, pr.remarks ")
             query.Append("FROM property_requests pr ")
-            query.Append("LEFT JOIN staff_accounts sa ON pr.user_id = sa.staff_id ")
-            query.Append("LEFT JOIN properties p ON pr.property_id = p.property_id ")
-            query.Append("LEFT JOIN supplies sup ON pr.supply_id = sup.supply_id WHERE 1=1 ")
+            query.Append("LEFT JOIN departments d ON pr.department_id = d.department_id WHERE 1=1 ")
 
             If Not String.IsNullOrEmpty(statusFilter) Then
                 query.Append(" AND pr.status = @status ")
             End If
-            If Not String.IsNullOrEmpty(requestTypeFilter) Then
-                query.Append(" AND pr.request_type = @requestType ")
-            End If
             If dateFrom.HasValue Then
-                query.Append(" AND pr.request_date >= @dateFrom ")
+                query.Append(" AND pr.date_of_request >= @dateFrom ")
             End If
             If dateTo.HasValue Then
-                query.Append(" AND pr.request_date <= @dateTo ")
+                query.Append(" AND pr.date_of_request <= @dateTo ")
             End If
 
-            query.Append(" ORDER BY pr.request_date DESC, pr.request_id DESC")
+            query.Append(" ORDER BY pr.date_of_request DESC, pr.request_id DESC")
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
                 If Not String.IsNullOrEmpty(statusFilter) Then
@@ -2628,59 +2605,23 @@ Public Class DatabaseConnection
 
             transaction = conn.BeginTransaction()
 
-            Dim requestInfo As New Dictionary(Of String, Object)
-            Using cmd As New MySqlCommand("SELECT request_type, property_id, supply_id, quantity, user_id, status " &
-                                          "FROM property_requests WHERE request_id = @requestID FOR UPDATE", conn, transaction)
-                cmd.Parameters.AddWithValue("@requestID", requestID)
-                Using reader As MySqlDataReader = cmd.ExecuteReader()
-                    If reader.Read() Then
-                        requestInfo("request_type") = reader("request_type").ToString()
-                        requestInfo("property_id") = If(IsDBNull(reader("property_id")), Nothing, reader("property_id"))
-                        requestInfo("supply_id") = If(IsDBNull(reader("supply_id")), Nothing, reader("supply_id"))
-                        requestInfo("quantity") = CInt(reader("quantity"))
-                        requestInfo("user_id") = CInt(reader("user_id"))
-                        requestInfo("status") = reader("status").ToString()
-                    Else
+            ' Check if request exists and is pending
+            Using checkCmd As New MySqlCommand("SELECT status, item_name, quantity_requested FROM property_requests WHERE request_id = @requestID FOR UPDATE", conn, transaction)
+                checkCmd.Parameters.AddWithValue("@requestID", requestID)
+                Using reader As MySqlDataReader = checkCmd.ExecuteReader()
+                    If Not reader.Read() Then
                         Throw New Exception("Request not found.")
+                    End If
+                    If reader("status").ToString() <> "Pending" Then
+                        Throw New Exception("Only pending requests can be approved.")
                     End If
                 End Using
             End Using
 
-            If requestInfo("status").ToString().ToLower() <> "pending" Then
-                Throw New Exception("Only pending requests can be approved.")
-            End If
-
-            Dim requestType As String = requestInfo("request_type").ToString().ToLower()
-            Dim quantity As Integer = CInt(requestInfo("quantity"))
-            Dim borrowerID As Integer = CInt(requestInfo("user_id"))
-
-            If requestType = "supply" Then
-                Using updateSupply As New MySqlCommand("UPDATE supplies SET quantity_in_stock = quantity_in_stock - @qty, updated_at = NOW() " &
-                                                      "WHERE supply_id = @supplyID AND quantity_in_stock >= @qty", conn, transaction)
-                    updateSupply.Parameters.AddWithValue("@qty", quantity)
-                    updateSupply.Parameters.AddWithValue("@supplyID", requestInfo("supply_id"))
-                    Dim rows = updateSupply.ExecuteNonQuery()
-                    If rows = 0 Then
-                        Throw New Exception("Insufficient stock to approve the request.")
-                    End If
-                End Using
-            ElseIf requestType = "property" Then
-                Using assignProperty As New MySqlCommand("UPDATE properties SET custodian_id = @custodianID, updated_at = NOW() " &
-                                                        "WHERE property_id = @propertyID", conn, transaction)
-                    assignProperty.Parameters.AddWithValue("@custodianID", borrowerID)
-                    assignProperty.Parameters.AddWithValue("@propertyID", requestInfo("property_id"))
-                    If assignProperty.ExecuteNonQuery() = 0 Then
-                        Throw New Exception("Failed to update property assignment.")
-                    End If
-                End Using
-            End If
-
-            Using updateRequest As New MySqlCommand("UPDATE property_requests SET status = 'approved', approved_by = @adminID, " &
-                                                    "approval_date = NOW(), release_date = @releaseDate, expected_return_date = @expectedReturnDate, " &
-                                                    "remarks = @remarks WHERE request_id = @requestID", conn, transaction)
+            ' Update request status to Approved
+            Using updateRequest As New MySqlCommand("UPDATE property_requests SET status = 'Approved', approved_by = @adminID, " &
+                                                    "approved_date = NOW(), remarks = @remarks WHERE request_id = @requestID", conn, transaction)
                 updateRequest.Parameters.AddWithValue("@adminID", adminID)
-                updateRequest.Parameters.AddWithValue("@releaseDate", If(releaseDate.HasValue, releaseDate.Value, DBNull.Value))
-                updateRequest.Parameters.AddWithValue("@expectedReturnDate", If(expectedReturnDate.HasValue, expectedReturnDate.Value, DBNull.Value))
                 updateRequest.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
                 updateRequest.Parameters.AddWithValue("@requestID", requestID)
                 updateRequest.ExecuteNonQuery()
@@ -2713,6 +2654,98 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
+    ''' Approve a maintenance request
+    ''' </summary>
+    Public Shared Function ApproveMaintenanceRequest(requestID As Integer, adminID As Integer, adminName As String,
+                                                     adminUserType As String, Optional remarks As String = "") As Boolean
+        If Not DemandPermission(SessionContext.ModulePermission.ModifyMaintenance, "approve maintenance requests") Then
+            Return False
+        End If
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            Dim query As String = "UPDATE maintenance_requests SET status = 'Approved', " &
+                                 "approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
+                                 "WHERE request_id = @requestID"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@adminID", adminID)
+                cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
+                cmd.Parameters.AddWithValue("@requestID", requestID)
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+                If result > 0 Then
+                    LogActivity(adminID, adminUserType, adminName, "APPROVE_MAINTENANCE_REQUEST", "Maintenance Request",
+                                $"Approved maintenance request #{requestID}", "")
+                    Return True
+                End If
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] ApproveMaintenanceRequest Exception: " & ex.Message)
+            MessageBox.Show("Error approving maintenance request: " & ex.Message, "Approval Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return False
+    End Function
+
+    ''' <summary>
+    ''' Reject a maintenance request
+    ''' </summary>
+    Public Shared Function RejectMaintenanceRequest(requestID As Integer, adminID As Integer, adminName As String,
+                                                     adminUserType As String, Optional remarks As String = "") As Boolean
+        If Not DemandPermission(SessionContext.ModulePermission.ModifyMaintenance, "reject maintenance requests") Then
+            Return False
+        End If
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            Dim query As String = "UPDATE maintenance_requests SET status = 'Rejected', " &
+                                 "approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
+                                 "WHERE request_id = @requestID"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@adminID", adminID)
+                cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
+                cmd.Parameters.AddWithValue("@requestID", requestID)
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+                If result > 0 Then
+                    LogActivity(adminID, adminUserType, adminName, "REJECT_MAINTENANCE_REQUEST", "Maintenance Request",
+                                $"Rejected maintenance request #{requestID}", "")
+                    Return True
+                End If
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] RejectMaintenanceRequest Exception: " & ex.Message)
+            MessageBox.Show("Error rejecting maintenance request: " & ex.Message, "Rejection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return False
+    End Function
+
+    ''' <summary>
     ''' Reject a pending request
     ''' </summary>
     Public Shared Function RejectPropertyRequest(requestID As Integer, adminID As Integer, adminName As String,
@@ -2726,8 +2759,8 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE property_requests SET status = 'rejected', approved_by = @adminID, approval_date = NOW(), remarks = @remarks " &
-                                  "WHERE request_id = @requestID AND status = 'pending'"
+            Dim query As String = "UPDATE property_requests SET status = 'Rejected', approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
+                                  "WHERE request_id = @requestID AND status = 'Pending'"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
                 cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
@@ -2847,13 +2880,13 @@ Public Class DatabaseConnection
             Dim quantity As Integer = CInt(requestInfo("quantity"))
 
             If requestType = "supply" Then
-                Using cmd As New MySqlCommand("UPDATE supplies SET quantity_in_stock = quantity_in_stock + @qty, updated_at = NOW() WHERE supply_id = @supplyID", conn, transaction)
+                Using cmd As New MySqlCommand("UPDATE supplies SET quantity = quantity + @qty, updated_at = NOW() WHERE supply_id = @supplyID", conn, transaction)
                     cmd.Parameters.AddWithValue("@qty", quantity)
                     cmd.Parameters.AddWithValue("@supplyID", requestInfo("supply_id"))
                     cmd.ExecuteNonQuery()
                 End Using
             ElseIf requestType = "property" Then
-                Using cmd As New MySqlCommand("UPDATE properties SET custodian_id = NULL, condition_status = @condition, status = 'active', updated_at = NOW() WHERE property_id = @propertyID", conn, transaction)
+                Using cmd As New MySqlCommand("UPDATE properties SET assigned_to = NULL, condition = @condition, status = 'Active', updated_at = NOW() WHERE property_id = @propertyID", conn, transaction)
                     cmd.Parameters.AddWithValue("@condition", conditionUponReturn)
                     cmd.Parameters.AddWithValue("@propertyID", requestInfo("property_id"))
                     cmd.ExecuteNonQuery()
@@ -2912,7 +2945,7 @@ Public Class DatabaseConnection
             Dim query As New StringBuilder()
             query.Append("SELECT pr.request_id, pr.request_type, pr.status, pr.request_date, ")
             query.Append("pr.release_date, pr.expected_return_date, pr.actual_returned_date, pr.quantity, ")
-            query.Append("COALESCE(p.property_name, sup.supply_name) AS item_name, ")
+            query.Append("COALESCE(p.item_name, sup.supply_name) AS item_name, ")
             query.Append("p.serial_number, ")
             query.Append("CASE ")
             query.Append(" WHEN pr.status IN ('approved','released') AND pr.actual_returned_date IS NULL ")
@@ -2981,25 +3014,20 @@ Public Class DatabaseConnection
                 calculatedNextSchedule = serviceDate.AddDays(maintenanceIntervalDays)
             End If
 
-            Dim query As String = "INSERT INTO maintenance (property_id, custodian_id, service_date, service_type, " &
-                                 "description, service_provider, provider_contact, cost, next_schedule, " &
-                                 "technician_assigned, status, remarks) " &
-                                 "VALUES (@propertyID, @custodianID, @serviceDate, @serviceType, @description, " &
-                                 "@serviceProvider, @providerContact, @cost, @nextSchedule, @technicianAssigned, @status, @remarks)"
+            Dim query As String = "INSERT INTO maintenance (request_id, property_item_name, maintenance_date, type_of_maintenance, " &
+                                 "maintenance_details, assigned_technician, cost_materials_labor, status) " &
+                                 "VALUES (@requestID, @propertyItemName, @serviceDate, @serviceType, @description, " &
+                                 "@technicianAssigned, @cost, @status)"
 
             Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@propertyID", propertyID)
-                cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@requestID", DBNull.Value)
+                cmd.Parameters.AddWithValue("@propertyItemName", If(String.IsNullOrEmpty(description), "Unknown", description))
                 cmd.Parameters.AddWithValue("@serviceDate", serviceDate)
                 cmd.Parameters.AddWithValue("@serviceType", serviceType)
                 cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
-                cmd.Parameters.AddWithValue("@serviceProvider", If(String.IsNullOrEmpty(serviceProvider), DBNull.Value, serviceProvider))
-                cmd.Parameters.AddWithValue("@providerContact", If(String.IsNullOrEmpty(providerContact), DBNull.Value, providerContact))
-                cmd.Parameters.AddWithValue("@cost", cost)
-                cmd.Parameters.AddWithValue("@nextSchedule", If(calculatedNextSchedule.HasValue, calculatedNextSchedule.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@technicianAssigned", If(String.IsNullOrEmpty(technicianAssigned), DBNull.Value, technicianAssigned))
+                cmd.Parameters.AddWithValue("@cost", cost)
                 cmd.Parameters.AddWithValue("@status", status)
-                cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 AndAlso adminID.HasValue Then
@@ -3023,6 +3051,80 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
+    ''' Get all supplies requests
+    ''' </summary>
+    Public Shared Function GetAllSuppliesRequests() As DataTable
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return dt
+            If Not SafeOpenConnection(conn) Then Return dt
+
+            Dim query As String = "SELECT sr.request_id, sr.requester_name, sr.date_of_request, sr.item_name, " &
+                                 "sr.quantity_requested, sr.purpose, sr.status, d.department_name " &
+                                 "FROM supplies_requests sr " &
+                                 "LEFT JOIN departments d ON sr.department_id = d.department_id " &
+                                 "ORDER BY sr.date_of_request DESC"
+
+            Using cmd As New MySqlCommand(query, conn)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllSuppliesRequests Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch ex As Exception
+                End Try
+            End If
+        End Try
+        Return dt
+    End Function
+
+    ''' <summary>
+    ''' Get all maintenance requests
+    ''' </summary>
+    Public Shared Function GetAllMaintenanceRequests() As DataTable
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return dt
+            If Not SafeOpenConnection(conn) Then Return dt
+
+            Dim query As String = "SELECT mr.request_id, mr.date_requested, mr.item_name, mr.property_number, " &
+                                 "mr.serial_number, mr.department_id, d.department_name, mr.location, " &
+                                 "mr.condition_before, mr.type_of_issue, mr.problem_description, mr.status, " &
+                                 "mr.assigned_technician, mr.target_date, mr.completion_date, mr.requested_by " &
+                                 "FROM maintenance_requests mr " &
+                                 "LEFT JOIN departments d ON mr.department_id = d.department_id " &
+                                 "ORDER BY mr.date_requested DESC"
+
+            Using cmd As New MySqlCommand(query, conn)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllMaintenanceRequests Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch ex As Exception
+                End Try
+            End If
+        End Try
+        Return dt
+    End Function
+
+    ''' <summary>
     ''' Get all maintenance records
     ''' </summary>
     Public Shared Function GetAllMaintenance() As DataTable
@@ -3034,14 +3136,12 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT m.maintenance_id, p.property_name, " &
-                                 "CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS custodian_name, " &
-                                 "m.service_date, m.service_type, m.description, m.service_provider, m.cost, m.status, " &
-                                 "m.next_schedule, m.technician_assigned, m.remarks " &
+            Dim query As String = "SELECT m.maintenance_id, m.property_item_name, " &
+                                 "m.maintenance_date, m.type_of_maintenance, m.maintenance_details, " &
+                                 "m.assigned_technician, m.cost_materials_labor, m.status, " &
+                                 "m.diagnosis, m.action_taken, m.parts_replaced " &
                                  "FROM maintenance m " &
-                                 "INNER JOIN properties p ON m.property_id = p.property_id " &
-                                 "LEFT JOIN users u ON m.custodian_id = u.user_id " &
-                                 "ORDER BY m.service_date DESC"
+                                 "ORDER BY m.maintenance_date DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 Using adapter As New MySqlDataAdapter(cmd)
@@ -3078,28 +3178,28 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return dt
 
             Dim query As New StringBuilder()
-            query.Append("SELECT m.maintenance_id, m.property_id, p.property_name, m.custodian_id, ")
-            query.Append("CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS custodian_name, ")
-            query.Append("m.service_date, m.service_type, m.description, m.service_provider, m.provider_contact, ")
-            query.Append("m.cost, m.status, m.next_schedule, m.technician_assigned, m.remarks ")
+            query.Append("SELECT m.maintenance_id, m.request_id, m.property_item_name, m.serial_number, ")
+            query.Append("m.location, m.department_id, d.department_name, m.condition_before_maint, ")
+            query.Append("m.type_of_maintenance, m.assigned_technician, m.maintenance_date, ")
+            query.Append("m.maintenance_details, m.cost_materials_labor, m.condition_after_maint, ")
+            query.Append("m.status, m.diagnosis, m.action_taken, m.parts_replaced ")
             query.Append("FROM maintenance m ")
-            query.Append("INNER JOIN properties p ON m.property_id = p.property_id ")
-            query.Append("LEFT JOIN users u ON m.custodian_id = u.user_id WHERE 1=1 ")
+            query.Append("LEFT JOIN departments d ON m.department_id = d.department_id WHERE 1=1 ")
 
             If Not String.IsNullOrEmpty(statusFilter) Then query.Append(" AND m.status = @status ")
-            If dateFrom.HasValue Then query.Append(" AND m.service_date >= @dateFrom ")
-            If dateTo.HasValue Then query.Append(" AND m.service_date <= @dateTo ")
-            If propertyID.HasValue Then query.Append(" AND m.property_id = @propertyID ")
-            If custodianID.HasValue Then query.Append(" AND m.custodian_id = @custodianID ")
+            If dateFrom.HasValue Then query.Append(" AND m.maintenance_date >= @dateFrom ")
+            If dateTo.HasValue Then query.Append(" AND m.maintenance_date <= @dateTo ")
+            If propertyID.HasValue Then query.Append(" AND m.property_item_name LIKE @propertyID ")
+            If custodianID.HasValue Then query.Append(" AND m.assigned_technician LIKE @custodianID ")
 
-            query.Append(" ORDER BY m.service_date DESC, m.maintenance_id DESC")
+            query.Append(" ORDER BY m.maintenance_date DESC, m.maintenance_id DESC")
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
                 If Not String.IsNullOrEmpty(statusFilter) Then cmd.Parameters.AddWithValue("@status", statusFilter)
                 If dateFrom.HasValue Then cmd.Parameters.AddWithValue("@dateFrom", dateFrom.Value)
                 If dateTo.HasValue Then cmd.Parameters.AddWithValue("@dateTo", dateTo.Value)
-                If propertyID.HasValue Then cmd.Parameters.AddWithValue("@propertyID", propertyID.Value)
-                If custodianID.HasValue Then cmd.Parameters.AddWithValue("@custodianID", custodianID.Value)
+                If propertyID.HasValue Then cmd.Parameters.AddWithValue("@propertyID", "%" & propertyID.Value.ToString() & "%")
+                If custodianID.HasValue Then cmd.Parameters.AddWithValue("@custodianID", "%" & custodianID.Value.ToString() & "%")
 
                 Using adapter As New MySqlDataAdapter(cmd)
                     adapter.Fill(dt)
@@ -3143,22 +3243,23 @@ Public Class DatabaseConnection
                 calculatedNextSchedule = serviceDate.AddDays(maintenanceIntervalDays)
             End If
 
-            Dim query As String = "UPDATE maintenance SET service_date = @serviceDate, service_type = @serviceType, " &
-                                  "description = @description, service_provider = @serviceProvider, provider_contact = @providerContact, " &
-                                  "cost = @cost, next_schedule = @nextSchedule, technician_assigned = @technicianAssigned, " &
-                                  "status = @status, remarks = @remarks WHERE maintenance_id = @maintenanceID"
+            Dim query As String = "UPDATE maintenance SET maintenance_date = @maintenanceDate, type_of_maintenance = @typeOfMaintenance, " &
+                                  "maintenance_details = @maintenanceDetails, assigned_technician = @assignedTechnician, " &
+                                  "cost_materials_labor = @costMaterialsLabor, status = @status, " &
+                                  "diagnosis = @diagnosis, action_taken = @actionTaken, parts_replaced = @partsReplaced, " &
+                                  "condition_after_maint = @conditionAfterMaint WHERE maintenance_id = @maintenanceID"
 
             Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@serviceDate", serviceDate)
-                cmd.Parameters.AddWithValue("@serviceType", serviceType)
-                cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
-                cmd.Parameters.AddWithValue("@serviceProvider", If(String.IsNullOrEmpty(serviceProvider), DBNull.Value, serviceProvider))
-                cmd.Parameters.AddWithValue("@providerContact", If(String.IsNullOrEmpty(providerContact), DBNull.Value, providerContact))
-                cmd.Parameters.AddWithValue("@cost", cost)
-                cmd.Parameters.AddWithValue("@nextSchedule", If(calculatedNextSchedule.HasValue, calculatedNextSchedule.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@technicianAssigned", If(String.IsNullOrEmpty(technicianAssigned), DBNull.Value, technicianAssigned))
+                cmd.Parameters.AddWithValue("@maintenanceDate", serviceDate)
+                cmd.Parameters.AddWithValue("@typeOfMaintenance", serviceType)
+                cmd.Parameters.AddWithValue("@maintenanceDetails", If(String.IsNullOrEmpty(description), DBNull.Value, description))
+                cmd.Parameters.AddWithValue("@assignedTechnician", If(String.IsNullOrEmpty(technicianAssigned), DBNull.Value, technicianAssigned))
+                cmd.Parameters.AddWithValue("@costMaterialsLabor", cost)
                 cmd.Parameters.AddWithValue("@status", status)
-                cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
+                cmd.Parameters.AddWithValue("@diagnosis", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
+                cmd.Parameters.AddWithValue("@actionTaken", If(String.IsNullOrEmpty(serviceProvider), DBNull.Value, serviceProvider))
+                cmd.Parameters.AddWithValue("@partsReplaced", If(String.IsNullOrEmpty(providerContact), DBNull.Value, providerContact))
+                cmd.Parameters.AddWithValue("@conditionAfterMaint", "Good")
                 cmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
 
                 Dim rows = cmd.ExecuteNonQuery()
@@ -3491,10 +3592,10 @@ Public Class DatabaseConnection
 
             ' Query to load admin profile data by admin ID - includes all fields from users table
             Dim query As String = "SELECT user_id, first_name, middle_name, last_name, suffix, position, " &
-                                 "department_id, contact_number, email, username, house_no_street, barangay, " &
-                                 "municipality, province_city, date_assigned, employee_id, user_type, status, " &
+                                 "department_id, contact_number, email, username, barangay, " &
+                                 "municipal, province, employee_id, role, status, " &
                                  "last_login, created_at " &
-                                 "FROM users WHERE user_id = @adminID AND status = 'active'"
+                                 "FROM users WHERE user_id = @adminID AND status = 'Active'"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
@@ -3511,13 +3612,11 @@ Public Class DatabaseConnection
                         adminProfile("contact_number") = If(IsDBNull(reader("contact_number")), "", reader("contact_number").ToString())
                         adminProfile("email") = If(IsDBNull(reader("email")), "", reader("email").ToString())
                         adminProfile("username") = If(IsDBNull(reader("username")), "", reader("username").ToString())
-                        adminProfile("house_no_street") = If(IsDBNull(reader("house_no_street")), "", reader("house_no_street").ToString())
                         adminProfile("barangay") = If(IsDBNull(reader("barangay")), "", reader("barangay").ToString())
-                        adminProfile("municipality") = If(IsDBNull(reader("municipality")), "", reader("municipality").ToString())
-                        adminProfile("province_city") = If(IsDBNull(reader("province_city")), "", reader("province_city").ToString())
-                        adminProfile("date_assigned") = If(IsDBNull(reader("date_assigned")), "", reader("date_assigned").ToString())
+                        adminProfile("municipal") = If(IsDBNull(reader("municipal")), "", reader("municipal").ToString())
+                        adminProfile("province") = If(IsDBNull(reader("province")), "", reader("province").ToString())
                         adminProfile("employee_id") = If(IsDBNull(reader("employee_id")), "", reader("employee_id").ToString())
-                        adminProfile("user_type") = If(IsDBNull(reader("user_type")), "", reader("user_type").ToString())
+                        adminProfile("user_type") = If(IsDBNull(reader("role")), "", reader("role").ToString())
                         adminProfile("status") = If(IsDBNull(reader("status")), "", reader("status").ToString())
                         adminProfile("last_login") = If(IsDBNull(reader("last_login")), "", reader("last_login").ToString())
                         adminProfile("created_at") = If(IsDBNull(reader("created_at")), "", reader("created_at").ToString())
@@ -3809,13 +3908,12 @@ Public Class DatabaseConnection
 
             Dim query As New StringBuilder()
             query.Append("SELECT user_id, first_name, middle_name, last_name, suffix, position, ")
-            query.Append("department_id, contact_number, email, username, user_type, status, ")
-            query.Append("employee_id, date_assigned, last_login, created_at, ")
-            query.Append("house_no_street, barangay, municipality, province_city ")
-            query.Append("FROM users WHERE user_type IN ('Admin','SuperAdmin')")
+            query.Append("department_id, contact_number, email, username, role AS user_type, status, ")
+            query.Append("employee_id, date_assigned, last_login, created_at ")
+            query.Append("FROM users WHERE role IN ('Admin','SuperAdmin')")
 
             If Not String.IsNullOrEmpty(statusFilter) Then query.Append(" AND status = @status")
-            If Not String.IsNullOrEmpty(roleFilter) Then query.Append(" AND user_type = @role")
+            If Not String.IsNullOrEmpty(roleFilter) Then query.Append(" AND role = @role")
             If Not String.IsNullOrEmpty(searchKeyword) Then
                 query.Append(" AND (")
                 query.Append("LOWER(first_name) LIKE @search OR LOWER(last_name) LIKE @search OR ")
@@ -3916,11 +4014,11 @@ Public Class DatabaseConnection
             adminQuery.Append("SELECT user_id, first_name, COALESCE(middle_name, '') as middle_name, last_name, ")
             adminQuery.Append("COALESCE(suffix, '') as suffix, COALESCE(position, '') as position, ")
             adminQuery.Append("COALESCE(department_id, '') as department_id, COALESCE(contact_number, '') as contact_number, ")
-            adminQuery.Append("email, username, user_type, status, ")
+            adminQuery.Append("email, username, role AS user_type, status, ")
             adminQuery.Append("COALESCE(employee_id, '') as employee_id, date_assigned, last_login, created_at, ")
-            adminQuery.Append("COALESCE(house_no_street, '') as house_no_street, COALESCE(barangay, '') as barangay, ")
-            adminQuery.Append("COALESCE(municipality, '') as municipality, COALESCE(province_city, '') as province_city ")
-            adminQuery.Append("FROM users WHERE user_type IN ('Admin','SuperAdmin')")
+            adminQuery.Append("COALESCE(barangay, '') as barangay, ")
+            adminQuery.Append("COALESCE(municipal, '') as municipal, COALESCE(province, '') as province ")
+            adminQuery.Append("FROM users WHERE role IN ('Admin','SuperAdmin')")
 
             If adminWhereConditions.Count > 0 Then
                 adminQuery.Append(" AND " & String.Join(" AND ", adminWhereConditions))
@@ -3966,7 +4064,7 @@ Public Class DatabaseConnection
                             row("user_type") = "Staff"
                             row("status") = SafeDbValue(record("status"))
                             row("employee_id") = SafeDbValue(record("employee_id"))
-                            row("date_assigned") = If(record.IsNull("date_assigned"), DBNull.Value, record("date_assigned"))
+                            row("date_assigned") = If(IsDBNull(record("date_assigned")) OrElse record("date_assigned") Is Nothing, DBNull.Value, record("date_assigned"))
                             row("last_login") = If(record.IsNull("last_login"), DBNull.Value, record("last_login"))
                             row("created_at") = If(record.IsNull("created_at"), DBNull.Value, record("created_at"))
                             row("house_no_street") = SafeDbValue(record("house_no_street"))
@@ -4007,7 +4105,7 @@ Public Class DatabaseConnection
                             row("user_type") = SafeDbValue(record("user_type"))
                             row("status") = SafeDbValue(record("status"))
                             row("employee_id") = SafeDbValue(record("employee_id"))
-                            row("date_assigned") = If(record.IsNull("date_assigned"), DBNull.Value, record("date_assigned"))
+                            row("date_assigned") = If(IsDBNull(record("date_assigned")) OrElse record("date_assigned") Is Nothing, DBNull.Value, record("date_assigned"))
                             row("last_login") = If(record.IsNull("last_login"), DBNull.Value, record("last_login"))
                             row("created_at") = If(record.IsNull("created_at"), DBNull.Value, record("created_at"))
                             row("house_no_street") = SafeDbValue(record("house_no_street"))
@@ -4063,7 +4161,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return context
             If Not SafeOpenConnection(conn) Then Return context
 
-            Dim query As String = "SELECT user_id, username, user_type FROM users WHERE LOWER(username) = LOWER(@username) LIMIT 1"
+            Dim query As String = "SELECT user_id, username, role AS user_type FROM users WHERE LOWER(username) = LOWER(@username) LIMIT 1"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@username", username.Trim())
                 Using reader As MySqlDataReader = cmd.ExecuteReader()
@@ -4106,7 +4204,7 @@ Public Class DatabaseConnection
 
             query.Append("SELECT user_id, ")
             query.Append("CONCAT(IFNULL(first_name,''),' ',IFNULL(last_name,'')) AS full_name, ")
-            query.Append("user_type, department_id ")
+            query.Append("role AS user_type, department_id ")
             query.Append("FROM users WHERE status = 'Active'")
 
             Dim roleList As List(Of String) = Nothing
@@ -4118,7 +4216,7 @@ Public Class DatabaseConnection
                 .ToList()
 
                 If roleList.Count > 0 Then
-                    query.Append(" AND user_type IN (")
+                    query.Append(" AND role IN (")
 
                     For i As Integer = 0 To roleList.Count - 1
                         If i > 0 Then query.Append(",")
@@ -4233,7 +4331,7 @@ Public Class DatabaseConnection
 
             Dim insertQuery As String =
                 "INSERT INTO users (first_name, middle_name, last_name, suffix, position, department_id, contact_number, email, username, password, " &
-                "house_no_street, barangay, municipality, province_city, date_assigned, employee_id, user_type, status, created_at) " &
+                "province, municipal, barangay, employee_id, role, status, created_at) " &
                 "VALUES (@firstName, @middleName, @lastName, @suffix, @position, @departmentID, @contactNumber, @email, @username, @password, " &
                 "@houseNo, @barangay, @municipality, @province, @dateAssigned, @employeeID, @userType, @status, NOW())"
 
@@ -4361,7 +4459,7 @@ Public Class DatabaseConnection
                 "UPDATE users SET first_name = @firstName, middle_name = @middleName, last_name = @lastName, suffix = @suffix, " &
                 "position = @position, department_id = @departmentID, contact_number = @contactNumber, email = @email, username = @username, " &
                 "house_no_street = @houseNo, barangay = @barangay, municipality = @municipality, province_city = @province, " &
-                "date_assigned = @dateAssigned, employee_id = @employeeID, user_type = @userType, status = @status, updated_at = NOW() " &
+                "employee_id = @employeeID, role = @userType, status = @status, updated_at = NOW() " &
                 "WHERE user_id = @adminID"
 
             Using cmd As New MySqlCommand(updateQuery, conn)
@@ -4814,7 +4912,7 @@ Public Class DatabaseConnection
                        "suffix = @suffix, position = @position, department_id = @departmentID, contact_number = @contactNumber, " &
                        "email = @email, username = @username, house_no_street = @houseNo, barangay = @barangay, " &
                        "municipality = @municipality, province_city = @province, date_assigned = @dateAssigned, " &
-                       "employee_id = @employeeID, user_type = @userType, status = @status, updated_at = NOW() " &
+                       "employee_id = @employeeID, role = @userType, status = @status, updated_at = NOW() " &
                        "WHERE user_id = @userID"
 
                 Using cmd As New MySqlCommand(query, conn)
@@ -5302,7 +5400,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return dt
 
             Dim query As New StringBuilder()
-            query.Append("SELECT user_id, first_name, last_name, position, contact_number, email, username, status, last_login ")
+            query.Append("SELECT user_id, first_name, last_name, position, contact_number, email, username, status, last_login, date_assigned  ")
             query.Append("FROM users WHERE LOWER(IFNULL(position,'')) LIKE '%custodian%'")
             If Not includeInactive Then query.Append(" AND status = 'Active'")
             If Not String.IsNullOrEmpty(searchKeyword) Then
@@ -5475,23 +5573,22 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return dt
 
             ' Build query with optional filters - includes all required fields
-            Dim query As String = "SELECT p.property_id, p.property_name, p.category, p.serial_number, " &
-                                 "p.supplier_name, p.condition_status, p.acquisition_cost, " &
-                                 "p.acquisition_date, p.warranty_details, " &
-                                 "CONCAT(u.first_name, ' ', u.last_name) AS assigned_employee, " &
+            Dim query As String = "SELECT p.property_id, p.item_name, p.category, p.property_number, p.serial_number, " &
+                                 "p.condition, p.acquisition_cost, p.acquisition_date, " &
+                                 "p.assigned_to, CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS assigned_employee, " &
                                  "d.department_name AS assigned_department, p.location, p.status, " &
                                  "p.created_at, p.updated_at " &
                                  "FROM properties p " &
-                                 "LEFT JOIN users u ON p.custodian_id = u.user_id " &
+                                 "LEFT JOIN users u ON p.assigned_to = u.user_id " &
                                  "LEFT JOIN departments d ON p.department_id = d.department_id " &
-                                 "WHERE p.status != 'disposed'"
+                                 "WHERE 1=1"
 
             ' Add filters
             If custodianID.HasValue Then
-                query &= " AND p.custodian_id = @custodianID"
+                query &= " AND p.assigned_to = @custodianID"
             End If
             If Not String.IsNullOrEmpty(conditionStatus) Then
-                query &= " AND p.condition_status = @conditionStatus"
+                query &= " AND p.condition = @conditionStatus"
             End If
             If Not String.IsNullOrEmpty(category) Then
                 query &= " AND p.category = @category"
@@ -5606,11 +5703,11 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE properties SET property_name = @propertyName, category = @category, " &
-                                 "description = @description, serial_number = @serialNumber, condition_status = @conditionStatus, " &
-                                 "location = @location, custodian_id = @custodianID, department_id = @departmentID, " &
-                                 "warranty_details = @warrantyDetails, acquisition_date = @acquisitionDate, acquisition_cost = @acquisitionCost, " &
-                                 "supplier_name = @supplierName, supplier_contact = @supplierContact, status = @status, updated_at = NOW() " &
+            Dim query As String = "UPDATE properties SET item_name = @propertyName, category = @category, " &
+                                 "description = @description, serial_number = @serialNumber, condition = @conditionStatus, " &
+                                 "location = @location, assigned_to = @custodianID, department_id = @departmentID, " &
+                                 "acquisition_date = @acquisitionDate, acquisition_cost = @acquisitionCost, " &
+                                 "status = @status, updated_at = NOW() " &
                                  "WHERE property_id = @propertyID"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -5623,11 +5720,8 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@warrantyDetails", If(String.IsNullOrEmpty(warrantyDetails), DBNull.Value, warrantyDetails))
                 cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
                 cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
-                cmd.Parameters.AddWithValue("@supplierName", supplierName)
-                cmd.Parameters.AddWithValue("@supplierContact", If(String.IsNullOrEmpty(supplierContact), DBNull.Value, supplierContact))
                 cmd.Parameters.AddWithValue("@status", status)
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
@@ -5680,8 +5774,8 @@ Public Class DatabaseConnection
                 End If
             End Using
 
-            ' Delete property (soft delete by setting status to 'disposed')
-            Dim query As String = "UPDATE properties SET status = 'disposed', disposal_date = CURDATE(), updated_at = NOW() WHERE property_id = @propertyID"
+            ' Delete property (soft delete by setting status to 'For Disposal')
+            Dim query As String = "UPDATE properties SET status = 'For Disposal', updated_at = NOW() WHERE property_id = @propertyID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@propertyID", propertyID)
 
@@ -5786,7 +5880,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return Nothing
             If Not SafeOpenConnection(conn) Then Return Nothing
 
-            Dim query As String = "SELECT property_id, property_name, category, description, serial_number, supplier_name, supplier_contact, " &
+            Dim query As String = "SELECT property_id, item_name, category, description, serial_number, supplier_name, supplier_contact, " &
                                   "condition_status, acquisition_cost, acquisition_date, warranty_details, custodian_id, department_id, " &
                                   "location, status, created_at, updated_at " &
                                   "FROM properties WHERE property_id = @propertyID LIMIT 1"
@@ -5827,7 +5921,7 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE properties SET custodian_id = @custodianID, updated_at = NOW() WHERE property_id = @propertyID"
+            Dim query As String = "UPDATE properties SET assigned_to = @custodianID, updated_at = NOW() WHERE property_id = @propertyID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@custodianID", custodianID)
                 cmd.Parameters.AddWithValue("@propertyID", propertyID)
@@ -5876,7 +5970,7 @@ Public Class DatabaseConnection
 
             Dim normalizedStatus As String = If(String.IsNullOrWhiteSpace(newStatus), "active", newStatus.Trim())
             Dim updateSql As New StringBuilder("UPDATE properties SET status = @status, updated_at = NOW()")
-            If Not String.IsNullOrWhiteSpace(conditionStatus) Then updateSql.Append(", condition_status = @condition")
+            If Not String.IsNullOrWhiteSpace(conditionStatus) Then updateSql.Append(", condition = @condition")
             If disposalDate.HasValue OrElse normalizedStatus.Equals("disposed", StringComparison.OrdinalIgnoreCase) Then
                 updateSql.Append(", disposal_date = @disposalDate")
             Else
@@ -5930,22 +6024,18 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return result
             If Not SafeOpenConnection(conn) Then Return result
 
-            Dim query As String = "SELECT property_name, acquisition_date, acquisition_cost, life_span, depreciation_value, " &
+            Dim query As String = "SELECT item_name, acquisition_date, acquisition_cost, life_span, depreciation_value, " &
                                   "warranty_details, condition_status, status, disposal_date " &
                                   "FROM properties WHERE property_id = @propertyID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@propertyID", propertyID)
                 Using reader As MySqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
-                        result("property_name") = reader("property_name").ToString()
+                        result("item_name") = reader("item_name").ToString()
                         result("acquisition_date") = reader("acquisition_date")
                         result("acquisition_cost") = reader("acquisition_cost")
-                        result("life_span") = If(IsDBNull(reader("life_span")), 0, CInt(reader("life_span")))
-                        result("depreciation_value") = If(IsDBNull(reader("depreciation_value")), 0D, CDec(reader("depreciation_value")))
-                        result("warranty_details") = If(IsDBNull(reader("warranty_details")), String.Empty, reader("warranty_details").ToString())
-                        result("condition_status") = If(IsDBNull(reader("condition_status")), String.Empty, reader("condition_status").ToString())
+                        result("condition") = If(IsDBNull(reader("condition")), String.Empty, reader("condition").ToString())
                         result("status") = reader("status").ToString()
-                        result("disposal_date") = If(IsDBNull(reader("disposal_date")), Nothing, reader("disposal_date"))
                     End If
                 End Using
             End Using
@@ -5995,30 +6085,27 @@ Public Class DatabaseConnection
             ' Build query with optional filters
             Dim query As String = "SELECT " &
                                  "supply_id AS SupplyID, " &
-                                 "supply_name AS SupplyName, " &
+                                 "item_name AS SupplyName, " &
                                  "category AS Category, " &
                                  "description AS Description, " &
                                  "unit_of_measure AS UnitOfMeasure, " &
-                                 "quantity_in_stock AS QuantityInStock, " &
-                                 "reorder_level AS ReorderLevel, " &
-                                 "supplier_name AS SupplierName, " &
-                                 "supplier_contact AS SupplierContact, " &
+                                 "quantity AS QuantityInStock, " &
                                  "unit_cost AS UnitCost, " &
-                                 "total_value AS TotalValue, " &
-                                 "acquisition_date AS AcquisitionDate, " &
-                                 "expiration_date AS ExpirationDate, " &
+                                 "total_cost AS TotalValue, " &
+                                 "date_received AS AcquisitionDate, " &
+                                 "supplier AS SupplierName, " &
                                  "location AS Location, " &
-                                 "status AS Status " &
+                                 "stock_status AS Status " &
                                  "FROM supplies WHERE 1=1"
 
             If Not String.IsNullOrEmpty(category) Then
                 query &= " AND category = @category"
             End If
             If Not String.IsNullOrEmpty(status) Then
-                query &= " AND status = @status"
+                query &= " AND stock_status = @status"
             End If
 
-            query &= " ORDER BY acquisition_date DESC"
+            query &= " ORDER BY date_received DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 If Not String.IsNullOrEmpty(category) Then
@@ -6073,8 +6160,8 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return Nothing
             If Not SafeOpenConnection(conn) Then Return Nothing
 
-            Dim query As String = "SELECT supply_id, supply_name, category, description, unit_of_measure, quantity_in_stock, reorder_level, " &
-                                  "supplier_name, supplier_contact, unit_cost, location, status, acquisition_date, expiration_date, custodian_id, department_id, remarks " &
+            Dim query As String = "SELECT supply_id, item_name, category, description, unit_of_measure, quantity, " &
+                                  "supplier, unit_cost, location, stock_status, date_received, total_cost, source_of_funds " &
                                   "FROM supplies WHERE supply_id = @supplyID LIMIT 1"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -6111,10 +6198,10 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT supply_id, supply_name, category, quantity_in_stock, reorder_level, " &
-                                 "unit_cost, total_value, location, status " &
-                                 "FROM supplies WHERE quantity_in_stock <= reorder_level AND status = 'active' " &
-                                 "ORDER BY (quantity_in_stock - reorder_level) ASC"
+            Dim query As String = "SELECT supply_id, item_name, category, quantity, " &
+                                 "unit_cost, total_cost, location, stock_status " &
+                                 "FROM supplies WHERE quantity <= 10 AND stock_status = 'Available' " &
+                                 "ORDER BY quantity ASC"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.CommandTimeout = 30
@@ -6151,11 +6238,11 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return dt
 
             Dim query As New StringBuilder()
-            query.Append("SELECT supply_id, supply_name, category, quantity_in_stock, reorder_level, unit_cost, ")
-            query.Append("total_value, status, location FROM supplies WHERE 1=1 ")
-            If includeLowStockOnly Then query.Append("AND quantity_in_stock <= reorder_level ")
+            query.Append("SELECT supply_id, item_name, category, quantity, unit_cost, ")
+            query.Append("total_cost, stock_status, location FROM supplies WHERE 1=1 ")
+            If includeLowStockOnly Then query.Append("AND quantity <= 10 ")
             If Not String.IsNullOrEmpty(category) Then query.Append("AND category = @category ")
-            query.Append("ORDER BY category, supply_name")
+            query.Append("ORDER BY category, item_name")
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
                 If Not String.IsNullOrEmpty(category) Then cmd.Parameters.AddWithValue("@category", category)
@@ -6197,11 +6284,10 @@ Public Class DatabaseConnection
             ' Calculate total value automatically
             Dim totalValue As Decimal = stock * unitCost
 
-            Dim query As String = "UPDATE supplies SET supply_name = @supplyName, category = @category, " &
-                                 "quantity_in_stock = @stock, unit_cost = @unitCost, total_value = @totalValue, " &
-                                 "status = @status, location = @location, description = @description, " &
-                                 "reorder_level = @reorderLevel, supplier_name = @supplierName, " &
-                                 "supplier_contact = @supplierContact, updated_at = NOW() " &
+            Dim query As String = "UPDATE supplies SET item_name = @supplyName, category = @category, " &
+                                 "quantity = @stock, unit_cost = @unitCost, total_cost = @totalValue, " &
+                                 "stock_status = @status, location = @location, description = @description, " &
+                                 "supplier = @supplierName, updated_at = NOW() " &
                                  "WHERE supply_id = @supplyID"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -6214,9 +6300,7 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@status", status)
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
-                cmd.Parameters.AddWithValue("@reorderLevel", reorderLevel)
                 cmd.Parameters.AddWithValue("@supplierName", If(String.IsNullOrEmpty(supplierName), DBNull.Value, supplierName))
-                cmd.Parameters.AddWithValue("@supplierContact", If(String.IsNullOrEmpty(supplierContact), DBNull.Value, supplierContact))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -6246,7 +6330,7 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Delete supply (ENHANCED)
     ''' </summary>
-    Public Shared Function DeleteSupply(supplyID As String) As Boolean
+    Public Shared Function DeleteSupply(supplyID As Integer) As Boolean
         If Not DemandPermission(SessionContext.ModulePermission.ModifySupplies, "delete supplies") Then
             Return False
         End If
@@ -6313,11 +6397,12 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
 
             If Not SafeOpenConnection(conn) Then Return dt
-            ' Select all 15 attributes as specified in requirements
+            ' Select all attributes matching schema
             Dim query As String = "SELECT d.department_id, d.department_name, d.head_of_department, " &
-                                 "d.contact_number, d.email, d.location, d.no_of_employees, d.department_code, " &
-                                 "d.office_hours, d.established_date, d.parent_department_id, d.status, " &
-                                 "d.budget_allocation, d.created_at, d.updated_at " &
+                                 "d.contact_number, d.email, d.location, d.office_code, " &
+                                 "d.building, d.floor_number, d.short_name, d.description, d.status, " &
+                                 "d.no_of_employees, d.budget_allocation, d.office_hours, d.established_date, " &
+                                 "d.parent_department_id, d.total_properties, d.total_supplies, d.created_at, d.updated_at " &
                                  "FROM departments d " &
                                  "ORDER BY d.department_name"
 
@@ -6478,7 +6563,7 @@ Public Class DatabaseConnection
             End Using
 
             ' Check for duplicate department code
-            Dim checkCodeQuery As String = "SELECT COUNT(*) FROM departments WHERE LOWER(department_code) = LOWER(@departmentCode)"
+            Dim checkCodeQuery As String = "SELECT COUNT(*) FROM departments WHERE LOWER(office_code) = LOWER(@departmentCode)"
             Using checkCmd As New MySqlCommand(checkCodeQuery, conn)
                 checkCmd.Parameters.AddWithValue("@departmentCode", departmentCode)
                 Dim codeCount As Integer = CInt(checkCmd.ExecuteScalar())
@@ -6496,7 +6581,7 @@ Public Class DatabaseConnection
                     Dim parentCount As Integer = CInt(checkParentCmd.ExecuteScalar())
                     If parentCount = 0 Then
                         ' Get list of available department IDs to show in error message
-                        Dim availableDeptsQuery As String = "SELECT department_id, department_name FROM departments WHERE status = 'active' ORDER BY department_id"
+                        Dim availableDeptsQuery As String = "SELECT department_id, department_name FROM departments WHERE status = 'Active' ORDER BY department_id"
                         Dim availableDepts As New List(Of String)
                         Using deptCmd As New MySqlCommand(availableDeptsQuery, conn)
                             Using reader As MySqlDataReader = deptCmd.ExecuteReader()
@@ -6529,7 +6614,7 @@ Public Class DatabaseConnection
                 End If
             End If
 
-            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, department_code, " &
+            Dim query As String = "INSERT INTO departments (department_name, head_of_department, location, office_code, " &
                                  "contact_number, email, no_of_employees, budget_allocation, office_hours, established_date, " &
                                  "parent_department_id, status) " &
                                  "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
@@ -6657,7 +6742,7 @@ Public Class DatabaseConnection
             End Using
 
             ' Check for duplicate department code (excluding current department)
-            Dim checkCodeQuery As String = "SELECT COUNT(*) FROM departments WHERE LOWER(department_code) = LOWER(@departmentCode) AND department_id != @departmentID"
+            Dim checkCodeQuery As String = "SELECT COUNT(*) FROM departments WHERE LOWER(office_code) = LOWER(@departmentCode) AND department_id != @departmentID"
             Using checkCmd As New MySqlCommand(checkCodeQuery, conn)
                 checkCmd.Parameters.AddWithValue("@departmentCode", departmentCode)
                 checkCmd.Parameters.AddWithValue("@departmentID", departmentID)
@@ -6669,7 +6754,7 @@ Public Class DatabaseConnection
             End Using
 
             Dim query As String = "UPDATE departments SET department_name = @departmentName, head_of_department = @headOfDepartment, " &
-                                 "location = @location, department_code = @departmentCode, contact_number = @contactNumber, " &
+                                 "location = @location, office_code = @departmentCode, contact_number = @contactNumber, " &
                                  "email = @email, no_of_employees = @noOfEmployees, budget_allocation = @budgetAllocation, " &
                                  "updated_at = NOW() WHERE department_id = @departmentID"
 
@@ -6726,7 +6811,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             ' Check if department has linked properties
-            Dim checkPropertiesQuery As String = "SELECT COUNT(*) FROM properties WHERE department_id = @departmentID AND status != 'disposed'"
+            Dim checkPropertiesQuery As String = "SELECT COUNT(*) FROM properties WHERE department_id = @departmentID AND status != 'For Disposal' AND status != 'Lost'"
             Using checkCmd As New MySqlCommand(checkPropertiesQuery, conn)
                 checkCmd.Parameters.AddWithValue("@departmentID", departmentID)
                 Dim propertyCount As Integer = CInt(checkCmd.ExecuteScalar())
@@ -6810,7 +6895,7 @@ Public Class DatabaseConnection
             End Using
 
             ' Get property count
-            Dim propertyQuery As String = "SELECT COUNT(*) FROM properties WHERE department_id = @departmentID AND status = 'active'"
+            Dim propertyQuery As String = "SELECT COUNT(*) FROM properties WHERE department_id = @departmentID AND status = 'Active'"
             Using cmd As New MySqlCommand(propertyQuery, conn)
                 cmd.Parameters.AddWithValue("@departmentID", departmentID)
                 stats("property_count") = CInt(cmd.ExecuteScalar())
@@ -6854,7 +6939,7 @@ Public Class DatabaseConnection
 
             ' Ensure SuperAdmin account exists and matches the expected credentials
             Dim superAdminId As Object = Nothing
-            Using checkCmd As New MySqlCommand("SELECT user_id FROM users WHERE LOWER(username) = LOWER(@username) AND user_type = 'SuperAdmin' LIMIT 1", conn)
+            Using checkCmd As New MySqlCommand("SELECT user_id FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'SuperAdmin' LIMIT 1", conn)
                 checkCmd.Parameters.AddWithValue("@username", superAdminUsername)
                 superAdminId = checkCmd.ExecuteScalar()
             End Using
@@ -6863,8 +6948,8 @@ Public Class DatabaseConnection
 
             If superAdminId Is Nothing OrElse superAdminId Is DBNull.Value Then
                 ' Create SuperAdmin account
-                Using insertCmd As New MySqlCommand("INSERT INTO users (first_name, last_name, email, username, password_encrypted, user_type, status, created_at) " &
-                                                    "VALUES (@firstName, @lastName, @email, @username, @password, 'SuperAdmin', 'active', NOW())", conn)
+                Using insertCmd As New MySqlCommand("INSERT INTO users (first_name, last_name, email, username, password_encrypted, role, status, created_at) " &
+                                                    "VALUES (@firstName, @lastName, @email, @username, @password, 'SuperAdmin', 'Active', NOW())", conn)
                     insertCmd.Parameters.AddWithValue("@firstName", "Super")
                     insertCmd.Parameters.AddWithValue("@lastName", "Administrator")
                     insertCmd.Parameters.AddWithValue("@email", "superadmin@stacruz.edu")
@@ -6889,7 +6974,7 @@ Public Class DatabaseConnection
 
             ' Ensure Admin account exists and matches the expected credentials
             Dim adminId As Object = Nothing
-            Using checkCmd As New MySqlCommand("SELECT user_id FROM users WHERE LOWER(username) = LOWER(@username) AND user_type = 'Admin' LIMIT 1", conn)
+            Using checkCmd As New MySqlCommand("SELECT user_id FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'Admin' LIMIT 1", conn)
                 checkCmd.Parameters.AddWithValue("@username", adminUsername)
                 adminId = checkCmd.ExecuteScalar()
             End Using
@@ -6898,8 +6983,8 @@ Public Class DatabaseConnection
 
             If adminId Is Nothing OrElse adminId Is DBNull.Value Then
                 ' Create Admin account
-                Using insertCmd As New MySqlCommand("INSERT INTO users (first_name, last_name, email, username, password_encrypted, user_type, status, created_at) " &
-                                                    "VALUES (@firstName, @lastName, @email, @username, @password, 'Admin', 'active', NOW())", conn)
+                Using insertCmd As New MySqlCommand("INSERT INTO users (first_name, last_name, email, username, password_encrypted, role, status, created_at) " &
+                                                    "VALUES (@firstName, @lastName, @email, @username, @password, 'Admin', 'Active', NOW())", conn)
                     insertCmd.Parameters.AddWithValue("@firstName", "System")
                     insertCmd.Parameters.AddWithValue("@lastName", "Administrator")
                     insertCmd.Parameters.AddWithValue("@email", "admin@stacruz.edu")

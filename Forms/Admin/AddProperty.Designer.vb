@@ -45,7 +45,7 @@ Partial Class AddProperty
         Me.supplier = New System.Windows.Forms.Label()
         Me.serialNumber = New System.Windows.Forms.Label()
         Me.property_Category = New System.Windows.Forms.Label()
-        Me.property_name = New System.Windows.Forms.Label()
+        Me.item_name = New System.Windows.Forms.Label()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
@@ -253,7 +253,7 @@ Partial Class AddProperty
         Me.Panel1.Controls.Add(Me.supplier)
         Me.Panel1.Controls.Add(Me.serialNumber)
         Me.Panel1.Controls.Add(Me.property_Category)
-        Me.Panel1.Controls.Add(Me.property_name)
+        Me.Panel1.Controls.Add(Me.item_name)
         Me.Panel1.Location = New System.Drawing.Point(50, 15)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel1.Name = "Panel1"
@@ -391,19 +391,19 @@ Partial Class AddProperty
         Me.property_Category.TabIndex = 59
         Me.property_Category.Text = "Category"
         '
-        'property_name
+        'item_name
         '
-        Me.property_name.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.item_name.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.property_name.AutoSize = True
-        Me.property_name.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.property_name.Location = New System.Drawing.Point(32, 38)
-        Me.property_name.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.property_name.Name = "property_name"
-        Me.property_name.Size = New System.Drawing.Size(68, 15)
-        Me.property_name.TabIndex = 58
-        Me.property_name.Text = "Item Name"
+        Me.item_name.AutoSize = True
+        Me.item_name.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.item_name.Location = New System.Drawing.Point(32, 38)
+        Me.item_name.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.item_name.Name = "item_name"
+        Me.item_name.Size = New System.Drawing.Size(68, 15)
+        Me.item_name.TabIndex = 58
+        Me.item_name.Text = "Item Name"
         '
         'RoundedPanel1
         '
@@ -621,7 +621,7 @@ Partial Class AddProperty
     Friend WithEvents supplier As System.Windows.Forms.Label
     Friend WithEvents serialNumber As System.Windows.Forms.Label
     Friend WithEvents property_Category As System.Windows.Forms.Label
-    Friend WithEvents property_name As System.Windows.Forms.Label
+    Friend WithEvents item_name As System.Windows.Forms.Label
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents instructions As System.Windows.Forms.Label
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label

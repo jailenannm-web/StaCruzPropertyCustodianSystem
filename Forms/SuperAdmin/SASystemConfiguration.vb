@@ -628,7 +628,8 @@ Public Class SASystemConfiguration
     Private Sub btnAddCategory_Click(sender As Object, e As EventArgs) Handles btnAddCategory.Click
         Dim name = txtCategoryName.Text.Trim()
         Dim description = txtDescription.Text.Trim()
-        Dim typeValue = If(cmbType.SelectedItem?.ToString(), String.Empty)
+        Dim selectedItem As Object = cmbType.SelectedItem
+        Dim typeValue = If(selectedItem IsNot Nothing, selectedItem.ToString(), String.Empty)
 
         If Not ValidateCategoryInputs(name, typeValue) Then Return
 
@@ -659,7 +660,8 @@ Public Class SASystemConfiguration
 
         Dim name = txtCategoryName.Text.Trim()
         Dim description = txtDescription.Text.Trim()
-        Dim typeValue = If(cmbType.SelectedItem?.ToString(), String.Empty)
+        Dim selectedItem As Object = cmbType.SelectedItem
+        Dim typeValue = If(selectedItem IsNot Nothing, selectedItem.ToString(), String.Empty)
 
         If Not ValidateCategoryInputs(name, typeValue) Then Return
 
@@ -723,9 +725,12 @@ Public Class SASystemConfiguration
 
         Dim row = dgvCategory.SelectedRows(0)
         editingCategoryId = CInt(row.Cells("ID").Value)
-        txtCategoryName.Text = row.Cells("CategoryName").Value?.ToString()
-        txtDescription.Text = row.Cells("Description").Value?.ToString()
-        cmbType.SelectedItem = row.Cells("Type").Value?.ToString()
+        Dim catNameValue As Object = row.Cells("CategoryName").Value
+        Dim descValue As Object = row.Cells("Description").Value
+        Dim typeValue As Object = row.Cells("Type").Value
+        txtCategoryName.Text = If(catNameValue IsNot Nothing, catNameValue.ToString(), "")
+        txtDescription.Text = If(descValue IsNot Nothing, descValue.ToString(), "")
+        cmbType.SelectedItem = If(typeValue IsNot Nothing, typeValue.ToString(), "")
     End Sub
 
     Private Function ValidateCategoryInputs(name As String, typeValue As String) As Boolean
@@ -866,9 +871,13 @@ Public Class SASystemConfiguration
 
         Dim row = dgvStatuses.SelectedRows(0)
         editingStatusId = CInt(row.Cells(0).Value)
-        txtStatusName.Text = row.Cells(1).Value?.ToString()
-        cmbStatusType.SelectedItem = row.Cells(2).Value?.ToString()
-        chkStatusActive.Checked = String.Equals(row.Cells(3).Value?.ToString(), "Yes", StringComparison.OrdinalIgnoreCase)
+        Dim statusNameValue As Object = row.Cells(1).Value
+        Dim statusTypeValue As Object = row.Cells(2).Value
+        Dim statusActiveValue As Object = row.Cells(3).Value
+        txtStatusName.Text = If(statusNameValue IsNot Nothing, statusNameValue.ToString(), "")
+        cmbStatusType.SelectedItem = If(statusTypeValue IsNot Nothing, statusTypeValue.ToString(), "")
+        Dim activeValue As String = If(statusActiveValue IsNot Nothing, statusActiveValue.ToString(), "")
+        chkStatusActive.Checked = String.Equals(activeValue, "Yes", StringComparison.OrdinalIgnoreCase)
     End Sub
 
     Private Sub ClearStatusFields()

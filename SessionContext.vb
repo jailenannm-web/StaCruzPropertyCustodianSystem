@@ -57,16 +57,16 @@ Public Module SessionContext
     Public Function HasPermission(permission As ModulePermission) As Boolean
         Select Case permission
             Case ModulePermission.ManageUsers
-                ' Only Super Admin can manage users
-                Return IsSuperAdmin()
+                ' Super Admin and Admin can manage users
+                Return IsSuperAdmin() OrElse IsAdmin()
             Case ModulePermission.ModifyProperties
-                ' Super Admin and Custodian Admin can modify properties
+                ' Only Super Admin can modify properties
                 ' Admin can only VIEW (returns False here)
-                Return IsSuperAdmin() OrElse IsCustodianAdmin()
+                Return IsSuperAdmin()
             Case ModulePermission.ModifySupplies
-                ' Super Admin and Custodian Admin can modify supplies
+                ' Only Super Admin can modify supplies
                 ' Admin can only VIEW (returns False here)
-                Return IsSuperAdmin() OrElse IsCustodianAdmin()
+                Return IsSuperAdmin()
             Case ModulePermission.ModifyRequests
                 ' Super Admin, Admin, and Custodian Admin can manage requests
                 Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin()

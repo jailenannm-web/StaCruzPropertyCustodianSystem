@@ -38,6 +38,7 @@ Partial Class UC_UserManagement
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.date_assigned = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.fullName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.firstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.middleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -76,7 +77,7 @@ Partial Class UC_UserManagement
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.UserID, Me.fullName, Me.firstName, Me.middleName, Me.lastName, Me.suffixAdmin, Me.positionAdmin, Me.DepartmentID, Me.EmployeeID, Me.contactNumber, Me.email, Me.usernameAdmin, Me.passwordAdmin, Me.provinceAdmin, Me.municipality, Me.barangay, Me.Role, Me.Status})
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.UserID, Me.date_assigned, Me.fullName, Me.firstName, Me.middleName, Me.lastName, Me.suffixAdmin, Me.positionAdmin, Me.DepartmentID, Me.EmployeeID, Me.contactNumber, Me.email, Me.usernameAdmin, Me.passwordAdmin, Me.provinceAdmin, Me.municipality, Me.barangay, Me.Role, Me.Status})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(53, 114)
         Me.pm_table.Name = "pm_table"
@@ -201,6 +202,13 @@ Partial Class UC_UserManagement
         Me.UserID.MinimumWidth = 6
         Me.UserID.Name = "UserID"
         Me.UserID.Width = 125
+        '
+        'date_assigned
+        '
+        Me.date_assigned.HeaderText = "Date Assigned"
+        Me.date_assigned.MinimumWidth = 6
+        Me.date_assigned.Name = "date_assigned"
+        Me.date_assigned.Width = 125
         '
         'fullName
         '
@@ -363,6 +371,7 @@ Partial Class UC_UserManagement
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlusermanagement As Label
     Friend WithEvents UserID As DataGridViewTextBoxColumn
+    Friend WithEvents date_assigned As DataGridViewTextBoxColumn
     Friend WithEvents fullName As DataGridViewTextBoxColumn
     Friend WithEvents firstName As DataGridViewTextBoxColumn
     Friend WithEvents middleName As DataGridViewTextBoxColumn

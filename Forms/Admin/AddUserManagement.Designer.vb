@@ -26,6 +26,8 @@ Partial Class AddUserManagement
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
         Me.uc_um_edituser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.Role = New System.Windows.Forms.ComboBox()
+        Me.lblrole = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.username = New System.Windows.Forms.TextBox()
         Me.suffixAdmin = New System.Windows.Forms.ComboBox()
@@ -100,6 +102,8 @@ Partial Class AddUserManagement
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.uc_um_edituser.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.uc_um_edituser.Controls.Add(Me.Role)
+        Me.uc_um_edituser.Controls.Add(Me.lblrole)
         Me.uc_um_edituser.Controls.Add(Me.Label1)
         Me.uc_um_edituser.Controls.Add(Me.username)
         Me.uc_um_edituser.Controls.Add(Me.suffixAdmin)
@@ -136,6 +140,31 @@ Partial Class AddUserManagement
         Me.uc_um_edituser.Name = "uc_um_edituser"
         Me.uc_um_edituser.Size = New System.Drawing.Size(1219, 560)
         Me.uc_um_edituser.TabIndex = 60
+        '
+        'Role
+        '
+        Me.Role.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Role.FormattingEnabled = True
+        Me.Role.Items.AddRange(New Object() {"Staff", "guard", "it", "teacher", "principal"})
+        Me.Role.Location = New System.Drawing.Point(858, 230)
+        Me.Role.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Role.Name = "Role"
+        Me.Role.Size = New System.Drawing.Size(244, 24)
+        Me.Role.TabIndex = 78
+        '
+        'lblrole
+        '
+        Me.lblrole.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblrole.AutoSize = True
+        Me.lblrole.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.lblrole.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.lblrole.Location = New System.Drawing.Point(709, 231)
+        Me.lblrole.Name = "lblrole"
+        Me.lblrole.Size = New System.Drawing.Size(39, 18)
+        Me.lblrole.TabIndex = 77
+        Me.lblrole.Text = "Role"
         '
         'Label1
         '
@@ -180,7 +209,7 @@ Partial Class AddUserManagement
         Me.passwordAddUser.BackColor = System.Drawing.SystemColors.Window
         Me.passwordAddUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.passwordAddUser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.passwordAddUser.Location = New System.Drawing.Point(853, 329)
+        Me.passwordAddUser.Location = New System.Drawing.Point(855, 407)
         Me.passwordAddUser.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.passwordAddUser.MaxLength = 100
         Me.passwordAddUser.Name = "passwordAddUser"
@@ -192,7 +221,7 @@ Partial Class AddUserManagement
         Me.barangay.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.barangay.FormattingEnabled = True
-        Me.barangay.Location = New System.Drawing.Point(853, 279)
+        Me.barangay.Location = New System.Drawing.Point(857, 349)
         Me.barangay.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.barangay.Name = "barangay"
         Me.barangay.Size = New System.Drawing.Size(245, 24)
@@ -203,7 +232,7 @@ Partial Class AddUserManagement
         Me.municipality.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.municipality.FormattingEnabled = True
-        Me.municipality.Location = New System.Drawing.Point(855, 217)
+        Me.municipality.Location = New System.Drawing.Point(855, 283)
         Me.municipality.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.municipality.Name = "municipality"
         Me.municipality.Size = New System.Drawing.Size(243, 24)
@@ -236,7 +265,7 @@ Partial Class AddUserManagement
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.Label9.ForeColor = System.Drawing.Color.Black
-        Me.Label9.Location = New System.Drawing.Point(709, 217)
+        Me.Label9.Location = New System.Drawing.Point(709, 289)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(113, 18)
         Me.Label9.TabIndex = 62
@@ -320,8 +349,6 @@ Partial Class AddUserManagement
         '
         'userID
         '
-        Me.userID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.userID.BackColor = System.Drawing.SystemColors.Window
         Me.userID.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.userID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
@@ -339,7 +366,7 @@ Partial Class AddUserManagement
         Me.um_edituser_txtboxID.AutoSize = True
         Me.um_edituser_txtboxID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.um_edituser_txtboxID.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_txtboxID.Location = New System.Drawing.Point(709, 330)
+        Me.um_edituser_txtboxID.Location = New System.Drawing.Point(711, 411)
         Me.um_edituser_txtboxID.Name = "um_edituser_txtboxID"
         Me.um_edituser_txtboxID.Size = New System.Drawing.Size(75, 18)
         Me.um_edituser_txtboxID.TabIndex = 46
@@ -352,7 +379,7 @@ Partial Class AddUserManagement
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(709, 277)
+        Me.Label6.Location = New System.Drawing.Point(711, 349)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(70, 18)
         Me.Label6.TabIndex = 44
@@ -501,8 +528,6 @@ Partial Class AddUserManagement
         '
         'departmentID
         '
-        Me.departmentID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.departmentID.FormattingEnabled = True
         Me.departmentID.Location = New System.Drawing.Point(264, 382)
         Me.departmentID.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -595,4 +620,6 @@ Partial Class AddUserManagement
     Friend WithEvents departmentID As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents username As System.Windows.Forms.TextBox
+    Friend WithEvents Role As System.Windows.Forms.ComboBox
+    Friend WithEvents lblrole As System.Windows.Forms.Label
 End Class

@@ -23,6 +23,14 @@ Public Class UC_UserManagement
         ConfigureFilterControls()
         LoadAdminContext()
         RefreshUserTable()
+        ApplyRolePermissions()
+    End Sub
+    
+    Private Sub ApplyRolePermissions()
+        Dim canManageUsers As Boolean = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
+        If btnAdd IsNot Nothing Then btnAdd.Enabled = canManageUsers
+        If btnEdit IsNot Nothing Then btnEdit.Enabled = canManageUsers
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = canManageUsers
     End Sub
 
     Private Sub ConfigureGrid()

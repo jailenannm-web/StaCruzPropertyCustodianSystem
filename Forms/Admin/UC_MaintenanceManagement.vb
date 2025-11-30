@@ -42,8 +42,12 @@ Public Class UC_MaintenanceManagement
     End Sub
 
     Private Sub ApplyRoleRestrictions()
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        Dim isAdmin As Boolean = SessionContext.IsAdmin()
         btnApprove.Enabled = canModifyMaintenance
-       btnAssign.Enabled = canModifyMaintenance
+        btnAssign.Enabled = canModifyMaintenance AndAlso isSuperAdmin
+        btnDelete.Enabled = isSuperAdmin
+        btnReject.Enabled = canModifyMaintenance
     End Sub
 
     Private Sub ShowMaintenanceRestriction()

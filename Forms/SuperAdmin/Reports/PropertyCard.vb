@@ -42,7 +42,7 @@ Public Class PropertyCard
         Dim spacing As Integer = 30
 
         AddLabel(panelCard, "Property ID: " & propertyData("property_id").ToString(), yPos) : yPos += spacing
-        AddLabel(panelCard, "Property Name: " & propertyData("property_name").ToString(), yPos) : yPos += spacing
+        AddLabel(panelCard, "Property Name: " & propertyData("item_name").ToString(), yPos) : yPos += spacing
         AddLabel(panelCard, "Category: " & propertyData("category").ToString(), yPos) : yPos += spacing
         AddLabel(panelCard, "Serial Number: " & propertyData("serial_number").ToString(), yPos) : yPos += spacing
         AddLabel(panelCard, "Supplier: " & propertyData("supplier_name").ToString(), yPos) : yPos += spacing

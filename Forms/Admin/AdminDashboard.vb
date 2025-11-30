@@ -516,7 +516,7 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub btn_MaintenanceRequest_Click(sender As Object, e As EventArgs) Handles btn_MaintenanceRequest.Click
+    Private Sub btn_MaintenanceRequest_Click(sender As Object, e As EventArgs) Handles admin_btn_MaintenanceRequest.Click
         LoadUserControl(New UC_MaintenanceRequestManagement())
     End Sub
 

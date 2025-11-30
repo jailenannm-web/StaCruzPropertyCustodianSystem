@@ -90,7 +90,7 @@ Public Class UC_DepartmentManagement
                         If(IsDBNull(row("email")), "", row("email").ToString()),
                         If(IsDBNull(row("location")), "", row("location").ToString()),
                         If(IsDBNull(row("no_of_employees")), "0", row("no_of_employees").ToString()),
-                        If(IsDBNull(row("department_code")), "", row("department_code").ToString()),
+                        If(IsDBNull(row("office_code")), "", row("office_code").ToString()),
                         If(IsDBNull(row("office_hours")), "", row("office_hours").ToString()),
                         If(IsDBNull(row("established_date")), "", If(IsDBNull(row("established_date")), "", CDate(row("established_date")).ToString("yyyy-MM-dd"))),
                         If(IsDBNull(row("parent_department_id")), "", If(IsDBNull(row("parent_department_id")), "", row("parent_department_id").ToString())),

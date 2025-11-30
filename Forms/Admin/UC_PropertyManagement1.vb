@@ -65,7 +65,7 @@ Public Class UC_PropertyManagement1
         ' Populate status filter
         pm_cbobx_status.Items.Clear()
         pm_cbobx_status.Items.Add("All Status")
-        pm_cbobx_status.Items.AddRange(New String() {"active", "disposed", "lost", "damaged"})
+        pm_cbobx_status.Items.AddRange(New String() {"Active", "For Disposal", "Lost", "Borrowed"})
         pm_cbobx_status.SelectedIndex = 0
 
         ' Wire up filter change events
@@ -83,24 +83,18 @@ Public Class UC_PropertyManagement1
 
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
-                    Dim warrantyExp As String = ""
-                    If Not IsDBNull(row("warranty_details")) AndAlso Not String.IsNullOrEmpty(row("warranty_details").ToString()) Then
-                        warrantyExp = row("warranty_details").ToString()
-                    End If
-
                     propertyManagementGrid.Rows.Add(
                         If(IsDBNull(row("property_id")), "", row("property_id").ToString()),
-                        If(IsDBNull(row("property_name")), "", row("property_name").ToString()),
+                        If(IsDBNull(row("item_name")), "", row("item_name").ToString()),
                         If(IsDBNull(row("category")), "", row("category").ToString()),
+                        If(IsDBNull(row("property_number")), "", row("property_number").ToString()),
                         If(IsDBNull(row("serial_number")), "", row("serial_number").ToString()),
-                        If(IsDBNull(row("supplier_name")), "", row("supplier_name").ToString()),
-                        If(IsDBNull(row("condition_status")), "", row("condition_status").ToString()),
-                        If(IsDBNull(row("acquisition_cost")), "0.00", Format(CDec(row("acquisition_cost")), "0.00")),
                         If(IsDBNull(row("acquisition_date")), "", CDate(row("acquisition_date")).ToString("yyyy-MM-dd")),
-                        warrantyExp,
+                        If(IsDBNull(row("acquisition_cost")), "0.00", Format(CDec(row("acquisition_cost")), "0.00")),
                         If(IsDBNull(row("assigned_employee")), "", row("assigned_employee").ToString()),
                         If(IsDBNull(row("assigned_department")), "", row("assigned_department").ToString()),
                         If(IsDBNull(row("location")), "", row("location").ToString()),
+                        If(IsDBNull(row("condition")), "", row("condition").ToString()),
                         If(IsDBNull(row("status")), "", row("status").ToString())
                     )
                 Next

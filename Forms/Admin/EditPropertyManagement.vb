@@ -47,7 +47,7 @@ Public Class EditPropertyManagement
         End If
 
         txtpropertyID.Text = propertyID.ToString()
-        txtPropertyName.Text = SafeValue("property_name")
+        txtPropertyName.Text = SafeValue("item_name")
         SelectComboValue(cboCategory, SafeValue("category"))
         txtSerialNumber.Text = SafeValue("serial_number")
         txtSupplier.Text = SafeValue("supplier_name")

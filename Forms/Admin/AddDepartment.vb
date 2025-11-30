@@ -69,11 +69,7 @@ Public Class AddDepartment
             Return
         End If
 
-        If String.IsNullOrWhiteSpace(department_code_Code.Text) Then
-            MessageBox.Show("Department Code is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            department_code_Code.Focus()
-            Return
-        End If
+        ' Office code is optional
 
         ' Validate email format if provided
         If Not String.IsNullOrWhiteSpace(email_txt.Text) Then
@@ -130,20 +126,20 @@ Public Class AddDepartment
         Dim establishedDate As Date? = established_date_date.Value.Date
 
         Try
-            ' Call the enhanced AddDepartment function with all fields
+            ' Call the enhanced AddDepartment function with all fields matching schema
             Dim success As Boolean = DatabaseConnection.AddDepartment(
                 department_name_txt.Text.Trim(),
                 head_of_department_txt.Text.Trim(),
                 location_txt.Text.Trim(),
-                department_code_Code.Text.Trim(),
+                If(String.IsNullOrWhiteSpace(department_code_Code.Text), "", department_code_Code.Text.Trim()),
                 If(String.IsNullOrWhiteSpace(contact_number_txt.Text), "", contact_number_txt.Text.Trim()),
                 If(String.IsNullOrWhiteSpace(email_txt.Text), "", email_txt.Text.Trim()),
-                noOfEmployees,
-                budgetAllocation,
-                officeHours,
-                establishedDate,
-                parentDeptID,
-                statusValue
+                0, ' no_of_employees - not in schema
+                0, ' budget_allocation - not in schema  
+                "", ' office_hours - not in schema
+                Nothing, ' established_date - not in schema
+                Nothing, ' parent_department_id - not in schema
+                If(status_cmbo.SelectedIndex >= 0, status_cmbo.SelectedItem.ToString(), "Active")
             )
 
             If success Then

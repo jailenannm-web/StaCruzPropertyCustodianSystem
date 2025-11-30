@@ -19,7 +19,8 @@ Public Class UC_PropertyRequestManagement
         If e.RowIndex >= 0 AndAlso prm_table1.Columns.Contains("action_edit") AndAlso
            e.ColumnIndex = prm_table1.Columns("action_edit").Index Then
 
-            Dim reqID As String = prm_table1.Rows(e.RowIndex).Cells("request_id").Value?.ToString()
+            Dim reqIDValue As Object = prm_table1.Rows(e.RowIndex).Cells("request_id").Value
+            Dim reqID As String = If(reqIDValue IsNot Nothing, reqIDValue.ToString(), "")
             MessageBox.Show("Edit Request: " & reqID, "Action", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             ' Example: open edit request UC
@@ -87,10 +88,12 @@ Public Class UC_PropertyRequestManagement
     End Sub
 
     Private Sub ApplyPermissionState()
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        Dim isAdmin As Boolean = SessionContext.IsAdmin()
         If btnApprove IsNot Nothing Then btnApprove.Enabled = canModifyRequests
         If btnReject IsNot Nothing Then btnReject.Enabled = canModifyRequests
-        If assign IsNot Nothing Then assign.Enabled = canModifyRequests
-        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = canModifyRequests
+        If assign IsNot Nothing Then assign.Enabled = canModifyRequests AndAlso isSuperAdmin
+        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = isSuperAdmin
     End Sub
 
     ' ----------------------------------------------------------------------
@@ -131,14 +134,16 @@ Public Class UC_PropertyRequestManagement
         End If
 
         Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
-        Dim requestIDStr As String = selectedRow.Cells("request_id").Value?.ToString()
+        Dim requestIDValue As Object = selectedRow.Cells("request_id").Value
+        Dim requestIDStr As String = If(requestIDValue IsNot Nothing, requestIDValue.ToString(), "")
         If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
             MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
         Dim requestID As Integer = Integer.Parse(requestIDStr)
-        Dim currentStatus As String = selectedRow.Cells("Status").Value?.ToString()?.ToLower() ?? ""
+        Dim statusValue As Object = selectedRow.Cells("Status").Value
+        Dim currentStatus As String = If(statusValue IsNot Nothing, statusValue.ToString().ToLower(), "")
 
         If currentStatus = "approved" Then
             MessageBox.Show("This request is already approved.", "Already Approved", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -173,14 +178,16 @@ Public Class UC_PropertyRequestManagement
         End If
 
         Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
-        Dim requestIDStr As String = selectedRow.Cells("request_id").Value?.ToString()
+        Dim requestIDValue As Object = selectedRow.Cells("request_id").Value
+        Dim requestIDStr As String = If(requestIDValue IsNot Nothing, requestIDValue.ToString(), "")
         If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
             MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
         Dim requestID As Integer = Integer.Parse(requestIDStr)
-        Dim currentStatus As String = selectedRow.Cells("Status").Value?.ToString()?.ToLower() ?? ""
+        Dim statusValue As Object = selectedRow.Cells("Status").Value
+        Dim currentStatus As String = If(statusValue IsNot Nothing, statusValue.ToString().ToLower(), "")
 
         If currentStatus = "rejected" Then
             MessageBox.Show("This request is already rejected.", "Already Rejected", MessageBoxButtons.OK, MessageBoxIcon.Information)

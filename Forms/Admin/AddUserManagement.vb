@@ -60,7 +60,7 @@ Public Class AddUserManagement
             usernameValue = (firstName.Text.Trim() & "." & lastName.Text.Trim()).ToLowerInvariant()
         End If
 
-        Dim roleValue As String = GetComboValue(departmentID, "Admin")
+        Dim roleValue As String = GetComboValue(Role, "Admin")
         Dim userTypeValue As String = If(String.Equals(roleValue, "SuperAdmin", StringComparison.OrdinalIgnoreCase), "SuperAdmin", "Admin")
         Dim positionValue As String = GetComboValue(positionAdmin, If(String.IsNullOrWhiteSpace(roleValue), "Administrator", roleValue))
 
@@ -112,7 +112,8 @@ Public Class AddUserManagement
         If String.IsNullOrWhiteSpace(lastName.Text) Then Return "Last name is required."
         If String.IsNullOrWhiteSpace(email.Text) Then Return "Email is required."
         If Not IsValidEmail(email.Text) Then Return "Please enter a valid email address."
-        If departmentID.SelectedIndex = -1 Then Return "Please select a user role."
+        Dim roleValue As String = GetComboValue(Role, "")
+        If String.IsNullOrWhiteSpace(roleValue) Then Return "Please select a user role."
         If String.IsNullOrWhiteSpace(employeeID.Text) Then Return "Employee ID is required."
         If String.IsNullOrWhiteSpace(passwordAddUser.Text) Then Return "Please provide an initial password."
         Return ""

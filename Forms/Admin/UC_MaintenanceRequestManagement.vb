@@ -19,7 +19,8 @@ Public Class UC_MaintenanceRequestManagement
         If e.RowIndex >= 0 AndAlso propertyManagementGrid.Columns.Contains("action_edit") AndAlso
            e.ColumnIndex = propertyManagementGrid.Columns("action_edit").Index Then
 
-            Dim reqID As String = propertyManagementGrid.Rows(e.RowIndex).Cells("request_id").Value?.ToString()
+            Dim reqIDValue As Object = propertyManagementGrid.Rows(e.RowIndex).Cells("request_id").Value
+            Dim reqID As String = If(reqIDValue IsNot Nothing, reqIDValue.ToString(), "")
             MessageBox.Show("Edit Request: " & reqID, "Action", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             ' Example: open edit request UC
@@ -76,7 +77,7 @@ Public Class UC_MaintenanceRequestManagement
 
     Private Sub LoadMaintenanceRequestData()
         Try
-            Dim dt As DataTable = DatabaseConnection.GetAllMaintenance()
+            Dim dt As DataTable = DatabaseConnection.GetAllMaintenanceRequests()
             propertyManagementGrid.DataSource = dt
             propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             propertyManagementGrid.ReadOnly = True
@@ -135,10 +136,10 @@ Public Class UC_MaintenanceRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
+            Dim requestID As Integer = Convert.ToInt32(dataRow("request_id"))
             Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
 
-            If currentStatus = "completed" OrElse currentStatus = "ongoing" Then
+            If currentStatus = "completed" OrElse currentStatus = "approved" OrElse currentStatus = "in progress" Then
                 MessageBox.Show("This maintenance request is already processed.", "Already Processed", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Return
             End If
@@ -146,17 +147,8 @@ Public Class UC_MaintenanceRequestManagement
             Dim remarks As String = InputBox("Enter approval remarks (optional):", "Approve Maintenance Request", "")
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-            ' Get existing values to preserve them
-            Dim serviceDate As Date = If(IsDBNull(dataRow("service_date")), Date.Today, Convert.ToDateTime(dataRow("service_date")))
-            Dim serviceType As String = If(IsDBNull(dataRow("service_type")), "repair", dataRow("service_type").ToString())
-            Dim description As String = If(IsDBNull(dataRow("description")), "", dataRow("description").ToString())
-            Dim serviceProvider As String = If(IsDBNull(dataRow("service_provider")), "", dataRow("service_provider").ToString())
-            Dim providerContact As String = ""
-            Dim cost As Decimal = If(IsDBNull(dataRow("cost")), 0, Convert.ToDecimal(dataRow("cost")))
-            Dim technicianAssigned As String = If(IsDBNull(dataRow("technician_assigned")), "", dataRow("technician_assigned").ToString())
-
-            ' Update maintenance status to ongoing (approved)
-            If DatabaseConnection.UpdateMaintenanceEntry(maintenanceID, serviceDate, serviceType, description, serviceProvider, providerContact, cost, Nothing, technicianAssigned, "ongoing", remarks, 0, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
+            ' Update maintenance request status to approved
+            If DatabaseConnection.ApproveMaintenanceRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
                 MessageBox.Show("Maintenance request approved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadMaintenanceRequestData()
             Else
@@ -188,10 +180,10 @@ Public Class UC_MaintenanceRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
+            Dim requestID As Integer = Convert.ToInt32(dataRow("request_id"))
             Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
 
-            If currentStatus = "cancelled" Then
+            If currentStatus = "rejected" Then
                 MessageBox.Show("This maintenance request is already rejected.", "Already Rejected", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Return
             End If
@@ -204,17 +196,8 @@ Public Class UC_MaintenanceRequestManagement
 
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-            ' Get existing values to preserve them
-            Dim serviceDate As Date = If(IsDBNull(dataRow("service_date")), Date.Today, Convert.ToDateTime(dataRow("service_date")))
-            Dim serviceType As String = If(IsDBNull(dataRow("service_type")), "repair", dataRow("service_type").ToString())
-            Dim description As String = If(IsDBNull(dataRow("description")), "", dataRow("description").ToString())
-            Dim serviceProvider As String = If(IsDBNull(dataRow("service_provider")), "", dataRow("service_provider").ToString())
-            Dim providerContact As String = ""
-            Dim cost As Decimal = If(IsDBNull(dataRow("cost")), 0, Convert.ToDecimal(dataRow("cost")))
-            Dim technicianAssigned As String = If(IsDBNull(dataRow("technician_assigned")), "", dataRow("technician_assigned").ToString())
-
-            ' Update maintenance status to cancelled
-            If DatabaseConnection.UpdateMaintenanceEntry(maintenanceID, serviceDate, serviceType, description, serviceProvider, providerContact, cost, Nothing, technicianAssigned, "cancelled", remarks, 0, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
+            ' Update maintenance request status to rejected
+            If DatabaseConnection.RejectMaintenanceRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
                 MessageBox.Show("Maintenance request rejected successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadMaintenanceRequestData()
             Else
