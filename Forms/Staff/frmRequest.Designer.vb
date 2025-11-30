@@ -41,26 +41,18 @@ Partial Class frmRequest
         Me.ApprovedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReleaseDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ActualReturnedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Penalty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ConditionUponReturn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UpdatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.btn_Cancel = New System.Windows.Forms.Button()
-        Me.btn_Request = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblRequest
         '
+        Me.lblRequest.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblRequest.AutoSize = True
         Me.lblRequest.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRequest.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.lblRequest.Location = New System.Drawing.Point(65, 29)
+        Me.lblRequest.Location = New System.Drawing.Point(72, 88)
         Me.lblRequest.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblRequest.Name = "lblRequest"
         Me.lblRequest.Size = New System.Drawing.Size(238, 58)
@@ -69,13 +61,17 @@ Partial Class frmRequest
         '
         'DataGridView1
         '
+        Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestID, Me.UserID, Me.PropertyID, Me.RequestDate, Me.Purpose, Me.Quantity, Me.Status, Me.ApprovedBy, Me.ReleaseDate, Me.ReturnDate, Me.ActualReturnedDate, Me.Remarks, Me.Penalty, Me.ConditionUponReturn, Me.CreatedAt, Me.UpdatedAt})
-        Me.DataGridView1.Location = New System.Drawing.Point(75, 162)
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestID, Me.UserID, Me.PropertyID, Me.RequestDate, Me.Purpose, Me.Quantity, Me.Status, Me.ApprovedBy, Me.ReleaseDate, Me.ReturnDate})
+        Me.DataGridView1.Location = New System.Drawing.Point(82, 150)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1524, 871)
+        Me.DataGridView1.Size = New System.Drawing.Size(1275, 884)
         Me.DataGridView1.TabIndex = 155
         '
         'RequestID
@@ -87,163 +83,73 @@ Partial Class frmRequest
         '
         'UserID
         '
-        Me.UserID.HeaderText = "User I.D"
+        Me.UserID.HeaderText = "Date of Request"
         Me.UserID.MinimumWidth = 6
         Me.UserID.Name = "UserID"
-        Me.UserID.Width = 125
+        Me.UserID.Width = 135
         '
         'PropertyID
         '
-        Me.PropertyID.HeaderText = "Property I.D"
+        Me.PropertyID.HeaderText = "Item Name"
         Me.PropertyID.MinimumWidth = 6
         Me.PropertyID.Name = "PropertyID"
-        Me.PropertyID.Width = 125
+        Me.PropertyID.Width = 170
         '
         'RequestDate
         '
-        Me.RequestDate.HeaderText = "RequestDate"
+        Me.RequestDate.HeaderText = "Description"
         Me.RequestDate.MinimumWidth = 6
         Me.RequestDate.Name = "RequestDate"
-        Me.RequestDate.Width = 125
+        Me.RequestDate.Width = 170
         '
         'Purpose
         '
-        Me.Purpose.HeaderText = "Purpose"
+        Me.Purpose.HeaderText = "Quantity Requested"
         Me.Purpose.MinimumWidth = 6
         Me.Purpose.Name = "Purpose"
-        Me.Purpose.Width = 125
+        Me.Purpose.Width = 150
         '
         'Quantity
         '
-        Me.Quantity.HeaderText = "Quantity"
+        Me.Quantity.HeaderText = "Unit"
         Me.Quantity.MinimumWidth = 6
         Me.Quantity.Name = "Quantity"
         Me.Quantity.Width = 125
         '
         'Status
         '
-        Me.Status.HeaderText = "Status"
+        Me.Status.HeaderText = "Purpose"
         Me.Status.MinimumWidth = 6
         Me.Status.Name = "Status"
-        Me.Status.Width = 125
+        Me.Status.Width = 200
         '
         'ApprovedBy
         '
-        Me.ApprovedBy.HeaderText = "Approved By"
+        Me.ApprovedBy.HeaderText = "Status "
         Me.ApprovedBy.MinimumWidth = 6
         Me.ApprovedBy.Name = "ApprovedBy"
         Me.ApprovedBy.Width = 125
         '
         'ReleaseDate
         '
-        Me.ReleaseDate.HeaderText = "Release Date"
+        Me.ReleaseDate.HeaderText = "Approved By"
         Me.ReleaseDate.MinimumWidth = 6
         Me.ReleaseDate.Name = "ReleaseDate"
-        Me.ReleaseDate.Width = 125
+        Me.ReleaseDate.Width = 150
         '
         'ReturnDate
         '
-        Me.ReturnDate.HeaderText = "Return Date"
+        Me.ReturnDate.HeaderText = "Approved Date"
         Me.ReturnDate.MinimumWidth = 6
         Me.ReturnDate.Name = "ReturnDate"
-        Me.ReturnDate.Width = 125
-        '
-        'ActualReturnedDate
-        '
-        Me.ActualReturnedDate.HeaderText = "Actual Returned Date"
-        Me.ActualReturnedDate.MinimumWidth = 6
-        Me.ActualReturnedDate.Name = "ActualReturnedDate"
-        Me.ActualReturnedDate.Width = 125
-        '
-        'Remarks
-        '
-        Me.Remarks.HeaderText = "Remarks"
-        Me.Remarks.MinimumWidth = 6
-        Me.Remarks.Name = "Remarks"
-        Me.Remarks.Width = 125
-        '
-        'Penalty
-        '
-        Me.Penalty.HeaderText = "Penalty"
-        Me.Penalty.MinimumWidth = 6
-        Me.Penalty.Name = "Penalty"
-        Me.Penalty.Width = 125
-        '
-        'ConditionUponReturn
-        '
-        Me.ConditionUponReturn.HeaderText = "Condition Upon Return"
-        Me.ConditionUponReturn.MinimumWidth = 6
-        Me.ConditionUponReturn.Name = "ConditionUponReturn"
-        Me.ConditionUponReturn.Width = 125
-        '
-        'CreatedAt
-        '
-        Me.CreatedAt.HeaderText = "Created At"
-        Me.CreatedAt.MinimumWidth = 6
-        Me.CreatedAt.Name = "CreatedAt"
-        Me.CreatedAt.Width = 125
-        '
-        'UpdatedAt
-        '
-        Me.UpdatedAt.HeaderText = "Updated At"
-        Me.UpdatedAt.MinimumWidth = 6
-        Me.UpdatedAt.Name = "UpdatedAt"
-        Me.UpdatedAt.Width = 125
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(72, 91)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(58, 41)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 157
-        Me.PictureBox2.TabStop = False
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(137, 93)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(775, 41)
-        Me.TextBox1.TabIndex = 156
-        '
-        'btn_Cancel
-        '
-        Me.btn_Cancel.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Cancel.Location = New System.Drawing.Point(1257, 1041)
-        Me.btn_Cancel.Margin = New System.Windows.Forms.Padding(4)
-        Me.btn_Cancel.Name = "btn_Cancel"
-        Me.btn_Cancel.Size = New System.Drawing.Size(156, 52)
-        Me.btn_Cancel.TabIndex = 158
-        Me.btn_Cancel.Text = "Cancel"
-        Me.btn_Cancel.UseVisualStyleBackColor = True
-        '
-        'btn_Request
-        '
-        Me.btn_Request.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Request.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Request.ForeColor = System.Drawing.Color.White
-        Me.btn_Request.Location = New System.Drawing.Point(1431, 1041)
-        Me.btn_Request.Margin = New System.Windows.Forms.Padding(4)
-        Me.btn_Request.Name = "btn_Request"
-        Me.btn_Request.Size = New System.Drawing.Size(168, 52)
-        Me.btn_Request.TabIndex = 159
-        Me.btn_Request.Text = "Add Request"
-        Me.btn_Request.UseVisualStyleBackColor = False
+        Me.ReturnDate.Width = 150
         '
         'frmRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1942, 1121)
-        Me.Controls.Add(Me.btn_Cancel)
-        Me.Controls.Add(Me.btn_Request)
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.TextBox1)
+        Me.ClientSize = New System.Drawing.Size(1467, 1175)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.lblRequest)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -252,7 +158,6 @@ Partial Class frmRequest
         Me.Text = "frmRequest"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -270,14 +175,4 @@ Partial Class frmRequest
     Friend WithEvents ApprovedBy As DataGridViewTextBoxColumn
     Friend WithEvents ReleaseDate As DataGridViewTextBoxColumn
     Friend WithEvents ReturnDate As DataGridViewTextBoxColumn
-    Friend WithEvents ActualReturnedDate As DataGridViewTextBoxColumn
-    Friend WithEvents Remarks As DataGridViewTextBoxColumn
-    Friend WithEvents Penalty As DataGridViewTextBoxColumn
-    Friend WithEvents ConditionUponReturn As DataGridViewTextBoxColumn
-    Friend WithEvents CreatedAt As DataGridViewTextBoxColumn
-    Friend WithEvents UpdatedAt As DataGridViewTextBoxColumn
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents btn_Cancel As Button
-    Friend WithEvents btn_Request As Button
 End Class

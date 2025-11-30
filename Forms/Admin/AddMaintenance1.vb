@@ -27,9 +27,7 @@ Public Class AddMaintenance1
         ' Add your save logic here
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        NavigateBack()
-    End Sub
+
 
     Private Sub admin_label_DepartmentManagement_Click(sender As Object, e As EventArgs) Handles admin_label_DepartmentManagement.Click
     End Sub

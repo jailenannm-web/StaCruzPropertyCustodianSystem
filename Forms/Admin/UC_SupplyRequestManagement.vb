@@ -18,8 +18,15 @@ Public Class UC_SupplyRequestManagement
 
     End Sub
 
-    Private Sub issuePropertyCard_Click(sender As Object, e As EventArgs) Handles issuePropertyCard.Click
+    Private Sub issueRequisition_Click(sender As Object, e As EventArgs) Handles issueRequisition.Click
+        Dim addSupplyRequestManagement As New RequisitionIssueSlip()
+        addSupplyRequestManagement.Dock = DockStyle.Fill
 
+        ' Clear previous controls
+        Me.Controls.Clear()
+
+        ' Add new user control
+        Me.Controls.Add(addSupplyRequestManagement)
     End Sub
 
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click

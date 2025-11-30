@@ -5,7 +5,7 @@ Public Class frmRequest
 
     End Sub
 
-    Private Sub btn_AddRequest_Click(sender As Object, e As EventArgs) Handles btn_Request.Click
+    Private Sub btn_AddRequest_Click(sender As Object, e As EventArgs) 
 
         Dim addUserForm As New frmPropertyRequest()
 
@@ -14,7 +14,4 @@ Public Class frmRequest
 
     End Sub
 
-    Private Sub btn_Request_Click(sender As Object, e As EventArgs) Handles btn_Request.Click
-
-    End Sub
 End Class

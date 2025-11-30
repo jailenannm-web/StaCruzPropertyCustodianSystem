@@ -51,17 +51,19 @@ Partial Class frmInventory
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnrequestproperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnrequestsupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'comboStatus
         '
-        Me.comboStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.comboStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.comboStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.comboStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.comboStatus.FormattingEnabled = True
-        Me.comboStatus.Location = New System.Drawing.Point(1321, 107)
+        Me.comboStatus.Location = New System.Drawing.Point(1326, 100)
         Me.comboStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.comboStatus.Name = "comboStatus"
         Me.comboStatus.Size = New System.Drawing.Size(147, 37)
@@ -69,11 +71,11 @@ Partial Class frmInventory
         '
         'comboCategoris
         '
-        Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.comboCategoris.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.comboCategoris.FormattingEnabled = True
-        Me.comboCategoris.Location = New System.Drawing.Point(1021, 107)
+        Me.comboCategoris.Location = New System.Drawing.Point(1026, 100)
         Me.comboCategoris.Margin = New System.Windows.Forms.Padding(4)
         Me.comboCategoris.Name = "comboCategoris"
         Me.comboCategoris.Size = New System.Drawing.Size(147, 37)
@@ -81,13 +83,14 @@ Partial Class frmInventory
         '
         'DataGridView1
         '
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertID, Me.PropertyName, Me.Category, Me.Description, Me.SerialNumber, Me.AcquisitionDate, Me.AcquisitionCost, Me.Supplier, Me.ConditionStatus, Me.LocationColumn, Me.CustodianID, Me.WarrantyDetail, Me.LifeSpan, Me.DepreciationValue, Me.DisposalDate})
-        Me.DataGridView1.Location = New System.Drawing.Point(85, 176)
+        Me.DataGridView1.Location = New System.Drawing.Point(4, 4)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1542, 777)
+        Me.DataGridView1.Size = New System.Drawing.Size(1504, 777)
         Me.DataGridView1.TabIndex = 161
         '
         'PropertID
@@ -198,27 +201,27 @@ Partial Class frmInventory
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(83, 100)
+        Me.PictureBox2.Location = New System.Drawing.Point(98, 100)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(58, 52)
+        Me.PictureBox2.Size = New System.Drawing.Size(55, 37)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 160
         Me.PictureBox2.TabStop = False
         '
         'TextBox1
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Poppins Light", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Font = New System.Drawing.Font("Poppins Light", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(148, 100)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(729, 52)
+        Me.TextBox1.Size = New System.Drawing.Size(729, 37)
         Me.TextBox1.TabIndex = 159
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(1232, 111)
+        Me.Label2.Location = New System.Drawing.Point(1237, 104)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(81, 36)
@@ -229,7 +232,7 @@ Partial Class frmInventory
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(885, 111)
+        Me.Label1.Location = New System.Drawing.Point(890, 104)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(129, 36)
@@ -251,6 +254,7 @@ Partial Class frmInventory
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.Label3.Location = New System.Drawing.Point(88, 30)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
@@ -261,7 +265,7 @@ Partial Class frmInventory
         'btnrequestproperty
         '
         Me.btnrequestproperty.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnrequestproperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnrequestproperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnrequestproperty.CornerRadius = 15
         Me.btnrequestproperty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnrequestproperty.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -277,7 +281,7 @@ Partial Class frmInventory
         'btnrequestsupply
         '
         Me.btnrequestsupply.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnrequestsupply.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnrequestsupply.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.btnrequestsupply.CornerRadius = 15
         Me.btnrequestsupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnrequestsupply.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -290,18 +294,30 @@ Partial Class frmInventory
         Me.btnrequestsupply.Text = "Request Supply"
         Me.btnrequestsupply.UseVisualStyleBackColor = False
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.5!))
+        Me.TableLayoutPanel1.Controls.Add(Me.DataGridView1, 0, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(98, 169)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1512, 786)
+        Me.TableLayoutPanel1.TabIndex = 166
+        '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1756, 1120)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.btnrequestsupply)
         Me.Controls.Add(Me.btnrequestproperty)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.comboStatus)
         Me.Controls.Add(Me.comboCategoris)
-        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label2)
@@ -314,6 +330,7 @@ Partial Class frmInventory
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -345,4 +362,5 @@ Partial Class frmInventory
     Friend WithEvents Label3 As Label
     Friend WithEvents btnrequestproperty As Resources.Controls.RoundedButton
     Friend WithEvents btnrequestsupply As Resources.Controls.RoundedButton
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 End Class

@@ -63,4 +63,10 @@ Partial Public Class RequisitionIssueSlip
     Private Sub Panel6_Paint(sender As Object, e As PaintEventArgs) Handles Panel6.Paint
 
     End Sub
+
+    Private Sub btn_Back_Click(sender As Object, e As EventArgs) Handles btn_Back.Click
+        Dim StaffDashboard As New StaffDashboard()
+        StaffDashboard.Show()
+        Me.Hide()
+    End Sub
 End Class

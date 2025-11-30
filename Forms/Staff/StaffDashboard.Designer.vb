@@ -35,16 +35,6 @@ Partial Class StaffDashboard
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.txtPersonalHistory = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.RequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RequestType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -61,25 +51,37 @@ Partial Class StaffDashboard
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.btnPropertyInventory = New System.Windows.Forms.Button()
         Me.btnMaintenanceReq = New System.Windows.Forms.Button()
         Me.icStaff = New System.Windows.Forms.PictureBox()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnReports = New System.Windows.Forms.Button()
         Me.btnBorrowedItem = New System.Windows.Forms.Button()
         Me.btnMyRequest = New System.Windows.Forms.Button()
-        Me.btnViewInventory = New System.Windows.Forms.Button()
+        Me.btnSupplyInventory = New System.Windows.Forms.Button()
         Me.btnProfile = New System.Windows.Forms.Button()
         Me.btnDashboard = New System.Windows.Forms.Button()
         Me.txtStaff = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.RequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PropertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RequestDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ApprovedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ReleaseDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pnlMain.SuspendLayout()
         Me.pnlFormLoader.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlSidebar.SuspendLayout()
         CType(Me.icStaff, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tmrSidebar
@@ -94,15 +96,15 @@ Partial Class StaffDashboard
         Me.pnlMain.Location = New System.Drawing.Point(356, 0)
         Me.pnlMain.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(1568, 922)
+        Me.pnlMain.Size = New System.Drawing.Size(1568, 1175)
         Me.pnlMain.TabIndex = 1
         '
         'pnlFormLoader
         '
+        Me.pnlFormLoader.Controls.Add(Me.DataGridView1)
         Me.pnlFormLoader.Controls.Add(Me.ComboBox1)
         Me.pnlFormLoader.Controls.Add(Me.ComboBox3)
         Me.pnlFormLoader.Controls.Add(Me.txtPersonalHistory)
-        Me.pnlFormLoader.Controls.Add(Me.DataGridView1)
         Me.pnlFormLoader.Controls.Add(Me.Panel4)
         Me.pnlFormLoader.Controls.Add(Me.Panel3)
         Me.pnlFormLoader.Controls.Add(Me.comboMonth)
@@ -115,7 +117,7 @@ Partial Class StaffDashboard
         Me.pnlFormLoader.Location = New System.Drawing.Point(0, 0)
         Me.pnlFormLoader.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlFormLoader.Name = "pnlFormLoader"
-        Me.pnlFormLoader.Size = New System.Drawing.Size(1568, 922)
+        Me.pnlFormLoader.Size = New System.Drawing.Size(1568, 1175)
         Me.pnlFormLoader.TabIndex = 12
         '
         'ComboBox1
@@ -153,80 +155,6 @@ Partial Class StaffDashboard
         Me.txtPersonalHistory.Size = New System.Drawing.Size(380, 50)
         Me.txtPersonalHistory.TabIndex = 7
         Me.txtPersonalHistory.Text = "Personal Request History"
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestID, Me.RequestType, Me.ItemName, Me.Category, Me.Quantity, Me.Status, Me.DateRequested, Me.Purpose, Me.Remarks})
-        Me.DataGridView1.Location = New System.Drawing.Point(61, 384)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1574, 665)
-        Me.DataGridView1.TabIndex = 156
-        '
-        'RequestID
-        '
-        Me.RequestID.HeaderText = "Request I.D"
-        Me.RequestID.MinimumWidth = 6
-        Me.RequestID.Name = "RequestID"
-        Me.RequestID.Width = 125
-        '
-        'RequestType
-        '
-        Me.RequestType.HeaderText = "Request Type"
-        Me.RequestType.MinimumWidth = 6
-        Me.RequestType.Name = "RequestType"
-        Me.RequestType.Width = 125
-        '
-        'ItemName
-        '
-        Me.ItemName.HeaderText = "Item Name"
-        Me.ItemName.MinimumWidth = 6
-        Me.ItemName.Name = "ItemName"
-        Me.ItemName.Width = 125
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Category"
-        Me.Category.MinimumWidth = 6
-        Me.Category.Name = "Category"
-        Me.Category.Width = 125
-        '
-        'Quantity
-        '
-        Me.Quantity.HeaderText = "Quantity"
-        Me.Quantity.MinimumWidth = 6
-        Me.Quantity.Name = "Quantity"
-        Me.Quantity.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
-        '
-        'DateRequested
-        '
-        Me.DateRequested.HeaderText = "Date Requested"
-        Me.DateRequested.MinimumWidth = 6
-        Me.DateRequested.Name = "DateRequested"
-        Me.DateRequested.Width = 125
-        '
-        'Purpose
-        '
-        Me.Purpose.HeaderText = "Purpose"
-        Me.Purpose.MinimumWidth = 6
-        Me.Purpose.Name = "Purpose"
-        Me.Purpose.Width = 125
-        '
-        'Remarks
-        '
-        Me.Remarks.HeaderText = "Remarks"
-        Me.Remarks.MinimumWidth = 6
-        Me.Remarks.Name = "Remarks"
-        Me.Remarks.Width = 125
         '
         'Panel4
         '
@@ -407,13 +335,14 @@ Partial Class StaffDashboard
         'pnlSidebar
         '
         Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pnlSidebar.Controls.Add(Me.btnPropertyInventory)
         Me.pnlSidebar.Controls.Add(Me.btnMaintenanceReq)
         Me.pnlSidebar.Controls.Add(Me.icStaff)
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Controls.Add(Me.btnReports)
         Me.pnlSidebar.Controls.Add(Me.btnBorrowedItem)
         Me.pnlSidebar.Controls.Add(Me.btnMyRequest)
-        Me.pnlSidebar.Controls.Add(Me.btnViewInventory)
+        Me.pnlSidebar.Controls.Add(Me.btnSupplyInventory)
         Me.pnlSidebar.Controls.Add(Me.btnProfile)
         Me.pnlSidebar.Controls.Add(Me.btnDashboard)
         Me.pnlSidebar.Controls.Add(Me.txtStaff)
@@ -423,8 +352,27 @@ Partial Class StaffDashboard
         Me.pnlSidebar.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSidebar.MaximumSize = New System.Drawing.Size(400, 0)
         Me.pnlSidebar.Name = "pnlSidebar"
-        Me.pnlSidebar.Size = New System.Drawing.Size(356, 922)
+        Me.pnlSidebar.Size = New System.Drawing.Size(356, 1175)
         Me.pnlSidebar.TabIndex = 0
+        '
+        'btnPropertyInventory
+        '
+        Me.btnPropertyInventory.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnPropertyInventory.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnPropertyInventory.FlatAppearance.BorderSize = 0
+        Me.btnPropertyInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPropertyInventory.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPropertyInventory.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnPropertyInventory.Image = CType(resources.GetObject("btnPropertyInventory.Image"), System.Drawing.Image)
+        Me.btnPropertyInventory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnPropertyInventory.Location = New System.Drawing.Point(19, 321)
+        Me.btnPropertyInventory.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnPropertyInventory.Name = "btnPropertyInventory"
+        Me.btnPropertyInventory.Size = New System.Drawing.Size(317, 63)
+        Me.btnPropertyInventory.TabIndex = 12
+        Me.btnPropertyInventory.Text = "Property Inventory"
+        Me.btnPropertyInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnPropertyInventory.UseVisualStyleBackColor = False
         '
         'btnMaintenanceReq
         '
@@ -436,7 +384,7 @@ Partial Class StaffDashboard
         Me.btnMaintenanceReq.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnMaintenanceReq.Image = CType(resources.GetObject("btnMaintenanceReq.Image"), System.Drawing.Image)
         Me.btnMaintenanceReq.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMaintenanceReq.Location = New System.Drawing.Point(16, 536)
+        Me.btnMaintenanceReq.Location = New System.Drawing.Point(16, 597)
         Me.btnMaintenanceReq.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaintenanceReq.Name = "btnMaintenanceReq"
         Me.btnMaintenanceReq.Size = New System.Drawing.Size(317, 63)
@@ -466,7 +414,7 @@ Partial Class StaffDashboard
         Me.btnLogout.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(16, 669)
+        Me.btnLogout.Location = New System.Drawing.Point(19, 730)
         Me.btnLogout.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(317, 63)
@@ -485,7 +433,7 @@ Partial Class StaffDashboard
         Me.btnReports.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnReports.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_reports1
         Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(16, 598)
+        Me.btnReports.Location = New System.Drawing.Point(19, 659)
         Me.btnReports.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReports.Name = "btnReports"
         Me.btnReports.Size = New System.Drawing.Size(317, 63)
@@ -504,7 +452,7 @@ Partial Class StaffDashboard
         Me.btnBorrowedItem.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnBorrowedItem.Image = CType(resources.GetObject("btnBorrowedItem.Image"), System.Drawing.Image)
         Me.btnBorrowedItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnBorrowedItem.Location = New System.Drawing.Point(13, 465)
+        Me.btnBorrowedItem.Location = New System.Drawing.Point(16, 526)
         Me.btnBorrowedItem.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBorrowedItem.Name = "btnBorrowedItem"
         Me.btnBorrowedItem.Size = New System.Drawing.Size(317, 63)
@@ -523,7 +471,7 @@ Partial Class StaffDashboard
         Me.btnMyRequest.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnMyRequest.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_propertyrequest
         Me.btnMyRequest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMyRequest.Location = New System.Drawing.Point(16, 394)
+        Me.btnMyRequest.Location = New System.Drawing.Point(19, 455)
         Me.btnMyRequest.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMyRequest.Name = "btnMyRequest"
         Me.btnMyRequest.Size = New System.Drawing.Size(317, 63)
@@ -532,24 +480,24 @@ Partial Class StaffDashboard
         Me.btnMyRequest.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnMyRequest.UseVisualStyleBackColor = False
         '
-        'btnViewInventory
+        'btnSupplyInventory
         '
-        Me.btnViewInventory.Cursor = System.Windows.Forms.Cursors.SizeNESW
-        Me.btnViewInventory.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.btnViewInventory.FlatAppearance.BorderSize = 0
-        Me.btnViewInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnViewInventory.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnViewInventory.ForeColor = System.Drawing.Color.FloralWhite
-        Me.btnViewInventory.Image = CType(resources.GetObject("btnViewInventory.Image"), System.Drawing.Image)
-        Me.btnViewInventory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnViewInventory.Location = New System.Drawing.Point(13, 323)
-        Me.btnViewInventory.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnViewInventory.Name = "btnViewInventory"
-        Me.btnViewInventory.Size = New System.Drawing.Size(317, 63)
-        Me.btnViewInventory.TabIndex = 5
-        Me.btnViewInventory.Text = "Inventory"
-        Me.btnViewInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnViewInventory.UseVisualStyleBackColor = False
+        Me.btnSupplyInventory.Cursor = System.Windows.Forms.Cursors.SizeNESW
+        Me.btnSupplyInventory.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.btnSupplyInventory.FlatAppearance.BorderSize = 0
+        Me.btnSupplyInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSupplyInventory.Font = New System.Drawing.Font("Poppins Medium", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSupplyInventory.ForeColor = System.Drawing.Color.FloralWhite
+        Me.btnSupplyInventory.Image = CType(resources.GetObject("btnSupplyInventory.Image"), System.Drawing.Image)
+        Me.btnSupplyInventory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSupplyInventory.Location = New System.Drawing.Point(19, 389)
+        Me.btnSupplyInventory.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSupplyInventory.Name = "btnSupplyInventory"
+        Me.btnSupplyInventory.Size = New System.Drawing.Size(317, 63)
+        Me.btnSupplyInventory.TabIndex = 5
+        Me.btnSupplyInventory.Text = "Supply Inventory"
+        Me.btnSupplyInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSupplyInventory.UseVisualStyleBackColor = False
         '
         'btnProfile
         '
@@ -602,12 +550,97 @@ Partial Class StaffDashboard
         Me.txtStaff.TabIndex = 1
         Me.txtStaff.Text = "Staff 1"
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestID, Me.UserID, Me.PropertyID, Me.RequestDate, Me.Purpose, Me.Quantity, Me.Status, Me.ApprovedBy, Me.ReleaseDate, Me.ReturnDate})
+        Me.DataGridView1.Location = New System.Drawing.Point(61, 370)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.Size = New System.Drawing.Size(1451, 745)
+        Me.DataGridView1.TabIndex = 159
+        '
+        'RequestID
+        '
+        Me.RequestID.HeaderText = "Request I.D"
+        Me.RequestID.MinimumWidth = 6
+        Me.RequestID.Name = "RequestID"
+        Me.RequestID.Width = 125
+        '
+        'UserID
+        '
+        Me.UserID.HeaderText = "Date of Request"
+        Me.UserID.MinimumWidth = 6
+        Me.UserID.Name = "UserID"
+        Me.UserID.Width = 135
+        '
+        'PropertyID
+        '
+        Me.PropertyID.HeaderText = "Item Name"
+        Me.PropertyID.MinimumWidth = 6
+        Me.PropertyID.Name = "PropertyID"
+        Me.PropertyID.Width = 170
+        '
+        'RequestDate
+        '
+        Me.RequestDate.HeaderText = "Description"
+        Me.RequestDate.MinimumWidth = 6
+        Me.RequestDate.Name = "RequestDate"
+        Me.RequestDate.Width = 170
+        '
+        'Purpose
+        '
+        Me.Purpose.HeaderText = "Quantity Requested"
+        Me.Purpose.MinimumWidth = 6
+        Me.Purpose.Name = "Purpose"
+        Me.Purpose.Width = 150
+        '
+        'Quantity
+        '
+        Me.Quantity.HeaderText = "Unit"
+        Me.Quantity.MinimumWidth = 6
+        Me.Quantity.Name = "Quantity"
+        Me.Quantity.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Purpose"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 200
+        '
+        'ApprovedBy
+        '
+        Me.ApprovedBy.HeaderText = "Status "
+        Me.ApprovedBy.MinimumWidth = 6
+        Me.ApprovedBy.Name = "ApprovedBy"
+        Me.ApprovedBy.Width = 125
+        '
+        'ReleaseDate
+        '
+        Me.ReleaseDate.HeaderText = "Approved By"
+        Me.ReleaseDate.MinimumWidth = 6
+        Me.ReleaseDate.Name = "ReleaseDate"
+        Me.ReleaseDate.Width = 150
+        '
+        'ReturnDate
+        '
+        Me.ReturnDate.HeaderText = "Approved Date"
+        Me.ReturnDate.MinimumWidth = 6
+        Me.ReturnDate.Name = "ReturnDate"
+        Me.ReturnDate.Width = 150
+        '
         'StaffDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1924, 922)
+        Me.ClientSize = New System.Drawing.Size(1924, 1175)
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.pnlSidebar)
         Me.ForeColor = System.Drawing.Color.Black
@@ -618,7 +651,6 @@ Partial Class StaffDashboard
         Me.pnlMain.ResumeLayout(False)
         Me.pnlFormLoader.ResumeLayout(False)
         Me.pnlFormLoader.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.Panel3.ResumeLayout(False)
@@ -630,6 +662,7 @@ Partial Class StaffDashboard
         Me.pnlSidebar.ResumeLayout(False)
         Me.pnlSidebar.PerformLayout()
         CType(Me.icStaff, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -641,7 +674,7 @@ Partial Class StaffDashboard
     Friend WithEvents btnReports As Button
     Friend WithEvents btnBorrowedItem As Button
     Friend WithEvents btnMyRequest As Button
-    Friend WithEvents btnViewInventory As Button
+    Friend WithEvents btnSupplyInventory As Button
     Friend WithEvents btnProfile As Button
     Friend WithEvents icStaff As PictureBox
     Friend WithEvents tmrSidebar As Timer
@@ -663,17 +696,19 @@ Partial Class StaffDashboard
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents RequestID As DataGridViewTextBoxColumn
-    Friend WithEvents RequestType As DataGridViewTextBoxColumn
-    Friend WithEvents ItemName As DataGridViewTextBoxColumn
-    Friend WithEvents Category As DataGridViewTextBoxColumn
-    Friend WithEvents Quantity As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents DateRequested As DataGridViewTextBoxColumn
-    Friend WithEvents Purpose As DataGridViewTextBoxColumn
-    Friend WithEvents Remarks As DataGridViewTextBoxColumn
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents btnMaintenanceReq As Button
+    Friend WithEvents btnPropertyInventory As Button
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents RequestID As DataGridViewTextBoxColumn
+    Friend WithEvents UserID As DataGridViewTextBoxColumn
+    Friend WithEvents PropertyID As DataGridViewTextBoxColumn
+    Friend WithEvents RequestDate As DataGridViewTextBoxColumn
+    Friend WithEvents Purpose As DataGridViewTextBoxColumn
+    Friend WithEvents Quantity As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents ApprovedBy As DataGridViewTextBoxColumn
+    Friend WithEvents ReleaseDate As DataGridViewTextBoxColumn
+    Friend WithEvents ReturnDate As DataGridViewTextBoxColumn
 End Class
