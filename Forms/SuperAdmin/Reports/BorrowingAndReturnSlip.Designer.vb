@@ -28,22 +28,6 @@ Partial Class BorrowingAndReturnSlip
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.lblPropertyCard = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReturnStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.borrowerSignature = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,22 +38,25 @@ Partial Class BorrowingAndReturnSlip
         Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.lblPropertyCard = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
@@ -83,12 +70,25 @@ Partial Class BorrowingAndReturnSlip
         Me.Label22 = New System.Windows.Forms.Label()
         Me.TextBox11 = New System.Windows.Forms.TextBox()
         Me.Label23 = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Label25 = New System.Windows.Forms.Label()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
+        Me.Label25 = New System.Windows.Forms.Label()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.TextBox13 = New System.Windows.Forms.TextBox()
         Me.Label27 = New System.Windows.Forms.Label()
@@ -106,8 +106,8 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.Panel8.SuspendLayout()
@@ -128,6 +128,76 @@ Partial Class BorrowingAndReturnSlip
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.Size = New System.Drawing.Size(892, 249)
         Me.DataGridView1.TabIndex = 347
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Quantity"
+        Me.Column1.MinimumWidth = 8
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 75
+        '
+        'ReturnStatus
+        '
+        Me.ReturnStatus.HeaderText = "Return Status"
+        Me.ReturnStatus.MinimumWidth = 6
+        Me.ReturnStatus.Name = "ReturnStatus"
+        Me.ReturnStatus.Width = 75
+        '
+        'borrowerSignature
+        '
+        Me.borrowerSignature.HeaderText = "Borrower Signature"
+        Me.borrowerSignature.MinimumWidth = 6
+        Me.borrowerSignature.Name = "borrowerSignature"
+        Me.borrowerSignature.Width = 75
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Unit"
+        Me.Column2.MinimumWidth = 6
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 75
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Description"
+        Me.Column3.MinimumWidth = 6
+        Me.Column3.Name = "Column3"
+        Me.Column3.Width = 150
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Property Number"
+        Me.Column4.MinimumWidth = 6
+        Me.Column4.Name = "Column4"
+        Me.Column4.Width = 75
+        '
+        'Column6
+        '
+        Me.Column6.HeaderText = "Date Acquired"
+        Me.Column6.MinimumWidth = 6
+        Me.Column6.Name = "Column6"
+        Me.Column6.Width = 75
+        '
+        'Remarks
+        '
+        Me.Remarks.HeaderText = "Remarks"
+        Me.Remarks.MinimumWidth = 6
+        Me.Remarks.Name = "Remarks"
+        Me.Remarks.Width = 110
+        '
+        'Column7
+        '
+        Me.Column7.HeaderText = "Unit Value"
+        Me.Column7.MinimumWidth = 6
+        Me.Column7.Name = "Column7"
+        Me.Column7.Width = 75
+        '
+        'Column8
+        '
+        Me.Column8.HeaderText = "Total Cost"
+        Me.Column8.MinimumWidth = 6
+        Me.Column8.Name = "Column8"
+        Me.Column8.Width = 75
         '
         'CheckBox1
         '
@@ -215,55 +285,23 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel1.Size = New System.Drawing.Size(892, 44)
         Me.Panel1.TabIndex = 368
         '
-        'TextBox5
+        'TextBox4
         '
-        Me.TextBox5.Location = New System.Drawing.Point(72, 12)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(219, 22)
-        Me.TextBox5.TabIndex = 55
+        Me.TextBox4.Location = New System.Drawing.Point(763, 12)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(117, 22)
+        Me.TextBox4.TabIndex = 331
         '
-        'Label2
+        'Label6
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(3, 14)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 22)
-        Me.Label2.TabIndex = 38
-        Me.Label2.Text = "Purpose:"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(315, 14)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(66, 22)
-        Me.Label3.TabIndex = 56
-        Me.Label3.Text = "Disposal:"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(439, 14)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(52, 22)
-        Me.Label4.TabIndex = 326
-        Me.Label4.Text = "Repair:"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'CheckBox4
-        '
-        Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(498, 16)
-        Me.CheckBox4.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
-        Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(18, 17)
-        Me.CheckBox4.TabIndex = 327
-        Me.CheckBox4.UseVisualStyleBackColor = True
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(705, 14)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(54, 22)
+        Me.Label6.TabIndex = 330
+        Me.Label6.Text = "Others:"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label5
         '
@@ -286,93 +324,55 @@ Partial Class BorrowingAndReturnSlip
         Me.CheckBox2.TabIndex = 329
         Me.CheckBox2.UseVisualStyleBackColor = True
         '
-        'Label6
+        'Label4
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(705, 14)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(54, 22)
-        Me.Label6.TabIndex = 330
-        Me.Label6.Text = "Others:"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(439, 14)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(52, 22)
+        Me.Label4.TabIndex = 326
+        Me.Label4.Text = "Repair:"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'TextBox4
+        'CheckBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(763, 12)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(117, 22)
-        Me.TextBox4.TabIndex = 331
+        Me.CheckBox4.AutoSize = True
+        Me.CheckBox4.Location = New System.Drawing.Point(498, 16)
+        Me.CheckBox4.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me.CheckBox4.Name = "CheckBox4"
+        Me.CheckBox4.Size = New System.Drawing.Size(18, 17)
+        Me.CheckBox4.TabIndex = 327
+        Me.CheckBox4.UseVisualStyleBackColor = True
         '
-        'Column1
+        'Label3
         '
-        Me.Column1.HeaderText = "Quantity"
-        Me.Column1.MinimumWidth = 8
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 75
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(315, 14)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(66, 22)
+        Me.Label3.TabIndex = 56
+        Me.Label3.Text = "Disposal:"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'ReturnStatus
+        'TextBox5
         '
-        Me.ReturnStatus.HeaderText = "Return Status"
-        Me.ReturnStatus.MinimumWidth = 6
-        Me.ReturnStatus.Name = "ReturnStatus"
-        Me.ReturnStatus.Width = 75
+        Me.TextBox5.Location = New System.Drawing.Point(72, 12)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(219, 22)
+        Me.TextBox5.TabIndex = 55
         '
-        'borrowerSignature
+        'Label2
         '
-        Me.borrowerSignature.HeaderText = "Borrower Signature"
-        Me.borrowerSignature.MinimumWidth = 6
-        Me.borrowerSignature.Name = "borrowerSignature"
-        Me.borrowerSignature.Width = 75
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Unit"
-        Me.Column2.MinimumWidth = 6
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 75
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Description"
-        Me.Column3.MinimumWidth = 6
-        Me.Column3.Name = "Column3"
-        Me.Column3.Width = 150
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Property Number"
-        Me.Column4.MinimumWidth = 6
-        Me.Column4.Name = "Column4"
-        Me.Column4.Width = 75
-        '
-        'Column6
-        '
-        Me.Column6.HeaderText = "Date Acquired"
-        Me.Column6.MinimumWidth = 6
-        Me.Column6.Name = "Column6"
-        Me.Column6.Width = 75
-        '
-        'Remarks
-        '
-        Me.Remarks.HeaderText = "Remarks"
-        Me.Remarks.MinimumWidth = 6
-        Me.Remarks.Name = "Remarks"
-        Me.Remarks.Width = 110
-        '
-        'Column7
-        '
-        Me.Column7.HeaderText = "Unit Value"
-        Me.Column7.MinimumWidth = 6
-        Me.Column7.Name = "Column7"
-        Me.Column7.Width = 75
-        '
-        'Column8
-        '
-        Me.Column8.HeaderText = "Total Cost"
-        Me.Column8.MinimumWidth = 6
-        Me.Column8.Name = "Column8"
-        Me.Column8.Width = 75
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(3, 14)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(63, 22)
+        Me.Label2.TabIndex = 38
+        Me.Label2.Text = "Purpose:"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Panel3
         '
@@ -416,143 +416,6 @@ Partial Class BorrowingAndReturnSlip
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 267.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(892, 268)
         Me.TableLayoutPanel1.TabIndex = 39
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.White
-        Me.Panel4.Controls.Add(Me.Label15)
-        Me.Panel4.Controls.Add(Me.TextBox7)
-        Me.Panel4.Controls.Add(Me.Label14)
-        Me.Panel4.Controls.Add(Me.Label13)
-        Me.Panel4.Controls.Add(Me.TextBox6)
-        Me.Panel4.Controls.Add(Me.Label12)
-        Me.Panel4.Controls.Add(Me.Label11)
-        Me.Panel4.Controls.Add(Me.TextBox3)
-        Me.Panel4.Controls.Add(Me.Label10)
-        Me.Panel4.Controls.Add(Me.Label8)
-        Me.Panel4.Controls.Add(Me.TextBox2)
-        Me.Panel4.Controls.Add(Me.Label7)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(4, 4)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(438, 260)
-        Me.Panel4.TabIndex = 369
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(62, 14)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(205, 22)
-        Me.Label7.TabIndex = 38
-        Me.Label7.Text = "I HEREBY CERTIFY that I have this" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(273, 14)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(65, 22)
-        Me.TextBox2.TabIndex = 56
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(344, 14)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(33, 22)
-        Me.Label8.TabIndex = 57
-        Me.Label8.Text = "day"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(28, 36)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(22, 22)
-        Me.Label10.TabIndex = 58
-        Me.Label10.Text = "of"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(56, 34)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(65, 22)
-        Me.TextBox3.TabIndex = 59
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(127, 36)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(38, 22)
-        Me.Label11.TabIndex = 60
-        Me.Label11.Text = ", 201."
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(28, 67)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(90, 22)
-        Me.Label12.TabIndex = 61
-        Me.Label12.Text = "RETURNED to:"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TextBox6
-        '
-        Me.TextBox6.Location = New System.Drawing.Point(107, 99)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(219, 22)
-        Me.TextBox6.TabIndex = 62
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(136, 124)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(151, 22)
-        Me.Label13.TabIndex = 63
-        Me.Label13.Text = "Name and Designation"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(28, 155)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(226, 22)
-        Me.Label14.TabIndex = 64
-        Me.Label14.Text = "the items/articles described above."
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(136, 217)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(151, 22)
-        Me.Label15.TabIndex = 66
-        Me.Label15.Text = "Name and Designation"
-        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Location = New System.Drawing.Point(107, 192)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(219, 22)
-        Me.TextBox7.TabIndex = 65
         '
         'Panel5
         '
@@ -691,6 +554,143 @@ Partial Class BorrowingAndReturnSlip
         Me.Label23.Text = "I HEREBY CERTIFY that I have this" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.White
+        Me.Panel4.Controls.Add(Me.Label15)
+        Me.Panel4.Controls.Add(Me.TextBox7)
+        Me.Panel4.Controls.Add(Me.Label14)
+        Me.Panel4.Controls.Add(Me.Label13)
+        Me.Panel4.Controls.Add(Me.TextBox6)
+        Me.Panel4.Controls.Add(Me.Label12)
+        Me.Panel4.Controls.Add(Me.Label11)
+        Me.Panel4.Controls.Add(Me.TextBox3)
+        Me.Panel4.Controls.Add(Me.Label10)
+        Me.Panel4.Controls.Add(Me.Label8)
+        Me.Panel4.Controls.Add(Me.TextBox2)
+        Me.Panel4.Controls.Add(Me.Label7)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(4, 4)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(438, 260)
+        Me.Panel4.TabIndex = 369
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(136, 217)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(151, 22)
+        Me.Label15.TabIndex = 66
+        Me.Label15.Text = "Name and Designation"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TextBox7
+        '
+        Me.TextBox7.Location = New System.Drawing.Point(107, 192)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(219, 22)
+        Me.TextBox7.TabIndex = 65
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(28, 155)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(226, 22)
+        Me.Label14.TabIndex = 64
+        Me.Label14.Text = "the items/articles described above."
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(136, 124)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(151, 22)
+        Me.Label13.TabIndex = 63
+        Me.Label13.Text = "Name and Designation"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TextBox6
+        '
+        Me.TextBox6.Location = New System.Drawing.Point(107, 99)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(219, 22)
+        Me.TextBox6.TabIndex = 62
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(28, 67)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(90, 22)
+        Me.Label12.TabIndex = 61
+        Me.Label12.Text = "RETURNED to:"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(127, 36)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(38, 22)
+        Me.Label11.TabIndex = 60
+        Me.Label11.Text = ", 201."
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(56, 34)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(65, 22)
+        Me.TextBox3.TabIndex = 59
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(28, 36)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(22, 22)
+        Me.Label10.TabIndex = 58
+        Me.Label10.Text = "of"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(344, 14)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(33, 22)
+        Me.Label8.TabIndex = 57
+        Me.Label8.Text = "day"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(273, 14)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(65, 22)
+        Me.TextBox2.TabIndex = 56
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(62, 14)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(205, 22)
+        Me.Label7.TabIndex = 38
+        Me.Label7.Text = "I HEREBY CERTIFY that I have this" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.White
@@ -701,6 +701,13 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(390, 36)
         Me.Panel6.TabIndex = 369
+        '
+        'TextBox12
+        '
+        Me.TextBox12.Location = New System.Drawing.Point(110, 7)
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.Size = New System.Drawing.Size(270, 22)
+        Me.TextBox12.TabIndex = 66
         '
         'Label24
         '
@@ -724,6 +731,13 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel7.Size = New System.Drawing.Size(390, 36)
         Me.Panel7.TabIndex = 370
         '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Location = New System.Drawing.Point(110, 6)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(270, 22)
+        Me.DateTimePicker2.TabIndex = 39
+        '
         'Label25
         '
         Me.Label25.AutoSize = True
@@ -734,20 +748,6 @@ Partial Class BorrowingAndReturnSlip
         Me.Label25.TabIndex = 38
         Me.Label25.Text = "Date:"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'DateTimePicker2
-        '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(110, 6)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(270, 22)
-        Me.DateTimePicker2.TabIndex = 39
-        '
-        'TextBox12
-        '
-        Me.TextBox12.Location = New System.Drawing.Point(110, 7)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(270, 22)
-        Me.TextBox12.TabIndex = 66
         '
         'Panel8
         '
@@ -925,10 +925,10 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         Me.Panel7.ResumeLayout(False)

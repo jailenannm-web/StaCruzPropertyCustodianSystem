@@ -43,4 +43,10 @@ Public Class BorrowingAndReturnSlip
     Private Sub BorrowingAndReturnSlip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub RoundedButton4_Click(sender As Object, e As EventArgs) Handles RoundedButton4.Click
+        Dim StaffDashboard As New StaffDashboard()
+        StaffDashboard.Show()
+        Me.Close()
+    End Sub
 End Class

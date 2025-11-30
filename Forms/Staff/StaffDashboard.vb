@@ -1,7 +1,8 @@
-﻿Imports System.Linq
-Imports System
-Imports System.Windows.Forms
+﻿Imports System
+Imports System.Diagnostics
 Imports System.Drawing
+Imports System.Linq
+Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Public Class StaffDashboard
     Private isSidebarExpanded As Boolean = True
@@ -68,19 +69,8 @@ Public Class StaffDashboard
 
 
 
-    Private Sub btnViewInventory_Click(sender As Object, e As EventArgs) Handles btnViewInventory.Click
-        ' --- Expands sidebar if collapsed ---
-        If Not isSidebarExpanded Then
-            ToggleSidebar()
-        End If
-        SetActiveButton(btnViewInventory)
-
-        ' --- Highlights the active button ---
-        ' (Make sure btnViewInventory is in your SetActiveButton sub)
-        SetActiveButton(btnViewInventory)
-
-        ' --- Loads the new form ---
-        loadFormIntoPanel(New frmInventory())
+    Private Sub btnViewInventory_Click(sender As Object, e As EventArgs) Handles btnSupplyInventory.Click
+        LoadUserControl(New SupplyInventory)
     End Sub
 
     Private Sub btnBorrowedItem_Click(sender As Object, e As EventArgs) Handles btnBorrowedItem.Click
@@ -147,6 +137,31 @@ Public Class StaffDashboard
         ' --- Show the panel ---
         pnlFormLoader.Visible = True
         pnlFormLoader.BringToFront() ' Make sure it's on top of pnlMain
+    End Sub
+
+    ' ----------------------
+    ' Load UserControl into Main Panel
+    ' ----------------------
+    Public Sub LoadUserControl(uc As UserControl)
+        Try
+            ' Clear previous controls
+            pnlFormLoader.Controls.Clear()
+
+
+            ' Add new UserControl
+            pnlFormLoader.Controls.Add(uc)
+            uc.Dock = DockStyle.Fill
+            uc.BringToFront()
+            uc.Focus()
+
+            ' Debug info (optional)
+            Debug.WriteLine("Loaded UC: " & uc.Name)
+            Debug.WriteLine("Panel Size: " & pnlFormLoader.ClientSize.ToString())
+            Debug.WriteLine("UC Size: " & uc.Size.ToString())
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading UserControl: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub dgvHistory_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
@@ -226,7 +241,7 @@ Public Class StaffDashboard
 
     End Sub
 
-    Private Sub DataGridView1_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+    Private Sub DataGridView1_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs)
 
     End Sub
 
@@ -281,16 +296,10 @@ Public Class StaffDashboard
     End Sub
 
     Private Sub btnMaintenanceReq_Click(sender As Object, e As EventArgs) Handles btnMaintenanceReq.Click
-        ' --- This code expands the sidebar ---
-        If Not isSidebarExpanded Then
-            ToggleSidebar()
-        End If
+        LoadUserControl(New MaintenanceRequest())
+    End Sub
 
-        ' --- This code changes the active button color ---
-        SetActiveButton(btnProfile)
-
-        ' --- THIS IS THE NEW CODE ---
-        ' Load your new profile form
-        loadFormIntoPanel(New MaintenanceRequest())
+    Private Sub btnPropertyInventory_Click(sender As Object, e As EventArgs) Handles btnPropertyInventory.Click
+        LoadUserControl(New PropertyInventory)
     End Sub
 End Class

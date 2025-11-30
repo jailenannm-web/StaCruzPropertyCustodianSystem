@@ -11,11 +11,12 @@ Public Class AddPropertyRequest
 
     ' Optional: Add a Back button like in EditUser
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-        If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New UC_PropertyRequestManagement())
-        End If
+        Dim StaffDashboard As New StaffDashboard()
+        StaffDashboard.Show()
+        Me.Hide()
     End Sub
+
+
 
     ' Optional: Add Save button logic
     Private Sub btnSave_Click(sender As Object, e As EventArgs)

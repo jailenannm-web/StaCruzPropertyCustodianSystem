@@ -120,7 +120,25 @@
       <DependentUpon>MaintenanceRequest.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Staff\MaintenanceRequest.vb">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Staff\MaintenanceRequestForm.Designer.vb">
+      <DependentUpon>MaintenanceRequestForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\MaintenanceRequestForm.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Staff\PropertyInventory.Designer.vb">
+      <DependentUpon>PropertyInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\PropertyInventory.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Staff\SupplyInventory.Designer.vb">
+      <DependentUpon>SupplyInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\SupplyInventory.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.Designer.vb">
       <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
@@ -480,6 +498,12 @@
     <EmbeddedResource Include="Forms\Staff\MaintenanceRequest.resx">
       <DependentUpon>MaintenanceRequest.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Staff\MaintenanceRequestForm.resx">
+      <DependentUpon>MaintenanceRequestForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Staff\PropertyInventory.resx">
+      <DependentUpon>PropertyInventory.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Staff\PropertyTransaction.resx">
       <DependentUpon>PropertyTransaction.vb</DependentUpon>
     </EmbeddedResource>
@@ -619,6 +643,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\Login\StaffLogin.resx">
       <DependentUpon>StaffLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Staff\SupplyInventory.resx">
+      <DependentUpon>SupplyInventory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Staff\TrnsBorrowItem.resx">
       <DependentUpon>TrnsBorrowItem.vb</DependentUpon>

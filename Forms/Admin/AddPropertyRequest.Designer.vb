@@ -57,10 +57,10 @@ Partial Class AddPropertyRequest
         'admin_label_DepartmentManagement
         '
         Me.admin_label_DepartmentManagement.AutoSize = True
-        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(33, 57)
         Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(378, 38)
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(426, 60)
         Me.admin_label_DepartmentManagement.TabIndex = 44
         Me.admin_label_DepartmentManagement.Text = "Property Request Form"
         '
@@ -70,7 +70,7 @@ Partial Class AddPropertyRequest
         Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.btnCancel.CornerRadius = 15
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Font = New System.Drawing.Font("Poppins Light", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnCancel.Location = New System.Drawing.Point(937, 798)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
@@ -86,7 +86,7 @@ Partial Class AddPropertyRequest
         Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
         Me.btnSave.CornerRadius = 15
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Font = New System.Drawing.Font("Poppins Light", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSave.Location = New System.Drawing.Point(1091, 798)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
@@ -103,6 +103,7 @@ Partial Class AddPropertyRequest
         Me.RoundedPanel2.Controls.Add(Me.Panel2)
         Me.RoundedPanel2.Controls.Add(Me.Panel1)
         Me.RoundedPanel2.CornerRadius = 5
+        Me.RoundedPanel2.Font = New System.Drawing.Font("Poppins Light", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RoundedPanel2.Location = New System.Drawing.Point(43, 207)
         Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.RoundedPanel2.Name = "RoundedPanel2"
@@ -378,6 +379,7 @@ Partial Class AddPropertyRequest
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RoundedPanel1.Controls.Add(Me.instructions)
         Me.RoundedPanel1.CornerRadius = 5
+        Me.RoundedPanel1.Font = New System.Drawing.Font("Poppins Light", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RoundedPanel1.Location = New System.Drawing.Point(43, 117)
         Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.RoundedPanel1.Name = "RoundedPanel1"
