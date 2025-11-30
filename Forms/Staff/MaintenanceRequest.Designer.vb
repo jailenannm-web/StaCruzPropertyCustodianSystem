@@ -24,7 +24,6 @@ Partial Class MaintenanceRequest
     Private Sub InitializeComponent()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.PropertID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PropertyName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -34,6 +33,7 @@ Partial Class MaintenanceRequest
         Me.AcquisitionCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ConditionStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -65,22 +65,6 @@ Partial Class MaintenanceRequest
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.Size = New System.Drawing.Size(1267, 876)
         Me.DataGridView1.TabIndex = 173
-        '
-        'RoundedButton1
-        '
-        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton1.CornerRadius = 15
-        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(1089, 1079)
-        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
-        Me.RoundedButton1.Name = "RoundedButton1"
-        Me.RoundedButton1.Size = New System.Drawing.Size(276, 39)
-        Me.RoundedButton1.TabIndex = 177
-        Me.RoundedButton1.Text = "Add Maintenance Request"
-        Me.RoundedButton1.UseVisualStyleBackColor = False
         '
         'PropertID
         '
@@ -144,6 +128,22 @@ Partial Class MaintenanceRequest
         Me.ConditionStatus.MinimumWidth = 6
         Me.ConditionStatus.Name = "ConditionStatus"
         Me.ConditionStatus.Width = 125
+        '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(1089, 1079)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(276, 39)
+        Me.RoundedButton1.TabIndex = 177
+        Me.RoundedButton1.Text = "Add Maintenance Request"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
         '
         'TableLayoutPanel1
         '

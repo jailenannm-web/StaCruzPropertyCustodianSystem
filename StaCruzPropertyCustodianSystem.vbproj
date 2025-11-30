@@ -120,7 +120,7 @@
       <DependentUpon>CustodianDashboard.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Staff\MaintenanceRequest.vb">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.Designer.vb">
       <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
@@ -310,8 +310,17 @@
     <Compile Include="Forms\Staff\MaintenanceRequest.Designer.vb">
       <DependentUpon>MaintenanceRequest.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Staff\MaintenanceRequest.vb">
-      <SubType>Form</SubType>
+    <Compile Include="Forms\Staff\MaintenanceRequestForm.Designer.vb">
+      <DependentUpon>MaintenanceRequestForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\MaintenanceRequestForm.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Staff\PropertyInventory.Designer.vb">
+      <DependentUpon>PropertyInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\PropertyInventory.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Staff\PropertyTransaction.Designer.vb">
       <DependentUpon>PropertyTransaction.vb</DependentUpon>
@@ -336,6 +345,12 @@
     </Compile>
     <Compile Include="Forms\Staff\TrnsReturnItem.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Staff\SupplyInventory.Designer.vb">
+      <DependentUpon>SupplyInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\SupplyInventory.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\InspectionandAcceptanceReport.Designer.vb">
       <DependentUpon>InspectionandAcceptanceReport.vb</DependentUpon>

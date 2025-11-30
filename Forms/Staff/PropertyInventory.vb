@@ -1,6 +1,13 @@
-﻿Imports System.Windows.Forms
+﻿Imports System
+Imports System.Windows.Forms
 
 Public Class PropertyInventory
+    Inherits System.Windows.Forms.UserControl
+
+    Public Sub New()
+        InitializeComponent()
+        Me.Dock = DockStyle.Fill
+    End Sub
     Private Sub btnrequestproperty_Click(sender As Object, e As System.EventArgs)
         Dim addRequest As New AddPropertyRequest()
         addRequest.Dock = DockStyle.Fill

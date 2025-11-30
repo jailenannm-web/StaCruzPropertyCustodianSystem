@@ -1,12 +1,14 @@
-﻿Imports System.Windows.Forms
+﻿Imports System
+Imports System.Windows.Forms
 
-Public Class MaintenanceRequest
+Partial Public Class MaintenanceRequest
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+        Me.Dock = DockStyle.Fill
+    End Sub
 
-
-    ' Clear previous controls
-    Me.Controls.Clear()
-
-    ' Add new user control
-    Me.Controls.Add(addMaintenanceRequest)
+    Private Sub MaintenanceRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Add initialization code here
     End Sub
 End Class

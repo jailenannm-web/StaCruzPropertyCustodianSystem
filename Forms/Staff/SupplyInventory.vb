@@ -1,6 +1,13 @@
-﻿Imports System.Windows.Forms
+﻿Imports System
+Imports System.Windows.Forms
 
 Public Class SupplyInventory
+    Inherits System.Windows.Forms.UserControl
+
+    Public Sub New()
+        InitializeComponent()
+        Me.Dock = DockStyle.Fill
+    End Sub
     Private Sub btnrequestsupply_Click(sender As Object, e As System.EventArgs)
         Dim addRequest As New AddSupplyRequest()
         addRequest.Dock = DockStyle.Fill
