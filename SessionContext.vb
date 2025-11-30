@@ -34,23 +34,65 @@ Public Module SessionContext
         Return String.Equals(CurrentRole, "Admin", StringComparison.OrdinalIgnoreCase)
     End Function
 
+    Public Function IsCustodianAdmin() As Boolean
+        Return String.Equals(CurrentRole, "Custodian", StringComparison.OrdinalIgnoreCase) _
+            OrElse String.Equals(CurrentRole, "CustodianAdmin", StringComparison.OrdinalIgnoreCase)
+    End Function
+
     Public Function IsCustodian() As Boolean
         Return String.Equals(CurrentRole, "Custodian", StringComparison.OrdinalIgnoreCase) _
             OrElse String.Equals(CurrentRole, "Staff", StringComparison.OrdinalIgnoreCase)
     End Function
 
+    Public Function IsStaff() As Boolean
+        Return String.Equals(CurrentRole, "Staff", StringComparison.OrdinalIgnoreCase)
+    End Function
+
+    ''' <summary>
+    ''' Check if user has permission based on role requirements:
+    ''' - Super Admin: Full access to everything
+    ''' - Admin: Can manage requests, view inventories (NO add/edit/delete properties/supplies)
+    ''' - Custodian Admin: Full access to inventory/maintenance (NO user management)
+    ''' </summary>
     Public Function HasPermission(permission As ModulePermission) As Boolean
         Select Case permission
             Case ModulePermission.ManageUsers
-                Return IsSuperAdmin() OrElse IsAdmin()
+                ' Only Super Admin can manage users
+                Return IsSuperAdmin()
             Case ModulePermission.ModifyProperties
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodian()
+                ' Super Admin and Custodian Admin can modify properties
+                ' Admin can only VIEW (returns False here)
+                Return IsSuperAdmin() OrElse IsCustodianAdmin()
             Case ModulePermission.ModifySupplies
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodian()
+                ' Super Admin and Custodian Admin can modify supplies
+                ' Admin can only VIEW (returns False here)
+                Return IsSuperAdmin() OrElse IsCustodianAdmin()
             Case ModulePermission.ModifyRequests
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodian()
+                ' Super Admin, Admin, and Custodian Admin can manage requests
+                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin()
             Case ModulePermission.ModifyMaintenance
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodian()
+                ' Super Admin, Admin, and Custodian Admin can manage maintenance
+                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin()
+            Case Else
+                Return False
+        End Select
+    End Function
+
+    ''' <summary>
+    ''' Check if user can VIEW (read-only access) to a module
+    ''' </summary>
+    Public Function CanView(moduleName As String) As Boolean
+        Select Case moduleName.ToLower()
+            Case "properties", "property"
+                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin()
+            Case "supplies", "supply"
+                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin()
+            Case "requests", "request"
+                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin() OrElse IsStaff()
+            Case "maintenance"
+                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin() OrElse IsStaff()
+            Case "users", "user"
+                Return IsSuperAdmin() OrElse IsAdmin()
             Case Else
                 Return False
         End Select

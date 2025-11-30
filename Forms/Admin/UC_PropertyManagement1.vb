@@ -11,6 +11,7 @@ Public Class UC_PropertyManagement1
 
     Private originalData As DataTable
     Private selectedPropertyID As Integer = -1
+    Private canModifyProperties As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -18,6 +19,9 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub UC_PropertyManagement1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Track role-based permissions
+        canModifyProperties = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyProperties)
+        ApplyRolePermissions()
         ' General settings
         propertyManagementGrid.ReadOnly = True
         propertyManagementGrid.AllowUserToAddRows = False
@@ -122,12 +126,26 @@ Public Class UC_PropertyManagement1
         End If
     End Sub
 
+    Private Sub ApplyRolePermissions()
+        If btnAdd IsNot Nothing Then btnAdd.Enabled = canModifyProperties
+        If btnEdit IsNot Nothing Then btnEdit.Enabled = canModifyProperties
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = canModifyProperties
+    End Sub
+
+    Private Sub ShowPropertyViewOnlyWarning()
+        MessageBox.Show("You have view-only access to Property Management. Admin users cannot add, edit, or delete properties.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
         ' Reload data with filters
         LoadPropertiesData()
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If Not canModifyProperties Then
+            ShowPropertyViewOnlyWarning()
+            Return
+        End If
         Dim addRequest As New AddProperty()
         addRequest.Dock = DockStyle.Fill
 
@@ -139,6 +157,11 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If Not canModifyProperties Then
+            ShowPropertyViewOnlyWarning()
+            Return
+        End If
+
         If propertyManagementGrid.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a property to edit.", "No Selection",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -188,6 +211,11 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If Not canModifyProperties Then
+            ShowPropertyViewOnlyWarning()
+            Return
+        End If
+
         If propertyManagementGrid.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a property to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return

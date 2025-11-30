@@ -71,7 +71,7 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub ShowSupplyViewOnlyWarning()
-        MessageBox.Show("You have view-only access to Supplies Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        MessageBox.Show("You have view-only access to Supplies Management. Admin users cannot add, edit, or delete supplies.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     Private Sub InitializeFilters()
