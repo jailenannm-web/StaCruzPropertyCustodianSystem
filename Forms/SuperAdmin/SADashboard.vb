@@ -132,6 +132,7 @@ Partial Class SADashboard
         ' --- THIS IS THE NEW CODE ---
         ' Load your new profile form
         LoadUserControl(New UC_UserManagement())
+
     End Sub
 
 

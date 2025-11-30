@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
 
@@ -75,11 +76,27 @@ Public Class UC_PropertyRequestManagement
     ' PRINT PAR LOGIC — FULLY CONNECTED TO PROPERTYCARD
     ' ----------------------------------------------------------------------
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click
+        Dim InventoryCustodianSlip As New InventoryCustodianSlip()
+        InventoryCustodianSlip.Show()
     End Sub
 
     Private Sub issuePropertyCard_Click(sender As Object, e As EventArgs) Handles issuePropertyCard.Click
 
+        If prm_table1.CurrentRow Is Nothing Then
+            MessageBox.Show("Please select a row first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim row As DataGridViewRow = prm_table1.CurrentRow
+
+        ' Convert DataGridViewRow → DataRow (or pass values manually)
+        Dim dt As DataTable = CType(prm_table1.DataSource, DataTable)
+        Dim dataRow As DataRow = dt.Rows(row.Index)
+
+        Dim cardForm As New PropertyCard(dataRow)
+        cardForm.Show()
     End Sub
+
 
     Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
 

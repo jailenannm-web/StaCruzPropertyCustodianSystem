@@ -28,7 +28,6 @@ Public Class EditUser
     End Sub
 
     Private Sub EditUser_Load(sender As Object, e As EventArgs)
-        PopulateDropdowns()
         LoadDepartmentOptions()
         If Not canManageUsers Then
             canManageUsers = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
@@ -61,13 +60,10 @@ Public Class EditUser
                             provinceValue As String,
                             municipalityValue As String,
                             barangayValue As String,
-                            houseNumber As String,
                             password As String,
                             dateRegistered As Date,
-                            statusValue As String,
                             username As String)
 
-        PopulateDropdowns()
 
         Me.userID.Text = userID
         Me.firstName.Text = firstName
@@ -77,32 +73,17 @@ Public Class EditUser
         Me.employeeID.Text = employeeID
         Me.contactNumber.Text = contactNumber
         Me.email.Text = email
-        Me.houseNumber.Text = houseNumber
         Me.password.Text = password
 
         SetComboValue(suffixAdmin, suffixValue)
         SetComboValue(positionAdmin, position)
-        SetComboValue(ComboBox1, userRole)
+        SetComboValue(usernameAdmin, userRole)
         SetComboValue(Me.province, provinceValue)
         SetComboValue(Me.municipality, municipalityValue)
         SetComboValue(Me.barangay, barangayValue)
-        SetComboValue(statusAdmin, statusValue)
 
-        Me.dateRegistered.Value = dateRegistered
         editingUsername = username
         currentUserType = userRole ' Store the current user type
-    End Sub
-
-    Private Sub PopulateDropdowns()
-        If ComboBox1.Items.Count = 0 Then
-            ComboBox1.Items.AddRange(New Object() {"Admin", "SuperAdmin", "Custodian", "Staff"})
-        End If
-        If statusAdmin.Items.Count = 0 Then
-            statusAdmin.Items.AddRange(New Object() {"Active", "Inactive"})
-        End If
-        If suffixAdmin.Items.Count = 0 Then
-            suffixAdmin.Items.AddRange(New Object() {"", "JR.", "SR.", "II", "III", "IV"})
-        End If
     End Sub
 
     Private Sub LoadDepartmentOptions()
@@ -144,33 +125,32 @@ Public Class EditUser
 
         Dim deptID As Integer? = ResolveDepartmentId()
 
-        Dim roleValue As String = GetComboValue(ComboBox1, currentUserType)
+        Dim roleValue As String = GetComboValue(usernameAdmin, currentUserType)
         ' Determine the new user type from dropdown
         Dim newUserTypeValue As String = If(String.Equals(roleValue, "SuperAdmin", StringComparison.OrdinalIgnoreCase), "SuperAdmin",
                                             If(String.Equals(roleValue, "Staff", StringComparison.OrdinalIgnoreCase), "Staff", "Admin"))
-        
+
         ' Use current user type to determine which table to update (can't change Staff to Admin or vice versa in single update)
         ' For Staff accounts, keep as Staff. For Admin/SuperAdmin, allow role changes between Admin and SuperAdmin
         Dim tableUserType As String = currentUserType
         If String.IsNullOrEmpty(tableUserType) Then
             tableUserType = newUserTypeValue
         End If
-        
+
         ' If current is Staff, new type must also be Staff
         If tableUserType = "Staff" AndAlso newUserTypeValue <> "Staff" Then
-            MessageBox.Show("Cannot change Staff account to Admin or SuperAdmin. Staff accounts must remain as Staff.", 
+            MessageBox.Show("Cannot change Staff account to Admin or SuperAdmin. Staff accounts must remain as Staff.",
                            "Role Change Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
-        
+
         ' If current is Admin/SuperAdmin, new type must also be Admin or SuperAdmin
         If (tableUserType = "Admin" OrElse tableUserType = "SuperAdmin") AndAlso newUserTypeValue = "Staff" Then
-            MessageBox.Show("Cannot change Admin/SuperAdmin account to Staff. Please create a new Staff account instead.", 
+            MessageBox.Show("Cannot change Admin/SuperAdmin account to Staff. Please create a new Staff account instead.",
                            "Role Change Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
-        
-        Dim statusValue As String = GetComboValue(statusAdmin, "Active")
+
         Dim positionValue As String = GetComboValue(positionAdmin, If(String.IsNullOrWhiteSpace(roleValue), "Administrator", roleValue))
 
         ' Use unified UpdateUserAccount function that handles both Admin/SuperAdmin and Staff
@@ -186,14 +166,11 @@ Public Class EditUser
             position:=positionValue,
             departmentID:=deptID,
             contactNumber:=contactNumber.Text.Trim(),
-            houseNoStreet:=houseNumber.Text.Trim(),
             barangay:=GetComboValue(barangay),
             municipality:=GetComboValue(municipality),
             provinceCity:=GetComboValue(province),
-            dateAssigned:=dateRegistered.Value,
             employeeID:=employeeID.Text.Trim(),
             newUserType:=newUserTypeValue, ' New role (only applies to Admin/SuperAdmin)
-            status:=statusValue,
             updatedByID:=currentAdminID,
             updatedByType:=currentAdminType,
             updatedByName:=currentAdminUsername,
@@ -239,8 +216,7 @@ Public Class EditUser
         If String.IsNullOrWhiteSpace(lastName.Text) Then Return "Last name is required."
         If String.IsNullOrWhiteSpace(email.Text) Then Return "Email is required."
         If Not IsValidEmail(email.Text) Then Return "Please enter a valid email address."
-        If ComboBox1.SelectedIndex = -1 Then Return "Please select a user role."
-        If statusAdmin.SelectedIndex = -1 Then Return "Please select an account status."
+        If usernameAdmin.SelectedIndex = -1 Then Return "Please select a user role."
         Return ""
     End Function
 

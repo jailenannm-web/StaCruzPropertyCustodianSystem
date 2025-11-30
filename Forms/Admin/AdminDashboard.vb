@@ -521,6 +521,6 @@ Public Class AdminDashboard
     End Sub
 
     Private Sub admin_btn_suppliesRequestManagement_Click(sender As Object, e As EventArgs) Handles admin_btn_suppliesRequestManagement.Click
-
+        LoadUserControl(New UC_SupplyRequestManagement())
     End Sub
 End Class

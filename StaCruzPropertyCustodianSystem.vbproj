@@ -110,6 +110,12 @@
   </ItemGroup>
   <!-- STAFF FORMS -->
   <ItemGroup>
+    <Compile Include="Forms\Admin\UC_SupplyRequestManagement.Designer.vb">
+      <DependentUpon>UC_SupplyRequestManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\UC_SupplyRequestManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Custodians\CustodianDashboard.Designer.vb">
       <DependentUpon>CustodianDashboard.vb</DependentUpon>
     </Compile>
@@ -422,6 +428,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UC_Reports.resx">
       <DependentUpon>UC_Reports.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_SupplyRequestManagement.resx">
+      <DependentUpon>UC_SupplyRequestManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UC_UserManagement.resx">
       <DependentUpon>UC_UserManagement.vb</DependentUpon>

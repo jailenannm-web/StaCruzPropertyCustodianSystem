@@ -27,14 +27,15 @@ Partial Class UC_SupplyManagement
         Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NameofRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateofRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colMenu = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unitofMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateReceived = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stockStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         Me.SuspendLayout()
@@ -79,7 +80,7 @@ Partial Class UC_SupplyManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameofRequester, Me.Department, Me.DateofRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status, Me.colMenu})
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.itemName, Me.category, Me.unitofMeasure, Me.quantity, Me.dateReceived, Me.unitCost, Me.location, Me.supplier, Me.stockStatus})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(62, 124)
         Me.pm_table.Name = "pm_table"
@@ -207,63 +208,68 @@ Partial Class UC_SupplyManagement
         Me.mnuPrintPARICS.Size = New System.Drawing.Size(190, 24)
         Me.mnuPrintPARICS.Text = "Print PAR/ICS"
         '
-        'NameofRequester
+        'itemName
         '
-        Me.NameofRequester.HeaderText = "Name of Requester"
-        Me.NameofRequester.MinimumWidth = 6
-        Me.NameofRequester.Name = "NameofRequester"
-        Me.NameofRequester.Width = 125
+        Me.itemName.HeaderText = "ItemName"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 125
         '
-        'Department
+        'category
         '
-        Me.Department.HeaderText = "Department"
-        Me.Department.MinimumWidth = 6
-        Me.Department.Name = "Department"
-        Me.Department.Width = 125
+        Me.category.HeaderText = "Category"
+        Me.category.MinimumWidth = 6
+        Me.category.Name = "category"
+        Me.category.Width = 125
         '
-        'DateofRequest
+        'unitofMeasure
         '
-        Me.DateofRequest.HeaderText = "Date of Request"
-        Me.DateofRequest.MinimumWidth = 6
-        Me.DateofRequest.Name = "DateofRequest"
-        Me.DateofRequest.Width = 125
+        Me.unitofMeasure.HeaderText = "Unit of Measure"
+        Me.unitofMeasure.MinimumWidth = 6
+        Me.unitofMeasure.Name = "unitofMeasure"
+        Me.unitofMeasure.Width = 125
         '
-        'ItemName
+        'quantity
         '
-        Me.ItemName.HeaderText = "Item Name"
-        Me.ItemName.MinimumWidth = 6
-        Me.ItemName.Name = "ItemName"
-        Me.ItemName.Width = 125
+        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.MinimumWidth = 6
+        Me.quantity.Name = "quantity"
+        Me.quantity.Width = 125
         '
-        'QuantityRequested
+        'dateReceived
         '
-        Me.QuantityRequested.HeaderText = "Quantity Requested"
-        Me.QuantityRequested.MinimumWidth = 6
-        Me.QuantityRequested.Name = "QuantityRequested"
-        Me.QuantityRequested.Width = 125
+        Me.dateReceived.HeaderText = "Date Received"
+        Me.dateReceived.MinimumWidth = 6
+        Me.dateReceived.Name = "dateReceived"
+        Me.dateReceived.Width = 125
         '
-        'Purpose
+        'unitCost
         '
-        Me.Purpose.HeaderText = "Purpose"
-        Me.Purpose.MinimumWidth = 6
-        Me.Purpose.Name = "Purpose"
-        Me.Purpose.Width = 125
+        Me.unitCost.HeaderText = "Unit Cost"
+        Me.unitCost.MinimumWidth = 6
+        Me.unitCost.Name = "unitCost"
+        Me.unitCost.Width = 125
         '
-        'Status
+        'location
         '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
+        Me.location.HeaderText = "Location"
+        Me.location.MinimumWidth = 6
+        Me.location.Name = "location"
+        Me.location.Width = 125
         '
-        'colMenu
+        'supplier
         '
-        Me.colMenu.HeaderText = "Actions"
-        Me.colMenu.MinimumWidth = 6
-        Me.colMenu.Name = "colMenu"
-        Me.colMenu.Text = "..."
-        Me.colMenu.UseColumnTextForButtonValue = True
-        Me.colMenu.Width = 125
+        Me.supplier.HeaderText = "Supplier"
+        Me.supplier.MinimumWidth = 6
+        Me.supplier.Name = "supplier"
+        Me.supplier.Width = 125
+        '
+        'stockStatus
+        '
+        Me.stockStatus.HeaderText = "Stock Status"
+        Me.stockStatus.MinimumWidth = 6
+        Me.stockStatus.Name = "stockStatus"
+        Me.stockStatus.Width = 125
         '
         'UC_SupplyManagement
         '
@@ -305,12 +311,13 @@ Partial Class UC_SupplyManagement
     Friend WithEvents mnuLostDamaged As ToolStripMenuItem
     Friend WithEvents mnuViewDetails As ToolStripMenuItem
     Friend WithEvents mnuPrintPARICS As ToolStripMenuItem
-    Friend WithEvents NameofRequester As DataGridViewTextBoxColumn
-    Friend WithEvents Department As DataGridViewTextBoxColumn
-    Friend WithEvents DateofRequest As DataGridViewTextBoxColumn
-    Friend WithEvents ItemName As DataGridViewTextBoxColumn
-    Friend WithEvents QuantityRequested As DataGridViewTextBoxColumn
-    Friend WithEvents Purpose As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents colMenu As DataGridViewButtonColumn
+    Friend WithEvents itemName As DataGridViewTextBoxColumn
+    Friend WithEvents category As DataGridViewTextBoxColumn
+    Friend WithEvents unitofMeasure As DataGridViewTextBoxColumn
+    Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents dateReceived As DataGridViewTextBoxColumn
+    Friend WithEvents unitCost As DataGridViewTextBoxColumn
+    Friend WithEvents location As DataGridViewTextBoxColumn
+    Friend WithEvents supplier As DataGridViewTextBoxColumn
+    Friend WithEvents stockStatus As DataGridViewTextBoxColumn
 End Class

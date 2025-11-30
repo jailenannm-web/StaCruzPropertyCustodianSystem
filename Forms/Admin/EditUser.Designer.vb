@@ -34,13 +34,10 @@ Partial Class EditUser
         Me.instructions = New System.Windows.Forms.Label()
         Me.uc_um_edituser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.suffixAdmin = New System.Windows.Forms.ComboBox()
-        Me.statusAdmin = New System.Windows.Forms.ComboBox()
-        Me.dateRegistered = New System.Windows.Forms.DateTimePicker()
-        Me.houseNumber = New System.Windows.Forms.TextBox()
         Me.barangay = New System.Windows.Forms.ComboBox()
         Me.municipality = New System.Windows.Forms.ComboBox()
         Me.province = New System.Windows.Forms.ComboBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.usernameAdmin = New System.Windows.Forms.ComboBox()
         Me.positionAdmin = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -50,9 +47,6 @@ Partial Class EditUser
         Me.middleName = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.userID = New System.Windows.Forms.TextBox()
-        Me.um_edituser_txtStatus = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.um_edituser_txtboxID = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.um_edituser_txtboxAddress = New System.Windows.Forms.Label()
         Me.um_edituser_Password = New System.Windows.Forms.Label()
@@ -113,13 +107,10 @@ Partial Class EditUser
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.uc_um_edituser.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.uc_um_edituser.Controls.Add(Me.suffixAdmin)
-        Me.uc_um_edituser.Controls.Add(Me.statusAdmin)
-        Me.uc_um_edituser.Controls.Add(Me.dateRegistered)
-        Me.uc_um_edituser.Controls.Add(Me.houseNumber)
         Me.uc_um_edituser.Controls.Add(Me.barangay)
         Me.uc_um_edituser.Controls.Add(Me.municipality)
         Me.uc_um_edituser.Controls.Add(Me.province)
-        Me.uc_um_edituser.Controls.Add(Me.ComboBox1)
+        Me.uc_um_edituser.Controls.Add(Me.usernameAdmin)
         Me.uc_um_edituser.Controls.Add(Me.positionAdmin)
         Me.uc_um_edituser.Controls.Add(Me.Label9)
         Me.uc_um_edituser.Controls.Add(Me.Label8)
@@ -129,9 +120,6 @@ Partial Class EditUser
         Me.uc_um_edituser.Controls.Add(Me.middleName)
         Me.uc_um_edituser.Controls.Add(Me.Label3)
         Me.uc_um_edituser.Controls.Add(Me.userID)
-        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtStatus)
-        Me.uc_um_edituser.Controls.Add(Me.Label4)
-        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxID)
         Me.uc_um_edituser.Controls.Add(Me.Label6)
         Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxAddress)
         Me.uc_um_edituser.Controls.Add(Me.um_edituser_Password)
@@ -164,38 +152,6 @@ Partial Class EditUser
         Me.suffixAdmin.Size = New System.Drawing.Size(345, 24)
         Me.suffixAdmin.TabIndex = 71
         '
-        'statusAdmin
-        '
-        Me.statusAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.statusAdmin.FormattingEnabled = True
-        Me.statusAdmin.Location = New System.Drawing.Point(924, 481)
-        Me.statusAdmin.Name = "statusAdmin"
-        Me.statusAdmin.Size = New System.Drawing.Size(239, 24)
-        Me.statusAdmin.TabIndex = 70
-        '
-        'dateRegistered
-        '
-        Me.dateRegistered.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dateRegistered.Location = New System.Drawing.Point(924, 428)
-        Me.dateRegistered.Name = "dateRegistered"
-        Me.dateRegistered.Size = New System.Drawing.Size(237, 22)
-        Me.dateRegistered.TabIndex = 69
-        '
-        'houseNumber
-        '
-        Me.houseNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.houseNumber.BackColor = System.Drawing.SystemColors.Window
-        Me.houseNumber.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.houseNumber.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.houseNumber.Location = New System.Drawing.Point(924, 328)
-        Me.houseNumber.MaxLength = 100
-        Me.houseNumber.Name = "houseNumber"
-        Me.houseNumber.Size = New System.Drawing.Size(239, 27)
-        Me.houseNumber.TabIndex = 68
-        '
         'barangay
         '
         Me.barangay.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -226,15 +182,15 @@ Partial Class EditUser
         Me.province.Size = New System.Drawing.Size(345, 24)
         Me.province.TabIndex = 65
         '
-        'ComboBox1
+        'usernameAdmin
         '
-        Me.ComboBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.usernameAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(816, 107)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(345, 24)
-        Me.ComboBox1.TabIndex = 64
+        Me.usernameAdmin.FormattingEnabled = True
+        Me.usernameAdmin.Location = New System.Drawing.Point(816, 107)
+        Me.usernameAdmin.Name = "usernameAdmin"
+        Me.usernameAdmin.Size = New System.Drawing.Size(345, 24)
+        Me.usernameAdmin.TabIndex = 64
         '
         'positionAdmin
         '
@@ -350,45 +306,6 @@ Partial Class EditUser
         Me.userID.Size = New System.Drawing.Size(284, 27)
         Me.userID.TabIndex = 53
         '
-        'um_edituser_txtStatus
-        '
-        Me.um_edituser_txtStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtStatus.AutoSize = True
-        Me.um_edituser_txtStatus.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.um_edituser_txtStatus.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_txtStatus.Location = New System.Drawing.Point(686, 429)
-        Me.um_edituser_txtStatus.Name = "um_edituser_txtStatus"
-        Me.um_edituser_txtStatus.Size = New System.Drawing.Size(130, 26)
-        Me.um_edituser_txtStatus.TabIndex = 50
-        Me.um_edituser_txtStatus.Text = "Date Registered"
-        '
-        'Label4
-        '
-        Me.Label4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(686, 482)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(59, 26)
-        Me.Label4.TabIndex = 48
-        Me.Label4.Text = "Status"
-        '
-        'um_edituser_txtboxID
-        '
-        Me.um_edituser_txtboxID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxID.AutoSize = True
-        Me.um_edituser_txtboxID.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.um_edituser_txtboxID.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_txtboxID.Location = New System.Drawing.Point(686, 329)
-        Me.um_edituser_txtboxID.Name = "um_edituser_txtboxID"
-        Me.um_edituser_txtboxID.Size = New System.Drawing.Size(222, 26)
-        Me.um_edituser_txtboxID.TabIndex = 46
-        Me.um_edituser_txtboxID.Text = "House Number/Full Address"
-        '
         'Label6
         '
         Me.Label6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -422,7 +339,7 @@ Partial Class EditUser
         Me.um_edituser_Password.AutoSize = True
         Me.um_edituser_Password.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.um_edituser_Password.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_Password.Location = New System.Drawing.Point(686, 375)
+        Me.um_edituser_Password.Location = New System.Drawing.Point(686, 321)
         Me.um_edituser_Password.Name = "um_edituser_Password"
         Me.um_edituser_Password.Size = New System.Drawing.Size(85, 26)
         Me.um_edituser_Password.TabIndex = 40
@@ -435,10 +352,10 @@ Partial Class EditUser
         Me.password.BackColor = System.Drawing.SystemColors.Window
         Me.password.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.password.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.password.Location = New System.Drawing.Point(924, 374)
+        Me.password.Location = New System.Drawing.Point(829, 319)
         Me.password.MaxLength = 100
         Me.password.Name = "password"
-        Me.password.Size = New System.Drawing.Size(239, 27)
+        Me.password.Size = New System.Drawing.Size(332, 27)
         Me.password.TabIndex = 39
         '
         'um_edituser_txtboxUsername
@@ -450,9 +367,9 @@ Partial Class EditUser
         Me.um_edituser_txtboxUsername.ForeColor = System.Drawing.Color.Black
         Me.um_edituser_txtboxUsername.Location = New System.Drawing.Point(686, 108)
         Me.um_edituser_txtboxUsername.Name = "um_edituser_txtboxUsername"
-        Me.um_edituser_txtboxUsername.Size = New System.Drawing.Size(81, 26)
+        Me.um_edituser_txtboxUsername.Size = New System.Drawing.Size(89, 26)
         Me.um_edituser_txtboxUsername.TabIndex = 38
-        Me.um_edituser_txtboxUsername.Text = "User Role"
+        Me.um_edituser_txtboxUsername.Text = "Username"
         '
         'um_edituser_txtboxEmail
         '
@@ -655,9 +572,6 @@ Partial Class EditUser
     Friend WithEvents contactNumber As TextBox
     Friend WithEvents um_edituser_txtboxdepartment As Label
     Friend WithEvents departmentID As TextBox
-    Friend WithEvents um_edituser_txtStatus As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents um_edituser_txtboxID As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents um_edituser_txtboxAddress As Label
     Friend WithEvents um_edituser_Password As Label
@@ -677,12 +591,9 @@ Partial Class EditUser
     Friend WithEvents Label7 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents positionAdmin As ComboBox
-    Friend WithEvents houseNumber As TextBox
     Friend WithEvents barangay As ComboBox
     Friend WithEvents municipality As ComboBox
     Friend WithEvents province As ComboBox
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents statusAdmin As ComboBox
-    Friend WithEvents dateRegistered As DateTimePicker
+    Friend WithEvents usernameAdmin As ComboBox
     Friend WithEvents suffixAdmin As ComboBox
 End Class
