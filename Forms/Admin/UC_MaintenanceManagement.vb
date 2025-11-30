@@ -74,4 +74,17 @@ Public Class UC_MaintenanceManagement
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
 
     End Sub
+
+    Private Sub btnGenerateMaintenance_Click(sender As Object, e As EventArgs) Handles btnGenerateMaintenance.Click
+
+        Dim addRequest As New MaintenanceReport()
+        addRequest.Dock = DockStyle.Fill
+
+        ' Clear previous controls
+        Me.Controls.Clear()
+
+        ' Add new user control
+        Me.Controls.Add(MaintenanceReport)
+    End Sub
+
 End Class

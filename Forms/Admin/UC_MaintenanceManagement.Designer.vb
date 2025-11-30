@@ -43,7 +43,7 @@ Partial Class UC_MaintenanceManagement
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlMaintenancemanagement = New System.Windows.Forms.Label()
         Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnGenerateMaintenance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -210,21 +210,21 @@ Partial Class UC_MaintenanceManagement
         Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = False
         '
-        'RoundedButton1
+        'btnGenerateMaintenance
         '
-        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton1.CornerRadius = 15
-        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(1100, 63)
-        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
-        Me.RoundedButton1.Name = "RoundedButton1"
-        Me.RoundedButton1.Size = New System.Drawing.Size(228, 35)
-        Me.RoundedButton1.TabIndex = 167
-        Me.RoundedButton1.Text = "Generate Maintenance Report"
-        Me.RoundedButton1.UseVisualStyleBackColor = False
+        Me.btnGenerateMaintenance.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGenerateMaintenance.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnGenerateMaintenance.CornerRadius = 15
+        Me.btnGenerateMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGenerateMaintenance.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnGenerateMaintenance.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnGenerateMaintenance.Location = New System.Drawing.Point(1100, 63)
+        Me.btnGenerateMaintenance.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnGenerateMaintenance.Name = "btnGenerateMaintenance"
+        Me.btnGenerateMaintenance.Size = New System.Drawing.Size(228, 35)
+        Me.btnGenerateMaintenance.TabIndex = 167
+        Me.btnGenerateMaintenance.Text = "Generate Maintenance Report"
+        Me.btnGenerateMaintenance.UseVisualStyleBackColor = False
         '
         'btnReject
         '
@@ -265,7 +265,7 @@ Partial Class UC_MaintenanceManagement
         Me.AutoScroll = True
         Me.Controls.Add(Me.btnAssign)
         Me.Controls.Add(Me.btnReject)
-        Me.Controls.Add(Me.RoundedButton1)
+        Me.Controls.Add(Me.btnGenerateMaintenance)
         Me.Controls.Add(Me.btnRefresh)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlMaintenancemanagement)
@@ -288,7 +288,7 @@ Partial Class UC_MaintenanceManagement
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlMaintenancemanagement As Label
     Friend WithEvents btnRefresh As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents btnGenerateMaintenance As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
     Friend WithEvents btnAssign As Resources.Controls.RoundedButton
     Friend WithEvents maintenanceID As DataGridViewTextBoxColumn
