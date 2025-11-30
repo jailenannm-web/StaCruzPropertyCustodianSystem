@@ -16,39 +16,37 @@ Public Class AddProperty
     End Sub
 
     Private Sub AddProperty_Load(sender As Object, e As EventArgs)
-        If Not EnsureModifyPermission() Then
-            Return
-        End If
+
         InitializeForm()
     End Sub
 
     Private Sub InitializeForm()
-        categoryCmbo.Items.Clear()
-        categoryCmbo.Items.AddRange(New Object() {
+        category.Items.Clear()
+        category.Items.AddRange(New Object() {
             "Furniture", "Equipment", "Office Supplies", "IT Equipment",
             "Laboratory Apparatus", "Books and Publications",
             "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
         })
-        If categoryCmbo.Items.Count > 0 Then categoryCmbo.SelectedIndex = 0
+        If category.Items.Count > 0 Then category.SelectedIndex = 0
 
-        conditionStatusCmbo.Items.Clear()
-        conditionStatusCmbo.Items.AddRange(New Object() {"good", "needs repair", "damaged"})
-        If conditionStatusCmbo.Items.Count > 0 Then conditionStatusCmbo.SelectedIndex = 0
+        condition.Items.Clear()
+        condition.Items.AddRange(New Object() {"good", "needs repair", "damaged"})
+        If condition.Items.Count > 0 Then condition.SelectedIndex = 0
 
         LoadDepartments()
         LoadCustodians()
 
-        datePurchasedDate.Value = Date.Today
+        acquisitionDate.Value = Date.Today
         warrantyExpirationDate.Value = Date.Today.AddYears(1)
     End Sub
 
     Private Sub LoadDepartments()
         Try
             departmentDirectory = DatabaseConnection.GetDepartmentLookup(True)
-            assignedDeparmentCmbo.DataSource = departmentDirectory
-            assignedDeparmentCmbo.DisplayMember = "department_name"
-            assignedDeparmentCmbo.ValueMember = "department_id"
-            assignedDeparmentCmbo.SelectedIndex = If(departmentDirectory.Rows.Count > 0, 0, -1)
+            department.DataSource = departmentDirectory
+            department.DisplayMember = "department_name"
+            department.ValueMember = "department_id"
+            department.SelectedIndex = If(departmentDirectory.Rows.Count > 0, 0, -1)
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AddProperty.LoadDepartments Exception: " & ex.Message)
         End Try
@@ -64,18 +62,16 @@ Public Class AddProperty
                 suggestions.Add($"{row("user_id")} - {row("full_name")}")
             Next
 
-            assignedEmployeeTxt.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            assignedEmployeeTxt.AutoCompleteSource = AutoCompleteSource.CustomSource
-            assignedEmployeeTxt.AutoCompleteCustomSource = suggestions
+            assignedTo.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            assignedTo.AutoCompleteSource = AutoCompleteSource.CustomSource
+            assignedTo.AutoCompleteCustomSource = suggestions
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AddProperty.LoadCustodians Exception: " & ex.Message)
         End Try
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If Not canModifyProperties AndAlso Not EnsureModifyPermission() Then
-            Return
-        End If
+
         Dim validationError = ValidateFields()
         If Not String.IsNullOrEmpty(validationError) Then
             MessageBox.Show(validationError, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -83,27 +79,43 @@ Public Class AddProperty
         End If
 
         Dim departmentId As Integer? = Nothing
-        If assignedDeparmentCmbo.SelectedValue IsNot Nothing Then
-            departmentId = Convert.ToInt32(assignedDeparmentCmbo.SelectedValue)
+        If department.SelectedValue IsNot Nothing Then
+            departmentId = Convert.ToInt32(department.SelectedValue)
         End If
 
         Dim custodianId As Integer? = ResolveCustodianId()
 
+        ' Parse acquisition cost
+        Dim acquisitionCostValue As Decimal = 0
+        If Not String.IsNullOrWhiteSpace(acquisitionCost.Text) Then
+            If Not Decimal.TryParse(acquisitionCost.Text.Trim(), acquisitionCostValue) Then
+                MessageBox.Show("Please enter a valid acquisition cost.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                acquisitionCost.Focus()
+                Return
+            End If
+        End If
+
+        ' Get description from description field
+        Dim descriptionValue As String = ""
+        If description IsNot Nothing Then
+            descriptionValue = description.Text.Trim()
+        End If
+
         Dim success = DatabaseConnection.AddProperty(
-            propertyNameTxt.Text.Trim(),
-            GetComboValue(categoryCmbo, "Others"),
-            remarks_txt.Text.Trim(),
-            serialNumberTxt.Text.Trim(),
-            datePurchasedDate.Value,
-            CDec(no_of_employees_numeric.Value),
-            supplierTxt.Text.Trim(),
-            "", ' supplier contact not captured separately
-            GetComboValue(conditionStatusCmbo, "good"),
-            propertyLocation.Text.Trim(),
-            custodianId,
-            departmentId,
-            warrantyExpirationDate.Value.ToShortDateString(),
-            Nothing
+            propertyNameTxt.Text.Trim(),                            ' propertyName
+            GetComboValue(category, "Others"),                       ' category
+            descriptionValue,                                        ' description
+            serialNumberTxt.Text.Trim(),                             ' serialNumber
+            acquisitionDate.Value,                                  ' acquisitionDate
+            acquisitionCostValue,                                   ' acquisitionCost
+            supplierTxt.Text.Trim(),                                 ' supplierName
+            "",                                                      ' supplierContact
+            GetComboValue(condition, "good"),                       ' conditionStatus
+            propertyLocation.Text.Trim(),                           ' location
+            custodianId,                                             ' custodianID
+            departmentId,                                            ' departmentID
+            warrantyExpirationDate.Value.ToShortDateString(),       ' warrantyDetails
+            Nothing                                                  ' lifeSpan
         )
 
         If success Then
@@ -125,7 +137,7 @@ Public Class AddProperty
 
     Private Function ValidateFields() As String
         If String.IsNullOrWhiteSpace(propertyNameTxt.Text) Then Return "Property name is required."
-        If categoryCmbo.SelectedIndex = -1 Then Return "Please select a category."
+        If category.SelectedIndex = -1 Then Return "Please select a category."
         If String.IsNullOrWhiteSpace(supplierTxt.Text) Then Return "Supplier is required."
         If no_of_employees_numeric.Value <= 0 Then Return "Acquisition cost must be greater than zero."
         If String.IsNullOrWhiteSpace(propertyLocation.Text) Then Return "Location is required."
@@ -133,7 +145,7 @@ Public Class AddProperty
     End Function
 
     Private Function ResolveCustodianId() As Integer?
-        Dim rawValue As String = assignedEmployeeTxt.Text.Trim()
+        Dim rawValue As String = assignedTo.Text.Trim()
         If String.IsNullOrWhiteSpace(rawValue) Then Return Nothing
         Dim candidate As String = rawValue
         If rawValue.Contains("-") Then candidate = rawValue.Split("-"c)(0).Trim()
@@ -154,21 +166,21 @@ Public Class AddProperty
         Return combo.SelectedItem.ToString()
     End Function
 
-    Private Function EnsureModifyPermission() As Boolean
-        canModifyProperties = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyProperties)
-        If Not canModifyProperties Then
-            MessageBox.Show("You have view-only access to Property Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            NavigateBackToList()
-            Return False
-        End If
-        Return True
-    End Function
+
 
     Private Sub conditionStatusCmbo_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
 
     Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub datePurchasedDate_ValueChanged(sender As Object, e As EventArgs) Handles acquisitionDate.ValueChanged
+
+    End Sub
+
+    Private Sub AddProperty_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

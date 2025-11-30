@@ -74,7 +74,13 @@ Public Class PropertyInventory
             ' Auto-size columns
             propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         Catch ex As Exception
-            MessageBox.Show("Error loading property data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = "Unable to load property data. "
+            If ex.Message.Contains("Connection") OrElse ex.Message.Contains("timeout") Then
+                errorMsg &= "Please check your database connection."
+            Else
+                errorMsg &= "Please try again."
+            End If
+            MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
     End Sub
     Private Sub btnrequestproperty_Click(sender As Object, e As System.EventArgs)
@@ -89,12 +95,16 @@ Public Class PropertyInventory
     End Sub
 
     Private Sub btnrequestproperty_Click_1(sender As Object, e As System.EventArgs) Handles btnrequestproperty.Click
-        Dim addPropertyInventory As New AddPropertyRequest()
-
-        ' Clear previous controls
-        Me.Controls.Clear()
-
-        ' Add new user control
-        Me.Controls.Add(addPropertyInventory)
+        ' Load AddPropertyRequest into parent dashboard
+        Dim parentDashboard = TryCast(Me.ParentForm, StaffDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(New AddPropertyRequest())
+        Else
+            ' Fallback: add directly to parent
+            Dim addPropertyRequest As New AddPropertyRequest()
+            addPropertyRequest.Dock = DockStyle.Fill
+            Me.Parent.Controls.Clear()
+            Me.Parent.Controls.Add(addPropertyRequest)
+        End If
     End Sub
 End Class

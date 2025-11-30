@@ -32,18 +32,10 @@ Public Class UC_PropertyRequestManagement
         End If
     End Sub
 
-    Private Sub ShowRequestRestrictionMessage()
-        MessageBox.Show("You have view-only access to Property Request Management.",
-                        "Access Restricted",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information)
-    End Sub
+
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs)
-        If Not canModifyRequests Then
-            ShowRequestRestrictionMessage()
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
@@ -52,23 +44,65 @@ Public Class UC_PropertyRequestManagement
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs)
-        If Not canModifyRequests Then
-            ShowRequestRestrictionMessage()
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
 
         MessageBox.Show("Delete request functionality here")
     End Sub
 
     Private Sub assign_Click(sender As Object, e As EventArgs)
-        If Not canModifyRequests Then
-            ShowRequestRestrictionMessage()
+        ' No restrictions for Super Admin, Admin, and Custodian
+        ' Validate that a request is selected
+        If prm_table1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a property request to assign.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+
+        ' Get request ID from selected row
+        Dim requestIDValue As Object = Nothing
+        If prm_table1.Columns.Contains("request_id") Then
+            requestIDValue = selectedRow.Cells("request_id").Value
+        ElseIf prm_table1.Columns.Contains("RequestID") Then
+            requestIDValue = selectedRow.Cells("RequestID").Value
+        ElseIf prm_table1.Columns.Count > 0 Then
+            ' Try first column as request ID
+            requestIDValue = selectedRow.Cells(0).Value
+        End If
+
+        If requestIDValue Is Nothing OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
+            MessageBox.Show("Invalid request selected. Please select a valid property request.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' Get request status to validate
+        Dim requestStatus As String = ""
+        If prm_table1.Columns.Contains("status") Then
+            requestStatus = If(selectedRow.Cells("status").Value IsNot Nothing, selectedRow.Cells("status").Value.ToString(), "")
+        ElseIf prm_table1.Columns.Contains("Status") Then
+            requestStatus = If(selectedRow.Cells("Status").Value IsNot Nothing, selectedRow.Cells("Status").Value.ToString(), "")
+        End If
+
+        ' Only allow assigning approved or pending requests
+        If Not String.IsNullOrEmpty(requestStatus) AndAlso requestStatus.ToLower() = "rejected" Then
+            MessageBox.Show("Cannot assign a rejected request. Please select an approved or pending request.", "Invalid Request Status", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New AssignRequestManagement())
+            Dim assignForm As New AssignRequestManagement()
+            ' Pass request ID to assign form if it has a method to load request data
+            Try
+                ' Try to set request ID using reflection or a public property
+                Dim requestIDProp = assignForm.GetType().GetProperty("RequestID")
+                If requestIDProp IsNot Nothing Then
+                    requestIDProp.SetValue(assignForm, requestIDValue.ToString())
+                End If
+            Catch
+                ' If property doesn't exist, continue anyway
+            End Try
+            parentDashboard.LoadUserControl(assignForm)
         End If
     End Sub
 
@@ -77,41 +111,49 @@ Public Class UC_PropertyRequestManagement
         ApplyPermissionState()
     End Sub
 
+    Private Sub ApplyPermissionState()
+        ' Super Admin, Admin, and Custodian have full access - ALL buttons enabled
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        If btnApprove IsNot Nothing Then btnApprove.Enabled = hasFullAccess
+        If btnReject IsNot Nothing Then btnReject.Enabled = hasFullAccess
+        If assign IsNot Nothing Then assign.Enabled = hasFullAccess
+        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = hasFullAccess
+
+    End Sub
+
     Private Sub LoadRequestData()
         Try
             Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
             prm_table1.DataSource = dt
             prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             prm_table1.ReadOnly = True
+            prm_table1.AllowUserToAddRows = False
+            prm_table1.AllowUserToDeleteRows = False
             prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             
             ' Update total count
-            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                ' Find the total label control - adjust name if needed
-                Dim totalLabel As Label = TryCast(Me.Controls.Find("ttlpropertymanagement", True).FirstOrDefault(), Label)
-                If totalLabel IsNot Nothing Then
-                    totalLabel.Text = "TOTAL: " & dt.Rows.Count.ToString()
-                End If
-            Else
-                Dim totalLabel As Label = TryCast(Me.Controls.Find("ttlpropertymanagement", True).FirstOrDefault(), Label)
-                If totalLabel IsNot Nothing Then
-                    totalLabel.Text = "TOTAL: 0"
-                End If
+            Dim totalLabel As Label = Nothing
+            Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+            If foundControls.Length > 0 Then
+                totalLabel = TryCast(foundControls(0), Label)
+            End If
+            If totalLabel IsNot Nothing Then
+                totalLabel.Text = If(dt IsNot Nothing AndAlso dt.Rows.Count > 0, dt.Rows.Count.ToString(), "0")
             End If
         Catch ex As Exception
-            MessageBox.Show("Error loading property requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error loading property requests: " & GetUserFriendlyErrorMessage(ex, "load property requests"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    Private Sub ApplyPermissionState()
-        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
-        Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        ' Super Admin can do all actions, Admin can only Approve/Reject
-        If btnApprove IsNot Nothing Then btnApprove.Enabled = (isSuperAdmin OrElse isAdmin)
-        If btnReject IsNot Nothing Then btnReject.Enabled = (isSuperAdmin OrElse isAdmin)
-        If assign IsNot Nothing Then assign.Enabled = isSuperAdmin
-        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = isSuperAdmin
-    End Sub
+    Private Function GetUserFriendlyErrorMessage(ex As Exception, action As String) As String
+        If ex Is Nothing Then Return "An unexpected error occurred."
+        If ex.Message.Contains("SupplyID") OrElse ex.Message.Contains("Column named") Then
+            Return "Data structure error. Please contact system administrator."
+        End If
+        Return "Unable to " & action & ". " & ex.Message
+    End Function
+
+
 
     ' ----------------------------------------------------------------------
     ' PRINT PAR LOGIC — FULLY CONNECTED TO PROPERTYCARD
@@ -140,27 +182,33 @@ Public Class UC_PropertyRequestManagement
 
 
     Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
-        If Not canModifyRequests Then
-            ShowRequestRestrictionMessage()
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
 
         If prm_table1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a request to approve.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
-        Dim requestIDValue As Object = selectedRow.Cells("request_id").Value
-        Dim requestIDStr As String = If(requestIDValue IsNot Nothing, requestIDValue.ToString(), "")
-        If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
-            MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
+        Try
+            Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
 
-        Dim requestID As Integer = Integer.Parse(requestIDStr)
-        Dim statusValue As Object = selectedRow.Cells("Status").Value
-        Dim currentStatus As String = If(statusValue IsNot Nothing, statusValue.ToString().ToLower(), "")
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            Dim requestIDValue As Object = If(dt.Columns.Contains("request_id"), dataRow("request_id"), Nothing)
+            Dim requestIDStr As String = If(requestIDValue IsNot Nothing AndAlso Not IsDBNull(requestIDValue), requestIDValue.ToString(), "")
+            If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
+                MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim requestID As Integer = Integer.Parse(requestIDStr)
+            Dim statusValue As Object = If(dt.Columns.Contains("status"), dataRow("status"), Nothing)
+            Dim currentStatus As String = If(statusValue IsNot Nothing AndAlso Not IsDBNull(statusValue), statusValue.ToString().ToLower(), "")
 
         If currentStatus = "approved" Then
             MessageBox.Show("This request is already approved.", "Already Approved", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -172,39 +220,48 @@ Public Class UC_PropertyRequestManagement
             Return
         End If
 
-        Dim remarks As String = InputBox("Enter approval remarks (optional):", "Approve Request", "")
-        Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
+            Dim remarks As String = InputBox("Enter approval remarks (optional):", "Approve Request", "")
+            Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-        If DatabaseConnection.ApprovePropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
-            MessageBox.Show("Request approved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            LoadRequestData()
-        Else
-            MessageBox.Show("Failed to approve request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+            If DatabaseConnection.ApprovePropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
+                MessageBox.Show("Request approved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                LoadRequestData()
+            Else
+                MessageBox.Show("Failed to approve request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error approving request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
-        If Not canModifyRequests Then
-            ShowRequestRestrictionMessage()
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
 
         If prm_table1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a request to reject.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
-        Dim requestIDValue As Object = selectedRow.Cells("request_id").Value
-        Dim requestIDStr As String = If(requestIDValue IsNot Nothing, requestIDValue.ToString(), "")
-        If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
-            MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
+        Try
+            Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
 
-        Dim requestID As Integer = Integer.Parse(requestIDStr)
-        Dim statusValue As Object = selectedRow.Cells("Status").Value
-        Dim currentStatus As String = If(statusValue IsNot Nothing, statusValue.ToString().ToLower(), "")
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            Dim requestIDValue As Object = If(dt.Columns.Contains("request_id"), dataRow("request_id"), Nothing)
+            Dim requestIDStr As String = If(requestIDValue IsNot Nothing AndAlso Not IsDBNull(requestIDValue), requestIDValue.ToString(), "")
+            If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
+                MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim requestID As Integer = Integer.Parse(requestIDStr)
+            Dim statusValue As Object = If(dt.Columns.Contains("status"), dataRow("status"), Nothing)
+            Dim currentStatus As String = If(statusValue IsNot Nothing AndAlso Not IsDBNull(statusValue), statusValue.ToString().ToLower(), "")
 
         If currentStatus = "rejected" Then
             MessageBox.Show("This request is already rejected.", "Already Rejected", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -218,29 +275,41 @@ Public Class UC_PropertyRequestManagement
             End If
         End If
 
-        Dim remarks As String = InputBox("Enter rejection reason (required):", "Reject Request", "")
-        If String.IsNullOrWhiteSpace(remarks) Then
-            MessageBox.Show("Rejection reason is required.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
+            Dim remarks As String = InputBox("Enter rejection reason (required):", "Reject Request", "")
+            If String.IsNullOrWhiteSpace(remarks) Then
+                MessageBox.Show("Rejection reason is required.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
 
-        Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
+            Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-        If DatabaseConnection.RejectPropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
-            MessageBox.Show("Request rejected successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            LoadRequestData()
-        Else
-            MessageBox.Show("Failed to reject request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+            If DatabaseConnection.RejectPropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
+                MessageBox.Show("Request rejected successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                LoadRequestData()
+            Else
+                MessageBox.Show("Failed to reject request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error rejecting request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub prm_btn_update_Click(sender As Object, e As EventArgs) Handles prm_btn_update.Click
-        If Not canModifyRequests Then
-            ShowRequestRestrictionMessage()
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        If Not isSuperAdmin Then
+
             Return
         End If
 
         LoadRequestData()
         MessageBox.Show("Request list refreshed.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
+
+    Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(New AssignRequestManagement())
+        End If
+    End Sub
+
 End Class

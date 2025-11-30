@@ -79,8 +79,11 @@ Public Class StaffRegister
 
             Dim staffLogin As New StaffLogin()
             staffLogin.Show()
+            Me.Close()
+        Else
+            ' Registration failed, keep form open so user can try again
+            System.Diagnostics.Debug.WriteLine("[v0] Registration failed - form remains open")
         End If
-        Me.Close()
 
     End Sub
 

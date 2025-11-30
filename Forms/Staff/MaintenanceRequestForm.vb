@@ -93,10 +93,15 @@ Public Class MaintenanceRequestForm
                 parentDashboard.LoadUserControl(New MaintenanceRequest())
             Else
                 ' If not in dashboard, try to close/remove this control
-                Me.Parent.Controls.Remove(Me)
+                Dim parentForm = TryCast(Me.Parent, Form)
+                If parentForm IsNot Nothing Then
+                    parentForm.Close()
+                Else
+                    Me.Parent.Controls.Remove(Me)
+                End If
             End If
         Else
-            MessageBox.Show("Failed to submit maintenance request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Unable to submit maintenance request. Please verify all required fields are filled and try again.", "Request Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
 

@@ -68,10 +68,9 @@ Partial Class AddDepartment
         '
         Me.admin_label_DepartmentManagement.AutoSize = True
         Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(39, 50)
-        Me.admin_label_DepartmentManagement.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(52, 62)
         Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(241, 31)
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(287, 38)
         Me.admin_label_DepartmentManagement.TabIndex = 38
         Me.admin_label_DepartmentManagement.Text = "Department Form"
         '
@@ -95,9 +94,10 @@ Partial Class AddDepartment
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(771, 576)
+        Me.btnCancel.Location = New System.Drawing.Point(1028, 709)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(109, 28)
+        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
         Me.btnCancel.TabIndex = 153
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
@@ -110,9 +110,10 @@ Partial Class AddDepartment
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSave.Location = New System.Drawing.Point(886, 576)
+        Me.btnSave.Location = New System.Drawing.Point(1181, 709)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(109, 28)
+        Me.btnSave.Size = New System.Drawing.Size(145, 34)
         Me.btnSave.TabIndex = 152
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = False
@@ -124,10 +125,10 @@ Partial Class AddDepartment
         Me.RoundedPanel2.Controls.Add(Me.Panel2)
         Me.RoundedPanel2.Controls.Add(Me.Panel1)
         Me.RoundedPanel2.CornerRadius = 5
-        Me.RoundedPanel2.Location = New System.Drawing.Point(46, 175)
-        Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RoundedPanel2.Location = New System.Drawing.Point(61, 215)
+        Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(948, 345)
+        Me.RoundedPanel2.Size = New System.Drawing.Size(1264, 425)
         Me.RoundedPanel2.TabIndex = 41
         '
         'Panel2
@@ -147,10 +148,10 @@ Partial Class AddDepartment
         Me.Panel2.Controls.Add(Me.department_code_Code)
         Me.Panel2.Controls.Add(Me.budget_allocation)
         Me.Panel2.Controls.Add(Me.budget_allocation_txt)
-        Me.Panel2.Location = New System.Drawing.Point(491, 15)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel2.Location = New System.Drawing.Point(655, 18)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(403, 310)
+        Me.Panel2.Size = New System.Drawing.Size(537, 382)
         Me.Panel2.TabIndex = 65
         '
         'established_date
@@ -160,10 +161,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.established_date.AutoSize = True
         Me.established_date.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.established_date.Location = New System.Drawing.Point(33, 123)
-        Me.established_date.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.established_date.Location = New System.Drawing.Point(44, 151)
         Me.established_date.Name = "established_date"
-        Me.established_date.Size = New System.Drawing.Size(100, 15)
+        Me.established_date.Size = New System.Drawing.Size(119, 18)
         Me.established_date.TabIndex = 48
         Me.established_date.Text = "Established Date"
         '
@@ -173,10 +173,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.parent_department_id_txt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.parent_department_id_txt.Location = New System.Drawing.Point(182, 208)
-        Me.parent_department_id_txt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.parent_department_id_txt.Location = New System.Drawing.Point(243, 256)
+        Me.parent_department_id_txt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.parent_department_id_txt.Name = "parent_department_id_txt"
-        Me.parent_department_id_txt.Size = New System.Drawing.Size(180, 21)
+        Me.parent_department_id_txt.Size = New System.Drawing.Size(239, 24)
         Me.parent_department_id_txt.TabIndex = 63
         '
         'department_code
@@ -186,10 +186,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.department_code.AutoSize = True
         Me.department_code.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.department_code.Location = New System.Drawing.Point(33, 38)
-        Me.department_code.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.department_code.Location = New System.Drawing.Point(44, 47)
         Me.department_code.Name = "department_code"
-        Me.department_code.Size = New System.Drawing.Size(55, 15)
+        Me.department_code.Size = New System.Drawing.Size(63, 18)
         Me.department_code.TabIndex = 46
         Me.department_code.Text = "Building "
         '
@@ -200,10 +199,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.status_cmbo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.status_cmbo.FormattingEnabled = True
-        Me.status_cmbo.Location = New System.Drawing.Point(182, 250)
-        Me.status_cmbo.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.status_cmbo.Location = New System.Drawing.Point(243, 308)
+        Me.status_cmbo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.status_cmbo.Name = "status_cmbo"
-        Me.status_cmbo.Size = New System.Drawing.Size(180, 23)
+        Me.status_cmbo.Size = New System.Drawing.Size(239, 26)
         Me.status_cmbo.TabIndex = 62
         '
         'office_hours
@@ -213,10 +212,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.office_hours.AutoSize = True
         Me.office_hours.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.office_hours.Location = New System.Drawing.Point(33, 80)
-        Me.office_hours.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.office_hours.Location = New System.Drawing.Point(44, 98)
         Me.office_hours.Name = "office_hours"
-        Me.office_hours.Size = New System.Drawing.Size(105, 15)
+        Me.office_hours.Size = New System.Drawing.Size(128, 18)
         Me.office_hours.TabIndex = 47
         Me.office_hours.Text = "Short Name/Code"
         '
@@ -227,10 +225,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.office_hours_cmbo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.office_hours_cmbo.FormattingEnabled = True
-        Me.office_hours_cmbo.Location = New System.Drawing.Point(182, 74)
-        Me.office_hours_cmbo.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.office_hours_cmbo.Location = New System.Drawing.Point(243, 91)
+        Me.office_hours_cmbo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.office_hours_cmbo.Name = "office_hours_cmbo"
-        Me.office_hours_cmbo.Size = New System.Drawing.Size(180, 23)
+        Me.office_hours_cmbo.Size = New System.Drawing.Size(239, 26)
         Me.office_hours_cmbo.TabIndex = 61
         '
         'parent_department_id
@@ -240,10 +238,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.parent_department_id.AutoSize = True
         Me.parent_department_id.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.parent_department_id.Location = New System.Drawing.Point(33, 163)
-        Me.parent_department_id.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.parent_department_id.Location = New System.Drawing.Point(44, 201)
         Me.parent_department_id.Name = "parent_department_id"
-        Me.parent_department_id.Size = New System.Drawing.Size(67, 15)
+        Me.parent_department_id.Size = New System.Drawing.Size(83, 18)
         Me.parent_department_id.TabIndex = 49
         Me.parent_department_id.Text = "Ofice Code"
         '
@@ -253,10 +250,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.established_date_date.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.established_date_date.Location = New System.Drawing.Point(182, 122)
-        Me.established_date_date.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.established_date_date.Location = New System.Drawing.Point(243, 150)
+        Me.established_date_date.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.established_date_date.Name = "established_date_date"
-        Me.established_date_date.Size = New System.Drawing.Size(180, 21)
+        Me.established_date_date.Size = New System.Drawing.Size(239, 24)
         Me.established_date_date.TabIndex = 60
         '
         'status
@@ -266,12 +263,11 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.status.AutoSize = True
         Me.status.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.status.Location = New System.Drawing.Point(33, 208)
-        Me.status.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.status.Location = New System.Drawing.Point(44, 256)
         Me.status.Name = "status"
-        Me.status.Size = New System.Drawing.Size(121, 15)
+        Me.status.Size = New System.Drawing.Size(99, 18)
         Me.status.TabIndex = 50
-        Me.status.Text = "Description/Mandate"
+        Me.status.Text = "DepartmentID"
         '
         'department_code_Code
         '
@@ -279,10 +275,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.department_code_Code.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.department_code_Code.Location = New System.Drawing.Point(182, 35)
-        Me.department_code_Code.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.department_code_Code.Location = New System.Drawing.Point(243, 43)
+        Me.department_code_Code.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.department_code_Code.Name = "department_code_Code"
-        Me.department_code_Code.Size = New System.Drawing.Size(180, 21)
+        Me.department_code_Code.Size = New System.Drawing.Size(239, 24)
         Me.department_code_Code.TabIndex = 59
         '
         'budget_allocation
@@ -292,10 +288,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.budget_allocation.AutoSize = True
         Me.budget_allocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.budget_allocation.Location = New System.Drawing.Point(33, 254)
-        Me.budget_allocation.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.budget_allocation.Location = New System.Drawing.Point(44, 313)
         Me.budget_allocation.Name = "budget_allocation"
-        Me.budget_allocation.Size = New System.Drawing.Size(41, 15)
+        Me.budget_allocation.Size = New System.Drawing.Size(50, 18)
         Me.budget_allocation.TabIndex = 51
         Me.budget_allocation.Text = "Status"
         '
@@ -305,10 +300,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.budget_allocation_txt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.budget_allocation_txt.Location = New System.Drawing.Point(182, 163)
-        Me.budget_allocation_txt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.budget_allocation_txt.Location = New System.Drawing.Point(243, 201)
+        Me.budget_allocation_txt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.budget_allocation_txt.Name = "budget_allocation_txt"
-        Me.budget_allocation_txt.Size = New System.Drawing.Size(180, 21)
+        Me.budget_allocation_txt.Size = New System.Drawing.Size(239, 24)
         Me.budget_allocation_txt.TabIndex = 58
         '
         'Panel1
@@ -328,10 +323,10 @@ Partial Class AddDepartment
         Me.Panel1.Controls.Add(Me.contact_number)
         Me.Panel1.Controls.Add(Me.head_of_department)
         Me.Panel1.Controls.Add(Me.department_name)
-        Me.Panel1.Location = New System.Drawing.Point(50, 15)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel1.Location = New System.Drawing.Point(67, 18)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(415, 310)
+        Me.Panel1.Size = New System.Drawing.Size(553, 382)
         Me.Panel1.TabIndex = 64
         '
         'no_of_employees_numeric
@@ -340,10 +335,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.no_of_employees_numeric.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.no_of_employees_numeric.Location = New System.Drawing.Point(192, 251)
-        Me.no_of_employees_numeric.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.no_of_employees_numeric.Location = New System.Drawing.Point(256, 309)
+        Me.no_of_employees_numeric.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.no_of_employees_numeric.Name = "no_of_employees_numeric"
-        Me.no_of_employees_numeric.Size = New System.Drawing.Size(190, 21)
+        Me.no_of_employees_numeric.Size = New System.Drawing.Size(253, 24)
         Me.no_of_employees_numeric.TabIndex = 69
         '
         'location_txt
@@ -352,10 +347,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.location_txt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.location_txt.Location = New System.Drawing.Point(192, 205)
-        Me.location_txt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.location_txt.Location = New System.Drawing.Point(256, 252)
+        Me.location_txt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.location_txt.Name = "location_txt"
-        Me.location_txt.Size = New System.Drawing.Size(192, 21)
+        Me.location_txt.Size = New System.Drawing.Size(255, 24)
         Me.location_txt.TabIndex = 68
         '
         'email_txt
@@ -364,10 +359,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.email_txt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.email_txt.Location = New System.Drawing.Point(192, 161)
-        Me.email_txt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.email_txt.Location = New System.Drawing.Point(256, 198)
+        Me.email_txt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.email_txt.Name = "email_txt"
-        Me.email_txt.Size = New System.Drawing.Size(192, 21)
+        Me.email_txt.Size = New System.Drawing.Size(255, 24)
         Me.email_txt.TabIndex = 67
         '
         'contact_number_txt
@@ -376,10 +371,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.contact_number_txt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.contact_number_txt.Location = New System.Drawing.Point(192, 119)
-        Me.contact_number_txt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.contact_number_txt.Location = New System.Drawing.Point(256, 146)
+        Me.contact_number_txt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.contact_number_txt.Name = "contact_number_txt"
-        Me.contact_number_txt.Size = New System.Drawing.Size(192, 21)
+        Me.contact_number_txt.Size = New System.Drawing.Size(255, 24)
         Me.contact_number_txt.TabIndex = 66
         '
         'head_of_department_txt
@@ -388,10 +383,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.head_of_department_txt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.head_of_department_txt.Location = New System.Drawing.Point(192, 77)
-        Me.head_of_department_txt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.head_of_department_txt.Location = New System.Drawing.Point(256, 95)
+        Me.head_of_department_txt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.head_of_department_txt.Name = "head_of_department_txt"
-        Me.head_of_department_txt.Size = New System.Drawing.Size(192, 21)
+        Me.head_of_department_txt.Size = New System.Drawing.Size(255, 24)
         Me.head_of_department_txt.TabIndex = 65
         '
         'department_name_txt
@@ -400,10 +395,10 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.department_name_txt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.department_name_txt.Location = New System.Drawing.Point(192, 36)
-        Me.department_name_txt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.department_name_txt.Location = New System.Drawing.Point(256, 44)
+        Me.department_name_txt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.department_name_txt.Name = "department_name_txt"
-        Me.department_name_txt.Size = New System.Drawing.Size(192, 21)
+        Me.department_name_txt.Size = New System.Drawing.Size(255, 24)
         Me.department_name_txt.TabIndex = 64
         '
         'no_of_employees
@@ -413,10 +408,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.no_of_employees.AutoSize = True
         Me.no_of_employees.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.no_of_employees.Location = New System.Drawing.Point(32, 254)
-        Me.no_of_employees.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.no_of_employees.Location = New System.Drawing.Point(43, 313)
         Me.no_of_employees.Name = "no_of_employees"
-        Me.no_of_employees.Size = New System.Drawing.Size(83, 15)
+        Me.no_of_employees.Size = New System.Drawing.Size(100, 18)
         Me.no_of_employees.TabIndex = 63
         Me.no_of_employees.Text = "Floor Number"
         '
@@ -427,10 +421,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.location.AutoSize = True
         Me.location.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.location.Location = New System.Drawing.Point(32, 208)
-        Me.location.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.location.Location = New System.Drawing.Point(43, 256)
         Me.location.Name = "location"
-        Me.location.Size = New System.Drawing.Size(125, 15)
+        Me.location.Size = New System.Drawing.Size(154, 18)
         Me.location.TabIndex = 62
         Me.location.Text = "Location/Office Room"
         '
@@ -441,10 +434,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.email.AutoSize = True
         Me.email.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.email.Location = New System.Drawing.Point(32, 163)
-        Me.email.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.email.Location = New System.Drawing.Point(43, 201)
         Me.email.Name = "email"
-        Me.email.Size = New System.Drawing.Size(96, 15)
+        Me.email.Size = New System.Drawing.Size(117, 18)
         Me.email.TabIndex = 61
         Me.email.Text = "Contact Number"
         '
@@ -455,10 +447,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.contact_number.AutoSize = True
         Me.contact_number.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.contact_number.Location = New System.Drawing.Point(32, 123)
-        Me.contact_number.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.contact_number.Location = New System.Drawing.Point(43, 151)
         Me.contact_number.Name = "contact_number"
-        Me.contact_number.Size = New System.Drawing.Size(39, 15)
+        Me.contact_number.Size = New System.Drawing.Size(45, 18)
         Me.contact_number.TabIndex = 60
         Me.contact_number.Text = "Email"
         '
@@ -469,10 +460,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.head_of_department.AutoSize = True
         Me.head_of_department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.head_of_department.Location = New System.Drawing.Point(32, 80)
-        Me.head_of_department.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.head_of_department.Location = New System.Drawing.Point(43, 98)
         Me.head_of_department.Name = "head_of_department"
-        Me.head_of_department.Size = New System.Drawing.Size(105, 15)
+        Me.head_of_department.Size = New System.Drawing.Size(124, 18)
         Me.head_of_department.TabIndex = 59
         Me.head_of_department.Text = "Department Head"
         '
@@ -483,10 +473,9 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.department_name.AutoSize = True
         Me.department_name.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.department_name.Location = New System.Drawing.Point(32, 38)
-        Me.department_name.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.department_name.Location = New System.Drawing.Point(43, 47)
         Me.department_name.Name = "department_name"
-        Me.department_name.Size = New System.Drawing.Size(109, 15)
+        Me.department_name.Size = New System.Drawing.Size(129, 18)
         Me.department_name.TabIndex = 58
         Me.department_name.Text = "Department Name"
         '
@@ -496,26 +485,25 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RoundedPanel1.Controls.Add(Me.instructions)
         Me.RoundedPanel1.CornerRadius = 5
-        Me.RoundedPanel1.Location = New System.Drawing.Point(46, 100)
-        Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RoundedPanel1.Location = New System.Drawing.Point(61, 123)
+        Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(948, 58)
+        Me.RoundedPanel1.Size = New System.Drawing.Size(1264, 71)
         Me.RoundedPanel1.TabIndex = 39
         '
         'instructions
         '
         Me.instructions.AutoSize = True
         Me.instructions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.instructions.Location = New System.Drawing.Point(14, 20)
-        Me.instructions.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.instructions.Location = New System.Drawing.Point(19, 25)
         Me.instructions.Name = "instructions"
-        Me.instructions.Size = New System.Drawing.Size(226, 15)
+        Me.instructions.Size = New System.Drawing.Size(267, 18)
         Me.instructions.TabIndex = 40
         Me.instructions.Text = "Fill the required department information."
         '
         'AddDepartment
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.Controls.Add(Me.btnCancel)
@@ -523,9 +511,9 @@ Partial Class AddDepartment
         Me.Controls.Add(Me.RoundedPanel2)
         Me.Controls.Add(Me.RoundedPanel1)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "AddDepartment"
-        Me.Size = New System.Drawing.Size(1069, 643)
+        Me.Size = New System.Drawing.Size(1425, 791)
         Me.RoundedPanel2.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()

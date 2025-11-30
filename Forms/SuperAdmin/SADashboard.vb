@@ -4,6 +4,9 @@ Imports System.Diagnostics
 Imports System.Drawing
 Imports System.Linq
 Imports System.Windows.Forms
+Imports System.Windows.Forms.DataVisualization.Charting
+Imports System.Threading.Tasks
+Imports System.Collections.Generic
 Imports Microsoft.VisualBasic
 Partial Class SADashboard
     Private tmrSidebar As Object
@@ -14,12 +17,15 @@ Partial Class SADashboard
 
         ' --- This code changes the active button color ---
         SetActiveButton(btnDashboard)
-        ' No form load here to avoid recursively loading SADashboard into itself
+        ' Reload charts when dashboard button is clicked
+        LoadDashboardChartsAsync()
     End Sub
 
     Private Sub SADashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Load supply statistics when dashboard loads
         LoadSupplyStats()
+        ' Load charts asynchronously
+        LoadDashboardChartsAsync()
     End Sub
 
     Public Sub LoadUserControl(uc As UserControl)
@@ -98,6 +104,96 @@ Partial Class SADashboard
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadSupplyStats Error: " & ex.Message)
         End Try
+    End Sub
+
+    Private Async Sub LoadDashboardChartsAsync()
+        If _isDashboardLoading Then Return
+        _isDashboardLoading = True
+        Cursor = Cursors.WaitCursor
+
+        Try
+            Dim propertyCategoryTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetPropertyCountsByCategory())
+            Dim supplyBreakdownTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetSupplyInventoryBreakdown())
+            Dim requestStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetRequestStatusCounts())
+            Dim supplyStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetSupplyStatusCounts())
+            Dim propertyConditionTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetPropertyConditionCounts())
+            Dim maintenanceStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetMaintenanceStatusCounts())
+            Dim requestTrendTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetBorrowingTrendData(6))
+            Dim departmentUsageTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetDepartmentInventoryDistribution())
+
+            Await Task.WhenAll(propertyCategoryTask, supplyBreakdownTask, requestStatusTask,
+                               supplyStatusTask, propertyConditionTask, maintenanceStatusTask,
+                               requestTrendTask, departmentUsageTask)
+
+            BindChartData(SAChart_TotalProperty, Await propertyCategoryTask, SeriesChartType.StackedBar)
+            BindChartData(SAChart_TotalSupplies, Await supplyBreakdownTask, SeriesChartType.StackedBar100)
+            BindChartData(SAChart_PendingRequest, Await requestStatusTask, SeriesChartType.Pie)
+            BindChartData(SAChart_InventoryStatusOverview, Await supplyStatusTask, SeriesChartType.Doughnut)
+            BindChartData(SAChart_PropertyConditionStatus, Await propertyConditionTask, SeriesChartType.StackedBar)
+            BindChartData(SAChart_ScheduleMaintenance, Await maintenanceStatusTask, SeriesChartType.Pie)
+            BindChartData(SAChart_RequestTrends, Await requestTrendTask, SeriesChartType.Line, showValueLabels:=False)
+            BindChartData(SAChart_RecentPropertyRequests, Await departmentUsageTask, SeriesChartType.Column)
+        Catch ex As Exception
+            Debug.WriteLine("Dashboard chart load error: " & ex.Message)
+            ' Don't show error dialog for charts - just log it
+        Finally
+            Cursor = Cursors.Default
+            _isDashboardLoading = False
+        End Try
+    End Sub
+
+    Private Sub BindChartData(chart As Chart,
+                              data As DataTable,
+                              chartType As SeriesChartType,
+                              Optional showValueLabels As Boolean = True,
+                              Optional emptyLabel As String = "No data available")
+        If chart Is Nothing Then Return
+
+        If chart.Series.Count = 0 Then
+            chart.Series.Add(New Series("Series1"))
+        End If
+
+        Dim series = chart.Series(0)
+        series.Points.Clear()
+        series.ChartType = chartType
+        series.IsValueShownAsLabel = showValueLabels
+        series.ToolTip = "#VALX: #VALY{N0}"
+
+        Dim hasLegend As Boolean = chart.Legends.Count > 0
+
+        If data Is Nothing OrElse data.Rows.Count = 0 Then
+            Dim idx = series.Points.AddY(0)
+            Dim point = series.Points(idx)
+            point.AxisLabel = emptyLabel
+            point.Label = emptyLabel
+            If hasLegend Then chart.Legends(0).Enabled = False
+            Return
+        End If
+
+        For Each row As DataRow In data.Rows
+            Dim total As Double
+            Double.TryParse(row("total").ToString(), total)
+            Dim idx = series.Points.AddXY(row("label").ToString(), total)
+            Dim point = series.Points(idx)
+            point.ToolTip = $"{row("label")}: {total:N0}"
+            If showValueLabels Then
+                point.Label = total.ToString("N0")
+            Else
+                point.Label = ""
+            End If
+        Next
+
+        If chartType = SeriesChartType.Line Then
+            series.MarkerStyle = MarkerStyle.Circle
+            series.MarkerSize = 7
+            If chart.ChartAreas.Count > 0 Then
+                chart.ChartAreas(0).AxisX.Interval = 1
+            End If
+        End If
+
+        If hasLegend Then
+            chart.Legends(0).Enabled = True
+        End If
     End Sub
 
     Public Sub loadFormIntoPanel(ByVal formToLoad As Form)

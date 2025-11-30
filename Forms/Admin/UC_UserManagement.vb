@@ -21,17 +21,12 @@ Public Class UC_UserManagement
     Private Sub UC_UserManagement_Load(sender As Object, e As EventArgs)
         ConfigureGrid()
         ConfigureFilterControls()
-        LoadAdminContext()
+
         RefreshUserTable()
-        ApplyRolePermissions()
+
     End Sub
-    
-    Private Sub ApplyRolePermissions()
-        Dim canManageUsers As Boolean = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
-        If btnAdd IsNot Nothing Then btnAdd.Enabled = canManageUsers
-        If btnEdit IsNot Nothing Then btnEdit.Enabled = canManageUsers
-        If btnDelete IsNot Nothing Then btnDelete.Enabled = canManageUsers
-    End Sub
+
+
 
     Private Sub ConfigureGrid()
         pm_table.AutoGenerateColumns = False
@@ -107,49 +102,68 @@ Public Class UC_UserManagement
                 Dim lastName As String = SafeValue(record, "last_name")
                 Dim suffix As String = SafeValue(record, "suffix")
 
-                Dim fullName As String = firstName
-
-                If middleName <> "" Then fullName &= " " & middleName
-                If lastName <> "" Then fullName &= " " & lastName
-                If suffix <> "" Then fullName &= " " & suffix
-
-                fullName = fullName.Trim()
-
-                ' ===== ADD ROW TO DATAGRIDVIEW =====
+                ' ===== ADD ROW TO DATAGRIDVIEW IN CORRECT COLUMN ORDER =====
+                ' Column order: UserID, date_assigned, firstName, middleName, lastName, suffixAdmin, positionAdmin, 
+                '                DepartmentID, EmployeeID, contactNumber, email, usernameAdmin, passwordAdmin, 
+                '                provinceAdmin, municipality, barangay, Role, Status
                 Dim rowIndex As Integer = pm_table.Rows.Add(
-                SafeValue(record, "user_id"),
-                firstName,
-                middleName,
-                lastName,
-                suffix,
-                fullName,                                 ' <-- NEW FULL NAME COLUMN
-                SafeValue(record, "positionAdmin"),
-                SafeValue(record, "department_id"),
-                SafeValue(record, "contact_number"),
-                SafeValue(record, "email"),
-                SafeValue(record, "user_type"),
-                SafeValue(record, "province_city"),
-                SafeValue(record, "municipality"),
-                SafeValue(record, "barangay"),
-                SafeValue(record, "house_no_street"),
-                "******",
-                FormatDateValue(record("created_at")),
-                SafeValue(record, "status")
-            )
+                    SafeValue(record, "user_id"),                    ' UserID
+                    FormatDateValue(                                 ' date_assigned
+                        If(record.Table.Columns.Contains("date_assigned") AndAlso Not record.IsNull("date_assigned"),
+                           record("date_assigned"),
+                           If(record.Table.Columns.Contains("created_at") AndAlso Not record.IsNull("created_at"),
+                              record("created_at"),
+                              DBNull.Value))
+                    ),
+                    firstName,                                       ' firstName
+                    middleName,                                      ' middleName
+                    lastName,                                        ' lastName
+                    suffix,                                          ' suffixAdmin
+                    SafeValue(record, "position"),                   ' positionAdmin (using position from DB)
+                    SafeValue(record, "department_id"),              ' DepartmentID
+                    SafeValue(record, "employee_id"),               ' EmployeeID
+                    SafeValue(record, "contact_number"),             ' contactNumber
+                    SafeValue(record, "email"),                     ' email
+                    SafeValue(record, "username"),                   ' usernameAdmin
+                    "******",                                        ' passwordAdmin (hidden)
+                    SafeValue(record, "province_city"),             ' provinceAdmin
+                    SafeValue(record, "municipality"),               ' municipality
+                    SafeValue(record, "barangay"),                   ' barangay
+                    SafeValue(record, "user_type"),                  ' Role
+                    SafeValue(record, "status")                      ' Status
+                )
+
+                Dim dateAssignedValue As Object = DBNull.Value
+
+                If record.Table.Columns.Contains("date_assigned") AndAlso Not record.IsNull("date_assigned") Then
+                    dateAssignedValue = record("date_assigned")
+                ElseIf record.Table.Columns.Contains("created_at") AndAlso Not record.IsNull("created_at") Then
+                    dateAssignedValue = record("created_at")
+                End If
 
                 pm_table.Rows(rowIndex).Tag = New UserRowMetadata With {
-                .Username = SafeValue(record, "username"),
-                .EmployeeID = SafeValue(record, "employee_id"),
-                .DateAssigned = record("date_assigned"),
-                .CreatedAt = record("created_at")
-            }
+                    .Username = SafeValue(record, "username"),
+                    .EmployeeID = SafeValue(record, "employee_id"),
+                    .DateAssigned = dateAssignedValue,
+                    .CreatedAt = If(
+                        record.Table.Columns.Contains("created_at") AndAlso Not record.IsNull("created_at"),
+                        record("created_at"),
+                        DBNull.Value
+                    )
+                }
+
             Next
 
-            ' OPTIONAL: HIDE the original name columns
-            If pm_table.Columns.Contains("firstName") Then pm_table.Columns("firstName").Visible = False
-            If pm_table.Columns.Contains("middleName") Then pm_table.Columns("middleName").Visible = False
-            If pm_table.Columns.Contains("lastName") Then pm_table.Columns("lastName").Visible = False
-            If pm_table.Columns.Contains("suffixAdmin") Then pm_table.Columns("suffixAdmin").Visible = False
+
+            ' Update total count
+            Dim totalLabel As Label = Nothing
+            Dim foundControls() As Control = Me.Controls.Find("ttlusermanagement", True)
+            If foundControls.Length > 0 Then
+                totalLabel = TryCast(foundControls(0), Label)
+            End If
+            If totalLabel IsNot Nothing Then
+                totalLabel.Text = records.Rows.Count.ToString()
+            End If
 
         Catch ex As Exception
             MessageBox.Show("Unable to load user accounts: " & ex.Message,
@@ -186,7 +200,7 @@ Public Class UC_UserManagement
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             Dim addForm As New AddUserManagement()
-            addForm.SetAuditContext(currentAdminID, currentAdminType, currentAdminUsername)
+
             parentDashboard.LoadUserControl(addForm)
         End If
     End Sub
@@ -313,6 +327,10 @@ Public Class UC_UserManagement
     End Class
 
     Private Sub pm_table_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles pm_table.CellContentClick
+
+    End Sub
+
+    Private Sub UC_UserManagement_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

@@ -29,16 +29,16 @@ Partial Class AddUserManagement
         Me.Role = New System.Windows.Forms.ComboBox()
         Me.lblrole = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.username = New System.Windows.Forms.TextBox()
+        Me.usernameAdmin = New System.Windows.Forms.TextBox()
         Me.suffixAdmin = New System.Windows.Forms.ComboBox()
-        Me.passwordAddUser = New System.Windows.Forms.TextBox()
+        Me.passwordAdmin = New System.Windows.Forms.TextBox()
         Me.barangay = New System.Windows.Forms.ComboBox()
         Me.municipality = New System.Windows.Forms.ComboBox()
         Me.provinceAdmin = New System.Windows.Forms.ComboBox()
         Me.positionAdmin = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.employeeID = New System.Windows.Forms.TextBox()
+        Me.EmployeeID = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.middleName = New System.Windows.Forms.TextBox()
@@ -105,16 +105,16 @@ Partial Class AddUserManagement
         Me.uc_um_edituser.Controls.Add(Me.Role)
         Me.uc_um_edituser.Controls.Add(Me.lblrole)
         Me.uc_um_edituser.Controls.Add(Me.Label1)
-        Me.uc_um_edituser.Controls.Add(Me.username)
+        Me.uc_um_edituser.Controls.Add(Me.usernameAdmin)
         Me.uc_um_edituser.Controls.Add(Me.suffixAdmin)
-        Me.uc_um_edituser.Controls.Add(Me.passwordAddUser)
+        Me.uc_um_edituser.Controls.Add(Me.passwordAdmin)
         Me.uc_um_edituser.Controls.Add(Me.barangay)
         Me.uc_um_edituser.Controls.Add(Me.municipality)
         Me.uc_um_edituser.Controls.Add(Me.provinceAdmin)
         Me.uc_um_edituser.Controls.Add(Me.positionAdmin)
         Me.uc_um_edituser.Controls.Add(Me.Label9)
         Me.uc_um_edituser.Controls.Add(Me.Label8)
-        Me.uc_um_edituser.Controls.Add(Me.employeeID)
+        Me.uc_um_edituser.Controls.Add(Me.EmployeeID)
         Me.uc_um_edituser.Controls.Add(Me.Label7)
         Me.uc_um_edituser.Controls.Add(Me.Label5)
         Me.uc_um_edituser.Controls.Add(Me.middleName)
@@ -146,7 +146,7 @@ Partial Class AddUserManagement
         Me.Role.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Role.FormattingEnabled = True
-        Me.Role.Items.AddRange(New Object() {"Staff", "guard", "it", "teacher", "principal"})
+        Me.Role.Items.AddRange(New Object() {"SuperAdmin", "Admin", "Custodian", "Staff"})
         Me.Role.Location = New System.Drawing.Point(858, 230)
         Me.Role.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Role.Name = "Role"
@@ -179,19 +179,19 @@ Partial Class AddUserManagement
         Me.Label1.TabIndex = 76
         Me.Label1.Text = "Username"
         '
-        'username
+        'usernameAdmin
         '
-        Me.username.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.usernameAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.username.BackColor = System.Drawing.SystemColors.Window
-        Me.username.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.username.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.username.Location = New System.Drawing.Point(855, 103)
-        Me.username.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.username.MaxLength = 100
-        Me.username.Name = "username"
-        Me.username.Size = New System.Drawing.Size(245, 22)
-        Me.username.TabIndex = 75
+        Me.usernameAdmin.BackColor = System.Drawing.SystemColors.Window
+        Me.usernameAdmin.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.usernameAdmin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.usernameAdmin.Location = New System.Drawing.Point(855, 103)
+        Me.usernameAdmin.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.usernameAdmin.MaxLength = 100
+        Me.usernameAdmin.Name = "usernameAdmin"
+        Me.usernameAdmin.Size = New System.Drawing.Size(245, 22)
+        Me.usernameAdmin.TabIndex = 75
         '
         'suffixAdmin
         '
@@ -202,19 +202,19 @@ Partial Class AddUserManagement
         Me.suffixAdmin.Size = New System.Drawing.Size(287, 24)
         Me.suffixAdmin.TabIndex = 71
         '
-        'passwordAddUser
+        'passwordAdmin
         '
-        Me.passwordAddUser.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.passwordAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.passwordAddUser.BackColor = System.Drawing.SystemColors.Window
-        Me.passwordAddUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.passwordAddUser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.passwordAddUser.Location = New System.Drawing.Point(855, 407)
-        Me.passwordAddUser.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.passwordAddUser.MaxLength = 100
-        Me.passwordAddUser.Name = "passwordAddUser"
-        Me.passwordAddUser.Size = New System.Drawing.Size(247, 22)
-        Me.passwordAddUser.TabIndex = 68
+        Me.passwordAdmin.BackColor = System.Drawing.SystemColors.Window
+        Me.passwordAdmin.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.passwordAdmin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.passwordAdmin.Location = New System.Drawing.Point(855, 407)
+        Me.passwordAdmin.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.passwordAdmin.MaxLength = 100
+        Me.passwordAdmin.Name = "passwordAdmin"
+        Me.passwordAdmin.Size = New System.Drawing.Size(247, 22)
+        Me.passwordAdmin.TabIndex = 68
         '
         'barangay
         '
@@ -252,7 +252,8 @@ Partial Class AddUserManagement
         'positionAdmin
         '
         Me.positionAdmin.FormattingEnabled = True
-        Me.positionAdmin.Location = New System.Drawing.Point(264, 322)
+        Me.positionAdmin.Items.AddRange(New Object() {"Teacher", "Staff", "Guard", "Principal", "Head admin", "IT"})
+        Me.positionAdmin.Location = New System.Drawing.Point(261, 322)
         Me.positionAdmin.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.positionAdmin.Name = "positionAdmin"
         Me.positionAdmin.Size = New System.Drawing.Size(287, 24)
@@ -284,17 +285,17 @@ Partial Class AddUserManagement
         Me.Label8.TabIndex = 60
         Me.Label8.Text = "Employee ID"
         '
-        'employeeID
+        'EmployeeID
         '
-        Me.employeeID.BackColor = System.Drawing.SystemColors.Window
-        Me.employeeID.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.employeeID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.employeeID.Location = New System.Drawing.Point(261, 430)
-        Me.employeeID.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.employeeID.MaxLength = 100
-        Me.employeeID.Name = "employeeID"
-        Me.employeeID.Size = New System.Drawing.Size(289, 22)
-        Me.employeeID.TabIndex = 59
+        Me.EmployeeID.BackColor = System.Drawing.SystemColors.Window
+        Me.EmployeeID.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EmployeeID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.EmployeeID.Location = New System.Drawing.Point(261, 430)
+        Me.EmployeeID.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.EmployeeID.MaxLength = 100
+        Me.EmployeeID.Name = "EmployeeID"
+        Me.EmployeeID.Size = New System.Drawing.Size(289, 22)
+        Me.EmployeeID.TabIndex = 59
         '
         'Label7
         '
@@ -529,7 +530,7 @@ Partial Class AddUserManagement
         'departmentID
         '
         Me.departmentID.FormattingEnabled = True
-        Me.departmentID.Location = New System.Drawing.Point(264, 382)
+        Me.departmentID.Location = New System.Drawing.Point(264, 369)
         Me.departmentID.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.departmentID.Name = "departmentID"
         Me.departmentID.Size = New System.Drawing.Size(287, 24)
@@ -591,14 +592,14 @@ Partial Class AddUserManagement
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents uc_um_edituser As Resources.Controls.RoundedPanel
     Friend WithEvents suffixAdmin As System.Windows.Forms.ComboBox
-    Friend WithEvents passwordAddUser As System.Windows.Forms.TextBox
+    Friend WithEvents passwordAdmin As System.Windows.Forms.TextBox
     Friend WithEvents barangay As System.Windows.Forms.ComboBox
     Friend WithEvents municipality As System.Windows.Forms.ComboBox
     Friend WithEvents provinceAdmin As System.Windows.Forms.ComboBox
     Friend WithEvents positionAdmin As System.Windows.Forms.ComboBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents employeeID As System.Windows.Forms.TextBox
+    Friend WithEvents EmployeeID As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents middleName As System.Windows.Forms.TextBox
@@ -619,7 +620,7 @@ Partial Class AddUserManagement
     Friend WithEvents firstName As System.Windows.Forms.TextBox
     Friend WithEvents departmentID As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents username As System.Windows.Forms.TextBox
+    Friend WithEvents usernameAdmin As System.Windows.Forms.TextBox
     Friend WithEvents Role As System.Windows.Forms.ComboBox
     Friend WithEvents lblrole As System.Windows.Forms.Label
 End Class

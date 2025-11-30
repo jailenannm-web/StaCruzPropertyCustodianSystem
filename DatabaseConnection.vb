@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
@@ -113,6 +113,11 @@ Public Class DatabaseConnection
 
     Private Shared Function DemandPermission(permission As SessionContext.ModulePermission,
                                              actionDescription As String) As Boolean
+        ' Super Admin, Admin, and Custodian bypass all permission checks
+        If SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian() Then
+            Return True
+        End If
+
         If String.IsNullOrWhiteSpace(SessionContext.CurrentRole) Then
             MessageBox.Show("Please login before attempting to " & actionDescription & ".",
                             "Access Denied",
@@ -795,60 +800,92 @@ Public Class DatabaseConnection
     ''' Logs LOGIN / LOGIN_FAILED into audit_logs and updates last_login on success.
     ''' </summary>
     Public Shared Function AuthenticateStaff(username As String,
-                                             password As String,
-                                             Optional ipAddress As String = "") As Dictionary(Of String, String)
+                                         password As String,
+                                         Optional ipAddress As String = "") As Dictionary(Of String, String)
+
         Dim result As New Dictionary(Of String, String)()
         Dim conn As MySqlConnection = Nothing
+
         Try
             If String.IsNullOrWhiteSpace(username) OrElse String.IsNullOrWhiteSpace(password) Then
-                System.Diagnostics.Debug.WriteLine("[v0] Staff Login - Empty credentials")
-                Return result
+                System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - Empty username or password")
+                Return Nothing
             End If
 
             conn = GetConnection()
-            If conn Is Nothing Then Return result
-            If Not SafeOpenConnection(conn) Then Return result
+            If conn Is Nothing Then
+                System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - GetConnection returned Nothing")
+                Return Nothing
+            End If
 
-            ' Authenticate Staff accounts from users table with role = 'Staff'
-            ' Use the same users table as SuperAdmin and Admin
+            If Not SafeOpenConnection(conn) Then
+                System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - SafeOpenConnection failed")
+                Return Nothing
+            End If
+
+            ' Use a single-row select to fetch the stored hash and metadata
             Dim query As String =
-                "SELECT user_id, first_name, last_name, email, contact_number, department_id, username, password_encrypted, status, role " &
-                "FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'Staff' AND status = 'Active'"
+            "SELECT user_id, first_name, last_name, email, contact_number, department_id, username, password_encrypted, status, role " &
+            "FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'Staff' LIMIT 1;"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@username", username.Trim())
 
                 Using reader As MySqlDataReader = cmd.ExecuteReader()
                     If Not reader.Read() Then
-                        System.Diagnostics.Debug.WriteLine("[v0] Staff Login Failed - User not found: " & username)
-                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Username not found or not a Staff account", ipAddress)
-                        Return result
+                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - user not found: " & username)
+                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Username not found", ipAddress)
+                        Return Nothing
                     End If
 
-                    Dim status As String = reader("status").ToString()
-                    Dim storedHash As String = reader("password_encrypted").ToString()
+                    ' Retrieve fields
+                    Dim status As String = If(IsDBNull(reader("status")), "", reader("status").ToString())
+                    Dim storedHash As String = If(IsDBNull(reader("password_encrypted")), "", reader("password_encrypted").ToString())
                     Dim role As String = If(IsDBNull(reader("role")), "", reader("role").ToString())
 
-                    ' Double-check: reject if role is not 'Staff'
+                    ' Quick sanity checks
+                    If String.IsNullOrEmpty(storedHash) Then
+                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - storedHash empty for: " & username)
+                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Missing password hash", ipAddress)
+                        Return Nothing
+                    End If
+
                     If Not String.Equals(role, "Staff", StringComparison.OrdinalIgnoreCase) Then
-                        System.Diagnostics.Debug.WriteLine("[v0] Staff Login Failed - Account is not a Staff account: " & username & " (role: " & role & ")")
-                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Account is not a Staff account", ipAddress)
-                        Return result
+                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - role is not Staff for: " & username & " role=" & role)
+                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Account role mismatch", ipAddress)
+                        Return Nothing
                     End If
 
                     If Not String.Equals(status, "Active", StringComparison.OrdinalIgnoreCase) Then
-                        System.Diagnostics.Debug.WriteLine("[v0] Staff Login Failed - Inactive account: " & username)
-                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Inactive staff account", ipAddress)
-                        Return result
+                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - account not active: " & username & " status=" & status)
+                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Inactive account", ipAddress)
+                        Return Nothing
                     End If
 
-                    If Not PasswordHelper.VerifyPassword(password, storedHash) Then
-                        System.Diagnostics.Debug.WriteLine("[v0] Staff Login Failed - Invalid password: " & username)
+                    ' Trim stored hash just in case
+                    storedHash = storedHash.Trim()
+
+                    ' Debug: (OPTIONAL) write stored hash length to debug. Uncomment if you need it.
+                    System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - storedHash length for " & username & " = " & storedHash.Length.ToString())
+
+                    ' BCRYPT verification
+                    Dim verified As Boolean = False
+                    Try
+                        verified = BCrypt.Net.BCrypt.Verify(password, storedHash)
+                    Catch bcryptEx As Exception
+                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - BCrypt.Verify exception: " & bcryptEx.Message)
+                        ' If bcrypt fails due to invalid hash format, log and return Nothing
+                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Invalid password hash format", ipAddress)
+                        Return Nothing
+                    End Try
+
+                    If Not verified Then
+                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - invalid password for: " & username)
                         LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Invalid password attempt", ipAddress)
-                        Return result
+                        Return Nothing
                     End If
 
-                    ' Successful authentication: populate profile dictionary
+                    ' At this point password is valid - populate result
                     Dim userID As Integer = Convert.ToInt32(reader("user_id"))
                     result("staff_id") = userID.ToString()
                     result("user_id") = userID.ToString()
@@ -859,27 +896,33 @@ Public Class DatabaseConnection
                     result("department_id") = If(IsDBNull(reader("department_id")), "", reader("department_id").ToString())
                     result("username") = reader("username").ToString()
                     result("user_type") = "Staff"
+
                 End Using
             End Using
 
-            ' Update last_login and log successful login
+            ' Update last_login and write audit
             If result.Count > 0 Then
-                Dim userID As Integer = CInt(result("user_id"))
-                Using updateCmd As New MySqlCommand("UPDATE users SET last_login = NOW() WHERE user_id = @userID", conn)
-                    updateCmd.Parameters.AddWithValue("@userID", userID)
-                    updateCmd.ExecuteNonQuery()
-                End Using
+                Try
+                    Using updateCmd As New MySqlCommand("UPDATE users SET last_login = NOW() WHERE user_id = @userID", conn)
+                        updateCmd.Parameters.AddWithValue("@userID", CInt(result("user_id")))
+                        updateCmd.ExecuteNonQuery()
+                    End Using
+                Catch ex As Exception
+                    System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - failed updating last_login: " & ex.Message)
+                End Try
 
-                LogActivity(userID, "Staff", result("username"), "LOGIN", "Authentication",
-                            "Staff successfully logged in", ipAddress)
-                System.Diagnostics.Debug.WriteLine("[v0] Staff Login Success: " & username)
+                LogActivity(CInt(result("user_id")), "Staff", result("username"), "LOGIN", "Authentication", "Staff successfully logged in", ipAddress)
+                System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - success for: " & username)
+                Return result
             End If
+
         Catch ex As MySqlException When ex.Message.Contains("ReplicationManager")
-            System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - ReplicationManager error: " & ex.Message)
+            System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - ReplicationManager MySqlException: " & ex.Message)
             MessageBox.Show("Database connection issue. Please try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff Exception: " & ex.Message)
-            MessageBox.Show("Error validating staff login: " & ex.Message, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "validate login")
+            MessageBox.Show(errorMsg, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If conn IsNot Nothing Then
                 Try
@@ -891,8 +934,9 @@ Public Class DatabaseConnection
             End If
         End Try
 
-        Return result
+        Return Nothing
     End Function
+
 
     Private Shared Function AuthenticateWithHardcodedCredentials(username As String,
                                                                  password As String,
@@ -1396,7 +1440,8 @@ Public Class DatabaseConnection
             MessageBox.Show("Database connection issue. Please try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Admin Login Exception: " & ex.Message)
-            MessageBox.Show("Error validating login: " & ex.Message, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "validate login")
+            MessageBox.Show(errorMsg, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If conn2 IsNot Nothing Then
                 Try
@@ -1531,17 +1576,27 @@ Public Class DatabaseConnection
 
             ' Force role to "Staff" for all registrations
             ' Insert into users table (same table used for SuperAdmin and Admin)
-            Dim insertQuery As String = "INSERT INTO users (first_name, last_name, email, contact_number, department_id, username, password_encrypted, role, status, created_at) " &
-                                       "VALUES (@firstName, @lastName, @email, @contactNumber, @departmentID, @username, @password, 'Staff', 'Active', NOW())"
+            ' Parse departmentID safely
+            Dim deptIDValue As Object = DBNull.Value
+            If Not String.IsNullOrWhiteSpace(departmentID) Then
+                Dim parsedDeptID As Integer
+                If Integer.TryParse(departmentID.Trim(), parsedDeptID) Then
+                    deptIDValue = parsedDeptID
+                End If
+            End If
+
+            Dim insertQuery As String = "INSERT INTO users (first_name, last_name, email, contact_number, department_id, username, password_encrypted, role, status, position, created_at) " &
+                                       "VALUES (@firstName, @lastName, @email, @contactNumber, @departmentID, @username, @password, 'Staff', 'Active', @position, NOW())"
 
             Using cmd As New MySqlCommand(insertQuery, conn)
                 cmd.Parameters.AddWithValue("@firstName", firstName.Trim())
                 cmd.Parameters.AddWithValue("@lastName", lastName.Trim())
                 cmd.Parameters.AddWithValue("@email", If(String.IsNullOrWhiteSpace(email), DBNull.Value, email.Trim()))
                 cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrWhiteSpace(contactNumber), DBNull.Value, contactNumber.Trim()))
-                cmd.Parameters.AddWithValue("@departmentID", If(String.IsNullOrWhiteSpace(departmentID), DBNull.Value, Convert.ToInt32(departmentID)))
+                cmd.Parameters.AddWithValue("@departmentID", deptIDValue)
                 cmd.Parameters.AddWithValue("@username", username.Trim())
                 cmd.Parameters.AddWithValue("@password", hashedPassword)
+                cmd.Parameters.AddWithValue("@position", If(String.IsNullOrWhiteSpace(position), "Staff", position.Trim()))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -1560,7 +1615,8 @@ Public Class DatabaseConnection
             Return False
         Catch ex As MySqlException
             System.Diagnostics.Debug.WriteLine("[v0] MySQL Registration Error: " & ex.Message & vbCrLf & ex.StackTrace)
-            MessageBox.Show("Database error during registration: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "complete registration")
+            MessageBox.Show(errorMsg, "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Catch ex As TypeInitializationException When ex.Message.Contains("ReplicationManager")
             System.Diagnostics.Debug.WriteLine("[v0] Registration - ReplicationManager TypeInit error: " & ex.Message)
@@ -1571,7 +1627,8 @@ Public Class DatabaseConnection
             If ex.Message.Contains("ReplicationManager") Then
                 MessageBox.Show("Database connection issue. Please ensure MySQL is running and try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                MessageBox.Show("Error during registration: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "complete registration")
+                MessageBox.Show(errorMsg, "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
             Return False
         Finally
@@ -1867,11 +1924,12 @@ Public Class DatabaseConnection
                 End If
             End Using
         Catch ex As MySqlException
-            MessageBox.Show("Database error adding supply: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "add supply")
+            MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             System.Diagnostics.Debug.WriteLine("[v0] Add Supply MySQL Exception: " & ex.Message & vbCrLf & ex.StackTrace)
             Return False
         Catch ex As Exception
-            MessageBox.Show("Error adding supply: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(GetUserFriendlyErrorMessage(ex, "add supply"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             System.Diagnostics.Debug.WriteLine("[v0] Add Supply Exception: " & ex.Message & vbCrLf & ex.StackTrace)
             Return False
         Finally
@@ -2061,11 +2119,11 @@ Public Class DatabaseConnection
         Dim sanitizedMonths As Integer = Math.Max(1, Math.Min(24, monthsBack))
         Dim fromDate As Date = Date.Today.AddMonths(-sanitizedMonths)
 
-        Dim query As String = "SELECT DATE_FORMAT(request_date, '%b %Y') AS label, COUNT(*) AS total " &
+        Dim query As String = "SELECT DATE_FORMAT(date_of_request, '%b %Y') AS label, COUNT(*) AS total " &
                               "FROM property_requests " &
-                              "WHERE request_date >= @fromDate " &
-                              "GROUP BY DATE_FORMAT(request_date, '%Y-%m') " &
-                              "ORDER BY DATE_FORMAT(request_date, '%Y-%m')"
+                              "WHERE date_of_request >= @fromDate " &
+                              "GROUP BY DATE_FORMAT(date_of_request, '%Y-%m') " &
+                              "ORDER BY DATE_FORMAT(date_of_request, '%Y-%m')"
 
         Dim parameters As New Dictionary(Of String, Object) From {
             {"@fromDate", fromDate}
@@ -2120,6 +2178,85 @@ Public Class DatabaseConnection
         Dim ordinal As Integer = reader.GetOrdinal(columnName)
         If ordinal < 0 OrElse reader.IsDBNull(ordinal) Then Return 0
         Return Convert.ToInt32(reader.GetValue(ordinal))
+    End Function
+
+    ''' <summary>
+    ''' Graceful error handling - converts technical errors to user-friendly messages
+    ''' </summary>
+    Private Shared Function GetUserFriendlyErrorMessage(ex As Exception, defaultAction As String) As String
+        If ex Is Nothing Then Return "An unexpected error occurred."
+
+        Dim errorMsg As String = ex.Message.ToLower()
+
+        ' Connection errors
+        If errorMsg.Contains("connection") OrElse errorMsg.Contains("timeout") OrElse errorMsg.Contains("unable to connect") Then
+            Return "Unable to connect to the database. Please ensure MySQL is running and try again."
+        End If
+
+        ' Column/field errors
+        If errorMsg.Contains("column") AndAlso errorMsg.Contains("cannot be found") OrElse errorMsg.Contains("unknown column") Then
+            Return "Data structure mismatch detected. Please contact system administrator."
+        End If
+
+        ' Duplicate key errors
+        If errorMsg.Contains("duplicate") OrElse errorMsg.Contains("already exists") Then
+            Return "This record already exists. Please check for duplicates."
+        End If
+
+        ' Foreign key errors
+        If errorMsg.Contains("foreign key") OrElse errorMsg.Contains("constraint") Then
+            Return "Cannot perform this action due to related records. Please remove dependencies first."
+        End If
+
+        ' Count mismatch errors
+        If errorMsg.Contains("column count") OrElse errorMsg.Contains("doesn't match") Then
+            Return "Data validation error. Please ensure all required fields are filled correctly."
+        End If
+
+        ' Permission errors
+        If errorMsg.Contains("access denied") OrElse errorMsg.Contains("permission") Then
+            Return "You do not have permission to perform this action."
+        End If
+
+        ' Generic fallback
+        Return $"Unable to {defaultAction}. Please verify your input and try again."
+    End Function
+
+    ''' <summary>
+    ''' Create test staff account for testing purposes
+    ''' </summary>
+    Public Shared Function CreateTestStaffAccount() As Boolean
+        Try
+            ' Get first department for assignment
+            Dim deptTable As DataTable = GetDepartmentLookup(True)
+            Dim deptID As Integer? = Nothing
+            If deptTable.Rows.Count > 0 Then
+                deptID = Convert.ToInt32(deptTable.Rows(0)("department_id"))
+            End If
+
+            ' Create the test staff account
+            Dim success As Boolean = AddStaffAccount(
+                firstName:="Test",
+                lastName:="Staff",
+                email:="test_staff@stacruz.edu",
+                username:="test_staff",
+                password:="Staff@1234",
+                contactNumber:="",
+                address:="",
+                departmentID:=deptID,
+                position:="Staff",
+                status:="Active",
+                createdByID:=Nothing,
+                createdByType:="System",
+                createdByName:="System",
+                ipAddress:="127.0.0.1"
+            )
+
+            Return success
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] CreateTestStaffAccount Exception: " & ex.Message)
+            Return False
+        End Try
     End Function
 
     ' =====================================================
@@ -2189,11 +2326,12 @@ Public Class DatabaseConnection
             End Using
         Catch ex As MySqlException
             System.Diagnostics.Debug.WriteLine("[v0] AddProperty MySQL Error: " & ex.Message)
-            MessageBox.Show("Database error adding property: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "add property")
+            MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AddProperty Exception: " & ex.Message & vbCrLf & ex.StackTrace)
-            MessageBox.Show("Error adding property: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(GetUserFriendlyErrorMessage(ex, "add property"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         Finally
             If conn IsNot Nothing Then
@@ -2234,9 +2372,15 @@ Public Class DatabaseConnection
                 End Try
             End While
 
-            Dim query As String = "SELECT property_id, item_name, category, serial_number, acquisition_date, " &
-                                 "acquisition_cost, condition, location, status " &
-                                 "FROM properties WHERE status != 'For Disposal' AND status != 'Lost' ORDER BY acquisition_date DESC"
+            Dim query As String = "SELECT p.property_id, p.item_name, p.category, p.property_number, p.serial_number, " &
+                                 "p.acquisition_date, p.acquisition_cost, p.condition, p.location, p.status, " &
+                                 "CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS assigned_employee, " &
+                                 "d.department_name AS assigned_department " &
+                                 "FROM properties p " &
+                                 "LEFT JOIN users u ON p.assigned_to = u.user_id " &
+                                 "LEFT JOIN departments d ON p.department_id = d.department_id " &
+                                 "WHERE p.status != 'For Disposal' AND p.status != 'Lost' " &
+                                 "ORDER BY p.acquisition_date DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.CommandTimeout = 30
@@ -2247,7 +2391,7 @@ Public Class DatabaseConnection
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] GetAllProperties Exception: " & ex.Message)
-            MessageBox.Show("Error retrieving properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(GetUserFriendlyErrorMessage(ex, "retrieve properties"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Finally
             If conn IsNot Nothing Then
                 Try
@@ -2267,9 +2411,9 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Submit a property request
     ''' </summary>
-    Public Shared Function SubmitPropertyRequest(userID As Integer, propertyID As Integer?, supplyID As Integer?,
-                                                 requestType As String, purpose As String, quantity As Integer,
-                                                 expectedReturnDate As Date?) As Boolean
+    Public Shared Function SubmitPropertyRequest(userID As Integer, itemName As String, purpose As String,
+                                                 quantity As Integer, Optional departmentID As Integer? = Nothing,
+                                                 Optional position As String = "", Optional requesterName As String = "") As Boolean
         If Not DemandPermission(SessionContext.ModulePermission.ModifyRequests, "submit property requests") Then
             Return False
         End If
@@ -2280,19 +2424,39 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "INSERT INTO property_requests (user_id, property_id, supply_id, request_type, " &
-                                 "request_date, purpose, quantity, status, expected_return_date) " &
-                                 "VALUES (@userID, @propertyID, @supplyID, @requestType, CURDATE(), @purpose, " &
-                                 "@quantity, 'pending', @expectedReturnDate)"
+            ' Get user info for requester_name if not provided
+            Dim finalRequesterName As String = requesterName
+            Dim finalPosition As String = position
+            Dim finalDeptID As Integer? = departmentID
+            If String.IsNullOrEmpty(finalRequesterName) AndAlso userID > 0 Then
+                Try
+                    Using userCmd As New MySqlCommand("SELECT CONCAT(first_name, ' ', last_name) AS full_name, position, department_id FROM users WHERE user_id = @userID UNION SELECT CONCAT(first_name, ' ', last_name) AS full_name, position, department_id FROM staff_accounts WHERE staff_id = @userID LIMIT 1", conn)
+                        userCmd.Parameters.AddWithValue("@userID", userID)
+                        Using reader As MySqlDataReader = userCmd.ExecuteReader()
+                            If reader.Read() Then
+                                finalRequesterName = If(reader.IsDBNull("full_name"), "", reader.GetString("full_name"))
+                                If String.IsNullOrEmpty(finalPosition) Then finalPosition = If(reader.IsDBNull("position"), "", reader.GetString("position"))
+                                If Not finalDeptID.HasValue AndAlso Not reader.IsDBNull("department_id") Then finalDeptID = reader.GetInt32("department_id")
+                            End If
+                        End Using
+                    End Using
+                Catch
+                    finalRequesterName = If(String.IsNullOrEmpty(finalRequesterName), "User #" & userID.ToString(), finalRequesterName)
+                End Try
+            End If
+
+            Dim query As String = "INSERT INTO property_requests (requester_name, position, department_id, date_of_request, " &
+                                 "item_name, description, quantity_requested, unit, purpose, status) " &
+                                 "VALUES (@requesterName, @position, @departmentID, CURDATE(), @itemName, '', " &
+                                 "@quantity, 'unit', @purpose, 'Pending')"
 
             Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@userID", userID)
-                cmd.Parameters.AddWithValue("@propertyID", If(propertyID.HasValue, propertyID.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@supplyID", If(supplyID.HasValue, supplyID.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@requestType", requestType)
-                cmd.Parameters.AddWithValue("@purpose", purpose)
+                cmd.Parameters.AddWithValue("@requesterName", finalRequesterName)
+                cmd.Parameters.AddWithValue("@position", If(String.IsNullOrEmpty(finalPosition), DBNull.Value, finalPosition))
+                cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@itemName", If(String.IsNullOrEmpty(itemName), "Item Request", itemName))
                 cmd.Parameters.AddWithValue("@quantity", quantity)
-                cmd.Parameters.AddWithValue("@expectedReturnDate", If(expectedReturnDate.HasValue, expectedReturnDate.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@purpose", purpose)
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -2302,7 +2466,16 @@ Public Class DatabaseConnection
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Submit Property Request Exception: " & ex.Message)
-            MessageBox.Show("Error submitting request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ' Graceful error handling - don't show raw SQL errors
+            Dim errorMsg As String = "Unable to submit property request. "
+            If ex.Message.Contains("Duplicate") Then
+                errorMsg &= "This request may already exist."
+            ElseIf ex.Message.Contains("Connection") OrElse ex.Message.Contains("timeout") Then
+                errorMsg &= "Please check your database connection and try again."
+            Else
+                errorMsg &= "Please verify all required fields are filled and try again."
+            End If
+            MessageBox.Show(errorMsg, "Request Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         Finally
             If conn IsNot Nothing Then
@@ -2320,15 +2493,15 @@ Public Class DatabaseConnection
     ''' STAFF-FACING helper: submit a property borrowing request (fixed assets).
     ''' </summary>
     Public Shared Function StaffSubmitPropertyRequest(staffID As Integer,
-                                                      propertyID As Integer,
+                                                      itemName As String,
                                                       quantity As Integer,
                                                       purpose As String,
-                                                      Optional expectedReturnDate As Date? = Nothing,
+                                                      Optional departmentID As Integer? = Nothing,
                                                       Optional ipAddress As String = "") As Boolean
-        Dim ok As Boolean = SubmitPropertyRequest(staffID, propertyID, Nothing, "property", purpose, quantity, expectedReturnDate)
+        Dim ok As Boolean = SubmitPropertyRequest(staffID, itemName, purpose, quantity, departmentID)
         If ok Then
             LogCrudAction(staffID, "Staff", "", "Property Requests", "Property Request", "Create",
-                          $"Staff #{staffID} requested property #{propertyID} x{quantity}", ipAddress)
+                          $"Staff #{staffID} requested property: {itemName} x{quantity}", ipAddress)
         End If
         Return ok
     End Function
@@ -2337,17 +2510,73 @@ Public Class DatabaseConnection
     ''' STAFF-FACING helper: submit a consumable supply request.
     ''' </summary>
     Public Shared Function StaffSubmitSupplyRequest(staffID As Integer,
-                                                    supplyID As Integer,
+                                                    itemName As String,
                                                     quantity As Integer,
                                                     purpose As String,
-                                                    Optional expectedReturnDate As Date? = Nothing,
+                                                    Optional departmentID As Integer? = Nothing,
+                                                    Optional position As String = "",
+                                                    Optional requesterName As String = "",
                                                     Optional ipAddress As String = "") As Boolean
-        Dim ok As Boolean = SubmitPropertyRequest(staffID, Nothing, supplyID, "supply", purpose, quantity, expectedReturnDate)
-        If ok Then
-            LogCrudAction(staffID, "Staff", "", "Supply Requests", "Supply Request", "Create",
-                          $"Staff #{staffID} requested supply #{supplyID} x{quantity}", ipAddress)
-        End If
-        Return ok
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            ' Get user info if not provided
+            Dim finalRequesterName As String = requesterName
+            Dim finalPosition As String = position
+            Dim finalDeptID As Integer? = departmentID
+            If String.IsNullOrEmpty(finalRequesterName) OrElse staffID > 0 Then
+                Try
+                    Using userCmd As New MySqlCommand("SELECT CONCAT(first_name, ' ', last_name) AS full_name, position, department_id FROM users WHERE user_id = @staffID UNION SELECT CONCAT(first_name, ' ', last_name) AS full_name, position, department_id FROM staff_accounts WHERE staff_id = @staffID LIMIT 1", conn)
+                        userCmd.Parameters.AddWithValue("@staffID", staffID)
+                        Using reader As MySqlDataReader = userCmd.ExecuteReader()
+                            If reader.Read() Then
+                                If String.IsNullOrEmpty(finalRequesterName) Then finalRequesterName = If(reader.IsDBNull("full_name"), "", reader.GetString("full_name"))
+                                If String.IsNullOrEmpty(finalPosition) Then finalPosition = If(reader.IsDBNull("position"), "", reader.GetString("position"))
+                                If Not finalDeptID.HasValue AndAlso Not reader.IsDBNull("department_id") Then finalDeptID = reader.GetInt32("department_id")
+                            End If
+                        End Using
+                    End Using
+                Catch
+                    finalRequesterName = If(String.IsNullOrEmpty(finalRequesterName), "User #" & staffID.ToString(), finalRequesterName)
+                End Try
+            End If
+
+            Dim query As String = "INSERT INTO supplies_requests (requester_name, position, department_id, date_of_request, " &
+                                 "item_name, description, quantity_requested, unit, purpose, status) " &
+                                 "VALUES (@requesterName, @position, @departmentID, CURDATE(), @itemName, '', " &
+                                 "@quantity, 'unit', @purpose, 'Pending')"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@requesterName", finalRequesterName)
+                cmd.Parameters.AddWithValue("@position", If(String.IsNullOrEmpty(finalPosition), DBNull.Value, finalPosition))
+                cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@itemName", itemName)
+                cmd.Parameters.AddWithValue("@quantity", quantity)
+                cmd.Parameters.AddWithValue("@purpose", purpose)
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+                If result > 0 Then
+                    LogCrudAction(staffID, "Staff", "", "Supply Requests", "Supply Request", "Create",
+                                  $"Staff #{staffID} requested supply: {itemName} x{quantity}", ipAddress)
+                    Return True
+                End If
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] Submit Supply Request Exception: " & ex.Message)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return False
     End Function
 
     ''' <summary>
@@ -2516,7 +2745,8 @@ Public Class DatabaseConnection
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] DeletePropertyRequest Exception: " & ex.Message)
-            MessageBox.Show("Unable to delete property request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "delete property request")
+            MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Finally
             If conn IsNot Nothing Then
@@ -2647,7 +2877,8 @@ Public Class DatabaseConnection
                 End Try
             End If
             System.Diagnostics.Debug.WriteLine("[v0] ApprovePropertyRequest Exception: " & ex.Message)
-            MessageBox.Show("Error approving request: " & ex.Message, "Approval Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "approve request")
+            MessageBox.Show(errorMsg, "Approval Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Finally
             If transaction IsNot Nothing Then transaction.Dispose()
@@ -2693,7 +2924,8 @@ Public Class DatabaseConnection
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] ApproveMaintenanceRequest Exception: " & ex.Message)
-            MessageBox.Show("Error approving maintenance request: " & ex.Message, "Approval Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "approve maintenance request")
+            MessageBox.Show(errorMsg, "Approval Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Finally
             If conn IsNot Nothing Then
@@ -2739,7 +2971,8 @@ Public Class DatabaseConnection
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] RejectMaintenanceRequest Exception: " & ex.Message)
-            MessageBox.Show("Error rejecting maintenance request: " & ex.Message, "Rejection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "reject maintenance request")
+            MessageBox.Show(errorMsg, "Rejection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Finally
             If conn IsNot Nothing Then
@@ -3012,7 +3245,8 @@ Public Class DatabaseConnection
                 End Try
             End If
             System.Diagnostics.Debug.WriteLine("[v0] RecordPropertyReturn Exception: " & ex.Message)
-            MessageBox.Show("Error recording return: " & ex.Message, "Return Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "record return")
+            MessageBox.Show(errorMsg, "Return Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Finally
             If transaction IsNot Nothing Then transaction.Dispose()
@@ -3321,7 +3555,7 @@ Public Class DatabaseConnection
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Submit Maintenance Request Exception: " & ex.Message)
-            MessageBox.Show("Error submitting maintenance request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(GetUserFriendlyErrorMessage(ex, "submit maintenance request"), "Request Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         Finally
             If conn IsNot Nothing Then
@@ -3702,7 +3936,8 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Safely open a database connection with ReplicationManager error handling
     ''' </summary>
-    Private Shared Function SafeOpenConnection(ByRef conn As MySqlConnection, Optional maxRetries As Integer = 3) As Boolean
+    Public Shared Function SafeOpenConnection(ByRef conn As MySqlConnection, Optional maxRetries As Integer = 3) As Boolean
+
         If conn Is Nothing Then
             conn = GetConnection()
             If conn Is Nothing Then Return False
@@ -3864,7 +4099,8 @@ Public Class DatabaseConnection
             MessageBox.Show("Database initialization error. Please restart the application.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As MySqlException
             System.Diagnostics.Debug.WriteLine("[v0] LoadAdminProfile MySQL Error: " & ex.Message)
-            MessageBox.Show("Database error loading admin profile: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "load admin profile")
+            MessageBox.Show(errorMsg, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadAdminProfile Exception: " & ex.Message & vbCrLf & ex.StackTrace)
             MessageBox.Show("Error loading admin profile: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -4541,15 +4777,29 @@ Public Class DatabaseConnection
                 Return False
             End If
 
-            Dim normalizedUserType As String = If(String.Equals(userType, "SuperAdmin", StringComparison.OrdinalIgnoreCase), "SuperAdmin", "Admin")
+            ' Normalize role to match database enum (SuperAdmin, Admin, Custodian, Staff)
+            Dim normalizedRole As String = "Admin"
+            If Not String.IsNullOrWhiteSpace(userType) Then
+                Dim roleUpper As String = userType.Trim().ToUpper()
+                If roleUpper = "SUPERADMIN" Then
+                    normalizedRole = "SuperAdmin"
+                ElseIf roleUpper = "ADMIN" Then
+                    normalizedRole = "Admin"
+                ElseIf roleUpper = "CUSTODIAN" Then
+                    normalizedRole = "Custodian"
+                ElseIf roleUpper = "STAFF" Then
+                    normalizedRole = "Staff"
+                End If
+            End If
+
             Dim normalizedStatus As String = If(String.Equals(status, "Inactive", StringComparison.OrdinalIgnoreCase), "Inactive", "Active")
             Dim assignedDate As Date = If(dateAssigned.HasValue, dateAssigned.Value, Date.Today)
 
             Dim insertQuery As String =
-                "INSERT INTO users (first_name, middle_name, last_name, suffix, position, department_id, contact_number, email, username, password, " &
+                "INSERT INTO users (first_name, middle_name, last_name, suffix, position, department_id, contact_number, email, username, password_encrypted, " &
                 "province, municipal, barangay, employee_id, role, status, created_at) " &
                 "VALUES (@firstName, @middleName, @lastName, @suffix, @position, @departmentID, @contactNumber, @email, @username, @password, " &
-                "@houseNo, @barangay, @municipality, @province, @dateAssigned, @employeeID, @userType, @status, NOW())"
+                "@province, @municipality, @barangay, @employeeID, @role, @status, NOW())"
 
             Using cmd As New MySqlCommand(insertQuery, conn)
                 cmd.Parameters.AddWithValue("@firstName", firstName.Trim())
@@ -4562,13 +4812,11 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@email", email.Trim())
                 cmd.Parameters.AddWithValue("@username", username.Trim())
                 cmd.Parameters.AddWithValue("@password", hashedPassword)
-                cmd.Parameters.AddWithValue("@houseNo", If(String.IsNullOrWhiteSpace(houseNoStreet), DBNull.Value, houseNoStreet.Trim()))
-                cmd.Parameters.AddWithValue("@barangay", If(String.IsNullOrWhiteSpace(barangay), DBNull.Value, barangay.Trim()))
-                cmd.Parameters.AddWithValue("@municipality", If(String.IsNullOrWhiteSpace(municipality), DBNull.Value, municipality.Trim()))
                 cmd.Parameters.AddWithValue("@province", If(String.IsNullOrWhiteSpace(provinceCity), DBNull.Value, provinceCity.Trim()))
-                cmd.Parameters.AddWithValue("@dateAssigned", assignedDate)
+                cmd.Parameters.AddWithValue("@municipality", If(String.IsNullOrWhiteSpace(municipality), DBNull.Value, municipality.Trim()))
+                cmd.Parameters.AddWithValue("@barangay", If(String.IsNullOrWhiteSpace(barangay), DBNull.Value, barangay.Trim()))
                 cmd.Parameters.AddWithValue("@employeeID", If(String.IsNullOrWhiteSpace(employeeID), DBNull.Value, employeeID.Trim()))
-                cmd.Parameters.AddWithValue("@userType", normalizedUserType)
+                cmd.Parameters.AddWithValue("@role", normalizedRole)
                 cmd.Parameters.AddWithValue("@status", normalizedStatus)
 
                 Dim rows As Integer = cmd.ExecuteNonQuery()
@@ -4587,7 +4835,7 @@ Public Class DatabaseConnection
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AddAdminAccount Exception: " & ex.Message)
-            MessageBox.Show("Error creating admin account: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(GetUserFriendlyErrorMessage(ex, "create admin account"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Finally
             If conn IsNot Nothing Then
                 Try
@@ -5843,7 +6091,7 @@ Public Class DatabaseConnection
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] GetAllProperties Exception: " & ex.Message & vbCrLf & ex.StackTrace)
-            MessageBox.Show("Error retrieving properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(GetUserFriendlyErrorMessage(ex, "retrieve properties"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Finally
             If conn IsNot Nothing Then
                 Try
@@ -6102,10 +6350,16 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return Nothing
             If Not SafeOpenConnection(conn) Then Return Nothing
 
-            Dim query As String = "SELECT property_id, item_name, category, description, serial_number, supplier_name, supplier_contact, " &
-                                  "condition_status, acquisition_cost, acquisition_date, warranty_details, custodian_id, department_id, " &
-                                  "location, status, created_at, updated_at " &
-                                  "FROM properties WHERE property_id = @propertyID LIMIT 1"
+            Dim query As String = "SELECT p.property_id, p.item_name, p.category, p.description, p.serial_number, " &
+                                  "p.supplier_name, p.supplier_contact, p.condition, p.acquisition_cost, p.acquisition_date, " &
+                                  "p.warranty_details, p.assigned_to, p.department_id, p.location, p.status, " &
+                                  "p.created_at, p.updated_at, " &
+                                  "CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS assigned_employee, " &
+                                  "d.department_name AS assigned_department " &
+                                  "FROM properties p " &
+                                  "LEFT JOIN users u ON p.assigned_to = u.user_id " &
+                                  "LEFT JOIN departments d ON p.department_id = d.department_id " &
+                                  "WHERE p.property_id = @propertyID LIMIT 1"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@propertyID", propertyID)
@@ -6354,7 +6608,7 @@ Public Class DatabaseConnection
             If ex.Message.Contains("ReplicationManager") Then
                 MessageBox.Show("Database connection error. Please restart the application and ensure MySQL is running.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                MessageBox.Show("Error retrieving supplies: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(GetUserFriendlyErrorMessage(ex, "retrieve supplies"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         Finally
             If conn IsNot Nothing Then
@@ -6563,8 +6817,8 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            ' Check if supply is currently requested/borrowed
-            Dim checkRequestedQuery As String = "SELECT COUNT(*) FROM property_requests WHERE supply_id = @supplyID AND status IN ('pending', 'approved', 'released')"
+            ' Check if supply is currently requested/borrowed (check supply_requests table, not property_requests)
+            Dim checkRequestedQuery As String = "SELECT COUNT(*) FROM supply_requests WHERE supply_id = @supplyID AND status IN ('pending', 'approved', 'released')"
             Using checkCmd As New MySqlCommand(checkRequestedQuery, conn)
                 checkCmd.Parameters.AddWithValue("@supplyID", supplyID)
                 Dim requestedCount As Integer = CInt(checkCmd.ExecuteScalar())
@@ -6619,12 +6873,13 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
 
             If Not SafeOpenConnection(conn) Then Return dt
-            ' Select all attributes matching schema
+            ' Select all attributes matching schema - use lowercase column names for consistency
             Dim query As String = "SELECT d.department_id, d.department_name, d.head_of_department, " &
                                  "d.contact_number, d.email, d.location, d.office_code, " &
                                  "d.building, d.floor_number, d.short_name, d.description, d.status, " &
-                                 "d.no_of_employees, d.budget_allocation, d.office_hours, d.established_date, " &
-                                 "d.parent_department_id, d.total_properties, d.total_supplies, d.created_at, d.updated_at " &
+                                 "COALESCE(d.total_properties, 0) AS total_properties, " &
+                                 "COALESCE(d.total_supplies, 0) AS total_supplies, " &
+                                 "d.created_at, d.updated_at " &
                                  "FROM departments d " &
                                  "ORDER BY d.department_name"
 
@@ -6637,7 +6892,7 @@ Public Class DatabaseConnection
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] GetAllDepartments Exception: " & ex.Message)
-            MessageBox.Show("Error retrieving departments: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(GetUserFriendlyErrorMessage(ex, "retrieve departments"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Finally
             If conn IsNot Nothing Then
                 Try

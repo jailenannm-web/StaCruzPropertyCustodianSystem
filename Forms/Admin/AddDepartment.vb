@@ -69,18 +69,7 @@ Public Class AddDepartment
             Return
         End If
 
-        ' Office code is optional
-
-        ' Validate email format if provided
-        If Not String.IsNullOrWhiteSpace(email_txt.Text) Then
-            Dim emailPattern As String = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            If Not Regex.IsMatch(email_txt.Text.Trim(), emailPattern) Then
-                MessageBox.Show("Please enter a valid email address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                email_txt.Focus()
-                Return
-            End If
-        End If
-
+        '
         ' Validate numeric fields
         Dim noOfEmployees As Integer = CInt(no_of_employees_numeric.Value)
         Dim budgetAllocation As Decimal = 0

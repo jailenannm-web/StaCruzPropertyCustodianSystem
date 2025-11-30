@@ -57,6 +57,7 @@ Partial Class UC_PropertyRequestManagement
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
         Me.issuePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -344,11 +345,28 @@ Partial Class UC_PropertyRequestManagement
         Me.printPAR.Text = "Print PAR/ICS"
         Me.printPAR.UseVisualStyleBackColor = False
         '
+        'btnAssign
+        '
+        Me.btnAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAssign.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnAssign.CornerRadius = 15
+        Me.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAssign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnAssign.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAssign.Location = New System.Drawing.Point(902, 76)
+        Me.btnAssign.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAssign.Name = "btnAssign"
+        Me.btnAssign.Size = New System.Drawing.Size(99, 34)
+        Me.btnAssign.TabIndex = 162
+        Me.btnAssign.Text = "Assign"
+        Me.btnAssign.UseVisualStyleBackColor = False
+        '
         'UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.btnAssign)
         Me.Controls.Add(Me.printPAR)
         Me.Controls.Add(Me.issuePropertyCard)
         Me.Controls.Add(Me.Label1)
@@ -396,4 +414,5 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents printPAR As Resources.Controls.RoundedButton
     Friend WithEvents Purpose As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents btnAssign As Resources.Controls.RoundedButton
 End Class

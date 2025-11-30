@@ -44,6 +44,8 @@ Partial Class UC_MaintenanceRequestManagement
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -266,10 +268,43 @@ Partial Class UC_MaintenanceRequestManagement
         Me.prm_btn_update.Text = "Update"
         Me.prm_btn_update.UseVisualStyleBackColor = False
         '
+        'btnDelete
+        '
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnDelete.CornerRadius = 15
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Location = New System.Drawing.Point(799, 69)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(99, 35)
+        Me.btnDelete.TabIndex = 174
+        Me.btnDelete.Text = "btnDelete"
+        Me.btnDelete.UseVisualStyleBackColor = False
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnAdd.CornerRadius = 15
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAdd.Location = New System.Drawing.Point(917, 69)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(99, 35)
+        Me.btnAdd.TabIndex = 175
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = False
+        '
         'UC_MaintenanceRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnReject)
         Me.Controls.Add(Me.prm_btn_update)
@@ -279,6 +314,7 @@ Partial Class UC_MaintenanceRequestManagement
         Me.Controls.Add(Me.ttlpropertymanagement)
         Me.Controls.Add(Me.propertyManagementGrid)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
+        Me.Controls.Add(Me.btnAdd)
         Me.Name = "UC_MaintenanceRequestManagement"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -309,4 +345,6 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
     Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
 End Class

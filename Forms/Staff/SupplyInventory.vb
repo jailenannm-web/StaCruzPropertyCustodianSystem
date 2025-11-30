@@ -90,7 +90,13 @@ Public Class SupplyInventory
             ' Auto-size columns
             propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         Catch ex As Exception
-            MessageBox.Show("Error loading supply data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = "Unable to load supply data. "
+            If ex.Message.Contains("Connection") OrElse ex.Message.Contains("timeout") Then
+                errorMsg &= "Please check your database connection."
+            Else
+                errorMsg &= "Please try again."
+            End If
+            MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
     End Sub
     Private Sub btnrequestsupply_Click(sender As Object, e As System.EventArgs)
@@ -105,13 +111,17 @@ Public Class SupplyInventory
     End Sub
 
     Private Sub btnrequestsupply_Click_1(sender As Object, e As System.EventArgs) Handles btnrequestsupply.Click
-        Dim addSupplyInventory As New AddSupplyRequest()
-
-        ' Clear previous controls
-        Me.Controls.Clear()
-
-        ' Add new user control
-        Me.Controls.Add(addSupplyInventory)
+        ' Load AddSupplyRequest into parent dashboard
+        Dim parentDashboard = TryCast(Me.ParentForm, StaffDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(New AddSupplyRequest())
+        Else
+            ' Fallback: add directly to parent
+            Dim addSupplyRequest As New AddSupplyRequest()
+            addSupplyRequest.Dock = DockStyle.Fill
+            Me.Parent.Controls.Clear()
+            Me.Parent.Controls.Add(addSupplyRequest)
+        End If
     End Sub
 
 End Class

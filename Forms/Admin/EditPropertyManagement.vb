@@ -17,9 +17,7 @@ Public Class EditPropertyManagement
     End Sub
 
     Private Sub EditPropertyManagement_Load(sender As Object, e As EventArgs)
-        If Not EnsureModifyPermission() Then
-            Return
-        End If
+
         InitializeForm()
     End Sub
 
@@ -99,9 +97,9 @@ Public Class EditPropertyManagement
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If Not canModifyProperties AndAlso Not EnsureModifyPermission() Then
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+
         If txtPropertyName.Text.Trim().Length = 0 Then
             MessageBox.Show("Property name is required.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -221,13 +219,5 @@ Public Class EditPropertyManagement
         Return Nothing
     End Function
 
-    Private Function EnsureModifyPermission() As Boolean
-        canModifyProperties = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyProperties)
-        If Not canModifyProperties Then
-            MessageBox.Show("You have view-only access to Property Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            NavigateBack()
-            Return False
-        End If
-        Return True
-    End Function
+
 End Class
