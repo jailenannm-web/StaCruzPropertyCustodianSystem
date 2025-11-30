@@ -36,33 +36,33 @@ Partial Class SADashboard
         Dim lblInventoryStatusOverview As System.Windows.Forms.Label
         Dim lblPropertyConditionStatus As System.Windows.Forms.Label
         Dim lblSystemAlerts As System.Windows.Forms.Label
-        Dim ChartArea10 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend10 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea11 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend11 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series11 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea12 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend12 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series12 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea13 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend13 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series13 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea14 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend14 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series14 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea15 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend15 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series15 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea16 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend16 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series16 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea17 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend17 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series17 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea18 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend18 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series18 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea7 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend7 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea8 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend8 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea9 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend9 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SADashboard))
         Me.pnlFormLoader = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -320,18 +320,18 @@ Partial Class SADashboard
         'SAChart_RecentPropertyRequests
         '
         Me.SAChart_RecentPropertyRequests.BackColor = System.Drawing.Color.Transparent
-        ChartArea10.Name = "ChartArea1"
-        Me.SAChart_RecentPropertyRequests.ChartAreas.Add(ChartArea10)
-        Legend10.Name = "Legend1"
-        Me.SAChart_RecentPropertyRequests.Legends.Add(Legend10)
+        ChartArea1.Name = "ChartArea1"
+        Me.SAChart_RecentPropertyRequests.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.SAChart_RecentPropertyRequests.Legends.Add(Legend1)
         Me.SAChart_RecentPropertyRequests.Location = New System.Drawing.Point(40, 73)
         Me.SAChart_RecentPropertyRequests.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_RecentPropertyRequests.Name = "SAChart_RecentPropertyRequests"
-        Series10.ChartArea = "ChartArea1"
-        Series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series10.Legend = "Legend1"
-        Series10.Name = "Series1"
-        Me.SAChart_RecentPropertyRequests.Series.Add(Series10)
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.SAChart_RecentPropertyRequests.Series.Add(Series1)
         Me.SAChart_RecentPropertyRequests.Size = New System.Drawing.Size(471, 186)
         Me.SAChart_RecentPropertyRequests.TabIndex = 52
         Me.SAChart_RecentPropertyRequests.Text = "Chart7"
@@ -355,18 +355,18 @@ Partial Class SADashboard
         '
         Me.SAChart_ScheduleMaintenance.BackColor = System.Drawing.Color.Transparent
         Me.SAChart_ScheduleMaintenance.BorderlineColor = System.Drawing.Color.Transparent
-        ChartArea11.Name = "ChartArea1"
-        Me.SAChart_ScheduleMaintenance.ChartAreas.Add(ChartArea11)
-        Legend11.Name = "Legend1"
-        Me.SAChart_ScheduleMaintenance.Legends.Add(Legend11)
+        ChartArea2.Name = "ChartArea1"
+        Me.SAChart_ScheduleMaintenance.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.SAChart_ScheduleMaintenance.Legends.Add(Legend2)
         Me.SAChart_ScheduleMaintenance.Location = New System.Drawing.Point(85, 76)
         Me.SAChart_ScheduleMaintenance.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_ScheduleMaintenance.Name = "SAChart_ScheduleMaintenance"
-        Series11.ChartArea = "ChartArea1"
-        Series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-        Series11.Legend = "Legend1"
-        Series11.Name = "Series1"
-        Me.SAChart_ScheduleMaintenance.Series.Add(Series11)
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.SAChart_ScheduleMaintenance.Series.Add(Series2)
         Me.SAChart_ScheduleMaintenance.Size = New System.Drawing.Size(447, 182)
         Me.SAChart_ScheduleMaintenance.TabIndex = 51
         Me.SAChart_ScheduleMaintenance.Text = "Chart6"
@@ -388,20 +388,20 @@ Partial Class SADashboard
         '
         'SAChart_PendingRequest
         '
-        ChartArea12.Name = "ChartArea1"
-        Me.SAChart_PendingRequest.ChartAreas.Add(ChartArea12)
-        Legend12.Name = "Legend1"
-        Me.SAChart_PendingRequest.Legends.Add(Legend12)
+        ChartArea3.Name = "ChartArea1"
+        Me.SAChart_PendingRequest.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.SAChart_PendingRequest.Legends.Add(Legend3)
         Me.SAChart_PendingRequest.Location = New System.Drawing.Point(85, 57)
         Me.SAChart_PendingRequest.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_PendingRequest.Name = "SAChart_PendingRequest"
-        Series12.BackImageTransparentColor = System.Drawing.Color.Transparent
-        Series12.ChartArea = "ChartArea1"
-        Series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-        Series12.LabelForeColor = System.Drawing.Color.BlanchedAlmond
-        Series12.Legend = "Legend1"
-        Series12.Name = "Series1"
-        Me.SAChart_PendingRequest.Series.Add(Series12)
+        Series3.BackImageTransparentColor = System.Drawing.Color.Transparent
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series3.LabelForeColor = System.Drawing.Color.BlanchedAlmond
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.SAChart_PendingRequest.Series.Add(Series3)
         Me.SAChart_PendingRequest.Size = New System.Drawing.Size(447, 182)
         Me.SAChart_PendingRequest.TabIndex = 50
         Me.SAChart_PendingRequest.Text = "Chart3"
@@ -424,18 +424,18 @@ Partial Class SADashboard
         'SAChart_TotalSupplies
         '
         Me.SAChart_TotalSupplies.BackColor = System.Drawing.Color.Transparent
-        ChartArea13.Name = "ChartArea1"
-        Me.SAChart_TotalSupplies.ChartAreas.Add(ChartArea13)
-        Legend13.Name = "Legend1"
-        Me.SAChart_TotalSupplies.Legends.Add(Legend13)
+        ChartArea4.Name = "ChartArea1"
+        Me.SAChart_TotalSupplies.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.SAChart_TotalSupplies.Legends.Add(Legend4)
         Me.SAChart_TotalSupplies.Location = New System.Drawing.Point(67, 52)
         Me.SAChart_TotalSupplies.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_TotalSupplies.Name = "SAChart_TotalSupplies"
-        Series13.ChartArea = "ChartArea1"
-        Series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100
-        Series13.Legend = "Legend1"
-        Series13.Name = "Series1"
-        Me.SAChart_TotalSupplies.Series.Add(Series13)
+        Series4.ChartArea = "ChartArea1"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100
+        Series4.Legend = "Legend1"
+        Series4.Name = "Series1"
+        Me.SAChart_TotalSupplies.Series.Add(Series4)
         Me.SAChart_TotalSupplies.Size = New System.Drawing.Size(447, 212)
         Me.SAChart_TotalSupplies.TabIndex = 49
         Me.SAChart_TotalSupplies.Text = "Chart2"
@@ -458,17 +458,17 @@ Partial Class SADashboard
         'SAChart_TotalProperty
         '
         Me.SAChart_TotalProperty.BackColor = System.Drawing.Color.Transparent
-        ChartArea14.Name = "ChartArea1"
-        Me.SAChart_TotalProperty.ChartAreas.Add(ChartArea14)
-        Legend14.Name = "Legend1"
-        Me.SAChart_TotalProperty.Legends.Add(Legend14)
+        ChartArea5.Name = "ChartArea1"
+        Me.SAChart_TotalProperty.ChartAreas.Add(ChartArea5)
+        Legend5.Name = "Legend1"
+        Me.SAChart_TotalProperty.Legends.Add(Legend5)
         Me.SAChart_TotalProperty.Location = New System.Drawing.Point(28, 60)
         Me.SAChart_TotalProperty.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_TotalProperty.Name = "SAChart_TotalProperty"
-        Series14.ChartArea = "ChartArea1"
-        Series14.Legend = "Legend1"
-        Series14.Name = "Series1"
-        Me.SAChart_TotalProperty.Series.Add(Series14)
+        Series5.ChartArea = "ChartArea1"
+        Series5.Legend = "Legend1"
+        Series5.Name = "Series1"
+        Me.SAChart_TotalProperty.Series.Add(Series5)
         Me.SAChart_TotalProperty.Size = New System.Drawing.Size(483, 203)
         Me.SAChart_TotalProperty.TabIndex = 48
         Me.SAChart_TotalProperty.Text = "Chart1"
@@ -491,17 +491,17 @@ Partial Class SADashboard
         'SAChart_RequestTrends
         '
         Me.SAChart_RequestTrends.BackColor = System.Drawing.Color.Transparent
-        ChartArea15.Name = "ChartArea1"
-        Me.SAChart_RequestTrends.ChartAreas.Add(ChartArea15)
-        Legend15.Name = "Legend1"
-        Me.SAChart_RequestTrends.Legends.Add(Legend15)
+        ChartArea6.Name = "ChartArea1"
+        Me.SAChart_RequestTrends.ChartAreas.Add(ChartArea6)
+        Legend6.Name = "Legend1"
+        Me.SAChart_RequestTrends.Legends.Add(Legend6)
         Me.SAChart_RequestTrends.Location = New System.Drawing.Point(36, 58)
         Me.SAChart_RequestTrends.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_RequestTrends.Name = "SAChart_RequestTrends"
-        Series15.ChartArea = "ChartArea1"
-        Series15.Legend = "Legend1"
-        Series15.Name = "Series1"
-        Me.SAChart_RequestTrends.Series.Add(Series15)
+        Series6.ChartArea = "ChartArea1"
+        Series6.Legend = "Legend1"
+        Series6.Name = "Series1"
+        Me.SAChart_RequestTrends.Series.Add(Series6)
         Me.SAChart_RequestTrends.Size = New System.Drawing.Size(483, 217)
         Me.SAChart_RequestTrends.TabIndex = 53
         Me.SAChart_RequestTrends.Text = "Chart8"
@@ -524,17 +524,17 @@ Partial Class SADashboard
         'SAChart_InventoryStatusOverview
         '
         Me.SAChart_InventoryStatusOverview.BackColor = System.Drawing.Color.Transparent
-        ChartArea16.Name = "ChartArea1"
-        Me.SAChart_InventoryStatusOverview.ChartAreas.Add(ChartArea16)
-        Legend16.Name = "Legend1"
-        Me.SAChart_InventoryStatusOverview.Legends.Add(Legend16)
+        ChartArea7.Name = "ChartArea1"
+        Me.SAChart_InventoryStatusOverview.ChartAreas.Add(ChartArea7)
+        Legend7.Name = "Legend1"
+        Me.SAChart_InventoryStatusOverview.Legends.Add(Legend7)
         Me.SAChart_InventoryStatusOverview.Location = New System.Drawing.Point(28, 68)
         Me.SAChart_InventoryStatusOverview.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_InventoryStatusOverview.Name = "SAChart_InventoryStatusOverview"
-        Series16.ChartArea = "ChartArea1"
-        Series16.Legend = "Legend1"
-        Series16.Name = "Series1"
-        Me.SAChart_InventoryStatusOverview.Series.Add(Series16)
+        Series7.ChartArea = "ChartArea1"
+        Series7.Legend = "Legend1"
+        Series7.Name = "Series1"
+        Me.SAChart_InventoryStatusOverview.Series.Add(Series7)
         Me.SAChart_InventoryStatusOverview.Size = New System.Drawing.Size(483, 207)
         Me.SAChart_InventoryStatusOverview.TabIndex = 49
         Me.SAChart_InventoryStatusOverview.Text = "Chart4"
@@ -557,18 +557,18 @@ Partial Class SADashboard
         'SAChart_PropertyConditionStatus
         '
         Me.SAChart_PropertyConditionStatus.BackColor = System.Drawing.Color.Transparent
-        ChartArea17.Name = "ChartArea1"
-        Me.SAChart_PropertyConditionStatus.ChartAreas.Add(ChartArea17)
-        Legend17.Name = "Legend1"
-        Me.SAChart_PropertyConditionStatus.Legends.Add(Legend17)
+        ChartArea8.Name = "ChartArea1"
+        Me.SAChart_PropertyConditionStatus.ChartAreas.Add(ChartArea8)
+        Legend8.Name = "Legend1"
+        Me.SAChart_PropertyConditionStatus.Legends.Add(Legend8)
         Me.SAChart_PropertyConditionStatus.Location = New System.Drawing.Point(31, 59)
         Me.SAChart_PropertyConditionStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_PropertyConditionStatus.Name = "SAChart_PropertyConditionStatus"
-        Series17.ChartArea = "ChartArea1"
-        Series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar
-        Series17.Legend = "Legend1"
-        Series17.Name = "Series1"
-        Me.SAChart_PropertyConditionStatus.Series.Add(Series17)
+        Series8.ChartArea = "ChartArea1"
+        Series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar
+        Series8.Legend = "Legend1"
+        Series8.Name = "Series1"
+        Me.SAChart_PropertyConditionStatus.Series.Add(Series8)
         Me.SAChart_PropertyConditionStatus.Size = New System.Drawing.Size(517, 199)
         Me.SAChart_PropertyConditionStatus.TabIndex = 50
         Me.SAChart_PropertyConditionStatus.Text = "Chart5"
@@ -589,18 +589,18 @@ Partial Class SADashboard
         'SAChart_SystemAlerts
         '
         Me.SAChart_SystemAlerts.BackColor = System.Drawing.Color.Transparent
-        ChartArea18.Name = "ChartArea1"
-        Me.SAChart_SystemAlerts.ChartAreas.Add(ChartArea18)
-        Legend18.Name = "Legend1"
-        Me.SAChart_SystemAlerts.Legends.Add(Legend18)
+        ChartArea9.Name = "ChartArea1"
+        Me.SAChart_SystemAlerts.ChartAreas.Add(ChartArea9)
+        Legend9.Name = "Legend1"
+        Me.SAChart_SystemAlerts.Legends.Add(Legend9)
         Me.SAChart_SystemAlerts.Location = New System.Drawing.Point(60, 62)
         Me.SAChart_SystemAlerts.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_SystemAlerts.Name = "SAChart_SystemAlerts"
-        Series18.ChartArea = "ChartArea1"
-        Series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
-        Series18.Legend = "Legend1"
-        Series18.Name = "Series1"
-        Me.SAChart_SystemAlerts.Series.Add(Series18)
+        Series9.ChartArea = "ChartArea1"
+        Series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series9.Legend = "Legend1"
+        Series9.Name = "Series1"
+        Me.SAChart_SystemAlerts.Series.Add(Series9)
         Me.SAChart_SystemAlerts.Size = New System.Drawing.Size(472, 213)
         Me.SAChart_SystemAlerts.TabIndex = 54
         Me.SAChart_SystemAlerts.Text = "Chart9"
@@ -656,7 +656,7 @@ Partial Class SADashboard
         Me.admin_btn_suppliesRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_suppliesRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.admin_btn_suppliesRequestManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_suppliesRequestManagement.Location = New System.Drawing.Point(760, 595)
+        Me.admin_btn_suppliesRequestManagement.Location = New System.Drawing.Point(1495, 595)
         Me.admin_btn_suppliesRequestManagement.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_btn_suppliesRequestManagement.Name = "admin_btn_suppliesRequestManagement"
         Me.admin_btn_suppliesRequestManagement.Size = New System.Drawing.Size(306, 56)
@@ -673,7 +673,7 @@ Partial Class SADashboard
         Me.btn_MaintenanceRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_MaintenanceRequest.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btn_MaintenanceRequest.ForeColor = System.Drawing.Color.White
-        Me.btn_MaintenanceRequest.Location = New System.Drawing.Point(760, 659)
+        Me.btn_MaintenanceRequest.Location = New System.Drawing.Point(1495, 659)
         Me.btn_MaintenanceRequest.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_MaintenanceRequest.Name = "btn_MaintenanceRequest"
         Me.btn_MaintenanceRequest.Size = New System.Drawing.Size(306, 56)

@@ -23,7 +23,7 @@ Partial Class UC_SupplyRequestManagement
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.issuePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.issueRequisition = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -56,21 +56,21 @@ Partial Class UC_SupplyRequestManagement
         Me.printPAR.Text = "Print PAR/ICS"
         Me.printPAR.UseVisualStyleBackColor = False
         '
-        'issuePropertyCard
+        'issueRequisition
         '
-        Me.issuePropertyCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.issuePropertyCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.issuePropertyCard.CornerRadius = 15
-        Me.issuePropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.issuePropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.issuePropertyCard.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertyCard.Location = New System.Drawing.Point(1023, 707)
-        Me.issuePropertyCard.Margin = New System.Windows.Forms.Padding(4)
-        Me.issuePropertyCard.Name = "issuePropertyCard"
-        Me.issuePropertyCard.Size = New System.Drawing.Size(153, 33)
-        Me.issuePropertyCard.TabIndex = 169
-        Me.issuePropertyCard.Text = "Issue Property Card"
-        Me.issuePropertyCard.UseVisualStyleBackColor = False
+        Me.issueRequisition.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.issueRequisition.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.issueRequisition.CornerRadius = 15
+        Me.issueRequisition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.issueRequisition.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.issueRequisition.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.issueRequisition.Location = New System.Drawing.Point(1023, 707)
+        Me.issueRequisition.Margin = New System.Windows.Forms.Padding(4)
+        Me.issueRequisition.Name = "issueRequisition"
+        Me.issueRequisition.Size = New System.Drawing.Size(153, 33)
+        Me.issueRequisition.TabIndex = 169
+        Me.issueRequisition.Text = "Issue RIS"
+        Me.issueRequisition.UseVisualStyleBackColor = False
         '
         'Label1
         '
@@ -208,7 +208,7 @@ Partial Class UC_SupplyRequestManagement
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.printPAR)
-        Me.Controls.Add(Me.issuePropertyCard)
+        Me.Controls.Add(Me.issueRequisition)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlpropertyrequestmanagement)
         Me.Controls.Add(Me.btnApprove)
@@ -224,7 +224,7 @@ Partial Class UC_SupplyRequestManagement
     End Sub
 
     Friend WithEvents printPAR As Resources.Controls.RoundedButton
-    Friend WithEvents issuePropertyCard As Resources.Controls.RoundedButton
+    Friend WithEvents issueRequisition As Resources.Controls.RoundedButton
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ttlpropertyrequestmanagement As System.Windows.Forms.Label
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton

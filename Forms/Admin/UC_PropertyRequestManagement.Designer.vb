@@ -29,14 +29,19 @@ Partial Class UC_PropertyRequestManagement
     Private Sub InitializeComponent()
         Me.admin_label_PropertyRequestManagement = New System.Windows.Forms.Label()
         Me.prm_table1 = New System.Windows.Forms.DataGridView()
+        Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.request_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.employee_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.department_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.property_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantity_requested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.requestDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.approved_by = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.approvedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.release_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,11 +55,6 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
-        Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.issuePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,7 +77,7 @@ Partial Class UC_PropertyRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_table1.BackgroundColor = System.Drawing.Color.White
         Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.purpose, Me.status})
+        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
         Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.prm_table1.Location = New System.Drawing.Point(62, 126)
         Me.prm_table1.Name = "prm_table1"
@@ -85,6 +85,55 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_table1.RowTemplate.Height = 24
         Me.prm_table1.Size = New System.Drawing.Size(1270, 573)
         Me.prm_table1.TabIndex = 34
+        '
+        'NameOfRequester
+        '
+        Me.NameOfRequester.HeaderText = "Name Of Requester"
+        Me.NameOfRequester.MinimumWidth = 6
+        Me.NameOfRequester.Name = "NameOfRequester"
+        Me.NameOfRequester.Width = 125
+        '
+        'Department
+        '
+        Me.Department.HeaderText = "Department"
+        Me.Department.MinimumWidth = 6
+        Me.Department.Name = "Department"
+        Me.Department.Width = 125
+        '
+        'DateOfRequest
+        '
+        Me.DateOfRequest.HeaderText = "Date Of Request"
+        Me.DateOfRequest.MinimumWidth = 6
+        Me.DateOfRequest.Name = "DateOfRequest"
+        Me.DateOfRequest.Width = 125
+        '
+        'ItemName
+        '
+        Me.ItemName.HeaderText = "Item Name"
+        Me.ItemName.MinimumWidth = 6
+        Me.ItemName.Name = "ItemName"
+        Me.ItemName.Width = 125
+        '
+        'QuantityRequested
+        '
+        Me.QuantityRequested.HeaderText = "Quantity Requested"
+        Me.QuantityRequested.MinimumWidth = 6
+        Me.QuantityRequested.Name = "QuantityRequested"
+        Me.QuantityRequested.Width = 125
+        '
+        'Purpose
+        '
+        Me.Purpose.HeaderText = "Purpose"
+        Me.Purpose.MinimumWidth = 6
+        Me.Purpose.Name = "Purpose"
+        Me.Purpose.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
         '
         'request_id
         '
@@ -121,26 +170,12 @@ Partial Class UC_PropertyRequestManagement
         Me.quantity_requested.Name = "quantity_requested"
         Me.quantity_requested.Width = 125
         '
-        'purpose
-        '
-        Me.purpose.HeaderText = "Purpose"
-        Me.purpose.MinimumWidth = 6
-        Me.purpose.Name = "purpose"
-        Me.purpose.Width = 125
-        '
         'requestDate
         '
         Me.requestDate.HeaderText = "Request Date"
         Me.requestDate.MinimumWidth = 6
         Me.requestDate.Name = "requestDate"
         Me.requestDate.Width = 125
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
         '
         'approved_by
         '
@@ -277,55 +312,6 @@ Partial Class UC_PropertyRequestManagement
         Me.ttlpropertyrequestmanagement.TabIndex = 158
         Me.ttlpropertyrequestmanagement.Text = "0"
         '
-        'NameOfRequester
-        '
-        Me.NameOfRequester.HeaderText = "Name Of Requester"
-        Me.NameOfRequester.MinimumWidth = 6
-        Me.NameOfRequester.Name = "NameOfRequester"
-        Me.NameOfRequester.Width = 125
-        '
-        'Department
-        '
-        Me.Department.HeaderText = "Department"
-        Me.Department.MinimumWidth = 6
-        Me.Department.Name = "Department"
-        Me.Department.Width = 125
-        '
-        'DateOfRequest
-        '
-        Me.DateOfRequest.HeaderText = "Date Of Request"
-        Me.DateOfRequest.MinimumWidth = 6
-        Me.DateOfRequest.Name = "DateOfRequest"
-        Me.DateOfRequest.Width = 125
-        '
-        'ItemName
-        '
-        Me.ItemName.HeaderText = "Item Name"
-        Me.ItemName.MinimumWidth = 6
-        Me.ItemName.Name = "ItemName"
-        Me.ItemName.Width = 125
-        '
-        'QuantityRequested
-        '
-        Me.QuantityRequested.HeaderText = "Quantity Requested"
-        Me.QuantityRequested.MinimumWidth = 6
-        Me.QuantityRequested.Name = "QuantityRequested"
-        Me.QuantityRequested.Width = 125
-        '
-        'Purpose
-        '
-        Me.purpose.HeaderText = "Purpose"
-        Me.purpose.MinimumWidth = 6
-        Me.purpose.Name = "Purpose"
-        Me.purpose.Width = 125
-        '
-        'Status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "Status"
-        Me.status.Width = 125
-        '
         'issuePropertyCard
         '
         Me.issuePropertyCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -339,7 +325,7 @@ Partial Class UC_PropertyRequestManagement
         Me.issuePropertyCard.Name = "issuePropertyCard"
         Me.issuePropertyCard.Size = New System.Drawing.Size(153, 33)
         Me.issuePropertyCard.TabIndex = 160
-        Me.issuePropertyCard.Text = "Issue Property Card"
+        Me.issuePropertyCard.Text = "Issue Property Acknoledgement "
         Me.issuePropertyCard.UseVisualStyleBackColor = False
         '
         'printPAR
@@ -390,9 +376,7 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents department_id As DataGridViewTextBoxColumn
     Friend WithEvents property_id As DataGridViewTextBoxColumn
     Friend WithEvents quantity_requested As DataGridViewTextBoxColumn
-    Friend WithEvents purpose As DataGridViewTextBoxColumn
     Friend WithEvents requestDate As DataGridViewTextBoxColumn
-    Friend WithEvents status As DataGridViewTextBoxColumn
     Friend WithEvents approved_by As DataGridViewTextBoxColumn
     Friend WithEvents approvedDate As DataGridViewTextBoxColumn
     Friend WithEvents release_date As DataGridViewTextBoxColumn
@@ -410,4 +394,6 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents QuantityRequested As DataGridViewTextBoxColumn
     Friend WithEvents issuePropertyCard As Resources.Controls.RoundedButton
     Friend WithEvents printPAR As Resources.Controls.RoundedButton
+    Friend WithEvents Purpose As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
 End Class
