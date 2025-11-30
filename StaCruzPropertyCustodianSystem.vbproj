@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5BA19DCE-6BE5-45B8-AADD-D54CAC6DE401}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>StaCruzPropertyCustodianSystem.My.MyApplication</StartupObject>
+    <StartupObject>StaCruzPropertyCustodianSystem.AdminDashboard</StartupObject>
     <RootNamespace>StaCruzPropertyCustodianSystem</RootNamespace>
     <AssemblyName>StaCruzPropertyCustodianSystem</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -110,35 +110,17 @@
   </ItemGroup>
   <!-- STAFF FORMS -->
   <ItemGroup>
-    <Compile Include="Forms\Admin\AddSupplyRequest.Designer.vb">
-      <DependentUpon>AddSupplyRequest.vb</DependentUpon>
+    <Compile Include="Forms\Admin\UC_SupplyRequestManagement.Designer.vb">
+      <DependentUpon>UC_SupplyRequestManagement.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Admin\AddSupplyRequest.vb">
+    <Compile Include="Forms\Admin\UC_SupplyRequestManagement.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Staff\MaintenanceRequest.Designer.vb">
-      <DependentUpon>MaintenanceRequest.vb</DependentUpon>
+    <Compile Include="Forms\Custodians\CustodianDashboard.Designer.vb">
+      <DependentUpon>CustodianDashboard.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Staff\MaintenanceRequest.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Staff\MaintenanceRequestForm.Designer.vb">
-      <DependentUpon>MaintenanceRequestForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Staff\MaintenanceRequestForm.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Staff\PropertyInventory.Designer.vb">
-      <DependentUpon>PropertyInventory.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Staff\PropertyInventory.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Staff\SupplyInventory.Designer.vb">
-      <DependentUpon>SupplyInventory.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Staff\SupplyInventory.vb">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.Designer.vb">
       <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
@@ -179,6 +161,12 @@
       <DependentUpon>AddSupply.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Admin\AddSupply.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AddSupplyRequest.Designer.vb">
+      <DependentUpon>AddSupplyRequest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddSupplyRequest.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Admin\AddUserManagement.Designer.vb">
@@ -319,6 +307,12 @@
     <Compile Include="Forms\Staff\frmProfile.Designer.vb">
       <DependentUpon>frmProfile.vb</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Staff\MaintenanceRequest.Designer.vb">
+      <DependentUpon>MaintenanceRequest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Staff\MaintenanceRequest.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Staff\PropertyTransaction.Designer.vb">
       <DependentUpon>PropertyTransaction.vb</DependentUpon>
     </Compile>
@@ -435,11 +429,17 @@
     <EmbeddedResource Include="Forms\Admin\UC_Reports.resx">
       <DependentUpon>UC_Reports.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\UC_SupplyRequestManagement.resx">
+      <DependentUpon>UC_SupplyRequestManagement.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\UC_UserManagement.resx">
       <DependentUpon>UC_UserManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\ViewDepartmentSupply.resx">
       <DependentUpon>ViewDepartmentSupply.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Custodians\CustodianDashboard.resx">
+      <DependentUpon>CustodianDashboard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmConfig.resx">
       <DependentUpon>frmConfig.vb</DependentUpon>

@@ -87,42 +87,67 @@ Public Class UC_UserManagement
     Private Sub RefreshUserTable()
         Try
             pm_table.Rows.Clear()
-            ' No search keyword, only filters
+
             Dim records As DataTable = DatabaseConnection.GetAdminAccounts(currentStatusFilter, currentRoleFilter, "")
 
             For Each record As DataRow In records.Rows
+
+                ' ===== BUILD FULL NAME FROM 4 COLUMNS =====
+                Dim firstName As String = SafeValue(record, "first_name")
+                Dim middleName As String = SafeValue(record, "middle_name")
+                Dim lastName As String = SafeValue(record, "last_name")
+                Dim suffix As String = SafeValue(record, "suffix")
+
+                Dim fullName As String = firstName
+
+                If middleName <> "" Then fullName &= " " & middleName
+                If lastName <> "" Then fullName &= " " & lastName
+                If suffix <> "" Then fullName &= " " & suffix
+
+                fullName = fullName.Trim()
+
+                ' ===== ADD ROW TO DATAGRIDVIEW =====
                 Dim rowIndex As Integer = pm_table.Rows.Add(
-                    SafeValue(record, "user_id"),
-                    SafeValue(record, "first_name"),
-                    SafeValue(record, "middle_name"),
-                    SafeValue(record, "last_name"),
-                    SafeValue(record, "suffix"),
-                    SafeValue(record, "position"),
-                    SafeValue(record, "department_id"),
-                    SafeValue(record, "contact_number"),
-                    SafeValue(record, "email"),
-                    SafeValue(record, "user_type"),
-                    SafeValue(record, "province_city"),
-                    SafeValue(record, "municipality"),
-                    SafeValue(record, "barangay"),
-                    SafeValue(record, "house_no_street"),
-                    "******",
-                    FormatDateValue(record("created_at")),
-                    SafeValue(record, "status")
-                )
+                SafeValue(record, "user_id"),
+                firstName,
+                middleName,
+                lastName,
+                suffix,
+                fullName,                                 ' <-- NEW FULL NAME COLUMN
+                SafeValue(record, "positionAdmin"),
+                SafeValue(record, "department_id"),
+                SafeValue(record, "contact_number"),
+                SafeValue(record, "email"),
+                SafeValue(record, "user_type"),
+                SafeValue(record, "province_city"),
+                SafeValue(record, "municipality"),
+                SafeValue(record, "barangay"),
+                SafeValue(record, "house_no_street"),
+                "******",
+                FormatDateValue(record("created_at")),
+                SafeValue(record, "status")
+            )
 
                 pm_table.Rows(rowIndex).Tag = New UserRowMetadata With {
-                    .Username = SafeValue(record, "username"),
-                    .EmployeeID = SafeValue(record, "employee_id"),
-                    .DateAssigned = record("date_assigned"),
-                    .CreatedAt = record("created_at")
-                }
+                .Username = SafeValue(record, "username"),
+                .EmployeeID = SafeValue(record, "employee_id"),
+                .DateAssigned = record("date_assigned"),
+                .CreatedAt = record("created_at")
+            }
             Next
+
+            ' OPTIONAL: HIDE the original name columns
+            If pm_table.Columns.Contains("firstName") Then pm_table.Columns("firstName").Visible = False
+            If pm_table.Columns.Contains("middleName") Then pm_table.Columns("middleName").Visible = False
+            If pm_table.Columns.Contains("lastName") Then pm_table.Columns("lastName").Visible = False
+            If pm_table.Columns.Contains("suffixAdmin") Then pm_table.Columns("suffixAdmin").Visible = False
+
         Catch ex As Exception
             MessageBox.Show("Unable to load user accounts: " & ex.Message,
-                            "User Management", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        "User Management", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
     Private Shared Function SafeValue(record As DataRow, columnName As String) As String
         If Not record.Table.Columns.Contains(columnName) Then Return ""
@@ -173,26 +198,24 @@ Public Class UC_UserManagement
         End If
 
         editForm.LoadUserData(
-            selectedRow.Cells("userID").Value.ToString(),
-            selectedRow.Cells("firstName").Value.ToString(),
-            selectedRow.Cells("middleName").Value.ToString(),
-            selectedRow.Cells("lastName").Value.ToString(),
-            selectedRow.Cells("suffix").Value.ToString(),
-            selectedRow.Cells("positionUser").Value.ToString(),
-            selectedRow.Cells("departmentID").Value.ToString(),
-            metadata.EmployeeID,
-            selectedRow.Cells("contactNumber").Value.ToString(),
-            selectedRow.Cells("email").Value.ToString(),
-            selectedRow.Cells("userRole").Value.ToString(),
-            selectedRow.Cells("province").Value.ToString(),
-            selectedRow.Cells("municipalityCity").Value.ToString(),
-            selectedRow.Cells("barangay").Value.ToString(),
-            selectedRow.Cells("houseNumber").Value.ToString(),
-            "",
-            dateAssignedValue,
-            selectedRow.Cells("accountStatus").Value.ToString(),
-            metadata.Username
-        )
+        selectedRow.Cells("userID").Value.ToString(),
+        selectedRow.Cells("firstName").Value.ToString(),
+        selectedRow.Cells("middleName").Value.ToString(),
+        selectedRow.Cells("lastName").Value.ToString(),
+        selectedRow.Cells("suffixAdmin").Value.ToString(),
+        selectedRow.Cells("positionAdmin").Value.ToString(),
+        selectedRow.Cells("departmentID").Value.ToString(),
+        metadata.EmployeeID,
+        selectedRow.Cells("contactNumber").Value.ToString(),
+        selectedRow.Cells("email").Value.ToString(),
+        selectedRow.Cells("usernameAdmin").Value.ToString(),  ' userRole
+        selectedRow.Cells("provinceAdmin").Value.ToString(),
+        selectedRow.Cells("municipality").Value.ToString(),
+        selectedRow.Cells("barangay").Value.ToString(),
+        "",
+        dateAssignedValue,
+        metadata.Username
+    )
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
@@ -200,7 +223,7 @@ Public Class UC_UserManagement
         End If
     End Sub
 
-    Private Sub btndelete_Click(sender As Object, e As EventArgs) Handles btndelete.Click
+    Private Sub btndelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim selectedRow = GetSelectedRow()
         If selectedRow Is Nothing Then Return
 
@@ -247,7 +270,7 @@ Public Class UC_UserManagement
         RefreshUserTable()
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
         ResetFilters()
     End Sub
 

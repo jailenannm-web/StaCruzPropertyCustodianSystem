@@ -58,16 +58,8 @@ Partial Class AdminDashboard
         Dim ChartArea9 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend9 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Me.lblSystemAlerts = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.lblPendingRequest = New System.Windows.Forms.Label()
-        Me.lblTotalSupplies = New System.Windows.Forms.Label()
-        Me.lblRequestTrends = New System.Windows.Forms.Label()
-        Me.lblScheduleMaintenance = New System.Windows.Forms.Label()
-        Me.lblPropertyConditionStatus = New System.Windows.Forms.Label()
-        Me.lblInventoryStatusOverview = New System.Windows.Forms.Label()
-        Me.lblTotalProperty = New System.Windows.Forms.Label()
         Me.admin_PanelSidebar = New System.Windows.Forms.Panel()
+        Me.admin_btn_suppliesRequestManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btn_MaintenanceRequest = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_btn_Logout = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_btn_reports = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -99,22 +91,31 @@ Partial Class AdminDashboard
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.RoundedPanel11 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_SystemAlerts = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.lblSystemAlerts = New System.Windows.Forms.Label()
         Me.RoundedPanel13 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_RecentPropertyRequests = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.RoundedPanel7 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_PendingRequest = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.lblPendingRequest = New System.Windows.Forms.Label()
         Me.RoundedPanel6 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_TotalSupplies = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.lblTotalSupplies = New System.Windows.Forms.Label()
         Me.RoundedPanel12 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_RequestTrends = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.lblRequestTrends = New System.Windows.Forms.Label()
         Me.RoundedPanel8 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_ScheduleMaintenance = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.lblScheduleMaintenance = New System.Windows.Forms.Label()
         Me.RoundedPanel9 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_PropertyConditionStatus = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.lblPropertyConditionStatus = New System.Windows.Forms.Label()
         Me.RoundedPanel10 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_InventoryStatusOverview = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.lblInventoryStatusOverview = New System.Windows.Forms.Label()
         Me.RoundedPanel5 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.SAChart_TotalProperty = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.lblTotalProperty = New System.Windows.Forms.Label()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
         Me.admin_panelcontainer = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -154,118 +155,11 @@ Partial Class AdminDashboard
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'lblSystemAlerts
-        '
-        Me.lblSystemAlerts.AutoSize = True
-        Me.lblSystemAlerts.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSystemAlerts.ForeColor = System.Drawing.Color.Black
-        Me.lblSystemAlerts.Location = New System.Drawing.Point(27, 23)
-        Me.lblSystemAlerts.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.lblSystemAlerts.Name = "lblSystemAlerts"
-        Me.lblSystemAlerts.Size = New System.Drawing.Size(133, 30)
-        Me.lblSystemAlerts.TabIndex = 56
-        Me.lblSystemAlerts.Text = "System Alerts"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(21, 23)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(243, 30)
-        Me.Label10.TabIndex = 48
-        Me.Label10.Text = "Inventory Status Overview"
-        '
-        'lblPendingRequest
-        '
-        Me.lblPendingRequest.AutoSize = True
-        Me.lblPendingRequest.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPendingRequest.ForeColor = System.Drawing.Color.Black
-        Me.lblPendingRequest.Location = New System.Drawing.Point(12, 23)
-        Me.lblPendingRequest.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.lblPendingRequest.Name = "lblPendingRequest"
-        Me.lblPendingRequest.Size = New System.Drawing.Size(159, 30)
-        Me.lblPendingRequest.TabIndex = 51
-        Me.lblPendingRequest.Text = "Pending Request"
-        '
-        'lblTotalSupplies
-        '
-        Me.lblTotalSupplies.AutoSize = True
-        Me.lblTotalSupplies.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalSupplies.ForeColor = System.Drawing.Color.Black
-        Me.lblTotalSupplies.Location = New System.Drawing.Point(21, 18)
-        Me.lblTotalSupplies.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.lblTotalSupplies.Name = "lblTotalSupplies"
-        Me.lblTotalSupplies.Size = New System.Drawing.Size(136, 30)
-        Me.lblTotalSupplies.TabIndex = 50
-        Me.lblTotalSupplies.Text = "Total Supplies"
-        '
-        'lblRequestTrends
-        '
-        Me.lblRequestTrends.AutoSize = True
-        Me.lblRequestTrends.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRequestTrends.ForeColor = System.Drawing.Color.Black
-        Me.lblRequestTrends.Location = New System.Drawing.Point(27, 23)
-        Me.lblRequestTrends.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.lblRequestTrends.Name = "lblRequestTrends"
-        Me.lblRequestTrends.Size = New System.Drawing.Size(146, 30)
-        Me.lblRequestTrends.TabIndex = 55
-        Me.lblRequestTrends.Text = "Request Trends"
-        '
-        'lblScheduleMaintenance
-        '
-        Me.lblScheduleMaintenance.AutoSize = True
-        Me.lblScheduleMaintenance.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblScheduleMaintenance.ForeColor = System.Drawing.Color.Black
-        Me.lblScheduleMaintenance.Location = New System.Drawing.Point(27, 23)
-        Me.lblScheduleMaintenance.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.lblScheduleMaintenance.Name = "lblScheduleMaintenance"
-        Me.lblScheduleMaintenance.Size = New System.Drawing.Size(211, 30)
-        Me.lblScheduleMaintenance.TabIndex = 48
-        Me.lblScheduleMaintenance.Text = "Schedule Maintenance"
-        '
-        'lblPropertyConditionStatus
-        '
-        Me.lblPropertyConditionStatus.AutoSize = True
-        Me.lblPropertyConditionStatus.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPropertyConditionStatus.ForeColor = System.Drawing.Color.Black
-        Me.lblPropertyConditionStatus.Location = New System.Drawing.Point(27, 23)
-        Me.lblPropertyConditionStatus.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.lblPropertyConditionStatus.Name = "lblPropertyConditionStatus"
-        Me.lblPropertyConditionStatus.Size = New System.Drawing.Size(239, 30)
-        Me.lblPropertyConditionStatus.TabIndex = 48
-        Me.lblPropertyConditionStatus.Text = "Property Condition Status"
-        '
-        'lblInventoryStatusOverview
-        '
-        Me.lblInventoryStatusOverview.AutoSize = True
-        Me.lblInventoryStatusOverview.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblInventoryStatusOverview.ForeColor = System.Drawing.Color.Black
-        Me.lblInventoryStatusOverview.Location = New System.Drawing.Point(19, 20)
-        Me.lblInventoryStatusOverview.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.lblInventoryStatusOverview.Name = "lblInventoryStatusOverview"
-        Me.lblInventoryStatusOverview.Size = New System.Drawing.Size(243, 30)
-        Me.lblInventoryStatusOverview.TabIndex = 48
-        Me.lblInventoryStatusOverview.Text = "Inventory Status Overview"
-        '
-        'lblTotalProperty
-        '
-        Me.lblTotalProperty.AutoSize = True
-        Me.lblTotalProperty.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalProperty.ForeColor = System.Drawing.Color.Black
-        Me.lblTotalProperty.Location = New System.Drawing.Point(31, 18)
-        Me.lblTotalProperty.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.lblTotalProperty.Name = "lblTotalProperty"
-        Me.lblTotalProperty.Size = New System.Drawing.Size(138, 30)
-        Me.lblTotalProperty.TabIndex = 46
-        Me.lblTotalProperty.Text = "Total Property"
-        '
         'admin_PanelSidebar
         '
         Me.admin_PanelSidebar.AutoScroll = True
         Me.admin_PanelSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_PanelSidebar.Controls.Add(Me.admin_btn_suppliesRequestManagement)
         Me.admin_PanelSidebar.Controls.Add(Me.btn_MaintenanceRequest)
         Me.admin_PanelSidebar.Controls.Add(Me.admin_btn_Logout)
         Me.admin_PanelSidebar.Controls.Add(Me.admin_btn_reports)
@@ -280,35 +174,62 @@ Partial Class AdminDashboard
         Me.admin_PanelSidebar.Controls.Add(Me.admin_picProfile)
         Me.admin_PanelSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.admin_PanelSidebar.Location = New System.Drawing.Point(0, 0)
-        Me.admin_PanelSidebar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.admin_PanelSidebar.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_PanelSidebar.Name = "admin_PanelSidebar"
-        Me.admin_PanelSidebar.Size = New System.Drawing.Size(457, 1175)
+        Me.admin_PanelSidebar.Size = New System.Drawing.Size(380, 1055)
         Me.admin_PanelSidebar.TabIndex = 1
+        '
+        'admin_btn_suppliesRequestManagement
+        '
+        Me.admin_btn_suppliesRequestManagement.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_suppliesRequestManagement.CornerRadius = 5
+        Me.admin_btn_suppliesRequestManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_suppliesRequestManagement.FlatAppearance.BorderSize = 0
+        Me.admin_btn_suppliesRequestManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_suppliesRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_suppliesRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_suppliesRequestManagement.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_suppliesRequestManagement.Location = New System.Drawing.Point(39, 655)
+        Me.admin_btn_suppliesRequestManagement.Margin = New System.Windows.Forms.Padding(4)
+        Me.admin_btn_suppliesRequestManagement.Name = "admin_btn_suppliesRequestManagement"
+        Me.admin_btn_suppliesRequestManagement.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_suppliesRequestManagement.TabIndex = 11
+        Me.admin_btn_suppliesRequestManagement.Text = "Supplies Request Management"
         '
         'btn_MaintenanceRequest
         '
-        Me.btn_MaintenanceRequest.CornerRadius = 15
-        Me.btn_MaintenanceRequest.Location = New System.Drawing.Point(0, 0)
-        Me.btn_MaintenanceRequest.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_MaintenanceRequest.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btn_MaintenanceRequest.CornerRadius = 5
+        Me.btn_MaintenanceRequest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.btn_MaintenanceRequest.FlatAppearance.BorderSize = 0
+        Me.btn_MaintenanceRequest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.btn_MaintenanceRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_MaintenanceRequest.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btn_MaintenanceRequest.ForeColor = System.Drawing.Color.White
+        Me.btn_MaintenanceRequest.Location = New System.Drawing.Point(39, 785)
+        Me.btn_MaintenanceRequest.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_MaintenanceRequest.Name = "btn_MaintenanceRequest"
-        Me.btn_MaintenanceRequest.Size = New System.Drawing.Size(100, 28)
+        Me.btn_MaintenanceRequest.Size = New System.Drawing.Size(306, 56)
         Me.btn_MaintenanceRequest.TabIndex = 0
+        Me.btn_MaintenanceRequest.Text = "Maintenance Request Management"
         '
         'admin_btn_Logout
         '
+        Me.admin_btn_Logout.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_btn_Logout.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_Logout.CornerRadius = 15
+        Me.admin_btn_Logout.CornerRadius = 5
         Me.admin_btn_Logout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_Logout.FlatAppearance.BorderSize = 0
         Me.admin_btn_Logout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_Logout.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.admin_btn_Logout.ForeColor = System.Drawing.Color.White
         Me.admin_btn_Logout.Image = CType(resources.GetObject("admin_btn_Logout.Image"), System.Drawing.Image)
         Me.admin_btn_Logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_Logout.Location = New System.Drawing.Point(32, 1073)
-        Me.admin_btn_Logout.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_btn_Logout.Location = New System.Drawing.Point(39, 961)
+        Me.admin_btn_Logout.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_Logout.Name = "admin_btn_Logout"
-        Me.admin_btn_Logout.Size = New System.Drawing.Size(404, 71)
+        Me.admin_btn_Logout.Size = New System.Drawing.Size(306, 56)
         Me.admin_btn_Logout.TabIndex = 10
         Me.admin_btn_Logout.Text = "Logout"
         Me.admin_btn_Logout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -316,19 +237,21 @@ Partial Class AdminDashboard
         '
         'admin_btn_reports
         '
+        Me.admin_btn_reports.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_btn_reports.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_reports.CornerRadius = 15
+        Me.admin_btn_reports.CornerRadius = 5
         Me.admin_btn_reports.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_reports.FlatAppearance.BorderSize = 0
         Me.admin_btn_reports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_reports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_reports.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_reports.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.admin_btn_reports.ForeColor = System.Drawing.Color.White
         Me.admin_btn_reports.Image = CType(resources.GetObject("admin_btn_reports.Image"), System.Drawing.Image)
         Me.admin_btn_reports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_reports.Location = New System.Drawing.Point(32, 978)
-        Me.admin_btn_reports.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_btn_reports.Location = New System.Drawing.Point(39, 850)
+        Me.admin_btn_reports.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_reports.Name = "admin_btn_reports"
-        Me.admin_btn_reports.Size = New System.Drawing.Size(404, 71)
+        Me.admin_btn_reports.Size = New System.Drawing.Size(306, 56)
         Me.admin_btn_reports.TabIndex = 8
         Me.admin_btn_reports.Text = "Reports"
         Me.admin_btn_reports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -336,19 +259,21 @@ Partial Class AdminDashboard
         '
         'admin_btn_MaintenanceManagement
         '
+        Me.admin_btn_MaintenanceManagement.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_btn_MaintenanceManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_MaintenanceManagement.CornerRadius = 15
+        Me.admin_btn_MaintenanceManagement.CornerRadius = 5
         Me.admin_btn_MaintenanceManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_MaintenanceManagement.FlatAppearance.BorderSize = 0
         Me.admin_btn_MaintenanceManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_MaintenanceManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_MaintenanceManagement.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_MaintenanceManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.admin_btn_MaintenanceManagement.ForeColor = System.Drawing.Color.White
         Me.admin_btn_MaintenanceManagement.Image = CType(resources.GetObject("admin_btn_MaintenanceManagement.Image"), System.Drawing.Image)
         Me.admin_btn_MaintenanceManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_MaintenanceManagement.Location = New System.Drawing.Point(32, 881)
-        Me.admin_btn_MaintenanceManagement.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_btn_MaintenanceManagement.Location = New System.Drawing.Point(39, 720)
+        Me.admin_btn_MaintenanceManagement.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_MaintenanceManagement.Name = "admin_btn_MaintenanceManagement"
-        Me.admin_btn_MaintenanceManagement.Size = New System.Drawing.Size(397, 71)
+        Me.admin_btn_MaintenanceManagement.Size = New System.Drawing.Size(306, 56)
         Me.admin_btn_MaintenanceManagement.TabIndex = 7
         Me.admin_btn_MaintenanceManagement.Text = "Maintenance Management"
         Me.admin_btn_MaintenanceManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -357,19 +282,21 @@ Partial Class AdminDashboard
         '
         'admin_btn_PropertyRequestManagement
         '
+        Me.admin_btn_PropertyRequestManagement.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_btn_PropertyRequestManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_PropertyRequestManagement.CornerRadius = 15
+        Me.admin_btn_PropertyRequestManagement.CornerRadius = 5
         Me.admin_btn_PropertyRequestManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_PropertyRequestManagement.FlatAppearance.BorderSize = 0
         Me.admin_btn_PropertyRequestManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_PropertyRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_PropertyRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_PropertyRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.admin_btn_PropertyRequestManagement.ForeColor = System.Drawing.Color.White
         Me.admin_btn_PropertyRequestManagement.Image = CType(resources.GetObject("admin_btn_PropertyRequestManagement.Image"), System.Drawing.Image)
         Me.admin_btn_PropertyRequestManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_PropertyRequestManagement.Location = New System.Drawing.Point(32, 768)
-        Me.admin_btn_PropertyRequestManagement.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_btn_PropertyRequestManagement.Location = New System.Drawing.Point(39, 590)
+        Me.admin_btn_PropertyRequestManagement.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_PropertyRequestManagement.Name = "admin_btn_PropertyRequestManagement"
-        Me.admin_btn_PropertyRequestManagement.Size = New System.Drawing.Size(404, 89)
+        Me.admin_btn_PropertyRequestManagement.Size = New System.Drawing.Size(306, 56)
         Me.admin_btn_PropertyRequestManagement.TabIndex = 6
         Me.admin_btn_PropertyRequestManagement.Text = "Property Request Management"
         Me.admin_btn_PropertyRequestManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -377,19 +304,21 @@ Partial Class AdminDashboard
         '
         'admin_btn_DepartmentManagement
         '
+        Me.admin_btn_DepartmentManagement.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_btn_DepartmentManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_DepartmentManagement.CornerRadius = 15
+        Me.admin_btn_DepartmentManagement.CornerRadius = 5
         Me.admin_btn_DepartmentManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_DepartmentManagement.FlatAppearance.BorderSize = 0
         Me.admin_btn_DepartmentManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_DepartmentManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_DepartmentManagement.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_DepartmentManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.admin_btn_DepartmentManagement.ForeColor = System.Drawing.Color.White
         Me.admin_btn_DepartmentManagement.Image = CType(resources.GetObject("admin_btn_DepartmentManagement.Image"), System.Drawing.Image)
         Me.admin_btn_DepartmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_DepartmentManagement.Location = New System.Drawing.Point(32, 672)
-        Me.admin_btn_DepartmentManagement.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_btn_DepartmentManagement.Location = New System.Drawing.Point(39, 524)
+        Me.admin_btn_DepartmentManagement.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_DepartmentManagement.Name = "admin_btn_DepartmentManagement"
-        Me.admin_btn_DepartmentManagement.Size = New System.Drawing.Size(404, 71)
+        Me.admin_btn_DepartmentManagement.Size = New System.Drawing.Size(306, 56)
         Me.admin_btn_DepartmentManagement.TabIndex = 5
         Me.admin_btn_DepartmentManagement.Text = "Department Management"
         Me.admin_btn_DepartmentManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -398,19 +327,21 @@ Partial Class AdminDashboard
         '
         'admin_btn_SuppliesManagement
         '
+        Me.admin_btn_SuppliesManagement.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_btn_SuppliesManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_SuppliesManagement.CornerRadius = 15
+        Me.admin_btn_SuppliesManagement.CornerRadius = 5
         Me.admin_btn_SuppliesManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_SuppliesManagement.FlatAppearance.BorderSize = 0
         Me.admin_btn_SuppliesManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_SuppliesManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.admin_btn_SuppliesManagement.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_SuppliesManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.admin_btn_SuppliesManagement.ForeColor = System.Drawing.Color.White
         Me.admin_btn_SuppliesManagement.Image = CType(resources.GetObject("admin_btn_SuppliesManagement.Image"), System.Drawing.Image)
         Me.admin_btn_SuppliesManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_SuppliesManagement.Location = New System.Drawing.Point(32, 576)
-        Me.admin_btn_SuppliesManagement.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_btn_SuppliesManagement.Location = New System.Drawing.Point(39, 458)
+        Me.admin_btn_SuppliesManagement.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_SuppliesManagement.Name = "admin_btn_SuppliesManagement"
-        Me.admin_btn_SuppliesManagement.Size = New System.Drawing.Size(404, 71)
+        Me.admin_btn_SuppliesManagement.Size = New System.Drawing.Size(306, 56)
         Me.admin_btn_SuppliesManagement.TabIndex = 4
         Me.admin_btn_SuppliesManagement.Text = "  Supplies Management"
         Me.admin_btn_SuppliesManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -419,8 +350,9 @@ Partial Class AdminDashboard
         '
         'admin_btn_PropertyManagement
         '
+        Me.admin_btn_PropertyManagement.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_btn_PropertyManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_PropertyManagement.CornerRadius = 15
+        Me.admin_btn_PropertyManagement.CornerRadius = 5
         Me.admin_btn_PropertyManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_PropertyManagement.FlatAppearance.BorderSize = 0
         Me.admin_btn_PropertyManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -429,10 +361,10 @@ Partial Class AdminDashboard
         Me.admin_btn_PropertyManagement.ForeColor = System.Drawing.Color.White
         Me.admin_btn_PropertyManagement.Image = CType(resources.GetObject("admin_btn_PropertyManagement.Image"), System.Drawing.Image)
         Me.admin_btn_PropertyManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_PropertyManagement.Location = New System.Drawing.Point(27, 459)
-        Me.admin_btn_PropertyManagement.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_btn_PropertyManagement.Location = New System.Drawing.Point(39, 392)
+        Me.admin_btn_PropertyManagement.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_PropertyManagement.Name = "admin_btn_PropertyManagement"
-        Me.admin_btn_PropertyManagement.Size = New System.Drawing.Size(389, 71)
+        Me.admin_btn_PropertyManagement.Size = New System.Drawing.Size(306, 56)
         Me.admin_btn_PropertyManagement.TabIndex = 3
         Me.admin_btn_PropertyManagement.Text = "Property Management"
         Me.admin_btn_PropertyManagement.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -441,8 +373,9 @@ Partial Class AdminDashboard
         '
         'admin_btn_UserManagement
         '
+        Me.admin_btn_UserManagement.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_btn_UserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_UserManagement.CornerRadius = 15
+        Me.admin_btn_UserManagement.CornerRadius = 5
         Me.admin_btn_UserManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
         Me.admin_btn_UserManagement.FlatAppearance.BorderSize = 0
         Me.admin_btn_UserManagement.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -451,10 +384,10 @@ Partial Class AdminDashboard
         Me.admin_btn_UserManagement.ForeColor = System.Drawing.Color.White
         Me.admin_btn_UserManagement.Image = CType(resources.GetObject("admin_btn_UserManagement.Image"), System.Drawing.Image)
         Me.admin_btn_UserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_UserManagement.Location = New System.Drawing.Point(27, 378)
-        Me.admin_btn_UserManagement.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_btn_UserManagement.Location = New System.Drawing.Point(39, 323)
+        Me.admin_btn_UserManagement.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_UserManagement.Name = "admin_btn_UserManagement"
-        Me.admin_btn_UserManagement.Size = New System.Drawing.Size(389, 71)
+        Me.admin_btn_UserManagement.Size = New System.Drawing.Size(306, 56)
         Me.admin_btn_UserManagement.TabIndex = 2
         Me.admin_btn_UserManagement.Text = "User Management"
         Me.admin_btn_UserManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -462,19 +395,21 @@ Partial Class AdminDashboard
         '
         'admin_btn_dashboard
         '
+        Me.admin_btn_dashboard.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_btn_dashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.admin_btn_dashboard.CornerRadius = 15
+        Me.admin_btn_dashboard.CornerRadius = 5
         Me.admin_btn_dashboard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_dashboard.FlatAppearance.BorderSize = 0
         Me.admin_btn_dashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.admin_btn_dashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_dashboard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_btn_dashboard.ForeColor = System.Drawing.Color.White
         Me.admin_btn_dashboard.Image = CType(resources.GetObject("admin_btn_dashboard.Image"), System.Drawing.Image)
         Me.admin_btn_dashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_dashboard.Location = New System.Drawing.Point(27, 297)
-        Me.admin_btn_dashboard.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_btn_dashboard.Location = New System.Drawing.Point(39, 257)
+        Me.admin_btn_dashboard.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_dashboard.Name = "admin_btn_dashboard"
-        Me.admin_btn_dashboard.Size = New System.Drawing.Size(389, 71)
+        Me.admin_btn_dashboard.Size = New System.Drawing.Size(306, 56)
         Me.admin_btn_dashboard.TabIndex = 0
         Me.admin_btn_dashboard.Text = "Dashboard"
         Me.admin_btn_dashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -482,10 +417,11 @@ Partial Class AdminDashboard
         '
         'admin_TitleProfile
         '
+        Me.admin_TitleProfile.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_TitleProfile.AutoSize = True
         Me.admin_TitleProfile.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_TitleProfile.ForeColor = System.Drawing.Color.White
-        Me.admin_TitleProfile.Location = New System.Drawing.Point(151, 230)
+        Me.admin_TitleProfile.Location = New System.Drawing.Point(143, 200)
         Me.admin_TitleProfile.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.admin_TitleProfile.Name = "admin_TitleProfile"
         Me.admin_TitleProfile.Size = New System.Drawing.Size(84, 36)
@@ -495,12 +431,13 @@ Partial Class AdminDashboard
         '
         'admin_picProfile
         '
+        Me.admin_picProfile.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.admin_picProfile.BackColor = System.Drawing.Color.Transparent
         Me.admin_picProfile.Image = CType(resources.GetObject("admin_picProfile.Image"), System.Drawing.Image)
-        Me.admin_picProfile.Location = New System.Drawing.Point(100, 55)
-        Me.admin_picProfile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.admin_picProfile.Location = New System.Drawing.Point(134, 90)
+        Me.admin_picProfile.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_picProfile.Name = "admin_picProfile"
-        Me.admin_picProfile.Size = New System.Drawing.Size(120, 111)
+        Me.admin_picProfile.Size = New System.Drawing.Size(101, 95)
         Me.admin_picProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.admin_picProfile.TabIndex = 0
         Me.admin_picProfile.TabStop = False
@@ -514,10 +451,10 @@ Partial Class AdminDashboard
         Me.admin_PanelMain.Controls.Add(Me.TableLayoutPanel4)
         Me.admin_PanelMain.Controls.Add(Me.admin_label_Dashboard)
         Me.admin_PanelMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.admin_PanelMain.Location = New System.Drawing.Point(457, 0)
-        Me.admin_PanelMain.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.admin_PanelMain.Location = New System.Drawing.Point(380, 0)
+        Me.admin_PanelMain.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_PanelMain.Name = "admin_PanelMain"
-        Me.admin_PanelMain.Size = New System.Drawing.Size(1467, 1175)
+        Me.admin_PanelMain.Size = New System.Drawing.Size(1544, 1055)
         Me.admin_PanelMain.TabIndex = 3
         '
         'comboFilter
@@ -528,8 +465,8 @@ Partial Class AdminDashboard
         Me.comboFilter.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.comboFilter.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.comboFilter.FormattingEnabled = True
-        Me.comboFilter.Location = New System.Drawing.Point(1376, 101)
-        Me.comboFilter.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.comboFilter.Location = New System.Drawing.Point(1220, 105)
+        Me.comboFilter.Margin = New System.Windows.Forms.Padding(5)
         Me.comboFilter.Name = "comboFilter"
         Me.comboFilter.Size = New System.Drawing.Size(229, 31)
         Me.comboFilter.TabIndex = 61
@@ -540,9 +477,9 @@ Partial Class AdminDashboard
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel1.Location = New System.Drawing.Point(80, 177)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1292, 172)
+        Me.Panel1.Size = New System.Drawing.Size(1369, 123)
         Me.Panel1.TabIndex = 58
         '
         'TableLayoutPanel3
@@ -569,7 +506,7 @@ Partial Class AdminDashboard
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1265, 148)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1369, 123)
         Me.TableLayoutPanel3.TabIndex = 21
         '
         'RoundedPanel2
@@ -581,10 +518,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel2.Controls.Add(Me.Label2)
         Me.RoundedPanel2.Controls.Add(Me.Label7)
         Me.RoundedPanel2.CornerRadius = 5
-        Me.RoundedPanel2.Location = New System.Drawing.Point(961, 12)
+        Me.RoundedPanel2.Location = New System.Drawing.Point(1039, 12)
         Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(291, 124)
+        Me.RoundedPanel2.Size = New System.Drawing.Size(317, 99)
         Me.RoundedPanel2.TabIndex = 24
         '
         'Label2
@@ -595,7 +532,7 @@ Partial Class AdminDashboard
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(135, 48)
+        Me.Label2.Location = New System.Drawing.Point(138, 32)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(38, 58)
@@ -626,7 +563,7 @@ Partial Class AdminDashboard
         Me.RoundedPanel3.Location = New System.Drawing.Point(13, 12)
         Me.RoundedPanel3.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.RoundedPanel3.Name = "RoundedPanel3"
-        Me.RoundedPanel3.Size = New System.Drawing.Size(290, 124)
+        Me.RoundedPanel3.Size = New System.Drawing.Size(316, 99)
         Me.RoundedPanel3.TabIndex = 23
         '
         'Label4
@@ -637,7 +574,7 @@ Partial Class AdminDashboard
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(129, 48)
+        Me.Label4.Location = New System.Drawing.Point(129, 32)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(38, 58)
@@ -665,10 +602,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel1.Controls.Add(Me.Label6)
         Me.RoundedPanel1.Controls.Add(Me.admin_panel_borrowed)
         Me.RoundedPanel1.CornerRadius = 5
-        Me.RoundedPanel1.Location = New System.Drawing.Point(645, 12)
+        Me.RoundedPanel1.Location = New System.Drawing.Point(697, 12)
         Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(290, 124)
+        Me.RoundedPanel1.Size = New System.Drawing.Size(316, 99)
         Me.RoundedPanel1.TabIndex = 23
         '
         'Label6
@@ -679,7 +616,7 @@ Partial Class AdminDashboard
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(128, 48)
+        Me.Label6.Location = New System.Drawing.Point(129, 32)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(38, 58)
@@ -707,10 +644,10 @@ Partial Class AdminDashboard
         Me.admin_panel_PendingRequests.Controls.Add(Me.Label5)
         Me.admin_panel_PendingRequests.Controls.Add(Me.Label1)
         Me.admin_panel_PendingRequests.CornerRadius = 5
-        Me.admin_panel_PendingRequests.Location = New System.Drawing.Point(329, 12)
+        Me.admin_panel_PendingRequests.Location = New System.Drawing.Point(355, 12)
         Me.admin_panel_PendingRequests.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.admin_panel_PendingRequests.Name = "admin_panel_PendingRequests"
-        Me.admin_panel_PendingRequests.Size = New System.Drawing.Size(290, 124)
+        Me.admin_panel_PendingRequests.Size = New System.Drawing.Size(316, 99)
         Me.admin_panel_PendingRequests.TabIndex = 22
         '
         'Label5
@@ -721,7 +658,7 @@ Partial Class AdminDashboard
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(129, 48)
+        Me.Label5.Location = New System.Drawing.Point(137, 32)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(38, 58)
@@ -758,14 +695,14 @@ Partial Class AdminDashboard
         Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel9, 1, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel10, 0, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.RoundedPanel5, 0, 0)
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(80, 334)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(80, 312)
         Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 3
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1253, 736)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1369, 666)
         Me.TableLayoutPanel4.TabIndex = 60
         '
         'RoundedPanel11
@@ -777,10 +714,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel11.Controls.Add(Me.SAChart_SystemAlerts)
         Me.RoundedPanel11.Controls.Add(Me.lblSystemAlerts)
         Me.RoundedPanel11.CornerRadius = 5
-        Me.RoundedPanel11.Location = New System.Drawing.Point(847, 502)
+        Me.RoundedPanel11.Location = New System.Drawing.Point(925, 456)
         Me.RoundedPanel11.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.RoundedPanel11.Name = "RoundedPanel11"
-        Me.RoundedPanel11.Size = New System.Drawing.Size(393, 222)
+        Me.RoundedPanel11.Size = New System.Drawing.Size(431, 198)
         Me.RoundedPanel11.TabIndex = 70
         '
         'SAChart_SystemAlerts
@@ -796,16 +733,28 @@ Partial Class AdminDashboard
         Legend1.Name = "Legend1"
         Me.SAChart_SystemAlerts.Legends.Add(Legend1)
         Me.SAChart_SystemAlerts.Location = New System.Drawing.Point(57, 69)
-        Me.SAChart_SystemAlerts.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SAChart_SystemAlerts.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_SystemAlerts.Name = "SAChart_SystemAlerts"
         Series1.ChartArea = "ChartArea1"
         Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
         Series1.Legend = "Legend1"
         Series1.Name = "Series1"
         Me.SAChart_SystemAlerts.Series.Add(Series1)
-        Me.SAChart_SystemAlerts.Size = New System.Drawing.Size(273, 129)
+        Me.SAChart_SystemAlerts.Size = New System.Drawing.Size(311, 105)
         Me.SAChart_SystemAlerts.TabIndex = 57
         Me.SAChart_SystemAlerts.Text = "Chart9"
+        '
+        'lblSystemAlerts
+        '
+        Me.lblSystemAlerts.AutoSize = True
+        Me.lblSystemAlerts.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSystemAlerts.ForeColor = System.Drawing.Color.Black
+        Me.lblSystemAlerts.Location = New System.Drawing.Point(27, 23)
+        Me.lblSystemAlerts.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.lblSystemAlerts.Name = "lblSystemAlerts"
+        Me.lblSystemAlerts.Size = New System.Drawing.Size(133, 30)
+        Me.lblSystemAlerts.TabIndex = 56
+        Me.lblSystemAlerts.Text = "System Alerts"
         '
         'RoundedPanel13
         '
@@ -816,10 +765,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel13.Controls.Add(Me.SAChart_RecentPropertyRequests)
         Me.RoundedPanel13.Controls.Add(Me.Label10)
         Me.RoundedPanel13.CornerRadius = 5
-        Me.RoundedPanel13.Location = New System.Drawing.Point(11, 500)
+        Me.RoundedPanel13.Location = New System.Drawing.Point(11, 454)
         Me.RoundedPanel13.Margin = New System.Windows.Forms.Padding(11, 10, 11, 10)
         Me.RoundedPanel13.Name = "RoundedPanel13"
-        Me.RoundedPanel13.Size = New System.Drawing.Size(395, 226)
+        Me.RoundedPanel13.Size = New System.Drawing.Size(434, 202)
         Me.RoundedPanel13.TabIndex = 69
         '
         'SAChart_RecentPropertyRequests
@@ -835,16 +784,28 @@ Partial Class AdminDashboard
         Legend2.Name = "Legend1"
         Me.SAChart_RecentPropertyRequests.Legends.Add(Legend2)
         Me.SAChart_RecentPropertyRequests.Location = New System.Drawing.Point(48, 69)
-        Me.SAChart_RecentPropertyRequests.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SAChart_RecentPropertyRequests.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_RecentPropertyRequests.Name = "SAChart_RecentPropertyRequests"
         Series2.ChartArea = "ChartArea1"
         Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
         Series2.Legend = "Legend1"
         Series2.Name = "Series1"
         Me.SAChart_RecentPropertyRequests.Series.Add(Series2)
-        Me.SAChart_RecentPropertyRequests.Size = New System.Drawing.Size(299, 134)
+        Me.SAChart_RecentPropertyRequests.Size = New System.Drawing.Size(338, 110)
         Me.SAChart_RecentPropertyRequests.TabIndex = 54
         Me.SAChart_RecentPropertyRequests.Text = "Chart7"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.Black
+        Me.Label10.Location = New System.Drawing.Point(21, 23)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(243, 30)
+        Me.Label10.TabIndex = 48
+        Me.Label10.Text = "Inventory Status Overview"
         '
         'RoundedPanel7
         '
@@ -855,10 +816,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel7.Controls.Add(Me.SAChart_PendingRequest)
         Me.RoundedPanel7.Controls.Add(Me.lblPendingRequest)
         Me.RoundedPanel7.CornerRadius = 5
-        Me.RoundedPanel7.Location = New System.Drawing.Point(847, 12)
+        Me.RoundedPanel7.Location = New System.Drawing.Point(925, 12)
         Me.RoundedPanel7.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.RoundedPanel7.Name = "RoundedPanel7"
-        Me.RoundedPanel7.Size = New System.Drawing.Size(393, 221)
+        Me.RoundedPanel7.Size = New System.Drawing.Size(431, 198)
         Me.RoundedPanel7.TabIndex = 68
         '
         'SAChart_PendingRequest
@@ -873,7 +834,7 @@ Partial Class AdminDashboard
         Legend3.Name = "Legend1"
         Me.SAChart_PendingRequest.Legends.Add(Legend3)
         Me.SAChart_PendingRequest.Location = New System.Drawing.Point(57, 57)
-        Me.SAChart_PendingRequest.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SAChart_PendingRequest.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_PendingRequest.Name = "SAChart_PendingRequest"
         Series3.BackImageTransparentColor = System.Drawing.Color.Transparent
         Series3.ChartArea = "ChartArea1"
@@ -882,9 +843,21 @@ Partial Class AdminDashboard
         Series3.Legend = "Legend1"
         Series3.Name = "Series1"
         Me.SAChart_PendingRequest.Series.Add(Series3)
-        Me.SAChart_PendingRequest.Size = New System.Drawing.Size(220, 145)
+        Me.SAChart_PendingRequest.Size = New System.Drawing.Size(258, 122)
         Me.SAChart_PendingRequest.TabIndex = 52
         Me.SAChart_PendingRequest.Text = "Chart3"
+        '
+        'lblPendingRequest
+        '
+        Me.lblPendingRequest.AutoSize = True
+        Me.lblPendingRequest.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPendingRequest.ForeColor = System.Drawing.Color.Black
+        Me.lblPendingRequest.Location = New System.Drawing.Point(12, 23)
+        Me.lblPendingRequest.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.lblPendingRequest.Name = "lblPendingRequest"
+        Me.lblPendingRequest.Size = New System.Drawing.Size(159, 30)
+        Me.lblPendingRequest.TabIndex = 51
+        Me.lblPendingRequest.Text = "Pending Request"
         '
         'RoundedPanel6
         '
@@ -895,10 +868,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel6.Controls.Add(Me.SAChart_TotalSupplies)
         Me.RoundedPanel6.Controls.Add(Me.lblTotalSupplies)
         Me.RoundedPanel6.CornerRadius = 5
-        Me.RoundedPanel6.Location = New System.Drawing.Point(430, 12)
+        Me.RoundedPanel6.Location = New System.Drawing.Point(469, 12)
         Me.RoundedPanel6.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.RoundedPanel6.Name = "RoundedPanel6"
-        Me.RoundedPanel6.Size = New System.Drawing.Size(391, 221)
+        Me.RoundedPanel6.Size = New System.Drawing.Size(430, 198)
         Me.RoundedPanel6.TabIndex = 67
         '
         'SAChart_TotalSupplies
@@ -914,16 +887,28 @@ Partial Class AdminDashboard
         Legend4.Name = "Legend1"
         Me.SAChart_TotalSupplies.Legends.Add(Legend4)
         Me.SAChart_TotalSupplies.Location = New System.Drawing.Point(28, 57)
-        Me.SAChart_TotalSupplies.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SAChart_TotalSupplies.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_TotalSupplies.Name = "SAChart_TotalSupplies"
         Series4.ChartArea = "ChartArea1"
         Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100
         Series4.Legend = "Legend1"
         Series4.Name = "Series1"
         Me.SAChart_TotalSupplies.Series.Add(Series4)
-        Me.SAChart_TotalSupplies.Size = New System.Drawing.Size(279, 145)
+        Me.SAChart_TotalSupplies.Size = New System.Drawing.Size(318, 122)
         Me.SAChart_TotalSupplies.TabIndex = 51
         Me.SAChart_TotalSupplies.Text = "Chart2"
+        '
+        'lblTotalSupplies
+        '
+        Me.lblTotalSupplies.AutoSize = True
+        Me.lblTotalSupplies.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalSupplies.ForeColor = System.Drawing.Color.Black
+        Me.lblTotalSupplies.Location = New System.Drawing.Point(21, 18)
+        Me.lblTotalSupplies.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.lblTotalSupplies.Name = "lblTotalSupplies"
+        Me.lblTotalSupplies.Size = New System.Drawing.Size(136, 30)
+        Me.lblTotalSupplies.TabIndex = 50
+        Me.lblTotalSupplies.Text = "Total Supplies"
         '
         'RoundedPanel12
         '
@@ -934,10 +919,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel12.Controls.Add(Me.SAChart_RequestTrends)
         Me.RoundedPanel12.Controls.Add(Me.lblRequestTrends)
         Me.RoundedPanel12.CornerRadius = 5
-        Me.RoundedPanel12.Location = New System.Drawing.Point(430, 502)
+        Me.RoundedPanel12.Location = New System.Drawing.Point(469, 456)
         Me.RoundedPanel12.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.RoundedPanel12.Name = "RoundedPanel12"
-        Me.RoundedPanel12.Size = New System.Drawing.Size(391, 222)
+        Me.RoundedPanel12.Size = New System.Drawing.Size(430, 198)
         Me.RoundedPanel12.TabIndex = 65
         '
         'SAChart_RequestTrends
@@ -953,15 +938,27 @@ Partial Class AdminDashboard
         Legend5.Name = "Legend1"
         Me.SAChart_RequestTrends.Legends.Add(Legend5)
         Me.SAChart_RequestTrends.Location = New System.Drawing.Point(33, 69)
-        Me.SAChart_RequestTrends.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SAChart_RequestTrends.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_RequestTrends.Name = "SAChart_RequestTrends"
         Series5.ChartArea = "ChartArea1"
         Series5.Legend = "Legend1"
         Series5.Name = "Series1"
         Me.SAChart_RequestTrends.Series.Add(Series5)
-        Me.SAChart_RequestTrends.Size = New System.Drawing.Size(303, 129)
+        Me.SAChart_RequestTrends.Size = New System.Drawing.Size(342, 105)
         Me.SAChart_RequestTrends.TabIndex = 56
         Me.SAChart_RequestTrends.Text = "Chart8"
+        '
+        'lblRequestTrends
+        '
+        Me.lblRequestTrends.AutoSize = True
+        Me.lblRequestTrends.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRequestTrends.ForeColor = System.Drawing.Color.Black
+        Me.lblRequestTrends.Location = New System.Drawing.Point(27, 23)
+        Me.lblRequestTrends.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.lblRequestTrends.Name = "lblRequestTrends"
+        Me.lblRequestTrends.Size = New System.Drawing.Size(146, 30)
+        Me.lblRequestTrends.TabIndex = 55
+        Me.lblRequestTrends.Text = "Request Trends"
         '
         'RoundedPanel8
         '
@@ -972,10 +969,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel8.Controls.Add(Me.SAChart_ScheduleMaintenance)
         Me.RoundedPanel8.Controls.Add(Me.lblScheduleMaintenance)
         Me.RoundedPanel8.CornerRadius = 5
-        Me.RoundedPanel8.Location = New System.Drawing.Point(847, 257)
+        Me.RoundedPanel8.Location = New System.Drawing.Point(925, 234)
         Me.RoundedPanel8.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.RoundedPanel8.Name = "RoundedPanel8"
-        Me.RoundedPanel8.Size = New System.Drawing.Size(393, 221)
+        Me.RoundedPanel8.Size = New System.Drawing.Size(431, 198)
         Me.RoundedPanel8.TabIndex = 63
         '
         'SAChart_ScheduleMaintenance
@@ -992,16 +989,28 @@ Partial Class AdminDashboard
         Legend6.Name = "Legend1"
         Me.SAChart_ScheduleMaintenance.Legends.Add(Legend6)
         Me.SAChart_ScheduleMaintenance.Location = New System.Drawing.Point(57, 53)
-        Me.SAChart_ScheduleMaintenance.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SAChart_ScheduleMaintenance.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_ScheduleMaintenance.Name = "SAChart_ScheduleMaintenance"
         Series6.ChartArea = "ChartArea1"
         Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
         Series6.Legend = "Legend1"
         Series6.Name = "Series1"
         Me.SAChart_ScheduleMaintenance.Series.Add(Series6)
-        Me.SAChart_ScheduleMaintenance.Size = New System.Drawing.Size(229, 151)
+        Me.SAChart_ScheduleMaintenance.Size = New System.Drawing.Size(267, 128)
         Me.SAChart_ScheduleMaintenance.TabIndex = 55
         Me.SAChart_ScheduleMaintenance.Text = "Chart6"
+        '
+        'lblScheduleMaintenance
+        '
+        Me.lblScheduleMaintenance.AutoSize = True
+        Me.lblScheduleMaintenance.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblScheduleMaintenance.ForeColor = System.Drawing.Color.Black
+        Me.lblScheduleMaintenance.Location = New System.Drawing.Point(27, 23)
+        Me.lblScheduleMaintenance.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.lblScheduleMaintenance.Name = "lblScheduleMaintenance"
+        Me.lblScheduleMaintenance.Size = New System.Drawing.Size(211, 30)
+        Me.lblScheduleMaintenance.TabIndex = 48
+        Me.lblScheduleMaintenance.Text = "Schedule Maintenance"
         '
         'RoundedPanel9
         '
@@ -1012,10 +1021,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel9.Controls.Add(Me.SAChart_PropertyConditionStatus)
         Me.RoundedPanel9.Controls.Add(Me.lblPropertyConditionStatus)
         Me.RoundedPanel9.CornerRadius = 5
-        Me.RoundedPanel9.Location = New System.Drawing.Point(430, 257)
+        Me.RoundedPanel9.Location = New System.Drawing.Point(469, 234)
         Me.RoundedPanel9.Margin = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.RoundedPanel9.Name = "RoundedPanel9"
-        Me.RoundedPanel9.Size = New System.Drawing.Size(391, 221)
+        Me.RoundedPanel9.Size = New System.Drawing.Size(430, 198)
         Me.RoundedPanel9.TabIndex = 62
         '
         'SAChart_PropertyConditionStatus
@@ -1031,16 +1040,28 @@ Partial Class AdminDashboard
         Legend7.Name = "Legend1"
         Me.SAChart_PropertyConditionStatus.Legends.Add(Legend7)
         Me.SAChart_PropertyConditionStatus.Location = New System.Drawing.Point(28, 60)
-        Me.SAChart_PropertyConditionStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SAChart_PropertyConditionStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_PropertyConditionStatus.Name = "SAChart_PropertyConditionStatus"
         Series7.ChartArea = "ChartArea1"
         Series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar
         Series7.Legend = "Legend1"
         Series7.Name = "Series1"
         Me.SAChart_PropertyConditionStatus.Series.Add(Series7)
-        Me.SAChart_PropertyConditionStatus.Size = New System.Drawing.Size(279, 144)
+        Me.SAChart_PropertyConditionStatus.Size = New System.Drawing.Size(318, 121)
         Me.SAChart_PropertyConditionStatus.TabIndex = 51
         Me.SAChart_PropertyConditionStatus.Text = "Chart5"
+        '
+        'lblPropertyConditionStatus
+        '
+        Me.lblPropertyConditionStatus.AutoSize = True
+        Me.lblPropertyConditionStatus.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPropertyConditionStatus.ForeColor = System.Drawing.Color.Black
+        Me.lblPropertyConditionStatus.Location = New System.Drawing.Point(27, 23)
+        Me.lblPropertyConditionStatus.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.lblPropertyConditionStatus.Name = "lblPropertyConditionStatus"
+        Me.lblPropertyConditionStatus.Size = New System.Drawing.Size(239, 30)
+        Me.lblPropertyConditionStatus.TabIndex = 48
+        Me.lblPropertyConditionStatus.Text = "Property Condition Status"
         '
         'RoundedPanel10
         '
@@ -1051,10 +1072,10 @@ Partial Class AdminDashboard
         Me.RoundedPanel10.Controls.Add(Me.SAChart_InventoryStatusOverview)
         Me.RoundedPanel10.Controls.Add(Me.lblInventoryStatusOverview)
         Me.RoundedPanel10.CornerRadius = 5
-        Me.RoundedPanel10.Location = New System.Drawing.Point(11, 255)
+        Me.RoundedPanel10.Location = New System.Drawing.Point(11, 232)
         Me.RoundedPanel10.Margin = New System.Windows.Forms.Padding(11, 10, 11, 10)
         Me.RoundedPanel10.Name = "RoundedPanel10"
-        Me.RoundedPanel10.Size = New System.Drawing.Size(395, 225)
+        Me.RoundedPanel10.Size = New System.Drawing.Size(434, 202)
         Me.RoundedPanel10.TabIndex = 61
         '
         'SAChart_InventoryStatusOverview
@@ -1070,15 +1091,27 @@ Partial Class AdminDashboard
         Legend8.Name = "Legend1"
         Me.SAChart_InventoryStatusOverview.Legends.Add(Legend8)
         Me.SAChart_InventoryStatusOverview.Location = New System.Drawing.Point(37, 60)
-        Me.SAChart_InventoryStatusOverview.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SAChart_InventoryStatusOverview.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_InventoryStatusOverview.Name = "SAChart_InventoryStatusOverview"
         Series8.ChartArea = "ChartArea1"
         Series8.Legend = "Legend1"
         Series8.Name = "Series1"
         Me.SAChart_InventoryStatusOverview.Series.Add(Series8)
-        Me.SAChart_InventoryStatusOverview.Size = New System.Drawing.Size(268, 151)
+        Me.SAChart_InventoryStatusOverview.Size = New System.Drawing.Size(307, 128)
         Me.SAChart_InventoryStatusOverview.TabIndex = 52
         Me.SAChart_InventoryStatusOverview.Text = "Chart4"
+        '
+        'lblInventoryStatusOverview
+        '
+        Me.lblInventoryStatusOverview.AutoSize = True
+        Me.lblInventoryStatusOverview.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInventoryStatusOverview.ForeColor = System.Drawing.Color.Black
+        Me.lblInventoryStatusOverview.Location = New System.Drawing.Point(19, 20)
+        Me.lblInventoryStatusOverview.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.lblInventoryStatusOverview.Name = "lblInventoryStatusOverview"
+        Me.lblInventoryStatusOverview.Size = New System.Drawing.Size(243, 30)
+        Me.lblInventoryStatusOverview.TabIndex = 48
+        Me.lblInventoryStatusOverview.Text = "Inventory Status Overview"
         '
         'RoundedPanel5
         '
@@ -1092,7 +1125,7 @@ Partial Class AdminDashboard
         Me.RoundedPanel5.Location = New System.Drawing.Point(11, 10)
         Me.RoundedPanel5.Margin = New System.Windows.Forms.Padding(11, 10, 11, 10)
         Me.RoundedPanel5.Name = "RoundedPanel5"
-        Me.RoundedPanel5.Size = New System.Drawing.Size(395, 225)
+        Me.RoundedPanel5.Size = New System.Drawing.Size(434, 202)
         Me.RoundedPanel5.TabIndex = 58
         '
         'SAChart_TotalProperty
@@ -1108,15 +1141,27 @@ Partial Class AdminDashboard
         Legend9.Name = "Legend1"
         Me.SAChart_TotalProperty.Legends.Add(Legend9)
         Me.SAChart_TotalProperty.Location = New System.Drawing.Point(37, 57)
-        Me.SAChart_TotalProperty.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SAChart_TotalProperty.Margin = New System.Windows.Forms.Padding(4)
         Me.SAChart_TotalProperty.Name = "SAChart_TotalProperty"
         Series9.ChartArea = "ChartArea1"
         Series9.Legend = "Legend1"
         Series9.Name = "Series1"
         Me.SAChart_TotalProperty.Series.Add(Series9)
-        Me.SAChart_TotalProperty.Size = New System.Drawing.Size(268, 149)
+        Me.SAChart_TotalProperty.Size = New System.Drawing.Size(307, 126)
         Me.SAChart_TotalProperty.TabIndex = 49
         Me.SAChart_TotalProperty.Text = "Chart1"
+        '
+        'lblTotalProperty
+        '
+        Me.lblTotalProperty.AutoSize = True
+        Me.lblTotalProperty.Font = New System.Drawing.Font("Poppins", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalProperty.ForeColor = System.Drawing.Color.Black
+        Me.lblTotalProperty.Location = New System.Drawing.Point(31, 18)
+        Me.lblTotalProperty.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.lblTotalProperty.Name = "lblTotalProperty"
+        Me.lblTotalProperty.Size = New System.Drawing.Size(138, 30)
+        Me.lblTotalProperty.TabIndex = 46
+        Me.lblTotalProperty.Text = "Total Property"
         '
         'admin_label_Dashboard
         '
@@ -1199,11 +1244,11 @@ Partial Class AdminDashboard
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(245, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(228, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1924, 1175)
+        Me.ClientSize = New System.Drawing.Size(1924, 1055)
         Me.Controls.Add(Me.admin_PanelMain)
         Me.Controls.Add(Me.admin_PanelSidebar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "AdminDashboard"
         Me.Text = "Admin Dashboard"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -1319,4 +1364,5 @@ Partial Class AdminDashboard
     Friend WithEvents lblPropertyConditionStatus As Label
     Friend WithEvents lblInventoryStatusOverview As Label
     Friend WithEvents lblTotalProperty As Label
+    Friend WithEvents admin_btn_suppliesRequestManagement As Resources.Controls.RoundedButton
 End Class

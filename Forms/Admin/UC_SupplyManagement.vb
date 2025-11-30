@@ -20,7 +20,7 @@ Public Class UC_SupplyManagement
         Me.Dock = DockStyle.Fill
     End Sub
 
-    Private Sub UC_PropertyManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub UC_SupplyManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' General settings
         pm_table.ReadOnly = True
         pm_table.AllowUserToAddRows = False
@@ -147,10 +147,6 @@ Public Class UC_SupplyManagement
         End If
     End Sub
 
-    Private Sub pm_table_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles pm_table.CellContentClick
-        ' Optional for future clickable cells
-    End Sub
-
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
         ' Reload data with filters
         LoadSuppliesData()
@@ -255,5 +251,44 @@ Public Class UC_SupplyManagement
 
     Private Sub admin_label_PM_Click(sender As Object, e As EventArgs) Handles admin_label_PM.Click
 
+    End Sub
+
+    Private Sub pm_table_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
+    Handles pm_table.CellClick
+
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex = pm_table.Columns("colMenu").Index Then
+            cmsActions.Show(Cursor.Position)
+        End If
+
+    End Sub
+
+    Private Sub mnuAssign_Click(sender As Object, e As EventArgs) _
+    Handles mnuAssign.Click
+
+        MessageBox.Show("Assign Property clicked!")
+    End Sub
+
+    Private Sub mnuDispose_Click(sender As Object, e As EventArgs) _
+    Handles mnuDispose.Click
+
+        MessageBox.Show("Dispose clicked!")
+    End Sub
+
+    Private Sub mnuLostDamaged_Click(sender As Object, e As EventArgs) _
+    Handles mnuLostDamaged.Click
+
+        MessageBox.Show("Mark Lost/Damaged clicked!")
+    End Sub
+
+    Private Sub mnuViewDetails_Click(sender As Object, e As EventArgs) _
+    Handles mnuViewDetails.Click
+
+        MessageBox.Show("View Details clicked!")
+    End Sub
+
+    Private Sub mnuPrintPARICS_Click(sender As Object, e As EventArgs) _
+    Handles mnuPrintPARICS.Click
+
+        MessageBox.Show("Print PAR/ICS clicked!")
     End Sub
 End Class

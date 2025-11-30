@@ -30,13 +30,6 @@ Partial Class UC_DepartmentManagement
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.admin_deptmanagement = New System.Windows.Forms.DataGridView()
-        Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
-        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
-        Me.btnView = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.DepartmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DepartmentHead = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DepartmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,6 +37,12 @@ Partial Class UC_DepartmentManagement
         Me.TotalProperties = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalSupplies = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
+        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -71,6 +70,55 @@ Partial Class UC_DepartmentManagement
         Me.admin_deptmanagement.RowHeadersWidth = 51
         Me.admin_deptmanagement.Size = New System.Drawing.Size(1270, 573)
         Me.admin_deptmanagement.TabIndex = 147
+        '
+        'DepartmentName
+        '
+        Me.DepartmentName.HeaderText = "Department Name"
+        Me.DepartmentName.MinimumWidth = 6
+        Me.DepartmentName.Name = "DepartmentName"
+        Me.DepartmentName.Width = 125
+        '
+        'DepartmentHead
+        '
+        Me.DepartmentHead.HeaderText = "Department Head"
+        Me.DepartmentHead.MinimumWidth = 6
+        Me.DepartmentHead.Name = "DepartmentHead"
+        Me.DepartmentHead.Width = 125
+        '
+        'DepartmentID
+        '
+        Me.DepartmentID.HeaderText = "Department I.D"
+        Me.DepartmentID.MinimumWidth = 6
+        Me.DepartmentID.Name = "DepartmentID"
+        Me.DepartmentID.Width = 125
+        '
+        'Location
+        '
+        Me.Location.HeaderText = "Location"
+        Me.Location.MinimumWidth = 6
+        Me.Location.Name = "Location"
+        Me.Location.Width = 125
+        '
+        'TotalProperties
+        '
+        Me.TotalProperties.HeaderText = "Total Properties"
+        Me.TotalProperties.MinimumWidth = 6
+        Me.TotalProperties.Name = "TotalProperties"
+        Me.TotalProperties.Width = 125
+        '
+        'TotalSupplies
+        '
+        Me.TotalSupplies.HeaderText = "Total Supplies"
+        Me.TotalSupplies.MinimumWidth = 6
+        Me.TotalSupplies.Name = "TotalSupplies"
+        Me.TotalSupplies.Width = 125
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
         '
         'ttldepartmentmanagement
         '
@@ -122,22 +170,6 @@ Partial Class UC_DepartmentManagement
         Me.pm_cbobx_categ.TabIndex = 155
         Me.pm_cbobx_categ.Text = "Categories"
         '
-        'btnView
-        '
-        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnView.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnView.CornerRadius = 15
-        Me.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnView.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnView.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnView.Location = New System.Drawing.Point(1123, 706)
-        Me.btnView.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(99, 34)
-        Me.btnView.TabIndex = 158
-        Me.btnView.Text = "View"
-        Me.btnView.UseVisualStyleBackColor = False
-        '
         'btnAdd
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -162,69 +194,19 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1016, 706)
+        Me.btnDelete.Location = New System.Drawing.Point(1123, 705)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(99, 35)
         Me.btnDelete.TabIndex = 157
-        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.Text = "Edit"
         Me.btnDelete.UseVisualStyleBackColor = False
-        '
-        'DepartmentName
-        '
-        Me.DepartmentName.HeaderText = "Department Name"
-        Me.DepartmentName.MinimumWidth = 6
-        Me.DepartmentName.Name = "DepartmentName"
-        Me.DepartmentName.Width = 125
-        '
-        'DepartmentHead
-        '
-        Me.DepartmentHead.HeaderText = "Department Head"
-        Me.DepartmentHead.MinimumWidth = 6
-        Me.DepartmentHead.Name = "DepartmentHead"
-        Me.DepartmentHead.Width = 125
-        '
-        'DepartmentID
-        '
-        Me.DepartmentID.HeaderText = "Department I.D"
-        Me.DepartmentID.MinimumWidth = 6
-        Me.DepartmentID.Name = "DepartmentID"
-        Me.DepartmentID.Width = 125
-        '
-        'Location
-        '
-        Me.Location.HeaderText = "Location"
-        Me.Location.MinimumWidth = 6
-        Me.Location.Name = "Location"
-        Me.Location.Width = 125
-        '
-        'TotalProperties
-        '
-        Me.TotalProperties.HeaderText = "Total Properties"
-        Me.TotalProperties.MinimumWidth = 6
-        Me.TotalProperties.Name = "TotalProperties"
-        Me.TotalProperties.Width = 125
-        '
-        'TotalSupplies
-        '
-        Me.TotalSupplies.HeaderText = "Total Supplies"
-        Me.TotalSupplies.MinimumWidth = 6
-        Me.TotalSupplies.Name = "TotalSupplies"
-        Me.TotalSupplies.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
         '
         'UC_DepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.pm_cbobx_status)
@@ -247,7 +229,6 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents Label1 As Label
     Friend WithEvents pm_cbobx_status As ComboBox
     Friend WithEvents pm_cbobx_categ As ComboBox
-    Friend WithEvents btnView As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As Resources.Controls.RoundedButton
     Friend WithEvents DepartmentName As DataGridViewTextBoxColumn

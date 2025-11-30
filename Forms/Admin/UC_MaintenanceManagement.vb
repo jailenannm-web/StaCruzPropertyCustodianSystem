@@ -25,15 +25,15 @@ Public Class UC_MaintenanceManagement
     End Sub
 
     Private Sub ApplyRoleRestrictions()
-        btnAdd.Enabled = canModifyMaintenance
-        btnEdit.Enabled = canModifyMaintenance
+        btnApprove.Enabled = canModifyMaintenance
+       btnAssign.Enabled = canModifyMaintenance
     End Sub
 
     Private Sub ShowMaintenanceRestriction()
         MessageBox.Show("You have view-only access to Maintenance Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
         If Not canModifyMaintenance Then
             ShowMaintenanceRestriction()
             Return
@@ -52,7 +52,7 @@ Public Class UC_MaintenanceManagement
         End If
     End Sub
 
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs)
         If Not canModifyMaintenance Then
             ShowMaintenanceRestriction()
             Return
