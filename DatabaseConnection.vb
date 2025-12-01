@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
@@ -2591,12 +2591,20 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT pr.request_id, pr.requester_name, " &
-                                 "pr.item_name, pr.date_of_request, pr.purpose, " &
-                                 "pr.quantity_requested, pr.status, d.department_name " &
+            Dim query As String = "SELECT " &
+                                 "pr.request_id AS request_id, " &
+                                 "TRIM(CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.middle_name,''), ' ', IFNULL(u.last_name,''), " &
+                                 "IF(u.suffix IS NOT NULL AND u.suffix != '', CONCAT(' ', u.suffix), ''))) AS 'Name of requester', " &
+                                 "IFNULL(d.department_name, 'N/A') AS 'Department', " &
+                                 "pr.date_of_request AS 'Date of request', " &
+                                 "pr.item_name AS 'Item name', " &
+                                 "pr.quantity_requested AS 'Quantity requested', " &
+                                 "pr.purpose AS 'Purpose', " &
+                                 "pr.status AS status " &
                                  "FROM property_requests pr " &
+                                 "LEFT JOIN users u ON pr.user_id = u.user_id " &
                                  "LEFT JOIN departments d ON pr.department_id = d.department_id " &
-                                 "ORDER BY pr.date_of_request DESC"
+                                 "ORDER BY pr.date_of_request DESC, pr.request_id DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.CommandTimeout = 30
@@ -3391,17 +3399,21 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            ' Try property_requests table first (with request_type='supply')
-            Dim query As String = "SELECT pr.request_id, pr.request_date, pr.quantity, pr.purpose, pr.status, " &
-                                 "COALESCE(sup.item_name, 'N/A') AS item_name, " &
-                                 "CONCAT(IFNULL(sa.first_name,''), ' ', IFNULL(sa.last_name,'')) AS requester_name, " &
-                                 "d.department_name " &
-                                 "FROM property_requests pr " &
-                                 "INNER JOIN users sa ON pr.user_id = sa.user_id " &
-                                 "LEFT JOIN departments d ON sa.department_id = d.department_id " &
-                                 "LEFT JOIN supplies sup ON pr.supply_id = sup.supply_id " &
-                                 "WHERE pr.request_type = 'supply' " &
-                                 "ORDER BY pr.request_date DESC"
+            ' Query supply_requests table directly
+            Dim query As String = "SELECT " &
+                                 "sr.request_id AS request_id, " &
+                                 "TRIM(CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.middle_name,''), ' ', IFNULL(u.last_name,''), " &
+                                 "IF(u.suffix IS NOT NULL AND u.suffix != '', CONCAT(' ', u.suffix), ''))) AS 'Name of requester', " &
+                                 "IFNULL(d.department_name, 'N/A') AS 'Department', " &
+                                 "sr.date_of_request AS 'Date of request', " &
+                                 "sr.item_name AS 'Item name', " &
+                                 "sr.quantity_requested AS 'Quantity requested', " &
+                                 "sr.purpose AS 'Purpose', " &
+                                 "sr.status AS status " &
+                                 "FROM supply_requests sr " &
+                                 "LEFT JOIN users u ON sr.user_id = u.user_id " &
+                                 "LEFT JOIN departments d ON sr.department_id = d.department_id " &
+                                 "ORDER BY sr.date_of_request DESC, sr.request_id DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 Using adapter As New MySqlDataAdapter(cmd)
@@ -3409,22 +3421,7 @@ Public Class DatabaseConnection
                 End Using
             End Using
         Catch ex As Exception
-            ' If property_requests doesn't work, try supplies_requests table
-            Try
-                dt.Clear()
-                Dim query2 As String = "SELECT sr.request_id, sr.date_of_request, sr.quantity_requested, sr.purpose, sr.status, " &
-                                     "sr.item_name, sr.requester_name, d.department_name " &
-                                     "FROM supplies_requests sr " &
-                                     "LEFT JOIN departments d ON sr.department_id = d.department_id " &
-                                     "ORDER BY sr.date_of_request DESC"
-                Using cmd2 As New MySqlCommand(query2, conn)
-                    Using adapter2 As New MySqlDataAdapter(cmd2)
-                        adapter2.Fill(dt)
-                    End Using
-                End Using
-            Catch ex2 As Exception
-                System.Diagnostics.Debug.WriteLine("[v0] GetAllSuppliesRequests Exception: " & ex2.Message)
-            End Try
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllSuppliesRequests Exception: " & ex.Message)
         Finally
             If conn IsNot Nothing Then
                 Try

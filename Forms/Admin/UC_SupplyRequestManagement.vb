@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Drawing
 Imports System.Data
 Imports System.Windows.Forms
@@ -26,8 +26,71 @@ Public Class UC_SupplyRequestManagement
         Try
             Dim dt As DataTable = DatabaseConnection.GetAllSuppliesRequests()
             If prm_table1 IsNot Nothing Then
+                ' Clear existing columns and disable auto-generation to prevent duplicates
+                prm_table1.Columns.Clear()
+                prm_table1.AutoGenerateColumns = False
+                
+                ' Add hidden request_id column first (needed for approve/reject functionality)
+                Dim colRequestID As New DataGridViewTextBoxColumn()
+                colRequestID.Name = "request_id"
+                colRequestID.HeaderText = "Request ID"
+                colRequestID.DataPropertyName = "request_id"
+                colRequestID.Visible = False
+                prm_table1.Columns.Add(colRequestID)
+                
+                ' Create and add columns with proper mapping
+                Dim colName As New DataGridViewTextBoxColumn()
+                colName.Name = "NameOfRequester"
+                colName.HeaderText = "Name of requester"
+                colName.DataPropertyName = "Name of requester"
+                colName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                prm_table1.Columns.Add(colName)
+                
+                Dim colDept As New DataGridViewTextBoxColumn()
+                colDept.Name = "Department"
+                colDept.HeaderText = "Department"
+                colDept.DataPropertyName = "Department"
+                colDept.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                prm_table1.Columns.Add(colDept)
+                
+                Dim colDate As New DataGridViewTextBoxColumn()
+                colDate.Name = "DateOfRequest"
+                colDate.HeaderText = "Date of request"
+                colDate.DataPropertyName = "Date of request"
+                colDate.DefaultCellStyle.Format = "MM/dd/yyyy"
+                colDate.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                prm_table1.Columns.Add(colDate)
+                
+                Dim colItem As New DataGridViewTextBoxColumn()
+                colItem.Name = "ItemName"
+                colItem.HeaderText = "Item name"
+                colItem.DataPropertyName = "Item name"
+                colItem.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                prm_table1.Columns.Add(colItem)
+                
+                Dim colQty As New DataGridViewTextBoxColumn()
+                colQty.Name = "QuantityRequested"
+                colQty.HeaderText = "Quantity requested"
+                colQty.DataPropertyName = "Quantity requested"
+                colQty.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                prm_table1.Columns.Add(colQty)
+                
+                Dim colPurpose As New DataGridViewTextBoxColumn()
+                colPurpose.Name = "Purpose"
+                colPurpose.HeaderText = "Purpose"
+                colPurpose.DataPropertyName = "Purpose"
+                colPurpose.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                prm_table1.Columns.Add(colPurpose)
+                
+                Dim colStatus As New DataGridViewTextBoxColumn()
+                colStatus.Name = "Status"
+                colStatus.HeaderText = "Status"
+                colStatus.DataPropertyName = "status"
+                colStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                prm_table1.Columns.Add(colStatus)
+                
+                ' Set DataSource after columns are configured
                 prm_table1.DataSource = dt
-                prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
                 prm_table1.ReadOnly = True
                 prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
