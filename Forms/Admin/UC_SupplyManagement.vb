@@ -50,8 +50,7 @@ Public Class UC_SupplyManagement
         ' Auto size
         pm_table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
-        ' Track role-based permissions
-        canModifySupplies = SessionContext.HasPermission(SessionContext.ModulePermission.ModifySupplies)
+        ' No restrictions - all buttons enabled for Super Admin, Admin, and Custodian
         ApplyRolePermissions()
 
         ' Initialize filter dropdowns
@@ -65,14 +64,13 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub ApplyRolePermissions()
-        btnAdd.Enabled = canModifySupplies
-        btnEdit.Enabled = canModifySupplies
-        btnDelete.Enabled = canModifySupplies
+        ' Super Admin, Admin, and Custodian have full access - all buttons enabled
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        btnAdd.Enabled = hasFullAccess
+        btnEdit.Enabled = hasFullAccess
+        btnDelete.Enabled = hasFullAccess
     End Sub
 
-    Private Sub ShowSupplyViewOnlyWarning()
-        MessageBox.Show("You have view-only access to Supplies Management. Admin users cannot add, edit, or delete supplies.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
-    End Sub
 
     Private Sub InitializeFilters()
         ' Populate category filter
@@ -112,23 +110,42 @@ Public Class UC_SupplyManagement
 
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
-                    ' Use correct column names from GetAllSupplies (SupplyID, SupplyName, Category, etc.)
-                    pm_table.Rows.Add(
-                        If(IsDBNull(row("SupplyID")), "", row("SupplyID").ToString()),
-                        If(IsDBNull(row("SupplyName")), "", row("SupplyName").ToString()),
-                        If(IsDBNull(row("Category")), "", row("Category").ToString()),
-                        If(IsDBNull(row("UnitOfMeasure")), "", row("UnitOfMeasure").ToString()),
-                        If(IsDBNull(row("QuantityInStock")), "0", row("QuantityInStock").ToString()),
-                        If(IsDBNull(row("AcquisitionDate")), "", CDate(row("AcquisitionDate")).ToString("yyyy-MM-dd")),
-                        If(IsDBNull(row("UnitCost")), "0.00", Format(CDec(row("UnitCost")), "0.00")),
-                        If(IsDBNull(row("Location")), "", row("Location").ToString()),
-                        If(IsDBNull(row("SupplierName")), "", row("SupplierName").ToString()),
-                        If(IsDBNull(row("Status")), "", row("Status").ToString()),
-                        If(IsDBNull(row("Status")), "", row("Status").ToString()),
-                        If(IsDBNull(row("Location")), "", row("Location").ToString()),
-                        "Edit"
-                    )
+                    ' Use safe column access with correct column names from GetAllSupplies
+                    Dim supplyID As String = If(row.Table.Columns.Contains("SupplyID") AndAlso Not IsDBNull(row("SupplyID")), row("SupplyID").ToString(), "")
+                    Dim supplyName As String = If(row.Table.Columns.Contains("SupplyName") AndAlso Not IsDBNull(row("SupplyName")), row("SupplyName").ToString(), "")
+                    Dim category As String = If(row.Table.Columns.Contains("Category") AndAlso Not IsDBNull(row("Category")), row("Category").ToString(), "")
+                    Dim unitOfMeasure As String = If(row.Table.Columns.Contains("UnitOfMeasure") AndAlso Not IsDBNull(row("UnitOfMeasure")), row("UnitOfMeasure").ToString(), "")
+                    Dim quantity As String = If(row.Table.Columns.Contains("QuantityInStock") AndAlso Not IsDBNull(row("QuantityInStock")), row("QuantityInStock").ToString(), "0")
+                    Dim acqDate As String = ""
+                    If row.Table.Columns.Contains("AcquisitionDate") AndAlso Not IsDBNull(row("AcquisitionDate")) Then
+                        Dim parsedDate As Date
+                        If Date.TryParse(row("AcquisitionDate").ToString(), parsedDate) Then
+                            acqDate = parsedDate.ToString("yyyy-MM-dd")
+                        End If
+                    End If
+                    Dim unitCost As String = "0.00"
+                    If row.Table.Columns.Contains("UnitCost") AndAlso Not IsDBNull(row("UnitCost")) Then
+                        Dim cost As Decimal
+                        If Decimal.TryParse(row("UnitCost").ToString(), cost) Then
+                            unitCost = Format(cost, "0.00")
+                        End If
+                    End If
+                    Dim location As String = If(row.Table.Columns.Contains("Location") AndAlso Not IsDBNull(row("Location")), row("Location").ToString(), "")
+                    Dim supplierName As String = If(row.Table.Columns.Contains("SupplierName") AndAlso Not IsDBNull(row("SupplierName")), row("SupplierName").ToString(), "")
+                    Dim status As String = If(row.Table.Columns.Contains("Status") AndAlso Not IsDBNull(row("Status")), row("Status").ToString(), "")
+
+                    ' Add row with SupplyID as first column (stored in Tag for easy access)
+                    Dim rowIndex As Integer = pm_table.Rows.Add(supplyName, category, unitOfMeasure, quantity, acqDate, unitCost, location, supplierName, status)
+                    ' Store SupplyID in row Tag for easy access
+                    If Not String.IsNullOrEmpty(supplyID) AndAlso Integer.TryParse(supplyID, Nothing) Then
+                        pm_table.Rows(rowIndex).Tag = supplyID
+                    End If
                 Next
+
+                ' Update total count
+                If ttlSupplymanagement IsNot Nothing Then
+                    ttlSupplymanagement.Text = dt.Rows.Count.ToString()
+                End If
                 System.Diagnostics.Debug.WriteLine("[v0] Supply Management - Loaded " & dt.Rows.Count & " supplies")
             Else
                 System.Diagnostics.Debug.WriteLine("[v0] Supply Management - No supplies found")
@@ -142,8 +159,9 @@ Public Class UC_SupplyManagement
     Private Sub pm_table_SelectionChanged(sender As Object, e As EventArgs)
         If pm_table.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = pm_table.SelectedRows(0)
-            If selectedRow.Cells("SupplyID").Value IsNot Nothing Then
-                Dim supplyIDStr As String = selectedRow.Cells("SupplyID").Value.ToString()
+            ' Get SupplyID from row Tag (stored when loading data)
+            If selectedRow.Tag IsNot Nothing Then
+                Dim supplyIDStr As String = selectedRow.Tag.ToString()
                 If Integer.TryParse(supplyIDStr, selectedSupplyID) Then
                     ' Row selected, enable Edit and Delete buttons
                 End If
@@ -156,13 +174,12 @@ Public Class UC_SupplyManagement
         LoadSuppliesData()
         ' Reapply search if there's search text
     End Sub
+    ' Super Admin bypasses all restrictions
 
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If Not canModifySupplies Then
-            ShowSupplyViewOnlyWarning()
-            Return
-        End If
+        ' Super Admin bypasses all restrictions
+
         ' Get reference to the parent dashboard form
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
 
@@ -178,53 +195,78 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If Not canModifySupplies Then
-            ShowSupplyViewOnlyWarning()
-            Return
-        End If
+        ' Super Admin bypasses all restrictions
         If pm_table.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a supply to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Dim selectedRow As DataGridViewRow = pm_table.SelectedRows(0)
-        If selectedRow.Cells("SupplyID").Value Is Nothing Then
+        ' Get SupplyID from row Tag
+        Dim supplyIDStr As String = ""
+        If selectedRow.Tag IsNot Nothing Then
+            supplyIDStr = selectedRow.Tag.ToString()
+        End If
+
+        If String.IsNullOrEmpty(supplyIDStr) Then
             MessageBox.Show("Invalid supply selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        Dim supplyIDStr As String = selectedRow.Cells("SupplyID").Value.ToString()
         Dim supplyID As Integer
         If Not Integer.TryParse(supplyIDStr, supplyID) Then
             MessageBox.Show("Invalid supply ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        ' Open edit form (you'll need to create UC_EditSupply or modify UC_AddSupply to support edit mode)
-        MessageBox.Show("Edit functionality - Supply ID: " & supplyID.ToString(), "Edit Supply", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        ' TODO: Implement edit form
-        ' Dim editSupplyUC As New UC_EditSupply(supplyID)
-        ' parentDashboard.LoadUserControl(editSupplyUC)
+        ' Get supply data from database
+        Dim supplyData As DataRow = DatabaseConnection.GetSupplyById(supplyIDStr)
+        If supplyData Is Nothing Then
+            MessageBox.Show("Supply not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Check if EditSupply form exists, otherwise show message
+        Try
+            ' Try to create EditSupply form using reflection
+            Dim editSupplyType As Type = Type.GetType("StaCruzPropertyCustodianSystem.Forms.Admin.EditSupply")
+            If editSupplyType IsNot Nothing Then
+                Dim editForm As Object = Activator.CreateInstance(editSupplyType)
+                ' Load supply data into edit form if it has a LoadSupplyData method
+                Dim loadMethod = editSupplyType.GetMethod("LoadSupplyData")
+                If loadMethod IsNot Nothing Then
+                    loadMethod.Invoke(editForm, New Object() {supplyID, supplyData})
+                End If
+                ' Navigate to edit form
+                Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+                If parentDashboard IsNot Nothing Then
+                    parentDashboard.LoadUserControl(TryCast(editForm, UserControl))
+                End If
+            Else
+                MessageBox.Show("Edit form for supplies is not yet implemented. Supply ID: " & supplyID.ToString(), "Edit Supply", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Edit functionality for Supply ID: " & supplyID.ToString() & " - Edit form needs to be implemented. Error: " & ex.Message, "Edit Supply", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        If Not canModifySupplies Then
-            ShowSupplyViewOnlyWarning()
-            Return
-        End If
-        If pm_table.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a supply to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
+        ' Super Admin bypasses all restrictions
+
 
         Dim selectedRow As DataGridViewRow = pm_table.SelectedRows(0)
-        If selectedRow.Cells("SupplyID").Value Is Nothing Then
+        ' Get SupplyID from row Tag
+        Dim supplyIDStr As String = ""
+        If selectedRow.Tag IsNot Nothing Then
+            supplyIDStr = selectedRow.Tag.ToString()
+        End If
+
+        If String.IsNullOrEmpty(supplyIDStr) Then
             MessageBox.Show("Invalid supply selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        Dim supplyIDStr As String = selectedRow.Cells("SupplyID").Value.ToString()
-        Dim supplyName As String = If(selectedRow.Cells("colName").Value IsNot Nothing, selectedRow.Cells("colName").Value.ToString(), "Unknown")
+        Dim supplyName As String = If(selectedRow.Cells("itemName").Value IsNot Nothing, selectedRow.Cells("itemName").Value.ToString(), "Unknown")
 
         Dim supplyID As Integer
         If Not Integer.TryParse(supplyIDStr, supplyID) Then
@@ -259,11 +301,12 @@ Public Class UC_SupplyManagement
 
     Private Sub pm_table_CellClick(sender As Object, e As DataGridViewCellEventArgs) _
     Handles pm_table.CellClick
-
-        If e.RowIndex >= 0 AndAlso e.ColumnIndex = pm_table.Columns("colMenu").Index Then
-            cmsActions.Show(Cursor.Position)
+        ' Check if colMenu column exists before accessing it
+        If e.RowIndex >= 0 AndAlso pm_table.Columns.Contains("colMenu") AndAlso e.ColumnIndex = pm_table.Columns("colMenu").Index Then
+            If cmsActions IsNot Nothing Then
+                cmsActions.Show(Cursor.Position)
+            End If
         End If
-
     End Sub
 
     Private Sub mnuAssign_Click(sender As Object, e As EventArgs) _

@@ -3,6 +3,7 @@ Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
+Imports MySql.Data.MySqlClient
 
 Public Class UC_MaintenanceRequestManagement
     Inherits UserControl
@@ -30,18 +31,10 @@ Public Class UC_MaintenanceRequestManagement
         End If
     End Sub
 
-    Private Sub ShowRequestRestrictionMessage()
-        MessageBox.Show("You have view-only access to Property Request Management.",
-                        "Access Restricted",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information)
-    End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs)
-        If Not canModifyRequests Then
-            ShowRequestRestrictionMessage()
-            Return
-        End If
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        ' No restrictions for Super Admin, Admin, and Custodian
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
@@ -49,20 +42,54 @@ Public Class UC_MaintenanceRequestManagement
         End If
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs)
-        If Not canModifyRequests Then
-            ShowRequestRestrictionMessage()
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
+        If Not isSuperAdmin Then
+
             Return
         End If
 
-        MessageBox.Show("Delete request functionality here")
+        If propertyManagementGrid.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a maintenance request to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Try
+            Dim selectedRow As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
+            Dim dt As DataTable = TryCast(propertyManagementGrid.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            Dim requestID As Integer = Convert.ToInt32(dataRow("request_id"))
+
+            Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this maintenance request? This action cannot be undone.", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+            If result = DialogResult.Yes Then
+                ' Delete maintenance request using DatabaseConnection
+                Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+                If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                    Using cmd As New MySqlCommand("DELETE FROM maintenance_requests WHERE request_id = @requestID", conn)
+                        cmd.Parameters.AddWithValue("@requestID", requestID)
+                        If cmd.ExecuteNonQuery() > 0 Then
+                            MessageBox.Show("Maintenance request deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            LoadMaintenanceRequestData()
+                        Else
+                            MessageBox.Show("Failed to delete maintenance request.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
+                    End Using
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error deleting maintenance request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub assign_Click(sender As Object, e As EventArgs)
-        If Not canModifyRequests Then
-            ShowRequestRestrictionMessage()
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
@@ -82,7 +109,7 @@ Public Class UC_MaintenanceRequestManagement
             propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             propertyManagementGrid.ReadOnly = True
             propertyManagementGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            
+
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 ttlpropertymanagement.Text = dt.Rows.Count.ToString()
             Else
@@ -95,20 +122,15 @@ Public Class UC_MaintenanceRequestManagement
     End Sub
 
     Private Sub ApplyPermissionState()
-        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
-        Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        ' Both Super Admin and Admin can Update, Approve, and Reject
-        If btnApprove IsNot Nothing Then btnApprove.Enabled = (isSuperAdmin OrElse isAdmin)
-        If btnReject IsNot Nothing Then btnReject.Enabled = (isSuperAdmin OrElse isAdmin)
-        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = (isSuperAdmin OrElse isAdmin)
+        ' Super Admin, Admin, and Custodian have full access - ALL buttons enabled
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        If btnApprove IsNot Nothing Then btnApprove.Enabled = hasFullAccess
+        If btnReject IsNot Nothing Then btnReject.Enabled = hasFullAccess
+        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = hasFullAccess
+        If btnAdd IsNot Nothing Then btnAdd.Enabled = hasFullAccess
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess
     End Sub
 
-    Private Sub ShowMaintenanceRequestRestrictionMessage()
-        MessageBox.Show("You have view-only access to Maintenance Request Management.",
-                        "Access Restricted",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information)
-    End Sub
 
     ' ----------------------------------------------------------------------
     ' PRINT PAR LOGIC — FULLY CONNECTED TO PROPERTYCARD
@@ -119,12 +141,7 @@ Public Class UC_MaintenanceRequestManagement
     End Sub
 
     Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
-        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
-        Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        If Not (isSuperAdmin OrElse isAdmin) Then
-            ShowMaintenanceRequestRestrictionMessage()
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
 
         If propertyManagementGrid.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a maintenance request to approve.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -160,17 +177,18 @@ Public Class UC_MaintenanceRequestManagement
                 MessageBox.Show("Failed to approve maintenance request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Catch ex As Exception
-            MessageBox.Show("Error approving maintenance request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = "An error occurred while approving the maintenance request."
+            If TypeOf ex Is MySqlException Then
+                errorMsg = "Database error: Unable to approve the maintenance request. Please check your connection and try again."
+            ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
+                errorMsg = "Invalid data format. Please refresh the list and try again."
+            End If
+            MessageBox.Show(errorMsg & vbCrLf & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
-        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
-        Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        If Not (isSuperAdmin OrElse isAdmin) Then
-            ShowMaintenanceRequestRestrictionMessage()
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
 
         If propertyManagementGrid.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a maintenance request to reject.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -211,17 +229,18 @@ Public Class UC_MaintenanceRequestManagement
                 MessageBox.Show("Failed to reject maintenance request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Catch ex As Exception
-            MessageBox.Show("Error rejecting maintenance request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = "An error occurred while rejecting the maintenance request."
+            If TypeOf ex Is MySqlException Then
+                errorMsg = "Database error: Unable to reject the maintenance request. Please check your connection and try again."
+            ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
+                errorMsg = "Invalid data format. Please refresh the list and try again."
+            End If
+            MessageBox.Show(errorMsg & vbCrLf & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     Private Sub prm_btn_update_Click(sender As Object, e As EventArgs) Handles prm_btn_update.Click
-        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
-        Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        If Not (isSuperAdmin OrElse isAdmin) Then
-            ShowMaintenanceRequestRestrictionMessage()
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
 
         LoadMaintenanceRequestData()
         MessageBox.Show("Maintenance request list refreshed.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)

@@ -42,6 +42,11 @@ Public Class AddUserManagement1
     End Sub
 
     Private Sub ShowManageRestriction()
+        ' No restrictions for Super Admin, Admin, and Custodian
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        If hasFullAccess Then
+            Return
+        End If
         MessageBox.Show("You have view-only access to User Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 

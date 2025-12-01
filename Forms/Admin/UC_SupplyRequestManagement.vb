@@ -32,16 +32,13 @@ Public Class UC_SupplyRequestManagement
                 prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
                 ' Update total count
-                If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                    Dim totalLabel As Label = TryCast(Me.Controls.Find("ttlpropertymanagement", True).FirstOrDefault(), Label)
-                    If totalLabel IsNot Nothing Then
-                        totalLabel.Text = "TOTAL: " & dt.Rows.Count.ToString()
-                    End If
-                Else
-                    Dim totalLabel As Label = TryCast(Me.Controls.Find("ttlpropertymanagement", True).FirstOrDefault(), Label)
-                    If totalLabel IsNot Nothing Then
-                        totalLabel.Text = "TOTAL: 0"
-                    End If
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then
+                    totalLabel = TryCast(foundControls(0), Label)
+                End If
+                If totalLabel IsNot Nothing Then
+                    totalLabel.Text = If(dt IsNot Nothing AndAlso dt.Rows.Count > 0, dt.Rows.Count.ToString(), "0")
                 End If
             End If
         Catch ex As Exception
@@ -50,20 +47,16 @@ Public Class UC_SupplyRequestManagement
     End Sub
 
     Private Sub ApplyPermissionState()
-        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
-        Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        ' Both Super Admin and Admin can Approve/Reject
-        If btnApprove IsNot Nothing Then btnApprove.Enabled = (isSuperAdmin OrElse isAdmin)
-        If btnReject IsNot Nothing Then btnReject.Enabled = (isSuperAdmin OrElse isAdmin)
+        ' Super Admin, Admin, and Custodian have full access - ALL buttons enabled
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        If btnApprove IsNot Nothing Then btnApprove.Enabled = hasFullAccess
+        If btnReject IsNot Nothing Then btnReject.Enabled = hasFullAccess
+        If issueRequisition IsNot Nothing Then issueRequisition.Enabled = hasFullAccess
+        If printPAR IsNot Nothing Then printPAR.Enabled = hasFullAccess
     End Sub
 
     Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
-        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
-        Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        If Not (isSuperAdmin OrElse isAdmin) Then
-            MessageBox.Show("You have view-only access to Supply Request Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
         If prm_table1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a request to reject.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -107,12 +100,7 @@ Public Class UC_SupplyRequestManagement
     End Sub
 
     Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
-        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
-        Dim isAdmin As Boolean = SessionContext.IsAdmin()
-        If Not (isSuperAdmin OrElse isAdmin) Then
-            MessageBox.Show("You have view-only access to Supply Request Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Return
-        End If
+        ' No restrictions for Super Admin, Admin, and Custodian
         If prm_table1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a request to approve.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return

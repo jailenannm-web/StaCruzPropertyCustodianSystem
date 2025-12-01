@@ -49,7 +49,13 @@ Partial Public Class MaintenanceRequest
             ' Auto-size columns
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         Catch ex As Exception
-            MessageBox.Show("Error loading maintenance requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim errorMsg As String = "Unable to load maintenance requests. "
+            If ex.Message.Contains("Connection") OrElse ex.Message.Contains("timeout") Then
+                errorMsg &= "Please check your database connection."
+            Else
+                errorMsg &= "Please try again."
+            End If
+            MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
     End Sub
 

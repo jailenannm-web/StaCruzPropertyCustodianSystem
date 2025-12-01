@@ -86,6 +86,8 @@ Partial Class SADashboard
         Me.SAChart_SystemAlerts = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.lblPropertyCustodian = New System.Windows.Forms.Label()
         Me.pnlSidebar = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.admin_btn_MaintenanceRequest = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_btn_suppliesRequestManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btn_MaintenanceRequest = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnPropertyRequestManagement = New System.Windows.Forms.Button()
@@ -624,6 +626,8 @@ Partial Class SADashboard
         '
         Me.pnlSidebar.AutoScroll = True
         Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pnlSidebar.Controls.Add(Me.admin_btn_MaintenanceRequest)
+        Me.pnlSidebar.Controls.Add(Me.RoundedButton1)
         Me.pnlSidebar.Controls.Add(Me.admin_btn_suppliesRequestManagement)
         Me.pnlSidebar.Controls.Add(Me.btn_MaintenanceRequest)
         Me.pnlSidebar.Controls.Add(Me.btnPropertyRequestManagement)
@@ -646,6 +650,40 @@ Partial Class SADashboard
         Me.pnlSidebar.Size = New System.Drawing.Size(360, 1055)
         Me.pnlSidebar.TabIndex = 21
         '
+        'admin_btn_MaintenanceRequest
+        '
+        Me.admin_btn_MaintenanceRequest.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.admin_btn_MaintenanceRequest.CornerRadius = 5
+        Me.admin_btn_MaintenanceRequest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.admin_btn_MaintenanceRequest.FlatAppearance.BorderSize = 0
+        Me.admin_btn_MaintenanceRequest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.admin_btn_MaintenanceRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.admin_btn_MaintenanceRequest.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_btn_MaintenanceRequest.ForeColor = System.Drawing.Color.White
+        Me.admin_btn_MaintenanceRequest.Location = New System.Drawing.Point(760, 756)
+        Me.admin_btn_MaintenanceRequest.Margin = New System.Windows.Forms.Padding(4)
+        Me.admin_btn_MaintenanceRequest.Name = "admin_btn_MaintenanceRequest"
+        Me.admin_btn_MaintenanceRequest.Size = New System.Drawing.Size(306, 56)
+        Me.admin_btn_MaintenanceRequest.TabIndex = 27
+        Me.admin_btn_MaintenanceRequest.Text = "Maintenance Request Management"
+        '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.RoundedButton1.CornerRadius = 5
+        Me.RoundedButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.RoundedButton1.FlatAppearance.BorderSize = 0
+        Me.RoundedButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.Color.White
+        Me.RoundedButton1.Location = New System.Drawing.Point(760, 620)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(306, 56)
+        Me.RoundedButton1.TabIndex = 26
+        Me.RoundedButton1.Text = "Supplies Request Management"
+        '
         'admin_btn_suppliesRequestManagement
         '
         Me.admin_btn_suppliesRequestManagement.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -656,7 +694,7 @@ Partial Class SADashboard
         Me.admin_btn_suppliesRequestManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_suppliesRequestManagement.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.admin_btn_suppliesRequestManagement.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_suppliesRequestManagement.Location = New System.Drawing.Point(1495, 595)
+        Me.admin_btn_suppliesRequestManagement.Location = New System.Drawing.Point(2965, 595)
         Me.admin_btn_suppliesRequestManagement.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_btn_suppliesRequestManagement.Name = "admin_btn_suppliesRequestManagement"
         Me.admin_btn_suppliesRequestManagement.Size = New System.Drawing.Size(306, 56)
@@ -673,7 +711,7 @@ Partial Class SADashboard
         Me.btn_MaintenanceRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_MaintenanceRequest.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btn_MaintenanceRequest.ForeColor = System.Drawing.Color.White
-        Me.btn_MaintenanceRequest.Location = New System.Drawing.Point(1495, 659)
+        Me.btn_MaintenanceRequest.Location = New System.Drawing.Point(2965, 659)
         Me.btn_MaintenanceRequest.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_MaintenanceRequest.Name = "btn_MaintenanceRequest"
         Me.btn_MaintenanceRequest.Size = New System.Drawing.Size(306, 56)
@@ -713,7 +751,7 @@ Partial Class SADashboard
         Me.btnLogout.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(25, 741)
+        Me.btnLogout.Location = New System.Drawing.Point(25, 764)
         Me.btnLogout.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(306, 56)
@@ -734,7 +772,7 @@ Partial Class SADashboard
         Me.btnDepartmentManagement.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnDepartmentManagement.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icDepartment
         Me.btnDepartmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDepartmentManagement.Location = New System.Drawing.Point(25, 342)
+        Me.btnDepartmentManagement.Location = New System.Drawing.Point(25, 343)
         Me.btnDepartmentManagement.Margin = New System.Windows.Forms.Padding(5)
         Me.btnDepartmentManagement.Name = "btnDepartmentManagement"
         Me.btnDepartmentManagement.Size = New System.Drawing.Size(306, 56)
@@ -755,7 +793,7 @@ Partial Class SADashboard
         Me.btnMaintenanceManagement.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnMaintenanceManagement.Image = CType(resources.GetObject("btnMaintenanceManagement.Image"), System.Drawing.Image)
         Me.btnMaintenanceManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMaintenanceManagement.Location = New System.Drawing.Point(25, 621)
+        Me.btnMaintenanceManagement.Location = New System.Drawing.Point(25, 633)
         Me.btnMaintenanceManagement.Margin = New System.Windows.Forms.Padding(5)
         Me.btnMaintenanceManagement.Name = "btnMaintenanceManagement"
         Me.btnMaintenanceManagement.Size = New System.Drawing.Size(306, 56)
@@ -839,7 +877,7 @@ Partial Class SADashboard
         Me.btnReports.ForeColor = System.Drawing.Color.FloralWhite
         Me.btnReports.Image = CType(resources.GetObject("btnReports.Image"), System.Drawing.Image)
         Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(25, 676)
+        Me.btnReports.Location = New System.Drawing.Point(25, 699)
         Me.btnReports.Margin = New System.Windows.Forms.Padding(5)
         Me.btnReports.Name = "btnReports"
         Me.btnReports.Size = New System.Drawing.Size(306, 56)
@@ -1114,4 +1152,6 @@ Partial Class SADashboard
     Friend WithEvents btnGenerateReports As Resources.Controls.RoundedButton
     Friend WithEvents btn_MaintenanceRequest As Resources.Controls.RoundedButton
     Friend WithEvents admin_btn_suppliesRequestManagement As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_MaintenanceRequest As Resources.Controls.RoundedButton
 End Class

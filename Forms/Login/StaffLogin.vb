@@ -7,11 +7,7 @@ Imports System.Data
 Public Class StaffLogin
 
     ' Click on "Don't have account yet" label to go to StaffRegister
-    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
-        Dim registerForm As New StaffRegister()
-        registerForm.Show()   ' Show the register form
-        Me.Hide()            ' Hide current login form instead of closing it
-    End Sub
+
 
     ' Login button click - Unified login for SuperAdmin, Admin, and Staff
     Private Sub btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
@@ -171,6 +167,8 @@ Public Class StaffLogin
         ' Initialize default accounts
         Try
             DatabaseConnection.InitializeDefaultAccounts()
+            ' Create test staff account if it doesn't exist
+            DatabaseConnection.CreateTestStaffAccount()
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Error initializing default accounts: " & ex.Message)
         End Try

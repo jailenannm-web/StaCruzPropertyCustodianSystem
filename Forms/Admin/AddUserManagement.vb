@@ -25,6 +25,20 @@ Public Class AddUserManagement
 
     Private Sub AddUserManagement_Load(sender As Object, e As EventArgs)
         ResetForm()
+        LoadDepartmentDropdown()
+        Role.SelectedIndex = -1
+    End Sub
+
+    Private Sub LoadDepartmentDropdown()
+        Try
+            departmentID.Items.Clear()
+            Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
+            departmentID.DisplayMember = "department_name"
+            departmentID.ValueMember = "department_id"
+            departmentID.DataSource = deptTable
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadDepartmentDropdown Error: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub ResetForm()
@@ -32,11 +46,11 @@ Public Class AddUserManagement
         firstName.Clear()
         middleName.Clear()
         lastName.Clear()
-        employeeID.Clear()
+        EmployeeID.Clear()
         contactNumber.Clear()
         email.Clear()
-        passwordAddUser.Clear()
-        passwordAddUser.Clear()
+        passwordAdmin.Clear()
+        passwordAdmin.Clear()
         departmentID.SelectedIndex = -1
         suffixAdmin.SelectedIndex = -1
         positionAdmin.SelectedIndex = -1
@@ -54,32 +68,70 @@ Public Class AddUserManagement
         End If
 
 
-        Dim employeeCode As String = employeeID.Text.Trim()
+        Dim employeeCode As String = EmployeeID.Text.Trim()
         Dim usernameValue As String = If(String.IsNullOrWhiteSpace(employeeCode), email.Text.Trim(), employeeCode)
         If String.IsNullOrWhiteSpace(usernameValue) Then
             usernameValue = (firstName.Text.Trim() & "." & lastName.Text.Trim()).ToLowerInvariant()
         End If
 
-        Dim roleValue As String = GetComboValue(Role, "Admin")
-        Dim userTypeValue As String = If(String.Equals(roleValue, "SuperAdmin", StringComparison.OrdinalIgnoreCase), "SuperAdmin", "Admin")
+        Dim roleValue As String = GetComboValue(Role, "")
+        If String.IsNullOrWhiteSpace(roleValue) Then
+            MessageBox.Show("Please select a role.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        ' Normalize role value to match database enum
+        If roleValue = "SuperAdmin" Then roleValue = "SuperAdmin"
+        If roleValue = "Admin" Then roleValue = "Admin"
+        If roleValue = "Custodian" Then roleValue = "Custodian"
+        If roleValue = "Staff" Then roleValue = "Staff"
         Dim positionValue As String = GetComboValue(positionAdmin, If(String.IsNullOrWhiteSpace(roleValue), "Administrator", roleValue))
+
+        ' Get department ID from dropdown if selected
+        ' Get department ID from dropdown if selected
+        Dim selectedDeptID As Integer? = Nothing
+
+        If departmentID.SelectedIndex >= 0 AndAlso departmentID.SelectedItem IsNot Nothing Then
+            Dim deptValue As Object = departmentID.SelectedValue
+
+            If deptValue IsNot Nothing Then
+
+                ' If SelectedValue is DataRowView
+                If TypeOf deptValue Is DataRowView Then
+                    Dim drv As DataRowView = CType(deptValue, DataRowView)
+
+                    ' FIXED: use Row.IsNull instead of IsDBNull
+                    If drv.Row.Table.Columns.Contains("department_id") AndAlso
+               Not drv.Row.IsNull("department_id") Then
+
+                        Integer.TryParse(drv.Row("department_id").ToString(), selectedDeptID)
+                    End If
+
+                    ' If SelectedValue is already an Integer
+                ElseIf TypeOf deptValue Is Integer Then
+                    selectedDeptID = CInt(deptValue)
+
+                End If
+            End If
+        End If
+
 
         Dim success As Boolean = DatabaseConnection.AddAdminAccount(
             firstName.Text.Trim(),
             lastName.Text.Trim(),
             email.Text.Trim(),
             usernameValue,
-            passwordAddUser.Text,
+            passwordAdmin.Text,
             middleName:=middleName.Text.Trim(),
             suffix:=GetComboValue(suffixAdmin),
             position:=positionValue,
+            departmentID:=selectedDeptID,
             contactNumber:=contactNumber.Text.Trim(),
-            houseNoStreet:=passwordAddUser.Text.Trim(),
+            houseNoStreet:="",
             barangay:=GetComboValue(barangay),
             municipality:=GetComboValue(municipality),
             provinceCity:=GetComboValue(provinceAdmin),
             employeeID:=employeeCode,
-            userType:=userTypeValue,
+            userType:=roleValue,
             createdByID:=currentAdminID,
             createdByType:=currentAdminType,
             createdByName:=currentAdminUsername,
@@ -111,30 +163,26 @@ Public Class AddUserManagement
         If String.IsNullOrWhiteSpace(firstName.Text) Then Return "First name is required."
         If String.IsNullOrWhiteSpace(lastName.Text) Then Return "Last name is required."
         If String.IsNullOrWhiteSpace(email.Text) Then Return "Email is required."
-        If Not IsValidEmail(email.Text) Then Return "Please enter a valid email address."
+
         Dim roleValue As String = GetComboValue(Role, "")
         If String.IsNullOrWhiteSpace(roleValue) Then Return "Please select a user role."
-        If String.IsNullOrWhiteSpace(employeeID.Text) Then Return "Employee ID is required."
-        If String.IsNullOrWhiteSpace(passwordAddUser.Text) Then Return "Please provide an initial password."
+        If String.IsNullOrWhiteSpace(EmployeeID.Text) Then Return "Employee ID is required."
+        If String.IsNullOrWhiteSpace(passwordAdmin.Text) Then Return "Please provide an initial password."
         Return ""
     End Function
 
-    Private Shared Function IsValidEmail(value As String) As Boolean
-        If String.IsNullOrWhiteSpace(value) Then Return False
-        Dim pattern As String = "^[^@\s]+@[^@\s]+\.[^@\s]+$"
-        Return Regex.IsMatch(value.Trim(), pattern, RegexOptions.IgnoreCase)
-    End Function
+
 
     Private Shared Function GetComboValue(combo As ComboBox, Optional fallback As String = "") As String
         If combo Is Nothing Then Return fallback
-        If combo.SelectedItem Is Nothing Then
-            Dim manualValue As String = combo.Text
-            If Not String.IsNullOrWhiteSpace(manualValue) Then
-                Return manualValue.Trim()
-            End If
-            Return If(String.IsNullOrWhiteSpace(fallback), "", fallback)
+        If combo.SelectedIndex >= 0 AndAlso combo.SelectedItem IsNot Nothing Then
+            Return combo.SelectedItem.ToString()
         End If
-        Return combo.SelectedItem.ToString()
+        Dim manualValue As String = combo.Text
+        If Not String.IsNullOrWhiteSpace(manualValue) Then
+            Return manualValue.Trim()
+        End If
+        Return If(String.IsNullOrWhiteSpace(fallback), "", fallback)
     End Function
 
 End Class

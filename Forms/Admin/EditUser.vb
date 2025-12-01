@@ -41,9 +41,6 @@ Public Class EditUser
         End If
     End Sub
 
-    Private Sub ShowManageRestriction()
-        MessageBox.Show("You have view-only access to User Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
-    End Sub
 
     ' Load user data into the fields
     Public Sub LoadUserData(userID As String,
@@ -108,7 +105,7 @@ Public Class EditUser
     ' Save button
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles um_edituser_save.Click
         If Not canManageUsers Then
-            ShowManageRestriction()
+
             Return
         End If
         Dim validationMessage As String = ValidateFields()
@@ -215,7 +212,6 @@ Public Class EditUser
         If String.IsNullOrWhiteSpace(firstName.Text) Then Return "First name is required."
         If String.IsNullOrWhiteSpace(lastName.Text) Then Return "Last name is required."
         If String.IsNullOrWhiteSpace(email.Text) Then Return "Email is required."
-        If Not IsValidEmail(email.Text) Then Return "Please enter a valid email address."
         If usernameAdmin.SelectedIndex = -1 Then Return "Please select a user role."
         Return ""
     End Function
@@ -246,10 +242,7 @@ Public Class EditUser
         Return Nothing
     End Function
 
-    Private Shared Function IsValidEmail(value As String) As Boolean
-        If String.IsNullOrWhiteSpace(value) Then Return False
-        Return Regex.IsMatch(value.Trim(), "^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase)
-    End Function
+
 
     Private Sub SetComboValue(combo As ComboBox, value As String)
         If combo Is Nothing Then Return

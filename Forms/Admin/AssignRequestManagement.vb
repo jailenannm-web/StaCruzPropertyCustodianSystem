@@ -43,6 +43,12 @@ Public Class AssignRequestManagement
     End Sub
 
     Private Function EnsureModifyPermission() As Boolean
+        ' No restrictions for Super Admin, Admin, and Custodian
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        If hasFullAccess Then
+            Return True
+        End If
+        ' For other roles, check permission
         canModifyRequests = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyRequests)
         If Not canModifyRequests Then
             MessageBox.Show("You have view-only access to Property Request Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)

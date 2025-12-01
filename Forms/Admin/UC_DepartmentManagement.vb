@@ -81,25 +81,22 @@ Public Class UC_DepartmentManagement
             originalData = dt.Copy()
 
             If dt.Rows.Count > 0 Then
-                For Each row As DataRow In dt.Rows
-                    admin_deptmanagement.Rows.Add(
-                        If(IsDBNull(row("department_id")), "", row("department_id").ToString()),
-                        If(IsDBNull(row("department_name")), "", row("department_name").ToString()),
-                        If(IsDBNull(row("head_of_department")), "", row("head_of_department").ToString()),
-                        If(IsDBNull(row("contact_number")), "", row("contact_number").ToString()),
-                        If(IsDBNull(row("email")), "", row("email").ToString()),
-                        If(IsDBNull(row("location")), "", row("location").ToString()),
-                        If(IsDBNull(row("no_of_employees")), "0", row("no_of_employees").ToString()),
-                        If(IsDBNull(row("office_code")), "", row("office_code").ToString()),
-                        If(IsDBNull(row("office_hours")), "", row("office_hours").ToString()),
-                        If(IsDBNull(row("established_date")), "", If(IsDBNull(row("established_date")), "", CDate(row("established_date")).ToString("yyyy-MM-dd"))),
-                        If(IsDBNull(row("parent_department_id")), "", If(IsDBNull(row("parent_department_id")), "", row("parent_department_id").ToString())),
-                        If(IsDBNull(row("status")), "", row("status").ToString()),
-                        If(IsDBNull(row("budget_allocation")), "0.00", Format(CDec(row("budget_allocation")), "0.00")),
-                        If(IsDBNull(row("created_at")), "", If(IsDBNull(row("created_at")), "", CDate(row("created_at")).ToString("yyyy-MM-dd HH:mm"))),
-                        If(IsDBNull(row("updated_at")), "", If(IsDBNull(row("updated_at")), "", CDate(row("updated_at")).ToString("yyyy-MM-dd HH:mm")))
-                    )
-                Next
+            For Each row As DataRow In dt.Rows
+                ' Use safe column access
+                Dim deptName As String = If(row.Table.Columns.Contains("department_name") AndAlso Not IsDBNull(row("department_name")), row("department_name").ToString(), "")
+                Dim headOfDept As String = If(row.Table.Columns.Contains("head_of_department") AndAlso Not IsDBNull(row("head_of_department")), row("head_of_department").ToString(), "")
+                Dim deptID As String = If(row.Table.Columns.Contains("department_id") AndAlso Not IsDBNull(row("department_id")), row("department_id").ToString(), "")
+                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
+                Dim totalProps As String = If(row.Table.Columns.Contains("total_properties") AndAlso Not IsDBNull(row("total_properties")), row("total_properties").ToString(), "0")
+                Dim totalSupplies As String = If(row.Table.Columns.Contains("total_supplies") AndAlso Not IsDBNull(row("total_supplies")), row("total_supplies").ToString(), "0")
+                Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
+                
+                admin_deptmanagement.Rows.Add(deptName, headOfDept, deptID, location, totalProps, totalSupplies, status)
+            Next
+            ' Update total count
+            If ttldepartmentmanagement IsNot Nothing Then
+                ttldepartmentmanagement.Text = dt.Rows.Count.ToString()
+            End If
             End If
 
             ' Apply status filter if selected
@@ -123,29 +120,27 @@ Public Class UC_DepartmentManagement
         Try
             admin_deptmanagement.Rows.Clear()
             Dim filteredRows = originalData.AsEnumerable().Where(Function(row)
+                                                                     If Not row.Table.Columns.Contains("status") Then Return False
                                                                      Dim status As String = If(IsDBNull(row("status")), "", row("status").ToString().ToLower())
                                                                      Return status = statusFilter.ToLower()
                                                                  End Function)
 
             For Each row As DataRow In filteredRows
-                admin_deptmanagement.Rows.Add(
-                    If(IsDBNull(row("department_id")), "", row("department_id").ToString()),
-                    If(IsDBNull(row("department_name")), "", row("department_name").ToString()),
-                    If(IsDBNull(row("head_of_department")), "", row("head_of_department").ToString()),
-                    If(IsDBNull(row("contact_number")), "", row("contact_number").ToString()),
-                    If(IsDBNull(row("email")), "", row("email").ToString()),
-                    If(IsDBNull(row("location")), "", row("location").ToString()),
-                    If(IsDBNull(row("no_of_employees")), "0", row("no_of_employees").ToString()),
-                    If(IsDBNull(row("department_code")), "", row("department_code").ToString()),
-                    If(IsDBNull(row("office_hours")), "", row("office_hours").ToString()),
-                    If(IsDBNull(row("established_date")), "", If(IsDBNull(row("established_date")), "", CDate(row("established_date")).ToString("yyyy-MM-dd"))),
-                    If(IsDBNull(row("parent_department_id")), "", If(IsDBNull(row("parent_department_id")), "", row("parent_department_id").ToString())),
-                    If(IsDBNull(row("status")), "", row("status").ToString()),
-                    If(IsDBNull(row("budget_allocation")), "0.00", Format(CDec(row("budget_allocation")), "0.00")),
-                    If(IsDBNull(row("created_at")), "", If(IsDBNull(row("created_at")), "", CDate(row("created_at")).ToString("yyyy-MM-dd HH:mm"))),
-                    If(IsDBNull(row("updated_at")), "", If(IsDBNull(row("updated_at")), "", CDate(row("updated_at")).ToString("yyyy-MM-dd HH:mm")))
-                )
+                ' Use safe column access
+                Dim deptName As String = If(row.Table.Columns.Contains("department_name") AndAlso Not IsDBNull(row("department_name")), row("department_name").ToString(), "")
+                Dim headOfDept As String = If(row.Table.Columns.Contains("head_of_department") AndAlso Not IsDBNull(row("head_of_department")), row("head_of_department").ToString(), "")
+                Dim deptID As String = If(row.Table.Columns.Contains("department_id") AndAlso Not IsDBNull(row("department_id")), row("department_id").ToString(), "")
+                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
+                Dim totalProps As String = If(row.Table.Columns.Contains("total_properties") AndAlso Not IsDBNull(row("total_properties")), row("total_properties").ToString(), "0")
+                Dim totalSupplies As String = If(row.Table.Columns.Contains("total_supplies") AndAlso Not IsDBNull(row("total_supplies")), row("total_supplies").ToString(), "0")
+                Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
+                
+                admin_deptmanagement.Rows.Add(deptName, headOfDept, deptID, location, totalProps, totalSupplies, status)
             Next
+            ' Update total count
+            If ttldepartmentmanagement IsNot Nothing Then
+                ttldepartmentmanagement.Text = filteredRows.Count().ToString()
+            End If
         Catch ex As Exception
             MessageBox.Show("Error filtering departments: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -154,8 +149,15 @@ Public Class UC_DepartmentManagement
     Private Sub admin_deptmanagement_SelectionChanged(sender As Object, e As EventArgs)
         If admin_deptmanagement.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = admin_deptmanagement.SelectedRows(0)
-            If selectedRow.Cells("department_id").Value IsNot Nothing Then
-                Dim departmentIDStr As String = selectedRow.Cells("department_id").Value.ToString()
+            ' Try both column name variations
+            Dim deptIDCell As DataGridViewCell = Nothing
+            If admin_deptmanagement.Columns.Contains("DepartmentID") Then
+                deptIDCell = selectedRow.Cells("DepartmentID")
+            ElseIf admin_deptmanagement.Columns.Contains("department_id") Then
+                deptIDCell = selectedRow.Cells("department_id")
+            End If
+            If deptIDCell IsNot Nothing AndAlso deptIDCell.Value IsNot Nothing Then
+                Dim departmentIDStr As String = deptIDCell.Value.ToString()
                 If Integer.TryParse(departmentIDStr, selectedDepartmentID) Then
                     ' Row selected, enable Edit and Delete buttons
                 End If
@@ -186,13 +188,27 @@ Public Class UC_DepartmentManagement
         End If
 
         Dim selectedRow As DataGridViewRow = admin_deptmanagement.SelectedRows(0)
-        If selectedRow.Cells("department_id").Value Is Nothing Then
+        ' Try both column name variations
+        Dim deptIDCell As DataGridViewCell = Nothing
+        Dim deptNameCell As DataGridViewCell = Nothing
+        If admin_deptmanagement.Columns.Contains("DepartmentID") Then
+            deptIDCell = selectedRow.Cells("DepartmentID")
+        ElseIf admin_deptmanagement.Columns.Contains("department_id") Then
+            deptIDCell = selectedRow.Cells("department_id")
+        End If
+        If admin_deptmanagement.Columns.Contains("DepartmentName") Then
+            deptNameCell = selectedRow.Cells("DepartmentName")
+        ElseIf admin_deptmanagement.Columns.Contains("department_name") Then
+            deptNameCell = selectedRow.Cells("department_name")
+        End If
+        
+        If deptIDCell Is Nothing OrElse deptIDCell.Value Is Nothing Then
             MessageBox.Show("Invalid department selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        Dim departmentIDStr As String = selectedRow.Cells("department_id").Value.ToString()
-        Dim departmentName As String = If(selectedRow.Cells("department_name").Value IsNot Nothing, selectedRow.Cells("department_name").Value.ToString(), "Unknown")
+        Dim departmentIDStr As String = deptIDCell.Value.ToString()
+        Dim departmentName As String = If(deptNameCell IsNot Nothing AndAlso deptNameCell.Value IsNot Nothing, deptNameCell.Value.ToString(), "Unknown")
 
         Dim departmentID As Integer
         If Not Integer.TryParse(departmentIDStr, departmentID) Then

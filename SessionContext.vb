@@ -40,8 +40,7 @@ Public Module SessionContext
     End Function
 
     Public Function IsCustodian() As Boolean
-        Return String.Equals(CurrentRole, "Custodian", StringComparison.OrdinalIgnoreCase) _
-            OrElse String.Equals(CurrentRole, "Staff", StringComparison.OrdinalIgnoreCase)
+        Return String.Equals(CurrentRole, "Custodian", StringComparison.OrdinalIgnoreCase)
     End Function
 
     Public Function IsStaff() As Boolean
@@ -50,32 +49,11 @@ Public Module SessionContext
 
     ''' <summary>
     ''' Check if user has permission based on role requirements:
-    ''' - Super Admin: Full access to everything
-    ''' - Admin: Can manage requests, view inventories (NO add/edit/delete properties/supplies)
-    ''' - Custodian Admin: Full access to inventory/maintenance (NO user management)
+    ''' - Super Admin, Admin, and Custodian: Full access to everything (NO RESTRICTIONS)
     ''' </summary>
     Public Function HasPermission(permission As ModulePermission) As Boolean
-        Select Case permission
-            Case ModulePermission.ManageUsers
-                ' Super Admin and Admin can manage users
-                Return IsSuperAdmin() OrElse IsAdmin()
-            Case ModulePermission.ModifyProperties
-                ' Only Super Admin can modify properties
-                ' Admin can only VIEW (returns False here)
-                Return IsSuperAdmin()
-            Case ModulePermission.ModifySupplies
-                ' Only Super Admin can modify supplies
-                ' Admin can only VIEW (returns False here)
-                Return IsSuperAdmin()
-            Case ModulePermission.ModifyRequests
-                ' Super Admin, Admin, and Custodian Admin can manage requests
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin()
-            Case ModulePermission.ModifyMaintenance
-                ' Super Admin, Admin, and Custodian Admin can manage maintenance
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin()
-            Case Else
-                Return False
-        End Select
+        ' Super Admin, Admin, and Custodian have full access to all modules
+        Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin() OrElse IsCustodian()
     End Function
 
     ''' <summary>
@@ -99,6 +77,11 @@ Public Module SessionContext
     End Function
 
     Public Function DemandPermission(permission As ModulePermission, actionDescription As String) As Boolean
+        ' Super Admin, Admin, and Custodian bypass all permission checks
+        If IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin() OrElse IsCustodian() Then
+            Return True
+        End If
+
         If HasPermission(permission) Then
             Return True
         End If

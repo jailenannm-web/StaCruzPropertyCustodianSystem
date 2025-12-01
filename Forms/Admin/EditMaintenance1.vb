@@ -41,6 +41,12 @@ Public Class EditMaintenance1
     End Sub
 
     Private Function EnsureModifyPermission() As Boolean
+        ' No restrictions for Super Admin, Admin, and Custodian
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        If hasFullAccess Then
+            Return True
+        End If
+        ' For other roles, check permission
         canModifyMaintenance = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyMaintenance)
         If Not canModifyMaintenance Then
             MessageBox.Show("You have view-only access to Maintenance Management.", "Access Restricted", MessageBoxButtons.OK, MessageBoxIcon.Information)
