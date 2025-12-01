@@ -216,7 +216,7 @@ Public Class AdminDashboard
 
     ' Property Request Management
     Private Sub admin_btn_PropertyRequestManagement_Click(sender As Object, e As EventArgs) Handles admin_btn_PropertyRequestManagement.Click
-        admin_btn_PropertyRequestManagement.Text = "Property Request" & vbCrLf & "Management"
+        admin_btn_PropertyRequestManagement.Text = "Property Request" & Environment.NewLine & "Management"
         LoadUserControl(New UC_PropertyRequestManagement())
     End Sub
 

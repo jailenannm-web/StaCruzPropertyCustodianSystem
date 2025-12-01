@@ -102,7 +102,7 @@ Public Class SupplyInventory
         Catch ex As Exception
             Dim errorMsg As String = "Unable to connect to the database. Please ensure MySQL is running and try again."
             MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            System.Diagnostics.Debug.WriteLine("SupplyInventory LoadSupplyData Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("SupplyInventory LoadSupplyData Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
     Private Sub btnrequestsupply_Click(sender As Object, e As System.EventArgs)

@@ -168,7 +168,7 @@ Public Class UC_PropertyRequestManagement
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading property requests: " & GetUserFriendlyErrorMessage(ex, "load property requests"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("LoadRequestData Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("LoadRequestData Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

@@ -654,7 +654,7 @@ Public Class DatabaseConnection
                     System.Threading.Thread.Sleep(100)
                     Continue While
                 ElseIf ex.Message.Contains("ReplicationManager") Then
-                    MessageBox.Show("Database connection issue detected. Please ensure MySQL is running properly." & vbCrLf & "Error: " & ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("Database connection issue detected. Please ensure MySQL is running properly." & Environment.NewLine & "Error: " & ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Throw
                 Else
                     MessageBox.Show("Database connection error: " & ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -734,10 +734,10 @@ Public Class DatabaseConnection
             End If
 
             If Not SafeOpenConnection(conn) Then
-                MessageBox.Show("Database connection failed. Please ensure:" & vbCrLf & vbCrLf &
-                              "1. MySQL/XAMPP is running" & vbCrLf &
-                              "2. The database 'teamcruzim' exists" & vbCrLf &
-                              "3. Username 'root' has proper permissions" & vbCrLf &
+                MessageBox.Show("Database connection failed. Please ensure:" & Environment.NewLine & Environment.NewLine &
+                              "1. MySQL/XAMPP is running" & Environment.NewLine &
+                              "2. The database 'teamcruzim' exists" & Environment.NewLine &
+                              "3. Username 'root' has proper permissions" & Environment.NewLine &
                               "4. No firewall is blocking the connection", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return False
             End If
@@ -752,14 +752,14 @@ Public Class DatabaseConnection
             Return True
         Catch ex As MySqlException
             System.Diagnostics.Debug.WriteLine("[v0] Database connection test failed (MySQL): " & ex.Message)
-            Dim errorMsg As String = "MySQL Error: " & ex.Message & vbCrLf & vbCrLf
+            Dim errorMsg As String = "MySQL Error: " & ex.Message & Environment.NewLine & Environment.NewLine
             If ex.Number = 1045 Then
                 errorMsg &= "Invalid username or password. Please check your database credentials."
             ElseIf ex.Number = 1049 Then
                 errorMsg &= "Database 'teamcruzim' does not exist. Please create it first."
             ElseIf ex.Number = 2003 OrElse ex.Number = 0 Then
-                errorMsg &= "Cannot connect to MySQL server. Please ensure:" & vbCrLf &
-                           "1. XAMPP/MySQL is running" & vbCrLf &
+                errorMsg &= "Cannot connect to MySQL server. Please ensure:" & Environment.NewLine &
+                           "1. XAMPP/MySQL is running" & Environment.NewLine &
                            "2. MySQL service is started"
             Else
                 errorMsg &= "Please check your MySQL configuration and ensure the server is running."
@@ -768,10 +768,10 @@ Public Class DatabaseConnection
             Return False
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Database connection test failed: " & ex.Message)
-            Dim errorMsg As String = "Database connection failed: " & ex.Message & vbCrLf & vbCrLf &
-                                    "Please ensure:" & vbCrLf &
-                                    "1. MySQL/XAMPP is running" & vbCrLf &
-                                    "2. The database server is accessible" & vbCrLf &
+            Dim errorMsg As String = "Database connection failed: " & ex.Message & Environment.NewLine & Environment.NewLine &
+                                    "Please ensure:" & Environment.NewLine &
+                                    "1. MySQL/XAMPP is running" & Environment.NewLine &
+                                    "2. The database server is accessible" & Environment.NewLine &
                                     "3. Your connection settings are correct"
             MessageBox.Show(errorMsg, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
@@ -1655,7 +1655,7 @@ Public Class DatabaseConnection
             MessageBox.Show("Database connection issue during registration. Please try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Catch ex As MySqlException
-            System.Diagnostics.Debug.WriteLine("[v0] MySQL Registration Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] MySQL Registration Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
             Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "complete registration")
             MessageBox.Show(errorMsg, "Registration Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
@@ -1664,7 +1664,7 @@ Public Class DatabaseConnection
             MessageBox.Show("Database initialization error. Please restart the application and try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] Registration Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] Registration Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             If ex.Message.Contains("ReplicationManager") Then
                 MessageBox.Show("Database connection issue. Please ensure MySQL is running and try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
@@ -1967,11 +1967,11 @@ Public Class DatabaseConnection
         Catch ex As MySqlException
             Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "add supply")
             MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("[v0] Add Supply MySQL Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] Add Supply MySQL Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             Return False
         Catch ex As Exception
             MessageBox.Show(GetUserFriendlyErrorMessage(ex, "add supply"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            System.Diagnostics.Debug.WriteLine("[v0] Add Supply Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] Add Supply Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             Return False
         Finally
             ' Ensure connection is always properly closed and disposed
@@ -2347,12 +2347,12 @@ Public Class DatabaseConnection
                 End If
             End Using
         Catch ex As MySqlException
-            System.Diagnostics.Debug.WriteLine("[v0] AddProperty MySQL Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] AddProperty MySQL Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
             Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "add property")
             MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] AddProperty Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] AddProperty Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "add property")
             MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
@@ -2399,7 +2399,7 @@ Public Class DatabaseConnection
                 End Using
             End Using
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] GetAllProperties Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllProperties Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
         Finally
             If conn IsNot Nothing Then
                 Try
@@ -2459,6 +2459,7 @@ Public Class DatabaseConnection
                                  "VALUES (@userID, @departmentID, CURDATE(), @itemName, " &
                                  "@quantity, @purpose, 'Pending')"
 
+            Dim requestID As Integer = 0
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@userID", userID)
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
@@ -2468,7 +2469,54 @@ Public Class DatabaseConnection
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
-                    System.Diagnostics.Debug.WriteLine("[v0] Property Request Submitted Successfully")
+                    ' Get the inserted request ID
+                    Using getIdCmd As New MySqlCommand("SELECT LAST_INSERT_ID()", conn)
+                        Dim idResult As Object = getIdCmd.ExecuteScalar()
+                        If idResult IsNot Nothing AndAlso Not IsDBNull(idResult) Then
+                            requestID = Convert.ToInt32(idResult)
+                        End If
+                    End Using
+                    
+                    ' Get requester name for notification
+                    Dim requesterFullName As String = ""
+                    If Not String.IsNullOrEmpty(requesterName) Then
+                        requesterFullName = requesterName
+                    Else
+                        Try
+                            Using nameCmd As New MySqlCommand("SELECT CONCAT(COALESCE(first_name, ''), ' ', COALESCE(last_name, '')) AS full_name FROM users WHERE user_id = @userID LIMIT 1", conn)
+                                nameCmd.Parameters.AddWithValue("@userID", userID)
+                                Dim nameResult As Object = nameCmd.ExecuteScalar()
+                                If nameResult IsNot Nothing AndAlso Not IsDBNull(nameResult) Then
+                                    requesterFullName = nameResult.ToString().Trim()
+                                End If
+                            End Using
+                        Catch
+                            requesterFullName = "Staff #" & userID.ToString()
+                        End Try
+                    End If
+                    
+                    ' Create activity logs for all Admin and SuperAdmin users to notify them
+                    Try
+                        Using adminCmd As New MySqlCommand("SELECT user_id, username, role FROM users WHERE role IN ('Admin', 'SuperAdmin') AND status = 'Active'", conn)
+                            Using reader As MySqlDataReader = adminCmd.ExecuteReader()
+                                While reader.Read()
+                                    Dim adminID As Integer = Convert.ToInt32(reader("user_id"))
+                                    Dim adminUsername As String = reader("username").ToString()
+                                    Dim adminRole As String = reader("role").ToString()
+                                    Dim notificationMsg As String = $"New property request from {requesterFullName}: {itemName} (Quantity: {quantity})"
+                                    
+                                    ' Create activity log entry for this admin
+                                    LogActivity(adminID, adminRole, adminUsername, "NEW_PROPERTY_REQUEST", "Property Requests",
+                                               notificationMsg, "")
+                                End While
+                            End Using
+                        End Using
+                    Catch notifyEx As Exception
+                        ' Don't fail the request submission if notification fails
+                        System.Diagnostics.Debug.WriteLine("[v0] Failed to notify admins: " & notifyEx.Message)
+                    End Try
+                    
+                    System.Diagnostics.Debug.WriteLine("[v0] Property Request Submitted Successfully (ID: " & requestID & ")")
                     Return True
                 End If
             End Using
@@ -4160,7 +4208,7 @@ Public Class DatabaseConnection
             Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "load admin profile")
             MessageBox.Show(errorMsg, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] LoadAdminProfile Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] LoadAdminProfile Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show("Error loading admin profile: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If conn IsNot Nothing Then
@@ -4343,7 +4391,7 @@ Public Class DatabaseConnection
                 End If
             End Using
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] UpdateAdminProfile Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] UpdateAdminProfile Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show("Error updating admin profile: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Finally
@@ -6151,7 +6199,7 @@ Public Class DatabaseConnection
                 End Using
             End Using
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] GetAllProperties Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllProperties Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show(GetUserFriendlyErrorMessage(ex, "retrieve properties"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Finally
             If conn IsNot Nothing Then
@@ -6665,7 +6713,7 @@ Public Class DatabaseConnection
             System.Diagnostics.Debug.WriteLine("[v0] GetAllSupplies - ReplicationManager error: " & ex.Message)
             MessageBox.Show("Database connection issue. Please try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] GetAllSupplies Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllSupplies Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             If ex.Message.Contains("ReplicationManager") Then
                 MessageBox.Show("Database connection error. Please restart the application and ensure MySQL is running.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else

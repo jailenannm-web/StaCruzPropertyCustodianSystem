@@ -3,6 +3,7 @@ Imports System.Data
 Imports System.Windows.Forms
 Imports System.Linq
 Imports Microsoft.VisualBasic
+Imports MySql.Data.MySqlClient
 
 Public Class AssignRequestManagement
     Inherits UserControl
@@ -296,7 +297,7 @@ Public Class AssignRequestManagement
             End If
         Catch ex As Exception
             MessageBox.Show("Error assigning item: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("AssignRequestManagement btnSave_Click Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("AssignRequestManagement btnSave_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

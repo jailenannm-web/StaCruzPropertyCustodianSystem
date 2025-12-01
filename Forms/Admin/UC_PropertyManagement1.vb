@@ -126,7 +126,7 @@ Public Class UC_PropertyManagement1
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Debug.WriteLine("[v0] Load Properties Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            Debug.WriteLine("[v0] Load Properties Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

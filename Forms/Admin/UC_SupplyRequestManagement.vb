@@ -76,7 +76,7 @@ Public Class UC_SupplyRequestManagement
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading supply requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("LoadSupplyRequestData Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("LoadSupplyRequestData Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

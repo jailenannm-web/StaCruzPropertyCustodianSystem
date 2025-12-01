@@ -159,7 +159,7 @@ Public Class EditMaintenance1
             End If
         Catch ex As Exception
             MessageBox.Show("Error updating maintenance record: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("EditMaintenance1 btnSave_Click Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("EditMaintenance1 btnSave_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

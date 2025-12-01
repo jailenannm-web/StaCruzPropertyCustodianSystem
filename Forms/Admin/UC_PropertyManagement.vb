@@ -75,7 +75,7 @@ Public Class UC_PropertyManagement
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading supplies: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("[v0] Load Supplies Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] Load Supplies Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

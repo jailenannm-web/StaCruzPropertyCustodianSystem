@@ -36,9 +36,9 @@ Public Module CreateTestStaffAccount
             )
 
             If success Then
-                MessageBox.Show("Test staff account created successfully!" & vbCrLf &
-                              "Username: test_staff" & vbCrLf &
-                              "Password: Staff@1234" & vbCrLf &
+                MessageBox.Show("Test staff account created successfully!" & Environment.NewLine &
+                              "Username: test_staff" & Environment.NewLine &
+                              "Password: Staff@1234" & Environment.NewLine &
                               "Role: Staff",
                               "Test Account Created",
                               MessageBoxButtons.OK,

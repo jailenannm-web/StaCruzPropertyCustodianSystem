@@ -110,7 +110,7 @@ Public Class UC_MaintenanceManagement
             ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
                 errorMsg = "Invalid data format. Please refresh the list and try again."
             End If
-            MessageBox.Show(errorMsg & vbCrLf & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(errorMsg & Environment.NewLine & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -158,7 +158,7 @@ Public Class UC_MaintenanceManagement
             ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
                 errorMsg = "Invalid data format. Please refresh the list and try again."
             End If
-            MessageBox.Show(errorMsg & vbCrLf & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(errorMsg & Environment.NewLine & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -256,7 +256,7 @@ Public Class UC_MaintenanceManagement
             ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
                 errorMsg = "Invalid data format. Please refresh the list and try again."
             End If
-            MessageBox.Show(errorMsg & vbCrLf & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(errorMsg & Environment.NewLine & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -310,7 +310,7 @@ Public Class UC_MaintenanceManagement
             ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
                 errorMsg = "Invalid data format. Please refresh the list and try again."
             End If
-            MessageBox.Show(errorMsg & vbCrLf & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(errorMsg & Environment.NewLine & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 

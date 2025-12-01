@@ -131,7 +131,7 @@ Public Class AddProperty
             End If
         Catch ex As Exception
             MessageBox.Show("Error adding property: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("AddProperty btnSave_Click Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("AddProperty btnSave_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

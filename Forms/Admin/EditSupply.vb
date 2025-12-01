@@ -66,7 +66,7 @@ Public Class EditSupply
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading supply data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("[v0] EditSupply.LoadSupplyData Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("[v0] EditSupply.LoadSupplyData Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

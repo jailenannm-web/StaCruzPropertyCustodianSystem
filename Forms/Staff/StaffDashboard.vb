@@ -143,7 +143,7 @@ Public Class StaffDashboard
             ' Update summary cards
             UpdateDashboardSummary()
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("LoadDashboardData Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("LoadDashboardData Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

@@ -57,7 +57,7 @@ Public Class frmProfile
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading profile: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("frmProfile LoadProfileData Error: " & ex.Message & vbCrLf & ex.StackTrace)
+            System.Diagnostics.Debug.WriteLine("frmProfile LoadProfileData Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 End Class
