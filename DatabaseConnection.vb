@@ -2270,7 +2270,8 @@ Public Class DatabaseConnection
                                        serialNumber As String, acquisitionDate As Date, acquisitionCost As Decimal,
                                        supplierName As String, supplierContact As String, conditionStatus As String,
                                        location As String, custodianID As Integer?, departmentID As Integer?,
-                                       warrantyDetails As String, lifeSpan As Integer?) As Boolean
+                                       warrantyDetails As String, lifeSpan As Integer?,
+                                       Optional propertyNumber As String = "") As Boolean
         If Not DemandPermission(SessionContext.ModulePermission.ModifyProperties, "add properties") Then
             Return False
         End If
@@ -2298,11 +2299,11 @@ Public Class DatabaseConnection
                 depreciationValue = 0
             End If
 
-            Dim query As String = "INSERT INTO properties (item_name, category, description, serial_number, " &
-                                 "acquisition_date, acquisition_cost, condition, " &
+            Dim query As String = "INSERT INTO properties (item_name, category, description, serial_number, property_number, " &
+                                 "acquisition_date, acquisition_cost, condition, supplier_name, " &
                                  "location, assigned_to, department_id, status) " &
-                                 "VALUES (@propertyName, @category, @description, @serialNumber, @acquisitionDate, " &
-                                 "@acquisitionCost, @conditionStatus, @location, " &
+                                 "VALUES (@propertyName, @category, @description, @serialNumber, @propertyNumber, @acquisitionDate, " &
+                                 "@acquisitionCost, @conditionStatus, @supplierName, @location, " &
                                  "@custodianID, @departmentID, 'Active')"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -2310,9 +2311,11 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@category", category)
                 cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
                 cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrEmpty(serialNumber), DBNull.Value, serialNumber))
+                cmd.Parameters.AddWithValue("@propertyNumber", If(String.IsNullOrEmpty(propertyNumber), DBNull.Value, propertyNumber))
                 cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
                 cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
                 cmd.Parameters.AddWithValue("@conditionStatus", conditionStatus)
+                cmd.Parameters.AddWithValue("@supplierName", If(String.IsNullOrEmpty(supplierName), DBNull.Value, supplierName))
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
@@ -6626,8 +6629,8 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Get a single supply record by ID for edit forms.
     ''' </summary>
-    Public Shared Function GetSupplyById(supplyID As String) As DataRow
-        If String.IsNullOrWhiteSpace(supplyID) Then Return Nothing
+    Public Shared Function GetSupplyById(supplyID As Integer) As DataRow
+        If supplyID <= 0 Then Return Nothing
 
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing

@@ -247,7 +247,7 @@ Public Class UC_MaintenanceManagement
                     Dim description As String = If(IsDBNull(dataRow("maintenance_details")), "", dataRow("maintenance_details").ToString())
                     Dim currentStatus As String = If(IsDBNull(dataRow("status")), "Ongoing", dataRow("status").ToString())
                     Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
-                    
+
                     ' Use UpdateMaintenanceEntry to assign technician
                     Dim cost As Decimal = 0
                     If Not IsDBNull(dataRow("cost_materials_labor")) Then

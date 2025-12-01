@@ -113,6 +113,12 @@
   </ItemGroup>
   <!-- STAFF FORMS -->
   <ItemGroup>
+    <Compile Include="Forms\Admin\EditSupply.Designer.vb">
+      <DependentUpon>EditSupply.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\EditSupply.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Admin\UC_SupplyRequestManagement.Designer.vb">
       <DependentUpon>UC_SupplyRequestManagement.vb</DependentUpon>
     </Compile>
@@ -419,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\EditPropertyManagement.resx">
       <DependentUpon>EditPropertyManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\EditSupply.resx">
+      <DependentUpon>EditSupply.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\EditUser.resx">
       <DependentUpon>EditUser.vb</DependentUpon>
