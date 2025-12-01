@@ -34,63 +34,94 @@ Public Class StaffLogin
         Dim password As String = txb_Password.Text
         SessionContext.Reset()
 
-        ' Try to authenticate as Admin/SuperAdmin/Custodian first (checks hardcoded credentials first)
-        Dim adminResult As Dictionary(Of String, String) = DatabaseConnection.ValidateAdminLogin(username, password)
+        Try
+            ' Try to authenticate as Admin/SuperAdmin/Custodian first (checks hardcoded credentials first)
+            Dim adminResult As Dictionary(Of String, String) = Nothing
+            Try
+                adminResult = DatabaseConnection.ValidateAdminLogin(username, password)
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - ValidateAdminLogin Exception: " & ex.Message)
+                System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - ValidateAdminLogin StackTrace: " & ex.StackTrace)
+                ' Continue to try Staff authentication
+            End Try
 
-        If adminResult IsNot Nothing AndAlso adminResult.Count > 0 Then
-            Dim userType As String = adminResult("user_type")
-            Dim userIDValue As Integer
-            If adminResult.ContainsKey("user_id") Then Integer.TryParse(adminResult("user_id"), userIDValue)
-
-            SessionContext.SetCurrentUser(userIDValue, username, userType)
-            My.Settings.LoggedInuser = username
-            My.Settings.Save()
-
-            MessageBox.Show("Login successful! Welcome, " & username & " (" & userType & ").", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-            If userType = "SuperAdmin" Then
-                OpenDashboard(New SADashboard())
-            ElseIf userType = "Admin" Then
-                OpenDashboard(New AdminDashboard())
-            ElseIf userType = "Custodian" Then
-                ' Custodian has their own dashboard
-                OpenDashboard(New CustodianDashboard())
-            End If
-            Return
-        End If
-
-        ' Try to authenticate as Staff (registered accounts only, not hardcoded Custodian)
-        Dim staffResult As Dictionary(Of String, String) = DatabaseConnection.AuthenticateStaff(username, password)
-        If staffResult IsNot Nothing AndAlso staffResult.Count > 0 Then
-            Dim staffID As Integer = 0
-            If staffResult.ContainsKey("user_id") Then
-                If Not Integer.TryParse(staffResult("user_id"), staffID) Then
-                    ' Try staff_id if user_id parsing fails
-                    If staffResult.ContainsKey("staff_id") Then
-                        Integer.TryParse(staffResult("staff_id"), staffID)
-                    End If
+            If adminResult IsNot Nothing AndAlso adminResult.Count > 0 Then
+                Dim userType As String = ""
+                Dim userIDValue As Integer = 0
+                
+                If adminResult.ContainsKey("user_type") Then
+                    userType = adminResult("user_type")
                 End If
-            ElseIf staffResult.ContainsKey("staff_id") Then
-                Integer.TryParse(staffResult("staff_id"), staffID)
+                
+                If adminResult.ContainsKey("user_id") Then
+                    Integer.TryParse(adminResult("user_id"), userIDValue)
+                End If
+
+                If userIDValue > 0 AndAlso Not String.IsNullOrEmpty(userType) Then
+                    SessionContext.SetCurrentUser(userIDValue, username, userType)
+                    My.Settings.LoggedInuser = username
+                    My.Settings.Save()
+
+                    MessageBox.Show("Login successful! Welcome, " & username & " (" & userType & ").", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    If userType = "SuperAdmin" Then
+                        OpenDashboard(New SADashboard())
+                    ElseIf userType = "Admin" Then
+                        OpenDashboard(New AdminDashboard())
+                    ElseIf userType = "Custodian" Then
+                        ' Custodian has their own dashboard
+                        OpenDashboard(New CustodianDashboard())
+                    End If
+                    Return
+                End If
             End If
-            
-            If staffID > 0 Then
-                SessionContext.SetCurrentUser(staffID, username, "Staff")
-                My.Settings.LoggedInuser = username
-                My.Settings.Save()
 
-                MessageBox.Show("Login successful! Welcome, " & username & " (Staff).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' Try to authenticate as Staff (registered accounts only, not hardcoded Custodian)
+            Dim staffResult As Dictionary(Of String, String) = Nothing
+            Try
+                staffResult = DatabaseConnection.AuthenticateStaff(username, password)
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - AuthenticateStaff Exception: " & ex.Message)
+                System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - AuthenticateStaff StackTrace: " & ex.StackTrace)
+                MessageBox.Show("Error during authentication. Please check your database connection and try again.", "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End Try
 
-                OpenDashboard(New StaffDashboard())
+            If staffResult IsNot Nothing AndAlso staffResult.Count > 0 Then
+                Dim staffID As Integer = 0
+                If staffResult.ContainsKey("user_id") Then
+                    If Not Integer.TryParse(staffResult("user_id"), staffID) Then
+                        ' Try staff_id if user_id parsing fails
+                        If staffResult.ContainsKey("staff_id") Then
+                            Integer.TryParse(staffResult("staff_id"), staffID)
+                        End If
+                    End If
+                ElseIf staffResult.ContainsKey("staff_id") Then
+                    Integer.TryParse(staffResult("staff_id"), staffID)
+                End If
+                
+                If staffID > 0 Then
+                    SessionContext.SetCurrentUser(staffID, username, "Staff")
+                    My.Settings.LoggedInuser = username
+                    My.Settings.Save()
+
+                    MessageBox.Show("Login successful! Welcome, " & username & " (Staff).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    OpenDashboard(New StaffDashboard())
+                Else
+                    MessageBox.Show("Failed to retrieve user ID. Please contact administrator.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
             Else
-                MessageBox.Show("Failed to retrieve user ID. Please contact administrator.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                ' Show generic error message - detailed checking would require accessing private methods
+                MessageBox.Show("Invalid username or password. Please check your credentials and try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                txb_Password.Clear()
+                txb_Username.Focus()
             End If
-        Else
-            ' Show generic error message - detailed checking would require accessing private methods
-            MessageBox.Show("Invalid username or password. Please check your credentials and try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            txb_Password.Clear()
-            txb_Username.Focus()
-        End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - General Exception: " & ex.Message)
+            System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - General Exception StackTrace: " & ex.StackTrace)
+            MessageBox.Show("An unexpected error occurred during login. Please try again.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     ' Cancel button click

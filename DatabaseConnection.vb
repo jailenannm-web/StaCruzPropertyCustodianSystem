@@ -879,7 +879,18 @@ Public Class DatabaseConnection
             MessageBox.Show("Database connection issue. Please try again.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff Exception: " & ex.Message)
-            MessageBox.Show("Error validating staff login: " & ex.Message, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff Exception StackTrace: " & ex.StackTrace)
+            Dim errorMessage As String = "Error validating staff login."
+            If Not String.IsNullOrEmpty(ex.Message) Then
+                If ex.Message.Contains("user_type") OrElse ex.Message.Contains("unknown column") Then
+                    errorMessage = "Database schema error. Please contact administrator."
+                ElseIf ex.Message.Contains("connection") OrElse ex.Message.Contains("Connection") Then
+                    errorMessage = "Database connection error. Please check if MySQL is running."
+                Else
+                    errorMessage = "Error validating staff login: " & ex.Message
+                End If
+            End If
+            MessageBox.Show(errorMessage, "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If conn IsNot Nothing Then
                 Try
