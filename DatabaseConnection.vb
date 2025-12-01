@@ -2448,6 +2448,12 @@ Public Class DatabaseConnection
                 End Try
             End If
 
+            ' Validate userID is valid
+            If userID <= 0 Then
+                MessageBox.Show("Invalid user ID. Please log in again.", "Session Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+
             Dim query As String = "INSERT INTO property_requests (user_id, department_id, date_of_request, " &
                                  "item_name, quantity_requested, purpose, status) " &
                                  "VALUES (@userID, @departmentID, CURDATE(), @itemName, " &
@@ -2457,8 +2463,8 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@userID", userID)
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@itemName", If(String.IsNullOrEmpty(itemName), "Item Request", itemName))
-                cmd.Parameters.AddWithValue("@quantity", quantity)
-                cmd.Parameters.AddWithValue("@purpose", If(String.IsNullOrEmpty(purpose), "", purpose))
+                cmd.Parameters.AddWithValue("@quantity", If(quantity > 0, quantity, 1))
+                cmd.Parameters.AddWithValue("@purpose", If(String.IsNullOrEmpty(purpose), "General use", purpose))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -2541,6 +2547,12 @@ Public Class DatabaseConnection
                 End Try
             End If
 
+            ' Validate staffID is valid
+            If staffID <= 0 Then
+                MessageBox.Show("Invalid user ID. Please log in again.", "Session Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+
             Dim query As String = "INSERT INTO supply_requests (user_id, department_id, date_of_request, " &
                                  "item_name, quantity_requested, purpose, status) " &
                                  "VALUES (@userID, @departmentID, CURDATE(), @itemName, " &
@@ -2549,9 +2561,9 @@ Public Class DatabaseConnection
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@userID", staffID)
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@itemName", itemName)
-                cmd.Parameters.AddWithValue("@quantity", quantity)
-                cmd.Parameters.AddWithValue("@purpose", purpose)
+                cmd.Parameters.AddWithValue("@itemName", If(String.IsNullOrEmpty(itemName), "Supply Request", itemName))
+                cmd.Parameters.AddWithValue("@quantity", If(quantity > 0, quantity, 1))
+                cmd.Parameters.AddWithValue("@purpose", If(String.IsNullOrEmpty(purpose), "General use", purpose))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -3132,7 +3144,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             Dim query As String = "UPDATE supply_requests SET status = 'Rejected', approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
-                                  "WHERE request_id = @requestID AND status = 'Pending'"
+                                  "WHERE request_id = @requestID AND UPPER(status) = 'PENDING'"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
                 cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))

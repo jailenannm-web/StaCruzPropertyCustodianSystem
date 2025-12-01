@@ -226,7 +226,15 @@ Public Class UC_MaintenanceManagement
 
         Try
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-            Dim maintenanceID As Integer = Convert.ToInt32(selectedRow.Cells("maintenance_id").Value)
+            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
 
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to reject this maintenance record?", "Confirm Rejection", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If result = DialogResult.Yes Then
@@ -262,18 +270,22 @@ Public Class UC_MaintenanceManagement
 
         Try
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-            Dim maintenanceID As Integer = Convert.ToInt32(selectedRow.Cells("maintenance_id").Value)
+            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
 
             ' Prompt for technician name
             Dim technicianName As String = InputBox("Enter technician name to assign:", "Assign Technician", "")
             If Not String.IsNullOrEmpty(technicianName) Then
                 ' Update maintenance record with technician using DatabaseConnection
-                Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
-                If dt IsNot Nothing Then
-                    Dim rowIndex As Integer = selectedRow.Index
-                    Dim dataRow As DataRow = dt.Rows(rowIndex)
-                    Dim serviceDate As Date = If(IsDBNull(dataRow("maintenance_date")), Date.Today, CDate(dataRow("maintenance_date")))
-                    Dim serviceType As String = If(IsDBNull(dataRow("type_of_maintenance")), "Repair", dataRow("type_of_maintenance").ToString())
+                Dim serviceDate As Date = If(IsDBNull(dataRow("maintenance_date")), Date.Today, CDate(dataRow("maintenance_date")))
+                Dim serviceType As String = If(IsDBNull(dataRow("type_of_maintenance")), "Repair", dataRow("type_of_maintenance").ToString())
                     Dim description As String = If(IsDBNull(dataRow("maintenance_details")), "", dataRow("maintenance_details").ToString())
                     Dim currentStatus As String = If(IsDBNull(dataRow("status")), "Ongoing", dataRow("status").ToString())
                     Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
@@ -290,7 +302,7 @@ Public Class UC_MaintenanceManagement
                         MessageBox.Show("Failed to assign technician. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
                 End If
-            End If
+
         Catch ex As Exception
             Dim errorMsg As String = "An error occurred while assigning the technician."
             If TypeOf ex Is MySqlException Then

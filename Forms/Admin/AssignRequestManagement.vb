@@ -71,8 +71,8 @@ Public Class AssignRequestManagement
                 MessageBox.Show("Error loading request data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Else
-            ' No request ID - allow manual assignment but warn user
-            MessageBox.Show("No request selected. You can still assign items manually, but this is not recommended.", "No Request Selected", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' No request ID - show warning that assignment requires a request
+            MessageBox.Show("No request selected. Assignment requires a valid request. Please select a request from Property Request Management or Supply Request Management first.", "No Request Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
 
@@ -154,12 +154,10 @@ Public Class AssignRequestManagement
             Return
         End If
         
-        ' Validate that a request exists
+        ' Validate that a request exists - REQUIRED for assignment
         If currentRequestID <= 0 Then
-            Dim result As DialogResult = MessageBox.Show("No request is selected. Do you want to assign an item without a request? This is not recommended.", "No Request Selected", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
-            If result = DialogResult.No Then
-                Return
-            End If
+            MessageBox.Show("Cannot assign items without a valid request. Please select a request from Property Request Management or Supply Request Management first.", "No Request Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
         End If
         
         Try
@@ -231,11 +229,22 @@ Public Class AssignRequestManagement
                     End If
                     
                     If DatabaseConnection.ReleasePropertyRequest(currentRequestID, adminID, adminName, adminUserType, releaseDate, expectedReturnDate) Then
-                        ' Update property assignment
+                        ' Update property assignment - use assigned_to column (or assigned_to_custodian if that's the column name)
                         Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
                         If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                            Using cmd As New MySqlCommand("UPDATE properties SET assigned_to = (SELECT user_id FROM property_requests WHERE request_id = @requestID LIMIT 1), status = 'Assigned', updated_at = NOW() WHERE property_id = @propertyID", conn)
-                                cmd.Parameters.AddWithValue("@requestID", currentRequestID)
+                            ' Get user_id from request
+                            Dim userIDFromRequest As Integer = 0
+                            Using getUserCmd As New MySqlCommand("SELECT user_id FROM property_requests WHERE request_id = @requestID LIMIT 1", conn)
+                                getUserCmd.Parameters.AddWithValue("@requestID", currentRequestID)
+                                Dim userIDResult As Object = getUserCmd.ExecuteScalar()
+                                If userIDResult IsNot Nothing AndAlso Not IsDBNull(userIDResult) Then
+                                    userIDFromRequest = Convert.ToInt32(userIDResult)
+                                End If
+                            End Using
+                            
+                            ' Update property with assignment
+                            Using cmd As New MySqlCommand("UPDATE properties SET assigned_to = @userID, status = 'Assigned', updated_at = NOW() WHERE property_id = @propertyID", conn)
+                                cmd.Parameters.AddWithValue("@userID", If(userIDFromRequest > 0, userIDFromRequest, DBNull.Value))
                                 cmd.Parameters.AddWithValue("@propertyID", selectedPropertyID)
                                 cmd.ExecuteNonQuery()
                             End Using
@@ -247,8 +256,6 @@ Public Class AssignRequestManagement
                     Else
                         MessageBox.Show("Failed to assign property. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
-                Else
-                    MessageBox.Show("Cannot assign property without a valid request. Please select a request first.", "No Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
             ElseIf isSupply AndAlso selectedSupplyID > 0 Then
                 ' For supply requests, we need to update the supply_requests table
@@ -285,8 +292,6 @@ Public Class AssignRequestManagement
                         End Using
                         If conn.State = ConnectionState.Open Then conn.Close()
                     End If
-                Else
-                    MessageBox.Show("Cannot assign supply without a valid request. Please select a request first.", "No Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
             End If
         Catch ex As Exception
