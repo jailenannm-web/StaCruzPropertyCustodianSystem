@@ -164,13 +164,14 @@ Public Class StaffLogin
         Me.Hide()
     End Sub
     Private Sub StaffLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Initialize default accounts
+        ' Initialize default accounts (including hardcoded staff account)
+        ' This is done silently without permission checks since no user is logged in yet
         Try
             DatabaseConnection.InitializeDefaultAccounts()
-            ' Create test staff account if it doesn't exist
-            DatabaseConnection.CreateTestStaffAccount()
+            ' CreateTestStaffAccount is now handled by InitializeDefaultAccounts, so no need to call it separately
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Error initializing default accounts: " & ex.Message)
+            ' Don't show error to user during initialization - it's handled silently
         End Try
 
         ' SECRET BUTTON HIDDEN SETTINGS

@@ -1,5 +1,8 @@
 Imports System
+Imports System.Data
 Imports System.Windows.Forms
+Imports System.Linq
+Imports Microsoft.VisualBasic
 
 Public Class AssignRequestManagement
     Inherits UserControl
@@ -14,9 +17,28 @@ Public Class AssignRequestManagement
     Private currentRequestID As Integer = -1
     Private requestData As DataRow = Nothing
 
+    ' Public property to receive RequestID
+    Public Property RequestID As Integer
+        Get
+            Return currentRequestID
+        End Get
+        Set(value As Integer)
+            currentRequestID = value
+            If Me.IsHandleCreated Then
+                LoadRequestData()
+            End If
+        End Set
+    End Property
+
     Private Sub AssignRequestManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         EnsureModifyPermission()
-        LoadRequestData()
+        ' Load available properties/supplies even if no request
+        LoadAvailableProperties()
+        LoadAvailableSupplies()
+        ' Load request data if RequestID is set
+        If currentRequestID > 0 Then
+            LoadRequestData()
+        End If
     End Sub
 
     Private Sub LoadRequestData()
@@ -30,11 +52,9 @@ Public Class AssignRequestManagement
                 If requestRows.Length > 0 Then
                     requestData = requestRows(0)
                     PopulateFormFields()
-                Else
-                    MessageBox.Show("Request not found. Please select a valid request from the list.", "Request Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
             Catch ex As Exception
-                MessageBox.Show("Error loading request data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Diagnostics.Debug.WriteLine("[v0] LoadRequestData Exception: " & ex.Message)
             End Try
         End If
     End Sub
@@ -56,13 +76,13 @@ Public Class AssignRequestManagement
     End Sub
 
     Private Sub LoadAvailableProperties()
-        ' Load properties that are available and match the request criteria
+        ' Load properties that are available (can assign even without request)
         Try
             Dim propertiesTable As DataTable = DatabaseConnection.GetAllProperties()
-            ' Filter for available properties (status = 'Active' and not assigned)
+            ' Filter for available properties (status = 'Active' or 'Available')
             Dim availableProperties = propertiesTable.AsEnumerable().Where(Function(p)
                                                                                 Dim status As String = If(IsDBNull(p("status")), "", p("status").ToString().ToLower())
-                                                                                Return status = "active"
+                                                                                Return status = "active" OrElse status = "available"
                                                                             End Function).CopyToDataTable()
 
             ' Populate ComboBox with available properties
@@ -73,6 +93,31 @@ Public Class AssignRequestManagement
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadAvailableProperties Exception: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub LoadAvailableSupplies()
+        ' Load supplies that are available (can assign even without request)
+        Try
+            Dim suppliesTable As DataTable = DatabaseConnection.GetAllSupplies()
+            ' Filter for available supplies
+            Dim availableSupplies = suppliesTable.AsEnumerable().Where(Function(s)
+                                                                                Dim status As String = If(IsDBNull(s("Status")), "", s("Status").ToString().ToLower())
+                                                                                Dim qty As Integer = 0
+                                                                                If s.Table.Columns.Contains("QuantityInStock") AndAlso Not IsDBNull(s("QuantityInStock")) Then
+                                                                                    Integer.TryParse(s("QuantityInStock").ToString(), qty)
+                                                                                End If
+                                                                                Return (status = "available" OrElse status = "") AndAlso qty > 0
+                                                                            End Function).CopyToDataTable()
+
+            ' Populate ComboBox with available supplies
+            If ComboBox2 IsNot Nothing Then
+                ComboBox2.DataSource = availableSupplies
+                ComboBox2.DisplayMember = "SupplyName"
+                ComboBox2.ValueMember = "SupplyID"
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadAvailableSupplies Exception: " & ex.Message)
         End Try
     End Sub
 

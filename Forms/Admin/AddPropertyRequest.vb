@@ -1,12 +1,21 @@
 ﻿Imports System
 Imports System.Windows.Forms
+Imports System.Collections.Generic
 
 Public Class AddPropertyRequest
     Inherits UserControl
+    
+    Private _prefillItemName As String = ""
 
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
+    End Sub
+    
+    Public Sub New(itemName As String)
+        InitializeComponent()
+        Me.Dock = DockStyle.Fill
+        _prefillItemName = itemName
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -148,6 +157,21 @@ Public Class AddPropertyRequest
     End Sub
 
     Private Sub AddPropertyRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        ' Pre-fill item name if provided
+        If Not String.IsNullOrEmpty(_prefillItemName) Then
+            TextBox8.Text = _prefillItemName
+        End If
+        
+        ' Pre-fill user info if available
+        If SessionContext.CurrentUserID.HasValue Then
+            Try
+                Dim profile As Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
+                If profile IsNot Nothing AndAlso profile.Count > 0 Then
+                    ' Fill in requester name, position, department if fields exist
+                    ' Note: Adjust field names based on actual form controls
+                End If
+            Catch
+            End Try
+        End If
     End Sub
 End Class

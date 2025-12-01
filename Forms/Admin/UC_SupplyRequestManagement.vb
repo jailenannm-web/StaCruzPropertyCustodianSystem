@@ -25,11 +25,44 @@ Public Class UC_SupplyRequestManagement
     Private Sub LoadSupplyRequestData()
         Try
             Dim dt As DataTable = DatabaseConnection.GetAllSuppliesRequests()
+            
+            If dt Is Nothing Then
+                MessageBox.Show("Unable to load supply requests. Please check your database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
             If prm_table1 IsNot Nothing Then
                 prm_table1.DataSource = dt
                 prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
                 prm_table1.ReadOnly = True
+                prm_table1.AllowUserToAddRows = False
+                prm_table1.AllowUserToDeleteRows = False
                 prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+
+                ' Set friendly column headers - must set on DataGridView columns after DataSource is set
+                ' Wait for columns to be created
+                Application.DoEvents()
+                
+                For Each col As DataGridViewColumn In prm_table1.Columns
+                    Select Case col.Name.ToLower()
+                        Case "requester_name"
+                            col.HeaderText = "Name of Requester"
+                        Case "department"
+                            col.HeaderText = "Department"
+                        Case "date_of_request"
+                            col.HeaderText = "Date of Request"
+                        Case "item_name"
+                            col.HeaderText = "Item Name"
+                        Case "quantity_requested"
+                            col.HeaderText = "Quantity Requested"
+                        Case "purpose"
+                            col.HeaderText = "Purpose"
+                        Case "status"
+                            col.HeaderText = "Status"
+                        Case "request_id"
+                            col.Visible = False ' Hide request_id column
+                    End Select
+                Next
 
                 ' Update total count
                 Dim totalLabel As Label = Nothing
@@ -38,11 +71,12 @@ Public Class UC_SupplyRequestManagement
                     totalLabel = TryCast(foundControls(0), Label)
                 End If
                 If totalLabel IsNot Nothing Then
-                    totalLabel.Text = If(dt IsNot Nothing AndAlso dt.Rows.Count > 0, dt.Rows.Count.ToString(), "0")
+                    totalLabel.Text = If(dt.Rows.Count > 0, dt.Rows.Count.ToString(), "0")
                 End If
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading supply requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("LoadSupplyRequestData Error: " & ex.Message & vbCrLf & ex.StackTrace)
         End Try
     End Sub
 
@@ -57,14 +91,14 @@ Public Class UC_SupplyRequestManagement
 
     Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
         ' No restrictions for Super Admin, Admin, and Custodian
-        If tblSupplyRequestmanagement.SelectedRows.Count = 0 Then
+        If prm_table1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a request to reject.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Try
-            Dim selectedRow As DataGridViewRow = tblSupplyRequestmanagement.SelectedRows(0)
-            Dim dt As DataTable = TryCast(tblSupplyRequestmanagement.DataSource, DataTable)
+            Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
             If dt Is Nothing Then
                 MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
@@ -72,8 +106,15 @@ Public Class UC_SupplyRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim requestID As Integer = Convert.ToInt32(dataRow("request_id"))
-            Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
+            Dim requestIDValue As Object = If(dt.Columns.Contains("request_id"), dataRow("request_id"), Nothing)
+            Dim requestIDStr As String = If(requestIDValue IsNot Nothing AndAlso Not IsDBNull(requestIDValue), requestIDValue.ToString(), "")
+            If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
+                MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            Dim requestID As Integer = Integer.Parse(requestIDStr)
+            Dim statusValue As Object = If(dt.Columns.Contains("status"), dataRow("status"), Nothing)
+            Dim currentStatus As String = If(statusValue IsNot Nothing AndAlso Not IsDBNull(statusValue), statusValue.ToString().ToLower(), "")
 
             If currentStatus = "rejected" Then
                 MessageBox.Show("This request is already rejected.", "Already Rejected", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -101,14 +142,14 @@ Public Class UC_SupplyRequestManagement
 
     Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
         ' No restrictions for Super Admin, Admin, and Custodian
-        If tblSupplyRequestmanagement.SelectedRows.Count = 0 Then
+        If prm_table1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a request to approve.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Try
-            Dim selectedRow As DataGridViewRow = tblSupplyRequestmanagement.SelectedRows(0)
-            Dim dt As DataTable = TryCast(tblSupplyRequestmanagement.DataSource, DataTable)
+            Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
             If dt Is Nothing Then
                 MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
@@ -116,8 +157,15 @@ Public Class UC_SupplyRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim requestID As Integer = Convert.ToInt32(dataRow("request_id"))
-            Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
+            Dim requestIDValue As Object = If(dt.Columns.Contains("request_id"), dataRow("request_id"), Nothing)
+            Dim requestIDStr As String = If(requestIDValue IsNot Nothing AndAlso Not IsDBNull(requestIDValue), requestIDValue.ToString(), "")
+            If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
+                MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            Dim requestID As Integer = Integer.Parse(requestIDStr)
+            Dim statusValue As Object = If(dt.Columns.Contains("status"), dataRow("status"), Nothing)
+            Dim currentStatus As String = If(statusValue IsNot Nothing AndAlso Not IsDBNull(statusValue), statusValue.ToString().ToLower(), "")
 
             If currentStatus = "approved" Then
                 MessageBox.Show("This request is already approved.", "Already Approved", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -158,7 +206,7 @@ Public Class UC_SupplyRequestManagement
 
     End Sub
 
-    Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblSupplyRequestmanagement.CellContentClick
+    Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles prm_table1.CellContentClick
 
     End Sub
 End Class

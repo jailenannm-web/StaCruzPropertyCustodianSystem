@@ -24,19 +24,54 @@ Public Class frmRequest
             DataGridView1.Rows.Clear()
             
             ' Populate DataGridView
-            For Each row As DataRow In dt.Rows
-                Dim requestID As String = If(IsDBNull(row("request_id")), "", row("request_id").ToString())
-                Dim requestDate As String = If(IsDBNull(row("request_date")), "", Convert.ToDateTime(row("request_date")).ToString("yyyy-MM-dd"))
-                Dim itemName As String = If(IsDBNull(row("item_name")), "", row("item_name").ToString())
-                Dim requestType As String = If(IsDBNull(row("request_type")), "", row("request_type").ToString())
-                Dim quantity As String = If(IsDBNull(row("quantity")), "1", row("quantity").ToString())
-                Dim status As String = If(IsDBNull(row("status")), "", row("status").ToString())
-                Dim approvedBy As String = If(IsDBNull(row("approval_date")), "", Convert.ToDateTime(row("approval_date")).ToString("yyyy-MM-dd"))
-                Dim releaseDate As String = If(IsDBNull(row("release_date")), "", If(IsDBNull(row("release_date")), "", Convert.ToDateTime(row("release_date")).ToString("yyyy-MM-dd")))
-                Dim returnDate As String = If(IsDBNull(row("expected_return_date")), "", If(IsDBNull(row("expected_return_date")), "", Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd")))
-                
-                DataGridView1.Rows.Add(requestID, requestDate, itemName, requestType, quantity, status, approvedBy, releaseDate, returnDate)
-            Next
+            If dt.Rows.Count > 0 Then
+                For Each row As DataRow In dt.Rows
+                    Try
+                        Dim requestID As String = ""
+                        Dim requestDate As String = ""
+                        Dim itemName As String = ""
+                        Dim requestType As String = ""
+                        Dim quantity As String = "1"
+                        Dim status As String = ""
+                        Dim approvedBy As String = ""
+                        Dim releaseDate As String = ""
+                        Dim returnDate As String = ""
+                        
+                        ' Safely access columns
+                        If dt.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")) Then
+                            requestID = row("request_id").ToString()
+                        End If
+                        If dt.Columns.Contains("request_date") AndAlso Not IsDBNull(row("request_date")) Then
+                            requestDate = Convert.ToDateTime(row("request_date")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
+                            itemName = row("item_name").ToString()
+                        End If
+                        If dt.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")) Then
+                            requestType = row("request_type").ToString()
+                        End If
+                        If dt.Columns.Contains("quantity") AndAlso Not IsDBNull(row("quantity")) Then
+                            quantity = row("quantity").ToString()
+                        End If
+                        If dt.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
+                            status = row("status").ToString()
+                        End If
+                        If dt.Columns.Contains("approval_date") AndAlso Not IsDBNull(row("approval_date")) Then
+                            approvedBy = Convert.ToDateTime(row("approval_date")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("release_date") AndAlso Not IsDBNull(row("release_date")) Then
+                            releaseDate = Convert.ToDateTime(row("release_date")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("expected_return_date") AndAlso Not IsDBNull(row("expected_return_date")) Then
+                            returnDate = Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd")
+                        End If
+                        
+                        DataGridView1.Rows.Add(requestID, requestDate, itemName, requestType, quantity, status, approvedBy, releaseDate, returnDate)
+                    Catch rowEx As Exception
+                        System.Diagnostics.Debug.WriteLine("Error processing row in frmRequest: " & rowEx.Message)
+                    End Try
+                Next
+            End If
             
             ' Auto-size columns
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill

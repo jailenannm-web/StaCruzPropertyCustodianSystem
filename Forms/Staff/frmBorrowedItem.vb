@@ -24,20 +24,58 @@ Public Class frmBorrowedItem
             DataGridView1.Rows.Clear()
             
             ' Populate DataGridView
-            For Each row As DataRow In dt.Rows
-                Dim requestID As String = If(IsDBNull(row("request_id")), "", row("request_id").ToString())
-                Dim propertyNo As String = If(IsDBNull(row("serial_number")), "", row("serial_number").ToString())
-                Dim itemName As String = If(IsDBNull(row("item_name")), "", row("item_name").ToString())
-                Dim requestType As String = If(IsDBNull(row("request_type")), "", row("request_type").ToString())
-                Dim borrowDate As String = If(IsDBNull(row("request_date")), "", Convert.ToDateTime(row("request_date")).ToString("yyyy-MM-dd"))
-                Dim expectedReturn As String = If(IsDBNull(row("expected_return_date")), "", If(IsDBNull(row("expected_return_date")), "", Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd")))
-                Dim status As String = If(IsDBNull(row("accountability_status")), "", row("accountability_status").ToString())
-                Dim actualReturn As String = If(IsDBNull(row("actual_returned_date")), "", If(IsDBNull(row("actual_returned_date")), "", Convert.ToDateTime(row("actual_returned_date")).ToString("yyyy-MM-dd")))
-                Dim conditionReturn As String = If(IsDBNull(row("condition_upon_return")), "", row("condition_upon_return").ToString())
-                Dim quantity As String = If(IsDBNull(row("quantity")), "1", row("quantity").ToString())
-                
-                DataGridView1.Rows.Add(requestID, propertyNo, itemName, requestType, quantity, borrowDate, expectedReturn, status, "", actualReturn, conditionReturn)
-            Next
+            If dt.Rows.Count > 0 Then
+                For Each row As DataRow In dt.Rows
+                    Try
+                        Dim requestID As String = ""
+                        Dim propertyNo As String = ""
+                        Dim itemName As String = ""
+                        Dim requestType As String = ""
+                        Dim borrowDate As String = ""
+                        Dim expectedReturn As String = ""
+                        Dim status As String = ""
+                        Dim actualReturn As String = ""
+                        Dim conditionReturn As String = ""
+                        Dim quantity As String = "1"
+                        
+                        ' Safely access columns
+                        If dt.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")) Then
+                            requestID = row("request_id").ToString()
+                        End If
+                        If dt.Columns.Contains("serial_number") AndAlso Not IsDBNull(row("serial_number")) Then
+                            propertyNo = row("serial_number").ToString()
+                        End If
+                        If dt.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
+                            itemName = row("item_name").ToString()
+                        End If
+                        If dt.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")) Then
+                            requestType = row("request_type").ToString()
+                        End If
+                        If dt.Columns.Contains("request_date") AndAlso Not IsDBNull(row("request_date")) Then
+                            borrowDate = Convert.ToDateTime(row("request_date")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("expected_return_date") AndAlso Not IsDBNull(row("expected_return_date")) Then
+                            expectedReturn = Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("accountability_status") AndAlso Not IsDBNull(row("accountability_status")) Then
+                            status = row("accountability_status").ToString()
+                        End If
+                        If dt.Columns.Contains("actual_returned_date") AndAlso Not IsDBNull(row("actual_returned_date")) Then
+                            actualReturn = Convert.ToDateTime(row("actual_returned_date")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("condition_upon_return") AndAlso Not IsDBNull(row("condition_upon_return")) Then
+                            conditionReturn = row("condition_upon_return").ToString()
+                        End If
+                        If dt.Columns.Contains("quantity") AndAlso Not IsDBNull(row("quantity")) Then
+                            quantity = row("quantity").ToString()
+                        End If
+                        
+                        DataGridView1.Rows.Add(requestID, propertyNo, itemName, requestType, quantity, borrowDate, expectedReturn, status, "", actualReturn, conditionReturn)
+                    Catch rowEx As Exception
+                        System.Diagnostics.Debug.WriteLine("Error processing row in frmBorrowedItem: " & rowEx.Message)
+                    End Try
+                Next
+            End If
             
             ' Auto-size columns
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill

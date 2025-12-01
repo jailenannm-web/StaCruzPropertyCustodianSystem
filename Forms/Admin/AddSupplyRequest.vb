@@ -3,6 +3,17 @@ Imports System.Windows.Forms
 
 Public Class AddSupplyRequest
     Inherits System.Windows.Forms.UserControl
+    
+    Private _prefillItemName As String = ""
+
+    Public Sub New()
+        InitializeComponent()
+    End Sub
+    
+    Public Sub New(itemName As String)
+        InitializeComponent()
+        _prefillItemName = itemName
+    End Sub
 
     Private Sub employeeID_Click(sender As Object, e As System.EventArgs) Handles sqr_employeeID.Click
 
@@ -14,6 +25,13 @@ Public Class AddSupplyRequest
             parentDashboard.LoadUserControl(New SupplyInventory())
         Else
             Me.Parent.Controls.Remove(Me)
+        End If
+    End Sub
+
+    Private Sub AddSupplyRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Pre-fill item name if provided
+        If Not String.IsNullOrEmpty(_prefillItemName) Then
+            TextBox8.Text = _prefillItemName
         End If
     End Sub
 

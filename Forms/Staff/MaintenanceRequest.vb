@@ -32,19 +32,54 @@ Partial Public Class MaintenanceRequest
             DataGridView1.Rows.Clear()
 
             ' Populate DataGridView
-            For Each row As DataRow In dt.Rows
-                Dim itemName As String = If(IsDBNull(row("item_name")), "", row("item_name").ToString())
-                Dim serialNo As String = If(IsDBNull(row("serial_number")), "", row("serial_number").ToString())
-                Dim location As String = If(IsDBNull(row("location")), "", row("location").ToString())
-                Dim department As String = If(IsDBNull(row("department_name")), "", row("department_name").ToString())
-                Dim conditionBefore As String = If(IsDBNull(row("condition_before")), "", row("condition_before").ToString())
-                Dim typeOfIssue As String = If(IsDBNull(row("type_of_issue")), "", row("type_of_issue").ToString())
-                Dim problemDesc As String = If(IsDBNull(row("problem_description")), "", row("problem_description").ToString())
-                Dim maintenanceDate As String = If(IsDBNull(row("date_requested")), "", Convert.ToDateTime(row("date_requested")).ToString("yyyy-MM-dd"))
-                Dim status As String = If(IsDBNull(row("status")), "", row("status").ToString())
+            If dt.Rows.Count > 0 Then
+                For Each row As DataRow In dt.Rows
+                    Try
+                        Dim itemName As String = ""
+                        Dim serialNo As String = ""
+                        Dim location As String = ""
+                        Dim department As String = ""
+                        Dim conditionBefore As String = ""
+                        Dim typeOfIssue As String = ""
+                        Dim problemDesc As String = ""
+                        Dim maintenanceDate As String = ""
+                        Dim status As String = ""
+                        
+                        ' Safely access columns
+                        If dt.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
+                            itemName = row("item_name").ToString()
+                        End If
+                        If dt.Columns.Contains("serial_number") AndAlso Not IsDBNull(row("serial_number")) Then
+                            serialNo = row("serial_number").ToString()
+                        End If
+                        If dt.Columns.Contains("location") AndAlso Not IsDBNull(row("location")) Then
+                            location = row("location").ToString()
+                        End If
+                        If dt.Columns.Contains("department_name") AndAlso Not IsDBNull(row("department_name")) Then
+                            department = row("department_name").ToString()
+                        End If
+                        If dt.Columns.Contains("condition_before") AndAlso Not IsDBNull(row("condition_before")) Then
+                            conditionBefore = row("condition_before").ToString()
+                        End If
+                        If dt.Columns.Contains("type_of_issue") AndAlso Not IsDBNull(row("type_of_issue")) Then
+                            typeOfIssue = row("type_of_issue").ToString()
+                        End If
+                        If dt.Columns.Contains("problem_description") AndAlso Not IsDBNull(row("problem_description")) Then
+                            problemDesc = row("problem_description").ToString()
+                        End If
+                        If dt.Columns.Contains("date_requested") AndAlso Not IsDBNull(row("date_requested")) Then
+                            maintenanceDate = Convert.ToDateTime(row("date_requested")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
+                            status = row("status").ToString()
+                        End If
 
-                DataGridView1.Rows.Add(itemName, serialNo, location, department, conditionBefore, typeOfIssue, problemDesc, maintenanceDate, status)
-            Next
+                        DataGridView1.Rows.Add(itemName, serialNo, location, department, conditionBefore, typeOfIssue, problemDesc, maintenanceDate, status)
+                    Catch rowEx As Exception
+                        System.Diagnostics.Debug.WriteLine("Error processing row in MaintenanceRequest: " & rowEx.Message)
+                    End Try
+                Next
+            End If
 
             ' Auto-size columns
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill

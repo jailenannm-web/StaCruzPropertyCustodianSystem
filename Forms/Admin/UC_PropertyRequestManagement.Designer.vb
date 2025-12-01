@@ -28,14 +28,7 @@ Partial Class UC_PropertyRequestManagement
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.admin_label_PropertyRequestManagement = New System.Windows.Forms.Label()
-        Me.tblpropertyrequestmanagement = New System.Windows.Forms.DataGridView()
-        Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.prm_table1 = New System.Windows.Forms.DataGridView()
         Me.request_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.employee_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.department_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,16 +42,23 @@ Partial Class UC_PropertyRequestManagement
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.penalty = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updated_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
+        Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.issuePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
-        Me.issuePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        CType(Me.tblpropertyrequestmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_PropertyRequestManagement
@@ -71,70 +71,21 @@ Partial Class UC_PropertyRequestManagement
         Me.admin_label_PropertyRequestManagement.TabIndex = 33
         Me.admin_label_PropertyRequestManagement.Text = "Property Request Management"
         '
-        'tblpropertyrequestmanagement
+        'prm_table1
         '
-        Me.tblpropertyrequestmanagement.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.prm_table1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tblpropertyrequestmanagement.BackgroundColor = System.Drawing.Color.White
-        Me.tblpropertyrequestmanagement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblpropertyrequestmanagement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
-        Me.tblpropertyrequestmanagement.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.tblpropertyrequestmanagement.Location = New System.Drawing.Point(62, 126)
-        Me.tblpropertyrequestmanagement.Name = "tblpropertyrequestmanagement"
-        Me.tblpropertyrequestmanagement.RowHeadersWidth = 51
-        Me.tblpropertyrequestmanagement.RowTemplate.Height = 24
-        Me.tblpropertyrequestmanagement.Size = New System.Drawing.Size(1270, 573)
-        Me.tblpropertyrequestmanagement.TabIndex = 34
-        '
-        'NameOfRequester
-        '
-        Me.NameOfRequester.HeaderText = "Name Of Requester"
-        Me.NameOfRequester.MinimumWidth = 6
-        Me.NameOfRequester.Name = "NameOfRequester"
-        Me.NameOfRequester.Width = 125
-        '
-        'Department
-        '
-        Me.Department.HeaderText = "Department"
-        Me.Department.MinimumWidth = 6
-        Me.Department.Name = "Department"
-        Me.Department.Width = 125
-        '
-        'DateOfRequest
-        '
-        Me.DateOfRequest.HeaderText = "Date Of Request"
-        Me.DateOfRequest.MinimumWidth = 6
-        Me.DateOfRequest.Name = "DateOfRequest"
-        Me.DateOfRequest.Width = 125
-        '
-        'ItemName
-        '
-        Me.ItemName.HeaderText = "Item Name"
-        Me.ItemName.MinimumWidth = 6
-        Me.ItemName.Name = "ItemName"
-        Me.ItemName.Width = 125
-        '
-        'QuantityRequested
-        '
-        Me.QuantityRequested.HeaderText = "Quantity Requested"
-        Me.QuantityRequested.MinimumWidth = 6
-        Me.QuantityRequested.Name = "QuantityRequested"
-        Me.QuantityRequested.Width = 125
-        '
-        'Purpose
-        '
-        Me.Purpose.HeaderText = "Purpose"
-        Me.Purpose.MinimumWidth = 6
-        Me.Purpose.Name = "Purpose"
-        Me.Purpose.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
+        Me.prm_table1.BackgroundColor = System.Drawing.Color.White
+        Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
+        Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.prm_table1.Location = New System.Drawing.Point(62, 126)
+        Me.prm_table1.Name = "prm_table1"
+        Me.prm_table1.RowHeadersWidth = 51
+        Me.prm_table1.RowTemplate.Height = 24
+        Me.prm_table1.Size = New System.Drawing.Size(1270, 573)
+        Me.prm_table1.TabIndex = 34
         '
         'request_id
         '
@@ -227,20 +178,77 @@ Partial Class UC_PropertyRequestManagement
         Me.updated_at.Name = "updated_at"
         Me.updated_at.Width = 125
         '
-        'assign
+        'Label1
         '
-        Me.assign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.assign.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.assign.CornerRadius = 15
-        Me.assign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.assign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.assign.ForeColor = System.Drawing.Color.White
-        Me.assign.Location = New System.Drawing.Point(1133, 78)
-        Me.assign.Name = "assign"
-        Me.assign.Size = New System.Drawing.Size(93, 33)
-        Me.assign.TabIndex = 156
-        Me.assign.Text = "Assign"
-        Me.assign.UseVisualStyleBackColor = False
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(52, 713)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.TabIndex = 159
+        Me.Label1.Text = "TOTAL:"
+        '
+        'ttlpropertyrequestmanagement
+        '
+        Me.ttlpropertyrequestmanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.ttlpropertyrequestmanagement.AutoSize = True
+        Me.ttlpropertyrequestmanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ttlpropertyrequestmanagement.ForeColor = System.Drawing.Color.Black
+        Me.ttlpropertyrequestmanagement.Location = New System.Drawing.Point(203, 713)
+        Me.ttlpropertyrequestmanagement.Name = "ttlpropertyrequestmanagement"
+        Me.ttlpropertyrequestmanagement.Size = New System.Drawing.Size(47, 58)
+        Me.ttlpropertyrequestmanagement.TabIndex = 158
+        Me.ttlpropertyrequestmanagement.Text = "0"
+        '
+        'btnAssign
+        '
+        Me.btnAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAssign.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnAssign.CornerRadius = 15
+        Me.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAssign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnAssign.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAssign.Location = New System.Drawing.Point(902, 76)
+        Me.btnAssign.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAssign.Name = "btnAssign"
+        Me.btnAssign.Size = New System.Drawing.Size(99, 34)
+        Me.btnAssign.TabIndex = 162
+        Me.btnAssign.Text = "Assign"
+        Me.btnAssign.UseVisualStyleBackColor = False
+        '
+        'printPAR
+        '
+        Me.printPAR.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.printPAR.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.printPAR.CornerRadius = 15
+        Me.printPAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.printPAR.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.printPAR.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.printPAR.Location = New System.Drawing.Point(1179, 722)
+        Me.printPAR.Margin = New System.Windows.Forms.Padding(4)
+        Me.printPAR.Name = "printPAR"
+        Me.printPAR.Size = New System.Drawing.Size(153, 33)
+        Me.printPAR.TabIndex = 161
+        Me.printPAR.Text = "Print PAR/ICS"
+        Me.printPAR.UseVisualStyleBackColor = False
+        '
+        'issuePropertyCard
+        '
+        Me.issuePropertyCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.issuePropertyCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.issuePropertyCard.CornerRadius = 15
+        Me.issuePropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.issuePropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.issuePropertyCard.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.issuePropertyCard.Location = New System.Drawing.Point(1018, 722)
+        Me.issuePropertyCard.Margin = New System.Windows.Forms.Padding(4)
+        Me.issuePropertyCard.Name = "issuePropertyCard"
+        Me.issuePropertyCard.Size = New System.Drawing.Size(153, 33)
+        Me.issuePropertyCard.TabIndex = 160
+        Me.issuePropertyCard.Text = "Issue Property Acknoledgement "
+        Me.issuePropertyCard.UseVisualStyleBackColor = False
         '
         'btnApprove
         '
@@ -289,77 +297,69 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_btn_update.Text = "Update"
         Me.prm_btn_update.UseVisualStyleBackColor = False
         '
-        'Label1
+        'assign
         '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(52, 713)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(145, 58)
-        Me.Label1.TabIndex = 159
-        Me.Label1.Text = "TOTAL:"
+        Me.assign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.assign.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.assign.CornerRadius = 15
+        Me.assign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.assign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.assign.ForeColor = System.Drawing.Color.White
+        Me.assign.Location = New System.Drawing.Point(1133, 78)
+        Me.assign.Name = "assign"
+        Me.assign.Size = New System.Drawing.Size(93, 33)
+        Me.assign.TabIndex = 156
+        Me.assign.Text = "Assign"
+        Me.assign.UseVisualStyleBackColor = False
         '
-        'ttlpropertyrequestmanagement
+        'Status
         '
-        Me.ttlpropertyrequestmanagement.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.ttlpropertyrequestmanagement.AutoSize = True
-        Me.ttlpropertyrequestmanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ttlpropertyrequestmanagement.ForeColor = System.Drawing.Color.Black
-        Me.ttlpropertyrequestmanagement.Location = New System.Drawing.Point(203, 713)
-        Me.ttlpropertyrequestmanagement.Name = "ttlpropertyrequestmanagement"
-        Me.ttlpropertyrequestmanagement.Size = New System.Drawing.Size(47, 58)
-        Me.ttlpropertyrequestmanagement.TabIndex = 158
-        Me.ttlpropertyrequestmanagement.Text = "0"
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
         '
-        'issuePropertyCard
+        'Purpose
         '
-        Me.issuePropertyCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.issuePropertyCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.issuePropertyCard.CornerRadius = 15
-        Me.issuePropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.issuePropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.issuePropertyCard.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertyCard.Location = New System.Drawing.Point(1018, 722)
-        Me.issuePropertyCard.Margin = New System.Windows.Forms.Padding(4)
-        Me.issuePropertyCard.Name = "issuePropertyCard"
-        Me.issuePropertyCard.Size = New System.Drawing.Size(153, 33)
-        Me.issuePropertyCard.TabIndex = 160
-        Me.issuePropertyCard.Text = "Issue Property Acknoledgement "
-        Me.issuePropertyCard.UseVisualStyleBackColor = False
+        Me.Purpose.HeaderText = "Purpose"
+        Me.Purpose.MinimumWidth = 6
+        Me.Purpose.Name = "Purpose"
+        Me.Purpose.Width = 125
         '
-        'printPAR
+        'QuantityRequested
         '
-        Me.printPAR.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.printPAR.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.printPAR.CornerRadius = 15
-        Me.printPAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.printPAR.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.printPAR.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.printPAR.Location = New System.Drawing.Point(1179, 722)
-        Me.printPAR.Margin = New System.Windows.Forms.Padding(4)
-        Me.printPAR.Name = "printPAR"
-        Me.printPAR.Size = New System.Drawing.Size(153, 33)
-        Me.printPAR.TabIndex = 161
-        Me.printPAR.Text = "Print PAR/ICS"
-        Me.printPAR.UseVisualStyleBackColor = False
+        Me.QuantityRequested.HeaderText = "Quantity Requested"
+        Me.QuantityRequested.MinimumWidth = 6
+        Me.QuantityRequested.Name = "QuantityRequested"
+        Me.QuantityRequested.Width = 125
         '
-        'btnAssign
+        'ItemName
         '
-        Me.btnAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAssign.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAssign.CornerRadius = 15
-        Me.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAssign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnAssign.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAssign.Location = New System.Drawing.Point(902, 76)
-        Me.btnAssign.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAssign.Name = "btnAssign"
-        Me.btnAssign.Size = New System.Drawing.Size(99, 34)
-        Me.btnAssign.TabIndex = 162
-        Me.btnAssign.Text = "Assign"
-        Me.btnAssign.UseVisualStyleBackColor = False
+        Me.ItemName.HeaderText = "Item Name"
+        Me.ItemName.MinimumWidth = 6
+        Me.ItemName.Name = "ItemName"
+        Me.ItemName.Width = 125
+        '
+        'DateOfRequest
+        '
+        Me.DateOfRequest.HeaderText = "Date Of Request"
+        Me.DateOfRequest.MinimumWidth = 6
+        Me.DateOfRequest.Name = "DateOfRequest"
+        Me.DateOfRequest.Width = 125
+        '
+        'Department
+        '
+        Me.Department.HeaderText = "Department"
+        Me.Department.MinimumWidth = 6
+        Me.Department.Name = "Department"
+        Me.Department.Width = 125
+        '
+        'NameOfRequester
+        '
+        Me.NameOfRequester.HeaderText = "Name Of Requester"
+        Me.NameOfRequester.MinimumWidth = 6
+        Me.NameOfRequester.Name = "NameOfRequester"
+        Me.NameOfRequester.Width = 125
         '
         'UC_PropertyRequestManagement
         '
@@ -374,18 +374,18 @@ Partial Class UC_PropertyRequestManagement
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnReject)
         Me.Controls.Add(Me.prm_btn_update)
-        Me.Controls.Add(Me.tblpropertyrequestmanagement)
+        Me.Controls.Add(Me.prm_table1)
         Me.Controls.Add(Me.admin_label_PropertyRequestManagement)
         Me.Name = "UC_PropertyRequestManagement"
         Me.Size = New System.Drawing.Size(1394, 803)
-        CType(Me.tblpropertyrequestmanagement, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents admin_label_PropertyRequestManagement As Label
-    Friend WithEvents tblpropertyrequestmanagement As DataGridView
+    Friend WithEvents prm_table1 As DataGridView
     Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
@@ -405,14 +405,14 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents assign As Resources.Controls.RoundedButton
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlpropertyrequestmanagement As Label
+    Friend WithEvents issuePropertyCard As Resources.Controls.RoundedButton
+    Friend WithEvents printPAR As Resources.Controls.RoundedButton
+    Friend WithEvents btnAssign As Resources.Controls.RoundedButton
     Friend WithEvents NameOfRequester As DataGridViewTextBoxColumn
     Friend WithEvents Department As DataGridViewTextBoxColumn
     Friend WithEvents DateOfRequest As DataGridViewTextBoxColumn
     Friend WithEvents ItemName As DataGridViewTextBoxColumn
     Friend WithEvents QuantityRequested As DataGridViewTextBoxColumn
-    Friend WithEvents issuePropertyCard As Resources.Controls.RoundedButton
-    Friend WithEvents printPAR As Resources.Controls.RoundedButton
     Friend WithEvents Purpose As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents btnAssign As Resources.Controls.RoundedButton
 End Class

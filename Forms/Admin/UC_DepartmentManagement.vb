@@ -149,19 +149,19 @@ Public Class UC_DepartmentManagement
     Private Sub admin_deptmanagement_SelectionChanged(sender As Object, e As EventArgs)
         If admin_deptmanagement.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = admin_deptmanagement.SelectedRows(0)
-            ' Try both column name variations
-            Dim deptIDCell As DataGridViewCell = Nothing
-            If admin_deptmanagement.Columns.Contains("DepartmentID") Then
-                deptIDCell = selectedRow.Cells("DepartmentID")
-            ElseIf admin_deptmanagement.Columns.Contains("department_id") Then
-                deptIDCell = selectedRow.Cells("department_id")
-            End If
-            If deptIDCell IsNot Nothing AndAlso deptIDCell.Value IsNot Nothing Then
-                Dim departmentIDStr As String = deptIDCell.Value.ToString()
-                If Integer.TryParse(departmentIDStr, selectedDepartmentID) Then
-                    ' Row selected, enable Edit and Delete buttons
+            ' Get department ID from the DepartmentID column (index 2 based on column order)
+            ' Column order: DepartmentName (0), DepartmentHead (1), DepartmentID (2), Location (3), TotalProperties (4), TotalSupplies (5), Status (6)
+            Try
+                If selectedRow.Cells.Count > 2 AndAlso selectedRow.Cells(2).Value IsNot Nothing Then
+                    Dim departmentIDStr As String = selectedRow.Cells(2).Value.ToString()
+                    If Integer.TryParse(departmentIDStr, selectedDepartmentID) Then
+                        ' Row selected, enable Edit and Delete buttons
+                    End If
                 End If
-            End If
+            Catch ex As Exception
+                ' Handle any errors silently
+                System.Diagnostics.Debug.WriteLine("SelectionChanged Error: " & ex.Message)
+            End Try
         End If
     End Sub
 
@@ -188,27 +188,31 @@ Public Class UC_DepartmentManagement
         End If
 
         Dim selectedRow As DataGridViewRow = admin_deptmanagement.SelectedRows(0)
-        ' Try both column name variations
-        Dim deptIDCell As DataGridViewCell = Nothing
-        Dim deptNameCell As DataGridViewCell = Nothing
-        If admin_deptmanagement.Columns.Contains("DepartmentID") Then
-            deptIDCell = selectedRow.Cells("DepartmentID")
-        ElseIf admin_deptmanagement.Columns.Contains("department_id") Then
-            deptIDCell = selectedRow.Cells("department_id")
-        End If
-        If admin_deptmanagement.Columns.Contains("DepartmentName") Then
-            deptNameCell = selectedRow.Cells("DepartmentName")
-        ElseIf admin_deptmanagement.Columns.Contains("department_name") Then
-            deptNameCell = selectedRow.Cells("department_name")
-        End If
-        
-        If deptIDCell Is Nothing OrElse deptIDCell.Value Is Nothing Then
+        ' Column order: DepartmentName (0), DepartmentHead (1), DepartmentID (2), Location (3), TotalProperties (4), TotalSupplies (5), Status (6)
+        If selectedRow.Cells.Count < 3 Then
             MessageBox.Show("Invalid department selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        Dim departmentIDStr As String = deptIDCell.Value.ToString()
-        Dim departmentName As String = If(deptNameCell IsNot Nothing AndAlso deptNameCell.Value IsNot Nothing, deptNameCell.Value.ToString(), "Unknown")
+        Dim deptIDValue As Object = Nothing
+        Dim deptNameValue As Object = Nothing
+        
+        Try
+            ' Use column index to avoid column name issues
+            deptIDValue = selectedRow.Cells(2).Value
+            deptNameValue = selectedRow.Cells(0).Value
+        Catch ex As Exception
+            MessageBox.Show("Error accessing row data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End Try
+        
+        If deptIDValue Is Nothing Then
+            MessageBox.Show("Invalid department selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim departmentIDStr As String = deptIDValue.ToString()
+        Dim departmentName As String = If(deptNameValue IsNot Nothing, deptNameValue.ToString(), "Unknown")
 
         Dim departmentID As Integer
         If Not Integer.TryParse(departmentIDStr, departmentID) Then

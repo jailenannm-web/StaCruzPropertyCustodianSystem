@@ -17,11 +17,11 @@ Public Class UC_PropertyRequestManagement
         canModifyRequests = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyRequests)
     End Sub
 
-    Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblpropertyrequestmanagement.CellContentClick
-        If e.RowIndex >= 0 AndAlso tblpropertyrequestmanagement.Columns.Contains("action_edit") AndAlso
-           e.ColumnIndex = tblpropertyrequestmanagement.Columns("action_edit").Index Then
+    Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles prm_table1.CellContentClick
+        If e.RowIndex >= 0 AndAlso prm_table1.Columns.Contains("action_edit") AndAlso
+           e.ColumnIndex = prm_table1.Columns("action_edit").Index Then
 
-            Dim reqIDValue As Object = tblpropertyrequestmanagement.Rows(e.RowIndex).Cells("request_id").Value
+            Dim reqIDValue As Object = prm_table1.Rows(e.RowIndex).Cells("request_id").Value
             Dim reqID As String = If(reqIDValue IsNot Nothing, reqIDValue.ToString(), "")
             MessageBox.Show("Edit Request: " & reqID, "Action", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -52,20 +52,20 @@ Public Class UC_PropertyRequestManagement
     Private Sub assign_Click(sender As Object, e As EventArgs)
         ' No restrictions for Super Admin, Admin, and Custodian
         ' Validate that a request is selected
-        If tblpropertyrequestmanagement.SelectedRows.Count = 0 Then
+        If prm_table1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a property request to assign.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        Dim selectedRow As DataGridViewRow = tblpropertyrequestmanagement.SelectedRows(0)
+        Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
 
         ' Get request ID from selected row
         Dim requestIDValue As Object = Nothing
-        If tblpropertyrequestmanagement.Columns.Contains("request_id") Then
+        If prm_table1.Columns.Contains("request_id") Then
             requestIDValue = selectedRow.Cells("request_id").Value
-        ElseIf tblpropertyrequestmanagement.Columns.Contains("RequestID") Then
+        ElseIf prm_table1.Columns.Contains("RequestID") Then
             requestIDValue = selectedRow.Cells("RequestID").Value
-        ElseIf tblpropertyrequestmanagement.Columns.Count > 0 Then
+        ElseIf prm_table1.Columns.Count > 0 Then
             ' Try first column as request ID
             requestIDValue = selectedRow.Cells(0).Value
         End If
@@ -77,9 +77,9 @@ Public Class UC_PropertyRequestManagement
 
         ' Get request status to validate
         Dim requestStatus As String = ""
-        If tblpropertyrequestmanagement.Columns.Contains("status") Then
+        If prm_table1.Columns.Contains("status") Then
             requestStatus = If(selectedRow.Cells("status").Value IsNot Nothing, selectedRow.Cells("status").Value.ToString(), "")
-        ElseIf tblpropertyrequestmanagement.Columns.Contains("Status") Then
+        ElseIf prm_table1.Columns.Contains("Status") Then
             requestStatus = If(selectedRow.Cells("Status").Value IsNot Nothing, selectedRow.Cells("Status").Value.ToString(), "")
         End If
 
@@ -92,16 +92,11 @@ Public Class UC_PropertyRequestManagement
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             Dim assignForm As New AssignRequestManagement()
-            ' Pass request ID to assign form if it has a method to load request data
-            Try
-                ' Try to set request ID using reflection or a public property
-                Dim requestIDProp = assignForm.GetType().GetProperty("RequestID")
-                If requestIDProp IsNot Nothing Then
-                    requestIDProp.SetValue(assignForm, requestIDValue.ToString())
-                End If
-            Catch
-                ' If property doesn't exist, continue anyway
-            End Try
+            ' Pass request ID to assign form using the RequestID property
+            Dim requestID As Integer = 0
+            If Integer.TryParse(requestIDValue.ToString(), requestID) Then
+                assignForm.RequestID = requestID
+            End If
             parentDashboard.LoadUserControl(assignForm)
         End If
     End Sub
@@ -124,12 +119,43 @@ Public Class UC_PropertyRequestManagement
     Private Sub LoadRequestData()
         Try
             Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
+            
+            If dt Is Nothing Then
+                MessageBox.Show("Unable to load property requests. Please check your database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
             prm_table1.DataSource = dt
             prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             prm_table1.ReadOnly = True
             prm_table1.AllowUserToAddRows = False
             prm_table1.AllowUserToDeleteRows = False
             prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+
+            ' Set friendly column headers - must set on DataGridView columns after DataSource is set
+            ' Wait for columns to be created
+            Application.DoEvents()
+            
+            For Each col As DataGridViewColumn In prm_table1.Columns
+                Select Case col.Name.ToLower()
+                    Case "requester_name"
+                        col.HeaderText = "Name of Requester"
+                    Case "department"
+                        col.HeaderText = "Department"
+                    Case "date_of_request"
+                        col.HeaderText = "Date of Request"
+                    Case "item_name"
+                        col.HeaderText = "Item Name"
+                    Case "quantity_requested"
+                        col.HeaderText = "Quantity Requested"
+                    Case "purpose"
+                        col.HeaderText = "Purpose"
+                    Case "status"
+                        col.HeaderText = "Status"
+                    Case "request_id"
+                        col.Visible = False ' Hide request_id column
+                End Select
+            Next
 
             ' Update total count
             Dim totalLabel As Label = Nothing
@@ -138,10 +164,11 @@ Public Class UC_PropertyRequestManagement
                 totalLabel = TryCast(foundControls(0), Label)
             End If
             If totalLabel IsNot Nothing Then
-                totalLabel.Text = If(dt IsNot Nothing AndAlso dt.Rows.Count > 0, dt.Rows.Count.ToString(), "0")
+                totalLabel.Text = If(dt.Rows.Count > 0, dt.Rows.Count.ToString(), "0")
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading property requests: " & GetUserFriendlyErrorMessage(ex, "load property requests"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("LoadRequestData Error: " & ex.Message & vbCrLf & ex.StackTrace)
         End Try
     End Sub
 
@@ -165,15 +192,15 @@ Public Class UC_PropertyRequestManagement
 
     Private Sub issuePropertyCard_Click(sender As Object, e As EventArgs) Handles issuePropertyCard.Click
 
-        If tblpropertyrequestmanagement.CurrentRow Is Nothing Then
+        If prm_table1.CurrentRow Is Nothing Then
             MessageBox.Show("Please select a row first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        Dim row As DataGridViewRow = tblpropertyrequestmanagement.CurrentRow
+        Dim row As DataGridViewRow = prm_table1.CurrentRow
 
         ' Convert DataGridViewRow → DataRow (or pass values manually)
-        Dim dt As DataTable = CType(tblpropertyrequestmanagement.DataSource, DataTable)
+        Dim dt As DataTable = CType(prm_table1.DataSource, DataTable)
         Dim dataRow As DataRow = dt.Rows(row.Index)
 
         Dim cardForm As New PropertyCard(dataRow)
@@ -184,14 +211,14 @@ Public Class UC_PropertyRequestManagement
     Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
         ' No restrictions for Super Admin, Admin, and Custodian
 
-        If tblpropertyrequestmanagement.SelectedRows.Count = 0 Then
+        If prm_table1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a request to approve.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Try
-            Dim selectedRow As DataGridViewRow = tblpropertyrequestmanagement.SelectedRows(0)
-            Dim dt As DataTable = TryCast(tblpropertyrequestmanagement.DataSource, DataTable)
+            Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
             If dt Is Nothing Then
                 MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
@@ -237,14 +264,14 @@ Public Class UC_PropertyRequestManagement
     Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
         ' No restrictions for Super Admin, Admin, and Custodian
 
-        If tblpropertyrequestmanagement.SelectedRows.Count = 0 Then
+        If prm_table1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a request to reject.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Try
-            Dim selectedRow As DataGridViewRow = tblpropertyrequestmanagement.SelectedRows(0)
-            Dim dt As DataTable = TryCast(tblpropertyrequestmanagement.DataSource, DataTable)
+            Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
             If dt Is Nothing Then
                 MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return

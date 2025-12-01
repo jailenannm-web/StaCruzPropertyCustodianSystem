@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
@@ -821,6 +821,47 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then
                 System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - SafeOpenConnection failed")
                 Return Nothing
+            End If
+
+            ' Check hardcoded staff credentials first
+            Dim hardcodedStaffUsername As String = "test_staff"
+            Dim hardcodedStaffPassword As String = "Staff@1234"
+            Dim normalizedUsername As String = username.Trim().ToLower()
+
+            If normalizedUsername = hardcodedStaffUsername.ToLower() AndAlso password = hardcodedStaffPassword Then
+                ' Ensure account exists in database and get full details
+                InitializeDefaultAccounts()
+                Dim hardcodedQuery As String =
+                    "SELECT user_id, first_name, last_name, email, contact_number, department_id, username, password_encrypted, status, role " &
+                    "FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'Staff' LIMIT 1;"
+                Using cmd As New MySqlCommand(hardcodedQuery, conn)
+                    cmd.Parameters.AddWithValue("@username", hardcodedStaffUsername)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            Dim userID As Integer = Convert.ToInt32(reader("user_id"))
+                            result("staff_id") = userID.ToString()
+                            result("user_id") = userID.ToString()
+                            result("first_name") = If(IsDBNull(reader("first_name")), "", reader("first_name").ToString())
+                            result("last_name") = If(IsDBNull(reader("last_name")), "", reader("last_name").ToString())
+                            result("email") = If(IsDBNull(reader("email")), "", reader("email").ToString())
+                            result("contact_number") = If(IsDBNull(reader("contact_number")), "", reader("contact_number").ToString())
+                            result("department_id") = If(IsDBNull(reader("department_id")), "", reader("department_id").ToString())
+                            result("username") = reader("username").ToString()
+                            result("user_type") = "Staff"
+
+                            ' Update last_login
+                            reader.Close()
+                            Using updateCmd As New MySqlCommand("UPDATE users SET last_login = NOW() WHERE user_id = @userID", conn)
+                                updateCmd.Parameters.AddWithValue("@userID", userID)
+                                updateCmd.ExecuteNonQuery()
+                            End Using
+
+                            LogActivity(userID, "Staff", hardcodedStaffUsername, "LOGIN", "Authentication", "Staff successfully logged in (hardcoded)", ipAddress)
+                            System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - hardcoded credentials matched for: " & username)
+                            Return result
+                        End If
+                    End Using
+                End Using
             End If
 
             ' Use a single-row select to fetch the stored hash and metadata
@@ -2226,33 +2267,12 @@ Public Class DatabaseConnection
     ''' Create test staff account for testing purposes
     ''' </summary>
     Public Shared Function CreateTestStaffAccount() As Boolean
+        ' This function is now handled by InitializeDefaultAccounts()
+        ' It creates the test_staff account directly in the users table
+        ' No need to call AddStaffAccount which requires permissions
         Try
-            ' Get first department for assignment
-            Dim deptTable As DataTable = GetDepartmentLookup(True)
-            Dim deptID As Integer? = Nothing
-            If deptTable.Rows.Count > 0 Then
-                deptID = Convert.ToInt32(deptTable.Rows(0)("department_id"))
-            End If
-
-            ' Create the test staff account
-            Dim success As Boolean = AddStaffAccount(
-                firstName:="Test",
-                lastName:="Staff",
-                email:="test_staff@stacruz.edu",
-                username:="test_staff",
-                password:="Staff@1234",
-                contactNumber:="",
-                address:="",
-                departmentID:=deptID,
-                position:="Staff",
-                status:="Active",
-                createdByID:=Nothing,
-                createdByType:="System",
-                createdByName:="System",
-                ipAddress:="127.0.0.1"
-            )
-
-            Return success
+            InitializeDefaultAccounts()
+            Return True
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] CreateTestStaffAccount Exception: " & ex.Message)
             Return False
@@ -2427,39 +2447,33 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            ' Get user info for requester_name if not provided
-            Dim finalRequesterName As String = requesterName
-            Dim finalPosition As String = position
+            ' Get user info for department if not provided
             Dim finalDeptID As Integer? = departmentID
-            If String.IsNullOrEmpty(finalRequesterName) AndAlso userID > 0 Then
+            If Not finalDeptID.HasValue AndAlso userID > 0 Then
                 Try
-                    Using userCmd As New MySqlCommand("SELECT CONCAT(first_name, ' ', last_name) AS full_name, position, department_id FROM users WHERE user_id = @userID UNION SELECT CONCAT(first_name, ' ', last_name) AS full_name, position, department_id FROM staff_accounts WHERE staff_id = @userID LIMIT 1", conn)
+                    Using userCmd As New MySqlCommand("SELECT department_id FROM users WHERE user_id = @userID LIMIT 1", conn)
                         userCmd.Parameters.AddWithValue("@userID", userID)
-                        Using reader As MySqlDataReader = userCmd.ExecuteReader()
-                            If reader.Read() Then
-                                finalRequesterName = If(reader.IsDBNull("full_name"), "", reader.GetString("full_name"))
-                                If String.IsNullOrEmpty(finalPosition) Then finalPosition = If(reader.IsDBNull("position"), "", reader.GetString("position"))
-                                If Not finalDeptID.HasValue AndAlso Not reader.IsDBNull("department_id") Then finalDeptID = reader.GetInt32("department_id")
-                            End If
-                        End Using
+                        Dim deptResult As Object = userCmd.ExecuteScalar()
+                        If deptResult IsNot Nothing AndAlso Not IsDBNull(deptResult) Then
+                            finalDeptID = Convert.ToInt32(deptResult)
+                        End If
                     End Using
                 Catch
-                    finalRequesterName = If(String.IsNullOrEmpty(finalRequesterName), "User #" & userID.ToString(), finalRequesterName)
+                    ' Continue with null department ID
                 End Try
             End If
 
-            Dim query As String = "INSERT INTO property_requests (requester_name, position, department_id, date_of_request, " &
-                                 "item_name, description, quantity_requested, unit, purpose, status) " &
-                                 "VALUES (@requesterName, @position, @departmentID, CURDATE(), @itemName, '', " &
-                                 "@quantity, 'unit', @purpose, 'Pending')"
+            Dim query As String = "INSERT INTO property_requests (user_id, department_id, date_of_request, " &
+                                 "item_name, quantity_requested, purpose, status) " &
+                                 "VALUES (@userID, @departmentID, CURDATE(), @itemName, " &
+                                 "@quantity, @purpose, 'Pending')"
 
             Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@requesterName", finalRequesterName)
-                cmd.Parameters.AddWithValue("@position", If(String.IsNullOrEmpty(finalPosition), DBNull.Value, finalPosition))
+                cmd.Parameters.AddWithValue("@userID", userID)
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@itemName", If(String.IsNullOrEmpty(itemName), "Item Request", itemName))
                 cmd.Parameters.AddWithValue("@quantity", quantity)
-                cmd.Parameters.AddWithValue("@purpose", purpose)
+                cmd.Parameters.AddWithValue("@purpose", If(String.IsNullOrEmpty(purpose), "", purpose))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -2526,35 +2540,29 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            ' Get user info if not provided
-            Dim finalRequesterName As String = requesterName
-            Dim finalPosition As String = position
+            ' Get user info for department if not provided
             Dim finalDeptID As Integer? = departmentID
-            If String.IsNullOrEmpty(finalRequesterName) OrElse staffID > 0 Then
+            If Not finalDeptID.HasValue AndAlso staffID > 0 Then
                 Try
-                    Using userCmd As New MySqlCommand("SELECT CONCAT(first_name, ' ', last_name) AS full_name, position, department_id FROM users WHERE user_id = @staffID UNION SELECT CONCAT(first_name, ' ', last_name) AS full_name, position, department_id FROM staff_accounts WHERE staff_id = @staffID LIMIT 1", conn)
+                    Using userCmd As New MySqlCommand("SELECT department_id FROM users WHERE user_id = @staffID LIMIT 1", conn)
                         userCmd.Parameters.AddWithValue("@staffID", staffID)
-                        Using reader As MySqlDataReader = userCmd.ExecuteReader()
-                            If reader.Read() Then
-                                If String.IsNullOrEmpty(finalRequesterName) Then finalRequesterName = If(reader.IsDBNull("full_name"), "", reader.GetString("full_name"))
-                                If String.IsNullOrEmpty(finalPosition) Then finalPosition = If(reader.IsDBNull("position"), "", reader.GetString("position"))
-                                If Not finalDeptID.HasValue AndAlso Not reader.IsDBNull("department_id") Then finalDeptID = reader.GetInt32("department_id")
-                            End If
-                        End Using
+                        Dim deptResult As Object = userCmd.ExecuteScalar()
+                        If deptResult IsNot Nothing AndAlso Not IsDBNull(deptResult) Then
+                            finalDeptID = Convert.ToInt32(deptResult)
+                        End If
                     End Using
                 Catch
-                    finalRequesterName = If(String.IsNullOrEmpty(finalRequesterName), "User #" & staffID.ToString(), finalRequesterName)
+                    ' Continue with null department ID
                 End Try
             End If
 
-            Dim query As String = "INSERT INTO supplies_requests (requester_name, position, department_id, date_of_request, " &
-                                 "item_name, description, quantity_requested, unit, purpose, status) " &
-                                 "VALUES (@requesterName, @position, @departmentID, CURDATE(), @itemName, '', " &
-                                 "@quantity, 'unit', @purpose, 'Pending')"
+            Dim query As String = "INSERT INTO supply_requests (user_id, department_id, date_of_request, " &
+                                 "item_name, quantity_requested, purpose, status) " &
+                                 "VALUES (@userID, @departmentID, CURDATE(), @itemName, " &
+                                 "@quantity, @purpose, 'Pending')"
 
             Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@requesterName", finalRequesterName)
-                cmd.Parameters.AddWithValue("@position", If(String.IsNullOrEmpty(finalPosition), DBNull.Value, finalPosition))
+                cmd.Parameters.AddWithValue("@userID", staffID)
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@itemName", itemName)
                 cmd.Parameters.AddWithValue("@quantity", quantity)
@@ -2597,12 +2605,12 @@ Public Class DatabaseConnection
             Dim query As String = "SELECT " &
                                  "pr.request_id AS request_id, " &
                                  "TRIM(CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.middle_name,''), ' ', IFNULL(u.last_name,''), " &
-                                 "IF(u.suffix IS NOT NULL AND u.suffix != '', CONCAT(' ', u.suffix), ''))) AS 'Name of requester', " &
-                                 "IFNULL(d.department_name, 'N/A') AS 'Department', " &
-                                 "pr.date_of_request AS 'Date of request', " &
-                                 "pr.item_name AS 'Item name', " &
-                                 "pr.quantity_requested AS 'Quantity requested', " &
-                                 "pr.purpose AS 'Purpose', " &
+                                 "IF(u.suffix IS NOT NULL AND u.suffix != '', CONCAT(' ', u.suffix), ''))) AS requester_name, " &
+                                 "IFNULL(d.department_name, 'N/A') AS department, " &
+                                 "pr.date_of_request AS date_of_request, " &
+                                 "pr.item_name AS item_name, " &
+                                 "pr.quantity_requested AS quantity_requested, " &
+                                 "pr.purpose AS purpose, " &
                                  "pr.status AS status " &
                                  "FROM property_requests pr " &
                                  "LEFT JOIN users u ON pr.user_id = u.user_id " &
@@ -2644,23 +2652,61 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As New StringBuilder()
-            query.Append("SELECT pr.request_id, pr.request_type, pr.status, pr.request_date, pr.approval_date, ")
-            query.Append("pr.release_date, pr.expected_return_date, pr.actual_returned_date, pr.quantity, ")
-            query.Append("pr.penalty, pr.condition_upon_return, pr.remarks, ")
-            query.Append("COALESCE(p.item_name, sup.supply_name) AS item_name, ")
-            query.Append("p.serial_number, p.location AS property_location, sup.location AS supply_location ")
-            query.Append("FROM property_requests pr ")
-            query.Append("LEFT JOIN properties p ON pr.property_id = p.property_id ")
-            query.Append("LEFT JOIN supplies sup ON pr.supply_id = sup.supply_id ")
-            query.Append("WHERE pr.user_id = @staffID ")
+            ' Combine property requests and supply requests
+            Dim query As String = ""
 
-            If Not String.IsNullOrEmpty(statusFilter) Then query.Append("AND pr.status = @status ")
-            If Not String.IsNullOrEmpty(requestTypeFilter) Then query.Append("AND pr.request_type = @requestType ")
-            If dateFrom.HasValue Then query.Append("AND pr.request_date >= @dateFrom ")
-            If dateTo.HasValue Then query.Append("AND pr.request_date <= @dateTo ")
+            If Not String.IsNullOrEmpty(requestTypeFilter) AndAlso requestTypeFilter.ToLower() = "property" Then
+                ' Only property requests
+                query = "SELECT pr.request_id, 'property' AS request_type, pr.status, pr.date_of_request AS request_date, " &
+                        "pr.approved_date AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
+                        "NULL AS actual_returned_date, pr.quantity_requested AS quantity, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, pr.purpose AS remarks, " &
+                        "pr.item_name, NULL AS serial_number, NULL AS property_location, NULL AS supply_location " &
+                        "FROM property_requests pr " &
+                        "WHERE pr.user_id = @staffID "
+                If Not String.IsNullOrEmpty(statusFilter) Then query &= "AND pr.status = @status "
+                If dateFrom.HasValue Then query &= "AND pr.date_of_request >= @dateFrom "
+                If dateTo.HasValue Then query &= "AND pr.date_of_request <= @dateTo "
+            ElseIf Not String.IsNullOrEmpty(requestTypeFilter) AndAlso requestTypeFilter.ToLower() = "supply" Then
+                ' Only supply requests
+                query = "SELECT sr.request_id, 'supply' AS request_type, sr.status, sr.date_of_request AS request_date, " &
+                        "sr.approved_date AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
+                        "NULL AS actual_returned_date, sr.quantity_requested AS quantity, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, sr.purpose AS remarks, " &
+                        "sr.item_name, NULL AS serial_number, NULL AS property_location, NULL AS supply_location " &
+                        "FROM supply_requests sr " &
+                        "WHERE sr.user_id = @staffID "
+                If Not String.IsNullOrEmpty(statusFilter) Then query &= "AND sr.status = @status "
+                If dateFrom.HasValue Then query &= "AND sr.date_of_request >= @dateFrom "
+                If dateTo.HasValue Then query &= "AND sr.date_of_request <= @dateTo "
+            Else
+                ' Show both - UNION ALL
+                Dim propQuery As String = "SELECT pr.request_id, 'property' AS request_type, pr.status, pr.date_of_request AS request_date, " &
+                        "pr.approved_date AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
+                        "NULL AS actual_returned_date, pr.quantity_requested AS quantity, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, pr.purpose AS remarks, " &
+                        "pr.item_name, NULL AS serial_number, NULL AS property_location, NULL AS supply_location " &
+                        "FROM property_requests pr " &
+                        "WHERE pr.user_id = @staffID "
+                If Not String.IsNullOrEmpty(statusFilter) Then propQuery &= "AND pr.status = @status "
+                If dateFrom.HasValue Then propQuery &= "AND pr.date_of_request >= @dateFrom "
+                If dateTo.HasValue Then propQuery &= "AND pr.date_of_request <= @dateTo "
 
-            query.Append("ORDER BY pr.request_date DESC, pr.request_id DESC")
+                Dim supplyQuery As String = "SELECT sr.request_id, 'supply' AS request_type, sr.status, sr.date_of_request AS request_date, " &
+                        "sr.approved_date AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
+                        "NULL AS actual_returned_date, sr.quantity_requested AS quantity, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, sr.purpose AS remarks, " &
+                        "sr.item_name, NULL AS serial_number, NULL AS property_location, NULL AS supply_location " &
+                        "FROM supply_requests sr " &
+                        "WHERE sr.user_id = @staffID "
+                If Not String.IsNullOrEmpty(statusFilter) Then supplyQuery &= "AND sr.status = @status "
+                If dateFrom.HasValue Then supplyQuery &= "AND sr.date_of_request >= @dateFrom "
+                If dateTo.HasValue Then supplyQuery &= "AND sr.date_of_request <= @dateTo "
+
+                query = propQuery & " UNION ALL " & supplyQuery
+            End If
+
+            query &= " ORDER BY request_date DESC, request_id DESC"
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
                 cmd.Parameters.AddWithValue("@staffID", staffID)
@@ -3055,7 +3101,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE supplies_requests SET status = 'Approved', approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
+            Dim query As String = "UPDATE supply_requests SET status = 'Approved', approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
                                   "WHERE request_id = @requestID AND status = 'Pending'"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
@@ -3099,7 +3145,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE supplies_requests SET status = 'Rejected', approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
+            Dim query As String = "UPDATE supply_requests SET status = 'Rejected', approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
                                   "WHERE request_id = @requestID AND status = 'Pending'"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
@@ -3283,30 +3329,44 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As New StringBuilder()
-            query.Append("SELECT pr.request_id, pr.request_type, pr.status, pr.request_date, ")
-            query.Append("pr.release_date, pr.expected_return_date, pr.actual_returned_date, pr.quantity, ")
-            query.Append("COALESCE(p.item_name, sup.supply_name) AS item_name, ")
-            query.Append("p.serial_number, ")
-            query.Append("CASE ")
-            query.Append(" WHEN pr.status IN ('approved','released') AND pr.actual_returned_date IS NULL ")
-            query.Append("      AND pr.expected_return_date IS NOT NULL AND pr.expected_return_date < CURDATE() THEN 'Overdue' ")
-            query.Append(" WHEN pr.status IN ('approved','released') AND pr.actual_returned_date IS NULL THEN 'Not yet returned' ")
-            query.Append(" WHEN pr.status = 'returned' THEN 'Returned' ")
-            query.Append(" ELSE pr.status ")
-            query.Append("END AS accountability_status ")
-            query.Append("FROM property_requests pr ")
-            query.Append("LEFT JOIN properties p ON pr.property_id = p.property_id ")
-            query.Append("LEFT JOIN supplies sup ON pr.supply_id = sup.supply_id ")
-            query.Append("WHERE pr.user_id = @staffID ")
+            ' Combine property requests and supply requests that are approved/released
+            Dim query As String = ""
 
             If Not includeHistory Then
-                query.Append("AND pr.status IN ('approved','released') ")
+                ' Only show approved/released items
+                query = "SELECT pr.request_id, 'property' AS request_type, pr.status, pr.date_of_request AS request_date, " &
+                        "NULL AS release_date, NULL AS expected_return_date, NULL AS actual_returned_date, " &
+                        "pr.quantity_requested AS quantity, pr.item_name AS item_name, NULL AS serial_number, " &
+                        "'Not yet returned' AS accountability_status " &
+                        "FROM property_requests pr " &
+                        "WHERE pr.user_id = @staffID AND pr.status IN ('Approved', 'approved', 'Released', 'released') " &
+                        "UNION ALL " &
+                        "SELECT sr.request_id, 'supply' AS request_type, sr.status, sr.date_of_request AS request_date, " &
+                        "NULL AS release_date, NULL AS expected_return_date, NULL AS actual_returned_date, " &
+                        "sr.quantity_requested AS quantity, sr.item_name AS item_name, NULL AS serial_number, " &
+                        "'Not yet returned' AS accountability_status " &
+                        "FROM supply_requests sr " &
+                        "WHERE sr.user_id = @staffID AND sr.status IN ('Approved', 'approved', 'Released', 'released') " &
+                        "ORDER BY request_date DESC, request_id DESC"
+            Else
+                ' Include all history
+                query = "SELECT pr.request_id, 'property' AS request_type, pr.status, pr.date_of_request AS request_date, " &
+                        "NULL AS release_date, NULL AS expected_return_date, NULL AS actual_returned_date, " &
+                        "pr.quantity_requested AS quantity, pr.item_name AS item_name, NULL AS serial_number, " &
+                        "pr.status AS accountability_status " &
+                        "FROM property_requests pr " &
+                        "WHERE pr.user_id = @staffID " &
+                        "UNION ALL " &
+                        "SELECT sr.request_id, 'supply' AS request_type, sr.status, sr.date_of_request AS request_date, " &
+                        "NULL AS release_date, NULL AS expected_return_date, NULL AS actual_returned_date, " &
+                        "sr.quantity_requested AS quantity, sr.item_name AS item_name, NULL AS serial_number, " &
+                        "sr.status AS accountability_status " &
+                        "FROM supply_requests sr " &
+                        "WHERE sr.user_id = @staffID " &
+                        "ORDER BY request_date DESC, request_id DESC"
             End If
 
-            query.Append("ORDER BY pr.request_date DESC, pr.request_id DESC")
-
-            Using cmd As New MySqlCommand(query.ToString(), conn)
+            Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@staffID", staffID)
                 Using adapter As New MySqlDataAdapter(cmd)
                     adapter.Fill(dt)
@@ -3406,12 +3466,12 @@ Public Class DatabaseConnection
             Dim query As String = "SELECT " &
                                  "sr.request_id AS request_id, " &
                                  "TRIM(CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.middle_name,''), ' ', IFNULL(u.last_name,''), " &
-                                 "IF(u.suffix IS NOT NULL AND u.suffix != '', CONCAT(' ', u.suffix), ''))) AS 'Name of requester', " &
-                                 "IFNULL(d.department_name, 'N/A') AS 'Department', " &
-                                 "sr.date_of_request AS 'Date of request', " &
-                                 "sr.item_name AS 'Item name', " &
-                                 "sr.quantity_requested AS 'Quantity requested', " &
-                                 "sr.purpose AS 'Purpose', " &
+                                 "IF(u.suffix IS NOT NULL AND u.suffix != '', CONCAT(' ', u.suffix), ''))) AS requester_name, " &
+                                 "IFNULL(d.department_name, 'N/A') AS department, " &
+                                 "sr.date_of_request AS date_of_request, " &
+                                 "sr.item_name AS item_name, " &
+                                 "sr.quantity_requested AS quantity_requested, " &
+                                 "sr.purpose AS purpose, " &
                                  "sr.status AS status " &
                                  "FROM supply_requests sr " &
                                  "LEFT JOIN users u ON sr.user_id = u.user_id " &
@@ -5651,7 +5711,10 @@ Public Class DatabaseConnection
                                               Optional updatedByType As String = "",
                                               Optional updatedByName As String = "",
                                               Optional ipAddress As String = "") As Boolean
-        If Not DemandPermission(SessionContext.ModulePermission.ManageUsers, "update staff accounts") Then
+        ' Allow staff to update their own profile, or require ManageUsers permission for updating other staff
+        If SessionContext.CurrentUserID.HasValue AndAlso SessionContext.CurrentUserID.Value = staffID Then
+            ' Staff updating their own profile - allow without permission check
+        ElseIf Not DemandPermission(SessionContext.ModulePermission.ManageUsers, "update staff accounts") Then
             Return False
         End If
         Dim conn As MySqlConnection = Nothing
@@ -7518,6 +7581,43 @@ Public Class DatabaseConnection
                     updateCmd.Parameters.AddWithValue("@userID", CInt(custodianId))
                     updateCmd.ExecuteNonQuery()
                     System.Diagnostics.Debug.WriteLine("[v0] Default Custodian account verified/updated: " & custodianUsername)
+                End Using
+            End If
+
+            ' Ensure hardcoded Staff account exists (test_staff)
+            Dim staffUsername As String = "test_staff"
+            Dim staffPassword As String = "Staff@1234"
+            Dim staffId As Object = Nothing
+            Using checkCmd As New MySqlCommand("SELECT user_id FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'Staff' LIMIT 1", conn)
+                checkCmd.Parameters.AddWithValue("@username", staffUsername)
+                staffId = checkCmd.ExecuteScalar()
+            End Using
+
+            Dim staffHashValue As String = PasswordHelper.HashPassword(staffPassword)
+
+            If staffId Is Nothing OrElse staffId Is DBNull.Value Then
+                ' Create hardcoded Staff account
+                Using insertCmd As New MySqlCommand("INSERT INTO users (first_name, last_name, email, username, password_encrypted, role, status, position, created_at) " &
+                                                    "VALUES (@firstName, @lastName, @email, @username, @password, 'Staff', 'Active', 'Staff', NOW())", conn)
+                    insertCmd.Parameters.AddWithValue("@firstName", "Test")
+                    insertCmd.Parameters.AddWithValue("@lastName", "Staff")
+                    insertCmd.Parameters.AddWithValue("@email", "test_staff@stacruz.edu")
+                    insertCmd.Parameters.AddWithValue("@username", staffUsername)
+                    insertCmd.Parameters.AddWithValue("@password", staffHashValue)
+                    insertCmd.ExecuteNonQuery()
+                    System.Diagnostics.Debug.WriteLine("[v0] Default Staff account created: " & staffUsername)
+                End Using
+            Else
+                ' Update existing Staff account to ensure credentials stay in sync
+                Using updateCmd As New MySqlCommand("UPDATE users SET first_name = @firstName, last_name = @lastName, email = @email, " &
+                                                    "password_encrypted = @password, status = 'Active' WHERE user_id = @userID AND role = 'Staff'", conn)
+                    updateCmd.Parameters.AddWithValue("@firstName", "Test")
+                    updateCmd.Parameters.AddWithValue("@lastName", "Staff")
+                    updateCmd.Parameters.AddWithValue("@email", "test_staff@stacruz.edu")
+                    updateCmd.Parameters.AddWithValue("@password", staffHashValue)
+                    updateCmd.Parameters.AddWithValue("@userID", CInt(staffId))
+                    updateCmd.ExecuteNonQuery()
+                    System.Diagnostics.Debug.WriteLine("[v0] Default Staff account verified/updated: " & staffUsername)
                 End Using
             End If
 

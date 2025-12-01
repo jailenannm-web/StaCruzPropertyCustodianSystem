@@ -2,14 +2,15 @@
 Imports System.Data
 Imports System.Windows.Forms
 Imports System.Xml.Linq
+Imports Microsoft.VisualBasic
 
 Public Class EditSupply
     Inherits UserControl
 
     Private currentSupplyID As Integer
 
-    Public Sub LoadSupplyData(supplyID As Integer, supplyRow As DataRow)
-        currentSupplyID = supplyID
+    Public Sub LoadSupplyData(supplyIDParam As Integer, supplyRow As DataRow)
+        currentSupplyID = supplyIDParam
 
         Try
             ' Map database columns to form fields using correct column names
@@ -61,7 +62,7 @@ Public Class EditSupply
             End If
 
             If supplyRow.Table.Columns.Contains("supply_id") AndAlso Not IsDBNull(supplyRow("supply_id")) Then
-                supplyID.Text = supplyRow("supply_id").ToString()
+                Me.supplyID.Text = supplyRow("supply_id").ToString()
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading supply data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
