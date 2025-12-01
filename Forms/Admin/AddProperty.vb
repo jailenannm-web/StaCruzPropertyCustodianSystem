@@ -101,8 +101,14 @@ Public Class AddProperty
             descriptionValue = description.Text.Trim()
         End If
 
+        ' Get property number if available
+        Dim propertyNumberValue As String = ""
+        If propertyNumber IsNot Nothing Then
+            propertyNumberValue = propertyNumber.Text.Trim()
+        End If
+
         Dim success = DatabaseConnection.AddProperty(
-            propertyNameTxt.Text.Trim(),                            ' propertyName
+            itemName.Text.Trim(),                            ' propertyName
             GetComboValue(category, "Others"),                       ' category
             descriptionValue,                                        ' description
             serialNumberTxt.Text.Trim(),                             ' serialNumber
@@ -115,7 +121,8 @@ Public Class AddProperty
             custodianId,                                             ' custodianID
             departmentId,                                            ' departmentID
             warrantyExpirationDate.Value.ToShortDateString(),       ' warrantyDetails
-            Nothing                                                  ' lifeSpan
+            Nothing,                                                 ' lifeSpan
+            propertyNumberValue                                      ' propertyNumber
         )
 
         If success Then
@@ -136,10 +143,15 @@ Public Class AddProperty
     End Sub
 
     Private Function ValidateFields() As String
-        If String.IsNullOrWhiteSpace(propertyNameTxt.Text) Then Return "Property name is required."
+        If String.IsNullOrWhiteSpace(itemName.Text) Then Return "Property name is required."
         If category.SelectedIndex = -1 Then Return "Please select a category."
         If String.IsNullOrWhiteSpace(supplierTxt.Text) Then Return "Supplier is required."
-        If no_of_employees_numeric.Value <= 0 Then Return "Acquisition cost must be greater than zero."
+        ' Validate acquisition cost from the correct field
+        If String.IsNullOrWhiteSpace(acquisitionCost.Text) Then Return "Acquisition cost is required."
+        Dim costValue As Decimal = 0
+        If Not Decimal.TryParse(acquisitionCost.Text.Trim(), costValue) OrElse costValue <= 0 Then
+            Return "Acquisition cost must be a valid number greater than zero."
+        End If
         If String.IsNullOrWhiteSpace(propertyLocation.Text) Then Return "Location is required."
         Return ""
     End Function

@@ -11,8 +11,76 @@ Public Class AssignRequestManagement
         Me.Dock = DockStyle.Fill
     End Sub
 
+    Private currentRequestID As Integer = -1
+    Private requestData As DataRow = Nothing
+
     Private Sub AssignRequestManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         EnsureModifyPermission()
+        LoadRequestData()
+    End Sub
+
+    Private Sub LoadRequestData()
+        ' Get request ID from parent form or session if available
+        ' For now, we'll load from the selected request in PropertyRequestManagement
+        ' This should be set when navigating to this form
+        If currentRequestID > 0 Then
+            Try
+                Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
+                Dim requestRows() As DataRow = dt.Select("request_id = " & currentRequestID)
+                If requestRows.Length > 0 Then
+                    requestData = requestRows(0)
+                    PopulateFormFields()
+                Else
+                    MessageBox.Show("Request not found. Please select a valid request from the list.", "Request Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Error loading request data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub PopulateFormFields()
+        If requestData Is Nothing Then Return
+
+        Try
+            ' Populate form fields with request data
+            If requestData.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(requestData("item_name")) Then
+                btn_PropertyName.Text = requestData("item_name").ToString()
+            End If
+
+            ' Load available properties that match the request
+            LoadAvailableProperties()
+        Catch ex As Exception
+            MessageBox.Show("Error populating form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub LoadAvailableProperties()
+        ' Load properties that are available and match the request criteria
+        Try
+            Dim propertiesTable As DataTable = DatabaseConnection.GetAllProperties()
+            ' Filter for available properties (status = 'Active' and not assigned)
+            Dim availableProperties = propertiesTable.AsEnumerable().Where(Function(p)
+                                                                                Dim status As String = If(IsDBNull(p("status")), "", p("status").ToString().ToLower())
+                                                                                Return status = "active"
+                                                                            End Function).CopyToDataTable()
+
+            ' Populate ComboBox with available properties
+            If ComboBox1 IsNot Nothing Then
+                ComboBox1.DataSource = availableProperties
+                ComboBox1.DisplayMember = "item_name"
+                ComboBox1.ValueMember = "property_id"
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadAvailableProperties Exception: " & ex.Message)
+        End Try
+    End Sub
+
+    Public Sub SetRequestID(requestID As Integer)
+        currentRequestID = requestID
+        If Me.IsHandleCreated Then
+            LoadRequestData()
+        End If
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click

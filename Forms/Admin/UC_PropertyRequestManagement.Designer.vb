@@ -28,7 +28,7 @@ Partial Class UC_PropertyRequestManagement
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.admin_label_PropertyRequestManagement = New System.Windows.Forms.Label()
-        Me.prm_table1 = New System.Windows.Forms.DataGridView()
+        Me.tblpropertyrequestmanagement = New System.Windows.Forms.DataGridView()
         Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -58,7 +58,7 @@ Partial Class UC_PropertyRequestManagement
         Me.issuePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblpropertyrequestmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_PropertyRequestManagement
@@ -71,21 +71,21 @@ Partial Class UC_PropertyRequestManagement
         Me.admin_label_PropertyRequestManagement.TabIndex = 33
         Me.admin_label_PropertyRequestManagement.Text = "Property Request Management"
         '
-        'prm_table1
+        'tblpropertyrequestmanagement
         '
-        Me.prm_table1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.tblpropertyrequestmanagement.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.prm_table1.BackgroundColor = System.Drawing.Color.White
-        Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
-        Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.prm_table1.Location = New System.Drawing.Point(62, 126)
-        Me.prm_table1.Name = "prm_table1"
-        Me.prm_table1.RowHeadersWidth = 51
-        Me.prm_table1.RowTemplate.Height = 24
-        Me.prm_table1.Size = New System.Drawing.Size(1270, 573)
-        Me.prm_table1.TabIndex = 34
+        Me.tblpropertyrequestmanagement.BackgroundColor = System.Drawing.Color.White
+        Me.tblpropertyrequestmanagement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblpropertyrequestmanagement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
+        Me.tblpropertyrequestmanagement.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.tblpropertyrequestmanagement.Location = New System.Drawing.Point(62, 126)
+        Me.tblpropertyrequestmanagement.Name = "tblpropertyrequestmanagement"
+        Me.tblpropertyrequestmanagement.RowHeadersWidth = 51
+        Me.tblpropertyrequestmanagement.RowTemplate.Height = 24
+        Me.tblpropertyrequestmanagement.Size = New System.Drawing.Size(1270, 573)
+        Me.tblpropertyrequestmanagement.TabIndex = 34
         '
         'NameOfRequester
         '
@@ -374,18 +374,18 @@ Partial Class UC_PropertyRequestManagement
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnReject)
         Me.Controls.Add(Me.prm_btn_update)
-        Me.Controls.Add(Me.prm_table1)
+        Me.Controls.Add(Me.tblpropertyrequestmanagement)
         Me.Controls.Add(Me.admin_label_PropertyRequestManagement)
         Me.Name = "UC_PropertyRequestManagement"
         Me.Size = New System.Drawing.Size(1394, 803)
-        CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblpropertyrequestmanagement, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents admin_label_PropertyRequestManagement As Label
-    Friend WithEvents prm_table1 As DataGridView
+    Friend WithEvents tblpropertyrequestmanagement As DataGridView
     Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton

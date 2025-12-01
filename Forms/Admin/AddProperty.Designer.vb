@@ -49,7 +49,7 @@ Partial Class AddProperty
         Me.category = New System.Windows.Forms.ComboBox()
         Me.supplierTxt = New System.Windows.Forms.TextBox()
         Me.serialNumberTxt = New System.Windows.Forms.TextBox()
-        Me.propertyNameTxt = New System.Windows.Forms.TextBox()
+        Me.itemName = New System.Windows.Forms.TextBox()
         Me.cost = New System.Windows.Forms.Label()
         Me.conditionStatus = New System.Windows.Forms.Label()
         Me.supplier = New System.Windows.Forms.Label()
@@ -324,7 +324,7 @@ Partial Class AddProperty
         Me.Panel1.Controls.Add(Me.category)
         Me.Panel1.Controls.Add(Me.supplierTxt)
         Me.Panel1.Controls.Add(Me.serialNumberTxt)
-        Me.Panel1.Controls.Add(Me.propertyNameTxt)
+        Me.Panel1.Controls.Add(Me.itemName)
         Me.Panel1.Controls.Add(Me.cost)
         Me.Panel1.Controls.Add(Me.conditionStatus)
         Me.Panel1.Controls.Add(Me.supplier)
@@ -420,15 +420,15 @@ Partial Class AddProperty
         Me.serialNumberTxt.Size = New System.Drawing.Size(255, 24)
         Me.serialNumberTxt.TabIndex = 66
         '
-        'propertyNameTxt
+        'itemName
         '
-        Me.propertyNameTxt.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.propertyNameTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertyNameTxt.Location = New System.Drawing.Point(256, 44)
-        Me.propertyNameTxt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.propertyNameTxt.Name = "propertyNameTxt"
-        Me.propertyNameTxt.Size = New System.Drawing.Size(255, 24)
-        Me.propertyNameTxt.TabIndex = 64
+        Me.itemName.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.itemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.itemName.Location = New System.Drawing.Point(256, 44)
+        Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.itemName.Name = "itemName"
+        Me.itemName.Size = New System.Drawing.Size(255, 24)
+        Me.itemName.TabIndex = 64
         '
         'cost
         '
@@ -608,7 +608,7 @@ Partial Class AddProperty
     Friend WithEvents no_of_employees_numeric As System.Windows.Forms.NumericUpDown
     Friend WithEvents supplierTxt As System.Windows.Forms.TextBox
     Friend WithEvents serialNumberTxt As System.Windows.Forms.TextBox
-    Friend WithEvents propertyNameTxt As System.Windows.Forms.TextBox
+    Friend WithEvents itemName As System.Windows.Forms.TextBox
     Friend WithEvents cost As System.Windows.Forms.Label
     Friend WithEvents conditionStatus As System.Windows.Forms.Label
     Friend WithEvents supplier As System.Windows.Forms.Label

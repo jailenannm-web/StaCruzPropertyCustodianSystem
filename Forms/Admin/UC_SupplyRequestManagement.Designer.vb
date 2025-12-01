@@ -28,7 +28,7 @@ Partial Class UC_SupplyRequestManagement
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.prm_table1 = New System.Windows.Forms.DataGridView()
+        Me.tblSupplyRequestmanagement = New System.Windows.Forms.DataGridView()
         Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -37,7 +37,7 @@ Partial Class UC_SupplyRequestManagement
         Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.admin_label_SupplyRequestManagement = New System.Windows.Forms.Label()
-        CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblSupplyRequestmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'printPAR
@@ -128,21 +128,21 @@ Partial Class UC_SupplyRequestManagement
         Me.btnReject.Text = "Reject"
         Me.btnReject.UseVisualStyleBackColor = False
         '
-        'prm_table1
+        'tblSupplyRequestmanagement
         '
-        Me.prm_table1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.tblSupplyRequestmanagement.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.prm_table1.BackgroundColor = System.Drawing.Color.White
-        Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
-        Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.prm_table1.Location = New System.Drawing.Point(67, 111)
-        Me.prm_table1.Name = "prm_table1"
-        Me.prm_table1.RowHeadersWidth = 51
-        Me.prm_table1.RowTemplate.Height = 24
-        Me.prm_table1.Size = New System.Drawing.Size(1270, 573)
-        Me.prm_table1.TabIndex = 163
+        Me.tblSupplyRequestmanagement.BackgroundColor = System.Drawing.Color.White
+        Me.tblSupplyRequestmanagement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblSupplyRequestmanagement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
+        Me.tblSupplyRequestmanagement.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
+        Me.tblSupplyRequestmanagement.Location = New System.Drawing.Point(67, 111)
+        Me.tblSupplyRequestmanagement.Name = "tblSupplyRequestmanagement"
+        Me.tblSupplyRequestmanagement.RowHeadersWidth = 51
+        Me.tblSupplyRequestmanagement.RowTemplate.Height = 24
+        Me.tblSupplyRequestmanagement.Size = New System.Drawing.Size(1270, 573)
+        Me.tblSupplyRequestmanagement.TabIndex = 163
         '
         'NameOfRequester
         '
@@ -213,11 +213,11 @@ Partial Class UC_SupplyRequestManagement
         Me.Controls.Add(Me.ttlpropertyrequestmanagement)
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnReject)
-        Me.Controls.Add(Me.prm_table1)
+        Me.Controls.Add(Me.tblSupplyRequestmanagement)
         Me.Controls.Add(Me.admin_label_SupplyRequestManagement)
         Me.Name = "UC_SupplyRequestManagement"
         Me.Size = New System.Drawing.Size(1394, 803)
-        CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblSupplyRequestmanagement, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -229,7 +229,7 @@ Partial Class UC_SupplyRequestManagement
     Friend WithEvents ttlpropertyrequestmanagement As System.Windows.Forms.Label
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
-    Friend WithEvents prm_table1 As System.Windows.Forms.DataGridView
+    Friend WithEvents tblSupplyRequestmanagement As System.Windows.Forms.DataGridView
     Friend WithEvents NameOfRequester As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Department As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DateOfRequest As System.Windows.Forms.DataGridViewTextBoxColumn

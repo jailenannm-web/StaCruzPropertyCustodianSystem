@@ -195,60 +195,47 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        ' Super Admin bypasses all restrictions
+
         If pm_table.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a supply to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Dim selectedRow As DataGridViewRow = pm_table.SelectedRows(0)
-        ' Get SupplyID from row Tag
-        Dim supplyIDStr As String = ""
-        If selectedRow.Tag IsNot Nothing Then
-            supplyIDStr = selectedRow.Tag.ToString()
-        End If
 
-        If String.IsNullOrEmpty(supplyIDStr) Then
+        ' Read supply_id stored in Tag
+        If selectedRow.Tag Is Nothing Then
             MessageBox.Show("Invalid supply selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
         Dim supplyID As Integer
-        If Not Integer.TryParse(supplyIDStr, supplyID) Then
-            MessageBox.Show("Invalid supply ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        If Not Integer.TryParse(selectedRow.Tag.ToString(), supplyID) Then
+            MessageBox.Show("Invalid supply ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        ' Get supply data from database
-        Dim supplyData As DataRow = DatabaseConnection.GetSupplyById(supplyIDStr)
+        ' Get supply data from DB
+        Dim supplyData As DataRow = DatabaseConnection.GetSupplyById(supplyID)
         If supplyData Is Nothing Then
             MessageBox.Show("Supply not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        ' Check if EditSupply form exists, otherwise show message
-        Try
-            ' Try to create EditSupply form using reflection
-            Dim editSupplyType As Type = Type.GetType("StaCruzPropertyCustodianSystem.Forms.Admin.EditSupply")
-            If editSupplyType IsNot Nothing Then
-                Dim editForm As Object = Activator.CreateInstance(editSupplyType)
-                ' Load supply data into edit form if it has a LoadSupplyData method
-                Dim loadMethod = editSupplyType.GetMethod("LoadSupplyData")
-                If loadMethod IsNot Nothing Then
-                    loadMethod.Invoke(editForm, New Object() {supplyID, supplyData})
-                End If
-                ' Navigate to edit form
-                Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-                If parentDashboard IsNot Nothing Then
-                    parentDashboard.LoadUserControl(TryCast(editForm, UserControl))
-                End If
-            Else
-                MessageBox.Show("Edit form for supplies is not yet implemented. Supply ID: " & supplyID.ToString(), "Edit Supply", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Edit functionality for Supply ID: " & supplyID.ToString() & " - Edit form needs to be implemented. Error: " & ex.Message, "Edit Supply", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End Try
+        ' Open EditSupply Form
+        Dim editForm As New EditSupply()
+        editForm.LoadSupplyData(supplyID, supplyData)
+
+        ' Navigate into Admin Dashboard
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(editForm)
+        Else
+            MessageBox.Show("Unable to open EditSupply screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
     End Sub
+
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         ' Super Admin bypasses all restrictions
