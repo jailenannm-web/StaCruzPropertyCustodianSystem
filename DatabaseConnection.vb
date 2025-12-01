@@ -2319,12 +2319,12 @@ Public Class DatabaseConnection
                 depreciationValue = 0
             End If
 
-            Dim query As String = "INSERT INTO properties (item_name, category, description, serial_number, property_number, " &
-                                 "acquisition_date, acquisition_cost, condition, supplier_name, " &
-                                 "location, assigned_to, department_id, status) " &
-                                 "VALUES (@propertyName, @category, @description, @serialNumber, @propertyNumber, @acquisitionDate, " &
-                                 "@acquisitionCost, @conditionStatus, @supplierName, @location, " &
-                                 "@custodianID, @departmentID, 'Active')"
+            Dim query As String = "INSERT INTO properties (item_name, property_name, category, description, serial_number, property_number, " &
+                                 "acquisition_date, acquisition_cost, condition, supplier_name, supplier_contact, " &
+                                 "location, assigned_to, department_id, warranty_details, life_span, status) " &
+                                 "VALUES (@propertyName, @propertyName, @category, @description, @serialNumber, @propertyNumber, @acquisitionDate, " &
+                                 "@acquisitionCost, @conditionStatus, @supplierName, @supplierContact, @location, " &
+                                 "@custodianID, @departmentID, @warrantyDetails, @lifeSpan, 'Active')"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@propertyName", propertyName)
@@ -2336,13 +2336,17 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
                 cmd.Parameters.AddWithValue("@conditionStatus", conditionStatus)
                 cmd.Parameters.AddWithValue("@supplierName", If(String.IsNullOrEmpty(supplierName), DBNull.Value, supplierName))
+                cmd.Parameters.AddWithValue("@supplierContact", If(String.IsNullOrEmpty(supplierContact), DBNull.Value, supplierContact))
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@warrantyDetails", If(String.IsNullOrEmpty(warrantyDetails), DBNull.Value, warrantyDetails))
+                cmd.Parameters.AddWithValue("@lifeSpan", If(lifeSpan.HasValue, lifeSpan.Value, DBNull.Value))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
                     System.Diagnostics.Debug.WriteLine("[v0] Property Added Successfully: " & propertyName)
+                    MessageBox.Show("Property added successfully!", "Property Management", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
                 End If
             End Using
@@ -2410,6 +2414,54 @@ Public Class DatabaseConnection
             End If
         End Try
         Return dt
+    End Function
+
+    ''' <summary>
+    ''' Retrieve a single property's full details by ID.
+    ''' </summary>
+    Public Shared Function GetPropertyDetails(propertyID As Integer) As DataRow
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return Nothing
+            If Not SafeOpenConnection(conn) Then Return Nothing
+
+            Dim query As String =
+                "SELECT p.property_id, p.item_name, p.property_name, p.category, p.property_number, p.serial_number, " &
+                "p.description, p.supplier_name, p.supplier_contact, p.condition AS condition_status, " &
+                "p.acquisition_cost, p.acquisition_date, p.warranty_details, p.location, p.status, " &
+                "CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS assigned_employee, " &
+                "d.department_name AS assigned_department " &
+                "FROM properties p " &
+                "LEFT JOIN users u ON p.assigned_to = u.user_id " &
+                "LEFT JOIN departments d ON p.department_id = d.department_id " &
+                "WHERE p.property_id = @propertyID LIMIT 1"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@propertyID", propertyID)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetPropertyDetails Exception: " & ex.Message)
+            Return Nothing
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+
+        If dt.Rows.Count > 0 Then
+            Return dt.Rows(0)
+        End If
+
+        Return Nothing
     End Function
 
     ' =====================================================
