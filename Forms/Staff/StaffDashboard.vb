@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Data
 Imports System.Diagnostics
 Imports System.Drawing
 Imports System.Linq
@@ -53,6 +54,9 @@ Public Class StaffDashboard
         ' Hide the form loader panel to show your pnlMain
         pnlFormLoader.Visible = True
 
+        ' Load dashboard data on startup
+        LoadDashboardData()
+
         ' (Your other load code... like sidebar setup)
     End Sub
 
@@ -70,7 +74,115 @@ Public Class StaffDashboard
 
         SetActiveButton(btnDashboard)
         pnlFormLoader.Visible = True
+        LoadDashboardData()
+    End Sub
 
+    Private Sub LoadDashboardData()
+        Try
+            If Not SessionContext.CurrentUserID.HasValue OrElse SessionContext.CurrentUserID.Value <= 0 Then
+                Return
+            End If
+
+            ' Load recent requests for the DataGridView
+            Dim dt As DataTable = DatabaseConnection.GetStaffRequests(SessionContext.CurrentUserID.Value)
+
+            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                ' Clear existing data
+                DataGridView1.Rows.Clear()
+
+                ' Populate DataGridView with recent requests (limit to 10 most recent)
+                Dim rowCount As Integer = Math.Min(10, dt.Rows.Count)
+                For i As Integer = 0 To rowCount - 1
+                    Dim row As DataRow = dt.Rows(i)
+                    Try
+                        Dim requestID As String = ""
+                        Dim requestDate As String = ""
+                        Dim itemName As String = ""
+                        Dim requestType As String = ""
+                        Dim quantity As String = "1"
+                        Dim status As String = ""
+                        Dim approvedBy As String = ""
+                        Dim releaseDate As String = ""
+                        Dim returnDate As String = ""
+
+                        If dt.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")) Then
+                            requestID = row("request_id").ToString()
+                        End If
+                        If dt.Columns.Contains("request_date") AndAlso Not IsDBNull(row("request_date")) Then
+                            requestDate = Convert.ToDateTime(row("request_date")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
+                            itemName = row("item_name").ToString()
+                        End If
+                        If dt.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")) Then
+                            requestType = row("request_type").ToString()
+                        End If
+                        If dt.Columns.Contains("quantity") AndAlso Not IsDBNull(row("quantity")) Then
+                            quantity = row("quantity").ToString()
+                        End If
+                        If dt.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
+                            status = row("status").ToString()
+                        End If
+                        If dt.Columns.Contains("approval_date") AndAlso Not IsDBNull(row("approval_date")) Then
+                            approvedBy = Convert.ToDateTime(row("approval_date")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("release_date") AndAlso Not IsDBNull(row("release_date")) Then
+                            releaseDate = Convert.ToDateTime(row("release_date")).ToString("yyyy-MM-dd")
+                        End If
+                        If dt.Columns.Contains("expected_return_date") AndAlso Not IsDBNull(row("expected_return_date")) Then
+                            returnDate = Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd")
+                        End If
+
+                        DataGridView1.Rows.Add(requestID, SessionContext.CurrentUserID.Value.ToString(), "", requestDate, itemName, quantity, status, approvedBy, releaseDate, returnDate)
+                    Catch rowEx As Exception
+                        System.Diagnostics.Debug.WriteLine("Error processing row in LoadDashboardData: " & rowEx.Message)
+                    End Try
+                Next
+            End If
+
+            ' Update summary cards
+            UpdateDashboardSummary()
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("LoadDashboardData Error: " & ex.Message & vbCrLf & ex.StackTrace)
+        End Try
+    End Sub
+
+    Private Sub UpdateDashboardSummary()
+        Try
+            If Not SessionContext.CurrentUserID.HasValue OrElse SessionContext.CurrentUserID.Value <= 0 Then
+                Return
+            End If
+
+            ' Get pending requests count
+            Dim pendingRequests As Integer = 0
+            Try
+                Dim dtPending As DataTable = DatabaseConnection.GetStaffRequests(SessionContext.CurrentUserID.Value, "Pending", "", Nothing, Nothing)
+                If dtPending IsNot Nothing Then
+                    pendingRequests = dtPending.Rows.Count
+                End If
+            Catch
+            End Try
+
+            ' Get borrowed items count
+            Dim borrowedItems As Integer = 0
+            Try
+                Dim dtBorrowed As DataTable = DatabaseConnection.GetStaffBorrowedItems(SessionContext.CurrentUserID.Value, False)
+                If dtBorrowed IsNot Nothing Then
+                    borrowedItems = dtBorrowed.Rows.Count
+                End If
+            Catch
+            End Try
+
+            ' Update labels if they exist
+            If Label5 IsNot Nothing Then
+                Label5.Text = pendingRequests.ToString()
+            End If
+            If Label3 IsNot Nothing Then
+                Label3.Text = borrowedItems.ToString()
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("UpdateDashboardSummary Error: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub btnProfile_Click(sender As Object, e As EventArgs) Handles btnProfile.Click

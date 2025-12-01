@@ -107,28 +107,32 @@ Public Class AddProperty
             propertyNumberValue = propertyNumber.Text.Trim()
         End If
 
-        Dim success = DatabaseConnection.AddProperty(
-            itemName.Text.Trim(),                            ' propertyName
-            GetComboValue(category, "Others"),                       ' category
-            descriptionValue,                                        ' description
-            serialNumberTxt.Text.Trim(),                             ' serialNumber
-            acquisitionDate.Value,                                  ' acquisitionDate
-            acquisitionCostValue,                                   ' acquisitionCost
-            supplierTxt.Text.Trim(),                                 ' supplierName
-            "",                                                      ' supplierContact
-            GetComboValue(condition, "good"),                       ' conditionStatus
-            propertyLocation.Text.Trim(),                           ' location
-            custodianId,                                             ' custodianID
-            departmentId,                                            ' departmentID
-            warrantyExpirationDate.Value.ToShortDateString(),       ' warrantyDetails
-            Nothing,                                                 ' lifeSpan
-            propertyNumberValue                                      ' propertyNumber
-        )
+        Try
+            Dim success = DatabaseConnection.AddProperty(
+                itemName.Text.Trim(),                            ' propertyName
+                GetComboValue(category, "Others"),                       ' category
+                descriptionValue,                                        ' description
+                serialNumberTxt.Text.Trim(),                             ' serialNumber
+                acquisitionDate.Value,                                  ' acquisitionDate
+                acquisitionCostValue,                                   ' acquisitionCost
+                supplierTxt.Text.Trim(),                                 ' supplierName
+                "",                                                      ' supplierContact
+                GetComboValue(condition, "good"),                       ' conditionStatus
+                propertyLocation.Text.Trim(),                           ' location
+                custodianId,                                             ' custodianID
+                departmentId,                                            ' departmentID
+                warrantyExpirationDate.Value.ToShortDateString(),       ' warrantyDetails
+                Nothing,                                                 ' lifeSpan
+                propertyNumberValue                                      ' propertyNumber
+            )
 
-        If success Then
-            MessageBox.Show("Property added successfully!", "Property Management", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            NavigateBackToList()
-        End If
+            If success Then
+                NavigateBackToList()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error adding property: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("AddProperty btnSave_Click Error: " & ex.Message & vbCrLf & ex.StackTrace)
+        End Try
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click

@@ -33,6 +33,13 @@ Public Class UC_MaintenanceManagement
 
     End Sub
 
+    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
+        ' Allow editing by double-clicking a row
+        If e.RowIndex >= 0 Then
+            btnEdit_Click(sender, e)
+        End If
+    End Sub
+
     Private Sub UC_MaintenanceManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Make grid read-only
         DataGridView1.ReadOnly = True
@@ -158,18 +165,41 @@ Public Class UC_MaintenanceManagement
     Private Sub btnEdit_Click(sender As Object, e As EventArgs)
         ' No restrictions for Super Admin, Admin, and Custodian
 
-        ' Get reference to the parent dashboard form
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-
-        If parentDashboard IsNot Nothing Then
-            ' Load the AddSupply UserControl
-            parentDashboard.LoadUserControl(New AddMaintenance1())
-        Else
-            ' Fallback: add directly to the parent container
-            Dim addSupplyUC As New EditMaintenance1()
-            Me.Parent.Controls.Add(addSupplyUC)
-            addSupplyUC.BringToFront()
+        If DataGridView1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a maintenance record to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
         End If
+
+        Try
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
+
+            ' Get reference to the parent dashboard form
+            Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+
+            If parentDashboard IsNot Nothing Then
+                ' Load EditMaintenance1 with maintenance ID
+                Dim editForm As New EditMaintenance1()
+                editForm.MaintenanceID = maintenanceID
+                parentDashboard.LoadUserControl(editForm)
+            Else
+                ' Fallback: add directly to the parent container
+                Dim editForm As New EditMaintenance1()
+                editForm.MaintenanceID = maintenanceID
+                Me.Parent.Controls.Add(editForm)
+                editForm.BringToFront()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading maintenance record for editing: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click

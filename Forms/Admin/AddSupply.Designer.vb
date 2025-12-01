@@ -24,6 +24,9 @@ Partial Class AddSupply
     Private Sub InitializeComponent()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.remarksTxt = New System.Windows.Forms.TextBox()
         Me.supplierTxt = New System.Windows.Forms.TextBox()
         Me.supplier = New System.Windows.Forms.Label()
@@ -32,6 +35,9 @@ Partial Class AddSupply
         Me.expirationDate = New System.Windows.Forms.Label()
         Me.remarksSupply = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.categoryCmbo = New System.Windows.Forms.ComboBox()
         Me.supplyName = New System.Windows.Forms.TextBox()
         Me.stockSupply = New System.Windows.Forms.NumericUpDown()
@@ -46,12 +52,6 @@ Partial Class AddSupply
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -66,10 +66,10 @@ Partial Class AddSupply
         Me.RoundedPanel2.Controls.Add(Me.Panel2)
         Me.RoundedPanel2.Controls.Add(Me.Panel1)
         Me.RoundedPanel2.CornerRadius = 5
-        Me.RoundedPanel2.Location = New System.Drawing.Point(42, 165)
-        Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RoundedPanel2.Location = New System.Drawing.Point(56, 203)
+        Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(905, 333)
+        Me.RoundedPanel2.Size = New System.Drawing.Size(1207, 410)
         Me.RoundedPanel2.TabIndex = 47
         '
         'Panel2
@@ -87,11 +87,47 @@ Partial Class AddSupply
         Me.Panel2.Controls.Add(Me.date_received)
         Me.Panel2.Controls.Add(Me.expirationDate)
         Me.Panel2.Controls.Add(Me.remarksSupply)
-        Me.Panel2.Location = New System.Drawing.Point(490, 15)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel2.Location = New System.Drawing.Point(653, 18)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(387, 298)
+        Me.Panel2.Size = New System.Drawing.Size(516, 367)
         Me.Panel2.TabIndex = 65
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.Location = New System.Drawing.Point(239, 202)
+        Me.TextBox3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(239, 24)
+        Me.TextBox3.TabIndex = 75
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(239, 257)
+        Me.TextBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(239, 24)
+        Me.TextBox2.TabIndex = 74
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(239, 95)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(239, 24)
+        Me.TextBox1.TabIndex = 73
         '
         'remarksTxt
         '
@@ -99,10 +135,10 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.remarksTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.remarksTxt.Location = New System.Drawing.Point(179, 208)
-        Me.remarksTxt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.remarksTxt.Location = New System.Drawing.Point(239, 151)
+        Me.remarksTxt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.remarksTxt.Name = "remarksTxt"
-        Me.remarksTxt.Size = New System.Drawing.Size(180, 21)
+        Me.remarksTxt.Size = New System.Drawing.Size(239, 24)
         Me.remarksTxt.TabIndex = 72
         '
         'supplierTxt
@@ -111,10 +147,10 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.supplierTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.supplierTxt.Location = New System.Drawing.Point(179, 35)
-        Me.supplierTxt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.supplierTxt.Location = New System.Drawing.Point(239, 43)
+        Me.supplierTxt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.supplierTxt.Name = "supplierTxt"
-        Me.supplierTxt.Size = New System.Drawing.Size(180, 21)
+        Me.supplierTxt.Size = New System.Drawing.Size(239, 24)
         Me.supplierTxt.TabIndex = 70
         '
         'supplier
@@ -124,10 +160,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.supplier.AutoSize = True
         Me.supplier.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.supplier.Location = New System.Drawing.Point(31, 38)
-        Me.supplier.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.supplier.Location = New System.Drawing.Point(41, 47)
         Me.supplier.Name = "supplier"
-        Me.supplier.Size = New System.Drawing.Size(56, 15)
+        Me.supplier.Size = New System.Drawing.Size(70, 18)
         Me.supplier.TabIndex = 69
         Me.supplier.Text = "Unit Cost"
         '
@@ -138,10 +173,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.receivedBy.AutoSize = True
         Me.receivedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.receivedBy.Location = New System.Drawing.Point(31, 166)
-        Me.receivedBy.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.receivedBy.Location = New System.Drawing.Point(41, 204)
         Me.receivedBy.Name = "receivedBy"
-        Me.receivedBy.Size = New System.Drawing.Size(96, 15)
+        Me.receivedBy.Size = New System.Drawing.Size(118, 18)
         Me.receivedBy.TabIndex = 48
         Me.receivedBy.Text = "Source of Funds"
         '
@@ -152,10 +186,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.date_received.AutoSize = True
         Me.date_received.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.date_received.Location = New System.Drawing.Point(31, 80)
-        Me.date_received.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.date_received.Location = New System.Drawing.Point(41, 98)
         Me.date_received.Name = "date_received"
-        Me.date_received.Size = New System.Drawing.Size(61, 15)
+        Me.date_received.Size = New System.Drawing.Size(77, 18)
         Me.date_received.TabIndex = 46
         Me.date_received.Text = "Total Cost"
         '
@@ -166,10 +199,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.expirationDate.AutoSize = True
         Me.expirationDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.expirationDate.Location = New System.Drawing.Point(31, 123)
-        Me.expirationDate.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.expirationDate.Location = New System.Drawing.Point(41, 151)
         Me.expirationDate.Name = "expirationDate"
-        Me.expirationDate.Size = New System.Drawing.Size(53, 15)
+        Me.expirationDate.Size = New System.Drawing.Size(61, 18)
         Me.expirationDate.TabIndex = 47
         Me.expirationDate.Text = "Supplier"
         '
@@ -180,10 +212,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.remarksSupply.AutoSize = True
         Me.remarksSupply.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.remarksSupply.Location = New System.Drawing.Point(31, 209)
-        Me.remarksSupply.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.remarksSupply.Location = New System.Drawing.Point(41, 257)
         Me.remarksSupply.Name = "remarksSupply"
-        Me.remarksSupply.Size = New System.Drawing.Size(54, 15)
+        Me.remarksSupply.Size = New System.Drawing.Size(65, 18)
         Me.remarksSupply.TabIndex = 49
         Me.remarksSupply.Text = "Location"
         '
@@ -204,11 +235,46 @@ Partial Class AddSupply
         Me.Panel1.Controls.Add(Me.category)
         Me.Panel1.Controls.Add(Me.nameSupply)
         Me.Panel1.Controls.Add(Me.supply_id)
-        Me.Panel1.Location = New System.Drawing.Point(50, 15)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel1.Location = New System.Drawing.Point(67, 18)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(372, 298)
+        Me.Panel1.Size = New System.Drawing.Size(496, 367)
         Me.Panel1.TabIndex = 64
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(212, 302)
+        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(239, 24)
+        Me.DateTimePicker1.TabIndex = 84
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(40, 304)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(104, 18)
+        Me.Label1.TabIndex = 83
+        Me.Label1.Text = "Date Received"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(212, 202)
+        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(240, 26)
+        Me.ComboBox1.TabIndex = 82
         '
         'categoryCmbo
         '
@@ -217,10 +283,10 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.categoryCmbo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.categoryCmbo.FormattingEnabled = True
-        Me.categoryCmbo.Location = New System.Drawing.Point(159, 80)
-        Me.categoryCmbo.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.categoryCmbo.Location = New System.Drawing.Point(212, 98)
+        Me.categoryCmbo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.categoryCmbo.Name = "categoryCmbo"
-        Me.categoryCmbo.Size = New System.Drawing.Size(181, 23)
+        Me.categoryCmbo.Size = New System.Drawing.Size(240, 26)
         Me.categoryCmbo.TabIndex = 79
         '
         'supplyName
@@ -229,10 +295,10 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.supplyName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.supplyName.Location = New System.Drawing.Point(159, 123)
-        Me.supplyName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.supplyName.Location = New System.Drawing.Point(210, 41)
+        Me.supplyName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.supplyName.Name = "supplyName"
-        Me.supplyName.Size = New System.Drawing.Size(182, 21)
+        Me.supplyName.Size = New System.Drawing.Size(241, 24)
         Me.supplyName.TabIndex = 78
         '
         'stockSupply
@@ -241,10 +307,10 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.stockSupply.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.stockSupply.Location = New System.Drawing.Point(159, 207)
-        Me.stockSupply.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.stockSupply.Location = New System.Drawing.Point(212, 255)
+        Me.stockSupply.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.stockSupply.Name = "stockSupply"
-        Me.stockSupply.Size = New System.Drawing.Size(180, 21)
+        Me.stockSupply.Size = New System.Drawing.Size(240, 24)
         Me.stockSupply.TabIndex = 75
         '
         'Label2
@@ -254,10 +320,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(32, 208)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Location = New System.Drawing.Point(43, 256)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(48, 15)
+        Me.Label2.Size = New System.Drawing.Size(58, 18)
         Me.Label2.TabIndex = 74
         Me.Label2.Text = "Quanity"
         '
@@ -267,10 +332,10 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.supplyID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.supplyID.Location = New System.Drawing.Point(159, 35)
-        Me.supplyID.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.supplyID.Location = New System.Drawing.Point(212, 148)
+        Me.supplyID.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.supplyID.Name = "supplyID"
-        Me.supplyID.Size = New System.Drawing.Size(182, 21)
+        Me.supplyID.Size = New System.Drawing.Size(241, 24)
         Me.supplyID.TabIndex = 64
         '
         'stock
@@ -280,10 +345,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.stock.AutoSize = True
         Me.stock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.stock.Location = New System.Drawing.Point(32, 166)
-        Me.stock.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.stock.Location = New System.Drawing.Point(43, 204)
         Me.stock.Name = "stock"
-        Me.stock.Size = New System.Drawing.Size(94, 15)
+        Me.stock.Size = New System.Drawing.Size(113, 18)
         Me.stock.TabIndex = 61
         Me.stock.Text = "Unit of Measure"
         '
@@ -294,10 +358,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.category.AutoSize = True
         Me.category.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.category.Location = New System.Drawing.Point(32, 123)
-        Me.category.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.category.Location = New System.Drawing.Point(43, 151)
         Me.category.Name = "category"
-        Me.category.Size = New System.Drawing.Size(69, 15)
+        Me.category.Size = New System.Drawing.Size(83, 18)
         Me.category.TabIndex = 60
         Me.category.Text = "Description"
         '
@@ -308,10 +371,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.nameSupply.AutoSize = True
         Me.nameSupply.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.nameSupply.Location = New System.Drawing.Point(32, 80)
-        Me.nameSupply.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.nameSupply.Location = New System.Drawing.Point(43, 98)
         Me.nameSupply.Name = "nameSupply"
-        Me.nameSupply.Size = New System.Drawing.Size(55, 15)
+        Me.nameSupply.Size = New System.Drawing.Size(68, 18)
         Me.nameSupply.TabIndex = 59
         Me.nameSupply.Text = "Category"
         '
@@ -322,10 +384,9 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.supply_id.AutoSize = True
         Me.supply_id.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.supply_id.Location = New System.Drawing.Point(32, 38)
-        Me.supply_id.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.supply_id.Location = New System.Drawing.Point(43, 47)
         Me.supply_id.Name = "supply_id"
-        Me.supply_id.Size = New System.Drawing.Size(68, 15)
+        Me.supply_id.Size = New System.Drawing.Size(80, 18)
         Me.supply_id.TabIndex = 58
         Me.supply_id.Text = "Item Name"
         '
@@ -335,20 +396,19 @@ Partial Class AddSupply
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RoundedPanel1.Controls.Add(Me.instructions)
         Me.RoundedPanel1.CornerRadius = 5
-        Me.RoundedPanel1.Location = New System.Drawing.Point(42, 90)
-        Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RoundedPanel1.Location = New System.Drawing.Point(56, 111)
+        Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(905, 58)
+        Me.RoundedPanel1.Size = New System.Drawing.Size(1207, 71)
         Me.RoundedPanel1.TabIndex = 46
         '
         'instructions
         '
         Me.instructions.AutoSize = True
         Me.instructions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.instructions.Location = New System.Drawing.Point(14, 20)
-        Me.instructions.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.instructions.Location = New System.Drawing.Point(19, 25)
         Me.instructions.Name = "instructions"
-        Me.instructions.Size = New System.Drawing.Size(198, 15)
+        Me.instructions.Size = New System.Drawing.Size(235, 18)
         Me.instructions.TabIndex = 40
         Me.instructions.Text = "Fill the required supply information."
         '
@@ -356,10 +416,9 @@ Partial Class AddSupply
         '
         Me.admin_label_DepartmentManagement.AutoSize = True
         Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(34, 41)
-        Me.admin_label_DepartmentManagement.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(45, 50)
         Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(296, 31)
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(353, 38)
         Me.admin_label_DepartmentManagement.TabIndex = 45
         Me.admin_label_DepartmentManagement.Text = "Supply Register Form"
         '
@@ -371,9 +430,10 @@ Partial Class AddSupply
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(695, 548)
+        Me.btnCancel.Location = New System.Drawing.Point(927, 674)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(109, 28)
+        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
         Me.btnCancel.TabIndex = 157
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
@@ -386,97 +446,26 @@ Partial Class AddSupply
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSave.Location = New System.Drawing.Point(810, 548)
+        Me.btnSave.Location = New System.Drawing.Point(1080, 674)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(109, 28)
+        Me.btnSave.Size = New System.Drawing.Size(145, 34)
         Me.btnSave.TabIndex = 156
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = False
         '
-        'ComboBox1
-        '
-        Me.ComboBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(159, 164)
-        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(181, 23)
-        Me.ComboBox1.TabIndex = 82
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.DateTimePicker1.Location = New System.Drawing.Point(159, 245)
-        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(2)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(180, 21)
-        Me.DateTimePicker1.TabIndex = 84
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(30, 247)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(87, 15)
-        Me.Label1.TabIndex = 83
-        Me.Label1.Text = "Date Received"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(179, 77)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(180, 21)
-        Me.TextBox1.TabIndex = 73
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(179, 120)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(2)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(180, 21)
-        Me.TextBox2.TabIndex = 74
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(179, 164)
-        Me.TextBox3.Margin = New System.Windows.Forms.Padding(2)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(180, 21)
-        Me.TextBox3.TabIndex = 75
-        '
         'AddSupply
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.RoundedPanel2)
         Me.Controls.Add(Me.RoundedPanel1)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "AddSupply"
-        Me.Size = New System.Drawing.Size(975, 671)
+        Me.Size = New System.Drawing.Size(1300, 826)
         Me.RoundedPanel2.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()

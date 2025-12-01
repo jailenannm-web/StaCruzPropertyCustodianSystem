@@ -25,19 +25,6 @@ Partial Class UC_MaintenanceRequestManagement
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertymanagement = New System.Windows.Forms.Label()
         Me.propertyManagementGrid = New System.Windows.Forms.DataGridView()
-        Me.requestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.serialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.propertyNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.conditionBefore = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.typeOfIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.problemDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.assignedTechnician = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.targetDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.issuePropertySlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -46,6 +33,19 @@ Partial Class UC_MaintenanceRequestManagement
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.targetDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.assignedTechnician = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.problemDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.typeOfIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.conditionBefore = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.department = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.propertyNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.serialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -87,97 +87,6 @@ Partial Class UC_MaintenanceRequestManagement
         Me.propertyManagementGrid.RowTemplate.Height = 24
         Me.propertyManagementGrid.Size = New System.Drawing.Size(1270, 564)
         Me.propertyManagementGrid.TabIndex = 163
-        '
-        'requestID
-        '
-        Me.requestID.HeaderText = "Request ID"
-        Me.requestID.MinimumWidth = 6
-        Me.requestID.Name = "requestID"
-        Me.requestID.Width = 85
-        '
-        'dateRequested
-        '
-        Me.dateRequested.HeaderText = "Date Requested"
-        Me.dateRequested.MinimumWidth = 6
-        Me.dateRequested.Name = "dateRequested"
-        Me.dateRequested.Width = 85
-        '
-        'itemName
-        '
-        Me.itemName.HeaderText = "Item Name"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 125
-        '
-        'serialNumber
-        '
-        Me.serialNumber.HeaderText = "Serial Number"
-        Me.serialNumber.MinimumWidth = 6
-        Me.serialNumber.Name = "serialNumber"
-        Me.serialNumber.Width = 85
-        '
-        'propertyNumber
-        '
-        Me.propertyNumber.HeaderText = "Property Number"
-        Me.propertyNumber.MinimumWidth = 6
-        Me.propertyNumber.Name = "propertyNumber"
-        Me.propertyNumber.Width = 85
-        '
-        'department
-        '
-        Me.department.HeaderText = "Department"
-        Me.department.MinimumWidth = 6
-        Me.department.Name = "department"
-        Me.department.Width = 85
-        '
-        'location
-        '
-        Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
-        Me.location.Name = "location"
-        Me.location.Width = 85
-        '
-        'conditionBefore
-        '
-        Me.conditionBefore.HeaderText = "Condition Before"
-        Me.conditionBefore.MinimumWidth = 6
-        Me.conditionBefore.Name = "conditionBefore"
-        Me.conditionBefore.Width = 85
-        '
-        'typeOfIssue
-        '
-        Me.typeOfIssue.HeaderText = "Type of Issue"
-        Me.typeOfIssue.MinimumWidth = 6
-        Me.typeOfIssue.Name = "typeOfIssue"
-        Me.typeOfIssue.Width = 85
-        '
-        'problemDescription
-        '
-        Me.problemDescription.HeaderText = "Problem Description"
-        Me.problemDescription.MinimumWidth = 6
-        Me.problemDescription.Name = "problemDescription"
-        Me.problemDescription.Width = 150
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 85
-        '
-        'assignedTechnician
-        '
-        Me.assignedTechnician.HeaderText = "Assigned Technician"
-        Me.assignedTechnician.MinimumWidth = 6
-        Me.assignedTechnician.Name = "assignedTechnician"
-        Me.assignedTechnician.Width = 85
-        '
-        'targetDate
-        '
-        Me.targetDate.HeaderText = "Target Date/Completion Date"
-        Me.targetDate.MinimumWidth = 6
-        Me.targetDate.Name = "targetDate"
-        Me.targetDate.Width = 85
         '
         'admin_label_DepartmentManagement
         '
@@ -300,6 +209,97 @@ Partial Class UC_MaintenanceRequestManagement
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
+        'targetDate
+        '
+        Me.targetDate.HeaderText = "Target Date/Completion Date"
+        Me.targetDate.MinimumWidth = 6
+        Me.targetDate.Name = "targetDate"
+        Me.targetDate.Width = 85
+        '
+        'assignedTechnician
+        '
+        Me.assignedTechnician.HeaderText = "Assigned Technician"
+        Me.assignedTechnician.MinimumWidth = 6
+        Me.assignedTechnician.Name = "assignedTechnician"
+        Me.assignedTechnician.Width = 85
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 85
+        '
+        'problemDescription
+        '
+        Me.problemDescription.HeaderText = "Problem Description"
+        Me.problemDescription.MinimumWidth = 6
+        Me.problemDescription.Name = "problemDescription"
+        Me.problemDescription.Width = 150
+        '
+        'typeOfIssue
+        '
+        Me.typeOfIssue.HeaderText = "Type of Issue"
+        Me.typeOfIssue.MinimumWidth = 6
+        Me.typeOfIssue.Name = "typeOfIssue"
+        Me.typeOfIssue.Width = 85
+        '
+        'conditionBefore
+        '
+        Me.conditionBefore.HeaderText = "Condition Before"
+        Me.conditionBefore.MinimumWidth = 6
+        Me.conditionBefore.Name = "conditionBefore"
+        Me.conditionBefore.Width = 85
+        '
+        'location
+        '
+        Me.location.HeaderText = "Location"
+        Me.location.MinimumWidth = 6
+        Me.location.Name = "location"
+        Me.location.Width = 85
+        '
+        'department
+        '
+        Me.department.HeaderText = "Department"
+        Me.department.MinimumWidth = 6
+        Me.department.Name = "department"
+        Me.department.Width = 85
+        '
+        'propertyNumber
+        '
+        Me.propertyNumber.HeaderText = "Property Number"
+        Me.propertyNumber.MinimumWidth = 6
+        Me.propertyNumber.Name = "propertyNumber"
+        Me.propertyNumber.Width = 85
+        '
+        'serialNumber
+        '
+        Me.serialNumber.HeaderText = "Serial Number"
+        Me.serialNumber.MinimumWidth = 6
+        Me.serialNumber.Name = "serialNumber"
+        Me.serialNumber.Width = 85
+        '
+        'itemName
+        '
+        Me.itemName.HeaderText = "Item Name"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 125
+        '
+        'dateRequested
+        '
+        Me.dateRequested.HeaderText = "Date Requested"
+        Me.dateRequested.MinimumWidth = 6
+        Me.dateRequested.Name = "dateRequested"
+        Me.dateRequested.Width = 85
+        '
+        'requestID
+        '
+        Me.requestID.HeaderText = "Request ID"
+        Me.requestID.MinimumWidth = 6
+        Me.requestID.Name = "requestID"
+        Me.requestID.Width = 85
+        '
         'UC_MaintenanceRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -327,6 +327,13 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents ttlpropertymanagement As System.Windows.Forms.Label
     Friend WithEvents propertyManagementGrid As System.Windows.Forms.DataGridView
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
+    Friend WithEvents printPAR As Resources.Controls.RoundedButton
+    Friend WithEvents issuePropertySlip As Resources.Controls.RoundedButton
+    Friend WithEvents btnApprove As Resources.Controls.RoundedButton
+    Friend WithEvents btnReject As Resources.Controls.RoundedButton
+    Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents requestID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dateRequested As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents itemName As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -340,11 +347,4 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents assignedTechnician As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents targetDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents printPAR As Resources.Controls.RoundedButton
-    Friend WithEvents issuePropertySlip As Resources.Controls.RoundedButton
-    Friend WithEvents btnApprove As Resources.Controls.RoundedButton
-    Friend WithEvents btnReject As Resources.Controls.RoundedButton
-    Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
-    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
-    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
 End Class

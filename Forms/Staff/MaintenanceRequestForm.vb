@@ -71,6 +71,23 @@ Public Class MaintenanceRequestForm
             End Try
         End If
 
+        ' Get condition and type of issue safely
+        Dim conditionBefore As String = "Good"
+        If conditionStatusCmbo.SelectedItem IsNot Nothing Then
+            conditionBefore = conditionStatusCmbo.SelectedItem.ToString()
+        End If
+        
+        Dim typeOfIssue As String = "Repair"
+        If ComboBox3.SelectedItem IsNot Nothing Then
+            typeOfIssue = ComboBox3.SelectedItem.ToString()
+        End If
+        
+        ' Get target date safely
+        Dim targetDate As Date? = Nothing
+        If DateTimePicker1.Value > Date.Today Then
+            targetDate = DateTimePicker1.Value
+        End If
+        
         ' Submit maintenance request
         Dim success As Boolean = DatabaseConnection.SubmitMaintenanceRequest(
             SessionContext.CurrentUserID.Value,
@@ -79,10 +96,10 @@ Public Class MaintenanceRequestForm
             serialNumberTxt.Text.Trim(),
             departmentID,
             TextBox2.Text.Trim(), ' location
-            conditionStatusCmbo.SelectedItem.ToString(),
-            ComboBox3.SelectedItem.ToString(), ' type of issue
+            conditionBefore,
+            typeOfIssue,
             TextBox1.Text.Trim(), ' problem description
-            If(DateTimePicker1.Value > Date.Today, DateTimePicker1.Value, Nothing) ' target date
+            targetDate
         )
 
         If success Then

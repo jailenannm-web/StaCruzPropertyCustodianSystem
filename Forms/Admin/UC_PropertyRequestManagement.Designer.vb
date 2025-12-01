@@ -51,13 +51,6 @@ Partial Class UC_PropertyRequestManagement
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -78,7 +71,6 @@ Partial Class UC_PropertyRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_table1.BackgroundColor = System.Drawing.Color.White
         Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
         Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.prm_table1.Location = New System.Drawing.Point(62, 126)
         Me.prm_table1.Name = "prm_table1"
@@ -312,55 +304,6 @@ Partial Class UC_PropertyRequestManagement
         Me.assign.Text = "Assign"
         Me.assign.UseVisualStyleBackColor = False
         '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
-        '
-        'Purpose
-        '
-        Me.Purpose.HeaderText = "Purpose"
-        Me.Purpose.MinimumWidth = 6
-        Me.Purpose.Name = "Purpose"
-        Me.Purpose.Width = 125
-        '
-        'QuantityRequested
-        '
-        Me.QuantityRequested.HeaderText = "Quantity Requested"
-        Me.QuantityRequested.MinimumWidth = 6
-        Me.QuantityRequested.Name = "QuantityRequested"
-        Me.QuantityRequested.Width = 125
-        '
-        'ItemName
-        '
-        Me.ItemName.HeaderText = "Item Name"
-        Me.ItemName.MinimumWidth = 6
-        Me.ItemName.Name = "ItemName"
-        Me.ItemName.Width = 125
-        '
-        'DateOfRequest
-        '
-        Me.DateOfRequest.HeaderText = "Date Of Request"
-        Me.DateOfRequest.MinimumWidth = 6
-        Me.DateOfRequest.Name = "DateOfRequest"
-        Me.DateOfRequest.Width = 125
-        '
-        'Department
-        '
-        Me.Department.HeaderText = "Department"
-        Me.Department.MinimumWidth = 6
-        Me.Department.Name = "Department"
-        Me.Department.Width = 125
-        '
-        'NameOfRequester
-        '
-        Me.NameOfRequester.HeaderText = "Name Of Requester"
-        Me.NameOfRequester.MinimumWidth = 6
-        Me.NameOfRequester.Name = "NameOfRequester"
-        Me.NameOfRequester.Width = 125
-        '
         'UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -408,11 +351,4 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents issuePropertyCard As Resources.Controls.RoundedButton
     Friend WithEvents printPAR As Resources.Controls.RoundedButton
     Friend WithEvents btnAssign As Resources.Controls.RoundedButton
-    Friend WithEvents NameOfRequester As DataGridViewTextBoxColumn
-    Friend WithEvents Department As DataGridViewTextBoxColumn
-    Friend WithEvents DateOfRequest As DataGridViewTextBoxColumn
-    Friend WithEvents ItemName As DataGridViewTextBoxColumn
-    Friend WithEvents QuantityRequested As DataGridViewTextBoxColumn
-    Friend WithEvents Purpose As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
 End Class

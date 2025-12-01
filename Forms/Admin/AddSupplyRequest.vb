@@ -1,5 +1,9 @@
 ﻿Imports System
+Imports System.Data
+Imports System.Linq
 Imports System.Windows.Forms
+Imports System.Collections.Generic
+Imports Microsoft.VisualBasic
 
 Public Class AddSupplyRequest
     Inherits System.Windows.Forms.UserControl
@@ -33,6 +37,57 @@ Public Class AddSupplyRequest
         If Not String.IsNullOrEmpty(_prefillItemName) Then
             TextBox8.Text = _prefillItemName
         End If
+        
+        ' Pre-fill user info if available
+        If SessionContext.CurrentUserID.HasValue Then
+            Try
+                Dim profile As Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
+                If profile IsNot Nothing AndAlso profile.Count > 0 Then
+                    ' Fill in requester name if field exists
+                    If profile.ContainsKey("first_name") AndAlso profile.ContainsKey("last_name") Then
+                        Dim fullName As String = profile("first_name").ToString() & " " & profile("last_name").ToString()
+                        Try
+                            Dim requesterField As Control = Me.Controls.Find("TextBox1", True).FirstOrDefault()
+                            If requesterField IsNot Nothing Then
+                                requesterField.Text = fullName
+                            End If
+                        Catch
+                        End Try
+                    End If
+                    
+                    ' Fill position if field exists
+                    If profile.ContainsKey("position") AndAlso profile("position") IsNot Nothing Then
+                        Try
+                            Dim positionField As Control = Me.Controls.Find("TextBox2", True).FirstOrDefault()
+                            If positionField IsNot Nothing Then
+                                positionField.Text = profile("position").ToString()
+                            End If
+                        Catch
+                        End Try
+                    End If
+                    
+                    ' Fill department if field exists
+                    If profile.ContainsKey("department_id") AndAlso profile("department_id") IsNot Nothing Then
+                        Try
+                            Dim deptID As Integer = Convert.ToInt32(profile("department_id"))
+                            Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
+                            For Each row As DataRow In dt.Rows
+                                If Convert.ToInt32(row("department_id")) = deptID Then
+                                    Dim deptField As Control = Me.Controls.Find("departmentID", True).FirstOrDefault()
+                                    If deptField IsNot Nothing Then
+                                        deptField.Text = row("department_name").ToString()
+                                    End If
+                                    Exit For
+                                End If
+                            Next
+                        Catch
+                        End Try
+                    End If
+                End If
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("AddSupplyRequest_Load Error: " & ex.Message)
+            End Try
+        End If
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -63,16 +118,35 @@ Public Class AddSupplyRequest
 
             ' Get department ID if provided
             Dim deptID As Integer? = Nothing
-            If Not String.IsNullOrWhiteSpace(departmentID.Text) Then
-                Integer.TryParse(departmentID.Text, deptID)
+            If departmentID IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(departmentID.Text) Then
+                Dim parsedDeptID As Integer
+                If Integer.TryParse(departmentID.Text.Trim(), parsedDeptID) Then
+                    deptID = parsedDeptID
+                End If
+            End If
+
+            ' Ensure purpose is not empty
+            Dim purposeText As String = TextBox3.Text.Trim()
+            If String.IsNullOrWhiteSpace(purposeText) Then
+                MessageBox.Show("Please enter the purpose of the request.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                TextBox3.Focus()
+                Return
+            End If
+
+            ' Ensure item name is not empty
+            Dim itemNameText As String = TextBox8.Text.Trim()
+            If String.IsNullOrWhiteSpace(itemNameText) Then
+                MessageBox.Show("Please enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                TextBox8.Focus()
+                Return
             End If
 
             ' Submit supply request
             Dim success As Boolean = DatabaseConnection.StaffSubmitSupplyRequest(
                 SessionContext.CurrentUserID.Value,
-                TextBox8.Text.Trim(), ' item name
+                itemNameText,
                 quantity,
-                TextBox3.Text.Trim(), ' purpose
+                purposeText,
                 deptID,
                 "", ' position - will be fetched from user record
                 "" ' requester name - will be fetched from user record

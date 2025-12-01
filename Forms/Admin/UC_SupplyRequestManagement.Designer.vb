@@ -29,13 +29,6 @@ Partial Class UC_SupplyRequestManagement
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_table1 = New System.Windows.Forms.DataGridView()
-        Me.NameOfRequester = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QuantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.admin_label_SupplyRequestManagement = New System.Windows.Forms.Label()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -135,7 +128,6 @@ Partial Class UC_SupplyRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_table1.BackgroundColor = System.Drawing.Color.White
         Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameOfRequester, Me.Department, Me.DateOfRequest, Me.ItemName, Me.QuantityRequested, Me.Purpose, Me.Status})
         Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.prm_table1.Location = New System.Drawing.Point(67, 111)
         Me.prm_table1.Name = "prm_table1"
@@ -143,55 +135,6 @@ Partial Class UC_SupplyRequestManagement
         Me.prm_table1.RowTemplate.Height = 24
         Me.prm_table1.Size = New System.Drawing.Size(1270, 573)
         Me.prm_table1.TabIndex = 163
-        '
-        'NameOfRequester
-        '
-        Me.NameOfRequester.HeaderText = "Name Of Requester"
-        Me.NameOfRequester.MinimumWidth = 6
-        Me.NameOfRequester.Name = "NameOfRequester"
-        Me.NameOfRequester.Width = 125
-        '
-        'Department
-        '
-        Me.Department.HeaderText = "Department"
-        Me.Department.MinimumWidth = 6
-        Me.Department.Name = "Department"
-        Me.Department.Width = 125
-        '
-        'DateOfRequest
-        '
-        Me.DateOfRequest.HeaderText = "Date Of Request"
-        Me.DateOfRequest.MinimumWidth = 6
-        Me.DateOfRequest.Name = "DateOfRequest"
-        Me.DateOfRequest.Width = 125
-        '
-        'ItemName
-        '
-        Me.ItemName.HeaderText = "Item Name"
-        Me.ItemName.MinimumWidth = 6
-        Me.ItemName.Name = "ItemName"
-        Me.ItemName.Width = 125
-        '
-        'QuantityRequested
-        '
-        Me.QuantityRequested.HeaderText = "Quantity Requested"
-        Me.QuantityRequested.MinimumWidth = 6
-        Me.QuantityRequested.Name = "QuantityRequested"
-        Me.QuantityRequested.Width = 125
-        '
-        'Purpose
-        '
-        Me.Purpose.HeaderText = "Purpose"
-        Me.Purpose.MinimumWidth = 6
-        Me.Purpose.Name = "Purpose"
-        Me.Purpose.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
         '
         'admin_label_SupplyRequestManagement
         '
@@ -230,12 +173,5 @@ Partial Class UC_SupplyRequestManagement
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
     Friend WithEvents prm_table1 As System.Windows.Forms.DataGridView
-    Friend WithEvents NameOfRequester As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Department As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DateOfRequest As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ItemName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents QuantityRequested As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Purpose As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Status As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents admin_label_SupplyRequestManagement As System.Windows.Forms.Label
 End Class

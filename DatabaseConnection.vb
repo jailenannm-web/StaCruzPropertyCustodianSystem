@@ -2343,18 +2343,18 @@ Public Class DatabaseConnection
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
                     System.Diagnostics.Debug.WriteLine("[v0] Property Added Successfully: " & propertyName)
-                    MessageBox.Show("Property added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
                 End If
             End Using
         Catch ex As MySqlException
-            System.Diagnostics.Debug.WriteLine("[v0] AddProperty MySQL Error: " & ex.Message)
+            System.Diagnostics.Debug.WriteLine("[v0] AddProperty MySQL Error: " & ex.Message & vbCrLf & ex.StackTrace)
             Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "add property")
             MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AddProperty Exception: " & ex.Message & vbCrLf & ex.StackTrace)
-            MessageBox.Show(GetUserFriendlyErrorMessage(ex, "add property"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "add property")
+            MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Finally
             If conn IsNot Nothing Then
@@ -2380,23 +2380,9 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim retryCount As Integer = 0
-            Dim maxRetries As Integer = 3
-
-            While retryCount < maxRetries
-                Try
-                    conn.Open()
-                    Exit While
-                Catch ex As MySqlException When ex.Message.Contains("ReplicationManager") AndAlso retryCount < maxRetries - 1
-                    retryCount += 1
-                    System.Threading.Thread.Sleep(500)
-                    conn.Dispose()
-                    conn = GetConnection()
-                End Try
-            End While
-
             Dim query As String = "SELECT p.property_id, p.item_name, p.category, p.property_number, p.serial_number, " &
                                  "p.acquisition_date, p.acquisition_cost, p.condition, p.location, p.status, " &
+                                 "p.description, " &
                                  "CONCAT(IFNULL(u.first_name,''), ' ', IFNULL(u.last_name,'')) AS assigned_employee, " &
                                  "d.department_name AS assigned_department " &
                                  "FROM properties p " &
@@ -2413,8 +2399,7 @@ Public Class DatabaseConnection
                 End Using
             End Using
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] GetAllProperties Exception: " & ex.Message)
-            MessageBox.Show(GetUserFriendlyErrorMessage(ex, "retrieve properties"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllProperties Exception: " & ex.Message & vbCrLf & ex.StackTrace)
         Finally
             If conn IsNot Nothing Then
                 Try
@@ -2907,7 +2892,8 @@ Public Class DatabaseConnection
                     If Not reader.Read() Then
                         Throw New Exception("Request not found.")
                     End If
-                    If reader("status").ToString() <> "Pending" Then
+                    Dim currentStatus As String = If(IsDBNull(reader("status")), "", reader("status").ToString().Trim())
+                    If currentStatus.ToLower() <> "pending" Then
                         Throw New Exception("Only pending requests can be approved.")
                     End If
                 End Using
@@ -3102,7 +3088,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             Dim query As String = "UPDATE supply_requests SET status = 'Approved', approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
-                                  "WHERE request_id = @requestID AND status = 'Pending'"
+                                  "WHERE request_id = @requestID AND UPPER(status) = 'PENDING'"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
                 cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
@@ -6880,19 +6866,32 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            ' Check if supply is currently requested/borrowed (check supply_requests table, not property_requests)
-            Dim checkRequestedQuery As String = "SELECT COUNT(*) FROM supply_requests WHERE supply_id = @supplyID AND status IN ('pending', 'approved', 'released')"
-            Using checkCmd As New MySqlCommand(checkRequestedQuery, conn)
-                checkCmd.Parameters.AddWithValue("@supplyID", supplyID)
-                Dim requestedCount As Integer = CInt(checkCmd.ExecuteScalar())
-                If requestedCount > 0 Then
-                    MessageBox.Show("Cannot delete supply. It has pending or active requests.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
+            ' Check if supply is currently requested/borrowed
+            ' First get the supply item name
+            Dim supplyItemName As String = ""
+            Using getNameCmd As New MySqlCommand("SELECT item_name FROM supplies WHERE supply_id = @supplyID", conn)
+                getNameCmd.Parameters.AddWithValue("@supplyID", supplyID)
+                Dim nameResult As Object = getNameCmd.ExecuteScalar()
+                If nameResult IsNot Nothing Then
+                    supplyItemName = nameResult.ToString()
                 End If
             End Using
+            
+            ' Check supply_requests table (uses item_name, not supply_id)
+            If Not String.IsNullOrEmpty(supplyItemName) Then
+                Dim checkRequestedQuery As String = "SELECT COUNT(*) FROM supply_requests WHERE item_name = @itemName AND status IN ('Pending', 'Approved', 'Released')"
+                Using checkCmd As New MySqlCommand(checkRequestedQuery, conn)
+                    checkCmd.Parameters.AddWithValue("@itemName", supplyItemName)
+                    Dim requestedCount As Integer = CInt(checkCmd.ExecuteScalar())
+                    If requestedCount > 0 Then
+                        MessageBox.Show("Cannot delete supply. It has pending or active requests.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return False
+                    End If
+                End Using
+            End If
 
-            ' Delete supply (soft delete by setting status to 'used')
-            Dim query As String = "UPDATE supplies SET status = 'used', updated_at = NOW() WHERE supply_id = @supplyID"
+            ' Delete supply (soft delete by setting stock_status to 'Out of Stock' and quantity to 0)
+            Dim query As String = "UPDATE supplies SET stock_status = 'Out of Stock', quantity = 0, updated_at = NOW() WHERE supply_id = @supplyID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@supplyID", supplyID)
 

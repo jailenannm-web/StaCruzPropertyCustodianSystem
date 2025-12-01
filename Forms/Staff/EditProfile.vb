@@ -79,23 +79,34 @@ Public Class EditProfile
                 Return
             End If
             
-            ' Get department ID if provided
+            ' Get department ID if provided - ensure it's a valid integer or Nothing
             Dim deptID As Integer? = Nothing
             If Not String.IsNullOrWhiteSpace(txb_DepartmentID.Text) Then
-                Integer.TryParse(txb_DepartmentID.Text, deptID)
+                Dim parsedDeptID As Integer
+                If Integer.TryParse(txb_DepartmentID.Text.Trim(), parsedDeptID) AndAlso parsedDeptID > 0 Then
+                    deptID = parsedDeptID
+                End If
             End If
+            
+            ' Ensure all required fields have values
+            Dim firstName As String = If(String.IsNullOrWhiteSpace(txb_FirstName.Text), "", txb_FirstName.Text.Trim())
+            Dim lastName As String = If(String.IsNullOrWhiteSpace(txb_LastName.Text), "", txb_LastName.Text.Trim())
+            Dim email As String = If(String.IsNullOrWhiteSpace(txb_Email.Text), "", txb_Email.Text.Trim())
+            Dim username As String = If(String.IsNullOrWhiteSpace(txb_UserName.Text), "", txb_UserName.Text.Trim())
+            Dim contactNumber As String = If(String.IsNullOrWhiteSpace(txb_ContactNumber.Text), "", txb_ContactNumber.Text.Trim())
+            Dim position As String = If(String.IsNullOrWhiteSpace(txb_Position.Text), "Staff", txb_Position.Text.Trim())
             
             ' Update profile using UpdateStaffAccount (staff can update their own profile)
             Dim success As Boolean = DatabaseConnection.UpdateStaffAccount(
                 SessionContext.CurrentUserID.Value,
-                txb_FirstName.Text.Trim(),
-                txb_LastName.Text.Trim(),
-                txb_Email.Text.Trim(),
-                txb_UserName.Text.Trim(),
-                txb_ContactNumber.Text.Trim(),
+                firstName,
+                lastName,
+                email,
+                username,
+                contactNumber,
                 "", ' address - not used in users table
                 deptID,
-                txb_Position.Text.Trim(),
+                position,
                 "Active", ' status
                 SessionContext.CurrentUserID.Value, ' updated by
                 "Staff", ' updated by type

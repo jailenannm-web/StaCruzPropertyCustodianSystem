@@ -1,6 +1,9 @@
 ﻿Imports System
+Imports System.Data
+Imports System.Linq
 Imports System.Windows.Forms
 Imports System.Collections.Generic
+Imports Microsoft.VisualBasic
 
 Public Class AddPropertyRequest
     Inherits UserControl
@@ -57,15 +60,34 @@ Public Class AddPropertyRequest
 
             ' Get department ID if provided
             Dim deptID As Integer? = Nothing
-            If Not String.IsNullOrWhiteSpace(departmentID.Text) Then
-                Integer.TryParse(departmentID.Text, deptID)
+            If departmentID IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(departmentID.Text) Then
+                Dim parsedDeptID As Integer
+                If Integer.TryParse(departmentID.Text.Trim(), parsedDeptID) Then
+                    deptID = parsedDeptID
+                End If
+            End If
+
+            ' Ensure purpose is not empty
+            Dim purposeText As String = TextBox3.Text.Trim()
+            If String.IsNullOrWhiteSpace(purposeText) Then
+                MessageBox.Show("Please enter the purpose of the request.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                TextBox3.Focus()
+                Return
+            End If
+
+            ' Ensure item name is not empty
+            Dim itemNameText As String = TextBox8.Text.Trim()
+            If String.IsNullOrWhiteSpace(itemNameText) Then
+                MessageBox.Show("Please enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                TextBox8.Focus()
+                Return
             End If
 
             ' Submit property request
             Dim success As Boolean = DatabaseConnection.SubmitPropertyRequest(
                 SessionContext.CurrentUserID.Value,
-                TextBox8.Text.Trim(), ' item name
-                TextBox3.Text.Trim(), ' purpose
+                itemNameText,
+                purposeText,
                 quantity,
                 deptID,
                 "", ' position - will be fetched
@@ -167,10 +189,50 @@ Public Class AddPropertyRequest
             Try
                 Dim profile As Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
                 If profile IsNot Nothing AndAlso profile.Count > 0 Then
-                    ' Fill in requester name, position, department if fields exist
-                    ' Note: Adjust field names based on actual form controls
+                    ' Fill in requester name if field exists (TextBox1 or similar)
+                    If profile.ContainsKey("first_name") AndAlso profile.ContainsKey("last_name") Then
+                        Dim fullName As String = profile("first_name").ToString() & " " & profile("last_name").ToString()
+                        ' Try to find and fill requester name field - adjust control name as needed
+                        Try
+                            Dim requesterField As Control = Me.Controls.Find("TextBox1", True).FirstOrDefault()
+                            If requesterField IsNot Nothing Then
+                                requesterField.Text = fullName
+                            End If
+                        Catch
+                        End Try
+                    End If
+                    
+                    ' Fill position if field exists
+                    If profile.ContainsKey("position") AndAlso profile("position") IsNot Nothing Then
+                        Try
+                            Dim positionField As Control = Me.Controls.Find("TextBox2", True).FirstOrDefault()
+                            If positionField IsNot Nothing Then
+                                positionField.Text = profile("position").ToString()
+                            End If
+                        Catch
+                        End Try
+                    End If
+                    
+                    ' Fill department if field exists
+                    If profile.ContainsKey("department_id") AndAlso profile("department_id") IsNot Nothing Then
+                        Try
+                            Dim deptID As Integer = Convert.ToInt32(profile("department_id"))
+                            Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
+                            For Each row As DataRow In dt.Rows
+                                If Convert.ToInt32(row("department_id")) = deptID Then
+                                    Dim deptField As Control = Me.Controls.Find("departmentID", True).FirstOrDefault()
+                                    If deptField IsNot Nothing Then
+                                        deptField.Text = row("department_name").ToString()
+                                    End If
+                                    Exit For
+                                End If
+                            Next
+                        Catch
+                        End Try
+                    End If
                 End If
-            Catch
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("AddPropertyRequest_Load Error: " & ex.Message)
             End Try
         End If
     End Sub

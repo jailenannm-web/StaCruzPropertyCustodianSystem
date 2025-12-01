@@ -31,15 +31,6 @@ Partial Class UC_MaintenanceManagement
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.maintenanceID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.diagnosis = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.actionTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.partsReplaced = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.maintenanceDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.technician = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlMaintenancemanagement = New System.Windows.Forms.Label()
         Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -98,7 +89,6 @@ Partial Class UC_MaintenanceManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.maintenanceID, Me.itemName, Me.diagnosis, Me.actionTaken, Me.partsReplaced, Me.maintenanceDate, Me.technician, Me.cost, Me.status})
         Me.DataGridView1.GridColor = System.Drawing.Color.White
         Me.DataGridView1.Location = New System.Drawing.Point(58, 109)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
@@ -106,69 +96,6 @@ Partial Class UC_MaintenanceManagement
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.Size = New System.Drawing.Size(1270, 573)
         Me.DataGridView1.TabIndex = 155
-        '
-        'maintenanceID
-        '
-        Me.maintenanceID.HeaderText = "Maintenance ID"
-        Me.maintenanceID.MinimumWidth = 6
-        Me.maintenanceID.Name = "maintenanceID"
-        Me.maintenanceID.Width = 125
-        '
-        'itemName
-        '
-        Me.itemName.HeaderText = "Item Name"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 140
-        '
-        'diagnosis
-        '
-        Me.diagnosis.HeaderText = "Diagnosis"
-        Me.diagnosis.MinimumWidth = 6
-        Me.diagnosis.Name = "diagnosis"
-        Me.diagnosis.Width = 175
-        '
-        'actionTaken
-        '
-        Me.actionTaken.HeaderText = "ActionTaken"
-        Me.actionTaken.MinimumWidth = 6
-        Me.actionTaken.Name = "actionTaken"
-        Me.actionTaken.Width = 125
-        '
-        'partsReplaced
-        '
-        Me.partsReplaced.HeaderText = "Parts Replaced"
-        Me.partsReplaced.MinimumWidth = 6
-        Me.partsReplaced.Name = "partsReplaced"
-        Me.partsReplaced.Width = 150
-        '
-        'maintenanceDate
-        '
-        Me.maintenanceDate.HeaderText = "Maintenance Date"
-        Me.maintenanceDate.MinimumWidth = 6
-        Me.maintenanceDate.Name = "maintenanceDate"
-        Me.maintenanceDate.Width = 125
-        '
-        'technician
-        '
-        Me.technician.HeaderText = "Technician"
-        Me.technician.MinimumWidth = 6
-        Me.technician.Name = "technician"
-        Me.technician.Width = 125
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Cost"
-        Me.cost.MinimumWidth = 6
-        Me.cost.Name = "cost"
-        Me.cost.Width = 125
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
         '
         'Label1
         '
@@ -291,13 +218,4 @@ Partial Class UC_MaintenanceManagement
     Friend WithEvents btnGenerateMaintenance As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
     Friend WithEvents btnAssign As Resources.Controls.RoundedButton
-    Friend WithEvents maintenanceID As DataGridViewTextBoxColumn
-    Friend WithEvents itemName As DataGridViewTextBoxColumn
-    Friend WithEvents diagnosis As DataGridViewTextBoxColumn
-    Friend WithEvents actionTaken As DataGridViewTextBoxColumn
-    Friend WithEvents partsReplaced As DataGridViewTextBoxColumn
-    Friend WithEvents maintenanceDate As DataGridViewTextBoxColumn
-    Friend WithEvents technician As DataGridViewTextBoxColumn
-    Friend WithEvents cost As DataGridViewTextBoxColumn
-    Friend WithEvents status As DataGridViewTextBoxColumn
 End Class
