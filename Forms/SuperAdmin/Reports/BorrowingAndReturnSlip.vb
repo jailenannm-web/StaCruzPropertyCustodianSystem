@@ -86,24 +86,23 @@ Public Class BorrowingAndReturnSlip
             ToList()
 
         For Each row As DataRow In filteredRows
-            Dim newRow As DataRow = reportTable.NewRow()
-            newRow("Column1") = If(Convert.IsDBNull(row("item_name")), "", row("item_name").ToString())
-            newRow("ReturnStatus") = If(Convert.IsDBNull(row("status")), "", row("status").ToString())
-            newRow("borrowerSignature") = ""
-            newRow("Column2") = If(Convert.IsDBNull(row("request_id")), "", "PR-" & row("request_id").ToString())
-            newRow("Column3") = If(Convert.IsDBNull(row("date_of_request")),
-                                   Date.Today.ToString("yyyy-MM-dd"),
-                                   Convert.ToDateTime(row("date_of_request")).ToString("yyyy-MM-dd"))
-            newRow("Column4") = If(Convert.IsDBNull(row("expected_return_date")),
-                                   "",
-                                   Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd"))
-            newRow("Column6") = If(Convert.IsDBNull(row("actual_returned_date")),
-                                   "",
-                                   Convert.ToDateTime(row("actual_returned_date")).ToString("yyyy-MM-dd"))
-            newRow("Remarks") = If(Convert.IsDBNull(row("remarks")), "", row("remarks").ToString())
-            newRow("Column7") = If(Convert.IsDBNull(row("condition_upon_return")), "", row("condition_upon_return").ToString())
-            newRow("Column8") = If(Convert.IsDBNull(row("penalty")), "0.00", Convert.ToDecimal(row("penalty")).ToString("F2"))
-            reportTable.Rows.Add(newRow)
+            Try
+                Dim newRow As DataRow = reportTable.NewRow()
+                newRow("Column1") = SafeGetString(row, "item_name")
+                newRow("ReturnStatus") = SafeGetString(row, "status")
+                newRow("borrowerSignature") = ""
+                Dim reqId As String = SafeGetString(row, "request_id")
+                newRow("Column2") = If(String.IsNullOrEmpty(reqId), "", "PR-" & reqId)
+                newRow("Column3") = SafeGetDateString(row, "date_of_request")
+                newRow("Column4") = SafeGetDateString(row, "expected_return_date", "", allowEmpty:=True)
+                newRow("Column6") = SafeGetDateString(row, "actual_returned_date", "", allowEmpty:=True)
+                newRow("Remarks") = SafeGetString(row, "remarks")
+                newRow("Column7") = SafeGetString(row, "condition_upon_return", "N/A")
+                newRow("Column8") = SafeGetDecimalString(row, "penalty", "0.00")
+                reportTable.Rows.Add(newRow)
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("[v0] BorrowingAndReturnSlip BuildRow Error: " & ex.Message)
+            End Try
         Next
 
         Return reportTable
@@ -124,4 +123,32 @@ Public Class BorrowingAndReturnSlip
         Dim fileName As String = "borrowing_return_slip_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".pdf"
         ReportExportHelper.ExportDataTableToPdf(borrowingTable, fileName, "Borrowing and Return Slip")
     End Sub
+
+    Private Function SafeGetString(row As DataRow, columnName As String, Optional fallback As String = "") As String
+        If row.Table.Columns.Contains(columnName) AndAlso Not Convert.IsDBNull(row(columnName)) Then
+            Return row(columnName).ToString()
+        End If
+        Return fallback
+    End Function
+
+    Private Function SafeGetDateString(row As DataRow, columnName As String, Optional fallback As String = "yyyy-MM-dd", Optional allowEmpty As Boolean = False) As String
+        If row.Table.Columns.Contains(columnName) AndAlso Not Convert.IsDBNull(row(columnName)) Then
+            Dim parsedDate As Date
+            If Date.TryParse(row(columnName).ToString(), parsedDate) Then
+                Return parsedDate.ToString("yyyy-MM-dd")
+            End If
+        End If
+        If allowEmpty Then Return ""
+        Return Date.Today.ToString("yyyy-MM-dd")
+    End Function
+
+    Private Function SafeGetDecimalString(row As DataRow, columnName As String, Optional fallback As String = "0.00") As String
+        If row.Table.Columns.Contains(columnName) AndAlso Not Convert.IsDBNull(row(columnName)) Then
+            Dim value As Decimal
+            If Decimal.TryParse(row(columnName).ToString(), value) Then
+                Return value.ToString("F2")
+            End If
+        End If
+        Return fallback
+    End Function
 End Class

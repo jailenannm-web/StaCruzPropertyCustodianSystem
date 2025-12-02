@@ -72,17 +72,21 @@ Partial Public Class RequisitionIssueSlip
             ToList()
 
         For Each row As DataRow In filteredRows
-            Dim newRow As DataRow = reportTable.NewRow()
-            newRow("requisitionName") = If(Convert.IsDBNull(row("item_name")), "", row("item_name").ToString())
-            newRow("requisitionUnit") = If(Convert.IsDBNull(row("unit")), "pcs", row("unit").ToString())
-            newRow("requisitionParticulars") = If(Convert.IsDBNull(row("description")), "", row("description").ToString())
-            Dim quantityRequested As Integer = If(Convert.IsDBNull(row("quantity_requested")), 1, Convert.ToInt32(row("quantity_requested")))
-            newRow("requisitionQuantity1") = quantityRequested
-            newRow("requisitionYes") = "Yes"
-            newRow("requisitionNo") = ""
-            newRow("requisitionQuantity2") = quantityRequested
-            newRow("requisitionRemarks") = If(Convert.IsDBNull(row("remarks")), "", row("remarks").ToString())
-            reportTable.Rows.Add(newRow)
+            Try
+                Dim quantityRequested As Integer = SafeGetInt(row, "quantity_requested", 1)
+                Dim newRow As DataRow = reportTable.NewRow()
+                newRow("requisitionName") = SafeGetString(row, "item_name")
+                newRow("requisitionUnit") = SafeGetString(row, "unit", "Unit")
+                newRow("requisitionParticulars") = SafeGetString(row, "description")
+                newRow("requisitionQuantity1") = quantityRequested
+                newRow("requisitionYes") = "Yes"
+                newRow("requisitionNo") = ""
+                newRow("requisitionQuantity2") = quantityRequested
+                newRow("requisitionRemarks") = SafeGetString(row, "remarks", "No remarks")
+                reportTable.Rows.Add(newRow)
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("[v0] RequisitionIssueSlip BuildRow Error: " & ex.Message)
+            End Try
         Next
 
         Return reportTable
@@ -134,4 +138,21 @@ Partial Public Class RequisitionIssueSlip
         Dim fileName As String = "requisition_issue_slip_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".pdf"
         ReportExportHelper.ExportDataTableToPdf(requisitionTable, fileName, "Requisition and Issue Slip")
     End Sub
+
+    Private Function SafeGetString(row As DataRow, columnName As String, Optional fallback As String = "") As String
+        If row.Table.Columns.Contains(columnName) AndAlso Not Convert.IsDBNull(row(columnName)) Then
+            Return row(columnName).ToString()
+        End If
+        Return fallback
+    End Function
+
+    Private Function SafeGetInt(row As DataRow, columnName As String, Optional fallback As Integer = 0) As Integer
+        If row.Table.Columns.Contains(columnName) AndAlso Not Convert.IsDBNull(row(columnName)) Then
+            Dim value As Integer
+            If Integer.TryParse(row(columnName).ToString(), value) Then
+                Return value
+            End If
+        End If
+        Return fallback
+    End Function
 End Class

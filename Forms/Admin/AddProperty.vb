@@ -1,5 +1,6 @@
 ﻿Imports System
 Imports System.Data
+Imports System.Linq
 Imports System.Windows.Forms
 
 Public Class AddProperty
@@ -78,11 +79,7 @@ Public Class AddProperty
             Return
         End If
 
-        Dim departmentId As Integer? = Nothing
-        If department.SelectedValue IsNot Nothing Then
-            departmentId = Convert.ToInt32(department.SelectedValue)
-        End If
-
+        Dim departmentId As Integer? = ResolveDepartmentId()
         Dim custodianId As Integer? = ResolveCustodianId()
 
         ' Parse acquisition cost
@@ -115,7 +112,7 @@ Public Class AddProperty
                 serialNumberTxt.Text.Trim(),                             ' serialNumber
                 acquisitionDate.Value,                                  ' acquisitionDate
                 acquisitionCostValue,                                   ' acquisitionCost
-                supplierTxt.Text.Trim(),                                 ' supplierName
+                GetSupplierValue(),                                      ' supplierName
                 "",                                                      ' supplierContact
                 GetComboValue(condition, "good"),                       ' conditionStatus
                 propertyLocation.Text.Trim(),                           ' location
@@ -161,13 +158,63 @@ Public Class AddProperty
     End Function
 
     Private Function ResolveCustodianId() As Integer?
-        Dim rawValue As String = assignedTo.Text.Trim()
-        If String.IsNullOrWhiteSpace(rawValue) Then Return Nothing
-        Dim candidate As String = rawValue
-        If rawValue.Contains("-") Then candidate = rawValue.Split("-"c)(0).Trim()
-        Dim parsed As Integer
-        If Integer.TryParse(candidate, parsed) Then Return parsed
+        Try
+            Dim rawValue As String = assignedTo.Text.Trim()
+            If String.IsNullOrWhiteSpace(rawValue) Then Return Nothing
+
+            Dim candidate As String = rawValue
+            If rawValue.Contains("-") Then
+                candidate = rawValue.Split("-"c)(0).Trim()
+            End If
+
+            Dim parsed As Integer
+            If Integer.TryParse(candidate, parsed) Then Return parsed
+
+            If custodianDirectory IsNot Nothing Then
+                Dim match = custodianDirectory.AsEnumerable().
+                    FirstOrDefault(Function(r) String.Equals(r("full_name").ToString(), rawValue, StringComparison.OrdinalIgnoreCase))
+                If match IsNot Nothing Then
+                    Return Convert.ToInt32(match("user_id"))
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] ResolveCustodianId Exception: " & ex.Message)
+        End Try
         Return Nothing
+    End Function
+
+    Private Function ResolveDepartmentId() As Integer?
+        Try
+            If departmentDirectory Is Nothing OrElse departmentDirectory.Rows.Count = 0 Then Return Nothing
+
+            Dim value = department.SelectedValue
+            If value IsNot Nothing AndAlso Not TypeOf value Is DataRowView Then
+                Dim parsed As Integer
+                If Integer.TryParse(value.ToString(), parsed) Then
+                    Return parsed
+                End If
+            End If
+
+            Dim textValue As String = department.Text?.Trim()
+            If String.IsNullOrWhiteSpace(textValue) Then Return Nothing
+
+            Dim match = departmentDirectory.AsEnumerable().
+                FirstOrDefault(Function(r) String.Equals(r("department_name").ToString(), textValue, StringComparison.OrdinalIgnoreCase))
+            If match IsNot Nothing Then
+                Return Convert.ToInt32(match("department_id"))
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] ResolveDepartmentId Exception: " & ex.Message)
+        End Try
+        Return Nothing
+    End Function
+
+    Private Function GetSupplierValue() As String
+        Dim supplierName = supplierTxt.Text?.Trim()
+        If String.IsNullOrEmpty(supplierName) Then
+            Return "Unknown Supplier"
+        End If
+        Return supplierName
     End Function
 
     Private Shared Function GetComboValue(combo As ComboBox, Optional fallback As String = "") As String

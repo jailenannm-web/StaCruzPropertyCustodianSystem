@@ -57,17 +57,19 @@ Public Class PropertyIssuance
             ToList()
 
         For Each row As DataRow In filteredRows
-            Dim newRow As DataRow = reportTable.NewRow()
-            newRow("quantity") = If(Convert.IsDBNull(row("quantity_requested")), 1, Convert.ToInt32(row("quantity_requested")))
-            newRow("unit") = "pcs"
-            newRow("description") = If(Convert.IsDBNull(row("item_name")), "", row("item_name").ToString())
-            newRow("propertyNumber") = If(Convert.IsDBNull(row("request_id")), "", "PR-" & row("request_id").ToString())
-            Dim requestDate As String = If(Convert.IsDBNull(row("date_of_request")),
-                                           Date.Today.ToString("yyyy-MM-dd"),
-                                           Convert.ToDateTime(row("date_of_request")).ToString("yyyy-MM-dd"))
-            newRow("dateAcquired") = requestDate
-            newRow("amount") = "0.00"
-            reportTable.Rows.Add(newRow)
+            Try
+                Dim newRow As DataRow = reportTable.NewRow()
+                newRow("quantity") = SafeGetInt(row, "quantity_requested", 1)
+                newRow("unit") = "pcs"
+                newRow("description") = SafeGetString(row, "item_name")
+                Dim reqId As String = SafeGetString(row, "request_id")
+                newRow("propertyNumber") = If(String.IsNullOrEmpty(reqId), "", "PR-" & reqId)
+                newRow("dateAcquired") = SafeGetDateString(row, "date_of_request")
+                newRow("amount") = "0.00"
+                reportTable.Rows.Add(newRow)
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("[v0] PropertyIssuance BuildRow Error: " & ex.Message)
+            End Try
         Next
 
         Return reportTable
@@ -104,4 +106,33 @@ Public Class PropertyIssuance
         Dim fileName As String = "property_issuance_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".pdf"
         ReportExportHelper.ExportDataTableToPdf(propertyIssuanceTable, fileName, "Property Issuance Report")
     End Sub
+
+    Private Function SafeGetString(row As DataRow, ParamArray names() As String) As String
+        For Each name In names
+            If row.Table.Columns.Contains(name) AndAlso Not Convert.IsDBNull(row(name)) Then
+                Return row(name).ToString()
+            End If
+        Next
+        Return ""
+    End Function
+
+    Private Function SafeGetInt(row As DataRow, columnName As String, Optional fallback As Integer = 0) As Integer
+        If row.Table.Columns.Contains(columnName) AndAlso Not Convert.IsDBNull(row(columnName)) Then
+            Dim value As Integer
+            If Integer.TryParse(row(columnName).ToString(), value) Then
+                Return value
+            End If
+        End If
+        Return fallback
+    End Function
+
+    Private Function SafeGetDateString(row As DataRow, columnName As String) As String
+        If row.Table.Columns.Contains(columnName) AndAlso Not Convert.IsDBNull(row(columnName)) Then
+            Dim parsedDate As Date
+            If Date.TryParse(row(columnName).ToString(), parsedDate) Then
+                Return parsedDate.ToString("yyyy-MM-dd")
+            End If
+        End If
+        Return Date.Today.ToString("yyyy-MM-dd")
+    End Function
 End Class
