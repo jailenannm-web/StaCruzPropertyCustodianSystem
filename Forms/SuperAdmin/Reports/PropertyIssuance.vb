@@ -108,7 +108,7 @@ Public Class PropertyIssuance
     End Sub
 
     Private Function SafeGetString(row As DataRow, ParamArray names() As String) As String
-        For Each name In names
+        For Each name As String In names
             If row.Table.Columns.Contains(name) AndAlso Not Convert.IsDBNull(row(name)) Then
                 Return row(name).ToString()
             End If

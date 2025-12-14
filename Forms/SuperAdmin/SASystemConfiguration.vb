@@ -292,8 +292,9 @@ Public Class SASystemConfiguration
 
     Private Sub ShowModule(target As ConfigModule)
         currentModule = target
-        For Each kvp In moduleControls
-            For Each ctrl In kvp.Value
+        For Each kvp As KeyValuePair(Of ConfigModule, List(Of Control)) In moduleControls
+            Dim controlList As List(Of Control) = kvp.Value
+            For Each ctrl As Control In controlList
                 ctrl.Visible = kvp.Key = target
             Next
         Next
@@ -482,7 +483,7 @@ Public Class SASystemConfiguration
             {"db_name", Tuple.Create(settings.DatabaseName, "Database name")}
         }
 
-        For Each entry In entries
+        For Each entry As KeyValuePair(Of String, Tuple(Of String, String)) In entries
             Using cmd As New MySqlCommand(upsert, conn)
                 cmd.Parameters.AddWithValue("@key", entry.Key)
                 cmd.Parameters.AddWithValue("@value", entry.Value.Item1)
