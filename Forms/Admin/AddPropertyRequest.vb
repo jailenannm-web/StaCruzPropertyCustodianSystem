@@ -35,15 +35,15 @@ Public Class AddPropertyRequest
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
             ' Validate required fields
-            If String.IsNullOrWhiteSpace(TextBox8.Text) Then
+            If String.IsNullOrWhiteSpace(description.Text) Then
                 MessageBox.Show("Please enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                TextBox8.Focus()
+                description.Focus()
                 Return
             End If
 
-            If String.IsNullOrWhiteSpace(TextBox3.Text) Then
+            If String.IsNullOrWhiteSpace(purpose.Text) Then
                 MessageBox.Show("Please enter the purpose of the request.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                TextBox3.Focus()
+                purpose.Focus()
                 Return
             End If
 
@@ -54,32 +54,32 @@ Public Class AddPropertyRequest
 
             ' Get quantity
             Dim quantity As Integer = 1
-            If Not String.IsNullOrWhiteSpace(TextBox5.Text) Then
-                Integer.TryParse(TextBox5.Text, quantity)
+            If Not String.IsNullOrWhiteSpace(unit.Text) Then
+                Integer.TryParse(unit.Text, quantity)
             End If
 
             ' Get department ID if provided
             Dim deptID As Integer? = Nothing
-            If departmentID IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(departmentID.Text) Then
+            If departmentId IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(departmentId.Text) Then
                 Dim parsedDeptID As Integer
-                If Integer.TryParse(departmentID.Text.Trim(), parsedDeptID) Then
+                If Integer.TryParse(departmentId.Text.Trim(), parsedDeptID) Then
                     deptID = parsedDeptID
                 End If
             End If
 
             ' Ensure purpose is not empty
-            Dim purposeText As String = TextBox3.Text.Trim()
+            Dim purposeText As String = purpose.Text.Trim()
             If String.IsNullOrWhiteSpace(purposeText) Then
                 MessageBox.Show("Please enter the purpose of the request.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                TextBox3.Focus()
+                purpose.Focus()
                 Return
             End If
 
             ' Ensure item name is not empty
-            Dim itemNameText As String = TextBox8.Text.Trim()
+            Dim itemNameText As String = description.Text.Trim()
             If String.IsNullOrWhiteSpace(itemNameText) Then
                 MessageBox.Show("Please enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                TextBox8.Focus()
+                description.Focus()
                 Return
             End If
 
@@ -123,11 +123,11 @@ Public Class AddPropertyRequest
 
     End Sub
 
-    Private Sub TextBox6_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+    Private Sub TextBox6_TextChanged(sender As Object, e As EventArgs) Handles quantityRequested.TextChanged
 
     End Sub
 
-    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
+    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles unit.TextChanged
 
     End Sub
 
@@ -166,7 +166,7 @@ Public Class AddPropertyRequest
     Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs)
     End Sub
 
-    Private Sub TextBox8_TextChanged(sender As Object, e As EventArgs) Handles TextBox8.TextChanged
+    Private Sub TextBox8_TextChanged(sender As Object, e As EventArgs) Handles description.TextChanged
 
     End Sub
 
@@ -174,14 +174,14 @@ Public Class AddPropertyRequest
 
     End Sub
 
-    Private Sub TextBox3_TextChanged_1(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
+    Private Sub TextBox3_TextChanged_1(sender As Object, e As EventArgs) Handles purpose.TextChanged
 
     End Sub
 
     Private Sub AddPropertyRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Pre-fill item name if provided
         If Not String.IsNullOrEmpty(_prefillItemName) Then
-            TextBox8.Text = _prefillItemName
+            description.Text = _prefillItemName
         End If
         
         ' Pre-fill user info if available
@@ -190,8 +190,8 @@ Public Class AddPropertyRequest
                 Dim profile As Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
                 If profile IsNot Nothing AndAlso profile.Count > 0 Then
                     ' Fill in requester name if field exists (TextBox1 or similar)
-                    If profile.ContainsKey("first_name") AndAlso profile.ContainsKey("last_name") Then
-                        Dim fullName As String = profile("first_name").ToString() & " " & profile("last_name").ToString()
+                    If profile.ContainsKey("firstName") AndAlso profile.ContainsKey("lastName") Then
+                        Dim fullName As String = profile("firstName").ToString() & " " & profile("lastName").ToString()
                         ' Try to find and fill requester name field - adjust control name as needed
                         Try
                             Dim requesterField As Control = Me.Controls.Find("TextBox1", True).FirstOrDefault()

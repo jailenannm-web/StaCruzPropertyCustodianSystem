@@ -27,15 +27,16 @@ Partial Class UC_SupplyManagement
         Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.supplyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unitofMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unitOfMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateReceived = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.totalCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sourceOfFunds = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stockStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         Me.SuspendLayout()
@@ -80,7 +81,7 @@ Partial Class UC_SupplyManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.itemName, Me.category, Me.unitofMeasure, Me.quantity, Me.dateReceived, Me.unitCost, Me.location, Me.supplier, Me.stockStatus})
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.supplyId, Me.itemName, Me.unitOfMeasure, Me.dateReceived, Me.unitCost, Me.totalCost, Me.sourceOfFunds, Me.stockStatus, Me.createdAt, Me.updatedAt})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(62, 124)
         Me.pm_table.Name = "pm_table"
@@ -208,68 +209,75 @@ Partial Class UC_SupplyManagement
         Me.mnuPrintPARICS.Size = New System.Drawing.Size(190, 24)
         Me.mnuPrintPARICS.Text = "Print PAR/ICS"
         '
+        'supplyId
+        '
+        Me.supplyId.HeaderText = "supplyId"
+        Me.supplyId.MinimumWidth = 6
+        Me.supplyId.Name = "supplyId"
+        Me.supplyId.Width = 125
+        '
         'itemName
         '
-        Me.itemName.HeaderText = "ItemName"
+        Me.itemName.HeaderText = "item Name"
         Me.itemName.MinimumWidth = 6
         Me.itemName.Name = "itemName"
         Me.itemName.Width = 125
         '
-        'category
+        'unitOfMeasure
         '
-        Me.category.HeaderText = "Category"
-        Me.category.MinimumWidth = 6
-        Me.category.Name = "category"
-        Me.category.Width = 125
-        '
-        'unitofMeasure
-        '
-        Me.unitofMeasure.HeaderText = "Unit of Measure"
-        Me.unitofMeasure.MinimumWidth = 6
-        Me.unitofMeasure.Name = "unitofMeasure"
-        Me.unitofMeasure.Width = 125
-        '
-        'quantity
-        '
-        Me.quantity.HeaderText = "Quantity"
-        Me.quantity.MinimumWidth = 6
-        Me.quantity.Name = "quantity"
-        Me.quantity.Width = 125
+        Me.unitOfMeasure.HeaderText = "unit Of Measure"
+        Me.unitOfMeasure.MinimumWidth = 6
+        Me.unitOfMeasure.Name = "unitOfMeasure"
+        Me.unitOfMeasure.Width = 125
         '
         'dateReceived
         '
-        Me.dateReceived.HeaderText = "Date Received"
+        Me.dateReceived.HeaderText = "date Received"
         Me.dateReceived.MinimumWidth = 6
         Me.dateReceived.Name = "dateReceived"
         Me.dateReceived.Width = 125
         '
         'unitCost
         '
-        Me.unitCost.HeaderText = "Unit Cost"
+        Me.unitCost.HeaderText = "unitCost"
         Me.unitCost.MinimumWidth = 6
         Me.unitCost.Name = "unitCost"
         Me.unitCost.Width = 125
         '
-        'location
+        'totalCost
         '
-        Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
-        Me.location.Name = "location"
-        Me.location.Width = 125
+        Me.totalCost.HeaderText = "totalCost"
+        Me.totalCost.MinimumWidth = 6
+        Me.totalCost.Name = "totalCost"
+        Me.totalCost.Width = 125
         '
-        'supplier
+        'sourceOfFunds
         '
-        Me.supplier.HeaderText = "Supplier"
-        Me.supplier.MinimumWidth = 6
-        Me.supplier.Name = "supplier"
-        Me.supplier.Width = 125
+        Me.sourceOfFunds.HeaderText = "source Of Funds"
+        Me.sourceOfFunds.MinimumWidth = 6
+        Me.sourceOfFunds.Name = "sourceOfFunds"
+        Me.sourceOfFunds.Width = 125
         '
         'stockStatus
         '
-        Me.stockStatus.HeaderText = "Stock Status"
+        Me.stockStatus.HeaderText = "stockStatus"
         Me.stockStatus.MinimumWidth = 6
         Me.stockStatus.Name = "stockStatus"
         Me.stockStatus.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
         '
         'UC_SupplyManagement
         '
@@ -311,13 +319,14 @@ Partial Class UC_SupplyManagement
     Friend WithEvents mnuLostDamaged As ToolStripMenuItem
     Friend WithEvents mnuViewDetails As ToolStripMenuItem
     Friend WithEvents mnuPrintPARICS As ToolStripMenuItem
+    Friend WithEvents supplyId As DataGridViewTextBoxColumn
     Friend WithEvents itemName As DataGridViewTextBoxColumn
-    Friend WithEvents category As DataGridViewTextBoxColumn
-    Friend WithEvents unitofMeasure As DataGridViewTextBoxColumn
-    Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents unitOfMeasure As DataGridViewTextBoxColumn
     Friend WithEvents dateReceived As DataGridViewTextBoxColumn
     Friend WithEvents unitCost As DataGridViewTextBoxColumn
-    Friend WithEvents location As DataGridViewTextBoxColumn
-    Friend WithEvents supplier As DataGridViewTextBoxColumn
+    Friend WithEvents totalCost As DataGridViewTextBoxColumn
+    Friend WithEvents sourceOfFunds As DataGridViewTextBoxColumn
     Friend WithEvents stockStatus As DataGridViewTextBoxColumn
+    Friend WithEvents createdAt As DataGridViewTextBoxColumn
+    Friend WithEvents updatedAt As DataGridViewTextBoxColumn
 End Class

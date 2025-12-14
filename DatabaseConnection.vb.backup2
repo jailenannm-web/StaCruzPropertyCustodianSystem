@@ -824,23 +824,23 @@ Public Class DatabaseConnection
             End If
 
             ' Check hardcoded staff credentials first
-            Dim hardcodedStaffUsername As String = "staff"
-            Dim hardcodedStaffPassword As String = "Staff@123"
+            Dim hardcodedStaffUsername As String = "test_staff"
+            Dim hardcodedStaffPassword As String = "Staff@1234"
             Dim normalizedUsername As String = username.Trim().ToLower()
 
             If normalizedUsername = hardcodedStaffUsername.ToLower() AndAlso password = hardcodedStaffPassword Then
                 ' Ensure account exists in database and get full details
                 InitializeDefaultAccounts()
                 Dim hardcodedQuery As String =
-                    "SELECT staffId, firstName, lastName, email, contactNumber, departmentId, username, passwordEncrypted, status " &
-                    "FROM staff_accounts WHERE LOWER(username) = LOWER(@username) LIMIT 1;"
+                    "SELECT userId, firstName, lastName, email, contactNumber, departmentId, username, passwordEncrypted, status, role " &
+                    "FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'Staff' LIMIT 1;"
                 Using cmd As New MySqlCommand(hardcodedQuery, conn)
                     cmd.Parameters.AddWithValue("@username", hardcodedStaffUsername)
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
                         If reader.Read() Then
-                            Dim staffID As Integer = Convert.ToInt32(reader("staffId"))
-                            result("staffId") = staffID.ToString()
-                            result("userId") = staffID.ToString()
+                            Dim userID As Integer = Convert.ToInt32(reader("userId"))
+                            result("staffId") = userID.ToString()
+                            result("userId") = userID.ToString()
                             result("firstName") = If(IsDBNull(reader("firstName")), "", reader("firstName").ToString())
                             result("lastName") = If(IsDBNull(reader("lastName")), "", reader("lastName").ToString())
                             result("email") = If(IsDBNull(reader("email")), "", reader("email").ToString())
@@ -851,12 +851,12 @@ Public Class DatabaseConnection
 
                             ' Update lastLogin
                             reader.Close()
-                            Using updateCmd As New MySqlCommand("UPDATE staff_accounts SET lastLogin = NOW() WHERE staffId = @staffID", conn)
-                                updateCmd.Parameters.AddWithValue("@staffID", staffID)
+                            Using updateCmd As New MySqlCommand("UPDATE users SET lastLogin = NOW() WHERE userId = @userID", conn)
+                                updateCmd.Parameters.AddWithValue("@userID", userID)
                                 updateCmd.ExecuteNonQuery()
                             End Using
 
-                            LogActivity(staffID, "Staff", hardcodedStaffUsername, "LOGIN", "Authentication", "Staff successfully logged in (hardcoded)", ipAddress)
+                            LogActivity(userID, "Staff", hardcodedStaffUsername, "LOGIN", "Authentication", "Staff successfully logged in (hardcoded)", ipAddress)
                             System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - hardcoded credentials matched for: " & username)
                             Return result
                         End If
@@ -864,10 +864,10 @@ Public Class DatabaseConnection
                 End Using
             End If
 
-            ' Use a single-row select to fetch the stored hash and metadata from staff_accounts table
+            ' Use a single-row select to fetch the stored hash and metadata
             Dim query As String =
-            "SELECT staffId, firstName, lastName, email, contactNumber, departmentId, username, passwordEncrypted, status " &
-            "FROM staff_accounts WHERE LOWER(username) = LOWER(@username) AND LOWER(status) = 'active' LIMIT 1;"
+            "SELECT userId, firstName, lastName, email, contactNumber, departmentId, username, passwordEncrypted, status, role " &
+            "FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'Staff' LIMIT 1;"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@username", username.Trim())
@@ -882,7 +882,7 @@ Public Class DatabaseConnection
                     ' Retrieve fields
                     Dim status As String = If(IsDBNull(reader("status")), "", reader("status").ToString())
                     Dim storedHash As String = If(IsDBNull(reader("passwordEncrypted")), "", reader("passwordEncrypted").ToString())
-                    Dim staffId As Integer = If(IsDBNull(reader("staffId")), 0, Convert.ToInt32(reader("staffId")))
+                    Dim role As String = If(IsDBNull(reader("role")), "", reader("role").ToString())
 
                     ' Quick sanity checks
                     If String.IsNullOrEmpty(storedHash) Then
@@ -891,9 +891,9 @@ Public Class DatabaseConnection
                         Return Nothing
                     End If
 
-                    If staffId <= 0 Then
-                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - invalid staffId for: " & username)
-                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Invalid staff ID", ipAddress)
+                    If Not String.Equals(role, "Staff", StringComparison.OrdinalIgnoreCase) Then
+                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - role is not Staff for: " & username & " role=" & role)
+                        LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Account role mismatch", ipAddress)
                         Return Nothing
                     End If
 
@@ -909,13 +909,13 @@ Public Class DatabaseConnection
                     ' Debug: (OPTIONAL) write stored hash length to debug. Uncomment if you need it.
                     System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - storedHash length for " & username & " = " & storedHash.Length.ToString())
 
-                    ' Password verification using PasswordHelper (PBKDF2)
+                    ' BCRYPT verification
                     Dim verified As Boolean = False
                     Try
-                        verified = PasswordHelper.VerifyPassword(password, storedHash)
-                    Catch pwEx As Exception
-                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - PasswordHelper.VerifyPassword exception: " & pwEx.Message)
-                        ' If verification fails due to invalid hash format, log and return Nothing
+                        verified = BCrypt.Net.BCrypt.Verify(password, storedHash)
+                    Catch bcryptEx As Exception
+                        System.Diagnostics.Debug.WriteLine("[v0] AuthenticateStaff - BCrypt.Verify exception: " & bcryptEx.Message)
+                        ' If bcrypt fails due to invalid hash format, log and return Nothing
                         LogActivity(Nothing, "Staff", username, "LOGIN_FAILED", "Authentication", "Invalid password hash format", ipAddress)
                         Return Nothing
                     End Try
@@ -927,7 +927,7 @@ Public Class DatabaseConnection
                     End If
 
                     ' At this point password is valid - populate result
-                    Dim userID As Integer = staffId
+                    Dim userID As Integer = Convert.ToInt32(reader("userId"))
                     result("staffId") = userID.ToString()
                     result("userId") = userID.ToString()
                     result("firstName") = If(IsDBNull(reader("firstName")), "", reader("firstName").ToString())
@@ -944,8 +944,8 @@ Public Class DatabaseConnection
             ' Update last_login and write audit
             If result.Count > 0 Then
                 Try
-                    Using updateCmd As New MySqlCommand("UPDATE staff_accounts SET lastLogin = NOW() WHERE staffId = @staffID", conn)
-                        updateCmd.Parameters.AddWithValue("@staffID", CInt(result("staffId")))
+                    Using updateCmd As New MySqlCommand("UPDATE users SET lastLogin = NOW() WHERE userId = @userID", conn)
+                        updateCmd.Parameters.AddWithValue("@userID", CInt(result("userId")))
                         updateCmd.ExecuteNonQuery()
                     End Using
                 Catch ex As Exception
@@ -986,11 +986,11 @@ Public Class DatabaseConnection
         Dim normalizedUsername As String = username.Trim().ToLower()
 
         Const superAdminUsername As String = "superadmin"
-        Const superAdminPassword As String = "SuperAdmin@123"
+        Const superAdminPassword As String = "SuperAdmin@2025"
         Const adminUsername As String = "admin"
-        Const adminPassword As String = "Admin@123"
+        Const adminPassword As String = "Admin@2025"
         Const custodianUsername As String = "custodian"
-        Const custodianPassword As String = "Custodian@123"
+        Const custodianPassword As String = "Custodian@2025"
 
         Try
             If normalizedUsername = superAdminUsername AndAlso password = superAdminPassword Then
@@ -1377,7 +1377,7 @@ Public Class DatabaseConnection
                     If conn IsNot Nothing AndAlso SafeOpenConnection(conn) Then
                         InitializeDefaultAccounts()
 
-                        Dim query As String = "SELECT userId, firstName, lastName, email, username, role AS user_type, passwordEncrypted " &
+                        Dim query As String = "SELECT userId, firstName, lastName, email, username, role AS user_type, password_encrypted " &
                                              "FROM users WHERE LOWER(username) = LOWER(@username) " &
                                                          "AND role = 'Admin' " &
                                              "AND status = 'Active'"
@@ -1437,7 +1437,7 @@ Public Class DatabaseConnection
             InitializeDefaultAccounts()
 
             ' Query uses role column (not user_type) - alias it as user_type for compatibility
-            Dim query As String = "SELECT userId, firstName, lastName, email, username, role AS user_type, passwordEncrypted " &
+            Dim query As String = "SELECT userId, firstName, lastName, email, username, role AS user_type, password_encrypted " &
                                  "FROM users WHERE LOWER(username) = LOWER(@username) " &
                                  "AND (role = 'Admin' OR role = 'SuperAdmin') " &
                                  "AND LOWER(status) = 'active'"
@@ -7597,9 +7597,9 @@ Public Class DatabaseConnection
 
             ' Hardcoded credentials
             Dim superAdminUsername As String = "superadmin"
-            Dim superAdminPassword As String = "SuperAdmin@123"
+            Dim superAdminPassword As String = "SuperAdmin@2025"
             Dim adminUsername As String = "admin"
-            Dim adminPassword As String = "Admin@123"
+            Dim adminPassword As String = "Admin@2025"
 
             ' Ensure SuperAdmin account exists and matches the expected credentials
             Dim superAdminId As Object = Nothing

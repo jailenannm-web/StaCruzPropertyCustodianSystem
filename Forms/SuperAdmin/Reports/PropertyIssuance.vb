@@ -59,12 +59,12 @@ Public Class PropertyIssuance
         For Each row As DataRow In filteredRows
             Try
                 Dim newRow As DataRow = reportTable.NewRow()
-                newRow("quantity") = SafeGetInt(row, "quantity_requested", 1)
+                newRow("quantity") = SafeGetInt(row, "quantityRequested", 1)
                 newRow("unit") = "pcs"
-                newRow("description") = SafeGetString(row, "item_name")
-                Dim reqId As String = SafeGetString(row, "request_id")
+                newRow("description") = SafeGetString(row, "itemName")
+                Dim reqId As String = SafeGetString(row, "requestId")
                 newRow("propertyNumber") = If(String.IsNullOrEmpty(reqId), "", "PR-" & reqId)
-                newRow("dateAcquired") = SafeGetDateString(row, "date_of_request")
+                newRow("dateAcquired") = SafeGetDateString(row, "dateOfRequest")
                 newRow("amount") = "0.00"
                 reportTable.Rows.Add(newRow)
             Catch ex As Exception

@@ -44,10 +44,10 @@ Public Class AddProperty
     Private Sub LoadDepartments()
         Try
             departmentDirectory = DatabaseConnection.GetDepartmentLookup(True)
-            department.DataSource = departmentDirectory
-            department.DisplayMember = "department_name"
-            department.ValueMember = "department_id"
-            department.SelectedIndex = If(departmentDirectory.Rows.Count > 0, 0, -1)
+            departmentId.DataSource = departmentDirectory
+            departmentId.DisplayMember = "departmentName"
+            departmentId.ValueMember = "departmentId"
+            departmentId.SelectedIndex = If(departmentDirectory.Rows.Count > 0, 0, -1)
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AddProperty.LoadDepartments Exception: " & ex.Message)
         End Try
@@ -60,7 +60,7 @@ Public Class AddProperty
 
             Dim suggestions As New AutoCompleteStringCollection()
             For Each row As DataRow In custodianDirectory.Rows
-                suggestions.Add($"{row("user_id")} - {row("full_name")}")
+                suggestions.Add($"{row("userId")} - {row("fullName")}")
             Next
 
             assignedTo.AutoCompleteMode = AutoCompleteMode.SuggestAppend
@@ -84,10 +84,10 @@ Public Class AddProperty
 
         ' Parse acquisition cost
         Dim acquisitionCostValue As Decimal = 0
-        If Not String.IsNullOrWhiteSpace(acquisitionCost.Text) Then
-            If Not Decimal.TryParse(acquisitionCost.Text.Trim(), acquisitionCostValue) Then
+        If Not String.IsNullOrWhiteSpace(totalCost.Text) Then
+            If Not Decimal.TryParse(totalCost.Text.Trim(), acquisitionCostValue) Then
                 MessageBox.Show("Please enter a valid acquisition cost.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                acquisitionCost.Focus()
+                totalCost.Focus()
                 Return
             End If
         End If
@@ -109,13 +109,13 @@ Public Class AddProperty
                 itemName.Text.Trim(),                            ' propertyName
                 GetComboValue(category, "Others"),                       ' category
                 descriptionValue,                                        ' description
-                serialNumberTxt.Text.Trim(),                             ' serialNumber
+                serialNumber.Text.Trim(),                             ' serialNumber
                 acquisitionDate.Value,                                  ' acquisitionDate
                 acquisitionCostValue,                                   ' acquisitionCost
-                GetSupplierValue(),                                      ' supplierName
-                "",                                                      ' supplierContact
+                "",                                                      ' supplierName (not in current schema)
+                "",                                                      ' supplierContact (not in current schema)
                 GetComboValue(condition, "good"),                       ' conditionStatus
-                propertyLocation.Text.Trim(),                           ' location
+                If(ResolveDepartmentId().HasValue, "Department Location", "Main Building"), ' location (default since no input field)
                 custodianId,                                             ' custodianID
                 departmentId,                                            ' departmentID
                 warrantyExpirationDate.Value.ToShortDateString(),       ' warrantyDetails
@@ -146,14 +146,13 @@ Public Class AddProperty
     Private Function ValidateFields() As String
         If String.IsNullOrWhiteSpace(itemName.Text) Then Return "Property name is required."
         If category.SelectedIndex = -1 Then Return "Please select a category."
-        If String.IsNullOrWhiteSpace(supplierTxt.Text) Then Return "Supplier is required."
         ' Validate acquisition cost from the correct field
-        If String.IsNullOrWhiteSpace(acquisitionCost.Text) Then Return "Acquisition cost is required."
+        If String.IsNullOrWhiteSpace(totalCost.Text) Then Return "Acquisition cost is required."
         Dim costValue As Decimal = 0
-        If Not Decimal.TryParse(acquisitionCost.Text.Trim(), costValue) OrElse costValue <= 0 Then
+        If Not Decimal.TryParse(totalCost.Text.Trim(), costValue) OrElse costValue <= 0 Then
             Return "Acquisition cost must be a valid number greater than zero."
         End If
-        If String.IsNullOrWhiteSpace(propertyLocation.Text) Then Return "Location is required."
+        ' Location is required but no input field exists - use default or department location
         Return ""
     End Function
 
@@ -171,10 +170,10 @@ Public Class AddProperty
             If Integer.TryParse(candidate, parsed) Then Return parsed
 
             If custodianDirectory IsNot Nothing Then
-                Dim match = custodianDirectory.AsEnumerable().
-                    FirstOrDefault(Function(r) String.Equals(r("full_name").ToString(), rawValue, StringComparison.OrdinalIgnoreCase))
+            Dim match = custodianDirectory.AsEnumerable().
+                FirstOrDefault(Function(r) String.Equals(r("fullName").ToString(), rawValue, StringComparison.OrdinalIgnoreCase))
                 If match IsNot Nothing Then
-                    Return Convert.ToInt32(match("user_id"))
+                    Return Convert.ToInt32(match("userId"))
                 End If
             End If
         Catch ex As Exception
@@ -187,7 +186,7 @@ Public Class AddProperty
         Try
             If departmentDirectory Is Nothing OrElse departmentDirectory.Rows.Count = 0 Then Return Nothing
 
-            Dim value = department.SelectedValue
+            Dim value = departmentId.SelectedValue
             If value IsNot Nothing AndAlso Not TypeOf value Is DataRowView Then
                 Dim parsed As Integer
                 If Integer.TryParse(value.ToString(), parsed) Then
@@ -195,13 +194,13 @@ Public Class AddProperty
                 End If
             End If
 
-            Dim textValue As String = department.Text?.Trim()
+            Dim textValue As String = departmentId.Text?.Trim()
             If String.IsNullOrWhiteSpace(textValue) Then Return Nothing
 
             Dim match = departmentDirectory.AsEnumerable().
-                FirstOrDefault(Function(r) String.Equals(r("department_name").ToString(), textValue, StringComparison.OrdinalIgnoreCase))
+                FirstOrDefault(Function(r) String.Equals(r("departmentName").ToString(), textValue, StringComparison.OrdinalIgnoreCase))
             If match IsNot Nothing Then
-                Return Convert.ToInt32(match("department_id"))
+                Return Convert.ToInt32(match("departmentId"))
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] ResolveDepartmentId Exception: " & ex.Message)
@@ -210,11 +209,8 @@ Public Class AddProperty
     End Function
 
     Private Function GetSupplierValue() As String
-        Dim supplierName = supplierTxt.Text?.Trim()
-        If String.IsNullOrEmpty(supplierName) Then
-            Return "Unknown Supplier"
-        End If
-        Return supplierName
+        ' Supplier field removed from schema - return empty string
+        Return ""
     End Function
 
     Private Shared Function GetComboValue(combo As ComboBox, Optional fallback As String = "") As String
@@ -244,6 +240,10 @@ Public Class AddProperty
     End Sub
 
     Private Sub AddProperty_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
 
     End Sub
 End Class

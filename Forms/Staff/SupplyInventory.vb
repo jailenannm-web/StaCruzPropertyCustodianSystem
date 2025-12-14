@@ -42,14 +42,14 @@ Public Class SupplyInventory
                     Dim stockStatus As String = ""
                     
                     ' Handle different possible column names
-                    If dt.Columns.Contains("supply_id") AndAlso Not IsDBNull(row("supply_id")) Then
-                        supplyID = row("supply_id").ToString()
+                    If dt.Columns.Contains("supplyId") AndAlso Not IsDBNull(row("supplyId")) Then
+                        supplyID = row("supplyId").ToString()
                     ElseIf dt.Columns.Contains("SupplyID") AndAlso Not IsDBNull(row("SupplyID")) Then
                         supplyID = row("SupplyID").ToString()
                     End If
                     
-                    If dt.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
-                        itemName = row("item_name").ToString()
+                    If dt.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")) Then
+                        itemName = row("itemName").ToString()
                     ElseIf dt.Columns.Contains("SupplyName") AndAlso Not IsDBNull(row("SupplyName")) Then
                         itemName = row("SupplyName").ToString()
                     End If
@@ -66,8 +66,8 @@ Public Class SupplyInventory
                         description = row("Description").ToString()
                     End If
                     
-                    If dt.Columns.Contains("unit_of_measure") AndAlso Not IsDBNull(row("unit_of_measure")) Then
-                        unitOfMeasure = row("unit_of_measure").ToString()
+                    If dt.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(row("unitOfMeasure")) Then
+                        unitOfMeasure = row("unitOfMeasure").ToString()
                     ElseIf dt.Columns.Contains("UnitOfMeasure") AndAlso Not IsDBNull(row("UnitOfMeasure")) Then
                         unitOfMeasure = row("UnitOfMeasure").ToString()
                     End If
@@ -87,8 +87,8 @@ Public Class SupplyInventory
                         location = row("Location").ToString()
                     End If
                     
-                    If dt.Columns.Contains("stock_status") AndAlso Not IsDBNull(row("stock_status")) Then
-                        stockStatus = row("stock_status").ToString()
+                    If dt.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")) Then
+                        stockStatus = row("stockStatus").ToString()
                     ElseIf dt.Columns.Contains("Status") AndAlso Not IsDBNull(row("Status")) Then
                         stockStatus = row("Status").ToString()
                     End If

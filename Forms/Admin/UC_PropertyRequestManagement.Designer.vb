@@ -51,6 +51,15 @@ Partial Class UC_PropertyRequestManagement
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requesterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateOfReques = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.approvedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -71,6 +80,7 @@ Partial Class UC_PropertyRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_table1.BackgroundColor = System.Drawing.Color.White
         Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.requestId, Me.createdAt, Me.updatedAt, Me.requesterName, Me.departmentId, Me.dateOfRequest, Me.dateOfReques, Me.quantityRequested, Me.approvedBy})
         Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.prm_table1.Location = New System.Drawing.Point(62, 126)
         Me.prm_table1.Name = "prm_table1"
@@ -304,6 +314,69 @@ Partial Class UC_PropertyRequestManagement
         Me.assign.Text = "Assign"
         Me.assign.UseVisualStyleBackColor = False
         '
+        'requestId
+        '
+        Me.requestId.HeaderText = "requestId"
+        Me.requestId.MinimumWidth = 6
+        Me.requestId.Name = "requestId"
+        Me.requestId.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
+        '
+        'requesterName
+        '
+        Me.requesterName.HeaderText = "requesterName"
+        Me.requesterName.MinimumWidth = 6
+        Me.requesterName.Name = "requesterName"
+        Me.requesterName.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "departmentId"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'dateOfRequest
+        '
+        Me.dateOfRequest.HeaderText = "date Of request"
+        Me.dateOfRequest.MinimumWidth = 6
+        Me.dateOfRequest.Name = "dateOfRequest"
+        Me.dateOfRequest.Width = 125
+        '
+        'dateOfReques
+        '
+        Me.dateOfReques.HeaderText = "dateOfRequest"
+        Me.dateOfReques.MinimumWidth = 6
+        Me.dateOfReques.Name = "dateOfReques"
+        Me.dateOfReques.Width = 125
+        '
+        'quantityRequested
+        '
+        Me.quantityRequested.HeaderText = "quantityRequested"
+        Me.quantityRequested.MinimumWidth = 6
+        Me.quantityRequested.Name = "quantityRequested"
+        Me.quantityRequested.Width = 125
+        '
+        'approvedBy
+        '
+        Me.approvedBy.HeaderText = "approvedDate"
+        Me.approvedBy.MinimumWidth = 6
+        Me.approvedBy.Name = "approvedBy"
+        Me.approvedBy.Width = 125
+        '
         'UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -351,4 +424,13 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents issuePropertyCard As Resources.Controls.RoundedButton
     Friend WithEvents printPAR As Resources.Controls.RoundedButton
     Friend WithEvents btnAssign As Resources.Controls.RoundedButton
+    Friend WithEvents requestId As DataGridViewTextBoxColumn
+    Friend WithEvents createdAt As DataGridViewTextBoxColumn
+    Friend WithEvents updatedAt As DataGridViewTextBoxColumn
+    Friend WithEvents requesterName As DataGridViewTextBoxColumn
+    Friend WithEvents departmentId As DataGridViewTextBoxColumn
+    Friend WithEvents dateOfRequest As DataGridViewTextBoxColumn
+    Friend WithEvents dateOfReques As DataGridViewTextBoxColumn
+    Friend WithEvents quantityRequested As DataGridViewTextBoxColumn
+    Friend WithEvents approvedBy As DataGridViewTextBoxColumn
 End Class

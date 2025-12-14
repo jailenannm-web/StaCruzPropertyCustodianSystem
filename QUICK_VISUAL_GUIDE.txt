@@ -1,0 +1,178 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║                    QUICK VISUAL GUIDE                             ║
+║              Creating Test Accounts - Super Easy!                 ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+
+        YOUR FOLDER: Team Cruz IM
+        │
+        ├── 📄 RUN_THIS_TO_CREATE_ACCOUNTS.bat  ← DOUBLE-CLICK THIS!
+        │
+        ├── 📄 CREATE_ACCOUNTS_NOW.sql  ← (Used by the .bat file)
+        │
+        └── 📄 STEP_BY_STEP_CREATE_ACCOUNTS.txt  ← (Full instructions)
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                    METHOD 1: ONE-CLICK (EASIEST)                  ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+    Step 1: Find the file
+    ╔════════════════════════════════════════════╗
+    ║  RUN_THIS_TO_CREATE_ACCOUNTS.bat          ║
+    ║  (It's in your Team Cruz IM folder)       ║
+    ╚════════════════════════════════════════════╝
+              ↓
+    
+    Step 2: Double-click it
+              ↓
+    
+    Step 3: Black window opens, asking for password
+    ╔════════════════════════════════════════════╗
+    ║ Enter your MySQL root password:           ║
+    ║ ****                                       ║
+    ╚════════════════════════════════════════════╝
+              ↓
+    
+    Step 4: Type password and press Enter
+              ↓
+    
+    Step 5: Wait for SUCCESS message!
+    ╔════════════════════════════════════════════╗
+    ║ SUCCESS! Test accounts have been created! ║
+    ║                                            ║
+    ║ You can now login with:                   ║
+    ║   superadmin / SuperAdmin@123              ║
+    ║   admin / Admin@123                        ║
+    ║   staff / Staff@123                        ║
+    ╚════════════════════════════════════════════╝
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                METHOD 2: MYSQL WORKBENCH (IF METHOD 1 FAILS)      ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+    Step 1: Open MySQL Workbench
+    ┌─────────────────────────────────────────┐
+    │  🔷 MySQL Workbench                     │
+    │  Click your local connection            │
+    └─────────────────────────────────────────┘
+              ↓
+    
+    Step 2: Click "File" menu → "Open SQL Script"
+              ↓
+    
+    Step 3: Browse and select
+    ┌─────────────────────────────────────────┐
+    │  📁 Team Cruz IM                        │
+    │     📄 CREATE_ACCOUNTS_NOW.sql  ← This! │
+    └─────────────────────────────────────────┘
+              ↓
+    
+    Step 4: Click the lightning bolt ⚡
+    ┌─────────────────────────────────────────┐
+    │  ⚡ Execute (lightning bolt icon)       │
+    └─────────────────────────────────────────┘
+              ↓
+    
+    Step 5: See success in output panel
+    ┌─────────────────────────────────────────┐
+    │  Output:                                │
+    │  ✓ ACCOUNTS CREATED SUCCESSFULLY!       │
+    │  ✓ 3 accounts created                   │
+    └─────────────────────────────────────────┘
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                        AFTER CREATING ACCOUNTS                    ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+    Step 1: Run your application
+    ┌─────────────────────────────────────────┐
+    │  Press F5 in Visual Studio              │
+    │         OR                              │
+    │  Run: StaCruzPropertyCustodianSystem.exe│
+    └─────────────────────────────────────────┘
+              ↓
+    
+    Step 2: Login screen appears
+    ┌─────────────────────────────────────────┐
+    │  👤 Username: [            ]            │
+    │  🔒 Password: [            ]            │
+    │                                         │
+    │          [Login]                        │
+    └─────────────────────────────────────────┘
+              ↓
+    
+    Step 3: Enter credentials
+    
+    TRY SUPERADMIN:
+    ┌─────────────────────────────────────────┐
+    │  👤 Username: superadmin                │
+    │  🔒 Password: SuperAdmin@123            │
+    └─────────────────────────────────────────┘
+    
+    TRY ADMIN:
+    ┌─────────────────────────────────────────┐
+    │  👤 Username: admin                     │
+    │  🔒 Password: Admin@123                 │
+    └─────────────────────────────────────────┘
+    
+    TRY STAFF:
+    ┌─────────────────────────────────────────┐
+    │  👤 Username: staff                     │
+    │  🔒 Password: Staff@123                 │
+    └─────────────────────────────────────────┘
+              ↓
+    
+    Step 4: Success! You're logged in!
+    ┌─────────────────────────────────────────┐
+    │  ✓ Login successful!                    │
+    │    Welcome, [username]                  │
+    │                                         │
+    │  [Opening Dashboard...]                 │
+    └─────────────────────────────────────────┘
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                        TROUBLESHOOTING                            ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+❌ Problem: "MySQL not found"
+   Solution: Use Method 2 (MySQL Workbench) instead
+
+❌ Problem: "Unknown database 'teamcruzim'"
+   Solution: Create it first:
+            1. Open MySQL Workbench
+            2. Run: CREATE DATABASE teamcruzim;
+            3. Then run CREATE_ACCOUNTS_NOW.sql again
+
+❌ Problem: "Table 'departments' doesn't exist"
+   Solution: You need to create tables first:
+            1. Find: teamcruzim_database.sql
+            2. Run that file first
+            3. Then run CREATE_ACCOUNTS_NOW.sql
+
+❌ Problem: Still getting "Invalid username or password"
+   Solution: 
+            1. Verify accounts were created:
+               Open MySQL Workbench and run:
+               SELECT * FROM users WHERE username = 'superadmin';
+            2. Make sure you rebuilt the application
+            3. Try exact passwords (case-sensitive!)
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                            SUMMARY                                ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+   ✓ All code is fixed
+   ✓ Application is rebuilt
+   ⚠️ You need to create database accounts (do this now!)
+   ✓ Then you can login successfully
+
+   
+   👉 NEXT: Double-click RUN_THIS_TO_CREATE_ACCOUNTS.bat
+
+
+═══════════════════════════════════════════════════════════════════

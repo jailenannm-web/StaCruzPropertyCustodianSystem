@@ -107,12 +107,12 @@ Public Class UC_UserManagement
                 '                DepartmentID, EmployeeID, contactNumber, email, usernameAdmin, passwordAdmin, 
                 '                provinceAdmin, municipality, barangay, Role, Status
                 Dim rowIndex As Integer = pm_table.Rows.Add(
-                    SafeValue(record, "user_id"),                    ' UserID
-                    FormatDateValue(                                 ' date_assigned
-                        If(record.Table.Columns.Contains("date_assigned") AndAlso Not record.IsNull("date_assigned"),
-                           record("date_assigned"),
-                           If(record.Table.Columns.Contains("created_at") AndAlso Not record.IsNull("created_at"),
-                              record("created_at"),
+                    SafeValue(record, "userId"),                    ' UserID
+                    FormatDateValue(                                 ' dateAssigned
+                        If(record.Table.Columns.Contains("dateAssigned") AndAlso Not record.IsNull("dateAssigned"),
+                           record("dateAssigned"),
+                           If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"),
+                              record("createdAt"),
                               DBNull.Value))
                     ),
                     firstName,                                       ' firstName
@@ -120,9 +120,9 @@ Public Class UC_UserManagement
                     lastName,                                        ' lastName
                     suffix,                                          ' suffixAdmin
                     SafeValue(record, "position"),                   ' positionAdmin (using position from DB)
-                    SafeValue(record, "department_id"),              ' DepartmentID
-                    SafeValue(record, "employee_id"),               ' EmployeeID
-                    SafeValue(record, "contact_number"),             ' contactNumber
+                    SafeValue(record, "departmentId"),              ' DepartmentID
+                    SafeValue(record, "employeeId"),               ' EmployeeID
+                    SafeValue(record, "contactNumber"),             ' contactNumber
                     SafeValue(record, "email"),                     ' email
                     SafeValue(record, "username"),                   ' usernameAdmin
                     "******",                                        ' passwordAdmin (hidden)

@@ -138,22 +138,22 @@ Public Class UC_PropertyRequestManagement
             
             For Each col As DataGridViewColumn In prm_table1.Columns
                 Select Case col.Name.ToLower()
-                    Case "requester_name"
+                    Case "requestername"
                         col.HeaderText = "Name of Requester"
                     Case "department"
                         col.HeaderText = "Department"
-                    Case "date_of_request"
+                    Case "dateofrequest"
                         col.HeaderText = "Date of Request"
-                    Case "item_name"
+                    Case "itemname"
                         col.HeaderText = "Item Name"
-                    Case "quantity_requested"
+                    Case "quantityrequested"
                         col.HeaderText = "Quantity Requested"
                     Case "purpose"
                         col.HeaderText = "Purpose"
                     Case "status"
                         col.HeaderText = "Status"
-                    Case "request_id"
-                        col.Visible = False ' Hide request_id column
+                    Case "requestid"
+                        col.Visible = False ' Hide requestId column
                 End Select
             Next
 

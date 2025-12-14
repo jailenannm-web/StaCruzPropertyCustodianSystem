@@ -84,36 +84,36 @@ Public Class UC_PropertyManagement1
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
                     ' Use safe column access
-                    Dim itemName As String = If(row.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")), row("item_name").ToString(), "")
+                    Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString(), "")
                     Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), "")
-                    Dim propNumber As String = If(row.Table.Columns.Contains("property_number") AndAlso Not IsDBNull(row("property_number")), row("property_number").ToString(), "")
-                    Dim serialNumber As String = If(row.Table.Columns.Contains("serial_number") AndAlso Not IsDBNull(row("serial_number")), row("serial_number").ToString(), "")
+                    Dim propNumber As String = If(row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")), row("propertyNumber").ToString(), "")
+                    Dim serialNumber As String = If(row.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")), row("serialNumber").ToString(), "")
                     Dim acqDate As String = ""
-                    If row.Table.Columns.Contains("acquisition_date") AndAlso Not IsDBNull(row("acquisition_date")) Then
+                    If row.Table.Columns.Contains("acquisitionDate") AndAlso Not IsDBNull(row("acquisitionDate")) Then
                         Dim parsedDate As Date
-                        If Date.TryParse(row("acquisition_date").ToString(), parsedDate) Then
+                        If Date.TryParse(row("acquisitionDate").ToString(), parsedDate) Then
                             acqDate = parsedDate.ToString("yyyy-MM-dd")
                         End If
                     End If
                     Dim acqCost As String = "0.00"
-                    If row.Table.Columns.Contains("acquisition_cost") AndAlso Not IsDBNull(row("acquisition_cost")) Then
+                    If row.Table.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(row("acquisitionCost")) Then
                         Dim cost As Decimal
-                        If Decimal.TryParse(row("acquisition_cost").ToString(), cost) Then
+                        If Decimal.TryParse(row("acquisitionCost").ToString(), cost) Then
                             acqCost = Format(cost, "0.00")
                         End If
                     End If
-                    Dim assignedEmp As String = If(row.Table.Columns.Contains("assigned_employee") AndAlso Not IsDBNull(row("assigned_employee")), row("assigned_employee").ToString(), "")
-                    Dim assignedDept As String = If(row.Table.Columns.Contains("assigned_department") AndAlso Not IsDBNull(row("assigned_department")), row("assigned_department").ToString(), "")
+                    Dim assignedEmp As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString(), "")
+                    Dim assignedDept As String = If(row.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")), row("assignedDepartment").ToString(), "")
                     Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
                     Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString(), "")
                     Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
-                    Dim propID As Object = If(row.Table.Columns.Contains("property_id") AndAlso Not IsDBNull(row("property_id")), row("property_id"), Nothing)
+                    Dim propID As Object = If(row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")), row("propertyId"), Nothing)
 
                     Dim rowIndex As Integer = propertyManagementGrid.Rows.Add(
                         itemName, category, propNumber, serialNumber, acqDate, acqCost,
                         assignedEmp, assignedDept, location, condition, status
                     )
-                    ' Store property_id in row Tag for easy access
+                    ' Store propertyId in row Tag for easy access
                     propertyManagementGrid.Rows(rowIndex).Tag = propID
                 Next
                 ' Update total count

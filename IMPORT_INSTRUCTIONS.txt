@@ -1,0 +1,93 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║              CRITICAL: IMPORT TEST ACCOUNTS NOW                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Your code has been fixed, but the test accounts need to be imported
+into your MySQL database for login to work!
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                    OPTION 1: MySQL Command Line                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+1. Open Command Prompt or PowerShell
+2. Navigate to the project folder:
+   cd "C:\Users\prince\OneDrive\Dokumen\Team Cruz IM"
+
+3. Run this command:
+   mysql -u root -p teamcruzim < tmp_rovodev_fix_and_import.sql
+
+4. Enter your MySQL root password when prompted
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                    OPTION 2: MySQL Workbench                      ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+1. Open MySQL Workbench
+2. Connect to your local MySQL server
+3. Click "File" > "Run SQL Script..."
+4. Browse to: C:\Users\prince\OneDrive\Dokumen\Team Cruz IM
+5. Select: tmp_rovodev_fix_and_import.sql
+6. Click "Run"
+7. Check the output to confirm accounts were created
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                    OPTION 3: phpMyAdmin                           ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+1. Open phpMyAdmin in your browser
+2. Select the "teamcruzim" database
+3. Click the "SQL" tab
+4. Click "Choose File" or open tmp_rovodev_fix_and_import.sql in notepad
+5. Copy and paste the entire contents
+6. Click "Go"
+
+╔═══════════════════════════════════════════════════════════════════╗
+║              AFTER IMPORTING, TEST THE LOGIN                      ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+1. Make sure you've already CLOSED the application
+2. In Visual Studio: Build > Rebuild Solution
+3. Run the application
+4. Try logging in with:
+   
+   Username: superadmin
+   Password: SuperAdmin@123
+   
+   Username: admin
+   Password: Admin@123
+   
+   Username: staff
+   Password: Staff@123
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                         TROUBLESHOOTING                           ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Problem: "Unknown database 'teamcruzim'"
+Solution: Create the database first:
+          CREATE DATABASE teamcruzim;
+
+Problem: "Table 'departments' doesn't exist"
+Solution: Run your full database schema creation script first:
+          mysql -u root -p teamcruzim < teamcruzim_database.sql
+
+Problem: MySQL command not found
+Solution: Add MySQL to your PATH or navigate to MySQL bin folder:
+          cd "C:\Program Files\MySQL\MySQL Server 8.0\bin"
+          Then run the mysql command from there
+
+Problem: Still getting login errors after import
+Solution: 
+   1. Verify accounts were imported (run tmp_rovodev_check_database.sql)
+   2. Make sure you rebuilt the application
+   3. Check the Debug output window in Visual Studio for error messages
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                          IMPORTANT                                ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+⚠️  The application MUST be rebuilt after code changes
+⚠️  The test accounts MUST be imported into the database
+⚠️  Both steps are required for login to work!
+
+═══════════════════════════════════════════════════════════════════

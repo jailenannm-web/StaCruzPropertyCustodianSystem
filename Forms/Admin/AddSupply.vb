@@ -28,35 +28,35 @@ Public Class AddSupply
         End If
 
         ' Validate required fields
-        If String.IsNullOrWhiteSpace(supplyName.Text) Then
+        If String.IsNullOrWhiteSpace(itemName.Text) Then
             MessageBox.Show("Supply name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            supplyName.Focus()
+            itemName.Focus()
             Return
         End If
 
-        If categoryCmbo.SelectedIndex = -1 AndAlso String.IsNullOrWhiteSpace(categoryCmbo.Text) Then
+        If category.SelectedIndex = -1 AndAlso String.IsNullOrWhiteSpace(category.Text) Then
             MessageBox.Show("Please select or enter a category.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            categoryCmbo.Focus()
+            category.Focus()
             Return
         End If
 
-        If stockSupply.Value <= 0 Then
+        If quantity.Value <= 0 Then
             MessageBox.Show("Stock quantity must be greater than zero.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            stockSupply.Focus()
+            quantity.Focus()
             Return
         End If
 
         ' Get values from form
-        Dim supplyIDValue As String = If(String.IsNullOrWhiteSpace(supplyID.Text), Guid.NewGuid().ToString().Substring(0, 8), supplyID.Text.Trim())
-        Dim supplyNameValue As String = supplyName.Text.Trim()
-        Dim categoryValue As String = If(categoryCmbo.SelectedIndex >= 0, categoryCmbo.SelectedItem.ToString(), categoryCmbo.Text.Trim())
-        Dim stockValue As Integer = CInt(stockSupply.Value)
+        Dim supplyIDValue As String = If(String.IsNullOrWhiteSpace(description.Text), Guid.NewGuid().ToString().Substring(0, 8), description.Text.Trim())
+        Dim supplyNameValue As String = itemName.Text.Trim()
+        Dim categoryValue As String = If(category.SelectedIndex >= 0, category.SelectedItem.ToString(), category.Text.Trim())
+        Dim stockValue As Integer = CInt(quantity.Value)
         Dim unitCostValue As Decimal = 0
         Dim totalValue As Decimal = 0
         Dim locationValue As String = ""
-        Dim descriptionValue As String = If(remarksTxt IsNot Nothing, remarksTxt.Text.Trim(), "")
+        Dim descriptionValue As String = If(supplier IsNot Nothing, supplier.Text.Trim(), "")
         Dim uomValue As String = "pcs" ' Default unit of measure
-        Dim supplierIDValue As String = If(supplierTxt IsNot Nothing, supplierTxt.Text.Trim(), "")
+        Dim supplierIDValue As String = If(unitCost IsNot Nothing, unitCost.Text.Trim(), "")
 
         ' Try to get unit cost from TextBox1 if it exists
         Try

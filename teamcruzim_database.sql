@@ -15,7 +15,6 @@ USE teamcruzim;
 SET FOREIGN_KEY_CHECKS = 0;
 
 /* Drop existing tables */
-DROP TABLE IF EXISTS orderdetails;
 DROP TABLE IF EXISTS audit_logs;
 DROP TABLE IF EXISTS borrowed_items;
 DROP TABLE IF EXISTS custodian;
@@ -143,6 +142,7 @@ CREATE TABLE categories (
 );
 
 /* 5. PROPERTIES TABLE */
+/* 5. PROPERTIES TABLE */
 CREATE TABLE properties (
   propertyId INT AUTO_INCREMENT PRIMARY KEY,
   itemName VARCHAR(200) NOT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE properties (
   assignedTo INT DEFAULT NULL,
   departmentId INT DEFAULT NULL,
   location VARCHAR(200) NOT NULL,
-  condition ENUM('Good', 'Needs Repair', 'Damaged') DEFAULT 'Good',
+  `condition` ENUM('Good', 'Needs Repair', 'Damaged') DEFAULT 'Good',
   status ENUM('Active', 'Borrowed', 'For Disposal', 'Lost', 'Cost') DEFAULT 'Active',
   internalCodes VARCHAR(100) DEFAULT NULL,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,

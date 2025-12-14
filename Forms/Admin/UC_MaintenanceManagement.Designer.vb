@@ -37,6 +37,22 @@ Partial Class UC_MaintenanceManagement
         Me.btnGenerateMaintenance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.maintenanceId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.costMaterialsLabor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.conditionAfterMaint = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.actionTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.partsReplaced = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.propertyItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.serialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.conditionBeforeMaint = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.typeOfMaintenance = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.assignedTechnician = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.maintenanceDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.maintenanceDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -89,6 +105,7 @@ Partial Class UC_MaintenanceManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.maintenanceId, Me.costMaterialsLabor, Me.conditionAfterMaint, Me.actionTaken, Me.partsReplaced, Me.createdAt, Me.updatedAt, Me.requestId, Me.propertyItemName, Me.serialNumber, Me.departmentId, Me.conditionBeforeMaint, Me.typeOfMaintenance, Me.assignedTechnician, Me.maintenanceDate, Me.maintenanceDetails})
         Me.DataGridView1.GridColor = System.Drawing.Color.White
         Me.DataGridView1.Location = New System.Drawing.Point(58, 109)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
@@ -185,6 +202,118 @@ Partial Class UC_MaintenanceManagement
         Me.btnAssign.Text = "Assign"
         Me.btnAssign.UseVisualStyleBackColor = False
         '
+        'maintenanceId
+        '
+        Me.maintenanceId.HeaderText = "maintenanceId"
+        Me.maintenanceId.MinimumWidth = 6
+        Me.maintenanceId.Name = "maintenanceId"
+        Me.maintenanceId.Width = 125
+        '
+        'costMaterialsLabor
+        '
+        Me.costMaterialsLabor.HeaderText = "costMaterialsLabor"
+        Me.costMaterialsLabor.MinimumWidth = 6
+        Me.costMaterialsLabor.Name = "costMaterialsLabor"
+        Me.costMaterialsLabor.Width = 125
+        '
+        'conditionAfterMaint
+        '
+        Me.conditionAfterMaint.HeaderText = "conditionAfterMaint"
+        Me.conditionAfterMaint.MinimumWidth = 6
+        Me.conditionAfterMaint.Name = "conditionAfterMaint"
+        Me.conditionAfterMaint.Width = 125
+        '
+        'actionTaken
+        '
+        Me.actionTaken.HeaderText = "actionTaken"
+        Me.actionTaken.MinimumWidth = 6
+        Me.actionTaken.Name = "actionTaken"
+        Me.actionTaken.Width = 125
+        '
+        'partsReplaced
+        '
+        Me.partsReplaced.HeaderText = "partsReplaced"
+        Me.partsReplaced.MinimumWidth = 6
+        Me.partsReplaced.Name = "partsReplaced"
+        Me.partsReplaced.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
+        '
+        'requestId
+        '
+        Me.requestId.HeaderText = "requestId"
+        Me.requestId.MinimumWidth = 6
+        Me.requestId.Name = "requestId"
+        Me.requestId.Width = 125
+        '
+        'propertyItemName
+        '
+        Me.propertyItemName.HeaderText = "propertyItemName"
+        Me.propertyItemName.MinimumWidth = 6
+        Me.propertyItemName.Name = "propertyItemName"
+        Me.propertyItemName.Width = 125
+        '
+        'serialNumber
+        '
+        Me.serialNumber.HeaderText = "serialNumber"
+        Me.serialNumber.MinimumWidth = 6
+        Me.serialNumber.Name = "serialNumber"
+        Me.serialNumber.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "departmentId"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'conditionBeforeMaint
+        '
+        Me.conditionBeforeMaint.HeaderText = "conditionBeforeMaint"
+        Me.conditionBeforeMaint.MinimumWidth = 6
+        Me.conditionBeforeMaint.Name = "conditionBeforeMaint"
+        Me.conditionBeforeMaint.Width = 125
+        '
+        'typeOfMaintenance
+        '
+        Me.typeOfMaintenance.HeaderText = "typeOfMaintenance"
+        Me.typeOfMaintenance.MinimumWidth = 6
+        Me.typeOfMaintenance.Name = "typeOfMaintenance"
+        Me.typeOfMaintenance.Width = 125
+        '
+        'assignedTechnician
+        '
+        Me.assignedTechnician.HeaderText = "assignedTechnician"
+        Me.assignedTechnician.MinimumWidth = 6
+        Me.assignedTechnician.Name = "assignedTechnician"
+        Me.assignedTechnician.Width = 125
+        '
+        'maintenanceDate
+        '
+        Me.maintenanceDate.HeaderText = "maintenanceDate"
+        Me.maintenanceDate.MinimumWidth = 6
+        Me.maintenanceDate.Name = "maintenanceDate"
+        Me.maintenanceDate.Width = 125
+        '
+        'maintenanceDetails
+        '
+        Me.maintenanceDetails.HeaderText = "maintenanceDetails"
+        Me.maintenanceDetails.MinimumWidth = 6
+        Me.maintenanceDetails.Name = "maintenanceDetails"
+        Me.maintenanceDetails.Width = 125
+        '
         'UC_MaintenanceManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -218,4 +347,20 @@ Partial Class UC_MaintenanceManagement
     Friend WithEvents btnGenerateMaintenance As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
     Friend WithEvents btnAssign As Resources.Controls.RoundedButton
+    Friend WithEvents maintenanceId As DataGridViewTextBoxColumn
+    Friend WithEvents costMaterialsLabor As DataGridViewTextBoxColumn
+    Friend WithEvents conditionAfterMaint As DataGridViewTextBoxColumn
+    Friend WithEvents actionTaken As DataGridViewTextBoxColumn
+    Friend WithEvents partsReplaced As DataGridViewTextBoxColumn
+    Friend WithEvents createdAt As DataGridViewTextBoxColumn
+    Friend WithEvents updatedAt As DataGridViewTextBoxColumn
+    Friend WithEvents requestId As DataGridViewTextBoxColumn
+    Friend WithEvents propertyItemName As DataGridViewTextBoxColumn
+    Friend WithEvents serialNumber As DataGridViewTextBoxColumn
+    Friend WithEvents departmentId As DataGridViewTextBoxColumn
+    Friend WithEvents conditionBeforeMaint As DataGridViewTextBoxColumn
+    Friend WithEvents typeOfMaintenance As DataGridViewTextBoxColumn
+    Friend WithEvents assignedTechnician As DataGridViewTextBoxColumn
+    Friend WithEvents maintenanceDate As DataGridViewTextBoxColumn
+    Friend WithEvents maintenanceDetails As DataGridViewTextBoxColumn
 End Class

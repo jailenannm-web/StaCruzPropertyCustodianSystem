@@ -42,13 +42,13 @@ Public Class PropertyInventory
                     
                     ' Handle different possible column names
                     Try
-                        If dt.Columns.Contains("property_number") AndAlso Not IsDBNull(row("property_number")) Then
-                            propertyNo = row("property_number").ToString()
-                        ElseIf dt.Columns.Contains("property_id") AndAlso Not IsDBNull(row("property_id")) Then
-                            propertyNo = row("property_id").ToString()
+                        If dt.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")) Then
+                            propertyNo = row("propertyNumber").ToString()
+                        ElseIf dt.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")) Then
+                            propertyNo = row("propertyId").ToString()
                         End If
-                        If dt.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
-                            itemName = row("item_name").ToString()
+                        If dt.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")) Then
+                            itemName = row("itemName").ToString()
                         End If
                         If dt.Columns.Contains("category") AndAlso Not IsDBNull(row("category")) Then
                             category = row("category").ToString()
@@ -59,8 +59,8 @@ Public Class PropertyInventory
                         If dt.Columns.Contains("location") AndAlso Not IsDBNull(row("location")) Then
                             location = row("location").ToString()
                         End If
-                        If dt.Columns.Contains("assigned_department") AndAlso Not IsDBNull(row("assigned_department")) Then
-                            department = row("assigned_department").ToString()
+                        If dt.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")) Then
+                            department = row("assignedDepartment").ToString()
                         End If
                         If dt.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")) Then
                             condition = row("condition").ToString()

@@ -38,17 +38,20 @@ Partial Class UC_PropertyManagement1
         Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
         Me.generatePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.propertyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unitOfMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.propertyNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.serialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.acquisitionDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.acquisitionCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.totalCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sourceOfFunds = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.assignedTo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.condition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.internalCodes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         Me.SuspendLayout()
@@ -83,7 +86,7 @@ Partial Class UC_PropertyManagement1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
         Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.itemName, Me.category, Me.propertyNumber, Me.serialNumber, Me.acquisitionDate, Me.acquisitionCost, Me.assignedTo, Me.department, Me.location, Me.condition, Me.status})
+        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyId, Me.itemName, Me.unitOfMeasure, Me.propertyNumber, Me.serialNumber, Me.acquisitionDate, Me.acquisitionCost, Me.totalCost, Me.sourceOfFunds, Me.assignedTo, Me.departmentId, Me.internalCodes, Me.createdAt, Me.updatedAt})
         Me.propertyManagementGrid.Location = New System.Drawing.Point(56, 126)
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
@@ -216,82 +219,103 @@ Partial Class UC_PropertyManagement1
         Me.generatePropertyCard.Text = "Generate Property Card"
         Me.generatePropertyCard.UseVisualStyleBackColor = False
         '
+        'propertyId
+        '
+        Me.propertyId.HeaderText = "propertyId"
+        Me.propertyId.MinimumWidth = 6
+        Me.propertyId.Name = "propertyId"
+        Me.propertyId.Width = 125
+        '
         'itemName
         '
-        Me.itemName.HeaderText = "Item Name"
+        Me.itemName.HeaderText = "itemName"
         Me.itemName.MinimumWidth = 6
         Me.itemName.Name = "itemName"
         Me.itemName.Width = 125
         '
-        'category
+        'unitOfMeasure
         '
-        Me.category.HeaderText = "Category"
-        Me.category.MinimumWidth = 6
-        Me.category.Name = "category"
-        Me.category.Width = 125
+        Me.unitOfMeasure.HeaderText = "unit Of Measure"
+        Me.unitOfMeasure.MinimumWidth = 6
+        Me.unitOfMeasure.Name = "unitOfMeasure"
+        Me.unitOfMeasure.Width = 125
         '
         'propertyNumber
         '
-        Me.propertyNumber.HeaderText = "Property Number"
+        Me.propertyNumber.HeaderText = "property Number"
         Me.propertyNumber.MinimumWidth = 6
         Me.propertyNumber.Name = "propertyNumber"
         Me.propertyNumber.Width = 125
         '
         'serialNumber
         '
-        Me.serialNumber.HeaderText = "Serial Number"
+        Me.serialNumber.HeaderText = "serial Number"
         Me.serialNumber.MinimumWidth = 6
         Me.serialNumber.Name = "serialNumber"
         Me.serialNumber.Width = 125
         '
         'acquisitionDate
         '
-        Me.acquisitionDate.HeaderText = "Acquisition Date"
+        Me.acquisitionDate.HeaderText = "acquisition Date"
         Me.acquisitionDate.MinimumWidth = 6
         Me.acquisitionDate.Name = "acquisitionDate"
         Me.acquisitionDate.Width = 125
         '
         'acquisitionCost
         '
-        Me.acquisitionCost.HeaderText = "Acquisition Cost"
+        Me.acquisitionCost.HeaderText = "acquisition Cost"
         Me.acquisitionCost.MinimumWidth = 6
         Me.acquisitionCost.Name = "acquisitionCost"
         Me.acquisitionCost.Width = 125
         '
+        'totalCost
+        '
+        Me.totalCost.HeaderText = "total Cost"
+        Me.totalCost.MinimumWidth = 6
+        Me.totalCost.Name = "totalCost"
+        Me.totalCost.Width = 125
+        '
+        'sourceOfFunds
+        '
+        Me.sourceOfFunds.HeaderText = "source Of Funds"
+        Me.sourceOfFunds.MinimumWidth = 6
+        Me.sourceOfFunds.Name = "sourceOfFunds"
+        Me.sourceOfFunds.Width = 125
+        '
         'assignedTo
         '
-        Me.assignedTo.HeaderText = "Assigned To"
+        Me.assignedTo.HeaderText = "assigned To"
         Me.assignedTo.MinimumWidth = 6
         Me.assignedTo.Name = "assignedTo"
         Me.assignedTo.Width = 125
         '
-        'department
+        'departmentId
         '
-        Me.department.HeaderText = "Department"
-        Me.department.MinimumWidth = 6
-        Me.department.Name = "department"
-        Me.department.Width = 125
+        Me.departmentId.HeaderText = "department Id"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
         '
-        'location
+        'internalCodes
         '
-        Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
-        Me.location.Name = "location"
-        Me.location.Width = 125
+        Me.internalCodes.HeaderText = "internal Codes"
+        Me.internalCodes.MinimumWidth = 6
+        Me.internalCodes.Name = "internalCodes"
+        Me.internalCodes.Width = 125
         '
-        'condition
+        'createdAt
         '
-        Me.condition.HeaderText = "Condition"
-        Me.condition.MinimumWidth = 6
-        Me.condition.Name = "condition"
-        Me.condition.Width = 125
+        Me.createdAt.HeaderText = "created At"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
         '
-        'status
+        'updatedAt
         '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
+        Me.updatedAt.HeaderText = "updated At"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
         '
         'UC_PropertyManagement1
         '
@@ -330,15 +354,18 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents mnuViewDetails As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuPrintPARICS As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents generatePropertyCard As Resources.Controls.RoundedButton
+    Friend WithEvents propertyId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents itemName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents category As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents unitOfMeasure As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents propertyNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents serialNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents acquisitionDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents acquisitionCost As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents totalCost As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents sourceOfFunds As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents assignedTo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents department As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents condition As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents departmentId As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents internalCodes As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents createdAt As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents updatedAt As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

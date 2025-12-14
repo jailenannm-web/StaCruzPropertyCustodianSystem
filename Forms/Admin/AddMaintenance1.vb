@@ -28,91 +28,91 @@ Public Class AddMaintenance1
         
         Try
             ' Validate required fields
-            If String.IsNullOrWhiteSpace(propertyNameTxt.Text) Then
+            If String.IsNullOrWhiteSpace(propertyItemName.Text) Then
                 MessageBox.Show("Please enter the property/item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                propertyNameTxt.Focus()
+                propertyItemName.Focus()
                 Return
             End If
-            
-            If ComboBox3.SelectedIndex < 0 Then
+
+            If departmentId.SelectedIndex < 0 Then
                 MessageBox.Show("Please select a service type.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                ComboBox3.Focus()
+                departmentId.Focus()
                 Return
             End If
-            
-            If String.IsNullOrWhiteSpace(TextBox1.Text) Then
+
+            If maintenanceDetails.SelectedIndex < 0 AndAlso String.IsNullOrWhiteSpace(maintenanceDetails.Text) Then
                 MessageBox.Show("Please enter maintenance description.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                TextBox1.Focus()
+                maintenanceDetails.Focus()
                 Return
             End If
-            
+
             ' Get property ID (try to parse from propertyNameTxt or use 0 if not found)
             Dim propertyID As Integer = 0
-            If Not String.IsNullOrWhiteSpace(propertyNameTxt.Text) Then
+            If Not String.IsNullOrWhiteSpace(propertyItemName.Text) Then
                 ' Try to find property by name
                 Try
                     Dim dt As DataTable = DatabaseConnection.GetAllProperties()
                     For Each row As DataRow In dt.Rows
-                        If row("item_name").ToString().Equals(propertyNameTxt.Text.Trim(), StringComparison.OrdinalIgnoreCase) Then
-                            propertyID = Convert.ToInt32(row("property_id"))
+                        If row("itemName").ToString().Equals(propertyItemName.Text.Trim(), StringComparison.OrdinalIgnoreCase) Then
+                            propertyID = Convert.ToInt32(row("propertyId"))
                             Exit For
                         End If
                     Next
                 Catch
                 End Try
             End If
-            
-            ' Get custodian ID if provided
+
+            ' Get custodian ID if provided (using assignedTechnician field)
             Dim custodianID As Integer? = Nothing
-            If Not String.IsNullOrWhiteSpace(assignedEmployeeTxt.Text) Then
+            If Not String.IsNullOrWhiteSpace(assignedTechnician.Text) Then
                 ' Try to find custodian by name or ID
                 Try
                     Dim dt As DataTable = DatabaseConnection.GetAllUsers("Custodian")
                     For Each row As DataRow In dt.Rows
-                        Dim fullName As String = row("first_name").ToString() & " " & row("last_name").ToString()
-                        If fullName.Equals(assignedEmployeeTxt.Text.Trim(), StringComparison.OrdinalIgnoreCase) Then
-                            custodianID = Convert.ToInt32(row("user_id"))
+                        Dim fullName As String = row("firstName").ToString() & " " & row("lastName").ToString()
+                        If fullName.Equals(assignedTechnician.Text.Trim(), StringComparison.OrdinalIgnoreCase) Then
+                            custodianID = Convert.ToInt32(row("userId"))
                             Exit For
                         End If
                     Next
                 Catch
                 End Try
             End If
-            
+
             ' Get service date
-            Dim serviceDate As Date = DateTimePicker1.Value
-            
+            Dim serviceDate As Date = maintenanceDate.Value
+
             ' Get service type
-            Dim serviceType As String = ComboBox3.SelectedItem.ToString()
-            
+            Dim serviceType As String = departmentId.SelectedItem.ToString()
+
             ' Get description
-            Dim description As String = TextBox1.Text.Trim()
-            
+            Dim description As String = If(maintenanceDetails.SelectedIndex >= 0, maintenanceDetails.SelectedItem.ToString(), maintenanceDetails.Text.Trim())
+
             ' Get service provider
-            Dim serviceProvider As String = TextBox2.Text.Trim()
-            
+            Dim serviceProvider As String = assignedTechnician.Text.Trim()
+
             ' Get provider contact
-            Dim providerContact As String = TextBox3.Text.Trim()
-            
+            Dim providerContact As String = costMaterialsLabor.Text.Trim()
+
             ' Get cost
             Dim cost As Decimal = 0
             If Not String.IsNullOrWhiteSpace(Label3.Text) Then
                 Decimal.TryParse(Label3.Text, cost)
             End If
-            
-            ' Get next schedule
+
+            ' Get next schedule (using maintenanceDate)
             Dim nextSchedule As Date? = Nothing
-            If established_date_date.Value > Date.Today Then
-                nextSchedule = established_date_date.Value
+            If maintenanceDate.Value > Date.Today Then
+                nextSchedule = maintenanceDate.Value
             End If
-            
+
             ' Get technician assigned
-            Dim technicianAssigned As String = assignedEmployeeTxt.Text.Trim()
-            
+            Dim technicianAssigned As String = assignedTechnician.Text.Trim()
+
             ' Get status
             Dim status As String = "Pending"
-            If conditionStatusCmbo.SelectedIndex >= 0 Then
-                status = conditionStatusCmbo.SelectedItem.ToString()
+            If conditionBeforeMaint.SelectedIndex >= 0 Then
+                status = conditionBeforeMaint.SelectedItem.ToString()
             End If
             
             ' Get admin info
