@@ -1337,4 +1337,16 @@ Public Class SASystemConfiguration
     Private Sub dtTo_ValueChanged(sender As Object, e As EventArgs) Handles dtTo.ValueChanged
 
     End Sub
+
+    Private Sub txtHost_TextChanged(sender As Object, e As EventArgs) Handles txtHost.TextChanged
+
+    End Sub
+
+    Private Sub dtFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtFrom.ValueChanged
+
+    End Sub
+
+    Private Sub cmbLogType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLogType.SelectedIndexChanged
+
+    End Sub
 End Class

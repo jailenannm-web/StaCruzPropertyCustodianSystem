@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5BA19DCE-6BE5-45B8-AADD-D54CAC6DE401}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>StaCruzPropertyCustodianSystem.AdminDashboard</StartupObject>
+    <StartupObject>StaCruzPropertyCustodianSystem.SASystemConfiguration</StartupObject>
     <RootNamespace>StaCruzPropertyCustodianSystem</RootNamespace>
     <AssemblyName>StaCruzPropertyCustodianSystem</AssemblyName>
     <FileAlignment>512</FileAlignment>
