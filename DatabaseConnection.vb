@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
@@ -2261,6 +2261,36 @@ Public Class DatabaseConnection
 
         ' Generic fallback
         Return $"Unable to {defaultAction}. Please verify your input and try again."
+    End Function
+
+    ''' <summary>
+    ''' Update the last login timestamp for a user
+    ''' </summary>
+    Public Shared Function UpdateLastLogin(userID As Integer) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            Dim query As String = "UPDATE users SET lastLogin = NOW() WHERE userId = @userID"
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@userID", userID)
+                Dim result As Integer = cmd.ExecuteNonQuery()
+                Return result > 0
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] UpdateLastLogin Exception: " & ex.Message)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
     End Function
 
     ''' <summary>
@@ -4538,7 +4568,7 @@ Public Class DatabaseConnection
             If Not String.IsNullOrEmpty(roleFilter) Then query.Append(" AND role = @role")
             If Not String.IsNullOrEmpty(searchKeyword) Then
                 query.Append(" AND (")
-                query.Append("LOWER(first_name) LIKE @search OR LOWER(last_name) LIKE @search OR ")
+                query.Append("LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR ")
                 query.Append("LOWER(username) LIKE @search OR LOWER(email) LIKE @search OR ")
                 query.Append("LOWER(employee_id) LIKE @search)")
             End If
@@ -4626,10 +4656,10 @@ Public Class DatabaseConnection
 
             If Not String.IsNullOrEmpty(searchKeyword) Then
                 Dim searchPattern As String = "%" & searchKeyword.Trim().ToLower() & "%"
-                adminWhereConditions.Add("(LOWER(first_name) LIKE @search OR LOWER(last_name) LIKE @search OR " &
+                adminWhereConditions.Add("(LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR " &
                                         "LOWER(username) LIKE @search OR LOWER(email) LIKE @search OR " &
                                         "LOWER(COALESCE(employeeId, '')) LIKE @search)")
-                staffWhereConditions.Add("(LOWER(first_name) LIKE @search OR LOWER(last_name) LIKE @search OR " &
+                staffWhereConditions.Add("(LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR " &
                                         "LOWER(username) LIKE @search OR LOWER(email) LIKE @search)")
             End If
 
@@ -5689,7 +5719,7 @@ Public Class DatabaseConnection
             If departmentID.HasValue Then query.Append(" AND departmentId = @departmentID")
             If Not String.IsNullOrEmpty(searchKeyword) Then
                 query.Append(" AND (")
-                query.Append("LOWER(first_name) LIKE @search OR LOWER(last_name) LIKE @search OR ")
+                query.Append("LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR ")
                 query.Append("LOWER(username) LIKE @search OR LOWER(email) LIKE @search)")
             End If
 
@@ -6048,7 +6078,7 @@ Public Class DatabaseConnection
             query.Append("FROM users WHERE LOWER(IFNULL(position,'')) LIKE '%custodian%'")
             If Not includeInactive Then query.Append(" AND status = 'Active'")
             If Not String.IsNullOrEmpty(searchKeyword) Then
-                query.Append(" AND (LOWER(first_name) LIKE @search OR LOWER(last_name) LIKE @search OR LOWER(username) LIKE @search)")
+                query.Append(" AND (LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR LOWER(username) LIKE @search)")
             End If
             query.Append(" ORDER BY lastName ASC")
 
@@ -6732,30 +6762,33 @@ Public Class DatabaseConnection
                 Return dt
             End If
 
-            ' Build query with optional filters
+            ' Build query with optional filters - using camelCase column names (matching database schema)
             Dim query As String = "SELECT " &
-                                 "supplyId AS SupplyID, " &
-                                 "itemName AS SupplyName, " &
-                                 "category AS Category, " &
-                                 "description AS Description, " &
-                                 "unitOfMeasure AS UnitOfMeasure, " &
-                                 "quantity AS QuantityInStock, " &
-                                 "unitCost AS UnitCost, " &
-                                 "totalCost AS TotalValue, " &
-                                 "dateReceived AS AcquisitionDate, " &
-                                 "supplier AS SupplierName, " &
-                                 "location AS Location, " &
-                                 "stockStatus AS Status " &
+                                 "supplyId AS supplyId, " &
+                                 "itemName AS itemName, " &
+                                 "category AS category, " &
+                                 "description AS description, " &
+                                 "unitOfMeasure AS unitOfMeasure, " &
+                                 "quantity AS quantity, " &
+                                 "unitCost AS unitCost, " &
+                                 "totalCost AS totalCost, " &
+                                 "dateReceived AS dateReceived, " &
+                                 "supplier AS supplier, " &
+                                 "sourceOfFunds AS sourceOfFunds, " &
+                                 "location AS location, " &
+                                 "stockStatus AS stockStatus, " &
+                                 "createdAt AS createdAt, " &
+                                 "updatedAt AS updatedAt " &
                                  "FROM supplies WHERE 1=1"
 
             If Not String.IsNullOrEmpty(category) Then
                 query &= " AND category = @category"
             End If
             If Not String.IsNullOrEmpty(status) Then
-                query &= " AND stock_status = @status"
+                query &= " AND stockStatus = @status"
             End If
 
-            query &= " ORDER BY date_received DESC"
+            query &= " ORDER BY dateReceived DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 If Not String.IsNullOrEmpty(category) Then
@@ -7001,7 +7034,7 @@ Public Class DatabaseConnection
                     supplyItemName = nameResult.ToString()
                 End If
             End Using
-            
+
             ' Check supply_requests table (uses item_name, not supply_id)
             If Not String.IsNullOrEmpty(supplyItemName) Then
                 Dim checkRequestedQuery As String = "SELECT COUNT(*) FROM supply_requests WHERE item_name = @itemName AND status IN ('Pending', 'Approved', 'Released')"
@@ -7060,13 +7093,23 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
 
             If Not SafeOpenConnection(conn) Then Return dt
-            ' Select all attributes matching schema - use lowercase column names for consistency
-            Dim query As String = "SELECT d.departmentId, d.departmentName, d.head_of_department, " &
-                                 "d.contactNumber, d.email, d.location, d.office_code, " &
-                                 "d.building, d.floor_number, d.short_name, d.description, d.status, " &
-                                 "COALESCE(d.total_properties, 0) AS total_properties, " &
-                                 "COALESCE(d.total_supplies, 0) AS total_supplies, " &
-                                 "d.createdAt, d.updated_at " &
+            ' Select all attributes matching schema - using camelCase column names (matching database schema)
+            Dim query As String = "SELECT d.departmentId AS departmentId, " &
+                                 "d.departmentName AS departmentName, " &
+                                 "d.headOfDepartment AS headOfDepartment, " &
+                                 "d.contactNumber AS contactNumber, " &
+                                 "d.email AS email, " &
+                                 "d.location AS location, " &
+                                 "d.officeCode AS officeCode, " &
+                                 "d.building AS building, " &
+                                 "d.floorNumber AS floorNumber, " &
+                                 "d.shortName AS shortName, " &
+                                 "d.description AS description, " &
+                                 "d.status AS status, " &
+                                 "COALESCE(d.totalProperties, 0) AS totalProperties, " &
+                                 "COALESCE(d.totalSupplies, 0) AS totalSupplies, " &
+                                 "d.createdAt AS createdAt, " &
+                                 "d.updatedAt AS updatedAt " &
                                  "FROM departments d " &
                                  "ORDER BY d.departmentName"
 
@@ -7584,8 +7627,8 @@ Public Class DatabaseConnection
 
     ''' <summary>
     ''' Initialize hardcoded SuperAdmin and Admin accounts if they don't exist
-    ''' SuperAdmin password: SuperAdmin@2025
-    ''' Admin password: Admin@2025
+    ''' SuperAdmin password: SuperAdmin@123
+    ''' Admin password: Admin@123
     ''' </summary>
     Public Shared Sub InitializeDefaultAccounts()
         Dim conn As MySqlConnection = Nothing
@@ -7625,7 +7668,7 @@ Public Class DatabaseConnection
             Else
                 ' Update existing SuperAdmin account to ensure credentials stay in sync
                 Using updateCmd As New MySqlCommand("UPDATE users SET firstName = @firstName, lastName = @lastName, email = @email, " &
-                                                    "passwordEncrypted = @password, status = 'active' WHERE userId = @userID", conn)
+                                                    "passwordEncrypted = @password, status = 'Active' WHERE userId = @userID", conn)
                     updateCmd.Parameters.AddWithValue("@firstName", "Super")
                     updateCmd.Parameters.AddWithValue("@lastName", "Administrator")
                     updateCmd.Parameters.AddWithValue("@email", "superadmin@stacruz.edu")
@@ -7660,7 +7703,7 @@ Public Class DatabaseConnection
             Else
                 ' Update existing Admin account to ensure credentials stay in sync
                 Using updateCmd As New MySqlCommand("UPDATE users SET firstName = @firstName, lastName = @lastName, email = @email, " &
-                                                    "passwordEncrypted = @password, status = 'active' WHERE userId = @userID", conn)
+                                                    "passwordEncrypted = @password, status = 'Active' WHERE userId = @userID", conn)
                     updateCmd.Parameters.AddWithValue("@firstName", "System")
                     updateCmd.Parameters.AddWithValue("@lastName", "Administrator")
                     updateCmd.Parameters.AddWithValue("@email", "admin@stacruz.edu")
@@ -7757,5 +7800,6 @@ Public Class DatabaseConnection
             End If
         End Try
     End Sub
+
 
 End Class

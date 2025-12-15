@@ -24,19 +24,19 @@ Public Class EditProfile
             Dim profile As Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
             
             If profile IsNot Nothing AndAlso profile.Count > 0 Then
-                ' Populate edit fields
-                If profile.ContainsKey("user_id") Then txb_UserID.Text = profile("user_id").ToString()
-                If profile.ContainsKey("first_name") Then txb_FirstName.Text = profile("first_name").ToString()
-                If profile.ContainsKey("middle_name") Then txb_MiddleName.Text = If(profile("middle_name") IsNot Nothing, profile("middle_name").ToString(), "")
-                If profile.ContainsKey("last_name") Then txb_LastName.Text = profile("last_name").ToString()
+                ' Populate edit fields - use camelCase to match database
+                If profile.ContainsKey("userId") Then txb_UserID.Text = profile("userId").ToString()
+                If profile.ContainsKey("firstName") Then txb_FirstName.Text = profile("firstName").ToString()
+                If profile.ContainsKey("middleName") Then txb_MiddleName.Text = If(profile("middleName") IsNot Nothing, profile("middleName").ToString(), "")
+                If profile.ContainsKey("lastName") Then txb_LastName.Text = profile("lastName").ToString()
                 If profile.ContainsKey("suffix") Then txb_Suffix.Text = If(profile("suffix") IsNot Nothing, profile("suffix").ToString(), "")
                 If profile.ContainsKey("position") Then txb_Position.Text = If(profile("position") IsNot Nothing, profile("position").ToString(), "")
                 If profile.ContainsKey("email") Then txb_Email.Text = profile("email").ToString()
-                If profile.ContainsKey("contact_number") Then txb_ContactNumber.Text = If(profile("contact_number") IsNot Nothing, profile("contact_number").ToString(), "")
+                If profile.ContainsKey("contactNumber") Then txb_ContactNumber.Text = If(profile("contactNumber") IsNot Nothing, profile("contactNumber").ToString(), "")
                 If profile.ContainsKey("username") Then txb_UserName.Text = profile("username").ToString()
-                If profile.ContainsKey("employee_id") Then txb_EmployeeID.Text = If(profile("employee_id") IsNot Nothing, profile("employee_id").ToString(), "")
-                If profile.ContainsKey("department_id") AndAlso profile("department_id") IsNot Nothing Then
-                    txb_DepartmentID.Text = profile("department_id").ToString()
+                If profile.ContainsKey("employeeId") Then txb_EmployeeID.Text = If(profile("employeeId") IsNot Nothing, profile("employeeId").ToString(), "")
+                If profile.ContainsKey("departmentId") AndAlso profile("departmentId") IsNot Nothing Then
+                    txb_DepartmentID.Text = profile("departmentId").ToString()
                 End If
             Else
                 MessageBox.Show("Unable to load profile information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)

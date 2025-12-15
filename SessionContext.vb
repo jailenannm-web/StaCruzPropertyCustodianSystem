@@ -1,96 +1,259 @@
 Imports System
+Imports System.Collections.Generic
+Imports System.Linq
+Imports System.Text
+Imports System.Threading.Tasks
 Imports System.Windows.Forms
 
-Public Module SessionContext
-    Public Property CurrentUserID As Integer?
-    Public Property CurrentUsername As String = ""
-    Public Property CurrentRole As String = ""
+Public Class SessionContext
+    ' ============================================================================
+    ' SESSION CONTEXT MANAGEMENT
+    ' ============================================================================
+    ' This class manages user session information and permissions
+    ' ============================================================================
+
+    ' ============================================================================
+    ' ENUMS
+    ' ============================================================================
 
     Public Enum ModulePermission
-        ManageUsers
-        ModifyProperties
-        ModifySupplies
-        ModifyRequests
-        ModifyMaintenance
+        ViewDashboard = 1
+        ManageUsers = 2
+        ModifyProperties = 3
+        ModifySupplies = 4
+        ModifyRequests = 5
+        ModifyMaintenance = 6
+        ViewReports = 7
+        SystemConfiguration = 8
     End Enum
 
-    Public Sub SetCurrentUser(userID As Integer?, username As String, role As String)
-        CurrentUserID = userID
-        CurrentUsername = If(username, "")
-        CurrentRole = If(role, "").Trim()
+    ' ============================================================================
+    ' SHARED PROPERTIES
+    ' ============================================================================
+
+    Private Shared _currentUserID As Integer? = Nothing
+    Private Shared _currentUsername As String = ""
+    Private Shared _currentRole As String = ""
+    Private Shared _currentFullName As String = ""
+    Private Shared _currentDepartment As String = ""
+    Private Shared _isLoggedIn As Boolean = False
+
+    ' ============================================================================
+    ' SHARED PROPERTY ACCESSORS
+    ' ============================================================================
+
+    Public Shared Property CurrentUserID As Integer?
+        Get
+            Return _currentUserID
+        End Get
+        Set(value As Integer?)
+            _currentUserID = value
+        End Set
+    End Property
+
+    Public Shared Property CurrentUsername As String
+        Get
+            Return _currentUsername
+        End Get
+        Set(value As String)
+            _currentUsername = value
+        End Set
+    End Property
+
+    Public Shared Property CurrentRole As String
+        Get
+            Return _currentRole
+        End Get
+        Set(value As String)
+            _currentRole = value
+        End Set
+    End Property
+
+    Public Shared Property CurrentFullName As String
+        Get
+            Return _currentFullName
+        End Get
+        Set(value As String)
+            _currentFullName = value
+        End Set
+    End Property
+
+    Public Shared Property CurrentDepartment As String
+        Get
+            Return _currentDepartment
+        End Get
+        Set(value As String)
+            _currentDepartment = value
+        End Set
+    End Property
+
+    Public Shared Property IsLoggedIn As Boolean
+        Get
+            Return _isLoggedIn
+        End Get
+        Set(value As Boolean)
+            _isLoggedIn = value
+        End Set
+    End Property
+
+    ' ============================================================================
+    ' SESSION MANAGEMENT METHODS
+    ' ============================================================================
+
+    Public Shared Sub Login(userID As Integer, username As String, role As String, fullName As String, Optional department As String = "")
+        _currentUserID = userID
+        _currentUsername = username
+        _currentRole = role
+        _currentFullName = fullName
+        _currentDepartment = department
+        _isLoggedIn = True
+
+        ' Update last login in database
+        DatabaseConnection.UpdateLastLogin(userID)
     End Sub
 
-    Public Sub Reset()
-        CurrentUserID = Nothing
-        CurrentUsername = ""
-        CurrentRole = ""
+    Public Shared Sub Logout()
+        _currentUserID = Nothing
+        _currentUsername = ""
+        _currentRole = ""
+        _currentFullName = ""
+        _currentDepartment = ""
+        _isLoggedIn = False
     End Sub
 
-    Public Function IsSuperAdmin() As Boolean
-        Return String.Equals(CurrentRole, "SuperAdmin", StringComparison.OrdinalIgnoreCase)
-    End Function
+    ''' <summary>
+    ''' Legacy method for backward compatibility - sets current user with minimal info
+    ''' </summary>
+    Public Shared Sub SetCurrentUser(userID As Integer, username As String, role As String)
+        _currentUserID = userID
+        _currentUsername = username
+        _currentRole = role
+        _currentFullName = username ' Use username as fallback for full name
+        _currentDepartment = ""
+        _isLoggedIn = True
 
-    Public Function IsAdmin() As Boolean
-        Return String.Equals(CurrentRole, "Admin", StringComparison.OrdinalIgnoreCase)
-    End Function
-
-    Public Function IsCustodianAdmin() As Boolean
-        Return String.Equals(CurrentRole, "Custodian", StringComparison.OrdinalIgnoreCase) _
-            OrElse String.Equals(CurrentRole, "CustodianAdmin", StringComparison.OrdinalIgnoreCase)
-    End Function
-
-    Public Function IsCustodian() As Boolean
-        Return String.Equals(CurrentRole, "Custodian", StringComparison.OrdinalIgnoreCase)
-    End Function
-
-    Public Function IsStaff() As Boolean
-        Return String.Equals(CurrentRole, "Staff", StringComparison.OrdinalIgnoreCase)
-    End Function
+        ' Update last login in database
+        DatabaseConnection.UpdateLastLogin(userID)
+    End Sub
 
     ''' <summary>
-    ''' Check if user has permission based on role requirements:
-    ''' - Super Admin, Admin, and Custodian: Full access to everything (NO RESTRICTIONS)
+    ''' Legacy method for backward compatibility - resets session (same as Logout)
     ''' </summary>
-    Public Function HasPermission(permission As ModulePermission) As Boolean
-        ' Super Admin, Admin, and Custodian have full access to all modules
-        Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin() OrElse IsCustodian()
+    Public Shared Sub Reset()
+        Logout()
+    End Sub
+
+    ' ============================================================================
+    ' ROLE CHECK METHODS
+    ' ============================================================================
+
+    Public Shared Function IsSuperAdmin() As Boolean
+        Return _currentRole = "SuperAdmin"
     End Function
 
-    ''' <summary>
-    ''' Check if user can VIEW (read-only access) to a module
-    ''' </summary>
-    Public Function CanView(moduleName As String) As Boolean
-        Select Case moduleName.ToLower()
-            Case "properties", "property"
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin()
-            Case "supplies", "supply"
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin()
-            Case "requests", "request"
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin() OrElse IsStaff()
-            Case "maintenance"
-                Return IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin() OrElse IsStaff()
-            Case "users", "user"
-                Return IsSuperAdmin() OrElse IsAdmin()
-            Case Else
-                Return False
-        End Select
+    Public Shared Function IsAdmin() As Boolean
+        Return _currentRole = "Admin"
     End Function
 
-    Public Function DemandPermission(permission As ModulePermission, actionDescription As String) As Boolean
-        ' Super Admin, Admin, and Custodian bypass all permission checks
-        If IsSuperAdmin() OrElse IsAdmin() OrElse IsCustodianAdmin() OrElse IsCustodian() Then
+    Public Shared Function IsCustodian() As Boolean
+        Return _currentRole = "Custodian"
+    End Function
+
+    Public Shared Function IsCustodianAdmin() As Boolean
+        Return IsAdmin() OrElse IsSuperAdmin()
+    End Function
+
+    Public Shared Function IsStaff() As Boolean
+        Return _currentRole = "Staff"
+    End Function
+
+    ' ============================================================================
+    ' PERMISSION CHECK METHODS
+    ' ============================================================================
+
+    Public Shared Function DemandPermission(permission As ModulePermission, actionDescription As String) As Boolean
+        ' Super Admin has all permissions
+        If IsSuperAdmin() Then
             Return True
         End If
 
-        If HasPermission(permission) Then
-            Return True
+        ' Admin has most permissions except system configuration
+        If IsAdmin() Then
+            Select Case permission
+                Case ModulePermission.SystemConfiguration
+                    Return False
+                Case Else
+                    Return True
+            End Select
         End If
 
-        MessageBox.Show("You do not have permission to perform this action (" & actionDescription & ")." &
-                        Environment.NewLine & "Please contact a Super Admin if you believe this is a mistake.",
-                        "Access Denied",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning)
+        ' Custodian permissions
+        If IsCustodian() Then
+            Select Case permission
+                Case ModulePermission.ViewDashboard,
+                     ModulePermission.ModifyProperties,
+                     ModulePermission.ModifySupplies,
+                     ModulePermission.ModifyRequests,
+                     ModulePermission.ModifyMaintenance,
+                     ModulePermission.ViewReports
+                    Return True
+                Case Else
+                    Return False
+            End Select
+        End If
+
+        ' Staff permissions
+        If IsStaff() Then
+            Select Case permission
+                Case ModulePermission.ViewDashboard,
+                     ModulePermission.ModifyRequests,
+                     ModulePermission.ViewReports
+                    Return True
+                Case Else
+                    Return False
+            End Select
+        End If
+
+        ' Default deny
         Return False
     End Function
-End Module
+
+    ' ============================================================================
+    ' UTILITY METHODS
+    ' ============================================================================
+
+    Public Shared Function GetCurrentUserInfo() As Dictionary(Of String, Object)
+        Dim info As New Dictionary(Of String, Object)()
+        info.Add("userID", _currentUserID)
+        info.Add("username", _currentUsername)
+        info.Add("role", _currentRole)
+        info.Add("fullName", _currentFullName)
+        info.Add("department", _currentDepartment)
+        info.Add("isLoggedIn", _isLoggedIn)
+        Return info
+    End Function
+
+    Public Shared Function HasPermission(permission As ModulePermission) As Boolean
+        Return DemandPermission(permission, "")
+    End Function
+
+    ' ============================================================================
+    ' VALIDATION METHODS
+    ' ============================================================================
+
+    Public Shared Function ValidateSession() As Boolean
+        Return _isLoggedIn AndAlso _currentUserID.HasValue AndAlso _currentUserID.Value > 0 AndAlso Not String.IsNullOrEmpty(_currentRole)
+    End Function
+
+    Public Shared Function RequireLogin(Optional redirectToLogin As Boolean = True) As Boolean
+        If Not ValidateSession() Then
+            If redirectToLogin Then
+                MessageBox.Show("Please login to access this feature.", "Login Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                ' Note: Form navigation would be handled by the calling form
+            End If
+            Return False
+        End If
+        Return True
+    End Function
+
+End Class

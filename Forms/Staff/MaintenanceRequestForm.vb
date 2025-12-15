@@ -26,7 +26,12 @@ Public Class MaintenanceRequestForm
             ComboBox4.Items.Clear()
             ComboBox4.Items.Add("Select Department")
             For Each row As DataRow In dt.Rows
-                ComboBox4.Items.Add(row("department_name").ToString())
+                ' Use camelCase column name to match database
+                If dt.Columns.Contains("departmentName") Then
+                    ComboBox4.Items.Add(row("departmentName").ToString())
+                ElseIf dt.Columns.Contains("department_name") Then
+                    ComboBox4.Items.Add(row("department_name").ToString())
+                End If
             Next
             ComboBox4.SelectedIndex = 0
         Catch ex As Exception
@@ -65,7 +70,12 @@ Public Class MaintenanceRequestForm
             Try
                 Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
                 If ComboBox4.SelectedIndex <= dt.Rows.Count Then
-                    departmentID = Convert.ToInt32(dt.Rows(ComboBox4.SelectedIndex - 1)("department_id"))
+                    ' Use camelCase column name to match database
+                    If dt.Columns.Contains("departmentId") Then
+                        departmentID = Convert.ToInt32(dt.Rows(ComboBox4.SelectedIndex - 1)("departmentId"))
+                    ElseIf dt.Columns.Contains("department_id") Then
+                        departmentID = Convert.ToInt32(dt.Rows(ComboBox4.SelectedIndex - 1)("department_id"))
+                    End If
                 End If
             Catch
             End Try

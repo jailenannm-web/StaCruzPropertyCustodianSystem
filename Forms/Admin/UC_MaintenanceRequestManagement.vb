@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
@@ -20,7 +20,13 @@ Public Class UC_MaintenanceRequestManagement
         If e.RowIndex >= 0 AndAlso propertyManagementGrid.Columns.Contains("action_edit") AndAlso
            e.ColumnIndex = propertyManagementGrid.Columns("action_edit").Index Then
 
-            Dim reqIDValue As Object = propertyManagementGrid.Rows(e.RowIndex).Cells("request_id").Value
+            ' Use camelCase to match database schema
+            Dim reqIDValue As Object = Nothing
+            If propertyManagementGrid.Columns.Contains("requestId") Then
+                reqIDValue = propertyManagementGrid.Rows(e.RowIndex).Cells("requestId").Value
+            ElseIf propertyManagementGrid.Columns.Contains("request_id") Then
+                reqIDValue = propertyManagementGrid.Rows(e.RowIndex).Cells("request_id").Value
+            End If
             Dim reqID As String = If(reqIDValue IsNot Nothing, reqIDValue.ToString(), "")
             MessageBox.Show("Edit Request: " & reqID, "Action", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -64,14 +70,19 @@ Public Class UC_MaintenanceRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim requestID As Integer = Convert.ToInt32(dataRow("request_id"))
+            Dim requestID As Integer = 0
+            If dt.Columns.Contains("requestId") Then
+                requestID = Convert.ToInt32(dataRow("requestId"))
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestID = Convert.ToInt32(dataRow("request_id"))
+            End If
 
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this maintenance request? This action cannot be undone.", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
             If result = DialogResult.Yes Then
                 ' Delete maintenance request using DatabaseConnection
                 Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
                 If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                    Using cmd As New MySqlCommand("DELETE FROM maintenance_requests WHERE request_id = @requestID", conn)
+                    Using cmd As New MySqlCommand("DELETE FROM maintenance_requests WHERE requestId = @requestID", conn)
                         cmd.Parameters.AddWithValue("@requestID", requestID)
                         If cmd.ExecuteNonQuery() > 0 Then
                             MessageBox.Show("Maintenance request deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -133,7 +144,7 @@ Public Class UC_MaintenanceRequestManagement
 
 
     ' ----------------------------------------------------------------------
-    ' PRINT PAR LOGIC — FULLY CONNECTED TO PROPERTYCARD
+    ' PRINT PAR LOGIC � FULLY CONNECTED TO PROPERTYCARD
     ' ----------------------------------------------------------------------
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click
         ' TODO: Implement maintenance report generation
@@ -158,7 +169,12 @@ Public Class UC_MaintenanceRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim requestID As Integer = Convert.ToInt32(dataRow("request_id"))
+            Dim requestID As Integer = 0
+            If dt.Columns.Contains("requestId") Then
+                requestID = Convert.ToInt32(dataRow("requestId"))
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestID = Convert.ToInt32(dataRow("request_id"))
+            End If
             Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
 
             If currentStatus = "completed" OrElse currentStatus = "approved" OrElse currentStatus = "in progress" Then
@@ -205,7 +221,12 @@ Public Class UC_MaintenanceRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim requestID As Integer = Convert.ToInt32(dataRow("request_id"))
+            Dim requestID As Integer = 0
+            If dt.Columns.Contains("requestId") Then
+                requestID = Convert.ToInt32(dataRow("requestId"))
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestID = Convert.ToInt32(dataRow("request_id"))
+            End If
             Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
 
             If currentStatus = "rejected" Then
@@ -246,3 +267,4 @@ Public Class UC_MaintenanceRequestManagement
         MessageBox.Show("Maintenance request list refreshed.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 End Class
+

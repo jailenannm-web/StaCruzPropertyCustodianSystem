@@ -82,16 +82,21 @@ Public Class UC_DepartmentManagement
 
             If dt.Rows.Count > 0 Then
             For Each row As DataRow In dt.Rows
-                ' Use safe column access
-                Dim deptName As String = If(row.Table.Columns.Contains("department_name") AndAlso Not IsDBNull(row("department_name")), row("department_name").ToString(), "")
-                Dim headOfDept As String = If(row.Table.Columns.Contains("head_of_department") AndAlso Not IsDBNull(row("head_of_department")), row("head_of_department").ToString(), "")
-                Dim deptID As String = If(row.Table.Columns.Contains("department_id") AndAlso Not IsDBNull(row("department_id")), row("department_id").ToString(), "")
-                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
-                Dim totalProps As String = If(row.Table.Columns.Contains("total_properties") AndAlso Not IsDBNull(row("total_properties")), row("total_properties").ToString(), "0")
-                Dim totalSupplies As String = If(row.Table.Columns.Contains("total_supplies") AndAlso Not IsDBNull(row("total_supplies")), row("total_supplies").ToString(), "0")
-                Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
+                ' Use safe column access - Match actual database camelCase column names
+                Dim deptID As String = If(row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")), row("departmentId").ToString(), "")
+                Dim headOfDept As String = If(row.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(row("headOfDepartment")), row("headOfDepartment").ToString(), "")
+                Dim contactNum As String = If(row.Table.Columns.Contains("contactNumber") AndAlso Not IsDBNull(row("contactNumber")), row("contactNumber").ToString(), "")
+                Dim floorNum As String = If(row.Table.Columns.Contains("floorNumber") AndAlso Not IsDBNull(row("floorNumber")), row("floorNumber").ToString(), "")
+                Dim shortName As String = If(row.Table.Columns.Contains("shortName") AndAlso Not IsDBNull(row("shortName")), row("shortName").ToString(), "")
+                Dim officeCode As String = If(row.Table.Columns.Contains("officeCode") AndAlso Not IsDBNull(row("officeCode")), row("officeCode").ToString(), "")
+                Dim totalProps As String = If(row.Table.Columns.Contains("totalProperties") AndAlso Not IsDBNull(row("totalProperties")), row("totalProperties").ToString(), "0")
+                Dim totalSupplies As String = If(row.Table.Columns.Contains("totalSupplies") AndAlso Not IsDBNull(row("totalSupplies")), row("totalSupplies").ToString(), "0")
+                Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
+                Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
+                Dim deptName As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString(), "")
                 
-                admin_deptmanagement.Rows.Add(deptName, headOfDept, deptID, location, totalProps, totalSupplies, status)
+                ' Add row matching Designer column order: departmentId, headOfDepartment, contactNumber, floorNumber, shortName, officeCode, totalProperties, totalSupplies, createdAt, updatedAt, departmentName
+                admin_deptmanagement.Rows.Add(deptID, headOfDept, contactNum, floorNum, shortName, officeCode, totalProps, totalSupplies, createdAt, updatedAt, deptName)
             Next
             ' Update total count
             If ttldepartmentmanagement IsNot Nothing Then
@@ -126,16 +131,20 @@ Public Class UC_DepartmentManagement
                                                                  End Function)
 
             For Each row As DataRow In filteredRows
-                ' Use safe column access
-                Dim deptName As String = If(row.Table.Columns.Contains("department_name") AndAlso Not IsDBNull(row("department_name")), row("department_name").ToString(), "")
-                Dim headOfDept As String = If(row.Table.Columns.Contains("head_of_department") AndAlso Not IsDBNull(row("head_of_department")), row("head_of_department").ToString(), "")
+                ' Use safe column access - Match Designer column order
                 Dim deptID As String = If(row.Table.Columns.Contains("department_id") AndAlso Not IsDBNull(row("department_id")), row("department_id").ToString(), "")
-                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
+                Dim headOfDept As String = If(row.Table.Columns.Contains("head_of_department") AndAlso Not IsDBNull(row("head_of_department")), row("head_of_department").ToString(), "")
+                Dim contactNum As String = If(row.Table.Columns.Contains("contact_number") AndAlso Not IsDBNull(row("contact_number")), row("contact_number").ToString(), "")
+                Dim floorNum As String = If(row.Table.Columns.Contains("floor_number") AndAlso Not IsDBNull(row("floor_number")), row("floor_number").ToString(), "")
+                Dim shortName As String = If(row.Table.Columns.Contains("short_name") AndAlso Not IsDBNull(row("short_name")), row("short_name").ToString(), "")
+                Dim officeCode As String = If(row.Table.Columns.Contains("office_code") AndAlso Not IsDBNull(row("office_code")), row("office_code").ToString(), "")
                 Dim totalProps As String = If(row.Table.Columns.Contains("total_properties") AndAlso Not IsDBNull(row("total_properties")), row("total_properties").ToString(), "0")
                 Dim totalSupplies As String = If(row.Table.Columns.Contains("total_supplies") AndAlso Not IsDBNull(row("total_supplies")), row("total_supplies").ToString(), "0")
-                Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
+                Dim createdAt As String = If(row.Table.Columns.Contains("created_at") AndAlso Not IsDBNull(row("created_at")), Convert.ToDateTime(row("created_at")).ToString("yyyy-MM-dd"), "")
+                Dim updatedAt As String = If(row.Table.Columns.Contains("updated_at") AndAlso Not IsDBNull(row("updated_at")), Convert.ToDateTime(row("updated_at")).ToString("yyyy-MM-dd"), "")
+                Dim deptName As String = If(row.Table.Columns.Contains("department_name") AndAlso Not IsDBNull(row("department_name")), row("department_name").ToString(), "")
                 
-                admin_deptmanagement.Rows.Add(deptName, headOfDept, deptID, location, totalProps, totalSupplies, status)
+                admin_deptmanagement.Rows.Add(deptID, headOfDept, contactNum, floorNum, shortName, officeCode, totalProps, totalSupplies, createdAt, updatedAt, deptName)
             Next
             ' Update total count
             If ttldepartmentmanagement IsNot Nothing Then
@@ -149,11 +158,11 @@ Public Class UC_DepartmentManagement
     Private Sub admin_deptmanagement_SelectionChanged(sender As Object, e As EventArgs)
         If admin_deptmanagement.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = admin_deptmanagement.SelectedRows(0)
-            ' Get department ID from the DepartmentID column (index 2 based on column order)
-            ' Column order: DepartmentName (0), DepartmentHead (1), DepartmentID (2), Location (3), TotalProperties (4), TotalSupplies (5), Status (6)
+            ' Get department ID from the first column (index 0 - departmentId)
+            ' Column order: departmentId (0), headOfDepartment (1), contactNumber (2), floorNumber (3), shortName (4), officeCode (5), totalProperties (6), totalSupplies (7), createdAt (8), updatedAt (9), departmentName (10)
             Try
-                If selectedRow.Cells.Count > 2 AndAlso selectedRow.Cells(2).Value IsNot Nothing Then
-                    Dim departmentIDStr As String = selectedRow.Cells(2).Value.ToString()
+                If selectedRow.Cells.Count > 0 AndAlso selectedRow.Cells(0).Value IsNot Nothing Then
+                    Dim departmentIDStr As String = selectedRow.Cells(0).Value.ToString()
                     If Integer.TryParse(departmentIDStr, selectedDepartmentID) Then
                         ' Row selected, enable Edit and Delete buttons
                     End If
@@ -188,8 +197,8 @@ Public Class UC_DepartmentManagement
         End If
 
         Dim selectedRow As DataGridViewRow = admin_deptmanagement.SelectedRows(0)
-        ' Column order: DepartmentName (0), DepartmentHead (1), DepartmentID (2), Location (3), TotalProperties (4), TotalSupplies (5), Status (6)
-        If selectedRow.Cells.Count < 3 Then
+        ' Column order: departmentId (0), headOfDepartment (1), contactNumber (2), floorNumber (3), shortName (4), officeCode (5), totalProperties (6), totalSupplies (7), createdAt (8), updatedAt (9), departmentName (10)
+        If selectedRow.Cells.Count < 11 Then
             MessageBox.Show("Invalid department selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
@@ -199,8 +208,8 @@ Public Class UC_DepartmentManagement
         
         Try
             ' Use column index to avoid column name issues
-            deptIDValue = selectedRow.Cells(2).Value
-            deptNameValue = selectedRow.Cells(0).Value
+            deptIDValue = selectedRow.Cells(0).Value  ' departmentId is first column
+            deptNameValue = selectedRow.Cells(10).Value ' departmentName is last column
         Catch ex As Exception
             MessageBox.Show("Error accessing row data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return

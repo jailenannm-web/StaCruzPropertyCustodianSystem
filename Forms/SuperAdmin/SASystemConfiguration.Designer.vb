@@ -241,7 +241,7 @@ Partial Class SASystemConfiguration
         '
         Me.DBHost.AutoSize = True
         Me.DBHost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.DBHost.Location = New System.Drawing.Point(496, 291)
+        Me.DBHost.Location = New System.Drawing.Point(458, 173)
         Me.DBHost.Name = "DBHost"
         Me.DBHost.Size = New System.Drawing.Size(77, 22)
         Me.DBHost.TabIndex = 162
@@ -249,25 +249,27 @@ Partial Class SASystemConfiguration
         '
         'txtHost
         '
+        Me.txtHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtHost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtHost.Location = New System.Drawing.Point(610, 291)
+        Me.txtHost.Location = New System.Drawing.Point(572, 173)
         Me.txtHost.Name = "txtHost"
-        Me.txtHost.Size = New System.Drawing.Size(303, 28)
+        Me.txtHost.Size = New System.Drawing.Size(419, 28)
         Me.txtHost.TabIndex = 163
         '
         'txtPort
         '
+        Me.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtPort.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtPort.Location = New System.Drawing.Point(610, 365)
+        Me.txtPort.Location = New System.Drawing.Point(572, 247)
         Me.txtPort.Name = "txtPort"
-        Me.txtPort.Size = New System.Drawing.Size(303, 28)
+        Me.txtPort.Size = New System.Drawing.Size(419, 28)
         Me.txtPort.TabIndex = 165
         '
         'port
         '
         Me.port.AutoSize = True
         Me.port.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.port.Location = New System.Drawing.Point(495, 368)
+        Me.port.Location = New System.Drawing.Point(457, 250)
         Me.port.Name = "port"
         Me.port.Size = New System.Drawing.Size(73, 22)
         Me.port.TabIndex = 164
@@ -275,17 +277,18 @@ Partial Class SASystemConfiguration
         '
         'txtDBName
         '
+        Me.txtDBName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDBName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtDBName.Location = New System.Drawing.Point(610, 430)
+        Me.txtDBName.Location = New System.Drawing.Point(572, 312)
         Me.txtDBName.Name = "txtDBName"
-        Me.txtDBName.Size = New System.Drawing.Size(303, 28)
+        Me.txtDBName.Size = New System.Drawing.Size(419, 28)
         Me.txtDBName.TabIndex = 167
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.Label5.Location = New System.Drawing.Point(495, 436)
+        Me.Label5.Location = New System.Drawing.Point(457, 318)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(87, 22)
         Me.Label5.TabIndex = 166
@@ -293,17 +296,18 @@ Partial Class SASystemConfiguration
         '
         'txtUser
         '
+        Me.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtUser.Location = New System.Drawing.Point(610, 494)
+        Me.txtUser.Location = New System.Drawing.Point(572, 376)
         Me.txtUser.Name = "txtUser"
-        Me.txtUser.Size = New System.Drawing.Size(303, 28)
+        Me.txtUser.Size = New System.Drawing.Size(419, 28)
         Me.txtUser.TabIndex = 169
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.Label6.Location = New System.Drawing.Point(495, 500)
+        Me.Label6.Location = New System.Drawing.Point(457, 382)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(78, 22)
         Me.Label6.TabIndex = 168
@@ -311,17 +315,18 @@ Partial Class SASystemConfiguration
         '
         'txtPassword
         '
+        Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtPassword.Location = New System.Drawing.Point(610, 571)
+        Me.txtPassword.Location = New System.Drawing.Point(572, 453)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(303, 28)
+        Me.txtPassword.Size = New System.Drawing.Size(419, 28)
         Me.txtPassword.TabIndex = 171
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.Label7.Location = New System.Drawing.Point(495, 574)
+        Me.Label7.Location = New System.Drawing.Point(457, 456)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(119, 22)
         Me.Label7.TabIndex = 170
@@ -334,7 +339,7 @@ Partial Class SASystemConfiguration
         Me.btnTestConn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnTestConn.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnTestConn.ForeColor = System.Drawing.Color.White
-        Me.btnTestConn.Location = New System.Drawing.Point(581, 630)
+        Me.btnTestConn.Location = New System.Drawing.Point(543, 512)
         Me.btnTestConn.Name = "btnTestConn"
         Me.btnTestConn.Size = New System.Drawing.Size(131, 46)
         Me.btnTestConn.TabIndex = 172
@@ -343,12 +348,12 @@ Partial Class SASystemConfiguration
         '
         'btnSaveConn
         '
-        Me.btnSaveConn.BackColor = System.Drawing.Color.Black
+        Me.btnSaveConn.BackColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.btnSaveConn.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnSaveConn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveConn.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnSaveConn.ForeColor = System.Drawing.Color.White
-        Me.btnSaveConn.Location = New System.Drawing.Point(782, 630)
+        Me.btnSaveConn.Location = New System.Drawing.Point(744, 512)
         Me.btnSaveConn.Name = "btnSaveConn"
         Me.btnSaveConn.Size = New System.Drawing.Size(131, 46)
         Me.btnSaveConn.TabIndex = 173
@@ -357,30 +362,30 @@ Partial Class SASystemConfiguration
         '
         'txtCategoryName
         '
-        Me.txtCategoryName.Location = New System.Drawing.Point(995, 294)
+        Me.txtCategoryName.Location = New System.Drawing.Point(1092, 234)
         Me.txtCategoryName.Name = "txtCategoryName"
-        Me.txtCategoryName.Size = New System.Drawing.Size(317, 22)
+        Me.txtCategoryName.Size = New System.Drawing.Size(264, 22)
         Me.txtCategoryName.TabIndex = 174
         '
         'txtDescription
         '
-        Me.txtDescription.Location = New System.Drawing.Point(995, 332)
+        Me.txtDescription.Location = New System.Drawing.Point(1092, 272)
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(317, 22)
+        Me.txtDescription.Size = New System.Drawing.Size(264, 22)
         Me.txtDescription.TabIndex = 175
         '
         'cmbType
         '
         Me.cmbType.FormattingEnabled = True
         Me.cmbType.Items.AddRange(New Object() {"Category", "Status"})
-        Me.cmbType.Location = New System.Drawing.Point(1378, 294)
+        Me.cmbType.Location = New System.Drawing.Point(1092, 195)
         Me.cmbType.Name = "cmbType"
-        Me.cmbType.Size = New System.Drawing.Size(178, 24)
+        Me.cmbType.Size = New System.Drawing.Size(264, 24)
         Me.cmbType.TabIndex = 176
         '
         'btnAddCategory
         '
-        Me.btnAddCategory.Location = New System.Drawing.Point(1340, 374)
+        Me.btnAddCategory.Location = New System.Drawing.Point(1391, 246)
         Me.btnAddCategory.Name = "btnAddCategory"
         Me.btnAddCategory.Size = New System.Drawing.Size(141, 48)
         Me.btnAddCategory.TabIndex = 177
@@ -389,7 +394,7 @@ Partial Class SASystemConfiguration
         '
         'btnEditCategory
         '
-        Me.btnEditCategory.Location = New System.Drawing.Point(1497, 374)
+        Me.btnEditCategory.Location = New System.Drawing.Point(1548, 246)
         Me.btnEditCategory.Name = "btnEditCategory"
         Me.btnEditCategory.Size = New System.Drawing.Size(142, 50)
         Me.btnEditCategory.TabIndex = 178
@@ -400,11 +405,11 @@ Partial Class SASystemConfiguration
         '
         Me.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvCategory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.CategoryName, Me.Type, Me.Description, Me.Status, Me.Action})
-        Me.dgvCategory.Location = New System.Drawing.Point(995, 430)
+        Me.dgvCategory.Location = New System.Drawing.Point(1082, 302)
         Me.dgvCategory.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvCategory.Name = "dgvCategory"
         Me.dgvCategory.RowHeadersWidth = 51
-        Me.dgvCategory.Size = New System.Drawing.Size(665, 254)
+        Me.dgvCategory.Size = New System.Drawing.Size(629, 254)
         Me.dgvCategory.TabIndex = 179
         '
         'ID
@@ -451,7 +456,7 @@ Partial Class SASystemConfiguration
         '
         'txtRoleName
         '
-        Me.txtRoleName.Location = New System.Drawing.Point(479, 749)
+        Me.txtRoleName.Location = New System.Drawing.Point(444, 599)
         Me.txtRoleName.Name = "txtRoleName"
         Me.txtRoleName.Size = New System.Drawing.Size(533, 22)
         Me.txtRoleName.TabIndex = 180
@@ -459,7 +464,7 @@ Partial Class SASystemConfiguration
         'chkInventory
         '
         Me.chkInventory.AutoSize = True
-        Me.chkInventory.Location = New System.Drawing.Point(489, 806)
+        Me.chkInventory.Location = New System.Drawing.Point(758, 671)
         Me.chkInventory.Name = "chkInventory"
         Me.chkInventory.Size = New System.Drawing.Size(83, 20)
         Me.chkInventory.TabIndex = 181
@@ -469,7 +474,7 @@ Partial Class SASystemConfiguration
         'chkMaintenance
         '
         Me.chkMaintenance.AutoSize = True
-        Me.chkMaintenance.Location = New System.Drawing.Point(581, 806)
+        Me.chkMaintenance.Location = New System.Drawing.Point(646, 672)
         Me.chkMaintenance.Name = "chkMaintenance"
         Me.chkMaintenance.Size = New System.Drawing.Size(106, 20)
         Me.chkMaintenance.TabIndex = 182
@@ -479,7 +484,7 @@ Partial Class SASystemConfiguration
         'chkBorrow
         '
         Me.chkBorrow.AutoSize = True
-        Me.chkBorrow.Location = New System.Drawing.Point(489, 832)
+        Me.chkBorrow.Location = New System.Drawing.Point(444, 671)
         Me.chkBorrow.Name = "chkBorrow"
         Me.chkBorrow.Size = New System.Drawing.Size(71, 20)
         Me.chkBorrow.TabIndex = 183
@@ -489,7 +494,7 @@ Partial Class SASystemConfiguration
         'CheckBox4
         '
         Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(581, 833)
+        Me.CheckBox4.Location = New System.Drawing.Point(531, 672)
         Me.CheckBox4.Name = "CheckBox4"
         Me.CheckBox4.Size = New System.Drawing.Size(97, 20)
         Me.CheckBox4.TabIndex = 184
@@ -498,9 +503,9 @@ Partial Class SASystemConfiguration
         '
         'btnSaveRole
         '
-        Me.btnSaveRole.Location = New System.Drawing.Point(709, 817)
+        Me.btnSaveRole.Location = New System.Drawing.Point(876, 663)
         Me.btnSaveRole.Name = "btnSaveRole"
-        Me.btnSaveRole.Size = New System.Drawing.Size(115, 35)
+        Me.btnSaveRole.Size = New System.Drawing.Size(115, 29)
         Me.btnSaveRole.TabIndex = 185
         Me.btnSaveRole.Text = "SaveRole"
         Me.btnSaveRole.UseVisualStyleBackColor = True
@@ -509,11 +514,11 @@ Partial Class SASystemConfiguration
         '
         Me.dgvRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvRoles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RoleID, Me.Statuss, Me.Role, Me.Permissions})
-        Me.dgvRoles.Location = New System.Drawing.Point(453, 895)
+        Me.dgvRoles.Location = New System.Drawing.Point(444, 720)
         Me.dgvRoles.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvRoles.Name = "dgvRoles"
         Me.dgvRoles.RowHeadersWidth = 51
-        Me.dgvRoles.Size = New System.Drawing.Size(610, 237)
+        Me.dgvRoles.Size = New System.Drawing.Size(547, 237)
         Me.dgvRoles.TabIndex = 186
         '
         'RoleID
@@ -546,14 +551,14 @@ Partial Class SASystemConfiguration
         '
         'dtFrom
         '
-        Me.dtFrom.Location = New System.Drawing.Point(1404, 760)
+        Me.dtFrom.Location = New System.Drawing.Point(1331, 664)
         Me.dtFrom.Name = "dtFrom"
         Me.dtFrom.Size = New System.Drawing.Size(243, 22)
         Me.dtFrom.TabIndex = 187
         '
         'dtTo
         '
-        Me.dtTo.Location = New System.Drawing.Point(1404, 717)
+        Me.dtTo.Location = New System.Drawing.Point(1082, 663)
         Me.dtTo.Name = "dtTo"
         Me.dtTo.Size = New System.Drawing.Size(231, 22)
         Me.dtTo.TabIndex = 188
@@ -561,16 +566,16 @@ Partial Class SASystemConfiguration
         'cmbLogType
         '
         Me.cmbLogType.FormattingEnabled = True
-        Me.cmbLogType.Location = New System.Drawing.Point(1666, 715)
+        Me.cmbLogType.Location = New System.Drawing.Point(1590, 601)
         Me.cmbLogType.Name = "cmbLogType"
         Me.cmbLogType.Size = New System.Drawing.Size(121, 24)
         Me.cmbLogType.TabIndex = 189
         '
         'btnExportLogs
         '
-        Me.btnExportLogs.Location = New System.Drawing.Point(1687, 757)
+        Me.btnExportLogs.Location = New System.Drawing.Point(1590, 643)
         Me.btnExportLogs.Name = "btnExportLogs"
-        Me.btnExportLogs.Size = New System.Drawing.Size(100, 48)
+        Me.btnExportLogs.Size = New System.Drawing.Size(121, 48)
         Me.btnExportLogs.TabIndex = 190
         Me.btnExportLogs.Text = "Exports Logs"
         Me.btnExportLogs.UseVisualStyleBackColor = True
@@ -579,11 +584,11 @@ Partial Class SASystemConfiguration
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.LogID, Me.DateTime, Me.User, Me.Actionn, Me.Message})
-        Me.DataGridView1.Location = New System.Drawing.Point(1136, 817)
+        Me.DataGridView1.Location = New System.Drawing.Point(1082, 720)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(665, 254)
+        Me.DataGridView1.Size = New System.Drawing.Size(643, 237)
         Me.DataGridView1.TabIndex = 191
         '
         'LogID
@@ -680,7 +685,7 @@ Partial Class SASystemConfiguration
         Me.pm_as_propertyman.CornerRadius = 20
         Me.pm_as_propertyman.Location = New System.Drawing.Point(-13, -8)
         Me.pm_as_propertyman.Name = "pm_as_propertyman"
-        Me.pm_as_propertyman.Size = New System.Drawing.Size(1973, 220)
+        Me.pm_as_propertyman.Size = New System.Drawing.Size(1973, 124)
         Me.pm_as_propertyman.TabIndex = 160
         '
         'SASystemConfiguration

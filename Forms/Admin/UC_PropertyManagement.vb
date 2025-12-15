@@ -52,26 +52,30 @@ Public Class UC_PropertyManagement
     Public Sub LoadSuppliesData()
         Try
             pm_table.Rows.Clear()
-            Dim dt As DataTable = DatabaseConnection.GetAllSupplies()
+            Dim dt As DataTable = DatabaseConnection.GetAllProperties()
 
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
-                    ' Use correct column names from GetAllSupplies (SupplyID, SupplyName, Category, etc.)
+                    ' Use correct column names from GetAllProperties query
+                    ' Query returns: propertyId, itemName, category, propertyNumber, serialNumber, 
+                    ' acquisitionDate, acquisitionCost, condition, location, status, description, 
+                    ' assignedEmployee, assignedDepartment
                     pm_table.Rows.Add(
-                        If(IsDBNull(row("SupplyID")), "", row("SupplyID").ToString()),
-                        If(IsDBNull(row("SupplyName")), "", row("SupplyName").ToString()),
-                        If(IsDBNull(row("Category")), "", row("Category").ToString()),
-                        If(IsDBNull(row("QuantityInStock")), "0", row("QuantityInStock").ToString()),
-                        If(IsDBNull(row("UnitCost")), "0.00", row("UnitCost").ToString()),
-                        If(IsDBNull(row("TotalValue")), "0.00", row("TotalValue").ToString()),
-                        If(IsDBNull(row("Status")), "", row("Status").ToString()),
-                        If(IsDBNull(row("Location")), "", row("Location").ToString()),
-                        "Edit"
+                        If(IsDBNull(row("propertyId")), "", row("propertyId").ToString()),
+                        If(IsDBNull(row("propertyNumber")), "", row("propertyNumber").ToString()),
+                        If(IsDBNull(row("itemName")), "", row("itemName").ToString()),
+                        If(IsDBNull(row("category")), "", row("category").ToString()),
+                        If(IsDBNull(row("serialNumber")), "", row("serialNumber").ToString()),
+                        If(IsDBNull(row("acquisitionCost")), "0.00", row("acquisitionCost").ToString()),
+                        If(IsDBNull(row("location")), "", row("location").ToString()),
+                        If(IsDBNull(row("status")), "", row("status").ToString()),
+                        If(IsDBNull(row("condition")), "", row("condition").ToString()),
+                        If(IsDBNull(row("assignedDepartment")), "", row("assignedDepartment").ToString())
                     )
                 Next
-                System.Diagnostics.Debug.WriteLine("[v0] Property Management - Loaded " & dt.Rows.Count & " supplies")
+                System.Diagnostics.Debug.WriteLine("[v0] Property Management - Loaded " & dt.Rows.Count & " properties")
             Else
-                System.Diagnostics.Debug.WriteLine("[v0] Property Management - No supplies found")
+                System.Diagnostics.Debug.WriteLine("[v0] Property Management - No properties found")
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading supplies: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -1322,4 +1322,19 @@ Public Class SASystemConfiguration
         BringToFront()
     End Sub
 
+    Private Sub chkInventory_CheckedChanged(sender As Object, e As EventArgs) Handles chkInventory.CheckedChanged
+
+    End Sub
+
+    Private Sub txtRoleName_TextChanged(sender As Object, e As EventArgs) Handles txtRoleName.TextChanged
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub dtTo_ValueChanged(sender As Object, e As EventArgs) Handles dtTo.ValueChanged
+
+    End Sub
 End Class

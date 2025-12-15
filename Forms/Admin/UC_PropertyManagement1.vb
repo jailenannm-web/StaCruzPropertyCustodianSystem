@@ -107,11 +107,20 @@ Public Class UC_PropertyManagement1
                     Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
                     Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString(), "")
                     Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
+                    Dim internalCodes As String = If(row.Table.Columns.Contains("internalCodes") AndAlso Not IsDBNull(row("internalCodes")), row("internalCodes").ToString(), "")
+                    Dim createdAt As String = ""
+                    If row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")) Then
+                        createdAt = Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd HH:mm")
+                    End If
+                    Dim updatedAt As String = ""
+                    If row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")) Then
+                        updatedAt = Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd HH:mm")
+                    End If
                     Dim propID As Object = If(row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")), row("propertyId"), Nothing)
 
                     Dim rowIndex As Integer = propertyManagementGrid.Rows.Add(
                         itemName, category, propNumber, serialNumber, acqDate, acqCost,
-                        assignedEmp, assignedDept, location, condition, status
+                        assignedEmp, assignedDept, location, condition, status, internalCodes, createdAt, updatedAt
                     )
                     ' Store propertyId in row Tag for easy access
                     propertyManagementGrid.Rows(rowIndex).Tag = propID

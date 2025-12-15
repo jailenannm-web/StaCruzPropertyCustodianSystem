@@ -110,36 +110,39 @@ Public Class UC_SupplyManagement
 
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
-                    ' Use safe column access with correct column names from GetAllSupplies
-                    Dim supplyID As String = If(row.Table.Columns.Contains("SupplyID") AndAlso Not IsDBNull(row("SupplyID")), row("SupplyID").ToString(), "")
-                    Dim supplyName As String = If(row.Table.Columns.Contains("SupplyName") AndAlso Not IsDBNull(row("SupplyName")), row("SupplyName").ToString(), "")
-                    Dim category As String = If(row.Table.Columns.Contains("Category") AndAlso Not IsDBNull(row("Category")), row("Category").ToString(), "")
-                    Dim unitOfMeasure As String = If(row.Table.Columns.Contains("UnitOfMeasure") AndAlso Not IsDBNull(row("UnitOfMeasure")), row("UnitOfMeasure").ToString(), "")
-                    Dim quantity As String = If(row.Table.Columns.Contains("QuantityInStock") AndAlso Not IsDBNull(row("QuantityInStock")), row("QuantityInStock").ToString(), "0")
+                    ' Use safe column access with correct camelCase column names from database
+                    ' Designer column order: supplyId, itemName, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, stockStatus, createdAt, updatedAt
+                    Dim supplyID As String = If(row.Table.Columns.Contains("supplyId") AndAlso Not IsDBNull(row("supplyId")), row("supplyId").ToString(), "")
+                    Dim supplyName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString(), "")
+                    Dim unitOfMeasure As String = If(row.Table.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(row("unitOfMeasure")), row("unitOfMeasure").ToString(), "")
                     Dim acqDate As String = ""
-                    If row.Table.Columns.Contains("AcquisitionDate") AndAlso Not IsDBNull(row("AcquisitionDate")) Then
+                    If row.Table.Columns.Contains("dateReceived") AndAlso Not IsDBNull(row("dateReceived")) Then
                         Dim parsedDate As Date
-                        If Date.TryParse(row("AcquisitionDate").ToString(), parsedDate) Then
+                        If Date.TryParse(row("dateReceived").ToString(), parsedDate) Then
                             acqDate = parsedDate.ToString("yyyy-MM-dd")
                         End If
                     End If
                     Dim unitCost As String = "0.00"
-                    If row.Table.Columns.Contains("UnitCost") AndAlso Not IsDBNull(row("UnitCost")) Then
+                    If row.Table.Columns.Contains("unitCost") AndAlso Not IsDBNull(row("unitCost")) Then
                         Dim cost As Decimal
-                        If Decimal.TryParse(row("UnitCost").ToString(), cost) Then
+                        If Decimal.TryParse(row("unitCost").ToString(), cost) Then
                             unitCost = Format(cost, "0.00")
                         End If
                     End If
-                    Dim location As String = If(row.Table.Columns.Contains("Location") AndAlso Not IsDBNull(row("Location")), row("Location").ToString(), "")
-                    Dim supplierName As String = If(row.Table.Columns.Contains("SupplierName") AndAlso Not IsDBNull(row("SupplierName")), row("SupplierName").ToString(), "")
-                    Dim status As String = If(row.Table.Columns.Contains("Status") AndAlso Not IsDBNull(row("Status")), row("Status").ToString(), "")
-
-                    ' Add row with SupplyID as first column (stored in Tag for easy access)
-                    Dim rowIndex As Integer = pm_table.Rows.Add(supplyName, category, unitOfMeasure, quantity, acqDate, unitCost, location, supplierName, status)
-                    ' Store SupplyID in row Tag for easy access
-                    If Not String.IsNullOrEmpty(supplyID) AndAlso Integer.TryParse(supplyID, Nothing) Then
-                        pm_table.Rows(rowIndex).Tag = supplyID
+                    Dim totalCost As String = "0.00"
+                    If row.Table.Columns.Contains("totalCost") AndAlso Not IsDBNull(row("totalCost")) Then
+                        Dim cost As Decimal
+                        If Decimal.TryParse(row("totalCost").ToString(), cost) Then
+                            totalCost = Format(cost, "0.00")
+                        End If
                     End If
+                    Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")
+                    Dim status As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), "")
+                    Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
+                    Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
+
+                    ' Add row matching Designer column order: supplyId, itemName, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, stockStatus, createdAt, updatedAt
+                    Dim rowIndex As Integer = pm_table.Rows.Add(supplyID, supplyName, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, status, createdAt, updatedAt)
                 Next
 
                 ' Update total count
@@ -159,13 +162,19 @@ Public Class UC_SupplyManagement
     Private Sub pm_table_SelectionChanged(sender As Object, e As EventArgs)
         If pm_table.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = pm_table.SelectedRows(0)
-            ' Get SupplyID from row Tag (stored when loading data)
-            If selectedRow.Tag IsNot Nothing Then
-                Dim supplyIDStr As String = selectedRow.Tag.ToString()
-                If Integer.TryParse(supplyIDStr, selectedSupplyID) Then
-                    ' Row selected, enable Edit and Delete buttons
+            ' Get SupplyID from first column (index 0 - supplyId)
+            ' Column order: supplyId (0), itemName (1), unitOfMeasure (2), dateReceived (3), unitCost (4), totalCost (5), sourceOfFunds (6), stockStatus (7), createdAt (8), updatedAt (9)
+            Try
+                If selectedRow.Cells.Count > 0 AndAlso selectedRow.Cells(0).Value IsNot Nothing Then
+                    Dim supplyIDStr As String = selectedRow.Cells(0).Value.ToString()
+                    If Integer.TryParse(supplyIDStr, selectedSupplyID) Then
+                        ' Row selected, enable Edit and Delete buttons
+                    End If
                 End If
-            End If
+            Catch ex As Exception
+                ' Handle any errors silently
+                System.Diagnostics.Debug.WriteLine("SelectionChanged Error: " & ex.Message)
+            End Try
         End If
     End Sub
 
@@ -203,14 +212,14 @@ Public Class UC_SupplyManagement
 
         Dim selectedRow As DataGridViewRow = pm_table.SelectedRows(0)
 
-        ' Read supply_id stored in Tag
-        If selectedRow.Tag Is Nothing Then
+        ' Read supply_id from first column (index 0)
+        If selectedRow.Cells.Count = 0 OrElse selectedRow.Cells(0).Value Is Nothing Then
             MessageBox.Show("Invalid supply selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
         Dim supplyID As Integer
-        If Not Integer.TryParse(selectedRow.Tag.ToString(), supplyID) Then
+        If Not Integer.TryParse(selectedRow.Cells(0).Value.ToString(), supplyID) Then
             MessageBox.Show("Invalid supply ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
@@ -240,20 +249,27 @@ Public Class UC_SupplyManagement
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         ' Super Admin bypasses all restrictions
 
-
-        Dim selectedRow As DataGridViewRow = pm_table.SelectedRows(0)
-        ' Get SupplyID from row Tag
-        Dim supplyIDStr As String = ""
-        If selectedRow.Tag IsNot Nothing Then
-            supplyIDStr = selectedRow.Tag.ToString()
+        If pm_table.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a supply to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
         End If
 
+        Dim selectedRow As DataGridViewRow = pm_table.SelectedRows(0)
+        ' Get SupplyID from first column (index 0)
+        If selectedRow.Cells.Count = 0 OrElse selectedRow.Cells(0).Value Is Nothing Then
+            MessageBox.Show("Invalid supply selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim supplyIDStr As String = selectedRow.Cells(0).Value.ToString()
+        
         If String.IsNullOrEmpty(supplyIDStr) Then
             MessageBox.Show("Invalid supply selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        Dim supplyName As String = If(selectedRow.Cells("itemName").Value IsNot Nothing, selectedRow.Cells("itemName").Value.ToString(), "Unknown")
+        ' Get supply name from second column (index 1 - itemName)
+        Dim supplyName As String = If(selectedRow.Cells(1).Value IsNot Nothing, selectedRow.Cells(1).Value.ToString(), "Unknown")
 
         Dim supplyID As Integer
         If Not Integer.TryParse(supplyIDStr, supplyID) Then

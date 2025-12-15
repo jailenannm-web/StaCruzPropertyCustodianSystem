@@ -1,4 +1,4 @@
-﻿Imports System.Drawing.Drawing2D
+Imports System.Drawing.Drawing2D
 Imports System.Diagnostics
 Imports System
 Imports System.Data
@@ -87,7 +87,13 @@ Public Class UC_MaintenanceManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
+            ' Use camelCase to match database schema
+            Dim maintenanceID As Integer = 0
+            If dt.Columns.Contains("maintenanceId") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
+            ElseIf dt.Columns.Contains("maintenance_id") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
+            End If
             Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
 
             If currentStatus = "completed" OrElse currentStatus = "approved" Then
@@ -132,14 +138,19 @@ Public Class UC_MaintenanceManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
+            Dim maintenanceID As Integer = 0
+            If dt.Columns.Contains("maintenanceId") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
+            ElseIf dt.Columns.Contains("maintenance_id") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
+            End If
 
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this maintenance record? This action cannot be undone.", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
             If result = DialogResult.Yes Then
                 ' Delete maintenance record
                 Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
                 If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                    Using cmd As New MySqlCommand("DELETE FROM maintenance WHERE maintenance_id = @maintenanceID", conn)
+                    Using cmd As New MySqlCommand("DELETE FROM maintenance WHERE maintenanceId = @maintenanceID", conn)
                         cmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
                         If cmd.ExecuteNonQuery() > 0 Then
                             MessageBox.Show("Maintenance record deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -180,7 +191,12 @@ Public Class UC_MaintenanceManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
+            Dim maintenanceID As Integer = 0
+            If dt.Columns.Contains("maintenanceId") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
+            ElseIf dt.Columns.Contains("maintenance_id") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
+            End If
 
             ' Get reference to the parent dashboard form
             Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
@@ -234,7 +250,12 @@ Public Class UC_MaintenanceManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
+            Dim maintenanceID As Integer = 0
+            If dt.Columns.Contains("maintenanceId") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
+            ElseIf dt.Columns.Contains("maintenance_id") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
+            End If
 
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to reject this maintenance record?", "Confirm Rejection", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If result = DialogResult.Yes Then
@@ -278,7 +299,12 @@ Public Class UC_MaintenanceManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = Convert.ToInt32(dataRow("maintenance_id"))
+            Dim maintenanceID As Integer = 0
+            If dt.Columns.Contains("maintenanceId") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
+            ElseIf dt.Columns.Contains("maintenance_id") Then
+                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
+            End If
 
             ' Prompt for technician name
             Dim technicianName As String = InputBox("Enter technician name to assign:", "Assign Technician", "")
@@ -315,3 +341,4 @@ Public Class UC_MaintenanceManagement
     End Sub
 
 End Class
+
