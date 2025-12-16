@@ -199,6 +199,8 @@ Public Class DatabaseConnection
         Return dt
     End Function
 
+    ' InitializeDefaultAccounts implementation removed - use existing implementation elsewhere in the codebase
+
     ''' <summary>
     ''' Retrieve supply inventory data with filters and optional low-stock focus
     ''' </summary>

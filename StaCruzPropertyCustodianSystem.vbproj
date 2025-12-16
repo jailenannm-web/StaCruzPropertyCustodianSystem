@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5BA19DCE-6BE5-45B8-AADD-D54CAC6DE401}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>StaCruzPropertyCustodianSystem.AdminDashboard</StartupObject>
+    <StartupObject>StaCruzPropertyCustodianSystem.StaffLogin</StartupObject>
     <RootNamespace>StaCruzPropertyCustodianSystem</RootNamespace>
     <AssemblyName>StaCruzPropertyCustodianSystem</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -753,6 +753,7 @@
   </ItemGroup>
   <!-- RESOURCES -->
   <ItemGroup>
+    <Content Include="sql\tmp_default_accounts_and_seed.sql" />
     <None Include="Resources\_Presentation5.png" />
     <None Include="Resources\_Presentation4.png" />
     <None Include="Resources\_Presentation3.png" />
