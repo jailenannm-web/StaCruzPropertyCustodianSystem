@@ -2561,7 +2561,7 @@ Public Class DatabaseConnection
                     End Try
                 End If
                 If String.IsNullOrEmpty(finalRequesterName) Then finalRequesterName = "Unknown"
-                
+
                 cmd.Parameters.AddWithValue("@requesterName", finalRequesterName)
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@itemName", If(String.IsNullOrEmpty(itemName), "Item Request", itemName))
@@ -2577,7 +2577,7 @@ Public Class DatabaseConnection
                             requestID = Convert.ToInt32(idResult)
                         End If
                     End Using
-                    
+
                     ' Get requester name for notification
                     Dim requesterFullName As String = ""
                     If Not String.IsNullOrEmpty(requesterName) Then
@@ -2595,7 +2595,7 @@ Public Class DatabaseConnection
                             requesterFullName = "Staff #" & userID.ToString()
                         End Try
                     End If
-                    
+
                     ' Create activity logs for all Admin and SuperAdmin users to notify them
                     Try
                         Using adminCmd As New MySqlCommand("SELECT userId, username, role FROM users WHERE role IN ('Admin', 'SuperAdmin') AND status = 'Active'", conn)
@@ -2605,7 +2605,7 @@ Public Class DatabaseConnection
                                     Dim adminUsername As String = reader("username").ToString()
                                     Dim adminRole As String = reader("role").ToString()
                                     Dim notificationMsg As String = $"New property request from {requesterFullName}: {itemName} (Quantity: {quantity})"
-                                    
+
                                     ' Create activity log entry for this admin
                                     LogActivity(adminID, adminRole, adminUsername, "NEW_PROPERTY_REQUEST", "Property Requests",
                                                notificationMsg, "")
@@ -2616,7 +2616,7 @@ Public Class DatabaseConnection
                         ' Don't fail the request submission if notification fails
                         System.Diagnostics.Debug.WriteLine("[v0] Failed to notify admins: " & notifyEx.Message)
                     End Try
-                    
+
                     System.Diagnostics.Debug.WriteLine("[v0] Property Request Submitted Successfully (ID: " & requestID & ")")
                     Return True
                 End If
