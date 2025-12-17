@@ -2009,10 +2009,64 @@ Public Class DatabaseConnection
         Return profile
     End Function
 
+    Private Shared Function SafeGetString(reader As MySqlDataReader, columnName As String) As String
+        If reader Is Nothing OrElse String.IsNullOrEmpty(columnName) Then
+            Return ""
+        End If
 
-    ''' <summary>
-    ''' Verify old password before allowing password change
-    ''' </summary>
+        ' Try the flexible helper first (handles multiple possible column name variants)
+        Try
+            Dim flexibleVal As String = SafeGetStringFlexible(reader, columnName)
+            If Not String.IsNullOrEmpty(flexibleVal) Then
+                Return flexibleVal
+            End If
+        Catch
+            ' Ignore and continue to ordinal-based lookup
+        End Try
+
+        Try
+            Dim ord As Integer = -1
+            ' Try direct ordinal lookup (exact name)
+            Try
+                ord = reader.GetOrdinal(columnName)
+            Catch
+                ' If direct ordinal lookup fails, try case-insensitive match via schema table
+                Try
+                    Dim schema As DataTable = reader.GetSchemaTable()
+                    If schema IsNot Nothing Then
+                        For Each row As DataRow In schema.Rows
+                            Try
+                                Dim colName As String = row("ColumnName").ToString()
+                                If String.Equals(colName, columnName, StringComparison.OrdinalIgnoreCase) Then
+                                    ord = reader.GetOrdinal(colName)
+                                    Exit For
+                                End If
+                            Catch
+                                ' ignore per-row errors
+                            End Try
+                        Next
+                    End If
+                Catch
+                    ' ignore schema-table errors
+                End Try
+            End Try
+
+            If ord >= 0 AndAlso Not reader.IsDBNull(ord) Then
+                Dim obj As Object = reader.GetValue(ord)
+                If obj Is Nothing OrElse IsDBNull(obj) Then
+                    Return ""
+                End If
+                Return obj.ToString()
+            End If
+        Catch
+            ' swallow any errors and return empty string
+        End Try
+
+        Return ""
+    End Function
+
+
+
     Public Shared Function VerifyOldPassword(adminID As String, oldPassword As String) As Boolean
         Dim conn As MySqlConnection = Nothing
         Try

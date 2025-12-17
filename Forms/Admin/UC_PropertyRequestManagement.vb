@@ -112,7 +112,22 @@ Public Class UC_PropertyRequestManagement
         If btnApprove IsNot Nothing Then btnApprove.Enabled = hasFullAccess
         If btnReject IsNot Nothing Then btnReject.Enabled = hasFullAccess
         If assign IsNot Nothing Then assign.Enabled = hasFullAccess
-        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = hasFullAccess
+
+        ' prm_btn_update control may not exist in the designer for this UC; lookup safely by name and wire handler
+        Try
+            Dim found() As Control = Me.Controls.Find("prm_btn_update", True)
+            If found IsNot Nothing AndAlso found.Length > 0 Then
+                Dim btn As Button = TryCast(found(0), Button)
+                If btn IsNot Nothing Then
+                    btn.Enabled = hasFullAccess
+                    ' ensure click handler is wired
+                    RemoveHandler btn.Click, AddressOf prm_btn_update_Click
+                    AddHandler btn.Click, AddressOf prm_btn_update_Click
+                End If
+            End If
+        Catch
+            ' ignore errors
+        End Try
 
     End Sub
 
@@ -336,7 +351,8 @@ Public Class UC_PropertyRequestManagement
         End Try
     End Sub
 
-    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs) Handles prm_btn_update.Click
+    ' Changed to NOT use Handles to avoid compile error when control not present in designer
+    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs)
         Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
         If Not isSuperAdmin Then
 

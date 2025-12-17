@@ -54,6 +54,7 @@ Partial Class EditProfile
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txb_DepartmentID = New System.Windows.Forms.ComboBox()
+        Me.txb_EmployeeID = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Txb_Password
@@ -210,7 +211,7 @@ Partial Class EditProfile
         Me.Label6.BackColor = System.Drawing.Color.Transparent
         Me.Label6.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(276, 776)
+        Me.Label6.Location = New System.Drawing.Point(279, 776)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(182, 26)
@@ -429,11 +430,23 @@ Partial Class EditProfile
         Me.txb_DepartmentID.Size = New System.Drawing.Size(421, 44)
         Me.txb_DepartmentID.TabIndex = 83
         '
+        'txb_EmployeeID
+        '
+        Me.txb_EmployeeID.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txb_EmployeeID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_EmployeeID.Location = New System.Drawing.Point(469, 871)
+        Me.txb_EmployeeID.Margin = New System.Windows.Forms.Padding(4)
+        Me.txb_EmployeeID.Multiline = True
+        Me.txb_EmployeeID.Name = "txb_EmployeeID"
+        Me.txb_EmployeeID.Size = New System.Drawing.Size(421, 42)
+        Me.txb_EmployeeID.TabIndex = 84
+        '
         'EditProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1924, 1175)
+        Me.Controls.Add(Me.txb_EmployeeID)
         Me.Controls.Add(Me.txb_DepartmentID)
         Me.Controls.Add(Me.Txb_Password)
         Me.Controls.Add(Me.txb_Position)
@@ -505,5 +518,6 @@ Partial Class EditProfile
     Friend WithEvents btn_Login As System.Windows.Forms.Button
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents txb_DepartmentID As System.Windows.Forms.TextBox
+    Friend WithEvents txb_DepartmentID As System.Windows.Forms.ComboBox
+    Friend WithEvents txb_EmployeeID As System.Windows.Forms.TextBox
 End Class
