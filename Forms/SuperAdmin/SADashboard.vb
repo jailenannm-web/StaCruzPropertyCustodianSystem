@@ -479,4 +479,17 @@ Partial Class SADashboard
         SetActiveButton(admin_btn_suppliesRequestManagement)
         LoadUserControl(New UC_SupplyManagement())
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        LoadUserControl(New audit())
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        LoadUserControl(New UC_MaintenanceRequestManagement)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LoadUserControl(New UC_SupplyRequestManagement)
+    End Sub
+
 End Class

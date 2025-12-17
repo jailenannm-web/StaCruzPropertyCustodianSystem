@@ -113,6 +113,12 @@
   </ItemGroup>
   <!-- STAFF FORMS -->
   <ItemGroup>
+    <Compile Include="Forms\Admin\audit.Designer.vb">
+      <DependentUpon>audit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\audit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Admin\EditSupply.Designer.vb">
       <DependentUpon>EditSupply.vb</DependentUpon>
     </Compile>
@@ -420,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AssignRequestManagement.resx">
       <DependentUpon>AssignRequestManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\audit.resx">
+      <DependentUpon>audit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\EditMaintenance1.resx">
       <DependentUpon>EditMaintenance1.vb</DependentUpon>

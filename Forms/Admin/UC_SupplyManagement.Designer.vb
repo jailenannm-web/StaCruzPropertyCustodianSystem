@@ -15,6 +15,16 @@ Partial Class UC_SupplyManagement
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_table = New System.Windows.Forms.DataGridView()
+        Me.supplyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unitOfMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateReceived = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.totalCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sourceOfFunds = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stockStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.admin_label_PM = New System.Windows.Forms.Label()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -27,16 +37,6 @@ Partial Class UC_SupplyManagement
         Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
-        Me.supplyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unitOfMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateReceived = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.totalCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.sourceOfFunds = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stockStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         Me.SuspendLayout()
@@ -89,6 +89,76 @@ Partial Class UC_SupplyManagement
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 26
+        '
+        'supplyId
+        '
+        Me.supplyId.HeaderText = "supplyId"
+        Me.supplyId.MinimumWidth = 6
+        Me.supplyId.Name = "supplyId"
+        Me.supplyId.Width = 125
+        '
+        'itemName
+        '
+        Me.itemName.HeaderText = "item Name"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 125
+        '
+        'unitOfMeasure
+        '
+        Me.unitOfMeasure.HeaderText = "unit Of Measure"
+        Me.unitOfMeasure.MinimumWidth = 6
+        Me.unitOfMeasure.Name = "unitOfMeasure"
+        Me.unitOfMeasure.Width = 125
+        '
+        'dateReceived
+        '
+        Me.dateReceived.HeaderText = "date Received"
+        Me.dateReceived.MinimumWidth = 6
+        Me.dateReceived.Name = "dateReceived"
+        Me.dateReceived.Width = 125
+        '
+        'unitCost
+        '
+        Me.unitCost.HeaderText = "unitCost"
+        Me.unitCost.MinimumWidth = 6
+        Me.unitCost.Name = "unitCost"
+        Me.unitCost.Width = 125
+        '
+        'totalCost
+        '
+        Me.totalCost.HeaderText = "totalCost"
+        Me.totalCost.MinimumWidth = 6
+        Me.totalCost.Name = "totalCost"
+        Me.totalCost.Width = 125
+        '
+        'sourceOfFunds
+        '
+        Me.sourceOfFunds.HeaderText = "source Of Funds"
+        Me.sourceOfFunds.MinimumWidth = 6
+        Me.sourceOfFunds.Name = "sourceOfFunds"
+        Me.sourceOfFunds.Width = 125
+        '
+        'stockStatus
+        '
+        Me.stockStatus.HeaderText = "stockStatus"
+        Me.stockStatus.MinimumWidth = 6
+        Me.stockStatus.Name = "stockStatus"
+        Me.stockStatus.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
         '
         'admin_label_PM
         '
@@ -208,76 +278,6 @@ Partial Class UC_SupplyManagement
         Me.mnuPrintPARICS.Name = "mnuPrintPARICS"
         Me.mnuPrintPARICS.Size = New System.Drawing.Size(190, 24)
         Me.mnuPrintPARICS.Text = "Print PAR/ICS"
-        '
-        'supplyId
-        '
-        Me.supplyId.HeaderText = "supplyId"
-        Me.supplyId.MinimumWidth = 6
-        Me.supplyId.Name = "supplyId"
-        Me.supplyId.Width = 125
-        '
-        'itemName
-        '
-        Me.itemName.HeaderText = "item Name"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 125
-        '
-        'unitOfMeasure
-        '
-        Me.unitOfMeasure.HeaderText = "unit Of Measure"
-        Me.unitOfMeasure.MinimumWidth = 6
-        Me.unitOfMeasure.Name = "unitOfMeasure"
-        Me.unitOfMeasure.Width = 125
-        '
-        'dateReceived
-        '
-        Me.dateReceived.HeaderText = "date Received"
-        Me.dateReceived.MinimumWidth = 6
-        Me.dateReceived.Name = "dateReceived"
-        Me.dateReceived.Width = 125
-        '
-        'unitCost
-        '
-        Me.unitCost.HeaderText = "unitCost"
-        Me.unitCost.MinimumWidth = 6
-        Me.unitCost.Name = "unitCost"
-        Me.unitCost.Width = 125
-        '
-        'totalCost
-        '
-        Me.totalCost.HeaderText = "totalCost"
-        Me.totalCost.MinimumWidth = 6
-        Me.totalCost.Name = "totalCost"
-        Me.totalCost.Width = 125
-        '
-        'sourceOfFunds
-        '
-        Me.sourceOfFunds.HeaderText = "source Of Funds"
-        Me.sourceOfFunds.MinimumWidth = 6
-        Me.sourceOfFunds.Name = "sourceOfFunds"
-        Me.sourceOfFunds.Width = 125
-        '
-        'stockStatus
-        '
-        Me.stockStatus.HeaderText = "stockStatus"
-        Me.stockStatus.MinimumWidth = 6
-        Me.stockStatus.Name = "stockStatus"
-        Me.stockStatus.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
         '
         'UC_SupplyManagement
         '
