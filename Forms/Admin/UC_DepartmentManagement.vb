@@ -14,9 +14,22 @@ Public Class UC_DepartmentManagement
     Private selectedDepartmentID As Integer = -1
     Private isSearching As Boolean = False
 
-    ' The DataGridView column fields are defined in the designer partial class.
-    ' Removed duplicate declarations here to avoid BC30260 duplicate definition errors.
-
+    ' The DataGridViewTextBoxColumn fields (departmentId, departmentName, etc.) are declared
+    ' in the designer partial class (UC_DepartmentManagement.Designer.vb). Do not redeclare them here.
+    Private departmentId As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private departmentName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private headOfDepartment As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private email As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private contactNumber As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private location As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private building As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private floorNumber As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private shortName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private officeCode As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private description As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private totalProperties As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private totalSupplies As System.Windows.Forms.DataGridViewTextBoxColumn
+    Private status As System.Windows.Forms.DataGridViewTextBoxColumn
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
@@ -173,8 +186,8 @@ Public Class UC_DepartmentManagement
                 Dim statusVal As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "Active")
 
                 admin_deptmanagement.Rows.Add(deptID, deptName, headOfDept, emailVal, contactNum, locationVal,
-                                             buildingVal, floorNum, shortName, officeCode, descriptionVal,
-                                             totalProps, totalSupplies, statusVal)
+ buildingVal, floorNum, shortName, officeCode, descriptionVal,
+ totalProps, totalSupplies, statusVal)
             Next
             ' Update total count
             If ttldepartmentmanagement IsNot Nothing Then
@@ -189,7 +202,7 @@ Public Class UC_DepartmentManagement
     Private Sub admin_deptmanagement_SelectionChanged(sender As Object, e As EventArgs)
         If admin_deptmanagement.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = admin_deptmanagement.SelectedRows(0)
-            ' Get department ID from the first column (index 0 - departmentId)
+            ' Get department ID from the first column (index0 - departmentId)
             ' Column order: departmentId (0), departmentName (1), headOfDepartment (2), email (3), contactNumber (4), 
             ' location (5), building (6), floorNumber (7), shortName (8), officeCode (9), description (10), 
             ' totalProperties (11), totalSupplies (12), status (13)
@@ -327,7 +340,7 @@ Public Class UC_DepartmentManagement
 
         Try
             ' Use column index to avoid column name issues
-            deptIDValue = selectedRow.Cells(0).Value  ' departmentId is first column
+            deptIDValue = selectedRow.Cells(0).Value ' departmentId is first column
             deptNameValue = selectedRow.Cells(1).Value ' departmentName is second column
         Catch ex As Exception
             MessageBox.Show("Error accessing row data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -350,11 +363,11 @@ Public Class UC_DepartmentManagement
 
         ' Confirmation dialog
         Dim result As DialogResult = MessageBox.Show(
-            "Are you sure you want to delete department '" & departmentName & "' (ID: " & departmentID.ToString() & ")?",
-            "Confirm Delete",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Warning
-        )
+ "Are you sure you want to delete department '" & departmentName & "' (ID: " & departmentID.ToString() & ")?",
+ "Confirm Delete",
+ MessageBoxButtons.YesNo,
+ MessageBoxIcon.Warning
+ )
 
         If result = DialogResult.Yes Then
             Try
@@ -444,8 +457,8 @@ Public Class UC_DepartmentManagement
                 Dim statusVal As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "Active")
 
                 admin_deptmanagement.Rows.Add(deptID, deptName, headOfDept, emailVal, contactNum, locationVal,
-                                             buildingVal, floorNum, shortName, officeCode, descriptionVal,
-                                             totalProps, totalSupplies, statusVal)
+ buildingVal, floorNum, shortName, officeCode, descriptionVal,
+ totalProps, totalSupplies, statusVal)
             Next
 
             If ttldepartmentmanagement IsNot Nothing Then
