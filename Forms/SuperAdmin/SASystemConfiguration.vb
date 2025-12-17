@@ -64,16 +64,10 @@ Public Class SASystemConfiguration
         Try
             SuspendLayout()
             SetupStatusIndicator()
-            SetupDynamicControls()
-            InitializeGridSettings()
-            InitializeDefaultValues()
-            InitializeModuleRegistry()
             ResumeLayout()
 
             LoadFallbackSettings()
             LoadAllModulesData()
-            ShowModule(ConfigModule.DatabaseSettings)
-            HighlightNavigationButton(btnConnection)
             ShowModuleStatus("System Configuration ready.", False)
         Catch ex As Exception
             ResumeLayout()
@@ -99,245 +93,21 @@ Public Class SASystemConfiguration
         lblStatusIndicator.BringToFront()
     End Sub
 
-    Private Sub SetupDynamicControls()
-        btnDeleteCategory = New Button() With {
-            .Text = "Delete",
-            .BackColor = Color.Firebrick,
-            .ForeColor = Color.White,
-            .FlatStyle = FlatStyle.Flat,
-            .Location = New Point(btnEditCategory.Right + 10, btnEditCategory.Top),
-            .Size = New Size(120, 48),
-            .Visible = False
-        }
-        AddHandler btnDeleteCategory.Click, AddressOf btnDeleteCategory_Click
-        Controls.Add(btnDeleteCategory)
-
-        btnRefreshCategories = New Button() With {
-            .Text = "Refresh",
-            .BackColor = Color.DimGray,
-            .ForeColor = Color.White,
-            .FlatStyle = FlatStyle.Flat,
-            .Location = New Point(btnAddCategory.Left - 150, btnAddCategory.Top),
-            .Size = New Size(120, 48),
-            .Visible = False
-        }
-        AddHandler btnRefreshCategories.Click, AddressOf btnRefreshCategories_Click
-        Controls.Add(btnRefreshCategories)
-
-        grpStatusPanel = New GroupBox() With {
-            .Text = "Status Definitions",
-            .Location = New Point(1191, 680),
-            .Size = New Size(665, 200),
-            .Visible = False
-        }
-        txtStatusName = New TextBox() With {.Location = New Point(20, 35), .Width = 180}
-        cmbStatusType = New ComboBox() With {
-            .Location = New Point(210, 35),
-            .Width = 150,
-            .DropDownStyle = ComboBoxStyle.DropDownList
-        }
-        cmbStatusType.Items.AddRange(New Object() {"property", "supply", "request", "maintenance"})
-        chkStatusActive = New CheckBox() With {.Location = New Point(380, 37), .Text = "Active", .Checked = True}
-        btnSaveStatus = New Button() With {.Text = "Save Status", .Location = New Point(470, 30), .Size = New Size(90, 32)}
-        btnDeleteStatus = New Button() With {.Text = "Delete", .Location = New Point(570, 30), .Size = New Size(75, 32)}
-        dgvStatuses = New DataGridView() With {
-            .Location = New Point(20, 80),
-            .Size = New Size(630, 100),
-            .ReadOnly = True,
-            .AllowUserToAddRows = False,
-            .AllowUserToDeleteRows = False,
-            .SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-            .AutoGenerateColumns = False,
-            .MultiSelect = False
-        }
-        dgvStatuses.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "ID", .DataPropertyName = "status_id", .Width = 60})
-        dgvStatuses.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Name", .DataPropertyName = "status_name", .Width = 200})
-        dgvStatuses.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Type", .DataPropertyName = "status_type", .Width = 120})
-        dgvStatuses.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Active", .DataPropertyName = "is_active", .Width = 80})
-
-        AddHandler btnSaveStatus.Click, AddressOf btnSaveStatus_Click
-        AddHandler btnDeleteStatus.Click, AddressOf btnDeleteStatus_Click
-        AddHandler dgvStatuses.SelectionChanged, AddressOf dgvStatuses_SelectionChanged
-
-        grpStatusPanel.Controls.AddRange(New Control() {txtStatusName, cmbStatusType, chkStatusActive, btnSaveStatus, btnDeleteStatus, dgvStatuses})
-        Controls.Add(grpStatusPanel)
-
-        grpRoleAssignment = New GroupBox() With {
-            .Text = "Role Assignment",
-            .Location = New Point(453, 850),
-            .Size = New Size(610, 130),
-            .Visible = False
-        }
-        cmbRoleSelector = New ComboBox() With {.Location = New Point(20, 40), .Width = 260, .DropDownStyle = ComboBoxStyle.DropDownList}
-        cmbRoleUsers = New ComboBox() With {.Location = New Point(300, 40), .Width = 280, .DropDownStyle = ComboBoxStyle.DropDownList}
-        btnAssignRole = New Button() With {.Text = "Assign", .Location = New Point(300, 80), .Size = New Size(90, 30)}
-        btnDeactivateRole = New Button() With {.Text = "Deactivate", .Location = New Point(400, 80), .Size = New Size(120, 30)}
-
-        AddHandler btnAssignRole.Click, AddressOf btnAssignRole_Click
-        AddHandler btnDeactivateRole.Click, AddressOf btnDeactivateRole_Click
-
-        grpRoleAssignment.Controls.AddRange(New Control() {cmbRoleSelector, cmbRoleUsers, btnAssignRole, btnDeactivateRole})
-        Controls.Add(grpRoleAssignment)
-
-        btnFilterLogs = New Button() With {
-            .Text = "Filter",
-            .Location = New Point(dtFrom.Left - 120, dtFrom.Top),
-            .Size = New Size(100, 28),
-            .Visible = False
-        }
-        AddHandler btnFilterLogs.Click, AddressOf btnFilterLogs_Click
-        Controls.Add(btnFilterLogs)
-
-        btnRefreshLogs = New Button() With {
-            .Text = "Refresh",
-            .Location = New Point(btnFilterLogs.Left, dtTo.Top),
-            .Size = New Size(100, 28),
-            .Visible = False
-        }
-        AddHandler btnRefreshLogs.Click, AddressOf btnRefreshLogs_Click
-        Controls.Add(btnRefreshLogs)
-
-        dgvRoles.Top = grpRoleAssignment.Bottom + 10
-    End Sub
-
-    Private Sub InitializeGridSettings()
-        dgvCategory.AutoGenerateColumns = False
-        dgvCategory.AllowUserToAddRows = False
-        dgvCategory.AllowUserToDeleteRows = False
-        dgvCategory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvCategory.MultiSelect = False
-        dgvCategory.ReadOnly = True
-
-        If dgvCategory.Columns.Contains("ID") Then dgvCategory.Columns("ID").DataPropertyName = "category_id"
-        If dgvCategory.Columns.Contains("CategoryName") Then dgvCategory.Columns("CategoryName").DataPropertyName = "category_name"
-        If dgvCategory.Columns.Contains("Type") Then dgvCategory.Columns("Type").DataPropertyName = "category_type"
-        If dgvCategory.Columns.Contains("Description") Then dgvCategory.Columns("Description").DataPropertyName = "description"
-        If dgvCategory.Columns.Contains("Status") Then dgvCategory.Columns("Status").DataPropertyName = "status"
-        If dgvCategory.Columns.Contains("Action") Then dgvCategory.Columns("Action").Visible = False
-
-        dgvRoles.AutoGenerateColumns = False
-        dgvRoles.AllowUserToAddRows = False
-        dgvRoles.AllowUserToDeleteRows = False
-        dgvRoles.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvRoles.MultiSelect = False
-        dgvRoles.ReadOnly = True
-
-        If dgvRoles.Columns.Contains("RoleID") Then dgvRoles.Columns("RoleID").DataPropertyName = "role_id"
-        If dgvRoles.Columns.Contains("Statuss") Then dgvRoles.Columns("Statuss").DataPropertyName = "status_text"
-        If dgvRoles.Columns.Contains("Role") Then dgvRoles.Columns("Role").DataPropertyName = "role_name"
-        If dgvRoles.Columns.Contains("Permissions") Then dgvRoles.Columns("Permissions").DataPropertyName = "permissions_text"
-
-        DataGridView1.AutoGenerateColumns = False
-        DataGridView1.AllowUserToAddRows = False
-        DataGridView1.AllowUserToDeleteRows = False
-        DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        DataGridView1.MultiSelect = False
-        DataGridView1.ReadOnly = True
-
-        If DataGridView1.Columns.Contains("LogID") Then DataGridView1.Columns("LogID").DataPropertyName = "log_id"
-        If DataGridView1.Columns.Contains("DateTime") Then DataGridView1.Columns("DateTime").DataPropertyName = "created_at"
-        If DataGridView1.Columns.Contains("User") Then DataGridView1.Columns("User").DataPropertyName = "username"
-        If DataGridView1.Columns.Contains("Actionn") Then DataGridView1.Columns("Actionn").DataPropertyName = "action"
-        If DataGridView1.Columns.Contains("Message") Then DataGridView1.Columns("Message").DataPropertyName = "description"
-    End Sub
-
-    Private Sub InitializeDefaultValues()
-        cmbType.Items.Clear()
-        cmbType.Items.AddRange(New Object() {"property", "supply"})
-        If cmbType.Items.Count > 0 Then cmbType.SelectedIndex = 0
-
-        comboCategoris.Items.Clear()
-        comboCategoris.Items.AddRange(New Object() {"All", "property", "supply"})
-        comboCategoris.SelectedIndex = 0
-
-        combostatus.Items.Clear()
-        combostatus.Items.AddRange(New Object() {"All", "active", "inactive"})
-        combostatus.SelectedIndex = 0
-
-        chkInventory.Text = "Inventory"
-        chkMaintenance.Text = "Maintenance"
-        chkBorrow.Text = "Borrow / Request"
-        CheckBox4.Text = "Reports"
-
-        dtFrom.Value = System.DateTime.Today.AddDays(-7)
-        dtTo.Value = System.DateTime.Today
-
-        TextBox1.Visible = False
-        PictureBox2.Visible = False
-    End Sub
-
-    Private Sub InitializeModuleRegistry()
-        moduleControls.Clear()
-        moduleControls(ConfigModule.DatabaseSettings) = New List(Of Control) From {
-            DBHost, txtHost, port, txtPort, Label5, txtDBName, Label6, txtUser, Label7, txtPassword, btnTestConn, btnSaveConn
-        }
-
-        moduleControls(ConfigModule.CategoryStatus) = New List(Of Control) From {
-            Label1, Label2, pnlCategories, pnlStatus, txtCategoryName, txtDescription, cmbType,
-            btnAddCategory, btnEditCategory, btnDeleteCategory, btnRefreshCategories, dgvCategory, grpStatusPanel
-        }
-
-        moduleControls(ConfigModule.UserRoles) = New List(Of Control) From {
-            txtRoleName, chkInventory, chkMaintenance, chkBorrow, CheckBox4, btnSaveRole, dgvRoles, grpRoleAssignment
-        }
-
-        moduleControls(ConfigModule.SystemLogs) = New List(Of Control) From {
-            dtFrom, dtTo, cmbLogType, btnExportLogs, btnFilterLogs, btnRefreshLogs, DataGridView1
-        }
-    End Sub
 
 #End Region
 
 #Region "Navigation"
 
-    Private Sub ShowModule(target As ConfigModule)
-        currentModule = target
-        For Each kvp As KeyValuePair(Of ConfigModule, List(Of Control)) In moduleControls
-            Dim controlList As List(Of Control) = kvp.Value
-            For Each ctrl As Control In controlList
-                ctrl.Visible = kvp.Key = target
-            Next
-        Next
-        Select Case target
-            Case ConfigModule.DatabaseSettings
-                HighlightNavigationButton(btnConnection)
-            Case ConfigModule.CategoryStatus
-                HighlightNavigationButton(btnCategory)
-            Case ConfigModule.UserRoles
-                HighlightNavigationButton(btnRoles)
-            Case ConfigModule.SystemLogs
-                HighlightNavigationButton(btnLogs)
-        End Select
-    End Sub
-
-    Private Sub HighlightNavigationButton(target As Button)
-        Dim buttons = New List(Of Button) From {btnConnection, btnCategory, btnRoles, btnLogs}
-        For Each btn In buttons
-            btn.BackColor = If(btn Is target, Color.FromArgb(51, 51, 51), Color.DarkGray)
-        Next
-    End Sub
-
-    Private Sub btnConnection_Click(sender As Object, e As EventArgs) Handles btnConnection.Click
-        ShowModule(ConfigModule.DatabaseSettings)
-    End Sub
-
-    Private Sub btnCategory_Click(sender As Object, e As EventArgs) Handles btnCategory.Click
-        ShowModule(ConfigModule.CategoryStatus)
+    Private Sub btnCategory_Click(sender As Object, e As EventArgs)
         LoadCategories()
         LoadStatuses()
     End Sub
 
-    Private Sub btnRoles_Click(sender As Object, e As EventArgs) Handles btnRoles.Click
-        ShowModule(ConfigModule.UserRoles)
-        LoadRoles()
+    Private Sub btnRoles_Click(sender As Object, e As EventArgs)
         LoadRoleLookups()
         LoadUsersForAssignment()
     End Sub
 
-    Private Sub btnLogs_Click(sender As Object, e As EventArgs) Handles btnLogs.Click
-        ShowModule(ConfigModule.SystemLogs)
-        LoadLogs(True)
-    End Sub
 
 #End Region
 
@@ -348,11 +118,8 @@ Public Class SASystemConfiguration
         EnsureDatabaseInfrastructure()
         LoadCategories()
         LoadStatuses()
-        LoadRoles()
         LoadRoleLookups()
         LoadUsersForAssignment()
-        LoadLogTypes()
-        LoadLogs(True)
     End Sub
 
     Private Sub LoadDbSettings()
@@ -609,7 +376,6 @@ Public Class SASystemConfiguration
         Try
             Using conn = GetModuleConnection()
                 If Not TryOpenModuleConnection(conn) Then
-                    dgvCategory.DataSource = Nothing
                     Return
                 End If
                 Dim query = "SELECT category_id, category_name, category_type, description, status FROM categories ORDER BY category_name"
@@ -618,7 +384,6 @@ Public Class SASystemConfiguration
                     adapter.Fill(categoryTable)
                 End Using
             End Using
-            dgvCategory.DataSource = categoryTable
             ApplyCategoryFilters()
         Catch ex As Exception
             ShowModuleStatus("Unable to load categories: " & ex.Message, True)
@@ -626,65 +391,8 @@ Public Class SASystemConfiguration
         End Try
     End Sub
 
-    Private Sub btnAddCategory_Click(sender As Object, e As EventArgs) Handles btnAddCategory.Click
-        Dim name = txtCategoryName.Text.Trim()
-        Dim description = txtDescription.Text.Trim()
-        Dim selectedItem As Object = cmbType.SelectedItem
-        Dim typeValue = If(selectedItem IsNot Nothing, selectedItem.ToString(), String.Empty)
 
-        If Not ValidateCategoryInputs(name, typeValue) Then Return
 
-        Try
-            Using conn = GetModuleConnection()
-                If Not TryOpenModuleConnection(conn) Then Return
-                Using cmd As New MySqlCommand("INSERT INTO categories (category_name, category_type, description, status) VALUES (@name, @type, @desc, 'active')", conn)
-                    cmd.Parameters.AddWithValue("@name", name)
-                    cmd.Parameters.AddWithValue("@type", typeValue)
-                    cmd.Parameters.AddWithValue("@desc", description)
-                    cmd.ExecuteNonQuery()
-                End Using
-            End Using
-            ShowModuleStatus("Category saved.", False)
-            ClearCategoryFields()
-            LoadCategories()
-        Catch ex As Exception
-            ShowModuleStatus("Unable to save category: " & ex.Message, True)
-            LogRecoveryEvent("AddCategory", ex)
-        End Try
-    End Sub
-
-    Private Sub btnEditCategory_Click(sender As Object, e As EventArgs) Handles btnEditCategory.Click
-        If Not editingCategoryId.HasValue Then
-            MessageBox.Show("Select a category to edit.", "Category", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Return
-        End If
-
-        Dim name = txtCategoryName.Text.Trim()
-        Dim description = txtDescription.Text.Trim()
-        Dim selectedItem As Object = cmbType.SelectedItem
-        Dim typeValue = If(selectedItem IsNot Nothing, selectedItem.ToString(), String.Empty)
-
-        If Not ValidateCategoryInputs(name, typeValue) Then Return
-
-        Try
-            Using conn = GetModuleConnection()
-                If Not TryOpenModuleConnection(conn) Then Return
-                Using cmd As New MySqlCommand("UPDATE categories SET category_name=@name, category_type=@type, description=@desc WHERE category_id=@id", conn)
-                    cmd.Parameters.AddWithValue("@name", name)
-                    cmd.Parameters.AddWithValue("@type", typeValue)
-                    cmd.Parameters.AddWithValue("@desc", description)
-                    cmd.Parameters.AddWithValue("@id", editingCategoryId.Value)
-                    cmd.ExecuteNonQuery()
-                End Using
-            End Using
-            ShowModuleStatus("Category updated.", False)
-            ClearCategoryFields()
-            LoadCategories()
-        Catch ex As Exception
-            ShowModuleStatus("Unable to update category: " & ex.Message, True)
-            LogRecoveryEvent("EditCategory", ex)
-        End Try
-    End Sub
 
     Private Sub btnDeleteCategory_Click(sender As Object, e As EventArgs)
         If Not editingCategoryId.HasValue Then
@@ -705,7 +413,6 @@ Public Class SASystemConfiguration
                 End Using
             End Using
             ShowModuleStatus("Category deleted.", False)
-            ClearCategoryFields()
             LoadCategories()
         Catch ex As Exception
             ShowModuleStatus("Unable to delete category: " & ex.Message, True)
@@ -716,22 +423,6 @@ Public Class SASystemConfiguration
     Private Sub btnRefreshCategories_Click(sender As Object, e As EventArgs)
         LoadCategories()
         LoadStatuses()
-    End Sub
-
-    Private Sub dgvCategory_SelectionChanged(sender As Object, e As EventArgs) Handles dgvCategory.SelectionChanged
-        If dgvCategory.SelectedRows.Count = 0 Then
-            editingCategoryId = Nothing
-            Return
-        End If
-
-        Dim row = dgvCategory.SelectedRows(0)
-        editingCategoryId = CInt(row.Cells("ID").Value)
-        Dim catNameValue As Object = row.Cells("CategoryName").Value
-        Dim descValue As Object = row.Cells("Description").Value
-        Dim typeValue As Object = row.Cells("Type").Value
-        txtCategoryName.Text = If(catNameValue IsNot Nothing, catNameValue.ToString(), "")
-        txtDescription.Text = If(descValue IsNot Nothing, descValue.ToString(), "")
-        cmbType.SelectedItem = If(typeValue IsNot Nothing, typeValue.ToString(), "")
     End Sub
 
     Private Function ValidateCategoryInputs(name As String, typeValue As String) As Boolean
@@ -745,13 +436,6 @@ Public Class SASystemConfiguration
         End If
         Return True
     End Function
-
-    Private Sub ClearCategoryFields()
-        txtCategoryName.Clear()
-        txtDescription.Clear()
-        If cmbType.Items.Count > 0 Then cmbType.SelectedIndex = 0
-        editingCategoryId = Nothing
-    End Sub
 
     Private Sub comboCategoris_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboCategoris.SelectedIndexChanged
         ApplyCategoryFilters()
@@ -892,79 +576,6 @@ Public Class SASystemConfiguration
 
 #Region "User Roles"
 
-    Private Sub LoadRoles()
-        Try
-            Using conn = GetModuleConnection()
-                If Not TryOpenModuleConnection(conn) Then
-                    dgvRoles.DataSource = Nothing
-                    Return
-                End If
-                Dim query = "SELECT role_id, role_name, is_active, can_inventory, can_maintenance, can_borrow, can_reports FROM user_roles ORDER BY role_name"
-                Using adapter As New MySqlDataAdapter(query, conn)
-                    roleTable = New DataTable()
-                    adapter.Fill(roleTable)
-                End Using
-            End Using
-            If Not roleTable.Columns.Contains("status_text") Then roleTable.Columns.Add("status_text", GetType(String))
-            If Not roleTable.Columns.Contains("permissions_text") Then roleTable.Columns.Add("permissions_text", GetType(String))
-
-            For Each row As DataRow In roleTable.Rows
-                Dim permissions As New List(Of String)
-                If DataRowBool(row, "can_inventory") Then permissions.Add("Inventory")
-                If DataRowBool(row, "can_maintenance") Then permissions.Add("Maintenance")
-                If DataRowBool(row, "can_borrow") Then permissions.Add("Borrow")
-                If DataRowBool(row, "can_reports") Then permissions.Add("Reports")
-                row("permissions_text") = String.Join(", ", permissions)
-                row("status_text") = If(DataRowBool(row, "is_active"), "Active", "Inactive")
-            Next
-
-            dgvRoles.DataSource = roleTable
-        Catch ex As Exception
-            ShowModuleStatus("Unable to load roles: " & ex.Message, True)
-            LogRecoveryEvent("LoadRoles", ex)
-        End Try
-    End Sub
-
-    Private Sub btnSaveRole_Click(sender As Object, e As EventArgs) Handles btnSaveRole.Click
-        Dim roleName = txtRoleName.Text.Trim()
-        If String.IsNullOrWhiteSpace(roleName) Then
-            MessageBox.Show("Role name is required.", "Roles", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        Dim sql As String
-        Dim statusMessage As String
-        If editingRoleId.HasValue Then
-            sql = "UPDATE user_roles SET role_name=@name, can_inventory=@inv, can_maintenance=@main, can_borrow=@borrow, can_reports=@reports WHERE role_id=@id"
-            statusMessage = "Role updated."
-        Else
-            sql = "INSERT INTO user_roles (role_name, can_inventory, can_maintenance, can_borrow, can_reports, is_active) VALUES (@name, @inv, @main, @borrow, @reports, 1)"
-            statusMessage = "Role saved."
-        End If
-
-        Try
-            Using conn = GetModuleConnection()
-                If Not TryOpenModuleConnection(conn) Then Return
-                Using cmd As New MySqlCommand(sql, conn)
-                    cmd.Parameters.AddWithValue("@name", roleName)
-                    cmd.Parameters.AddWithValue("@inv", chkInventory.Checked)
-                    cmd.Parameters.AddWithValue("@main", chkMaintenance.Checked)
-                    cmd.Parameters.AddWithValue("@borrow", chkBorrow.Checked)
-                    cmd.Parameters.AddWithValue("@reports", CheckBox4.Checked)
-                    If editingRoleId.HasValue Then cmd.Parameters.AddWithValue("@id", editingRoleId.Value)
-                    cmd.ExecuteNonQuery()
-                End Using
-            End Using
-            ShowModuleStatus(statusMessage, False)
-            ClearRoleFields()
-            LoadRoles()
-            LoadRoleLookups()
-        Catch ex As Exception
-            ShowModuleStatus("Unable to save role: " & ex.Message, True)
-            LogRecoveryEvent("SaveRole", ex)
-        End Try
-    End Sub
-
     Private Sub btnDeactivateRole_Click(sender As Object, e As EventArgs)
         If Not editingRoleId.HasValue Then
             MessageBox.Show("Select a role first.", "Roles", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -980,28 +591,11 @@ Public Class SASystemConfiguration
                 End Using
             End Using
             ShowModuleStatus("Role status toggled.", False)
-            LoadRoles()
             LoadRoleLookups()
         Catch ex As Exception
             ShowModuleStatus("Unable to toggle role: " & ex.Message, True)
             LogRecoveryEvent("ToggleRole", ex)
         End Try
-    End Sub
-
-    Private Sub dgvRoles_SelectionChanged(sender As Object, e As EventArgs) Handles dgvRoles.SelectionChanged
-        If dgvRoles.SelectedRows.Count = 0 Then
-            editingRoleId = Nothing
-            Return
-        End If
-
-        Dim row = dgvRoles.SelectedRows(0)
-        editingRoleId = CInt(row.Cells("RoleID").Value)
-        txtRoleName.Text = Convert.ToString(row.Cells("Role").Value)
-        Dim permissionsText = Convert.ToString(row.Cells("Permissions").Value)
-        chkInventory.Checked = permissionsText.Contains("Inventory")
-        chkMaintenance.Checked = permissionsText.Contains("Maintenance")
-        chkBorrow.Checked = permissionsText.Contains("Borrow")
-        CheckBox4.Checked = permissionsText.Contains("Reports")
     End Sub
 
     Private Sub LoadRoleLookups()
@@ -1084,15 +678,6 @@ Public Class SASystemConfiguration
         End Try
     End Sub
 
-    Private Sub ClearRoleFields()
-        txtRoleName.Clear()
-        chkInventory.Checked = False
-        chkMaintenance.Checked = False
-        chkBorrow.Checked = False
-        CheckBox4.Checked = False
-        editingRoleId = Nothing
-    End Sub
-
     Private Class ComboBoxItem
         Public ReadOnly Property Key As Integer
         Public ReadOnly Property DisplayText As String
@@ -1109,83 +694,7 @@ Public Class SASystemConfiguration
 
 #Region "Logs"
 
-    Private Sub LoadLogTypes()
-        cmbLogType.Items.Clear()
-        cmbLogType.Items.Add("All")
-        Try
-            Using conn = GetModuleConnection()
-                If Not TryOpenModuleConnection(conn) Then
-                    cmbLogType.SelectedIndex = 0
-                    Return
-                End If
-                Using cmd As New MySqlCommand("SELECT DISTINCT module FROM audit_logs ORDER BY module", conn)
-                    Using reader = cmd.ExecuteReader()
-                        While reader.Read()
-                            cmbLogType.Items.Add(reader.GetString("module"))
-                        End While
-                    End Using
-                End Using
-            End Using
-        Catch ex As Exception
-            LogRecoveryEvent("LoadLogTypes", ex)
-        End Try
-
-        cmbLogType.SelectedIndex = 0
-    End Sub
-
-    Private Sub LoadLogs(applyFilters As Boolean)
-        Try
-            Using conn = GetModuleConnection()
-                If Not TryOpenModuleConnection(conn) Then
-                    DataGridView1.DataSource = Nothing
-                    Return
-                End If
-                Dim query As New StringBuilder("SELECT log_id, created_at, username, action, description FROM audit_logs WHERE 1=1 ")
-                Using cmd As New MySqlCommand()
-                    cmd.Connection = conn
-
-                    If applyFilters Then
-                        query.Append("AND created_at BETWEEN @from AND @to ")
-                        cmd.Parameters.AddWithValue("@from", dtFrom.Value.Date)
-                        cmd.Parameters.AddWithValue("@to", dtTo.Value.Date.AddDays(1).AddSeconds(-1))
-                        If cmbLogType.SelectedIndex > 0 Then
-                            query.Append("AND module = @module ")
-                            cmd.Parameters.AddWithValue("@module", cmbLogType.SelectedItem.ToString())
-                        End If
-                    End If
-                    query.Append("ORDER BY created_at DESC LIMIT 500")
-                    cmd.CommandText = query.ToString()
-
-                    Using adapter As New MySqlDataAdapter(cmd)
-                        logTable = New DataTable()
-                        adapter.Fill(logTable)
-                    End Using
-                End Using
-            End Using
-
-            DataGridView1.DataSource = logTable
-        Catch ex As Exception
-            ShowModuleStatus("Unable to load logs: " & ex.Message, True)
-            LogRecoveryEvent("LoadLogs", ex)
-        End Try
-    End Sub
-
-    Private Sub btnFilterLogs_Click(sender As Object, e As EventArgs)
-        If dtFrom.Value > dtTo.Value Then
-            MessageBox.Show("From date must be earlier than To date.", "Logs", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-        LoadLogs(True)
-    End Sub
-
-    Private Sub btnRefreshLogs_Click(sender As Object, e As EventArgs)
-        dtFrom.Value = System.DateTime.Today.AddDays(-7)
-        dtTo.Value = System.DateTime.Today
-        cmbLogType.SelectedIndex = 0
-        LoadLogs(True)
-    End Sub
-
-    Private Sub btnExportLogs_Click(sender As Object, e As EventArgs) Handles btnExportLogs.Click
+    Private Sub btnExportLogs_Click(sender As Object, e As EventArgs)
         If logTable Is Nothing OrElse logTable.Rows.Count = 0 Then
             MessageBox.Show("No logs to export.", "Logs", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
@@ -1322,19 +831,19 @@ Public Class SASystemConfiguration
         BringToFront()
     End Sub
 
-    Private Sub chkInventory_CheckedChanged(sender As Object, e As EventArgs) Handles chkInventory.CheckedChanged
+    Private Sub chkInventory_CheckedChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub txtRoleName_TextChanged(sender As Object, e As EventArgs) Handles txtRoleName.TextChanged
+    Private Sub txtRoleName_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
     End Sub
 
-    Private Sub dtTo_ValueChanged(sender As Object, e As EventArgs) Handles dtTo.ValueChanged
+    Private Sub dtTo_ValueChanged(sender As Object, e As EventArgs)
 
     End Sub
 End Class

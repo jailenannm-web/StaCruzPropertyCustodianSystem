@@ -32,16 +32,16 @@ Partial Class PropertyTransaction
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.pnlTransaction = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.RoundedButton3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedButton2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.propertyID = New System.Windows.Forms.TextBox()
+        Me.propertyName = New System.Windows.Forms.TextBox()
+        Me.propertyDescription = New System.Windows.Forms.TextBox()
+        Me.propertyQuantity = New System.Windows.Forms.TextBox()
+        Me.serialNumber = New System.Windows.Forms.TextBox()
+        Me.propertyCategory = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.RoundedButton4 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedButton5 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -160,49 +160,6 @@ Partial Class PropertyTransaction
         Me.pnlTransaction.Size = New System.Drawing.Size(1927, 473)
         Me.pnlTransaction.TabIndex = 30
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(487, 257)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(488, 22)
-        Me.TextBox1.TabIndex = 31
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(487, 300)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(488, 22)
-        Me.TextBox2.TabIndex = 32
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(487, 350)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(1192, 22)
-        Me.TextBox3.TabIndex = 33
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(487, 395)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(488, 22)
-        Me.TextBox4.TabIndex = 34
-        '
-        'TextBox6
-        '
-        Me.TextBox6.Location = New System.Drawing.Point(1191, 300)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(488, 22)
-        Me.TextBox6.TabIndex = 36
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(1191, 255)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(488, 24)
-        Me.ComboBox1.TabIndex = 37
-        '
         'RoundedButton3
         '
         Me.RoundedButton3.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
@@ -251,6 +208,49 @@ Partial Class PropertyTransaction
         Me.RoundedPanel2.Size = New System.Drawing.Size(1612, 272)
         Me.RoundedPanel2.TabIndex = 39
         '
+        'propertyID
+        '
+        Me.propertyID.Location = New System.Drawing.Point(487, 257)
+        Me.propertyID.Name = "propertyID"
+        Me.propertyID.Size = New System.Drawing.Size(488, 22)
+        Me.propertyID.TabIndex = 31
+        '
+        'propertyName
+        '
+        Me.propertyName.Location = New System.Drawing.Point(487, 300)
+        Me.propertyName.Name = "propertyName"
+        Me.propertyName.Size = New System.Drawing.Size(488, 22)
+        Me.propertyName.TabIndex = 32
+        '
+        'propertyDescription
+        '
+        Me.propertyDescription.Location = New System.Drawing.Point(487, 350)
+        Me.propertyDescription.Name = "propertyDescription"
+        Me.propertyDescription.Size = New System.Drawing.Size(1192, 22)
+        Me.propertyDescription.TabIndex = 33
+        '
+        'propertyQuantity
+        '
+        Me.propertyQuantity.Location = New System.Drawing.Point(487, 395)
+        Me.propertyQuantity.Name = "propertyQuantity"
+        Me.propertyQuantity.Size = New System.Drawing.Size(488, 22)
+        Me.propertyQuantity.TabIndex = 34
+        '
+        'serialNumber
+        '
+        Me.serialNumber.Location = New System.Drawing.Point(1191, 300)
+        Me.serialNumber.Name = "serialNumber"
+        Me.serialNumber.Size = New System.Drawing.Size(488, 22)
+        Me.serialNumber.TabIndex = 36
+        '
+        'propertyCategory
+        '
+        Me.propertyCategory.FormattingEnabled = True
+        Me.propertyCategory.Location = New System.Drawing.Point(1191, 255)
+        Me.propertyCategory.Name = "propertyCategory"
+        Me.propertyCategory.Size = New System.Drawing.Size(488, 24)
+        Me.propertyCategory.TabIndex = 37
+        '
         'RoundedPanel1
         '
         Me.RoundedPanel1.BackColor = System.Drawing.Color.White
@@ -294,12 +294,12 @@ Partial Class PropertyTransaction
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.ClientSize = New System.Drawing.Size(1902, 1033)
-        Me.Controls.Add(Me.ComboBox1)
-        Me.Controls.Add(Me.TextBox6)
-        Me.Controls.Add(Me.TextBox4)
-        Me.Controls.Add(Me.TextBox3)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.propertyCategory)
+        Me.Controls.Add(Me.serialNumber)
+        Me.Controls.Add(Me.propertyQuantity)
+        Me.Controls.Add(Me.propertyDescription)
+        Me.Controls.Add(Me.propertyName)
+        Me.Controls.Add(Me.propertyID)
         Me.Controls.Add(Me.pnlTransaction)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
@@ -335,12 +335,12 @@ Partial Class PropertyTransaction
     Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
     Friend WithEvents RoundedButton3 As Resources.Controls.RoundedButton
     Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents propertyID As System.Windows.Forms.TextBox
+    Friend WithEvents propertyName As System.Windows.Forms.TextBox
+    Friend WithEvents propertyDescription As System.Windows.Forms.TextBox
+    Friend WithEvents propertyQuantity As System.Windows.Forms.TextBox
+    Friend WithEvents serialNumber As System.Windows.Forms.TextBox
+    Friend WithEvents propertyCategory As System.Windows.Forms.ComboBox
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
     Friend WithEvents RoundedButton4 As Resources.Controls.RoundedButton
