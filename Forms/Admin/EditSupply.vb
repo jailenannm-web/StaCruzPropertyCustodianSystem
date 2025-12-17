@@ -398,9 +398,9 @@ Public Class EditSupply
             Dim location As String = If(locationBox IsNot Nothing AndAlso locationBox.SelectedIndex >= 0, locationBox.SelectedItem.ToString(), If(locationBox IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(locationBox.Text), locationBox.Text, ""))
             Dim description As String = If(descriptionBox IsNot Nothing AndAlso descriptionBox.SelectedIndex >= 0, descriptionBox.SelectedItem.ToString(), If(descriptionBox IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(descriptionBox.Text), descriptionBox.Text, ""))
             Dim supplierName As String = If(supplierBox IsNot Nothing AndAlso supplierBox.SelectedIndex >= 0, supplierBox.SelectedItem.ToString(), If(supplierBox IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(supplierBox.Text), supplierBox.Text, ""))
-            Dim unitOfMeasure As String = If(uomBox IsNot Nothing AndAlso uomBox.SelectedIndex >= 0, uomBox.SelectedItem.ToString(), If(uomBox IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(uomBox.Text), uomBox.Text, ""))
-            Dim sourceOfFunds As String = If(sourceOfFundsTxt IsNot Nothing, sourceOfFundsTxt.Text.Trim(), "")
-            Dim dateReceived As Date? = If(dateReceivedPicker IsNot Nothing, dateReceivedPicker.Value, Nothing)
+            Dim unitOfMeasureValue As String = If(uomBox IsNot Nothing AndAlso uomBox.SelectedIndex >= 0, uomBox.SelectedItem.ToString(), If(uomBox IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(uomBox.Text), uomBox.Text, ""))
+            Dim sourceOfFundsValue As String = If(sourceOfFundsTxt IsNot Nothing, sourceOfFundsTxt.Text.Trim(), "")
+            Dim dateReceivedValue As Date? = If(dateReceivedPicker IsNot Nothing, dateReceivedPicker.Value, Nothing)
 
             ' Call UpdateSupply with all parameters
             Dim success As Boolean = DatabaseConnection.UpdateSupply(
@@ -415,9 +415,9 @@ Public Class EditSupply
                 0, ' reorderLevel
                 supplierName,
                 "", ' supplierContact
-                unitOfMeasure,
-                sourceOfFunds,
-                dateReceived
+                unitOfMeasureValue,
+                sourceOfFundsValue,
+                dateReceivedValue
             )
 
             If success Then

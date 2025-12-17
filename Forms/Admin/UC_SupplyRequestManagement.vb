@@ -229,14 +229,76 @@ Public Class UC_SupplyRequestManagement
     End Sub
 
     Private Sub issueRequisition_Click(sender As Object, e As EventArgs) Handles issueRequisition.Click
-        Dim addSupplyRequestManagement As New RequisitionIssueSlip()
-        addSupplyRequestManagement.Dock = DockStyle.Fill
+        ' Validate that a request is selected
+        If prm_table1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a supply request to assign.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
-        ' Clear previous controls
-        Me.Controls.Clear()
+        Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+        Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+        
+        ' Get request ID from DataTable source
+        Dim requestIDValue As Object = Nothing
+        If dt IsNot Nothing Then
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
+        End If
+        
+        ' Fallback to DataGridView cells
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) Then
+            If prm_table1.Columns.Contains("request_id") Then
+                requestIDValue = selectedRow.Cells("request_id").Value
+            ElseIf prm_table1.Columns.Contains("RequestID") Then
+                requestIDValue = selectedRow.Cells("RequestID").Value
+            ElseIf prm_table1.Columns.Count > 0 Then
+                requestIDValue = selectedRow.Cells(0).Value
+            End If
+        End If
 
-        ' Add new user control
-        Me.Controls.Add(addSupplyRequestManagement)
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
+            MessageBox.Show("Invalid request selected. Please select a valid supply request.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim requestID As Integer = 0
+        If Not Integer.TryParse(requestIDValue.ToString(), requestID) Then
+            MessageBox.Show("Invalid request ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Get request status to validate
+        Dim requestStatus As String = ""
+        If dt IsNot Nothing Then
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            If dt.Columns.Contains("status") AndAlso Not IsDBNull(dataRow("status")) Then
+                requestStatus = dataRow("status").ToString().ToLower()
+            End If
+        Else
+            If prm_table1.Columns.Contains("status") Then
+                requestStatus = If(selectedRow.Cells("status").Value IsNot Nothing, selectedRow.Cells("status").Value.ToString().ToLower(), "")
+            End If
+        End If
+
+        ' Only allow assigning approved or pending requests
+        If Not String.IsNullOrEmpty(requestStatus) AndAlso requestStatus = "rejected" Then
+            MessageBox.Show("Cannot assign a rejected request. Please select an approved or pending request.", "Invalid Request Status", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' Open assignment form with request ID
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            Dim assignForm As New AssignRequestManagement()
+            assignForm.RequestID = requestID
+            parentDashboard.LoadUserControl(assignForm)
+        End If
     End Sub
 
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click

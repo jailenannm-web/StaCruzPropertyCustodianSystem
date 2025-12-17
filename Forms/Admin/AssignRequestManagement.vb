@@ -74,12 +74,41 @@ Public Class AssignRequestManagement
         Try
             Dim combo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox3")
             If combo IsNot Nothing Then
+                ' Clear any DataSource binding first
+                combo.DataSource = Nothing
                 combo.Items.Clear()
-                combo.Items.AddRange(New String() {
-                    "Furniture", "Equipment", "Office Supplies", "IT Equipment",
-                    "Laboratory Apparatus", "Books and Publications",
-                    "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
-                })
+                ' Try to load from database first
+                Try
+                    Dim categoriesTable As DataTable = DatabaseConnection.GetCategories("property")
+                    If categoriesTable IsNot Nothing AndAlso categoriesTable.Rows.Count > 0 Then
+                        ' Use DataSource with proper DisplayMember
+                        combo.DataSource = categoriesTable
+                        If categoriesTable.Columns.Contains("categoryName") Then
+                            combo.DisplayMember = "categoryName"
+                            combo.ValueMember = "categoryName"
+                        ElseIf categoriesTable.Columns.Contains("category_name") Then
+                            combo.DisplayMember = "category_name"
+                            combo.ValueMember = "category_name"
+                        ElseIf categoriesTable.Columns.Count > 0 Then
+                            combo.DisplayMember = categoriesTable.Columns(0).ColumnName
+                            combo.ValueMember = categoriesTable.Columns(0).ColumnName
+                        End If
+                    Else
+                        ' Fallback to hardcoded list
+                        combo.Items.AddRange(New String() {
+                            "Furniture", "Equipment", "Office Supplies", "IT Equipment",
+                            "Laboratory Apparatus", "Books and Publications",
+                            "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
+                        })
+                    End If
+                Catch
+                    ' Fallback to hardcoded list if database load fails
+                    combo.Items.AddRange(New String() {
+                        "Furniture", "Equipment", "Office Supplies", "IT Equipment",
+                        "Laboratory Apparatus", "Books and Publications",
+                        "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
+                    })
+                End Try
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadCategoryDropdown Exception: " & ex.Message)
@@ -92,8 +121,17 @@ Public Class AssignRequestManagement
             Dim combo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox2")
             If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 AndAlso combo IsNot Nothing Then
                 combo.DataSource = deptTable
-                combo.DisplayMember = "department_name"
-                combo.ValueMember = "department_id"
+                ' Use camelCase column names if available, fallback to snake_case
+                If deptTable.Columns.Contains("departmentName") Then
+                    combo.DisplayMember = "departmentName"
+                    combo.ValueMember = "departmentId"
+                ElseIf deptTable.Columns.Contains("department_name") Then
+                    combo.DisplayMember = "department_name"
+                    combo.ValueMember = "department_id"
+                ElseIf deptTable.Columns.Count >= 2 Then
+                    combo.DisplayMember = deptTable.Columns(1).ColumnName
+                    combo.ValueMember = deptTable.Columns(0).ColumnName
+                End If
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadDepartmentDropdown Exception: " & ex.Message)
@@ -122,7 +160,14 @@ Public Class AssignRequestManagement
             Dim deptID As Integer
             If TypeOf combo.SelectedValue Is DataRowView Then
                 Dim drv As DataRowView = CType(combo.SelectedValue, DataRowView)
-                If Not Integer.TryParse(drv.Row("department_id").ToString(), deptID) Then Return
+                ' Try both camelCase and snake_case column names
+                If drv.Row.Table.Columns.Contains("departmentId") Then
+                    If Not Integer.TryParse(drv.Row("departmentId").ToString(), deptID) Then Return
+                ElseIf drv.Row.Table.Columns.Contains("department_id") Then
+                    If Not Integer.TryParse(drv.Row("department_id").ToString(), deptID) Then Return
+                Else
+                    Return
+                End If
             ElseIf Not Integer.TryParse(combo.SelectedValue.ToString(), deptID) Then
                 Return
             End If
@@ -186,18 +231,32 @@ Public Class AssignRequestManagement
                 End If
             End If
 
-            ' Auto-fill Category
+            ' Auto-fill Category - ensure it's not bound to DataSource when setting value
             Dim catCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox3")
             If catCombo IsNot Nothing Then
                 Dim category As String = ""
                 If propertyData.Table.Columns.Contains("category") AndAlso Not IsDBNull(propertyData("category")) Then
                     category = propertyData("category").ToString()
                 End If
+                ' Clear DataSource if bound to prevent DataRowView display issue
+                If catCombo.DataSource IsNot Nothing Then
+                    catCombo.DataSource = Nothing
+                    ' Reload items if needed
+                    If catCombo.Items.Count = 0 Then
+                        catCombo.Items.AddRange(New String() {
+                            "Furniture", "Equipment", "Office Supplies", "IT Equipment",
+                            "Laboratory Apparatus", "Books and Publications",
+                            "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
+                        })
+                    End If
+                End If
                 Dim categoryIndex As Integer = catCombo.FindStringExact(category)
                 If categoryIndex >= 0 Then
                     catCombo.SelectedIndex = categoryIndex
-                Else
-                    catCombo.Text = category
+                ElseIf Not String.IsNullOrEmpty(category) Then
+                    ' Add category if not in list, then select it
+                    catCombo.Items.Add(category)
+                    catCombo.SelectedItem = category
                 End If
             End If
 
@@ -623,7 +682,7 @@ Public Class AssignRequestManagement
     End Sub
 
     Private Sub ComboBox4_SelectedIndexChanged(sender As Object, e As EventArgs)
-        ' intentionally left blank — wired dynamically
+        ' intentionally left blank ï¿½ wired dynamically
     End Sub
 
     Private Sub NavigateBack()

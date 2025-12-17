@@ -2722,11 +2722,8 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
                 cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
                 cmd.Parameters.AddWithValue("@conditionStatus", conditionStatus)
-                cmd.Parameters.AddWithValue("@supplierName", If(String.IsNullOrEmpty(supplierName), DBNull.Value, supplierName))
-                cmd.Parameters.AddWithValue("@supplierContact", If(String.IsNullOrEmpty(supplierContact), DBNull.Value, supplierContact))
-                cmd.Parameters.AddWithValue("@unitOfMeasure", If(String.IsNullOrWhiteSpace(unitOfMeasure), DBNull.Value, unitOfMeasure))
-                cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrWhiteSpace(sourceOfFunds), DBNull.Value, sourceOfFunds))
-                cmd.Parameters.AddWithValue("@dateReceived", If(dateReceived.HasValue, dateReceived.Value, DBNull.Value))
+                ' Note: supplierName and supplierContact are not used in the INSERT statement
+                ' They are kept in function signature for backward compatibility but not inserted into database
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))

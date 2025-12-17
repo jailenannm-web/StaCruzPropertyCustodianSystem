@@ -58,29 +58,52 @@ Public Class UC_PropertyRequestManagement
         End If
 
         Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
-
-        ' Get request ID from selected row
+        Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+        
+        ' Get request ID from DataTable source (more reliable than DataGridView cells)
         Dim requestIDValue As Object = Nothing
-        If prm_table1.Columns.Contains("request_id") Then
-            requestIDValue = selectedRow.Cells("request_id").Value
-        ElseIf prm_table1.Columns.Contains("RequestID") Then
-            requestIDValue = selectedRow.Cells("RequestID").Value
-        ElseIf prm_table1.Columns.Count > 0 Then
-            ' Try first column as request ID
-            requestIDValue = selectedRow.Cells(0).Value
+        If dt IsNot Nothing Then
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            ' Try both camelCase and snake_case column names
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
+        End If
+        
+        ' Fallback to DataGridView cells if DataTable not available
+        If requestIDValue Is Nothing Then
+            If prm_table1.Columns.Contains("request_id") Then
+                requestIDValue = selectedRow.Cells("request_id").Value
+            ElseIf prm_table1.Columns.Contains("RequestID") Then
+                requestIDValue = selectedRow.Cells("RequestID").Value
+            ElseIf prm_table1.Columns.Count > 0 Then
+                requestIDValue = selectedRow.Cells(0).Value
+            End If
         End If
 
-        If requestIDValue Is Nothing OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
             MessageBox.Show("Invalid request selected. Please select a valid property request.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        ' Get request status to validate
+        ' Get request status to validate - prefer DataTable source
         Dim requestStatus As String = ""
-        If prm_table1.Columns.Contains("status") Then
-            requestStatus = If(selectedRow.Cells("status").Value IsNot Nothing, selectedRow.Cells("status").Value.ToString(), "")
-        ElseIf prm_table1.Columns.Contains("Status") Then
-            requestStatus = If(selectedRow.Cells("Status").Value IsNot Nothing, selectedRow.Cells("Status").Value.ToString(), "")
+        If dt IsNot Nothing Then
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            If dt.Columns.Contains("status") AndAlso Not IsDBNull(dataRow("status")) Then
+                requestStatus = dataRow("status").ToString()
+            End If
+        Else
+            ' Fallback to DataGridView cells
+            If prm_table1.Columns.Contains("status") Then
+                requestStatus = If(selectedRow.Cells("status").Value IsNot Nothing, selectedRow.Cells("status").Value.ToString(), "")
+            ElseIf prm_table1.Columns.Contains("Status") Then
+                requestStatus = If(selectedRow.Cells("Status").Value IsNot Nothing, selectedRow.Cells("Status").Value.ToString(), "")
+            End If
         End If
 
         ' Only allow assigning approved or pending requests
@@ -400,7 +423,13 @@ Public Class UC_PropertyRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim requestIDValue As Object = If(dt.Columns.Contains("request_id"), dataRow("request_id"), Nothing)
+            ' Try both camelCase and snake_case column names
+            Dim requestIDValue As Object = Nothing
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
             Dim requestIDStr As String = If(requestIDValue IsNot Nothing AndAlso Not IsDBNull(requestIDValue), requestIDValue.ToString(), "")
             If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
                 MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -455,9 +484,54 @@ Public Class UC_PropertyRequestManagement
     End Sub
 
     Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
+        ' Validate that a request is selected
+        If prm_table1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a property request to assign.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+        Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+        
+        ' Get request ID from DataTable source
+        Dim requestIDValue As Object = Nothing
+        If dt IsNot Nothing Then
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
+        End If
+        
+        ' Fallback to DataGridView cells
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) Then
+            If prm_table1.Columns.Contains("request_id") Then
+                requestIDValue = selectedRow.Cells("request_id").Value
+            ElseIf prm_table1.Columns.Contains("RequestID") Then
+                requestIDValue = selectedRow.Cells("RequestID").Value
+            ElseIf prm_table1.Columns.Count > 0 Then
+                requestIDValue = selectedRow.Cells(0).Value
+            End If
+        End If
+
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
+            MessageBox.Show("Invalid request selected. Please select a valid property request.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim requestID As Integer = 0
+        If Not Integer.TryParse(requestIDValue.ToString(), requestID) Then
+            MessageBox.Show("Invalid request ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New AssignRequestManagement())
+            Dim assignForm As New AssignRequestManagement()
+            assignForm.RequestID = requestID
+            parentDashboard.LoadUserControl(assignForm)
         End If
     End Sub
 
