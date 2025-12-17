@@ -31,23 +31,9 @@ Partial Public Class RequisitionIssueSlip
 
     End Sub
 
-    Private Sub RequisitionIssueSlip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadRequisitionData()
-    End Sub
-    
-    Private Sub LoadRequisitionData()
-        Try
-            Dim dt As DataTable = DatabaseConnection.GetAllSuppliesRequests()
-            requisitionTable = BuildRequisitionTable(dt)
 
-            If requisitionDataGrid1 IsNot Nothing Then
-                requisitionDataGrid1.AutoGenerateColumns = False
-                requisitionDataGrid1.DataSource = requisitionTable
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Error loading requisition data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
+
+
 
     Private Function BuildRequisitionTable(source As DataTable) As DataTable
         Dim reportTable As New DataTable()
@@ -96,7 +82,7 @@ Partial Public Class RequisitionIssueSlip
 
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles requisitionDataGrid1.CellContentClick
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
     End Sub
 
@@ -107,11 +93,11 @@ Partial Public Class RequisitionIssueSlip
 
     End Sub
 
-    Private Sub Panel23_Paint(sender As Object, e As PaintEventArgs) Handles Panel23.Paint
+    Private Sub Panel23_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub Panel24_Paint(sender As Object, e As PaintEventArgs) Handles Panel24.Paint
+    Private Sub Panel24_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
@@ -119,7 +105,7 @@ Partial Public Class RequisitionIssueSlip
 
     End Sub
 
-    Private Sub Panel6_Paint(sender As Object, e As PaintEventArgs) Handles Panel6.Paint
+    Private Sub Panel6_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
@@ -155,4 +141,68 @@ Partial Public Class RequisitionIssueSlip
         End If
         Return fallback
     End Function
+
+    Private Sub entityName_Click(sender As Object, e As EventArgs) Handles entityName.Click
+
+    End Sub
+
+    Private Sub fundCluster_Click(sender As Object, e As EventArgs) Handles fundCluster.Click
+
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label10_Click_1(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TextBox8_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub lblPropertyCard_Click(sender As Object, e As EventArgs) Handles lblPropertyCard.Click
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub departmentId_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub unit_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label9_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label3_Click_2(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub departmentId_TextChanged_1(sender As Object, e As EventArgs) Handles departmentId.TextChanged
+
+    End Sub
+
+    Private Sub position_TextChanged(sender As Object, e As EventArgs) Handles position.TextChanged
+
+    End Sub
+
+    Private Sub Label2_Click_1(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
 End Class

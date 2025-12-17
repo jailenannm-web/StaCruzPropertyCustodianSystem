@@ -39,27 +39,12 @@ Public Class BorrowingAndReturnSlip
 
     End Sub
 
-    Private Sub Label12_Click(sender As Object, e As EventArgs) Handles Label12.Click
+    Private Sub Label12_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub BorrowingAndReturnSlip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadBorrowingAndReturnData()
-    End Sub
-    
-    Private Sub LoadBorrowingAndReturnData()
-        Try
-            Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
-            borrowingTable = BuildBorrowingTable(dt)
 
-            If DataGridView1 IsNot Nothing Then
-                DataGridView1.AutoGenerateColumns = False
-                DataGridView1.DataSource = borrowingTable
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Error loading borrowing and return data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
+
 
     Private Function BuildBorrowingTable(source As DataTable) As DataTable
         Dim reportTable As New DataTable()
@@ -151,4 +136,40 @@ Public Class BorrowingAndReturnSlip
         End If
         Return fallback
     End Function
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles itemType.TextChanged
+
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub Label26_Click(sender As Object, e As EventArgs) Handles Label26.Click
+
+    End Sub
+
+    Private Sub Label30_Click(sender As Object, e As EventArgs) Handles Label30.Click
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged_1(sender As Object, e As EventArgs) Handles status.TextChanged
+
+    End Sub
+
+    Private Sub Panel10_Paint(sender As Object, e As PaintEventArgs) Handles Panel10.Paint
+
+    End Sub
 End Class

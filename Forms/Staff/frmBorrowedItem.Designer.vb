@@ -28,22 +28,24 @@ Partial Class frmBorrowedItem
     Private Sub InitializeComponent()
         Me.lblBorrowed = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.PropertyName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitofMeasurement = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BorrowQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BorrowDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ExpecteReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Condition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.returndate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.conditionreturn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.borrowedItemsearchbar = New System.Windows.Forms.TextBox()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
+        Me.borrowedId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.itemType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.itemId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.borrowerName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.borrowerPosition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.borrowDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.expectedReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.actualReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.conditionOnReturn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,90 +71,13 @@ Partial Class frmBorrowedItem
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertyName, Me.Category, Me.Description, Me.UnitofMeasurement, Me.BorrowQuantity, Me.BorrowDate, Me.ExpecteReturnDate, Me.Status, Me.Condition, Me.returndate, Me.conditionreturn})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.borrowedId, Me.requestID, Me.itemType, Me.itemId, Me.borrowerName, Me.borrowerPosition, Me.departmentId, Me.borrowDate, Me.expectedReturnDate, Me.actualReturnDate, Me.conditionOnReturn, Me.status, Me.remarks})
         Me.DataGridView1.Location = New System.Drawing.Point(4, 4)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.Size = New System.Drawing.Size(1267, 876)
         Me.DataGridView1.TabIndex = 2
-        '
-        'PropertyName
-        '
-        Me.PropertyName.HeaderText = "Borrow ID"
-        Me.PropertyName.MinimumWidth = 6
-        Me.PropertyName.Name = "PropertyName"
-        Me.PropertyName.Width = 125
-        '
-        'Category
-        '
-        Me.Category.HeaderText = "Property No."
-        Me.Category.MinimumWidth = 6
-        Me.Category.Name = "Category"
-        Me.Category.Width = 125
-        '
-        'Description
-        '
-        Me.Description.HeaderText = "Item Name"
-        Me.Description.MinimumWidth = 6
-        Me.Description.Name = "Description"
-        Me.Description.Width = 125
-        '
-        'UnitofMeasurement
-        '
-        Me.UnitofMeasurement.HeaderText = "Description"
-        Me.UnitofMeasurement.MinimumWidth = 6
-        Me.UnitofMeasurement.Name = "UnitofMeasurement"
-        Me.UnitofMeasurement.Width = 125
-        '
-        'BorrowQuantity
-        '
-        Me.BorrowQuantity.HeaderText = "Quantity"
-        Me.BorrowQuantity.MinimumWidth = 6
-        Me.BorrowQuantity.Name = "BorrowQuantity"
-        Me.BorrowQuantity.Width = 125
-        '
-        'BorrowDate
-        '
-        Me.BorrowDate.HeaderText = "Borrow Date"
-        Me.BorrowDate.MinimumWidth = 6
-        Me.BorrowDate.Name = "BorrowDate"
-        Me.BorrowDate.Width = 125
-        '
-        'ExpecteReturnDate
-        '
-        Me.ExpecteReturnDate.HeaderText = "Due Date"
-        Me.ExpecteReturnDate.MinimumWidth = 6
-        Me.ExpecteReturnDate.Name = "ExpecteReturnDate"
-        Me.ExpecteReturnDate.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Condition Before"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
-        '
-        'Condition
-        '
-        Me.Condition.HeaderText = "Status"
-        Me.Condition.MinimumWidth = 6
-        Me.Condition.Name = "Condition"
-        Me.Condition.Width = 125
-        '
-        'returndate
-        '
-        Me.returndate.HeaderText = "Return Date"
-        Me.returndate.MinimumWidth = 6
-        Me.returndate.Name = "returndate"
-        Me.returndate.Width = 125
-        '
-        'conditionreturn
-        '
-        Me.conditionreturn.HeaderText = "Condition Upon Return"
-        Me.conditionreturn.MinimumWidth = 6
-        Me.conditionreturn.Name = "conditionreturn"
-        Me.conditionreturn.Width = 125
         '
         'TableLayoutPanel1
         '
@@ -215,6 +140,97 @@ Partial Class frmBorrowedItem
         Me.pm_cbobx_categ.TabIndex = 184
         Me.pm_cbobx_categ.Text = "Categories"
         '
+        'borrowedId
+        '
+        Me.borrowedId.HeaderText = "Borrowed ID"
+        Me.borrowedId.MinimumWidth = 6
+        Me.borrowedId.Name = "borrowedId"
+        Me.borrowedId.Width = 125
+        '
+        'requestID
+        '
+        Me.requestID.HeaderText = "Request ID"
+        Me.requestID.MinimumWidth = 6
+        Me.requestID.Name = "requestID"
+        Me.requestID.Width = 125
+        '
+        'itemType
+        '
+        Me.itemType.HeaderText = "Item Type"
+        Me.itemType.MinimumWidth = 6
+        Me.itemType.Name = "itemType"
+        Me.itemType.Width = 125
+        '
+        'itemId
+        '
+        Me.itemId.HeaderText = "Item ID"
+        Me.itemId.MinimumWidth = 6
+        Me.itemId.Name = "itemId"
+        Me.itemId.Width = 125
+        '
+        'borrowerName
+        '
+        Me.borrowerName.HeaderText = "Borrower Name"
+        Me.borrowerName.MinimumWidth = 6
+        Me.borrowerName.Name = "borrowerName"
+        Me.borrowerName.Width = 125
+        '
+        'borrowerPosition
+        '
+        Me.borrowerPosition.HeaderText = "Borrower Position"
+        Me.borrowerPosition.MinimumWidth = 6
+        Me.borrowerPosition.Name = "borrowerPosition"
+        Me.borrowerPosition.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "Department ID"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'borrowDate
+        '
+        Me.borrowDate.HeaderText = "Borrow Date"
+        Me.borrowDate.MinimumWidth = 6
+        Me.borrowDate.Name = "borrowDate"
+        Me.borrowDate.Width = 125
+        '
+        'expectedReturnDate
+        '
+        Me.expectedReturnDate.HeaderText = "Expected Return Date"
+        Me.expectedReturnDate.MinimumWidth = 6
+        Me.expectedReturnDate.Name = "expectedReturnDate"
+        Me.expectedReturnDate.Width = 125
+        '
+        'actualReturnDate
+        '
+        Me.actualReturnDate.HeaderText = "Actual Return Date"
+        Me.actualReturnDate.MinimumWidth = 6
+        Me.actualReturnDate.Name = "actualReturnDate"
+        Me.actualReturnDate.Width = 125
+        '
+        'conditionOnReturn
+        '
+        Me.conditionOnReturn.HeaderText = "Condition On Return"
+        Me.conditionOnReturn.MinimumWidth = 6
+        Me.conditionOnReturn.Name = "conditionOnReturn"
+        Me.conditionOnReturn.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 125
+        '
+        'remarks
+        '
+        Me.remarks.HeaderText = "Remarks"
+        Me.remarks.MinimumWidth = 6
+        Me.remarks.Name = "remarks"
+        Me.remarks.Width = 125
+        '
         'frmBorrowedItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -242,20 +258,22 @@ Partial Class frmBorrowedItem
 
     Friend WithEvents lblBorrowed As Label
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents PropertyName As DataGridViewTextBoxColumn
-    Friend WithEvents Category As DataGridViewTextBoxColumn
-    Friend WithEvents Description As DataGridViewTextBoxColumn
-    Friend WithEvents UnitofMeasurement As DataGridViewTextBoxColumn
-    Friend WithEvents BorrowQuantity As DataGridViewTextBoxColumn
-    Friend WithEvents BorrowDate As DataGridViewTextBoxColumn
-    Friend WithEvents ExpecteReturnDate As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents Condition As DataGridViewTextBoxColumn
-    Friend WithEvents returndate As DataGridViewTextBoxColumn
-    Friend WithEvents conditionreturn As DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents borrowedItemsearchbar As TextBox
     Friend WithEvents pm_cbobx_status As ComboBox
     Friend WithEvents pm_cbobx_categ As ComboBox
+    Friend WithEvents borrowedId As DataGridViewTextBoxColumn
+    Friend WithEvents requestID As DataGridViewTextBoxColumn
+    Friend WithEvents itemType As DataGridViewTextBoxColumn
+    Friend WithEvents itemId As DataGridViewTextBoxColumn
+    Friend WithEvents borrowerName As DataGridViewTextBoxColumn
+    Friend WithEvents borrowerPosition As DataGridViewTextBoxColumn
+    Friend WithEvents departmentId As DataGridViewTextBoxColumn
+    Friend WithEvents borrowDate As DataGridViewTextBoxColumn
+    Friend WithEvents expectedReturnDate As DataGridViewTextBoxColumn
+    Friend WithEvents actualReturnDate As DataGridViewTextBoxColumn
+    Friend WithEvents conditionOnReturn As DataGridViewTextBoxColumn
+    Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents remarks As DataGridViewTextBoxColumn
 End Class

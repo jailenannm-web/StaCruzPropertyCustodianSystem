@@ -30,17 +30,6 @@ Partial Class UC_DepartmentManagement
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.admin_deptmanagement = New System.Windows.Forms.DataGridView()
-        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.headOfDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.floorNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.shortName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.officeCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.totalProperties = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.totalSupplies = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.departmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
@@ -49,6 +38,20 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.departmentmanagementsearchbar = New System.Windows.Forms.TextBox()
+        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.headOfDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.email = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.building = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.floorNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.shortName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.officeCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.totalProperties = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.totalSupplies = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -70,90 +73,13 @@ Partial Class UC_DepartmentManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.admin_deptmanagement.BackgroundColor = System.Drawing.Color.White
         Me.admin_deptmanagement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.admin_deptmanagement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.departmentId, Me.headOfDepartment, Me.contactNumber, Me.floorNumber, Me.shortName, Me.officeCode, Me.totalProperties, Me.totalSupplies, Me.createdAt, Me.updatedAt, Me.departmentName})
-        Me.admin_deptmanagement.Location = New System.Drawing.Point(59, 116)
+        Me.admin_deptmanagement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.departmentId, Me.departmentName, Me.headOfDepartment, Me.email, Me.contactNumber, Me.location, Me.building, Me.floorNumber, Me.shortName, Me.officeCode, Me.description, Me.totalProperties, Me.totalSupplies, Me.status})
+        Me.admin_deptmanagement.Location = New System.Drawing.Point(59, 115)
         Me.admin_deptmanagement.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_deptmanagement.Name = "admin_deptmanagement"
         Me.admin_deptmanagement.RowHeadersWidth = 51
         Me.admin_deptmanagement.Size = New System.Drawing.Size(1270, 573)
         Me.admin_deptmanagement.TabIndex = 147
-        '
-        'departmentId
-        '
-        Me.departmentId.HeaderText = "Department Id"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
-        '
-        'headOfDepartment
-        '
-        Me.headOfDepartment.HeaderText = "head Of Department"
-        Me.headOfDepartment.MinimumWidth = 6
-        Me.headOfDepartment.Name = "headOfDepartment"
-        Me.headOfDepartment.Width = 125
-        '
-        'contactNumber
-        '
-        Me.contactNumber.HeaderText = "contact Number"
-        Me.contactNumber.MinimumWidth = 6
-        Me.contactNumber.Name = "contactNumber"
-        Me.contactNumber.Width = 125
-        '
-        'floorNumber
-        '
-        Me.floorNumber.HeaderText = "floor Number"
-        Me.floorNumber.MinimumWidth = 6
-        Me.floorNumber.Name = "floorNumber"
-        Me.floorNumber.Width = 125
-        '
-        'shortName
-        '
-        Me.shortName.HeaderText = "short Name"
-        Me.shortName.MinimumWidth = 6
-        Me.shortName.Name = "shortName"
-        Me.shortName.Width = 125
-        '
-        'officeCode
-        '
-        Me.officeCode.HeaderText = "office Code"
-        Me.officeCode.MinimumWidth = 6
-        Me.officeCode.Name = "officeCode"
-        Me.officeCode.Width = 125
-        '
-        'totalProperties
-        '
-        Me.totalProperties.HeaderText = "total Properties"
-        Me.totalProperties.MinimumWidth = 6
-        Me.totalProperties.Name = "totalProperties"
-        Me.totalProperties.Width = 125
-        '
-        'totalSupplies
-        '
-        Me.totalSupplies.HeaderText = "total Supplies"
-        Me.totalSupplies.MinimumWidth = 6
-        Me.totalSupplies.Name = "totalSupplies"
-        Me.totalSupplies.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
-        '
-        'departmentName
-        '
-        Me.departmentName.HeaderText = "Department Name"
-        Me.departmentName.MinimumWidth = 6
-        Me.departmentName.Name = "departmentName"
-        Me.departmentName.Width = 125
         '
         'ttldepartmentmanagement
         '
@@ -257,6 +183,104 @@ Partial Class UC_DepartmentManagement
         Me.departmentmanagementsearchbar.Size = New System.Drawing.Size(367, 42)
         Me.departmentmanagementsearchbar.TabIndex = 158
         '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "Department ID"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'departmentName
+        '
+        Me.departmentName.HeaderText = "Department Name"
+        Me.departmentName.MinimumWidth = 6
+        Me.departmentName.Name = "departmentName"
+        Me.departmentName.Width = 125
+        '
+        'headOfDepartment
+        '
+        Me.headOfDepartment.HeaderText = "Head of Department"
+        Me.headOfDepartment.MinimumWidth = 6
+        Me.headOfDepartment.Name = "headOfDepartment"
+        Me.headOfDepartment.Width = 125
+        '
+        'email
+        '
+        Me.email.HeaderText = "Email"
+        Me.email.MinimumWidth = 6
+        Me.email.Name = "email"
+        Me.email.Width = 125
+        '
+        'contactNumber
+        '
+        Me.contactNumber.HeaderText = "Contact Number"
+        Me.contactNumber.MinimumWidth = 6
+        Me.contactNumber.Name = "contactNumber"
+        Me.contactNumber.Width = 125
+        '
+        'location
+        '
+        Me.location.HeaderText = "Location"
+        Me.location.MinimumWidth = 6
+        Me.location.Name = "location"
+        Me.location.Width = 125
+        '
+        'building
+        '
+        Me.building.HeaderText = "Building"
+        Me.building.MinimumWidth = 6
+        Me.building.Name = "building"
+        Me.building.Width = 125
+        '
+        'floorNumber
+        '
+        Me.floorNumber.HeaderText = "Floor Number"
+        Me.floorNumber.MinimumWidth = 6
+        Me.floorNumber.Name = "floorNumber"
+        Me.floorNumber.Width = 125
+        '
+        'shortName
+        '
+        Me.shortName.HeaderText = "Short Name"
+        Me.shortName.MinimumWidth = 6
+        Me.shortName.Name = "shortName"
+        Me.shortName.Width = 125
+        '
+        'officeCode
+        '
+        Me.officeCode.HeaderText = "Office Code"
+        Me.officeCode.MinimumWidth = 6
+        Me.officeCode.Name = "officeCode"
+        Me.officeCode.Width = 125
+        '
+        'description
+        '
+        Me.description.HeaderText = "Description"
+        Me.description.MinimumWidth = 6
+        Me.description.Name = "description"
+        Me.description.Width = 125
+        '
+        'totalProperties
+        '
+        Me.totalProperties.HeaderText = "Total Properties"
+        Me.totalProperties.MinimumWidth = 6
+        Me.totalProperties.Name = "totalProperties"
+        Me.totalProperties.Width = 125
+        '
+        'totalSupplies
+        '
+        Me.totalSupplies.HeaderText = "Total Supplies"
+        Me.totalSupplies.MinimumWidth = 6
+        Me.totalSupplies.Name = "totalSupplies"
+        Me.totalSupplies.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 125
+        '
         'UC_DepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -289,17 +313,20 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents pm_cbobx_categ As ComboBox
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents departmentmanagementsearchbar As TextBox
     Friend WithEvents departmentId As DataGridViewTextBoxColumn
+    Friend WithEvents departmentName As DataGridViewTextBoxColumn
     Friend WithEvents headOfDepartment As DataGridViewTextBoxColumn
+    Friend WithEvents email As DataGridViewTextBoxColumn
     Friend WithEvents contactNumber As DataGridViewTextBoxColumn
+    Friend WithEvents location As DataGridViewTextBoxColumn
+    Friend WithEvents building As DataGridViewTextBoxColumn
     Friend WithEvents floorNumber As DataGridViewTextBoxColumn
     Friend WithEvents shortName As DataGridViewTextBoxColumn
     Friend WithEvents officeCode As DataGridViewTextBoxColumn
+    Friend WithEvents description As DataGridViewTextBoxColumn
     Friend WithEvents totalProperties As DataGridViewTextBoxColumn
     Friend WithEvents totalSupplies As DataGridViewTextBoxColumn
-    Friend WithEvents createdAt As DataGridViewTextBoxColumn
-    Friend WithEvents updatedAt As DataGridViewTextBoxColumn
-    Friend WithEvents departmentName As DataGridViewTextBoxColumn
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents departmentmanagementsearchbar As TextBox
+    Friend WithEvents status As DataGridViewTextBoxColumn
 End Class
