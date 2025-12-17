@@ -5,6 +5,7 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Imports System.Linq
+Imports System.Globalization
 
 Public Class UC_PropertyManagement1
     Inherits UserControl
@@ -78,7 +79,12 @@ Public Class UC_PropertyManagement1
             Dim categoryFilter As String = ""
             Dim statusFilter As String = ""
 
-            Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, "", categoryFilter, Nothing)
+            ' Get status filter from dropdown
+            If pm_cbobx_status.SelectedIndex > 0 Then
+                statusFilter = pm_cbobx_status.SelectedItem.ToString()
+            End If
+
+            Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, "", categoryFilter, Nothing, statusFilter)
             originalData = dt.Copy()
 
             If dt.Rows.Count > 0 Then
@@ -200,7 +206,7 @@ Public Class UC_PropertyManagement1
         ' Use the originalData DataTable to get full property details
         Dim propertyRow As DataRow = Nothing
         If originalData IsNot Nothing Then
-            Dim rows() As DataRow = originalData.Select("property_id = " & propertyID)
+            Dim rows() As DataRow = originalData.Select("propertyId = " & propertyID)
             If rows.Length > 0 Then
                 propertyRow = rows(0)
             End If
@@ -208,39 +214,68 @@ Public Class UC_PropertyManagement1
 
         ' If we have the property row, use it; otherwise use DataGridView cells
         If propertyRow IsNot Nothing Then
+            ' Read values defensively using helpers that tolerate multiple column name variants and cultures
+            Dim propName As String = If(propertyRow.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(propertyRow("itemName")), propertyRow("itemName").ToString(), If(propertyManagementGrid.Columns.Contains("itemName") AndAlso row.Cells("itemName").Value IsNot Nothing, row.Cells("itemName").Value.ToString(), ""))
+            Dim propCategory As String = If(propertyRow.Table.Columns.Contains("category") AndAlso Not IsDBNull(propertyRow("category")), propertyRow("category").ToString(), If(propertyManagementGrid.Columns.Contains("category") AndAlso row.Cells("category").Value IsNot Nothing, row.Cells("category").Value.ToString(), ""))
+            Dim propSerial As String = If(propertyRow.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(propertyRow("serialNumber")), propertyRow("serialNumber").ToString(), If(propertyManagementGrid.Columns.Contains("serialNumber") AndAlso row.Cells("serialNumber").Value IsNot Nothing, row.Cells("serialNumber").Value.ToString(), ""))
+            Dim propSupplier As String = If(propertyRow.Table.Columns.Contains("supplier") AndAlso Not IsDBNull(propertyRow("supplier")), propertyRow("supplier").ToString(), "")
+            Dim propCondition As String = If(propertyRow.Table.Columns.Contains("condition") AndAlso Not IsDBNull(propertyRow("condition")), propertyRow("condition").ToString(), If(propertyManagementGrid.Columns.Contains("condition") AndAlso row.Cells("condition").Value IsNot Nothing, row.Cells("condition").Value.ToString(), ""))
+
+            Dim cost As Decimal = ReadDecimalFromRow(propertyRow, New String() {"acquisitionCost", "acquisition_cost"})
+            Dim datePurchased As Date = ParseDateCell(If(propertyRow.Table.Columns.Contains("acquisitionDate"), propertyRow("acquisitionDate"), If(propertyRow.Table.Columns.Contains("acquisition_date"), propertyRow("acquisition_date"), Nothing)), Date.Today)
+            Dim warrantyExp As Date = Date.Today.AddYears(1)
+            Dim assignedEmployee As String = If(propertyRow.Table.Columns.Contains("assignedTo") AndAlso Not IsDBNull(propertyRow("assignedTo")), propertyRow("assignedTo").ToString(), If(propertyManagementGrid.Columns.Contains("assignedTo") AndAlso row.Cells("assignedTo").Value IsNot Nothing, row.Cells("assignedTo").Value.ToString(), ""))
+            Dim assignedDepartment As String = If(propertyRow.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(propertyRow("departmentId")), propertyRow("departmentId").ToString(), If(propertyManagementGrid.Columns.Contains("department") AndAlso row.Cells("department").Value IsNot Nothing, row.Cells("department").Value.ToString(), ""))
+            Dim loc As String = If(propertyRow.Table.Columns.Contains("location") AndAlso Not IsDBNull(propertyRow("location")), propertyRow("location").ToString(), If(propertyManagementGrid.Columns.Contains("location") AndAlso row.Cells("location").Value IsNot Nothing, row.Cells("location").Value.ToString(), ""))
+            Dim st As String = If(propertyRow.Table.Columns.Contains("status") AndAlso Not IsDBNull(propertyRow("status")), propertyRow("status").ToString(), If(propertyManagementGrid.Columns.Contains("status") AndAlso row.Cells("status").Value IsNot Nothing, row.Cells("status").Value.ToString(), ""))
+            Dim createdAt As Date = ParseDateCell(If(propertyRow.Table.Columns.Contains("createdAt"), propertyRow("createdAt"), If(propertyRow.Table.Columns.Contains("created_at"), propertyRow("created_at"), Nothing)), Date.Now)
+            Dim updatedAt As Date = ParseDateCell(If(propertyRow.Table.Columns.Contains("updatedAt"), propertyRow("updatedAt"), If(propertyRow.Table.Columns.Contains("updated_at"), propertyRow("updated_at"), Nothing)), Date.Now)
+
             editForm.LoadPropertyData(
                 propertyID,
-                If(propertyRow.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(propertyRow("item_name")), propertyRow("item_name").ToString(), If(row.Cells("itemName").Value IsNot Nothing, row.Cells("itemName").Value.ToString(), "")),
-                If(propertyRow.Table.Columns.Contains("category") AndAlso Not IsDBNull(propertyRow("category")), propertyRow("category").ToString(), If(row.Cells("category").Value IsNot Nothing, row.Cells("category").Value.ToString(), "")),
-                If(propertyRow.Table.Columns.Contains("serial_number") AndAlso Not IsDBNull(propertyRow("serial_number")), propertyRow("serial_number").ToString(), If(row.Cells("serialNumber").Value IsNot Nothing, row.Cells("serialNumber").Value.ToString(), "")),
-                If(propertyRow.Table.Columns.Contains("supplier_name") AndAlso Not IsDBNull(propertyRow("supplier_name")), propertyRow("supplier_name").ToString(), ""),
-                If(propertyRow.Table.Columns.Contains("condition") AndAlso Not IsDBNull(propertyRow("condition")), propertyRow("condition").ToString(), If(row.Cells("condition").Value IsNot Nothing, row.Cells("condition").Value.ToString(), "")),
-                If(propertyRow.Table.Columns.Contains("acquisition_cost") AndAlso Not IsDBNull(propertyRow("acquisition_cost")), Decimal.Parse(propertyRow("acquisition_cost").ToString()), If(row.Cells("acquisitionCost").Value IsNot Nothing, Decimal.Parse(row.Cells("acquisitionCost").Value.ToString()), 0)),
-                If(propertyRow.Table.Columns.Contains("acquisition_date") AndAlso Not IsDBNull(propertyRow("acquisition_date")), ParseDateCell(propertyRow("acquisition_date")), If(row.Cells("acquisitionDate").Value IsNot Nothing, ParseDateCell(row.Cells("acquisitionDate").Value), Date.Today)),
-                Date.Today.AddYears(1), ' Warranty expiration - not in grid, use default
-                If(propertyRow.Table.Columns.Contains("assigned_employee") AndAlso Not IsDBNull(propertyRow("assigned_employee")), propertyRow("assigned_employee").ToString(), If(row.Cells("assignedTo").Value IsNot Nothing, row.Cells("assignedTo").Value.ToString(), "")),
-                If(propertyRow.Table.Columns.Contains("assigned_department") AndAlso Not IsDBNull(propertyRow("assigned_department")), propertyRow("assigned_department").ToString(), If(row.Cells("department").Value IsNot Nothing, row.Cells("department").Value.ToString(), "")),
-                If(propertyRow.Table.Columns.Contains("location") AndAlso Not IsDBNull(propertyRow("location")), propertyRow("location").ToString(), If(row.Cells("location").Value IsNot Nothing, row.Cells("location").Value.ToString(), "")),
-                If(propertyRow.Table.Columns.Contains("status") AndAlso Not IsDBNull(propertyRow("status")), propertyRow("status").ToString(), If(row.Cells("status").Value IsNot Nothing, row.Cells("status").Value.ToString(), "")),
-                If(propertyRow.Table.Columns.Contains("created_at") AndAlso Not IsDBNull(propertyRow("created_at")), ParseDateCell(propertyRow("created_at")), Date.Now),
-                If(propertyRow.Table.Columns.Contains("updated_at") AndAlso Not IsDBNull(propertyRow("updated_at")), ParseDateCell(propertyRow("updated_at")), Date.Now)
+                propName,
+                propCategory,
+                propSerial,
+                propSupplier,
+                propCondition,
+                cost,
+                datePurchased,
+                warrantyExp,
+                assignedEmployee,
+                assignedDepartment,
+                loc,
+                st,
+                createdAt,
+                updatedAt
             )
         Else
             ' Fallback to DataGridView cells if originalData is not available
+            Dim propName As String = If(propertyManagementGrid.Columns.Contains("itemName") AndAlso row.Cells("itemName").Value IsNot Nothing, row.Cells("itemName").Value.ToString(), "")
+            Dim propCategory As String = If(propertyManagementGrid.Columns.Contains("category") AndAlso row.Cells("category").Value IsNot Nothing, row.Cells("category").Value.ToString(), "")
+            Dim propSerial As String = If(propertyManagementGrid.Columns.Contains("serialNumber") AndAlso row.Cells("serialNumber").Value IsNot Nothing, row.Cells("serialNumber").Value.ToString(), "")
+            Dim propCondition As String = If(propertyManagementGrid.Columns.Contains("condition") AndAlso row.Cells("condition").Value IsNot Nothing, row.Cells("condition").Value.ToString(), "")
+            Dim cost As Decimal = ReadDecimalFromGridCell(row, "acquisitionCost")
+            Dim datePurchased As Date = ParseDateCell(GetCellValueOrNothing(row, "acquisitionDate"), Date.Today)
+            Dim warrantyExp As Date = Date.Today.AddYears(1)
+            Dim assignedEmployee As String = If(propertyManagementGrid.Columns.Contains("assignedTo") AndAlso row.Cells("assignedTo").Value IsNot Nothing, row.Cells("assignedTo").Value.ToString(), "")
+            Dim assignedDepartment As String = If(propertyManagementGrid.Columns.Contains("department") AndAlso row.Cells("department").Value IsNot Nothing, row.Cells("department").Value.ToString(), "")
+            Dim loc As String = If(propertyManagementGrid.Columns.Contains("location") AndAlso row.Cells("location").Value IsNot Nothing, row.Cells("location").Value.ToString(), "")
+            Dim st As String = If(propertyManagementGrid.Columns.Contains("status") AndAlso row.Cells("status").Value IsNot Nothing, row.Cells("status").Value.ToString(), "")
+
             editForm.LoadPropertyData(
                 propertyID,
-                If(row.Cells("itemName").Value IsNot Nothing, row.Cells("itemName").Value.ToString(), ""),
-                If(row.Cells("category").Value IsNot Nothing, row.Cells("category").Value.ToString(), ""),
-                If(row.Cells("serialNumber").Value IsNot Nothing, row.Cells("serialNumber").Value.ToString(), ""),
+                propName,
+                propCategory,
+                propSerial,
                 "", ' Supplier not in grid
-                If(row.Cells("condition").Value IsNot Nothing, row.Cells("condition").Value.ToString(), ""),
-                If(row.Cells("acquisitionCost").Value IsNot Nothing, Decimal.Parse(row.Cells("acquisitionCost").Value.ToString()), 0),
-                If(row.Cells("acquisitionDate").Value IsNot Nothing, ParseDateCell(row.Cells("acquisitionDate").Value), Date.Today),
-                Date.Today.AddYears(1),
-                If(row.Cells("assignedTo").Value IsNot Nothing, row.Cells("assignedTo").Value.ToString(), ""),
-                If(row.Cells("department").Value IsNot Nothing, row.Cells("department").Value.ToString(), ""),
-                If(row.Cells("location").Value IsNot Nothing, row.Cells("location").Value.ToString(), ""),
-                If(row.Cells("status").Value IsNot Nothing, row.Cells("status").Value.ToString(), ""),
+                propCondition,
+                cost,
+                datePurchased,
+                warrantyExp,
+                assignedEmployee,
+                assignedDepartment,
+                loc,
+                st,
                 Date.Now,
                 Date.Now
             )
@@ -311,6 +346,10 @@ Public Class UC_PropertyManagement1
             If Not String.IsNullOrEmpty(stringValue) AndAlso Date.TryParse(stringValue, parsed) Then
                 Return parsed
             End If
+            ' If the object is already a Date type, return it
+            If TypeOf cellValue Is Date Then
+                Return CType(cellValue, Date)
+            End If
         End If
 
         Return If(fallback.HasValue, fallback.Value, Date.Today)
@@ -347,7 +386,7 @@ Public Class UC_PropertyManagement1
         End If
 
         ' Find the DataRow in originalData
-        Dim rows() As DataRow = originalData.Select("property_id = " & propertyID)
+        Dim rows() As DataRow = originalData.Select("propertyId = " & propertyID)
         If rows.Length = 0 Then
             MessageBox.Show("Property data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
@@ -394,4 +433,40 @@ Public Class UC_PropertyManagement1
         MessageBox.Show("Print PAR/ICS clicked!")
     End Sub
 
+    Private Function ReadDecimalFromRow(row As DataRow, colNames As String()) As Decimal
+        For Each n In colNames
+            If row.Table.Columns.Contains(n) AndAlso Not IsDBNull(row(n)) Then
+                Dim obj = row(n)
+                If TypeOf obj Is Decimal OrElse TypeOf obj Is Double OrElse TypeOf obj Is Single Then
+                    Return Convert.ToDecimal(obj)
+                End If
+                Dim s = obj.ToString().Trim()
+                Dim d As Decimal
+                If Decimal.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, d) Then Return d
+                If Decimal.TryParse(s, NumberStyles.Any, CultureInfo.CurrentCulture, d) Then Return d
+            End If
+        Next
+        Return 0D
+    End Function
+
+    Private Function ReadDecimalFromGridCell(row As DataGridViewRow, columnName As String) As Decimal
+        If row Is Nothing Then Return 0D
+        If Not propertyManagementGrid.Columns.Contains(columnName) Then
+            ' Try common alternate column name used in the UI (acqCost)
+            If propertyManagementGrid.Columns.Contains("acqCost") Then columnName = "acqCost" Else Return 0D
+        End If
+
+        Dim obj = row.Cells(columnName).Value
+        If obj Is Nothing OrElse IsDBNull(obj) Then Return 0D
+        If TypeOf obj Is Decimal OrElse TypeOf obj Is Double OrElse TypeOf obj Is Single Then
+            Return Convert.ToDecimal(obj)
+        End If
+
+        Dim s = obj.ToString().Trim()
+        Dim d As Decimal
+        If Decimal.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, d) Then Return d
+        If Decimal.TryParse(s, NumberStyles.Any, CultureInfo.CurrentCulture, d) Then Return d
+
+        Return 0D
+    End Function
 End Class

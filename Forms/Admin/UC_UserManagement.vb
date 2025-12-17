@@ -97,9 +97,9 @@ Public Class UC_UserManagement
             For Each record As DataRow In records.Rows
 
                 ' ===== BUILD FULL NAME FROM 4 COLUMNS =====
-                Dim firstName As String = SafeValue(record, "first_name")
-                Dim middleName As String = SafeValue(record, "middle_name")
-                Dim lastName As String = SafeValue(record, "last_name")
+                Dim firstName As String = SafeValue(record, "firstName")
+                Dim middleName As String = SafeValue(record, "middleName")
+                Dim lastName As String = SafeValue(record, "lastName")
                 Dim suffix As String = SafeValue(record, "suffix")
 
                 ' ===== ADD ROW TO DATAGRIDVIEW IN CORRECT COLUMN ORDER =====
@@ -135,10 +135,10 @@ Public Class UC_UserManagement
 
                 Dim dateAssignedValue As Object = DBNull.Value
 
-                If record.Table.Columns.Contains("date_assigned") AndAlso Not record.IsNull("date_assigned") Then
-                    dateAssignedValue = record("date_assigned")
-                ElseIf record.Table.Columns.Contains("created_at") AndAlso Not record.IsNull("created_at") Then
-                    dateAssignedValue = record("created_at")
+                If record.Table.Columns.Contains("dateAssigned") AndAlso Not record.IsNull("dateAssigned") Then
+                    dateAssignedValue = record("dateAssigned")
+                ElseIf record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt") Then
+                    dateAssignedValue = record("createdAt")
                 End If
 
                 pm_table.Rows(rowIndex).Tag = New UserRowMetadata With {
@@ -146,8 +146,8 @@ Public Class UC_UserManagement
                     .EmployeeID = SafeValue(record, "employee_id"),
                     .DateAssigned = dateAssignedValue,
                     .CreatedAt = If(
-                        record.Table.Columns.Contains("created_at") AndAlso Not record.IsNull("created_at"),
-                        record("created_at"),
+                        record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"),
+                        record("createdAt"),
                         DBNull.Value
                     )
                 }

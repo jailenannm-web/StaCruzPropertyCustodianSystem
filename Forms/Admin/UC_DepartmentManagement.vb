@@ -131,18 +131,18 @@ Public Class UC_DepartmentManagement
                                                                  End Function)
 
             For Each row As DataRow In filteredRows
-                ' Use safe column access - Match Designer column order
-                Dim deptID As String = If(row.Table.Columns.Contains("department_id") AndAlso Not IsDBNull(row("department_id")), row("department_id").ToString(), "")
-                Dim headOfDept As String = If(row.Table.Columns.Contains("head_of_department") AndAlso Not IsDBNull(row("head_of_department")), row("head_of_department").ToString(), "")
-                Dim contactNum As String = If(row.Table.Columns.Contains("contact_number") AndAlso Not IsDBNull(row("contact_number")), row("contact_number").ToString(), "")
-                Dim floorNum As String = If(row.Table.Columns.Contains("floor_number") AndAlso Not IsDBNull(row("floor_number")), row("floor_number").ToString(), "")
-                Dim shortName As String = If(row.Table.Columns.Contains("short_name") AndAlso Not IsDBNull(row("short_name")), row("short_name").ToString(), "")
-                Dim officeCode As String = If(row.Table.Columns.Contains("office_code") AndAlso Not IsDBNull(row("office_code")), row("office_code").ToString(), "")
-                Dim totalProps As String = If(row.Table.Columns.Contains("total_properties") AndAlso Not IsDBNull(row("total_properties")), row("total_properties").ToString(), "0")
-                Dim totalSupplies As String = If(row.Table.Columns.Contains("total_supplies") AndAlso Not IsDBNull(row("total_supplies")), row("total_supplies").ToString(), "0")
-                Dim createdAt As String = If(row.Table.Columns.Contains("created_at") AndAlso Not IsDBNull(row("created_at")), Convert.ToDateTime(row("created_at")).ToString("yyyy-MM-dd"), "")
-                Dim updatedAt As String = If(row.Table.Columns.Contains("updated_at") AndAlso Not IsDBNull(row("updated_at")), Convert.ToDateTime(row("updated_at")).ToString("yyyy-MM-dd"), "")
-                Dim deptName As String = If(row.Table.Columns.Contains("department_name") AndAlso Not IsDBNull(row("department_name")), row("department_name").ToString(), "")
+                ' Use safe column access - Match camelCase column names from database
+                Dim deptID As String = If(row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")), row("departmentId").ToString(), "")
+                Dim headOfDept As String = If(row.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(row("headOfDepartment")), row("headOfDepartment").ToString(), "")
+                Dim contactNum As String = If(row.Table.Columns.Contains("contactNumber") AndAlso Not IsDBNull(row("contactNumber")), row("contactNumber").ToString(), "")
+                Dim floorNum As String = If(row.Table.Columns.Contains("floorNumber") AndAlso Not IsDBNull(row("floorNumber")), row("floorNumber").ToString(), "")
+                Dim shortName As String = If(row.Table.Columns.Contains("shortName") AndAlso Not IsDBNull(row("shortName")), row("shortName").ToString(), "")
+                Dim officeCode As String = If(row.Table.Columns.Contains("officeCode") AndAlso Not IsDBNull(row("officeCode")), row("officeCode").ToString(), "")
+                Dim totalProps As String = If(row.Table.Columns.Contains("totalProperties") AndAlso Not IsDBNull(row("totalProperties")), row("totalProperties").ToString(), "0")
+                Dim totalSupplies As String = If(row.Table.Columns.Contains("totalSupplies") AndAlso Not IsDBNull(row("totalSupplies")), row("totalSupplies").ToString(), "0")
+                Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
+                Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
+                Dim deptName As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString(), "")
                 
                 admin_deptmanagement.Rows.Add(deptID, headOfDept, contactNum, floorNum, shortName, officeCode, totalProps, totalSupplies, createdAt, updatedAt, deptName)
             Next
@@ -263,6 +263,10 @@ Public Class UC_DepartmentManagement
     End Sub
 
     Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles departmentmanagementsearchbar.TextChanged
 
     End Sub
 End Class

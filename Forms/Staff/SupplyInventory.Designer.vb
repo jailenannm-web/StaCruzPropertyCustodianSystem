@@ -34,8 +34,13 @@ Partial Class SupplyInventory
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnrequestsupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.supplyinventorysearchbar = New System.Windows.Forms.TextBox()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
+        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'propertyManagementGrid
@@ -154,10 +159,60 @@ Partial Class SupplyInventory
         Me.btnrequestsupply.Text = "Request Supply"
         Me.btnrequestsupply.UseVisualStyleBackColor = False
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(415, 87)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 186
+        Me.PictureBox2.TabStop = False
+        '
+        'supplyinventorysearchbar
+        '
+        Me.supplyinventorysearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.supplyinventorysearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.supplyinventorysearchbar.Location = New System.Drawing.Point(480, 87)
+        Me.supplyinventorysearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.supplyinventorysearchbar.Name = "supplyinventorysearchbar"
+        Me.supplyinventorysearchbar.Size = New System.Drawing.Size(367, 42)
+        Me.supplyinventorysearchbar.TabIndex = 185
+        '
+        'pm_cbobx_status
+        '
+        Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1062, 98)
+        Me.pm_cbobx_status.Name = "pm_cbobx_status"
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
+        Me.pm_cbobx_status.TabIndex = 183
+        Me.pm_cbobx_status.Text = "Status"
+        '
+        'pm_cbobx_categ
+        '
+        Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(887, 98)
+        Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
+        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
+        Me.pm_cbobx_categ.TabIndex = 184
+        Me.pm_cbobx_categ.Text = "Categories"
+        '
         'SupplyInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.supplyinventorysearchbar)
+        Me.Controls.Add(Me.pm_cbobx_status)
+        Me.Controls.Add(Me.pm_cbobx_categ)
         Me.Controls.Add(Me.btnrequestsupply)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.Label3)
@@ -165,6 +220,7 @@ Partial Class SupplyInventory
         Me.Size = New System.Drawing.Size(1467, 1175)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -182,4 +238,8 @@ Partial Class SupplyInventory
     Friend WithEvents stockstatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnrequestsupply As Resources.Controls.RoundedButton
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents supplyinventorysearchbar As System.Windows.Forms.TextBox
+    Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
+    Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox
 End Class

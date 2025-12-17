@@ -35,8 +35,13 @@ Partial Class MaintenanceRequest
         Me.ConditionStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.maintenancerequestssearchbar = New System.Windows.Forms.TextBox()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
+        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label3
@@ -160,10 +165,60 @@ Partial Class MaintenanceRequest
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1275, 884)
         Me.TableLayoutPanel1.TabIndex = 178
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(494, 73)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 182
+        Me.PictureBox2.TabStop = False
+        '
+        'maintenancerequestssearchbar
+        '
+        Me.maintenancerequestssearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.maintenancerequestssearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.maintenancerequestssearchbar.Location = New System.Drawing.Point(559, 73)
+        Me.maintenancerequestssearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.maintenancerequestssearchbar.Name = "maintenancerequestssearchbar"
+        Me.maintenancerequestssearchbar.Size = New System.Drawing.Size(367, 42)
+        Me.maintenancerequestssearchbar.TabIndex = 181
+        '
+        'pm_cbobx_status
+        '
+        Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1141, 84)
+        Me.pm_cbobx_status.Name = "pm_cbobx_status"
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
+        Me.pm_cbobx_status.TabIndex = 179
+        Me.pm_cbobx_status.Text = "Status"
+        '
+        'pm_cbobx_categ
+        '
+        Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(966, 84)
+        Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
+        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
+        Me.pm_cbobx_categ.TabIndex = 180
+        Me.pm_cbobx_categ.Text = "Categories"
+        '
         'MaintenanceRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.maintenancerequestssearchbar)
+        Me.Controls.Add(Me.pm_cbobx_status)
+        Me.Controls.Add(Me.pm_cbobx_categ)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.RoundedButton1)
         Me.Controls.Add(Me.Label3)
@@ -171,6 +226,7 @@ Partial Class MaintenanceRequest
         Me.Size = New System.Drawing.Size(1467, 1175)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -188,4 +244,8 @@ Partial Class MaintenanceRequest
     Friend WithEvents ConditionStatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Protected Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Protected Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents maintenancerequestssearchbar As System.Windows.Forms.TextBox
+    Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
+    Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox
 End Class

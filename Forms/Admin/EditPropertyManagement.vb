@@ -31,7 +31,77 @@ Public Class EditPropertyManagement
         End If
 
         If conditionStatusCmbo.Items.Count = 0 Then
-            conditionStatusCmbo.Items.AddRange(New Object() {"good", "needs repair", "damaged"})
+            conditionStatusCmbo.Items.AddRange(New Object() {"New", "Good", "Fair", "Damaged", "For Repair"})
+        End If
+
+        ' Load departments
+        LoadDepartments()
+        LoadSuppliers()
+
+        ' Wire up department change event for cascading employee dropdown
+        AddHandler txtAssignedDepartment.SelectedIndexChanged, AddressOf txtAssignedDepartment_SelectedIndexChanged
+    End Sub
+
+    Private Sub LoadSuppliers()
+        Try
+            Dim suppliersTable As DataTable = DatabaseConnection.GetSuppliers()
+            If suppliersTable IsNot Nothing AndAlso suppliersTable.Rows.Count > 0 Then
+                If txtSupplier IsNot Nothing AndAlso TypeOf txtSupplier Is ComboBox Then
+                    Dim supplierCombo As ComboBox = CType(txtSupplier, ComboBox)
+                    supplierCombo.DataSource = suppliersTable
+                    supplierCombo.DisplayMember = "supplier_name"
+                    supplierCombo.ValueMember = "supplier_name"
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] EditPropertyManagement.LoadSuppliers Exception: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub LoadDepartments()
+        Try
+            Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
+            If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 Then
+                txtAssignedDepartment.DataSource = deptTable
+                txtAssignedDepartment.DisplayMember = "department_name"
+                txtAssignedDepartment.ValueMember = "department_id"
+            Else
+                txtAssignedDepartment.Items.Clear()
+                txtAssignedDepartment.Items.Add("No Departments Available")
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] EditPropertyManagement.LoadDepartments Exception: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub LoadEmployeesByDepartment(departmentID As Integer)
+        Try
+            Dim usersTable As DataTable = DatabaseConnection.GetUsersByDepartment(departmentID)
+            If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 Then
+                txtAssignedEmployee.DataSource = usersTable
+                txtAssignedEmployee.DisplayMember = "fullName"
+                txtAssignedEmployee.ValueMember = "userId"
+            Else
+                txtAssignedEmployee.Items.Clear()
+                txtAssignedEmployee.Items.Add("No employees in this department")
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] EditPropertyManagement.LoadEmployeesByDepartment Exception: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub txtAssignedDepartment_SelectedIndexChanged(sender As Object, e As EventArgs)
+        ' When department changes, reload employees for that department
+        If txtAssignedDepartment.SelectedValue IsNot Nothing Then
+            Dim deptID As Integer
+            If TypeOf txtAssignedDepartment.SelectedValue Is DataRowView Then
+                Dim drv As DataRowView = CType(txtAssignedDepartment.SelectedValue, DataRowView)
+                If Integer.TryParse(drv.Row("department_id").ToString(), deptID) Then
+                    LoadEmployeesByDepartment(deptID)
+                End If
+            ElseIf Integer.TryParse(txtAssignedDepartment.SelectedValue.ToString(), deptID) Then
+                LoadEmployeesByDepartment(deptID)
+            End If
         End If
     End Sub
 
@@ -45,20 +115,76 @@ Public Class EditPropertyManagement
         End If
 
         txtpropertyID.Text = propertyID.ToString()
-        txtPropertyName.Text = SafeValue("item_name")
+        txtPropertyName.Text = SafeValue("itemName")
         SelectComboValue(cboCategory, SafeValue("category"))
-        txtSerialNumber.Text = SafeValue("serial_number")
-        txtSupplier.Text = SafeValue("supplier_name")
-        SelectComboValue(conditionStatusCmbo, SafeValue("condition_status"))
-        txtCost.Text = SafeDecimal("acquisition_cost").ToString("0.00")
-        dtpDatePurchased.Value = ParseDate("acquisition_date", Date.Today)
-        dtpWarrantyExpiration.Value = ParseDate("updated_at", Date.Today)
-        txtAssignedEmployee.Text = SafeValue("custodian_id")
-        txtAssignedDepartment.Text = SafeValue("department_id")
+        txtSerialNumber.Text = SafeValue("serialNumber")
+        ' Set supplier from dropdown if it's a ComboBox, otherwise use TextBox
+        Dim supplierValue As String = SafeValue("supplier")
+        If txtSupplier IsNot Nothing Then
+            If TypeOf txtSupplier Is ComboBox Then
+                Dim supplierCombo As ComboBox = CType(txtSupplier, ComboBox)
+                Dim supplierIndex As Integer = supplierCombo.FindStringExact(supplierValue)
+                If supplierIndex >= 0 Then
+                    supplierCombo.SelectedIndex = supplierIndex
+                Else
+                    supplierCombo.Text = supplierValue
+                End If
+            Else
+                txtSupplier.Text = supplierValue
+            End If
+        End If
+        ' Fix condition value to match dropdown options
+        Dim conditionValue As String = SafeValue("condition")
+        If String.IsNullOrEmpty(conditionValue) Then conditionValue = "New"
+        ' Map old values to new values
+        If conditionValue.Equals("Needs Repair", StringComparison.OrdinalIgnoreCase) Then conditionValue = "For Repair"
+        If conditionValue.Equals("good", StringComparison.OrdinalIgnoreCase) Then conditionValue = "Good"
+        If conditionValue.Equals("damaged", StringComparison.OrdinalIgnoreCase) Then conditionValue = "Damaged"
+        SelectComboValue(conditionStatusCmbo, conditionValue)
+        txtCost.Text = SafeDecimal("acquisitionCost").ToString("0.00")
+        dtpDatePurchased.Value = ParseDate("acquisitionDate", Date.Today)
+        dtpWarrantyExpiration.Value = ParseDate("updatedAt", Date.Today)
+
+        ' Show employee name instead of ID
+        Dim employeeName As String = SafeValue("assignedEmployee")
+        If String.IsNullOrEmpty(employeeName) Then
+            Dim assignedToID As String = SafeValue("assignedTo")
+            If Not String.IsNullOrEmpty(assignedToID) Then
+                employeeName = "User ID: " & assignedToID
+            End If
+        End If
+        txtAssignedEmployee.Text = employeeName
+
+        ' Load department dropdown and set selected value
+        Dim deptID As String = SafeValue("departmentId")
+        If Not String.IsNullOrEmpty(deptID) Then
+            Dim deptIDInt As Integer
+            If Integer.TryParse(deptID, deptIDInt) Then
+                ' Refresh departments and employees for the selected department
+                LoadDepartments()
+                LoadEmployeesByDepartment(deptIDInt)
+
+                ' Prefer direct SelectedValue assignment; fallback to item scan if needed
+                Try
+                    txtAssignedDepartment.SelectedValue = deptIDInt
+                Catch
+                    For i As Integer = 0 To txtAssignedDepartment.Items.Count - 1
+                        If TypeOf txtAssignedDepartment.Items(i) Is DataRowView Then
+                            Dim drv As DataRowView = CType(txtAssignedDepartment.Items(i), DataRowView)
+                            If drv.Row("department_id").ToString() = deptID Then
+                                txtAssignedDepartment.SelectedIndex = i
+                                Exit For
+                            End If
+                        End If
+                    Next
+                End Try
+            End If
+        End If
+
         txtLocation.Text = SafeValue("location")
         txtRemarks.Text = SafeValue("description")
-        dtpDateCreated.Value = ParseDate("created_at", Date.Today)
-        dtpDateUpdated.Value = ParseDate("updated_at", Date.Today)
+        dtpDateCreated.Value = ParseDate("createdAt", Date.Today)
+        dtpDateUpdated.Value = ParseDate("updatedAt", Date.Today)
     End Sub
 
     Public Sub LoadPropertyData(
@@ -119,8 +245,39 @@ Public Class EditPropertyManagement
         Dim confirmation = MessageBox.Show("Save changes to this property?", "Confirm Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If confirmation <> DialogResult.Yes Then Return
 
-        Dim custodianId As Integer? = ParseNullableInt(txtAssignedEmployee.Text)
-        Dim departmentId As Integer? = ParseNullableInt(txtAssignedDepartment.Text)
+        ' Get selected employee ID from dropdown
+        Dim custodianId As Integer? = Nothing
+        If txtAssignedEmployee.SelectedValue IsNot Nothing Then
+            If TypeOf txtAssignedEmployee.SelectedValue Is DataRowView Then
+                Dim drv As DataRowView = CType(txtAssignedEmployee.SelectedValue, DataRowView)
+                Dim parsed As Integer
+                If Integer.TryParse(drv.Row("userId").ToString(), parsed) Then
+                    custodianId = parsed
+                End If
+            Else
+                Dim parsed As Integer
+                If Integer.TryParse(txtAssignedEmployee.SelectedValue.ToString(), parsed) Then
+                    custodianId = parsed
+                End If
+            End If
+        End If
+
+        ' Get selected department ID from dropdown
+        Dim departmentId As Integer? = Nothing
+        If txtAssignedDepartment.SelectedValue IsNot Nothing Then
+            If TypeOf txtAssignedDepartment.SelectedValue Is DataRowView Then
+                Dim drv As DataRowView = CType(txtAssignedDepartment.SelectedValue, DataRowView)
+                Dim parsed As Integer
+                If Integer.TryParse(drv.Row("department_id").ToString(), parsed) Then
+                    departmentId = parsed
+                End If
+            Else
+                Dim parsed As Integer
+                If Integer.TryParse(txtAssignedDepartment.SelectedValue.ToString(), parsed) Then
+                    departmentId = parsed
+                End If
+            End If
+        End If
         Dim statusValue As String = If(propertyRecord IsNot Nothing, SafeValue("status"), "active")
 
         Dim updateOk = DatabaseConnection.UpdateProperty(

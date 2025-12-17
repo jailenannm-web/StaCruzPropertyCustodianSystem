@@ -48,7 +48,7 @@ Public Class UC_MaintenanceRequestManagement
         End If
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles Delete.Click
         Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
         If Not isSuperAdmin Then
 
@@ -139,7 +139,7 @@ Public Class UC_MaintenanceRequestManagement
         If btnReject IsNot Nothing Then btnReject.Enabled = hasFullAccess
         If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = hasFullAccess
         If btnAdd IsNot Nothing Then btnAdd.Enabled = hasFullAccess
-        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess
+        If Delete IsNot Nothing Then Delete.Enabled = hasFullAccess
     End Sub
 
 
@@ -260,11 +260,15 @@ Public Class UC_MaintenanceRequestManagement
         End Try
     End Sub
 
-    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs) Handles prm_btn_update.Click
+    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs)
         ' No restrictions for Super Admin, Admin, and Custodian
 
         LoadMaintenanceRequestData()
         MessageBox.Show("Maintenance request list refreshed.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    Private Sub admin_label_DepartmentManagement_Click(sender As Object, e As EventArgs) Handles admin_label_DepartmentManagement.Click
+
     End Sub
 End Class
 

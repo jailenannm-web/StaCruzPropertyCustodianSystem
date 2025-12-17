@@ -141,9 +141,7 @@ Partial Class EditPropertyManagement
         '
         'txtRemarks
         '
-        Me.txtRemarks.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtRemarks.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtRemarks.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRemarks.FormattingEnabled = True
         Me.txtRemarks.Location = New System.Drawing.Point(239, 254)
@@ -164,9 +162,7 @@ Partial Class EditPropertyManagement
         '
         'txtAssignedDepartment
         '
-        Me.txtAssignedDepartment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtAssignedDepartment.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.txtAssignedDepartment.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAssignedDepartment.FormattingEnabled = True
         Me.txtAssignedDepartment.Location = New System.Drawing.Point(239, 148)
@@ -176,9 +172,7 @@ Partial Class EditPropertyManagement
         '
         'txtAssignedEmployee
         '
-        Me.txtAssignedEmployee.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtAssignedEmployee.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.txtAssignedEmployee.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAssignedEmployee.FormattingEnabled = True
         Me.txtAssignedEmployee.Location = New System.Drawing.Point(239, 94)
@@ -350,6 +344,7 @@ Partial Class EditPropertyManagement
         '
         'dtpDatePurchased
         '
+        Me.dtpDatePurchased.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.dtpDatePurchased.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.dtpDatePurchased.Location = New System.Drawing.Point(255, 429)
         Me.dtpDatePurchased.Name = "dtpDatePurchased"
@@ -358,6 +353,7 @@ Partial Class EditPropertyManagement
         '
         'txtCost
         '
+        Me.txtCost.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.txtCost.Location = New System.Drawing.Point(256, 378)
         Me.txtCost.Name = "txtCost"
         Me.txtCost.Size = New System.Drawing.Size(197, 22)
@@ -365,9 +361,7 @@ Partial Class EditPropertyManagement
         '
         'conditionStatusCmbo
         '
-        Me.conditionStatusCmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.conditionStatusCmbo.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.conditionStatusCmbo.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.conditionStatusCmbo.FormattingEnabled = True
         Me.conditionStatusCmbo.Location = New System.Drawing.Point(256, 313)
@@ -377,9 +371,7 @@ Partial Class EditPropertyManagement
         '
         'txtSerialNumber
         '
-        Me.txtSerialNumber.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtSerialNumber.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.txtSerialNumber.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSerialNumber.Location = New System.Drawing.Point(256, 202)
         Me.txtSerialNumber.Name = "txtSerialNumber"
@@ -388,9 +380,7 @@ Partial Class EditPropertyManagement
         '
         'txtSupplier
         '
-        Me.txtSupplier.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtSupplier.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.txtSupplier.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSupplier.FormattingEnabled = True
         Me.txtSupplier.Location = New System.Drawing.Point(256, 254)
@@ -400,9 +390,7 @@ Partial Class EditPropertyManagement
         '
         'cboCategory
         '
-        Me.cboCategory.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cboCategory.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.cboCategory.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboCategory.FormattingEnabled = True
         Me.cboCategory.Location = New System.Drawing.Point(256, 148)
@@ -412,9 +400,7 @@ Partial Class EditPropertyManagement
         '
         'txtPropertyName
         '
-        Me.txtPropertyName.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPropertyName.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.txtPropertyName.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPropertyName.Location = New System.Drawing.Point(256, 94)
         Me.txtPropertyName.Name = "txtPropertyName"
@@ -449,9 +435,7 @@ Partial Class EditPropertyManagement
         '
         'txtpropertyID
         '
-        Me.txtpropertyID.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtpropertyID.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.txtpropertyID.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtpropertyID.Location = New System.Drawing.Point(256, 43)
         Me.txtpropertyID.Name = "txtpropertyID"

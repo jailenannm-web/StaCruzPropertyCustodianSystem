@@ -125,4 +125,7 @@ Public Class EditProfile
         End Try
     End Sub
 
+    Private Sub position_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

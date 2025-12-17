@@ -29,7 +29,6 @@ Partial Class AddProperty
         Me.Label3 = New System.Windows.Forms.Label()
         Me.acquisitionCost = New System.Windows.Forms.NumericUpDown()
         Me.warrantyExpirationDate = New System.Windows.Forms.DateTimePicker()
-        Me.assignedTo = New System.Windows.Forms.TextBox()
         Me.departmentId = New System.Windows.Forms.ComboBox()
         Me.assignedEmployee = New System.Windows.Forms.Label()
         Me.warrantyExpiration = New System.Windows.Forms.Label()
@@ -38,7 +37,6 @@ Partial Class AddProperty
         Me.totalCost = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.acquisitionDate = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.description = New System.Windows.Forms.TextBox()
         Me.propertyNumber = New System.Windows.Forms.TextBox()
@@ -55,6 +53,7 @@ Partial Class AddProperty
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.assignedTo = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.acquisitionCost, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,12 +79,12 @@ Partial Class AddProperty
         Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.assignedTo)
         Me.Panel2.Controls.Add(Me.warranty)
         Me.Panel2.Controls.Add(Me.condition)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.acquisitionCost)
         Me.Panel2.Controls.Add(Me.warrantyExpirationDate)
-        Me.Panel2.Controls.Add(Me.assignedTo)
         Me.Panel2.Controls.Add(Me.departmentId)
         Me.Panel2.Controls.Add(Me.assignedEmployee)
         Me.Panel2.Controls.Add(Me.warrantyExpiration)
@@ -113,9 +112,8 @@ Partial Class AddProperty
         '
         'condition
         '
-        Me.condition.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.condition.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.condition.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.condition.FormattingEnabled = True
         Me.condition.Items.AddRange(New Object() {"GOOD", "DAMAGE", "READY TO USE"})
@@ -159,23 +157,10 @@ Partial Class AddProperty
         Me.warrantyExpirationDate.Size = New System.Drawing.Size(239, 24)
         Me.warrantyExpirationDate.TabIndex = 67
         '
-        'assignedTo
-        '
-        Me.assignedTo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.assignedTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.assignedTo.Location = New System.Drawing.Point(244, 142)
-        Me.assignedTo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.assignedTo.Name = "assignedTo"
-        Me.assignedTo.Size = New System.Drawing.Size(239, 24)
-        Me.assignedTo.TabIndex = 66
-        '
         'departmentId
         '
-        Me.departmentId.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.departmentId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.departmentId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.departmentId.FormattingEnabled = True
         Me.departmentId.Items.AddRange(New Object() {"MATH DEPARTMENT", "SCIENCE DEPARTMENT", "ENGLISH DEPARTMENT", "MAPEH DEPARMENT", "TLE DEPARTMENT"})
@@ -255,7 +240,6 @@ Partial Class AddProperty
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.acquisitionDate)
-        Me.Panel1.Controls.Add(Me.DateTimePicker1)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.description)
         Me.Panel1.Controls.Add(Me.propertyNumber)
@@ -279,17 +263,8 @@ Partial Class AddProperty
         Me.acquisitionDate.Location = New System.Drawing.Point(256, 299)
         Me.acquisitionDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.acquisitionDate.Name = "acquisitionDate"
-        Me.acquisitionDate.Size = New System.Drawing.Size(255, 24)
+        Me.acquisitionDate.Size = New System.Drawing.Size(216, 24)
         Me.acquisitionDate.TabIndex = 78
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.DateTimePicker1.Location = New System.Drawing.Point(256, 299)
-        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(255, 24)
-        Me.DateTimePicker1.TabIndex = 74
         '
         'Label2
         '
@@ -311,7 +286,7 @@ Partial Class AddProperty
         Me.description.Location = New System.Drawing.Point(256, 151)
         Me.description.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.description.Name = "description"
-        Me.description.Size = New System.Drawing.Size(255, 24)
+        Me.description.Size = New System.Drawing.Size(216, 24)
         Me.description.TabIndex = 72
         '
         'propertyNumber
@@ -321,7 +296,7 @@ Partial Class AddProperty
         Me.propertyNumber.Location = New System.Drawing.Point(256, 205)
         Me.propertyNumber.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.propertyNumber.Name = "propertyNumber"
-        Me.propertyNumber.Size = New System.Drawing.Size(255, 24)
+        Me.propertyNumber.Size = New System.Drawing.Size(216, 24)
         Me.propertyNumber.TabIndex = 74
         '
         'category
@@ -333,7 +308,7 @@ Partial Class AddProperty
         Me.category.Location = New System.Drawing.Point(256, 98)
         Me.category.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.category.Name = "category"
-        Me.category.Size = New System.Drawing.Size(255, 26)
+        Me.category.Size = New System.Drawing.Size(216, 26)
         Me.category.TabIndex = 71
         '
         'serialNumber
@@ -343,7 +318,7 @@ Partial Class AddProperty
         Me.serialNumber.Location = New System.Drawing.Point(254, 257)
         Me.serialNumber.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.serialNumber.Name = "serialNumber"
-        Me.serialNumber.Size = New System.Drawing.Size(255, 24)
+        Me.serialNumber.Size = New System.Drawing.Size(218, 24)
         Me.serialNumber.TabIndex = 66
         '
         'itemName
@@ -353,7 +328,7 @@ Partial Class AddProperty
         Me.itemName.Location = New System.Drawing.Point(256, 44)
         Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.itemName.Name = "itemName"
-        Me.itemName.Size = New System.Drawing.Size(255, 24)
+        Me.itemName.Size = New System.Drawing.Size(216, 24)
         Me.itemName.TabIndex = 64
         '
         'cost
@@ -485,6 +460,19 @@ Partial Class AddProperty
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = False
         '
+        'assignedTo
+        '
+        Me.assignedTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.assignedTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.assignedTo.FormattingEnabled = True
+        Me.assignedTo.Items.AddRange(New Object() {"MATH DEPARTMENT", "SCIENCE DEPARTMENT", "ENGLISH DEPARTMENT", "MAPEH DEPARMENT", "TLE DEPARTMENT"})
+        Me.assignedTo.Location = New System.Drawing.Point(244, 142)
+        Me.assignedTo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.assignedTo.Name = "assignedTo"
+        Me.assignedTo.Size = New System.Drawing.Size(239, 26)
+        Me.assignedTo.TabIndex = 80
+        '
         'AddProperty
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -531,16 +519,15 @@ Partial Class AddProperty
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents departmentId As System.Windows.Forms.ComboBox
     Friend WithEvents warrantyExpirationDate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents assignedTo As System.Windows.Forms.TextBox
     Friend WithEvents category As System.Windows.Forms.ComboBox
     Friend WithEvents btnCancel As Resources.Controls.RoundedButton
     Friend WithEvents btnSave As Resources.Controls.RoundedButton
     Friend WithEvents propertyNumber As System.Windows.Forms.TextBox
     Friend WithEvents description As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents condition As System.Windows.Forms.ComboBox
     Friend WithEvents acquisitionDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents warranty As System.Windows.Forms.Label
+    Friend WithEvents assignedTo As System.Windows.Forms.ComboBox
 End Class

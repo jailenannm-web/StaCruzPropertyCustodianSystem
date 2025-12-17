@@ -2,6 +2,7 @@
 Imports System.Data
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
+Imports System.Diagnostics
 
 Public Class AddUserManagement
     Inherits UserControl
@@ -25,19 +26,134 @@ Public Class AddUserManagement
 
     Private Sub AddUserManagement_Load(sender As Object, e As EventArgs)
         ResetForm()
+        LoadSuffixDropdown()
         LoadDepartmentDropdown()
+        LoadProvinceDropdown()
         role.SelectedIndex = -1
+    End Sub
+
+    Private Sub LoadSuffixDropdown()
+        Try
+            suffix.Items.Clear()
+            suffix.Items.Add("None")
+            suffix.Items.Add("Jr.")
+            suffix.Items.Add("Sr.")
+            suffix.Items.Add("II")
+            suffix.Items.Add("III")
+            suffix.Items.Add("IV")
+            suffix.SelectedIndex = 0 ' Default to "None"
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadSuffixDropdown Error: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub LoadDepartmentDropdown()
         Try
             departmentId.Items.Clear()
             Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
-            departmentId.DisplayMember = "department_name"
-            departmentId.ValueMember = "department_id"
-            departmentId.DataSource = deptTable
+            If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 Then
+                departmentId.DisplayMember = "department_name"
+                departmentId.ValueMember = "department_id"
+                departmentId.DataSource = deptTable
+            Else
+                ' Add empty option if no departments
+                departmentId.Items.Add("No Departments Available")
+            End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadDepartmentDropdown Error: " & ex.Message)
+            MessageBox.Show("Failed to load departments: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
+    End Sub
+
+    Private Sub LoadProvinceDropdown()
+        Try
+            RemoveHandler province.SelectedIndexChanged, AddressOf province_SelectedIndexChanged
+            province.Items.Clear()
+            Dim provinces As DataTable = DatabaseConnection.GetProvinces()
+            If provinces IsNot Nothing AndAlso provinces.Rows.Count > 0 Then
+                province.DisplayMember = "province_name"
+                province.ValueMember = "province_id"
+                province.DataSource = provinces
+            Else
+                ' If no province table exists, add common provinces manually
+                province.Items.Add("Metro Manila")
+                province.Items.Add("Cavite")
+                province.Items.Add("Laguna")
+                province.Items.Add("Batangas")
+                province.Items.Add("Rizal")
+                province.Items.Add("Quezon")
+            End If
+            ' optionally: province.SelectedIndex = -1
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadProvinceDropdown Error: " & ex.Message)
+            ' If GetProvinces doesn't exist, add common provinces manually
+            province.Items.Add("Metro Manila")
+            province.Items.Add("Cavite")
+            province.Items.Add("Laguna")
+            province.Items.Add("Batangas")
+            province.Items.Add("Rizal")
+            province.Items.Add("Quezon")
+        Finally
+            AddHandler province.SelectedIndexChanged, AddressOf province_SelectedIndexChanged
+        End Try
+    End Sub
+
+    Private Sub province_SelectedIndexChanged(sender As Object, e As EventArgs) Handles province.SelectedIndexChanged
+        If province.SelectedIndex < 0 Then Return
+        LoadMunicipalityDropdown()
+    End Sub
+
+    Private Sub LoadMunicipalityDropdown()
+        Try
+            ' Ensure unbound before modifying
+            If municipal.DataSource IsNot Nothing Then municipal.DataSource = Nothing
+            municipal.Items.Clear()
+
+            Dim selectedProvince As String = If(province.SelectedItem IsNot Nothing, province.SelectedItem.ToString(), "")
+            If String.IsNullOrEmpty(selectedProvince) Then Return
+
+            Dim municipalities As DataTable = DatabaseConnection.GetMunicipalities(selectedProvince)
+            If municipalities IsNot Nothing AndAlso municipalities.Rows.Count > 0 Then
+                municipal.DisplayMember = "municipality_name"
+                municipal.ValueMember = "municipality_id"
+                municipal.DataSource = municipalities
+            Else
+                municipal.Items.Add("Select Municipality")
+            End If
+            ' Unbind barangay similarly
+            If barangay.DataSource IsNot Nothing Then barangay.DataSource = Nothing
+            barangay.Items.Clear()
+        Catch ex As Exception
+            Debug.WriteLine("[v0] LoadMunicipalityDropdown Error: " & ex.Message)
+            municipal.DataSource = Nothing
+            municipal.Items.Clear()
+            municipal.Items.Add("Select Municipality")
+        End Try
+    End Sub
+
+    Private Sub municipal_SelectedIndexChanged(sender As Object, e As EventArgs) Handles municipal.SelectedIndexChanged
+        If municipal.SelectedIndex < 0 Then Return
+        LoadBarangayDropdown()
+    End Sub
+
+    Private Sub LoadBarangayDropdown()
+        Try
+            barangay.Items.Clear()
+            Dim selectedMunicipality As String = If(municipal.SelectedItem IsNot Nothing, municipal.SelectedItem.ToString(), "")
+            If String.IsNullOrEmpty(selectedMunicipality) Then Return
+
+            Dim barangays As DataTable = DatabaseConnection.GetBarangays(selectedMunicipality)
+            If barangays IsNot Nothing AndAlso barangays.Rows.Count > 0 Then
+                barangay.DisplayMember = "barangay_name"
+                barangay.ValueMember = "barangay_id"
+                barangay.DataSource = barangays
+            Else
+                barangay.Items.Add("Select Barangay")
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadBarangayDropdown Error: " & ex.Message)
+            barangay.Items.Clear()
+            barangay.Items.Add("Select Barangay")
         End Try
     End Sub
 
@@ -50,13 +166,18 @@ Public Class AddUserManagement
         contactNumber.Clear()
         email.Clear()
         passwordEncrypted.Clear()
-        passwordEncrypted.Clear()
+        username.Clear()
         departmentId.SelectedIndex = -1
-        suffix.SelectedIndex = -1
+        If suffix.Items.Count > 0 Then suffix.SelectedIndex = 0 ' Reset to "None"
         position.SelectedIndex = -1
+        role.SelectedIndex = -1
         province.SelectedIndex = -1
-        municipal.SelectedIndex = -1
-        barangay.SelectedIndex = -1
+        If municipal.DataSource IsNot Nothing Then
+            municipal.DataSource = Nothing
+        End If
+        municipal.Items.Clear()
+        If barangay.DataSource IsNot Nothing Then barangay.DataSource = Nothing Else barangay.Items.Clear()
+        province.SelectedIndex = -1
     End Sub
 
     ' Save button
@@ -122,7 +243,7 @@ Public Class AddUserManagement
             usernameValue,
             passwordEncrypted.Text,
             middleName:=middleName.Text.Trim(),
-            suffix:=GetComboValue(suffix),
+            suffix:=If(GetComboValue(suffix) = "None" OrElse String.IsNullOrWhiteSpace(GetComboValue(suffix)), "", GetComboValue(suffix)),
             position:=positionValue,
             departmentID:=selectedDeptID,
             contactNumber:=contactNumber.Text.Trim(),

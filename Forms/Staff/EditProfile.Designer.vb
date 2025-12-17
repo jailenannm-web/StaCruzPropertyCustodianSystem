@@ -38,7 +38,6 @@ Partial Class EditProfile
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txb_FirstName = New System.Windows.Forms.TextBox()
-        Me.txb_EmployeeID = New System.Windows.Forms.TextBox()
         Me.txb_MiddleName = New System.Windows.Forms.TextBox()
         Me.txb_LastName = New System.Windows.Forms.TextBox()
         Me.txb_UserName = New System.Windows.Forms.TextBox()
@@ -48,13 +47,13 @@ Partial Class EditProfile
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.txb_DepartmentID = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.btn_Cancel = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btn_Login = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.txb_DepartmentID = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'Txb_Password
@@ -241,17 +240,6 @@ Partial Class EditProfile
         Me.txb_FirstName.Size = New System.Drawing.Size(421, 42)
         Me.txb_FirstName.TabIndex = 56
         '
-        'txb_EmployeeID
-        '
-        Me.txb_EmployeeID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_EmployeeID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_EmployeeID.Location = New System.Drawing.Point(466, 760)
-        Me.txb_EmployeeID.Margin = New System.Windows.Forms.Padding(4)
-        Me.txb_EmployeeID.Multiline = True
-        Me.txb_EmployeeID.Name = "txb_EmployeeID"
-        Me.txb_EmployeeID.Size = New System.Drawing.Size(421, 42)
-        Me.txb_EmployeeID.TabIndex = 73
-        '
         'txb_MiddleName
         '
         Me.txb_MiddleName.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -355,17 +343,6 @@ Partial Class EditProfile
         Me.Label10.TabIndex = 69
         Me.Label10.Text = "Email"
         '
-        'txb_DepartmentID
-        '
-        Me.txb_DepartmentID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_DepartmentID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepartmentID.Location = New System.Drawing.Point(466, 879)
-        Me.txb_DepartmentID.Margin = New System.Windows.Forms.Padding(4)
-        Me.txb_DepartmentID.Multiline = True
-        Me.txb_DepartmentID.Name = "txb_DepartmentID"
-        Me.txb_DepartmentID.Size = New System.Drawing.Size(421, 42)
-        Me.txb_DepartmentID.TabIndex = 62
-        '
         'Label12
         '
         Me.Label12.BackColor = System.Drawing.Color.Transparent
@@ -441,11 +418,23 @@ Partial Class EditProfile
         Me.Label15.TabIndex = 65
         Me.Label15.Text = "Contact Number"
         '
+        'txb_DepartmentID
+        '
+        Me.txb_DepartmentID.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txb_DepartmentID.FormattingEnabled = True
+        Me.txb_DepartmentID.Items.AddRange(New Object() {"Daet", "Basud", "Capalonga", "Jose Panganiban", "Labo", "Mercedes", "Paracale", "San Lorenzo Ruiz", "San Vicente", "Santa Elena", "Talisay", "Vinzons"})
+        Me.txb_DepartmentID.Location = New System.Drawing.Point(455, 818)
+        Me.txb_DepartmentID.Margin = New System.Windows.Forms.Padding(4)
+        Me.txb_DepartmentID.Name = "txb_DepartmentID"
+        Me.txb_DepartmentID.Size = New System.Drawing.Size(421, 44)
+        Me.txb_DepartmentID.TabIndex = 83
+        '
         'EditProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1924, 1175)
+        Me.Controls.Add(Me.txb_DepartmentID)
         Me.Controls.Add(Me.Txb_Password)
         Me.Controls.Add(Me.txb_Position)
         Me.Controls.Add(Me.txb_UserID)
@@ -462,7 +451,6 @@ Partial Class EditProfile
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txb_FirstName)
-        Me.Controls.Add(Me.txb_EmployeeID)
         Me.Controls.Add(Me.txb_MiddleName)
         Me.Controls.Add(Me.txb_LastName)
         Me.Controls.Add(Me.txb_UserName)
@@ -472,7 +460,6 @@ Partial Class EditProfile
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.txb_DepartmentID)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.btn_Cancel)
         Me.Controls.Add(Me.Label13)
@@ -503,7 +490,6 @@ Partial Class EditProfile
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txb_FirstName As System.Windows.Forms.TextBox
-    Friend WithEvents txb_EmployeeID As System.Windows.Forms.TextBox
     Friend WithEvents txb_MiddleName As System.Windows.Forms.TextBox
     Friend WithEvents txb_LastName As System.Windows.Forms.TextBox
     Friend WithEvents txb_UserName As System.Windows.Forms.TextBox
@@ -513,11 +499,11 @@ Partial Class EditProfile
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txb_DepartmentID As System.Windows.Forms.TextBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents btn_Cancel As System.Windows.Forms.Button
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents btn_Login As System.Windows.Forms.Button
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents txb_DepartmentID As System.Windows.Forms.TextBox
 End Class

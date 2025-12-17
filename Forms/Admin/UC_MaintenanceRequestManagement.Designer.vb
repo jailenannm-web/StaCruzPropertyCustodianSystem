@@ -25,14 +25,6 @@ Partial Class UC_MaintenanceRequestManagement
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertymanagement = New System.Windows.Forms.Label()
         Me.propertyManagementGrid = New System.Windows.Forms.DataGridView()
-        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
-        Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.issuePropertySlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -48,7 +40,17 @@ Partial Class UC_MaintenanceRequestManagement
         Me.requestedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
+        Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.issuePropertySlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Delete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.maintenancerequestmanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -89,127 +91,6 @@ Partial Class UC_MaintenanceRequestManagement
         Me.propertyManagementGrid.RowTemplate.Height = 24
         Me.propertyManagementGrid.Size = New System.Drawing.Size(1270, 564)
         Me.propertyManagementGrid.TabIndex = 163
-        '
-        'admin_label_DepartmentManagement
-        '
-        Me.admin_label_DepartmentManagement.AutoSize = True
-        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(57, 54)
-        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(639, 58)
-        Me.admin_label_DepartmentManagement.TabIndex = 162
-        Me.admin_label_DepartmentManagement.Text = "Maintenance Request Management"
-        '
-        'printPAR
-        '
-        Me.printPAR.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.printPAR.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.printPAR.CornerRadius = 15
-        Me.printPAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.printPAR.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.printPAR.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.printPAR.Location = New System.Drawing.Point(1184, 690)
-        Me.printPAR.Margin = New System.Windows.Forms.Padding(4)
-        Me.printPAR.Name = "printPAR"
-        Me.printPAR.Size = New System.Drawing.Size(153, 33)
-        Me.printPAR.TabIndex = 170
-        Me.printPAR.Text = "Print PAR/ICS"
-        Me.printPAR.UseVisualStyleBackColor = False
-        '
-        'issuePropertySlip
-        '
-        Me.issuePropertySlip.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.issuePropertySlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.issuePropertySlip.CornerRadius = 15
-        Me.issuePropertySlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.issuePropertySlip.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.issuePropertySlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertySlip.Location = New System.Drawing.Point(1023, 690)
-        Me.issuePropertySlip.Margin = New System.Windows.Forms.Padding(4)
-        Me.issuePropertySlip.Name = "issuePropertySlip"
-        Me.issuePropertySlip.Size = New System.Drawing.Size(153, 33)
-        Me.issuePropertySlip.TabIndex = 169
-        Me.issuePropertySlip.Text = "Issue Property Slip"
-        Me.issuePropertySlip.UseVisualStyleBackColor = False
-        '
-        'btnApprove
-        '
-        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnApprove.CornerRadius = 15
-        Me.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnApprove.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnApprove.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnApprove.Location = New System.Drawing.Point(1238, 70)
-        Me.btnApprove.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnApprove.Name = "btnApprove"
-        Me.btnApprove.Size = New System.Drawing.Size(99, 34)
-        Me.btnApprove.TabIndex = 172
-        Me.btnApprove.Text = "Approve"
-        Me.btnApprove.UseVisualStyleBackColor = False
-        '
-        'btnReject
-        '
-        Me.btnReject.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnReject.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnReject.CornerRadius = 15
-        Me.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReject.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnReject.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReject.Location = New System.Drawing.Point(1132, 69)
-        Me.btnReject.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnReject.Name = "btnReject"
-        Me.btnReject.Size = New System.Drawing.Size(99, 35)
-        Me.btnReject.TabIndex = 173
-        Me.btnReject.Text = "Reject"
-        Me.btnReject.UseVisualStyleBackColor = False
-        '
-        'prm_btn_update
-        '
-        Me.prm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.prm_btn_update.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.prm_btn_update.CornerRadius = 15
-        Me.prm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.prm_btn_update.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.prm_btn_update.ForeColor = System.Drawing.Color.White
-        Me.prm_btn_update.Location = New System.Drawing.Point(1032, 71)
-        Me.prm_btn_update.Name = "prm_btn_update"
-        Me.prm_btn_update.Size = New System.Drawing.Size(93, 33)
-        Me.prm_btn_update.TabIndex = 171
-        Me.prm_btn_update.Text = "Update"
-        Me.prm_btn_update.UseVisualStyleBackColor = False
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
-        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(799, 69)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(99, 35)
-        Me.btnDelete.TabIndex = 174
-        Me.btnDelete.Text = "btnDelete"
-        Me.btnDelete.UseVisualStyleBackColor = False
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
-        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(917, 69)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(99, 35)
-        Me.btnAdd.TabIndex = 175
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = False
         '
         'requestId
         '
@@ -325,14 +206,141 @@ Partial Class UC_MaintenanceRequestManagement
         Me.updatedAt.Visible = False
         Me.updatedAt.Width = 125
         '
+        'admin_label_DepartmentManagement
+        '
+        Me.admin_label_DepartmentManagement.AutoSize = True
+        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 14.8!, System.Drawing.FontStyle.Bold)
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(21, 60)
+        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(483, 44)
+        Me.admin_label_DepartmentManagement.TabIndex = 162
+        Me.admin_label_DepartmentManagement.Text = "Maintenance Request Management"
+        '
+        'printPAR
+        '
+        Me.printPAR.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.printPAR.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.printPAR.CornerRadius = 15
+        Me.printPAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.printPAR.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.printPAR.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.printPAR.Location = New System.Drawing.Point(1184, 690)
+        Me.printPAR.Margin = New System.Windows.Forms.Padding(4)
+        Me.printPAR.Name = "printPAR"
+        Me.printPAR.Size = New System.Drawing.Size(153, 33)
+        Me.printPAR.TabIndex = 170
+        Me.printPAR.Text = "Print PAR/ICS"
+        Me.printPAR.UseVisualStyleBackColor = False
+        '
+        'issuePropertySlip
+        '
+        Me.issuePropertySlip.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.issuePropertySlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.issuePropertySlip.CornerRadius = 15
+        Me.issuePropertySlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.issuePropertySlip.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.issuePropertySlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.issuePropertySlip.Location = New System.Drawing.Point(1023, 690)
+        Me.issuePropertySlip.Margin = New System.Windows.Forms.Padding(4)
+        Me.issuePropertySlip.Name = "issuePropertySlip"
+        Me.issuePropertySlip.Size = New System.Drawing.Size(153, 33)
+        Me.issuePropertySlip.TabIndex = 169
+        Me.issuePropertySlip.Text = "Issue Property Slip"
+        Me.issuePropertySlip.UseVisualStyleBackColor = False
+        '
+        'btnApprove
+        '
+        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnApprove.CornerRadius = 15
+        Me.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnApprove.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnApprove.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnApprove.Location = New System.Drawing.Point(1238, 70)
+        Me.btnApprove.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnApprove.Name = "btnApprove"
+        Me.btnApprove.Size = New System.Drawing.Size(99, 34)
+        Me.btnApprove.TabIndex = 172
+        Me.btnApprove.Text = "Approve"
+        Me.btnApprove.UseVisualStyleBackColor = False
+        '
+        'btnReject
+        '
+        Me.btnReject.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReject.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnReject.CornerRadius = 15
+        Me.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReject.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnReject.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReject.Location = New System.Drawing.Point(1132, 69)
+        Me.btnReject.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnReject.Name = "btnReject"
+        Me.btnReject.Size = New System.Drawing.Size(99, 35)
+        Me.btnReject.TabIndex = 173
+        Me.btnReject.Text = "Reject"
+        Me.btnReject.UseVisualStyleBackColor = False
+        '
+        'Delete
+        '
+        Me.Delete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Delete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Delete.CornerRadius = 15
+        Me.Delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Delete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.Delete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Delete.Location = New System.Drawing.Point(916, 69)
+        Me.Delete.Margin = New System.Windows.Forms.Padding(4)
+        Me.Delete.Name = "Delete"
+        Me.Delete.Size = New System.Drawing.Size(99, 35)
+        Me.Delete.TabIndex = 174
+        Me.Delete.Text = "Delete"
+        Me.Delete.UseVisualStyleBackColor = False
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnAdd.CornerRadius = 15
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAdd.Location = New System.Drawing.Point(1023, 69)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(99, 35)
+        Me.btnAdd.TabIndex = 175
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(520, 57)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(36, 44)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 177
+        Me.PictureBox2.TabStop = False
+        '
+        'maintenancerequestmanagementsearchbar
+        '
+        Me.maintenancerequestmanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.maintenancerequestmanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.maintenancerequestmanagementsearchbar.Location = New System.Drawing.Point(563, 59)
+        Me.maintenancerequestmanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.maintenancerequestmanagementsearchbar.Name = "maintenancerequestmanagementsearchbar"
+        Me.maintenancerequestmanagementsearchbar.Size = New System.Drawing.Size(345, 42)
+        Me.maintenancerequestmanagementsearchbar.TabIndex = 176
+        '
         'UC_MaintenanceRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.maintenancerequestmanagementsearchbar)
+        Me.Controls.Add(Me.Delete)
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnReject)
-        Me.Controls.Add(Me.prm_btn_update)
         Me.Controls.Add(Me.printPAR)
         Me.Controls.Add(Me.issuePropertySlip)
         Me.Controls.Add(Me.Label1)
@@ -343,6 +351,7 @@ Partial Class UC_MaintenanceRequestManagement
         Me.Name = "UC_MaintenanceRequestManagement"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -356,8 +365,7 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents issuePropertySlip As Resources.Controls.RoundedButton
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
-    Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
-    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents Delete As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
     Friend WithEvents requestId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dateRequested As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -374,4 +382,6 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents requestedBy As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents createdAt As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents maintenancerequestmanagementsearchbar As System.Windows.Forms.TextBox
 End Class

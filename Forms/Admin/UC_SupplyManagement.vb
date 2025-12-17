@@ -73,10 +73,24 @@ Public Class UC_SupplyManagement
 
 
     Private Sub InitializeFilters()
-        ' Populate category filter
+        ' Populate category filter from database
         pm_cbobx_categ.Items.Clear()
         pm_cbobx_categ.Items.Add("All Categories")
-        pm_cbobx_categ.Items.AddRange(New String() {"Stationery", "Electronics", "Furniture", "Equipment", "Other"})
+        Try
+            Dim categoriesTable As DataTable = DatabaseConnection.GetCategories("supply")
+            If categoriesTable IsNot Nothing AndAlso categoriesTable.Rows.Count > 0 Then
+                For Each row As DataRow In categoriesTable.Rows
+                    pm_cbobx_categ.Items.Add(row("category_name").ToString())
+                Next
+            Else
+                ' Fallback to hardcoded categories if database query fails
+                pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Supplies", "Medical Supplies", "Stationery", "Electronics", "Furniture", "Equipment", "Other"})
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] InitializeFilters Exception: " & ex.Message)
+            ' Fallback to hardcoded categories
+            pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Supplies", "Medical Supplies", "Stationery", "Electronics", "Furniture", "Equipment", "Other"})
+        End Try
         pm_cbobx_categ.SelectedIndex = 0
 
         ' Populate status filter

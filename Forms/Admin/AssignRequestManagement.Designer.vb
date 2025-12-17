@@ -26,20 +26,17 @@ Partial Class AssignRequestManagement
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Property_ID = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Cost = New System.Windows.Forms.Label()
-        Me.txb_Cost = New System.Windows.Forms.TextBox()
+        Me.lblCost = New System.Windows.Forms.Label()
         Me.ConditionStatus = New System.Windows.Forms.Label()
-        Me.SerialNumber = New System.Windows.Forms.Label()
-        Me.txb_SerialNumber = New System.Windows.Forms.TextBox()
+        Me.lblSerialNumber = New System.Windows.Forms.Label()
+        Me.serialNumber = New System.Windows.Forms.TextBox()
         Me.um_edituser_fullname = New System.Windows.Forms.Label()
-        Me.btn_PropertyName = New System.Windows.Forms.TextBox()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
-        Me.btn_Suppier = New System.Windows.Forms.TextBox()
+        Me.suppier = New System.Windows.Forms.TextBox()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.warrantyExpiration = New System.Windows.Forms.DateTimePicker()
+        Me.datePurchased = New System.Windows.Forms.DateTimePicker()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
@@ -48,29 +45,33 @@ Partial Class AssignRequestManagement
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.assignmentPurpose = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.DateCreated = New System.Windows.Forms.Label()
+        Me.DateCreatedlbl = New System.Windows.Forms.Label()
         Me.RoundedPanel4 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.DateUpdated = New System.Windows.Forms.Label()
-        Me.UpdatedBy = New System.Windows.Forms.Label()
-        Me.ComboBox11 = New System.Windows.Forms.ComboBox()
-        Me.DateTimePicker3 = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimePicker4 = New System.Windows.Forms.DateTimePicker()
-        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.DateUpdatedlbl = New System.Windows.Forms.Label()
+        Me.UpdatedBylbl = New System.Windows.Forms.Label()
+        Me.condition = New System.Windows.Forms.ComboBox()
+        Me.dateCreated = New System.Windows.Forms.DateTimePicker()
+        Me.dateUpdated = New System.Windows.Forms.DateTimePicker()
+        Me.updatedBy = New System.Windows.Forms.ComboBox()
+        Me.department = New System.Windows.Forms.ComboBox()
+        Me.employee = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
+        Me.propertyId = New System.Windows.Forms.ComboBox()
+        Me.propertyName = New System.Windows.Forms.ComboBox()
+        Me.cost = New System.Windows.Forms.NumericUpDown()
+        Me.location = New System.Windows.Forms.ComboBox()
+        Me.remarks = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel1.SuspendLayout()
         Me.RoundedPanel2.SuspendLayout()
         Me.RoundedPanel4.SuspendLayout()
         Me.RoundedPanel3.SuspendLayout()
+        CType(Me.cost, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label8
@@ -126,19 +127,6 @@ Partial Class AssignRequestManagement
         Me.Label3.TabIndex = 92
         Me.Label3.Text = "Property I.D"
         '
-        'Property_ID
-        '
-        Me.Property_ID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Property_ID.BackColor = System.Drawing.SystemColors.Window
-        Me.Property_ID.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Property_ID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Property_ID.Location = New System.Drawing.Point(245, 80)
-        Me.Property_ID.MaxLength = 100
-        Me.Property_ID.Name = "Property_ID"
-        Me.Property_ID.Size = New System.Drawing.Size(323, 27)
-        Me.Property_ID.TabIndex = 91
-        '
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -152,31 +140,18 @@ Partial Class AssignRequestManagement
         Me.Label2.TabIndex = 80
         Me.Label2.Text = "Warranty Expiration"
         '
-        'Cost
+        'lblCost
         '
-        Me.Cost.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.lblCost.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Cost.AutoSize = True
-        Me.Cost.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.Cost.ForeColor = System.Drawing.Color.Black
-        Me.Cost.Location = New System.Drawing.Point(79, 291)
-        Me.Cost.Name = "Cost"
-        Me.Cost.Size = New System.Drawing.Size(47, 26)
-        Me.Cost.TabIndex = 78
-        Me.Cost.Text = "Cost"
-        '
-        'txb_Cost
-        '
-        Me.txb_Cost.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txb_Cost.BackColor = System.Drawing.SystemColors.Window
-        Me.txb_Cost.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Cost.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txb_Cost.Location = New System.Drawing.Point(245, 290)
-        Me.txb_Cost.MaxLength = 100
-        Me.txb_Cost.Name = "txb_Cost"
-        Me.txb_Cost.Size = New System.Drawing.Size(323, 27)
-        Me.txb_Cost.TabIndex = 77
+        Me.lblCost.AutoSize = True
+        Me.lblCost.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblCost.ForeColor = System.Drawing.Color.Black
+        Me.lblCost.Location = New System.Drawing.Point(79, 291)
+        Me.lblCost.Name = "lblCost"
+        Me.lblCost.Size = New System.Drawing.Size(47, 26)
+        Me.lblCost.TabIndex = 78
+        Me.lblCost.Text = "Cost"
         '
         'ConditionStatus
         '
@@ -191,31 +166,31 @@ Partial Class AssignRequestManagement
         Me.ConditionStatus.TabIndex = 76
         Me.ConditionStatus.Text = "Condition Status"
         '
-        'SerialNumber
+        'lblSerialNumber
         '
-        Me.SerialNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.lblSerialNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SerialNumber.AutoSize = True
-        Me.SerialNumber.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.SerialNumber.ForeColor = System.Drawing.Color.Black
-        Me.SerialNumber.Location = New System.Drawing.Point(79, 180)
-        Me.SerialNumber.Name = "SerialNumber"
-        Me.SerialNumber.Size = New System.Drawing.Size(119, 26)
-        Me.SerialNumber.TabIndex = 75
-        Me.SerialNumber.Text = "Serial Number"
+        Me.lblSerialNumber.AutoSize = True
+        Me.lblSerialNumber.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblSerialNumber.ForeColor = System.Drawing.Color.Black
+        Me.lblSerialNumber.Location = New System.Drawing.Point(79, 180)
+        Me.lblSerialNumber.Name = "lblSerialNumber"
+        Me.lblSerialNumber.Size = New System.Drawing.Size(119, 26)
+        Me.lblSerialNumber.TabIndex = 75
+        Me.lblSerialNumber.Text = "Serial Number"
         '
-        'txb_SerialNumber
+        'serialNumber
         '
-        Me.txb_SerialNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.serialNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txb_SerialNumber.BackColor = System.Drawing.SystemColors.Window
-        Me.txb_SerialNumber.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_SerialNumber.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txb_SerialNumber.Location = New System.Drawing.Point(245, 180)
-        Me.txb_SerialNumber.MaxLength = 100
-        Me.txb_SerialNumber.Name = "txb_SerialNumber"
-        Me.txb_SerialNumber.Size = New System.Drawing.Size(323, 27)
-        Me.txb_SerialNumber.TabIndex = 74
+        Me.serialNumber.BackColor = System.Drawing.SystemColors.Window
+        Me.serialNumber.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.serialNumber.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.serialNumber.Location = New System.Drawing.Point(245, 180)
+        Me.serialNumber.MaxLength = 100
+        Me.serialNumber.Name = "serialNumber"
+        Me.serialNumber.Size = New System.Drawing.Size(323, 27)
+        Me.serialNumber.TabIndex = 74
         '
         'um_edituser_fullname
         '
@@ -230,19 +205,6 @@ Partial Class AssignRequestManagement
         Me.um_edituser_fullname.TabIndex = 73
         Me.um_edituser_fullname.Text = "Property Name"
         '
-        'btn_PropertyName
-        '
-        Me.btn_PropertyName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_PropertyName.BackColor = System.Drawing.SystemColors.Window
-        Me.btn_PropertyName.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_PropertyName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.btn_PropertyName.Location = New System.Drawing.Point(245, 113)
-        Me.btn_PropertyName.MaxLength = 100
-        Me.btn_PropertyName.Name = "btn_PropertyName"
-        Me.btn_PropertyName.Size = New System.Drawing.Size(323, 27)
-        Me.btn_PropertyName.TabIndex = 72
-        '
         'admin_label_DepartmentManagement
         '
         Me.admin_label_DepartmentManagement.AutoSize = True
@@ -253,18 +215,18 @@ Partial Class AssignRequestManagement
         Me.admin_label_DepartmentManagement.TabIndex = 108
         Me.admin_label_DepartmentManagement.Text = "Assign Property"
         '
-        'btn_Suppier
+        'suppier
         '
-        Me.btn_Suppier.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.suppier.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_Suppier.BackColor = System.Drawing.SystemColors.Window
-        Me.btn_Suppier.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Suppier.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.btn_Suppier.Location = New System.Drawing.Point(245, 217)
-        Me.btn_Suppier.MaxLength = 100
-        Me.btn_Suppier.Name = "btn_Suppier"
-        Me.btn_Suppier.Size = New System.Drawing.Size(323, 27)
-        Me.btn_Suppier.TabIndex = 109
+        Me.suppier.BackColor = System.Drawing.SystemColors.Window
+        Me.suppier.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.suppier.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.suppier.Location = New System.Drawing.Point(245, 217)
+        Me.suppier.MaxLength = 100
+        Me.suppier.Name = "suppier"
+        Me.suppier.Size = New System.Drawing.Size(323, 27)
+        Me.suppier.TabIndex = 109
         '
         'RoundedPanel1
         '
@@ -272,44 +234,44 @@ Partial Class AssignRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RoundedPanel1.BackColor = System.Drawing.Color.White
         Me.RoundedPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.RoundedPanel1.Controls.Add(Me.DateTimePicker2)
-        Me.RoundedPanel1.Controls.Add(Me.DateTimePicker1)
+        Me.RoundedPanel1.Controls.Add(Me.cost)
+        Me.RoundedPanel1.Controls.Add(Me.propertyName)
+        Me.RoundedPanel1.Controls.Add(Me.propertyId)
+        Me.RoundedPanel1.Controls.Add(Me.warrantyExpiration)
+        Me.RoundedPanel1.Controls.Add(Me.datePurchased)
         Me.RoundedPanel1.Controls.Add(Me.ComboBox3)
         Me.RoundedPanel1.Controls.Add(Me.ComboBox1)
         Me.RoundedPanel1.Controls.Add(Me.RoundedPanel2)
         Me.RoundedPanel1.Controls.Add(Me.Label3)
-        Me.RoundedPanel1.Controls.Add(Me.Property_ID)
-        Me.RoundedPanel1.Controls.Add(Me.btn_PropertyName)
         Me.RoundedPanel1.Controls.Add(Me.um_edituser_fullname)
-        Me.RoundedPanel1.Controls.Add(Me.btn_Suppier)
+        Me.RoundedPanel1.Controls.Add(Me.suppier)
         Me.RoundedPanel1.Controls.Add(Me.Label8)
         Me.RoundedPanel1.Controls.Add(Me.Label5)
-        Me.RoundedPanel1.Controls.Add(Me.SerialNumber)
-        Me.RoundedPanel1.Controls.Add(Me.txb_SerialNumber)
+        Me.RoundedPanel1.Controls.Add(Me.lblSerialNumber)
+        Me.RoundedPanel1.Controls.Add(Me.serialNumber)
         Me.RoundedPanel1.Controls.Add(Me.Label7)
         Me.RoundedPanel1.Controls.Add(Me.ConditionStatus)
-        Me.RoundedPanel1.Controls.Add(Me.Cost)
+        Me.RoundedPanel1.Controls.Add(Me.lblCost)
         Me.RoundedPanel1.Controls.Add(Me.Label2)
-        Me.RoundedPanel1.Controls.Add(Me.txb_Cost)
         Me.RoundedPanel1.CornerRadius = 10
         Me.RoundedPanel1.Location = New System.Drawing.Point(106, 109)
         Me.RoundedPanel1.Name = "RoundedPanel1"
         Me.RoundedPanel1.Size = New System.Drawing.Size(1317, 424)
         Me.RoundedPanel1.TabIndex = 115
         '
-        'DateTimePicker2
+        'warrantyExpiration
         '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(245, 361)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(325, 22)
-        Me.DateTimePicker2.TabIndex = 116
+        Me.warrantyExpiration.Location = New System.Drawing.Point(245, 361)
+        Me.warrantyExpiration.Name = "warrantyExpiration"
+        Me.warrantyExpiration.Size = New System.Drawing.Size(325, 22)
+        Me.warrantyExpiration.TabIndex = 116
         '
-        'DateTimePicker1
+        'datePurchased
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(245, 326)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(325, 22)
-        Me.DateTimePicker1.TabIndex = 119
+        Me.datePurchased.Location = New System.Drawing.Point(245, 326)
+        Me.datePurchased.Name = "datePurchased"
+        Me.datePurchased.Size = New System.Drawing.Size(325, 22)
+        Me.datePurchased.TabIndex = 119
         '
         'ComboBox3
         '
@@ -411,17 +373,6 @@ Partial Class AssignRequestManagement
         Me.Label20.TabIndex = 95
         Me.Label20.Text = "Assignment Purpose"
         '
-        'TextBox5
-        '
-        Me.TextBox5.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox5.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.TextBox5.Location = New System.Drawing.Point(245, 180)
-        Me.TextBox5.MaxLength = 100
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(323, 27)
-        Me.TextBox5.TabIndex = 74
-        '
         'Label18
         '
         Me.Label18.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -448,16 +399,16 @@ Partial Class AssignRequestManagement
         Me.Label16.TabIndex = 94
         Me.Label16.Text = "Location"
         '
-        'TextBox4
+        'assignmentPurpose
         '
-        Me.TextBox4.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox4.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.TextBox4.Location = New System.Drawing.Point(245, 217)
-        Me.TextBox4.MaxLength = 100
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(323, 27)
-        Me.TextBox4.TabIndex = 109
+        Me.assignmentPurpose.BackColor = System.Drawing.SystemColors.Window
+        Me.assignmentPurpose.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.assignmentPurpose.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.assignmentPurpose.Location = New System.Drawing.Point(245, 217)
+        Me.assignmentPurpose.MaxLength = 100
+        Me.assignmentPurpose.Name = "assignmentPurpose"
+        Me.assignmentPurpose.Size = New System.Drawing.Size(323, 27)
+        Me.assignmentPurpose.TabIndex = 109
         '
         'Label13
         '
@@ -486,18 +437,18 @@ Partial Class AssignRequestManagement
         Me.Label6.TabIndex = 92
         Me.Label6.Text = "Department"
         '
-        'DateCreated
+        'DateCreatedlbl
         '
-        Me.DateCreated.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.DateCreatedlbl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DateCreated.AutoSize = True
-        Me.DateCreated.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.DateCreated.ForeColor = System.Drawing.Color.Black
-        Me.DateCreated.Location = New System.Drawing.Point(79, 287)
-        Me.DateCreated.Name = "DateCreated"
-        Me.DateCreated.Size = New System.Drawing.Size(112, 26)
-        Me.DateCreated.TabIndex = 87
-        Me.DateCreated.Text = "Date Created"
+        Me.DateCreatedlbl.AutoSize = True
+        Me.DateCreatedlbl.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.DateCreatedlbl.ForeColor = System.Drawing.Color.Black
+        Me.DateCreatedlbl.Location = New System.Drawing.Point(79, 287)
+        Me.DateCreatedlbl.Name = "DateCreatedlbl"
+        Me.DateCreatedlbl.Size = New System.Drawing.Size(112, 26)
+        Me.DateCreatedlbl.TabIndex = 87
+        Me.DateCreatedlbl.Text = "Date Created"
         '
         'RoundedPanel4
         '
@@ -525,88 +476,77 @@ Partial Class AssignRequestManagement
         Me.Label4.TabIndex = 120
         Me.Label4.Text = "Assignment Details"
         '
-        'DateUpdated
+        'DateUpdatedlbl
         '
-        Me.DateUpdated.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.DateUpdatedlbl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DateUpdated.AutoSize = True
-        Me.DateUpdated.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.DateUpdated.ForeColor = System.Drawing.Color.Black
-        Me.DateUpdated.Location = New System.Drawing.Point(79, 324)
-        Me.DateUpdated.Name = "DateUpdated"
-        Me.DateUpdated.Size = New System.Drawing.Size(115, 26)
-        Me.DateUpdated.TabIndex = 88
-        Me.DateUpdated.Text = "Date Updated"
+        Me.DateUpdatedlbl.AutoSize = True
+        Me.DateUpdatedlbl.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.DateUpdatedlbl.ForeColor = System.Drawing.Color.Black
+        Me.DateUpdatedlbl.Location = New System.Drawing.Point(79, 324)
+        Me.DateUpdatedlbl.Name = "DateUpdatedlbl"
+        Me.DateUpdatedlbl.Size = New System.Drawing.Size(115, 26)
+        Me.DateUpdatedlbl.TabIndex = 88
+        Me.DateUpdatedlbl.Text = "Date Updated"
         '
-        'UpdatedBy
+        'UpdatedBylbl
         '
-        Me.UpdatedBy.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.UpdatedBylbl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.UpdatedBy.AutoSize = True
-        Me.UpdatedBy.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.UpdatedBy.ForeColor = System.Drawing.Color.Black
-        Me.UpdatedBy.Location = New System.Drawing.Point(78, 358)
-        Me.UpdatedBy.Name = "UpdatedBy"
-        Me.UpdatedBy.Size = New System.Drawing.Size(98, 26)
-        Me.UpdatedBy.TabIndex = 85
-        Me.UpdatedBy.Text = "Updated by"
+        Me.UpdatedBylbl.AutoSize = True
+        Me.UpdatedBylbl.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.UpdatedBylbl.ForeColor = System.Drawing.Color.Black
+        Me.UpdatedBylbl.Location = New System.Drawing.Point(78, 358)
+        Me.UpdatedBylbl.Name = "UpdatedBylbl"
+        Me.UpdatedBylbl.Size = New System.Drawing.Size(98, 26)
+        Me.UpdatedBylbl.TabIndex = 85
+        Me.UpdatedBylbl.Text = "Updated by"
         '
-        'ComboBox11
+        'condition
         '
-        Me.ComboBox11.FormattingEnabled = True
-        Me.ComboBox11.Location = New System.Drawing.Point(245, 252)
-        Me.ComboBox11.Name = "ComboBox11"
-        Me.ComboBox11.Size = New System.Drawing.Size(325, 24)
-        Me.ComboBox11.TabIndex = 118
+        Me.condition.FormattingEnabled = True
+        Me.condition.Location = New System.Drawing.Point(245, 252)
+        Me.condition.Name = "condition"
+        Me.condition.Size = New System.Drawing.Size(325, 24)
+        Me.condition.TabIndex = 118
         '
-        'DateTimePicker3
+        'dateCreated
         '
-        Me.DateTimePicker3.Location = New System.Drawing.Point(245, 291)
-        Me.DateTimePicker3.Name = "DateTimePicker3"
-        Me.DateTimePicker3.Size = New System.Drawing.Size(325, 22)
-        Me.DateTimePicker3.TabIndex = 123
+        Me.dateCreated.Location = New System.Drawing.Point(245, 291)
+        Me.dateCreated.Name = "dateCreated"
+        Me.dateCreated.Size = New System.Drawing.Size(325, 22)
+        Me.dateCreated.TabIndex = 123
         '
-        'DateTimePicker4
+        'dateUpdated
         '
-        Me.DateTimePicker4.Location = New System.Drawing.Point(245, 328)
-        Me.DateTimePicker4.Name = "DateTimePicker4"
-        Me.DateTimePicker4.Size = New System.Drawing.Size(325, 22)
-        Me.DateTimePicker4.TabIndex = 124
+        Me.dateUpdated.Location = New System.Drawing.Point(245, 328)
+        Me.dateUpdated.Name = "dateUpdated"
+        Me.dateUpdated.Size = New System.Drawing.Size(325, 22)
+        Me.dateUpdated.TabIndex = 124
         '
-        'ComboBox6
+        'updatedBy
         '
-        Me.ComboBox6.FormattingEnabled = True
-        Me.ComboBox6.Location = New System.Drawing.Point(245, 358)
-        Me.ComboBox6.Name = "ComboBox6"
-        Me.ComboBox6.Size = New System.Drawing.Size(325, 24)
-        Me.ComboBox6.TabIndex = 125
+        Me.updatedBy.FormattingEnabled = True
+        Me.updatedBy.Location = New System.Drawing.Point(245, 358)
+        Me.updatedBy.Name = "updatedBy"
+        Me.updatedBy.Size = New System.Drawing.Size(325, 24)
+        Me.updatedBy.TabIndex = 125
         '
-        'ComboBox2
+        'department
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(245, 80)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(325, 24)
-        Me.ComboBox2.TabIndex = 126
+        Me.department.FormattingEnabled = True
+        Me.department.Location = New System.Drawing.Point(245, 80)
+        Me.department.Name = "department"
+        Me.department.Size = New System.Drawing.Size(325, 24)
+        Me.department.TabIndex = 126
         '
-        'ComboBox4
+        'employee
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(245, 115)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(325, 24)
-        Me.ComboBox4.TabIndex = 127
-        '
-        'TextBox2
-        '
-        Me.TextBox2.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox2.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.TextBox2.Location = New System.Drawing.Point(245, 147)
-        Me.TextBox2.MaxLength = 100
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(323, 27)
-        Me.TextBox2.TabIndex = 128
+        Me.employee.FormattingEnabled = True
+        Me.employee.Location = New System.Drawing.Point(245, 115)
+        Me.employee.Name = "employee"
+        Me.employee.Size = New System.Drawing.Size(325, 24)
+        Me.employee.TabIndex = 127
         '
         'RoundedPanel3
         '
@@ -614,23 +554,23 @@ Partial Class AssignRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RoundedPanel3.BackColor = System.Drawing.Color.White
         Me.RoundedPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.RoundedPanel3.Controls.Add(Me.TextBox2)
-        Me.RoundedPanel3.Controls.Add(Me.ComboBox4)
-        Me.RoundedPanel3.Controls.Add(Me.ComboBox2)
-        Me.RoundedPanel3.Controls.Add(Me.ComboBox6)
-        Me.RoundedPanel3.Controls.Add(Me.DateTimePicker4)
-        Me.RoundedPanel3.Controls.Add(Me.DateTimePicker3)
-        Me.RoundedPanel3.Controls.Add(Me.ComboBox11)
-        Me.RoundedPanel3.Controls.Add(Me.UpdatedBy)
-        Me.RoundedPanel3.Controls.Add(Me.DateUpdated)
+        Me.RoundedPanel3.Controls.Add(Me.remarks)
+        Me.RoundedPanel3.Controls.Add(Me.location)
+        Me.RoundedPanel3.Controls.Add(Me.employee)
+        Me.RoundedPanel3.Controls.Add(Me.department)
+        Me.RoundedPanel3.Controls.Add(Me.updatedBy)
+        Me.RoundedPanel3.Controls.Add(Me.dateUpdated)
+        Me.RoundedPanel3.Controls.Add(Me.dateCreated)
+        Me.RoundedPanel3.Controls.Add(Me.condition)
+        Me.RoundedPanel3.Controls.Add(Me.UpdatedBylbl)
+        Me.RoundedPanel3.Controls.Add(Me.DateUpdatedlbl)
         Me.RoundedPanel3.Controls.Add(Me.RoundedPanel4)
-        Me.RoundedPanel3.Controls.Add(Me.DateCreated)
+        Me.RoundedPanel3.Controls.Add(Me.DateCreatedlbl)
         Me.RoundedPanel3.Controls.Add(Me.Label6)
         Me.RoundedPanel3.Controls.Add(Me.Label13)
-        Me.RoundedPanel3.Controls.Add(Me.TextBox4)
+        Me.RoundedPanel3.Controls.Add(Me.assignmentPurpose)
         Me.RoundedPanel3.Controls.Add(Me.Label16)
         Me.RoundedPanel3.Controls.Add(Me.Label18)
-        Me.RoundedPanel3.Controls.Add(Me.TextBox5)
         Me.RoundedPanel3.Controls.Add(Me.Label20)
         Me.RoundedPanel3.Controls.Add(Me.Label21)
         Me.RoundedPanel3.CornerRadius = 10
@@ -638,6 +578,50 @@ Partial Class AssignRequestManagement
         Me.RoundedPanel3.Name = "RoundedPanel3"
         Me.RoundedPanel3.Size = New System.Drawing.Size(1317, 415)
         Me.RoundedPanel3.TabIndex = 126
+        '
+        'propertyId
+        '
+        Me.propertyId.FormattingEnabled = True
+        Me.propertyId.Location = New System.Drawing.Point(245, 80)
+        Me.propertyId.Name = "propertyId"
+        Me.propertyId.Size = New System.Drawing.Size(325, 24)
+        Me.propertyId.TabIndex = 120
+        '
+        'propertyName
+        '
+        Me.propertyName.FormattingEnabled = True
+        Me.propertyName.Location = New System.Drawing.Point(245, 114)
+        Me.propertyName.Name = "propertyName"
+        Me.propertyName.Size = New System.Drawing.Size(325, 24)
+        Me.propertyName.TabIndex = 121
+        '
+        'cost
+        '
+        Me.cost.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cost.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cost.Location = New System.Drawing.Point(245, 291)
+        Me.cost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cost.Name = "cost"
+        Me.cost.Size = New System.Drawing.Size(330, 24)
+        Me.cost.TabIndex = 122
+        '
+        'location
+        '
+        Me.location.FormattingEnabled = True
+        Me.location.Location = New System.Drawing.Point(245, 149)
+        Me.location.Name = "location"
+        Me.location.Size = New System.Drawing.Size(325, 24)
+        Me.location.TabIndex = 129
+        '
+        'remarks
+        '
+        Me.remarks.FormattingEnabled = True
+        Me.remarks.Location = New System.Drawing.Point(245, 181)
+        Me.remarks.Name = "remarks"
+        Me.remarks.Size = New System.Drawing.Size(325, 24)
+        Me.remarks.TabIndex = 130
         '
         'AssignRequestManagement
         '
@@ -658,6 +642,7 @@ Partial Class AssignRequestManagement
         Me.RoundedPanel4.PerformLayout()
         Me.RoundedPanel3.ResumeLayout(False)
         Me.RoundedPanel3.PerformLayout()
+        CType(Me.cost, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -666,45 +651,45 @@ Partial Class AssignRequestManagement
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Property_ID As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Cost As System.Windows.Forms.Label
-    Friend WithEvents txb_Cost As System.Windows.Forms.TextBox
+    Friend WithEvents lblCost As System.Windows.Forms.Label
     Friend WithEvents ConditionStatus As System.Windows.Forms.Label
-    Friend WithEvents SerialNumber As System.Windows.Forms.Label
-    Friend WithEvents txb_SerialNumber As System.Windows.Forms.TextBox
+    Friend WithEvents lblSerialNumber As System.Windows.Forms.Label
+    Friend WithEvents serialNumber As System.Windows.Forms.TextBox
     Friend WithEvents um_edituser_fullname As System.Windows.Forms.Label
-    Friend WithEvents btn_PropertyName As System.Windows.Forms.TextBox
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
-    Friend WithEvents btn_Suppier As System.Windows.Forms.TextBox
+    Friend WithEvents suppier As System.Windows.Forms.TextBox
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents DateTimePicker2 As System.Windows.Forms.DateTimePicker
-    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
+    Friend WithEvents warrantyExpiration As System.Windows.Forms.DateTimePicker
+    Friend WithEvents datePurchased As System.Windows.Forms.DateTimePicker
     Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
     Friend WithEvents btnCancel As Resources.Controls.RoundedButton
     Friend WithEvents btnSave As Resources.Controls.RoundedButton
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents assignmentPurpose As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents DateCreated As System.Windows.Forms.Label
+    Friend WithEvents DateCreatedlbl As System.Windows.Forms.Label
     Friend WithEvents RoundedPanel4 As Resources.Controls.RoundedPanel
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents DateUpdated As System.Windows.Forms.Label
-    Friend WithEvents UpdatedBy As System.Windows.Forms.Label
-    Friend WithEvents ComboBox11 As System.Windows.Forms.ComboBox
-    Friend WithEvents DateTimePicker3 As System.Windows.Forms.DateTimePicker
-    Friend WithEvents DateTimePicker4 As System.Windows.Forms.DateTimePicker
-    Friend WithEvents ComboBox6 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox4 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents DateUpdatedlbl As System.Windows.Forms.Label
+    Friend WithEvents UpdatedBylbl As System.Windows.Forms.Label
+    Friend WithEvents condition As System.Windows.Forms.ComboBox
+    Friend WithEvents dateCreated As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dateUpdated As System.Windows.Forms.DateTimePicker
+    Friend WithEvents updatedBy As System.Windows.Forms.ComboBox
+    Friend WithEvents department As System.Windows.Forms.ComboBox
+    Friend WithEvents employee As System.Windows.Forms.ComboBox
     Friend WithEvents RoundedPanel3 As Resources.Controls.RoundedPanel
+    Friend WithEvents propertyId As System.Windows.Forms.ComboBox
+    Friend WithEvents propertyName As System.Windows.Forms.ComboBox
+    Friend WithEvents cost As System.Windows.Forms.NumericUpDown
+    Friend WithEvents remarks As System.Windows.Forms.ComboBox
+    Friend WithEvents location As System.Windows.Forms.ComboBox
 End Class

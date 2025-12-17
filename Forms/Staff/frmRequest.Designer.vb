@@ -41,7 +41,12 @@ Partial Class frmRequest
         Me.ApprovedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReleaseDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.myrequestssearchbar = New System.Windows.Forms.TextBox()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
+        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblRequest
@@ -144,12 +149,62 @@ Partial Class frmRequest
         Me.ReturnDate.Name = "ReturnDate"
         Me.ReturnDate.Width = 150
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(343, 88)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 186
+        Me.PictureBox2.TabStop = False
+        '
+        'myrequestssearchbar
+        '
+        Me.myrequestssearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.myrequestssearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.myrequestssearchbar.Location = New System.Drawing.Point(408, 88)
+        Me.myrequestssearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.myrequestssearchbar.Name = "myrequestssearchbar"
+        Me.myrequestssearchbar.Size = New System.Drawing.Size(367, 42)
+        Me.myrequestssearchbar.TabIndex = 185
+        '
+        'pm_cbobx_status
+        '
+        Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(990, 99)
+        Me.pm_cbobx_status.Name = "pm_cbobx_status"
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
+        Me.pm_cbobx_status.TabIndex = 183
+        Me.pm_cbobx_status.Text = "Status"
+        '
+        'pm_cbobx_categ
+        '
+        Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(815, 99)
+        Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
+        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
+        Me.pm_cbobx_categ.TabIndex = 184
+        Me.pm_cbobx_categ.Text = "Categories"
+        '
         'frmRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1467, 1175)
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.myrequestssearchbar)
+        Me.Controls.Add(Me.pm_cbobx_status)
+        Me.Controls.Add(Me.pm_cbobx_categ)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.lblRequest)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -158,6 +213,7 @@ Partial Class frmRequest
         Me.Text = "frmRequest"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -175,4 +231,8 @@ Partial Class frmRequest
     Friend WithEvents ApprovedBy As DataGridViewTextBoxColumn
     Friend WithEvents ReleaseDate As DataGridViewTextBoxColumn
     Friend WithEvents ReturnDate As DataGridViewTextBoxColumn
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents myrequestssearchbar As TextBox
+    Friend WithEvents pm_cbobx_status As ComboBox
+    Friend WithEvents pm_cbobx_categ As ComboBox
 End Class
