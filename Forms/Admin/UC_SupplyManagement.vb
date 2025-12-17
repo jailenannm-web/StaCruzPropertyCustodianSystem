@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Diagnostics
 Imports System.Drawing
@@ -7,6 +7,7 @@ Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Imports System.Text.RegularExpressions
 Imports System.Linq
+Imports MySql.Data.MySqlClient
 
 Public Class UC_SupplyManagement
     Inherits UserControl
@@ -37,16 +38,16 @@ Public Class UC_SupplyManagement
                 pm_cbobx_categ.Items.Clear()
                 pm_cbobx_categ.Items.Add("All")
                 
-                ' Load categories from database
+                ' Load categories from database - get unique categories from supplies table
                 Try
                     Dim categories As DataTable = DatabaseConnection.GetCategories("supply")
                     If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
                         For Each row As DataRow In categories.Rows
                             Dim categoryName As String = ""
-                            If row.Table.Columns.Contains("categoryName") AndAlso Not IsDBNull(row("categoryName")) Then
-                                categoryName = row("categoryName").ToString()
-                            ElseIf row.Table.Columns.Contains("category_name") AndAlso Not IsDBNull(row("category_name")) Then
+                            If row.Table.Columns.Contains("category_name") AndAlso Not IsDBNull(row("category_name")) Then
                                 categoryName = row("category_name").ToString()
+                            ElseIf row.Table.Columns.Contains("categoryName") AndAlso Not IsDBNull(row("categoryName")) Then
+                                categoryName = row("categoryName").ToString()
                             ElseIf row.Table.Columns.Count > 0 AndAlso Not IsDBNull(row(0)) Then
                                 categoryName = row(0).ToString()
                             End If
@@ -55,10 +56,35 @@ Public Class UC_SupplyManagement
                             End If
                         Next
                     End If
+                    ' Also get unique categories directly from supplies table as fallback
+                    If pm_cbobx_categ.Items.Count <= 1 Then ' Only "All" item
+                        Try
+                            Dim conn = DatabaseConnection.GetConnection()
+                            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                                Dim query As String = "SELECT DISTINCT category FROM supplies WHERE category IS NOT NULL AND category != '' ORDER BY category"
+                                Using cmd As New MySql.Data.MySqlClient.MySqlCommand(query, conn)
+                                    Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                                        While reader.Read()
+                                            Dim catName As String = reader("category").ToString()
+                                            If Not String.IsNullOrEmpty(catName) AndAlso Not pm_cbobx_categ.Items.Contains(catName) Then
+                                                pm_cbobx_categ.Items.Add(catName)
+                                            End If
+                                        End While
+                                    End Using
+                                End Using
+                                conn.Close()
+                            End If
+                        Catch
+                            ' Fallback to common categories
+                            If pm_cbobx_categ.Items.Count <= 1 Then
+                                pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Materials", "Medical Supplies", "IT Supplies", "Stationery", "Electronics", "Furniture", "Equipment"})
+                            End If
+                        End Try
+                    End If
                 Catch ex As Exception
                     System.Diagnostics.Debug.WriteLine("[v0] Error loading categories: " & ex.Message)
                     ' Fallback to common categories
-                    pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Materials", "Medical Supplies", "IT Supplies"})
+                    pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Materials", "Medical Supplies", "IT Supplies", "Stationery", "Electronics", "Furniture", "Equipment"})
                 End Try
                 
                 pm_cbobx_categ.SelectedIndex = 0
@@ -440,11 +466,15 @@ Public Class UC_SupplyManagement
             Try
                 Dim success As Boolean = DatabaseConnection.DeleteSupply(supplyID)
                 If success Then
-                    LoadSuppliesData() ' Refresh table
-                    MessageBox.Show("Supply deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Refresh table to show updated data
+                    LoadSuppliesData()
+                    ' Success message is already shown by DeleteSupply function
+                Else
+                    MessageBox.Show("Failed to delete supply. It may be in use or already deleted.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
             Catch ex As Exception
                 MessageBox.Show("Error deleting supply: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Diagnostics.Debug.WriteLine("[v0] btnDelete_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
             End Try
         End If
     End Sub

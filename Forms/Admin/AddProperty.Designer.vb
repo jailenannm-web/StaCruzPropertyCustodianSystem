@@ -24,6 +24,7 @@ Partial Class AddProperty
     Private Sub InitializeComponent()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.assignedTo = New System.Windows.Forms.ComboBox()
         Me.warranty = New System.Windows.Forms.Label()
         Me.condition = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -53,7 +54,6 @@ Partial Class AddProperty
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.assignedTo = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.acquisitionCost, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -97,6 +97,19 @@ Partial Class AddProperty
         Me.Panel2.Size = New System.Drawing.Size(537, 428)
         Me.Panel2.TabIndex = 65
         '
+        'assignedTo
+        '
+        Me.assignedTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.assignedTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.assignedTo.FormattingEnabled = True
+        Me.assignedTo.Items.AddRange(New Object() {"MATH DEPARTMENT", "SCIENCE DEPARTMENT", "ENGLISH DEPARTMENT", "MAPEH DEPARMENT", "TLE DEPARTMENT"})
+        Me.assignedTo.Location = New System.Drawing.Point(250, 185)
+        Me.assignedTo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.assignedTo.Name = "assignedTo"
+        Me.assignedTo.Size = New System.Drawing.Size(239, 26)
+        Me.assignedTo.TabIndex = 80
+        '
         'warranty
         '
         Me.warranty.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -104,7 +117,7 @@ Partial Class AddProperty
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.warranty.AutoSize = True
         Me.warranty.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.warranty.Location = New System.Drawing.Point(45, 16)
+        Me.warranty.Location = New System.Drawing.Point(51, 59)
         Me.warranty.Name = "warranty"
         Me.warranty.Size = New System.Drawing.Size(64, 18)
         Me.warranty.TabIndex = 79
@@ -117,7 +130,7 @@ Partial Class AddProperty
         Me.condition.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.condition.FormattingEnabled = True
         Me.condition.Items.AddRange(New Object() {"GOOD", "DAMAGE", "READY TO USE"})
-        Me.condition.Location = New System.Drawing.Point(242, 254)
+        Me.condition.Location = New System.Drawing.Point(248, 297)
         Me.condition.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.condition.Name = "condition"
         Me.condition.Size = New System.Drawing.Size(255, 26)
@@ -130,7 +143,7 @@ Partial Class AddProperty
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(43, 258)
+        Me.Label3.Location = New System.Drawing.Point(49, 301)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(71, 18)
         Me.Label3.TabIndex = 75
@@ -142,7 +155,7 @@ Partial Class AddProperty
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.acquisitionCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.acquisitionCost.Location = New System.Drawing.Point(244, 56)
+        Me.acquisitionCost.Location = New System.Drawing.Point(250, 99)
         Me.acquisitionCost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.acquisitionCost.Name = "acquisitionCost"
         Me.acquisitionCost.Size = New System.Drawing.Size(253, 24)
@@ -151,7 +164,7 @@ Partial Class AddProperty
         'warrantyExpirationDate
         '
         Me.warrantyExpirationDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.warrantyExpirationDate.Location = New System.Drawing.Point(244, 11)
+        Me.warrantyExpirationDate.Location = New System.Drawing.Point(250, 54)
         Me.warrantyExpirationDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.warrantyExpirationDate.Name = "warrantyExpirationDate"
         Me.warrantyExpirationDate.Size = New System.Drawing.Size(239, 24)
@@ -164,7 +177,7 @@ Partial Class AddProperty
         Me.departmentId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.departmentId.FormattingEnabled = True
         Me.departmentId.Items.AddRange(New Object() {"MATH DEPARTMENT", "SCIENCE DEPARTMENT", "ENGLISH DEPARTMENT", "MAPEH DEPARMENT", "TLE DEPARTMENT"})
-        Me.departmentId.Location = New System.Drawing.Point(244, 197)
+        Me.departmentId.Location = New System.Drawing.Point(250, 240)
         Me.departmentId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.departmentId.Name = "departmentId"
         Me.departmentId.Size = New System.Drawing.Size(239, 26)
@@ -177,7 +190,7 @@ Partial Class AddProperty
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.assignedEmployee.AutoSize = True
         Me.assignedEmployee.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.assignedEmployee.Location = New System.Drawing.Point(45, 106)
+        Me.assignedEmployee.Location = New System.Drawing.Point(51, 149)
         Me.assignedEmployee.Name = "assignedEmployee"
         Me.assignedEmployee.Size = New System.Drawing.Size(77, 18)
         Me.assignedEmployee.TabIndex = 48
@@ -190,7 +203,7 @@ Partial Class AddProperty
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.warrantyExpiration.AutoSize = True
         Me.warrantyExpiration.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.warrantyExpiration.Location = New System.Drawing.Point(34, 58)
+        Me.warrantyExpiration.Location = New System.Drawing.Point(40, 101)
         Me.warrantyExpiration.Name = "warrantyExpiration"
         Me.warrantyExpiration.Size = New System.Drawing.Size(123, 18)
         Me.warrantyExpiration.TabIndex = 47
@@ -203,7 +216,7 @@ Partial Class AddProperty
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.location.AutoSize = True
         Me.location.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.location.Location = New System.Drawing.Point(45, 145)
+        Me.location.Location = New System.Drawing.Point(51, 188)
         Me.location.Name = "location"
         Me.location.Size = New System.Drawing.Size(85, 18)
         Me.location.TabIndex = 50
@@ -216,7 +229,7 @@ Partial Class AddProperty
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.remarks.AutoSize = True
         Me.remarks.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.remarks.Location = New System.Drawing.Point(45, 200)
+        Me.remarks.Location = New System.Drawing.Point(51, 243)
         Me.remarks.Name = "remarks"
         Me.remarks.Size = New System.Drawing.Size(85, 18)
         Me.remarks.TabIndex = 51
@@ -228,7 +241,7 @@ Partial Class AddProperty
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.totalCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.totalCost.Location = New System.Drawing.Point(244, 95)
+        Me.totalCost.Location = New System.Drawing.Point(250, 138)
         Me.totalCost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.totalCost.Name = "totalCost"
         Me.totalCost.Size = New System.Drawing.Size(239, 24)
@@ -260,7 +273,7 @@ Partial Class AddProperty
         'acquisitionDate
         '
         Me.acquisitionDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.acquisitionDate.Location = New System.Drawing.Point(256, 299)
+        Me.acquisitionDate.Location = New System.Drawing.Point(210, 299)
         Me.acquisitionDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.acquisitionDate.Name = "acquisitionDate"
         Me.acquisitionDate.Size = New System.Drawing.Size(216, 24)
@@ -283,7 +296,7 @@ Partial Class AddProperty
         '
         Me.description.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.description.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.description.Location = New System.Drawing.Point(256, 151)
+        Me.description.Location = New System.Drawing.Point(210, 149)
         Me.description.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.description.Name = "description"
         Me.description.Size = New System.Drawing.Size(216, 24)
@@ -293,7 +306,7 @@ Partial Class AddProperty
         '
         Me.propertyNumber.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.propertyNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertyNumber.Location = New System.Drawing.Point(256, 205)
+        Me.propertyNumber.Location = New System.Drawing.Point(210, 205)
         Me.propertyNumber.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.propertyNumber.Name = "propertyNumber"
         Me.propertyNumber.Size = New System.Drawing.Size(216, 24)
@@ -305,7 +318,7 @@ Partial Class AddProperty
         Me.category.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.category.FormattingEnabled = True
         Me.category.Items.AddRange(New Object() {"Electronics", "Computer", "Furnitures"})
-        Me.category.Location = New System.Drawing.Point(256, 98)
+        Me.category.Location = New System.Drawing.Point(210, 101)
         Me.category.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.category.Name = "category"
         Me.category.Size = New System.Drawing.Size(216, 26)
@@ -315,7 +328,7 @@ Partial Class AddProperty
         '
         Me.serialNumber.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.serialNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.serialNumber.Location = New System.Drawing.Point(254, 257)
+        Me.serialNumber.Location = New System.Drawing.Point(210, 257)
         Me.serialNumber.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.serialNumber.Name = "serialNumber"
         Me.serialNumber.Size = New System.Drawing.Size(218, 24)
@@ -325,7 +338,7 @@ Partial Class AddProperty
         '
         Me.itemName.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.itemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.itemName.Location = New System.Drawing.Point(256, 44)
+        Me.itemName.Location = New System.Drawing.Point(210, 47)
         Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.itemName.Name = "itemName"
         Me.itemName.Size = New System.Drawing.Size(216, 24)
@@ -459,19 +472,6 @@ Partial Class AddProperty
         Me.btnSave.TabIndex = 154
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = False
-        '
-        'assignedTo
-        '
-        Me.assignedTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.assignedTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.assignedTo.FormattingEnabled = True
-        Me.assignedTo.Items.AddRange(New Object() {"MATH DEPARTMENT", "SCIENCE DEPARTMENT", "ENGLISH DEPARTMENT", "MAPEH DEPARMENT", "TLE DEPARTMENT"})
-        Me.assignedTo.Location = New System.Drawing.Point(244, 142)
-        Me.assignedTo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.assignedTo.Name = "assignedTo"
-        Me.assignedTo.Size = New System.Drawing.Size(239, 26)
-        Me.assignedTo.TabIndex = 80
         '
         'AddProperty
         '

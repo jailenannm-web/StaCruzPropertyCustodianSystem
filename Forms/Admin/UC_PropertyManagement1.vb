@@ -101,11 +101,21 @@ Public Class UC_PropertyManagement1
 
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
-                    ' Use safe column access
+                    ' Extract propertyId first
+                    Dim propID As Integer = 0
+                    If row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")) Then
+                        Integer.TryParse(row("propertyId").ToString(), propID)
+                    End If
+
+                    ' Extract all fields matching Designer column order:
+                    ' propertyId, itemName, unitOfMeasure, propertyNumber, serialNumber, 
+                    ' acquisitionDate, acquisitionCost, totalCost, sourceOfFunds, assignedTo, 
+                    ' departmentId, internalCodes, createdAt, updatedAt
                     Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString(), "")
-                    Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), "")
+                    Dim unitOfMeasure As String = If(row.Table.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(row("unitOfMeasure")), row("unitOfMeasure").ToString(), "")
                     Dim propNumber As String = If(row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")), row("propertyNumber").ToString(), "")
                     Dim serialNumber As String = If(row.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")), row("serialNumber").ToString(), "")
+                    
                     Dim acqDate As String = ""
                     If row.Table.Columns.Contains("acquisitionDate") AndAlso Not IsDBNull(row("acquisitionDate")) Then
                         Dim parsedDate As Date
@@ -113,6 +123,7 @@ Public Class UC_PropertyManagement1
                             acqDate = parsedDate.ToString("yyyy-MM-dd")
                         End If
                     End If
+                    
                     Dim acqCost As String = "0.00"
                     If row.Table.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(row("acquisitionCost")) Then
                         Dim cost As Decimal
@@ -120,25 +131,54 @@ Public Class UC_PropertyManagement1
                             acqCost = Format(cost, "0.00")
                         End If
                     End If
-                    Dim assignedEmp As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString(), "")
-                    Dim assignedDept As String = If(row.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")), row("assignedDepartment").ToString(), "")
-                    Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
-                    Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString(), "")
-                    Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
+                    
+                    Dim totalCost As String = "0.00"
+                    If row.Table.Columns.Contains("totalCost") AndAlso Not IsDBNull(row("totalCost")) Then
+                        Dim tCost As Decimal
+                        If Decimal.TryParse(row("totalCost").ToString(), tCost) Then
+                            totalCost = Format(tCost, "0.00")
+                        End If
+                    ElseIf row.Table.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(row("acquisitionCost")) Then
+                        ' Use acquisitionCost as totalCost if totalCost is null
+                        Dim tCost As Decimal
+                        If Decimal.TryParse(row("acquisitionCost").ToString(), tCost) Then
+                            totalCost = Format(tCost, "0.00")
+                        End If
+                    End If
+                    
+                    Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")
+                    ' assignedTo should show employee name, not ID
+                    Dim assignedTo As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString(), "")
+                    ' departmentId should show department ID (numeric), not name
+                    Dim departmentId As String = If(row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")), row("departmentId").ToString(), "")
                     Dim internalCodes As String = If(row.Table.Columns.Contains("internalCodes") AndAlso Not IsDBNull(row("internalCodes")), row("internalCodes").ToString(), "")
+                    
                     Dim createdAt As String = ""
                     If row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")) Then
                         createdAt = Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd HH:mm")
                     End If
+                    
                     Dim updatedAt As String = ""
                     If row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")) Then
                         updatedAt = Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd HH:mm")
                     End If
-                    Dim propID As Object = If(row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")), row("propertyId"), Nothing)
 
+                    ' Add row in correct column order matching Designer
                     Dim rowIndex As Integer = propertyManagementGrid.Rows.Add(
-                        itemName, category, propNumber, serialNumber, acqDate, acqCost,
-                        assignedEmp, assignedDept, location, condition, status, internalCodes, createdAt, updatedAt
+                        propID.ToString(),        ' propertyId
+                        itemName,                ' itemName
+                        unitOfMeasure,           ' unitOfMeasure
+                        propNumber,              ' propertyNumber
+                        serialNumber,            ' serialNumber
+                        acqDate,                 ' acquisitionDate
+                        acqCost,                 ' acquisitionCost
+                        totalCost,               ' totalCost
+                        sourceOfFunds,           ' sourceOfFunds
+                        assignedTo,              ' assignedTo
+                        departmentId,            ' departmentId
+                        internalCodes,           ' internalCodes
+                        createdAt,               ' createdAt
+                        updatedAt                ' updatedAt
                     )
                     ' Store propertyId in row Tag for easy access
                     propertyManagementGrid.Rows(rowIndex).Tag = propID
@@ -150,10 +190,16 @@ Public Class UC_PropertyManagement1
                 Debug.WriteLine("[v0] Property Management - Loaded " & dt.Rows.Count & " properties")
             Else
                 Debug.WriteLine("[v0] Property Management - No properties found")
+                If ttlpropertymanagement IsNot Nothing Then
+                    ttlpropertymanagement.Text = "0"
+                End If
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Debug.WriteLine("[v0] Load Properties Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+            If ttlpropertymanagement IsNot Nothing Then
+                ttlpropertymanagement.Text = "0"
+            End If
         End Try
     End Sub
 
@@ -224,24 +270,30 @@ Public Class UC_PropertyManagement1
                 If String.IsNullOrEmpty(searchLower) Then Return True
 
                 Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
-                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
                 Dim propNumber As String = If(row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")), row("propertyNumber").ToString().ToLower(), String.Empty)
                 Dim serialNumber As String = If(row.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")), row("serialNumber").ToString().ToLower(), String.Empty)
-                Dim assignedEmp As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString().ToLower(), String.Empty)
-                Dim assignedDept As String = If(row.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")), row("assignedDepartment").ToString().ToLower(), String.Empty)
-                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
-                Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString().ToLower(), String.Empty)
+                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
+                Dim assignedEmployee As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString().ToLower(), String.Empty)
+                Dim assignedDepartment As String = If(row.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")), row("assignedDepartment").ToString().ToLower(), String.Empty)
                 Dim internalCodes As String = If(row.Table.Columns.Contains("internalCodes") AndAlso Not IsDBNull(row("internalCodes")), row("internalCodes").ToString().ToLower(), String.Empty)
 
-                Return itemName.Contains(searchLower) OrElse category.Contains(searchLower) OrElse propNumber.Contains(searchLower) OrElse serialNumber.Contains(searchLower) OrElse assignedEmp.Contains(searchLower) OrElse assignedDept.Contains(searchLower) OrElse location.Contains(searchLower) OrElse condition.Contains(searchLower) OrElse internalCodes.Contains(searchLower)
+                Return itemName.Contains(searchLower) OrElse propNumber.Contains(searchLower) OrElse serialNumber.Contains(searchLower) OrElse category.Contains(searchLower) OrElse assignedEmployee.Contains(searchLower) OrElse assignedDepartment.Contains(searchLower) OrElse internalCodes.Contains(searchLower)
             End Function)
 
             propertyManagementGrid.Rows.Clear()
             For Each row As DataRow In filtered
+                ' Extract propertyId first
+                Dim propID As Integer = 0
+                If row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")) Then
+                    Integer.TryParse(row("propertyId").ToString(), propID)
+                End If
+
+                ' Extract all fields matching Designer column order
                 Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString(), "")
-                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), "")
+                Dim unitOfMeasure As String = If(row.Table.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(row("unitOfMeasure")), row("unitOfMeasure").ToString(), "")
                 Dim propNumber As String = If(row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")), row("propertyNumber").ToString(), "")
                 Dim serialNumber As String = If(row.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")), row("serialNumber").ToString(), "")
+                
                 Dim acqDate As String = ""
                 If row.Table.Columns.Contains("acquisitionDate") AndAlso Not IsDBNull(row("acquisitionDate")) Then
                     Dim parsedDate As Date
@@ -249,6 +301,7 @@ Public Class UC_PropertyManagement1
                         acqDate = parsedDate.ToString("yyyy-MM-dd")
                     End If
                 End If
+                
                 Dim acqCost As String = "0.00"
                 If row.Table.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(row("acquisitionCost")) Then
                     Dim cost As Decimal
@@ -256,25 +309,52 @@ Public Class UC_PropertyManagement1
                         acqCost = Format(cost, "0.00")
                     End If
                 End If
-                Dim assignedEmp As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString(), "")
-                Dim assignedDept As String = If(row.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")), row("assignedDepartment").ToString(), "")
-                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
-                Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString(), "")
-                Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
+                
+                Dim totalCost As String = "0.00"
+                If row.Table.Columns.Contains("totalCost") AndAlso Not IsDBNull(row("totalCost")) Then
+                    Dim tCost As Decimal
+                    If Decimal.TryParse(row("totalCost").ToString(), tCost) Then
+                        totalCost = Format(tCost, "0.00")
+                    End If
+                ElseIf row.Table.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(row("acquisitionCost")) Then
+                    Dim tCost As Decimal
+                    If Decimal.TryParse(row("acquisitionCost").ToString(), tCost) Then
+                        totalCost = Format(tCost, "0.00")
+                    End If
+                End If
+                
+                Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")
+                ' assignedTo should show employee name, not ID - use assignedEmployee from JOIN
+                Dim assignedTo As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString(), "")
+                ' departmentId should show department ID (numeric), not name
+                Dim departmentId As String = If(row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")), row("departmentId").ToString(), "")
                 Dim internalCodes As String = If(row.Table.Columns.Contains("internalCodes") AndAlso Not IsDBNull(row("internalCodes")), row("internalCodes").ToString(), "")
+                
                 Dim createdAt As String = ""
                 If row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")) Then
                     createdAt = Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd HH:mm")
                 End If
+                
                 Dim updatedAt As String = ""
                 If row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")) Then
                     updatedAt = Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd HH:mm")
                 End If
-                Dim propID As Object = If(row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")), row("propertyId"), Nothing)
 
                 Dim rowIndex As Integer = propertyManagementGrid.Rows.Add(
-                    itemName, category, propNumber, serialNumber, acqDate, acqCost,
-                    assignedEmp, assignedDept, location, condition, status, internalCodes, createdAt, updatedAt
+                    propID.ToString(),
+                    itemName,
+                    unitOfMeasure,
+                    propNumber,
+                    serialNumber,
+                    acqDate,
+                    acqCost,
+                    totalCost,
+                    sourceOfFunds,
+                    assignedTo,
+                    departmentId,
+                    internalCodes,
+                    createdAt,
+                    updatedAt
                 )
                 propertyManagementGrid.Rows(rowIndex).Tag = propID
             Next
@@ -489,31 +569,28 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub generatePropertyCard_Click(sender As Object, e As EventArgs) Handles generatePropertyCard.Click
-        ' Check if a row is selected
-        If propertyManagementGrid.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a property first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
+        ' This button generates property codes for existing properties that don't have them
+        Try
+            Dim result As DialogResult = MessageBox.Show(
+                "This will generate property codes (PROP-XXXXXX) for all properties that don't have them. Continue?",
+                "Generate Property Codes",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            )
 
-        Dim selectedRowGrid As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
-        Dim propertyID As Integer
-        If selectedRowGrid.Tag Is Nothing OrElse Not Integer.TryParse(selectedRowGrid.Tag.ToString(), propertyID) Then
-            MessageBox.Show("Invalid Property ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
-
-        ' Find the DataRow in originalData
-        Dim rows() As DataRow = originalData.Select("propertyId = " & propertyID)
-        If rows.Length = 0 Then
-            MessageBox.Show("Property data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
-
-        Dim selectedRow As DataRow = rows(0)
-
-        ' Open PropertyCard with the selected row
-        Dim frm As New PropertyCard(selectedRow)
-        frm.Show()
+            If result = DialogResult.Yes Then
+                Dim countGenerated As Integer = DatabaseConnection.GeneratePropertyCodesForExisting()
+                If countGenerated > 0 Then
+                    MessageBox.Show($"Successfully generated property codes for {countGenerated} property/properties.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Refresh the grid to show new codes
+                    LoadPropertiesData()
+                Else
+                    MessageBox.Show("All properties already have property codes, or no properties were found.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error generating property codes: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub propertyManagementGrid_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellContentClick

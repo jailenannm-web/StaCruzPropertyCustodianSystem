@@ -1,4 +1,4 @@
-﻿Imports System.Drawing.Drawing2D
+Imports System.Drawing.Drawing2D
 Imports System.Diagnostics
 Imports System
 Imports System.Drawing
@@ -11,8 +11,35 @@ Public Class UC_AddSupply
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
-        ' Initialize combobox options
-        pm_as_cmbobxCateg.Items.AddRange(New String() {"Stationery", "Electronics", "Furniture", "Equipment", "Other"})
+        ' Load categories from database
+        Try
+            Dim categories As DataTable = DatabaseConnection.GetCategories("supply")
+            If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
+                pm_as_cmbobxCateg.Items.Clear()
+                For Each row As DataRow In categories.Rows
+                    Dim categoryName As String = ""
+                    If row.Table.Columns.Contains("category_name") AndAlso Not IsDBNull(row("category_name")) Then
+                        categoryName = row("category_name").ToString()
+                    ElseIf row.Table.Columns.Contains("categoryName") AndAlso Not IsDBNull(row("categoryName")) Then
+                        categoryName = row("categoryName").ToString()
+                    ElseIf row.Table.Columns.Count > 0 AndAlso Not IsDBNull(row(0)) Then
+                        categoryName = row(0).ToString()
+                    End If
+                    If Not String.IsNullOrEmpty(categoryName) AndAlso Not pm_as_cmbobxCateg.Items.Contains(categoryName) Then
+                        pm_as_cmbobxCateg.Items.Add(categoryName)
+                    End If
+                Next
+            Else
+                ' Fallback to hardcoded categories
+                pm_as_cmbobxCateg.Items.AddRange(New String() {"Stationery", "Electronics", "Furniture", "Equipment", "Office Supplies", "Cleaning Supplies", "Medical Supplies", "Other"})
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] Error loading categories: " & ex.Message)
+            pm_as_cmbobxCateg.Items.AddRange(New String() {"Stationery", "Electronics", "Furniture", "Equipment", "Office Supplies", "Cleaning Supplies", "Medical Supplies", "Other"})
+        End Try
+        
+        ' Initialize status combobox
+        pm_as_cmbobxStatus.Items.Clear()
         pm_as_cmbobxStatus.Items.AddRange(New String() {"Available", "Low Stock", "Out of Stock"})
     End Sub
 
@@ -39,8 +66,16 @@ Public Class UC_AddSupply
             Dim unitCost As Decimal = If(Decimal.TryParse(pm_as_txtUnitCost.Text, unitCost), unitCost, 0)
             Dim totalValue As Decimal = stock * unitCost
 
-            ' Call database function with all 12 required parameters
-            ' Passing empty strings for optional fields not present in this form
+            ' Validate Date Received - use today if not provided (Date Received field may not exist in form)
+            Dim dateReceived As Date = Date.Today
+            
+            ' Validate location
+            If String.IsNullOrWhiteSpace(pm_as_txtLocation.Text) Then
+                MessageBox.Show("Location is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+            
+            ' Call database function with all required parameters including dateReceived
             Dim success As Boolean = DatabaseConnection.AddSupply(
                 um_as_txtSupplyID.Text.Trim(),
                 pm_as_txtName.Text.Trim(),
@@ -53,35 +88,29 @@ Public Class UC_AddSupply
                 "",  ' description - empty
                 "",  ' uom (unit of measure) - empty
                 0,   ' reorderLevel - empty
-                ""   ' supplierID - empty
+                "",  ' supplierID - empty
+                dateReceived  ' dateReceived - use today's date
             )
 
             If success Then
-                ' Clear form fields after successful add
-                ClearForm()
-                
-                ' Refresh the Property Management data grid
-                Dim parentForm As Control = Me.Parent
-                While parentForm IsNot Nothing
-                    If TypeOf parentForm Is UC_SupplyManagement Then
-                        CType(parentForm, UC_SupplyManagement).LoadSuppliesData()
-                        Exit While
-                    End If
-                    parentForm = parentForm.Parent
-                End While
-                
-                ' Also try to refresh if parent is a form with Property Management control
-                If Me.Parent IsNot Nothing Then
-                    For Each ctrl As Control In Me.Parent.Controls
-                        If TypeOf ctrl Is UC_SupplyManagement Then
-                            CType(ctrl, UC_SupplyManagement).LoadSuppliesData()
-                        End If
-                    Next
-                End If
-                
-                ' Notify parent form to refresh data
-                Me.Parent.Controls.Remove(Me)
                 MessageBox.Show("Supply added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                
+                ' Navigate back to Supply Management list
+                Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+                If parentDashboard IsNot Nothing Then
+                    parentDashboard.LoadUserControl(New UC_SupplyManagement())
+                Else
+                    ' Fallback: try to refresh parent control
+                    Dim parentForm As Control = Me.Parent
+                    While parentForm IsNot Nothing
+                        If TypeOf parentForm Is UC_SupplyManagement Then
+                            CType(parentForm, UC_SupplyManagement).LoadSuppliesData()
+                            Exit While
+                        End If
+                        parentForm = parentForm.Parent
+                    End While
+                    Me.Parent.Controls.Remove(Me)
+                End If
             End If
 
         Catch ex As Exception
