@@ -1,6 +1,8 @@
 Imports System
 Imports System.Data
 Imports System.Windows.Forms
+Imports Microsoft.VisualBasic
+Imports System.Linq
 
 Public Class UC_UserManagement
     Inherits UserControl
@@ -21,9 +23,21 @@ Public Class UC_UserManagement
     Private Sub UC_UserManagement_Load(sender As Object, e As EventArgs)
         ConfigureGrid()
         ConfigureFilterControls()
+        LoadAdminContext()
 
         RefreshUserTable()
 
+        ' Wire up search textbox if present
+        Dim searchNames As String() = {"pm_search", "usermanagementsearchbar", "txtSearch", "txtbox_search", "admin_txtbox_search", "searchBox"}
+        For Each nm As String In searchNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                Dim tb As TextBox = CType(found(0), TextBox)
+                RemoveHandler tb.TextChanged, AddressOf UserSearch_TextChanged
+                AddHandler tb.TextChanged, AddressOf UserSearch_TextChanged
+                Exit For
+            End If
+        Next
     End Sub
 
 
@@ -93,6 +107,11 @@ Public Class UC_UserManagement
 
             ' Use GetAllUsers to get both Admin/SuperAdmin (from users table) and Staff (from staff_accounts table)
             Dim records As DataTable = DatabaseConnection.GetAllUsers(currentStatusFilter, currentRoleFilter, "")
+            
+            ' Store original data for search
+            If records IsNot Nothing Then
+                originalUserData = records.Copy()
+            End If
 
             For Each record As DataRow In records.Rows
 
@@ -332,5 +351,113 @@ Public Class UC_UserManagement
 
     Private Sub UC_UserManagement_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+    Private originalUserData As DataTable = Nothing
+    Private isSearchingUsers As Boolean = False
+
+    Private Sub UserSearch_TextChanged(sender As Object, e As EventArgs)
+        Dim tb As TextBox = TryCast(sender, TextBox)
+        If tb Is Nothing Then Return
+        ApplyUserSearch(tb.Text)
+    End Sub
+
+    Private Sub ApplyUserSearch(searchText As String)
+        If originalUserData Is Nothing Then
+            ' Store original data on first search
+            Try
+                Dim dt As DataTable = DatabaseConnection.GetAllUsers(currentStatusFilter, currentRoleFilter, "")
+                If dt IsNot Nothing Then
+                    originalUserData = dt.Copy()
+                End If
+            Catch
+                Return
+            End Try
+        End If
+
+        If originalUserData Is Nothing Then Return
+        If isSearchingUsers Then Return
+        isSearchingUsers = True
+
+        Try
+            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
+            
+            If String.IsNullOrEmpty(searchLower) Then
+                RefreshUserTable()
+                isSearchingUsers = False
+                Return
+            End If
+
+            ' Filter original data
+            Dim filtered = originalUserData.AsEnumerable().Where(Function(row)
+                Dim firstName As String = If(row.Table.Columns.Contains("firstName") AndAlso Not IsDBNull(row("firstName")), row("firstName").ToString().ToLower(), String.Empty)
+                Dim middleName As String = If(row.Table.Columns.Contains("middleName") AndAlso Not IsDBNull(row("middleName")), row("middleName").ToString().ToLower(), String.Empty)
+                Dim lastName As String = If(row.Table.Columns.Contains("lastName") AndAlso Not IsDBNull(row("lastName")), row("lastName").ToString().ToLower(), String.Empty)
+                Dim username As String = If(row.Table.Columns.Contains("username") AndAlso Not IsDBNull(row("username")), row("username").ToString().ToLower(), String.Empty)
+                Dim email As String = If(row.Table.Columns.Contains("email") AndAlso Not IsDBNull(row("email")), row("email").ToString().ToLower(), String.Empty)
+                Dim employeeId As String = If(row.Table.Columns.Contains("employeeId") AndAlso Not IsDBNull(row("employeeId")), row("employeeId").ToString().ToLower(), String.Empty)
+                Dim position As String = If(row.Table.Columns.Contains("position") AndAlso Not IsDBNull(row("position")), row("position").ToString().ToLower(), String.Empty)
+                
+                Return firstName.Contains(searchLower) OrElse middleName.Contains(searchLower) OrElse lastName.Contains(searchLower) OrElse username.Contains(searchLower) OrElse email.Contains(searchLower) OrElse employeeId.Contains(searchLower) OrElse position.Contains(searchLower)
+            End Function)
+
+            ' Clear and repopulate grid
+            pm_table.Rows.Clear()
+            For Each record As DataRow In filtered
+                Dim firstName As String = SafeValue(record, "firstName")
+                Dim middleName As String = SafeValue(record, "middleName")
+                Dim lastName As String = SafeValue(record, "lastName")
+                Dim suffix As String = SafeValue(record, "suffix")
+
+                Dim rowIndex As Integer = pm_table.Rows.Add(
+                    SafeValue(record, "userId"),
+                    FormatDateValue(If(record.Table.Columns.Contains("dateAssigned") AndAlso Not record.IsNull("dateAssigned"), record("dateAssigned"), If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"), record("createdAt"), DBNull.Value))),
+                    firstName,
+                    middleName,
+                    lastName,
+                    suffix,
+                    SafeValue(record, "position"),
+                    SafeValue(record, "departmentId"),
+                    SafeValue(record, "employeeId"),
+                    SafeValue(record, "contactNumber"),
+                    SafeValue(record, "email"),
+                    SafeValue(record, "username"),
+                    "******",
+                    SafeValue(record, "province_city"),
+                    SafeValue(record, "municipality"),
+                    SafeValue(record, "barangay"),
+                    SafeValue(record, "user_type"),
+                    SafeValue(record, "status")
+                )
+
+                Dim dateAssignedValue As Object = DBNull.Value
+                If record.Table.Columns.Contains("dateAssigned") AndAlso Not record.IsNull("dateAssigned") Then
+                    dateAssignedValue = record("dateAssigned")
+                ElseIf record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt") Then
+                    dateAssignedValue = record("createdAt")
+                End If
+
+                pm_table.Rows(rowIndex).Tag = New UserRowMetadata With {
+                    .Username = SafeValue(record, "username"),
+                    .EmployeeID = SafeValue(record, "employee_id"),
+                    .DateAssigned = dateAssignedValue,
+                    .CreatedAt = If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"), record("createdAt"), DBNull.Value)
+                }
+            Next
+
+            ' Update total count
+            Dim totalLabel As Label = Nothing
+            Dim foundControls() As Control = Me.Controls.Find("ttlusermanagement", True)
+            If foundControls.Length > 0 Then
+                totalLabel = TryCast(foundControls(0), Label)
+            End If
+            If totalLabel IsNot Nothing Then
+                totalLabel.Text = filtered.Count().ToString()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error searching users: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            isSearchingUsers = False
+        End Try
     End Sub
 End Class

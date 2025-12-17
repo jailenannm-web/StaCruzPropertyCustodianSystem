@@ -261,4 +261,7 @@ Public Class AddDepartment
         If statusCombo IsNot Nothing AndAlso statusCombo.Items.Count > 0 Then statusCombo.SelectedIndex = 0
     End Sub
 
+    Private Sub AddDepartment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

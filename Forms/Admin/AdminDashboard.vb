@@ -523,4 +523,8 @@ Public Class AdminDashboard
     Private Sub admin_btn_suppliesRequestManagement_Click(sender As Object, e As EventArgs) Handles admin_btn_suppliesRequestManagement.Click
         LoadUserControl(New UC_SupplyRequestManagement())
     End Sub
+
+    Private Sub RoundedButton1_Click(sender As Object, e As EventArgs) Handles RoundedButton1.Click
+        LoadUserControl(New audit())
+    End Sub
 End Class

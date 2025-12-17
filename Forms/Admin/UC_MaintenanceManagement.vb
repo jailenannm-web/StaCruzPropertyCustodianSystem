@@ -10,6 +10,8 @@ Public Class UC_MaintenanceManagement
     Inherits UserControl
 
     Private canModifyMaintenance As Boolean = False
+    Private originalData As DataTable
+    Private isSearching As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -47,11 +49,24 @@ Public Class UC_MaintenanceManagement
         DataGridView1.AllowUserToDeleteRows = False
         DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         LoadMaintenanceData()
+
+        ' Wire search textbox if present
+        Dim searchNames As String() = {"maintenanceSearch", "maintenance_search", "txtSearch", "txtbox_search", "admin_txtbox_search", "DataGridSearch"}
+        For Each nm As String In searchNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                Dim tb As TextBox = CType(found(0), TextBox)
+                RemoveHandler tb.TextChanged, AddressOf MaintenanceSearch_TextChanged
+                AddHandler tb.TextChanged, AddressOf MaintenanceSearch_TextChanged
+                Exit For
+            End If
+        Next
     End Sub
 
     Private Sub LoadMaintenanceData()
         Try
             Dim maintenanceData As DataTable = DatabaseConnection.GetAllMaintenance()
+            originalData = If(maintenanceData IsNot Nothing, maintenanceData.Copy(), Nothing)
             If maintenanceData IsNot Nothing AndAlso maintenanceData.Rows.Count > 0 Then
                 DataGridView1.DataSource = maintenanceData
                 ttlMaintenancemanagement.Text = maintenanceData.Rows.Count.ToString()
@@ -65,9 +80,49 @@ Public Class UC_MaintenanceManagement
         End Try
     End Sub
 
+    Private Sub MaintenanceSearch_TextChanged(sender As Object, e As EventArgs)
+        Dim tb As TextBox = TryCast(sender, TextBox)
+        If tb Is Nothing Then Return
+        ApplyMaintenanceSearch(tb.Text)
+    End Sub
 
+    Private Sub ApplyMaintenanceSearch(searchText As String)
+        If originalData Is Nothing Then Return
+        If isSearching Then Return
+        isSearching = True
+        Try
+            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
 
+            Dim filtered = originalData.AsEnumerable().Where(Function(row)
+                                                                 If String.IsNullOrEmpty(searchLower) Then Return True
+                                                                 ' Check common fields: property_item_name, maintenance_details, assigned_technician, status
+                                                                 Dim a As String = If(row.Table.Columns.Contains("property_item_name") AndAlso Not IsDBNull(row("property_item_name")), row("property_item_name").ToString().ToLower(), String.Empty)
+                                                                 Dim b As String = If(row.Table.Columns.Contains("maintenance_details") AndAlso Not IsDBNull(row("maintenance_details")), row("maintenance_details").ToString().ToLower(), String.Empty)
+                                                                 Dim c As String = If(row.Table.Columns.Contains("assigned_technician") AndAlso Not IsDBNull(row("assigned_technician")), row("assigned_technician").ToString().ToLower(), String.Empty)
+                                                                 Dim d As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
+                                                                 Return a.Contains(searchLower) OrElse b.Contains(searchLower) OrElse c.Contains(searchLower) OrElse d.Contains(searchLower)
+                                                             End Function)
 
+            If filtered Is Nothing Then
+                DataGridView1.DataSource = Nothing
+                ttlMaintenancemanagement.Text = "0"
+            Else
+                Dim dt As DataTable = filtered.CopyToDataTable()
+                DataGridView1.DataSource = dt
+                ttlMaintenancemanagement.Text = dt.Rows.Count.ToString()
+            End If
+        Catch ex As Exception
+            ' If there are no matches CopyToDataTable will throw — handle gracefully
+            If TypeOf ex Is InvalidOperationException Then
+                DataGridView1.DataSource = Nothing
+                ttlMaintenancemanagement.Text = "0"
+            Else
+                MessageBox.Show("Error searching maintenance records: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Finally
+            isSearching = False
+        End Try
+    End Sub
 
     Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
         ' No restrictions for Super Admin, Admin, and Custodian
@@ -312,22 +367,22 @@ Public Class UC_MaintenanceManagement
                 ' Update maintenance record with technician using DatabaseConnection
                 Dim serviceDate As Date = If(IsDBNull(dataRow("maintenance_date")), Date.Today, CDate(dataRow("maintenance_date")))
                 Dim serviceType As String = If(IsDBNull(dataRow("type_of_maintenance")), "Repair", dataRow("type_of_maintenance").ToString())
-                    Dim description As String = If(IsDBNull(dataRow("maintenance_details")), "", dataRow("maintenance_details").ToString())
-                    Dim currentStatus As String = If(IsDBNull(dataRow("status")), "Ongoing", dataRow("status").ToString())
-                    Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
+                Dim description As String = If(IsDBNull(dataRow("maintenance_details")), "", dataRow("maintenance_details").ToString())
+                Dim currentStatus As String = If(IsDBNull(dataRow("status")), "Ongoing", dataRow("status").ToString())
+                Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-                    ' Use UpdateMaintenanceEntry to assign technician
-                    Dim cost As Decimal = 0
-                    If Not IsDBNull(dataRow("cost_materials_labor")) Then
-                        Decimal.TryParse(dataRow("cost_materials_labor").ToString(), cost)
-                    End If
-                    If DatabaseConnection.UpdateMaintenanceEntry(maintenanceID, serviceDate, serviceType, description, "", "", cost, Nothing, technicianName, currentStatus, "", 0, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
-                        MessageBox.Show($"Technician '{technicianName}' assigned to maintenance record #{maintenanceID}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        LoadMaintenanceData()
-                    Else
-                        MessageBox.Show("Failed to assign technician. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
+                ' Use UpdateMaintenanceEntry to assign technician
+                Dim cost As Decimal = 0
+                If Not IsDBNull(dataRow("cost_materials_labor")) Then
+                    Decimal.TryParse(dataRow("cost_materials_labor").ToString(), cost)
                 End If
+                If DatabaseConnection.UpdateMaintenanceEntry(maintenanceID, serviceDate, serviceType, description, "", "", cost, Nothing, technicianName, currentStatus, "", 0, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
+                    MessageBox.Show($"Technician '{technicianName}' assigned to maintenance record #{maintenanceID}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    LoadMaintenanceData()
+                Else
+                    MessageBox.Show("Failed to assign technician. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End If
 
         Catch ex As Exception
             Dim errorMsg As String = "An error occurred while assigning the technician."

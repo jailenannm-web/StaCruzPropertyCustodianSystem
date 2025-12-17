@@ -10,6 +10,8 @@ Public Class UC_SupplyRequestManagement
     Inherits UserControl
 
     Private canModifyRequests As Boolean = False
+    Private originalData As DataTable
+    Private isSearching As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -20,17 +22,31 @@ Public Class UC_SupplyRequestManagement
     Private Sub UC_SupplyRequestManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadSupplyRequestData()
         ApplyPermissionState()
+
+        ' Wire up search textbox if present
+        Dim searchNames As String() = {"prm_search", "supplyRequestSearch", "txtSearch", "txtbox_search", "admin_txtbox_search"}
+        For Each nm As String In searchNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                Dim tb As TextBox = CType(found(0), TextBox)
+                RemoveHandler tb.TextChanged, AddressOf SupplyRequestSearch_TextChanged
+                AddHandler tb.TextChanged, AddressOf SupplyRequestSearch_TextChanged
+                Exit For
+            End If
+        Next
     End Sub
 
     Private Sub LoadSupplyRequestData()
         Try
             Dim dt As DataTable = DatabaseConnection.GetAllSuppliesRequests()
-            
+
             If dt Is Nothing Then
                 MessageBox.Show("Unable to load supply requests. Please check your database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                originalData = Nothing
                 Return
             End If
-            
+            originalData = dt.Copy()
+
             If prm_table1 IsNot Nothing Then
                 ' Prevent auto-generated duplicate columns
                 prm_table1.AutoGenerateColumns = False
@@ -70,12 +86,8 @@ Public Class UC_SupplyRequestManagement
                     End Select
                 Next
 
+                ' Bind data source AFTER column mapping
                 prm_table1.DataSource = dt
-                prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-                prm_table1.ReadOnly = True
-                prm_table1.AllowUserToAddRows = False
-                prm_table1.AllowUserToDeleteRows = False
-                prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
                 ' Update total count
                 Dim totalLabel As Label = Nothing
@@ -233,5 +245,64 @@ Public Class UC_SupplyRequestManagement
 
     Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles prm_table1.CellContentClick
 
+    End Sub
+
+    Private Sub SupplyRequestSearch_TextChanged(sender As Object, e As EventArgs)
+        Dim tb As TextBox = TryCast(sender, TextBox)
+        If tb Is Nothing Then Return
+        ApplySupplyRequestSearch(tb.Text)
+    End Sub
+
+    Private Sub ApplySupplyRequestSearch(searchText As String)
+        If originalData Is Nothing Then Return
+        If isSearching Then Return
+        isSearching = True
+        Try
+            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
+            If String.IsNullOrEmpty(searchLower) Then
+                prm_table1.DataSource = originalData.Copy()
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then totalLabel = TryCast(foundControls(0), Label)
+                If totalLabel IsNot Nothing Then totalLabel.Text = originalData.Rows.Count.ToString()
+                isSearching = False
+                Return
+            End If
+
+            Dim filtered = originalData.AsEnumerable().Where(Function(row)
+                                                                 Dim requester As String = If(row.Table.Columns.Contains("requesterName") AndAlso Not IsDBNull(row("requesterName")), row("requesterName").ToString().ToLower(), String.Empty)
+                                                                 Dim dept As String = If(row.Table.Columns.Contains("department") AndAlso Not IsDBNull(row("department")), row("department").ToString().ToLower(), String.Empty)
+                                                                 Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
+                                                                 Dim purpose As String = If(row.Table.Columns.Contains("purpose") AndAlso Not IsDBNull(row("purpose")), row("purpose").ToString().ToLower(), String.Empty)
+                                                                 Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
+                                                                 Return requester.Contains(searchLower) OrElse dept.Contains(searchLower) OrElse itemName.Contains(searchLower) OrElse purpose.Contains(searchLower) OrElse status.Contains(searchLower)
+                                                             End Function)
+            If filtered Is Nothing OrElse Not filtered.Any() Then
+                prm_table1.DataSource = Nothing
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then totalLabel = TryCast(foundControls(0), Label)
+                If totalLabel IsNot Nothing Then totalLabel.Text = "0"
+            Else
+                Dim dt As DataTable = filtered.CopyToDataTable()
+                prm_table1.DataSource = dt
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then totalLabel = TryCast(foundControls(0), Label)
+                If totalLabel IsNot Nothing Then totalLabel.Text = dt.Rows.Count.ToString()
+            End If
+        Catch ex As Exception
+            If TypeOf ex Is InvalidOperationException Then
+                prm_table1.DataSource = Nothing
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then totalLabel = TryCast(foundControls(0), Label)
+                If totalLabel IsNot Nothing Then totalLabel.Text = "0"
+            Else
+                MessageBox.Show("Error searching supply requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Finally
+            isSearching = False
+        End Try
     End Sub
 End Class

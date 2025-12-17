@@ -14,13 +14,79 @@ Public Class UC_SupplyManagement
     Private originalData As DataTable
     Private selectedSupplyID As Integer = -1
     Private canModifySupplies As Boolean = False
+    Private isSearching As Boolean = False
 
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
     End Sub
 
+    ' Ensure role-based UI and filters are initialized
+    Private Sub ApplyRolePermissions()
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        If btnAdd IsNot Nothing Then btnAdd.Enabled = hasFullAccess
+        If btnEdit IsNot Nothing Then btnEdit.Enabled = hasFullAccess
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess
+        ' btnRefresh may not be present in this designer - avoid referencing undefined controls
+    End Sub
+
+    Private Sub InitializeFilters()
+        ' Initialize category and status comboboxes if present
+        Try
+            If pm_cbobx_categ IsNot Nothing Then
+                pm_cbobx_categ.Items.Clear()
+                pm_cbobx_categ.Items.Add("All")
+                
+                ' Load categories from database
+                Try
+                    Dim categories As DataTable = DatabaseConnection.GetCategories("supply")
+                    If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
+                        For Each row As DataRow In categories.Rows
+                            Dim categoryName As String = ""
+                            If row.Table.Columns.Contains("categoryName") AndAlso Not IsDBNull(row("categoryName")) Then
+                                categoryName = row("categoryName").ToString()
+                            ElseIf row.Table.Columns.Contains("category_name") AndAlso Not IsDBNull(row("category_name")) Then
+                                categoryName = row("category_name").ToString()
+                            ElseIf row.Table.Columns.Count > 0 AndAlso Not IsDBNull(row(0)) Then
+                                categoryName = row(0).ToString()
+                            End If
+                            If Not String.IsNullOrEmpty(categoryName) AndAlso Not pm_cbobx_categ.Items.Contains(categoryName) Then
+                                pm_cbobx_categ.Items.Add(categoryName)
+                            End If
+                        Next
+                    End If
+                Catch ex As Exception
+                    System.Diagnostics.Debug.WriteLine("[v0] Error loading categories: " & ex.Message)
+                    ' Fallback to common categories
+                    pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Materials", "Medical Supplies", "IT Supplies"})
+                End Try
+                
+                pm_cbobx_categ.SelectedIndex = 0
+                AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
+            End If
+
+            If pm_cbobx_status IsNot Nothing Then
+                pm_cbobx_status.Items.Clear()
+                pm_cbobx_status.Items.Add("All Status")
+                pm_cbobx_status.Items.AddRange(New String() {"In Stock", "Low Stock", "Out of Stock"})
+                pm_cbobx_status.SelectedIndex = 0
+                AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] InitializeFilters Error: " & ex.Message)
+        End Try
+    End Sub
+
     Private Sub UC_SupplyManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Add null check for PictureBox2 to prevent crashes
+        Try
+            If PictureBox2 Is Nothing Then
+                System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - PictureBox2 is Nothing, skipping initialization")
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Error checking PictureBox2: " & ex.Message)
+        End Try
+
         ' General settings
         pm_table.ReadOnly = True
         pm_table.AllowUserToAddRows = False
@@ -61,47 +127,18 @@ Public Class UC_SupplyManagement
 
         ' Wire up event handlers
         AddHandler pm_table.SelectionChanged, AddressOf pm_table_SelectionChanged
-    End Sub
 
-    Private Sub ApplyRolePermissions()
-        ' Super Admin, Admin, and Custodian have full access - all buttons enabled
-        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
-        btnAdd.Enabled = hasFullAccess
-        btnEdit.Enabled = hasFullAccess
-        btnDelete.Enabled = hasFullAccess
-    End Sub
-
-
-    Private Sub InitializeFilters()
-        ' Populate category filter from database
-        pm_cbobx_categ.Items.Clear()
-        pm_cbobx_categ.Items.Add("All Categories")
-        Try
-            Dim categoriesTable As DataTable = DatabaseConnection.GetCategories("supply")
-            If categoriesTable IsNot Nothing AndAlso categoriesTable.Rows.Count > 0 Then
-                For Each row As DataRow In categoriesTable.Rows
-                    pm_cbobx_categ.Items.Add(row("category_name").ToString())
-                Next
-            Else
-                ' Fallback to hardcoded categories if database query fails
-                pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Supplies", "Medical Supplies", "Stationery", "Electronics", "Furniture", "Equipment", "Other"})
+        ' Wire up search textbox if present (try common names)
+        Dim searchNames As String() = {"pm_search", "pm_searchbar", "supplysearch", "supplymanagementsearchbar", "txtSearch", "txtbox_search", "searchBox", "admin_txtbox_search"}
+        For Each nm As String In searchNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                Dim tb As TextBox = CType(found(0), TextBox)
+                RemoveHandler tb.TextChanged, AddressOf SupplySearch_TextChanged
+                AddHandler tb.TextChanged, AddressOf SupplySearch_TextChanged
+                Exit For
             End If
-        Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] InitializeFilters Exception: " & ex.Message)
-            ' Fallback to hardcoded categories
-            pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Supplies", "Medical Supplies", "Stationery", "Electronics", "Furniture", "Equipment", "Other"})
-        End Try
-        pm_cbobx_categ.SelectedIndex = 0
-
-        ' Populate status filter
-        pm_cbobx_status.Items.Clear()
-        pm_cbobx_status.Items.Add("All Status")
-        pm_cbobx_status.Items.AddRange(New String() {"Available", "Low Stock", "Out of Stock"})
-        pm_cbobx_status.SelectedIndex = 0
-
-        ' Wire up filter change events
-        AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
-        AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
+        Next
     End Sub
 
     ' Added method to load supplies from database
@@ -112,14 +149,18 @@ Public Class UC_SupplyManagement
             Dim statusFilter As String = ""
 
             ' Get filter values
-            If pm_cbobx_categ.SelectedIndex > 0 Then
+            If pm_cbobx_categ IsNot Nothing AndAlso pm_cbobx_categ.SelectedIndex > 0 Then
                 categoryFilter = pm_cbobx_categ.SelectedItem.ToString()
             End If
-            If pm_cbobx_status.SelectedIndex > 0 Then
+            If pm_cbobx_status IsNot Nothing AndAlso pm_cbobx_status.SelectedIndex > 0 Then
                 statusFilter = pm_cbobx_status.SelectedItem.ToString()
             End If
 
             Dim dt As DataTable = DatabaseConnection.GetAllSupplies(categoryFilter, statusFilter)
+            If dt Is Nothing Then
+                originalData = Nothing
+                Return
+            End If
             originalData = dt.Copy()
 
             If dt.Rows.Count > 0 Then
@@ -173,6 +214,85 @@ Public Class UC_SupplyManagement
         End Try
     End Sub
 
+    ' Apply search filter that works with existing category and status filters
+    Private Sub ApplySupplySearch(searchText As String)
+        If originalData Is Nothing Then Return
+        If isSearching Then Return
+        isSearching = True
+        Try
+            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
+            Dim categoryFilter As String = If(pm_cbobx_categ IsNot Nothing AndAlso pm_cbobx_categ.SelectedIndex > 0, pm_cbobx_categ.SelectedItem.ToString(), String.Empty)
+            Dim statusFilter As String = If(pm_cbobx_status IsNot Nothing AndAlso pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
+
+            Dim filtered = originalData.AsEnumerable().Where(Function(row)
+                                                                 ' category
+                                                                 If Not String.IsNullOrEmpty(categoryFilter) Then
+                                                                     If Not row.Table.Columns.Contains("category") Then Return False
+                                                                     Dim cat As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), String.Empty)
+                                                                     If Not cat.Equals(categoryFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                 End If
+                                                                 ' status
+                                                                 If Not String.IsNullOrEmpty(statusFilter) Then
+                                                                     If Not row.Table.Columns.Contains("stockStatus") Then Return False
+                                                                     Dim st As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), String.Empty)
+                                                                     If Not st.Equals(statusFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                 End If
+                                                                 If String.IsNullOrEmpty(searchLower) Then Return True
+                                                                 ' searchable fields: itemName, category, description, supplier/sourceOfFunds, unitOfMeasure, location, stockStatus
+                                                                 Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
+                                                                 Dim catVal As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
+                                                                 Dim desc As String = If(row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")), row("description").ToString().ToLower(), String.Empty)
+                                                                 Dim supplier As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString().ToLower(), String.Empty)
+                                                                 Dim uom As String = If(row.Table.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(row("unitOfMeasure")), row("unitOfMeasure").ToString().ToLower(), String.Empty)
+                                                                 Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
+                                                                 Dim stockSt As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString().ToLower(), String.Empty)
+                                                                 Return itemName.Contains(searchLower) OrElse catVal.Contains(searchLower) OrElse desc.Contains(searchLower) OrElse supplier.Contains(searchLower) OrElse uom.Contains(searchLower) OrElse location.Contains(searchLower) OrElse stockSt.Contains(searchLower)
+                                                             End Function)
+
+            pm_table.Rows.Clear()
+            For Each row As DataRow In filtered
+                Dim supplyID As String = If(row.Table.Columns.Contains("supplyId") AndAlso Not IsDBNull(row("supplyId")), row("supplyId").ToString(), "")
+                Dim supplyName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString(), "")
+                Dim unitOfMeasure As String = If(row.Table.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(row("unitOfMeasure")), row("unitOfMeasure").ToString(), "")
+                Dim acqDate As String = ""
+                If row.Table.Columns.Contains("dateReceived") AndAlso Not IsDBNull(row("dateReceived")) Then
+                    Dim parsedDate As Date
+                    If Date.TryParse(row("dateReceived").ToString(), parsedDate) Then
+                        acqDate = parsedDate.ToString("yyyy-MM-dd")
+                    End If
+                End If
+                Dim unitCost As String = "0.00"
+                If row.Table.Columns.Contains("unitCost") AndAlso Not IsDBNull(row("unitCost")) Then
+                    Dim cost As Decimal
+                    If Decimal.TryParse(row("unitCost").ToString(), cost) Then
+                        unitCost = Format(cost, "0.00")
+                    End If
+                End If
+                Dim totalCost As String = "0.00"
+                If row.Table.Columns.Contains("totalCost") AndAlso Not IsDBNull(row("totalCost")) Then
+                    Dim cost As Decimal
+                    If Decimal.TryParse(row("totalCost").ToString(), cost) Then
+                        totalCost = Format(cost, "0.00")
+                    End If
+                End If
+                Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")
+                Dim status As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), "")
+                Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
+                Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
+
+                pm_table.Rows.Add(supplyID, supplyName, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, status, createdAt, updatedAt)
+            Next
+
+            If ttlSupplymanagement IsNot Nothing Then
+                ttlSupplymanagement.Text = filtered.Count().ToString()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error searching supplies: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            isSearching = False
+        End Try
+    End Sub
+
     Private Sub pm_table_SelectionChanged(sender As Object, e As EventArgs)
         If pm_table.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = pm_table.SelectedRows(0)
@@ -196,9 +316,26 @@ Public Class UC_SupplyManagement
         ' Reload data with filters
         LoadSuppliesData()
         ' Reapply search if there's search text
+        ' find any search textbox and reapply
+        Dim searchNames As String() = {"pm_search", "pm_searchbar", "supplysearch", "supplymanagementsearchbar", "txtSearch", "txtbox_search", "searchBox", "admin_txtbox_search"}
+        For Each nm As String In searchNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                Dim tb As TextBox = CType(found(0), TextBox)
+                If Not String.IsNullOrWhiteSpace(tb.Text) Then
+                    ApplySupplySearch(tb.Text)
+                End If
+                Exit For
+            End If
+        Next
     End Sub
     ' Super Admin bypasses all restrictions
 
+    Private Sub SupplySearch_TextChanged(sender As Object, e As EventArgs)
+        Dim tb As TextBox = TryCast(sender, TextBox)
+        If tb Is Nothing Then Return
+        ApplySupplySearch(tb.Text)
+    End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         ' Super Admin bypasses all restrictions
@@ -276,7 +413,7 @@ Public Class UC_SupplyManagement
         End If
 
         Dim supplyIDStr As String = selectedRow.Cells(0).Value.ToString()
-        
+
         If String.IsNullOrEmpty(supplyIDStr) Then
             MessageBox.Show("Invalid supply selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return

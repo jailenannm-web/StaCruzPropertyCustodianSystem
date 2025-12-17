@@ -47,6 +47,7 @@ Partial Class UC_MaintenanceRequestManagement
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Delete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.maintenancerequestmanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -312,6 +313,22 @@ Partial Class UC_MaintenanceRequestManagement
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
+        'prm_btn_update
+        '
+        Me.prm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.prm_btn_update.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.prm_btn_update.CornerRadius = 15
+        Me.prm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.prm_btn_update.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.prm_btn_update.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.prm_btn_update.Location = New System.Drawing.Point(830, 69)
+        Me.prm_btn_update.Margin = New System.Windows.Forms.Padding(4)
+        Me.prm_btn_update.Name = "prm_btn_update"
+        Me.prm_btn_update.Size = New System.Drawing.Size(78, 35)
+        Me.prm_btn_update.TabIndex = 178
+        Me.prm_btn_update.Text = "Refresh"
+        Me.prm_btn_update.UseVisualStyleBackColor = False
+        '
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
@@ -336,6 +353,7 @@ Partial Class UC_MaintenanceRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.prm_btn_update)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.maintenancerequestmanagementsearchbar)
         Me.Controls.Add(Me.Delete)
@@ -367,6 +385,7 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
     Friend WithEvents Delete As Resources.Controls.RoundedButton
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
+    Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
     Friend WithEvents requestId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dateRequested As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents itemName As System.Windows.Forms.DataGridViewTextBoxColumn

@@ -104,6 +104,94 @@ Public Class UC_PropertyRequestManagement
     Private Sub UC_PropertyRequestManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadRequestData()
         ApplyPermissionState()
+
+        ' Wire up search textbox if present
+        Dim searchNames As String() = {"prm_search", "propertyRequestSearch", "txtSearch", "txtbox_search", "admin_txtbox_search", "searchBox"}
+        For Each nm As String In searchNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                Dim tb As TextBox = CType(found(0), TextBox)
+                RemoveHandler tb.TextChanged, AddressOf PropertyRequestSearch_TextChanged
+                AddHandler tb.TextChanged, AddressOf PropertyRequestSearch_TextChanged
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private originalRequestData As DataTable = Nothing
+    Private isSearchingRequests As Boolean = False
+
+    Private Sub PropertyRequestSearch_TextChanged(sender As Object, e As EventArgs)
+        Dim tb As TextBox = TryCast(sender, TextBox)
+        If tb Is Nothing Then Return
+        ApplyPropertyRequestSearch(tb.Text)
+    End Sub
+
+    Private Sub ApplyPropertyRequestSearch(searchText As String)
+        If originalRequestData Is Nothing Then
+            Try
+                Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
+                If dt IsNot Nothing Then
+                    originalRequestData = dt.Copy()
+                End If
+            Catch
+                Return
+            End Try
+        End If
+
+        If originalRequestData Is Nothing Then Return
+        If isSearchingRequests Then Return
+        isSearchingRequests = True
+
+        Try
+            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
+            
+            If String.IsNullOrEmpty(searchLower) Then
+                prm_table1.DataSource = originalRequestData.Copy()
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then totalLabel = TryCast(foundControls(0), Label)
+                If totalLabel IsNot Nothing Then totalLabel.Text = originalRequestData.Rows.Count.ToString()
+                isSearchingRequests = False
+                Return
+            End If
+
+            Dim filtered = originalRequestData.AsEnumerable().Where(Function(row)
+                Dim requester As String = If(row.Table.Columns.Contains("requesterName") AndAlso Not IsDBNull(row("requesterName")), row("requesterName").ToString().ToLower(), String.Empty)
+                Dim dept As String = If(row.Table.Columns.Contains("department") AndAlso Not IsDBNull(row("department")), row("department").ToString().ToLower(), String.Empty)
+                Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
+                Dim purpose As String = If(row.Table.Columns.Contains("purpose") AndAlso Not IsDBNull(row("purpose")), row("purpose").ToString().ToLower(), String.Empty)
+                Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
+                Return requester.Contains(searchLower) OrElse dept.Contains(searchLower) OrElse itemName.Contains(searchLower) OrElse purpose.Contains(searchLower) OrElse status.Contains(searchLower)
+            End Function)
+
+            If filtered Is Nothing OrElse Not filtered.Any() Then
+                prm_table1.DataSource = Nothing
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then totalLabel = TryCast(foundControls(0), Label)
+                If totalLabel IsNot Nothing Then totalLabel.Text = "0"
+            Else
+                Dim dt As DataTable = filtered.CopyToDataTable()
+                prm_table1.DataSource = dt
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then totalLabel = TryCast(foundControls(0), Label)
+                If totalLabel IsNot Nothing Then totalLabel.Text = dt.Rows.Count.ToString()
+            End If
+        Catch ex As Exception
+            If TypeOf ex Is InvalidOperationException Then
+                prm_table1.DataSource = Nothing
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then totalLabel = TryCast(foundControls(0), Label)
+                If totalLabel IsNot Nothing Then totalLabel.Text = "0"
+            Else
+                MessageBox.Show("Error searching property requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Finally
+            isSearchingRequests = False
+        End Try
     End Sub
 
     Private Sub ApplyPermissionState()
@@ -139,6 +227,9 @@ Public Class UC_PropertyRequestManagement
                 MessageBox.Show("Unable to load property requests. Please check your database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
+
+            ' Store original data for search
+            originalRequestData = dt.Copy()
 
             ' Prevent auto-generated duplicate columns and bind to the existing designer columns
             prm_table1.AutoGenerateColumns = False
