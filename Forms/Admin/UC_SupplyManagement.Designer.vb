@@ -15,6 +15,16 @@ Partial Class UC_SupplyManagement
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_table = New System.Windows.Forms.DataGridView()
+        Me.supplyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unitOfMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateReceived = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.totalCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sourceOfFunds = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stockStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.admin_label_PM = New System.Windows.Forms.Label()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -27,18 +37,11 @@ Partial Class UC_SupplyManagement
         Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
-        Me.supplyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unitOfMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateReceived = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.totalCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.sourceOfFunds = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stockStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.supplymanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_PropertyManagement
@@ -89,6 +92,76 @@ Partial Class UC_SupplyManagement
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 26
+        '
+        'supplyId
+        '
+        Me.supplyId.HeaderText = "supplyId"
+        Me.supplyId.MinimumWidth = 6
+        Me.supplyId.Name = "supplyId"
+        Me.supplyId.Width = 125
+        '
+        'itemName
+        '
+        Me.itemName.HeaderText = "item Name"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 125
+        '
+        'unitOfMeasure
+        '
+        Me.unitOfMeasure.HeaderText = "unit Of Measure"
+        Me.unitOfMeasure.MinimumWidth = 6
+        Me.unitOfMeasure.Name = "unitOfMeasure"
+        Me.unitOfMeasure.Width = 125
+        '
+        'dateReceived
+        '
+        Me.dateReceived.HeaderText = "date Received"
+        Me.dateReceived.MinimumWidth = 6
+        Me.dateReceived.Name = "dateReceived"
+        Me.dateReceived.Width = 125
+        '
+        'unitCost
+        '
+        Me.unitCost.HeaderText = "unitCost"
+        Me.unitCost.MinimumWidth = 6
+        Me.unitCost.Name = "unitCost"
+        Me.unitCost.Width = 125
+        '
+        'totalCost
+        '
+        Me.totalCost.HeaderText = "totalCost"
+        Me.totalCost.MinimumWidth = 6
+        Me.totalCost.Name = "totalCost"
+        Me.totalCost.Width = 125
+        '
+        'sourceOfFunds
+        '
+        Me.sourceOfFunds.HeaderText = "source Of Funds"
+        Me.sourceOfFunds.MinimumWidth = 6
+        Me.sourceOfFunds.Name = "sourceOfFunds"
+        Me.sourceOfFunds.Width = 125
+        '
+        'stockStatus
+        '
+        Me.stockStatus.HeaderText = "stockStatus"
+        Me.stockStatus.MinimumWidth = 6
+        Me.stockStatus.Name = "stockStatus"
+        Me.stockStatus.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
         '
         'admin_label_PM
         '
@@ -209,79 +282,31 @@ Partial Class UC_SupplyManagement
         Me.mnuPrintPARICS.Size = New System.Drawing.Size(190, 24)
         Me.mnuPrintPARICS.Text = "Print PAR/ICS"
         '
-        'supplyId
+        'PictureBox2
         '
-        Me.supplyId.HeaderText = "supplyId"
-        Me.supplyId.MinimumWidth = 6
-        Me.supplyId.Name = "supplyId"
-        Me.supplyId.Width = 125
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(495, 69)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(36, 44)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 179
+        Me.PictureBox2.TabStop = False
         '
-        'itemName
+        'supplymanagementsearchbar
         '
-        Me.itemName.HeaderText = "item Name"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 125
-        '
-        'unitOfMeasure
-        '
-        Me.unitOfMeasure.HeaderText = "unit Of Measure"
-        Me.unitOfMeasure.MinimumWidth = 6
-        Me.unitOfMeasure.Name = "unitOfMeasure"
-        Me.unitOfMeasure.Width = 125
-        '
-        'dateReceived
-        '
-        Me.dateReceived.HeaderText = "date Received"
-        Me.dateReceived.MinimumWidth = 6
-        Me.dateReceived.Name = "dateReceived"
-        Me.dateReceived.Width = 125
-        '
-        'unitCost
-        '
-        Me.unitCost.HeaderText = "unitCost"
-        Me.unitCost.MinimumWidth = 6
-        Me.unitCost.Name = "unitCost"
-        Me.unitCost.Width = 125
-        '
-        'totalCost
-        '
-        Me.totalCost.HeaderText = "totalCost"
-        Me.totalCost.MinimumWidth = 6
-        Me.totalCost.Name = "totalCost"
-        Me.totalCost.Width = 125
-        '
-        'sourceOfFunds
-        '
-        Me.sourceOfFunds.HeaderText = "source Of Funds"
-        Me.sourceOfFunds.MinimumWidth = 6
-        Me.sourceOfFunds.Name = "sourceOfFunds"
-        Me.sourceOfFunds.Width = 125
-        '
-        'stockStatus
-        '
-        Me.stockStatus.HeaderText = "stockStatus"
-        Me.stockStatus.MinimumWidth = 6
-        Me.stockStatus.Name = "stockStatus"
-        Me.stockStatus.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
+        Me.supplymanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.supplymanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.supplymanagementsearchbar.Location = New System.Drawing.Point(538, 71)
+        Me.supplymanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.supplymanagementsearchbar.Name = "supplymanagementsearchbar"
+        Me.supplymanagementsearchbar.Size = New System.Drawing.Size(345, 42)
+        Me.supplymanagementsearchbar.TabIndex = 178
         '
         'UC_SupplyManagement
         '
         Me.AutoScroll = True
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.supplymanagementsearchbar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlSupplymanagement)
         Me.Controls.Add(Me.btnEdit)
@@ -296,6 +321,7 @@ Partial Class UC_SupplyManagement
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsActions.ResumeLayout(False)
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -329,4 +355,6 @@ Partial Class UC_SupplyManagement
     Friend WithEvents stockStatus As DataGridViewTextBoxColumn
     Friend WithEvents createdAt As DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As DataGridViewTextBoxColumn
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents supplymanagementsearchbar As TextBox
 End Class

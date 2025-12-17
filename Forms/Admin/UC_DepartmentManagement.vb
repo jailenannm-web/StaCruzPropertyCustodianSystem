@@ -331,8 +331,4 @@ Public Class UC_DepartmentManagement
         ' Real-time search: filter the DataGrid based on entered text and selected status
         ApplySearchFilter(departmentmanagementsearchbar.Text)
     End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles departmentmanagementsearchbar.TextChanged
-
-    End Sub
 End Class
