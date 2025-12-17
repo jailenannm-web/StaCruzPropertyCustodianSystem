@@ -4925,9 +4925,10 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Retrieve all admin and super admin accounts with optional filters.
     ''' </summary>
+    ' --- Modified GetAdminAccounts ---
     Public Shared Function GetAdminAccounts(Optional statusFilter As String = "",
-                                            Optional roleFilter As String = "",
-                                            Optional searchKeyword As String = "") As DataTable
+                                        Optional roleFilter As String = "",
+                                        Optional searchKeyword As String = "") As DataTable
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing
         Try
@@ -4935,10 +4936,37 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
+            ' Determine available users table columns to avoid referencing missing columns (e.g. dateAssigned)
+            Dim availableCols = GetUsersTableColumns(conn)
+
+            ' Build safe select expressions for columns that may be absent in schema
+            Dim dateAssignedExpr As String = "NULL AS dateAssigned"
+            If availableCols.Contains("dateAssigned") Then
+                dateAssignedExpr = "dateAssigned AS dateAssigned"
+            ElseIf availableCols.Contains("date_assigned") Then
+                dateAssignedExpr = "date_assigned AS dateAssigned"
+            ElseIf availableCols.Contains("dateassigned") Then
+                dateAssignedExpr = "dateassigned AS dateAssigned"
+            End If
+
+            Dim lastLoginExpr As String = "NULL AS lastLogin"
+            If availableCols.Contains("lastLogin") Then
+                lastLoginExpr = "lastLogin AS lastLogin"
+            ElseIf availableCols.Contains("last_login") Then
+                lastLoginExpr = "last_login AS lastLogin"
+            End If
+
+            Dim createdAtExpr As String = "NULL AS created_at"
+            If availableCols.Contains("createdAt") Then
+                createdAtExpr = "createdAt AS created_at"
+            ElseIf availableCols.Contains("created_at") Then
+                createdAtExpr = "created_at AS created_at"
+            End If
+
             Dim query As New StringBuilder()
             query.Append("SELECT userId, firstName, middleName, lastName, suffix, position, ")
             query.Append("departmentId, contactNumber, email, username, role AS user_type, status, ")
-            query.Append("employeeId, dateAssigned, lastLogin, created_at ")
+            query.Append("employeeId, " & dateAssignedExpr & ", " & lastLoginExpr & ", " & createdAtExpr & " ")
             query.Append("FROM users WHERE role IN ('Admin','SuperAdmin')")
 
             If Not String.IsNullOrEmpty(statusFilter) Then query.Append(" AND status = @status")
@@ -4976,13 +5004,10 @@ Public Class DatabaseConnection
         Return dt
     End Function
 
-    ''' <summary>
-    ''' Retrieve ALL users (Admin, SuperAdmin, and Staff) with optional filters.
-    ''' Combines data from users table (all roles: Admin, SuperAdmin, Staff, Custodian).
-    ''' </summary>
+    ' --- Modified GetAllUsers ---
     Public Shared Function GetAllUsers(Optional statusFilter As String = "",
-                                       Optional roleFilter As String = "",
-                                       Optional searchKeyword As String = "") As DataTable
+                                   Optional roleFilter As String = "",
+                                   Optional searchKeyword As String = "") As DataTable
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing
         Try
@@ -4990,7 +5015,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            ' Create unified schema for the result table (using consistent camelCase)
+            ' Build unified schema for the result table (using consistent camelCase)
             dt.Columns.Add("userId", GetType(Integer))
             dt.Columns.Add("firstName", GetType(String))
             dt.Columns.Add("middleName", GetType(String))
@@ -5012,64 +5037,65 @@ Public Class DatabaseConnection
             dt.Columns.Add("municipality", GetType(String))
             dt.Columns.Add("province_city", GetType(String))
 
-            ' Build WHERE clause conditions
-            Dim adminWhereConditions As New List(Of String)()
-            Dim staffWhereConditions As New List(Of String)()
+            ' Determine available columns to avoid selecting missing ones
+            Dim availableCols = GetUsersTableColumns(conn)
 
-            If Not String.IsNullOrEmpty(statusFilter) Then
-                adminWhereConditions.Add("LOWER(status) = LOWER(@status)")
-                staffWhereConditions.Add("LOWER(status) = LOWER(@status)")
+            Dim dateAssignedExpr As String = "NULL AS dateAssigned"
+            If availableCols.Contains("dateAssigned") Then
+                dateAssignedExpr = "dateAssigned AS dateAssigned"
+            ElseIf availableCols.Contains("date_assigned") Then
+                dateAssignedExpr = "date_assigned AS dateAssigned"
             End If
 
-            If Not String.IsNullOrEmpty(roleFilter) Then
-                If roleFilter = "Admin" OrElse roleFilter = "SuperAdmin" Then
-                    ' Note: users table has 'role' column, not 'user_type' (user_type is just an alias)
-                    adminWhereConditions.Add("role = @role")
-                ElseIf roleFilter = "Staff" Then
-                    ' Staff accounts are in users table with role = 'Staff', no additional filter needed
-                    ' (already filtered in the WHERE clause of staffQuery)
-                End If
+            Dim lastLoginExpr As String = "NULL AS lastLogin"
+            If availableCols.Contains("lastLogin") Then
+                lastLoginExpr = "lastLogin AS lastLogin"
+            ElseIf availableCols.Contains("last_login") Then
+                lastLoginExpr = "last_login AS lastLogin"
             End If
 
-            If Not String.IsNullOrEmpty(searchKeyword) Then
-                Dim searchPattern As String = "%" & searchKeyword.Trim().ToLower() & "%"
-                adminWhereConditions.Add("(LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR " &
-                                        "LOWER(username) LIKE @search OR LOWER(email) LIKE @search OR " &
-                                        "LOWER(COALESCE(employeeId, '')) LIKE @search)")
-                staffWhereConditions.Add("(LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR " &
-                                        "LOWER(username) LIKE @search OR LOWER(email) LIKE @search)")
+            Dim createdAtExpr As String = "NULL AS createdAt"
+            If availableCols.Contains("createdAt") Then
+                createdAtExpr = "createdAt AS createdAt"
+            ElseIf availableCols.Contains("created_at") Then
+                createdAtExpr = "created_at AS createdAt"
             End If
 
-            ' Query Admin/SuperAdmin accounts from users table
+            ' Build admin and staff queries using safe expressions
             Dim adminQuery As New StringBuilder()
             adminQuery.Append("SELECT userId, firstName, COALESCE(middleName, '') as middleName, lastName, ")
             adminQuery.Append("COALESCE(suffix, '') as suffix, COALESCE(position, '') as position, ")
             adminQuery.Append("COALESCE(departmentId, '') as departmentId, COALESCE(contactNumber, '') as contactNumber, ")
             adminQuery.Append("email, username, role AS user_type, status, ")
-            adminQuery.Append("COALESCE(employeeId, '') as employeeId, dateAssigned, lastLogin, createdAt, ")
+            adminQuery.Append("COALESCE(employeeId, '') as employeeId, " & dateAssignedExpr & ", " & lastLoginExpr & ", " & createdAtExpr & ", ")
             adminQuery.Append("COALESCE(barangay, '') as barangay, ")
             adminQuery.Append("COALESCE(municipal, '') as municipal, COALESCE(province, '') as province ")
             adminQuery.Append("FROM users WHERE role IN ('Admin','SuperAdmin')")
 
-            If adminWhereConditions.Count > 0 Then
-                adminQuery.Append(" AND " & String.Join(" AND ", adminWhereConditions))
+            If Not String.IsNullOrEmpty(statusFilter) Then
+                adminQuery.Append(" AND LOWER(status) = LOWER(@status)")
             End If
 
-            ' Query Staff accounts from users table (same table as Admin/SuperAdmin)
             Dim staffQuery As New StringBuilder()
             staffQuery.Append("SELECT userId, firstName, COALESCE(middleName, '') as middleName, lastName, ")
             staffQuery.Append("COALESCE(suffix, '') as suffix, COALESCE(position, 'Staff') as position, ")
             staffQuery.Append("COALESCE(CAST(departmentId AS CHAR), '') as departmentId, COALESCE(contactNumber, '') as contactNumber, ")
             staffQuery.Append("email, username, role AS user_type, status, ")
-            staffQuery.Append("COALESCE(employeeId, '') as employeeId, dateAssigned, lastLogin, createdAt, ")
+            staffQuery.Append("COALESCE(employeeId, '') as employeeId, " & dateAssignedExpr & ", " & lastLoginExpr & ", " & createdAtExpr & ", ")
             staffQuery.Append("COALESCE(province, '') as province_city, COALESCE(municipal, '') as municipality, COALESCE(barangay, '') as barangay, '' as house_no_street ")
             staffQuery.Append("FROM users WHERE role = 'Staff'")
 
-            If staffWhereConditions.Count > 0 Then
-                staffQuery.Append(" AND " & String.Join(" AND ", staffWhereConditions))
+            If Not String.IsNullOrEmpty(statusFilter) Then
+                staffQuery.Append(" AND LOWER(status) = LOWER(@status)")
             End If
 
-            ' If role filter is set to Admin or SuperAdmin, skip staff query
+            If Not String.IsNullOrEmpty(searchKeyword) Then
+                Dim searchPattern As String = "%" & searchKeyword.Trim().ToLower() & "%"
+                adminQuery.Append(" AND (LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR LOWER(username) LIKE @search OR LOWER(email) LIKE @search OR LOWER(COALESCE(employeeId, '')) LIKE @search)")
+                staffQuery.Append(" AND (LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR LOWER(username) LIKE @search OR LOWER(email) LIKE @search)")
+            End If
+
+            ' Execute staff query first when appropriate
             If String.IsNullOrEmpty(roleFilter) OrElse roleFilter = "Staff" Then
                 Using cmd As New MySqlCommand(staffQuery.ToString(), conn)
                     If Not String.IsNullOrEmpty(statusFilter) Then cmd.Parameters.AddWithValue("@status", statusFilter)
@@ -5095,8 +5121,8 @@ Public Class DatabaseConnection
                             row("status") = SafeDbValue(record("status"))
                             row("employeeId") = SafeDbValue(record("employeeId"))
                             row("dateAssigned") = If(IsDBNull(record("dateAssigned")) OrElse record("dateAssigned") Is Nothing, DBNull.Value, record("dateAssigned"))
-                            row("lastLogin") = If(record.IsNull("lastLogin"), DBNull.Value, record("lastLogin"))
-                            row("createdAt") = If(record.IsNull("createdAt"), DBNull.Value, record("createdAt"))
+                            row("lastLogin") = If(record.Table.Columns.Contains("lastLogin") AndAlso Not record.IsNull("lastLogin"), record("lastLogin"), DBNull.Value)
+                            row("createdAt") = If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"), record("createdAt"), DBNull.Value)
                             row("house_no_street") = SafeDbValue(record("house_no_street"))
                             row("barangay") = SafeDbValue(record("barangay"))
                             row("municipality") = SafeDbValue(record("municipality"))
@@ -5107,7 +5133,6 @@ Public Class DatabaseConnection
                 End Using
             End If
 
-            ' If role filter is not set to Staff only, query admin accounts
             If String.IsNullOrEmpty(roleFilter) OrElse roleFilter = "Admin" OrElse roleFilter = "SuperAdmin" Then
                 Using cmd As New MySqlCommand(adminQuery.ToString(), conn)
                     If Not String.IsNullOrEmpty(statusFilter) Then cmd.Parameters.AddWithValue("@status", statusFilter)
@@ -5136,8 +5161,8 @@ Public Class DatabaseConnection
                             row("status") = SafeDbValue(record("status"))
                             row("employeeId") = SafeDbValue(record("employeeId"))
                             row("dateAssigned") = If(IsDBNull(record("dateAssigned")) OrElse record("dateAssigned") Is Nothing, DBNull.Value, record("dateAssigned"))
-                            row("lastLogin") = If(record.IsNull("lastLogin"), DBNull.Value, record("lastLogin"))
-                            row("createdAt") = If(record.IsNull("createdAt"), DBNull.Value, record("createdAt"))
+                            row("lastLogin") = If(record.Table.Columns.Contains("lastLogin") AndAlso Not record.IsNull("lastLogin"), record("lastLogin"), DBNull.Value)
+                            row("createdAt") = If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"), record("createdAt"), DBNull.Value)
                             row("house_no_street") = SafeDbValue(record("house_no_street"))
                             row("barangay") = SafeDbValue(record("barangay"))
                             row("municipality") = SafeDbValue(record("municipality"))

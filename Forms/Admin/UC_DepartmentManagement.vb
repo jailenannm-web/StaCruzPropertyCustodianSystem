@@ -14,6 +14,9 @@ Public Class UC_DepartmentManagement
     Private selectedDepartmentID As Integer = -1
     Private isSearching As Boolean = False
 
+    ' The DataGridView column fields are defined in the designer partial class.
+    ' Removed duplicate declarations here to avoid BC30260 duplicate definition errors.
+
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
