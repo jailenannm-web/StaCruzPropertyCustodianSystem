@@ -1,6 +1,7 @@
 Imports System
 Imports System.Data
 Imports System.Windows.Forms
+Imports System.Linq
 
 Public Class AddSupply
     Inherits UserControl
@@ -175,7 +176,26 @@ Public Class AddSupply
         Catch
         End Try
 
-        ' Call DatabaseConnection.AddSupply
+        ' Get dateReceived from DateTimePicker if available
+        Dim dateReceivedValue As Date? = Nothing
+        Try
+            ' Find the control by name (Designer control should be accessible)
+            Dim foundControls() As Control = Me.Controls.Find("dateReceived", True)
+            If foundControls.Length > 0 Then
+                Dim datePicker As DateTimePicker = TryCast(foundControls(0), DateTimePicker)
+                If datePicker IsNot Nothing Then
+                    dateReceivedValue = datePicker.Value
+                Else
+                    dateReceivedValue = Date.Today
+                End If
+            Else
+                dateReceivedValue = Date.Today
+            End If
+        Catch
+            dateReceivedValue = Date.Today
+        End Try
+
+        ' Call DatabaseConnection.AddSupply (sourceOfFunds is handled inside the function)
         Dim success As Boolean = DatabaseConnection.AddSupply(
             supplyIDValue,
             supplyNameValue,
@@ -188,7 +208,8 @@ Public Class AddSupply
             descriptionValue,
             uomValue,
             10, ' reorderLevel (default)
-            supplierIDValue
+            supplierIDValue,
+            dateReceivedValue ' dateReceived parameter
         )
 
         If success Then

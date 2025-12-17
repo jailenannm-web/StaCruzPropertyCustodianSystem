@@ -31,20 +31,24 @@ Partial Class frmRequest
     Private Sub InitializeComponent()
         Me.lblRequest = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.RequestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PropertyID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RequestDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ApprovedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ReleaseDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.myrequestssearchbar = New System.Windows.Forms.TextBox()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
+        Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requesterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.position = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.approvedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.approvedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -71,83 +75,13 @@ Partial Class frmRequest
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestID, Me.UserID, Me.PropertyID, Me.RequestDate, Me.Purpose, Me.Quantity, Me.Status, Me.ApprovedBy, Me.ReleaseDate, Me.ReturnDate})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.requestId, Me.requesterName, Me.position, Me.departmentId, Me.dateOfRequest, Me.itemName, Me.description, Me.quantityRequested, Me.unit, Me.purpose, Me.status, Me.approvedBy, Me.approvedDate, Me.remarks})
         Me.DataGridView1.Location = New System.Drawing.Point(82, 150)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.Size = New System.Drawing.Size(1275, 884)
         Me.DataGridView1.TabIndex = 155
-        '
-        'RequestID
-        '
-        Me.RequestID.HeaderText = "Request I.D"
-        Me.RequestID.MinimumWidth = 6
-        Me.RequestID.Name = "RequestID"
-        Me.RequestID.Width = 125
-        '
-        'UserID
-        '
-        Me.UserID.HeaderText = "Date of Request"
-        Me.UserID.MinimumWidth = 6
-        Me.UserID.Name = "UserID"
-        Me.UserID.Width = 135
-        '
-        'PropertyID
-        '
-        Me.PropertyID.HeaderText = "Item Name"
-        Me.PropertyID.MinimumWidth = 6
-        Me.PropertyID.Name = "PropertyID"
-        Me.PropertyID.Width = 170
-        '
-        'RequestDate
-        '
-        Me.RequestDate.HeaderText = "Description"
-        Me.RequestDate.MinimumWidth = 6
-        Me.RequestDate.Name = "RequestDate"
-        Me.RequestDate.Width = 170
-        '
-        'Purpose
-        '
-        Me.Purpose.HeaderText = "Quantity Requested"
-        Me.Purpose.MinimumWidth = 6
-        Me.Purpose.Name = "Purpose"
-        Me.Purpose.Width = 150
-        '
-        'Quantity
-        '
-        Me.Quantity.HeaderText = "Unit"
-        Me.Quantity.MinimumWidth = 6
-        Me.Quantity.Name = "Quantity"
-        Me.Quantity.Width = 125
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Purpose"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 200
-        '
-        'ApprovedBy
-        '
-        Me.ApprovedBy.HeaderText = "Status "
-        Me.ApprovedBy.MinimumWidth = 6
-        Me.ApprovedBy.Name = "ApprovedBy"
-        Me.ApprovedBy.Width = 125
-        '
-        'ReleaseDate
-        '
-        Me.ReleaseDate.HeaderText = "Approved By"
-        Me.ReleaseDate.MinimumWidth = 6
-        Me.ReleaseDate.Name = "ReleaseDate"
-        Me.ReleaseDate.Width = 150
-        '
-        'ReturnDate
-        '
-        Me.ReturnDate.HeaderText = "Approved Date"
-        Me.ReturnDate.MinimumWidth = 6
-        Me.ReturnDate.Name = "ReturnDate"
-        Me.ReturnDate.Width = 150
         '
         'PictureBox2
         '
@@ -195,6 +129,110 @@ Partial Class frmRequest
         Me.pm_cbobx_categ.TabIndex = 184
         Me.pm_cbobx_categ.Text = "Categories"
         '
+        'requestId
+        '
+        Me.requestId.HeaderText = "Request ID"
+        Me.requestId.MinimumWidth = 6
+        Me.requestId.Name = "requestId"
+        Me.requestId.Width = 125
+        '
+        'requesterName
+        '
+        Me.requesterName.HeaderText = "Requester Name"
+        Me.requesterName.MinimumWidth = 6
+        Me.requesterName.Name = "requesterName"
+        Me.requesterName.Width = 125
+        '
+        'position
+        '
+        Me.position.HeaderText = "Position"
+        Me.position.MinimumWidth = 6
+        Me.position.Name = "position"
+        Me.position.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "Department ID"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'dateOfRequest
+        '
+        Me.dateOfRequest.HeaderText = "Date of Request"
+        Me.dateOfRequest.MinimumWidth = 6
+        Me.dateOfRequest.Name = "dateOfRequest"
+        Me.dateOfRequest.Width = 125
+        '
+        'itemName
+        '
+        Me.itemName.HeaderText = "Item Name"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 125
+        '
+        'description
+        '
+        Me.description.HeaderText = "Description"
+        Me.description.MinimumWidth = 6
+        Me.description.Name = "description"
+        Me.description.Width = 125
+        '
+        'quantityRequested
+        '
+        Me.quantityRequested.HeaderText = "Quantity Requested"
+        Me.quantityRequested.MinimumWidth = 6
+        Me.quantityRequested.Name = "quantityRequested"
+        Me.quantityRequested.Width = 125
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.MinimumWidth = 6
+        Me.unit.Name = "unit"
+        Me.unit.Visible = False
+        Me.unit.Width = 125
+        '
+        'purpose
+        '
+        Me.purpose.HeaderText = "Purpose"
+        Me.purpose.MinimumWidth = 6
+        Me.purpose.Name = "purpose"
+        Me.purpose.Visible = False
+        Me.purpose.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Visible = False
+        Me.status.Width = 125
+        '
+        'approvedBy
+        '
+        Me.approvedBy.HeaderText = "Approved By"
+        Me.approvedBy.MinimumWidth = 6
+        Me.approvedBy.Name = "approvedBy"
+        Me.approvedBy.Visible = False
+        Me.approvedBy.Width = 125
+        '
+        'approvedDate
+        '
+        Me.approvedDate.HeaderText = "Approved Date"
+        Me.approvedDate.MinimumWidth = 6
+        Me.approvedDate.Name = "approvedDate"
+        Me.approvedDate.Visible = False
+        Me.approvedDate.Width = 125
+        '
+        'remarks
+        '
+        Me.remarks.HeaderText = "Remarks"
+        Me.remarks.MinimumWidth = 6
+        Me.remarks.Name = "remarks"
+        Me.remarks.Visible = False
+        Me.remarks.Width = 125
+        '
         'frmRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -221,18 +259,22 @@ Partial Class frmRequest
 
     Friend WithEvents lblRequest As Label
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents RequestID As DataGridViewTextBoxColumn
-    Friend WithEvents UserID As DataGridViewTextBoxColumn
-    Friend WithEvents PropertyID As DataGridViewTextBoxColumn
-    Friend WithEvents RequestDate As DataGridViewTextBoxColumn
-    Friend WithEvents Purpose As DataGridViewTextBoxColumn
-    Friend WithEvents Quantity As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents ApprovedBy As DataGridViewTextBoxColumn
-    Friend WithEvents ReleaseDate As DataGridViewTextBoxColumn
-    Friend WithEvents ReturnDate As DataGridViewTextBoxColumn
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents myrequestssearchbar As TextBox
     Friend WithEvents pm_cbobx_status As ComboBox
     Friend WithEvents pm_cbobx_categ As ComboBox
+    Friend WithEvents requestId As DataGridViewTextBoxColumn
+    Friend WithEvents requesterName As DataGridViewTextBoxColumn
+    Friend WithEvents position As DataGridViewTextBoxColumn
+    Friend WithEvents departmentId As DataGridViewTextBoxColumn
+    Friend WithEvents dateOfRequest As DataGridViewTextBoxColumn
+    Friend WithEvents itemName As DataGridViewTextBoxColumn
+    Friend WithEvents description As DataGridViewTextBoxColumn
+    Friend WithEvents quantityRequested As DataGridViewTextBoxColumn
+    Friend WithEvents unit As DataGridViewTextBoxColumn
+    Friend WithEvents purpose As DataGridViewTextBoxColumn
+    Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents approvedBy As DataGridViewTextBoxColumn
+    Friend WithEvents approvedDate As DataGridViewTextBoxColumn
+    Friend WithEvents remarks As DataGridViewTextBoxColumn
 End Class

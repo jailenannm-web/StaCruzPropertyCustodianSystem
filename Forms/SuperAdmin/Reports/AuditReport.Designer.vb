@@ -24,7 +24,7 @@ Partial Class AuditReport
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
+    'It can be modified using the Windows Form Designer. 
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
@@ -34,47 +34,14 @@ Partial Class AuditReport
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.lblPropertyCard = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.DateTimePicker3 = New System.Windows.Forms.DateTimePicker()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.lblName = New System.Windows.Forms.Label()
-        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.DateTimePicker4 = New System.Windows.Forms.DateTimePicker()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.status = New System.Windows.Forms.TextBox()
+        Me.action = New System.Windows.Forms.TextBox()
+        Me.userAgent = New System.Windows.Forms.TextBox()
+        Me.ipAddress = New System.Windows.Forms.TextBox()
+        Me.recordId = New System.Windows.Forms.TextBox()
+        Me.tableName = New System.Windows.Forms.TextBox()
         Me.logId = New System.Windows.Forms.TextBox()
         Me.userId = New System.Windows.Forms.TextBox()
         Me.user = New System.Windows.Forms.TextBox()
@@ -93,12 +60,45 @@ Partial Class AuditReport
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
-        Me.tableName = New System.Windows.Forms.TextBox()
-        Me.recordId = New System.Windows.Forms.TextBox()
-        Me.userAgent = New System.Windows.Forms.TextBox()
-        Me.ipAddress = New System.Windows.Forms.TextBox()
-        Me.status = New System.Windows.Forms.TextBox()
-        Me.action = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.DateTimePicker4 = New System.Windows.Forms.DateTimePicker()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.DateTimePicker3 = New System.Windows.Forms.DateTimePicker()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblName = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel11.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -197,240 +197,6 @@ Partial Class AuditReport
         Me.Panel1.Size = New System.Drawing.Size(913, 724)
         Me.Panel1.TabIndex = 361
         '
-        'DateTimePicker3
-        '
-        Me.DateTimePicker3.Location = New System.Drawing.Point(115, 18)
-        Me.DateTimePicker3.Margin = New System.Windows.Forms.Padding(4)
-        Me.DateTimePicker3.Name = "DateTimePicker3"
-        Me.DateTimePicker3.Size = New System.Drawing.Size(246, 22)
-        Me.DateTimePicker3.TabIndex = 355
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(65, 64)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(43, 22)
-        Me.Label8.TabIndex = 56
-        Me.Label8.Text = "User :"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblName
-        '
-        Me.lblName.AutoSize = True
-        Me.lblName.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblName.Location = New System.Drawing.Point(65, 21)
-        Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(48, 22)
-        Me.lblName.TabIndex = 38
-        Me.lblName.Text = "From :"
-        Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'RoundedButton1
-        '
-        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton1.CornerRadius = 15
-        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(1111, 869)
-        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
-        Me.RoundedButton1.Name = "RoundedButton1"
-        Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
-        Me.RoundedButton1.TabIndex = 368
-        Me.RoundedButton1.Text = "Generate PDF File"
-        Me.RoundedButton1.UseVisualStyleBackColor = False
-        '
-        'btnCSV
-        '
-        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnCSV.CornerRadius = 15
-        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCSV.Location = New System.Drawing.Point(950, 869)
-        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnCSV.Name = "btnCSV"
-        Me.btnCSV.Size = New System.Drawing.Size(153, 34)
-        Me.btnCSV.TabIndex = 367
-        Me.btnCSV.Text = "Generate CSV File"
-        Me.btnCSV.UseVisualStyleBackColor = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(830, 869)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(112, 34)
-        Me.Button2.TabIndex = 366
-        Me.Button2.Text = "Back"
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(366, 20)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(31, 22)
-        Me.Label7.TabIndex = 372
-        Me.Label7.Text = "To :"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(404, 20)
-        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(247, 22)
-        Me.DateTimePicker1.TabIndex = 373
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(83, 504)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(56, 22)
-        Me.Label10.TabIndex = 377
-        Me.Label10.Text = "Status :"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(83, 459)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 22)
-        Me.Label1.TabIndex = 356
-        Me.Label1.Text = "Action :"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(65, 99)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(58, 22)
-        Me.Label2.TabIndex = 381
-        Me.Label2.Text = "User ID :"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(65, 134)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(53, 22)
-        Me.Label3.TabIndex = 380
-        Me.Label3.Text = "Log ID :"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(66, 322)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(87, 22)
-        Me.Label4.TabIndex = 385
-        Me.Label4.Text = "table Name :"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(65, 171)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(86, 22)
-        Me.Label5.TabIndex = 384
-        Me.Label5.Text = "Description :"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(65, 376)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(74, 22)
-        Me.Label9.TabIndex = 390
-        Me.Label9.Text = "Record ID :"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(474, 335)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(72, 22)
-        Me.Label12.TabIndex = 392
-        Me.Label12.Text = "IP Adress :"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(474, 376)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(83, 22)
-        Me.Label13.TabIndex = 394
-        Me.Label13.Text = "User Agent :"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'TextBox11
-        '
-        Me.TextBox11.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox11.Location = New System.Drawing.Point(70, 197)
-        Me.TextBox11.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox11.Multiline = True
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(753, 95)
-        Me.TextBox11.TabIndex = 395
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(150, 59)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(299, 27)
-        Me.TextBox1.TabIndex = 396
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(150, 94)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(299, 27)
-        Me.TextBox2.TabIndex = 397
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(150, 129)
-        Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox4.Multiline = True
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(299, 27)
-        Me.TextBox4.TabIndex = 398
-        '
         'Panel2
         '
         Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -460,194 +226,6 @@ Partial Class AuditReport
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(913, 724)
         Me.Panel2.TabIndex = 399
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(150, 129)
-        Me.TextBox5.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox5.Multiline = True
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(299, 27)
-        Me.TextBox5.TabIndex = 398
-        '
-        'TextBox6
-        '
-        Me.TextBox6.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(150, 94)
-        Me.TextBox6.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox6.Multiline = True
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(299, 27)
-        Me.TextBox6.TabIndex = 397
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox7.Location = New System.Drawing.Point(150, 59)
-        Me.TextBox7.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox7.Multiline = True
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(299, 27)
-        Me.TextBox7.TabIndex = 396
-        '
-        'TextBox8
-        '
-        Me.TextBox8.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox8.Location = New System.Drawing.Point(70, 197)
-        Me.TextBox8.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox8.Multiline = True
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(753, 95)
-        Me.TextBox8.TabIndex = 395
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(474, 376)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(83, 22)
-        Me.Label6.TabIndex = 394
-        Me.Label6.Text = "User Agent :"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(65, 171)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(86, 22)
-        Me.Label11.TabIndex = 384
-        Me.Label11.Text = "Description :"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(474, 335)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(72, 22)
-        Me.Label14.TabIndex = 392
-        Me.Label14.Text = "IP Adress :"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(65, 134)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(53, 22)
-        Me.Label15.TabIndex = 380
-        Me.Label15.Text = "Log ID :"
-        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'DateTimePicker2
-        '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(404, 20)
-        Me.DateTimePicker2.Margin = New System.Windows.Forms.Padding(4)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(247, 22)
-        Me.DateTimePicker2.TabIndex = 373
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(366, 20)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(31, 22)
-        Me.Label16.TabIndex = 372
-        Me.Label16.Text = "To :"
-        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(83, 504)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(56, 22)
-        Me.Label17.TabIndex = 377
-        Me.Label17.Text = "Status :"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(83, 459)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(56, 22)
-        Me.Label18.TabIndex = 356
-        Me.Label18.Text = "Action :"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(65, 376)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(74, 22)
-        Me.Label19.TabIndex = 390
-        Me.Label19.Text = "Record ID :"
-        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'DateTimePicker4
-        '
-        Me.DateTimePicker4.Location = New System.Drawing.Point(115, 18)
-        Me.DateTimePicker4.Margin = New System.Windows.Forms.Padding(4)
-        Me.DateTimePicker4.Name = "DateTimePicker4"
-        Me.DateTimePicker4.Size = New System.Drawing.Size(246, 22)
-        Me.DateTimePicker4.TabIndex = 355
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(66, 322)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(87, 22)
-        Me.Label20.TabIndex = 385
-        Me.Label20.Text = "table Name :"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(65, 64)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(43, 22)
-        Me.Label21.TabIndex = 56
-        Me.Label21.Text = "User :"
-        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(65, 21)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(48, 22)
-        Me.Label22.TabIndex = 38
-        Me.Label22.Text = "From :"
-        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(65, 99)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(58, 22)
-        Me.Label23.TabIndex = 381
-        Me.Label23.Text = "User ID :"
-        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Panel3
         '
@@ -683,6 +261,66 @@ Partial Class AuditReport
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(913, 724)
         Me.Panel3.TabIndex = 399
+        '
+        'status
+        '
+        Me.status.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.status.Location = New System.Drawing.Point(598, 454)
+        Me.status.Margin = New System.Windows.Forms.Padding(4)
+        Me.status.Multiline = True
+        Me.status.Name = "status"
+        Me.status.Size = New System.Drawing.Size(252, 27)
+        Me.status.TabIndex = 404
+        '
+        'action
+        '
+        Me.action.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.action.Location = New System.Drawing.Point(150, 454)
+        Me.action.Margin = New System.Windows.Forms.Padding(4)
+        Me.action.Multiline = True
+        Me.action.Name = "action"
+        Me.action.Size = New System.Drawing.Size(306, 27)
+        Me.action.TabIndex = 403
+        '
+        'userAgent
+        '
+        Me.userAgent.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.userAgent.Location = New System.Drawing.Point(598, 412)
+        Me.userAgent.Margin = New System.Windows.Forms.Padding(4)
+        Me.userAgent.Multiline = True
+        Me.userAgent.Name = "userAgent"
+        Me.userAgent.Size = New System.Drawing.Size(252, 27)
+        Me.userAgent.TabIndex = 402
+        '
+        'ipAddress
+        '
+        Me.ipAddress.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ipAddress.Location = New System.Drawing.Point(598, 371)
+        Me.ipAddress.Margin = New System.Windows.Forms.Padding(4)
+        Me.ipAddress.Multiline = True
+        Me.ipAddress.Name = "ipAddress"
+        Me.ipAddress.Size = New System.Drawing.Size(252, 27)
+        Me.ipAddress.TabIndex = 401
+        '
+        'recordId
+        '
+        Me.recordId.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.recordId.Location = New System.Drawing.Point(154, 412)
+        Me.recordId.Margin = New System.Windows.Forms.Padding(4)
+        Me.recordId.Multiline = True
+        Me.recordId.Name = "recordId"
+        Me.recordId.Size = New System.Drawing.Size(302, 27)
+        Me.recordId.TabIndex = 400
+        '
+        'tableName
+        '
+        Me.tableName.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tableName.Location = New System.Drawing.Point(154, 371)
+        Me.tableName.Margin = New System.Windows.Forms.Padding(4)
+        Me.tableName.Multiline = True
+        Me.tableName.Name = "tableName"
+        Me.tableName.Size = New System.Drawing.Size(302, 27)
+        Me.tableName.TabIndex = 399
         '
         'logId
         '
@@ -872,65 +510,427 @@ Partial Class AuditReport
         Me.Label35.Text = "User ID :"
         Me.Label35.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'tableName
+        'TextBox5
         '
-        Me.tableName.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tableName.Location = New System.Drawing.Point(154, 371)
-        Me.tableName.Margin = New System.Windows.Forms.Padding(4)
-        Me.tableName.Multiline = True
-        Me.tableName.Name = "tableName"
-        Me.tableName.Size = New System.Drawing.Size(302, 27)
-        Me.tableName.TabIndex = 399
+        Me.TextBox5.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox5.Location = New System.Drawing.Point(150, 129)
+        Me.TextBox5.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox5.Multiline = True
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(299, 27)
+        Me.TextBox5.TabIndex = 398
         '
-        'recordId
+        'TextBox6
         '
-        Me.recordId.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.recordId.Location = New System.Drawing.Point(154, 412)
-        Me.recordId.Margin = New System.Windows.Forms.Padding(4)
-        Me.recordId.Multiline = True
-        Me.recordId.Name = "recordId"
-        Me.recordId.Size = New System.Drawing.Size(302, 27)
-        Me.recordId.TabIndex = 400
+        Me.TextBox6.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox6.Location = New System.Drawing.Point(150, 94)
+        Me.TextBox6.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox6.Multiline = True
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(299, 27)
+        Me.TextBox6.TabIndex = 397
         '
-        'userAgent
+        'TextBox7
         '
-        Me.userAgent.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.userAgent.Location = New System.Drawing.Point(598, 412)
-        Me.userAgent.Margin = New System.Windows.Forms.Padding(4)
-        Me.userAgent.Multiline = True
-        Me.userAgent.Name = "userAgent"
-        Me.userAgent.Size = New System.Drawing.Size(252, 27)
-        Me.userAgent.TabIndex = 402
+        Me.TextBox7.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox7.Location = New System.Drawing.Point(150, 59)
+        Me.TextBox7.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox7.Multiline = True
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(299, 27)
+        Me.TextBox7.TabIndex = 396
         '
-        'ipAddress
+        'TextBox8
         '
-        Me.ipAddress.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ipAddress.Location = New System.Drawing.Point(598, 371)
-        Me.ipAddress.Margin = New System.Windows.Forms.Padding(4)
-        Me.ipAddress.Multiline = True
-        Me.ipAddress.Name = "ipAddress"
-        Me.ipAddress.Size = New System.Drawing.Size(252, 27)
-        Me.ipAddress.TabIndex = 401
+        Me.TextBox8.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox8.Location = New System.Drawing.Point(70, 197)
+        Me.TextBox8.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox8.Multiline = True
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(753, 95)
+        Me.TextBox8.TabIndex = 395
         '
-        'status
+        'Label6
         '
-        Me.status.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.status.Location = New System.Drawing.Point(598, 454)
-        Me.status.Margin = New System.Windows.Forms.Padding(4)
-        Me.status.Multiline = True
-        Me.status.Name = "status"
-        Me.status.Size = New System.Drawing.Size(252, 27)
-        Me.status.TabIndex = 404
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(474, 376)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(83, 22)
+        Me.Label6.TabIndex = 394
+        Me.Label6.Text = "User Agent :"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'action
+        'Label11
         '
-        Me.action.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.action.Location = New System.Drawing.Point(150, 454)
-        Me.action.Margin = New System.Windows.Forms.Padding(4)
-        Me.action.Multiline = True
-        Me.action.Name = "action"
-        Me.action.Size = New System.Drawing.Size(306, 27)
-        Me.action.TabIndex = 403
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(65, 171)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(86, 22)
+        Me.Label11.TabIndex = 384
+        Me.Label11.Text = "Description :"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(474, 335)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(72, 22)
+        Me.Label14.TabIndex = 392
+        Me.Label14.Text = "IP Adress :"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(65, 134)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(53, 22)
+        Me.Label15.TabIndex = 380
+        Me.Label15.Text = "Log ID :"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Location = New System.Drawing.Point(404, 20)
+        Me.DateTimePicker2.Margin = New System.Windows.Forms.Padding(4)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(247, 22)
+        Me.DateTimePicker2.TabIndex = 373
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(366, 20)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(31, 22)
+        Me.Label16.TabIndex = 372
+        Me.Label16.Text = "To :"
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(83, 504)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(56, 22)
+        Me.Label17.TabIndex = 377
+        Me.Label17.Text = "Status :"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(83, 459)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(56, 22)
+        Me.Label18.TabIndex = 356
+        Me.Label18.Text = "Action :"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(65, 376)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(74, 22)
+        Me.Label19.TabIndex = 390
+        Me.Label19.Text = "Record ID :"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'DateTimePicker4
+        '
+        Me.DateTimePicker4.Location = New System.Drawing.Point(115, 18)
+        Me.DateTimePicker4.Margin = New System.Windows.Forms.Padding(4)
+        Me.DateTimePicker4.Name = "DateTimePicker4"
+        Me.DateTimePicker4.Size = New System.Drawing.Size(246, 22)
+        Me.DateTimePicker4.TabIndex = 355
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(66, 322)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(87, 22)
+        Me.Label20.TabIndex = 385
+        Me.Label20.Text = "table Name :"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(65, 64)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(43, 22)
+        Me.Label21.TabIndex = 56
+        Me.Label21.Text = "User :"
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(65, 21)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(48, 22)
+        Me.Label22.TabIndex = 38
+        Me.Label22.Text = "From :"
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(65, 99)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(58, 22)
+        Me.Label23.TabIndex = 381
+        Me.Label23.Text = "User ID :"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.Location = New System.Drawing.Point(150, 129)
+        Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox4.Multiline = True
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(299, 27)
+        Me.TextBox4.TabIndex = 398
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(150, 94)
+        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox2.Multiline = True
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(299, 27)
+        Me.TextBox2.TabIndex = 397
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(150, 59)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(299, 27)
+        Me.TextBox1.TabIndex = 396
+        '
+        'TextBox11
+        '
+        Me.TextBox11.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox11.Location = New System.Drawing.Point(70, 197)
+        Me.TextBox11.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox11.Multiline = True
+        Me.TextBox11.Name = "TextBox11"
+        Me.TextBox11.Size = New System.Drawing.Size(753, 95)
+        Me.TextBox11.TabIndex = 395
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(474, 376)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(83, 22)
+        Me.Label13.TabIndex = 394
+        Me.Label13.Text = "User Agent :"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(65, 171)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(86, 22)
+        Me.Label5.TabIndex = 384
+        Me.Label5.Text = "Description :"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(474, 335)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(72, 22)
+        Me.Label12.TabIndex = 392
+        Me.Label12.Text = "IP Adress :"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(65, 134)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(53, 22)
+        Me.Label3.TabIndex = 380
+        Me.Label3.Text = "Log ID :"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Location = New System.Drawing.Point(404, 20)
+        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(247, 22)
+        Me.DateTimePicker1.TabIndex = 373
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(366, 20)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(31, 22)
+        Me.Label7.TabIndex = 372
+        Me.Label7.Text = "To :"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(83, 504)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(56, 22)
+        Me.Label10.TabIndex = 377
+        Me.Label10.Text = "Status :"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(83, 459)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(56, 22)
+        Me.Label1.TabIndex = 356
+        Me.Label1.Text = "Action :"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(65, 376)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(74, 22)
+        Me.Label9.TabIndex = 390
+        Me.Label9.Text = "Record ID :"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'DateTimePicker3
+        '
+        Me.DateTimePicker3.Location = New System.Drawing.Point(115, 18)
+        Me.DateTimePicker3.Margin = New System.Windows.Forms.Padding(4)
+        Me.DateTimePicker3.Name = "DateTimePicker3"
+        Me.DateTimePicker3.Size = New System.Drawing.Size(246, 22)
+        Me.DateTimePicker3.TabIndex = 355
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(66, 322)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(87, 22)
+        Me.Label4.TabIndex = 385
+        Me.Label4.Text = "table Name :"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(65, 64)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(43, 22)
+        Me.Label8.TabIndex = 56
+        Me.Label8.Text = "User :"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblName
+        '
+        Me.lblName.AutoSize = True
+        Me.lblName.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblName.Location = New System.Drawing.Point(65, 21)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(48, 22)
+        Me.lblName.TabIndex = 38
+        Me.lblName.Text = "From :"
+        Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(65, 99)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(58, 22)
+        Me.Label2.TabIndex = 381
+        Me.Label2.Text = "User ID :"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(1111, 869)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
+        Me.RoundedButton1.TabIndex = 368
+        Me.RoundedButton1.Text = "Generate PDF File"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'btnCSV
+        '
+        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnCSV.CornerRadius = 15
+        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCSV.Location = New System.Drawing.Point(950, 869)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCSV.Name = "btnCSV"
+        Me.btnCSV.Size = New System.Drawing.Size(153, 34)
+        Me.btnCSV.TabIndex = 367
+        Me.btnCSV.Text = "Generate CSV File"
+        Me.btnCSV.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.Button2.ForeColor = System.Drawing.Color.White
+        Me.Button2.Location = New System.Drawing.Point(830, 869)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(112, 34)
+        Me.Button2.TabIndex = 366
+        Me.Button2.Text = "Back"
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'AuditReport
         '

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5BA19DCE-6BE5-45B8-AADD-D54CAC6DE401}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>StaCruzPropertyCustodianSystem.AdminDashboard</StartupObject>
+    <StartupObject>StaCruzPropertyCustodianSystem.StaffLogin</StartupObject>
     <RootNamespace>StaCruzPropertyCustodianSystem</RootNamespace>
     <AssemblyName>StaCruzPropertyCustodianSystem</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -127,11 +127,18 @@
   </ItemGroup>
   <!-- STAFF FORMS -->
   <ItemGroup>
+    <Compile Include="DatabaseConnection.Extensions.vb" />
     <Compile Include="Forms\Admin\audit.Designer.vb">
       <DependentUpon>audit.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Admin\audit.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AuditReportAdmin.Designer.vb">
+      <DependentUpon>AuditReportAdmin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AuditReportAdmin.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Admin\EditSupply.Designer.vb">
       <DependentUpon>EditSupply.vb</DependentUpon>
@@ -443,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\audit.resx">
       <DependentUpon>audit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AuditReportAdmin.resx">
+      <DependentUpon>AuditReportAdmin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\EditMaintenance1.resx">
       <DependentUpon>EditMaintenance1.vb</DependentUpon>
