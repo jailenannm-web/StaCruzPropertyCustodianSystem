@@ -18,68 +18,11 @@ Public Class PropertyIssuance
 
     End Sub
 
-    Private Sub PropertyIssuance_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
-        LoadPropertyIssuanceData()
-    End Sub
-    
-    Private Sub LoadPropertyIssuanceData()
-        Try
-            Dim sourceTable As DataTable = DatabaseConnection.GetAllPropertyRequests()
-            propertyIssuanceTable = BuildPropertyIssuanceTable(sourceTable)
-
-            If propertyAcknowledgement IsNot Nothing Then
-                propertyAcknowledgement.AutoGenerateColumns = False
-                propertyAcknowledgement.DataSource = propertyIssuanceTable
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Error loading property issuance data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
-    Private Function BuildPropertyIssuanceTable(source As DataTable) As DataTable
-        Dim reportTable As New DataTable()
-        reportTable.Columns.Add("quantity", GetType(Integer))
-        reportTable.Columns.Add("unit", GetType(String))
-        reportTable.Columns.Add("description", GetType(String))
-        reportTable.Columns.Add("propertyNumber", GetType(String))
-        reportTable.Columns.Add("dateAcquired", GetType(String))
-        reportTable.Columns.Add("amount", GetType(String))
-
-        If source Is Nothing OrElse source.Rows.Count = 0 Then
-            Return reportTable
-        End If
-
-        Dim filteredRows = source.AsEnumerable().
-            Where(Function(r)
-                      Dim statusValue As String = If(Convert.IsDBNull(r("status")), "", r("status").ToString().ToLower())
-                      Return statusValue = "approved" OrElse statusValue = "released"
-                  End Function).
-            ToList()
-
-        For Each row As DataRow In filteredRows
-            Try
-                Dim newRow As DataRow = reportTable.NewRow()
-                newRow("quantity") = SafeGetInt(row, "quantityRequested", 1)
-                newRow("unit") = "pcs"
-                newRow("description") = SafeGetString(row, "itemName")
-                Dim reqId As String = SafeGetString(row, "requestId")
-                newRow("propertyNumber") = If(String.IsNullOrEmpty(reqId), "", "PR-" & reqId)
-                newRow("dateAcquired") = SafeGetDateString(row, "dateOfRequest")
-                newRow("amount") = "0.00"
-                reportTable.Rows.Add(newRow)
-            Catch ex As Exception
-                System.Diagnostics.Debug.WriteLine("[v0] PropertyIssuance BuildRow Error: " & ex.Message)
-            End Try
-        Next
-
-        Return reportTable
-    End Function
-
     Private Sub txtname_TextChanged(sender As Object, e As System.EventArgs) Handles entityNameTxt.TextChanged
 
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles propertyAcknowledgement.CellContentClick
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs)
 
     End Sub
 
@@ -135,4 +78,8 @@ Public Class PropertyIssuance
         End If
         Return Date.Today.ToString("yyyy-MM-dd")
     End Function
+
+    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+
+    End Sub
 End Class

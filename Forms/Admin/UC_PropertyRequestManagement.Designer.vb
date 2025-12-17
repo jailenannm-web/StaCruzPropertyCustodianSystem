@@ -53,6 +53,8 @@ Partial Class UC_PropertyRequestManagement
         Me.updated_at = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.maintenancemanagementsearchbar = New System.Windows.Forms.TextBox()
         Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.issuePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -60,8 +62,6 @@ Partial Class UC_PropertyRequestManagement
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.maintenancemanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -270,6 +270,26 @@ Partial Class UC_PropertyRequestManagement
         Me.ttlpropertyrequestmanagement.TabIndex = 158
         Me.ttlpropertyrequestmanagement.Text = "0"
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(516, 61)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(31, 40)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 173
+        Me.PictureBox2.TabStop = False
+        '
+        'maintenancemanagementsearchbar
+        '
+        Me.maintenancemanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.maintenancemanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.maintenancemanagementsearchbar.Location = New System.Drawing.Point(554, 61)
+        Me.maintenancemanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.maintenancemanagementsearchbar.Name = "maintenancemanagementsearchbar"
+        Me.maintenancemanagementsearchbar.Size = New System.Drawing.Size(340, 42)
+        Me.maintenancemanagementsearchbar.TabIndex = 172
+        '
         'btnAssign
         '
         Me.btnAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -278,7 +298,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAssign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAssign.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAssign.Location = New System.Drawing.Point(902, 76)
+        Me.btnAssign.Location = New System.Drawing.Point(915, 77)
         Me.btnAssign.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAssign.Name = "btnAssign"
         Me.btnAssign.Size = New System.Drawing.Size(99, 34)
@@ -379,26 +399,6 @@ Partial Class UC_PropertyRequestManagement
         Me.assign.TabIndex = 156
         Me.assign.Text = "Assign"
         Me.assign.UseVisualStyleBackColor = False
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(516, 61)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(31, 40)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 173
-        Me.PictureBox2.TabStop = False
-        '
-        'maintenancemanagementsearchbar
-        '
-        Me.maintenancemanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.maintenancemanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.maintenancemanagementsearchbar.Location = New System.Drawing.Point(554, 61)
-        Me.maintenancemanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
-        Me.maintenancemanagementsearchbar.Name = "maintenancemanagementsearchbar"
-        Me.maintenancemanagementsearchbar.Size = New System.Drawing.Size(340, 42)
-        Me.maintenancemanagementsearchbar.TabIndex = 172
         '
         'UC_PropertyRequestManagement
         '

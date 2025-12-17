@@ -192,7 +192,7 @@ Partial Class StaffLogin
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources._Presentation
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1924, 1222)
+        Me.ClientSize = New System.Drawing.Size(1924, 1102)
         Me.Controls.Add(Me.btnSecretConfig)
         Me.Controls.Add(Me.PictureBox4)
         Me.Controls.Add(Me.PictureBox3)
