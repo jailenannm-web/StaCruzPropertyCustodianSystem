@@ -722,6 +722,9 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\MaintenanceReport.resx">
       <DependentUpon>MaintenanceReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.resx">
+      <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyCard.resx">
       <DependentUpon>PropertyCard.vb</DependentUpon>
     </EmbeddedResource>

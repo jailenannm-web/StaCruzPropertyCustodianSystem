@@ -4,7 +4,7 @@ Imports System
 Imports System.Drawing
 Imports Microsoft.VisualBasic
 Public Class MaintenanceReport
-    Private Sub TextBox3_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox3.TextChanged
+    Private Sub TextBox3_TextChanged(sender As Object, e As System.EventArgs) Handles nationalboardno.TextChanged
 
     End Sub
 
@@ -16,7 +16,7 @@ Public Class MaintenanceReport
 
     End Sub
 
-    Private Sub TextBox10_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox10.TextChanged
+    Private Sub TextBox10_TextChanged(sender As Object, e As System.EventArgs) Handles systemfailure.TextChanged
 
     End Sub
 End Class

@@ -30,20 +30,20 @@ Partial Class RequisitionIssueSlip
         Me.entityName = New System.Windows.Forms.Label()
         Me.fundCluster = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.cluster = New System.Windows.Forms.TextBox()
         Me.requisitionPurpose = New System.Windows.Forms.TextBox()
         Me.purpose = New System.Windows.Forms.Label()
         Me.Panel15 = New System.Windows.Forms.Panel()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.office = New System.Windows.Forms.TextBox()
+        Me.division = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.risnumber = New System.Windows.Forms.TextBox()
+        Me.responsibilitycenter = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel9 = New System.Windows.Forms.Panel()
@@ -192,14 +192,14 @@ Partial Class RequisitionIssueSlip
         Me.TextBox1.Size = New System.Drawing.Size(312, 22)
         Me.TextBox1.TabIndex = 43
         '
-        'TextBox6
+        'cluster
         '
-        Me.TextBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.cluster.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox6.Location = New System.Drawing.Point(104, 3)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(683, 22)
-        Me.TextBox6.TabIndex = 45
+        Me.cluster.Location = New System.Drawing.Point(104, 3)
+        Me.cluster.Name = "cluster"
+        Me.cluster.Size = New System.Drawing.Size(683, 22)
+        Me.cluster.TabIndex = 45
         '
         'requisitionPurpose
         '
@@ -225,7 +225,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Panel15.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel15.BackColor = System.Drawing.Color.White
-        Me.Panel15.Controls.Add(Me.TextBox6)
+        Me.Panel15.Controls.Add(Me.cluster)
         Me.Panel15.Controls.Add(Me.fundCluster)
         Me.Panel15.Location = New System.Drawing.Point(577, 99)
         Me.Panel15.Name = "Panel15"
@@ -261,8 +261,8 @@ Partial Class RequisitionIssueSlip
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel8.BackColor = System.Drawing.Color.White
         Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel8.Controls.Add(Me.TextBox4)
-        Me.Panel8.Controls.Add(Me.TextBox5)
+        Me.Panel8.Controls.Add(Me.office)
+        Me.Panel8.Controls.Add(Me.division)
         Me.Panel8.Controls.Add(Me.Label7)
         Me.Panel8.Controls.Add(Me.Label8)
         Me.Panel8.Location = New System.Drawing.Point(0, 3)
@@ -270,21 +270,21 @@ Partial Class RequisitionIssueSlip
         Me.Panel8.Size = New System.Drawing.Size(416, 56)
         Me.Panel8.TabIndex = 48
         '
-        'TextBox4
+        'office
         '
-        Me.TextBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox4.Location = New System.Drawing.Point(95, 28)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(312, 22)
-        Me.TextBox4.TabIndex = 46
+        Me.office.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.office.Location = New System.Drawing.Point(95, 28)
+        Me.office.Name = "office"
+        Me.office.Size = New System.Drawing.Size(312, 22)
+        Me.office.TabIndex = 46
         '
-        'TextBox5
+        'division
         '
-        Me.TextBox5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox5.Location = New System.Drawing.Point(95, 5)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(312, 22)
-        Me.TextBox5.TabIndex = 44
+        Me.division.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.division.Location = New System.Drawing.Point(95, 5)
+        Me.division.Name = "division"
+        Me.division.Size = New System.Drawing.Size(312, 22)
+        Me.division.TabIndex = 44
         '
         'Label7
         '
@@ -314,8 +314,8 @@ Partial Class RequisitionIssueSlip
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel7.BackColor = System.Drawing.Color.White
         Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel7.Controls.Add(Me.TextBox2)
-        Me.Panel7.Controls.Add(Me.TextBox3)
+        Me.Panel7.Controls.Add(Me.risnumber)
+        Me.Panel7.Controls.Add(Me.responsibilitycenter)
         Me.Panel7.Controls.Add(Me.Label5)
         Me.Panel7.Controls.Add(Me.Label6)
         Me.Panel7.Location = New System.Drawing.Point(415, 3)
@@ -323,21 +323,21 @@ Partial Class RequisitionIssueSlip
         Me.Panel7.Size = New System.Drawing.Size(791, 56)
         Me.Panel7.TabIndex = 49
         '
-        'TextBox2
+        'risnumber
         '
-        Me.TextBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox2.Location = New System.Drawing.Point(208, 28)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(574, 22)
-        Me.TextBox2.TabIndex = 46
+        Me.risnumber.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.risnumber.Location = New System.Drawing.Point(208, 28)
+        Me.risnumber.Name = "risnumber"
+        Me.risnumber.Size = New System.Drawing.Size(574, 22)
+        Me.risnumber.TabIndex = 46
         '
-        'TextBox3
+        'responsibilitycenter
         '
-        Me.TextBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox3.Location = New System.Drawing.Point(208, 5)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(574, 22)
-        Me.TextBox3.TabIndex = 44
+        Me.responsibilitycenter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.responsibilitycenter.Location = New System.Drawing.Point(208, 5)
+        Me.responsibilitycenter.Name = "responsibilitycenter"
+        Me.responsibilitycenter.Size = New System.Drawing.Size(574, 22)
+        Me.responsibilitycenter.TabIndex = 44
         '
         'Label5
         '
@@ -1284,20 +1284,20 @@ Partial Class RequisitionIssueSlip
     Friend WithEvents entityName As Label
     Friend WithEvents fundCluster As Label
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents cluster As TextBox
     Friend WithEvents requisitionPurpose As TextBox
     Friend WithEvents purpose As Label
     Friend WithEvents Panel15 As Panel
     Friend WithEvents Panel16 As Panel
     Friend WithEvents Panel17 As Panel
     Friend WithEvents Panel8 As Panel
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents office As TextBox
+    Friend WithEvents division As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Panel7 As Panel
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents risnumber As TextBox
+    Friend WithEvents responsibilitycenter As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Panel9 As Panel

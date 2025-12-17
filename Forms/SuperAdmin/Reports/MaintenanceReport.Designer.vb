@@ -34,11 +34,11 @@ Partial Class MaintenanceReport
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.status = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.nationalboardno = New System.Windows.Forms.TextBox()
         Me.serialNumber = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
@@ -49,38 +49,38 @@ Partial Class MaintenanceReport
         Me.CheckBox8 = New System.Windows.Forms.CheckBox()
         Me.CheckBox6 = New System.Windows.Forms.CheckBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.manufacturer = New System.Windows.Forms.TextBox()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.shutdownmaintenance = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.preventivemaintenance = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.systemfailure = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.TextBox11 = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
+        Me.maintenancedescription = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
+        Me.maintenanceinspection = New System.Windows.Forms.TextBox()
         Me.Label23 = New System.Windows.Forms.Label()
-        Me.TextBox14 = New System.Windows.Forms.TextBox()
+        Me.pressuretest = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.TextBox15 = New System.Windows.Forms.TextBox()
+        Me.custodianname = New System.Windows.Forms.TextBox()
         Me.Label25 = New System.Windows.Forms.Label()
-        Me.TextBox16 = New System.Windows.Forms.TextBox()
+        Me.custodiannumber = New System.Windows.Forms.TextBox()
         Me.Label27 = New System.Windows.Forms.Label()
-        Me.TextBox18 = New System.Windows.Forms.TextBox()
+        Me.mechanicname = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
-        Me.TextBox17 = New System.Windows.Forms.TextBox()
+        Me.mechanicnumber = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.DateTimePicker4 = New System.Windows.Forms.DateTimePicker()
         Me.Label30 = New System.Windows.Forms.Label()
-        Me.TextBox19 = New System.Windows.Forms.TextBox()
+        Me.systemname = New System.Windows.Forms.TextBox()
         Me.btn_Back = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
@@ -176,15 +176,15 @@ Partial Class MaintenanceReport
         Me.Label9.TabIndex = 3
         Me.Label9.Text = "Last Maintenace :"
         '
-        'TextBox2
+        'status
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(972, 210)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(495, 26)
-        Me.TextBox2.TabIndex = 12
+        Me.status.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.status.Location = New System.Drawing.Point(972, 210)
+        Me.status.Margin = New System.Windows.Forms.Padding(4)
+        Me.status.Multiline = True
+        Me.status.Name = "status"
+        Me.status.Size = New System.Drawing.Size(495, 26)
+        Me.status.TabIndex = 12
         '
         'Label10
         '
@@ -222,14 +222,14 @@ Partial Class MaintenanceReport
         Me.Label12.TabIndex = 15
         Me.Label12.Text = "SLAC Pressure System Number :"
         '
-        'TextBox3
+        'nationalboardno
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(1685, 208)
-        Me.TextBox3.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(107, 28)
-        Me.TextBox3.TabIndex = 16
+        Me.nationalboardno.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nationalboardno.Location = New System.Drawing.Point(1685, 208)
+        Me.nationalboardno.Margin = New System.Windows.Forms.Padding(4)
+        Me.nationalboardno.Name = "nationalboardno"
+        Me.nationalboardno.Size = New System.Drawing.Size(107, 28)
+        Me.nationalboardno.TabIndex = 16
         '
         'serialNumber
         '
@@ -362,15 +362,15 @@ Partial Class MaintenanceReport
         Me.Label15.TabIndex = 19
         Me.Label15.Text = "Manufacturer :"
         '
-        'TextBox6
+        'manufacturer
         '
-        Me.TextBox6.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(971, 311)
-        Me.TextBox6.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox6.Multiline = True
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(496, 27)
-        Me.TextBox6.TabIndex = 21
+        Me.manufacturer.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.manufacturer.Location = New System.Drawing.Point(971, 311)
+        Me.manufacturer.Margin = New System.Windows.Forms.Padding(4)
+        Me.manufacturer.Multiline = True
+        Me.manufacturer.Name = "manufacturer"
+        Me.manufacturer.Size = New System.Drawing.Size(496, 27)
+        Me.manufacturer.TabIndex = 21
         '
         'TextBox5
         '
@@ -415,15 +415,15 @@ Partial Class MaintenanceReport
         Me.Label16.TabIndex = 25
         Me.Label16.Text = "Shut-down Maintenance :"
         '
-        'TextBox8
+        'shutdownmaintenance
         '
-        Me.TextBox8.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox8.Location = New System.Drawing.Point(1032, 383)
-        Me.TextBox8.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox8.Multiline = True
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(437, 27)
-        Me.TextBox8.TabIndex = 26
+        Me.shutdownmaintenance.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.shutdownmaintenance.Location = New System.Drawing.Point(1032, 383)
+        Me.shutdownmaintenance.Margin = New System.Windows.Forms.Padding(4)
+        Me.shutdownmaintenance.Multiline = True
+        Me.shutdownmaintenance.Name = "shutdownmaintenance"
+        Me.shutdownmaintenance.Size = New System.Drawing.Size(437, 27)
+        Me.shutdownmaintenance.TabIndex = 26
         '
         'Label17
         '
@@ -437,15 +437,15 @@ Partial Class MaintenanceReport
         Me.Label17.TabIndex = 27
         Me.Label17.Text = "Preventive Maintenace :"
         '
-        'TextBox9
+        'preventivemaintenance
         '
-        Me.TextBox9.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox9.Location = New System.Drawing.Point(1484, 311)
-        Me.TextBox9.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox9.Multiline = True
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(308, 30)
-        Me.TextBox9.TabIndex = 28
+        Me.preventivemaintenance.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.preventivemaintenance.Location = New System.Drawing.Point(1484, 311)
+        Me.preventivemaintenance.Margin = New System.Windows.Forms.Padding(4)
+        Me.preventivemaintenance.Multiline = True
+        Me.preventivemaintenance.Name = "preventivemaintenance"
+        Me.preventivemaintenance.Size = New System.Drawing.Size(308, 30)
+        Me.preventivemaintenance.TabIndex = 28
         '
         'Label18
         '
@@ -459,15 +459,15 @@ Partial Class MaintenanceReport
         Me.Label18.TabIndex = 29
         Me.Label18.Text = "System Failure Problem :"
         '
-        'TextBox10
+        'systemfailure
         '
-        Me.TextBox10.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox10.Location = New System.Drawing.Point(1484, 383)
-        Me.TextBox10.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox10.Multiline = True
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(308, 30)
-        Me.TextBox10.TabIndex = 30
+        Me.systemfailure.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.systemfailure.Location = New System.Drawing.Point(1484, 383)
+        Me.systemfailure.Margin = New System.Windows.Forms.Padding(4)
+        Me.systemfailure.Multiline = True
+        Me.systemfailure.Name = "systemfailure"
+        Me.systemfailure.Size = New System.Drawing.Size(308, 30)
+        Me.systemfailure.TabIndex = 30
         '
         'Label19
         '
@@ -515,15 +515,15 @@ Partial Class MaintenanceReport
         Me.Label21.TabIndex = 34
         Me.Label21.Text = "Maintenace Description :"
         '
-        'TextBox12
+        'maintenancedescription
         '
-        Me.TextBox12.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox12.Location = New System.Drawing.Point(663, 585)
-        Me.TextBox12.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox12.Multiline = True
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(1129, 52)
-        Me.TextBox12.TabIndex = 35
+        Me.maintenancedescription.Font = New System.Drawing.Font("Poppins", 8.25!)
+        Me.maintenancedescription.Location = New System.Drawing.Point(663, 604)
+        Me.maintenancedescription.Margin = New System.Windows.Forms.Padding(4)
+        Me.maintenancedescription.Multiline = True
+        Me.maintenancedescription.Name = "maintenancedescription"
+        Me.maintenancedescription.Size = New System.Drawing.Size(1129, 30)
+        Me.maintenancedescription.TabIndex = 35
         '
         'Label22
         '
@@ -537,15 +537,15 @@ Partial Class MaintenanceReport
         Me.Label22.TabIndex = 36
         Me.Label22.Text = "Maintenace Inspection :"
         '
-        'TextBox13
+        'maintenanceinspection
         '
-        Me.TextBox13.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox13.Location = New System.Drawing.Point(663, 631)
-        Me.TextBox13.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox13.Multiline = True
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.Size = New System.Drawing.Size(1129, 43)
-        Me.TextBox13.TabIndex = 37
+        Me.maintenanceinspection.Font = New System.Drawing.Font("Poppins", 7.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.maintenanceinspection.Location = New System.Drawing.Point(663, 654)
+        Me.maintenanceinspection.Margin = New System.Windows.Forms.Padding(4)
+        Me.maintenanceinspection.Multiline = True
+        Me.maintenanceinspection.Name = "maintenanceinspection"
+        Me.maintenanceinspection.Size = New System.Drawing.Size(1129, 32)
+        Me.maintenanceinspection.TabIndex = 37
         '
         'Label23
         '
@@ -559,15 +559,15 @@ Partial Class MaintenanceReport
         Me.Label23.TabIndex = 38
         Me.Label23.Text = "Pressure test :"
         '
-        'TextBox14
+        'pressuretest
         '
-        Me.TextBox14.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox14.Location = New System.Drawing.Point(663, 668)
-        Me.TextBox14.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox14.Multiline = True
-        Me.TextBox14.Name = "TextBox14"
-        Me.TextBox14.Size = New System.Drawing.Size(1129, 51)
-        Me.TextBox14.TabIndex = 39
+        Me.pressuretest.Font = New System.Drawing.Font("Poppins", 8.25!)
+        Me.pressuretest.Location = New System.Drawing.Point(663, 695)
+        Me.pressuretest.Margin = New System.Windows.Forms.Padding(4)
+        Me.pressuretest.Multiline = True
+        Me.pressuretest.Name = "pressuretest"
+        Me.pressuretest.Size = New System.Drawing.Size(1129, 37)
+        Me.pressuretest.TabIndex = 39
         '
         'Label24
         '
@@ -579,17 +579,17 @@ Partial Class MaintenanceReport
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(792, 55)
         Me.Label24.TabIndex = 40
-        Me.Label24.Text = "Costudian's Name(Printed) :"
+        Me.Label24.Text = "Custodian's Name(Printed) :"
         '
-        'TextBox15
+        'custodianname
         '
-        Me.TextBox15.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox15.Location = New System.Drawing.Point(676, 741)
-        Me.TextBox15.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox15.Multiline = True
-        Me.TextBox15.Name = "TextBox15"
-        Me.TextBox15.Size = New System.Drawing.Size(563, 29)
-        Me.TextBox15.TabIndex = 41
+        Me.custodianname.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.custodianname.Location = New System.Drawing.Point(676, 741)
+        Me.custodianname.Margin = New System.Windows.Forms.Padding(4)
+        Me.custodianname.Multiline = True
+        Me.custodianname.Name = "custodianname"
+        Me.custodianname.Size = New System.Drawing.Size(563, 29)
+        Me.custodianname.TabIndex = 41
         '
         'Label25
         '
@@ -603,15 +603,15 @@ Partial Class MaintenanceReport
         Me.Label25.TabIndex = 42
         Me.Label25.Text = "Phone :"
         '
-        'TextBox16
+        'custodiannumber
         '
-        Me.TextBox16.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox16.Location = New System.Drawing.Point(1312, 741)
-        Me.TextBox16.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox16.Multiline = True
-        Me.TextBox16.Name = "TextBox16"
-        Me.TextBox16.Size = New System.Drawing.Size(480, 29)
-        Me.TextBox16.TabIndex = 43
+        Me.custodiannumber.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.custodiannumber.Location = New System.Drawing.Point(1312, 741)
+        Me.custodiannumber.Margin = New System.Windows.Forms.Padding(4)
+        Me.custodiannumber.Multiline = True
+        Me.custodiannumber.Name = "custodiannumber"
+        Me.custodiannumber.Size = New System.Drawing.Size(480, 29)
+        Me.custodiannumber.TabIndex = 43
         '
         'Label27
         '
@@ -625,15 +625,15 @@ Partial Class MaintenanceReport
         Me.Label27.TabIndex = 44
         Me.Label27.Text = "Mechanic's Name(Printed) :"
         '
-        'TextBox18
+        'mechanicname
         '
-        Me.TextBox18.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox18.Location = New System.Drawing.Point(676, 784)
-        Me.TextBox18.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox18.Multiline = True
-        Me.TextBox18.Name = "TextBox18"
-        Me.TextBox18.Size = New System.Drawing.Size(563, 29)
-        Me.TextBox18.TabIndex = 45
+        Me.mechanicname.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mechanicname.Location = New System.Drawing.Point(676, 784)
+        Me.mechanicname.Margin = New System.Windows.Forms.Padding(4)
+        Me.mechanicname.Multiline = True
+        Me.mechanicname.Name = "mechanicname"
+        Me.mechanicname.Size = New System.Drawing.Size(563, 29)
+        Me.mechanicname.TabIndex = 45
         '
         'Label26
         '
@@ -647,15 +647,15 @@ Partial Class MaintenanceReport
         Me.Label26.TabIndex = 46
         Me.Label26.Text = "Phone :"
         '
-        'TextBox17
+        'mechanicnumber
         '
-        Me.TextBox17.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox17.Location = New System.Drawing.Point(1312, 778)
-        Me.TextBox17.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox17.Multiline = True
-        Me.TextBox17.Name = "TextBox17"
-        Me.TextBox17.Size = New System.Drawing.Size(480, 29)
-        Me.TextBox17.TabIndex = 47
+        Me.mechanicnumber.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mechanicnumber.Location = New System.Drawing.Point(1312, 778)
+        Me.mechanicnumber.Margin = New System.Windows.Forms.Padding(4)
+        Me.mechanicnumber.Multiline = True
+        Me.mechanicnumber.Name = "mechanicnumber"
+        Me.mechanicnumber.Size = New System.Drawing.Size(480, 29)
+        Me.mechanicnumber.TabIndex = 47
         '
         'Label29
         '
@@ -703,15 +703,15 @@ Partial Class MaintenanceReport
         Me.Label30.TabIndex = 51
         Me.Label30.Text = "Maintenace And Repair Records"
         '
-        'TextBox19
+        'systemname
         '
-        Me.TextBox19.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox19.Location = New System.Drawing.Point(971, 166)
-        Me.TextBox19.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox19.Multiline = True
-        Me.TextBox19.Name = "TextBox19"
-        Me.TextBox19.Size = New System.Drawing.Size(496, 36)
-        Me.TextBox19.TabIndex = 52
+        Me.systemname.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.systemname.Location = New System.Drawing.Point(971, 166)
+        Me.systemname.Margin = New System.Windows.Forms.Padding(4)
+        Me.systemname.Multiline = True
+        Me.systemname.Name = "systemname"
+        Me.systemname.Size = New System.Drawing.Size(496, 36)
+        Me.systemname.TabIndex = 52
         '
         'btn_Back
         '
@@ -837,7 +837,7 @@ Partial Class MaintenanceReport
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btn_Back)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.TextBox19)
+        Me.Controls.Add(Me.systemname)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.ComboBox2)
@@ -845,42 +845,42 @@ Partial Class MaintenanceReport
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label28)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.status)
         Me.Controls.Add(Me.Label29)
         Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.TextBox17)
+        Me.Controls.Add(Me.mechanicnumber)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.TextBox18)
-        Me.Controls.Add(Me.TextBox3)
+        Me.Controls.Add(Me.mechanicname)
+        Me.Controls.Add(Me.nationalboardno)
         Me.Controls.Add(Me.Label27)
         Me.Controls.Add(Me.serialNumber)
-        Me.Controls.Add(Me.TextBox16)
+        Me.Controls.Add(Me.custodiannumber)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label25)
         Me.Controls.Add(Me.TableLayoutPanel4)
-        Me.Controls.Add(Me.TextBox15)
+        Me.Controls.Add(Me.custodianname)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label24)
-        Me.Controls.Add(Me.TextBox6)
-        Me.Controls.Add(Me.TextBox14)
+        Me.Controls.Add(Me.manufacturer)
+        Me.Controls.Add(Me.pressuretest)
         Me.Controls.Add(Me.TextBox5)
         Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.TextBox13)
+        Me.Controls.Add(Me.maintenanceinspection)
         Me.Controls.Add(Me.TextBox7)
         Me.Controls.Add(Me.Label22)
         Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.TextBox12)
-        Me.Controls.Add(Me.TextBox8)
+        Me.Controls.Add(Me.maintenancedescription)
+        Me.Controls.Add(Me.shutdownmaintenance)
         Me.Controls.Add(Me.Label21)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Label20)
-        Me.Controls.Add(Me.TextBox9)
+        Me.Controls.Add(Me.preventivemaintenance)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.TextBox10)
+        Me.Controls.Add(Me.systemfailure)
         Me.ForeColor = System.Drawing.Color.Transparent
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "MaintenanceReport"
@@ -899,11 +899,11 @@ Partial Class MaintenanceReport
     Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents status As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents nationalboardno As System.Windows.Forms.TextBox
     Friend WithEvents serialNumber As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents TableLayoutPanel4 As System.Windows.Forms.TableLayoutPanel
@@ -914,38 +914,38 @@ Partial Class MaintenanceReport
     Friend WithEvents CheckBox8 As System.Windows.Forms.CheckBox
     Friend WithEvents CheckBox6 As System.Windows.Forms.CheckBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
+    Friend WithEvents manufacturer As System.Windows.Forms.TextBox
     Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
+    Friend WithEvents shutdownmaintenance As System.Windows.Forms.TextBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
+    Friend WithEvents preventivemaintenance As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents TextBox10 As System.Windows.Forms.TextBox
+    Friend WithEvents systemfailure As System.Windows.Forms.TextBox
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents TextBox11 As System.Windows.Forms.TextBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents TextBox12 As System.Windows.Forms.TextBox
+    Friend WithEvents maintenancedescription As System.Windows.Forms.TextBox
     Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents TextBox13 As System.Windows.Forms.TextBox
+    Friend WithEvents maintenanceinspection As System.Windows.Forms.TextBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
-    Friend WithEvents TextBox14 As System.Windows.Forms.TextBox
+    Friend WithEvents pressuretest As System.Windows.Forms.TextBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
-    Friend WithEvents TextBox15 As System.Windows.Forms.TextBox
+    Friend WithEvents custodianname As System.Windows.Forms.TextBox
     Friend WithEvents Label25 As System.Windows.Forms.Label
-    Friend WithEvents TextBox16 As System.Windows.Forms.TextBox
+    Friend WithEvents custodiannumber As System.Windows.Forms.TextBox
     Friend WithEvents Label27 As System.Windows.Forms.Label
-    Friend WithEvents TextBox18 As System.Windows.Forms.TextBox
+    Friend WithEvents mechanicname As System.Windows.Forms.TextBox
     Friend WithEvents Label26 As System.Windows.Forms.Label
-    Friend WithEvents TextBox17 As System.Windows.Forms.TextBox
+    Friend WithEvents mechanicnumber As System.Windows.Forms.TextBox
     Friend WithEvents Label29 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents DateTimePicker4 As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label30 As System.Windows.Forms.Label
-    Friend WithEvents TextBox19 As System.Windows.Forms.TextBox
+    Friend WithEvents systemname As System.Windows.Forms.TextBox
     Friend WithEvents btn_Back As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents DateTimePicker2 As System.Windows.Forms.DateTimePicker

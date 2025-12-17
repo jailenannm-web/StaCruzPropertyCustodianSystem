@@ -26,21 +26,21 @@ Partial Class InspectionandAcceptanceReport
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.entityName = New System.Windows.Forms.Label()
         Me.Panel15 = New System.Windows.Forms.Panel()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.clusterfund = New System.Windows.Forms.TextBox()
         Me.fundCluster = New System.Windows.Forms.Label()
         Me.requisitionPurpose = New System.Windows.Forms.TextBox()
         Me.purpose = New System.Windows.Forms.Label()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.lblWaste = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.invoiceno = New System.Windows.Forms.TextBox()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.responsibilityCenter = New System.Windows.Forms.TextBox()
+        Me.requisitioningOffice = New System.Windows.Forms.TextBox()
+        Me.poNumberDate = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.supplier = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
@@ -118,7 +118,7 @@ Partial Class InspectionandAcceptanceReport
         'Panel15
         '
         Me.Panel15.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel15.Controls.Add(Me.TextBox6)
+        Me.Panel15.Controls.Add(Me.clusterfund)
         Me.Panel15.Controls.Add(Me.fundCluster)
         Me.Panel15.Location = New System.Drawing.Point(847, 68)
         Me.Panel15.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -126,15 +126,15 @@ Partial Class InspectionandAcceptanceReport
         Me.Panel15.Size = New System.Drawing.Size(423, 30)
         Me.Panel15.TabIndex = 70
         '
-        'TextBox6
+        'clusterfund
         '
-        Me.TextBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.clusterfund.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox6.Location = New System.Drawing.Point(104, 2)
-        Me.TextBox6.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(312, 22)
-        Me.TextBox6.TabIndex = 45
+        Me.clusterfund.Location = New System.Drawing.Point(104, 2)
+        Me.clusterfund.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.clusterfund.Name = "clusterfund"
+        Me.clusterfund.Size = New System.Drawing.Size(312, 22)
+        Me.clusterfund.TabIndex = 45
         '
         'fundCluster
         '
@@ -191,14 +191,14 @@ Partial Class InspectionandAcceptanceReport
         Me.lblWaste.TabIndex = 68
         Me.lblWaste.Text = "INSPECTION AND ACCEPTANCE REPORT"
         '
-        'TextBox7
+        'invoiceno
         '
-        Me.TextBox7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox7.Location = New System.Drawing.Point(1087, 166)
-        Me.TextBox7.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(173, 22)
-        Me.TextBox7.TabIndex = 51
+        Me.invoiceno.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.invoiceno.Location = New System.Drawing.Point(1087, 166)
+        Me.invoiceno.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.invoiceno.Name = "invoiceno"
+        Me.invoiceno.Size = New System.Drawing.Size(173, 22)
+        Me.invoiceno.TabIndex = 51
         '
         'Panel8
         '
@@ -208,11 +208,11 @@ Partial Class InspectionandAcceptanceReport
         Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel8.Controls.Add(Me.Label9)
         Me.Panel8.Controls.Add(Me.Label7)
-        Me.Panel8.Controls.Add(Me.TextBox4)
-        Me.Panel8.Controls.Add(Me.TextBox3)
-        Me.Panel8.Controls.Add(Me.TextBox2)
+        Me.Panel8.Controls.Add(Me.responsibilityCenter)
+        Me.Panel8.Controls.Add(Me.requisitioningOffice)
+        Me.Panel8.Controls.Add(Me.poNumberDate)
         Me.Panel8.Controls.Add(Me.Label5)
-        Me.Panel8.Controls.Add(Me.TextBox5)
+        Me.Panel8.Controls.Add(Me.supplier)
         Me.Panel8.Controls.Add(Me.Label8)
         Me.Panel8.Location = New System.Drawing.Point(0, 2)
         Me.Panel8.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -242,32 +242,32 @@ Partial Class InspectionandAcceptanceReport
         Me.Label7.Text = "Requisitioning Offfice/DEpt :"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'TextBox4
+        'responsibilityCenter
         '
-        Me.TextBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox4.Location = New System.Drawing.Point(201, 96)
-        Me.TextBox4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(347, 22)
-        Me.TextBox4.TabIndex = 48
+        Me.responsibilityCenter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.responsibilityCenter.Location = New System.Drawing.Point(201, 96)
+        Me.responsibilityCenter.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.responsibilityCenter.Name = "responsibilityCenter"
+        Me.responsibilityCenter.Size = New System.Drawing.Size(347, 22)
+        Me.responsibilityCenter.TabIndex = 48
         '
-        'TextBox3
+        'requisitioningOffice
         '
-        Me.TextBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox3.Location = New System.Drawing.Point(201, 65)
-        Me.TextBox3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(347, 22)
-        Me.TextBox3.TabIndex = 47
+        Me.requisitioningOffice.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.requisitioningOffice.Location = New System.Drawing.Point(201, 65)
+        Me.requisitioningOffice.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.requisitioningOffice.Name = "requisitioningOffice"
+        Me.requisitioningOffice.Size = New System.Drawing.Size(347, 22)
+        Me.requisitioningOffice.TabIndex = 47
         '
-        'TextBox2
+        'poNumberDate
         '
-        Me.TextBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox2.Location = New System.Drawing.Point(141, 34)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(407, 22)
-        Me.TextBox2.TabIndex = 46
+        Me.poNumberDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.poNumberDate.Location = New System.Drawing.Point(141, 34)
+        Me.poNumberDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.poNumberDate.Name = "poNumberDate"
+        Me.poNumberDate.Size = New System.Drawing.Size(407, 22)
+        Me.poNumberDate.TabIndex = 46
         '
         'Label5
         '
@@ -280,14 +280,14 @@ Partial Class InspectionandAcceptanceReport
         Me.Label5.Text = "PO No./Date :"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'TextBox5
+        'supplier
         '
-        Me.TextBox5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox5.Location = New System.Drawing.Point(141, 5)
-        Me.TextBox5.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(407, 22)
-        Me.TextBox5.TabIndex = 44
+        Me.supplier.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supplier.Location = New System.Drawing.Point(141, 5)
+        Me.supplier.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.supplier.Name = "supplier"
+        Me.supplier.Size = New System.Drawing.Size(407, 22)
+        Me.supplier.TabIndex = 44
         '
         'Label8
         '
@@ -351,7 +351,7 @@ Partial Class InspectionandAcceptanceReport
         'DateTimePicker5
         '
         Me.DateTimePicker5.Location = New System.Drawing.Point(67, 37)
-        Me.DateTimePicker5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DateTimePicker5.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker5.Name = "DateTimePicker5"
         Me.DateTimePicker5.Size = New System.Drawing.Size(205, 22)
         Me.DateTimePicker5.TabIndex = 45
@@ -470,7 +470,7 @@ Partial Class InspectionandAcceptanceReport
         '
         Me.CheckBox2.AutoSize = True
         Me.CheckBox2.Location = New System.Drawing.Point(457, 91)
-        Me.CheckBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CheckBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(241, 20)
         Me.CheckBox2.TabIndex = 82
@@ -481,7 +481,7 @@ Partial Class InspectionandAcceptanceReport
         '
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Location = New System.Drawing.Point(457, 58)
-        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(87, 20)
         Me.CheckBox1.TabIndex = 81
@@ -502,7 +502,7 @@ Partial Class InspectionandAcceptanceReport
         'DateTimePicker2
         '
         Me.DateTimePicker2.Location = New System.Drawing.Point(555, 15)
-        Me.DateTimePicker2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DateTimePicker2.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(205, 22)
         Me.DateTimePicker2.TabIndex = 76
@@ -573,7 +573,7 @@ Partial Class InspectionandAcceptanceReport
         Me.CheckBox3.Cursor = System.Windows.Forms.Cursors.No
         Me.CheckBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CheckBox3.Location = New System.Drawing.Point(24, 59)
-        Me.CheckBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CheckBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.CheckBox3.Name = "CheckBox3"
         Me.CheckBox3.Size = New System.Drawing.Size(361, 55)
         Me.CheckBox3.TabIndex = 10
@@ -628,7 +628,7 @@ Partial Class InspectionandAcceptanceReport
         'DateTimePicker1
         '
         Me.DateTimePicker1.Location = New System.Drawing.Point(169, 15)
-        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(205, 22)
         Me.DateTimePicker1.TabIndex = 74
@@ -650,13 +650,13 @@ Partial Class InspectionandAcceptanceReport
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.ClientSize = New System.Drawing.Size(1700, 1055)
-        Me.Controls.Add(Me.TextBox7)
+        Me.Controls.Add(Me.invoiceno)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Panel16)
         Me.Controls.Add(Me.Panel15)
         Me.Controls.Add(Me.Panel17)
         Me.Controls.Add(Me.lblWaste)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "InspectionandAcceptanceReport"
         Me.Text = "InspectionandAcceptanceReport"
         Me.Panel16.ResumeLayout(False)
@@ -684,21 +684,21 @@ Partial Class InspectionandAcceptanceReport
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents entityName As System.Windows.Forms.Label
     Friend WithEvents Panel15 As System.Windows.Forms.Panel
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
+    Friend WithEvents clusterfund As System.Windows.Forms.TextBox
     Friend WithEvents fundCluster As System.Windows.Forms.Label
     Friend WithEvents requisitionPurpose As System.Windows.Forms.TextBox
     Friend WithEvents purpose As System.Windows.Forms.Label
     Friend WithEvents Panel17 As System.Windows.Forms.Panel
     Friend WithEvents lblWaste As System.Windows.Forms.Label
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
+    Friend WithEvents invoiceno As System.Windows.Forms.TextBox
     Friend WithEvents Panel8 As System.Windows.Forms.Panel
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents responsibilityCenter As System.Windows.Forms.TextBox
+    Friend WithEvents requisitioningOffice As System.Windows.Forms.TextBox
+    Friend WithEvents poNumberDate As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
+    Friend WithEvents supplier As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Panel7 As System.Windows.Forms.Panel
     Friend WithEvents TextBox8 As System.Windows.Forms.TextBox

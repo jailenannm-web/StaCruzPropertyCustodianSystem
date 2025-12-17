@@ -30,13 +30,6 @@ Partial Class InventoryReport
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btn_Back = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.lblPropertyCard = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.fundClusterTxt = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.entityNameTxt = New System.Windows.Forms.TextBox()
-        Me.lblName = New System.Windows.Forms.Label()
         Me.Reorder = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Manufacturer = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,6 +40,13 @@ Partial Class InventoryReport
         Me.ReorderCycle = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemReorderQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemDiscontinue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.lblPropertyCard = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.repoter = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.inventoryperiod = New System.Windows.Forms.TextBox()
+        Me.lblName = New System.Windows.Forms.Label()
         Me.RoundedButton2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -62,7 +62,7 @@ Partial Class InventoryReport
         Me.Button1.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.White
         Me.Button1.Location = New System.Drawing.Point(820, 1296)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(235, 52)
         Me.Button1.TabIndex = 79
@@ -76,7 +76,7 @@ Partial Class InventoryReport
         Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Back.ForeColor = System.Drawing.Color.White
         Me.btn_Back.Location = New System.Drawing.Point(488, 1296)
-        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Back.Name = "btn_Back"
         Me.btn_Back.Size = New System.Drawing.Size(235, 52)
         Me.btn_Back.TabIndex = 78
@@ -91,11 +91,81 @@ Partial Class InventoryReport
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Reorder, Me.ItemNumber, Me.Manufacturer, Me.Description, Me.CostPerItem, Me.StockQuantity, Me.InventoryValue, Me.ReorderCycle, Me.ItemReorderQuantity, Me.ItemDiscontinue})
         Me.DataGridView1.Location = New System.Drawing.Point(334, 186)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.Size = New System.Drawing.Size(913, 652)
         Me.DataGridView1.TabIndex = 85
+        '
+        'Reorder
+        '
+        Me.Reorder.HeaderText = "Reorder?"
+        Me.Reorder.MinimumWidth = 6
+        Me.Reorder.Name = "Reorder"
+        Me.Reorder.Width = 125
+        '
+        'ItemNumber
+        '
+        Me.ItemNumber.HeaderText = "Item Number"
+        Me.ItemNumber.MinimumWidth = 6
+        Me.ItemNumber.Name = "ItemNumber"
+        Me.ItemNumber.Width = 125
+        '
+        'Manufacturer
+        '
+        Me.Manufacturer.HeaderText = "Manufacturer"
+        Me.Manufacturer.MinimumWidth = 6
+        Me.Manufacturer.Name = "Manufacturer"
+        Me.Manufacturer.Width = 125
+        '
+        'Description
+        '
+        Me.Description.HeaderText = "Description"
+        Me.Description.MinimumWidth = 6
+        Me.Description.Name = "Description"
+        Me.Description.Width = 125
+        '
+        'CostPerItem
+        '
+        Me.CostPerItem.HeaderText = "Cost Per Item"
+        Me.CostPerItem.MinimumWidth = 6
+        Me.CostPerItem.Name = "CostPerItem"
+        Me.CostPerItem.Width = 125
+        '
+        'StockQuantity
+        '
+        Me.StockQuantity.HeaderText = "Stock Quantity"
+        Me.StockQuantity.MinimumWidth = 6
+        Me.StockQuantity.Name = "StockQuantity"
+        Me.StockQuantity.Width = 125
+        '
+        'InventoryValue
+        '
+        Me.InventoryValue.HeaderText = "Inventory Value"
+        Me.InventoryValue.MinimumWidth = 6
+        Me.InventoryValue.Name = "InventoryValue"
+        Me.InventoryValue.Width = 125
+        '
+        'ReorderCycle
+        '
+        Me.ReorderCycle.HeaderText = "Reorder Cycle"
+        Me.ReorderCycle.MinimumWidth = 6
+        Me.ReorderCycle.Name = "ReorderCycle"
+        Me.ReorderCycle.Width = 125
+        '
+        'ItemReorderQuantity
+        '
+        Me.ItemReorderQuantity.HeaderText = "Item Reorder Quantity"
+        Me.ItemReorderQuantity.MinimumWidth = 6
+        Me.ItemReorderQuantity.Name = "ItemReorderQuantity"
+        Me.ItemReorderQuantity.Width = 125
+        '
+        'ItemDiscontinue
+        '
+        Me.ItemDiscontinue.HeaderText = "Item Discontinue?"
+        Me.ItemDiscontinue.MinimumWidth = 6
+        Me.ItemDiscontinue.Name = "ItemDiscontinue"
+        Me.ItemDiscontinue.Width = 125
         '
         'Panel11
         '
@@ -128,21 +198,21 @@ Partial Class InventoryReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.fundClusterTxt)
+        Me.Panel1.Controls.Add(Me.repoter)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.entityNameTxt)
+        Me.Panel1.Controls.Add(Me.inventoryperiod)
         Me.Panel1.Controls.Add(Me.lblName)
         Me.Panel1.Location = New System.Drawing.Point(334, 123)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(913, 64)
         Me.Panel1.TabIndex = 370
         '
-        'fundClusterTxt
+        'repoter
         '
-        Me.fundClusterTxt.Location = New System.Drawing.Point(135, 35)
-        Me.fundClusterTxt.Name = "fundClusterTxt"
-        Me.fundClusterTxt.Size = New System.Drawing.Size(302, 22)
-        Me.fundClusterTxt.TabIndex = 57
+        Me.repoter.Location = New System.Drawing.Point(135, 35)
+        Me.repoter.Name = "repoter"
+        Me.repoter.Size = New System.Drawing.Size(302, 22)
+        Me.repoter.TabIndex = 57
         '
         'Label1
         '
@@ -155,12 +225,12 @@ Partial Class InventoryReport
         Me.Label1.Text = "Reporter:"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'entityNameTxt
+        'inventoryperiod
         '
-        Me.entityNameTxt.Location = New System.Drawing.Point(135, 7)
-        Me.entityNameTxt.Name = "entityNameTxt"
-        Me.entityNameTxt.Size = New System.Drawing.Size(302, 22)
-        Me.entityNameTxt.TabIndex = 55
+        Me.inventoryperiod.Location = New System.Drawing.Point(135, 7)
+        Me.inventoryperiod.Name = "inventoryperiod"
+        Me.inventoryperiod.Size = New System.Drawing.Size(302, 22)
+        Me.inventoryperiod.TabIndex = 55
         '
         'lblName
         '
@@ -172,66 +242,6 @@ Partial Class InventoryReport
         Me.lblName.TabIndex = 38
         Me.lblName.Text = "Inventory Period:"
         Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Reorder
-        '
-        Me.Reorder.HeaderText = "Reorder?"
-        Me.Reorder.MinimumWidth = 6
-        Me.Reorder.Name = "Reorder"
-        '
-        'ItemNumber
-        '
-        Me.ItemNumber.HeaderText = "Item Number"
-        Me.ItemNumber.MinimumWidth = 6
-        Me.ItemNumber.Name = "ItemNumber"
-        '
-        'Manufacturer
-        '
-        Me.Manufacturer.HeaderText = "Manufacturer"
-        Me.Manufacturer.MinimumWidth = 6
-        Me.Manufacturer.Name = "Manufacturer"
-        '
-        'Description
-        '
-        Me.Description.HeaderText = "Description"
-        Me.Description.MinimumWidth = 6
-        Me.Description.Name = "Description"
-        '
-        'CostPerItem
-        '
-        Me.CostPerItem.HeaderText = "Cost Per Item"
-        Me.CostPerItem.MinimumWidth = 6
-        Me.CostPerItem.Name = "CostPerItem"
-        '
-        'StockQuantity
-        '
-        Me.StockQuantity.HeaderText = "Stock Quantity"
-        Me.StockQuantity.MinimumWidth = 6
-        Me.StockQuantity.Name = "StockQuantity"
-        '
-        'InventoryValue
-        '
-        Me.InventoryValue.HeaderText = "Inventory Value"
-        Me.InventoryValue.MinimumWidth = 6
-        Me.InventoryValue.Name = "InventoryValue"
-        '
-        'ReorderCycle
-        '
-        Me.ReorderCycle.HeaderText = "Reorder Cycle"
-        Me.ReorderCycle.MinimumWidth = 6
-        Me.ReorderCycle.Name = "ReorderCycle"
-        '
-        'ItemReorderQuantity
-        '
-        Me.ItemReorderQuantity.HeaderText = "Item Reorder Quantity"
-        Me.ItemReorderQuantity.MinimumWidth = 6
-        Me.ItemReorderQuantity.Name = "ItemReorderQuantity"
-        '
-        'ItemDiscontinue
-        '
-        Me.ItemDiscontinue.HeaderText = "Item Discontinue?"
-        Me.ItemDiscontinue.MinimumWidth = 6
-        Me.ItemDiscontinue.Name = "ItemDiscontinue"
         '
         'RoundedButton2
         '
@@ -295,7 +305,7 @@ Partial Class InventoryReport
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btn_Back)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "InventoryReport"
         Me.Text = "InventoryReport"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -326,9 +336,9 @@ Partial Class InventoryReport
     Friend WithEvents ItemReorderQuantity As DataGridViewTextBoxColumn
     Friend WithEvents ItemDiscontinue As DataGridViewTextBoxColumn
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents fundClusterTxt As TextBox
+    Friend WithEvents repoter As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents entityNameTxt As TextBox
+    Friend WithEvents inventoryperiod As TextBox
     Friend WithEvents lblName As Label
     Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
 End Class
