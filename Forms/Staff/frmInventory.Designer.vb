@@ -44,7 +44,7 @@ Partial Class frmInventory
         Me.DepreciationValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DisposalDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.inventorysearchbar = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblSuppliesManagement = New System.Windows.Forms.Label()
@@ -208,14 +208,14 @@ Partial Class frmInventory
         Me.PictureBox2.TabIndex = 160
         Me.PictureBox2.TabStop = False
         '
-        'TextBox1
+        'inventorysearchbar
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Poppins Light", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(148, 100)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(729, 37)
-        Me.TextBox1.TabIndex = 159
+        Me.inventorysearchbar.Font = New System.Drawing.Font("Poppins Light", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.inventorysearchbar.Location = New System.Drawing.Point(148, 100)
+        Me.inventorysearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.inventorysearchbar.Name = "inventorysearchbar"
+        Me.inventorysearchbar.Size = New System.Drawing.Size(729, 37)
+        Me.inventorysearchbar.TabIndex = 159
         '
         'Label2
         '
@@ -319,7 +319,7 @@ Partial Class frmInventory
         Me.Controls.Add(Me.comboStatus)
         Me.Controls.Add(Me.comboCategoris)
         Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.inventorysearchbar)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblSuppliesManagement)
@@ -355,7 +355,7 @@ Partial Class frmInventory
     Friend WithEvents DepreciationValue As DataGridViewTextBoxColumn
     Friend WithEvents DisposalDate As DataGridViewTextBoxColumn
     Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents inventorysearchbar As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents lblSuppliesManagement As Label

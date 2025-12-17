@@ -26,18 +26,6 @@ Partial Class UC_PropertyManagement1
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.propertyManagementGrid = New System.Windows.Forms.DataGridView()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ttlpropertymanagement = New System.Windows.Forms.Label()
-        Me.cmsActions = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.msuAssign = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDispose = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
-        Me.generatePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.propertyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unitOfMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -52,8 +40,23 @@ Partial Class UC_PropertyManagement1
         Me.internalCodes = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlpropertymanagement = New System.Windows.Forms.Label()
+        Me.cmsActions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.msuAssign = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDispose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.generatePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.propertymanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_DepartmentManagement
@@ -93,6 +96,104 @@ Partial Class UC_PropertyManagement1
         Me.propertyManagementGrid.RowTemplate.Height = 24
         Me.propertyManagementGrid.Size = New System.Drawing.Size(1270, 564)
         Me.propertyManagementGrid.TabIndex = 45
+        '
+        'propertyId
+        '
+        Me.propertyId.HeaderText = "propertyId"
+        Me.propertyId.MinimumWidth = 6
+        Me.propertyId.Name = "propertyId"
+        Me.propertyId.Width = 125
+        '
+        'itemName
+        '
+        Me.itemName.HeaderText = "itemName"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 125
+        '
+        'unitOfMeasure
+        '
+        Me.unitOfMeasure.HeaderText = "unit Of Measure"
+        Me.unitOfMeasure.MinimumWidth = 6
+        Me.unitOfMeasure.Name = "unitOfMeasure"
+        Me.unitOfMeasure.Width = 125
+        '
+        'propertyNumber
+        '
+        Me.propertyNumber.HeaderText = "property Number"
+        Me.propertyNumber.MinimumWidth = 6
+        Me.propertyNumber.Name = "propertyNumber"
+        Me.propertyNumber.Width = 125
+        '
+        'serialNumber
+        '
+        Me.serialNumber.HeaderText = "serial Number"
+        Me.serialNumber.MinimumWidth = 6
+        Me.serialNumber.Name = "serialNumber"
+        Me.serialNumber.Width = 125
+        '
+        'acquisitionDate
+        '
+        Me.acquisitionDate.HeaderText = "acquisition Date"
+        Me.acquisitionDate.MinimumWidth = 6
+        Me.acquisitionDate.Name = "acquisitionDate"
+        Me.acquisitionDate.Width = 125
+        '
+        'acquisitionCost
+        '
+        Me.acquisitionCost.HeaderText = "acquisition Cost"
+        Me.acquisitionCost.MinimumWidth = 6
+        Me.acquisitionCost.Name = "acquisitionCost"
+        Me.acquisitionCost.Width = 125
+        '
+        'totalCost
+        '
+        Me.totalCost.HeaderText = "total Cost"
+        Me.totalCost.MinimumWidth = 6
+        Me.totalCost.Name = "totalCost"
+        Me.totalCost.Width = 125
+        '
+        'sourceOfFunds
+        '
+        Me.sourceOfFunds.HeaderText = "source Of Funds"
+        Me.sourceOfFunds.MinimumWidth = 6
+        Me.sourceOfFunds.Name = "sourceOfFunds"
+        Me.sourceOfFunds.Width = 125
+        '
+        'assignedTo
+        '
+        Me.assignedTo.HeaderText = "assigned To"
+        Me.assignedTo.MinimumWidth = 6
+        Me.assignedTo.Name = "assignedTo"
+        Me.assignedTo.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "department Id"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'internalCodes
+        '
+        Me.internalCodes.HeaderText = "internal Codes"
+        Me.internalCodes.MinimumWidth = 6
+        Me.internalCodes.Name = "internalCodes"
+        Me.internalCodes.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "created At"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updated At"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
         '
         'btnEdit
         '
@@ -219,109 +320,33 @@ Partial Class UC_PropertyManagement1
         Me.generatePropertyCard.Text = "Generate Property Card"
         Me.generatePropertyCard.UseVisualStyleBackColor = False
         '
-        'propertyId
+        'PictureBox2
         '
-        Me.propertyId.HeaderText = "propertyId"
-        Me.propertyId.MinimumWidth = 6
-        Me.propertyId.Name = "propertyId"
-        Me.propertyId.Width = 125
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(484, 65)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 173
+        Me.PictureBox2.TabStop = False
         '
-        'itemName
+        'propertymanagementsearchbar
         '
-        Me.itemName.HeaderText = "itemName"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 125
-        '
-        'unitOfMeasure
-        '
-        Me.unitOfMeasure.HeaderText = "unit Of Measure"
-        Me.unitOfMeasure.MinimumWidth = 6
-        Me.unitOfMeasure.Name = "unitOfMeasure"
-        Me.unitOfMeasure.Width = 125
-        '
-        'propertyNumber
-        '
-        Me.propertyNumber.HeaderText = "property Number"
-        Me.propertyNumber.MinimumWidth = 6
-        Me.propertyNumber.Name = "propertyNumber"
-        Me.propertyNumber.Width = 125
-        '
-        'serialNumber
-        '
-        Me.serialNumber.HeaderText = "serial Number"
-        Me.serialNumber.MinimumWidth = 6
-        Me.serialNumber.Name = "serialNumber"
-        Me.serialNumber.Width = 125
-        '
-        'acquisitionDate
-        '
-        Me.acquisitionDate.HeaderText = "acquisition Date"
-        Me.acquisitionDate.MinimumWidth = 6
-        Me.acquisitionDate.Name = "acquisitionDate"
-        Me.acquisitionDate.Width = 125
-        '
-        'acquisitionCost
-        '
-        Me.acquisitionCost.HeaderText = "acquisition Cost"
-        Me.acquisitionCost.MinimumWidth = 6
-        Me.acquisitionCost.Name = "acquisitionCost"
-        Me.acquisitionCost.Width = 125
-        '
-        'totalCost
-        '
-        Me.totalCost.HeaderText = "total Cost"
-        Me.totalCost.MinimumWidth = 6
-        Me.totalCost.Name = "totalCost"
-        Me.totalCost.Width = 125
-        '
-        'sourceOfFunds
-        '
-        Me.sourceOfFunds.HeaderText = "source Of Funds"
-        Me.sourceOfFunds.MinimumWidth = 6
-        Me.sourceOfFunds.Name = "sourceOfFunds"
-        Me.sourceOfFunds.Width = 125
-        '
-        'assignedTo
-        '
-        Me.assignedTo.HeaderText = "assigned To"
-        Me.assignedTo.MinimumWidth = 6
-        Me.assignedTo.Name = "assignedTo"
-        Me.assignedTo.Width = 125
-        '
-        'departmentId
-        '
-        Me.departmentId.HeaderText = "department Id"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
-        '
-        'internalCodes
-        '
-        Me.internalCodes.HeaderText = "internal Codes"
-        Me.internalCodes.MinimumWidth = 6
-        Me.internalCodes.Name = "internalCodes"
-        Me.internalCodes.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "created At"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updated At"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
+        Me.propertymanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.propertymanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.propertymanagementsearchbar.Location = New System.Drawing.Point(549, 65)
+        Me.propertymanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.propertymanagementsearchbar.Name = "propertymanagementsearchbar"
+        Me.propertymanagementsearchbar.Size = New System.Drawing.Size(367, 42)
+        Me.propertymanagementsearchbar.TabIndex = 172
         '
         'UC_PropertyManagement1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.propertymanagementsearchbar)
         Me.Controls.Add(Me.generatePropertyCard)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlpropertymanagement)
@@ -335,6 +360,7 @@ Partial Class UC_PropertyManagement1
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsActions.ResumeLayout(False)
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -368,4 +394,6 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents internalCodes As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents createdAt As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents propertymanagementsearchbar As System.Windows.Forms.TextBox
 End Class

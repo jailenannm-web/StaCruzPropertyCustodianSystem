@@ -49,7 +49,10 @@ Public Class StaffLogin
                     userType = adminResult("user_type")
                 End If
                 
-                If adminResult.ContainsKey("user_id") Then
+                ' Check both userId and user_id for compatibility
+                If adminResult.ContainsKey("userId") Then
+                    Integer.TryParse(adminResult("userId"), userIDValue)
+                ElseIf adminResult.ContainsKey("user_id") Then
                     Integer.TryParse(adminResult("user_id"), userIDValue)
                 End If
 

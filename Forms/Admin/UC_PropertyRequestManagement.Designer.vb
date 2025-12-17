@@ -29,6 +29,15 @@ Partial Class UC_PropertyRequestManagement
     Private Sub InitializeComponent()
         Me.admin_label_PropertyRequestManagement = New System.Windows.Forms.Label()
         Me.prm_table1 = New System.Windows.Forms.DataGridView()
+        Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requesterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateOfReques = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.approvedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.request_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.employee_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.department_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -51,25 +60,19 @@ Partial Class UC_PropertyRequestManagement
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requesterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateOfReques = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.approvedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.maintenancemanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_PropertyRequestManagement
         '
         Me.admin_label_PropertyRequestManagement.AutoSize = True
-        Me.admin_label_PropertyRequestManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_label_PropertyRequestManagement.Font = New System.Drawing.Font("Poppins Black", 15.8!, System.Drawing.FontStyle.Bold)
         Me.admin_label_PropertyRequestManagement.Location = New System.Drawing.Point(52, 61)
         Me.admin_label_PropertyRequestManagement.Name = "admin_label_PropertyRequestManagement"
-        Me.admin_label_PropertyRequestManagement.Size = New System.Drawing.Size(560, 58)
+        Me.admin_label_PropertyRequestManagement.Size = New System.Drawing.Size(466, 48)
         Me.admin_label_PropertyRequestManagement.TabIndex = 33
         Me.admin_label_PropertyRequestManagement.Text = "Property Request Management"
         '
@@ -88,6 +91,69 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_table1.RowTemplate.Height = 24
         Me.prm_table1.Size = New System.Drawing.Size(1270, 573)
         Me.prm_table1.TabIndex = 34
+        '
+        'requestId
+        '
+        Me.requestId.HeaderText = "requestId"
+        Me.requestId.MinimumWidth = 6
+        Me.requestId.Name = "requestId"
+        Me.requestId.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
+        '
+        'requesterName
+        '
+        Me.requesterName.HeaderText = "requesterName"
+        Me.requesterName.MinimumWidth = 6
+        Me.requesterName.Name = "requesterName"
+        Me.requesterName.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "departmentId"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'dateOfRequest
+        '
+        Me.dateOfRequest.HeaderText = "date Of request"
+        Me.dateOfRequest.MinimumWidth = 6
+        Me.dateOfRequest.Name = "dateOfRequest"
+        Me.dateOfRequest.Width = 125
+        '
+        'dateOfReques
+        '
+        Me.dateOfReques.HeaderText = "dateOfRequest"
+        Me.dateOfReques.MinimumWidth = 6
+        Me.dateOfReques.Name = "dateOfReques"
+        Me.dateOfReques.Width = 125
+        '
+        'quantityRequested
+        '
+        Me.quantityRequested.HeaderText = "quantityRequested"
+        Me.quantityRequested.MinimumWidth = 6
+        Me.quantityRequested.Name = "quantityRequested"
+        Me.quantityRequested.Width = 125
+        '
+        'approvedBy
+        '
+        Me.approvedBy.HeaderText = "approvedDate"
+        Me.approvedBy.MinimumWidth = 6
+        Me.approvedBy.Name = "approvedBy"
+        Me.approvedBy.Width = 125
         '
         'request_id
         '
@@ -314,74 +380,33 @@ Partial Class UC_PropertyRequestManagement
         Me.assign.Text = "Assign"
         Me.assign.UseVisualStyleBackColor = False
         '
-        'requestId
+        'PictureBox2
         '
-        Me.requestId.HeaderText = "requestId"
-        Me.requestId.MinimumWidth = 6
-        Me.requestId.Name = "requestId"
-        Me.requestId.Width = 125
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(516, 61)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(31, 40)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 173
+        Me.PictureBox2.TabStop = False
         '
-        'createdAt
+        'maintenancemanagementsearchbar
         '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
-        '
-        'requesterName
-        '
-        Me.requesterName.HeaderText = "requesterName"
-        Me.requesterName.MinimumWidth = 6
-        Me.requesterName.Name = "requesterName"
-        Me.requesterName.Width = 125
-        '
-        'departmentId
-        '
-        Me.departmentId.HeaderText = "departmentId"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
-        '
-        'dateOfRequest
-        '
-        Me.dateOfRequest.HeaderText = "date Of request"
-        Me.dateOfRequest.MinimumWidth = 6
-        Me.dateOfRequest.Name = "dateOfRequest"
-        Me.dateOfRequest.Width = 125
-        '
-        'dateOfReques
-        '
-        Me.dateOfReques.HeaderText = "dateOfRequest"
-        Me.dateOfReques.MinimumWidth = 6
-        Me.dateOfReques.Name = "dateOfReques"
-        Me.dateOfReques.Width = 125
-        '
-        'quantityRequested
-        '
-        Me.quantityRequested.HeaderText = "quantityRequested"
-        Me.quantityRequested.MinimumWidth = 6
-        Me.quantityRequested.Name = "quantityRequested"
-        Me.quantityRequested.Width = 125
-        '
-        'approvedBy
-        '
-        Me.approvedBy.HeaderText = "approvedDate"
-        Me.approvedBy.MinimumWidth = 6
-        Me.approvedBy.Name = "approvedBy"
-        Me.approvedBy.Width = 125
+        Me.maintenancemanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.maintenancemanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.maintenancemanagementsearchbar.Location = New System.Drawing.Point(554, 61)
+        Me.maintenancemanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.maintenancemanagementsearchbar.Name = "maintenancemanagementsearchbar"
+        Me.maintenancemanagementsearchbar.Size = New System.Drawing.Size(340, 42)
+        Me.maintenancemanagementsearchbar.TabIndex = 172
         '
         'UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.maintenancemanagementsearchbar)
         Me.Controls.Add(Me.btnAssign)
         Me.Controls.Add(Me.printPAR)
         Me.Controls.Add(Me.issuePropertyCard)
@@ -395,6 +420,7 @@ Partial Class UC_PropertyRequestManagement
         Me.Name = "UC_PropertyRequestManagement"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -433,4 +459,6 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents dateOfReques As DataGridViewTextBoxColumn
     Friend WithEvents quantityRequested As DataGridViewTextBoxColumn
     Friend WithEvents approvedBy As DataGridViewTextBoxColumn
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents maintenancemanagementsearchbar As TextBox
 End Class

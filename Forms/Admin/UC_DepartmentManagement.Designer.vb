@@ -30,12 +30,6 @@ Partial Class UC_DepartmentManagement
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.admin_deptmanagement = New System.Windows.Forms.DataGridView()
-        Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
-        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.headOfDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,14 +41,23 @@ Partial Class UC_DepartmentManagement
         Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.departmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
+        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.departmentmanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_DepartmentManagement
         '
         Me.admin_label_DepartmentManagement.AutoSize = True
         Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(49, 54)
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(49, 43)
         Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
         Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(475, 58)
         Me.admin_label_DepartmentManagement.TabIndex = 37
@@ -74,6 +77,83 @@ Partial Class UC_DepartmentManagement
         Me.admin_deptmanagement.RowHeadersWidth = 51
         Me.admin_deptmanagement.Size = New System.Drawing.Size(1270, 573)
         Me.admin_deptmanagement.TabIndex = 147
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "Department Id"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'headOfDepartment
+        '
+        Me.headOfDepartment.HeaderText = "head Of Department"
+        Me.headOfDepartment.MinimumWidth = 6
+        Me.headOfDepartment.Name = "headOfDepartment"
+        Me.headOfDepartment.Width = 125
+        '
+        'contactNumber
+        '
+        Me.contactNumber.HeaderText = "contact Number"
+        Me.contactNumber.MinimumWidth = 6
+        Me.contactNumber.Name = "contactNumber"
+        Me.contactNumber.Width = 125
+        '
+        'floorNumber
+        '
+        Me.floorNumber.HeaderText = "floor Number"
+        Me.floorNumber.MinimumWidth = 6
+        Me.floorNumber.Name = "floorNumber"
+        Me.floorNumber.Width = 125
+        '
+        'shortName
+        '
+        Me.shortName.HeaderText = "short Name"
+        Me.shortName.MinimumWidth = 6
+        Me.shortName.Name = "shortName"
+        Me.shortName.Width = 125
+        '
+        'officeCode
+        '
+        Me.officeCode.HeaderText = "office Code"
+        Me.officeCode.MinimumWidth = 6
+        Me.officeCode.Name = "officeCode"
+        Me.officeCode.Width = 125
+        '
+        'totalProperties
+        '
+        Me.totalProperties.HeaderText = "total Properties"
+        Me.totalProperties.MinimumWidth = 6
+        Me.totalProperties.Name = "totalProperties"
+        Me.totalProperties.Width = 125
+        '
+        'totalSupplies
+        '
+        Me.totalSupplies.HeaderText = "total Supplies"
+        Me.totalSupplies.MinimumWidth = 6
+        Me.totalSupplies.Name = "totalSupplies"
+        Me.totalSupplies.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
+        '
+        'departmentName
+        '
+        Me.departmentName.HeaderText = "Department Name"
+        Me.departmentName.MinimumWidth = 6
+        Me.departmentName.Name = "departmentName"
+        Me.departmentName.Width = 125
         '
         'ttldepartmentmanagement
         '
@@ -157,88 +237,33 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete.Text = "Edit"
         Me.btnDelete.UseVisualStyleBackColor = False
         '
-        'departmentId
+        'PictureBox2
         '
-        Me.departmentId.HeaderText = "Department Id"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(537, 51)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 159
+        Me.PictureBox2.TabStop = False
         '
-        'headOfDepartment
+        'departmentmanagementsearchbar
         '
-        Me.headOfDepartment.HeaderText = "head Of Department"
-        Me.headOfDepartment.MinimumWidth = 6
-        Me.headOfDepartment.Name = "headOfDepartment"
-        Me.headOfDepartment.Width = 125
-        '
-        'contactNumber
-        '
-        Me.contactNumber.HeaderText = "contact Number"
-        Me.contactNumber.MinimumWidth = 6
-        Me.contactNumber.Name = "contactNumber"
-        Me.contactNumber.Width = 125
-        '
-        'floorNumber
-        '
-        Me.floorNumber.HeaderText = "floor Number"
-        Me.floorNumber.MinimumWidth = 6
-        Me.floorNumber.Name = "floorNumber"
-        Me.floorNumber.Width = 125
-        '
-        'shortName
-        '
-        Me.shortName.HeaderText = "short Name"
-        Me.shortName.MinimumWidth = 6
-        Me.shortName.Name = "shortName"
-        Me.shortName.Width = 125
-        '
-        'officeCode
-        '
-        Me.officeCode.HeaderText = "office Code"
-        Me.officeCode.MinimumWidth = 6
-        Me.officeCode.Name = "officeCode"
-        Me.officeCode.Width = 125
-        '
-        'totalProperties
-        '
-        Me.totalProperties.HeaderText = "total Properties"
-        Me.totalProperties.MinimumWidth = 6
-        Me.totalProperties.Name = "totalProperties"
-        Me.totalProperties.Width = 125
-        '
-        'totalSupplies
-        '
-        Me.totalSupplies.HeaderText = "total Supplies"
-        Me.totalSupplies.MinimumWidth = 6
-        Me.totalSupplies.Name = "totalSupplies"
-        Me.totalSupplies.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
-        '
-        'departmentName
-        '
-        Me.departmentName.HeaderText = "Department Name"
-        Me.departmentName.MinimumWidth = 6
-        Me.departmentName.Name = "departmentName"
-        Me.departmentName.Width = 125
+        Me.departmentmanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.departmentmanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.departmentmanagementsearchbar.Location = New System.Drawing.Point(602, 51)
+        Me.departmentmanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.departmentmanagementsearchbar.Name = "departmentmanagementsearchbar"
+        Me.departmentmanagementsearchbar.Size = New System.Drawing.Size(367, 42)
+        Me.departmentmanagementsearchbar.TabIndex = 158
         '
         'UC_DepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.departmentmanagementsearchbar)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.pm_cbobx_status)
@@ -250,6 +275,7 @@ Partial Class UC_DepartmentManagement
         Me.Name = "UC_DepartmentManagement"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -274,4 +300,6 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents createdAt As DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As DataGridViewTextBoxColumn
     Friend WithEvents departmentName As DataGridViewTextBoxColumn
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents departmentmanagementsearchbar As TextBox
 End Class

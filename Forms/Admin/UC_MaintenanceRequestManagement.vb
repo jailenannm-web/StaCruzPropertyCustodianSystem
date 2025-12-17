@@ -48,7 +48,7 @@ Public Class UC_MaintenanceRequestManagement
         End If
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles Delete.Click
         Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
         If Not isSuperAdmin Then
 
@@ -137,9 +137,20 @@ Public Class UC_MaintenanceRequestManagement
         Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
         If btnApprove IsNot Nothing Then btnApprove.Enabled = hasFullAccess
         If btnReject IsNot Nothing Then btnReject.Enabled = hasFullAccess
-        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = hasFullAccess
+
+        ' prm_btn_update control may not exist in the designer for this UC; lookup safely by name
+        Try
+            Dim found() As Control = Me.Controls.Find("prm_btn_update", True)
+            If found IsNot Nothing AndAlso found.Length > 0 Then
+                Dim btn As Button = TryCast(found(0), Button)
+                If btn IsNot Nothing Then btn.Enabled = hasFullAccess
+                End If
+        Catch
+            ' ignore errors
+        End Try
+
         If btnAdd IsNot Nothing Then btnAdd.Enabled = hasFullAccess
-        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess
+        If Delete IsNot Nothing Then Delete.Enabled = hasFullAccess
     End Sub
 
 
@@ -260,11 +271,15 @@ Public Class UC_MaintenanceRequestManagement
         End Try
     End Sub
 
-    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs) Handles prm_btn_update.Click
+    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs)
         ' No restrictions for Super Admin, Admin, and Custodian
 
         LoadMaintenanceRequestData()
         MessageBox.Show("Maintenance request list refreshed.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    Private Sub admin_label_DepartmentManagement_Click(sender As Object, e As EventArgs) Handles admin_label_DepartmentManagement.Click
+
     End Sub
 End Class
 

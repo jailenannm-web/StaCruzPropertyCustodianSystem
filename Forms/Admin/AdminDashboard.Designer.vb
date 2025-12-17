@@ -460,12 +460,12 @@ Partial Class AdminDashboard
         'comboFilter
         '
         Me.comboFilter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.comboFilter.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.comboFilter.BackColor = System.Drawing.Color.White
         Me.comboFilter.Cursor = System.Windows.Forms.Cursors.Default
         Me.comboFilter.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.comboFilter.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.comboFilter.FormattingEnabled = True
-        Me.comboFilter.Location = New System.Drawing.Point(1220, 105)
+        Me.comboFilter.Location = New System.Drawing.Point(1165, 105)
         Me.comboFilter.Margin = New System.Windows.Forms.Padding(5)
         Me.comboFilter.Name = "comboFilter"
         Me.comboFilter.Size = New System.Drawing.Size(229, 31)

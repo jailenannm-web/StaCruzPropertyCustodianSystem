@@ -112,50 +112,74 @@ Public Class UC_PropertyRequestManagement
         If btnApprove IsNot Nothing Then btnApprove.Enabled = hasFullAccess
         If btnReject IsNot Nothing Then btnReject.Enabled = hasFullAccess
         If assign IsNot Nothing Then assign.Enabled = hasFullAccess
-        If prm_btn_update IsNot Nothing Then prm_btn_update.Enabled = hasFullAccess
+
+        ' prm_btn_update control may not exist in the designer for this UC; lookup safely by name and wire handler
+        Try
+            Dim found() As Control = Me.Controls.Find("prm_btn_update", True)
+            If found IsNot Nothing AndAlso found.Length > 0 Then
+                Dim btn As Button = TryCast(found(0), Button)
+                If btn IsNot Nothing Then
+                    btn.Enabled = hasFullAccess
+                    ' ensure click handler is wired
+                    RemoveHandler btn.Click, AddressOf prm_btn_update_Click
+                    AddHandler btn.Click, AddressOf prm_btn_update_Click
+                End If
+            End If
+        Catch
+            ' ignore errors
+        End Try
 
     End Sub
 
     Private Sub LoadRequestData()
         Try
             Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
-            
+
             If dt Is Nothing Then
                 MessageBox.Show("Unable to load property requests. Please check your database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
-            
+
+            ' Prevent auto-generated duplicate columns and bind to the existing designer columns
+            prm_table1.AutoGenerateColumns = False
+            prm_table1.DataSource = Nothing
+
+            ' Map designer columns to data properties (camelCase from DB)
+            For Each col As DataGridViewColumn In prm_table1.Columns
+                Select Case col.Name.ToLower()
+                    Case "requestid"
+                        col.DataPropertyName = "requestId"
+                        col.Visible = False
+                    Case "requestername"
+                        col.DataPropertyName = "requesterName"
+                        col.HeaderText = "Name of Requester"
+                    Case "departmentid"
+                        col.DataPropertyName = "department"
+                        col.HeaderText = "Department"
+                    Case "dateofrequest", "dateofreques"
+                        col.DataPropertyName = "dateOfRequest"
+                        col.HeaderText = "Date of Request"
+                    Case "itemname"
+                        col.DataPropertyName = "itemName"
+                        col.HeaderText = "Item Name"
+                    Case "quantityrequested"
+                        col.DataPropertyName = "quantityRequested"
+                        col.HeaderText = "Quantity Requested"
+                    Case "purpose"
+                        col.DataPropertyName = "purpose"
+                        col.HeaderText = "Purpose"
+                    Case "status"
+                        col.DataPropertyName = "status"
+                        col.HeaderText = "Status"
+                End Select
+            Next
+
             prm_table1.DataSource = dt
             prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
             prm_table1.ReadOnly = True
             prm_table1.AllowUserToAddRows = False
             prm_table1.AllowUserToDeleteRows = False
             prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-
-            ' Set friendly column headers - must set on DataGridView columns after DataSource is set
-            ' Wait for columns to be created
-            Application.DoEvents()
-            
-            For Each col As DataGridViewColumn In prm_table1.Columns
-                Select Case col.Name.ToLower()
-                    Case "requestername"
-                        col.HeaderText = "Name of Requester"
-                    Case "department"
-                        col.HeaderText = "Department"
-                    Case "dateofrequest"
-                        col.HeaderText = "Date of Request"
-                    Case "itemname"
-                        col.HeaderText = "Item Name"
-                    Case "quantityrequested"
-                        col.HeaderText = "Quantity Requested"
-                    Case "purpose"
-                        col.HeaderText = "Purpose"
-                    Case "status"
-                        col.HeaderText = "Status"
-                    Case "requestid"
-                        col.Visible = False ' Hide requestId column
-                End Select
-            Next
 
             ' Update total count
             Dim totalLabel As Label = Nothing
@@ -226,7 +250,13 @@ Public Class UC_PropertyRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim requestIDValue As Object = If(dt.Columns.Contains("request_id"), dataRow("request_id"), Nothing)
+            ' Accept both camelCase and snake_case
+            Dim requestIDValue As Object = Nothing
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
             Dim requestIDStr As String = If(requestIDValue IsNot Nothing AndAlso Not IsDBNull(requestIDValue), requestIDValue.ToString(), "")
             If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
                 MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -321,7 +351,8 @@ Public Class UC_PropertyRequestManagement
         End Try
     End Sub
 
-    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs) Handles prm_btn_update.Click
+    ' Changed to NOT use Handles to avoid compile error when control not present in designer
+    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs)
         Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
         If Not isSuperAdmin Then
 

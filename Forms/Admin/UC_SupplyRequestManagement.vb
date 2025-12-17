@@ -32,37 +32,50 @@ Public Class UC_SupplyRequestManagement
             End If
             
             If prm_table1 IsNot Nothing Then
+                ' Prevent auto-generated duplicate columns
+                prm_table1.AutoGenerateColumns = False
+                prm_table1.DataSource = Nothing
+
+                ' Map designer columns to data properties (camelCase from DB)
+                For Each col As DataGridViewColumn In prm_table1.Columns
+                    Select Case col.Name.ToLower()
+                        Case "requestid", "request_id"
+                            col.DataPropertyName = "requestId"
+                            col.Visible = False
+                        Case "requestername", "requester_name"
+                            col.DataPropertyName = "requesterName"
+                            col.HeaderText = "Name of Requester"
+                        Case "departmentid", "department"
+                            col.DataPropertyName = "department"
+                            col.HeaderText = "Department"
+                        Case "dateofrequest", "date_of_request"
+                            col.DataPropertyName = "dateOfRequest"
+                            col.HeaderText = "Date of Request"
+                        Case "itemname", "item_name"
+                            col.DataPropertyName = "itemName"
+                            col.HeaderText = "Item Name"
+                        Case "quantityrequested", "quantity_requested"
+                            col.DataPropertyName = "quantityRequested"
+                            col.HeaderText = "Quantity Requested"
+                        Case "purpose"
+                            col.DataPropertyName = "purpose"
+                            col.HeaderText = "Purpose"
+                        Case "status"
+                            col.DataPropertyName = "status"
+                            col.HeaderText = "Status"
+                        Case "createdat", "created_at"
+                            col.DataPropertyName = "createdAt"
+                        Case "updatedat", "updated_at"
+                            col.DataPropertyName = "updatedAt"
+                    End Select
+                Next
+
                 prm_table1.DataSource = dt
                 prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
                 prm_table1.ReadOnly = True
                 prm_table1.AllowUserToAddRows = False
                 prm_table1.AllowUserToDeleteRows = False
                 prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-
-                ' Set friendly column headers - must set on DataGridView columns after DataSource is set
-                ' Wait for columns to be created
-                Application.DoEvents()
-                
-                For Each col As DataGridViewColumn In prm_table1.Columns
-                    Select Case col.Name.ToLower()
-                        Case "requester_name"
-                            col.HeaderText = "Name of Requester"
-                        Case "department"
-                            col.HeaderText = "Department"
-                        Case "date_of_request"
-                            col.HeaderText = "Date of Request"
-                        Case "item_name"
-                            col.HeaderText = "Item Name"
-                        Case "quantity_requested"
-                            col.HeaderText = "Quantity Requested"
-                        Case "purpose"
-                            col.HeaderText = "Purpose"
-                        Case "status"
-                            col.HeaderText = "Status"
-                        Case "request_id"
-                            col.Visible = False ' Hide request_id column
-                    End Select
-                Next
 
                 ' Update total count
                 Dim totalLabel As Label = Nothing
@@ -106,7 +119,13 @@ Public Class UC_SupplyRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim requestIDValue As Object = If(dt.Columns.Contains("request_id"), dataRow("request_id"), Nothing)
+            ' Try both camelCase and snake_case column names
+            Dim requestIDValue As Object = Nothing
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
             Dim requestIDStr As String = If(requestIDValue IsNot Nothing AndAlso Not IsDBNull(requestIDValue), requestIDValue.ToString(), "")
             If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
                 MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -157,7 +176,13 @@ Public Class UC_SupplyRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim requestIDValue As Object = If(dt.Columns.Contains("request_id"), dataRow("request_id"), Nothing)
+            ' Try both camelCase and snake_case column names
+            Dim requestIDValue As Object = Nothing
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
             Dim requestIDStr As String = If(requestIDValue IsNot Nothing AndAlso Not IsDBNull(requestIDValue), requestIDValue.ToString(), "")
             If String.IsNullOrEmpty(requestIDStr) OrElse Not Integer.TryParse(requestIDStr, Nothing) Then
                 MessageBox.Show("Invalid request selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -31,44 +31,94 @@ Public Class AddProperty
         If category.Items.Count > 0 Then category.SelectedIndex = 0
 
         condition.Items.Clear()
-        condition.Items.AddRange(New Object() {"good", "needs repair", "damaged"})
+        condition.Items.AddRange(New Object() {"New", "Good", "Fair", "Damaged", "For Repair"})
         If condition.Items.Count > 0 Then condition.SelectedIndex = 0
 
         LoadDepartments()
         LoadCustodians()
+        LoadSuppliers()
 
         acquisitionDate.Value = Date.Today
         warrantyExpirationDate.Value = Date.Today.AddYears(1)
     End Sub
 
-    Private Sub LoadDepartments()
+    Private Sub LoadSuppliers()
         Try
-            departmentDirectory = DatabaseConnection.GetDepartmentLookup(True)
-            departmentId.DataSource = departmentDirectory
-            departmentId.DisplayMember = "departmentName"
-            departmentId.ValueMember = "departmentId"
-            departmentId.SelectedIndex = If(departmentDirectory.Rows.Count > 0, 0, -1)
+            Dim suppliersTable As DataTable = DatabaseConnection.GetSuppliers()
+            If suppliersTable IsNot Nothing AndAlso suppliersTable.Rows.Count > 0 Then
+                ' Find supplier control - it might be a ComboBox or TextBox
+                Dim supplierControl As Control = Me.Controls.Find("supplier", True).FirstOrDefault()
+                If supplierControl IsNot Nothing AndAlso TypeOf supplierControl Is ComboBox Then
+                    Dim supplierCombo As ComboBox = CType(supplierControl, ComboBox)
+                    supplierCombo.DataSource = suppliersTable
+                    supplierCombo.DisplayMember = "supplier_name"
+                    supplierCombo.ValueMember = "supplier_name"
+                    supplierCombo.SelectedIndex = -1
+                End If
+            End If
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] AddProperty.LoadDepartments Exception: " & ex.Message)
+            System.Diagnostics.Debug.WriteLine("[v0] AddProperty.LoadSuppliers Exception: " & ex.Message)
         End Try
     End Sub
 
-    Private Sub LoadCustodians()
+    Private Sub LoadDepartments()
         Try
-            custodianDirectory = DatabaseConnection.GetActiveUsersForAssignment(New String() {"Admin", "Custodian", "Staff"})
-            If custodianDirectory Is Nothing Then Return
+            departmentDirectory = DatabaseConnection.GetDepartmentLookup(True)
+            If departmentDirectory IsNot Nothing AndAlso departmentDirectory.Rows.Count > 0 Then
+                departmentId.DataSource = departmentDirectory
+                departmentId.DisplayMember = "department_name"
+                departmentId.ValueMember = "department_id"
+                departmentId.SelectedIndex = 0
+            Else
+                departmentId.Items.Clear()
+                departmentId.Items.Add("No Departments Available")
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] AddProperty.LoadDepartments Exception: " & ex.Message)
+            MessageBox.Show("Failed to load departments: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
+    End Sub
 
-            Dim suggestions As New AutoCompleteStringCollection()
-            For Each row As DataRow In custodianDirectory.Rows
-                suggestions.Add($"{row("userId")} - {row("fullName")}")
-            Next
+    ' Replace LoadCustodians with this safer implementation
+    Private Sub LoadCustodians(Optional departmentID As Integer? = Nothing)
+        Try
+            Dim usersTable As DataTable = Nothing
+            If departmentID.HasValue Then
+                usersTable = DatabaseConnection.GetUsersByDepartment(departmentID.Value)
+            Else
+                usersTable = DatabaseConnection.GetActiveUsersForAssignment(New String() {"Admin", "Custodian", "Staff"})
+            End If
 
-            assignedTo.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            assignedTo.AutoCompleteSource = AutoCompleteSource.CustomSource
-            assignedTo.AutoCompleteCustomSource = suggestions
+            ' Always clear any existing DataSource before modifying Items
+            If assignedTo.DataSource IsNot Nothing Then
+                assignedTo.DataSource = Nothing
+            End If
+
+            If usersTable Is Nothing OrElse usersTable.Rows.Count = 0 Then
+                assignedTo.Items.Clear()
+                assignedTo.Items.Add("No users available")
+                custodianDirectory = Nothing
+                Return
+            End If
+
+            ' Keep local copy for ResolveCustodianId
+            custodianDirectory = usersTable.Copy()
+
+            assignedTo.DisplayMember = "fullName"
+            assignedTo.ValueMember = "userId"
+            assignedTo.DataSource = usersTable
+            assignedTo.SelectedIndex = -1
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] AddProperty.LoadCustodians Exception: " & ex.Message)
+            If assignedTo.DataSource IsNot Nothing Then assignedTo.DataSource = Nothing
+            assignedTo.Items.Clear()
+            assignedTo.Items.Add("Error loading users")
         End Try
+    End Sub
+    Private Sub departmentId_SelectedIndexChanged(sender As Object, e As EventArgs) Handles departmentId.SelectedIndexChanged
+        ' Reload users when department changes
+        Dim deptID As Integer? = ResolveDepartmentId()
+        LoadCustodians(deptID)
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -114,7 +164,7 @@ Public Class AddProperty
                 acquisitionCostValue,                                   ' acquisitionCost
                 "",                                                      ' supplierName (not in current schema)
                 "",                                                      ' supplierContact (not in current schema)
-                GetComboValue(condition, "good"),                       ' conditionStatus
+                GetComboValue(condition, "New"),                       ' conditionStatus
                 If(ResolveDepartmentId().HasValue, "Department Location", "Main Building"), ' location (default since no input field)
                 custodianId,                                             ' custodianID
                 departmentId,                                            ' departmentID
@@ -187,20 +237,33 @@ Public Class AddProperty
             If departmentDirectory Is Nothing OrElse departmentDirectory.Rows.Count = 0 Then Return Nothing
 
             Dim value = departmentId.SelectedValue
-            If value IsNot Nothing AndAlso Not TypeOf value Is DataRowView Then
-                Dim parsed As Integer
-                If Integer.TryParse(value.ToString(), parsed) Then
-                    Return parsed
+            If value IsNot Nothing Then
+                ' Handle DataRowView
+                If TypeOf value Is DataRowView Then
+                    Dim drv As DataRowView = CType(value, DataRowView)
+                    If drv.Row.Table.Columns.Contains("department_id") AndAlso Not drv.Row.IsNull("department_id") Then
+                        Dim parsed As Integer
+                        If Integer.TryParse(drv.Row("department_id").ToString(), parsed) Then
+                            Return parsed
+                        End If
+                    End If
+                Else
+                    ' Handle direct integer value
+                    Dim parsed As Integer
+                    If Integer.TryParse(value.ToString(), parsed) Then
+                        Return parsed
+                    End If
                 End If
             End If
 
+            ' Fallback to text matching
             Dim textValue As String = departmentId.Text?.Trim()
             If String.IsNullOrWhiteSpace(textValue) Then Return Nothing
 
             Dim match = departmentDirectory.AsEnumerable().
-                FirstOrDefault(Function(r) String.Equals(r("departmentName").ToString(), textValue, StringComparison.OrdinalIgnoreCase))
+                FirstOrDefault(Function(r) String.Equals(r("department_name").ToString(), textValue, StringComparison.OrdinalIgnoreCase))
             If match IsNot Nothing Then
-                Return Convert.ToInt32(match("departmentId"))
+                Return Convert.ToInt32(match("department_id"))
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] ResolveDepartmentId Exception: " & ex.Message)

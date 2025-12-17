@@ -28,26 +28,26 @@ Partial Class MaintenanceRequestForm
         Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.categoryCmbo = New System.Windows.Forms.ComboBox()
-        Me.conditionStatusCmbo = New System.Windows.Forms.ComboBox()
-        Me.serialNumberTxt = New System.Windows.Forms.TextBox()
-        Me.propertyNameTxt = New System.Windows.Forms.TextBox()
+        Me.department = New System.Windows.Forms.ComboBox()
+        Me.location = New System.Windows.Forms.ComboBox()
+        Me.conditionBefore = New System.Windows.Forms.ComboBox()
+        Me.serialNumber = New System.Windows.Forms.TextBox()
         Me.SAAddM_ServiceType = New System.Windows.Forms.Label()
         Me.SAAddM_ServiceDate = New System.Windows.Forms.Label()
         Me.SAAddM_CustodianID = New System.Windows.Forms.Label()
-        Me.SAAddM_PropertyID = New System.Windows.Forms.Label()
-        Me.SAAddM_MainID = New System.Windows.Forms.Label()
+        Me.serialnumberlbs = New System.Windows.Forms.Label()
+        Me.propertylbs = New System.Windows.Forms.Label()
         Me.SAAddM_ServiceProvided = New System.Windows.Forms.Label()
         Me.SAAddM_Providercontact = New System.Windows.Forms.Label()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.user = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.typesOfIssue = New System.Windows.Forms.ComboBox()
         Me.SAAddM_Description = New System.Windows.Forms.Label()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.targetDate = New System.Windows.Forms.DateTimePicker()
+        Me.problemDescription = New System.Windows.Forms.TextBox()
+        Me.itemName = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.RoundedPanel2.SuspendLayout()
@@ -124,84 +124,72 @@ Partial Class MaintenanceRequestForm
         Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.Controls.Add(Me.ComboBox3)
-        Me.Panel1.Controls.Add(Me.categoryCmbo)
-        Me.Panel1.Controls.Add(Me.conditionStatusCmbo)
-        Me.Panel1.Controls.Add(Me.serialNumberTxt)
-        Me.Panel1.Controls.Add(Me.propertyNameTxt)
+        Me.Panel1.Controls.Add(Me.itemName)
+        Me.Panel1.Controls.Add(Me.department)
+        Me.Panel1.Controls.Add(Me.location)
+        Me.Panel1.Controls.Add(Me.conditionBefore)
+        Me.Panel1.Controls.Add(Me.serialNumber)
         Me.Panel1.Controls.Add(Me.SAAddM_ServiceType)
         Me.Panel1.Controls.Add(Me.SAAddM_ServiceDate)
         Me.Panel1.Controls.Add(Me.SAAddM_CustodianID)
-        Me.Panel1.Controls.Add(Me.SAAddM_PropertyID)
-        Me.Panel1.Controls.Add(Me.SAAddM_MainID)
+        Me.Panel1.Controls.Add(Me.serialnumberlbs)
+        Me.Panel1.Controls.Add(Me.propertylbs)
         Me.Panel1.Location = New System.Drawing.Point(45, 18)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(572, 336)
         Me.Panel1.TabIndex = 64
         '
-        'ComboBox3
+        'department
         '
-        Me.ComboBox3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.department.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ComboBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(255, 197)
-        Me.ComboBox3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(273, 26)
-        Me.ComboBox3.TabIndex = 72
+        Me.department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.department.FormattingEnabled = True
+        Me.department.Location = New System.Drawing.Point(255, 197)
+        Me.department.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.department.Name = "department"
+        Me.department.Size = New System.Drawing.Size(273, 26)
+        Me.department.TabIndex = 72
         '
-        'categoryCmbo
+        'location
         '
-        Me.categoryCmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.location.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.categoryCmbo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.categoryCmbo.FormattingEnabled = True
-        Me.categoryCmbo.Location = New System.Drawing.Point(255, 144)
-        Me.categoryCmbo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.categoryCmbo.Name = "categoryCmbo"
-        Me.categoryCmbo.Size = New System.Drawing.Size(273, 26)
-        Me.categoryCmbo.TabIndex = 71
+        Me.location.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.location.FormattingEnabled = True
+        Me.location.Location = New System.Drawing.Point(255, 144)
+        Me.location.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.location.Name = "location"
+        Me.location.Size = New System.Drawing.Size(273, 26)
+        Me.location.TabIndex = 71
         '
-        'conditionStatusCmbo
+        'conditionBefore
         '
-        Me.conditionStatusCmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.conditionBefore.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.conditionStatusCmbo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.conditionStatusCmbo.FormattingEnabled = True
-        Me.conditionStatusCmbo.Location = New System.Drawing.Point(279, 249)
-        Me.conditionStatusCmbo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.conditionStatusCmbo.Name = "conditionStatusCmbo"
-        Me.conditionStatusCmbo.Size = New System.Drawing.Size(251, 26)
-        Me.conditionStatusCmbo.TabIndex = 70
+        Me.conditionBefore.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.conditionBefore.FormattingEnabled = True
+        Me.conditionBefore.Location = New System.Drawing.Point(279, 249)
+        Me.conditionBefore.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.conditionBefore.Name = "conditionBefore"
+        Me.conditionBefore.Size = New System.Drawing.Size(251, 26)
+        Me.conditionBefore.TabIndex = 70
         '
-        'serialNumberTxt
+        'serialNumber
         '
-        Me.serialNumberTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.serialNumber.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.serialNumberTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.serialNumberTxt.Location = New System.Drawing.Point(255, 95)
-        Me.serialNumberTxt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.serialNumberTxt.Name = "serialNumberTxt"
-        Me.serialNumberTxt.Size = New System.Drawing.Size(273, 24)
-        Me.serialNumberTxt.TabIndex = 66
-        '
-        'propertyNameTxt
-        '
-        Me.propertyNameTxt.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.propertyNameTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertyNameTxt.Location = New System.Drawing.Point(256, 44)
-        Me.propertyNameTxt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.propertyNameTxt.Name = "propertyNameTxt"
-        Me.propertyNameTxt.Size = New System.Drawing.Size(273, 24)
-        Me.propertyNameTxt.TabIndex = 64
+        Me.serialNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.serialNumber.Location = New System.Drawing.Point(255, 95)
+        Me.serialNumber.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.serialNumber.Name = "serialNumber"
+        Me.serialNumber.Size = New System.Drawing.Size(273, 24)
+        Me.serialNumber.TabIndex = 66
         '
         'SAAddM_ServiceType
         '
@@ -242,31 +230,31 @@ Partial Class MaintenanceRequestForm
         Me.SAAddM_CustodianID.TabIndex = 60
         Me.SAAddM_CustodianID.Text = "Location"
         '
-        'SAAddM_PropertyID
+        'serialnumberlbs
         '
-        Me.SAAddM_PropertyID.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.serialnumberlbs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SAAddM_PropertyID.AutoSize = True
-        Me.SAAddM_PropertyID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SAAddM_PropertyID.Location = New System.Drawing.Point(43, 98)
-        Me.SAAddM_PropertyID.Name = "SAAddM_PropertyID"
-        Me.SAAddM_PropertyID.Size = New System.Drawing.Size(102, 18)
-        Me.SAAddM_PropertyID.TabIndex = 59
-        Me.SAAddM_PropertyID.Text = "Serial Number"
+        Me.serialnumberlbs.AutoSize = True
+        Me.serialnumberlbs.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.serialnumberlbs.Location = New System.Drawing.Point(43, 98)
+        Me.serialnumberlbs.Name = "serialnumberlbs"
+        Me.serialnumberlbs.Size = New System.Drawing.Size(102, 18)
+        Me.serialnumberlbs.TabIndex = 59
+        Me.serialnumberlbs.Text = "Serial Number"
         '
-        'SAAddM_MainID
+        'propertylbs
         '
-        Me.SAAddM_MainID.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.propertylbs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SAAddM_MainID.AutoSize = True
-        Me.SAAddM_MainID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SAAddM_MainID.Location = New System.Drawing.Point(43, 47)
-        Me.SAAddM_MainID.Name = "SAAddM_MainID"
-        Me.SAAddM_MainID.Size = New System.Drawing.Size(148, 18)
-        Me.SAAddM_MainID.TabIndex = 58
-        Me.SAAddM_MainID.Text = "Property / Item Name"
+        Me.propertylbs.AutoSize = True
+        Me.propertylbs.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.propertylbs.Location = New System.Drawing.Point(43, 47)
+        Me.propertylbs.Name = "propertylbs"
+        Me.propertylbs.Size = New System.Drawing.Size(148, 18)
+        Me.propertylbs.TabIndex = 58
+        Me.propertylbs.Text = "Property / Item Name"
         '
         'SAAddM_ServiceProvided
         '
@@ -313,12 +301,12 @@ Partial Class MaintenanceRequestForm
         Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel2.Controls.Add(Me.TextBox2)
+        Me.Panel2.Controls.Add(Me.user)
         Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Controls.Add(Me.ComboBox4)
+        Me.Panel2.Controls.Add(Me.typesOfIssue)
         Me.Panel2.Controls.Add(Me.SAAddM_Description)
-        Me.Panel2.Controls.Add(Me.DateTimePicker1)
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.targetDate)
+        Me.Panel2.Controls.Add(Me.problemDescription)
         Me.Panel2.Controls.Add(Me.SAAddM_ServiceProvided)
         Me.Panel2.Controls.Add(Me.SAAddM_Providercontact)
         Me.Panel2.Location = New System.Drawing.Point(685, 18)
@@ -327,17 +315,17 @@ Partial Class MaintenanceRequestForm
         Me.Panel2.Size = New System.Drawing.Size(525, 336)
         Me.Panel2.TabIndex = 65
         '
-        'TextBox2
+        'user
         '
-        Me.TextBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.user.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(265, 194)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(227, 24)
-        Me.TextBox2.TabIndex = 77
+        Me.user.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.user.Location = New System.Drawing.Point(265, 194)
+        Me.user.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.user.Name = "user"
+        Me.user.Size = New System.Drawing.Size(227, 24)
+        Me.user.TabIndex = 77
         '
         'Label1
         '
@@ -352,18 +340,18 @@ Partial Class MaintenanceRequestForm
         Me.Label1.TabIndex = 76
         Me.Label1.Text = "Requested By"
         '
-        'ComboBox4
+        'typesOfIssue
         '
-        Me.ComboBox4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.typesOfIssue.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ComboBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(265, 39)
-        Me.ComboBox4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(227, 26)
-        Me.ComboBox4.TabIndex = 75
+        Me.typesOfIssue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.typesOfIssue.FormattingEnabled = True
+        Me.typesOfIssue.Location = New System.Drawing.Point(265, 39)
+        Me.typesOfIssue.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.typesOfIssue.Name = "typesOfIssue"
+        Me.typesOfIssue.Size = New System.Drawing.Size(227, 26)
+        Me.typesOfIssue.TabIndex = 75
         '
         'SAAddM_Description
         '
@@ -378,29 +366,41 @@ Partial Class MaintenanceRequestForm
         Me.SAAddM_Description.TabIndex = 74
         Me.SAAddM_Description.Text = "Type of Issue"
         '
-        'DateTimePicker1
+        'targetDate
         '
-        Me.DateTimePicker1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.targetDate.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Location = New System.Drawing.Point(265, 146)
-        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(227, 24)
-        Me.DateTimePicker1.TabIndex = 75
+        Me.targetDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.targetDate.Location = New System.Drawing.Point(265, 146)
+        Me.targetDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.targetDate.Name = "targetDate"
+        Me.targetDate.Size = New System.Drawing.Size(227, 24)
+        Me.targetDate.TabIndex = 75
         '
-        'TextBox1
+        'problemDescription
         '
-        Me.TextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.problemDescription.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(265, 92)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(227, 24)
-        Me.TextBox1.TabIndex = 68
+        Me.problemDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.problemDescription.Location = New System.Drawing.Point(265, 92)
+        Me.problemDescription.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.problemDescription.Name = "problemDescription"
+        Me.problemDescription.Size = New System.Drawing.Size(227, 24)
+        Me.problemDescription.TabIndex = 68
+        '
+        'itemName
+        '
+        Me.itemName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.itemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.itemName.FormattingEnabled = True
+        Me.itemName.Location = New System.Drawing.Point(257, 44)
+        Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.itemName.Name = "itemName"
+        Me.itemName.Size = New System.Drawing.Size(273, 26)
+        Me.itemName.TabIndex = 73
         '
         'MaintenanceRequestForm
         '
@@ -431,24 +431,24 @@ Partial Class MaintenanceRequestForm
     Friend WithEvents btnCancel As Resources.Controls.RoundedButton
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
-    Friend WithEvents categoryCmbo As System.Windows.Forms.ComboBox
-    Friend WithEvents conditionStatusCmbo As System.Windows.Forms.ComboBox
-    Friend WithEvents serialNumberTxt As System.Windows.Forms.TextBox
-    Friend WithEvents propertyNameTxt As System.Windows.Forms.TextBox
+    Friend WithEvents department As System.Windows.Forms.ComboBox
+    Friend WithEvents location As System.Windows.Forms.ComboBox
+    Friend WithEvents conditionBefore As System.Windows.Forms.ComboBox
+    Friend WithEvents serialNumber As System.Windows.Forms.TextBox
     Friend WithEvents SAAddM_ServiceType As System.Windows.Forms.Label
     Friend WithEvents SAAddM_ServiceDate As System.Windows.Forms.Label
     Friend WithEvents SAAddM_CustodianID As System.Windows.Forms.Label
-    Friend WithEvents SAAddM_PropertyID As System.Windows.Forms.Label
-    Friend WithEvents SAAddM_MainID As System.Windows.Forms.Label
+    Friend WithEvents serialnumberlbs As System.Windows.Forms.Label
+    Friend WithEvents propertylbs As System.Windows.Forms.Label
     Friend WithEvents SAAddM_ServiceProvided As System.Windows.Forms.Label
     Friend WithEvents SAAddM_Providercontact As System.Windows.Forms.Label
     Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox4 As System.Windows.Forms.ComboBox
+    Friend WithEvents typesOfIssue As System.Windows.Forms.ComboBox
     Friend WithEvents SAAddM_Description As System.Windows.Forms.Label
-    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents targetDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents problemDescription As System.Windows.Forms.TextBox
+    Friend WithEvents user As System.Windows.Forms.TextBox
+    Friend WithEvents itemName As System.Windows.Forms.ComboBox
 End Class
