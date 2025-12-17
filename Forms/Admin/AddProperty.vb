@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Linq
 Imports System.Windows.Forms
@@ -31,7 +31,8 @@ Public Class AddProperty
         If category.Items.Count > 0 Then category.SelectedIndex = 0
 
         condition.Items.Clear()
-        condition.Items.AddRange(New Object() {"New", "Good", "Fair", "Damaged", "For Repair"})
+        ' Match database ENUM values: 'Good', 'Needs Repair', 'Damaged'
+        condition.Items.AddRange(New Object() {"Good", "Needs Repair", "Damaged"})
         If condition.Items.Count > 0 Then condition.SelectedIndex = 0
 
         LoadDepartments()
@@ -164,7 +165,7 @@ Public Class AddProperty
                 acquisitionCostValue,                                   ' acquisitionCost
                 "",                                                      ' supplierName (not in current schema)
                 "",                                                      ' supplierContact (not in current schema)
-                GetComboValue(condition, "New"),                       ' conditionStatus
+                GetComboValue(condition, "Good"),                       ' conditionStatus
                 If(ResolveDepartmentId().HasValue, "Department Location", "Main Building"), ' location (default since no input field)
                 custodianId,                                             ' custodianID
                 departmentId,                                            ' departmentID

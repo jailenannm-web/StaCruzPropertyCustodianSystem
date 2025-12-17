@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
@@ -31,7 +31,8 @@ Public Class EditPropertyManagement
         End If
 
         If conditionStatusCmbo.Items.Count = 0 Then
-            conditionStatusCmbo.Items.AddRange(New Object() {"New", "Good", "Fair", "Damaged", "For Repair"})
+            ' Match database ENUM values: 'Good', 'Needs Repair', 'Damaged'
+            conditionStatusCmbo.Items.AddRange(New Object() {"Good", "Needs Repair", "Damaged"})
         End If
 
         ' Load departments

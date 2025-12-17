@@ -107,53 +107,63 @@ Public Class UC_UserManagement
 
             ' Use GetAllUsers to get both Admin/SuperAdmin (from users table) and Staff (from staff_accounts table)
             Dim records As DataTable = DatabaseConnection.GetAllUsers(currentStatusFilter, currentRoleFilter, "")
-            
+
             ' Store original data for search
-            If records IsNot Nothing Then
+            If records IsNot Nothing AndAlso records.Rows.Count > 0 Then
                 originalUserData = records.Copy()
+            Else
+                originalUserData = Nothing
+                ' Show message only if filters are active (not on initial load)
+                If Not String.IsNullOrEmpty(currentStatusFilter) OrElse Not String.IsNullOrEmpty(currentRoleFilter) Then
+                    ' Filters are active but no results - this is expected
+                End If
             End If
 
             For Each record As DataRow In records.Rows
-
                 ' ===== BUILD FULL NAME FROM 4 COLUMNS =====
                 Dim firstName As String = SafeValue(record, "firstName")
                 Dim middleName As String = SafeValue(record, "middleName")
                 Dim lastName As String = SafeValue(record, "lastName")
                 Dim suffix As String = SafeValue(record, "suffix")
+                Dim fullName As String = $"{firstName} {If(String.IsNullOrWhiteSpace(middleName), "", middleName & " ")}{lastName}{If(String.IsNullOrWhiteSpace(suffix), "", " " & suffix)}".Trim()
+
+                ' Format dates
+                Dim createdAtValue As String = ""
+                If record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt") Then
+                    createdAtValue = FormatDateValue(record("createdAt"))
+                End If
+
+                Dim updatedAtValue As String = ""
+                If record.Table.Columns.Contains("updatedAt") AndAlso Not record.IsNull("updatedAt") Then
+                    updatedAtValue = FormatDateValue(record("updatedAt"))
+                ElseIf record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt") Then
+                    updatedAtValue = FormatDateValue(record("createdAt"))
+                End If
+
+                Dim lastLoginValue As String = ""
+                If record.Table.Columns.Contains("lastLogin") AndAlso Not record.IsNull("lastLogin") Then
+                    lastLoginValue = FormatDateValue(record("lastLogin"))
+                End If
 
                 ' ===== ADD ROW TO DATAGRIDVIEW IN CORRECT COLUMN ORDER =====
-                ' Column order: UserID, date_assigned, firstName, middleName, lastName, suffixAdmin, positionAdmin, 
-                '                DepartmentID, EmployeeID, contactNumber, email, usernameAdmin, passwordAdmin, 
-                '                provinceAdmin, municipality, barangay, Role, Status
+                ' Column order from Designer: userId, createdAt, updatedAt, firstName, middleName, lastName, 
+                '                            fullName, departmentId, employeeId, contactNumber, passwordEncrypted, lastLogin
                 Dim rowIndex As Integer = pm_table.Rows.Add(
-                    SafeValue(record, "userId"),                    ' UserID
-                    FormatDateValue(                                 ' dateAssigned
-                        If(record.Table.Columns.Contains("dateAssigned") AndAlso Not record.IsNull("dateAssigned"),
-                           record("dateAssigned"),
-                           If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"),
-                              record("createdAt"),
-                              DBNull.Value))
-                    ),
+                    SafeValue(record, "userId"),                    ' userId
+                    createdAtValue,                                  ' createdAt
+                    updatedAtValue,                                  ' updatedAt
                     firstName,                                       ' firstName
                     middleName,                                      ' middleName
                     lastName,                                        ' lastName
-                    suffix,                                          ' suffixAdmin
-                    SafeValue(record, "position"),                   ' positionAdmin (using position from DB)
-                    SafeValue(record, "departmentId"),              ' DepartmentID
-                    SafeValue(record, "employeeId"),               ' EmployeeID
-                    SafeValue(record, "contactNumber"),             ' contactNumber
-                    SafeValue(record, "email"),                     ' email
-                    SafeValue(record, "username"),                   ' usernameAdmin
-                    "******",                                        ' passwordAdmin (hidden)
-                    SafeValue(record, "province_city"),             ' provinceAdmin
-                    SafeValue(record, "municipality"),               ' municipality
-                    SafeValue(record, "barangay"),                   ' barangay
-                    SafeValue(record, "user_type"),                  ' Role
-                    SafeValue(record, "status")                      ' Status
+                    fullName,                                        ' fullName
+                    SafeValue(record, "departmentId"),              ' departmentId
+                    SafeValue(record, "employeeId"),                ' employeeId
+                    SafeValue(record, "contactNumber"),            ' contactNumber
+                    "******",                                        ' passwordEncrypted (hidden)
+                    lastLoginValue                                   ' lastLogin
                 )
 
                 Dim dateAssignedValue As Object = DBNull.Value
-
                 If record.Table.Columns.Contains("dateAssigned") AndAlso Not record.IsNull("dateAssigned") Then
                     dateAssignedValue = record("dateAssigned")
                 ElseIf record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt") Then
@@ -162,7 +172,7 @@ Public Class UC_UserManagement
 
                 pm_table.Rows(rowIndex).Tag = New UserRowMetadata With {
                     .Username = SafeValue(record, "username"),
-                    .EmployeeID = SafeValue(record, "employee_id"),
+                    .EmployeeID = SafeValue(record, "employeeId"),
                     .DateAssigned = dateAssignedValue,
                     .CreatedAt = If(
                         record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"),
@@ -170,7 +180,6 @@ Public Class UC_UserManagement
                         DBNull.Value
                     )
                 }
-
             Next
 
 
@@ -181,10 +190,14 @@ Public Class UC_UserManagement
                 totalLabel = TryCast(foundControls(0), Label)
             End If
             If totalLabel IsNot Nothing Then
-                totalLabel.Text = records.Rows.Count.ToString()
+                totalLabel.Text = If(records IsNot Nothing, records.Rows.Count.ToString(), "0")
             End If
 
+            ' Debug output
+            System.Diagnostics.Debug.WriteLine("[v0] User Management - Loaded " & If(records IsNot Nothing, records.Rows.Count, 0) & " users")
+
         Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] RefreshUserTable Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show("Unable to load user accounts: " & ex.Message,
                         "User Management", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -239,25 +252,41 @@ Public Class UC_UserManagement
             Date.TryParse(metadata.DateAssigned.ToString(), dateAssignedValue)
         End If
 
+        ' Get user data from database using userId
+        Dim userIdStr As String = If(selectedRow.Cells("userId").Value IsNot Nothing, selectedRow.Cells("userId").Value.ToString(), "")
+        Dim userId As Integer
+        If Not Integer.TryParse(userIdStr, userId) Then
+            MessageBox.Show("Invalid user ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Get full user data from database
+        Dim userData As DataRow = DatabaseConnection.GetUserById(userId)
+        If userData Is Nothing Then
+            MessageBox.Show("User data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Load user data into edit form
         editForm.LoadUserData(
-        selectedRow.Cells("userID").Value.ToString(),
-        selectedRow.Cells("firstName").Value.ToString(),
-        selectedRow.Cells("middleName").Value.ToString(),
-        selectedRow.Cells("lastName").Value.ToString(),
-        selectedRow.Cells("suffixAdmin").Value.ToString(),
-        selectedRow.Cells("positionAdmin").Value.ToString(),
-        selectedRow.Cells("departmentID").Value.ToString(),
-        metadata.EmployeeID,
-        selectedRow.Cells("contactNumber").Value.ToString(),
-        selectedRow.Cells("email").Value.ToString(),
-        selectedRow.Cells("usernameAdmin").Value.ToString(),  ' userRole
-        selectedRow.Cells("provinceAdmin").Value.ToString(),
-        selectedRow.Cells("municipality").Value.ToString(),
-        selectedRow.Cells("barangay").Value.ToString(),
-        "",
-        dateAssignedValue,
-        metadata.Username
-    )
+            userIdStr,
+            SafeValue(userData, "firstName"),
+            SafeValue(userData, "middleName"),
+            SafeValue(userData, "lastName"),
+            SafeValue(userData, "suffix"),
+            SafeValue(userData, "position"),
+            SafeValue(userData, "departmentId"),
+            SafeValue(userData, "employeeId"),
+            SafeValue(userData, "contactNumber"),
+            SafeValue(userData, "email"),
+            SafeValue(userData, "username"),
+            SafeValue(userData, "province"),
+            SafeValue(userData, "municipal"),
+            SafeValue(userData, "barangay"),
+            "",
+            dateAssignedValue,
+            SafeValue(userData, "username")
+        )
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
@@ -381,7 +410,7 @@ Public Class UC_UserManagement
 
         Try
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
-            
+
             If String.IsNullOrEmpty(searchLower) Then
                 RefreshUserTable()
                 isSearchingUsers = False
@@ -390,16 +419,16 @@ Public Class UC_UserManagement
 
             ' Filter original data
             Dim filtered = originalUserData.AsEnumerable().Where(Function(row)
-                Dim firstName As String = If(row.Table.Columns.Contains("firstName") AndAlso Not IsDBNull(row("firstName")), row("firstName").ToString().ToLower(), String.Empty)
-                Dim middleName As String = If(row.Table.Columns.Contains("middleName") AndAlso Not IsDBNull(row("middleName")), row("middleName").ToString().ToLower(), String.Empty)
-                Dim lastName As String = If(row.Table.Columns.Contains("lastName") AndAlso Not IsDBNull(row("lastName")), row("lastName").ToString().ToLower(), String.Empty)
-                Dim username As String = If(row.Table.Columns.Contains("username") AndAlso Not IsDBNull(row("username")), row("username").ToString().ToLower(), String.Empty)
-                Dim email As String = If(row.Table.Columns.Contains("email") AndAlso Not IsDBNull(row("email")), row("email").ToString().ToLower(), String.Empty)
-                Dim employeeId As String = If(row.Table.Columns.Contains("employeeId") AndAlso Not IsDBNull(row("employeeId")), row("employeeId").ToString().ToLower(), String.Empty)
-                Dim position As String = If(row.Table.Columns.Contains("position") AndAlso Not IsDBNull(row("position")), row("position").ToString().ToLower(), String.Empty)
-                
-                Return firstName.Contains(searchLower) OrElse middleName.Contains(searchLower) OrElse lastName.Contains(searchLower) OrElse username.Contains(searchLower) OrElse email.Contains(searchLower) OrElse employeeId.Contains(searchLower) OrElse position.Contains(searchLower)
-            End Function)
+                                                                     Dim firstName As String = If(row.Table.Columns.Contains("firstName") AndAlso Not IsDBNull(row("firstName")), row("firstName").ToString().ToLower(), String.Empty)
+                                                                     Dim middleName As String = If(row.Table.Columns.Contains("middleName") AndAlso Not IsDBNull(row("middleName")), row("middleName").ToString().ToLower(), String.Empty)
+                                                                     Dim lastName As String = If(row.Table.Columns.Contains("lastName") AndAlso Not IsDBNull(row("lastName")), row("lastName").ToString().ToLower(), String.Empty)
+                                                                     Dim username As String = If(row.Table.Columns.Contains("username") AndAlso Not IsDBNull(row("username")), row("username").ToString().ToLower(), String.Empty)
+                                                                     Dim email As String = If(row.Table.Columns.Contains("email") AndAlso Not IsDBNull(row("email")), row("email").ToString().ToLower(), String.Empty)
+                                                                     Dim employeeId As String = If(row.Table.Columns.Contains("employeeId") AndAlso Not IsDBNull(row("employeeId")), row("employeeId").ToString().ToLower(), String.Empty)
+                                                                     Dim position As String = If(row.Table.Columns.Contains("position") AndAlso Not IsDBNull(row("position")), row("position").ToString().ToLower(), String.Empty)
+
+                                                                     Return firstName.Contains(searchLower) OrElse middleName.Contains(searchLower) OrElse lastName.Contains(searchLower) OrElse username.Contains(searchLower) OrElse email.Contains(searchLower) OrElse employeeId.Contains(searchLower) OrElse position.Contains(searchLower)
+                                                                 End Function)
 
             ' Clear and repopulate grid
             pm_table.Rows.Clear()
@@ -408,26 +437,38 @@ Public Class UC_UserManagement
                 Dim middleName As String = SafeValue(record, "middleName")
                 Dim lastName As String = SafeValue(record, "lastName")
                 Dim suffix As String = SafeValue(record, "suffix")
+                Dim fullName As String = $"{firstName} {If(String.IsNullOrWhiteSpace(middleName), "", middleName & " ")}{lastName}{If(String.IsNullOrWhiteSpace(suffix), "", " " & suffix)}".Trim()
+
+                Dim createdAtValue As String = ""
+                If record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt") Then
+                    createdAtValue = FormatDateValue(record("createdAt"))
+                End If
+
+                Dim updatedAtValue As String = ""
+                If record.Table.Columns.Contains("updatedAt") AndAlso Not record.IsNull("updatedAt") Then
+                    updatedAtValue = FormatDateValue(record("updatedAt"))
+                ElseIf record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt") Then
+                    updatedAtValue = FormatDateValue(record("createdAt"))
+                End If
+
+                Dim lastLoginValue As String = ""
+                If record.Table.Columns.Contains("lastLogin") AndAlso Not record.IsNull("lastLogin") Then
+                    lastLoginValue = FormatDateValue(record("lastLogin"))
+                End If
 
                 Dim rowIndex As Integer = pm_table.Rows.Add(
                     SafeValue(record, "userId"),
-                    FormatDateValue(If(record.Table.Columns.Contains("dateAssigned") AndAlso Not record.IsNull("dateAssigned"), record("dateAssigned"), If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"), record("createdAt"), DBNull.Value))),
+                    createdAtValue,
+                    updatedAtValue,
                     firstName,
                     middleName,
                     lastName,
-                    suffix,
-                    SafeValue(record, "position"),
+                    fullName,
                     SafeValue(record, "departmentId"),
                     SafeValue(record, "employeeId"),
                     SafeValue(record, "contactNumber"),
-                    SafeValue(record, "email"),
-                    SafeValue(record, "username"),
                     "******",
-                    SafeValue(record, "province_city"),
-                    SafeValue(record, "municipality"),
-                    SafeValue(record, "barangay"),
-                    SafeValue(record, "user_type"),
-                    SafeValue(record, "status")
+                    lastLoginValue
                 )
 
                 Dim dateAssignedValue As Object = DBNull.Value
@@ -439,7 +480,7 @@ Public Class UC_UserManagement
 
                 pm_table.Rows(rowIndex).Tag = New UserRowMetadata With {
                     .Username = SafeValue(record, "username"),
-                    .EmployeeID = SafeValue(record, "employee_id"),
+                    .EmployeeID = SafeValue(record, "employeeId"),
                     .DateAssigned = dateAssignedValue,
                     .CreatedAt = If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"), record("createdAt"), DBNull.Value)
                 }

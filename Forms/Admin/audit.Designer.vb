@@ -24,20 +24,20 @@ Partial Class audit
     Private Sub InitializeComponent()
         Me.dtFrom = New System.Windows.Forms.DateTimePicker()
         Me.dtTo = New System.Windows.Forms.DateTimePicker()
-        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.cmbLogType = New System.Windows.Forms.ComboBox()
-        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.userAgent = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ipAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.recordId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.tableName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.action = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.userId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.logId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.userId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.action = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tableName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.recordId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ipAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.userAgent = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -55,22 +55,6 @@ Partial Class audit
         Me.dtTo.Size = New System.Drawing.Size(231, 22)
         Me.dtTo.TabIndex = 200
         '
-        'btnCancel
-        '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnCancel.CornerRadius = 15
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(1089, 756)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
-        Me.btnCancel.TabIndex = 198
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = False
-        '
         'cmbLogType
         '
         Me.cmbLogType.FormattingEnabled = True
@@ -78,22 +62,6 @@ Partial Class audit
         Me.cmbLogType.Name = "cmbLogType"
         Me.cmbLogType.Size = New System.Drawing.Size(121, 24)
         Me.cmbLogType.TabIndex = 201
-        '
-        'btnSave
-        '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnSave.CornerRadius = 15
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSave.Location = New System.Drawing.Point(1242, 756)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(145, 34)
-        Me.btnSave.TabIndex = 197
-        Me.btnSave.Text = "Export Logs"
-        Me.btnSave.UseVisualStyleBackColor = False
         '
         'admin_label_DepartmentManagement
         '
@@ -113,76 +81,109 @@ Partial Class audit
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1256, 417)
+        Me.DataGridView1.Size = New System.Drawing.Size(1402, 689)
         Me.DataGridView1.TabIndex = 196
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'userAgent
-        '
-        Me.userAgent.HeaderText = "userAgent"
-        Me.userAgent.MinimumWidth = 6
-        Me.userAgent.Name = "userAgent"
-        Me.userAgent.Width = 125
-        '
-        'ipAddress
-        '
-        Me.ipAddress.HeaderText = "ipAddress"
-        Me.ipAddress.MinimumWidth = 6
-        Me.ipAddress.Name = "ipAddress"
-        Me.ipAddress.Width = 125
-        '
-        'description
-        '
-        Me.description.HeaderText = "description"
-        Me.description.MinimumWidth = 6
-        Me.description.Name = "description"
-        Me.description.Width = 125
-        '
-        'recordId
-        '
-        Me.recordId.HeaderText = "recordId"
-        Me.recordId.MinimumWidth = 6
-        Me.recordId.Name = "recordId"
-        Me.recordId.Width = 125
-        '
-        'tableName
-        '
-        Me.tableName.HeaderText = "tableName"
-        Me.tableName.MinimumWidth = 6
-        Me.tableName.Name = "tableName"
-        Me.tableName.Width = 125
-        '
-        'action
-        '
-        Me.action.HeaderText = "action"
-        Me.action.MinimumWidth = 6
-        Me.action.Name = "action"
-        Me.action.Width = 125
-        '
-        'userId
-        '
-        Me.userId.HeaderText = "userId"
-        Me.userId.MinimumWidth = 6
-        Me.userId.Name = "userId"
-        Me.userId.Width = 125
         '
         'logId
         '
-        Me.logId.HeaderText = "logId"
+        Me.logId.HeaderText = "Log ID"
         Me.logId.MinimumWidth = 6
         Me.logId.Name = "logId"
-        Me.logId.Width = 125
+        Me.logId.Width = 150
+        '
+        'userId
+        '
+        Me.userId.HeaderText = "User ID"
+        Me.userId.MinimumWidth = 6
+        Me.userId.Name = "userId"
+        Me.userId.Width = 150
+        '
+        'action
+        '
+        Me.action.HeaderText = "Action"
+        Me.action.MinimumWidth = 6
+        Me.action.Name = "action"
+        Me.action.Width = 150
+        '
+        'tableName
+        '
+        Me.tableName.HeaderText = "Table Name"
+        Me.tableName.MinimumWidth = 6
+        Me.tableName.Name = "tableName"
+        Me.tableName.Width = 150
+        '
+        'recordId
+        '
+        Me.recordId.HeaderText = "Record ID"
+        Me.recordId.MinimumWidth = 6
+        Me.recordId.Name = "recordId"
+        Me.recordId.Width = 150
+        '
+        'description
+        '
+        Me.description.HeaderText = "Description"
+        Me.description.MinimumWidth = 6
+        Me.description.Name = "description"
+        Me.description.Width = 150
+        '
+        'ipAddress
+        '
+        Me.ipAddress.HeaderText = "IP Address"
+        Me.ipAddress.MinimumWidth = 6
+        Me.ipAddress.Name = "ipAddress"
+        Me.ipAddress.Width = 150
+        '
+        'userAgent
+        '
+        Me.userAgent.HeaderText = "User Agent"
+        Me.userAgent.MinimumWidth = 6
+        Me.userAgent.Name = "userAgent"
+        Me.userAgent.Width = 150
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "Created At"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 150
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnCancel.CornerRadius = 15
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Location = New System.Drawing.Point(1540, 997)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
+        Me.btnCancel.TabIndex = 198
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'btnSave
+        '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
+        Me.btnSave.CornerRadius = 15
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSave.Location = New System.Drawing.Point(1693, 997)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(145, 34)
+        Me.btnSave.TabIndex = 197
+        Me.btnSave.Text = "Export Logs"
+        Me.btnSave.UseVisualStyleBackColor = False
         '
         'audit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.dtFrom)
         Me.Controls.Add(Me.dtTo)
@@ -191,7 +192,7 @@ Partial Class audit
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Name = "audit"
-        Me.Size = New System.Drawing.Size(1501, 898)
+        Me.Size = New System.Drawing.Size(1942, 1102)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
