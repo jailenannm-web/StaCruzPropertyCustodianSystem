@@ -36,6 +36,31 @@ Public Class UC_SupplyManagement
             If pm_cbobx_categ IsNot Nothing Then
                 pm_cbobx_categ.Items.Clear()
                 pm_cbobx_categ.Items.Add("All")
+                
+                ' Load categories from database
+                Try
+                    Dim categories As DataTable = DatabaseConnection.GetCategories("supply")
+                    If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
+                        For Each row As DataRow In categories.Rows
+                            Dim categoryName As String = ""
+                            If row.Table.Columns.Contains("categoryName") AndAlso Not IsDBNull(row("categoryName")) Then
+                                categoryName = row("categoryName").ToString()
+                            ElseIf row.Table.Columns.Contains("category_name") AndAlso Not IsDBNull(row("category_name")) Then
+                                categoryName = row("category_name").ToString()
+                            ElseIf row.Table.Columns.Count > 0 AndAlso Not IsDBNull(row(0)) Then
+                                categoryName = row(0).ToString()
+                            End If
+                            If Not String.IsNullOrEmpty(categoryName) AndAlso Not pm_cbobx_categ.Items.Contains(categoryName) Then
+                                pm_cbobx_categ.Items.Add(categoryName)
+                            End If
+                        Next
+                    End If
+                Catch ex As Exception
+                    System.Diagnostics.Debug.WriteLine("[v0] Error loading categories: " & ex.Message)
+                    ' Fallback to common categories
+                    pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Materials", "Medical Supplies", "IT Supplies"})
+                End Try
+                
                 pm_cbobx_categ.SelectedIndex = 0
                 AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
             End If
@@ -47,12 +72,21 @@ Public Class UC_SupplyManagement
                 pm_cbobx_status.SelectedIndex = 0
                 AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
             End If
-        Catch
-            ' ignore
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] InitializeFilters Error: " & ex.Message)
         End Try
     End Sub
 
     Private Sub UC_SupplyManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Add null check for PictureBox2 to prevent crashes
+        Try
+            If PictureBox2 Is Nothing Then
+                System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - PictureBox2 is Nothing, skipping initialization")
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Error checking PictureBox2: " & ex.Message)
+        End Try
+
         ' General settings
         pm_table.ReadOnly = True
         pm_table.AllowUserToAddRows = False

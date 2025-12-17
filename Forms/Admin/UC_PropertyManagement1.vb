@@ -60,6 +60,18 @@ Public Class UC_PropertyManagement1
 
         ' Wire up event handlers
         AddHandler propertyManagementGrid.SelectionChanged, AddressOf propertyManagementGrid_SelectionChanged
+
+        ' Wire up search textbox if present
+        Dim searchNames As String() = {"pm_search", "propertymanagementsearchbar", "txtSearch", "txtbox_search", "admin_txtbox_search", "searchBox"}
+        For Each nm As String In searchNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                Dim tb As TextBox = CType(found(0), TextBox)
+                RemoveHandler tb.TextChanged, AddressOf PropertySearch_TextChanged
+                AddHandler tb.TextChanged, AddressOf PropertySearch_TextChanged
+                Exit For
+            End If
+        Next
     End Sub
 
     Private Sub InitializeFilters()
@@ -170,6 +182,111 @@ Public Class UC_PropertyManagement1
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
         ' Reload data with filters
         LoadPropertiesData()
+        ' Reapply search if there's search text
+        Dim searchNames As String() = {"pm_search", "propertymanagementsearchbar", "txtSearch", "txtbox_search", "admin_txtbox_search", "searchBox"}
+        For Each nm As String In searchNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                Dim tb As TextBox = CType(found(0), TextBox)
+                If Not String.IsNullOrWhiteSpace(tb.Text) Then
+                    PropertySearch_TextChanged(tb, EventArgs.Empty)
+                End If
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private isSearchingProperties As Boolean = False
+
+    Private Sub PropertySearch_TextChanged(sender As Object, e As EventArgs)
+        Dim tb As TextBox = TryCast(sender, TextBox)
+        If tb Is Nothing Then Return
+        ApplyPropertySearch(tb.Text)
+    End Sub
+
+    Private Sub ApplyPropertySearch(searchText As String)
+        If originalData Is Nothing Then Return
+        If isSearchingProperties Then Return
+        isSearchingProperties = True
+
+        Try
+            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
+            Dim statusFilter As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
+
+            Dim filtered = originalData.AsEnumerable().Where(Function(row)
+                ' Apply status filter
+                If Not String.IsNullOrEmpty(statusFilter) Then
+                    Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
+                    If status <> statusFilter.ToLower() Then Return False
+                End If
+
+                ' Apply search filter
+                If String.IsNullOrEmpty(searchLower) Then Return True
+
+                Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
+                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
+                Dim propNumber As String = If(row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")), row("propertyNumber").ToString().ToLower(), String.Empty)
+                Dim serialNumber As String = If(row.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")), row("serialNumber").ToString().ToLower(), String.Empty)
+                Dim assignedEmp As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString().ToLower(), String.Empty)
+                Dim assignedDept As String = If(row.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")), row("assignedDepartment").ToString().ToLower(), String.Empty)
+                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
+                Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString().ToLower(), String.Empty)
+                Dim internalCodes As String = If(row.Table.Columns.Contains("internalCodes") AndAlso Not IsDBNull(row("internalCodes")), row("internalCodes").ToString().ToLower(), String.Empty)
+
+                Return itemName.Contains(searchLower) OrElse category.Contains(searchLower) OrElse propNumber.Contains(searchLower) OrElse serialNumber.Contains(searchLower) OrElse assignedEmp.Contains(searchLower) OrElse assignedDept.Contains(searchLower) OrElse location.Contains(searchLower) OrElse condition.Contains(searchLower) OrElse internalCodes.Contains(searchLower)
+            End Function)
+
+            propertyManagementGrid.Rows.Clear()
+            For Each row As DataRow In filtered
+                Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString(), "")
+                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), "")
+                Dim propNumber As String = If(row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")), row("propertyNumber").ToString(), "")
+                Dim serialNumber As String = If(row.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")), row("serialNumber").ToString(), "")
+                Dim acqDate As String = ""
+                If row.Table.Columns.Contains("acquisitionDate") AndAlso Not IsDBNull(row("acquisitionDate")) Then
+                    Dim parsedDate As Date
+                    If Date.TryParse(row("acquisitionDate").ToString(), parsedDate) Then
+                        acqDate = parsedDate.ToString("yyyy-MM-dd")
+                    End If
+                End If
+                Dim acqCost As String = "0.00"
+                If row.Table.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(row("acquisitionCost")) Then
+                    Dim cost As Decimal
+                    If Decimal.TryParse(row("acquisitionCost").ToString(), cost) Then
+                        acqCost = Format(cost, "0.00")
+                    End If
+                End If
+                Dim assignedEmp As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString(), "")
+                Dim assignedDept As String = If(row.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")), row("assignedDepartment").ToString(), "")
+                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
+                Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString(), "")
+                Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
+                Dim internalCodes As String = If(row.Table.Columns.Contains("internalCodes") AndAlso Not IsDBNull(row("internalCodes")), row("internalCodes").ToString(), "")
+                Dim createdAt As String = ""
+                If row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")) Then
+                    createdAt = Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd HH:mm")
+                End If
+                Dim updatedAt As String = ""
+                If row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")) Then
+                    updatedAt = Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd HH:mm")
+                End If
+                Dim propID As Object = If(row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")), row("propertyId"), Nothing)
+
+                Dim rowIndex As Integer = propertyManagementGrid.Rows.Add(
+                    itemName, category, propNumber, serialNumber, acqDate, acqCost,
+                    assignedEmp, assignedDept, location, condition, status, internalCodes, createdAt, updatedAt
+                )
+                propertyManagementGrid.Rows(rowIndex).Tag = propID
+            Next
+
+            If ttlpropertymanagement IsNot Nothing Then
+                ttlpropertymanagement.Text = filtered.Count().ToString()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error searching properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            isSearchingProperties = False
+        End Try
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click

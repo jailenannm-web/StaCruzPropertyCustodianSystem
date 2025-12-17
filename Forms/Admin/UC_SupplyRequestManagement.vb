@@ -86,6 +86,9 @@ Public Class UC_SupplyRequestManagement
                     End Select
                 Next
 
+                ' Bind data source AFTER column mapping
+                prm_table1.DataSource = dt
+
                 ' Update total count
                 Dim totalLabel As Label = Nothing
                 Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)

@@ -187,8 +187,72 @@ Public Class UC_DepartmentManagement
         End If
     End Sub
 
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs)
-        ' Your edit logic remains here (unchanged)
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If admin_deptmanagement.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a department to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim selectedRow As DataGridViewRow = admin_deptmanagement.SelectedRows(0)
+        If selectedRow.Cells.Count < 11 Then
+            MessageBox.Show("Invalid department selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim deptIDValue As Object = selectedRow.Cells(0).Value ' departmentId is first column
+        If deptIDValue Is Nothing Then
+            MessageBox.Show("Invalid department selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim departmentID As Integer
+        If Not Integer.TryParse(deptIDValue.ToString(), departmentID) Then
+            MessageBox.Show("Invalid department ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Get department data from database - use GetAllDepartments and filter
+        Dim allDepts As DataTable = DatabaseConnection.GetAllDepartments()
+        Dim deptData As DataRow = Nothing
+        If allDepts IsNot Nothing Then
+            Dim rows() As DataRow = allDepts.Select("departmentId = " & departmentID)
+            If rows.Length > 0 Then
+                deptData = rows(0)
+            End If
+        End If
+
+        If deptData Is Nothing Then
+            MessageBox.Show("Department not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Open EditDepartment Form - check if form exists, otherwise create a simple edit dialog
+        Try
+            Dim editFormType As Type = Type.GetType("StaCruzPropertyCustodianSystem.EditDepartment")
+            If editFormType IsNot Nothing Then
+                Dim editForm As Object = Activator.CreateInstance(editFormType)
+                Dim loadMethod = editFormType.GetMethod("LoadDepartmentData")
+                If loadMethod IsNot Nothing Then
+                    loadMethod.Invoke(editForm, New Object() {departmentID, deptData})
+                    Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+                    If parentDashboard IsNot Nothing Then
+                        parentDashboard.LoadUserControl(TryCast(editForm, UserControl))
+                    End If
+                End If
+            Else
+                MessageBox.Show("Edit Department form not available. Please use Add Department to update.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error opening edit form: " & ex.Message & Environment.NewLine & "Please use Add Department form to update department information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+        ' Navigate to Admin Dashboard
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(editForm)
+        Else
+            MessageBox.Show("Unable to open EditDepartment screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
