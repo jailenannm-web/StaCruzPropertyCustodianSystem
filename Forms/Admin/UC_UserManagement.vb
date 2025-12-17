@@ -1,6 +1,8 @@
 Imports System
 Imports System.Data
 Imports System.Windows.Forms
+Imports Microsoft.VisualBasic
+Imports System.Linq
 
 Public Class UC_UserManagement
     Inherits UserControl

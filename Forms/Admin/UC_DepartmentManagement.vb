@@ -57,6 +57,18 @@ Public Class UC_DepartmentManagement
 
         ' Wire up event handlers
         AddHandler admin_deptmanagement.SelectionChanged, AddressOf admin_deptmanagement_SelectionChanged
+
+        ' Wire up btnEdit handler dynamically if control exists (avoids WithEvents requirement)
+        Try
+            Dim foundEdit() As Control = Me.Controls.Find("btnEdit", True)
+            If foundEdit IsNot Nothing AndAlso foundEdit.Length > 0 Then
+                Dim ctrl As Control = foundEdit(0)
+                RemoveHandler ctrl.Click, AddressOf btnEdit_Click
+                AddHandler ctrl.Click, AddressOf btnEdit_Click
+            End If
+        Catch
+            ' Ignore if control not found or cannot attach
+        End Try
     End Sub
 
     Private Sub InitializeFilters()
@@ -187,7 +199,7 @@ Public Class UC_DepartmentManagement
         End If
     End Sub
 
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs)
         If admin_deptmanagement.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a department to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -226,18 +238,22 @@ Public Class UC_DepartmentManagement
             Return
         End If
 
+        ' Prepare editForm variable in outer scope
+        Dim editForm As UserControl = Nothing
+
         ' Open EditDepartment Form - check if form exists, otherwise create a simple edit dialog
         Try
             Dim editFormType As Type = Type.GetType("StaCruzPropertyCustodianSystem.EditDepartment")
             If editFormType IsNot Nothing Then
-                Dim editForm As Object = Activator.CreateInstance(editFormType)
+                Dim instance = Activator.CreateInstance(editFormType)
                 Dim loadMethod = editFormType.GetMethod("LoadDepartmentData")
                 If loadMethod IsNot Nothing Then
-                    loadMethod.Invoke(editForm, New Object() {departmentID, deptData})
-                    Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-                    If parentDashboard IsNot Nothing Then
-                        parentDashboard.LoadUserControl(TryCast(editForm, UserControl))
-                    End If
+                    loadMethod.Invoke(instance, New Object() {departmentID, deptData})
+                End If
+                editForm = TryCast(instance, UserControl)
+                If editForm Is Nothing Then
+                    ' If the created instance is not a UserControl, show information
+                    MessageBox.Show("Edit Department form is not a UserControl. Please use Add Department to update.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
             Else
                 MessageBox.Show("Edit Department form not available. Please use Add Department to update.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -246,12 +262,14 @@ Public Class UC_DepartmentManagement
             MessageBox.Show("Error opening edit form: " & ex.Message & Environment.NewLine & "Please use Add Department form to update department information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
-        ' Navigate to Admin Dashboard
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-        If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(editForm)
-        Else
-            MessageBox.Show("Unable to open EditDepartment screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        ' Navigate to Admin Dashboard if we have a valid editForm
+        If editForm IsNot Nothing Then
+            Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+            If parentDashboard IsNot Nothing Then
+                parentDashboard.LoadUserControl(editForm)
+            Else
+                MessageBox.Show("Unable to open EditDepartment screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         End If
     End Sub
 
