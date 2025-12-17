@@ -107,10 +107,23 @@ Public Class UC_SupplyManagement
         Next
     End Sub
 
-    Private Sub SupplySearch_TextChanged(sender As Object, e As EventArgs)
-        Dim tb As TextBox = TryCast(sender, TextBox)
-        If tb Is Nothing Then Return
-        ApplySupplySearch(tb.Text)
+
+    Private Sub InitializeFilters()
+        ' Populate category filter
+        pm_cbobx_categ.Items.Clear()
+        pm_cbobx_categ.Items.Add("All Categories")
+        pm_cbobx_categ.Items.AddRange(New String() {"Stationery", "Electronics", "Furniture", "Equipment", "Other"})
+        pm_cbobx_categ.SelectedIndex = 0
+
+        ' Populate status filter
+        pm_cbobx_status.Items.Clear()
+        pm_cbobx_status.Items.Add("All Status")
+        pm_cbobx_status.Items.AddRange(New String() {"Available", "Low Stock", "Out of Stock"})
+        pm_cbobx_status.SelectedIndex = 0
+
+        ' Wire up filter change events
+        AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
+        AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
     End Sub
 
     ' Added method to load supplies from database

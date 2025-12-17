@@ -86,22 +86,15 @@ Public Class UC_SupplyRequestManagement
                     End Select
                 Next
 
-                prm_table1.DataSource = dt
-                prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-                prm_table1.ReadOnly = True
-                prm_table1.AllowUserToAddRows = False
-                prm_table1.AllowUserToDeleteRows = False
-                prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            End If
-
-            ' Update total count
-            Dim totalLabel As Label = Nothing
-            Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
-            If foundControls.Length > 0 Then
-                totalLabel = TryCast(foundControls(0), Label)
-            End If
-            If totalLabel IsNot Nothing Then
-                totalLabel.Text = If(dt.Rows.Count > 0, dt.Rows.Count.ToString(), "0")
+                ' Update total count
+                Dim totalLabel As Label = Nothing
+                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
+                If foundControls.Length > 0 Then
+                    totalLabel = TryCast(foundControls(0), Label)
+                End If
+                If totalLabel IsNot Nothing Then
+                    totalLabel.Text = If(dt.Rows.Count > 0, dt.Rows.Count.ToString(), "0")
+                End If
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading supply requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
