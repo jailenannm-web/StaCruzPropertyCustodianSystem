@@ -4,11 +4,14 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Imports MySql.Data.MySqlClient
+Imports System.Linq
 
 Public Class UC_MaintenanceRequestManagement
     Inherits UserControl
 
     Private canModifyRequests As Boolean = False
+    Private originalData As DataTable
+    Private isSearching As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -16,7 +19,137 @@ Public Class UC_MaintenanceRequestManagement
         canModifyRequests = SessionContext.HasPermission(SessionContext.ModulePermission.ModifyMaintenance)
     End Sub
 
-    Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellContentClick
+    Private Sub UC_MaintenanceRequestManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadMaintenanceRequestData()
+        ApplyPermissionState()
+
+        ' Wire search textbox if present
+        Dim searchNames As String() = {"prm_search", "maintenanceRequestSearch", "txtSearch", "txtbox_search", "admin_txtbox_search"}
+        For Each nm As String In searchNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                Dim tb As TextBox = CType(found(0), TextBox)
+                RemoveHandler tb.TextChanged, AddressOf RequestSearch_TextChanged
+                AddHandler tb.TextChanged, AddressOf RequestSearch_TextChanged
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub LoadMaintenanceRequestData()
+        Try
+            Dim dt As DataTable = DatabaseConnection.GetAllMaintenanceRequests()
+
+            If propertyManagementGrid IsNot Nothing Then
+                propertyManagementGrid.AutoGenerateColumns = False
+                propertyManagementGrid.DataSource = Nothing
+            End If
+
+            If dt Is Nothing Then
+                MessageBox.Show("Unable to load maintenance requests. Please check your database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                originalData = Nothing
+                If ttlpropertymanagement IsNot Nothing Then ttlpropertymanagement.Text = "0"
+                Return
+            End If
+            originalData = dt.Copy()
+
+            ' Map designer columns to data properties if grid exists
+            If propertyManagementGrid IsNot Nothing Then
+                For Each col As DataGridViewColumn In propertyManagementGrid.Columns
+                    Select Case col.Name.ToLower()
+                        Case "requestid", "request_id"
+                            col.DataPropertyName = "requestId"
+                            col.Visible = False
+                        Case "requestername", "requester_name"
+                            col.DataPropertyName = "requesterName"
+                            col.HeaderText = "Name of Requester"
+                        Case "departmentid", "department"
+                            col.DataPropertyName = "department"
+                            col.HeaderText = "Department"
+                        Case "dateofrequest", "date_of_request"
+                            col.DataPropertyName = "dateOfRequest"
+                            col.HeaderText = "Date of Request"
+                        Case "itemname", "item_name"
+                            col.DataPropertyName = "itemName"
+                            col.HeaderText = "Item Name"
+                        Case "purpose"
+                            col.DataPropertyName = "purpose"
+                            col.HeaderText = "Purpose"
+                        Case "status"
+                            col.DataPropertyName = "status"
+                            col.HeaderText = "Status"
+                        Case "createdat", "created_at"
+                            col.DataPropertyName = "createdAt"
+                        Case "updatedat", "updated_at"
+                            col.DataPropertyName = "updatedAt"
+                    End Select
+                Next
+
+                propertyManagementGrid.DataSource = dt
+                propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+                propertyManagementGrid.ReadOnly = True
+                propertyManagementGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            End If
+
+            If ttlpropertymanagement IsNot Nothing Then
+                ttlpropertymanagement.Text = If(dt.Rows.Count > 0, dt.Rows.Count.ToString(), "0")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading maintenance requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If ttlpropertymanagement IsNot Nothing Then ttlpropertymanagement.Text = "0"
+        End Try
+    End Sub
+
+    Private Sub RequestSearch_TextChanged(sender As Object, e As EventArgs)
+        Dim tb As TextBox = TryCast(sender, TextBox)
+        If tb Is Nothing Then Return
+        ApplyRequestSearch(tb.Text)
+    End Sub
+
+    Private Sub ApplyRequestSearch(searchText As String)
+        If originalData Is Nothing Then Return
+        If isSearching Then Return
+        isSearching = True
+        Try
+            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
+            If String.IsNullOrEmpty(searchLower) Then
+                If propertyManagementGrid IsNot Nothing Then propertyManagementGrid.DataSource = originalData.Copy()
+                If ttlpropertymanagement IsNot Nothing Then ttlpropertymanagement.Text = originalData.Rows.Count.ToString()
+                isSearching = False
+                Return
+            End If
+
+            Dim filtered = originalData.AsEnumerable().Where(Function(row)
+                                                                 Dim requester As String = If(row.Table.Columns.Contains("requesterName") AndAlso Not IsDBNull(row("requesterName")), row("requesterName").ToString().ToLower(), String.Empty)
+                                                                 Dim dept As String = If(row.Table.Columns.Contains("department") AndAlso Not IsDBNull(row("department")), row("department").ToString().ToLower(), String.Empty)
+                                                                 Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
+                                                                 Dim purpose As String = If(row.Table.Columns.Contains("purpose") AndAlso Not IsDBNull(row("purpose")), row("purpose").ToString().ToLower(), String.Empty)
+                                                                 Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
+                                                                 Return requester.Contains(searchLower) OrElse dept.Contains(searchLower) OrElse itemName.Contains(searchLower) OrElse purpose.Contains(searchLower) OrElse status.Contains(searchLower)
+                                                             End Function)
+
+            Dim filteredList = filtered.ToList()
+            If filteredList Is Nothing OrElse filteredList.Count = 0 Then
+                If propertyManagementGrid IsNot Nothing Then propertyManagementGrid.DataSource = Nothing
+                If ttlpropertymanagement IsNot Nothing Then ttlpropertymanagement.Text = "0"
+            Else
+                Dim dt As DataTable = filteredList.CopyToDataTable()
+                If propertyManagementGrid IsNot Nothing Then propertyManagementGrid.DataSource = dt
+                If ttlpropertymanagement IsNot Nothing Then ttlpropertymanagement.Text = dt.Rows.Count.ToString()
+            End If
+        Catch ex As Exception
+            If TypeOf ex Is InvalidOperationException Then
+                If propertyManagementGrid IsNot Nothing Then propertyManagementGrid.DataSource = Nothing
+                If ttlpropertymanagement IsNot Nothing Then ttlpropertymanagement.Text = "0"
+            Else
+                MessageBox.Show("Error searching maintenance requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Finally
+            isSearching = False
+        End Try
+    End Sub
+
+    Private Sub propertyManagementGrid_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellContentClick
         If e.RowIndex >= 0 AndAlso propertyManagementGrid.Columns.Contains("action_edit") AndAlso
            e.ColumnIndex = propertyManagementGrid.Columns("action_edit").Index Then
 
@@ -36,8 +169,6 @@ Public Class UC_MaintenanceRequestManagement
             ' Me.Parent.Controls.Add(uc) : uc.BringToFront()
         End If
     End Sub
-
-
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         ' No restrictions for Super Admin, Admin, and Custodian
@@ -108,30 +239,6 @@ Public Class UC_MaintenanceRequestManagement
         End If
     End Sub
 
-    Private Sub UC_MaintenanceRequestManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadMaintenanceRequestData()
-        ApplyPermissionState()
-    End Sub
-
-    Private Sub LoadMaintenanceRequestData()
-        Try
-            Dim dt As DataTable = DatabaseConnection.GetAllMaintenanceRequests()
-            propertyManagementGrid.DataSource = dt
-            propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-            propertyManagementGrid.ReadOnly = True
-            propertyManagementGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-
-            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                ttlpropertymanagement.Text = dt.Rows.Count.ToString()
-            Else
-                ttlpropertymanagement.Text = "0"
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Error loading maintenance requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            ttlpropertymanagement.Text = "0"
-        End Try
-    End Sub
-
     Private Sub ApplyPermissionState()
         ' Super Admin, Admin, and Custodian have full access - ALL buttons enabled
         Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
@@ -144,7 +251,7 @@ Public Class UC_MaintenanceRequestManagement
             If found IsNot Nothing AndAlso found.Length > 0 Then
                 Dim btn As Button = TryCast(found(0), Button)
                 If btn IsNot Nothing Then btn.Enabled = hasFullAccess
-                End If
+            End If
         Catch
             ' ignore errors
         End Try

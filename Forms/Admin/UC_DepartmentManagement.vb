@@ -12,6 +12,7 @@ Public Class UC_DepartmentManagement
 
     Private originalData As DataTable
     Private selectedDepartmentID As Integer = -1
+    Private isSearching As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -81,27 +82,27 @@ Public Class UC_DepartmentManagement
             originalData = dt.Copy()
 
             If dt.Rows.Count > 0 Then
-            For Each row As DataRow In dt.Rows
-                ' Use safe column access - Match actual database camelCase column names
-                Dim deptID As String = If(row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")), row("departmentId").ToString(), "")
-                Dim headOfDept As String = If(row.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(row("headOfDepartment")), row("headOfDepartment").ToString(), "")
-                Dim contactNum As String = If(row.Table.Columns.Contains("contactNumber") AndAlso Not IsDBNull(row("contactNumber")), row("contactNumber").ToString(), "")
-                Dim floorNum As String = If(row.Table.Columns.Contains("floorNumber") AndAlso Not IsDBNull(row("floorNumber")), row("floorNumber").ToString(), "")
-                Dim shortName As String = If(row.Table.Columns.Contains("shortName") AndAlso Not IsDBNull(row("shortName")), row("shortName").ToString(), "")
-                Dim officeCode As String = If(row.Table.Columns.Contains("officeCode") AndAlso Not IsDBNull(row("officeCode")), row("officeCode").ToString(), "")
-                Dim totalProps As String = If(row.Table.Columns.Contains("totalProperties") AndAlso Not IsDBNull(row("totalProperties")), row("totalProperties").ToString(), "0")
-                Dim totalSupplies As String = If(row.Table.Columns.Contains("totalSupplies") AndAlso Not IsDBNull(row("totalSupplies")), row("totalSupplies").ToString(), "0")
-                Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
-                Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
-                Dim deptName As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString(), "")
-                
-                ' Add row matching Designer column order: departmentId, headOfDepartment, contactNumber, floorNumber, shortName, officeCode, totalProperties, totalSupplies, createdAt, updatedAt, departmentName
-                admin_deptmanagement.Rows.Add(deptID, headOfDept, contactNum, floorNum, shortName, officeCode, totalProps, totalSupplies, createdAt, updatedAt, deptName)
-            Next
-            ' Update total count
-            If ttldepartmentmanagement IsNot Nothing Then
-                ttldepartmentmanagement.Text = dt.Rows.Count.ToString()
-            End If
+                For Each row As DataRow In dt.Rows
+                    ' Use safe column access - Match actual database camelCase column names
+                    Dim deptID As String = If(row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")), row("departmentId").ToString(), "")
+                    Dim headOfDept As String = If(row.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(row("headOfDepartment")), row("headOfDepartment").ToString(), "")
+                    Dim contactNum As String = If(row.Table.Columns.Contains("contactNumber") AndAlso Not IsDBNull(row("contactNumber")), row("contactNumber").ToString(), "")
+                    Dim floorNum As String = If(row.Table.Columns.Contains("floorNumber") AndAlso Not IsDBNull(row("floorNumber")), row("floorNumber").ToString(), "")
+                    Dim shortName As String = If(row.Table.Columns.Contains("shortName") AndAlso Not IsDBNull(row("shortName")), row("shortName").ToString(), "")
+                    Dim officeCode As String = If(row.Table.Columns.Contains("officeCode") AndAlso Not IsDBNull(row("officeCode")), row("officeCode").ToString(), "")
+                    Dim totalProps As String = If(row.Table.Columns.Contains("totalProperties") AndAlso Not IsDBNull(row("totalProperties")), row("totalProperties").ToString(), "0")
+                    Dim totalSupplies As String = If(row.Table.Columns.Contains("totalSupplies") AndAlso Not IsDBNull(row("totalSupplies")), row("totalSupplies").ToString(), "0")
+                    Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
+                    Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
+                    Dim deptName As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString(), "")
+
+                    ' Add row matching Designer column order: departmentId, headOfDepartment, contactNumber, floorNumber, shortName, officeCode, totalProperties, totalSupplies, createdAt, updatedAt, departmentName
+                    admin_deptmanagement.Rows.Add(deptID, headOfDept, contactNum, floorNum, shortName, officeCode, totalProps, totalSupplies, createdAt, updatedAt, deptName)
+                Next
+                ' Update total count
+                If ttldepartmentmanagement IsNot Nothing Then
+                    ttldepartmentmanagement.Text = dt.Rows.Count.ToString()
+                End If
             End If
 
             ' Apply status filter if selected
@@ -143,7 +144,7 @@ Public Class UC_DepartmentManagement
                 Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
                 Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
                 Dim deptName As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString(), "")
-                
+
                 admin_deptmanagement.Rows.Add(deptID, headOfDept, contactNum, floorNum, shortName, officeCode, totalProps, totalSupplies, createdAt, updatedAt, deptName)
             Next
             ' Update total count
@@ -205,7 +206,7 @@ Public Class UC_DepartmentManagement
 
         Dim deptIDValue As Object = Nothing
         Dim deptNameValue As Object = Nothing
-        
+
         Try
             ' Use column index to avoid column name issues
             deptIDValue = selectedRow.Cells(0).Value  ' departmentId is first column
@@ -214,7 +215,7 @@ Public Class UC_DepartmentManagement
             MessageBox.Show("Error accessing row data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End Try
-        
+
         If deptIDValue Is Nothing Then
             MessageBox.Show("Invalid department selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
@@ -266,7 +267,68 @@ Public Class UC_DepartmentManagement
 
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles departmentmanagementsearchbar.TextChanged
+    ' Apply a combined search + status filter and rebind the DataGrid without duplicating rows
+    Private Sub ApplySearchFilter(searchText As String)
+        If originalData Is Nothing Then Return
+        If isSearching Then Return
+        isSearching = True
 
+        Try
+            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
+            Dim statusFilter As String = "All Status"
+            If pm_cbobx_status.SelectedItem IsNot Nothing Then
+                statusFilter = pm_cbobx_status.SelectedItem.ToString()
+            End If
+
+            Dim filtered = originalData.AsEnumerable().Where(Function(row)
+                                                                 ' If status column exists and a specific status is selected, enforce it
+                                                                 If statusFilter <> "All Status" Then
+                                                                     If Not row.Table.Columns.Contains("status") Then Return False
+                                                                     Dim statusVal As String = If(IsDBNull(row("status")), String.Empty, row("status").ToString().ToLower())
+                                                                     If statusVal <> statusFilter.ToLower() Then Return False
+                                                                 End If
+
+                                                                 ' If no search text provided, include this row (status already checked)
+                                                                 If String.IsNullOrEmpty(searchLower) Then Return True
+
+                                                                 ' Check searchable fields: departmentName, headOfDepartment, officeCode
+                                                                 Dim nameVal As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString().ToLower(), String.Empty)
+                                                                 Dim headVal As String = If(row.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(row("headOfDepartment")), row("headOfDepartment").ToString().ToLower(), String.Empty)
+                                                                 Dim codeVal As String = If(row.Table.Columns.Contains("officeCode") AndAlso Not IsDBNull(row("officeCode")), row("officeCode").ToString().ToLower(), String.Empty)
+
+                                                                 Return nameVal.Contains(searchLower) OrElse headVal.Contains(searchLower) OrElse codeVal.Contains(searchLower)
+                                                             End Function)
+
+            admin_deptmanagement.Rows.Clear()
+
+            For Each row As DataRow In filtered
+                Dim deptID As String = If(row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")), row("departmentId").ToString(), "")
+                Dim headOfDept As String = If(row.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(row("headOfDepartment")), row("headOfDepartment").ToString(), "")
+                Dim contactNum As String = If(row.Table.Columns.Contains("contactNumber") AndAlso Not IsDBNull(row("contactNumber")), row("contactNumber").ToString(), "")
+                Dim floorNum As String = If(row.Table.Columns.Contains("floorNumber") AndAlso Not IsDBNull(row("floorNumber")), row("floorNumber").ToString(), "")
+                Dim shortName As String = If(row.Table.Columns.Contains("shortName") AndAlso Not IsDBNull(row("shortName")), row("shortName").ToString(), "")
+                Dim officeCode As String = If(row.Table.Columns.Contains("officeCode") AndAlso Not IsDBNull(row("officeCode")), row("officeCode").ToString(), "")
+                Dim totalProps As String = If(row.Table.Columns.Contains("totalProperties") AndAlso Not IsDBNull(row("totalProperties")), row("totalProperties").ToString(), "0")
+                Dim totalSupplies As String = If(row.Table.Columns.Contains("totalSupplies") AndAlso Not IsDBNull(row("totalSupplies")), row("totalSupplies").ToString(), "0")
+                Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
+                Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
+                Dim deptName As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString(), "")
+
+                admin_deptmanagement.Rows.Add(deptID, headOfDept, contactNum, floorNum, shortName, officeCode, totalProps, totalSupplies, createdAt, updatedAt, deptName)
+            Next
+
+            If ttldepartmentmanagement IsNot Nothing Then
+                ttldepartmentmanagement.Text = filtered.Count().ToString()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error searching departments: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            isSearching = False
+        End Try
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles departmentmanagementsearchbar.TextChanged
+        ' Real-time search: filter the DataGrid based on entered text and selected status
+        ApplySearchFilter(departmentmanagementsearchbar.Text)
     End Sub
 End Class
