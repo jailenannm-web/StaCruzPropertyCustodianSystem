@@ -174,7 +174,6 @@ Partial Class UC_DepartmentManagement
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.Controls.Add(Me.btnedit)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.departmentmanagementsearchbar)
         Me.Controls.Add(Me.btnAdd)
@@ -217,9 +216,5 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents description As DataGridViewTextBoxColumn
     Friend WithEvents totalProperties As DataGridViewTextBoxColumn
     Friend WithEvents totalSupplies As DataGridViewTextBoxColumn
-    Friend WithEvents createdAt As DataGridViewTextBoxColumn
-    Friend WithEvents updatedAt As DataGridViewTextBoxColumn
-    Friend WithEvents departmentName As DataGridViewTextBoxColumn
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents departmentmanagementsearchbar As TextBox
+    Friend WithEvents status As DataGridViewTextBoxColumn
 End Class

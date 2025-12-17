@@ -7619,7 +7619,7 @@ Public Class DatabaseConnection
                                  "d.createdAt AS createdAt, " &
                                  "d.updatedAt AS updatedAt " &
                                  "FROM departments d " &
-                                 "ORDER BY d.departmentName"
+                                 "ORDER BY d.createdAt DESC, d.departmentName"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.CommandTimeout = 30
