@@ -42,7 +42,7 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.lblPropertyCard = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.governmentname = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
@@ -52,7 +52,7 @@ Partial Class BorrowingAndReturnSlip
         Me.Label4 = New System.Windows.Forms.Label()
         Me.CheckBox4 = New System.Windows.Forms.CheckBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.purpose = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -239,19 +239,19 @@ Partial Class BorrowingAndReturnSlip
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.governmentname)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Location = New System.Drawing.Point(338, 85)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(892, 44)
         Me.Panel2.TabIndex = 367
         '
-        'TextBox1
+        'governmentname
         '
-        Me.TextBox1.Location = New System.Drawing.Point(395, 10)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(293, 22)
-        Me.TextBox1.TabIndex = 55
+        Me.governmentname.Location = New System.Drawing.Point(395, 10)
+        Me.governmentname.Name = "governmentname"
+        Me.governmentname.Size = New System.Drawing.Size(293, 22)
+        Me.governmentname.TabIndex = 55
         '
         'Label1
         '
@@ -277,7 +277,7 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.CheckBox4)
         Me.Panel1.Controls.Add(Me.Label3)
-        Me.Panel1.Controls.Add(Me.TextBox5)
+        Me.Panel1.Controls.Add(Me.purpose)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.CheckBox1)
         Me.Panel1.Location = New System.Drawing.Point(338, 128)
@@ -356,12 +356,12 @@ Partial Class BorrowingAndReturnSlip
         Me.Label3.Text = "Disposal:"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'TextBox5
+        'purpose
         '
-        Me.TextBox5.Location = New System.Drawing.Point(72, 12)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(219, 22)
-        Me.TextBox5.TabIndex = 55
+        Me.purpose.Location = New System.Drawing.Point(72, 12)
+        Me.purpose.Name = "purpose"
+        Me.purpose.Size = New System.Drawing.Size(219, 22)
+        Me.purpose.TabIndex = 55
         '
         'Label2
         '
@@ -947,7 +947,7 @@ Partial Class BorrowingAndReturnSlip
     Friend WithEvents Panel11 As Panel
     Friend WithEvents lblPropertyCard As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents governmentname As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents TextBox4 As TextBox
@@ -957,7 +957,7 @@ Partial Class BorrowingAndReturnSlip
     Friend WithEvents Label4 As Label
     Friend WithEvents CheckBox4 As CheckBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents purpose As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents ReturnStatus As DataGridViewTextBoxColumn

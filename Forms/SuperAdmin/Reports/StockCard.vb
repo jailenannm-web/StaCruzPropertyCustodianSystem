@@ -36,7 +36,7 @@ Public Class StockCard1
 
     End Sub
 
-    Private Sub TextBox2_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox2.TextChanged
+    Private Sub TextBox2_TextChanged(sender As Object, e As System.EventArgs) Handles item.TextChanged
 
     End Sub
 

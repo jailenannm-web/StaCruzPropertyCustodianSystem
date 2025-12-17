@@ -42,8 +42,8 @@ Partial Class StockCard1
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.description = New System.Windows.Forms.TextBox()
+        Me.unitofmeasurement = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
@@ -55,7 +55,7 @@ Partial Class StockCard1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.item = New System.Windows.Forms.TextBox()
         Me.Label30 = New System.Windows.Forms.Label()
         CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -81,7 +81,7 @@ Partial Class StockCard1
         Me.DataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Quantity3, Me.NumberOfDaysConsume})
         Me.DataGridView3.Location = New System.Drawing.Point(1006, 393)
-        Me.DataGridView3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DataGridView3.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView3.Name = "DataGridView3"
         Me.DataGridView3.RowHeadersWidth = 51
         Me.DataGridView3.Size = New System.Drawing.Size(724, 410)
@@ -109,7 +109,7 @@ Partial Class StockCard1
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Quantity2, Me.Office})
         Me.DataGridView2.Location = New System.Drawing.Point(664, 393)
-        Me.DataGridView2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DataGridView2.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.ReadOnly = True
         Me.DataGridView2.RowHeadersWidth = 51
@@ -119,17 +119,23 @@ Partial Class StockCard1
         'Quantity1
         '
         Me.Quantity1.HeaderText = "Quantity"
+        Me.Quantity1.MinimumWidth = 6
         Me.Quantity1.Name = "Quantity1"
+        Me.Quantity1.Width = 125
         '
         'Referencre
         '
         Me.Referencre.HeaderText = "Referencre"
+        Me.Referencre.MinimumWidth = 6
         Me.Referencre.Name = "Referencre"
+        Me.Referencre.Width = 125
         '
         'DateAndTime
         '
         Me.DateAndTime.HeaderText = "Date"
+        Me.DateAndTime.MinimumWidth = 6
         Me.DateAndTime.Name = "DateAndTime"
+        Me.DateAndTime.Width = 125
         '
         'DataGridView1
         '
@@ -140,6 +146,34 @@ Partial Class StockCard1
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.Size = New System.Drawing.Size(459, 410)
         Me.DataGridView1.TabIndex = 80
+        '
+        'TextBox7
+        '
+        Me.TextBox7.Location = New System.Drawing.Point(0, 0)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox7.TabIndex = 0
+        '
+        'Label6
+        '
+        Me.Label6.Location = New System.Drawing.Point(0, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(100, 23)
+        Me.Label6.TabIndex = 1
+        '
+        'TextBox6
+        '
+        Me.TextBox6.Location = New System.Drawing.Point(0, 0)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox6.TabIndex = 2
+        '
+        'Label5
+        '
+        Me.Label5.Location = New System.Drawing.Point(0, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(100, 23)
+        Me.Label5.TabIndex = 3
         '
         'Label1
         '
@@ -152,23 +186,23 @@ Partial Class StockCard1
         Me.Label1.TabIndex = 52
         Me.Label1.Text = "Unit of Mesurement :"
         '
-        'TextBox1
+        'description
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(351, 198)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(593, 35)
-        Me.TextBox1.TabIndex = 53
+        Me.description.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.description.Location = New System.Drawing.Point(351, 198)
+        Me.description.Multiline = True
+        Me.description.Name = "description"
+        Me.description.Size = New System.Drawing.Size(593, 35)
+        Me.description.TabIndex = 53
         '
-        'TextBox3
+        'unitofmeasurement
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(351, 228)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(593, 35)
-        Me.TextBox3.TabIndex = 54
+        Me.unitofmeasurement.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.unitofmeasurement.Location = New System.Drawing.Point(351, 228)
+        Me.unitofmeasurement.Multiline = True
+        Me.unitofmeasurement.Name = "unitofmeasurement"
+        Me.unitofmeasurement.Size = New System.Drawing.Size(593, 35)
+        Me.unitofmeasurement.TabIndex = 54
         '
         'Label3
         '
@@ -297,15 +331,15 @@ Partial Class StockCard1
         Me.Label8.TabIndex = 11
         Me.Label8.Text = "Description :"
         '
-        'TextBox2
+        'item
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(351, 169)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(593, 35)
-        Me.TextBox2.TabIndex = 12
-        Me.TextBox2.Text = " "
+        Me.item.Font = New System.Drawing.Font("Poppins", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.item.Location = New System.Drawing.Point(351, 169)
+        Me.item.Multiline = True
+        Me.item.Name = "item"
+        Me.item.Size = New System.Drawing.Size(593, 35)
+        Me.item.TabIndex = 12
+        Me.item.Text = " "
         '
         'Label30
         '
@@ -336,15 +370,15 @@ Partial Class StockCard1
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.btn_Back)
-        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.item)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.description)
         Me.Controls.Add(Me.TextBox5)
-        Me.Controls.Add(Me.TextBox3)
+        Me.Controls.Add(Me.unitofmeasurement)
         Me.Controls.Add(Me.TextBox4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label4)
@@ -367,8 +401,8 @@ Partial Class StockCard1
     Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents description As System.Windows.Forms.TextBox
+    Friend WithEvents unitofmeasurement As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
@@ -380,7 +414,7 @@ Partial Class StockCard1
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents item As System.Windows.Forms.TextBox
     Friend WithEvents Label30 As System.Windows.Forms.Label
     Friend WithEvents Quantity1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Referencre As System.Windows.Forms.DataGridViewTextBoxColumn
