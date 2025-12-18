@@ -151,16 +151,16 @@ Public Class AddProperty
 
         ' Get property number if available
         Dim propertyNumberValue As String = ""
-        If propertyNumber IsNot Nothing Then
-            propertyNumberValue = propertyNumber.Text.Trim()
+        If description IsNot Nothing Then
+            propertyNumberValue = description.Text.Trim()
         End If
 
         Try
             Dim success = DatabaseConnection.AddProperty(
-                itemName.Text.Trim(),                            ' propertyName
+                propertyId.Text.Trim(),                            ' propertyName
                 GetComboValue(category, "Others"),                       ' category
                 descriptionValue,                                        ' description
-                serialNumber.Text.Trim(),                             ' serialNumber
+                serialNumber.Text.Trim(),                                   ' serialNumber
                 acquisitionDate.Value,                                  ' acquisitionDate
                 acquisitionCostValue,                                   ' acquisitionCost
                 "",                                                      ' supplierName (not in current schema)
@@ -195,7 +195,7 @@ Public Class AddProperty
     End Sub
 
     Private Function ValidateFields() As String
-        If String.IsNullOrWhiteSpace(itemName.Text) Then Return "Property name is required."
+        If String.IsNullOrWhiteSpace(propertyId.Text) Then Return "Property name is required."
         If category.SelectedIndex = -1 Then Return "Please select a category."
         ' Validate acquisition cost from the correct field
         If String.IsNullOrWhiteSpace(totalCost.Text) Then Return "Acquisition cost is required."
@@ -308,6 +308,14 @@ Public Class AddProperty
     End Sub
 
     Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub location_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 End Class

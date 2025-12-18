@@ -1,11 +1,128 @@
 ﻿Imports System
 Imports System.Data
+Imports System.Linq
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 
 Public Class frmRequest
+    Private originalRequestData As DataTable
+    Private isSearching As Boolean = False
+
     Private Sub frmRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitializeFilters()
         LoadMyRequests()
+        AddHandler myrequestssearchbar.TextChanged, AddressOf RequestSearch_TextChanged
+    End Sub
+
+    Private Sub InitializeFilters()
+        ' Initialize status filter
+        pm_cbobx_status.Items.Clear()
+        pm_cbobx_status.Items.Add("All Status")
+        pm_cbobx_status.Items.AddRange(New String() {"Pending", "Approved", "Rejected", "Borrowed", "Returned"})
+        pm_cbobx_status.SelectedIndex = 0
+        AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
+
+        ' Initialize category filter (request type)
+        pm_cbobx_categ.Items.Clear()
+        pm_cbobx_categ.Items.Add("All Types")
+        pm_cbobx_categ.Items.AddRange(New String() {"property", "supply"})
+        pm_cbobx_categ.SelectedIndex = 0
+        AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
+    End Sub
+
+    Private Sub Filter_Changed(sender As Object, e As EventArgs)
+        If Not isSearching Then
+            ApplyRequestSearch(myrequestssearchbar.Text)
+        End If
+    End Sub
+
+    Private Sub RequestSearch_TextChanged(sender As Object, e As EventArgs)
+        ApplyRequestSearch(myrequestssearchbar.Text)
+    End Sub
+
+    Private Sub ApplyRequestSearch(searchText As String)
+        If originalRequestData Is Nothing OrElse originalRequestData.Rows.Count = 0 Then Return
+        If isSearching Then Return
+        isSearching = True
+
+        Try
+            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
+            Dim statusFilterValue As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
+            Dim categoryFilterValue As String = If(pm_cbobx_categ.SelectedIndex > 0, pm_cbobx_categ.SelectedItem.ToString(), String.Empty)
+
+            Dim filteredRows As IEnumerable(Of DataRow) = originalRequestData.AsEnumerable().Where(Function(row)
+                ' Apply status filter
+                If Not String.IsNullOrEmpty(statusFilterValue) Then
+                    Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), String.Empty)
+                    If Not rowStatus.Equals(statusFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
+                End If
+
+                ' Apply category/type filter
+                If Not String.IsNullOrEmpty(categoryFilterValue) Then
+                    Dim requestType As String = If(row.Table.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")), row("request_type").ToString(), String.Empty)
+                    If Not requestType.Equals(categoryFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
+                End If
+
+                ' Apply search filter
+                If String.IsNullOrEmpty(searchLower) Then Return True
+
+                Dim itemName As String = If(row.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")), row("item_name").ToString().ToLower(), String.Empty)
+                Dim requestID As String = If(row.Table.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")), row("request_id").ToString().ToLower(), String.Empty)
+
+                Return itemName.Contains(searchLower) OrElse requestID.Contains(searchLower)
+            End Function)
+
+            DataGridView1.Rows.Clear()
+            For Each row As DataRow In filteredRows
+                Try
+                    Dim requestID As String = ""
+                    Dim requestDate As String = ""
+                    Dim itemName As String = ""
+                    Dim requestType As String = ""
+                    Dim quantity As String = "1"
+                    Dim requestStatus As String = ""
+                    Dim approvedBy As String = ""
+                    Dim releaseDate As String = ""
+                    Dim returnDate As String = ""
+
+                    If row.Table.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")) Then
+                        requestID = row("request_id").ToString()
+                    End If
+                    If row.Table.Columns.Contains("request_date") AndAlso Not IsDBNull(row("request_date")) Then
+                        requestDate = Convert.ToDateTime(row("request_date")).ToString("yyyy-MM-dd")
+                    End If
+                    If row.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
+                        itemName = row("item_name").ToString()
+                    End If
+                    If row.Table.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")) Then
+                        requestType = row("request_type").ToString()
+                    End If
+                    If row.Table.Columns.Contains("quantity") AndAlso Not IsDBNull(row("quantity")) Then
+                        quantity = row("quantity").ToString()
+                    End If
+                    If row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
+                        requestStatus = row("status").ToString()
+                    End If
+                    If row.Table.Columns.Contains("approval_date") AndAlso Not IsDBNull(row("approval_date")) Then
+                        approvedBy = Convert.ToDateTime(row("approval_date")).ToString("yyyy-MM-dd")
+                    End If
+                    If row.Table.Columns.Contains("release_date") AndAlso Not IsDBNull(row("release_date")) Then
+                        releaseDate = Convert.ToDateTime(row("release_date")).ToString("yyyy-MM-dd")
+                    End If
+                    If row.Table.Columns.Contains("expected_return_date") AndAlso Not IsDBNull(row("expected_return_date")) Then
+                        returnDate = Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd")
+                    End If
+
+                    DataGridView1.Rows.Add(requestID, requestDate, itemName, requestType, quantity, requestStatus, approvedBy, releaseDate, returnDate)
+                Catch rowEx As Exception
+                    System.Diagnostics.Debug.WriteLine("Error processing row in frmRequest: " & rowEx.Message)
+                End Try
+            Next
+        Catch ex As Exception
+            MessageBox.Show("Error searching requests: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            isSearching = False
+        End Try
     End Sub
 
     Private Sub LoadMyRequests()
@@ -19,59 +136,10 @@ Public Class frmRequest
 
             ' Load all requests for the current staff member
             Dim dt As DataTable = DatabaseConnection.GetStaffRequests(SessionContext.CurrentUserID.Value)
+            originalRequestData = dt.Copy()
             
-            ' Clear existing data
-            DataGridView1.Rows.Clear()
-            
-            ' Populate DataGridView
-            If dt.Rows.Count > 0 Then
-                For Each row As DataRow In dt.Rows
-                    Try
-                        Dim requestID As String = ""
-                        Dim requestDate As String = ""
-                        Dim itemName As String = ""
-                        Dim requestType As String = ""
-                        Dim quantity As String = "1"
-                        Dim status As String = ""
-                        Dim approvedBy As String = ""
-                        Dim releaseDate As String = ""
-                        Dim returnDate As String = ""
-                        
-                        ' Safely access columns
-                        If dt.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")) Then
-                            requestID = row("request_id").ToString()
-                        End If
-                        If dt.Columns.Contains("request_date") AndAlso Not IsDBNull(row("request_date")) Then
-                            requestDate = Convert.ToDateTime(row("request_date")).ToString("yyyy-MM-dd")
-                        End If
-                        If dt.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
-                            itemName = row("item_name").ToString()
-                        End If
-                        If dt.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")) Then
-                            requestType = row("request_type").ToString()
-                        End If
-                        If dt.Columns.Contains("quantity") AndAlso Not IsDBNull(row("quantity")) Then
-                            quantity = row("quantity").ToString()
-                        End If
-                        If dt.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
-                            status = row("status").ToString()
-                        End If
-                        If dt.Columns.Contains("approval_date") AndAlso Not IsDBNull(row("approval_date")) Then
-                            approvedBy = Convert.ToDateTime(row("approval_date")).ToString("yyyy-MM-dd")
-                        End If
-                        If dt.Columns.Contains("release_date") AndAlso Not IsDBNull(row("release_date")) Then
-                            releaseDate = Convert.ToDateTime(row("release_date")).ToString("yyyy-MM-dd")
-                        End If
-                        If dt.Columns.Contains("expected_return_date") AndAlso Not IsDBNull(row("expected_return_date")) Then
-                            returnDate = Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd")
-                        End If
-                        
-                        DataGridView1.Rows.Add(requestID, requestDate, itemName, requestType, quantity, status, approvedBy, releaseDate, returnDate)
-                    Catch rowEx As Exception
-                        System.Diagnostics.Debug.WriteLine("Error processing row in frmRequest: " & rowEx.Message)
-                    End Try
-                Next
-            End If
+            ' Apply current filters
+            ApplyRequestSearch(myrequestssearchbar.Text)
             
             ' Auto-size columns
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill

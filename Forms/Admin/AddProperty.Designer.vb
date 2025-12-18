@@ -40,10 +40,8 @@ Partial Class AddProperty
         Me.acquisitionDate = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.description = New System.Windows.Forms.TextBox()
-        Me.propertyNumber = New System.Windows.Forms.TextBox()
-        Me.category = New System.Windows.Forms.ComboBox()
         Me.serialNumber = New System.Windows.Forms.TextBox()
-        Me.itemName = New System.Windows.Forms.TextBox()
+        Me.propertyId = New System.Windows.Forms.TextBox()
         Me.cost = New System.Windows.Forms.Label()
         Me.conditionStatus = New System.Windows.Forms.Label()
         Me.lblDescription = New System.Windows.Forms.Label()
@@ -54,6 +52,8 @@ Partial Class AddProperty
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.itemName = New System.Windows.Forms.TextBox()
+        Me.category = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.acquisitionCost, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -252,13 +252,13 @@ Partial Class AddProperty
         Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.category)
+        Me.Panel1.Controls.Add(Me.itemName)
         Me.Panel1.Controls.Add(Me.acquisitionDate)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.description)
-        Me.Panel1.Controls.Add(Me.propertyNumber)
-        Me.Panel1.Controls.Add(Me.category)
         Me.Panel1.Controls.Add(Me.serialNumber)
-        Me.Panel1.Controls.Add(Me.itemName)
+        Me.Panel1.Controls.Add(Me.propertyId)
         Me.Panel1.Controls.Add(Me.cost)
         Me.Panel1.Controls.Add(Me.conditionStatus)
         Me.Panel1.Controls.Add(Me.lblDescription)
@@ -296,33 +296,11 @@ Partial Class AddProperty
         '
         Me.description.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.description.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.description.Location = New System.Drawing.Point(210, 149)
+        Me.description.Location = New System.Drawing.Point(210, 205)
         Me.description.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.description.Name = "description"
-        Me.description.Size = New System.Drawing.Size(216, 24)
-        Me.description.TabIndex = 72
-        '
-        'propertyNumber
-        '
-        Me.propertyNumber.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.propertyNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertyNumber.Location = New System.Drawing.Point(210, 205)
-        Me.propertyNumber.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.propertyNumber.Name = "propertyNumber"
-        Me.propertyNumber.Size = New System.Drawing.Size(216, 24)
-        Me.propertyNumber.TabIndex = 74
-        '
-        'category
-        '
-        Me.category.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.category.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.category.FormattingEnabled = True
-        Me.category.Items.AddRange(New Object() {"Electronics", "Computer", "Furnitures"})
-        Me.category.Location = New System.Drawing.Point(210, 101)
-        Me.category.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.category.Name = "category"
-        Me.category.Size = New System.Drawing.Size(216, 26)
-        Me.category.TabIndex = 71
+        Me.description.Size = New System.Drawing.Size(239, 24)
+        Me.description.TabIndex = 74
         '
         'serialNumber
         '
@@ -334,15 +312,15 @@ Partial Class AddProperty
         Me.serialNumber.Size = New System.Drawing.Size(218, 24)
         Me.serialNumber.TabIndex = 66
         '
-        'itemName
+        'propertyId
         '
-        Me.itemName.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.itemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.itemName.Location = New System.Drawing.Point(210, 47)
-        Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.itemName.Name = "itemName"
-        Me.itemName.Size = New System.Drawing.Size(216, 24)
-        Me.itemName.TabIndex = 64
+        Me.propertyId.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.propertyId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.propertyId.Location = New System.Drawing.Point(210, 47)
+        Me.propertyId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.propertyId.Name = "propertyId"
+        Me.propertyId.Size = New System.Drawing.Size(239, 24)
+        Me.propertyId.TabIndex = 64
         '
         'cost
         '
@@ -366,9 +344,9 @@ Partial Class AddProperty
         Me.conditionStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.conditionStatus.Location = New System.Drawing.Point(43, 205)
         Me.conditionStatus.Name = "conditionStatus"
-        Me.conditionStatus.Size = New System.Drawing.Size(121, 18)
+        Me.conditionStatus.Size = New System.Drawing.Size(83, 18)
         Me.conditionStatus.TabIndex = 62
-        Me.conditionStatus.Text = "Property Number"
+        Me.conditionStatus.Text = "Description"
         '
         'lblDescription
         '
@@ -379,9 +357,9 @@ Partial Class AddProperty
         Me.lblDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDescription.Location = New System.Drawing.Point(43, 151)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(83, 18)
+        Me.lblDescription.Size = New System.Drawing.Size(68, 18)
         Me.lblDescription.TabIndex = 60
-        Me.lblDescription.Text = "Description"
+        Me.lblDescription.Text = "Category"
         '
         'property_Category
         '
@@ -392,9 +370,9 @@ Partial Class AddProperty
         Me.property_Category.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.property_Category.Location = New System.Drawing.Point(43, 98)
         Me.property_Category.Name = "property_Category"
-        Me.property_Category.Size = New System.Drawing.Size(68, 18)
+        Me.property_Category.Size = New System.Drawing.Size(80, 18)
         Me.property_Category.TabIndex = 59
-        Me.property_Category.Text = "Category"
+        Me.property_Category.Text = "Item Name"
         '
         'item_name
         '
@@ -405,9 +383,9 @@ Partial Class AddProperty
         Me.item_name.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.item_name.Location = New System.Drawing.Point(43, 47)
         Me.item_name.Name = "item_name"
-        Me.item_name.Size = New System.Drawing.Size(80, 18)
+        Me.item_name.Size = New System.Drawing.Size(82, 18)
         Me.item_name.TabIndex = 58
-        Me.item_name.Text = "Item Name"
+        Me.item_name.Text = "Property ID"
         '
         'RoundedPanel1
         '
@@ -473,6 +451,29 @@ Partial Class AddProperty
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = False
         '
+        'itemName
+        '
+        Me.itemName.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.itemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.itemName.Location = New System.Drawing.Point(210, 98)
+        Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.itemName.Name = "itemName"
+        Me.itemName.Size = New System.Drawing.Size(239, 24)
+        Me.itemName.TabIndex = 79
+        '
+        'category
+        '
+        Me.category.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.category.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.category.FormattingEnabled = True
+        Me.category.Items.AddRange(New Object() {"MATH DEPARTMENT", "SCIENCE DEPARTMENT", "ENGLISH DEPARTMENT", "MAPEH DEPARMENT", "TLE DEPARTMENT"})
+        Me.category.Location = New System.Drawing.Point(210, 149)
+        Me.category.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.category.Name = "category"
+        Me.category.Size = New System.Drawing.Size(239, 26)
+        Me.category.TabIndex = 81
+        '
         'AddProperty
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -508,7 +509,7 @@ Partial Class AddProperty
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents acquisitionCost As System.Windows.Forms.NumericUpDown
     Friend WithEvents serialNumber As System.Windows.Forms.TextBox
-    Friend WithEvents itemName As System.Windows.Forms.TextBox
+    Friend WithEvents propertyId As System.Windows.Forms.TextBox
     Friend WithEvents cost As System.Windows.Forms.Label
     Friend WithEvents conditionStatus As System.Windows.Forms.Label
     Friend WithEvents lblDescription As System.Windows.Forms.Label
@@ -519,10 +520,8 @@ Partial Class AddProperty
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents departmentId As System.Windows.Forms.ComboBox
     Friend WithEvents warrantyExpirationDate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents category As System.Windows.Forms.ComboBox
     Friend WithEvents btnCancel As Resources.Controls.RoundedButton
     Friend WithEvents btnSave As Resources.Controls.RoundedButton
-    Friend WithEvents propertyNumber As System.Windows.Forms.TextBox
     Friend WithEvents description As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -530,4 +529,6 @@ Partial Class AddProperty
     Friend WithEvents acquisitionDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents warranty As System.Windows.Forms.Label
     Friend WithEvents assignedTo As System.Windows.Forms.ComboBox
+    Friend WithEvents category As System.Windows.Forms.ComboBox
+    Friend WithEvents itemName As System.Windows.Forms.TextBox
 End Class
