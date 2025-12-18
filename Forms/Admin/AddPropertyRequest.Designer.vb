@@ -30,15 +30,13 @@ Partial Class AddPropertyRequest
         Me.purpose = New System.Windows.Forms.TextBox()
         Me.description = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.unit = New System.Windows.Forms.TextBox()
-        Me.quantityRequested = New System.Windows.Forms.TextBox()
         Me.approved_by = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.department = New System.Windows.Forms.ComboBox()
         Me.itemName = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.position = New System.Windows.Forms.TextBox()
         Me.requesterName = New System.Windows.Forms.TextBox()
         Me.quantityRequest = New System.Windows.Forms.Label()
         Me.property_id = New System.Windows.Forms.Label()
@@ -47,11 +45,14 @@ Partial Class AddPropertyRequest
         Me.request_id = New System.Windows.Forms.Label()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
-        Me.department = New System.Windows.Forms.ComboBox()
+        Me.position = New System.Windows.Forms.ComboBox()
+        Me.quantityRequested = New System.Windows.Forms.NumericUpDown()
+        Me.unit = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.RoundedPanel1.SuspendLayout()
+        CType(Me.quantityRequested, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_DepartmentManagement
@@ -115,11 +116,11 @@ Partial Class AddPropertyRequest
         Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.unit)
+        Me.Panel2.Controls.Add(Me.quantityRequested)
         Me.Panel2.Controls.Add(Me.purpose)
         Me.Panel2.Controls.Add(Me.description)
         Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.unit)
-        Me.Panel2.Controls.Add(Me.quantityRequested)
         Me.Panel2.Controls.Add(Me.approved_by)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label1)
@@ -167,30 +168,6 @@ Partial Class AddPropertyRequest
         Me.Label3.TabIndex = 91
         Me.Label3.Text = "Description"
         '
-        'unit
-        '
-        Me.unit.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.unit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.unit.Location = New System.Drawing.Point(207, 144)
-        Me.unit.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.unit.Name = "unit"
-        Me.unit.Size = New System.Drawing.Size(291, 24)
-        Me.unit.TabIndex = 89
-        '
-        'quantityRequested
-        '
-        Me.quantityRequested.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.quantityRequested.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.quantityRequested.Location = New System.Drawing.Point(207, 91)
-        Me.quantityRequested.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.quantityRequested.Name = "quantityRequested"
-        Me.quantityRequested.Size = New System.Drawing.Size(291, 24)
-        Me.quantityRequested.TabIndex = 88
-        '
         'approved_by
         '
         Me.approved_by.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -235,10 +212,10 @@ Partial Class AddPropertyRequest
         Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.position)
         Me.Panel1.Controls.Add(Me.department)
         Me.Panel1.Controls.Add(Me.itemName)
         Me.Panel1.Controls.Add(Me.DateTimePicker1)
-        Me.Panel1.Controls.Add(Me.position)
         Me.Panel1.Controls.Add(Me.requesterName)
         Me.Panel1.Controls.Add(Me.quantityRequest)
         Me.Panel1.Controls.Add(Me.property_id)
@@ -250,6 +227,15 @@ Partial Class AddPropertyRequest
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(553, 415)
         Me.Panel1.TabIndex = 64
+        '
+        'department
+        '
+        Me.department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.department.FormattingEnabled = True
+        Me.department.Location = New System.Drawing.Point(223, 139)
+        Me.department.Name = "department"
+        Me.department.Size = New System.Drawing.Size(288, 26)
+        Me.department.TabIndex = 127
         '
         'itemName
         '
@@ -271,18 +257,6 @@ Partial Class AddPropertyRequest
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(288, 24)
         Me.DateTimePicker1.TabIndex = 79
-        '
-        'position
-        '
-        Me.position.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.position.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.position.Location = New System.Drawing.Point(223, 95)
-        Me.position.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.position.Name = "position"
-        Me.position.Size = New System.Drawing.Size(288, 24)
-        Me.position.TabIndex = 76
         '
         'requesterName
         '
@@ -384,14 +358,34 @@ Partial Class AddPropertyRequest
         Me.instructions.TabIndex = 40
         Me.instructions.Text = "Fill the required information."
         '
-        'department
+        'position
         '
-        Me.department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.department.FormattingEnabled = True
-        Me.department.Location = New System.Drawing.Point(223, 139)
-        Me.department.Name = "department"
-        Me.department.Size = New System.Drawing.Size(288, 26)
-        Me.department.TabIndex = 127
+        Me.position.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.position.FormattingEnabled = True
+        Me.position.Location = New System.Drawing.Point(223, 89)
+        Me.position.Name = "position"
+        Me.position.Size = New System.Drawing.Size(288, 26)
+        Me.position.TabIndex = 128
+        '
+        'quantityRequested
+        '
+        Me.quantityRequested.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.quantityRequested.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.quantityRequested.Location = New System.Drawing.Point(207, 96)
+        Me.quantityRequested.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.quantityRequested.Name = "quantityRequested"
+        Me.quantityRequested.Size = New System.Drawing.Size(291, 24)
+        Me.quantityRequested.TabIndex = 94
+        '
+        'unit
+        '
+        Me.unit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.unit.FormattingEnabled = True
+        Me.unit.Location = New System.Drawing.Point(207, 144)
+        Me.unit.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.unit.Name = "unit"
+        Me.unit.Size = New System.Drawing.Size(291, 26)
+        Me.unit.TabIndex = 95
         '
         'AddPropertyRequest
         '
@@ -412,6 +406,7 @@ Partial Class AddPropertyRequest
         Me.Panel1.PerformLayout()
         Me.RoundedPanel1.ResumeLayout(False)
         Me.RoundedPanel1.PerformLayout()
+        CType(Me.quantityRequested, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -429,18 +424,18 @@ Partial Class AddPropertyRequest
     Friend WithEvents department_id As System.Windows.Forms.Label
     Friend WithEvents employeeID As System.Windows.Forms.Label
     Friend WithEvents request_id As System.Windows.Forms.Label
-    Friend WithEvents position As System.Windows.Forms.TextBox
     Friend WithEvents btnCancel As Resources.Controls.RoundedButton
     Friend WithEvents btnSave As Resources.Controls.RoundedButton
     Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
     Friend WithEvents approved_by As System.Windows.Forms.Label
     Friend WithEvents description As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents unit As System.Windows.Forms.TextBox
-    Friend WithEvents quantityRequested As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents itemName As System.Windows.Forms.TextBox
     Friend WithEvents purpose As System.Windows.Forms.TextBox
     Friend WithEvents department As System.Windows.Forms.ComboBox
+    Friend WithEvents position As System.Windows.Forms.ComboBox
+    Friend WithEvents quantityRequested As System.Windows.Forms.NumericUpDown
+    Friend WithEvents unit As System.Windows.Forms.ComboBox
 End Class

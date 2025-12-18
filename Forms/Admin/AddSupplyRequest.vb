@@ -52,16 +52,37 @@ Public Class AddSupplyRequest
 
     Private Sub AddSupplyRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            ' Bind Department dropdown (ComboBox) to real departments
+            Try
+                If department IsNot Nothing Then
+                    Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
+                    If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 Then
+                        department.DataSource = deptTable
+                        If deptTable.Columns.Contains("department_name") Then
+                            department.DisplayMember = "department_name"
+                            department.ValueMember = "department_id"
+                        ElseIf deptTable.Columns.Contains("departmentName") Then
+                            department.DisplayMember = "departmentName"
+                            department.ValueMember = "departmentId"
+                        ElseIf deptTable.Columns.Count >= 2 Then
+                            department.DisplayMember = deptTable.Columns(1).ColumnName
+                            department.ValueMember = deptTable.Columns(0).ColumnName
+                        End If
+                    End If
+                End If
+            Catch
+            End Try
+
             ' Pre-fill item name if provided
             If Not String.IsNullOrEmpty(_prefillItemName) Then
                 itemName.Text = _prefillItemName
             End If
-            
+
             ' Pre-fill description if provided
             If Not String.IsNullOrEmpty(_prefillItemDescription) Then
                 description.Text = _prefillItemDescription
             End If
-            
+
             ' Pre-fill requester name if provided
             If Not String.IsNullOrEmpty(_prefillRequesterName) Then
                 Try
@@ -72,7 +93,7 @@ Public Class AddSupplyRequest
                 Catch
                 End Try
             End If
-            
+
             ' Pre-fill position if provided
             If Not String.IsNullOrEmpty(_prefillPosition) Then
                 Try
@@ -83,18 +104,17 @@ Public Class AddSupplyRequest
                 Catch
                 End Try
             End If
-            
+
             ' Pre-fill department if provided
             If Not String.IsNullOrEmpty(_prefillDepartment) Then
                 Try
-                    Dim deptField As Control = Me.Controls.Find("departmentID", True).FirstOrDefault()
-                    If deptField IsNot Nothing Then
-                        deptField.Text = _prefillDepartment
+                    If department IsNot Nothing Then
+                        department.Text = _prefillDepartment
                     End If
                 Catch
                 End Try
             End If
-            
+
             ' If pre-fill data not provided, try to get from profile
             If String.IsNullOrEmpty(_prefillRequesterName) AndAlso SessionContext.CurrentUserID.HasValue Then
                 Try
@@ -114,7 +134,7 @@ Public Class AddSupplyRequest
                             Catch
                             End Try
                         End If
-                        
+
                         ' Fill position
                         If profile.ContainsKey("position") AndAlso profile("position") IsNot Nothing Then
                             Try
@@ -125,34 +145,16 @@ Public Class AddSupplyRequest
                             Catch
                             End Try
                         End If
-                        
+
                         ' Fill department
                         If profile.ContainsKey("departmentId") AndAlso profile("departmentId") IsNot Nothing Then
                             Try
                                 Dim deptID As Integer = Convert.ToInt32(profile("departmentId"))
-                                Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
-                                For Each row As DataRow In dt.Rows
-                                    Dim rowDeptID As Integer = 0
-                                    If row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")) Then
-                                        Integer.TryParse(row("departmentId").ToString(), rowDeptID)
-                                    ElseIf row.Table.Columns.Contains("department_id") AndAlso Not IsDBNull(row("department_id")) Then
-                                        Integer.TryParse(row("department_id").ToString(), rowDeptID)
-                                    End If
-                                    If rowDeptID = deptID Then
-                                        If row.Table.Columns.Contains("departmentName") Then
-                                            Dim deptField As Control = Me.Controls.Find("departmentID", True).FirstOrDefault()
-                                            If deptField IsNot Nothing Then
-                                                deptField.Text = row("departmentName").ToString()
-                                            End If
-                                        ElseIf row.Table.Columns.Contains("department_name") Then
-                                            Dim deptField As Control = Me.Controls.Find("departmentID", True).FirstOrDefault()
-                                            If deptField IsNot Nothing Then
-                                                deptField.Text = row("department_name").ToString()
-                                            End If
-                                        End If
-                                        Exit For
-                                    End If
-                                Next
+                                If department IsNot Nothing AndAlso department.DataSource IsNot Nothing Then
+                                    department.SelectedValue = deptID
+                                ElseIf department IsNot Nothing Then
+                                    department.Text = deptID.ToString()
+                                End If
                             Catch
                             End Try
                         End If
@@ -194,9 +196,12 @@ Public Class AddSupplyRequest
 
             ' Get department ID if provided
             Dim deptID As Integer? = Nothing
-            If departmentId IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(departmentId.Text) Then
-                Dim parsedDeptID As Integer
-                If Integer.TryParse(departmentId.Text.Trim(), parsedDeptID) Then
+            ' department is a ComboBox in the designer (stores department id or name depending on binding)
+            If department IsNot Nothing Then
+                Dim parsedDeptID As Integer = 0
+                If department.SelectedValue IsNot Nothing AndAlso Integer.TryParse(department.SelectedValue.ToString(), parsedDeptID) Then
+                    deptID = parsedDeptID
+                ElseIf Integer.TryParse(department.Text.Trim(), parsedDeptID) Then
                     deptID = parsedDeptID
                 End If
             End If

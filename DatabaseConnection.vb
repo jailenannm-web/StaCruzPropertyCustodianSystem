@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
@@ -3785,6 +3785,161 @@ Public Class DatabaseConnection
                 End Try
             End If
         End Try
+    End Function
+
+    ' =====================================================================
+    ' DIRECT ASSIGNMENT HELPERS (NO PRIOR REQUEST REQUIRED)
+    ' Creates a Released request row so Staff "My Borrowed Items" can show it.
+    ' =====================================================================
+
+    Public Shared Function CreateDirectPropertyRelease(assignedUserId As Integer,
+                                                       propertyId As Integer,
+                                                       departmentId As Integer?,
+                                                       itemName As String,
+                                                       quantity As Integer,
+                                                       purpose As String,
+                                                       releasedBy As String,
+                                                       releasedDate As Date) As Integer
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return 0
+            If Not SafeOpenConnection(conn) Then Return 0
+
+            ' Attempt 1 (camelCase columns)
+            Try
+                Dim q As String =
+                    "INSERT INTO property_requests (userId, propertyId, requesterName, departmentId, dateOfRequest, itemName, quantityRequested, purpose, status, releaseDate, remarks) " &
+                    "VALUES (@userId, @propertyId, @requesterName, @departmentId, NOW(), @itemName, @qty, @purpose, 'Released', @releaseDate, @remarks); " &
+                    "SELECT LAST_INSERT_ID();"
+                Using cmd As New MySqlCommand(q, conn)
+                    cmd.Parameters.AddWithValue("@userId", assignedUserId)
+                    cmd.Parameters.AddWithValue("@propertyId", propertyId)
+                    cmd.Parameters.AddWithValue("@requesterName", If(String.IsNullOrWhiteSpace(releasedBy), "Admin", releasedBy))
+                    cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue AndAlso departmentId.Value > 0, departmentId.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@itemName", If(String.IsNullOrWhiteSpace(itemName), "Property", itemName))
+                    cmd.Parameters.AddWithValue("@qty", If(quantity > 0, quantity, 1))
+                    cmd.Parameters.AddWithValue("@purpose", If(String.IsNullOrWhiteSpace(purpose), "Direct assignment", purpose))
+                    cmd.Parameters.AddWithValue("@releaseDate", releasedDate)
+                    cmd.Parameters.AddWithValue("@remarks", "Direct assignment")
+                    Dim newIdObj = cmd.ExecuteScalar()
+                    Dim newId As Integer = 0
+                    Integer.TryParse(If(newIdObj, "0").ToString(), newId)
+                    If newId > 0 Then Return newId
+                End Using
+            Catch
+            End Try
+
+            ' Attempt 2 (snake_case columns)
+            Try
+                Dim q2 As String =
+                    "INSERT INTO property_requests (user_id, property_id, requester_name, department_id, request_date, item_name, quantity, purpose, status, release_date, remarks) " &
+                    "VALUES (@userId, @propertyId, @requesterName, @departmentId, NOW(), @itemName, @qty, @purpose, 'Released', @releaseDate, @remarks); " &
+                    "SELECT LAST_INSERT_ID();"
+                Using cmd2 As New MySqlCommand(q2, conn)
+                    cmd2.Parameters.AddWithValue("@userId", assignedUserId)
+                    cmd2.Parameters.AddWithValue("@propertyId", propertyId)
+                    cmd2.Parameters.AddWithValue("@requesterName", If(String.IsNullOrWhiteSpace(releasedBy), "Admin", releasedBy))
+                    cmd2.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue AndAlso departmentId.Value > 0, departmentId.Value, DBNull.Value))
+                    cmd2.Parameters.AddWithValue("@itemName", If(String.IsNullOrWhiteSpace(itemName), "Property", itemName))
+                    cmd2.Parameters.AddWithValue("@qty", If(quantity > 0, quantity, 1))
+                    cmd2.Parameters.AddWithValue("@purpose", If(String.IsNullOrWhiteSpace(purpose), "Direct assignment", purpose))
+                    cmd2.Parameters.AddWithValue("@releaseDate", releasedDate)
+                    cmd2.Parameters.AddWithValue("@remarks", "Direct assignment")
+                    Dim newIdObj = cmd2.ExecuteScalar()
+                    Dim newId As Integer = 0
+                    Integer.TryParse(If(newIdObj, "0").ToString(), newId)
+                    If newId > 0 Then Return newId
+                End Using
+            Catch
+            End Try
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] CreateDirectPropertyRelease Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return 0
+    End Function
+
+    Public Shared Function CreateDirectSupplyRelease(assignedUserId As Integer,
+                                                     supplyId As Integer,
+                                                     departmentId As Integer?,
+                                                     itemName As String,
+                                                     quantity As Integer,
+                                                     purpose As String,
+                                                     releasedBy As String,
+                                                     releasedDate As Date) As Integer
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return 0
+            If Not SafeOpenConnection(conn) Then Return 0
+
+            ' Attempt 1 (camelCase columns)
+            Try
+                Dim q As String =
+                    "INSERT INTO supplies_requests (userId, supplyId, requesterName, departmentId, dateOfRequest, itemName, quantityRequested, purpose, status, releasedBy, releasedDate) " &
+                    "VALUES (@userId, @supplyId, @requesterName, @departmentId, NOW(), @itemName, @qty, @purpose, 'Released', @releasedBy, @releasedDate); " &
+                    "SELECT LAST_INSERT_ID();"
+                Using cmd As New MySqlCommand(q, conn)
+                    cmd.Parameters.AddWithValue("@userId", assignedUserId)
+                    cmd.Parameters.AddWithValue("@supplyId", supplyId)
+                    cmd.Parameters.AddWithValue("@requesterName", If(String.IsNullOrWhiteSpace(releasedBy), "Admin", releasedBy))
+                    cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue AndAlso departmentId.Value > 0, departmentId.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@itemName", If(String.IsNullOrWhiteSpace(itemName), "Supply", itemName))
+                    cmd.Parameters.AddWithValue("@qty", If(quantity > 0, quantity, 1))
+                    cmd.Parameters.AddWithValue("@purpose", If(String.IsNullOrWhiteSpace(purpose), "Direct assignment", purpose))
+                    cmd.Parameters.AddWithValue("@releasedBy", If(String.IsNullOrWhiteSpace(releasedBy), "Admin", releasedBy))
+                    cmd.Parameters.AddWithValue("@releasedDate", releasedDate)
+                    Dim newIdObj = cmd.ExecuteScalar()
+                    Dim newId As Integer = 0
+                    Integer.TryParse(If(newIdObj, "0").ToString(), newId)
+                    If newId > 0 Then Return newId
+                End Using
+            Catch
+            End Try
+
+            ' Attempt 2 (snake_case columns)
+            Try
+                Dim q2 As String =
+                    "INSERT INTO supplies_requests (user_id, supply_id, requester_name, department_id, request_date, item_name, quantity, purpose, status, released_by, released_date) " &
+                    "VALUES (@userId, @supplyId, @requesterName, @departmentId, NOW(), @itemName, @qty, @purpose, 'Released', @releasedBy, @releasedDate); " &
+                    "SELECT LAST_INSERT_ID();"
+                Using cmd2 As New MySqlCommand(q2, conn)
+                    cmd2.Parameters.AddWithValue("@userId", assignedUserId)
+                    cmd2.Parameters.AddWithValue("@supplyId", supplyId)
+                    cmd2.Parameters.AddWithValue("@requesterName", If(String.IsNullOrWhiteSpace(releasedBy), "Admin", releasedBy))
+                    cmd2.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue AndAlso departmentId.Value > 0, departmentId.Value, DBNull.Value))
+                    cmd2.Parameters.AddWithValue("@itemName", If(String.IsNullOrWhiteSpace(itemName), "Supply", itemName))
+                    cmd2.Parameters.AddWithValue("@qty", If(quantity > 0, quantity, 1))
+                    cmd2.Parameters.AddWithValue("@purpose", If(String.IsNullOrWhiteSpace(purpose), "Direct assignment", purpose))
+                    cmd2.Parameters.AddWithValue("@releasedBy", If(String.IsNullOrWhiteSpace(releasedBy), "Admin", releasedBy))
+                    cmd2.Parameters.AddWithValue("@releasedDate", releasedDate)
+                    Dim newIdObj = cmd2.ExecuteScalar()
+                    Dim newId As Integer = 0
+                    Integer.TryParse(If(newIdObj, "0").ToString(), newId)
+                    If newId > 0 Then Return newId
+                End Using
+            Catch
+            End Try
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] CreateDirectSupplyRelease Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return 0
     End Function
 
     ''' <summary>

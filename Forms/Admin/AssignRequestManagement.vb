@@ -541,12 +541,6 @@ Public Class AssignRequestManagement
             Return
         End If
 
-        ' Validate that a request exists - REQUIRED for assignment
-        If currentRequestID <= 0 Then
-            MessageBox.Show("Cannot assign items without a valid request. Please select a request from Property Request Management or Supply Request Management first.", "No Request Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
         Try
             ' Determine if assigning property
             Dim selectedPropertyID As Integer = 0
@@ -565,6 +559,10 @@ Public Class AssignRequestManagement
             If employee IsNot Nothing AndAlso employee.SelectedValue IsNot Nothing Then
                 Integer.TryParse(employee.SelectedValue.ToString(), selectedEmployeeID)
             End If
+            If selectedEmployeeID <= 0 Then
+                MessageBox.Show("Please select an employee to assign the property to.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
 
             ' If we have a request ID, validate it exists and is approved/pending
             If currentRequestID > 0 Then
@@ -573,10 +571,7 @@ Public Class AssignRequestManagement
                     requestStatus = If(IsDBNull(requestData("status")), "", requestData("status").ToString().ToLower())
                 End If
 
-                If Not String.IsNullOrEmpty(requestStatus) AndAlso requestStatus = "rejected" Then
-                    MessageBox.Show("Cannot assign items to a rejected request.", "Invalid Request Status", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return
-                End If
+                ' Allow assignment even if rejected (admin direct assignment allowed)
             End If
 
             ' Get admin info
@@ -584,61 +579,54 @@ Public Class AssignRequestManagement
             Dim adminName As String = SessionContext.CurrentUsername
             Dim adminUserType As String = SessionContext.CurrentRole
 
-            ' Assign the property
-            If currentRequestID > 0 Then
-                Dim releaseDate As Date = Date.Today
-                Dim expectedReturnDate As Date? = Nothing
-                If warrantyExpiration IsNot Nothing AndAlso warrantyExpiration.Value > Date.Today Then
-                    expectedReturnDate = warrantyExpiration.Value
-                End If
+            ' Flexible assignment:
+            ' - Always allow direct property assignment (request is optional).
+            ' - If request exists, we will attempt to mark it Released, but we do NOT block if it fails.
 
-                ' First approve if pending, then release
-                If requestData IsNot Nothing AndAlso requestData.Table.Columns.Contains("status") Then
-                    Dim status As String = If(IsDBNull(requestData("status")), "", requestData("status").ToString())
-                    If status.ToLower() = "pending" Then
-                        If Not DatabaseConnection.ApprovePropertyRequest(currentRequestID, adminID, adminName, adminUserType) Then
-                            MessageBox.Show("Failed to approve request before assignment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            Return
-                        End If
-                    End If
-                End If
-
-                If DatabaseConnection.ReleasePropertyRequest(currentRequestID, adminID, adminName, adminUserType, releaseDate, expectedReturnDate) Then
-                    ' Update property assignment
-                    Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-                    If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                        ' Get department ID
-                        Dim deptID As Object = DBNull.Value
-                        If department IsNot Nothing AndAlso department.SelectedValue IsNot Nothing Then
-                            Dim parsedDeptId As Integer = 0
-                            If Integer.TryParse(department.SelectedValue.ToString(), parsedDeptId) Then
-                                deptID = parsedDeptId
-                            End If
-                        End If
-
-                        ' Get location
-                        Dim locationVal As String = ""
-                        If location IsNot Nothing Then
-                            locationVal = If(location.SelectedItem IsNot Nothing, location.SelectedItem.ToString(), location.Text)
-                        End If
-
-                        ' Update property with assignment
-                        Using cmd As New MySqlCommand("UPDATE properties SET assignedTo = @userID, departmentId = @deptID, location = @location, status = 'Assigned', updatedAt = NOW() WHERE propertyId = @propertyID", conn)
-                            cmd.Parameters.AddWithValue("@userID", If(selectedEmployeeID > 0, selectedEmployeeID, DBNull.Value))
-                            cmd.Parameters.AddWithValue("@deptID", deptID)
-                            cmd.Parameters.AddWithValue("@location", If(String.IsNullOrEmpty(locationVal), DBNull.Value, locationVal))
-                            cmd.Parameters.AddWithValue("@propertyID", selectedPropertyID)
-                            cmd.ExecuteNonQuery()
-                        End Using
-                        If conn.State = ConnectionState.Open Then conn.Close()
-                    End If
-
-                    MessageBox.Show("Property assigned successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    NavigateBack()
-                Else
-                    MessageBox.Show("Failed to assign property. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim deptIdOpt As Integer? = Nothing
+            If department IsNot Nothing AndAlso department.SelectedValue IsNot Nothing Then
+                Dim parsedDeptId As Integer = 0
+                If Integer.TryParse(department.SelectedValue.ToString(), parsedDeptId) Then
+                    deptIdOpt = parsedDeptId
                 End If
             End If
+
+            Dim locationVal As String = ""
+            If location IsNot Nothing Then
+                locationVal = If(location.SelectedItem IsNot Nothing, location.SelectedItem.ToString(), location.Text)
+            End If
+
+            Dim purposeText As String = If(assignmentPurpose IsNot Nothing, assignmentPurpose.Text, "")
+
+            ' Update property with assignment
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                Using cmd As New MySqlCommand("UPDATE properties SET assignedTo = @userID, departmentId = @deptID, location = @location, status = 'Assigned', updatedAt = NOW() WHERE propertyId = @propertyID", conn)
+                    cmd.Parameters.AddWithValue("@userID", selectedEmployeeID)
+                    cmd.Parameters.AddWithValue("@deptID", If(deptIdOpt.HasValue, deptIdOpt.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@location", If(String.IsNullOrEmpty(locationVal), DBNull.Value, locationVal))
+                    cmd.Parameters.AddWithValue("@propertyID", selectedPropertyID)
+                    cmd.ExecuteNonQuery()
+                End Using
+
+                ' If there is an existing request, try to mark it Released but do not block if it doesn't update.
+                If currentRequestID > 0 Then
+                    Try
+                        DatabaseConnection.ReleasePropertyRequest(currentRequestID, adminID, adminName, adminUserType, Date.Today, Nothing)
+                    Catch
+                    End Try
+                End If
+
+                ' Ensure a Released request record exists for My Borrowed Items view.
+                DatabaseConnection.CreateDirectPropertyRelease(selectedEmployeeID, selectedPropertyID, deptIdOpt,
+                                                              If(propertyName IsNot Nothing, propertyName.Text, ""),
+                                                              1, purposeText, adminName, Date.Today)
+
+                If conn.State = ConnectionState.Open Then conn.Close()
+            End If
+
+            MessageBox.Show("Property assigned successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            NavigateBack()
         Catch ex As Exception
             MessageBox.Show("Error assigning item: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             System.Diagnostics.Debug.WriteLine("AssignRequestManagement btnSave_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)

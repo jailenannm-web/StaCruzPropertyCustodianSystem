@@ -495,12 +495,17 @@ Public Class AssignSupplyManagement
             Return
         End If
 
-        If currentRequestID <= 0 Then
-            MessageBox.Show("Cannot assign supplies without a valid request. Please select a request from Supply Request Management first.", "No Request Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
         Try
+            ' Employee is required for direct assignment
+            Dim selectedEmployeeID As Integer = 0
+            If employee IsNot Nothing AndAlso employee.SelectedValue IsNot Nothing Then
+                Integer.TryParse(employee.SelectedValue.ToString(), selectedEmployeeID)
+            End If
+            If selectedEmployeeID <= 0 Then
+                MessageBox.Show("Please select an employee to assign the supply to.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
             ' Get selected supply ID
             Dim selectedSupplyID As Integer = 0
             If supplyId IsNot Nothing AndAlso supplyId.SelectedIndex >= 0 AndAlso supplyId.SelectedValue IsNot Nothing Then
@@ -530,10 +535,7 @@ Public Class AssignSupplyManagement
                     requestStatus = If(IsDBNull(requestData("status")), "", requestData("status").ToString().ToLower())
                 End If
 
-                If Not String.IsNullOrEmpty(requestStatus) AndAlso requestStatus = "rejected" Then
-                    MessageBox.Show("Cannot assign supplies to a rejected request.", "Invalid Request Status", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return
-                End If
+                ' Allow assignment even if rejected (admin direct assignment allowed)
             End If
 
             ' Get admin info
@@ -541,16 +543,7 @@ Public Class AssignSupplyManagement
             Dim adminName As String = SessionContext.CurrentUsername
             Dim adminUserType As String = SessionContext.CurrentRole
 
-            ' Approve supply request first if pending
-            If requestData IsNot Nothing AndAlso requestData.Table.Columns.Contains("status") Then
-                Dim status As String = If(IsDBNull(requestData("status")), "", requestData("status").ToString())
-                If status.ToLower() = "pending" Then
-                    If Not DatabaseConnection.ApproveSupplyRequest(currentRequestID, adminID, adminName, adminUserType) Then
-                        MessageBox.Show("Failed to approve supply request before assignment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Return
-                    End If
-                End If
-            End If
+            ' Direct assignment: request workflow is optional. If a request exists, we will release it; otherwise create one.
 
             ' Update supply quantity (deduct from inventory)
             Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
@@ -576,12 +569,32 @@ Public Class AssignSupplyManagement
                     cmd.Parameters.AddWithValue("@qty", qtyToAssign)
                     cmd.Parameters.AddWithValue("@supplyID", selectedSupplyID)
                     If cmd.ExecuteNonQuery() > 0 Then
-                        ' Update the supply request as released
-                        Using updateCmd As New MySqlCommand("UPDATE supplies_requests SET status = 'Released', releasedBy = @adminName, releasedDate = NOW(), updatedAt = NOW() WHERE requestId = @requestID", conn)
-                            updateCmd.Parameters.AddWithValue("@adminName", adminName)
-                            updateCmd.Parameters.AddWithValue("@requestID", currentRequestID)
-                            updateCmd.ExecuteNonQuery()
-                        End Using
+                        Dim deptId As Integer? = Nothing
+                        If department IsNot Nothing AndAlso department.SelectedValue IsNot Nothing Then
+                            Dim d As Integer = 0
+                            If Integer.TryParse(department.SelectedValue.ToString(), d) Then deptId = d
+                        End If
+
+                        Dim purposeText As String = If(assignmentPurpose IsNot Nothing, assignmentPurpose.Text, "")
+
+                        If currentRequestID > 0 Then
+                            ' Update existing request to Released and (optionally) set the target userId for staff borrowed view
+                            Try
+                                Using updateCmd As New MySqlCommand("UPDATE supplies_requests SET status = 'Released', userId = @userId, releasedBy = @adminName, releasedDate = NOW(), updatedAt = NOW() WHERE requestId = @requestID", conn)
+                                    updateCmd.Parameters.AddWithValue("@adminName", adminName)
+                                    updateCmd.Parameters.AddWithValue("@requestID", currentRequestID)
+                                    updateCmd.Parameters.AddWithValue("@userId", selectedEmployeeID)
+                                    updateCmd.ExecuteNonQuery()
+                                End Using
+                            Catch
+                                ' ignore if schema differs; direct insert below still ensures borrowed view
+                            End Try
+                        End If
+
+                        ' Ensure a Released record exists for the selected employee so it appears in My Borrowed Items.
+                        Dim newReqId As Integer = DatabaseConnection.CreateDirectSupplyRelease(selectedEmployeeID, selectedSupplyID, deptId,
+                                                                                               If(supplyName IsNot Nothing, supplyName.Text, ""),
+                                                                                               qtyToAssign, purposeText, adminName, Date.Today)
 
                         MessageBox.Show("Supply assigned successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         NavigateBack()
