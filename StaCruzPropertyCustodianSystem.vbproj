@@ -167,7 +167,6 @@
     <Compile Include="Forms\SuperAdmin\Reports\SuppliesMaterials.Designer.vb">
       <DependentUpon>SuppliesMaterials.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Supply\EditSupply.vb" />
     <Compile Include="Utilities\ReportExportHelper.vb" />
     <Compile Include="DatabaseConnection.vb" />
     <Compile Include="SessionContext.vb" />

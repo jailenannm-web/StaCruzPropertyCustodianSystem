@@ -5005,10 +5005,9 @@ Public Class DatabaseConnection
     End Function
 
     ' --- Modified GetAllUsers ---
-    ' Replace the GetAllUsers function with the resilient version below.
     Public Shared Function GetAllUsers(Optional statusFilter As String = "",
-                               Optional roleFilter As String = "",
-                               Optional searchKeyword As String = "") As DataTable
+                                   Optional roleFilter As String = "",
+                                   Optional searchKeyword As String = "") As DataTable
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing
         Try
@@ -5062,31 +5061,6 @@ Public Class DatabaseConnection
                 createdAtExpr = "created_at AS createdAt"
             End If
 
-            ' Address-related expressions (guard against missing columns)
-            Dim houseExpr As String = "'' AS house_no_street"
-            If availableCols.Contains("house_no_street") Then
-                houseExpr = "COALESCE(house_no_street, '') AS house_no_street"
-            End If
-
-            Dim barangayExpr As String = "'' AS barangay"
-            If availableCols.Contains("barangay") Then
-                barangayExpr = "COALESCE(barangay, '') AS barangay"
-            End If
-
-            Dim municipalityExpr As String = "'' AS municipality"
-            If availableCols.Contains("municipality") Then
-                municipalityExpr = "COALESCE(municipality, '') AS municipality"
-            ElseIf availableCols.Contains("municipal") Then
-                municipalityExpr = "COALESCE(municipal, '') AS municipality"
-            End If
-
-            Dim provinceCityExpr As String = "'' AS province_city"
-            If availableCols.Contains("province_city") Then
-                provinceCityExpr = "COALESCE(province_city, '') AS province_city"
-            ElseIf availableCols.Contains("province") Then
-                provinceCityExpr = "COALESCE(province, '') AS province_city"
-            End If
-
             ' Build admin and staff queries using safe expressions
             Dim adminQuery As New StringBuilder()
             adminQuery.Append("SELECT userId, firstName, COALESCE(middleName, '') as middleName, lastName, ")
@@ -5094,10 +5068,8 @@ Public Class DatabaseConnection
             adminQuery.Append("COALESCE(departmentId, '') as departmentId, COALESCE(contactNumber, '') as contactNumber, ")
             adminQuery.Append("email, username, role AS user_type, status, ")
             adminQuery.Append("COALESCE(employeeId, '') as employeeId, " & dateAssignedExpr & ", " & lastLoginExpr & ", " & createdAtExpr & ", ")
-            adminQuery.Append(houseExpr & ", ")
-            adminQuery.Append(barangayExpr & ", ")
-            adminQuery.Append(municipalityExpr & ", ")
-            adminQuery.Append(provinceCityExpr & " ")
+            adminQuery.Append("COALESCE(barangay, '') as barangay, ")
+            adminQuery.Append("COALESCE(municipal, '') as municipal, COALESCE(province, '') as province ")
             adminQuery.Append("FROM users WHERE role IN ('Admin','SuperAdmin')")
 
             If Not String.IsNullOrEmpty(statusFilter) Then
@@ -5110,10 +5082,7 @@ Public Class DatabaseConnection
             staffQuery.Append("COALESCE(CAST(departmentId AS CHAR), '') as departmentId, COALESCE(contactNumber, '') as contactNumber, ")
             staffQuery.Append("email, username, role AS user_type, status, ")
             staffQuery.Append("COALESCE(employeeId, '') as employeeId, " & dateAssignedExpr & ", " & lastLoginExpr & ", " & createdAtExpr & ", ")
-            staffQuery.Append(houseExpr & ", ")
-            staffQuery.Append(barangayExpr & ", ")
-            staffQuery.Append(municipalityExpr & ", ")
-            staffQuery.Append(provinceCityExpr & " ")
+            staffQuery.Append("COALESCE(province, '') as province_city, COALESCE(municipal, '') as municipality, COALESCE(barangay, '') as barangay, '' as house_no_street ")
             staffQuery.Append("FROM users WHERE role = 'Staff'")
 
             If Not String.IsNullOrEmpty(statusFilter) Then
@@ -5121,6 +5090,7 @@ Public Class DatabaseConnection
             End If
 
             If Not String.IsNullOrEmpty(searchKeyword) Then
+                Dim searchPattern As String = "%" & searchKeyword.Trim().ToLower() & "%"
                 adminQuery.Append(" AND (LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR LOWER(username) LIKE @search OR LOWER(email) LIKE @search OR LOWER(COALESCE(employeeId, '')) LIKE @search)")
                 staffQuery.Append(" AND (LOWER(firstName) LIKE @search OR LOWER(lastName) LIKE @search OR LOWER(username) LIKE @search OR LOWER(email) LIKE @search)")
             End If
@@ -5150,10 +5120,10 @@ Public Class DatabaseConnection
                             row("user_type") = "Staff"
                             row("status") = SafeDbValue(record("status"))
                             row("employeeId") = SafeDbValue(record("employeeId"))
-                            row("dateAssigned") = If(record.Table.Columns.Contains("dateAssigned") AndAlso Not IsDBNull(record("dateAssigned")), record("dateAssigned"), DBNull.Value)
+                            row("dateAssigned") = If(IsDBNull(record("dateAssigned")) OrElse record("dateAssigned") Is Nothing, DBNull.Value, record("dateAssigned"))
                             row("lastLogin") = If(record.Table.Columns.Contains("lastLogin") AndAlso Not record.IsNull("lastLogin"), record("lastLogin"), DBNull.Value)
                             row("createdAt") = If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"), record("createdAt"), DBNull.Value)
-                            row("house_no_street") = If(record.Table.Columns.Contains("house_no_street"), SafeDbValue(record("house_no_street")), "")
+                            row("house_no_street") = SafeDbValue(record("house_no_street"))
                             row("barangay") = SafeDbValue(record("barangay"))
                             row("municipality") = SafeDbValue(record("municipality"))
                             row("province_city") = SafeDbValue(record("province_city"))
@@ -5190,10 +5160,10 @@ Public Class DatabaseConnection
                             row("user_type") = SafeDbValue(record("user_type"))
                             row("status") = SafeDbValue(record("status"))
                             row("employeeId") = SafeDbValue(record("employeeId"))
-                            row("dateAssigned") = If(record.Table.Columns.Contains("dateAssigned") AndAlso Not IsDBNull(record("dateAssigned")), record("dateAssigned"), DBNull.Value)
+                            row("dateAssigned") = If(IsDBNull(record("dateAssigned")) OrElse record("dateAssigned") Is Nothing, DBNull.Value, record("dateAssigned"))
                             row("lastLogin") = If(record.Table.Columns.Contains("lastLogin") AndAlso Not record.IsNull("lastLogin"), record("lastLogin"), DBNull.Value)
                             row("createdAt") = If(record.Table.Columns.Contains("createdAt") AndAlso Not record.IsNull("createdAt"), record("createdAt"), DBNull.Value)
-                            row("house_no_street") = If(record.Table.Columns.Contains("house_no_street"), SafeDbValue(record("house_no_street")), "")
+                            row("house_no_street") = SafeDbValue(record("house_no_street"))
                             row("barangay") = SafeDbValue(record("barangay"))
                             row("municipality") = SafeDbValue(record("municipality"))
                             row("province_city") = SafeDbValue(record("province_city"))
