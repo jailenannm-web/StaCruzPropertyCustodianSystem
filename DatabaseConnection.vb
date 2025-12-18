@@ -5046,7 +5046,7 @@ Public Class DatabaseConnection
             adminQuery.Append("COALESCE(suffix, '') as suffix, COALESCE(position, '') as position, ")
             adminQuery.Append("COALESCE(departmentId, '') as departmentId, COALESCE(contactNumber, '') as contactNumber, ")
             adminQuery.Append("email, username, role AS user_type, status, ")
-            adminQuery.Append("COALESCE(employeeId, '') as employeeId, dateAssigned, lastLogin, createdAt, ")
+            adminQuery.Append("COALESCE(employeeId, '') as employeeId, createdAt AS dateAssigned, lastLogin, createdAt, ")
             adminQuery.Append("COALESCE(barangay, '') as barangay, ")
             adminQuery.Append("COALESCE(municipal, '') as municipal, COALESCE(province, '') as province ")
             adminQuery.Append("FROM users WHERE role IN ('Admin','SuperAdmin')")
@@ -5061,7 +5061,7 @@ Public Class DatabaseConnection
             staffQuery.Append("COALESCE(suffix, '') as suffix, COALESCE(position, 'Staff') as position, ")
             staffQuery.Append("COALESCE(CAST(departmentId AS CHAR), '') as departmentId, COALESCE(contactNumber, '') as contactNumber, ")
             staffQuery.Append("email, username, role AS user_type, status, ")
-            staffQuery.Append("COALESCE(employeeId, '') as employeeId, dateAssigned, lastLogin, createdAt, ")
+            staffQuery.Append("COALESCE(employeeId, '') as employeeId, createdAt AS dateAssigned, lastLogin, createdAt, ")
             staffQuery.Append("COALESCE(province, '') as province_city, COALESCE(municipal, '') as municipality, COALESCE(barangay, '') as barangay, '' as house_no_street ")
             staffQuery.Append("FROM users WHERE role = 'Staff'")
 
@@ -5184,7 +5184,7 @@ Public Class DatabaseConnection
 
             Dim query As String = "SELECT userId, firstName, middleName, lastName, suffix, position, " &
                                  "departmentId, contactNumber, email, username, role, status, " &
-                                 "employeeId, dateAssigned, lastLogin, createdAt, updatedAt, " &
+                                 "employeeId, createdAt AS dateAssigned, lastLogin, createdAt, updatedAt, " &
                                  "province, municipal, barangay " &
                                  "FROM users WHERE userId = @userId LIMIT 1"
 

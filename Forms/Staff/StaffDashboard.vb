@@ -65,16 +65,28 @@ Public Class StaffDashboard
     End Sub
 
     Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
-        ' --- THIS CHECK IS STILL NEEDED ---
-        If Not isSidebarExpanded Then
-            ' If the panel is collapsed, expand it.
-            ToggleSidebar()
-        End If
-        ' --- END OF CHECK ---
+        Try
+            ' --- THIS CHECK IS STILL NEEDED ---
+            If Not isSidebarExpanded Then
+                ' If the panel is collapsed, expand it.
+                ToggleSidebar()
+            End If
+            ' --- END OF CHECK ---
 
-        SetActiveButton(btnDashboard)
-        pnlFormLoader.Visible = True
-        LoadDashboardData()
+            SetActiveButton(btnDashboard)
+            
+            ' Clear any existing user controls from the panel
+            pnlFormLoader.Controls.Clear()
+            
+            ' Show the dashboard panel
+            pnlFormLoader.Visible = True
+            
+            ' Load dashboard data
+            LoadDashboardData()
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("btnDashboard_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+            MessageBox.Show("Error loading dashboard: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub LoadDashboardData()
@@ -100,7 +112,7 @@ Public Class StaffDashboard
                         Dim itemName As String = ""
                         Dim requestType As String = ""
                         Dim quantity As String = "1"
-                        Dim status As String = ""
+                        Dim requestStatus As String = ""
                         Dim approvedBy As String = ""
                         Dim releaseDate As String = ""
                         Dim returnDate As String = ""
@@ -121,7 +133,7 @@ Public Class StaffDashboard
                             quantity = row("quantity").ToString()
                         End If
                         If dt.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
-                            status = row("status").ToString()
+                            requestStatus = row("status").ToString()
                         End If
                         If dt.Columns.Contains("approval_date") AndAlso Not IsDBNull(row("approval_date")) Then
                             approvedBy = Convert.ToDateTime(row("approval_date")).ToString("yyyy-MM-dd")
@@ -133,7 +145,7 @@ Public Class StaffDashboard
                             returnDate = Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd")
                         End If
 
-                        DataGridView1.Rows.Add(requestID, SessionContext.CurrentUserID.Value.ToString(), "", requestDate, itemName, quantity, status, approvedBy, releaseDate, returnDate)
+                        DataGridView1.Rows.Add(requestID, SessionContext.CurrentUserID.Value.ToString(), "", requestDate, itemName, quantity, requestStatus, approvedBy, releaseDate, returnDate)
                     Catch rowEx As Exception
                         System.Diagnostics.Debug.WriteLine("Error processing row in LoadDashboardData: " & rowEx.Message)
                     End Try
