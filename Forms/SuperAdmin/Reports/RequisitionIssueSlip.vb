@@ -11,6 +11,33 @@ Partial Public Class RequisitionIssueSlip
         InitializeComponent()
     End Sub
 
+    Private Sub RequisitionIssueSlip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadRequisitionData()
+    End Sub
+
+    Private Sub LoadRequisitionData()
+        Try
+            ' Load supply requests using DatabaseConnection function
+            Dim dt As DataTable = DatabaseConnection.GetAllSuppliesRequests()
+            If dt Is Nothing OrElse dt.Rows.Count = 0 Then
+                requisitionTable = New DataTable()
+                Return
+            End If
+
+            ' Build requisition table
+            requisitionTable = BuildRequisitionTable(dt)
+
+            ' Populate form fields with first record if available
+            If dt.Rows.Count > 0 Then
+                Dim firstRow As DataRow = dt.Rows(0)
+                ' Populate any form fields if needed
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading requisition data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            requisitionTable = New DataTable()
+        End Try
+    End Sub
+
     Private Sub admin_label_Reports_Click(sender As Object, e As EventArgs)
 
     End Sub
@@ -59,9 +86,9 @@ Partial Public Class RequisitionIssueSlip
 
         For Each row As DataRow In filteredRows
             Try
-                Dim quantityRequested As Integer = SafeGetInt(row, "quantity_requested", 1)
+                Dim quantityRequested As Integer = SafeGetInt(row, "quantityRequested", "quantity_requested", 1)
                 Dim newRow As DataRow = reportTable.NewRow()
-                newRow("requisitionName") = SafeGetString(row, "item_name")
+                newRow("requisitionName") = SafeGetString(row, "itemName", "item_name")
                 newRow("requisitionUnit") = SafeGetString(row, "unit", "Unit")
                 newRow("requisitionParticulars") = SafeGetString(row, "description")
                 newRow("requisitionQuantity1") = quantityRequested
@@ -125,21 +152,39 @@ Partial Public Class RequisitionIssueSlip
         ReportExportHelper.ExportDataTableToPdf(requisitionTable, fileName, "Requisition and Issue Slip")
     End Sub
 
-    Private Function SafeGetString(row As DataRow, columnName As String, Optional fallback As String = "") As String
-        If row.Table.Columns.Contains(columnName) AndAlso Not Convert.IsDBNull(row(columnName)) Then
-            Return row(columnName).ToString()
+    Private Function SafeGetString(row As DataRow, ParamArray names() As String) As String
+        For Each name As String In names
+            If row.Table.Columns.Contains(name) AndAlso Not Convert.IsDBNull(row(name)) Then
+                Return row(name).ToString()
+            End If
+        Next
+        ' If no match found and last parameter is not a column name, use it as fallback
+        If names.Length > 0 AndAlso Not row.Table.Columns.Contains(names(names.Length - 1)) Then
+            Return names(names.Length - 1)
         End If
-        Return fallback
+        Return ""
     End Function
 
-    Private Function SafeGetInt(row As DataRow, columnName As String, Optional fallback As Integer = 0) As Integer
-        If row.Table.Columns.Contains(columnName) AndAlso Not Convert.IsDBNull(row(columnName)) Then
-            Dim value As Integer
-            If Integer.TryParse(row(columnName).ToString(), value) Then
-                Return value
+    Private Function SafeGetInt(row As DataRow, ParamArray names() As String) As Integer
+        For Each name As String In names
+            If row.Table.Columns.Contains(name) AndAlso Not Convert.IsDBNull(row(name)) Then
+                Dim value As Integer
+                If Integer.TryParse(row(name).ToString(), value) Then
+                    Return value
+                End If
+            End If
+        Next
+        ' If no match found and last parameter is numeric, use it as fallback
+        If names.Length > 0 Then
+            Dim lastParam As String = names(names.Length - 1)
+            If Not row.Table.Columns.Contains(lastParam) Then
+                Dim fallbackValue As Integer
+                If Integer.TryParse(lastParam, fallbackValue) Then
+                    Return fallbackValue
+                End If
             End If
         End If
-        Return fallback
+        Return 0
     End Function
 
     Private Sub entityName_Click(sender As Object, e As EventArgs) Handles entityName.Click

@@ -5,6 +5,7 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Imports System.Linq
+Imports System.Collections.Generic
 Imports System.Globalization
 
 Public Class UC_PropertyManagement1
@@ -275,9 +276,9 @@ Public Class UC_PropertyManagement1
             ' Apply location filter if specified
             If Not String.IsNullOrEmpty(locationFilter) Then
                 Dim filteredRows = dt.AsEnumerable().Where(Function(r)
-                    Dim loc As String = If(r.Table.Columns.Contains("location") AndAlso Not IsDBNull(r("location")), r("location").ToString(), "")
-                    Return loc = locationFilter
-                End Function)
+                                                               Dim loc As String = If(r.Table.Columns.Contains("location") AndAlso Not IsDBNull(r("location")), r("location").ToString(), "")
+                                                               Return loc = locationFilter
+                                                           End Function)
                 dt = filteredRows.CopyToDataTable()
             End If
 
@@ -397,29 +398,29 @@ Public Class UC_PropertyManagement1
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
             Dim statusFilter As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
 
-            Dim filtered = originalData.AsEnumerable().Where(Function(row)
-                ' Apply status filter
-                If Not String.IsNullOrEmpty(statusFilter) Then
-                    Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
-                    If status <> statusFilter.ToLower() Then Return False
-                End If
+            Dim filteredRows As IEnumerable(Of DataRow) = originalData.AsEnumerable().Where(Function(row)
+                                                                                                ' Apply status filter
+                                                                                                If Not String.IsNullOrEmpty(statusFilter) Then
+                                                                                                    Dim rowStatusValue As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
+                                                                                                    If rowStatusValue <> statusFilter.ToLower() Then Return False
+                                                                                                End If
 
-                ' Apply search filter
-                If String.IsNullOrEmpty(searchLower) Then Return True
+                                                                                                ' Apply search filter
+                                                                                                If String.IsNullOrEmpty(searchLower) Then Return True
 
-                Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
-                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
-                Dim description As String = If(row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")), row("description").ToString().ToLower(), String.Empty)
-                Dim assignedEmployee As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString().ToLower(), String.Empty)
-                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
-                Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString().ToLower(), String.Empty)
-                Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
+                                                                                                Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
+                                                                                                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
+                                                                                                Dim description As String = If(row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")), row("description").ToString().ToLower(), String.Empty)
+                                                                                                Dim assignedEmployee As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString().ToLower(), String.Empty)
+                                                                                                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
+                                                                                                Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString().ToLower(), String.Empty)
+                                                                                                Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
 
-                Return itemName.Contains(searchLower) OrElse category.Contains(searchLower) OrElse description.Contains(searchLower) OrElse assignedEmployee.Contains(searchLower) OrElse location.Contains(searchLower) OrElse condition.Contains(searchLower) OrElse status.Contains(searchLower)
-            End Function)
+                                                                                                Return itemName.Contains(searchLower) OrElse category.Contains(searchLower) OrElse description.Contains(searchLower) OrElse assignedEmployee.Contains(searchLower) OrElse location.Contains(searchLower) OrElse condition.Contains(searchLower) OrElse rowStatus.Contains(searchLower)
+                                                                                            End Function)
 
             propertyManagementGrid.Rows.Clear()
-            For Each row As DataRow In filtered
+            For Each row As DataRow In filteredRows
                 ' Extract propertyId first
                 Dim propID As Integer = 0
                 If row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")) Then
@@ -459,7 +460,7 @@ Public Class UC_PropertyManagement1
             Next
 
             If ttlpropertymanagement IsNot Nothing Then
-                ttlpropertymanagement.Text = filtered.Count().ToString()
+                ttlpropertymanagement.Text = filteredRows.Count().ToString()
             End If
         Catch ex As Exception
             MessageBox.Show("Error searching properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

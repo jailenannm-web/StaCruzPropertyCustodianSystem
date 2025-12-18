@@ -85,16 +85,16 @@ Public Class SupplyInventory
     End Sub
     
     Private Sub ApplySupplySearch(searchText As String)
-        If originalData Is Nothing Then Return
+        If originalData Is Nothing OrElse originalData.Rows.Count = 0 Then Return
         If isSearching Then Return
         isSearching = True
         
         Try
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
             Dim categoryFilter As String = If(pm_cbobx_categ.SelectedIndex > 0, pm_cbobx_categ.SelectedItem.ToString(), String.Empty)
-            Dim statusFilter As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
+            Dim statusFilterValue As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
             
-            Dim filtered = originalData.AsEnumerable().Where(Function(row)
+            Dim filteredRows As IEnumerable(Of DataRow) = originalData.AsEnumerable().Where(Function(row)
                 ' Apply category filter
                 If Not String.IsNullOrEmpty(categoryFilter) Then
                     Dim cat As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), String.Empty)
@@ -102,9 +102,9 @@ Public Class SupplyInventory
                 End If
                 
                 ' Apply status filter
-                If Not String.IsNullOrEmpty(statusFilter) Then
-                    Dim stockStatus As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), String.Empty)
-                    If Not stockStatus.Equals(statusFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                If Not String.IsNullOrEmpty(statusFilterValue) Then
+                    Dim stockStatusValue As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), String.Empty)
+                    If Not stockStatusValue.Equals(statusFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
                 End If
                 
                 ' Apply search filter
@@ -119,7 +119,7 @@ Public Class SupplyInventory
             End Function)
             
             propertyManagementGrid.Rows.Clear()
-            For Each row As DataRow In filtered
+            For Each row As DataRow In filteredRows
                 Dim supplyID As String = ""
                 Dim itemName As String = ""
                 Dim category As String = ""

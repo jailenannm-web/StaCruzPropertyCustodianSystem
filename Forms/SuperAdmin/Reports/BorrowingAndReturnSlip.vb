@@ -7,6 +7,34 @@ Imports System.Windows.Forms
 Public Class BorrowingAndReturnSlip
     Private borrowingTable As DataTable
 
+    Private Sub BorrowingAndReturnSlip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadBorrowingData()
+    End Sub
+
+    Private Sub LoadBorrowingData()
+        Try
+            ' Load property requests that have been approved/borrowed/returned
+            Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
+            If dt Is Nothing Then
+                borrowingTable = New DataTable()
+                Return
+            End If
+
+            ' Build borrowing table
+            borrowingTable = BuildBorrowingTable(dt)
+
+            ' Populate form fields with first record if available
+            If dt.Rows.Count > 0 Then
+                Dim firstRow As DataRow = dt.Rows(0)
+                itemType.Text = SafeGetString(firstRow, "request_type", "property")
+                status.Text = SafeGetString(firstRow, "status", "Pending")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading borrowing data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            borrowingTable = New DataTable()
+        End Try
+    End Sub
+
     Private Sub Label16_Click(sender As Object, e As System.EventArgs)
 
     End Sub

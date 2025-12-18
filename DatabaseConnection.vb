@@ -3059,13 +3059,43 @@ Public Class DatabaseConnection
                 Return False
             End If
 
-            Dim query As String = "INSERT INTO supply_requests (userId, departmentId, date_of_request, " &
-                                 "item_name, quantity_requested, purpose, status) " &
-                                 "VALUES (@userID, @departmentID, CURDATE(), @itemName, " &
+            ' Get requester name and position from user record if not provided
+            Dim finalRequesterName As String = requesterName
+            Dim finalPosition As String = position
+            If String.IsNullOrEmpty(finalRequesterName) OrElse String.IsNullOrEmpty(finalPosition) Then
+                Try
+                    Using userCmd As New MySqlCommand("SELECT firstName, middleName, lastName, suffix, position FROM users WHERE userId = @staffID LIMIT 1", conn)
+                        userCmd.Parameters.AddWithValue("@staffID", staffID)
+                        Using reader As MySqlDataReader = userCmd.ExecuteReader()
+                            If reader.Read() Then
+                                If String.IsNullOrEmpty(finalRequesterName) Then
+                                    Dim firstName As String = If(IsDBNull(reader("firstName")), "", reader("firstName").ToString())
+                                    Dim middleName As String = If(IsDBNull(reader("middleName")), "", reader("middleName").ToString())
+                                    Dim lastName As String = If(IsDBNull(reader("lastName")), "", reader("lastName").ToString())
+                                    Dim suffix As String = If(IsDBNull(reader("suffix")), "", reader("suffix").ToString())
+                                    finalRequesterName = firstName & If(Not String.IsNullOrEmpty(middleName), " " & middleName, "") & " " & lastName & If(Not String.IsNullOrEmpty(suffix), " " & suffix, "")
+                                End If
+                                If String.IsNullOrEmpty(finalPosition) AndAlso Not IsDBNull(reader("position")) Then
+                                    finalPosition = reader("position").ToString()
+                                End If
+                            End If
+                        End Using
+                    End Using
+                Catch
+                    ' Use defaults if unable to fetch
+                    If String.IsNullOrEmpty(finalRequesterName) Then finalRequesterName = "Staff User"
+                    If String.IsNullOrEmpty(finalPosition) Then finalPosition = "Staff"
+                End Try
+            End If
+
+            Dim query As String = "INSERT INTO supplies_requests (requesterName, position, departmentId, dateOfRequest, " &
+                                 "itemName, quantityRequested, purpose, status) " &
+                                 "VALUES (@requesterName, @position, @departmentID, NOW(), @itemName, " &
                                  "@quantity, @purpose, 'Pending')"
 
             Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@userID", staffID)
+                cmd.Parameters.AddWithValue("@requesterName", If(String.IsNullOrEmpty(finalRequesterName), "Staff User", finalRequesterName))
+                cmd.Parameters.AddWithValue("@position", If(String.IsNullOrEmpty(finalPosition), "Staff", finalPosition))
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@itemName", If(String.IsNullOrEmpty(itemName), "Supply Request", itemName))
                 cmd.Parameters.AddWithValue("@quantity", If(quantity > 0, quantity, 1))

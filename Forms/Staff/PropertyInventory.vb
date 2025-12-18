@@ -85,26 +85,26 @@ Public Class PropertyInventory
     End Sub
     
     Private Sub ApplyPropertySearch(searchText As String)
-        If originalData Is Nothing Then Return
+        If originalData Is Nothing OrElse originalData.Rows.Count = 0 Then Return
         If isSearching Then Return
         isSearching = True
         
         Try
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
             Dim categoryFilter As String = If(pm_cbobx_categ.SelectedIndex > 0, pm_cbobx_categ.SelectedItem.ToString(), String.Empty)
-            Dim statusFilter As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
+            Dim statusFilterValue As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
             
-            Dim filtered = originalData.AsEnumerable().Where(Function(row)
+            Dim filteredRows As IEnumerable(Of DataRow) = originalData.AsEnumerable().Where(Function(row)
                 ' Apply category filter
                 If Not String.IsNullOrEmpty(categoryFilter) Then
                     Dim cat As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), String.Empty)
                     If Not cat.Equals(categoryFilter, StringComparison.OrdinalIgnoreCase) Then Return False
                 End If
                 
-                ' Apply status filter
-                If Not String.IsNullOrEmpty(statusFilter) Then
-                    Dim st As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), String.Empty)
-                    If Not st.Equals(statusFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                ' Apply status filter - use statusFilterValue to avoid conflict with Designer field 'status'
+                If Not String.IsNullOrEmpty(statusFilterValue) Then
+                    Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), String.Empty)
+                    If Not rowStatus.Equals(statusFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
                 End If
                 
                 ' Apply search filter
@@ -119,7 +119,7 @@ Public Class PropertyInventory
             End Function)
             
             propertyManagementGrid.Rows.Clear()
-            For Each row As DataRow In filtered
+            For Each row As DataRow In filteredRows
                 Dim propertyNo As String = ""
                 Dim itemName As String = ""
                 Dim category As String = ""
