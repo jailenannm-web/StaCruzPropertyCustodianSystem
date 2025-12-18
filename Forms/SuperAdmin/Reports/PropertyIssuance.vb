@@ -2,6 +2,7 @@
 Imports System.Data
 Imports System.Linq
 Imports System.Windows.Forms
+Imports Microsoft.VisualBasic
 
 Public Class PropertyIssuance
     Private propertyIssuanceTable As DataTable
@@ -27,7 +28,7 @@ Public Class PropertyIssuance
                 Dim firstRow As DataRow = propertyIssuanceTable.Rows(0)
                 entityNameTxt.Text = SafeGetString(firstRow, "entityName", "Sta. Cruz Property Custodian System")
                 numberPAR.Text = SafeGetString(firstRow, "parNumber", "PAR-" & DateTime.Now.ToString("yyyyMMdd"))
-                If propertyIssuanceTable.Columns.Contains("dateIssued") AndAlso Not IsDBNull(firstRow("dateIssued")) Then
+                If propertyIssuanceTable.Columns.Contains("dateIssued") AndAlso Not Convert.IsDBNull(firstRow("dateIssued")) Then
                     DateTimePicker1.Value = Convert.ToDateTime(firstRow("dateIssued"))
                 End If
             Else
@@ -43,10 +44,10 @@ Public Class PropertyIssuance
                 propertyNumber.Text = SafeGetString(firstRequest, "propertyNumber", "propertyId", "")
                 description.Text = SafeGetString(firstRequest, "description", "itemDescription", "")
                 quantity.Text = SafeGetString(firstRequest, "quantity", "1")
-                If dt.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(firstRequest("acquisitionCost")) Then
+                If dt.Columns.Contains("acquisitionCost") AndAlso Not Convert.IsDBNull(firstRequest("acquisitionCost")) Then
                     amount.Text = Convert.ToDecimal(firstRequest("acquisitionCost")).ToString("N2")
                 End If
-                If dt.Columns.Contains("acquisitionDate") AndAlso Not IsDBNull(firstRequest("acquisitionDate")) Then
+                If dt.Columns.Contains("acquisitionDate") AndAlso Not Convert.IsDBNull(firstRequest("acquisitionDate")) Then
                     dateAcquired.Value = Convert.ToDateTime(firstRequest("acquisitionDate"))
                 End If
             End If
@@ -80,7 +81,7 @@ Public Class PropertyIssuance
                     newRow("propertyNumber") = SafeGetString(row, "propertyNumber", "propertyId", "")
                     newRow("description") = SafeGetString(row, "description", "itemDescription", "itemName", "")
                     newRow("quantity") = SafeGetInt(row, "quantity", 1)
-                    newRow("amount") = SafeGetDecimal(row, "acquisitionCost", "totalCost", 0)
+                    newRow("amount") = SafeGetDecimal(row, "acquisitionCost", "totalCost", 0D)
                     newRow("dateAcquired") = SafeGetDate(row, "acquisitionDate", DateTime.Now)
                     reportTable.Rows.Add(newRow)
                 End If
@@ -113,7 +114,7 @@ Public Class PropertyIssuance
                 End If
             End If
         Next
-        Return 0
+        Return 0D
     End Function
 
     Private Sub fundCluster_Click(sender As Object, e As System.EventArgs) Handles fundCluster.Click

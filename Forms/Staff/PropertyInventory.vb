@@ -3,6 +3,7 @@ Imports System.Data
 Imports System.Linq
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
+Imports System.Collections.Generic
 
 Public Class PropertyInventory
     Inherits System.Windows.Forms.UserControl
@@ -39,11 +40,11 @@ Public Class PropertyInventory
             If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
                 For Each row As DataRow In categories.Rows
                     Dim categoryName As String = ""
-                    If row.Table.Columns.Contains("category_name") AndAlso Not IsDBNull(row("category_name")) Then
+                    If row.Table.Columns.Contains("category_name") AndAlso Not Convert.IsDBNull(row("category_name")) Then
                         categoryName = row("category_name").ToString()
-                    ElseIf row.Table.Columns.Contains("categoryName") AndAlso Not IsDBNull(row("categoryName")) Then
+                    ElseIf row.Table.Columns.Contains("categoryName") AndAlso Not Convert.IsDBNull(row("categoryName")) Then
                         categoryName = row("categoryName").ToString()
-                    ElseIf row.Table.Columns.Count > 0 AndAlso Not IsDBNull(row(0)) Then
+                    ElseIf row.Table.Columns.Count > 0 AndAlso Not Convert.IsDBNull(row(0)) Then
                         categoryName = row(0).ToString()
                     End If
                     If Not String.IsNullOrEmpty(categoryName) AndAlso Not pm_cbobx_categ.Items.Contains(categoryName) Then
@@ -94,29 +95,29 @@ Public Class PropertyInventory
             Dim categoryFilter As String = If(pm_cbobx_categ.SelectedIndex > 0, pm_cbobx_categ.SelectedItem.ToString(), String.Empty)
             Dim statusFilterValue As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
             
-            Dim filteredRows As IEnumerable(Of DataRow) = originalData.AsEnumerable().Where(Function(row)
+            Dim filteredRows() As DataRow = originalData.AsEnumerable().Where(Function(row)
                 ' Apply category filter
                 If Not String.IsNullOrEmpty(categoryFilter) Then
-                    Dim cat As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), String.Empty)
+                    Dim cat As String = If(row.Table.Columns.Contains("category") AndAlso Not Convert.IsDBNull(row("category")), row("category").ToString(), String.Empty)
                     If Not cat.Equals(categoryFilter, StringComparison.OrdinalIgnoreCase) Then Return False
                 End If
                 
                 ' Apply status filter - use statusFilterValue to avoid conflict with Designer field 'status'
                 If Not String.IsNullOrEmpty(statusFilterValue) Then
-                    Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), String.Empty)
+                    Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not Convert.IsDBNull(row("status")), row("status").ToString(), String.Empty)
                     If Not rowStatus.Equals(statusFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
                 End If
                 
                 ' Apply search filter
                 If String.IsNullOrEmpty(searchLower) Then Return True
                 
-                Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
-                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
-                Dim description As String = If(row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")), row("description").ToString().ToLower(), String.Empty)
-                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
+                Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not Convert.IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
+                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not Convert.IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
+                Dim description As String = If(row.Table.Columns.Contains("description") AndAlso Not Convert.IsDBNull(row("description")), row("description").ToString().ToLower(), String.Empty)
+                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not Convert.IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
                 
                 Return itemName.Contains(searchLower) OrElse category.Contains(searchLower) OrElse description.Contains(searchLower) OrElse location.Contains(searchLower)
-            End Function)
+            End Function).ToArray()
             
             propertyManagementGrid.Rows.Clear()
             For Each row As DataRow In filteredRows
@@ -130,30 +131,30 @@ Public Class PropertyInventory
                 Dim propertyStatus As String = ""
                 
                 Try
-                    If row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")) Then
+                    If row.Table.Columns.Contains("propertyNumber") AndAlso Not Convert.IsDBNull(row("propertyNumber")) Then
                         propertyNo = row("propertyNumber").ToString()
-                    ElseIf row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")) Then
+                    ElseIf row.Table.Columns.Contains("propertyId") AndAlso Not Convert.IsDBNull(row("propertyId")) Then
                         propertyNo = row("propertyId").ToString()
                     End If
-                    If row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")) Then
+                    If row.Table.Columns.Contains("itemName") AndAlso Not Convert.IsDBNull(row("itemName")) Then
                         itemName = row("itemName").ToString()
                     End If
-                    If row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")) Then
+                    If row.Table.Columns.Contains("category") AndAlso Not Convert.IsDBNull(row("category")) Then
                         category = row("category").ToString()
                     End If
-                    If row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")) Then
+                    If row.Table.Columns.Contains("description") AndAlso Not Convert.IsDBNull(row("description")) Then
                         description = row("description").ToString()
                     End If
-                    If row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")) Then
+                    If row.Table.Columns.Contains("location") AndAlso Not Convert.IsDBNull(row("location")) Then
                         location = row("location").ToString()
                     End If
-                    If row.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")) Then
+                    If row.Table.Columns.Contains("assignedDepartment") AndAlso Not Convert.IsDBNull(row("assignedDepartment")) Then
                         department = row("assignedDepartment").ToString()
                     End If
-                    If row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")) Then
+                    If row.Table.Columns.Contains("condition") AndAlso Not Convert.IsDBNull(row("condition")) Then
                         condition = row("condition").ToString()
                     End If
-                    If row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
+                    If row.Table.Columns.Contains("status") AndAlso Not Convert.IsDBNull(row("status")) Then
                         propertyStatus = row("status").ToString()
                     End If
                 Catch colEx As Exception
@@ -212,30 +213,30 @@ Public Class PropertyInventory
                     
                     ' Handle different possible column names
                     Try
-                        If row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")) Then
+                        If row.Table.Columns.Contains("propertyNumber") AndAlso Not Convert.IsDBNull(row("propertyNumber")) Then
                             propertyNo = row("propertyNumber").ToString()
-                        ElseIf row.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(row("propertyId")) Then
+                        ElseIf row.Table.Columns.Contains("propertyId") AndAlso Not Convert.IsDBNull(row("propertyId")) Then
                             propertyNo = row("propertyId").ToString()
                         End If
-                        If row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")) Then
+                        If row.Table.Columns.Contains("itemName") AndAlso Not Convert.IsDBNull(row("itemName")) Then
                             itemName = row("itemName").ToString()
                         End If
-                        If row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")) Then
+                        If row.Table.Columns.Contains("category") AndAlso Not Convert.IsDBNull(row("category")) Then
                             category = row("category").ToString()
                         End If
-                        If row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")) Then
+                        If row.Table.Columns.Contains("description") AndAlso Not Convert.IsDBNull(row("description")) Then
                             description = row("description").ToString()
                         End If
-                        If row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")) Then
+                        If row.Table.Columns.Contains("location") AndAlso Not Convert.IsDBNull(row("location")) Then
                             location = row("location").ToString()
                         End If
-                        If row.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(row("assignedDepartment")) Then
+                        If row.Table.Columns.Contains("assignedDepartment") AndAlso Not Convert.IsDBNull(row("assignedDepartment")) Then
                             department = row("assignedDepartment").ToString()
                         End If
-                        If row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")) Then
+                        If row.Table.Columns.Contains("condition") AndAlso Not Convert.IsDBNull(row("condition")) Then
                             condition = row("condition").ToString()
                         End If
-                        If row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
+                        If row.Table.Columns.Contains("status") AndAlso Not Convert.IsDBNull(row("status")) Then
                             propertyStatus = row("status").ToString()
                         End If
                     Catch colEx As Exception
@@ -300,7 +301,7 @@ Public Class PropertyInventory
                 
                 If SessionContext.CurrentUserID.HasValue Then
                     Try
-                        Dim profile As Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
+                        Dim profile As System.Collections.Generic.Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
                         If profile IsNot Nothing AndAlso profile.Count > 0 Then
                             ' Build full name
                             Dim firstName As String = If(profile.ContainsKey("firstName"), profile("firstName").ToString(), "")

@@ -75,12 +75,26 @@ Public Class UC_PropertyManagement1
         Next
     End Sub
 
+    Private Function FindStatusComboBox() As ComboBox
+        Dim names() As String = {"pm_cbobx_status", "statusFilter", "cbStatus"}
+        For Each nm As String In names
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                Return CType(found(0), ComboBox)
+            End If
+        Next
+        Return Nothing
+    End Function
+
     Private Sub InitializeFilters()
-        ' Populate status filter
-        pm_cbobx_status.Items.Clear()
-        pm_cbobx_status.Items.Add("All Status")
-        pm_cbobx_status.Items.AddRange(New String() {"Active", "For Disposal", "Lost", "Borrowed"})
-        pm_cbobx_status.SelectedIndex = 0
+        ' Populate status filter using dynamic lookup
+        Dim statusCb As ComboBox = FindStatusComboBox()
+        If statusCb IsNot Nothing Then
+            statusCb.Items.Clear()
+            statusCb.Items.Add("All Status")
+            statusCb.Items.AddRange(New String() {"Active", "For Disposal", "Lost", "Borrowed"})
+            statusCb.SelectedIndex = 0
+        End If
 
         ' Populate category filter
         Dim categoryFilter As ComboBox = Nothing
@@ -187,8 +201,10 @@ Public Class UC_PropertyManagement1
             AddHandler conditionFilter.SelectedIndexChanged, AddressOf Filter_Changed
         End If
 
-        ' Wire up filter change events
-        AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
+        ' Wire up filter change events for status control if found
+        If statusCb IsNot Nothing Then
+            AddHandler statusCb.SelectedIndexChanged, AddressOf Filter_Changed
+        End If
     End Sub
 
     Public Sub LoadPropertiesData()
@@ -200,8 +216,9 @@ Public Class UC_PropertyManagement1
             Dim conditionFilter As String = ""
 
             ' Get status filter from dropdown
-            If pm_cbobx_status.SelectedIndex > 0 Then
-                statusFilter = pm_cbobx_status.SelectedItem.ToString()
+            Dim statusCb As ComboBox = FindStatusComboBox()
+            If statusCb IsNot Nothing AndAlso statusCb.SelectedIndex > 0 Then
+                statusFilter = statusCb.SelectedItem.ToString()
             End If
 
             ' Get category filter
@@ -396,7 +413,8 @@ Public Class UC_PropertyManagement1
 
         Try
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
-            Dim statusFilter As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
+            Dim statusCb As ComboBox = FindStatusComboBox()
+            Dim statusFilter As String = If(statusCb IsNot Nothing AndAlso statusCb.SelectedIndex > 0, statusCb.SelectedItem.ToString(), String.Empty)
 
             Dim filteredRows As IEnumerable(Of DataRow) = originalData.AsEnumerable().Where(Function(row)
                                                                                                 ' Apply status filter
@@ -727,7 +745,7 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub mnuPrintPARICS_Click(sender As Object, e As EventArgs) _
-    Handles mnuPrintPARICS.Click
+   Handles mnuPrintPARICS.Click
 
         MessageBox.Show("Print PAR/ICS clicked!")
     End Sub

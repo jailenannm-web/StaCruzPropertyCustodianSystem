@@ -50,27 +50,28 @@ Public Class frmRequest
             Dim statusFilterValue As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
             Dim categoryFilterValue As String = If(pm_cbobx_categ.SelectedIndex > 0, pm_cbobx_categ.SelectedItem.ToString(), String.Empty)
 
-            Dim filteredRows As IEnumerable(Of DataRow) = originalRequestData.AsEnumerable().Where(Function(row)
-                ' Apply status filter
-                If Not String.IsNullOrEmpty(statusFilterValue) Then
-                    Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), String.Empty)
-                    If Not rowStatus.Equals(statusFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
-                End If
+            ' Produce a DataRow() array so For Each can iterate without type resolution issues.
+            Dim filteredRows() As DataRow = originalRequestData.AsEnumerable().Where(Function(row)
+                                                                                         ' Apply status filter
+                                                                                         If Not String.IsNullOrEmpty(statusFilterValue) Then
+                                                                                             Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), String.Empty)
+                                                                                             If Not rowStatus.Equals(statusFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                                         End If
 
-                ' Apply category/type filter
-                If Not String.IsNullOrEmpty(categoryFilterValue) Then
-                    Dim requestType As String = If(row.Table.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")), row("request_type").ToString(), String.Empty)
-                    If Not requestType.Equals(categoryFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
-                End If
+                                                                                         ' Apply category/type filter
+                                                                                         If Not String.IsNullOrEmpty(categoryFilterValue) Then
+                                                                                             Dim requestType As String = If(row.Table.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")), row("request_type").ToString(), String.Empty)
+                                                                                             If Not requestType.Equals(categoryFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                                         End If
 
-                ' Apply search filter
-                If String.IsNullOrEmpty(searchLower) Then Return True
+                                                                                         ' Apply search filter
+                                                                                         If String.IsNullOrEmpty(searchLower) Then Return True
 
-                Dim itemName As String = If(row.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")), row("item_name").ToString().ToLower(), String.Empty)
-                Dim requestID As String = If(row.Table.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")), row("request_id").ToString().ToLower(), String.Empty)
+                                                                                         Dim itemName As String = If(row.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")), row("item_name").ToString().ToLower(), String.Empty)
+                                                                                         Dim requestID As String = If(row.Table.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")), row("request_id").ToString().ToLower(), String.Empty)
 
-                Return itemName.Contains(searchLower) OrElse requestID.Contains(searchLower)
-            End Function)
+                                                                                         Return itemName.Contains(searchLower) OrElse requestID.Contains(searchLower)
+                                                                                     End Function).ToArray()
 
             DataGridView1.Rows.Clear()
             For Each row As DataRow In filteredRows

@@ -123,7 +123,7 @@ Partial Class AddPropertyRequest
         Me.Panel2.Controls.Add(Me.approved_by)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Location = New System.Drawing.Point(656, 18)
+        Me.Panel2.Location = New System.Drawing.Point(639, 18)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(537, 415)
@@ -245,7 +245,7 @@ Partial Class AddPropertyRequest
         Me.Panel1.Controls.Add(Me.department_id)
         Me.Panel1.Controls.Add(Me.employeeID)
         Me.Panel1.Controls.Add(Me.request_id)
-        Me.Panel1.Location = New System.Drawing.Point(67, 18)
+        Me.Panel1.Location = New System.Drawing.Point(50, 18)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(553, 415)
