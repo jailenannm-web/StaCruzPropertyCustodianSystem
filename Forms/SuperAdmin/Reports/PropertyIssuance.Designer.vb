@@ -29,15 +29,6 @@ Partial Class PropertyIssuance
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.lblPropertyCard = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.fundClusterTxt = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.propertyAcknowledgement = New System.Windows.Forms.DataGridView()
-        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.propertyNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateAcquired = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -58,19 +49,32 @@ Partial Class PropertyIssuance
         Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedButton2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.quantity = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.description = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.propertyNumber = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.dateAcquired = New System.Windows.Forms.DateTimePicker()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.amount = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel11.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        CType(Me.propertyAcknowledgement, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblName
         '
         Me.lblName.AutoSize = True
         Me.lblName.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblName.Location = New System.Drawing.Point(10, 9)
+        Me.lblName.Location = New System.Drawing.Point(11, 22)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(87, 22)
         Me.lblName.TabIndex = 38
@@ -80,9 +84,9 @@ Partial Class PropertyIssuance
         'numberPAR
         '
         Me.numberPAR.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.numberPAR.Location = New System.Drawing.Point(624, 7)
+        Me.numberPAR.Location = New System.Drawing.Point(598, 20)
         Me.numberPAR.Name = "numberPAR"
-        Me.numberPAR.Size = New System.Drawing.Size(275, 22)
+        Me.numberPAR.Size = New System.Drawing.Size(302, 22)
         Me.numberPAR.TabIndex = 45
         '
         'fundCluster
@@ -90,7 +94,7 @@ Partial Class PropertyIssuance
         Me.fundCluster.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.fundCluster.AutoSize = True
         Me.fundCluster.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.fundCluster.Location = New System.Drawing.Point(555, 9)
+        Me.fundCluster.Location = New System.Drawing.Point(473, 22)
         Me.fundCluster.Name = "fundCluster"
         Me.fundCluster.Size = New System.Drawing.Size(63, 22)
         Me.fundCluster.TabIndex = 39
@@ -99,7 +103,7 @@ Partial Class PropertyIssuance
         '
         'entityNameTxt
         '
-        Me.entityNameTxt.Location = New System.Drawing.Point(135, 7)
+        Me.entityNameTxt.Location = New System.Drawing.Point(136, 20)
         Me.entityNameTxt.Name = "entityNameTxt"
         Me.entityNameTxt.Size = New System.Drawing.Size(302, 22)
         Me.entityNameTxt.TabIndex = 55
@@ -111,7 +115,7 @@ Partial Class PropertyIssuance
         Me.Panel11.BackColor = System.Drawing.Color.White
         Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel11.Controls.Add(Me.lblPropertyCard)
-        Me.Panel11.Location = New System.Drawing.Point(374, 77)
+        Me.Panel11.Location = New System.Drawing.Point(359, 140)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Size = New System.Drawing.Size(913, 64)
         Me.Panel11.TabIndex = 56
@@ -122,7 +126,7 @@ Partial Class PropertyIssuance
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPropertyCard.AutoSize = True
         Me.lblPropertyCard.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPropertyCard.Location = New System.Drawing.Point(204, 10)
+        Me.lblPropertyCard.Location = New System.Drawing.Point(204, 14)
         Me.lblPropertyCard.Name = "lblPropertyCard"
         Me.lblPropertyCard.Size = New System.Drawing.Size(527, 44)
         Me.lblPropertyCard.TabIndex = 38
@@ -134,90 +138,14 @@ Partial Class PropertyIssuance
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.fundClusterTxt)
-        Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.fundCluster)
         Me.Panel1.Controls.Add(Me.numberPAR)
         Me.Panel1.Controls.Add(Me.entityNameTxt)
         Me.Panel1.Controls.Add(Me.lblName)
-        Me.Panel1.Location = New System.Drawing.Point(374, 139)
+        Me.Panel1.Location = New System.Drawing.Point(359, 202)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(913, 64)
         Me.Panel1.TabIndex = 57
-        '
-        'fundClusterTxt
-        '
-        Me.fundClusterTxt.Location = New System.Drawing.Point(135, 35)
-        Me.fundClusterTxt.Name = "fundClusterTxt"
-        Me.fundClusterTxt.Size = New System.Drawing.Size(302, 22)
-        Me.fundClusterTxt.TabIndex = 57
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(10, 37)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(90, 22)
-        Me.Label1.TabIndex = 56
-        Me.Label1.Text = "Fund Cluster:"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'propertyAcknowledgement
-        '
-        Me.propertyAcknowledgement.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.propertyAcknowledgement.BackgroundColor = System.Drawing.Color.White
-        Me.propertyAcknowledgement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.propertyAcknowledgement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.quantity, Me.unit, Me.description, Me.propertyNumber, Me.dateAcquired, Me.amount})
-        Me.propertyAcknowledgement.Location = New System.Drawing.Point(374, 203)
-        Me.propertyAcknowledgement.Name = "propertyAcknowledgement"
-        Me.propertyAcknowledgement.RowHeadersWidth = 51
-        Me.propertyAcknowledgement.RowTemplate.Height = 24
-        Me.propertyAcknowledgement.Size = New System.Drawing.Size(913, 301)
-        Me.propertyAcknowledgement.TabIndex = 59
-        '
-        'quantity
-        '
-        Me.quantity.HeaderText = "Quantity"
-        Me.quantity.MinimumWidth = 6
-        Me.quantity.Name = "quantity"
-        Me.quantity.Width = 125
-        '
-        'unit
-        '
-        Me.unit.HeaderText = "Unit"
-        Me.unit.MinimumWidth = 6
-        Me.unit.Name = "unit"
-        Me.unit.Width = 125
-        '
-        'description
-        '
-        Me.description.HeaderText = "Description"
-        Me.description.MinimumWidth = 6
-        Me.description.Name = "description"
-        Me.description.Width = 200
-        '
-        'propertyNumber
-        '
-        Me.propertyNumber.HeaderText = "Property Number"
-        Me.propertyNumber.MinimumWidth = 6
-        Me.propertyNumber.Name = "propertyNumber"
-        Me.propertyNumber.Width = 140
-        '
-        'dateAcquired
-        '
-        Me.dateAcquired.HeaderText = "Date Acquired"
-        Me.dateAcquired.MinimumWidth = 6
-        Me.dateAcquired.Name = "dateAcquired"
-        Me.dateAcquired.Width = 125
-        '
-        'amount
-        '
-        Me.amount.HeaderText = "Amount"
-        Me.amount.MinimumWidth = 6
-        Me.amount.Name = "amount"
-        Me.amount.Width = 150
         '
         'TableLayoutPanel1
         '
@@ -230,7 +158,7 @@ Partial Class PropertyIssuance
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(374, 504)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(359, 398)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -325,7 +253,7 @@ Partial Class PropertyIssuance
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(7, 20)
+        Me.Label7.Location = New System.Drawing.Point(14, 20)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(71, 22)
         Me.Label7.TabIndex = 56
@@ -424,7 +352,7 @@ Partial Class PropertyIssuance
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(7, 20)
+        Me.Label2.Location = New System.Drawing.Point(10, 20)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(85, 22)
         Me.Label2.TabIndex = 56
@@ -439,7 +367,7 @@ Partial Class PropertyIssuance
         Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(1134, 816)
+        Me.RoundedButton1.Location = New System.Drawing.Point(1119, 709)
         Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
         Me.RoundedButton1.Name = "RoundedButton1"
         Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
@@ -455,7 +383,7 @@ Partial Class PropertyIssuance
         Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCSV.Location = New System.Drawing.Point(973, 816)
+        Me.btnCSV.Location = New System.Drawing.Point(958, 709)
         Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCSV.Name = "btnCSV"
         Me.btnCSV.Size = New System.Drawing.Size(153, 34)
@@ -471,7 +399,7 @@ Partial Class PropertyIssuance
         Me.RoundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.RoundedButton2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.RoundedButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton2.Location = New System.Drawing.Point(812, 816)
+        Me.RoundedButton2.Location = New System.Drawing.Point(797, 709)
         Me.RoundedButton2.Margin = New System.Windows.Forms.Padding(4)
         Me.RoundedButton2.Name = "RoundedButton2"
         Me.RoundedButton2.Size = New System.Drawing.Size(153, 34)
@@ -479,16 +407,152 @@ Partial Class PropertyIssuance
         Me.RoundedButton2.Text = "Back"
         Me.RoundedButton2.UseVisualStyleBackColor = False
         '
+        'Panel4
+        '
+        Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel4.BackColor = System.Drawing.Color.White
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.amount)
+        Me.Panel4.Controls.Add(Me.Label15)
+        Me.Panel4.Controls.Add(Me.Label14)
+        Me.Panel4.Controls.Add(Me.dateAcquired)
+        Me.Panel4.Controls.Add(Me.propertyNumber)
+        Me.Panel4.Controls.Add(Me.Label13)
+        Me.Panel4.Controls.Add(Me.description)
+        Me.Panel4.Controls.Add(Me.Label12)
+        Me.Panel4.Controls.Add(Me.TextBox4)
+        Me.Panel4.Controls.Add(Me.Label11)
+        Me.Panel4.Controls.Add(Me.quantity)
+        Me.Panel4.Controls.Add(Me.Label10)
+        Me.Panel4.Location = New System.Drawing.Point(359, 264)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(913, 135)
+        Me.Panel4.TabIndex = 58
+        '
+        'quantity
+        '
+        Me.quantity.Location = New System.Drawing.Point(136, 23)
+        Me.quantity.Name = "quantity"
+        Me.quantity.Size = New System.Drawing.Size(302, 22)
+        Me.quantity.TabIndex = 55
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(11, 25)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(66, 22)
+        Me.Label10.TabIndex = 38
+        Me.Label10.Text = "Quantity:"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(136, 55)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(302, 22)
+        Me.TextBox4.TabIndex = 57
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(11, 57)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(37, 22)
+        Me.Label11.TabIndex = 56
+        Me.Label11.Text = "Unit:"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'description
+        '
+        Me.description.Location = New System.Drawing.Point(136, 87)
+        Me.description.Name = "description"
+        Me.description.Size = New System.Drawing.Size(302, 22)
+        Me.description.TabIndex = 59
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(11, 89)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(83, 22)
+        Me.Label12.TabIndex = 58
+        Me.Label12.Text = "Description:"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'propertyNumber
+        '
+        Me.propertyNumber.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.propertyNumber.Location = New System.Drawing.Point(598, 21)
+        Me.propertyNumber.Name = "propertyNumber"
+        Me.propertyNumber.Size = New System.Drawing.Size(302, 22)
+        Me.propertyNumber.TabIndex = 61
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(473, 25)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(118, 22)
+        Me.Label13.TabIndex = 60
+        Me.Label13.Text = "Property Number:"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'dateAcquired
+        '
+        Me.dateAcquired.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dateAcquired.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold)
+        Me.dateAcquired.Location = New System.Drawing.Point(598, 57)
+        Me.dateAcquired.Name = "dateAcquired"
+        Me.dateAcquired.Size = New System.Drawing.Size(302, 25)
+        Me.dateAcquired.TabIndex = 62
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(473, 57)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(100, 22)
+        Me.Label14.TabIndex = 63
+        Me.Label14.Text = "Date Acquired:"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'amount
+        '
+        Me.amount.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.amount.Location = New System.Drawing.Point(598, 95)
+        Me.amount.Name = "amount"
+        Me.amount.Size = New System.Drawing.Size(302, 22)
+        Me.amount.TabIndex = 65
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(473, 89)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(64, 22)
+        Me.Label15.TabIndex = 64
+        Me.Label15.Text = "Amount:"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'PropertyIssuance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.ClientSize = New System.Drawing.Size(1569, 942)
+        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.RoundedButton2)
         Me.Controls.Add(Me.RoundedButton1)
         Me.Controls.Add(Me.btnCSV)
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Controls.Add(Me.propertyAcknowledgement)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel11)
         Me.Name = "PropertyIssuance"
@@ -498,12 +562,13 @@ Partial Class PropertyIssuance
         Me.Panel11.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.propertyAcknowledgement, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -515,15 +580,6 @@ Partial Class PropertyIssuance
     Friend WithEvents Panel11 As System.Windows.Forms.Panel
     Friend WithEvents lblPropertyCard As System.Windows.Forms.Label
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents fundClusterTxt As System.Windows.Forms.TextBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents propertyAcknowledgement As System.Windows.Forms.DataGridView
-    Friend WithEvents quantity As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents unit As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents description As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents propertyNumber As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents dateAcquired As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents amount As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label4 As System.Windows.Forms.Label
@@ -544,4 +600,17 @@ Partial Class PropertyIssuance
     Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
     Friend WithEvents btnCSV As Resources.Controls.RoundedButton
     Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
+    Friend WithEvents Panel4 As System.Windows.Forms.Panel
+    Friend WithEvents quantity As System.Windows.Forms.TextBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents description As System.Windows.Forms.TextBox
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents dateAcquired As System.Windows.Forms.DateTimePicker
+    Friend WithEvents propertyNumber As System.Windows.Forms.TextBox
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents amount As System.Windows.Forms.TextBox
+    Friend WithEvents Label15 As System.Windows.Forms.Label
 End Class
