@@ -28,12 +28,14 @@ Partial Class UC_MaintenanceRequestManagement
         Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.propertyNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.serialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.conditionBefore = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.typeOfIssue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.problemDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.assignedTechnician = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.targetDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.completionDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -85,7 +87,7 @@ Partial Class UC_MaintenanceRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
         Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.requestId, Me.dateRequested, Me.itemName, Me.propertyNumber, Me.serialNumber, Me.departmentId, Me.conditionBefore, Me.typeOfIssue, Me.problemDescription, Me.assignedTechnician, Me.targetDate, Me.completionDate, Me.requestedBy, Me.createdAt, Me.updatedAt})
+        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.requestId, Me.dateRequested, Me.itemName, Me.location, Me.propertyNumber, Me.serialNumber, Me.departmentId, Me.conditionBefore, Me.typeOfIssue, Me.problemDescription, Me.status, Me.assignedTechnician, Me.targetDate, Me.completionDate, Me.requestedBy, Me.createdAt, Me.updatedAt})
         Me.propertyManagementGrid.Location = New System.Drawing.Point(67, 115)
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
@@ -114,6 +116,13 @@ Partial Class UC_MaintenanceRequestManagement
         Me.itemName.Name = "itemName"
         Me.itemName.Width = 125
         '
+        'location
+        '
+        Me.location.HeaderText = "location"
+        Me.location.MinimumWidth = 6
+        Me.location.Name = "location"
+        Me.location.Width = 125
+        '
         'propertyNumber
         '
         Me.propertyNumber.HeaderText = "propertyNumber"
@@ -140,7 +149,6 @@ Partial Class UC_MaintenanceRequestManagement
         Me.conditionBefore.HeaderText = "conditionBefore"
         Me.conditionBefore.MinimumWidth = 6
         Me.conditionBefore.Name = "conditionBefore"
-        Me.conditionBefore.Visible = False
         Me.conditionBefore.Width = 125
         '
         'typeOfIssue
@@ -148,7 +156,6 @@ Partial Class UC_MaintenanceRequestManagement
         Me.typeOfIssue.HeaderText = "typeOfIssue"
         Me.typeOfIssue.MinimumWidth = 6
         Me.typeOfIssue.Name = "typeOfIssue"
-        Me.typeOfIssue.Visible = False
         Me.typeOfIssue.Width = 125
         '
         'problemDescription
@@ -156,8 +163,14 @@ Partial Class UC_MaintenanceRequestManagement
         Me.problemDescription.HeaderText = "problemDescription"
         Me.problemDescription.MinimumWidth = 6
         Me.problemDescription.Name = "problemDescription"
-        Me.problemDescription.Visible = False
         Me.problemDescription.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 125
         '
         'assignedTechnician
         '
@@ -389,12 +402,14 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents requestId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dateRequested As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents itemName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents propertyNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents serialNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents departmentId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents conditionBefore As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents typeOfIssue As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents problemDescription As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents assignedTechnician As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents targetDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents completionDate As System.Windows.Forms.DataGridViewTextBoxColumn

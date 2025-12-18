@@ -3500,8 +3500,8 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             Dim query As String = "UPDATE maintenance_requests SET status = 'Approved', " &
-                                 "approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
-                                 "WHERE request_id = @requestID"
+                                 "updatedAt = NOW() " &
+                                 "WHERE requestId = @requestID"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
@@ -3547,8 +3547,8 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             Dim query As String = "UPDATE maintenance_requests SET status = 'Rejected', " &
-                                 "approved_by = @adminID, approved_date = NOW(), remarks = @remarks " &
-                                 "WHERE request_id = @requestID"
+                                 "updatedAt = NOW() " &
+                                 "WHERE requestId = @requestID"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
@@ -4231,14 +4231,12 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT mr.requestId, mr.dateRequested AS dateOfRequest, mr.itemName, mr.propertyNumber, " &
-                                 "mr.serialNumber, mr.departmentId, d.departmentName AS department, mr.location, " &
-                                 "mr.conditionBefore, mr.typeOfIssue, mr.problemDescription AS purpose, mr.status, " &
-                                 "mr.assignedTechnician, mr.targetDate, mr.completionDate, " &
-                                 "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS requesterName " &
+            Dim query As String = "SELECT mr.requestId, mr.itemName, mr.location, " &
+                                 "mr.conditionBefore, mr.typeOfIssue AS typeOfMaintenance, mr.status, " &
+                                 "mr.problemDescription AS actionTaken, " &
+                                 "mr.propertyNumber, mr.serialNumber, mr.departmentId, mr.assignedTechnician, " &
+                                 "mr.targetDate, mr.completionDate, mr.requestedBy, mr.createdAt, mr.updatedAt " &
                                  "FROM maintenance_requests mr " &
-                                 "LEFT JOIN departments d ON mr.departmentId = d.departmentId " &
-                                 "LEFT JOIN users u ON mr.requestedBy = u.userId " &
                                  "ORDER BY mr.dateRequested DESC"
 
             Using cmd As New MySqlCommand(query, conn)

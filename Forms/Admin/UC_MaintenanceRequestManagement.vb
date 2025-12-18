@@ -57,44 +57,36 @@ Public Class UC_MaintenanceRequestManagement
             If propertyManagementGrid IsNot Nothing Then
                 For Each col As DataGridViewColumn In propertyManagementGrid.Columns
                     Select Case col.Name.ToLower()
-                        Case "requestid", "request_id"
+                        Case "requestid"
                             col.DataPropertyName = "requestId"
-                            col.Visible = False ' Hidden - internal ID
-                        Case "requestername", "requester_name"
-                            col.DataPropertyName = "requesterName"
-                            col.HeaderText = "Name of Requester"
+                            col.HeaderText = "Maintenance Request ID"
                             col.Visible = True
-                        Case "departmentid", "department_id"
-                            col.DataPropertyName = "departmentId"
-                            col.Visible = False ' Hidden - internal ID
-                        Case "department"
-                            col.DataPropertyName = "department"
-                            col.HeaderText = "Department"
-                            col.Visible = True
-                        Case "dateofrequest", "date_of_request"
-                            col.DataPropertyName = "dateOfRequest"
-                            col.HeaderText = "Date of Request"
-                            col.Visible = True
-                        Case "itemname", "item_name"
+                        Case "itemname"
                             col.DataPropertyName = "itemName"
-                            col.HeaderText = "Item Name"
+                            col.HeaderText = "Property / Item Name"
                             col.Visible = True
-                        Case "purpose"
-                            col.DataPropertyName = "purpose"
-                            col.HeaderText = "Purpose"
+                        Case "location"
+                            col.DataPropertyName = "location"
+                            col.HeaderText = "Location"
+                            col.Visible = True
+                        Case "conditionbefore"
+                            col.DataPropertyName = "conditionBefore"
+                            col.HeaderText = "Condition Before"
+                            col.Visible = True
+                        Case "typeofissue"
+                            col.DataPropertyName = "typeOfMaintenance"
+                            col.HeaderText = "Type of Maintenance"
                             col.Visible = True
                         Case "status"
                             col.DataPropertyName = "status"
                             col.HeaderText = "Status"
                             col.Visible = True
-                        Case "createdat", "created_at"
-                            col.DataPropertyName = "createdAt"
-                            col.Visible = False ' Hidden - timestamp
-                        Case "updatedat", "updated_at"
-                            col.DataPropertyName = "updatedAt"
-                            col.Visible = False ' Hidden - timestamp
+                        Case "problemdescription"
+                            col.DataPropertyName = "actionTaken"
+                            col.HeaderText = "Action Taken"
+                            col.Visible = True
                         Case Else
-                            ' Hide all other columns by default
+                            ' Hide all other columns by default (propertyNumber, serialNumber, departmentId, etc.)
                             col.Visible = False
                     End Select
                 Next
@@ -134,12 +126,11 @@ Public Class UC_MaintenanceRequestManagement
             End If
 
             Dim filtered = originalData.AsEnumerable().Where(Function(row)
-                                                                 Dim requester As String = If(row.Table.Columns.Contains("requesterName") AndAlso Not IsDBNull(row("requesterName")), row("requesterName").ToString().ToLower(), String.Empty)
-                                                                 Dim dept As String = If(row.Table.Columns.Contains("department") AndAlso Not IsDBNull(row("department")), row("department").ToString().ToLower(), String.Empty)
                                                                  Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
-                                                                 Dim purpose As String = If(row.Table.Columns.Contains("purpose") AndAlso Not IsDBNull(row("purpose")), row("purpose").ToString().ToLower(), String.Empty)
+                                                                 Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
+                                                                 Dim maintType As String = If(row.Table.Columns.Contains("typeOfMaintenance") AndAlso Not IsDBNull(row("typeOfMaintenance")), row("typeOfMaintenance").ToString().ToLower(), String.Empty)
                                                                  Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
-                                                                 Return requester.Contains(searchLower) OrElse dept.Contains(searchLower) OrElse itemName.Contains(searchLower) OrElse purpose.Contains(searchLower) OrElse status.Contains(searchLower)
+                                                                 Return itemName.Contains(searchLower) OrElse location.Contains(searchLower) OrElse maintType.Contains(searchLower) OrElse status.Contains(searchLower)
                                                              End Function)
 
             Dim filteredList = filtered.ToList()
@@ -189,7 +180,8 @@ Public Class UC_MaintenanceRequestManagement
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New AddPropertyRequest())
+            ' Open AddMaintenance1 form for adding maintenance requests
+            parentDashboard.LoadUserControl(New AddMaintenance1())
         End If
     End Sub
 
