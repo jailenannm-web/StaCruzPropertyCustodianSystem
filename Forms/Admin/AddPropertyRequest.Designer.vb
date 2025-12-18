@@ -39,7 +39,6 @@ Partial Class AddPropertyRequest
         Me.itemName = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.position = New System.Windows.Forms.TextBox()
-        Me.departmentId = New System.Windows.Forms.TextBox()
         Me.requesterName = New System.Windows.Forms.TextBox()
         Me.quantityRequest = New System.Windows.Forms.Label()
         Me.property_id = New System.Windows.Forms.Label()
@@ -48,6 +47,7 @@ Partial Class AddPropertyRequest
         Me.request_id = New System.Windows.Forms.Label()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
+        Me.department = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -235,10 +235,10 @@ Partial Class AddPropertyRequest
         Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.department)
         Me.Panel1.Controls.Add(Me.itemName)
         Me.Panel1.Controls.Add(Me.DateTimePicker1)
         Me.Panel1.Controls.Add(Me.position)
-        Me.Panel1.Controls.Add(Me.departmentId)
         Me.Panel1.Controls.Add(Me.requesterName)
         Me.Panel1.Controls.Add(Me.quantityRequest)
         Me.Panel1.Controls.Add(Me.property_id)
@@ -283,18 +283,6 @@ Partial Class AddPropertyRequest
         Me.position.Name = "position"
         Me.position.Size = New System.Drawing.Size(288, 24)
         Me.position.TabIndex = 76
-        '
-        'departmentId
-        '
-        Me.departmentId.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.departmentId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.departmentId.Location = New System.Drawing.Point(223, 146)
-        Me.departmentId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Size = New System.Drawing.Size(288, 24)
-        Me.departmentId.TabIndex = 66
         '
         'requesterName
         '
@@ -396,6 +384,15 @@ Partial Class AddPropertyRequest
         Me.instructions.TabIndex = 40
         Me.instructions.Text = "Fill the required information."
         '
+        'department
+        '
+        Me.department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.department.FormattingEnabled = True
+        Me.department.Location = New System.Drawing.Point(223, 139)
+        Me.department.Name = "department"
+        Me.department.Size = New System.Drawing.Size(288, 26)
+        Me.department.TabIndex = 127
+        '
         'AddPropertyRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -426,7 +423,6 @@ Partial Class AddPropertyRequest
     Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents departmentId As System.Windows.Forms.TextBox
     Friend WithEvents requesterName As System.Windows.Forms.TextBox
     Friend WithEvents quantityRequest As System.Windows.Forms.Label
     Friend WithEvents property_id As System.Windows.Forms.Label
@@ -446,4 +442,5 @@ Partial Class AddPropertyRequest
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents itemName As System.Windows.Forms.TextBox
     Friend WithEvents purpose As System.Windows.Forms.TextBox
+    Friend WithEvents department As System.Windows.Forms.ComboBox
 End Class

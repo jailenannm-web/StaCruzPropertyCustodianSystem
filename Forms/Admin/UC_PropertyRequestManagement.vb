@@ -259,32 +259,47 @@ Public Class UC_PropertyRequestManagement
             prm_table1.DataSource = Nothing
 
             ' Map designer columns to data properties (camelCase from DB)
+            ' Show only: Requester Name, Position, Item Name, Description, Purpose, Quantity Requested, Date of Request, Status
             For Each col As DataGridViewColumn In prm_table1.Columns
                 Select Case col.Name.ToLower()
-                    Case "requestid"
+                    Case "requestid", "request_id"
                         col.DataPropertyName = "requestId"
                         col.Visible = False
-                    Case "requestername"
+                    Case "requestername", "requester_name"
                         col.DataPropertyName = "requesterName"
-                        col.HeaderText = "Name of Requester"
-                    Case "departmentid"
-                        col.DataPropertyName = "department"
-                        col.HeaderText = "Department"
-                    Case "dateofrequest", "dateofreques"
-                        col.DataPropertyName = "dateOfRequest"
-                        col.HeaderText = "Date of Request"
-                    Case "itemname"
+                        col.HeaderText = "Requester Name"
+                        col.Visible = True
+                    Case "position"
+                        col.DataPropertyName = "position"
+                        col.HeaderText = "Position"
+                        col.Visible = True
+                    Case "itemname", "item_name"
                         col.DataPropertyName = "itemName"
                         col.HeaderText = "Item Name"
-                    Case "quantityrequested"
-                        col.DataPropertyName = "quantityRequested"
-                        col.HeaderText = "Quantity Requested"
+                        col.Visible = True
+                    Case "description"
+                        col.DataPropertyName = "description"
+                        col.HeaderText = "Description"
+                        col.Visible = True
                     Case "purpose"
                         col.DataPropertyName = "purpose"
                         col.HeaderText = "Purpose"
+                        col.Visible = True
+                    Case "quantityrequested", "quantity_requested"
+                        col.DataPropertyName = "quantityRequested"
+                        col.HeaderText = "Quantity Requested"
+                        col.Visible = True
+                    Case "dateofrequest", "dateofreques", "date_of_request"
+                        col.DataPropertyName = "dateOfRequest"
+                        col.HeaderText = "Date of Request"
+                        col.Visible = True
                     Case "status"
                         col.DataPropertyName = "status"
                         col.HeaderText = "Status"
+                        col.Visible = True
+                    Case Else
+                        ' Hide all other columns (departmentId, createdAt, updatedAt, approvedBy, etc.)
+                        col.Visible = False
                 End Select
             Next
 

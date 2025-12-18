@@ -44,9 +44,41 @@ Public Class UC_DepartmentManagement
         admin_deptmanagement.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
         admin_deptmanagement.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        ' Column alignment
+        ' Set column headers and alignment
         For Each col As DataGridViewColumn In admin_deptmanagement.Columns
             col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            ' Set HeaderText based on column name
+            Select Case col.Name.ToLower()
+                Case "departmentid"
+                    col.HeaderText = "Department ID"
+                    col.Visible = False
+                Case "departmentname"
+                    col.HeaderText = "Department Name"
+                Case "headofdepartment"
+                    col.HeaderText = "Head of Department"
+                Case "email"
+                    col.HeaderText = "Email"
+                Case "contactnumber"
+                    col.HeaderText = "Contact Number"
+                Case "location"
+                    col.HeaderText = "Location"
+                Case "building"
+                    col.HeaderText = "Building"
+                Case "floornumber"
+                    col.HeaderText = "Floor Number"
+                Case "shortname"
+                    col.HeaderText = "Short Name"
+                Case "officecode"
+                    col.HeaderText = "Office Code"
+                Case "description"
+                    col.HeaderText = "Description"
+                Case "totalproperties"
+                    col.HeaderText = "Total Properties"
+                Case "totalsupplies"
+                    col.HeaderText = "Total Supplies"
+                Case "status"
+                    col.HeaderText = "Status"
+            End Select
         Next
 
         ' Auto size
@@ -99,20 +131,24 @@ Public Class UC_DepartmentManagement
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
                     ' Use safe column access - Match actual database camelCase column names
+                    ' Designer column order: departmentId, departmentName, headOfDepartment, email, contactNumber, location, building, floorNumber, shortName, officeCode, description, totalProperties, totalSupplies, status
                     Dim deptID As String = If(row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")), row("departmentId").ToString(), "")
+                    Dim deptName As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString(), "")
                     Dim headOfDept As String = If(row.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(row("headOfDepartment")), row("headOfDepartment").ToString(), "")
+                    Dim emailVal As String = If(row.Table.Columns.Contains("email") AndAlso Not IsDBNull(row("email")), row("email").ToString(), "")
                     Dim contactNum As String = If(row.Table.Columns.Contains("contactNumber") AndAlso Not IsDBNull(row("contactNumber")), row("contactNumber").ToString(), "")
+                    Dim locationVal As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
+                    Dim buildingVal As String = If(row.Table.Columns.Contains("building") AndAlso Not IsDBNull(row("building")), row("building").ToString(), "")
                     Dim floorNum As String = If(row.Table.Columns.Contains("floorNumber") AndAlso Not IsDBNull(row("floorNumber")), row("floorNumber").ToString(), "")
                     Dim shortName As String = If(row.Table.Columns.Contains("shortName") AndAlso Not IsDBNull(row("shortName")), row("shortName").ToString(), "")
                     Dim officeCode As String = If(row.Table.Columns.Contains("officeCode") AndAlso Not IsDBNull(row("officeCode")), row("officeCode").ToString(), "")
+                    Dim descriptionVal As String = If(row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")), row("description").ToString(), "")
                     Dim totalProps As String = If(row.Table.Columns.Contains("totalProperties") AndAlso Not IsDBNull(row("totalProperties")), row("totalProperties").ToString(), "0")
                     Dim totalSupplies As String = If(row.Table.Columns.Contains("totalSupplies") AndAlso Not IsDBNull(row("totalSupplies")), row("totalSupplies").ToString(), "0")
-                    Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
-                    Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
-                    Dim deptName As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString(), "")
+                    Dim statusVal As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "Active")
 
-                    ' Add row matching Designer column order: departmentId, headOfDepartment, contactNumber, floorNumber, shortName, officeCode, totalProperties, totalSupplies, createdAt, updatedAt, departmentName
-                    admin_deptmanagement.Rows.Add(deptID, headOfDept, contactNum, floorNum, shortName, officeCode, totalProps, totalSupplies, createdAt, updatedAt, deptName)
+                    ' Add row matching Designer column order exactly
+                    admin_deptmanagement.Rows.Add(deptID, deptName, headOfDept, emailVal, contactNum, locationVal, buildingVal, floorNum, shortName, officeCode, descriptionVal, totalProps, totalSupplies, statusVal)
                 Next
                 ' Update total count
                 If ttldepartmentmanagement IsNot Nothing Then
@@ -272,39 +308,21 @@ Public Class UC_DepartmentManagement
             Return
         End If
 
-        ' Prepare editForm variable in outer scope
-        Dim editForm As UserControl = Nothing
-
-        ' Open EditDepartment Form - check if form exists, otherwise create a simple edit dialog
+        ' Open EditDepartment Form directly
         Try
-            Dim editFormType As Type = Type.GetType("StaCruzPropertyCustodianSystem.EditDepartment")
-            If editFormType IsNot Nothing Then
-                Dim instance = Activator.CreateInstance(editFormType)
-                Dim loadMethod = editFormType.GetMethod("LoadDepartmentData")
-                If loadMethod IsNot Nothing Then
-                    loadMethod.Invoke(instance, New Object() {departmentID, deptData})
-                End If
-                editForm = TryCast(instance, UserControl)
-                If editForm Is Nothing Then
-                    ' If the created instance is not a UserControl, show information
-                    MessageBox.Show("Edit Department form is not a UserControl. Please use Add Department to update.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End If
-            Else
-                MessageBox.Show("Edit Department form not available. Please use Add Department to update.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Error opening edit form: " & ex.Message & Environment.NewLine & "Please use Add Department form to update department information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-
-        ' Navigate to Admin Dashboard if we have a valid editForm
-        If editForm IsNot Nothing Then
+            Dim editForm As New EditDepartment()
+            editForm.LoadDepartmentData(departmentID, deptData)
+            
             Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
             If parentDashboard IsNot Nothing Then
                 parentDashboard.LoadUserControl(editForm)
             Else
                 MessageBox.Show("Unable to open EditDepartment screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-        End If
+        Catch ex As Exception
+            MessageBox.Show("Error opening edit form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("[v0] btnEdit_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click

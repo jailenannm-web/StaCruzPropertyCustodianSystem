@@ -54,7 +54,12 @@ Public Class AddSupplyRequest
         Try
             ' Pre-fill item name if provided
             If Not String.IsNullOrEmpty(_prefillItemName) Then
-                description.Text = _prefillItemName
+                itemName.Text = _prefillItemName
+            End If
+            
+            ' Pre-fill description if provided
+            If Not String.IsNullOrEmpty(_prefillItemDescription) Then
+                description.Text = _prefillItemDescription
             End If
             
             ' Pre-fill requester name if provided

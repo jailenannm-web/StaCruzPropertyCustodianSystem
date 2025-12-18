@@ -51,8 +51,14 @@ Public Class UC_SupplyRequestManagement
                 ' Prevent auto-generated duplicate columns
                 prm_table1.AutoGenerateColumns = False
                 prm_table1.DataSource = Nothing
+                prm_table1.ReadOnly = True
+                prm_table1.AllowUserToAddRows = False
+                prm_table1.AllowUserToDeleteRows = False
+                prm_table1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                prm_table1.MultiSelect = False
 
                 ' Map designer columns to data properties (camelCase from DB)
+                ' Show only: Requester Name, Position, Item Name, Description, Purpose, Quantity Requested, Date of Request, Status
                 For Each col As DataGridViewColumn In prm_table1.Columns
                     Select Case col.Name.ToLower()
                         Case "requestid", "request_id"
@@ -60,34 +66,45 @@ Public Class UC_SupplyRequestManagement
                             col.Visible = False
                         Case "requestername", "requester_name"
                             col.DataPropertyName = "requesterName"
-                            col.HeaderText = "Name of Requester"
-                        Case "departmentid", "department"
-                            col.DataPropertyName = "department"
-                            col.HeaderText = "Department"
-                        Case "dateofrequest", "date_of_request"
-                            col.DataPropertyName = "dateOfRequest"
-                            col.HeaderText = "Date of Request"
+                            col.HeaderText = "Requester Name"
+                            col.Visible = True
+                        Case "position"
+                            col.DataPropertyName = "position"
+                            col.HeaderText = "Position"
+                            col.Visible = True
                         Case "itemname", "item_name"
                             col.DataPropertyName = "itemName"
                             col.HeaderText = "Item Name"
-                        Case "quantityrequested", "quantity_requested"
-                            col.DataPropertyName = "quantityRequested"
-                            col.HeaderText = "Quantity Requested"
+                            col.Visible = True
+                        Case "description"
+                            col.DataPropertyName = "description"
+                            col.HeaderText = "Description"
+                            col.Visible = True
                         Case "purpose"
                             col.DataPropertyName = "purpose"
                             col.HeaderText = "Purpose"
+                            col.Visible = True
+                        Case "quantityrequested", "quantity_requested"
+                            col.DataPropertyName = "quantityRequested"
+                            col.HeaderText = "Quantity Requested"
+                            col.Visible = True
+                        Case "dateofrequest", "date_of_request"
+                            col.DataPropertyName = "dateOfRequest"
+                            col.HeaderText = "Date of Request"
+                            col.Visible = True
                         Case "status"
                             col.DataPropertyName = "status"
                             col.HeaderText = "Status"
-                        Case "createdat", "created_at"
-                            col.DataPropertyName = "createdAt"
-                        Case "updatedat", "updated_at"
-                            col.DataPropertyName = "updatedAt"
+                            col.Visible = True
+                        Case Else
+                            ' Hide all other columns (departmentId, createdAt, updatedAt, approvedBy, approvedDate, etc.)
+                            col.Visible = False
                     End Select
                 Next
 
                 ' Bind data source AFTER column mapping
                 prm_table1.DataSource = dt
+                prm_table1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
                 ' Update total count
                 Dim totalLabel As Label = Nothing
@@ -104,6 +121,52 @@ Public Class UC_SupplyRequestManagement
             System.Diagnostics.Debug.WriteLine("LoadSupplyRequestData Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
+
+    Private Function TryGetSelectedRequestId() As Integer
+        Try
+            If prm_table1 Is Nothing Then Return -1
+
+            Dim row As DataGridViewRow = Nothing
+            If prm_table1.SelectedRows IsNot Nothing AndAlso prm_table1.SelectedRows.Count > 0 Then
+                row = prm_table1.SelectedRows(0)
+            ElseIf prm_table1.CurrentRow IsNot Nothing Then
+                row = prm_table1.CurrentRow
+            End If
+
+            If row Is Nothing Then Return -1
+
+            ' Prefer DataSource -> DataRow for accuracy
+            Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+            If dt IsNot Nothing AndAlso row.Index >= 0 AndAlso row.Index < dt.Rows.Count Then
+                Dim dr As DataRow = dt.Rows(row.Index)
+                If dt.Columns.Contains("requestId") AndAlso Not IsDBNull(dr("requestId")) Then
+                    Dim v As Integer = 0
+                    If Integer.TryParse(dr("requestId").ToString(), v) Then Return v
+                End If
+                If dt.Columns.Contains("request_id") AndAlso Not IsDBNull(dr("request_id")) Then
+                    Dim v As Integer = 0
+                    If Integer.TryParse(dr("request_id").ToString(), v) Then Return v
+                End If
+            End If
+
+            ' Fallback to hidden grid column
+            If prm_table1.Columns.Contains("requestId") AndAlso row.Cells("requestId").Value IsNot Nothing Then
+                Dim v As Integer = 0
+                If Integer.TryParse(row.Cells("requestId").Value.ToString(), v) Then Return v
+            End If
+            If prm_table1.Columns.Contains("request_id") AndAlso row.Cells("request_id").Value IsNot Nothing Then
+                Dim v As Integer = 0
+                If Integer.TryParse(row.Cells("request_id").Value.ToString(), v) Then Return v
+            End If
+            If row.Cells.Count > 0 AndAlso row.Cells(0).Value IsNot Nothing Then
+                Dim v As Integer = 0
+                If Integer.TryParse(row.Cells(0).Value.ToString(), v) Then Return v
+            End If
+        Catch
+        End Try
+
+        Return -1
+    End Function
 
     Private Sub ApplyPermissionState()
         ' Super Admin, Admin, and Custodian have full access - ALL buttons enabled
@@ -292,10 +355,10 @@ Public Class UC_SupplyRequestManagement
             Return
         End If
 
-        ' Open assignment form with request ID
+        ' Open supply assignment form with request ID
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            Dim assignForm As New AssignRequestManagement()
+            Dim assignForm As New AssignSupplyManagement()
             assignForm.RequestID = requestID
             parentDashboard.LoadUserControl(assignForm)
         End If
@@ -303,6 +366,18 @@ Public Class UC_SupplyRequestManagement
 
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click
 
+    End Sub
+
+    Private Sub btnAssignSupply_Click(sender As Object, e As EventArgs) Handles btnAssignSupply.Click
+        ' Always redirect to Assign panel; pass RequestID when available.
+        Dim requestID As Integer = TryGetSelectedRequestId()
+
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            Dim assignForm As New AssignSupplyManagement()
+            If requestID > 0 Then assignForm.RequestID = requestID
+            parentDashboard.LoadUserControl(assignForm)
+        End If
     End Sub
 
     Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles prm_table1.CellContentClick

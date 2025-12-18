@@ -2895,9 +2895,9 @@ Public Class DatabaseConnection
                 Return False
             End If
 
-            Dim query As String = "INSERT INTO property_requests (requesterName, departmentId, dateOfRequest, " &
+            Dim query As String = "INSERT INTO property_requests (userId, requesterName, departmentId, dateOfRequest, " &
                                  "itemName, quantityRequested, purpose, status) " &
-                                 "VALUES (@requesterName, @departmentID, CURDATE(), @itemName, " &
+                                 "VALUES (@userID, @requesterName, @departmentID, CURDATE(), @itemName, " &
                                  "@quantity, @purpose, 'Pending')"
 
             Dim requestID As Integer = 0
@@ -2919,6 +2919,7 @@ Public Class DatabaseConnection
                 End If
                 If String.IsNullOrEmpty(finalRequesterName) Then finalRequesterName = "Unknown"
 
+                cmd.Parameters.AddWithValue("@userID", userID)
                 cmd.Parameters.AddWithValue("@requesterName", finalRequesterName)
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@itemName", If(String.IsNullOrEmpty(itemName), "Item Request", itemName))
@@ -3088,12 +3089,13 @@ Public Class DatabaseConnection
                 End Try
             End If
 
-            Dim query As String = "INSERT INTO supplies_requests (requesterName, position, departmentId, dateOfRequest, " &
+            Dim query As String = "INSERT INTO supplies_requests (userId, requesterName, position, departmentId, dateOfRequest, " &
                                  "itemName, quantityRequested, purpose, status) " &
-                                 "VALUES (@requesterName, @position, @departmentID, NOW(), @itemName, " &
+                                 "VALUES (@userID, @requesterName, @position, @departmentID, NOW(), @itemName, " &
                                  "@quantity, @purpose, 'Pending')"
 
             Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@userID", staffID)
                 cmd.Parameters.AddWithValue("@requesterName", If(String.IsNullOrEmpty(finalRequesterName), "Staff User", finalRequesterName))
                 cmd.Parameters.AddWithValue("@position", If(String.IsNullOrEmpty(finalPosition), "Staff", finalPosition))
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
@@ -3138,9 +3140,11 @@ Public Class DatabaseConnection
             Dim query As String = "SELECT " &
                                  "pr.requestId AS requestId, " &
                                  "pr.requesterName AS requesterName, " &
+                                 "IFNULL(pr.position, 'N/A') AS position, " &
                                  "IFNULL(d.departmentName, 'N/A') AS department, " &
                                  "pr.dateOfRequest AS dateOfRequest, " &
                                  "pr.itemName AS itemName, " &
+                                 "IFNULL(pr.description, '') AS description, " &
                                  "pr.quantityRequested AS quantityRequested, " &
                                  "pr.purpose AS purpose, " &
                                  "pr.status AS status " &
@@ -3722,23 +3726,53 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE property_requests SET status = 'Released', releaseDate = @releaseDate, expectedReturnDate = @expectedReturnDate, " &
-                                  "remarks = @remarks WHERE requestId = @requestID AND status IN ('Approved', 'Released')"
-            Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@releaseDate", releaseDate)
-                cmd.Parameters.AddWithValue("@expectedReturnDate", If(expectedReturnDate.HasValue, expectedReturnDate.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
-                cmd.Parameters.AddWithValue("@requestID", requestID)
-                Dim rows = cmd.ExecuteNonQuery()
-                If rows > 0 Then
-                    LogActivity(adminID, adminUserType, adminName, "RELEASE_REQUEST", "Property Request",
-                                $"Released request #{requestID}", "")
-                    Return True
-                Else
-                    MessageBox.Show("Request must be approved before it can be released.", "Release Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
-                End If
-            End Using
+            ' Be tolerant of schema differences (camelCase vs snake_case).
+            Dim rows As Integer = 0
+
+            ' Attempt 1: camelCase schema
+            Try
+                Dim query As String =
+                    "UPDATE property_requests " &
+                    "SET status = 'Released', releaseDate = @releaseDate, expectedReturnDate = @expectedReturnDate, remarks = @remarks " &
+                    "WHERE requestId = @requestID AND LOWER(status) IN ('approved','released')"
+                Using cmd As New MySqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@releaseDate", releaseDate)
+                    cmd.Parameters.AddWithValue("@expectedReturnDate", If(expectedReturnDate.HasValue, expectedReturnDate.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
+                    cmd.Parameters.AddWithValue("@requestID", requestID)
+                    rows = cmd.ExecuteNonQuery()
+                End Using
+            Catch
+                rows = 0
+            End Try
+
+            ' Attempt 2: snake_case schema
+            If rows <= 0 Then
+                Try
+                    Dim query2 As String =
+                        "UPDATE property_requests " &
+                        "SET status = 'Released', release_date = @releaseDate, expected_return_date = @expectedReturnDate, remarks = @remarks " &
+                        "WHERE request_id = @requestID AND LOWER(status) IN ('approved','released')"
+                    Using cmd2 As New MySqlCommand(query2, conn)
+                        cmd2.Parameters.AddWithValue("@releaseDate", releaseDate)
+                        cmd2.Parameters.AddWithValue("@expectedReturnDate", If(expectedReturnDate.HasValue, expectedReturnDate.Value, DBNull.Value))
+                        cmd2.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
+                        cmd2.Parameters.AddWithValue("@requestID", requestID)
+                        rows = cmd2.ExecuteNonQuery()
+                    End Using
+                Catch
+                    rows = 0
+                End Try
+            End If
+
+            If rows > 0 Then
+                LogActivity(adminID, adminUserType, adminName, "RELEASE_REQUEST", "Property Request",
+                            $"Released request #{requestID}", "")
+                Return True
+            End If
+
+            MessageBox.Show("Request must be approved before it can be released (or the request record was not found).", "Release Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] ReleasePropertyRequest Exception: " & ex.Message)
             Return False
@@ -4000,9 +4034,11 @@ Public Class DatabaseConnection
             Dim query As String = "SELECT " &
                                  "sr.requestId AS requestId, " &
                                  "sr.requesterName AS requesterName, " &
+                                 "IFNULL(sr.position, 'N/A') AS position, " &
                                  "IFNULL(d.departmentName, 'N/A') AS department, " &
                                  "sr.dateOfRequest AS dateOfRequest, " &
                                  "sr.itemName AS itemName, " &
+                                 "IFNULL(sr.description, '') AS description, " &
                                  "sr.quantityRequested AS quantityRequested, " &
                                  "sr.purpose AS purpose, " &
                                  "sr.status AS status " &
@@ -5125,7 +5161,8 @@ Public Class DatabaseConnection
             adminQuery.Append("email, username, role AS user_type, status, ")
             adminQuery.Append("COALESCE(employeeId, '') as employeeId, createdAt AS dateAssigned, lastLogin, createdAt, ")
             adminQuery.Append("COALESCE(barangay, '') as barangay, ")
-            adminQuery.Append("COALESCE(municipal, '') as municipal, COALESCE(province, '') as province ")
+            ' Use the previously built expressions so we don't depend on specific physical column names
+            adminQuery.Append(municipalityExpr & ", " & provinceCityExpr & " ")
             adminQuery.Append("FROM users WHERE role IN ('Admin','SuperAdmin')")
 
             If Not String.IsNullOrEmpty(statusFilter) Then
@@ -5418,7 +5455,7 @@ Public Class DatabaseConnection
                 End If
             End If
 
-            query.Append(" ORDER BY full_name")
+            query.Append(" ORDER BY fullName")
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
 
@@ -8245,8 +8282,7 @@ Public Class DatabaseConnection
     ''' </summary>
     Public Shared Function UpdateDepartment(departmentID As Integer, departmentName As String, headOfDepartment As String,
                                            location As String, departmentCode As String, Optional contactNumber As String = "",
-                                           Optional email As String = "", Optional noOfEmployees As Integer = 0,
-                                           Optional budgetAllocation As Decimal = 0) As Boolean
+                                           Optional email As String = "") As Boolean
         Dim conn As MySqlConnection = Nothing
         Try
             conn = GetConnection()
@@ -8267,7 +8303,7 @@ Public Class DatabaseConnection
             End Using
 
             ' Check for duplicate department code (excluding current department)
-            Dim checkCodeQuery As String = "SELECT COUNT(*) FROM departments WHERE LOWER(office_code) = LOWER(@departmentCode) AND department_id != @departmentID"
+            Dim checkCodeQuery As String = "SELECT COUNT(*) FROM departments WHERE LOWER(officeCode) = LOWER(@departmentCode) AND departmentId != @departmentID"
             Using checkCmd As New MySqlCommand(checkCodeQuery, conn)
                 checkCmd.Parameters.AddWithValue("@departmentCode", departmentCode)
                 checkCmd.Parameters.AddWithValue("@departmentID", departmentID)
@@ -8278,10 +8314,9 @@ Public Class DatabaseConnection
                 End If
             End Using
 
-            Dim query As String = "UPDATE departments SET departmentName = @departmentName, head_of_department = @headOfDepartment, " &
-                                 "location = @location, office_code = @departmentCode, contactNumber = @contactNumber, " &
-                                 "email = @email, no_of_employees = @noOfEmployees, budget_allocation = @budgetAllocation, " &
-                                 "updated_at = NOW() WHERE departmentId = @departmentID"
+            Dim query As String = "UPDATE departments SET departmentName = @departmentName, headOfDepartment = @headOfDepartment, " &
+                                 "location = @location, officeCode = @departmentCode, contactNumber = @contactNumber, " &
+                                 "email = @email, updatedAt = NOW() WHERE departmentId = @departmentID"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@departmentID", departmentID)
@@ -8291,8 +8326,6 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@departmentCode", departmentCode)
                 cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(contactNumber), DBNull.Value, contactNumber))
                 cmd.Parameters.AddWithValue("@email", If(String.IsNullOrEmpty(email), DBNull.Value, email))
-                cmd.Parameters.AddWithValue("@noOfEmployees", noOfEmployees)
-                cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -8358,7 +8391,7 @@ Public Class DatabaseConnection
             End Using
 
             ' Delete department (soft delete by setting status to 'inactive')
-            Dim query As String = "UPDATE departments SET status = 'inactive', updated_at = NOW() WHERE departmentId = @departmentID"
+            Dim query As String = "UPDATE departments SET status = 'inactive', updatedAt = NOW() WHERE departmentId = @departmentID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@departmentID", departmentID)
 

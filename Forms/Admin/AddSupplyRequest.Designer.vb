@@ -35,7 +35,6 @@ Partial Class AddSupplyRequest
         Me.approved_by = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.position = New System.Windows.Forms.TextBox()
-        Me.departmentId = New System.Windows.Forms.TextBox()
         Me.requesterName = New System.Windows.Forms.TextBox()
         Me.quantityRequest = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -48,6 +47,7 @@ Partial Class AddSupplyRequest
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
+        Me.department = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.RoundedPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -216,18 +216,6 @@ Partial Class AddSupplyRequest
         Me.position.Size = New System.Drawing.Size(288, 24)
         Me.position.TabIndex = 76
         '
-        'departmentId
-        '
-        Me.departmentId.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.departmentId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.departmentId.Location = New System.Drawing.Point(223, 146)
-        Me.departmentId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Size = New System.Drawing.Size(288, 24)
-        Me.departmentId.TabIndex = 66
-        '
         'requesterName
         '
         Me.requesterName.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -283,10 +271,10 @@ Partial Class AddSupplyRequest
         Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.department)
         Me.Panel1.Controls.Add(Me.itemName)
         Me.Panel1.Controls.Add(Me.DateTimePicker1)
         Me.Panel1.Controls.Add(Me.position)
-        Me.Panel1.Controls.Add(Me.departmentId)
         Me.Panel1.Controls.Add(Me.requesterName)
         Me.Panel1.Controls.Add(Me.quantityRequest)
         Me.Panel1.Controls.Add(Me.sqr_property_id)
@@ -394,6 +382,15 @@ Partial Class AddSupplyRequest
         Me.admin_label_DepartmentManagement.TabIndex = 156
         Me.admin_label_DepartmentManagement.Text = "Supply Request Form"
         '
+        'department
+        '
+        Me.department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.department.FormattingEnabled = True
+        Me.department.Location = New System.Drawing.Point(223, 151)
+        Me.department.Name = "department"
+        Me.department.Size = New System.Drawing.Size(288, 26)
+        Me.department.TabIndex = 128
+        '
         'AddSupplyRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -430,7 +427,6 @@ Partial Class AddSupplyRequest
     Friend WithEvents approved_by As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents position As System.Windows.Forms.TextBox
-    Friend WithEvents departmentId As System.Windows.Forms.TextBox
     Friend WithEvents requesterName As System.Windows.Forms.TextBox
     Friend WithEvents quantityRequest As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -443,4 +439,5 @@ Partial Class AddSupplyRequest
     Friend WithEvents btnSave As Resources.Controls.RoundedButton
     Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
+    Friend WithEvents department As System.Windows.Forms.ComboBox
 End Class

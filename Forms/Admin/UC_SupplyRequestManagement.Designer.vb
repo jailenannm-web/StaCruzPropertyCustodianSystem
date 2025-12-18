@@ -24,24 +24,31 @@ Partial Class UC_SupplyRequestManagement
     Private Sub InitializeComponent()
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.issueRequisition = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAssignSupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_table1 = New System.Windows.Forms.DataGridView()
+        Me.admin_label_SupplyRequestManagement = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.supplyrequestmanagementsearchbar = New System.Windows.Forms.TextBox()
         Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requesterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requesterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.position = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.quantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.approvedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.approvedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.admin_label_SupplyRequestManagement = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.supplyrequestmanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -134,6 +141,22 @@ Partial Class UC_SupplyRequestManagement
         Me.btnReject.Text = "Reject"
         Me.btnReject.UseVisualStyleBackColor = False
         '
+        'btnAssignSupply
+        '
+        Me.btnAssignSupply.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAssignSupply.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnAssignSupply.CornerRadius = 15
+        Me.btnAssignSupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAssignSupply.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnAssignSupply.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAssignSupply.Location = New System.Drawing.Point(1026, 62)
+        Me.btnAssignSupply.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAssignSupply.Name = "btnAssignSupply"
+        Me.btnAssignSupply.Size = New System.Drawing.Size(99, 34)
+        Me.btnAssignSupply.TabIndex = 180
+        Me.btnAssignSupply.Text = "Assign"
+        Me.btnAssignSupply.UseVisualStyleBackColor = False
+        '
         'prm_table1
         '
         Me.prm_table1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -141,7 +164,7 @@ Partial Class UC_SupplyRequestManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_table1.BackgroundColor = System.Drawing.Color.White
         Me.prm_table1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.requestId, Me.requesterName, Me.departmentId, Me.dateOfRequest, Me.itemName, Me.quantityRequested, Me.approvedBy, Me.approvedDate, Me.createdAt, Me.updatedAt})
+        Me.prm_table1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.requestId, Me.departmentId, Me.requesterName, Me.itemName, Me.position, Me.description, Me.quantityRequested, Me.unit, Me.purpose, Me.status, Me.remarks, Me.dateOfRequest, Me.approvedBy, Me.approvedDate, Me.createdAt, Me.updatedAt})
         Me.prm_table1.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.prm_table1.Location = New System.Drawing.Point(67, 111)
         Me.prm_table1.Name = "prm_table1"
@@ -149,76 +172,6 @@ Partial Class UC_SupplyRequestManagement
         Me.prm_table1.RowTemplate.Height = 24
         Me.prm_table1.Size = New System.Drawing.Size(1270, 573)
         Me.prm_table1.TabIndex = 163
-        '
-        'requestId
-        '
-        Me.requestId.HeaderText = "requestId"
-        Me.requestId.MinimumWidth = 6
-        Me.requestId.Name = "requestId"
-        Me.requestId.Width = 125
-        '
-        'requesterName
-        '
-        Me.requesterName.HeaderText = "requesterName"
-        Me.requesterName.MinimumWidth = 6
-        Me.requesterName.Name = "requesterName"
-        Me.requesterName.Width = 125
-        '
-        'departmentId
-        '
-        Me.departmentId.HeaderText = "departmentId"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
-        '
-        'dateOfRequest
-        '
-        Me.dateOfRequest.HeaderText = "dateOfRequest"
-        Me.dateOfRequest.MinimumWidth = 6
-        Me.dateOfRequest.Name = "dateOfRequest"
-        Me.dateOfRequest.Width = 125
-        '
-        'itemName
-        '
-        Me.itemName.HeaderText = "itemName"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 125
-        '
-        'quantityRequested
-        '
-        Me.quantityRequested.HeaderText = "quantityRequested"
-        Me.quantityRequested.MinimumWidth = 6
-        Me.quantityRequested.Name = "quantityRequested"
-        Me.quantityRequested.Width = 125
-        '
-        'approvedBy
-        '
-        Me.approvedBy.HeaderText = "approvedBy"
-        Me.approvedBy.MinimumWidth = 6
-        Me.approvedBy.Name = "approvedBy"
-        Me.approvedBy.Width = 125
-        '
-        'approvedDate
-        '
-        Me.approvedDate.HeaderText = "approvedDate"
-        Me.approvedDate.MinimumWidth = 6
-        Me.approvedDate.Name = "approvedDate"
-        Me.approvedDate.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
         '
         'admin_label_SupplyRequestManagement
         '
@@ -250,6 +203,118 @@ Partial Class UC_SupplyRequestManagement
         Me.supplyrequestmanagementsearchbar.Size = New System.Drawing.Size(345, 42)
         Me.supplyrequestmanagementsearchbar.TabIndex = 178
         '
+        'requestId
+        '
+        Me.requestId.HeaderText = "RequestId"
+        Me.requestId.MinimumWidth = 6
+        Me.requestId.Name = "requestId"
+        Me.requestId.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "departmentId"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'requesterName
+        '
+        Me.requesterName.HeaderText = "Requester Name"
+        Me.requesterName.MinimumWidth = 6
+        Me.requesterName.Name = "requesterName"
+        Me.requesterName.Width = 125
+        '
+        'itemName
+        '
+        Me.itemName.HeaderText = "itemName"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 125
+        '
+        'position
+        '
+        Me.position.HeaderText = "Position"
+        Me.position.MinimumWidth = 6
+        Me.position.Name = "position"
+        Me.position.Width = 125
+        '
+        'description
+        '
+        Me.description.HeaderText = "Description"
+        Me.description.MinimumWidth = 6
+        Me.description.Name = "description"
+        Me.description.Width = 125
+        '
+        'quantityRequested
+        '
+        Me.quantityRequested.HeaderText = "quantityRequested"
+        Me.quantityRequested.MinimumWidth = 6
+        Me.quantityRequested.Name = "quantityRequested"
+        Me.quantityRequested.Width = 125
+        '
+        'unit
+        '
+        Me.unit.HeaderText = "Unit"
+        Me.unit.MinimumWidth = 6
+        Me.unit.Name = "unit"
+        Me.unit.Width = 125
+        '
+        'purpose
+        '
+        Me.purpose.HeaderText = "Purpose"
+        Me.purpose.MinimumWidth = 6
+        Me.purpose.Name = "purpose"
+        Me.purpose.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 125
+        '
+        'remarks
+        '
+        Me.remarks.HeaderText = "Remarks"
+        Me.remarks.MinimumWidth = 6
+        Me.remarks.Name = "remarks"
+        Me.remarks.Width = 125
+        '
+        'dateOfRequest
+        '
+        Me.dateOfRequest.HeaderText = "Date Of Request"
+        Me.dateOfRequest.MinimumWidth = 6
+        Me.dateOfRequest.Name = "dateOfRequest"
+        Me.dateOfRequest.Width = 125
+        '
+        'approvedBy
+        '
+        Me.approvedBy.HeaderText = "approvedBy"
+        Me.approvedBy.MinimumWidth = 6
+        Me.approvedBy.Name = "approvedBy"
+        Me.approvedBy.Width = 125
+        '
+        'approvedDate
+        '
+        Me.approvedDate.HeaderText = "approvedDate"
+        Me.approvedDate.MinimumWidth = 6
+        Me.approvedDate.Name = "approvedDate"
+        Me.approvedDate.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
+        '
         'UC_SupplyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -260,6 +325,7 @@ Partial Class UC_SupplyRequestManagement
         Me.Controls.Add(Me.issueRequisition)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlpropertyrequestmanagement)
+        Me.Controls.Add(Me.btnAssignSupply)
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnReject)
         Me.Controls.Add(Me.prm_table1)
@@ -279,18 +345,25 @@ Partial Class UC_SupplyRequestManagement
     Friend WithEvents ttlpropertyrequestmanagement As System.Windows.Forms.Label
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
+    Friend WithEvents btnAssignSupply As Resources.Controls.RoundedButton
     Friend WithEvents prm_table1 As System.Windows.Forms.DataGridView
     Friend WithEvents admin_label_SupplyRequestManagement As System.Windows.Forms.Label
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents supplyrequestmanagementsearchbar As System.Windows.Forms.TextBox
     Friend WithEvents requestId As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents requesterName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents departmentId As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents dateOfRequest As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents requesterName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents itemName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents position As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents description As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents quantityRequested As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents unit As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents purpose As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents remarks As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents dateOfRequest As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents approvedBy As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents approvedDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents createdAt As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
-    Friend WithEvents supplyrequestmanagementsearchbar As System.Windows.Forms.TextBox
 End Class

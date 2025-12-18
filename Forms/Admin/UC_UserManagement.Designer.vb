@@ -29,14 +29,6 @@ Partial Class UC_UserManagement
     Private Sub InitializeComponent()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
         Me.pm_table = New System.Windows.Forms.DataGridView()
-        Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
-        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ttlusermanagement = New System.Windows.Forms.Label()
-        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.userId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,6 +41,14 @@ Partial Class UC_UserManagement
         Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.passwordEncrypted = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lastLogin = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
+        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlusermanagement = New System.Windows.Forms.Label()
+        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -78,6 +78,90 @@ Partial Class UC_UserManagement
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 27
+        '
+        'userId
+        '
+        Me.userId.HeaderText = "user Id"
+        Me.userId.MinimumWidth = 6
+        Me.userId.Name = "userId"
+        Me.userId.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
+        '
+        'firstName
+        '
+        Me.firstName.HeaderText = "first Name"
+        Me.firstName.MinimumWidth = 6
+        Me.firstName.Name = "firstName"
+        Me.firstName.Width = 125
+        '
+        'middleName
+        '
+        Me.middleName.HeaderText = "middle Name"
+        Me.middleName.MinimumWidth = 6
+        Me.middleName.Name = "middleName"
+        Me.middleName.Width = 125
+        '
+        'lastName
+        '
+        Me.lastName.HeaderText = "last Name"
+        Me.lastName.MinimumWidth = 6
+        Me.lastName.Name = "lastName"
+        Me.lastName.Width = 125
+        '
+        'fullName
+        '
+        Me.fullName.HeaderText = "full Name"
+        Me.fullName.MinimumWidth = 6
+        Me.fullName.Name = "fullName"
+        Me.fullName.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "department Id"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'employeeId
+        '
+        Me.employeeId.HeaderText = "employeeId"
+        Me.employeeId.MinimumWidth = 6
+        Me.employeeId.Name = "employeeId"
+        Me.employeeId.Width = 125
+        '
+        'contactNumber
+        '
+        Me.contactNumber.HeaderText = "contactNumber"
+        Me.contactNumber.MinimumWidth = 6
+        Me.contactNumber.Name = "contactNumber"
+        Me.contactNumber.Width = 125
+        '
+        'passwordEncrypted
+        '
+        Me.passwordEncrypted.HeaderText = "passwordEncrypted"
+        Me.passwordEncrypted.MinimumWidth = 6
+        Me.passwordEncrypted.Name = "passwordEncrypted"
+        Me.passwordEncrypted.Width = 125
+        '
+        'lastLogin
+        '
+        Me.lastLogin.HeaderText = "lastLogin"
+        Me.lastLogin.MinimumWidth = 6
+        Me.lastLogin.Name = "lastLogin"
+        Me.lastLogin.Width = 125
         '
         'cboRoleFilter
         '
@@ -188,90 +272,6 @@ Partial Class UC_UserManagement
         Me.btnAdd.TabIndex = 158
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
-        '
-        'userId
-        '
-        Me.userId.HeaderText = "user Id"
-        Me.userId.MinimumWidth = 6
-        Me.userId.Name = "userId"
-        Me.userId.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
-        '
-        'firstName
-        '
-        Me.firstName.HeaderText = "first Name"
-        Me.firstName.MinimumWidth = 6
-        Me.firstName.Name = "firstName"
-        Me.firstName.Width = 125
-        '
-        'middleName
-        '
-        Me.middleName.HeaderText = "middle Name"
-        Me.middleName.MinimumWidth = 6
-        Me.middleName.Name = "middleName"
-        Me.middleName.Width = 125
-        '
-        'lastName
-        '
-        Me.lastName.HeaderText = "last Name"
-        Me.lastName.MinimumWidth = 6
-        Me.lastName.Name = "lastName"
-        Me.lastName.Width = 125
-        '
-        'fullName
-        '
-        Me.fullName.HeaderText = "full Name"
-        Me.fullName.MinimumWidth = 6
-        Me.fullName.Name = "fullName"
-        Me.fullName.Width = 125
-        '
-        'departmentId
-        '
-        Me.departmentId.HeaderText = "department Id"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
-        '
-        'employeeId
-        '
-        Me.employeeId.HeaderText = "employeeId"
-        Me.employeeId.MinimumWidth = 6
-        Me.employeeId.Name = "employeeId"
-        Me.employeeId.Width = 125
-        '
-        'contactNumber
-        '
-        Me.contactNumber.HeaderText = "contactNumber"
-        Me.contactNumber.MinimumWidth = 6
-        Me.contactNumber.Name = "contactNumber"
-        Me.contactNumber.Width = 125
-        '
-        'passwordEncrypted
-        '
-        Me.passwordEncrypted.HeaderText = "passwordEncrypted"
-        Me.passwordEncrypted.MinimumWidth = 6
-        Me.passwordEncrypted.Name = "passwordEncrypted"
-        Me.passwordEncrypted.Width = 125
-        '
-        'lastLogin
-        '
-        Me.lastLogin.HeaderText = "lastLogin"
-        Me.lastLogin.MinimumWidth = 6
-        Me.lastLogin.Name = "lastLogin"
-        Me.lastLogin.Width = 125
         '
         'UC_UserManagement
         '

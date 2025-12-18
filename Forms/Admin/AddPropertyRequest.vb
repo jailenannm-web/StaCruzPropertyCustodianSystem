@@ -76,9 +76,9 @@ Public Class AddPropertyRequest
 
             ' Get department ID if provided
             Dim deptID As Integer? = Nothing
-            If departmentId IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(departmentId.Text) Then
+            If department IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(department.Text) Then
                 Dim parsedDeptID As Integer
-                If Integer.TryParse(departmentId.Text.Trim(), parsedDeptID) Then
+                If Integer.TryParse(department.Text.Trim(), parsedDeptID) Then
                     deptID = parsedDeptID
                 End If
             End If
@@ -198,7 +198,12 @@ Public Class AddPropertyRequest
         Try
             ' Pre-fill item name and description if provided
             If Not String.IsNullOrEmpty(_prefillItemName) Then
-                description.Text = _prefillItemName
+                itemName.Text = _prefillItemName
+            End If
+            
+            ' Pre-fill description if provided
+            If Not String.IsNullOrEmpty(_prefillItemDescription) Then
+                description.Text = _prefillItemDescription
             End If
             
             ' Pre-fill requester name if provided
@@ -213,7 +218,7 @@ Public Class AddPropertyRequest
             
             ' Pre-fill department if provided
             If Not String.IsNullOrEmpty(_prefillDepartment) Then
-                departmentId.Text = _prefillDepartment
+                department.Text = _prefillDepartment
             End If
             
             ' Pre-fill date if provided
@@ -260,9 +265,9 @@ Public Class AddPropertyRequest
                                     End If
                                     If rowDeptID = deptID Then
                                         If row.Table.Columns.Contains("departmentName") Then
-                                            departmentId.Text = row("departmentName").ToString()
+                                            department.Text = row("departmentName").ToString()
                                         ElseIf row.Table.Columns.Contains("department_name") Then
-                                            departmentId.Text = row("department_name").ToString()
+                                            department.Text = row("department_name").ToString()
                                         End If
                                         Exit For
                                     End If

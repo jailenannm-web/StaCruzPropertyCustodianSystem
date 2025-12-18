@@ -1,14 +1,20 @@
 ﻿Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
+Imports System.ComponentModel
 
 Namespace Resources.Controls
+    <ToolboxItem(True)>
     Public Class RoundedPanel
         Inherits Panel
 
         Public Property CornerRadius As Integer = 20
 
         Protected Overrides Sub OnPaint(e As PaintEventArgs)
+            If Me.Width <= 1 OrElse Me.Height <= 1 Then
+                MyBase.OnPaint(e)
+                Return
+            End If
             MyBase.OnPaint(e)
             Using path As New GraphicsPath()
                 Dim rect As New Rectangle(0, 0, Me.Width, Me.Height)

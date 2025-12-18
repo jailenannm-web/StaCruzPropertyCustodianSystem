@@ -77,26 +77,26 @@ Public Class frmRequest
             For Each row As DataRow In filteredRows
                 Try
                     Dim requestID As String = ""
+                    Dim requesterName As String = ""
+                    Dim position As String = ""
+                    Dim departmentId As String = ""
                     Dim requestDate As String = ""
                     Dim itemName As String = ""
-                    Dim requestType As String = ""
+                    Dim description As String = ""
                     Dim quantity As String = "1"
                     Dim requestStatus As String = ""
                     Dim approvedBy As String = ""
-                    Dim releaseDate As String = ""
-                    Dim returnDate As String = ""
+                    Dim approvedDate As String = ""
+                    Dim remarks As String = ""
 
                     If row.Table.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")) Then
                         requestID = row("request_id").ToString()
                     End If
                     If row.Table.Columns.Contains("request_date") AndAlso Not IsDBNull(row("request_date")) Then
-                        requestDate = Convert.ToDateTime(row("request_date")).ToString("yyyy-MM-dd")
+                        requestDate = Convert.ToDateTime(row("request_date")).ToString("MM/dd/yyyy")
                     End If
                     If row.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
                         itemName = row("item_name").ToString()
-                    End If
-                    If row.Table.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")) Then
-                        requestType = row("request_type").ToString()
                     End If
                     If row.Table.Columns.Contains("quantity") AndAlso Not IsDBNull(row("quantity")) Then
                         quantity = row("quantity").ToString()
@@ -105,16 +105,15 @@ Public Class frmRequest
                         requestStatus = row("status").ToString()
                     End If
                     If row.Table.Columns.Contains("approval_date") AndAlso Not IsDBNull(row("approval_date")) Then
-                        approvedBy = Convert.ToDateTime(row("approval_date")).ToString("yyyy-MM-dd")
+                        approvedDate = Convert.ToDateTime(row("approval_date")).ToString("MM/dd/yyyy")
                     End If
-                    If row.Table.Columns.Contains("release_date") AndAlso Not IsDBNull(row("release_date")) Then
-                        releaseDate = Convert.ToDateTime(row("release_date")).ToString("yyyy-MM-dd")
-                    End If
-                    If row.Table.Columns.Contains("expected_return_date") AndAlso Not IsDBNull(row("expected_return_date")) Then
-                        returnDate = Convert.ToDateTime(row("expected_return_date")).ToString("yyyy-MM-dd")
+                    If row.Table.Columns.Contains("remarks") AndAlso Not IsDBNull(row("remarks")) Then
+                        remarks = row("remarks").ToString()
                     End If
 
-                    DataGridView1.Rows.Add(requestID, requestDate, itemName, requestType, quantity, requestStatus, approvedBy, releaseDate, returnDate)
+                    ' Match the column order in the designer: requestId, requesterName, position, departmentId, dateOfRequest, itemName, description, quantityRequested, unit, purpose, status, approvedBy, approvedDate, remarks
+                    ' Note: Some columns are hidden in the designer
+                    DataGridView1.Rows.Add(requestID, requesterName, position, departmentId, requestDate, itemName, description, quantity, "", "", requestStatus, approvedBy, approvedDate, remarks)
                 Catch rowEx As Exception
                     System.Diagnostics.Debug.WriteLine("Error processing row in frmRequest: " & rowEx.Message)
                 End Try

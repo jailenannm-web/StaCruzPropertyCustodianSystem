@@ -1,13 +1,9 @@
 Imports System
 Imports System.Data
-Imports System.Diagnostics
 Imports System.Drawing
-Imports System.Drawing.Drawing2D
+Imports System.Linq
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
-Imports System.Text.RegularExpressions
-Imports System.Linq
-Imports MySql.Data.MySqlClient
 
 Public Class UC_SupplyManagement
     Inherits UserControl
@@ -37,7 +33,7 @@ Public Class UC_SupplyManagement
             If pm_cbobx_categ IsNot Nothing Then
                 pm_cbobx_categ.Items.Clear()
                 pm_cbobx_categ.Items.Add("All")
-                
+
                 ' Load categories from database - get unique categories from supplies table
                 Try
                     Dim categories As DataTable = DatabaseConnection.GetCategories("supply")
@@ -86,7 +82,7 @@ Public Class UC_SupplyManagement
                     ' Fallback to common categories
                     pm_cbobx_categ.Items.AddRange(New String() {"Office Supplies", "Cleaning Materials", "Medical Supplies", "IT Supplies", "Stationery", "Electronics", "Furniture", "Equipment"})
                 End Try
-                
+
                 pm_cbobx_categ.SelectedIndex = 0
                 AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
             End If
@@ -94,7 +90,8 @@ Public Class UC_SupplyManagement
             If pm_cbobx_status IsNot Nothing Then
                 pm_cbobx_status.Items.Clear()
                 pm_cbobx_status.Items.Add("All Status")
-                pm_cbobx_status.Items.AddRange(New String() {"In Stock", "Low Stock", "Out of Stock"})
+                ' Match database enum values: 'Available', 'Low Stock', 'Out of Stock'
+                pm_cbobx_status.Items.AddRange(New String() {"Available", "Low Stock", "Out of Stock"})
                 pm_cbobx_status.SelectedIndex = 0
                 AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
             End If

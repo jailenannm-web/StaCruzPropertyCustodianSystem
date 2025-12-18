@@ -76,7 +76,8 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Function FindStatusComboBox() As ComboBox
-        Dim names() As String = {"pm_cbobx_status", "statusFilter", "cbStatus"}
+        ' Designer uses "filter" as the Status combo in this UC
+        Dim names() As String = {"pm_cbobx_status", "statusFilter", "cbStatus", "filter"}
         For Each nm As String In names
             Dim found() As Control = Me.Controls.Find(nm, True)
             If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
@@ -360,14 +361,19 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub propertyManagementGrid_SelectionChanged(sender As Object, e As EventArgs)
-        If propertyManagementGrid.SelectedRows.Count > 0 Then
+        Dim hasSelection As Boolean = False
+        selectedPropertyID = -1
+
+        If propertyManagementGrid IsNot Nothing AndAlso propertyManagementGrid.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
-            If selectedRow.Tag IsNot Nothing Then
-                If Integer.TryParse(selectedRow.Tag.ToString(), selectedPropertyID) Then
-                    ' Row selected, enable Edit and Delete buttons
-                End If
+            If selectedRow IsNot Nothing AndAlso selectedRow.Tag IsNot Nothing Then
+                hasSelection = Integer.TryParse(selectedRow.Tag.ToString(), selectedPropertyID) AndAlso selectedPropertyID > 0
             End If
         End If
+
+        ' Require a valid selection before enabling Edit/Delete
+        If btnEdit IsNot Nothing Then btnEdit.Enabled = canModifyProperties AndAlso hasSelection
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = canModifyProperties AndAlso hasSelection
     End Sub
 
 
@@ -376,9 +382,12 @@ Public Class UC_PropertyManagement1
     Private Sub ApplyRolePermissions()
         ' Super Admin, Admin, and Custodian have full access - all buttons enabled
         Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        canModifyProperties = hasFullAccess
+
         If btnAdd IsNot Nothing Then btnAdd.Enabled = hasFullAccess
-        If btnEdit IsNot Nothing Then btnEdit.Enabled = hasFullAccess
-        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess
+        ' Edit/Delete should be enabled only when a row is selected; SelectionChanged will manage them.
+        If btnEdit IsNot Nothing Then btnEdit.Enabled = False
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = False
     End Sub
 
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
@@ -489,20 +498,25 @@ Public Class UC_PropertyManagement1
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         ' Super Admin bypasses all restrictions
+        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(New AddProperty())
+            Return
+        End If
 
+        ' Fallback (should not usually happen)
         Dim addRequest As New AddProperty()
         addRequest.Dock = DockStyle.Fill
-
-        ' Clear previous controls
         Me.Controls.Clear()
-
-        ' Add new user control
         Me.Controls.Add(addRequest)
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         ' Super Admin bypasses all restrictions
-
+        If propertyManagementGrid Is Nothing OrElse propertyManagementGrid.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a property to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
         Dim row As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
 

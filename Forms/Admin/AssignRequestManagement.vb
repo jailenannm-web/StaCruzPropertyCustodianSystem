@@ -46,23 +46,20 @@ Public Class AssignRequestManagement
         LoadCategoryDropdown()
         LoadDepartmentDropdown()
         LoadConditionDropdown()
+        LoadLocationDropdown()
         ' Load available properties/supplies even if no request
         LoadAvailableProperties()
-        LoadAvailableSupplies()
-        ' Wire up property selection change event for auto-fill
-        Dim propCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox1")
-        If propCombo IsNot Nothing Then
-            AddHandler propCombo.SelectedIndexChanged, AddressOf ComboBox1_SelectedIndexChanged
+        ' Wire up property ID selection change event for auto-fill
+        If propertyId IsNot Nothing Then
+            AddHandler propertyId.SelectedIndexChanged, AddressOf PropertyId_SelectedIndexChanged
+        End If
+        ' Wire up property name selection change event for auto-fill
+        If propertyName IsNot Nothing Then
+            AddHandler propertyName.SelectedIndexChanged, AddressOf PropertyName_SelectedIndexChanged
         End If
         ' Wire up department change for cascading employee dropdown
-        Dim deptCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox2")
-        If deptCombo IsNot Nothing Then
-            AddHandler deptCombo.SelectedIndexChanged, AddressOf ComboBox2_SelectedIndexChanged
-        End If
-        ' Wire up employee change if needed
-        Dim empCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox4")
-        If empCombo IsNot Nothing Then
-            AddHandler empCombo.SelectedIndexChanged, AddressOf ComboBox4_SelectedIndexChanged
+        If department IsNot Nothing Then
+            AddHandler department.SelectedIndexChanged, AddressOf Department_SelectedIndexChanged
         End If
         ' Load request data if RequestID is set
         If currentRequestID > 0 Then
@@ -72,30 +69,30 @@ Public Class AssignRequestManagement
 
     Private Sub LoadCategoryDropdown()
         Try
-            Dim combo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox3")
-            If combo IsNot Nothing Then
+            ' ComboBox1 is the category dropdown based on designer
+            If ComboBox1 IsNot Nothing Then
                 ' Clear any DataSource binding first
-                combo.DataSource = Nothing
-                combo.Items.Clear()
+                ComboBox1.DataSource = Nothing
+                ComboBox1.Items.Clear()
                 ' Try to load from database first
                 Try
                     Dim categoriesTable As DataTable = DatabaseConnection.GetCategories("property")
                     If categoriesTable IsNot Nothing AndAlso categoriesTable.Rows.Count > 0 Then
                         ' Use DataSource with proper DisplayMember
-                        combo.DataSource = categoriesTable
+                        ComboBox1.DataSource = categoriesTable
                         If categoriesTable.Columns.Contains("categoryName") Then
-                            combo.DisplayMember = "categoryName"
-                            combo.ValueMember = "categoryName"
+                            ComboBox1.DisplayMember = "categoryName"
+                            ComboBox1.ValueMember = "categoryName"
                         ElseIf categoriesTable.Columns.Contains("category_name") Then
-                            combo.DisplayMember = "category_name"
-                            combo.ValueMember = "category_name"
+                            ComboBox1.DisplayMember = "category_name"
+                            ComboBox1.ValueMember = "category_name"
                         ElseIf categoriesTable.Columns.Count > 0 Then
-                            combo.DisplayMember = categoriesTable.Columns(0).ColumnName
-                            combo.ValueMember = categoriesTable.Columns(0).ColumnName
+                            ComboBox1.DisplayMember = categoriesTable.Columns(0).ColumnName
+                            ComboBox1.ValueMember = categoriesTable.Columns(0).ColumnName
                         End If
                     Else
                         ' Fallback to hardcoded list
-                        combo.Items.AddRange(New String() {
+                        ComboBox1.Items.AddRange(New String() {
                             "Furniture", "Equipment", "Office Supplies", "IT Equipment",
                             "Laboratory Apparatus", "Books and Publications",
                             "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
@@ -103,7 +100,7 @@ Public Class AssignRequestManagement
                     End If
                 Catch
                     ' Fallback to hardcoded list if database load fails
-                    combo.Items.AddRange(New String() {
+                    ComboBox1.Items.AddRange(New String() {
                         "Furniture", "Equipment", "Office Supplies", "IT Equipment",
                         "Laboratory Apparatus", "Books and Publications",
                         "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
@@ -118,19 +115,18 @@ Public Class AssignRequestManagement
     Private Sub LoadDepartmentDropdown()
         Try
             Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
-            Dim combo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox2")
-            If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 AndAlso combo IsNot Nothing Then
-                combo.DataSource = deptTable
+            If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 AndAlso department IsNot Nothing Then
+                department.DataSource = deptTable
                 ' Use camelCase column names if available, fallback to snake_case
                 If deptTable.Columns.Contains("departmentName") Then
-                    combo.DisplayMember = "departmentName"
-                    combo.ValueMember = "departmentId"
+                    department.DisplayMember = "departmentName"
+                    department.ValueMember = "departmentId"
                 ElseIf deptTable.Columns.Contains("department_name") Then
-                    combo.DisplayMember = "department_name"
-                    combo.ValueMember = "department_id"
+                    department.DisplayMember = "department_name"
+                    department.ValueMember = "department_id"
                 ElseIf deptTable.Columns.Count >= 2 Then
-                    combo.DisplayMember = deptTable.Columns(1).ColumnName
-                    combo.ValueMember = deptTable.Columns(0).ColumnName
+                    department.DisplayMember = deptTable.Columns(1).ColumnName
+                    department.ValueMember = deptTable.Columns(0).ColumnName
                 End If
             End If
         Catch ex As Exception
@@ -140,26 +136,61 @@ Public Class AssignRequestManagement
 
     Private Sub LoadConditionDropdown()
         Try
-            Dim combo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox11")
-            If combo IsNot Nothing Then
-                combo.Items.Clear()
-                combo.Items.AddRange(New String() {"New", "Good", "Fair", "Damaged", "For Repair"})
+            If condition IsNot Nothing Then
+                condition.Items.Clear()
+                condition.Items.AddRange(New String() {"New", "Good", "Fair", "Damaged", "For Repair"})
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadConditionDropdown Exception: " & ex.Message)
         End Try
     End Sub
 
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Private Sub LoadLocationDropdown()
+        Try
+            If location IsNot Nothing Then
+                location.Items.Clear()
+                ' Try to load from database first
+                Try
+                    Dim locationsTable As DataTable = DatabaseConnection.GetLocations()
+                    If locationsTable IsNot Nothing AndAlso locationsTable.Rows.Count > 0 Then
+                        For Each row As DataRow In locationsTable.Rows
+                            Dim locName As String = ""
+                            If row.Table.Columns.Contains("locationName") AndAlso Not IsDBNull(row("locationName")) Then
+                                locName = row("locationName").ToString()
+                            ElseIf row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")) Then
+                                locName = row("location").ToString()
+                            ElseIf row.Table.Columns.Count > 0 AndAlso Not IsDBNull(row(0)) Then
+                                locName = row(0).ToString()
+                            End If
+                            If Not String.IsNullOrEmpty(locName) AndAlso Not location.Items.Contains(locName) Then
+                                location.Items.Add(locName)
+                            End If
+                        Next
+                    End If
+                Catch
+                    ' Fallback to hardcoded
+                End Try
+                ' Fallback to hardcoded list
+                If location.Items.Count = 0 Then
+                    location.Items.AddRange(New String() {
+                        "Main Building", "Annex Building", "Storage Room", "Office 1", "Office 2",
+                        "Conference Room", "Laboratory", "Library", "Gymnasium", "Cafeteria"
+                    })
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadLocationDropdown Exception: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Department_SelectedIndexChanged(sender As Object, e As EventArgs)
         ' Load employees when department changes
-        Dim combo As ComboBox = TryCast(sender, ComboBox)
-        If combo Is Nothing Then combo = FindControlOfType(Of ComboBox)("ComboBox2")
-        If combo Is Nothing OrElse combo.SelectedValue Is Nothing Then Return
+        If department Is Nothing OrElse department.SelectedValue Is Nothing Then Return
 
         Try
             Dim deptID As Integer
-            If TypeOf combo.SelectedValue Is DataRowView Then
-                Dim drv As DataRowView = CType(combo.SelectedValue, DataRowView)
+            If TypeOf department.SelectedValue Is DataRowView Then
+                Dim drv As DataRowView = CType(department.SelectedValue, DataRowView)
                 ' Try both camelCase and snake_case column names
                 If drv.Row.Table.Columns.Contains("departmentId") Then
                     If Not Integer.TryParse(drv.Row("departmentId").ToString(), deptID) Then Return
@@ -168,194 +199,211 @@ Public Class AssignRequestManagement
                 Else
                     Return
                 End If
-            ElseIf Not Integer.TryParse(combo.SelectedValue.ToString(), deptID) Then
+            ElseIf Not Integer.TryParse(department.SelectedValue.ToString(), deptID) Then
                 Return
             End If
 
             Dim usersTable As DataTable = DatabaseConnection.GetUsersByDepartment(deptID)
-            Dim empCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox4")
-            If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 AndAlso empCombo IsNot Nothing Then
-                empCombo.DataSource = usersTable
-                empCombo.DisplayMember = "fullName"
-                empCombo.ValueMember = "userId"
-            ElseIf empCombo IsNot Nothing Then
-                empCombo.DataSource = Nothing
-                empCombo.Items.Clear()
-                empCombo.Items.Add("No employees in this department")
+            If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 AndAlso employee IsNot Nothing Then
+                employee.DataSource = usersTable
+                employee.DisplayMember = "fullName"
+                employee.ValueMember = "userId"
+            ElseIf employee IsNot Nothing Then
+                employee.DataSource = Nothing
+                employee.Items.Clear()
+                employee.Items.Add("No employees in this department")
             End If
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] ComboBox2_SelectedIndexChanged Exception: " & ex.Message)
+            System.Diagnostics.Debug.WriteLine("[v0] Department_SelectedIndexChanged Exception: " & ex.Message)
         End Try
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
-        ' Auto-fill all fields when a property is selected
-        Dim combo As ComboBox = TryCast(sender, ComboBox)
-        If combo Is Nothing Then combo = FindControlOfType(Of ComboBox)("ComboBox1")
-        If combo Is Nothing OrElse combo.SelectedValue Is Nothing Then Return
+    Private Sub PropertyId_SelectedIndexChanged(sender As Object, e As EventArgs)
+        ' Auto-fill all fields when a property ID is selected
+        If propertyId Is Nothing OrElse propertyId.SelectedValue Is Nothing Then Return
 
         Try
-            Dim propertyID As Integer
-            If TypeOf combo.SelectedValue Is DataRowView Then
-                Dim drv As DataRowView = CType(combo.SelectedValue, DataRowView)
-                If Not Integer.TryParse(drv.Row("propertyId").ToString(), propertyID) Then Return
-            ElseIf Not Integer.TryParse(combo.SelectedValue.ToString(), propertyID) Then
+            Dim propID As Integer
+            If TypeOf propertyId.SelectedValue Is DataRowView Then
+                Dim drv As DataRowView = CType(propertyId.SelectedValue, DataRowView)
+                If Not Integer.TryParse(drv.Row("propertyId").ToString(), propID) Then Return
+            ElseIf Not Integer.TryParse(propertyId.SelectedValue.ToString(), propID) Then
                 Return
             End If
 
-            ' Get property details from database
-            Dim propertyData As DataRow = DatabaseConnection.GetPropertyDetails(propertyID)
-            If propertyData Is Nothing Then Return
-
-            ' Auto-fill Property ID
-            Dim propIdCtl As Control = FindControlOfType(Of Control)("Property_ID")
-            If propIdCtl IsNot Nothing Then
-                If TypeOf propIdCtl Is TextBox Then
-                    CType(propIdCtl, TextBox).Text = propertyID.ToString()
-                ElseIf TypeOf propIdCtl Is Label Then
-                    CType(propIdCtl, Label).Text = propertyID.ToString()
-                End If
-            End If
-
-            ' Auto-fill Property Name
-            Dim btnProp As Control = FindControlOfType(Of Control)("btn_PropertyName")
-            If btnProp IsNot Nothing Then
-                Dim itemName As String = ""
-                If propertyData.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(propertyData("itemName")) Then
-                    itemName = propertyData("itemName").ToString()
-                End If
-                If TypeOf btnProp Is Button Then
-                    CType(btnProp, Button).Text = itemName
-                ElseIf TypeOf btnProp Is Label Then
-                    CType(btnProp, Label).Text = itemName
-                End If
-            End If
-
-            ' Auto-fill Category - ensure it's not bound to DataSource when setting value
-            Dim catCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox3")
-            If catCombo IsNot Nothing Then
-                Dim category As String = ""
-                If propertyData.Table.Columns.Contains("category") AndAlso Not IsDBNull(propertyData("category")) Then
-                    category = propertyData("category").ToString()
-                End If
-                ' Clear DataSource if bound to prevent DataRowView display issue
-                If catCombo.DataSource IsNot Nothing Then
-                    catCombo.DataSource = Nothing
-                    ' Reload items if needed
-                    If catCombo.Items.Count = 0 Then
-                        catCombo.Items.AddRange(New String() {
-                            "Furniture", "Equipment", "Office Supplies", "IT Equipment",
-                            "Laboratory Apparatus", "Books and Publications",
-                            "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
-                        })
-                    End If
-                End If
-                Dim categoryIndex As Integer = catCombo.FindStringExact(category)
-                If categoryIndex >= 0 Then
-                    catCombo.SelectedIndex = categoryIndex
-                ElseIf Not String.IsNullOrEmpty(category) Then
-                    ' Add category if not in list, then select it
-                    catCombo.Items.Add(category)
-                    catCombo.SelectedItem = category
-                End If
-            End If
-
-            ' Auto-fill Serial Number
-            Dim serialTxt As TextBox = FindControlOfType(Of TextBox)("txb_SerialNumber")
-            If serialTxt IsNot Nothing Then
-                Dim serialNumber As String = ""
-                If propertyData.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(propertyData("serialNumber")) Then
-                    serialNumber = propertyData("serialNumber").ToString()
-                End If
-                serialTxt.Text = serialNumber
-            End If
-
-            ' Auto-fill Supplier
-            Dim btnSupplier As Control = FindControlOfType(Of Control)("btn_Suppier")
-            If btnSupplier IsNot Nothing Then
-                Dim supplier As String = ""
-                If propertyData.Table.Columns.Contains("supplier") AndAlso Not IsDBNull(propertyData("supplier")) Then
-                    supplier = propertyData("supplier").ToString()
-                End If
-                If TypeOf btnSupplier Is Button Then
-                    CType(btnSupplier, Button).Text = supplier
-                ElseIf TypeOf btnSupplier Is Label Then
-                    CType(btnSupplier, Label).Text = supplier
-                End If
-            End If
-
-            ' Auto-fill Condition
-            Dim condCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox11")
-            If condCombo IsNot Nothing Then
-                Dim condition As String = ""
-                If propertyData.Table.Columns.Contains("condition") AndAlso Not IsDBNull(propertyData("condition")) Then
-                    condition = propertyData("condition").ToString()
-                End If
-                Dim conditionIndex As Integer = condCombo.FindStringExact(condition)
-                If conditionIndex >= 0 Then
-                    condCombo.SelectedIndex = conditionIndex
-                Else
-                    condCombo.Text = condition
-                End If
-            End If
-
-            ' Auto-fill Cost
-            Dim costTxt As TextBox = FindControlOfType(Of TextBox)("txb_Cost")
-            If costTxt IsNot Nothing Then
-                Dim cost As Decimal = 0
-                If propertyData.Table.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(propertyData("acquisitionCost")) Then
-                    Decimal.TryParse(propertyData("acquisitionCost").ToString(), cost)
-                End If
-                costTxt.Text = cost.ToString("0.00")
-            End If
-
-            ' Auto-fill Department
-            Dim deptCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox2")
-            If deptCombo IsNot Nothing Then
-                Dim deptName As String = ""
-                If propertyData.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(propertyData("assignedDepartment")) Then
-                    deptName = propertyData("assignedDepartment").ToString()
-                ElseIf propertyData.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(propertyData("departmentId")) Then
-                    deptName = propertyData("departmentId").ToString()
-                End If
-                If Not String.IsNullOrEmpty(deptName) Then
-                    Dim deptIndex As Integer = deptCombo.FindStringExact(deptName)
-                    If deptIndex >= 0 Then
-                        deptCombo.SelectedIndex = deptIndex
-                    Else
-                        deptCombo.Text = deptName
-                    End If
-                End If
-            End If
-
-            ' Auto-fill Employee
-            Dim empCombo2 As ComboBox = FindControlOfType(Of ComboBox)("ComboBox4")
-            If empCombo2 IsNot Nothing Then
-                Dim employeeName As String = ""
-                If propertyData.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(propertyData("assignedEmployee")) Then
-                    employeeName = propertyData("assignedEmployee").ToString()
-                End If
-                If Not String.IsNullOrEmpty(employeeName) Then
-                    Dim empIndex As Integer = empCombo2.FindStringExact(employeeName)
-                    If empIndex >= 0 Then
-                        empCombo2.SelectedIndex = empIndex
-                    End If
-                End If
-            End If
-
-            ' Auto-fill Location
-            Dim locTxt As TextBox = FindControlOfType(Of TextBox)("TextBox2")
-            If locTxt IsNot Nothing Then
-                Dim location As String = ""
-                If propertyData.Table.Columns.Contains("location") AndAlso Not IsDBNull(propertyData("location")) Then
-                    location = propertyData("location").ToString()
-                End If
-                locTxt.Text = location
-            End If
+            AutoFillPropertyDetails(propID)
 
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] ComboBox1_SelectedIndexChanged Exception: " & ex.Message)
+            System.Diagnostics.Debug.WriteLine("[v0] PropertyId_SelectedIndexChanged Exception: " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub PropertyName_SelectedIndexChanged(sender As Object, e As EventArgs)
+        ' Auto-fill all fields when a property name is selected
+        If propertyName Is Nothing OrElse propertyName.SelectedValue Is Nothing Then Return
+
+        Try
+            Dim propID As Integer
+            If TypeOf propertyName.SelectedValue Is DataRowView Then
+                Dim drv As DataRowView = CType(propertyName.SelectedValue, DataRowView)
+                If Not Integer.TryParse(drv.Row("propertyId").ToString(), propID) Then Return
+            ElseIf Not Integer.TryParse(propertyName.SelectedValue.ToString(), propID) Then
+                Return
+            End If
+
+            AutoFillPropertyDetails(propID)
+
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] PropertyName_SelectedIndexChanged Exception: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub AutoFillPropertyDetails(propID As Integer)
+        ' Get property details from database
+        Dim propertyData As DataRow = DatabaseConnection.GetPropertyDetails(propID)
+        If propertyData Is Nothing Then Return
+
+        ' Auto-fill Property Name dropdown (sync with Property ID selection)
+        If propertyName IsNot Nothing AndAlso propertyName.DataSource IsNot Nothing Then
+            Try
+                For i As Integer = 0 To propertyName.Items.Count - 1
+                    Dim drv As DataRowView = TryCast(propertyName.Items(i), DataRowView)
+                    If drv IsNot Nothing Then
+                        Dim itemPropID As Integer = 0
+                        If drv.Row.Table.Columns.Contains("propertyId") AndAlso Integer.TryParse(drv.Row("propertyId").ToString(), itemPropID) Then
+                            If itemPropID = propID Then
+                                propertyName.SelectedIndex = i
+                                Exit For
+                            End If
+                        End If
+                    End If
+                Next
+            Catch
+            End Try
+        End If
+
+        ' Auto-fill Serial Number
+        If serialNumber IsNot Nothing Then
+            Dim serialNum As String = ""
+            If propertyData.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(propertyData("serialNumber")) Then
+                serialNum = propertyData("serialNumber").ToString()
+            End If
+            serialNumber.Text = serialNum
+        End If
+
+        ' Auto-fill Supplier
+        If suppier IsNot Nothing Then
+            Dim supplierVal As String = ""
+            If propertyData.Table.Columns.Contains("supplier") AndAlso Not IsDBNull(propertyData("supplier")) Then
+                supplierVal = propertyData("supplier").ToString()
+            End If
+            suppier.Text = supplierVal
+        End If
+
+        ' Auto-fill Category dropdown
+        If ComboBox1 IsNot Nothing Then
+            Dim categoryVal As String = ""
+            If propertyData.Table.Columns.Contains("category") AndAlso Not IsDBNull(propertyData("category")) Then
+                categoryVal = propertyData("category").ToString()
+            End If
+            ' Clear DataSource if bound to prevent DataRowView display issue
+            If ComboBox1.DataSource IsNot Nothing Then
+                ComboBox1.DataSource = Nothing
+                If ComboBox1.Items.Count = 0 Then
+                    ComboBox1.Items.AddRange(New String() {
+                        "Furniture", "Equipment", "Office Supplies", "IT Equipment",
+                        "Laboratory Apparatus", "Books and Publications",
+                        "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
+                    })
+                End If
+            End If
+            Dim categoryIndex As Integer = ComboBox1.FindStringExact(categoryVal)
+            If categoryIndex >= 0 Then
+                ComboBox1.SelectedIndex = categoryIndex
+            ElseIf Not String.IsNullOrEmpty(categoryVal) Then
+                ComboBox1.Items.Add(categoryVal)
+                ComboBox1.SelectedItem = categoryVal
+            End If
+        End If
+
+        ' Auto-fill Condition
+        If condition IsNot Nothing Then
+            Dim conditionVal As String = ""
+            If propertyData.Table.Columns.Contains("condition") AndAlso Not IsDBNull(propertyData("condition")) Then
+                conditionVal = propertyData("condition").ToString()
+            End If
+            Dim conditionIndex As Integer = condition.FindStringExact(conditionVal)
+            If conditionIndex >= 0 Then
+                condition.SelectedIndex = conditionIndex
+            Else
+                condition.Text = conditionVal
+            End If
+        End If
+
+        ' Auto-fill Cost
+        If cost IsNot Nothing Then
+            Dim costVal As Decimal = 0
+            If propertyData.Table.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(propertyData("acquisitionCost")) Then
+                Decimal.TryParse(propertyData("acquisitionCost").ToString(), costVal)
+            End If
+            cost.Value = costVal
+        End If
+
+        ' Auto-fill Location dropdown
+        If location IsNot Nothing Then
+            Dim locationVal As String = ""
+            If propertyData.Table.Columns.Contains("location") AndAlso Not IsDBNull(propertyData("location")) Then
+                locationVal = propertyData("location").ToString()
+            End If
+            Dim locIndex As Integer = location.FindStringExact(locationVal)
+            If locIndex >= 0 Then
+                location.SelectedIndex = locIndex
+            ElseIf Not String.IsNullOrEmpty(locationVal) Then
+                location.Items.Add(locationVal)
+                location.SelectedItem = locationVal
+            End If
+        End If
+
+        ' Auto-fill Department
+        If department IsNot Nothing Then
+            Dim deptName As String = ""
+            If propertyData.Table.Columns.Contains("assignedDepartment") AndAlso Not IsDBNull(propertyData("assignedDepartment")) Then
+                deptName = propertyData("assignedDepartment").ToString()
+            End If
+            If Not String.IsNullOrEmpty(deptName) Then
+                Dim deptIndex As Integer = department.FindStringExact(deptName)
+                If deptIndex >= 0 Then
+                    department.SelectedIndex = deptIndex
+                Else
+                    department.Text = deptName
+                End If
+            End If
+        End If
+
+        ' Auto-fill Employee
+        If employee IsNot Nothing Then
+            Dim employeeName As String = ""
+            If propertyData.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(propertyData("assignedEmployee")) Then
+                employeeName = propertyData("assignedEmployee").ToString()
+            End If
+            If Not String.IsNullOrEmpty(employeeName) Then
+                Dim empIndex As Integer = employee.FindStringExact(employeeName)
+                If empIndex >= 0 Then
+                    employee.SelectedIndex = empIndex
+                End If
+            End If
+        End If
+
+        ' Auto-fill Date Purchased
+        If datePurchased IsNot Nothing Then
+            If propertyData.Table.Columns.Contains("acquisitionDate") AndAlso Not IsDBNull(propertyData("acquisitionDate")) Then
+                Try
+                    datePurchased.Value = Convert.ToDateTime(propertyData("acquisitionDate"))
+                Catch
+                End Try
+            End If
+        End If
+
     End Sub
 
     Private Sub LoadRequestData()
@@ -396,8 +444,8 @@ Public Class AssignRequestManagement
                 MessageBox.Show("Error loading request data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Else
-            ' No request ID - show warning that assignment requires a request
-            MessageBox.Show("No request selected. Assignment requires a valid request. Please select a request from Property Request Management or Supply Request Management first.", "No Request Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            ' Do not block navigation; allow opening the assignment panel even without a pre-selected request.
+            ' RequestID can be provided later by navigating from the Request Management grid.
         End If
     End Sub
 
@@ -445,16 +493,30 @@ Public Class AssignRequestManagement
                 availableProperties = availableList.CopyToDataTable()
             End If
 
-            ' Populate ComboBox with available properties
-            Dim combo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox1")
-            If combo IsNot Nothing Then
-                combo.DataSource = Nothing
+            ' Populate Property ID dropdown
+            If propertyId IsNot Nothing Then
+                propertyId.DataSource = Nothing
                 If availableProperties IsNot Nothing Then
-                    combo.DataSource = availableProperties
-                    combo.DisplayMember = "itemName"
-                    combo.ValueMember = "propertyId"
+                    ' Clone the table for the second dropdown to avoid shared binding issues
+                    propertyId.DataSource = availableProperties.Copy()
+                    propertyId.DisplayMember = "propertyId"
+                    propertyId.ValueMember = "propertyId"
+                    propertyId.SelectedIndex = -1
                 Else
-                    combo.Items.Clear()
+                    propertyId.Items.Clear()
+                End If
+            End If
+
+            ' Populate Property Name dropdown
+            If propertyName IsNot Nothing Then
+                propertyName.DataSource = Nothing
+                If availableProperties IsNot Nothing Then
+                    propertyName.DataSource = availableProperties.Copy()
+                    propertyName.DisplayMember = "itemName"
+                    propertyName.ValueMember = "propertyId"
+                    propertyName.SelectedIndex = -1
+                Else
+                    propertyName.Items.Clear()
                 End If
             End If
         Catch ex As Exception
@@ -462,50 +524,6 @@ Public Class AssignRequestManagement
         End Try
     End Sub
 
-    Private Sub LoadAvailableSupplies()
-        ' Load supplies that are available (can assign even without request)
-        Try
-            Dim suppliesTable As DataTable = DatabaseConnection.GetAllSupplies()
-            If suppliesTable Is Nothing OrElse suppliesTable.Rows.Count = 0 Then Return
-
-            ' Filter for available supplies
-            Dim availableList = suppliesTable.AsEnumerable().Where(Function(s)
-                                                                       Dim status As String = ""
-                                                                       If s.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(s("stockStatus")) Then
-                                                                           status = s("stockStatus").ToString().ToLower()
-                                                                       ElseIf s.Table.Columns.Contains("Status") AndAlso Not IsDBNull(s("Status")) Then
-                                                                           status = s("Status").ToString().ToLower()
-                                                                       End If
-                                                                       Dim qty As Integer = 0
-                                                                       If s.Table.Columns.Contains("quantity") AndAlso Not IsDBNull(s("quantity")) Then
-                                                                           Integer.TryParse(s("quantity").ToString(), qty)
-                                                                       ElseIf s.Table.Columns.Contains("QuantityInStock") AndAlso Not IsDBNull(s("QuantityInStock")) Then
-                                                                           Integer.TryParse(s("QuantityInStock").ToString(), qty)
-                                                                       End If
-                                                                       Return (status = "available" OrElse status = "") AndAlso qty > 0
-                                                                   End Function)
-
-            Dim availableSupplies As DataTable = Nothing
-            If availableList.Any() Then
-                availableSupplies = availableList.CopyToDataTable()
-            End If
-
-            ' Populate ComboBox with available supplies
-            Dim combo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox2")
-            If combo IsNot Nothing Then
-                combo.DataSource = Nothing
-                If availableSupplies IsNot Nothing Then
-                    combo.DataSource = availableSupplies
-                    combo.DisplayMember = "itemName"
-                    combo.ValueMember = If(availableSupplies.Columns.Contains("supplyId"), "supplyId", "supply_id")
-                Else
-                    combo.Items.Clear()
-                End If
-            End If
-        Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] LoadAvailableSupplies Exception: " & ex.Message)
-        End Try
-    End Sub
 
     Public Sub SetRequestID(requestID As Integer)
         currentRequestID = requestID
@@ -530,33 +548,22 @@ Public Class AssignRequestManagement
         End If
 
         Try
-            ' Determine if assigning property or supply
-            Dim isProperty As Boolean = False
-            Dim isSupply As Boolean = False
+            ' Determine if assigning property
             Dim selectedPropertyID As Integer = 0
-            Dim selectedSupplyID As Integer = 0
 
-            Dim propCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox1")
-            Dim supCombo As ComboBox = FindControlOfType(Of ComboBox)("ComboBox2")
-
-            If propCombo IsNot Nothing AndAlso propCombo.SelectedIndex >= 0 AndAlso propCombo.SelectedValue IsNot Nothing Then
-                isProperty = True
-                Integer.TryParse(propCombo.SelectedValue.ToString(), selectedPropertyID)
+            If propertyId IsNot Nothing AndAlso propertyId.SelectedIndex >= 0 AndAlso propertyId.SelectedValue IsNot Nothing Then
+                Integer.TryParse(propertyId.SelectedValue.ToString(), selectedPropertyID)
             End If
 
-            If supCombo IsNot Nothing AndAlso supCombo.SelectedIndex >= 0 AndAlso supCombo.SelectedValue IsNot Nothing Then
-                isSupply = True
-                Integer.TryParse(supCombo.SelectedValue.ToString(), selectedSupplyID)
-            End If
-
-            If Not isProperty AndAlso Not isSupply Then
-                MessageBox.Show("Please select a property or supply to assign.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            If selectedPropertyID <= 0 Then
+                MessageBox.Show("Please select a property to assign.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
 
-            If isProperty AndAlso isSupply Then
-                MessageBox.Show("Please select either a property OR a supply, not both.", "Multiple Selections", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
+            ' Validate employee selection
+            Dim selectedEmployeeID As Integer = 0
+            If employee IsNot Nothing AndAlso employee.SelectedValue IsNot Nothing Then
+                Integer.TryParse(employee.SelectedValue.ToString(), selectedEmployeeID)
             End If
 
             ' If we have a request ID, validate it exists and is approved/pending
@@ -577,99 +584,59 @@ Public Class AssignRequestManagement
             Dim adminName As String = SessionContext.CurrentUsername
             Dim adminUserType As String = SessionContext.CurrentRole
 
-            ' Assign the item
-            If isProperty AndAlso selectedPropertyID > 0 Then
-                ' Use ReleasePropertyRequest to assign property
-                If currentRequestID > 0 Then
-                    Dim releaseDate As Date = Date.Today
-                    Dim expectedReturnDate As Date? = Nothing
-                    Dim dtPicker As DateTimePicker = FindControlOfType(Of DateTimePicker)("DateTimePicker1")
-                    If dtPicker IsNot Nothing AndAlso dtPicker.Value > Date.Today Then
-                        expectedReturnDate = dtPicker.Value
-                    End If
+            ' Assign the property
+            If currentRequestID > 0 Then
+                Dim releaseDate As Date = Date.Today
+                Dim expectedReturnDate As Date? = Nothing
+                If warrantyExpiration IsNot Nothing AndAlso warrantyExpiration.Value > Date.Today Then
+                    expectedReturnDate = warrantyExpiration.Value
+                End If
 
-                    ' First approve if pending, then release
-                    If requestData IsNot Nothing AndAlso requestData.Table.Columns.Contains("status") Then
-                        Dim status As String = If(IsDBNull(requestData("status")), "", requestData("status").ToString())
-                        If status.ToLower() = "pending" Then
-                            If Not DatabaseConnection.ApprovePropertyRequest(currentRequestID, adminID, adminName, adminUserType) Then
-                                MessageBox.Show("Failed to approve request before assignment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                Return
-                            End If
+                ' First approve if pending, then release
+                If requestData IsNot Nothing AndAlso requestData.Table.Columns.Contains("status") Then
+                    Dim status As String = If(IsDBNull(requestData("status")), "", requestData("status").ToString())
+                    If status.ToLower() = "pending" Then
+                        If Not DatabaseConnection.ApprovePropertyRequest(currentRequestID, adminID, adminName, adminUserType) Then
+                            MessageBox.Show("Failed to approve request before assignment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Return
                         End If
-                    End If
-
-                    If DatabaseConnection.ReleasePropertyRequest(currentRequestID, adminID, adminName, adminUserType, releaseDate, expectedReturnDate) Then
-                        ' Update property assignment - use assigned_to column (or assigned_to_custodian if that's the column name)
-                        Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-                        If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                            ' Get requester info from request (requesterName sometimes stored)
-                            Dim requesterNameObj As Object = Nothing
-                            Using getUserCmd As New MySqlCommand("SELECT requesterName, departmentId FROM property_requests WHERE requestId = @requestID LIMIT 1", conn)
-                                getUserCmd.Parameters.AddWithValue("@requestID", currentRequestID)
-                                Using reader = getUserCmd.ExecuteReader()
-                                    If reader.Read() Then
-                                        requesterNameObj = If(IsDBNull(reader("requesterName")), Nothing, reader("requesterName"))
-                                    End If
-                                End Using
-                            End Using
-
-                            ' Update property with assignment (note: using requesterName as assigned_to may be schema mismatch; using DBNull if not numeric)
-                            Using cmd As New MySqlCommand("UPDATE properties SET assigned_to = @userID, status = 'Assigned', updated_at = NOW() WHERE property_id = @propertyID", conn)
-                                Dim userIdParam As Object = DBNull.Value
-                                ' If requesterNameObj is numeric user id, use it; otherwise leave null
-                                Dim parsedUserId As Integer = 0
-                                If requesterNameObj IsNot Nothing AndAlso Integer.TryParse(requesterNameObj.ToString(), parsedUserId) Then
-                                    userIdParam = parsedUserId
-                                End If
-                                cmd.Parameters.AddWithValue("@userID", userIdParam)
-                                cmd.Parameters.AddWithValue("@propertyID", selectedPropertyID)
-                                cmd.ExecuteNonQuery()
-                            End Using
-                            If conn.State = ConnectionState.Open Then conn.Close()
-                        End If
-
-                        MessageBox.Show("Property assigned successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        NavigateBack()
-                    Else
-                        MessageBox.Show("Failed to assign property. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
                 End If
-            ElseIf isSupply AndAlso selectedSupplyID > 0 Then
-                ' For supply requests, we need to update the supply_requests table
-                If currentRequestID > 0 Then
-                    ' Approve supply request first if pending
-                    Dim requestStatus As String = ""
-                    If requestData IsNot Nothing AndAlso requestData.Table.Columns.Contains("status") Then
-                        requestStatus = If(IsDBNull(requestData("status")), "", requestData("status").ToString())
-                        If requestStatus.ToLower() = "pending" Then
-                            If Not DatabaseConnection.ApproveSupplyRequest(currentRequestID, adminID, adminName, adminUserType) Then
-                                MessageBox.Show("Failed to approve supply request before assignment.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                Return
-                            End If
-                        End If
-                    End If
 
-                    ' Update supply quantity (deduct from inventory)
-                    Dim quantityRequested As Integer = 1
-                    If requestData IsNot Nothing AndAlso requestData.Table.Columns.Contains("quantity_requested") AndAlso Not IsDBNull(requestData("quantity_requested")) Then
-                        Integer.TryParse(requestData("quantity_requested").ToString(), quantityRequested)
-                    End If
-
+                If DatabaseConnection.ReleasePropertyRequest(currentRequestID, adminID, adminName, adminUserType, releaseDate, expectedReturnDate) Then
+                    ' Update property assignment
                     Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
                     If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                        Using cmd As New MySqlCommand("UPDATE supplies SET quantity = quantity - @qty, updated_at = NOW() WHERE supply_id = @supplyID AND quantity >= @qty", conn)
-                            cmd.Parameters.AddWithValue("@qty", quantityRequested)
-                            cmd.Parameters.AddWithValue("@supplyID", selectedSupplyID)
-                            If cmd.ExecuteNonQuery() > 0 Then
-                                MessageBox.Show("Supply assigned successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                                NavigateBack()
-                            Else
-                                MessageBox.Show("Insufficient supply quantity or supply not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        ' Get department ID
+                        Dim deptID As Object = DBNull.Value
+                        If department IsNot Nothing AndAlso department.SelectedValue IsNot Nothing Then
+                            Dim parsedDeptId As Integer = 0
+                            If Integer.TryParse(department.SelectedValue.ToString(), parsedDeptId) Then
+                                deptID = parsedDeptId
                             End If
+                        End If
+
+                        ' Get location
+                        Dim locationVal As String = ""
+                        If location IsNot Nothing Then
+                            locationVal = If(location.SelectedItem IsNot Nothing, location.SelectedItem.ToString(), location.Text)
+                        End If
+
+                        ' Update property with assignment
+                        Using cmd As New MySqlCommand("UPDATE properties SET assignedTo = @userID, departmentId = @deptID, location = @location, status = 'Assigned', updatedAt = NOW() WHERE propertyId = @propertyID", conn)
+                            cmd.Parameters.AddWithValue("@userID", If(selectedEmployeeID > 0, selectedEmployeeID, DBNull.Value))
+                            cmd.Parameters.AddWithValue("@deptID", deptID)
+                            cmd.Parameters.AddWithValue("@location", If(String.IsNullOrEmpty(locationVal), DBNull.Value, locationVal))
+                            cmd.Parameters.AddWithValue("@propertyID", selectedPropertyID)
+                            cmd.ExecuteNonQuery()
                         End Using
                         If conn.State = ConnectionState.Open Then conn.Close()
                     End If
+
+                    MessageBox.Show("Property assigned successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    NavigateBack()
+                Else
+                    MessageBox.Show("Failed to assign property. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             End If
         Catch ex As Exception
@@ -679,10 +646,6 @@ Public Class AssignRequestManagement
     End Sub
 
     Private Sub RoundedPanel3_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel3.Paint
-    End Sub
-
-    Private Sub ComboBox4_SelectedIndexChanged(sender As Object, e As EventArgs)
-        ' intentionally left blank � wired dynamically
     End Sub
 
     Private Sub NavigateBack()

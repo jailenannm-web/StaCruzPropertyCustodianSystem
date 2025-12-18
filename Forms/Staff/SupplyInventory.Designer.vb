@@ -28,7 +28,7 @@ Partial Class SupplyInventory
         Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unitofmeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantityavail = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.quantityavail = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stockstatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -98,8 +98,6 @@ Partial Class SupplyInventory
         Me.quantityavail.HeaderText = "Quantity Available"
         Me.quantityavail.MinimumWidth = 6
         Me.quantityavail.Name = "quantityavail"
-        Me.quantityavail.Text = "..."
-        Me.quantityavail.UseColumnTextForButtonValue = True
         Me.quantityavail.Width = 150
         '
         'location
@@ -233,7 +231,7 @@ Partial Class SupplyInventory
     Friend WithEvents category As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents description As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents unitofmeasure As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents quantityavail As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents quantityavail As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents stockstatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel

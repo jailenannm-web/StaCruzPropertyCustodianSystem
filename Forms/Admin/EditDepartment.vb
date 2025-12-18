@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Windows.Forms
 Imports System.Text.RegularExpressions
@@ -7,8 +7,7 @@ Imports Microsoft.VisualBasic
 Public Class EditDepartment
     Inherits UserControl
 
-    Private departmentID As Integer = 0
-    Private originalDepartmentData As DataRow = Nothing
+    Private _departmentId As Integer = 0
 
     Public Sub New()
         InitializeComponent()
@@ -32,6 +31,27 @@ Public Class EditDepartment
             statusCombo.Items.Clear()
             statusCombo.Items.Add("Active")
             statusCombo.Items.Add("Inactive")
+            statusCombo.SelectedIndex = 0
+        End If
+
+        ' Initialize office hours dropdown with common options
+        Dim officeHoursCombo As ComboBox = FindControlOfType(Of ComboBox)("office_hours_cmbo")
+        If officeHoursCombo IsNot Nothing Then
+            officeHoursCombo.Items.Clear()
+            officeHoursCombo.Items.Add("8:00 AM - 5:00 PM")
+            officeHoursCombo.Items.Add("7:00 AM - 4:00 PM")
+            officeHoursCombo.Items.Add("7:30 AM - 5:30 PM")
+            officeHoursCombo.Items.Add("9:00 AM - 6:00 PM")
+            officeHoursCombo.Items.Add("24/7")
+            officeHoursCombo.Items.Add("7:00 AM - 7:00 PM")
+            officeHoursCombo.Items.Add("8:00 AM - 6:00 PM")
+            officeHoursCombo.SelectedIndex = 0
+        End If
+
+        ' Set default established date to today
+        Dim estDate As DateTimePicker = FindControlOfType(Of DateTimePicker)("established_date_date")
+        If estDate IsNot Nothing Then
+            estDate.Value = System.DateTime.Now
         End If
 
         ' Load Department Head dropdown from users table
@@ -40,8 +60,7 @@ Public Class EditDepartment
 
     Private Sub LoadDepartmentHeadDropdown()
         Try
-            Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("headOfDepartment")
-            Dim tbHead As TextBox = FindControlOfType(Of TextBox)("headOfDepartment")
+            Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
 
             Dim usersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
             If cbHead IsNot Nothing Then
@@ -49,126 +68,147 @@ Public Class EditDepartment
                     cbHead.DataSource = usersTable
                     cbHead.DisplayMember = "fullName"
                     cbHead.ValueMember = "userId"
+                    cbHead.SelectedIndex = -1
                 Else
                     cbHead.DataSource = Nothing
                     cbHead.Items.Clear()
                     cbHead.Items.Add("No users available")
                 End If
-            ElseIf tbHead IsNot Nothing Then
-                If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 Then
-                    tbHead.Text = ""
-                Else
-                    tbHead.Text = "No users available"
-                End If
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadDepartmentHeadDropdown Exception: " & ex.Message)
+            Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
+            If cbHead IsNot Nothing Then
+                cbHead.DataSource = Nothing
+                cbHead.Items.Clear()
+                cbHead.Items.Add("Error loading users")
+            End If
         End Try
     End Sub
 
-    Public Sub LoadDepartmentData(deptID As Integer, deptData As DataRow)
-        Try
-            departmentID = deptID
-            originalDepartmentData = deptData
+    ''' <summary>
+    ''' Load department data into the form for editing
+    ''' </summary>
+    Public Sub LoadDepartmentData(departmentId As Integer, deptData As DataRow)
+        _departmentId = departmentId
 
-            ' Load department name
+        Try
+            ' Department Name
             Dim deptNameTxt As TextBox = FindControlOfType(Of TextBox)("departmentName")
-            If deptNameTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(deptData("departmentName")) Then
-                deptNameTxt.Text = deptData("departmentName").ToString()
+            If deptNameTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("departmentName") Then
+                deptNameTxt.Text = If(IsDBNull(deptData("departmentName")), "", deptData("departmentName").ToString())
             End If
 
-            ' Load department head
-            Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("headOfDepartment")
-            Dim tbHead As TextBox = FindControlOfType(Of TextBox)("headOfDepartment")
-            If cbHead IsNot Nothing Then
-                If deptData.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(deptData("headOfDepartment")) Then
-                    Dim headName As String = deptData("headOfDepartment").ToString()
-                    ' Try to find matching user in dropdown
-                    For i As Integer = 0 To cbHead.Items.Count - 1
-                        If TypeOf cbHead.Items(i) Is DataRowView Then
-                            Dim drv As DataRowView = CType(cbHead.Items(i), DataRowView)
-                            If drv.Row.Table.Columns.Contains("fullName") AndAlso drv.Row("fullName").ToString() = headName Then
+            ' Email
+            Dim emailTxt As TextBox = FindControlOfType(Of TextBox)("email")
+            If emailTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("email") Then
+                emailTxt.Text = If(IsDBNull(deptData("email")), "", deptData("email").ToString())
+            End If
+
+            ' Contact Number
+            Dim contactTxt As TextBox = FindControlOfType(Of TextBox)("contactNumber")
+            If contactTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("contactNumber") Then
+                contactTxt.Text = If(IsDBNull(deptData("contactNumber")), "", deptData("contactNumber").ToString())
+            End If
+
+            ' Location
+            Dim locationTxt As TextBox = FindControlOfType(Of TextBox)("location")
+            If locationTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("location") Then
+                locationTxt.Text = If(IsDBNull(deptData("location")), "", deptData("location").ToString())
+            End If
+
+            ' Building
+            Dim buildingTxt As TextBox = FindControlOfType(Of TextBox)("building")
+            If buildingTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("building") Then
+                buildingTxt.Text = If(IsDBNull(deptData("building")), "", deptData("building").ToString())
+            End If
+
+            ' Floor Number
+            Dim floorTxt As TextBox = FindControlOfType(Of TextBox)("floorNumber")
+            If floorTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("floorNumber") Then
+                floorTxt.Text = If(IsDBNull(deptData("floorNumber")), "", deptData("floorNumber").ToString())
+            End If
+
+            ' Office Code
+            Dim officeCodeTxt As TextBox = FindControlOfType(Of TextBox)("officeCode")
+            If officeCodeTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("officeCode") Then
+                officeCodeTxt.Text = If(IsDBNull(deptData("officeCode")), "", deptData("officeCode").ToString())
+            End If
+
+            ' Short Name (office_hours_cmbo is actually used for short name based on designer)
+            Dim shortNameCombo As ComboBox = FindControlOfType(Of ComboBox)("office_hours_cmbo")
+            If shortNameCombo IsNot Nothing AndAlso deptData.Table.Columns.Contains("shortName") Then
+                Dim shortNameVal As String = If(IsDBNull(deptData("shortName")), "", deptData("shortName").ToString())
+                ' Try to find and select the value, otherwise add it
+                Dim idx As Integer = shortNameCombo.FindStringExact(shortNameVal)
+                If idx >= 0 Then
+                    shortNameCombo.SelectedIndex = idx
+                Else
+                    shortNameCombo.Text = shortNameVal
+                End If
+            End If
+
+            ' Established Date
+            Dim estDatePicker As DateTimePicker = FindControlOfType(Of DateTimePicker)("established_date_date")
+            If estDatePicker IsNot Nothing AndAlso deptData.Table.Columns.Contains("establishedDate") Then
+                If Not IsDBNull(deptData("establishedDate")) Then
+                    Try
+                        estDatePicker.Value = Convert.ToDateTime(deptData("establishedDate"))
+                    Catch
+                        estDatePicker.Value = DateTime.Now
+                    End Try
+                End If
+            End If
+
+            ' Status
+            Dim statusCombo As ComboBox = FindControlOfType(Of ComboBox)("status_cmbo")
+            If statusCombo IsNot Nothing AndAlso deptData.Table.Columns.Contains("status") Then
+                Dim statusVal As String = If(IsDBNull(deptData("status")), "Active", deptData("status").ToString())
+                Dim statusIdx As Integer = statusCombo.FindStringExact(statusVal)
+                If statusIdx >= 0 Then
+                    statusCombo.SelectedIndex = statusIdx
+                Else
+                    statusCombo.SelectedIndex = 0
+                End If
+            End If
+
+            ' Department Head - select in ComboBox
+            Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
+            If cbHead IsNot Nothing AndAlso deptData.Table.Columns.Contains("headOfDepartment") Then
+                Dim headVal As String = If(IsDBNull(deptData("headOfDepartment")), "", deptData("headOfDepartment").ToString())
+                If Not String.IsNullOrEmpty(headVal) Then
+                    ' Try to find by display name
+                    Dim found As Boolean = False
+                    If cbHead.DataSource IsNot Nothing AndAlso TypeOf cbHead.DataSource Is DataTable Then
+                        Dim dt As DataTable = CType(cbHead.DataSource, DataTable)
+                        For i As Integer = 0 To dt.Rows.Count - 1
+                            Dim fullName As String = ""
+                            If dt.Columns.Contains("fullName") AndAlso Not IsDBNull(dt.Rows(i)("fullName")) Then
+                                fullName = dt.Rows(i)("fullName").ToString()
+                            End If
+                            If String.Equals(fullName, headVal, StringComparison.OrdinalIgnoreCase) Then
                                 cbHead.SelectedIndex = i
+                                found = True
                                 Exit For
                             End If
-                        End If
-                    Next
-                    ' If not found, set text
-                    If cbHead.SelectedIndex = -1 Then
-                        cbHead.Text = headName
+                        Next
+                    End If
+                    If Not found Then
+                        cbHead.Text = headVal
                     End If
                 End If
-            ElseIf tbHead IsNot Nothing Then
-                If deptData.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(deptData("headOfDepartment")) Then
-                    tbHead.Text = deptData("headOfDepartment").ToString()
-                End If
             End If
 
-            ' Load email
-            Dim emailTxt As TextBox = FindControlOfType(Of TextBox)("email")
-            If emailTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("email") AndAlso Not IsDBNull(deptData("email")) Then
-                emailTxt.Text = deptData("email").ToString()
+            ' Update label to indicate editing
+            Dim titleLabel As Label = FindControlOfType(Of Label)("admin_label_DepartmentManagement")
+            If titleLabel IsNot Nothing Then
+                titleLabel.Text = "Edit Department"
             End If
 
-            ' Load contact number
-            Dim contactTxt As TextBox = FindControlOfType(Of TextBox)("contactNumber")
-            If contactTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("contactNumber") AndAlso Not IsDBNull(deptData("contactNumber")) Then
-                contactTxt.Text = deptData("contactNumber").ToString()
-            End If
-
-            ' Load location
-            Dim locationTxt As TextBox = FindControlOfType(Of TextBox)("location")
-            If locationTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("location") AndAlso Not IsDBNull(deptData("location")) Then
-                locationTxt.Text = deptData("location").ToString()
-            End If
-
-            ' Load building
-            Dim buildingTxt As TextBox = FindControlOfType(Of TextBox)("building")
-            If buildingTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("building") AndAlso Not IsDBNull(deptData("building")) Then
-                buildingTxt.Text = deptData("building").ToString()
-            End If
-
-            ' Load floor number
-            Dim floorTxt As TextBox = FindControlOfType(Of TextBox)("floorNumber")
-            If floorTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("floorNumber") AndAlso Not IsDBNull(deptData("floorNumber")) Then
-                floorTxt.Text = deptData("floorNumber").ToString()
-            End If
-
-            ' Load short name
-            Dim shortNameTxt As TextBox = FindControlOfType(Of TextBox)("shortName")
-            If shortNameTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("shortName") AndAlso Not IsDBNull(deptData("shortName")) Then
-                shortNameTxt.Text = deptData("shortName").ToString()
-            End If
-
-            ' Load office code
-            Dim officeCodeTxt As TextBox = FindControlOfType(Of TextBox)("officeCode")
-            If officeCodeTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("officeCode") AndAlso Not IsDBNull(deptData("officeCode")) Then
-                officeCodeTxt.Text = deptData("officeCode").ToString()
-            End If
-
-            ' Load description
-            Dim descTxt As TextBox = FindControlOfType(Of TextBox)("description")
-            If descTxt Is Nothing Then
-                Dim descRich As RichTextBox = FindControlOfType(Of RichTextBox)("description")
-                If descRich IsNot Nothing AndAlso deptData.Table.Columns.Contains("description") AndAlso Not IsDBNull(deptData("description")) Then
-                    descRich.Text = deptData("description").ToString()
-                End If
-            Else
-                If deptData.Table.Columns.Contains("description") AndAlso Not IsDBNull(deptData("description")) Then
-                    descTxt.Text = deptData("description").ToString()
-                End If
-            End If
-
-            ' Load status
-            Dim statusCombo As ComboBox = FindControlOfType(Of ComboBox)("status_cmbo")
-            If statusCombo IsNot Nothing AndAlso deptData.Table.Columns.Contains("status") AndAlso Not IsDBNull(deptData("status")) Then
-                Dim statusVal As String = deptData("status").ToString()
-                For i As Integer = 0 To statusCombo.Items.Count - 1
-                    If statusCombo.Items(i).ToString().Equals(statusVal, StringComparison.OrdinalIgnoreCase) Then
-                        statusCombo.SelectedIndex = i
-                        Exit For
-                    End If
-                Next
+            ' Update instructions
+            Dim instructionsLabel As Label = FindControlOfType(Of Label)("instructions")
+            If instructionsLabel IsNot Nothing Then
+                instructionsLabel.Text = "Update the department information below."
             End If
 
         Catch ex As Exception
@@ -185,6 +225,12 @@ Public Class EditDepartment
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        ' Validate department ID
+        If _departmentId <= 0 Then
+            MessageBox.Show("Invalid department ID. Cannot update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
         ' Validate required fields
         Dim deptNameTxt As TextBox = FindControlOfType(Of TextBox)("departmentName")
         If deptNameTxt Is Nothing OrElse String.IsNullOrWhiteSpace(deptNameTxt.Text) Then
@@ -195,8 +241,7 @@ Public Class EditDepartment
 
         ' Get Department Head value
         Dim headOfDeptString As String = ""
-        Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("headOfDepartment")
-        Dim tbHead As TextBox = FindControlOfType(Of TextBox)("headOfDepartment")
+        Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
 
         If cbHead IsNot Nothing Then
             If cbHead.SelectedItem IsNot Nothing Then
@@ -204,6 +249,8 @@ Public Class EditDepartment
                     Dim drv As DataRowView = CType(cbHead.SelectedItem, DataRowView)
                     If drv.Row.Table.Columns.Contains("fullName") AndAlso Not IsDBNull(drv.Row("fullName")) Then
                         headOfDeptString = drv.Row("fullName").ToString()
+                    ElseIf drv.Row.Table.Columns.Contains("userId") AndAlso Not IsDBNull(drv.Row("userId")) Then
+                        headOfDeptString = drv.Row("userId").ToString()
                     End If
                 Else
                     headOfDeptString = cbHead.Text
@@ -211,12 +258,11 @@ Public Class EditDepartment
             Else
                 headOfDeptString = cbHead.Text
             End If
-        ElseIf tbHead IsNot Nothing Then
-            headOfDeptString = tbHead.Text.Trim()
         End If
 
         If String.IsNullOrWhiteSpace(headOfDeptString) Then
             MessageBox.Show("Please select or enter a Department Head.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            If cbHead IsNot Nothing Then cbHead.Focus()
             Return
         End If
 
@@ -244,54 +290,40 @@ Public Class EditDepartment
             Dim emailTxt As TextBox = FindControlOfType(Of TextBox)("email")
             Dim buildingTxt As TextBox = FindControlOfType(Of TextBox)("building")
             Dim floorTxt As TextBox = FindControlOfType(Of TextBox)("floorNumber")
-            Dim shortNameTxt As TextBox = FindControlOfType(Of TextBox)("shortName")
 
             Dim officeCodeValue As String = If(officeCodeTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(officeCodeTxt.Text), officeCodeTxt.Text.Trim(), "")
             Dim contactValue As String = If(contactTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(contactTxt.Text), contactTxt.Text.Trim(), "")
             Dim emailValue As String = If(emailTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(emailTxt.Text), emailTxt.Text.Trim(), "")
             Dim buildingValue As String = If(buildingTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(buildingTxt.Text), buildingTxt.Text.Trim(), "")
             Dim floorValue As String = If(floorTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(floorTxt.Text), floorTxt.Text.Trim(), "")
-            Dim shortNameValue As String = If(shortNameTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(shortNameTxt.Text), shortNameTxt.Text.Trim(), "")
 
-            Dim descTxt As TextBox = FindControlOfType(Of TextBox)("description")
-            Dim descRich As RichTextBox = FindControlOfType(Of RichTextBox)("description")
-            Dim descriptionValue As String = ""
-            If descTxt IsNot Nothing Then
-                descriptionValue = descTxt.Text.Trim()
-            ElseIf descRich IsNot Nothing Then
-                descriptionValue = descRich.Text.Trim()
+            ' Get established date
+            Dim estPicker As DateTimePicker = FindControlOfType(Of DateTimePicker)("established_date_date")
+            Dim establishedDate As Date? = Nothing
+            If estPicker IsNot Nothing Then
+                establishedDate = estPicker.Value.Date
             End If
 
-            ' Call UpdateDepartment function - signature: (departmentID, departmentName, headOfDepartment, location, departmentCode, Optional contactNumber, Optional email, Optional noOfEmployees, Optional budgetAllocation)
+            ' Call the UpdateDepartment function
             Dim success As Boolean = DatabaseConnection.UpdateDepartment(
-                departmentID,
+                _departmentId,
                 deptName,
                 headOfDeptString,
                 locationStr,
-                officeCodeValue,  ' departmentCode parameter
-                contactValue,    ' Optional contactNumber
-                emailValue,      ' Optional email
-                0,               ' Optional noOfEmployees (will be recalculated)
-                0                ' Optional budgetAllocation
+                officeCodeValue,
+                contactValue,
+                emailValue
             )
 
             If success Then
                 MessageBox.Show("Department updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                
+
                 ' Return to department management and refresh
                 Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
                 If parentDashboard IsNot Nothing Then
                     Dim deptManagement As New UC_DepartmentManagement()
                     parentDashboard.LoadUserControl(deptManagement)
-                    ' Refresh the data
-                    Try
-                        deptManagement.LoadDepartmentsData()
-                    Catch
-                        ' Ignore if method not available
-                    End Try
                 End If
-            Else
-                MessageBox.Show("Failed to update department. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Catch ex As Exception
             MessageBox.Show("Error updating department: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -303,4 +335,3 @@ Public Class EditDepartment
 
     End Sub
 End Class
-

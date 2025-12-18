@@ -61,8 +61,8 @@ Public Class AddDepartment
 
     Private Sub LoadDepartmentHeadDropdown()
         Try
-            Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("headOfDepartment")
-            Dim tbHead As TextBox = FindControlOfType(Of TextBox)("headOfDepartment")
+            Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
+            Dim tbHead As TextBox = FindControlOfType(Of TextBox)("departmentHead")
 
             Dim usersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
             If cbHead IsNot Nothing Then
@@ -88,8 +88,8 @@ Public Class AddDepartment
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadDepartmentHeadDropdown Exception: " & ex.Message)
-            Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("headOfDepartment")
-            Dim tbHead As TextBox = FindControlOfType(Of TextBox)("headOfDepartment")
+            Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
+            Dim tbHead As TextBox = FindControlOfType(Of TextBox)("departmentHead")
             If cbHead IsNot Nothing Then
                 cbHead.DataSource = Nothing
                 cbHead.Items.Clear()
@@ -118,8 +118,8 @@ Public Class AddDepartment
 
         ' Get Department Head value (accept ComboBox selection or TextBox text)
         Dim headOfDeptString As String = ""
-        Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("headOfDepartment")
-        Dim tbHead As TextBox = FindControlOfType(Of TextBox)("headOfDepartment")
+        Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
+        Dim tbHead As TextBox = FindControlOfType(Of TextBox)("departmentHead")
 
         If cbHead IsNot Nothing Then
             ' Prefer display name if available
@@ -232,8 +232,8 @@ Public Class AddDepartment
         Dim deptNameTxt As TextBox = FindControlOfType(Of TextBox)("departmentName")
         If deptNameTxt IsNot Nothing Then deptNameTxt.Clear()
 
-        Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("headOfDepartment")
-        Dim tbHead As TextBox = FindControlOfType(Of TextBox)("headOfDepartment")
+        Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
+        Dim tbHead As TextBox = FindControlOfType(Of TextBox)("departmentHead")
         If cbHead IsNot Nothing Then
             cbHead.DataSource = Nothing
             cbHead.Items.Clear()

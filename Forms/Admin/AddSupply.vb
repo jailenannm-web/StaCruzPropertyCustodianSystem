@@ -176,7 +176,7 @@ Public Class AddSupply
         Catch
         End Try
 
-        ' Get dateReceived from DateTimePicker if available
+        ' Get dateReceived from DateTimePicker - REQUIRED FIELD
         Dim dateReceivedValue As Date? = Nothing
         Try
             ' Find the control by name (Designer control should be accessible)
@@ -186,14 +186,23 @@ Public Class AddSupply
                 If datePicker IsNot Nothing Then
                     dateReceivedValue = datePicker.Value
                 Else
-                    dateReceivedValue = Date.Today
+                    MessageBox.Show("Date Received is required. Please select a date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
                 End If
             Else
-                dateReceivedValue = Date.Today
+                MessageBox.Show("Date Received field is missing. Please contact system administrator.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
             End If
-        Catch
-            dateReceivedValue = Date.Today
+        Catch ex As Exception
+            MessageBox.Show("Error reading Date Received: " & ex.Message, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
         End Try
+
+        ' Validate Date Received is not null
+        If Not dateReceivedValue.HasValue Then
+            MessageBox.Show("Date Received is required. Please select a date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
         ' Call DatabaseConnection.AddSupply (sourceOfFunds is handled inside the function)
         Dim success As Boolean = DatabaseConnection.AddSupply(
