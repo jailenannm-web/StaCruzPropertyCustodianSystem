@@ -321,7 +321,7 @@ Partial Class UC_MaintenanceRequestManagement
         Me.prm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.prm_btn_update.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.prm_btn_update.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.prm_btn_update.Location = New System.Drawing.Point(830, 69)
+        Me.prm_btn_update.Location = New System.Drawing.Point(916, 690)
         Me.prm_btn_update.Margin = New System.Windows.Forms.Padding(4)
         Me.prm_btn_update.Name = "prm_btn_update"
         Me.prm_btn_update.Size = New System.Drawing.Size(78, 35)

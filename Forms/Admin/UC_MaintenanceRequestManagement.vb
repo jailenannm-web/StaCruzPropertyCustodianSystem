@@ -59,29 +59,43 @@ Public Class UC_MaintenanceRequestManagement
                     Select Case col.Name.ToLower()
                         Case "requestid", "request_id"
                             col.DataPropertyName = "requestId"
-                            col.Visible = False
+                            col.Visible = False ' Hidden - internal ID
                         Case "requestername", "requester_name"
                             col.DataPropertyName = "requesterName"
                             col.HeaderText = "Name of Requester"
-                        Case "departmentid", "department"
+                            col.Visible = True
+                        Case "departmentid", "department_id"
+                            col.DataPropertyName = "departmentId"
+                            col.Visible = False ' Hidden - internal ID
+                        Case "department"
                             col.DataPropertyName = "department"
                             col.HeaderText = "Department"
+                            col.Visible = True
                         Case "dateofrequest", "date_of_request"
                             col.DataPropertyName = "dateOfRequest"
                             col.HeaderText = "Date of Request"
+                            col.Visible = True
                         Case "itemname", "item_name"
                             col.DataPropertyName = "itemName"
                             col.HeaderText = "Item Name"
+                            col.Visible = True
                         Case "purpose"
                             col.DataPropertyName = "purpose"
                             col.HeaderText = "Purpose"
+                            col.Visible = True
                         Case "status"
                             col.DataPropertyName = "status"
                             col.HeaderText = "Status"
+                            col.Visible = True
                         Case "createdat", "created_at"
                             col.DataPropertyName = "createdAt"
+                            col.Visible = False ' Hidden - timestamp
                         Case "updatedat", "updated_at"
                             col.DataPropertyName = "updatedAt"
+                            col.Visible = False ' Hidden - timestamp
+                        Case Else
+                            ' Hide all other columns by default
+                            col.Visible = False
                     End Select
                 Next
 
@@ -251,7 +265,7 @@ Public Class UC_MaintenanceRequestManagement
 
 
     ' ----------------------------------------------------------------------
-    ' PRINT PAR LOGIC — FULLY CONNECTED TO PROPERTYCARD
+    ' PRINT PAR LOGIC ï¿½ FULLY CONNECTED TO PROPERTYCARD
     ' ----------------------------------------------------------------------
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click
         ' TODO: Implement maintenance report generation

@@ -137,8 +137,8 @@ Partial Public Class RequisitionIssueSlip
     End Sub
 
     Private Sub btn_Back_Click(sender As Object, e As EventArgs) Handles btn_Back.Click
-        Dim StaffDashboard As New StaffDashboard()
-        StaffDashboard.Show()
+        Dim AdminDashboard As New AdminDashboard()
+        AdminDashboard.Show()
         Me.Hide()
     End Sub
 

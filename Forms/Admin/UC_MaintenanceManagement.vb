@@ -67,6 +67,51 @@ Public Class UC_MaintenanceManagement
         Try
             Dim maintenanceData As DataTable = DatabaseConnection.GetAllMaintenance()
             originalData = If(maintenanceData IsNot Nothing, maintenanceData.Copy(), Nothing)
+            
+            ' Configure DataGrid columns before setting DataSource
+            DataGridView1.AutoGenerateColumns = False
+            
+            ' Map columns and set visibility
+            For Each col As DataGridViewColumn In DataGridView1.Columns
+                Select Case col.Name.ToLower()
+                    Case "maintenanceid"
+                        col.DataPropertyName = "maintenanceId"
+                        col.HeaderText = "Maintenance ID"
+                        col.Visible = True
+                    Case "propertyitemname"
+                        col.DataPropertyName = "propertyItemName"
+                        col.HeaderText = "Property Item Name"
+                        col.Visible = True
+                    Case "location"
+                        col.DataPropertyName = "location"
+                        col.HeaderText = "Location"
+                        col.Visible = True
+                    Case "conditionbeforemaint"
+                        col.DataPropertyName = "conditionBeforeMaint"
+                        col.HeaderText = "Condition Before"
+                        col.Visible = True
+                    Case "typeofmaintenance"
+                        col.DataPropertyName = "typeOfMaintenance"
+                        col.HeaderText = "Type of Maintenance"
+                        col.Visible = True
+                    Case "assignedtechnician"
+                        col.DataPropertyName = "assignedTechnician"
+                        col.HeaderText = "Assigned Technician"
+                        col.Visible = True
+                    Case "status"
+                        col.DataPropertyName = "status"
+                        col.HeaderText = "Status"
+                        col.Visible = True
+                    Case "actiontaken"
+                        col.DataPropertyName = "actionTaken"
+                        col.HeaderText = "Action Taken"
+                        col.Visible = True
+                    Case Else
+                        ' Hide all other columns
+                        col.Visible = False
+                End Select
+            Next
+            
             If maintenanceData IsNot Nothing AndAlso maintenanceData.Rows.Count > 0 Then
                 DataGridView1.DataSource = maintenanceData
                 ttlMaintenancemanagement.Text = maintenanceData.Rows.Count.ToString()
@@ -95,10 +140,10 @@ Public Class UC_MaintenanceManagement
 
             Dim filtered = originalData.AsEnumerable().Where(Function(row)
                                                                  If String.IsNullOrEmpty(searchLower) Then Return True
-                                                                 ' Check common fields: property_item_name, maintenance_details, assigned_technician, status
-                                                                 Dim a As String = If(row.Table.Columns.Contains("property_item_name") AndAlso Not IsDBNull(row("property_item_name")), row("property_item_name").ToString().ToLower(), String.Empty)
-                                                                 Dim b As String = If(row.Table.Columns.Contains("maintenance_details") AndAlso Not IsDBNull(row("maintenance_details")), row("maintenance_details").ToString().ToLower(), String.Empty)
-                                                                 Dim c As String = If(row.Table.Columns.Contains("assigned_technician") AndAlso Not IsDBNull(row("assigned_technician")), row("assigned_technician").ToString().ToLower(), String.Empty)
+                                                                 ' Check common fields: propertyItemName, maintenanceDetails, assignedTechnician, status (camelCase)
+                                                                 Dim a As String = If(row.Table.Columns.Contains("propertyItemName") AndAlso Not IsDBNull(row("propertyItemName")), row("propertyItemName").ToString().ToLower(), String.Empty)
+                                                                 Dim b As String = If(row.Table.Columns.Contains("maintenanceDetails") AndAlso Not IsDBNull(row("maintenanceDetails")), row("maintenanceDetails").ToString().ToLower(), String.Empty)
+                                                                 Dim c As String = If(row.Table.Columns.Contains("assignedTechnician") AndAlso Not IsDBNull(row("assignedTechnician")), row("assignedTechnician").ToString().ToLower(), String.Empty)
                                                                  Dim d As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
                                                                  Return a.Contains(searchLower) OrElse b.Contains(searchLower) OrElse c.Contains(searchLower) OrElse d.Contains(searchLower)
                                                              End Function)
@@ -112,7 +157,7 @@ Public Class UC_MaintenanceManagement
                 ttlMaintenancemanagement.Text = dt.Rows.Count.ToString()
             End If
         Catch ex As Exception
-            ' If there are no matches CopyToDataTable will throw — handle gracefully
+            ' If there are no matches CopyToDataTable will throw ï¿½ handle gracefully
             If TypeOf ex Is InvalidOperationException Then
                 DataGridView1.DataSource = Nothing
                 ttlMaintenancemanagement.Text = "0"
@@ -361,27 +406,19 @@ Public Class UC_MaintenanceManagement
                 maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
             End If
 
-            ' Prompt for technician name
-            Dim technicianName As String = InputBox("Enter technician name to assign:", "Assign Technician", "")
-            If Not String.IsNullOrEmpty(technicianName) Then
-                ' Update maintenance record with technician using DatabaseConnection
-                Dim serviceDate As Date = If(IsDBNull(dataRow("maintenance_date")), Date.Today, CDate(dataRow("maintenance_date")))
-                Dim serviceType As String = If(IsDBNull(dataRow("type_of_maintenance")), "Repair", dataRow("type_of_maintenance").ToString())
-                Dim description As String = If(IsDBNull(dataRow("maintenance_details")), "", dataRow("maintenance_details").ToString())
-                Dim currentStatus As String = If(IsDBNull(dataRow("status")), "Ongoing", dataRow("status").ToString())
-                Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
+            If maintenanceID <= 0 Then
+                MessageBox.Show("Invalid maintenance record selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
 
-                ' Use UpdateMaintenanceEntry to assign technician
-                Dim cost As Decimal = 0
-                If Not IsDBNull(dataRow("cost_materials_labor")) Then
-                    Decimal.TryParse(dataRow("cost_materials_labor").ToString(), cost)
-                End If
-                If DatabaseConnection.UpdateMaintenanceEntry(maintenanceID, serviceDate, serviceType, description, "", "", cost, Nothing, technicianName, currentStatus, "", 0, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
-                    MessageBox.Show($"Technician '{technicianName}' assigned to maintenance record #{maintenanceID}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    LoadMaintenanceData()
-                Else
-                    MessageBox.Show("Failed to assign technician. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
+            ' Open AssignTechnician form
+            Dim assignForm As New AssignTechnician()
+            assignForm.MaintenanceID = maintenanceID
+            Dim result As DialogResult = assignForm.ShowDialog()
+
+            ' Refresh data after assignment
+            If result = DialogResult.OK Then
+                LoadMaintenanceData()
             End If
 
         Catch ex As Exception

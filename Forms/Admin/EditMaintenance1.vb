@@ -39,27 +39,34 @@ Public Class EditMaintenance1
 
             Dim dt As DataTable = DatabaseConnection.GetAllMaintenance()
             For Each row As DataRow In dt.Rows
-                If Convert.ToInt32(row("maintenance_id")) = _maintenanceID Then
+                Dim rowID As Integer = 0
+                If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(row("maintenanceId")) Then
+                    rowID = Convert.ToInt32(row("maintenanceId"))
+                ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(row("maintenance_id")) Then
+                    rowID = Convert.ToInt32(row("maintenance_id"))
+                End If
+                
+                If rowID = _maintenanceID Then
                     ' Load data into form fields
                     ' Note: Adjust field names based on actual form controls
                     Try
-                        If dt.Columns.Contains("property_item_name") AndAlso Not IsDBNull(row("property_item_name")) Then
-                            ' propertyNameTxt.Text = row("property_item_name").ToString()
+                        If dt.Columns.Contains("propertyItemName") AndAlso Not IsDBNull(row("propertyItemName")) Then
+                            ' propertyNameTxt.Text = row("propertyItemName").ToString()
                         End If
-                        If dt.Columns.Contains("maintenance_date") AndAlso Not IsDBNull(row("maintenance_date")) Then
-                            ' DateTimePicker1.Value = Convert.ToDateTime(row("maintenance_date"))
+                        If dt.Columns.Contains("maintenanceDate") AndAlso Not IsDBNull(row("maintenanceDate")) Then
+                            ' DateTimePicker1.Value = Convert.ToDateTime(row("maintenanceDate"))
                         End If
-                        If dt.Columns.Contains("type_of_maintenance") AndAlso Not IsDBNull(row("type_of_maintenance")) Then
-                            ' ComboBox3.SelectedItem = row("type_of_maintenance").ToString()
+                        If dt.Columns.Contains("typeOfMaintenance") AndAlso Not IsDBNull(row("typeOfMaintenance")) Then
+                            ' ComboBox3.SelectedItem = row("typeOfMaintenance").ToString()
                         End If
-                        If dt.Columns.Contains("maintenance_details") AndAlso Not IsDBNull(row("maintenance_details")) Then
-                            ' TextBox1.Text = row("maintenance_details").ToString()
+                        If dt.Columns.Contains("maintenanceDetails") AndAlso Not IsDBNull(row("maintenanceDetails")) Then
+                            ' TextBox1.Text = row("maintenanceDetails").ToString()
                         End If
-                        If dt.Columns.Contains("assigned_technician") AndAlso Not IsDBNull(row("assigned_technician")) Then
-                            ' assignedEmployeeTxt.Text = row("assigned_technician").ToString()
+                        If dt.Columns.Contains("assignedTechnician") AndAlso Not IsDBNull(row("assignedTechnician")) Then
+                            ' assignedEmployeeTxt.Text = row("assignedTechnician").ToString()
                         End If
-                        If dt.Columns.Contains("cost_materials_labor") AndAlso Not IsDBNull(row("cost_materials_labor")) Then
-                            ' Label3.Text = row("cost_materials_labor").ToString()
+                        If dt.Columns.Contains("costMaterialsLabor") AndAlso Not IsDBNull(row("costMaterialsLabor")) Then
+                            ' Label3.Text = row("costMaterialsLabor").ToString()
                         End If
                     Catch
                     End Try

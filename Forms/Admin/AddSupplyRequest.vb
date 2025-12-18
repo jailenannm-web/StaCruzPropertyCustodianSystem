@@ -188,11 +188,12 @@ Public Class AddSupplyRequest
                 Return
             End If
 
-            ' Get quantity
+            ' Get quantity (from Quantity Requested field)
             Dim quantity As Integer = 1
-            If Not String.IsNullOrWhiteSpace(unit.Text) Then
-                Integer.TryParse(unit.Text, quantity)
+            If quantityRequested IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(quantityRequested.Text) Then
+                Integer.TryParse(quantityRequested.Text.Trim(), quantity)
             End If
+            If quantity <= 0 Then quantity = 1
 
             ' Get department ID if provided
             Dim deptID As Integer? = Nothing

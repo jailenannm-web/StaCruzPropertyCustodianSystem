@@ -4231,13 +4231,15 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT mr.request_id, mr.date_requested, mr.item_name, mr.property_number, " &
-                                 "mr.serial_number, mr.departmentId, d.departmentName, mr.location, " &
-                                 "mr.condition_before, mr.type_of_issue, mr.problem_description, mr.status, " &
-                                 "mr.assigned_technician, mr.target_date, mr.completion_date, mr.requested_by " &
+            Dim query As String = "SELECT mr.requestId, mr.dateRequested AS dateOfRequest, mr.itemName, mr.propertyNumber, " &
+                                 "mr.serialNumber, mr.departmentId, d.departmentName AS department, mr.location, " &
+                                 "mr.conditionBefore, mr.typeOfIssue, mr.problemDescription AS purpose, mr.status, " &
+                                 "mr.assignedTechnician, mr.targetDate, mr.completionDate, " &
+                                 "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS requesterName " &
                                  "FROM maintenance_requests mr " &
                                  "LEFT JOIN departments d ON mr.departmentId = d.departmentId " &
-                                 "ORDER BY mr.date_requested DESC"
+                                 "LEFT JOIN users u ON mr.requestedBy = u.userId " &
+                                 "ORDER BY mr.dateRequested DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 Using adapter As New MySqlDataAdapter(cmd)
@@ -4269,14 +4271,16 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT mr.request_id, mr.date_requested, mr.item_name, mr.property_number, " &
-                                 "mr.serial_number, mr.departmentId, d.departmentName, mr.location, " &
-                                 "mr.condition_before, mr.type_of_issue, mr.problem_description, mr.status, " &
-                                 "mr.assigned_technician, mr.target_date, mr.completion_date, mr.requested_by " &
+            Dim query As String = "SELECT mr.requestId, mr.dateRequested AS dateOfRequest, mr.itemName, mr.propertyNumber, " &
+                                 "mr.serialNumber, mr.departmentId, d.departmentName AS department, mr.location, " &
+                                 "mr.conditionBefore, mr.typeOfIssue, mr.problemDescription, mr.status, " &
+                                 "mr.assignedTechnician, mr.targetDate, mr.completionDate, " &
+                                 "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS requesterName " &
                                  "FROM maintenance_requests mr " &
                                  "LEFT JOIN departments d ON mr.departmentId = d.departmentId " &
-                                 "WHERE mr.requested_by = @staffID " &
-                                 "ORDER BY mr.date_requested DESC"
+                                 "LEFT JOIN users u ON mr.requestedBy = u.userId " &
+                                 "WHERE mr.requestedBy = @staffID " &
+                                 "ORDER BY mr.dateRequested DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@staffID", staffID)
@@ -4364,12 +4368,13 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT m.maintenance_id, m.property_item_name, " &
-                                 "m.maintenance_date, m.type_of_maintenance, m.maintenance_details, " &
-                                 "m.assigned_technician, m.cost_materials_labor, m.status, " &
-                                 "m.diagnosis, m.action_taken, m.parts_replaced " &
+            Dim query As String = "SELECT m.maintenanceId, m.propertyItemName, " &
+                                 "m.location, m.conditionBeforeMaint, " &
+                                 "m.maintenanceDate, m.typeOfMaintenance, m.maintenanceDetails, " &
+                                 "m.assignedTechnician, m.costMaterialsLabor, m.status, " &
+                                 "m.diagnosis, m.actionTaken, m.partsReplaced " &
                                  "FROM maintenance m " &
-                                 "ORDER BY m.maintenance_date DESC"
+                                 "ORDER BY m.maintenanceDate DESC"
 
             Using cmd As New MySqlCommand(query, conn)
                 Using adapter As New MySqlDataAdapter(cmd)
@@ -4471,11 +4476,11 @@ Public Class DatabaseConnection
                 calculatedNextSchedule = serviceDate.AddDays(maintenanceIntervalDays)
             End If
 
-            Dim query As String = "UPDATE maintenance SET maintenance_date = @maintenanceDate, type_of_maintenance = @typeOfMaintenance, " &
-                                  "maintenance_details = @maintenanceDetails, assigned_technician = @assignedTechnician, " &
-                                  "cost_materials_labor = @costMaterialsLabor, status = @status, " &
-                                  "diagnosis = @diagnosis, action_taken = @actionTaken, parts_replaced = @partsReplaced, " &
-                                  "condition_after_maint = @conditionAfterMaint WHERE maintenance_id = @maintenanceID"
+            Dim query As String = "UPDATE maintenance SET maintenanceDate = @maintenanceDate, typeOfMaintenance = @typeOfMaintenance, " &
+                                  "maintenanceDetails = @maintenanceDetails, assignedTechnician = @assignedTechnician, " &
+                                  "costMaterialsLabor = @costMaterialsLabor, status = @status, " &
+                                  "diagnosis = @diagnosis, actionTaken = @actionTaken, partsReplaced = @partsReplaced, " &
+                                  "conditionAfterMaint = @conditionAfterMaint WHERE maintenanceId = @maintenanceID"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@maintenanceDate", serviceDate)

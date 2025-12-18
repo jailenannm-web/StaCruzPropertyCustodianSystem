@@ -146,8 +146,8 @@ Public Class PropertyIssuance
     End Sub
 
     Private Sub RoundedButton2_Click(sender As Object, e As System.EventArgs) Handles RoundedButton2.Click
-        Dim StaffDashboard As New StaffDashboard()
-        StaffDashboard.Show()
+        Dim AdminDashboard As New AdminDashboard()
+        AdminDashboard.Show()
         Me.Close()
     End Sub
 

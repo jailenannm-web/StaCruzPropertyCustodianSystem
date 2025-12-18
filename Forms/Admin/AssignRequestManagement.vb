@@ -9,6 +9,8 @@ Public Class AssignRequestManagement
     Inherits UserControl
 
     Private canModifyRequests As Boolean = False
+    Private allAvailableProperties As DataTable = Nothing
+    Private searchBox As TextBox = Nothing
 
     Public Sub New()
         InitializeComponent()
@@ -49,6 +51,7 @@ Public Class AssignRequestManagement
         LoadLocationDropdown()
         ' Load available properties/supplies even if no request
         LoadAvailableProperties()
+        EnsureSearchBox()
         ' Wire up property ID selection change event for auto-fill
         If propertyId IsNot Nothing Then
             AddHandler propertyId.SelectedIndexChanged, AddressOf PropertyId_SelectedIndexChanged
@@ -65,6 +68,94 @@ Public Class AssignRequestManagement
         If currentRequestID > 0 Then
             LoadRequestData()
         End If
+    End Sub
+
+    Private Sub EnsureSearchBox()
+        If searchBox IsNot Nothing Then Return
+        Try
+            searchBox = New TextBox()
+            searchBox.Name = "assignPropertySearch"
+            searchBox.Font = New Drawing.Font("Poppins", 10.0!, Drawing.FontStyle.Regular)
+            searchBox.Width = 360
+            searchBox.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+            ' .NET Framework TextBox has no PlaceholderText; use a simple watermark instead.
+            searchBox.ForeColor = Drawing.Color.Gray
+            searchBox.Text = "Search property (name/category/supplier/status)..."
+            searchBox.Location = New Drawing.Point(Me.Width - searchBox.Width - 30, 48)
+            AddHandler Me.SizeChanged, Sub()
+                                           If searchBox IsNot Nothing Then
+                                               searchBox.Location = New Drawing.Point(Me.Width - searchBox.Width - 30, searchBox.Location.Y)
+                                           End If
+                                       End Sub
+            AddHandler searchBox.TextChanged, AddressOf ApplyPropertySearch
+            AddHandler searchBox.GotFocus, Sub()
+                                               If searchBox IsNot Nothing AndAlso searchBox.ForeColor = Drawing.Color.Gray Then
+                                                   searchBox.Text = ""
+                                                   searchBox.ForeColor = Drawing.Color.Black
+                                               End If
+                                           End Sub
+            AddHandler searchBox.LostFocus, Sub()
+                                                If searchBox IsNot Nothing AndAlso String.IsNullOrWhiteSpace(searchBox.Text) Then
+                                                    searchBox.ForeColor = Drawing.Color.Gray
+                                                    searchBox.Text = "Search property (name/category/supplier/status)..."
+                                                End If
+                                            End Sub
+            Me.Controls.Add(searchBox)
+            searchBox.BringToFront()
+        Catch
+            ' ignore
+        End Try
+    End Sub
+
+    Private Sub ApplyPropertySearch(sender As Object, e As EventArgs)
+        Dim q As String = ""
+        If searchBox IsNot Nothing Then q = searchBox.Text
+        ApplyPropertySearch(q)
+    End Sub
+
+    Private Sub ApplyPropertySearch(q As String)
+        If allAvailableProperties Is Nothing Then Return
+        Dim searchLower As String = If(String.IsNullOrWhiteSpace(q), "", q.Trim().ToLower())
+        If String.IsNullOrEmpty(searchLower) Then
+            BindPropertiesToDropdowns(allAvailableProperties)
+            Return
+        End If
+
+        Try
+            Dim rows = allAvailableProperties.AsEnumerable().Where(Function(r)
+                                                                       Dim itemNameVal As String = If(r.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(r("itemName")), r("itemName").ToString().ToLower(), "")
+                                                                       Dim categoryVal As String = If(r.Table.Columns.Contains("category") AndAlso Not IsDBNull(r("category")), r("category").ToString().ToLower(), "")
+                                                                       Dim supplierVal As String = If(r.Table.Columns.Contains("supplier") AndAlso Not IsDBNull(r("supplier")), r("supplier").ToString().ToLower(), "")
+                                                                       Dim statusVal As String = If(r.Table.Columns.Contains("status") AndAlso Not IsDBNull(r("status")), r("status").ToString().ToLower(), "")
+                                                                       Return itemNameVal.Contains(searchLower) OrElse categoryVal.Contains(searchLower) OrElse supplierVal.Contains(searchLower) OrElse statusVal.Contains(searchLower)
+                                                                   End Function)
+            If rows.Any() Then
+                BindPropertiesToDropdowns(rows.CopyToDataTable())
+            Else
+                BindPropertiesToDropdowns(allAvailableProperties.Clone())
+            End If
+        Catch
+            BindPropertiesToDropdowns(allAvailableProperties)
+        End Try
+    End Sub
+
+    Private Sub BindPropertiesToDropdowns(dt As DataTable)
+        If dt Is Nothing Then Return
+        Try
+            If propertyId IsNot Nothing Then
+                propertyId.DataSource = dt.Copy()
+                propertyId.DisplayMember = "propertyId"
+                propertyId.ValueMember = "propertyId"
+                propertyId.SelectedIndex = -1
+            End If
+            If propertyName IsNot Nothing Then
+                propertyName.DataSource = dt.Copy()
+                propertyName.DisplayMember = "itemName"
+                propertyName.ValueMember = "propertyId"
+                propertyName.SelectedIndex = -1
+            End If
+        Catch
+        End Try
     End Sub
 
     Private Sub LoadCategoryDropdown()
@@ -492,33 +583,9 @@ Public Class AssignRequestManagement
             If availableList.Any() Then
                 availableProperties = availableList.CopyToDataTable()
             End If
+            allAvailableProperties = If(availableProperties IsNot Nothing, availableProperties.Copy(), propertiesTable.Copy())
 
-            ' Populate Property ID dropdown
-            If propertyId IsNot Nothing Then
-                propertyId.DataSource = Nothing
-                If availableProperties IsNot Nothing Then
-                    ' Clone the table for the second dropdown to avoid shared binding issues
-                    propertyId.DataSource = availableProperties.Copy()
-                    propertyId.DisplayMember = "propertyId"
-                    propertyId.ValueMember = "propertyId"
-                    propertyId.SelectedIndex = -1
-                Else
-                    propertyId.Items.Clear()
-                End If
-            End If
-
-            ' Populate Property Name dropdown
-            If propertyName IsNot Nothing Then
-                propertyName.DataSource = Nothing
-                If availableProperties IsNot Nothing Then
-                    propertyName.DataSource = availableProperties.Copy()
-                    propertyName.DisplayMember = "itemName"
-                    propertyName.ValueMember = "propertyId"
-                    propertyName.SelectedIndex = -1
-                Else
-                    propertyName.Items.Clear()
-                End If
-            End If
+            BindPropertiesToDropdowns(If(availableProperties, propertiesTable))
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadAvailableProperties Exception: " & ex.Message)
         End Try

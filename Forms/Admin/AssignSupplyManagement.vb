@@ -9,6 +9,8 @@ Public Class AssignSupplyManagement
     Inherits UserControl
 
     Private canModifyRequests As Boolean = False
+    Private allAvailableSupplies As DataTable = Nothing
+    Private searchBox As TextBox = Nothing
 
     Public Sub New()
         InitializeComponent()
@@ -41,6 +43,7 @@ Public Class AssignSupplyManagement
         LoadStockStatusDropdown()
         ' Load available supplies
         LoadAvailableSupplies()
+        EnsureSearchBox()
         ' Wire up supply ID selection change event for auto-fill
         If supplyId IsNot Nothing Then
             AddHandler supplyId.SelectedIndexChanged, AddressOf SupplyId_SelectedIndexChanged
@@ -57,6 +60,95 @@ Public Class AssignSupplyManagement
         If currentRequestID > 0 Then
             LoadRequestData()
         End If
+    End Sub
+
+    Private Sub EnsureSearchBox()
+        If searchBox IsNot Nothing Then Return
+        Try
+            searchBox = New TextBox()
+            searchBox.Name = "assignSupplySearch"
+            searchBox.Font = New Drawing.Font("Poppins", 10.0!, Drawing.FontStyle.Regular)
+            searchBox.Width = 360
+            searchBox.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+            searchBox.TextAlign = HorizontalAlignment.Left
+            ' .NET Framework TextBox has no PlaceholderText; use a simple watermark instead.
+            searchBox.ForeColor = Drawing.Color.Gray
+            searchBox.Text = "Search supply (name/category/supplier/status)..."
+            searchBox.Location = New Drawing.Point(Me.Width - searchBox.Width - 30, 48)
+            AddHandler Me.SizeChanged, Sub()
+                                           If searchBox IsNot Nothing Then
+                                               searchBox.Location = New Drawing.Point(Me.Width - searchBox.Width - 30, searchBox.Location.Y)
+                                           End If
+                                       End Sub
+            AddHandler searchBox.TextChanged, AddressOf ApplySupplySearch
+            AddHandler searchBox.GotFocus, Sub()
+                                               If searchBox IsNot Nothing AndAlso searchBox.ForeColor = Drawing.Color.Gray Then
+                                                   searchBox.Text = ""
+                                                   searchBox.ForeColor = Drawing.Color.Black
+                                               End If
+                                           End Sub
+            AddHandler searchBox.LostFocus, Sub()
+                                                If searchBox IsNot Nothing AndAlso String.IsNullOrWhiteSpace(searchBox.Text) Then
+                                                    searchBox.ForeColor = Drawing.Color.Gray
+                                                    searchBox.Text = "Search supply (name/category/supplier/status)..."
+                                                End If
+                                            End Sub
+            Me.Controls.Add(searchBox)
+            searchBox.BringToFront()
+        Catch
+            ' ignore
+        End Try
+    End Sub
+
+    Private Sub ApplySupplySearch(sender As Object, e As EventArgs)
+        Dim q As String = ""
+        If searchBox IsNot Nothing Then q = searchBox.Text
+        ApplySupplySearch(q)
+    End Sub
+
+    Private Sub ApplySupplySearch(q As String)
+        If allAvailableSupplies Is Nothing Then Return
+        Dim searchLower As String = If(String.IsNullOrWhiteSpace(q), "", q.Trim().ToLower())
+        If String.IsNullOrEmpty(searchLower) Then
+            BindSuppliesToDropdowns(allAvailableSupplies)
+            Return
+        End If
+
+        Try
+            Dim rows = allAvailableSupplies.AsEnumerable().Where(Function(r)
+                                                                     Dim itemNameVal As String = If(r.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(r("itemName")), r("itemName").ToString().ToLower(), "")
+                                                                     Dim categoryVal As String = If(r.Table.Columns.Contains("category") AndAlso Not IsDBNull(r("category")), r("category").ToString().ToLower(), "")
+                                                                     Dim supplierVal As String = If(r.Table.Columns.Contains("supplier") AndAlso Not IsDBNull(r("supplier")), r("supplier").ToString().ToLower(), "")
+                                                                     Dim statusVal As String = If(r.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(r("stockStatus")), r("stockStatus").ToString().ToLower(), "")
+                                                                     Return itemNameVal.Contains(searchLower) OrElse categoryVal.Contains(searchLower) OrElse supplierVal.Contains(searchLower) OrElse statusVal.Contains(searchLower)
+                                                                 End Function)
+            If rows.Any() Then
+                BindSuppliesToDropdowns(rows.CopyToDataTable())
+            Else
+                BindSuppliesToDropdowns(allAvailableSupplies.Clone())
+            End If
+        Catch
+            BindSuppliesToDropdowns(allAvailableSupplies)
+        End Try
+    End Sub
+
+    Private Sub BindSuppliesToDropdowns(dt As DataTable)
+        If dt Is Nothing Then Return
+        Try
+            If supplyId IsNot Nothing Then
+                supplyId.DataSource = dt.Copy()
+                supplyId.DisplayMember = "supplyId"
+                supplyId.ValueMember = "supplyId"
+                supplyId.SelectedIndex = -1
+            End If
+            If supplyName IsNot Nothing Then
+                supplyName.DataSource = dt.Copy()
+                supplyName.DisplayMember = "itemName"
+                supplyName.ValueMember = "supplyId"
+                supplyName.SelectedIndex = -1
+            End If
+        Catch
+        End Try
     End Sub
 
     Private Sub LoadCategoryDropdown()
@@ -455,32 +547,9 @@ Public Class AssignSupplyManagement
             If availableList.Any() Then
                 availableSupplies = availableList.CopyToDataTable()
             End If
+            allAvailableSupplies = If(availableSupplies IsNot Nothing, availableSupplies.Copy(), suppliesTable.Copy())
 
-            ' Populate Supply ID dropdown
-            If supplyId IsNot Nothing Then
-                supplyId.DataSource = Nothing
-                If availableSupplies IsNot Nothing Then
-                    supplyId.DataSource = availableSupplies.Copy()
-                    supplyId.DisplayMember = "supplyId"
-                    supplyId.ValueMember = "supplyId"
-                    supplyId.SelectedIndex = -1
-                Else
-                    supplyId.Items.Clear()
-                End If
-            End If
-
-            ' Populate Supply Name dropdown
-            If supplyName IsNot Nothing Then
-                supplyName.DataSource = Nothing
-                If availableSupplies IsNot Nothing Then
-                    supplyName.DataSource = availableSupplies.Copy()
-                    supplyName.DisplayMember = "itemName"
-                    supplyName.ValueMember = "supplyId"
-                    supplyName.SelectedIndex = -1
-                Else
-                    supplyName.Items.Clear()
-                End If
-            End If
+            BindSuppliesToDropdowns(If(availableSupplies, suppliesTable))
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadAvailableSupplies Exception: " & ex.Message)
         End Try
