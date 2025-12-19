@@ -2830,9 +2830,11 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Retrieve a single property's full details by ID.
     ''' </summary>
-    Public Shared Function GetPropertyDetails(propertyID As Integer) As DataRow
+    ' Overload: get property details by numeric ID (primary) or fallback by property number
+    Public Shared Function GetPropertyDetails(propertyID As Integer, Optional propertyNumber As String = Nothing) As DataRow
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing
+        
         Try
             conn = GetConnection()
             If conn Is Nothing Then Return Nothing
@@ -2841,7 +2843,7 @@ Public Class DatabaseConnection
             Dim query As String =
                 "SELECT p.propertyId, p.itemName, p.category, p.propertyNumber, p.serialNumber, " &
                 "p.description, p.condition, p.acquisitionCost, p.acquisitionDate, p.location, p.status, " &
-                "p.assignedTo, p.departmentId, " &
+                "p.assignedTo, p.departmentId, p.unitOfMeasure, " &
                 "CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,'')) AS assignedEmployee, " &
                 "d.departmentName AS assignedDepartment, " &
                 "p.supplier " &
@@ -2856,9 +2858,14 @@ Public Class DatabaseConnection
                     adapter.Fill(dt)
                 End Using
             End Using
+            
+            ' If found, return the row
+            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                System.Diagnostics.Debug.WriteLine("[GetPropertyDetails] Property found by ID: " & propertyID.ToString())
+                Return dt.Rows(0)
+            End If
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] GetPropertyDetails Exception: " & ex.Message)
-            Return Nothing
+            System.Diagnostics.Debug.WriteLine("[GetPropertyDetails] Exception by ID: " & ex.Message)
         Finally
             If conn IsNot Nothing Then
                 Try
@@ -2869,10 +2876,56 @@ Public Class DatabaseConnection
             End If
         End Try
 
-        If dt.Rows.Count > 0 Then
-            Return dt.Rows(0)
+        ' If not found by propertyId, try by propertyNumber (fallback)
+        If String.IsNullOrWhiteSpace(propertyNumber) Then
+            propertyNumber = propertyID.ToString() ' try numeric as propertyNumber
         End If
 
+        If Not String.IsNullOrWhiteSpace(propertyNumber) Then
+            conn = Nothing
+            Try
+                dt = New DataTable()
+                conn = GetConnection()
+                If conn Is Nothing Then Return Nothing
+                If Not SafeOpenConnection(conn) Then Return Nothing
+
+                Dim queryByNumber As String =
+                    "SELECT p.propertyId, p.itemName, p.category, p.propertyNumber, p.serialNumber, " &
+                    "p.description, p.condition, p.acquisitionCost, p.acquisitionDate, p.location, p.status, " &
+                    "p.assignedTo, p.departmentId, p.unitOfMeasure, " &
+                    "CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,'')) AS assignedEmployee, " &
+                    "d.departmentName AS assignedDepartment, " &
+                    "p.supplier " &
+                    "FROM properties p " &
+                    "LEFT JOIN users u ON p.assignedTo = u.userId " &
+                    "LEFT JOIN departments d ON p.departmentId = d.departmentId " &
+                    "WHERE p.propertyNumber = @propNumber LIMIT 1"
+
+                Using cmd As New MySqlCommand(queryByNumber, conn)
+                    cmd.Parameters.AddWithValue("@propNumber", propertyNumber)
+                    Using adapter As New MySqlDataAdapter(cmd)
+                        adapter.Fill(dt)
+                    End Using
+                End Using
+                
+                If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                    System.Diagnostics.Debug.WriteLine("[GetPropertyDetails] Property found by number: " & propertyNumber)
+                    Return dt.Rows(0)
+                End If
+            Catch ex2 As Exception
+                System.Diagnostics.Debug.WriteLine("[GetPropertyDetails] Exception by number: " & ex2.Message)
+            Finally
+                If conn IsNot Nothing Then
+                    Try
+                        If conn.State = ConnectionState.Open Then conn.Close()
+                        conn.Dispose()
+                    Catch
+                    End Try
+                End If
+            End Try
+        End If
+
+        System.Diagnostics.Debug.WriteLine("[GetPropertyDetails] Property not found. ID: " & propertyID.ToString() & ", Number: " & If(propertyNumber, ""))
         Return Nothing
     End Function
 
@@ -3575,7 +3628,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return Nothing
 
             Dim query As String = ""
-            
+
             If requestType.ToLower() = "property" Then
                 query = "SELECT pr.requestId AS request_id, 'property' AS request_type, pr.status, pr.dateOfRequest AS request_date, " &
                         "pr.approvedDate AS approval_date, pr.quantityRequested AS quantity, " &
@@ -3723,7 +3776,7 @@ Public Class DatabaseConnection
                     If currentStatus.ToLower() <> "pending" Then
                         Throw New Exception("Only pending requests can be approved.")
                     End If
-                    
+
                     ' Store request details for creating borrowed_items record
                     requestDetails("itemName") = If(IsDBNull(reader("itemName")), "", reader("itemName").ToString())
                     requestDetails("quantityRequested") = If(IsDBNull(reader("quantityRequested")), 1, Convert.ToInt32(reader("quantityRequested")))
@@ -3754,7 +3807,7 @@ Public Class DatabaseConnection
                         itemId = Convert.ToInt32(itemResult)
                     End If
                 End Using
-                
+
                 ' If item found, create borrowed_items record
                 If itemId > 0 Then
                     Using insertBorrowedCmd As New MySqlCommand("INSERT INTO borrowed_items (requestId, itemType, itemId, borrowerName, borrowerPosition, departmentId, borrowDate, expectedReturnDate, status, remarks) " &
@@ -3956,7 +4009,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             transaction = conn.BeginTransaction()
-            
+
             ' Get request details before updating
             Dim requestDetails As New Dictionary(Of String, Object)
             Using getCmd As New MySqlCommand("SELECT status, itemName, quantityRequested, requesterName, position, departmentId, dateOfRequest, description, unit " &
@@ -3970,7 +4023,7 @@ Public Class DatabaseConnection
                     If currentStatus.ToLower() <> "pending" Then
                         Throw New Exception("Only pending requests can be approved.")
                     End If
-                    
+
                     ' Store request details
                     requestDetails("itemName") = If(IsDBNull(reader("itemName")), "", reader("itemName").ToString())
                     requestDetails("quantityRequested") = If(IsDBNull(reader("quantityRequested")), 1, Convert.ToInt32(reader("quantityRequested")))
@@ -4004,7 +4057,7 @@ Public Class DatabaseConnection
                         itemId = Convert.ToInt32(itemResult)
                     End If
                 End Using
-                
+
                 ' If item found, create borrowed_items record
                 If itemId > 0 Then
                     Using insertBorrowedCmd As New MySqlCommand("INSERT INTO borrowed_items (requestId, itemType, itemId, borrowerName, borrowerPosition, departmentId, borrowDate, status, remarks) " &
@@ -4636,7 +4689,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT mr.requestId, mr.itemName AS itemName, mr.location AS location, " &
+            Dim query As String = "SELECT mr.requestId AS requestId, mr.itemName AS itemName, mr.location AS location, " &
                                  "mr.conditionBefore AS conditionBefore, mr.typeOfIssue AS typeOfIssue, mr.status AS status, " &
                                  "mr.problemDescription AS problemDescription, " &
                                  "mr.propertyNumber AS propertyNumber, mr.serialNumber AS serialNumber, " &
