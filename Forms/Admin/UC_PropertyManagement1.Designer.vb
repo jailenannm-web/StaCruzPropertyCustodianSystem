@@ -56,6 +56,7 @@ Partial Class UC_PropertyManagement1
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.generatePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.issuePropertySlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -355,12 +356,30 @@ Partial Class UC_PropertyManagement1
         Me.generatePropertyCard.TabIndex = 176
         Me.generatePropertyCard.Text = "Generate Property Codes"
         Me.generatePropertyCard.UseVisualStyleBackColor = False
+        Me.generatePropertyCard.Visible = False
+        '
+        'issuePropertySlip
+        '
+        Me.issuePropertySlip.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.issuePropertySlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.issuePropertySlip.CornerRadius = 15
+        Me.issuePropertySlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.issuePropertySlip.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.issuePropertySlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.issuePropertySlip.Location = New System.Drawing.Point(998, 82)
+        Me.issuePropertySlip.Margin = New System.Windows.Forms.Padding(4)
+        Me.issuePropertySlip.Name = "issuePropertySlip"
+        Me.issuePropertySlip.Size = New System.Drawing.Size(153, 33)
+        Me.issuePropertySlip.TabIndex = 177
+        Me.issuePropertySlip.Text = "Issue Property Slip"
+        Me.issuePropertySlip.UseVisualStyleBackColor = False
         '
         'UC_PropertyManagement1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.issuePropertySlip)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
@@ -414,4 +433,5 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents condition As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents issuePropertySlip As Resources.Controls.RoundedButton
 End Class

@@ -424,7 +424,7 @@ Public Class UC_MaintenanceRequestManagement
 
     End Sub
 
-    Private Sub issuePropertySlip_Click(sender As Object, e As EventArgs) Handles issuePropertySlip.Click
+    Private Sub issuePropertySlip_Click(sender As Object, e As EventArgs)
         If propertyManagementGrid Is Nothing OrElse propertyManagementGrid.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a maintenance request first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -440,7 +440,7 @@ Public Class UC_MaintenanceRequestManagement
 
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
-            
+
             ' Get request ID
             Dim requestID As Integer = 0
             If dt.Columns.Contains("requestId") Then

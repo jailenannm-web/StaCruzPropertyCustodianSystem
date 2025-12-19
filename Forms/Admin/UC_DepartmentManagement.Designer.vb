@@ -30,15 +30,6 @@ Partial Class UC_DepartmentManagement
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.admin_deptmanagement = New System.Windows.Forms.DataGridView()
-        Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
-        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.departmentmanagementsearchbar = New System.Windows.Forms.TextBox()
-        ' Instantiate missing DataGridView columns to avoid NullReferenceException
         Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.departmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.headOfDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -53,7 +44,14 @@ Partial Class UC_DepartmentManagement
         Me.totalProperties = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.totalSupplies = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-
+        Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
+        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.departmentmanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -75,36 +73,6 @@ Partial Class UC_DepartmentManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.admin_deptmanagement.BackgroundColor = System.Drawing.Color.White
         Me.admin_deptmanagement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        ' Configure basic properties for new columns
-        Me.departmentId.HeaderText = "departmentId"
-        Me.departmentId.Name = "departmentId"
-        Me.departmentName.HeaderText = "departmentName"
-        Me.departmentName.Name = "departmentName"
-        Me.headOfDepartment.HeaderText = "headOfDepartment"
-        Me.headOfDepartment.Name = "headOfDepartment"
-        Me.email.HeaderText = "email"
-        Me.email.Name = "email"
-        Me.contactNumber.HeaderText = "contactNumber"
-        Me.contactNumber.Name = "contactNumber"
-        Me.location.HeaderText = "location"
-        Me.location.Name = "location"
-        Me.building.HeaderText = "building"
-        Me.building.Name = "building"
-        Me.floorNumber.HeaderText = "floorNumber"
-        Me.floorNumber.Name = "floorNumber"
-        Me.shortName.HeaderText = "shortName"
-        Me.shortName.Name = "shortName"
-        Me.officeCode.HeaderText = "officeCode"
-        Me.officeCode.Name = "officeCode"
-        Me.description.HeaderText = "description"
-        Me.description.Name = "description"
-        Me.totalProperties.HeaderText = "totalProperties"
-        Me.totalProperties.Name = "totalProperties"
-        Me.totalSupplies.HeaderText = "totalSupplies"
-        Me.totalSupplies.Name = "totalSupplies"
-        Me.status.HeaderText = "status"
-        Me.status.Name = "status"
-
         Me.admin_deptmanagement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.departmentId, Me.departmentName, Me.headOfDepartment, Me.email, Me.contactNumber, Me.location, Me.building, Me.floorNumber, Me.shortName, Me.officeCode, Me.description, Me.totalProperties, Me.totalSupplies, Me.status})
         Me.admin_deptmanagement.Location = New System.Drawing.Point(59, 115)
         Me.admin_deptmanagement.Margin = New System.Windows.Forms.Padding(4)
@@ -112,6 +80,104 @@ Partial Class UC_DepartmentManagement
         Me.admin_deptmanagement.RowHeadersWidth = 51
         Me.admin_deptmanagement.Size = New System.Drawing.Size(1270, 573)
         Me.admin_deptmanagement.TabIndex = 147
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "departmentId"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'departmentName
+        '
+        Me.departmentName.HeaderText = "departmentName"
+        Me.departmentName.MinimumWidth = 6
+        Me.departmentName.Name = "departmentName"
+        Me.departmentName.Width = 125
+        '
+        'headOfDepartment
+        '
+        Me.headOfDepartment.HeaderText = "headOfDepartment"
+        Me.headOfDepartment.MinimumWidth = 6
+        Me.headOfDepartment.Name = "headOfDepartment"
+        Me.headOfDepartment.Width = 125
+        '
+        'email
+        '
+        Me.email.HeaderText = "email"
+        Me.email.MinimumWidth = 6
+        Me.email.Name = "email"
+        Me.email.Width = 125
+        '
+        'contactNumber
+        '
+        Me.contactNumber.HeaderText = "contactNumber"
+        Me.contactNumber.MinimumWidth = 6
+        Me.contactNumber.Name = "contactNumber"
+        Me.contactNumber.Width = 125
+        '
+        'location
+        '
+        Me.location.HeaderText = "location"
+        Me.location.MinimumWidth = 6
+        Me.location.Name = "location"
+        Me.location.Width = 125
+        '
+        'building
+        '
+        Me.building.HeaderText = "building"
+        Me.building.MinimumWidth = 6
+        Me.building.Name = "building"
+        Me.building.Width = 125
+        '
+        'floorNumber
+        '
+        Me.floorNumber.HeaderText = "floorNumber"
+        Me.floorNumber.MinimumWidth = 6
+        Me.floorNumber.Name = "floorNumber"
+        Me.floorNumber.Width = 125
+        '
+        'shortName
+        '
+        Me.shortName.HeaderText = "shortName"
+        Me.shortName.MinimumWidth = 6
+        Me.shortName.Name = "shortName"
+        Me.shortName.Width = 125
+        '
+        'officeCode
+        '
+        Me.officeCode.HeaderText = "officeCode"
+        Me.officeCode.MinimumWidth = 6
+        Me.officeCode.Name = "officeCode"
+        Me.officeCode.Width = 125
+        '
+        'description
+        '
+        Me.description.HeaderText = "description"
+        Me.description.MinimumWidth = 6
+        Me.description.Name = "description"
+        Me.description.Width = 125
+        '
+        'totalProperties
+        '
+        Me.totalProperties.HeaderText = "totalProperties"
+        Me.totalProperties.MinimumWidth = 6
+        Me.totalProperties.Name = "totalProperties"
+        Me.totalProperties.Width = 125
+        '
+        'totalSupplies
+        '
+        Me.totalSupplies.HeaderText = "totalSupplies"
+        Me.totalSupplies.MinimumWidth = 6
+        Me.totalSupplies.Name = "totalSupplies"
+        Me.totalSupplies.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 125
         '
         'ttldepartmentmanagement
         '
@@ -187,7 +253,7 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1016, 705)
+        Me.btnDelete.Location = New System.Drawing.Point(1123, 704)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(99, 35)

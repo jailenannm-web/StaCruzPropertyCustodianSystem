@@ -813,4 +813,38 @@ Public Class UC_PropertyManagement1
 
         Return 0D
     End Function
+
+    Private Sub issuePropertySlip_Click(sender As Object, e As EventArgs) Handles issuePropertySlip.Click
+        If propertyManagementGrid Is Nothing OrElse propertyManagementGrid.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a maintenance request first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Try
+            Dim selectedRow As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
+            Dim dt As DataTable = TryCast(propertyManagementGrid.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+
+            ' Get request ID
+            Dim requestID As Integer = 0
+            If dt.Columns.Contains("requestId") Then
+                requestID = Convert.ToInt32(dataRow("requestId"))
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestID = Convert.ToInt32(dataRow("request_id"))
+            End If
+
+            ' Open Property Issuance Slip with maintenance request data
+            Dim propertyIssuance As New PropertyIssuance()
+            ' TODO: If PropertyIssuance accepts maintenance request data, pass it here
+            propertyIssuance.Show()
+        Catch ex As Exception
+            MessageBox.Show("Error opening property slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 End Class

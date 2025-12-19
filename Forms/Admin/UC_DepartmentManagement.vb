@@ -324,7 +324,7 @@ Public Class UC_DepartmentManagement
         Try
             Dim editForm As New EditDepartment()
             editForm.LoadDepartmentData(departmentID, deptData)
-            
+
             ' Check SuperAdminDashboard first
             Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
             If superAdminDashboard IsNot Nothing Then

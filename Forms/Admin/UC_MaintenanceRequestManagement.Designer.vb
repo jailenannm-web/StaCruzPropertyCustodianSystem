@@ -44,7 +44,6 @@ Partial Class UC_MaintenanceRequestManagement
         Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.issuePropertySlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Delete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -246,22 +245,6 @@ Partial Class UC_MaintenanceRequestManagement
         Me.printPAR.Text = "Print PAR/ICS"
         Me.printPAR.UseVisualStyleBackColor = False
         '
-        'issuePropertySlip
-        '
-        Me.issuePropertySlip.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.issuePropertySlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.issuePropertySlip.CornerRadius = 15
-        Me.issuePropertySlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.issuePropertySlip.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.issuePropertySlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertySlip.Location = New System.Drawing.Point(1023, 690)
-        Me.issuePropertySlip.Margin = New System.Windows.Forms.Padding(4)
-        Me.issuePropertySlip.Name = "issuePropertySlip"
-        Me.issuePropertySlip.Size = New System.Drawing.Size(153, 33)
-        Me.issuePropertySlip.TabIndex = 169
-        Me.issuePropertySlip.Text = "Issue Property Slip"
-        Me.issuePropertySlip.UseVisualStyleBackColor = False
-        '
         'btnApprove
         '
         Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -328,13 +311,13 @@ Partial Class UC_MaintenanceRequestManagement
         '
         'prm_btn_update
         '
-        Me.prm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.prm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_btn_update.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.prm_btn_update.CornerRadius = 15
         Me.prm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.prm_btn_update.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.prm_btn_update.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.prm_btn_update.Location = New System.Drawing.Point(916, 690)
+        Me.prm_btn_update.Location = New System.Drawing.Point(1085, 690)
         Me.prm_btn_update.Margin = New System.Windows.Forms.Padding(4)
         Me.prm_btn_update.Name = "prm_btn_update"
         Me.prm_btn_update.Size = New System.Drawing.Size(78, 35)
@@ -373,7 +356,6 @@ Partial Class UC_MaintenanceRequestManagement
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnReject)
         Me.Controls.Add(Me.printPAR)
-        Me.Controls.Add(Me.issuePropertySlip)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlpropertymanagement)
         Me.Controls.Add(Me.propertyManagementGrid)
@@ -393,7 +375,6 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents propertyManagementGrid As System.Windows.Forms.DataGridView
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents printPAR As Resources.Controls.RoundedButton
-    Friend WithEvents issuePropertySlip As Resources.Controls.RoundedButton
     Friend WithEvents btnApprove As Resources.Controls.RoundedButton
     Friend WithEvents btnReject As Resources.Controls.RoundedButton
     Friend WithEvents Delete As Resources.Controls.RoundedButton
