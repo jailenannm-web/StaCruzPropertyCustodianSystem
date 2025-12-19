@@ -368,12 +368,21 @@ Public Class UC_PropertyManagement1
             Dim selectedRow As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
             If selectedRow IsNot Nothing AndAlso selectedRow.Tag IsNot Nothing Then
                 hasSelection = Integer.TryParse(selectedRow.Tag.ToString(), selectedPropertyID) AndAlso selectedPropertyID > 0
+            Else
+                ' Try to get propertyID from cells if Tag is not set
+                If propertyManagementGrid.Columns.Contains("propertyId") AndAlso selectedRow.Cells("propertyId").Value IsNot Nothing Then
+                    hasSelection = Integer.TryParse(selectedRow.Cells("propertyId").Value.ToString(), selectedPropertyID) AndAlso selectedPropertyID > 0
+                ElseIf selectedRow.Cells.Count > 0 AndAlso selectedRow.Cells(0).Value IsNot Nothing Then
+                    ' Try first cell
+                    hasSelection = Integer.TryParse(selectedRow.Cells(0).Value.ToString(), selectedPropertyID) AndAlso selectedPropertyID > 0
+                End If
             End If
         End If
 
-        ' Require a valid selection before enabling Edit/Delete
-        If btnEdit IsNot Nothing Then btnEdit.Enabled = canModifyProperties AndAlso hasSelection
-        If btnDelete IsNot Nothing Then btnDelete.Enabled = canModifyProperties AndAlso hasSelection
+        ' SuperAdmin and Admin have full access - enable buttons when selection exists
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
+        If btnEdit IsNot Nothing Then btnEdit.Enabled = hasFullAccess AndAlso hasSelection
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess AndAlso hasSelection
     End Sub
 
 
@@ -381,13 +390,24 @@ Public Class UC_PropertyManagement1
 
     Private Sub ApplyRolePermissions()
         ' Super Admin, Admin, and Custodian have full access - all buttons enabled
+        ' No restrictions - all buttons enabled for SuperAdmin and Admin
         Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
         canModifyProperties = hasFullAccess
 
         If btnAdd IsNot Nothing Then btnAdd.Enabled = hasFullAccess
-        ' Edit/Delete should be enabled only when a row is selected; SelectionChanged will manage them.
-        If btnEdit IsNot Nothing Then btnEdit.Enabled = False
-        If btnDelete IsNot Nothing Then btnDelete.Enabled = False
+        ' Edit/Delete will be enabled when a row is selected (handled in SelectionChanged)
+        ' SuperAdmin and Admin have full access - buttons will be enabled based on selection
+        If btnEdit IsNot Nothing Then btnEdit.Enabled = False ' Will be enabled when row is selected
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = False ' Will be enabled when row is selected
+        
+        ' Also enable issuePropertySlip button if it exists
+        Try
+            Dim issueSlipBtn = Me.Controls.Find("issuePropertySlip", True)
+            If issueSlipBtn IsNot Nothing AndAlso issueSlipBtn.Length > 0 Then
+                issueSlipBtn(0).Enabled = hasFullAccess
+            End If
+        Catch
+        End Try
     End Sub
 
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
@@ -773,8 +793,41 @@ Public Class UC_PropertyManagement1
 
     Private Sub mnuPrintPARICS_Click(sender As Object, e As EventArgs) _
    Handles mnuPrintPARICS.Click
+        ' Open Property Issuance for selected property
+        If propertyManagementGrid Is Nothing OrElse propertyManagementGrid.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a property first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
-        MessageBox.Show("Print PAR/ICS clicked!")
+        Try
+            Dim selectedRow As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
+            Dim dt As DataTable = TryCast(propertyManagementGrid.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+
+            ' Get property ID
+            Dim propertyID As Integer = 0
+            If dt.Columns.Contains("propertyId") AndAlso Not IsDBNull(dataRow("propertyId")) Then
+                propertyID = Convert.ToInt32(dataRow("propertyId"))
+            ElseIf selectedRow.Tag IsNot Nothing AndAlso Integer.TryParse(selectedRow.Tag.ToString(), propertyID) Then
+                ' Use Tag if available
+            Else
+                MessageBox.Show("Unable to identify property.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            If propertyID > 0 Then
+                Dim propertyIssuance As New PropertyIssuance(propertyID)
+                propertyIssuance.ShowDialog()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error opening property slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Function ReadDecimalFromRow(row As DataRow, colNames As String()) As Decimal
@@ -816,35 +869,106 @@ Public Class UC_PropertyManagement1
 
     Private Sub issuePropertySlip_Click(sender As Object, e As EventArgs) Handles issuePropertySlip.Click
         If propertyManagementGrid Is Nothing OrElse propertyManagementGrid.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a maintenance request first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Please select a property first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         Try
             Dim selectedRow As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
-            Dim dt As DataTable = TryCast(propertyManagementGrid.DataSource, DataTable)
-            If dt Is Nothing Then
-                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            
+            ' Get property ID - try multiple methods
+            Dim propertyID As Integer = 0
+            
+            ' Method 1: Try Tag (stored when rows are manually added)
+            If selectedRow.Tag IsNot Nothing AndAlso Integer.TryParse(selectedRow.Tag.ToString(), propertyID) AndAlso propertyID > 0 Then
+                ' Success - use this propertyID
+            Else
+                ' Method 2: Try DataSource binding
+                Dim dt As DataTable = TryCast(propertyManagementGrid.DataSource, DataTable)
+                If dt IsNot Nothing AndAlso selectedRow.Index >= 0 AndAlso selectedRow.Index < dt.Rows.Count Then
+                    Dim dataRow As DataRow = dt.Rows(selectedRow.Index)
+                    If dt.Columns.Contains("propertyId") AndAlso Not IsDBNull(dataRow("propertyId")) Then
+                        Integer.TryParse(dataRow("propertyId").ToString(), propertyID)
+                    End If
+                End If
+                
+                ' Method 3: Try cell value directly
+                If propertyID <= 0 AndAlso propertyManagementGrid.Columns.Contains("propertyId") Then
+                    Dim cellValue As Object = selectedRow.Cells("propertyId").Value
+                    If cellValue IsNot Nothing AndAlso Not IsDBNull(cellValue) Then
+                        Integer.TryParse(cellValue.ToString(), propertyID)
+                    End If
+                End If
+                
+                ' Method 4: Try first visible cell if it's propertyId column
+                If propertyID <= 0 AndAlso selectedRow.Cells.Count > 0 Then
+                    Dim firstCell As Object = selectedRow.Cells(0).Value
+                    If firstCell IsNot Nothing AndAlso Not IsDBNull(firstCell) Then
+                        Integer.TryParse(firstCell.ToString(), propertyID)
+                    End If
+                End If
+            End If
+
+            If propertyID <= 0 Then
+                MessageBox.Show("Unable to identify property. Please try selecting the property again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
 
-            Dim rowIndex As Integer = selectedRow.Index
-            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            ' Open Property Issuance Slip with property data
+            Dim propertyIssuance As New PropertyIssuance(propertyID)
+            propertyIssuance.ShowDialog()
+        Catch ex As Exception
+            MessageBox.Show("Error opening property slip: " & ex.Message & Environment.NewLine & "Stack Trace: " & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
-            ' Get request ID
-            Dim requestID As Integer = 0
-            If dt.Columns.Contains("requestId") Then
-                requestID = Convert.ToInt32(dataRow("requestId"))
-            ElseIf dt.Columns.Contains("request_id") Then
-                requestID = Convert.ToInt32(dataRow("request_id"))
+    Private Sub propertyManagementGrid_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellDoubleClick
+        ' Open Property Issuance when double-clicking a property row
+        If e.RowIndex < 0 Then Return
+
+        Try
+            Dim selectedRow As DataGridViewRow = propertyManagementGrid.Rows(e.RowIndex)
+            
+            ' Get property ID - try multiple methods
+            Dim propertyID As Integer = 0
+            
+            ' Method 1: Try Tag (stored when rows are manually added)
+            If selectedRow.Tag IsNot Nothing AndAlso Integer.TryParse(selectedRow.Tag.ToString(), propertyID) AndAlso propertyID > 0 Then
+                ' Success - use this propertyID
+            Else
+                ' Method 2: Try DataSource binding
+                Dim dt As DataTable = TryCast(propertyManagementGrid.DataSource, DataTable)
+                If dt IsNot Nothing AndAlso e.RowIndex >= 0 AndAlso e.RowIndex < dt.Rows.Count Then
+                    Dim dataRow As DataRow = dt.Rows(e.RowIndex)
+                    If dt.Columns.Contains("propertyId") AndAlso Not IsDBNull(dataRow("propertyId")) Then
+                        Integer.TryParse(dataRow("propertyId").ToString(), propertyID)
+                    End If
+                End If
+                
+                ' Method 3: Try cell value directly
+                If propertyID <= 0 AndAlso propertyManagementGrid.Columns.Contains("propertyId") Then
+                    Dim cellValue As Object = selectedRow.Cells("propertyId").Value
+                    If cellValue IsNot Nothing AndAlso Not IsDBNull(cellValue) Then
+                        Integer.TryParse(cellValue.ToString(), propertyID)
+                    End If
+                End If
+                
+                ' Method 4: Try first visible cell if it's propertyId column
+                If propertyID <= 0 AndAlso selectedRow.Cells.Count > 0 Then
+                    Dim firstCell As Object = selectedRow.Cells(0).Value
+                    If firstCell IsNot Nothing AndAlso Not IsDBNull(firstCell) Then
+                        Integer.TryParse(firstCell.ToString(), propertyID)
+                    End If
+                End If
             End If
 
-            ' Open Property Issuance Slip with maintenance request data
-            Dim propertyIssuance As New PropertyIssuance()
-            ' TODO: If PropertyIssuance accepts maintenance request data, pass it here
-            propertyIssuance.Show()
+            If propertyID > 0 Then
+                ' Open Property Issuance Slip with property data
+                Dim propertyIssuance As New PropertyIssuance(propertyID)
+                propertyIssuance.ShowDialog()
+            End If
         Catch ex As Exception
-            MessageBox.Show("Error opening property slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("Error opening property slip on double-click: " & ex.Message)
         End Try
     End Sub
 End Class

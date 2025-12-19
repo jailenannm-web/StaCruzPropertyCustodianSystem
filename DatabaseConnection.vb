@@ -7595,8 +7595,12 @@ Public Class DatabaseConnection
                                          location As String, custodianID As Integer?, departmentID As Integer?,
                                          warrantyDetails As String, acquisitionDate As Date, acquisitionCost As Decimal,
                                          supplierName As String, supplierContact As String, status As String) As Boolean
-        If Not DemandPermission(SessionContext.ModulePermission.ModifyProperties, "update properties") Then
-            Return False
+        ' SuperAdmin and Admin bypass all restrictions
+        Dim isSuperAdminOrAdmin As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin()
+        If Not isSuperAdminOrAdmin Then
+            If Not DemandPermission(SessionContext.ModulePermission.ModifyProperties, "update properties") Then
+                Return False
+            End If
         End If
         Dim conn As MySqlConnection = Nothing
         Try
@@ -7663,8 +7667,12 @@ Public Class DatabaseConnection
     ''' Delete property (with validation)
     ''' </summary>
     Public Shared Function DeleteProperty(propertyID As Integer) As Boolean
-        If Not DemandPermission(SessionContext.ModulePermission.ModifyProperties, "delete properties") Then
-            Return False
+        ' SuperAdmin and Admin bypass all restrictions
+        Dim isSuperAdminOrAdmin As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin()
+        If Not isSuperAdminOrAdmin Then
+            If Not DemandPermission(SessionContext.ModulePermission.ModifyProperties, "delete properties") Then
+                Return False
+            End If
         End If
         Dim conn As MySqlConnection = Nothing
         Try
@@ -7862,6 +7870,48 @@ Public Class DatabaseConnection
             End If
         End Try
         Return False
+    End Function
+
+    ''' <summary>
+    ''' Assign property to an employee and department
+    ''' No restrictions for SuperAdmin and Admin
+    ''' </summary>
+    Public Shared Function AssignPropertyToEmployee(propertyID As Integer, Optional employeeID As Integer? = Nothing, Optional departmentID As Integer? = Nothing) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            Dim query As String = "UPDATE properties SET assignedTo = @employeeID, departmentId = @departmentID, " &
+                                 "status = 'Assigned', updatedAt = NOW() " &
+                                 "WHERE propertyId = @propertyID"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@propertyID", propertyID)
+                cmd.Parameters.AddWithValue("@employeeID", If(employeeID.HasValue, employeeID.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+                If result > 0 Then
+                    System.Diagnostics.Debug.WriteLine("[v0] Property Assigned Successfully - ID: " & propertyID)
+                    Return True
+                Else
+                    Return False
+                End If
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] AssignPropertyToEmployee Exception: " & ex.Message)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch ex As Exception
+                End Try
+            End If
+        End Try
     End Function
 
     ''' <summary>
