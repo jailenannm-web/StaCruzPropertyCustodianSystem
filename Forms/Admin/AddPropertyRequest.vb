@@ -78,12 +78,38 @@ Public Class AddPropertyRequest
             ' Get department ID if provided
             Dim deptID As Integer? = Nothing
             If department IsNot Nothing Then
-                Dim parsedDeptID As Integer = 0
-                If department.SelectedValue IsNot Nothing AndAlso Integer.TryParse(department.SelectedValue.ToString(), parsedDeptID) Then
-                    deptID = parsedDeptID
-                ElseIf Integer.TryParse(department.Text.Trim(), parsedDeptID) Then
-                    deptID = parsedDeptID
-                End If
+                Try
+                    If department.SelectedValue IsNot Nothing Then
+                        Dim selectedValue As Object = department.SelectedValue
+                        Dim parsedDeptID As Integer = 0
+                        If Integer.TryParse(selectedValue.ToString(), parsedDeptID) Then
+                            deptID = parsedDeptID
+                        End If
+                    ElseIf Not String.IsNullOrWhiteSpace(department.Text) Then
+                        ' Try to find department by name
+                        Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
+                        If deptTable IsNot Nothing Then
+                            For Each row As DataRow In deptTable.Rows
+                                Dim deptName As String = ""
+                                If deptTable.Columns.Contains("department_name") Then
+                                    deptName = row("department_name").ToString()
+                                    If deptName.Equals(department.Text.Trim(), StringComparison.OrdinalIgnoreCase) Then
+                                        deptID = Convert.ToInt32(row("department_id"))
+                                        Exit For
+                                    End If
+                                ElseIf deptTable.Columns.Contains("departmentName") Then
+                                    deptName = row("departmentName").ToString()
+                                    If deptName.Equals(department.Text.Trim(), StringComparison.OrdinalIgnoreCase) Then
+                                        deptID = Convert.ToInt32(row("departmentId"))
+                                        Exit For
+                                    End If
+                                End If
+                            Next
+                        End If
+                    End If
+                Catch ex As Exception
+                    System.Diagnostics.Debug.WriteLine("Error parsing department ID: " & ex.Message)
+                End Try
             End If
 
             ' Ensure purpose is not empty
@@ -98,7 +124,7 @@ Public Class AddPropertyRequest
             Dim itemNameText As String = itemName.Text.Trim()
             If String.IsNullOrWhiteSpace(itemNameText) Then
                 MessageBox.Show("Please enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                itemName.Focus()
+                If itemName IsNot Nothing Then itemName.Focus()
                 Return
             End If
 

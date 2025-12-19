@@ -27,11 +27,7 @@ Partial Class AddSupplyRequest
         Me.sqr_department_id = New System.Windows.Forms.Label()
         Me.sqr_employeeID = New System.Windows.Forms.Label()
         Me.sqr_request_id = New System.Windows.Forms.Label()
-        Me.purpose = New System.Windows.Forms.TextBox()
-        Me.description = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.unit = New System.Windows.Forms.TextBox()
-        Me.quantityRequested = New System.Windows.Forms.TextBox()
         Me.approved_by = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.position = New System.Windows.Forms.TextBox()
@@ -40,6 +36,7 @@ Partial Class AddSupplyRequest
         Me.Label1 = New System.Windows.Forms.Label()
         Me.itemName = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.department = New System.Windows.Forms.ComboBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -47,11 +44,15 @@ Partial Class AddSupplyRequest
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
-        Me.department = New System.Windows.Forms.ComboBox()
+        Me.unit = New System.Windows.Forms.ComboBox()
+        Me.quantityRequested = New System.Windows.Forms.NumericUpDown()
+        Me.purpose = New System.Windows.Forms.TextBox()
+        Me.description = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.RoundedPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.RoundedPanel2.SuspendLayout()
+        CType(Me.quantityRequested, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'instructions
@@ -116,31 +117,6 @@ Partial Class AddSupplyRequest
         Me.sqr_request_id.TabIndex = 58
         Me.sqr_request_id.Text = "Name of Requester"
         '
-        'purpose
-        '
-        Me.purpose.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.purpose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.purpose.Location = New System.Drawing.Point(207, 197)
-        Me.purpose.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.purpose.Multiline = True
-        Me.purpose.Name = "purpose"
-        Me.purpose.Size = New System.Drawing.Size(288, 158)
-        Me.purpose.TabIndex = 93
-        '
-        'description
-        '
-        Me.description.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.description.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.description.Location = New System.Drawing.Point(207, 52)
-        Me.description.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.description.Name = "description"
-        Me.description.Size = New System.Drawing.Size(291, 24)
-        Me.description.TabIndex = 92
-        '
         'Label3
         '
         Me.Label3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -153,30 +129,6 @@ Partial Class AddSupplyRequest
         Me.Label3.Size = New System.Drawing.Size(83, 18)
         Me.Label3.TabIndex = 91
         Me.Label3.Text = "Description"
-        '
-        'unit
-        '
-        Me.unit.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.unit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.unit.Location = New System.Drawing.Point(207, 144)
-        Me.unit.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.unit.Name = "unit"
-        Me.unit.Size = New System.Drawing.Size(291, 24)
-        Me.unit.TabIndex = 89
-        '
-        'quantityRequested
-        '
-        Me.quantityRequested.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.quantityRequested.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.quantityRequested.Location = New System.Drawing.Point(207, 91)
-        Me.quantityRequested.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.quantityRequested.Name = "quantityRequested"
-        Me.quantityRequested.Size = New System.Drawing.Size(291, 24)
-        Me.quantityRequested.TabIndex = 88
         '
         'approved_by
         '
@@ -287,6 +239,15 @@ Partial Class AddSupplyRequest
         Me.Panel1.Size = New System.Drawing.Size(553, 415)
         Me.Panel1.TabIndex = 64
         '
+        'department
+        '
+        Me.department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.department.FormattingEnabled = True
+        Me.department.Location = New System.Drawing.Point(223, 151)
+        Me.department.Name = "department"
+        Me.department.Size = New System.Drawing.Size(288, 26)
+        Me.department.TabIndex = 128
+        '
         'DateTimePicker1
         '
         Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
@@ -313,11 +274,11 @@ Partial Class AddSupplyRequest
         Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.unit)
+        Me.Panel2.Controls.Add(Me.quantityRequested)
         Me.Panel2.Controls.Add(Me.purpose)
         Me.Panel2.Controls.Add(Me.description)
         Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.unit)
-        Me.Panel2.Controls.Add(Me.quantityRequested)
         Me.Panel2.Controls.Add(Me.approved_by)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label1)
@@ -382,14 +343,50 @@ Partial Class AddSupplyRequest
         Me.admin_label_DepartmentManagement.TabIndex = 156
         Me.admin_label_DepartmentManagement.Text = "Supply Request Form"
         '
-        'department
+        'unit
         '
-        Me.department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.department.FormattingEnabled = True
-        Me.department.Location = New System.Drawing.Point(223, 151)
-        Me.department.Name = "department"
-        Me.department.Size = New System.Drawing.Size(288, 26)
-        Me.department.TabIndex = 128
+        Me.unit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.unit.FormattingEnabled = True
+        Me.unit.Location = New System.Drawing.Point(177, 145)
+        Me.unit.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.unit.Name = "unit"
+        Me.unit.Size = New System.Drawing.Size(291, 26)
+        Me.unit.TabIndex = 99
+        '
+        'quantityRequested
+        '
+        Me.quantityRequested.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.quantityRequested.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.quantityRequested.Location = New System.Drawing.Point(177, 97)
+        Me.quantityRequested.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.quantityRequested.Name = "quantityRequested"
+        Me.quantityRequested.Size = New System.Drawing.Size(291, 24)
+        Me.quantityRequested.TabIndex = 98
+        '
+        'purpose
+        '
+        Me.purpose.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.purpose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.purpose.Location = New System.Drawing.Point(177, 198)
+        Me.purpose.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.purpose.Multiline = True
+        Me.purpose.Name = "purpose"
+        Me.purpose.Size = New System.Drawing.Size(288, 158)
+        Me.purpose.TabIndex = 97
+        '
+        'description
+        '
+        Me.description.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.description.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.description.Location = New System.Drawing.Point(177, 53)
+        Me.description.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.description.Name = "description"
+        Me.description.Size = New System.Drawing.Size(291, 24)
+        Me.description.TabIndex = 96
         '
         'AddSupplyRequest
         '
@@ -409,6 +406,7 @@ Partial Class AddSupplyRequest
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.RoundedPanel2.ResumeLayout(False)
+        CType(Me.quantityRequested, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -419,11 +417,7 @@ Partial Class AddSupplyRequest
     Friend WithEvents sqr_department_id As System.Windows.Forms.Label
     Friend WithEvents sqr_employeeID As System.Windows.Forms.Label
     Friend WithEvents sqr_request_id As System.Windows.Forms.Label
-    Friend WithEvents purpose As System.Windows.Forms.TextBox
-    Friend WithEvents description As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents unit As System.Windows.Forms.TextBox
-    Friend WithEvents quantityRequested As System.Windows.Forms.TextBox
     Friend WithEvents approved_by As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents position As System.Windows.Forms.TextBox
@@ -440,4 +434,8 @@ Partial Class AddSupplyRequest
     Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents department As System.Windows.Forms.ComboBox
+    Friend WithEvents unit As System.Windows.Forms.ComboBox
+    Friend WithEvents quantityRequested As System.Windows.Forms.NumericUpDown
+    Friend WithEvents purpose As System.Windows.Forms.TextBox
+    Friend WithEvents description As System.Windows.Forms.TextBox
 End Class

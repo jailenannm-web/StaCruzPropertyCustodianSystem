@@ -288,8 +288,12 @@ Public Class SupplyInventory
                 Dim selectedRow As DataGridViewRow = propertyManagementGrid.Rows(e.RowIndex)
                 
                 ' Column order: supplyID (0), itemName (1), category (2), description (3), unitOfMeasure (4), quantity (5), location (6), stockStatus (7)
-                Dim itemName As String = If(selectedRow.Cells.Count > 1 AndAlso selectedRow.Cells(1).Value IsNot Nothing, selectedRow.Cells(1).Value.ToString(), "")
+                Dim itemNameValue As String = If(selectedRow.Cells.Count > 1 AndAlso selectedRow.Cells(1).Value IsNot Nothing, selectedRow.Cells(1).Value.ToString(), "")
+                Dim categoryValue As String = If(selectedRow.Cells.Count > 2 AndAlso selectedRow.Cells(2).Value IsNot Nothing, selectedRow.Cells(2).Value.ToString(), "")
                 Dim itemDescription As String = If(selectedRow.Cells.Count > 3 AndAlso selectedRow.Cells(3).Value IsNot Nothing, selectedRow.Cells(3).Value.ToString(), "")
+                Dim unitOfMeasureValue As String = If(selectedRow.Cells.Count > 4 AndAlso selectedRow.Cells(4).Value IsNot Nothing, selectedRow.Cells(4).Value.ToString(), "")
+                Dim availableQuantity As String = If(selectedRow.Cells.Count > 5 AndAlso selectedRow.Cells(5).Value IsNot Nothing, selectedRow.Cells(5).Value.ToString(), "0")
+                Dim locationValue As String = If(selectedRow.Cells.Count > 6 AndAlso selectedRow.Cells(6).Value IsNot Nothing, selectedRow.Cells(6).Value.ToString(), "")
                 
                 ' Get staff profile for auto-fill
                 Dim requesterName As String = ""
@@ -347,10 +351,10 @@ Public Class SupplyInventory
                     End Try
                 End If
                 
-                ' Navigate to request form with pre-filled data
+                ' Navigate to request form with pre-filled data - pass all required fields
                 Dim parentDashboard = TryCast(Me.ParentForm, StaffDashboard)
                 If parentDashboard IsNot Nothing Then
-                    Dim requestForm As New AddSupplyRequest(itemName, itemDescription, requesterName, position, department, currentDate)
+                    Dim requestForm As New AddSupplyRequest(itemNameValue, itemDescription, categoryValue, availableQuantity, locationValue, unitOfMeasureValue, requesterName, position, department, currentDate)
                     parentDashboard.LoadUserControl(requestForm)
                 End If
             Catch ex As Exception

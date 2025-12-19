@@ -192,5 +192,23 @@ Public Class StaffLogin
         cfg.Show()
     End Sub
 
+    ' Register link click - navigate to registration form
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+        Dim registerForm As New StaffRegister()
+        registerForm.Show()
+        Me.Hide()
+    End Sub
+
+    ' Show/Hide password toggle for login form
+    Private Sub btn_ShowPasswordLogin_Click(sender As Object, e As EventArgs) Handles btn_ShowPasswordLogin.Click
+        If txb_Password.PasswordChar = "*"c Then
+            txb_Password.PasswordChar = Char.MinValue
+            btn_ShowPasswordLogin.Text = "Hide"
+        Else
+            txb_Password.PasswordChar = "*"c
+            btn_ShowPasswordLogin.Text = "Show"
+        End If
+    End Sub
+
 
 End Class

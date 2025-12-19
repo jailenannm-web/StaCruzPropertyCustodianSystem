@@ -33,12 +33,12 @@ Partial Class StaffRegister
         Me.txb_FirstName = New System.Windows.Forms.TextBox()
         Me.txb_MiddleName = New System.Windows.Forms.TextBox()
         Me.txb_LastName = New System.Windows.Forms.TextBox()
-        Me.txb_Suffix = New System.Windows.Forms.TextBox()
+        Me.cb_Suffix = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txb_DepartmentID = New System.Windows.Forms.TextBox()
+        Me.cb_Department = New System.Windows.Forms.ComboBox()
         Me.btn_Cancel = New System.Windows.Forms.Button()
-        Me.btn_Login = New System.Windows.Forms.Button()
+        Me.btn_Register = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -57,6 +57,7 @@ Partial Class StaffRegister
         Me.txb_UserID = New System.Windows.Forms.TextBox()
         Me.txb_Position = New System.Windows.Forms.TextBox()
         Me.Txb_Password = New System.Windows.Forms.TextBox()
+        Me.btn_ShowPassword = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -129,7 +130,7 @@ Partial Class StaffRegister
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(254, 42)
         Me.Label6.TabIndex = 5
-        Me.Label6.Text = "Department I.D"
+        Me.Label6.Text = "Department"
         '
         'txb_FirstName
         '
@@ -164,16 +165,16 @@ Partial Class StaffRegister
         Me.txb_LastName.Size = New System.Drawing.Size(421, 42)
         Me.txb_LastName.TabIndex = 8
         '
-        'txb_Suffix
+        'cb_Suffix
         '
-        Me.txb_Suffix.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_Suffix.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_Suffix.Location = New System.Drawing.Point(389, 656)
-        Me.txb_Suffix.Margin = New System.Windows.Forms.Padding(4)
-        Me.txb_Suffix.Multiline = True
-        Me.txb_Suffix.Name = "txb_Suffix"
-        Me.txb_Suffix.Size = New System.Drawing.Size(421, 42)
-        Me.txb_Suffix.TabIndex = 9
+        Me.cb_Suffix.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb_Suffix.FormattingEnabled = True
+        Me.cb_Suffix.Items.AddRange(New Object() {"", "Jr.", "Sr.", "II", "III", "IV"})
+        Me.cb_Suffix.Location = New System.Drawing.Point(389, 656)
+        Me.cb_Suffix.Margin = New System.Windows.Forms.Padding(4)
+        Me.cb_Suffix.Name = "cb_Suffix"
+        Me.cb_Suffix.Size = New System.Drawing.Size(421, 44)
+        Me.cb_Suffix.TabIndex = 9
         '
         'Label7
         '
@@ -199,16 +200,15 @@ Partial Class StaffRegister
         Me.Label8.TabIndex = 12
         Me.Label8.Text = "Last Name"
         '
-        'txb_DepartmentID
+        'cb_Department
         '
-        Me.txb_DepartmentID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txb_DepartmentID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_DepartmentID.Location = New System.Drawing.Point(386, 963)
-        Me.txb_DepartmentID.Margin = New System.Windows.Forms.Padding(4)
-        Me.txb_DepartmentID.Multiline = True
-        Me.txb_DepartmentID.Name = "txb_DepartmentID"
-        Me.txb_DepartmentID.Size = New System.Drawing.Size(421, 42)
-        Me.txb_DepartmentID.TabIndex = 13
+        Me.cb_Department.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb_Department.FormattingEnabled = True
+        Me.cb_Department.Location = New System.Drawing.Point(379, 866)
+        Me.cb_Department.Margin = New System.Windows.Forms.Padding(4)
+        Me.cb_Department.Name = "cb_Department"
+        Me.cb_Department.Size = New System.Drawing.Size(421, 44)
+        Me.cb_Department.TabIndex = 13
         '
         'btn_Cancel
         '
@@ -222,20 +222,20 @@ Partial Class StaffRegister
         Me.btn_Cancel.Text = "Cancel"
         Me.btn_Cancel.UseVisualStyleBackColor = True
         '
-        'btn_Login
+        'btn_Register
         '
-        Me.btn_Login.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Login.FlatAppearance.BorderSize = 0
-        Me.btn_Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_Login.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Login.ForeColor = System.Drawing.Color.Transparent
-        Me.btn_Login.Location = New System.Drawing.Point(1062, 1086)
-        Me.btn_Login.Margin = New System.Windows.Forms.Padding(4)
-        Me.btn_Login.Name = "btn_Login"
-        Me.btn_Login.Size = New System.Drawing.Size(227, 58)
-        Me.btn_Login.TabIndex = 16
-        Me.btn_Login.Text = "Login"
-        Me.btn_Login.UseVisualStyleBackColor = False
+        Me.btn_Register.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Register.FlatAppearance.BorderSize = 0
+        Me.btn_Register.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_Register.Font = New System.Drawing.Font("Poppins", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Register.ForeColor = System.Drawing.Color.White
+        Me.btn_Register.Location = New System.Drawing.Point(1399, 1086)
+        Me.btn_Register.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Register.Name = "btn_Register"
+        Me.btn_Register.Size = New System.Drawing.Size(227, 58)
+        Me.btn_Register.TabIndex = 50
+        Me.btn_Register.Text = "Register"
+        Me.btn_Register.UseVisualStyleBackColor = False
         '
         'Label15
         '
@@ -335,7 +335,7 @@ Partial Class StaffRegister
         '
         Me.txb_EmployeeID.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txb_EmployeeID.Font = New System.Drawing.Font("Poppins Medium", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txb_EmployeeID.Location = New System.Drawing.Point(386, 868)
+        Me.txb_EmployeeID.Location = New System.Drawing.Point(403, 972)
         Me.txb_EmployeeID.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_EmployeeID.Multiline = True
         Me.txb_EmployeeID.Name = "txb_EmployeeID"
@@ -440,8 +440,24 @@ Partial Class StaffRegister
         Me.Txb_Password.Margin = New System.Windows.Forms.Padding(4)
         Me.Txb_Password.Multiline = True
         Me.Txb_Password.Name = "Txb_Password"
+        Me.Txb_Password.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.Txb_Password.Size = New System.Drawing.Size(421, 42)
         Me.Txb_Password.TabIndex = 49
+        '
+        'btn_ShowPassword
+        '
+        Me.btn_ShowPassword.BackColor = System.Drawing.Color.Transparent
+        Me.btn_ShowPassword.FlatAppearance.BorderSize = 0
+        Me.btn_ShowPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_ShowPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_ShowPassword.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_ShowPassword.Location = New System.Drawing.Point(1815, 553)
+        Me.btn_ShowPassword.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_ShowPassword.Name = "btn_ShowPassword"
+        Me.btn_ShowPassword.Size = New System.Drawing.Size(105, 42)
+        Me.btn_ShowPassword.TabIndex = 51
+        Me.btn_ShowPassword.Text = "Show"
+        Me.btn_ShowPassword.UseVisualStyleBackColor = False
         '
         'StaffRegister
         '
@@ -452,6 +468,7 @@ Partial Class StaffRegister
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1942, 1222)
         Me.Controls.Add(Me.Txb_Password)
+        Me.Controls.Add(Me.btn_ShowPassword)
         Me.Controls.Add(Me.txb_Position)
         Me.Controls.Add(Me.txb_UserID)
         Me.Controls.Add(Me.cb_Barangay)
@@ -471,17 +488,17 @@ Partial Class StaffRegister
         Me.Controls.Add(Me.txb_MiddleName)
         Me.Controls.Add(Me.txb_LastName)
         Me.Controls.Add(Me.txb_UserName)
-        Me.Controls.Add(Me.txb_Suffix)
+        Me.Controls.Add(Me.cb_Suffix)
         Me.Controls.Add(Me.txb_Email)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.txb_DepartmentID)
+        Me.Controls.Add(Me.cb_Department)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.btn_Cancel)
         Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.btn_Login)
+        Me.Controls.Add(Me.btn_Register)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label15)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -504,12 +521,11 @@ Partial Class StaffRegister
     Friend WithEvents txb_FirstName As TextBox
     Friend WithEvents txb_MiddleName As TextBox
     Friend WithEvents txb_LastName As TextBox
-    Friend WithEvents txb_Suffix As TextBox
+    Friend WithEvents cb_Suffix As ComboBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents txb_DepartmentID As TextBox
+    Friend WithEvents cb_Department As ComboBox
     Friend WithEvents btn_Cancel As Button
-    Friend WithEvents btn_Login As Button
     Friend WithEvents Label15 As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
@@ -528,4 +544,5 @@ Partial Class StaffRegister
     Friend WithEvents txb_UserID As TextBox
     Friend WithEvents txb_Position As TextBox
     Friend WithEvents Txb_Password As TextBox
+    Friend WithEvents btn_ShowPassword As Button
 End Class

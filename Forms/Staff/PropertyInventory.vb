@@ -25,10 +25,10 @@ Public Class PropertyInventory
     End Sub
     
     Private Sub InitializeFilters()
-        ' Initialize status filter
+        ' Initialize condition filter (replaced Status with Condition)
         pm_cbobx_status.Items.Clear()
-        pm_cbobx_status.Items.Add("All Status")
-        pm_cbobx_status.Items.AddRange(New String() {"Active", "For Disposal", "Lost", "Borrowed"})
+        pm_cbobx_status.Items.Add("All Conditions")
+        pm_cbobx_status.Items.AddRange(New String() {"Good", "Damaged", "Needs Repair"})
         pm_cbobx_status.SelectedIndex = 0
         AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
         
@@ -93,7 +93,7 @@ Public Class PropertyInventory
         Try
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
             Dim categoryFilter As String = If(pm_cbobx_categ.SelectedIndex > 0, pm_cbobx_categ.SelectedItem.ToString(), String.Empty)
-            Dim statusFilterValue As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
+            Dim conditionFilterValue As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
             
             Dim filteredRows() As DataRow = originalData.AsEnumerable().Where(Function(row)
                 ' Apply category filter
@@ -102,10 +102,10 @@ Public Class PropertyInventory
                     If Not cat.Equals(categoryFilter, StringComparison.OrdinalIgnoreCase) Then Return False
                 End If
                 
-                ' Apply status filter - use statusFilterValue to avoid conflict with Designer field 'status'
-                If Not String.IsNullOrEmpty(statusFilterValue) Then
-                    Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not Convert.IsDBNull(row("status")), row("status").ToString(), String.Empty)
-                    If Not rowStatus.Equals(statusFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
+                ' Apply condition filter (replaced status filter)
+                If Not String.IsNullOrEmpty(conditionFilterValue) Then
+                    Dim rowCondition As String = If(row.Table.Columns.Contains("condition") AndAlso Not Convert.IsDBNull(row("condition")), row("condition").ToString(), String.Empty)
+                    If Not rowCondition.Equals(conditionFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
                 End If
                 
                 ' Apply search filter
@@ -176,21 +176,31 @@ Public Class PropertyInventory
         Try
             ' Get filters
             Dim categoryFilter As String = ""
-            Dim statusFilter As String = ""
+            Dim conditionFilter As String = ""
             
             If pm_cbobx_categ.SelectedIndex > 0 Then
                 categoryFilter = pm_cbobx_categ.SelectedItem.ToString()
             End If
             If pm_cbobx_status.SelectedIndex > 0 Then
-                statusFilter = pm_cbobx_status.SelectedItem.ToString()
+                conditionFilter = pm_cbobx_status.SelectedItem.ToString()
             End If
             
-            ' Load all available properties from database with filters
-            Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, "", categoryFilter, Nothing, statusFilter)
+            ' Load all available properties from database with filters (condition replaces status)
+            Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, "", categoryFilter, Nothing, "")
+            ' Filter by condition in code since GetAllProperties doesn't support condition filter
             
             If dt Is Nothing Then
                 MessageBox.Show("Unable to connect to the database. Please ensure MySQL is running and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
+            End If
+            
+            ' Apply condition filter if specified
+            If Not String.IsNullOrEmpty(conditionFilter) Then
+                Dim conditionRows = dt.AsEnumerable().Where(Function(row)
+                    Dim rowCondition As String = If(row.Table.Columns.Contains("condition") AndAlso Not Convert.IsDBNull(row("condition")), row("condition").ToString(), String.Empty)
+                    Return rowCondition.Equals(conditionFilter, StringComparison.OrdinalIgnoreCase)
+                End Function).ToArray()
+                dt = conditionRows.CopyToDataTable()
             End If
             
             ' Store original data for search
@@ -249,6 +259,9 @@ Public Class PropertyInventory
                     propertyManagementGrid.Rows.Add(propertyNo, itemName, category, description, location, department, condition, propertyStatus, quantity)
                 Next
             End If
+            
+            ' Update total properties count after populating grid
+            UpdateTotalPropertiesCount(propertyManagementGrid.Rows.Count)
             
             ' Auto-size columns
             propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
@@ -355,5 +368,30 @@ Public Class PropertyInventory
                 MessageBox.Show("Error loading request form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
+    End Sub
+    
+    Private Sub UpdateTotalPropertiesCount(count As Integer)
+        ' Find or create total count label
+        Dim totalLabel As Label = Nothing
+        For Each ctrl As Control In Me.Controls
+            If TypeOf ctrl Is Label AndAlso ctrl.Name = "lblTotalProperties" Then
+                totalLabel = CType(ctrl, Label)
+                Exit For
+            End If
+        Next
+        
+        If totalLabel Is Nothing Then
+            ' Create label if it doesn't exist
+            totalLabel = New System.Windows.Forms.Label()
+            totalLabel.Name = "lblTotalProperties"
+            totalLabel.AutoSize = True
+            totalLabel.Font = New System.Drawing.Font("Poppins", 10.0F, System.Drawing.FontStyle.Bold)
+            totalLabel.ForeColor = System.Drawing.Color.FromArgb(27, 60, 83)
+            totalLabel.Location = New System.Drawing.Point(Label3.Left, Label3.Bottom + 10)
+            Me.Controls.Add(totalLabel)
+            totalLabel.BringToFront()
+        End If
+        
+        totalLabel.Text = "Total Properties: " & count.ToString()
     End Sub
 End Class

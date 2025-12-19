@@ -38,6 +38,7 @@ Partial Class StaffLogin
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.btnSecretConfig = New System.Windows.Forms.Button()
+        Me.btn_ShowPasswordLogin = New System.Windows.Forms.Button()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -121,14 +122,15 @@ Partial Class StaffLogin
         'Label5
         '
         Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.Label5.Location = New System.Drawing.Point(708, 876)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(382, 28)
         Me.Label5.TabIndex = 8
-        Me.Label5.Text = "Doesn’t have an account? Register here"
+        Me.Label5.Text = "Doesn't have an account? Register here"
         '
         'Label6
         '
@@ -185,6 +187,21 @@ Partial Class StaffLogin
         Me.btnSecretConfig.Text = "Button1"
         Me.btnSecretConfig.UseVisualStyleBackColor = True
         '
+        'btn_ShowPasswordLogin
+        '
+        Me.btn_ShowPasswordLogin.BackColor = System.Drawing.Color.Transparent
+        Me.btn_ShowPasswordLogin.FlatAppearance.BorderSize = 0
+        Me.btn_ShowPasswordLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_ShowPasswordLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_ShowPasswordLogin.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_ShowPasswordLogin.Location = New System.Drawing.Point(1224, 820)
+        Me.btn_ShowPasswordLogin.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_ShowPasswordLogin.Name = "btn_ShowPasswordLogin"
+        Me.btn_ShowPasswordLogin.Size = New System.Drawing.Size(100, 52)
+        Me.btn_ShowPasswordLogin.TabIndex = 16
+        Me.btn_ShowPasswordLogin.Text = "Show"
+        Me.btn_ShowPasswordLogin.UseVisualStyleBackColor = False
+        '
         'StaffLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -193,6 +210,7 @@ Partial Class StaffLogin
         Me.BackgroundImage = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources._Presentation
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1924, 1102)
+        Me.Controls.Add(Me.btn_ShowPasswordLogin)
         Me.Controls.Add(Me.btnSecretConfig)
         Me.Controls.Add(Me.PictureBox4)
         Me.Controls.Add(Me.PictureBox3)
@@ -230,4 +248,5 @@ Partial Class StaffLogin
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents btnSecretConfig As Button
+    Friend WithEvents btn_ShowPasswordLogin As Button
 End Class

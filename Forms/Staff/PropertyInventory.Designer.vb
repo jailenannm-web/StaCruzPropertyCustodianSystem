@@ -196,7 +196,7 @@ Partial Class PropertyInventory
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
         Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
         Me.pm_cbobx_status.TabIndex = 183
-        Me.pm_cbobx_status.Text = "Status"
+        Me.pm_cbobx_status.Text = "Condition"
         '
         'pm_cbobx_categ
         '

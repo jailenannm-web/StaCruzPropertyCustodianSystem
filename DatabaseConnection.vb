@@ -1753,7 +1753,13 @@ Public Class DatabaseConnection
     Public Shared Function RegisterStaff(firstName As String, lastName As String, email As String,
                                          contactNumber As String, address As String, departmentID As String,
                                          username As String, password As String,
-                                         Optional position As String = "Staff") As Boolean
+                                         Optional position As String = "Staff",
+                                         Optional middleName As String = Nothing,
+                                         Optional suffix As String = Nothing,
+                                         Optional employeeId As String = Nothing,
+                                         Optional province As String = Nothing,
+                                         Optional municipal As String = Nothing,
+                                         Optional barangay As String = Nothing) As Boolean
         Dim conn As MySqlConnection = Nothing
         Try
             conn = GetConnection()
@@ -1846,27 +1852,44 @@ Public Class DatabaseConnection
 
             ' Force role to "Staff" for all registrations
             ' Insert into users table (same table used for SuperAdmin and Admin)
-            ' Parse departmentID safely
+            ' Parse departmentID safely and validate it exists
             Dim deptIDValue As Object = DBNull.Value
             If Not String.IsNullOrWhiteSpace(departmentID) Then
                 Dim parsedDeptID As Integer
                 If Integer.TryParse(departmentID.Trim(), parsedDeptID) Then
-                    deptIDValue = parsedDeptID
+                    ' Validate department exists
+                    Dim checkDeptQuery As String = "SELECT COUNT(*) FROM departments WHERE departmentId = @deptID AND status = 'Active'"
+                    Using checkCmd As New MySqlCommand(checkDeptQuery, conn)
+                        checkCmd.Parameters.AddWithValue("@deptID", parsedDeptID)
+                        Dim deptCount As Integer = CInt(checkCmd.ExecuteScalar())
+                        If deptCount > 0 Then
+                            deptIDValue = parsedDeptID
+                        Else
+                            MessageBox.Show("Selected department does not exist or is inactive. Please select a valid department.", "Invalid Department", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            Return False
+                        End If
+                    End Using
                 End If
             End If
 
-            Dim insertQuery As String = "INSERT INTO users (firstName, lastName, email, contactNumber, departmentId, username, passwordEncrypted, role, status, position, createdAt) " &
-                                       "VALUES (@firstName, @lastName, @email, @contactNumber, @departmentID, @username, @password, 'Staff', 'Active', @position, NOW())"
+            Dim insertQuery As String = "INSERT INTO users (firstName, middleName, lastName, suffix, email, contactNumber, departmentId, employeeId, username, passwordEncrypted, role, status, position, province, municipal, barangay, createdAt) " &
+                                       "VALUES (@firstName, @middleName, @lastName, @suffix, @email, @contactNumber, @departmentID, @employeeId, @username, @password, 'Staff', 'Active', @position, @province, @municipal, @barangay, NOW())"
 
             Using cmd As New MySqlCommand(insertQuery, conn)
                 cmd.Parameters.AddWithValue("@firstName", firstName.Trim())
+                cmd.Parameters.AddWithValue("@middleName", If(String.IsNullOrWhiteSpace(middleName), DBNull.Value, middleName.Trim()))
                 cmd.Parameters.AddWithValue("@lastName", lastName.Trim())
+                cmd.Parameters.AddWithValue("@suffix", If(String.IsNullOrWhiteSpace(suffix), DBNull.Value, suffix.Trim()))
                 cmd.Parameters.AddWithValue("@email", If(String.IsNullOrWhiteSpace(email), DBNull.Value, email.Trim()))
                 cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrWhiteSpace(contactNumber), DBNull.Value, contactNumber.Trim()))
                 cmd.Parameters.AddWithValue("@departmentID", deptIDValue)
+                cmd.Parameters.AddWithValue("@employeeId", If(String.IsNullOrWhiteSpace(employeeId), DBNull.Value, employeeId.Trim()))
                 cmd.Parameters.AddWithValue("@username", username.Trim())
                 cmd.Parameters.AddWithValue("@password", hashedPassword)
                 cmd.Parameters.AddWithValue("@position", If(String.IsNullOrWhiteSpace(position), "Staff", position.Trim()))
+                cmd.Parameters.AddWithValue("@province", If(String.IsNullOrWhiteSpace(province), DBNull.Value, province.Trim()))
+                cmd.Parameters.AddWithValue("@municipal", If(String.IsNullOrWhiteSpace(municipal), DBNull.Value, municipal.Trim()))
+                cmd.Parameters.AddWithValue("@barangay", If(String.IsNullOrWhiteSpace(barangay), DBNull.Value, barangay.Trim()))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -2863,9 +2886,10 @@ Public Class DatabaseConnection
     Public Shared Function SubmitPropertyRequest(userID As Integer, itemName As String, purpose As String,
                                                  quantity As Integer, Optional departmentID As Integer? = Nothing,
                                                  Optional position As String = "", Optional requesterName As String = "") As Boolean
-        If Not DemandPermission(SessionContext.ModulePermission.ModifyRequests, "submit property requests") Then
-            Return False
-        End If
+        ' Allow Staff users to submit requests - remove permission check for Staff role
+        ' If Not DemandPermission(SessionContext.ModulePermission.ModifyRequests, "submit property requests") Then
+        '     Return False
+        ' End If
         Dim conn As MySqlConnection = Nothing
         Try
             conn = GetConnection()
