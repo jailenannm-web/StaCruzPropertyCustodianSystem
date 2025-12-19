@@ -16,20 +16,10 @@ Public Class UC_MaintenanceManagement
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
-        ApplyRoleRestrictions()
+
     End Sub
 
-    Private Sub ApplyRoleRestrictions()
-        ' Super Admin, Admin, and Custodian have full access - ALL buttons enabled
-        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
-        If btnApprove IsNot Nothing Then btnApprove.Enabled = hasFullAccess
-        If btnAssign IsNot Nothing Then btnAssign.Enabled = hasFullAccess
-        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess
-        If btnReject IsNot Nothing Then btnReject.Enabled = hasFullAccess
 
-        If btnRefresh IsNot Nothing Then btnRefresh.Enabled = True ' Always enabled
-        If btnGenerateMaintenance IsNot Nothing Then btnGenerateMaintenance.Enabled = hasFullAccess
-    End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 

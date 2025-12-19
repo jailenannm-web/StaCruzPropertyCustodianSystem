@@ -32,12 +32,16 @@ Partial Public Class MaintenanceRequest
             DataGridView1.Rows.Clear()
 
             ' Populate DataGridView
+            ' Note: Column order must match the designer column order:
+            ' PropertID (Property/Item Name), PropertyName (Serial No.), Category (Location), 
+            ' Description (Department), SerialNumber (Condition Before), AcquisitionDate (Type of Issue),
+            ' AcquisitionCost (Problem Description), Supplier (Maintenance Date), ConditionStatus (Status)
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
                     Try
                         Dim itemName As String = ""
                         Dim serialNo As String = ""
-                        Dim location As String = ""
+                        Dim locationValue As String = ""
                         Dim department As String = ""
                         Dim conditionBefore As String = ""
                         Dim typeOfIssue As String = ""
@@ -53,7 +57,7 @@ Partial Public Class MaintenanceRequest
                             serialNo = row("serialNumber").ToString()
                         End If
                         If dt.Columns.Contains("location") AndAlso Not IsDBNull(row("location")) Then
-                            location = row("location").ToString()
+                            locationValue = row("location").ToString()
                         End If
                         If dt.Columns.Contains("department") AndAlso Not IsDBNull(row("department")) Then
                             department = row("department").ToString()
@@ -86,7 +90,17 @@ Partial Public Class MaintenanceRequest
                             status = row("status").ToString()
                         End If
 
-                        DataGridView1.Rows.Add(itemName, serialNo, location, department, conditionBefore, typeOfIssue, problemDesc, maintenanceDate, status)
+                        ' Add data in the correct column order matching the designer:
+                        ' Column 0: PropertID (shows as "Property/Item Name") -> itemName
+                        ' Column 1: PropertyName (shows as "Serial No.") -> serialNo
+                        ' Column 2: Category (shows as "Location") -> locationValue
+                        ' Column 3: Description -> department
+                        ' Column 4: SerialNumber -> conditionBefore
+                        ' Column 5: AcquisitionDate -> typeOfIssue
+                        ' Column 6: AcquisitionCost -> problemDesc
+                        ' Column 7: Supplier -> maintenanceDate
+                        ' Column 8: ConditionStatus -> status
+                        DataGridView1.Rows.Add(itemName, serialNo, locationValue, department, conditionBefore, typeOfIssue, problemDesc, maintenanceDate, status)
                     Catch rowEx As Exception
                         System.Diagnostics.Debug.WriteLine("Error processing row in MaintenanceRequest: " & rowEx.Message)
                     End Try

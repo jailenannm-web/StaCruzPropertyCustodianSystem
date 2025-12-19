@@ -878,46 +878,77 @@ Public Class UC_PropertyManagement1
             
             ' Get property ID - try multiple methods
             Dim propertyID As Integer = 0
+            Dim debugInfo As String = ""
             
             ' Method 1: Try Tag (stored when rows are manually added)
-            If selectedRow.Tag IsNot Nothing AndAlso Integer.TryParse(selectedRow.Tag.ToString(), propertyID) AndAlso propertyID > 0 Then
-                ' Success - use this propertyID
-            Else
-                ' Method 2: Try DataSource binding
+            If selectedRow.Tag IsNot Nothing Then
+                debugInfo &= "Tag found: " & selectedRow.Tag.ToString() & "; "
+                If Integer.TryParse(selectedRow.Tag.ToString(), propertyID) AndAlso propertyID > 0 Then
+                    debugInfo &= "PropertyID from Tag: " & propertyID.ToString()
+                    System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] " & debugInfo)
+                End If
+            End If
+            
+            ' Method 2: Try cell value directly (propertyId column)
+            If propertyID <= 0 AndAlso propertyManagementGrid.Columns.Contains("propertyId") Then
+                Dim cellValue As Object = selectedRow.Cells("propertyId").Value
+                debugInfo &= "Cell(propertyId) value: " & If(cellValue IsNot Nothing, cellValue.ToString(), "Nothing") & "; "
+                If cellValue IsNot Nothing AndAlso Not IsDBNull(cellValue) Then
+                    If Integer.TryParse(cellValue.ToString(), propertyID) AndAlso propertyID > 0 Then
+                        debugInfo &= "PropertyID from cell: " & propertyID.ToString()
+                        System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] " & debugInfo)
+                    End If
+                End If
+            End If
+            
+            ' Method 3: Try first cell (if propertyId is first column)
+            If propertyID <= 0 AndAlso selectedRow.Cells.Count > 0 Then
+                Dim firstCell As Object = selectedRow.Cells(0).Value
+                debugInfo &= "Cell(0) value: " & If(firstCell IsNot Nothing, firstCell.ToString(), "Nothing") & "; "
+                If firstCell IsNot Nothing AndAlso Not IsDBNull(firstCell) Then
+                    If Integer.TryParse(firstCell.ToString(), propertyID) AndAlso propertyID > 0 Then
+                        debugInfo &= "PropertyID from first cell: " & propertyID.ToString()
+                        System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] " & debugInfo)
+                    End If
+                End If
+            End If
+            
+            ' Method 4: Try DataSource binding (if using data binding)
+            If propertyID <= 0 Then
                 Dim dt As DataTable = TryCast(propertyManagementGrid.DataSource, DataTable)
                 If dt IsNot Nothing AndAlso selectedRow.Index >= 0 AndAlso selectedRow.Index < dt.Rows.Count Then
                     Dim dataRow As DataRow = dt.Rows(selectedRow.Index)
                     If dt.Columns.Contains("propertyId") AndAlso Not IsDBNull(dataRow("propertyId")) Then
-                        Integer.TryParse(dataRow("propertyId").ToString(), propertyID)
-                    End If
-                End If
-                
-                ' Method 3: Try cell value directly
-                If propertyID <= 0 AndAlso propertyManagementGrid.Columns.Contains("propertyId") Then
-                    Dim cellValue As Object = selectedRow.Cells("propertyId").Value
-                    If cellValue IsNot Nothing AndAlso Not IsDBNull(cellValue) Then
-                        Integer.TryParse(cellValue.ToString(), propertyID)
-                    End If
-                End If
-                
-                ' Method 4: Try first visible cell if it's propertyId column
-                If propertyID <= 0 AndAlso selectedRow.Cells.Count > 0 Then
-                    Dim firstCell As Object = selectedRow.Cells(0).Value
-                    If firstCell IsNot Nothing AndAlso Not IsDBNull(firstCell) Then
-                        Integer.TryParse(firstCell.ToString(), propertyID)
+                        If Integer.TryParse(dataRow("propertyId").ToString(), propertyID) AndAlso propertyID > 0 Then
+                            debugInfo &= "PropertyID from DataSource: " & propertyID.ToString()
+                            System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] " & debugInfo)
+                        End If
                     End If
                 End If
             End If
 
             If propertyID <= 0 Then
-                MessageBox.Show("Unable to identify property. Please try selecting the property again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] Failed to get PropertyID. Debug info: " & debugInfo)
+                MessageBox.Show("Unable to identify property. Please try selecting the property again." & Environment.NewLine & "Debug: " & debugInfo, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
 
+            System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] Opening PropertyIssuance with PropertyID: " & propertyID.ToString())
+
+            ' Get propertyNumber if available
+            Dim propNumber As String = ""
+            If propertyManagementGrid.Columns.Contains("propertyNumber") Then
+                Dim cellVal = selectedRow.Cells("propertyNumber").Value
+                If cellVal IsNot Nothing AndAlso Not IsDBNull(cellVal) Then
+                    propNumber = cellVal.ToString()
+                End If
+            End If
+
             ' Open Property Issuance Slip with property data
-            Dim propertyIssuance As New PropertyIssuance(propertyID)
+            Dim propertyIssuance As New PropertyIssuance(propertyID, propNumber)
             propertyIssuance.ShowDialog()
         Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show("Error opening property slip: " & ex.Message & Environment.NewLine & "Stack Trace: " & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
@@ -963,8 +994,17 @@ Public Class UC_PropertyManagement1
             End If
 
             If propertyID > 0 Then
+                ' Get propertyNumber if available
+                Dim propNumber As String = ""
+                If propertyManagementGrid.Columns.Contains("propertyNumber") Then
+                    Dim cellVal = selectedRow.Cells("propertyNumber").Value
+                    If cellVal IsNot Nothing AndAlso Not IsDBNull(cellVal) Then
+                        propNumber = cellVal.ToString()
+                    End If
+                End If
+
                 ' Open Property Issuance Slip with property data
-                Dim propertyIssuance As New PropertyIssuance(propertyID)
+                Dim propertyIssuance As New PropertyIssuance(propertyID, propNumber)
                 propertyIssuance.ShowDialog()
             End If
         Catch ex As Exception

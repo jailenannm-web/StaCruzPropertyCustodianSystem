@@ -2,17 +2,22 @@
 Imports System.Data
 Imports System.Linq
 Imports System.Windows.Forms
+Imports System.IO
+Imports System.Text
 Imports Microsoft.VisualBasic
+Imports System.Collections.Generic
 
 Public Class PropertyIssuance
     Private propertyIssuanceTable As DataTable
     Private currentPropertyID As Integer = -1
+    Private currentPropertyNumber As String = ""
     Private currentPropertyData As DataRow = Nothing
 
-    ' Constructor to accept propertyID
-    Public Sub New(Optional propertyID As Integer = -1)
+    ' Constructor to accept propertyID and optional propertyNumber
+    Public Sub New(Optional propertyID As Integer = -1, Optional propertyNumber As String = "")
         InitializeComponent()
         currentPropertyID = propertyID
+        currentPropertyNumber = propertyNumber
     End Sub
 
     Private Sub PropertyIssuance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -21,8 +26,10 @@ Public Class PropertyIssuance
 
         ' Load property data if propertyID is provided
         If currentPropertyID > 0 Then
-            LoadPropertyData(currentPropertyID)
+            System.Diagnostics.Debug.WriteLine("[PropertyIssuance] Loading property ID: " & currentPropertyID.ToString() & " | propertyNumber: " & currentPropertyNumber)
+            LoadPropertyData(currentPropertyID, currentPropertyNumber)
         Else
+            System.Diagnostics.Debug.WriteLine("[PropertyIssuance] No property ID provided, loading default data")
             LoadPropertyIssuanceData()
         End If
     End Sub
@@ -76,13 +83,29 @@ Public Class PropertyIssuance
         End Try
     End Sub
 
-    Private Sub LoadPropertyData(propertyID As Integer)
+    Private Sub LoadPropertyData(propertyID As Integer, Optional propertyNumberValue As String = "")
         Try
-            currentPropertyData = DatabaseConnection.GetPropertyDetails(propertyID)
+            System.Diagnostics.Debug.WriteLine("[PropertyIssuance] GetPropertyDetails called with ID: " & propertyID.ToString() & " | propNumber: " & propertyNumberValue)
+            currentPropertyData = DatabaseConnection.GetPropertyDetails(propertyID, propertyNumberValue)
+
             If currentPropertyData Is Nothing Then
-                MessageBox.Show("Property not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Diagnostics.Debug.WriteLine("[PropertyIssuance] GetPropertyDetails returned Nothing. Trying fallback values.")
+                ' Show minimal info using provided IDs so user can still generate a slip
+                numberPAR.Text = "PAR-" & DateTime.Now.ToString("yyyyMMdd") & "-" & propertyID.ToString("D6")
+                propertyNumber.Text = If(String.IsNullOrWhiteSpace(propertyNumberValue), propertyID.ToString(), propertyNumberValue)
+                entityNameTxt.Text = "Sta. Cruz Property Custodian System"
+                description.Text = "(Property not found in records)"
+                quantity.Text = "1"
+                TextBox4.Text = "pcs"
+                dateAcquired.Value = DateTime.Now
+                amount.Text = "0.00"
+                BuildPropertyIssuanceTableFromProperty()
+                MessageBox.Show("Property not found in database. Using fallback data for export." & Environment.NewLine &
+                                "Property ID: " & propertyID.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
+
+            System.Diagnostics.Debug.WriteLine("[PropertyIssuance] Property data loaded successfully")
 
             ' Auto-fill all fields from property data
             entityNameTxt.Text = "Sta. Cruz Property Custodian System"
@@ -90,59 +113,182 @@ Public Class PropertyIssuance
 
             ' Property Details
             propertyNumber.Text = SafeGetString(currentPropertyData, "propertyNumber", "")
-            description.Text = SafeGetString(currentPropertyData, "description", "itemName", "")
+
+            ' Description: Build comprehensive description with all available details
+            Dim descParts As New List(Of String)
+
+            ' Start with itemName or description
+            Dim itemName As String = SafeGetString(currentPropertyData, "itemName", "")
+            Dim baseDesc As String = SafeGetString(currentPropertyData, "description", "")
+            If Not String.IsNullOrEmpty(baseDesc) Then
+                descParts.Add(baseDesc)
+            ElseIf Not String.IsNullOrEmpty(itemName) Then
+                descParts.Add(itemName)
+            End If
+
+            ' Add category if available
+            Dim category As String = SafeGetString(currentPropertyData, "category", "")
+            If Not String.IsNullOrEmpty(category) Then
+                descParts.Add("Category: " & category)
+            End If
+
+            ' Add serial number if available
+            Dim serialNum As String = SafeGetString(currentPropertyData, "serialNumber", "")
+            If Not String.IsNullOrEmpty(serialNum) Then
+                descParts.Add("Serial: " & serialNum)
+            End If
+
+            ' Add supplier if available
+            Dim supplier As String = SafeGetString(currentPropertyData, "supplier", "")
+            If Not String.IsNullOrEmpty(supplier) Then
+                descParts.Add("Supplier: " & supplier)
+            End If
+
+            ' Add condition if available
+            Dim condition As String = SafeGetString(currentPropertyData, "condition", "")
+            If Not String.IsNullOrEmpty(condition) Then
+                descParts.Add("Condition: " & condition)
+            End If
+
+            ' Add location if available
+            Dim location As String = SafeGetString(currentPropertyData, "location", "")
+            If Not String.IsNullOrEmpty(location) Then
+                descParts.Add("Location: " & location)
+            End If
+
+            ' Combine all parts
+            If descParts.Count > 0 Then
+                description.Text = String.Join(" | ", descParts)
+            Else
+                description.Text = "No description available"
+            End If
+
             quantity.Text = "1"
-            TextBox4.Text = SafeGetString(currentPropertyData, "unitOfMeasure", "unit", "")
+
+            ' Unit: Try unitOfMeasure, then check if there's a unit column
+            Dim unitValue As String = SafeGetString(currentPropertyData, "unitOfMeasure", "unit", "")
+            If String.IsNullOrEmpty(unitValue) Then
+                unitValue = "pcs" ' Default unit
+            End If
+            TextBox4.Text = unitValue
 
             ' Amount and Date Acquired
+            Dim costValue As Decimal = 0D
             If currentPropertyData.Table.Columns.Contains("acquisitionCost") AndAlso Not IsDBNull(currentPropertyData("acquisitionCost")) Then
-                Dim cost As Decimal = 0D
-                If Decimal.TryParse(currentPropertyData("acquisitionCost").ToString(), cost) Then
-                    amount.Text = cost.ToString("N2")
+                If Decimal.TryParse(currentPropertyData("acquisitionCost").ToString(), costValue) Then
+                    amount.Text = costValue.ToString("N2")
                 End If
+            End If
+            If String.IsNullOrEmpty(amount.Text) Then
+                amount.Text = "0.00"
             End If
 
             If currentPropertyData.Table.Columns.Contains("acquisitionDate") AndAlso Not IsDBNull(currentPropertyData("acquisitionDate")) Then
-                Dim acqDate As Date
-                If Date.TryParse(currentPropertyData("acquisitionDate").ToString(), acqDate) Then
-                    dateAcquired.Value = acqDate
-                End If
+                Try
+                    Dim acqDate As Date
+                    If Date.TryParse(currentPropertyData("acquisitionDate").ToString(), acqDate) Then
+                        dateAcquired.Value = acqDate
+                    Else
+                        dateAcquired.Value = DateTime.Now
+                    End If
+                Catch
+                    dateAcquired.Value = DateTime.Now
+                End Try
+            Else
+                dateAcquired.Value = DateTime.Now
             End If
 
             ' Received By (Employee assignment)
             Dim assignedEmployee As String = SafeGetString(currentPropertyData, "assignedEmployee", "")
             If Not String.IsNullOrEmpty(assignedEmployee) Then
-                TextBox1.Text = assignedEmployee
-                ' Try to select in ComboBox1
-                For i As Integer = 0 To ComboBox1.Items.Count - 1
-                    If ComboBox1.Items(i).ToString().Equals(assignedEmployee, StringComparison.OrdinalIgnoreCase) Then
-                        ComboBox1.SelectedIndex = i
-                        Exit For
-                    End If
-                Next
-            End If
+                TextBox1.Text = assignedEmployee.Trim()
 
-            ' Department
-            Dim assignedDept As String = SafeGetString(currentPropertyData, "assignedDepartment", "departmentName", "")
-            If Not String.IsNullOrEmpty(assignedDept) Then
-                ' Try to select in ComboBox1 if it's a department name
-                For i As Integer = 0 To ComboBox1.Items.Count - 1
-                    If ComboBox1.Items(i).ToString().Equals(assignedDept, StringComparison.OrdinalIgnoreCase) Then
-                        ComboBox1.SelectedIndex = i
-                        Exit For
-                    End If
-                Next
+                ' Try to select in ComboBox1 (Department dropdown for Position/Office)
+                Dim assignedDept As String = SafeGetString(currentPropertyData, "assignedDepartment", "departmentName", "")
+                If Not String.IsNullOrEmpty(assignedDept) Then
+                    For i As Integer = 0 To ComboBox1.Items.Count - 1
+                        If StringComparer.OrdinalIgnoreCase.Equals(ComboBox1.Items(i).ToString(), assignedDept.Trim()) Then
+                            ComboBox1.SelectedIndex = i
+                            Exit For
+                        End If
+                    Next
+                End If
+            Else
+                ' If no employee assigned, leave TextBox1 empty but still try to set department
+                Dim assignedDept As String = SafeGetString(currentPropertyData, "assignedDepartment", "departmentName", "")
+                If Not String.IsNullOrEmpty(assignedDept) Then
+                    For i As Integer = 0 To ComboBox1.Items.Count - 1
+                        If StringComparer.OrdinalIgnoreCase.Equals(ComboBox1.Items(i).ToString(), assignedDept.Trim()) Then
+                            ComboBox1.SelectedIndex = i
+                            Exit For
+                        End If
+                    Next
+                End If
             End If
 
             ' Issued By (Property Custodian - current admin/superadmin)
             Dim currentUser As String = ""
-            If SessionContext.CurrentUsername IsNot Nothing Then
-                currentUser = SessionContext.CurrentUsername
+            Try
+                If SessionContext.CurrentUsername IsNot Nothing Then
+                    currentUser = SessionContext.CurrentUsername
+                End If
+            Catch
+            End Try
+
+            If String.IsNullOrEmpty(currentUser) Then
+                ' Try to get full name from current user context
+                Try
+                    If SessionContext.CurrentUserID.HasValue Then
+                        Dim userDt As DataTable = DatabaseConnection.GetAllUsers("", "", "")
+                        If userDt IsNot Nothing Then
+                            For Each row As DataRow In userDt.Rows
+                                If userDt.Columns.Contains("userId") AndAlso Not IsDBNull(row("userId")) Then
+                                    If Convert.ToInt32(row("userId")) = SessionContext.CurrentUserID.Value Then
+                                        Dim firstName As String = If(userDt.Columns.Contains("firstName") AndAlso Not IsDBNull(row("firstName")), row("firstName").ToString(), "")
+                                        Dim lastName As String = If(userDt.Columns.Contains("lastName") AndAlso Not IsDBNull(row("lastName")), row("lastName").ToString(), "")
+                                        currentUser = (firstName & " " & lastName).Trim()
+                                        Exit For
+                                    End If
+                                End If
+                            Next
+                        End If
+                    End If
+                Catch
+                End Try
             End If
+
             If String.IsNullOrEmpty(currentUser) Then
                 currentUser = "Property Custodian"
             End If
             TextBox2.Text = currentUser
+
+            ' Set Position/Office for Issued By (ComboBox2)
+            ' Try to find current user's position
+            Try
+                If SessionContext.CurrentUserID.HasValue Then
+                    Dim userDt As DataTable = DatabaseConnection.GetAllUsers("", "", "")
+                    If userDt IsNot Nothing Then
+                        For Each row As DataRow In userDt.Rows
+                            If userDt.Columns.Contains("userId") AndAlso Not IsDBNull(row("userId")) Then
+                                If Convert.ToInt32(row("userId")) = SessionContext.CurrentUserID.Value Then
+                                    Dim position As String = If(userDt.Columns.Contains("position") AndAlso Not IsDBNull(row("position")), row("position").ToString(), "")
+                                    If Not String.IsNullOrEmpty(position) Then
+                                        ' Try to find in ComboBox2
+                                        For i As Integer = 0 To ComboBox2.Items.Count - 1
+                                            If ComboBox2.Items(i).ToString().ToUpper().Contains(position.ToUpper()) Then
+                                                ComboBox2.SelectedIndex = i
+                                                Exit For
+                                            End If
+                                        Next
+                                    End If
+                                    Exit For
+                                End If
+                            End If
+                        Next
+                    End If
+                End If
+            Catch
+            End Try
 
             ' Set dates
             DateTimePicker1.Value = DateTime.Now ' Date received
@@ -151,8 +297,11 @@ Public Class PropertyIssuance
             ' Build property issuance table for export
             BuildPropertyIssuanceTableFromProperty()
 
+            System.Diagnostics.Debug.WriteLine("[PropertyIssuance] All fields auto-filled successfully")
+
         Catch ex As Exception
-            MessageBox.Show("Error loading property data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("[PropertyIssuance] LoadPropertyData Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
+            MessageBox.Show("Error loading property data: " & ex.Message & Environment.NewLine & "Property ID: " & propertyID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -300,7 +449,7 @@ Public Class PropertyIssuance
                 If departments IsNot Nothing Then
                     For Each row As DataRow In departments.Rows
                         If departments.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")) Then
-                            If row("departmentName").ToString().Equals(selectedDeptName, StringComparison.OrdinalIgnoreCase) Then
+                            If StringComparer.OrdinalIgnoreCase.Equals(row("departmentName").ToString(), selectedDeptName) Then
                                 If departments.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")) Then
                                     departmentID = Convert.ToInt32(row("departmentId"))
                                 End If
@@ -326,7 +475,7 @@ Public Class PropertyIssuance
                             If Not String.IsNullOrEmpty(empName) Then empName &= " "
                             empName &= row("lastName").ToString()
                         End If
-                        If empName.Equals(selectedEmpName, StringComparison.OrdinalIgnoreCase) Then
+                        If StringComparer.OrdinalIgnoreCase.Equals(empName, selectedEmpName) Then
                             If users.Columns.Contains("userId") AndAlso Not IsDBNull(row("userId")) Then
                                 employeeID = Convert.ToInt32(row("userId"))
                             End If
@@ -410,14 +559,15 @@ Public Class PropertyIssuance
         Try
             ' Rebuild table from current form data
             BuildPropertyIssuanceTableFromProperty()
-            
+
             If propertyIssuanceTable Is Nothing OrElse propertyIssuanceTable.Rows.Count = 0 Then
                 MessageBox.Show("No data to export. Please ensure all fields are filled.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Return
             End If
 
+            ' Export to CSV in Property Acknowledgement Receipt format
             Dim fileName As String = "property_acknowledgement_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".csv"
-            ReportExportHelper.ExportDataTableToCsv(propertyIssuanceTable, fileName, "Property Acknowledgement Receipt exported successfully to CSV.")
+            ExportPropertyAcknowledgementToCsv(fileName)
         Catch ex As Exception
             MessageBox.Show("Error exporting CSV: " & ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -427,18 +577,117 @@ Public Class PropertyIssuance
         Try
             ' Rebuild table from current form data
             BuildPropertyIssuanceTableFromProperty()
-            
+
             If propertyIssuanceTable Is Nothing OrElse propertyIssuanceTable.Rows.Count = 0 Then
                 MessageBox.Show("No data to export. Please ensure all fields are filled.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Return
             End If
 
+            ' Export to PDF in Property Acknowledgement Receipt format
             Dim fileName As String = "property_acknowledgement_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".pdf"
-            ReportExportHelper.ExportDataTableToPdf(propertyIssuanceTable, fileName, "Property Acknowledgement Receipt")
+            ExportPropertyAcknowledgementToPdf(fileName)
         Catch ex As Exception
             MessageBox.Show("Error exporting PDF: " & ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    Private Sub ExportPropertyAcknowledgementToCsv(fileName As String)
+        Try
+            Using dialog As New SaveFileDialog()
+                dialog.Filter = "CSV Files|*.csv"
+                dialog.FileName = fileName
+                dialog.AddExtension = True
+                dialog.DefaultExt = "csv"
+
+                If dialog.ShowDialog() = DialogResult.OK Then
+                    Using writer As New StreamWriter(dialog.FileName, False, New UTF8Encoding(True))
+                        ' Write header
+                        writer.WriteLine("PROPERTY ACKNOWLEDGEMENT RECEIPT")
+                        writer.WriteLine("")
+                        writer.WriteLine("Entity Name," & QuoteCsvValue(entityNameTxt.Text))
+                        writer.WriteLine("PAR No.," & QuoteCsvValue(numberPAR.Text))
+                        writer.WriteLine("")
+                        writer.WriteLine("PROPERTY DETAILS")
+                        writer.WriteLine("Property Number," & QuoteCsvValue(propertyNumber.Text))
+                        writer.WriteLine("Description," & QuoteCsvValue(description.Text))
+                        writer.WriteLine("Quantity," & QuoteCsvValue(quantity.Text))
+                        writer.WriteLine("Unit," & QuoteCsvValue(TextBox4.Text))
+                        writer.WriteLine("Date Acquired," & QuoteCsvValue(dateAcquired.Value.ToString("dddd, MMMM dd, yyyy")))
+                        writer.WriteLine("Amount," & QuoteCsvValue(amount.Text))
+                        writer.WriteLine("")
+                        writer.WriteLine("RECEIVED BY")
+                        writer.WriteLine("Name," & QuoteCsvValue(TextBox1.Text))
+                        writer.WriteLine("Position/Office," & QuoteCsvValue(If(ComboBox1.SelectedIndex > 0, ComboBox1.SelectedItem.ToString(), "")))
+                        writer.WriteLine("Date," & QuoteCsvValue(DateTimePicker1.Value.ToString("dddd, MMMM dd, yyyy")))
+                        writer.WriteLine("")
+                        writer.WriteLine("ISSUED BY")
+                        writer.WriteLine("Name," & QuoteCsvValue(TextBox2.Text))
+                        writer.WriteLine("Position/Office," & QuoteCsvValue(If(ComboBox2.SelectedIndex > 0, ComboBox2.SelectedItem.ToString(), "")))
+                        writer.WriteLine("Date," & QuoteCsvValue(DateTimePicker2.Value.ToString("dddd, MMMM dd, yyyy")))
+                    End Using
+
+                    MessageBox.Show("Property Acknowledgement Receipt exported successfully to CSV.", "Export Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error exporting CSV: " & ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub ExportPropertyAcknowledgementToPdf(fileName As String)
+        Try
+            Using dialog As New SaveFileDialog()
+                dialog.Filter = "PDF Files|*.pdf"
+                dialog.FileName = fileName
+                dialog.AddExtension = True
+                dialog.DefaultExt = "pdf"
+
+                If dialog.ShowDialog() = DialogResult.OK Then
+                    ' Create a formated PDF export
+                    Dim pdfTable As New DataTable()
+                    pdfTable.Columns.Add("Field", GetType(String))
+                    pdfTable.Columns.Add("Value", GetType(String))
+
+                    ' Add all form data to table
+                    pdfTable.Rows.Add("PROPERTY ACKNOWLEDGEMENT RECEIPT", "")
+                    pdfTable.Rows.Add("", "")
+                    pdfTable.Rows.Add("Entity Name", entityNameTxt.Text)
+                    pdfTable.Rows.Add("PAR No.", numberPAR.Text)
+                    pdfTable.Rows.Add("", "")
+                    pdfTable.Rows.Add("PROPERTY DETAILS", "")
+                    pdfTable.Rows.Add("Property Number", propertyNumber.Text)
+                    pdfTable.Rows.Add("Description", description.Text)
+                    pdfTable.Rows.Add("Quantity", quantity.Text)
+                    pdfTable.Rows.Add("Unit", TextBox4.Text)
+                    pdfTable.Rows.Add("Date Acquired", dateAcquired.Value.ToString("dddd, MMMM dd, yyyy"))
+                    pdfTable.Rows.Add("Amount", amount.Text)
+                    pdfTable.Rows.Add("", "")
+                    pdfTable.Rows.Add("RECEIVED BY", "")
+                    pdfTable.Rows.Add("Signature over Printed Name of End User", TextBox1.Text)
+                    pdfTable.Rows.Add("Position/Office", If(ComboBox1.SelectedIndex > 0, ComboBox1.SelectedItem.ToString(), ""))
+                    pdfTable.Rows.Add("Date", DateTimePicker1.Value.ToString("dddd, MMMM dd, yyyy"))
+                    pdfTable.Rows.Add("", "")
+                    pdfTable.Rows.Add("ISSUED BY", "")
+                    pdfTable.Rows.Add("Signature Printed Name of Supply and/or Property Custodian", TextBox2.Text)
+                    pdfTable.Rows.Add("Position/Office", If(ComboBox2.SelectedIndex > 0, ComboBox2.SelectedItem.ToString(), ""))
+                    pdfTable.Rows.Add("Date", DateTimePicker2.Value.ToString("dddd, MMMM dd, yyyy"))
+
+                    ReportExportHelper.ExportDataTableToPdf(pdfTable, dialog.FileName, "Property Acknowledgement Receipt", "Property Acknowledgement Receipt exported successfully to PDF.")
+                End If
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error exporting PDF: " & ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Function QuoteCsvValue(value As String) As String
+        If String.IsNullOrEmpty(value) Then Return ""
+        ' Escape quotes and wrap in quotes if contains comma, quote, or newline
+        If value.Contains(",") OrElse value.Contains("""") OrElse value.Contains(vbCrLf) OrElse value.Contains(vbLf) Then
+            Return """" & value.Replace("""", """""") & """"
+        End If
+        Return value
+    End Function
 
     Private Function SafeGetString(row As DataRow, ParamArray names() As String) As String
         For Each name As String In names
