@@ -28,6 +28,7 @@ Partial Class MaintenanceRequestForm
         Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.itemName = New System.Windows.Forms.ComboBox()
         Me.department = New System.Windows.Forms.ComboBox()
         Me.location = New System.Windows.Forms.ComboBox()
         Me.conditionBefore = New System.Windows.Forms.ComboBox()
@@ -47,7 +48,6 @@ Partial Class MaintenanceRequestForm
         Me.SAAddM_Description = New System.Windows.Forms.Label()
         Me.targetDate = New System.Windows.Forms.DateTimePicker()
         Me.problemDescription = New System.Windows.Forms.TextBox()
-        Me.itemName = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.RoundedPanel2.SuspendLayout()
@@ -139,6 +139,18 @@ Partial Class MaintenanceRequestForm
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(572, 336)
         Me.Panel1.TabIndex = 64
+        '
+        'itemName
+        '
+        Me.itemName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.itemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.itemName.FormattingEnabled = True
+        Me.itemName.Location = New System.Drawing.Point(257, 44)
+        Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.itemName.Name = "itemName"
+        Me.itemName.Size = New System.Drawing.Size(273, 26)
+        Me.itemName.TabIndex = 73
         '
         'department
         '
@@ -389,18 +401,6 @@ Partial Class MaintenanceRequestForm
         Me.problemDescription.Name = "problemDescription"
         Me.problemDescription.Size = New System.Drawing.Size(227, 24)
         Me.problemDescription.TabIndex = 68
-        '
-        'itemName
-        '
-        Me.itemName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.itemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.itemName.FormattingEnabled = True
-        Me.itemName.Location = New System.Drawing.Point(257, 44)
-        Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.itemName.Name = "itemName"
-        Me.itemName.Size = New System.Drawing.Size(273, 26)
-        Me.itemName.TabIndex = 73
         '
         'MaintenanceRequestForm
         '

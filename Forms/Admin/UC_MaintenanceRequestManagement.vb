@@ -59,35 +59,69 @@ Public Class UC_MaintenanceRequestManagement
                     Select Case col.Name.ToLower()
                         Case "requestid"
                             col.DataPropertyName = "requestId"
-                            col.HeaderText = "Maintenance Request ID"
+                            col.HeaderText = "Request ID"
                             col.Visible = True
                         Case "itemname"
                             col.DataPropertyName = "itemName"
                             col.HeaderText = "Property / Item Name"
                             col.Visible = True
+                        Case "serialnumber"
+                            col.DataPropertyName = "serialNumber"
+                            col.HeaderText = "Serial Number"
+                            col.Visible = True
                         Case "location"
                             col.DataPropertyName = "location"
                             col.HeaderText = "Location"
+                            col.Visible = True
+                        Case "departmentid"
+                            col.DataPropertyName = "departmentName"
+                            col.HeaderText = "Department"
                             col.Visible = True
                         Case "conditionbefore"
                             col.DataPropertyName = "conditionBefore"
                             col.HeaderText = "Condition Before"
                             col.Visible = True
-                        Case "typeofissue"
-                            col.DataPropertyName = "typeOfMaintenance"
-                            col.HeaderText = "Type of Maintenance"
+                        Case "typeofissue", "typeofmaintenance"
+                            col.DataPropertyName = "typeOfIssue"
+                            col.HeaderText = "Type of Issue"
                             col.Visible = True
+                        Case "problemdescription"
+                            col.DataPropertyName = "problemDescription"
+                            col.HeaderText = "Problem Description"
+                            col.Visible = True
+                        Case "daterequested", "maintenancedate"
+                            col.DataPropertyName = "dateRequested"
+                            col.HeaderText = "Date Requested"
+                            col.Visible = True
+                        Case "propertynumber"
+                            col.DataPropertyName = "propertyNumber"
+                            col.HeaderText = "Property Number"
+                            col.Visible = False ' Hide by default
+                        Case "targetdate"
+                            col.DataPropertyName = "targetDate"
+                            col.HeaderText = "Target Date"
+                            col.Visible = False ' Hide by default
+                        Case "completiondate"
+                            col.DataPropertyName = "completionDate"
+                            col.HeaderText = "Completion Date"
+                            col.Visible = False ' Hide by default
                         Case "status"
                             col.DataPropertyName = "status"
                             col.HeaderText = "Status"
                             col.Visible = True
-                        Case "problemdescription"
-                            col.DataPropertyName = "actionTaken"
-                            col.HeaderText = "Action Taken"
+                        Case "requestername", "requestedby"
+                            col.DataPropertyName = "requesterName"
+                            col.HeaderText = "Requested By"
+                            col.Visible = True
+                        Case "assignedtechnician"
+                            col.DataPropertyName = "assignedTechnician"
+                            col.HeaderText = "Assigned Technician"
                             col.Visible = True
                         Case Else
-                            ' Hide all other columns by default (propertyNumber, serialNumber, departmentId, etc.)
-                            col.Visible = False
+                            ' Hide columns that don't need to be shown by default
+                            If col.Name.ToLower().Contains("action") OrElse col.Name.ToLower().Contains("created") OrElse col.Name.ToLower().Contains("updated") Then
+                                col.Visible = False
+                            End If
                     End Select
                 Next
 
@@ -182,6 +216,12 @@ Public Class UC_MaintenanceRequestManagement
         If parentDashboard IsNot Nothing Then
             ' Open AddMaintenance1 form for adding maintenance requests
             parentDashboard.LoadUserControl(New AddMaintenance1())
+        Else
+            ' Try SuperAdminDashboard
+            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+            If superAdminDashboard IsNot Nothing Then
+                superAdminDashboard.LoadUserControl(New AddMaintenance1())
+            End If
         End If
     End Sub
 
@@ -382,6 +422,40 @@ Public Class UC_MaintenanceRequestManagement
 
     Private Sub admin_label_DepartmentManagement_Click(sender As Object, e As EventArgs) Handles admin_label_DepartmentManagement.Click
 
+    End Sub
+
+    Private Sub issuePropertySlip_Click(sender As Object, e As EventArgs) Handles issuePropertySlip.Click
+        If propertyManagementGrid Is Nothing OrElse propertyManagementGrid.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a maintenance request first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Try
+            Dim selectedRow As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
+            Dim dt As DataTable = TryCast(propertyManagementGrid.DataSource, DataTable)
+            If dt Is Nothing Then
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            
+            ' Get request ID
+            Dim requestID As Integer = 0
+            If dt.Columns.Contains("requestId") Then
+                requestID = Convert.ToInt32(dataRow("requestId"))
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestID = Convert.ToInt32(dataRow("request_id"))
+            End If
+
+            ' Open Property Issuance Slip with maintenance request data
+            Dim propertyIssuance As New PropertyIssuance()
+            ' TODO: If PropertyIssuance accepts maintenance request data, pass it here
+            propertyIssuance.Show()
+        Catch ex As Exception
+            MessageBox.Show("Error opening property slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class
 

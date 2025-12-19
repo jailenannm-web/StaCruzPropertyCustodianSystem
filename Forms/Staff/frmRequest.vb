@@ -29,7 +29,7 @@ Public Class frmRequest
         ' Initialize category filter (request type)
         pm_cbobx_categ.Items.Clear()
         pm_cbobx_categ.Items.Add("All Types")
-        pm_cbobx_categ.Items.AddRange(New String() {"property", "supply"})
+        pm_cbobx_categ.Items.AddRange(New String() {"property", "supply", "maintenance"})
         pm_cbobx_categ.SelectedIndex = 0
         AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
     End Sub

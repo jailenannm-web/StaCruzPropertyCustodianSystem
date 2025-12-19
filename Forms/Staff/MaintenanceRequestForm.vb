@@ -56,23 +56,40 @@ Public Class MaintenanceRequestForm
         Catch ex As Exception
             MessageBox.Show("Error loading departments: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
+        ' Populate location ComboBox with common locations
+        Dim locationCombo As ComboBox = FindControlOfType(Of ComboBox)("location")
+        If locationCombo IsNot Nothing Then
+            locationCombo.Items.Clear()
+            locationCombo.Items.AddRange(New String() {"Main Building", "Annex Building", "Warehouse", "Storage Room", "Office", "Laboratory", "Classroom", "Other"})
+            If locationCombo.Items.Count > 0 Then locationCombo.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        ' Find relevant controls (designer names may vary - update strings if different)
-        Dim propNameTxt As TextBox = FindControlOfType(Of TextBox)("propertyNameTxt")
+        ' Find relevant controls - itemName is a ComboBox, not TextBox
+        Dim itemNameCombo As ComboBox = FindControlOfType(Of ComboBox)("itemName")
         Dim probDescTxt As TextBox = FindControlOfType(Of TextBox)("problemDescription")
         Dim deptIssueCombo As ComboBox = FindControlOfType(Of ComboBox)("department")
         Dim typesCombo As ComboBox = FindControlOfType(Of ComboBox)("typesOfIssue")
         Dim condCombo As ComboBox = FindControlOfType(Of ComboBox)("conditionBefore")
         Dim serialTxt As TextBox = FindControlOfType(Of TextBox)("serialNumber")
-        Dim locationTxt As TextBox = FindControlOfType(Of TextBox)("user") ' location control named 'user' in original code
+        Dim locationCombo As ComboBox = FindControlOfType(Of ComboBox)("location") ' location is a ComboBox
         Dim targetPicker As DateTimePicker = FindControlOfType(Of DateTimePicker)("targetDate")
 
-        ' Validate required fields
-        If propNameTxt Is Nothing OrElse String.IsNullOrWhiteSpace(propNameTxt.Text) Then
-            MessageBox.Show("Please enter the item/property name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            If propNameTxt IsNot Nothing Then propNameTxt.Focus()
+        ' Validate required fields - itemName is a ComboBox
+        Dim itemNameValue As String = ""
+        If itemNameCombo IsNot Nothing Then
+            If itemNameCombo.SelectedItem IsNot Nothing Then
+                itemNameValue = itemNameCombo.SelectedItem.ToString()
+            ElseIf Not String.IsNullOrWhiteSpace(itemNameCombo.Text) Then
+                itemNameValue = itemNameCombo.Text.Trim()
+            End If
+        End If
+        
+        If String.IsNullOrWhiteSpace(itemNameValue) Then
+            MessageBox.Show("Please enter item name/property name", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            If itemNameCombo IsNot Nothing Then itemNameCombo.Focus()
             Return
         End If
 
@@ -126,17 +143,27 @@ Public Class MaintenanceRequestForm
             targetDateValue = targetPicker.Value
         End If
 
+        ' Get location value from ComboBox
+        Dim locationValue As String = ""
+        If locationCombo IsNot Nothing Then
+            If locationCombo.SelectedItem IsNot Nothing Then
+                locationValue = locationCombo.SelectedItem.ToString()
+            ElseIf Not String.IsNullOrWhiteSpace(locationCombo.Text) Then
+                locationValue = locationCombo.Text.Trim()
+            End If
+        End If
+
         ' Submit maintenance request - use safe null coalescing for optional controls
         Dim success As Boolean = DatabaseConnection.SubmitMaintenanceRequest(
             SessionContext.CurrentUserID.Value,
-            propNameTxt.Text.Trim(),
+            itemNameValue, ' Use the validated itemNameValue
             "", ' property number - optional
             If(serialTxt IsNot Nothing, serialTxt.Text.Trim(), ""),
             departmentID,
-            If(locationTxt IsNot Nothing, locationTxt.Text.Trim(), ""), ' location
+            locationValue, ' location from ComboBox
             conditionBeforeValue,
             typeOfIssue,
-            probDescTxt.Text.Trim(), ' problem description
+            If(probDescTxt IsNot Nothing, probDescTxt.Text.Trim(), ""), ' problem description
             targetDateValue
         )
 
@@ -171,5 +198,9 @@ Public Class MaintenanceRequestForm
                 Me.Parent.Controls.Remove(Me)
             End If
         End If
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
     End Sub
 End Class

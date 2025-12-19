@@ -45,30 +45,42 @@ Partial Public Class MaintenanceRequest
                         Dim maintenanceDate As String = ""
                         Dim status As String = ""
                         
-                        ' Safely access columns
-                        If dt.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
-                            itemName = row("item_name").ToString()
+                        ' Safely access columns - use camelCase to match query results
+                        If dt.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")) Then
+                            itemName = row("itemName").ToString()
                         End If
-                        If dt.Columns.Contains("serial_number") AndAlso Not IsDBNull(row("serial_number")) Then
-                            serialNo = row("serial_number").ToString()
+                        If dt.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")) Then
+                            serialNo = row("serialNumber").ToString()
                         End If
                         If dt.Columns.Contains("location") AndAlso Not IsDBNull(row("location")) Then
                             location = row("location").ToString()
                         End If
-                        If dt.Columns.Contains("department_name") AndAlso Not IsDBNull(row("department_name")) Then
-                            department = row("department_name").ToString()
+                        If dt.Columns.Contains("department") AndAlso Not IsDBNull(row("department")) Then
+                            department = row("department").ToString()
+                        ElseIf dt.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")) Then
+                            department = row("departmentName").ToString()
                         End If
-                        If dt.Columns.Contains("condition_before") AndAlso Not IsDBNull(row("condition_before")) Then
-                            conditionBefore = row("condition_before").ToString()
+                        If dt.Columns.Contains("conditionBefore") AndAlso Not IsDBNull(row("conditionBefore")) Then
+                            conditionBefore = row("conditionBefore").ToString()
                         End If
-                        If dt.Columns.Contains("type_of_issue") AndAlso Not IsDBNull(row("type_of_issue")) Then
-                            typeOfIssue = row("type_of_issue").ToString()
+                        If dt.Columns.Contains("typeOfIssue") AndAlso Not IsDBNull(row("typeOfIssue")) Then
+                            typeOfIssue = row("typeOfIssue").ToString()
                         End If
-                        If dt.Columns.Contains("problem_description") AndAlso Not IsDBNull(row("problem_description")) Then
-                            problemDesc = row("problem_description").ToString()
+                        If dt.Columns.Contains("problemDescription") AndAlso Not IsDBNull(row("problemDescription")) Then
+                            problemDesc = row("problemDescription").ToString()
                         End If
-                        If dt.Columns.Contains("date_requested") AndAlso Not IsDBNull(row("date_requested")) Then
-                            maintenanceDate = Convert.ToDateTime(row("date_requested")).ToString("yyyy-MM-dd")
+                        If dt.Columns.Contains("dateOfRequest") AndAlso Not IsDBNull(row("dateOfRequest")) Then
+                            Try
+                                maintenanceDate = Convert.ToDateTime(row("dateOfRequest")).ToString("yyyy-MM-dd")
+                            Catch
+                                maintenanceDate = row("dateOfRequest").ToString()
+                            End Try
+                        ElseIf dt.Columns.Contains("dateRequested") AndAlso Not IsDBNull(row("dateRequested")) Then
+                            Try
+                                maintenanceDate = Convert.ToDateTime(row("dateRequested")).ToString("yyyy-MM-dd")
+                            Catch
+                                maintenanceDate = row("dateRequested").ToString()
+                            End Try
                         End If
                         If dt.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
                             status = row("status").ToString()

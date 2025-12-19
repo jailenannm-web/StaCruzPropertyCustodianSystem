@@ -3424,12 +3424,36 @@ Public Class DatabaseConnection
                 If dateFrom.HasValue Then supplyQuery &= "AND sr.dateOfRequest >= @dateFrom "
                 If dateTo.HasValue Then supplyQuery &= "AND sr.dateOfRequest <= @dateTo "
 
-                query = propQuery & " UNION ALL " & supplyQuery
+                ' Add maintenance requests to the union
+                Dim maintQuery As String = "SELECT mr.requestId AS request_id, 'maintenance' AS request_type, mr.status, mr.dateRequested AS request_date, " &
+                        "NULL AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
+                        "NULL AS actual_returned_date, 1 AS quantity, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, mr.problemDescription AS remarks, " &
+                        "mr.itemName AS item_name, mr.problemDescription AS description, " &
+                        "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS requesterName, " &
+                        "IFNULL(u.position, 'Staff') AS position, mr.departmentId, " &
+                        "d3.departmentName AS department_name, '' AS unit, mr.serialNumber AS serial_number, " &
+                        "mr.location AS property_location, '' AS supply_location " &
+                        "FROM maintenance_requests mr " &
+                        "LEFT JOIN departments d3 ON mr.departmentId = d3.departmentId " &
+                        "LEFT JOIN users u ON mr.requestedBy = u.userId "
+                If Not String.IsNullOrEmpty(staffFullName) Then
+                    maintQuery &= "WHERE mr.requestedBy = @staffID "
+                Else
+                    maintQuery &= "WHERE 1=1 "
+                End If
+                If Not String.IsNullOrEmpty(statusFilter) Then maintQuery &= "AND mr.status = @status "
+                If dateFrom.HasValue Then maintQuery &= "AND mr.dateRequested >= @dateFrom "
+                If dateTo.HasValue Then maintQuery &= "AND mr.dateRequested <= @dateTo "
+
+                query = propQuery & " UNION ALL " & supplyQuery & " UNION ALL " & maintQuery
             End If
 
             query &= " ORDER BY request_date DESC, request_id DESC"
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
+                ' Add staff ID parameter for maintenance requests
+                cmd.Parameters.AddWithValue("@staffID", staffID)
                 ' Add staff name parameter for matching requests (since no userId column)
                 If Not String.IsNullOrEmpty(staffFullName) Then
                     cmd.Parameters.AddWithValue("@staffName", "%" & staffFullName & "%")
@@ -4612,12 +4636,19 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT mr.requestId, mr.itemName, mr.location, " &
-                                 "mr.conditionBefore, mr.typeOfIssue AS typeOfMaintenance, mr.status, " &
-                                 "mr.problemDescription AS actionTaken, " &
-                                 "mr.propertyNumber, mr.serialNumber, mr.departmentId, mr.assignedTechnician, " &
-                                 "mr.targetDate, mr.completionDate, mr.requestedBy, mr.createdAt, mr.updatedAt " &
+            Dim query As String = "SELECT mr.requestId, mr.itemName AS itemName, mr.location AS location, " &
+                                 "mr.conditionBefore AS conditionBefore, mr.typeOfIssue AS typeOfIssue, mr.status AS status, " &
+                                 "mr.problemDescription AS problemDescription, " &
+                                 "mr.propertyNumber AS propertyNumber, mr.serialNumber AS serialNumber, " &
+                                 "mr.departmentId AS departmentId, d.departmentName AS departmentName, " &
+                                 "mr.assignedTechnician AS assignedTechnician, " &
+                                 "mr.targetDate AS targetDate, mr.completionDate AS completionDate, " &
+                                 "mr.requestedBy AS requestedBy, mr.createdAt AS createdAt, mr.updatedAt AS updatedAt, " &
+                                 "mr.dateRequested AS dateRequested, " &
+                                 "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS requesterName " &
                                  "FROM maintenance_requests mr " &
+                                 "LEFT JOIN users u ON mr.requestedBy = u.userId " &
+                                 "LEFT JOIN departments d ON mr.departmentId = d.departmentId " &
                                  "ORDER BY mr.dateRequested DESC"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -4694,9 +4725,9 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "INSERT INTO maintenance_requests (date_requested, item_name, property_number, " &
-                                 "serial_number, departmentId, location, condition_before, type_of_issue, " &
-                                 "problem_description, status, requested_by, target_date) " &
+            Dim query As String = "INSERT INTO maintenance_requests (dateRequested, itemName, propertyNumber, " &
+                                 "serialNumber, departmentId, location, conditionBefore, typeOfIssue, " &
+                                 "problemDescription, status, requestedBy, targetDate) " &
                                  "VALUES (CURDATE(), @itemName, @propertyNumber, @serialNumber, @departmentID, " &
                                  "@location, @conditionBefore, @typeOfIssue, @problemDescription, 'Pending', " &
                                  "@requestedBy, @targetDate)"
