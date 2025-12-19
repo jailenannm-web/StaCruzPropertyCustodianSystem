@@ -81,7 +81,7 @@ Partial Class audit
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1402, 689)
+        Me.DataGridView1.Size = New System.Drawing.Size(1230, 427)
         Me.DataGridView1.TabIndex = 196
         '
         'logId

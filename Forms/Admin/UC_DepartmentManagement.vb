@@ -254,15 +254,16 @@ Public Class UC_DepartmentManagement
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        ' Check SuperAdminDashboard first
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(New AddDepartment())
+            Return
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New AddDepartment())
-        Else
-            ' Try SuperAdminDashboard
-            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-            If superAdminDashboard IsNot Nothing Then
-                superAdminDashboard.LoadUserControl(New AddDepartment())
-            End If
         End If
     End Sub
 
@@ -324,17 +325,18 @@ Public Class UC_DepartmentManagement
             Dim editForm As New EditDepartment()
             editForm.LoadDepartmentData(departmentID, deptData)
             
+            ' Check SuperAdminDashboard first
+            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+            If superAdminDashboard IsNot Nothing Then
+                superAdminDashboard.LoadUserControl(editForm)
+                Return
+            End If
+
             Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
             If parentDashboard IsNot Nothing Then
                 parentDashboard.LoadUserControl(editForm)
             Else
-                ' Try SuperAdminDashboard
-                Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-                If superAdminDashboard IsNot Nothing Then
-                    superAdminDashboard.LoadUserControl(editForm)
-                Else
-                    MessageBox.Show("Unable to open EditDepartment screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
+                MessageBox.Show("Unable to open EditDepartment screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Catch ex As Exception
             MessageBox.Show("Error opening edit form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

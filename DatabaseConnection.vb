@@ -5028,9 +5028,18 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT a.logId, a.userId, COALESCE(u.username, 'System') AS username, " &
-                                 "COALESCE(u.role, 'Unknown') AS role, a.action, a.tableName AS module, " &
-                                 "a.recordId, a.description, a.ipAddress, a.userAgent, a.createdAt " &
+            ' Improved query with better NULL handling and complete data retrieval
+            Dim query As String = "SELECT a.logId, " &
+                                 "COALESCE(a.userId, 0) AS userId, " &
+                                 "COALESCE(NULLIF(u.username, ''), 'System') AS username, " &
+                                 "COALESCE(NULLIF(u.role, ''), 'Unknown') AS role, " &
+                                 "COALESCE(NULLIF(a.action, ''), 'UNKNOWN') AS action, " &
+                                 "COALESCE(NULLIF(a.tableName, ''), 'N/A') AS module, " &
+                                 "COALESCE(a.recordId, 0) AS recordId, " &
+                                 "COALESCE(NULLIF(a.description, ''), 'No description available') AS description, " &
+                                 "COALESCE(NULLIF(a.ipAddress, ''), 'N/A') AS ipAddress, " &
+                                 "COALESCE(NULLIF(a.userAgent, ''), 'N/A') AS userAgent, " &
+                                 "COALESCE(a.createdAt, NOW()) AS createdAt " &
                                  "FROM audit_logs a " &
                                  "LEFT JOIN users u ON a.userId = u.userId WHERE 1=1"
 
@@ -5040,8 +5049,8 @@ Public Class DatabaseConnection
             If endDate.HasValue Then
                 query &= " AND DATE(a.createdAt) <= @endDate"
             End If
-            If Not String.IsNullOrEmpty(roleFilter) Then
-                query &= " AND u.role = @roleFilter"
+            If Not String.IsNullOrEmpty(roleFilter) AndAlso roleFilter <> "All Roles" Then
+                query &= " AND COALESCE(u.role, 'Unknown') = @roleFilter"
             End If
             If Not String.IsNullOrEmpty(moduleFilter) Then
                 query &= " AND a.tableName = @moduleFilter"
@@ -5050,7 +5059,7 @@ Public Class DatabaseConnection
                 query &= " AND a.action = @actionFilter"
             End If
 
-            query &= " ORDER BY a.createdAt DESC LIMIT 1000"
+            query &= " ORDER BY a.createdAt DESC LIMIT 5000"
 
             Using cmd As New MySqlCommand(query, conn)
                 If startDate.HasValue Then
@@ -5099,9 +5108,18 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return Nothing
 
-            Dim query As String = "SELECT a.logId, a.userId, COALESCE(u.username, 'System') AS username, " &
-                                 "COALESCE(u.role, 'Unknown') AS role, a.action, a.tableName AS module, " &
-                                 "a.recordId, a.description, a.ipAddress, a.userAgent, a.createdAt " &
+            ' Improved query with better NULL handling for single record retrieval
+            Dim query As String = "SELECT a.logId, " &
+                                 "COALESCE(a.userId, 0) AS userId, " &
+                                 "COALESCE(NULLIF(u.username, ''), 'System') AS username, " &
+                                 "COALESCE(NULLIF(u.role, ''), 'Unknown') AS role, " &
+                                 "COALESCE(NULLIF(a.action, ''), 'UNKNOWN') AS action, " &
+                                 "COALESCE(NULLIF(a.tableName, ''), 'N/A') AS module, " &
+                                 "COALESCE(a.recordId, 0) AS recordId, " &
+                                 "COALESCE(NULLIF(a.description, ''), 'No description available') AS description, " &
+                                 "COALESCE(NULLIF(a.ipAddress, ''), 'N/A') AS ipAddress, " &
+                                 "COALESCE(NULLIF(a.userAgent, ''), 'N/A') AS userAgent, " &
+                                 "COALESCE(a.createdAt, NOW()) AS createdAt " &
                                  "FROM audit_logs a " &
                                  "LEFT JOIN users u ON a.userId = u.userId " &
                                  "WHERE a.logId = @logId LIMIT 1"
@@ -8938,7 +8956,7 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            ' Check if department has linked properties - skip for SuperAdmin and Admin
+            ' Check if department has linked properties - skip ALL restrictions for SuperAdmin and Admin
             Dim isSuperAdminOrAdmin As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin()
             If Not isSuperAdminOrAdmin Then
                 Dim checkPropertiesQuery As String = "SELECT COUNT(*) FROM properties WHERE departmentId = @departmentID AND status != 'For Disposal' AND status != 'Lost'"
@@ -8950,18 +8968,18 @@ Public Class DatabaseConnection
                         Return False
                     End If
                 End Using
-            End If
 
-            ' Check if department has staff members
-            Dim checkStaffQuery As String = "SELECT COUNT(*) FROM users WHERE departmentId = @departmentID AND role = 'Staff' AND status = 'active'"
-            Using checkCmd As New MySqlCommand(checkStaffQuery, conn)
-                checkCmd.Parameters.AddWithValue("@departmentID", departmentID)
-                Dim staffCount As Integer = CInt(checkCmd.ExecuteScalar())
-                If staffCount > 0 Then
-                    MessageBox.Show("Cannot delete department. It has " & staffCount & " active staff member(s). Please reassign staff first.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
-                End If
-            End Using
+                ' Check if department has staff members - only for non-SuperAdmin/Admin
+                Dim checkStaffQuery As String = "SELECT COUNT(*) FROM users WHERE departmentId = @departmentID AND role = 'Staff' AND status = 'active'"
+                Using checkCmd As New MySqlCommand(checkStaffQuery, conn)
+                    checkCmd.Parameters.AddWithValue("@departmentID", departmentID)
+                    Dim staffCount As Integer = CInt(checkCmd.ExecuteScalar())
+                    If staffCount > 0 Then
+                        MessageBox.Show("Cannot delete department. It has " & staffCount & " active staff member(s). Please reassign staff first.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return False
+                    End If
+                End Using
+            End If
 
             ' Delete department (soft delete by setting status to 'inactive')
             Dim query As String = "UPDATE departments SET status = 'inactive', updatedAt = NOW() WHERE departmentId = @departmentID"

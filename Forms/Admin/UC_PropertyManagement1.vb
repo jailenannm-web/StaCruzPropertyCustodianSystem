@@ -497,7 +497,14 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        ' Super Admin bypasses all restrictions
+        ' Super Admin and Admin bypass all restrictions
+        ' Check SuperAdminDashboard first
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(New AddProperty())
+            Return
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New AddProperty())
@@ -610,19 +617,19 @@ Public Class UC_PropertyManagement1
             )
         End If
 
-        ' LOAD THE USER CONTROL TO DASHBOARD
+        ' LOAD THE USER CONTROL TO DASHBOARD - Check SuperAdminDashboard first
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(editForm)
+            Return
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(editForm)
         Else
-            ' Try SuperAdminDashboard
-            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-            If superAdminDashboard IsNot Nothing Then
-                superAdminDashboard.LoadUserControl(editForm)
-            Else
-                MessageBox.Show("Error: Dashboard not found.", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            MessageBox.Show("Error: Dashboard not found.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 

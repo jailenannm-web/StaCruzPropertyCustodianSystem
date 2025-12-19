@@ -229,6 +229,17 @@ Public Class UC_UserManagement
     End Function
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        ' Check SuperAdminDashboard first, then AdminDashboard
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            Try
+                superAdminDashboard.loadFormIntoPanel(New StaffRegister())
+                Return
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("[v0] SuperAdmin LoadFormIntoPanel Error: " & ex.Message)
+            End Try
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             ' StaffRegister is a Form, not a UserControl; use LoadFormIntoPanel if available
@@ -241,20 +252,6 @@ Public Class UC_UserManagement
                 frm.Show()
                 Return
             End Try
-        Else
-            ' Try SuperAdminDashboard
-            Dim superAdminDashboard = TryCast(Me.ParentForm, Object)
-            If superAdminDashboard IsNot Nothing Then
-                Try
-                    ' If it has LoadFormIntoPanel, call it
-                    Dim mi = superAdminDashboard.GetType().GetMethod("LoadFormIntoPanel")
-                    If mi IsNot Nothing Then
-                        mi.Invoke(superAdminDashboard, New Object() {New StaffRegister()})
-                        Return
-                    End If
-                Catch
-                End Try
-            End If
         End If
     End Sub
 
@@ -312,15 +309,16 @@ Public Class UC_UserManagement
             SafeValue(userData, "username")
         )
 
+        ' Check SuperAdminDashboard first, then AdminDashboard
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(editForm)
+            Return
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(editForm)
-        Else
-            ' Try SuperAdminDashboard
-            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-            If superAdminDashboard IsNot Nothing Then
-                superAdminDashboard.LoadUserControl(editForm)
-            End If
         End If
     End Sub
 

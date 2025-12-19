@@ -71,8 +71,14 @@ Public Class AuditReportAdmin
  ' Action
  txtAction.Text = If(Convert.IsDBNull(auditData("action")), "", auditData("action").ToString())
 
- ' Module (Table Name)
- txtTableName.Text = If(Convert.IsDBNull(auditData("module")), "", auditData("module").ToString())
+            ' Module (Table Name) - handle both "module" and "tableName" column names
+            Dim moduleValue As String = ""
+            If Not Convert.IsDBNull(auditData("module")) Then
+                moduleValue = auditData("module").ToString()
+            ElseIf auditData.Table.Columns.Contains("tableName") AndAlso Not Convert.IsDBNull(auditData("tableName")) Then
+                moduleValue = auditData("tableName").ToString()
+            End If
+            txtTableName.Text = If(String.IsNullOrWhiteSpace(moduleValue), "N/A", moduleValue)
 
  ' Record ID
  txtRecordID.Text = If(Convert.IsDBNull(auditData("recordId")), "", auditData("recordId").ToString())
@@ -112,36 +118,81 @@ Public Class AuditReportAdmin
  Me.Close()
  End Sub
 
- ' Public helper so other forms can build the same export DataTable from a DataRow
- Public Shared Function CreateExportTableFromDataRow(auditRow As DataRow) As DataTable
- Dim exportTable As New DataTable()
- exportTable.TableName = "Audit Report"
- exportTable.Columns.Add("Field", GetType(String))
- exportTable.Columns.Add("Value", GetType(String))
+    ' Public helper so other forms can build the same export DataTable from a DataRow
+    Public Shared Function CreateExportTableFromDataRow(auditRow As DataRow) As DataTable
+        Dim exportTable As New DataTable()
+        exportTable.TableName = "Audit Report"
+        exportTable.Columns.Add("Field", GetType(String))
+        exportTable.Columns.Add("Value", GetType(String))
 
- If auditRow Is Nothing Then Return exportTable
+        If auditRow Is Nothing Then Return exportTable
 
- ' Header Section
- exportTable.Rows.Add("System Title", "Sta Cruz Property Custodian System")
- exportTable.Rows.Add("Report Title", "Audit Report")
- exportTable.Rows.Add("Date Generated", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
- exportTable.Rows.Add("", "") ' spacing
+        Try
+            ' Header Section - Match the Audit Report form format
+            exportTable.Rows.Add("AUDIT REPORT", "")
+            exportTable.Rows.Add("", "")
+            exportTable.Rows.Add("System", "Sta Cruz Property Custodian System")
+            exportTable.Rows.Add("Report Generated", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            exportTable.Rows.Add("", "") ' spacing
 
- ' Audit Details
- exportTable.Rows.Add("Audit ID (Log ID)", If(Convert.IsDBNull(auditRow("logId")), "N/A", auditRow("logId").ToString()))
- exportTable.Rows.Add("User ID", If(Convert.IsDBNull(auditRow("userId")) OrElse auditRow("userId").ToString() = "0", "N/A", auditRow("userId").ToString()))
- exportTable.Rows.Add("User Name", If(Convert.IsDBNull(auditRow("username")) OrElse String.IsNullOrWhiteSpace(auditRow("username").ToString()), "System", auditRow("username").ToString()))
- exportTable.Rows.Add("User Role", If(Convert.IsDBNull(auditRow("role")) OrElse String.IsNullOrWhiteSpace(auditRow("role").ToString()), "Unknown", auditRow("role").ToString()))
- exportTable.Rows.Add("Action Performed", If(Convert.IsDBNull(auditRow("action")) OrElse String.IsNullOrWhiteSpace(auditRow("action").ToString()), "N/A", auditRow("action").ToString()))
- exportTable.Rows.Add("Module Affected", If(Convert.IsDBNull(auditRow("module")) OrElse String.IsNullOrWhiteSpace(auditRow("module").ToString()), "N/A", auditRow("module").ToString()))
- exportTable.Rows.Add("Affected Record ID", If(Convert.IsDBNull(auditRow("recordId")) OrElse auditRow("recordId").ToString() = "0", "N/A", auditRow("recordId").ToString()))
- exportTable.Rows.Add("Description / Remarks", If(Convert.IsDBNull(auditRow("description")) OrElse String.IsNullOrWhiteSpace(auditRow("description").ToString()), "N/A", auditRow("description").ToString()))
- exportTable.Rows.Add("IP Address", If(Convert.IsDBNull(auditRow("ipAddress")) OrElse String.IsNullOrWhiteSpace(auditRow("ipAddress").ToString()), "N/A", auditRow("ipAddress").ToString()))
- exportTable.Rows.Add("User Agent", If(Convert.IsDBNull(auditRow("userAgent")) OrElse String.IsNullOrWhiteSpace(auditRow("userAgent").ToString()), "N/A", auditRow("userAgent").ToString()))
- exportTable.Rows.Add("Date & Time of Action", If(Convert.IsDBNull(auditRow("createdAt")), "N/A", Convert.ToDateTime(auditRow("createdAt")).ToString("yyyy-MM-dd HH:mm:ss")))
+            ' Helper function to safely get column value
+            Dim GetValue As Func(Of String, String) = Function(colName As String) As String
+                                                            If auditRow.Table.Columns.Contains(colName) AndAlso Not Convert.IsDBNull(auditRow(colName)) Then
+                                                                Return auditRow(colName).ToString()
+                                                            End If
+                                                            Return Nothing
+                                                        End Function
 
- Return exportTable
- End Function
+            ' Date Range Section (matching form format)
+            Dim createdAt As String = Nothing
+            If auditRow.Table.Columns.Contains("createdAt") AndAlso Not Convert.IsDBNull(auditRow("createdAt")) Then
+                createdAt = Convert.ToDateTime(auditRow("createdAt")).ToString("yyyy-MM-dd HH:mm:ss")
+            End If
+            exportTable.Rows.Add("From", If(String.IsNullOrWhiteSpace(createdAt), "N/A", createdAt))
+            exportTable.Rows.Add("To", If(String.IsNullOrWhiteSpace(createdAt), "N/A", createdAt))
+            exportTable.Rows.Add("", "") ' spacing
+
+            ' Audit Details - Match exact form field labels
+            Dim username As String = GetValue("username")
+            exportTable.Rows.Add("User", If(String.IsNullOrWhiteSpace(username), "System", username))
+
+            Dim role As String = GetValue("role")
+            exportTable.Rows.Add("Role", If(String.IsNullOrWhiteSpace(role), "Unknown", role))
+
+            Dim userId As String = GetValue("userId")
+            exportTable.Rows.Add("User ID", If(String.IsNullOrWhiteSpace(userId) OrElse userId = "0", "N/A", userId))
+
+            Dim logId As String = GetValue("logId")
+            exportTable.Rows.Add("Log ID", If(String.IsNullOrWhiteSpace(logId), "N/A", logId))
+
+            Dim action As String = GetValue("action")
+            exportTable.Rows.Add("Action", If(String.IsNullOrWhiteSpace(action), "N/A", action))
+
+            ' Handle both "module" and "tableName" column names
+            Dim moduleValue As String = GetValue("module")
+            If String.IsNullOrWhiteSpace(moduleValue) Then
+                moduleValue = GetValue("tableName")
+            End If
+            exportTable.Rows.Add("Table Name", If(String.IsNullOrWhiteSpace(moduleValue), "N/A", moduleValue))
+
+            Dim recordId As String = GetValue("recordId")
+            exportTable.Rows.Add("Record ID", If(String.IsNullOrWhiteSpace(recordId) OrElse recordId = "0", "N/A", recordId))
+
+            Dim description As String = GetValue("description")
+            exportTable.Rows.Add("Description", If(String.IsNullOrWhiteSpace(description), "No description available", description))
+
+            Dim ipAddress As String = GetValue("ipAddress")
+            exportTable.Rows.Add("IP Address", If(String.IsNullOrWhiteSpace(ipAddress), "N/A", ipAddress))
+
+            Dim userAgent As String = GetValue("userAgent")
+            exportTable.Rows.Add("User Agent", If(String.IsNullOrWhiteSpace(userAgent), "N/A", userAgent))
+        Catch ex As Exception
+            ' Add error information to export table
+            exportTable.Rows.Add("Error", "Error processing audit data: " & ex.Message)
+        End Try
+
+        Return exportTable
+    End Function
 
  Private Sub btnGenerateCSV_Click(sender As Object, e As EventArgs) Handles btnGenerateCSV.Click
  If auditData Is Nothing Then

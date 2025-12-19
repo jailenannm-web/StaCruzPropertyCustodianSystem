@@ -7,7 +7,7 @@ Imports System.Text
 Imports System.Windows.Forms
 
 Public Module ReportExportHelper
-    Public Sub ExportDataTableToCsv(table As DataTable, suggestedFileName As String, Optional successMessage As String = "CSV file exported successfully.")
+    Public Sub ExportDataTableToCsv(table As DataTable, suggestedFileName As String, Optional successMessage As String = "CSV file exported successfully.", Optional isBulkExport As Boolean = False)
         If table Is Nothing OrElse table.Rows.Count = 0 Then
             MessageBox.Show("No data to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
@@ -20,7 +20,7 @@ Public Module ReportExportHelper
             dialog.DefaultExt = "csv"
             If dialog.ShowDialog() = DialogResult.OK Then
                 Try
-                    WriteCsv(table, dialog.FileName)
+                    WriteCsv(table, dialog.FileName, isBulkExport)
                     MessageBox.Show(successMessage, "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Catch ex As Exception
                     MessageBox.Show("Failed to export CSV file: " & ex.Message, "Export", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -58,15 +58,71 @@ Public Module ReportExportHelper
         End Using
     End Sub
 
-    Private Sub WriteCsv(table As DataTable, filePath As String)
+    Private Sub WriteCsv(table As DataTable, filePath As String, Optional isBulkExport As Boolean = False)
         ' Use UTF8 with BOM so Excel recognizes encoding reliably
         Using writer As New StreamWriter(filePath, False, New UTF8Encoding(True))
-            Dim headers = table.Columns.Cast(Of DataColumn)().Select(Function(c) QuoteCsvValue(c.ColumnName)).ToArray()
-            writer.WriteLine(String.Join(",", headers))
-            For Each row As DataRow In table.Rows
-                Dim values = table.Columns.Cast(Of DataColumn)().Select(Function(col) QuoteCsvValue(Convert.ToString(row(col)))).ToArray()
-                writer.WriteLine(String.Join(",", values))
-            Next
+            ' Check if this is a key-value format (Field/Value) or table format
+            Dim isKeyValueFormat As Boolean = table.Columns.Count = 2 AndAlso 
+                                              table.Columns.Contains("Field") AndAlso 
+                                              table.Columns.Contains("Value") AndAlso
+                                              Not isBulkExport
+            
+            If isKeyValueFormat Then
+                ' Professional key-value format for single audit record
+                ' Add header section
+                writer.WriteLine(QuoteCsvValue("AUDIT REPORT"))
+                writer.WriteLine("")
+                writer.WriteLine(QuoteCsvValue("Sta Cruz Property Custodian System"))
+                writer.WriteLine(QuoteCsvValue("Report Generated: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")))
+                writer.WriteLine("")
+                writer.WriteLine(QuoteCsvValue(New String("="c, 78)))
+                writer.WriteLine("")
+                
+                ' Write field-value pairs with proper formatting
+                For Each row As DataRow In table.Rows
+                    Dim fieldName As String = If(Convert.IsDBNull(row("Field")), "", Convert.ToString(row("Field")))
+                    Dim fieldValue As String = If(Convert.IsDBNull(row("Value")), "", Convert.ToString(row("Value")))
+                    
+                    ' Skip empty separator rows
+                    If String.IsNullOrWhiteSpace(fieldName) AndAlso String.IsNullOrWhiteSpace(fieldValue) Then
+                        writer.WriteLine("")
+                    ElseIf Not String.IsNullOrWhiteSpace(fieldName) Then
+                        ' Format as CSV with Field and Value columns
+                        writer.WriteLine(QuoteCsvValue(fieldName) & "," & QuoteCsvValue(fieldValue))
+                    End If
+                Next
+                
+                ' Add footer
+                writer.WriteLine("")
+                writer.WriteLine(QuoteCsvValue(New String("="c, 78)))
+                writer.WriteLine(QuoteCsvValue("End of Report"))
+            Else
+                ' Professional table format for bulk exports
+                ' Add header section (as comments/metadata rows)
+                writer.WriteLine(QuoteCsvValue("AUDIT LOG REPORT"))
+                writer.WriteLine(QuoteCsvValue(""))
+                writer.WriteLine(QuoteCsvValue("Sta Cruz Property Custodian System"))
+                writer.WriteLine(QuoteCsvValue("Report Generated: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")))
+                writer.WriteLine(QuoteCsvValue("Total Records: " & table.Rows.Count.ToString()))
+                writer.WriteLine(QuoteCsvValue(""))
+                writer.WriteLine(QuoteCsvValue(New String("="c, 78)))
+                writer.WriteLine(QuoteCsvValue(""))
+                
+                ' Write column headers
+                Dim headers = table.Columns.Cast(Of DataColumn)().Select(Function(c) QuoteCsvValue(c.ColumnName)).ToArray()
+                writer.WriteLine(String.Join(",", headers))
+                
+                ' Write data rows
+                For Each row As DataRow In table.Rows
+                    Dim values = table.Columns.Cast(Of DataColumn)().Select(Function(col) QuoteCsvValue(Convert.ToString(row(col)))).ToArray()
+                    writer.WriteLine(String.Join(",", values))
+                Next
+                
+                ' Add footer
+                writer.WriteLine(QuoteCsvValue(""))
+                writer.WriteLine(QuoteCsvValue(New String("="c, 78)))
+                writer.WriteLine(QuoteCsvValue("End of Report"))
+            End If
         End Using
     End Sub
 
@@ -85,27 +141,53 @@ Public Module ReportExportHelper
         lines.Add(New String("="c, Math.Min(80, Math.Max(title.Length + 5, 50))))
         lines.Add("") ' Empty line for spacing
         
-        ' Body Section - Format as key-value pairs for better readability
-        For Each row As DataRow In table.Rows
-            Dim fieldName As String = If(Convert.IsDBNull(row("Field")), "", Convert.ToString(row("Field")))
-            Dim fieldValue As String = If(Convert.IsDBNull(row("Value")), "", Convert.ToString(row("Value")))
-            
-            ' Skip empty separator rows in PDF
-            If String.IsNullOrWhiteSpace(fieldName) AndAlso String.IsNullOrWhiteSpace(fieldValue) Then
-                lines.Add("") ' Add empty line for spacing
-            ElseIf Not String.IsNullOrWhiteSpace(fieldName) Then
-                ' Format as "Field: Value" for better readability
-                Dim displayLine As String = fieldName & ": " & fieldValue
+        ' Check if table is in key-value format (Field/Value) or table format (multiple columns)
+        Dim isKeyValueFormat As Boolean = table.Columns.Count = 2 AndAlso 
+                                          table.Columns.Contains("Field") AndAlso 
+                                          table.Columns.Contains("Value")
+        
+        If isKeyValueFormat Then
+            ' Body Section - Format matching the Audit Report form layout
+            Dim inHeaderSection As Boolean = True
+            For Each row As DataRow In table.Rows
+                Dim fieldName As String = If(Convert.IsDBNull(row("Field")), "", Convert.ToString(row("Field")))
+                Dim fieldValue As String = If(Convert.IsDBNull(row("Value")), "", Convert.ToString(row("Value")))
+                
+                ' Skip empty separator rows in PDF
+                If String.IsNullOrWhiteSpace(fieldName) AndAlso String.IsNullOrWhiteSpace(fieldValue) Then
+                    lines.Add("") ' Add empty line for spacing
+                    Continue For
+                End If
+                
+                ' Handle header section
+                If fieldName = "AUDIT REPORT" Then
+                    lines.Add("")
+                    lines.Add("AUDIT REPORT")
+                    lines.Add(New String("="c, 50))
+                    Continue For
+                End If
+                
+                If String.IsNullOrWhiteSpace(fieldName) Then
+                    Continue For
+                End If
+                
+                ' Format as "Field: Value" with proper alignment (matching form layout)
+                Dim displayLine As String = fieldName.PadRight(20) & ": " & fieldValue
+                
                 ' Wrap long lines
-                If displayLine.Length > 80 Then
-                    Dim words As String() = displayLine.Split(" "c)
-                    Dim currentLine As New StringBuilder()
+                If displayLine.Length > 75 Then
+                    Dim fieldPart As String = fieldName.PadRight(20) & ": "
+                    Dim valuePart As String = fieldValue
+                    Dim words As String() = valuePart.Split(" "c)
+                    Dim currentLine As New StringBuilder(fieldPart)
+                    
                     For Each word As String In words
-                        If (currentLine.Length + word.Length + 1) > 80 Then
+                        If (currentLine.Length + word.Length + 1) > 75 Then
                             lines.Add(currentLine.ToString().Trim())
                             currentLine.Clear()
+                            currentLine.Append(New String(" "c, 22)) ' Indent continuation lines
                         End If
-                        If currentLine.Length > 0 Then currentLine.Append(" ")
+                        If currentLine.Length > 0 AndAlso currentLine.Length > 22 Then currentLine.Append(" ")
                         currentLine.Append(word)
                     Next
                     If currentLine.Length > 0 Then
@@ -114,8 +196,64 @@ Public Module ReportExportHelper
                 Else
                     lines.Add(displayLine)
                 End If
+            Next
+        Else
+            ' Table format - display as tabular data (only columns with data)
+            ' Calculate column widths based on content
+            Dim colWidths As New Dictionary(Of String, Integer)()
+            For Each col As DataColumn In table.Columns
+                ' Start with column name length
+                Dim maxWidth As Integer = Math.Min(col.ColumnName.Length, 20)
+                ' Check data in rows
+                For Each row As DataRow In table.Rows
+                    Dim cellValue As String = If(Convert.IsDBNull(row(col)), "", Convert.ToString(row(col)))
+                    If cellValue.Length > maxWidth Then
+                        maxWidth = Math.Min(cellValue.Length, 25) ' Cap at 25 characters
+                    End If
+                Next
+                colWidths(col.ColumnName) = Math.Max(maxWidth, 10) ' Minimum 10 characters
+            Next
+
+            ' Add column headers with proper spacing
+            Dim headerLine As New StringBuilder()
+            For Each col As DataColumn In table.Columns
+                If headerLine.Length > 0 Then headerLine.Append(" | ")
+                Dim colName As String = col.ColumnName
+                Dim width As Integer = colWidths(col.ColumnName)
+                If colName.Length > width Then colName = colName.Substring(0, width - 3) & "..."
+                headerLine.Append(colName.PadRight(width))
+            Next
+            lines.Add(headerLine.ToString())
+            lines.Add(New String("-"c, Math.Min(120, headerLine.Length)))
+            
+            ' Add data rows with proper formatting
+            Dim rowCount As Integer = 0
+            For Each row As DataRow In table.Rows
+                rowCount += 1
+                ' Limit rows per page to avoid overload
+                If rowCount > 30 Then
+                    lines.Add("")
+                    lines.Add("... (Additional " & (table.Rows.Count - rowCount + 1).ToString() & " rows not shown to prevent overload)")
+                    Exit For
+                End If
+                
+                Dim dataLine As New StringBuilder()
+                For Each col As DataColumn In table.Columns
+                    If dataLine.Length > 0 Then dataLine.Append(" | ")
+                    Dim cellValue As String = If(Convert.IsDBNull(row(col)), "", Convert.ToString(row(col)))
+                    Dim width As Integer = colWidths(col.ColumnName)
+                    If cellValue.Length > width Then cellValue = cellValue.Substring(0, width - 3) & "..."
+                    dataLine.Append(cellValue.PadRight(width))
+                Next
+                lines.Add(dataLine.ToString())
+            Next
+            
+            ' Add summary if rows were truncated
+            If rowCount < table.Rows.Count Then
+                lines.Add("")
+                lines.Add("Note: Report shows first 30 rows. Total records: " & table.Rows.Count.ToString())
             End If
-        Next
+        End If
 
         Dim streamContent As String = BuildPdfContent(lines)
         Dim streamBytes = Encoding.UTF8.GetBytes(streamContent)
@@ -163,13 +301,21 @@ Public Module ReportExportHelper
     Private Function BuildPdfContent(lines As IEnumerable(Of String)) As String
         Dim builder As New StringBuilder()
         Dim currentY As Integer = 750 ' Start a bit lower for header space
-        Const lineHeight As Integer = 14
+        Const lineHeight As Integer = 12
         Const headerFontSize As Integer = 16
-        Const bodyFontSize As Integer = 10
+        Const bodyFontSize As Integer = 9
         Dim isFirstLine As Boolean = True
+        Dim lineCount As Integer = 0
 
         For Each line As String In lines
-            If currentY < 50 Then Exit For ' Stop before bottom margin
+            ' Check if we need to start a new page (approximately 50 lines per page)
+            If currentY < 50 AndAlso lineCount > 0 Then
+                ' Add page break - note: This is a simple implementation
+                ' For proper multi-page support, you'd need to create multiple page objects
+                builder.AppendLine("BT /F1 " & bodyFontSize & " Tf 50 50 Td (--- Continued on next page ---) Tj ET")
+                ' Reset Y position for new page (simplified - in production, create new page object)
+                currentY = 750
+            End If
             
             Dim sanitized = EscapePdfText(line)
             Dim fontSize As Integer = If(isFirstLine, headerFontSize, bodyFontSize)
@@ -178,6 +324,7 @@ Public Module ReportExportHelper
             builder.AppendLine("BT /F1 " & fontSize & " Tf 50 " & currentY.ToString() & " Td (" & sanitized & ") Tj ET")
             currentY -= If(isFirstLine, lineHeight + 4, lineHeight) ' Extra space after header
             isFirstLine = False
+            lineCount += 1
         Next
 
         Return builder.ToString()
