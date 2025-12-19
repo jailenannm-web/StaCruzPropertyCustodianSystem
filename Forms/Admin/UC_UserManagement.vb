@@ -231,9 +231,30 @@ Public Class UC_UserManagement
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            Dim addForm As New AddUserManagement()
-
-            parentDashboard.LoadUserControl(addForm)
+            ' StaffRegister is a Form, not a UserControl; use LoadFormIntoPanel if available
+            Try
+                parentDashboard.LoadFormIntoPanel(New StaffRegister())
+                Return
+            Catch
+                ' Fallback: show as dialog
+                Dim frm As New StaffRegister()
+                frm.Show()
+                Return
+            End Try
+        Else
+            ' Try SuperAdminDashboard
+            Dim superAdminDashboard = TryCast(Me.ParentForm, Object)
+            If superAdminDashboard IsNot Nothing Then
+                Try
+                    ' If it has LoadFormIntoPanel, call it
+                    Dim mi = superAdminDashboard.GetType().GetMethod("LoadFormIntoPanel")
+                    If mi IsNot Nothing Then
+                        mi.Invoke(superAdminDashboard, New Object() {New StaffRegister()})
+                        Return
+                    End If
+                Catch
+                End Try
+            End If
         End If
     End Sub
 
@@ -244,20 +265,23 @@ Public Class UC_UserManagement
         Dim metadata As UserRowMetadata = TryCast(selectedRow.Tag, UserRowMetadata)
         If metadata Is Nothing Then metadata = New UserRowMetadata()
 
-        Dim editForm As New EditUser()
-        editForm.SetAuditContext(currentAdminID, currentAdminType, currentAdminUsername)
-
-        Dim dateAssignedValue As Date = Date.Today
-        If metadata.DateAssigned IsNot Nothing AndAlso metadata.DateAssigned IsNot DBNull.Value Then
-            Date.TryParse(metadata.DateAssigned.ToString(), dateAssignedValue)
-        End If
-
         ' Get user data from database using userId
         Dim userIdStr As String = If(selectedRow.Cells("userId").Value IsNot Nothing, selectedRow.Cells("userId").Value.ToString(), "")
         Dim userId As Integer
         If Not Integer.TryParse(userIdStr, userId) Then
             MessageBox.Show("Invalid user ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
+        End If
+
+        ' Open EditProfile as a dialog form (user requested EditProfile)
+        ' Note: EditProfile currently loads the current user's profile
+        ' For editing other users, we'll use EditUser UserControl instead
+        Dim editForm As New EditUser()
+        editForm.SetAuditContext(currentAdminID, currentAdminType, currentAdminUsername)
+
+        Dim dateAssignedValue As Date = Date.Today
+        If metadata.DateAssigned IsNot Nothing AndAlso metadata.DateAssigned IsNot DBNull.Value Then
+            Date.TryParse(metadata.DateAssigned.ToString(), dateAssignedValue)
         End If
 
         ' Get full user data from database
@@ -291,6 +315,12 @@ Public Class UC_UserManagement
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(editForm)
+        Else
+            ' Try SuperAdminDashboard
+            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+            If superAdminDashboard IsNot Nothing Then
+                superAdminDashboard.LoadUserControl(editForm)
+            End If
         End If
     End Sub
 

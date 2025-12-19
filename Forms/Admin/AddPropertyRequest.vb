@@ -50,9 +50,25 @@ Public Class AddPropertyRequest
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            ' Validate required fields
-            If itemName Is Nothing OrElse String.IsNullOrWhiteSpace(itemName.Text) Then
-                MessageBox.Show("Please enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            ' Validate required fields - handle both ComboBox and TextBox
+            Dim itemNameValid As Boolean = False
+            ' Declare once and reuse to avoid shadowing
+            Dim itemNameCombo As ComboBox = Nothing
+            If itemName IsNot Nothing Then
+                ' Use Control as intermediary to allow TryCast even if itemName is declared as TextBox in designer
+                Dim ctl As Control = DirectCast(itemName, Control)
+                itemNameCombo = TryCast(ctl, ComboBox)
+                If itemNameCombo IsNot Nothing Then
+                    ' It's a ComboBox
+                    itemNameValid = (itemNameCombo.SelectedValue IsNot Nothing) OrElse Not String.IsNullOrWhiteSpace(itemNameCombo.Text)
+                Else
+                    ' It's a TextBox
+                    itemNameValid = Not String.IsNullOrWhiteSpace(itemName.Text)
+                End If
+            End If
+            
+            If Not itemNameValid Then
+                MessageBox.Show("Please select or enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 If itemName IsNot Nothing Then itemName.Focus()
                 Return
             End If
@@ -120,13 +136,77 @@ Public Class AddPropertyRequest
                 Return
             End If
 
-            ' Ensure item name is not empty
-            Dim itemNameText As String = itemName.Text.Trim()
+            ' Ensure item name is not empty - handle both ComboBox and TextBox
+            Dim itemNameText As String = ""
+            ' Reuse previously declared itemNameCombo (don't redeclare)
+            If itemNameCombo Is Nothing AndAlso itemName IsNot Nothing Then
+                Dim ctl2 As Control = DirectCast(itemName, Control)
+                itemNameCombo = TryCast(ctl2, ComboBox)
+            End If
+
+            If itemNameCombo IsNot Nothing Then
+                ' It's a ComboBox
+                If itemNameCombo.SelectedValue IsNot Nothing Then
+                    itemNameText = itemNameCombo.SelectedValue.ToString()
+                ElseIf Not String.IsNullOrWhiteSpace(itemNameCombo.Text) Then
+                    itemNameText = itemNameCombo.Text.Trim()
+                End If
+            Else
+                ' It's a TextBox
+                itemNameText = itemName.Text.Trim()
+            End If
+            
             If String.IsNullOrWhiteSpace(itemNameText) Then
-                MessageBox.Show("Please enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Please select or enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 If itemName IsNot Nothing Then itemName.Focus()
                 Return
             End If
+
+            ' Get position and requester name from current session if available
+            Dim positionText As String = ""
+            Dim requesterNameText As String = ""
+            Dim descriptionText As String = ""
+            Dim unitText As String = ""
+            
+            If position IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(position.Text) Then
+                positionText = position.Text.Trim()
+            End If
+            If requesterName IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(requesterName.Text) Then
+                requesterNameText = requesterName.Text.Trim()
+            End If
+            If description IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(description.Text) Then
+                descriptionText = description.Text.Trim()
+            End If
+            
+            ' Get unit from form if available
+            Try
+                Dim unitControl As Control = Me.Controls.Find("unit", True).FirstOrDefault()
+                If unitControl Is Nothing Then
+                    ' Try in Panel1
+                    For Each ctrl As Control In Me.Controls
+                        For Each subCtrl As Control In ctrl.Controls
+                            If subCtrl.Name.ToLower().Contains("unit") Then
+                                unitControl = subCtrl
+                                Exit For
+                            End If
+                        Next
+                        If unitControl IsNot Nothing Then Exit For
+                    Next
+                End If
+                If unitControl IsNot Nothing Then
+                    If TypeOf unitControl Is ComboBox Then
+                        Dim unitCombo As ComboBox = CType(unitControl, ComboBox)
+                        If unitCombo.SelectedValue IsNot Nothing Then
+                            unitText = unitCombo.SelectedValue.ToString()
+                        ElseIf Not String.IsNullOrWhiteSpace(unitCombo.Text) Then
+                            unitText = unitCombo.Text.Trim()
+                        End If
+                    ElseIf TypeOf unitControl Is TextBox Then
+                        unitText = CType(unitControl, TextBox).Text.Trim()
+                    End If
+                End If
+            Catch
+            End Try
 
             ' Submit property request
             Dim success As Boolean = DatabaseConnection.SubmitPropertyRequest(
@@ -135,8 +215,10 @@ Public Class AddPropertyRequest
                 purposeText,
                 quantity,
                 deptID,
-                "", ' position - will be fetched
-                "" ' requester name - will be fetched
+                positionText, ' position
+                requesterNameText, ' requester name
+                descriptionText, ' description
+                unitText ' unit
             )
 
             If success Then
@@ -246,10 +328,52 @@ Public Class AddPropertyRequest
             Catch
             End Try
 
-            ' Pre-fill item name and description if provided
-            If Not String.IsNullOrEmpty(_prefillItemName) Then
-                itemName.Text = _prefillItemName
-            End If
+            ' Bind Item Name dropdown to available properties
+            Try
+                If itemName IsNot Nothing Then
+                    ' Convert TextBox to ComboBox if needed - check if it's already a ComboBox
+                    Dim itemNameCombo As ComboBox = Nothing
+                    Dim ctl As Control = DirectCast(itemName, Control)
+                    itemNameCombo = TryCast(ctl, ComboBox)
+                    If itemNameCombo Is Nothing Then
+                        ' It's a TextBox, we'll keep using it as TextBox but populate with data
+                        ' For now, just set the text if provided
+                        If Not String.IsNullOrEmpty(_prefillItemName) Then
+                            itemName.Text = _prefillItemName
+                        End If
+                    Else
+                        ' It's a ComboBox, populate it
+                        Dim propTable As DataTable = DatabaseConnection.GetAvailablePropertiesForDropdown()
+                        If propTable IsNot Nothing AndAlso propTable.Rows.Count > 0 Then
+                            ' Create a display format with itemName and propertyNumber
+                            propTable.Columns.Add("DisplayName", GetType(String), "itemName + IIF(propertyNumber IS NULL OR propertyNumber = '', '', ' (' + propertyNumber + ')')")
+                            itemNameCombo.DataSource = propTable
+                            itemNameCombo.DisplayMember = "DisplayName"
+                            itemNameCombo.ValueMember = "itemName"
+                            
+                            ' Select pre-filled item if provided
+                            If Not String.IsNullOrEmpty(_prefillItemName) Then
+                                Try
+                                    Dim foundRow() As DataRow = propTable.Select("itemName = '" & _prefillItemName.Replace("'", "''") & "'")
+                                    If foundRow.Length > 0 Then
+                                        itemNameCombo.SelectedValue = _prefillItemName
+                                    Else
+                                        itemNameCombo.Text = _prefillItemName
+                                    End If
+                                Catch
+                                    itemNameCombo.Text = _prefillItemName
+                                End Try
+                            End If
+                        End If
+                    End If
+                End If
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("AddPropertyRequest_Load ItemName Dropdown Error: " & ex.Message)
+                ' Fallback: use as TextBox
+                If Not String.IsNullOrEmpty(_prefillItemName) Then
+                    itemName.Text = _prefillItemName
+                End If
+            End Try
             
             ' Pre-fill description if provided
             If Not String.IsNullOrEmpty(_prefillItemDescription) Then

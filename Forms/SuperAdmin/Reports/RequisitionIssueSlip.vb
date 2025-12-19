@@ -6,14 +6,111 @@ Imports System.Windows.Forms
 
 Partial Public Class RequisitionIssueSlip
     Private requisitionTable As DataTable
+    Private selectedRequestId As Integer? = Nothing
+    Private selectedRequestType As String = ""
 
     Public Sub New()
         InitializeComponent()
     End Sub
 
-    Private Sub RequisitionIssueSlip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadRequisitionData()
+    Public Sub New(requestId As Integer, requestType As String)
+        InitializeComponent()
+        selectedRequestId = requestId
+        selectedRequestType = requestType
     End Sub
+
+    Private Sub RequisitionIssueSlip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' If a specific request was selected, load and populate it
+        If selectedRequestId.HasValue AndAlso Not String.IsNullOrEmpty(selectedRequestType) Then
+            LoadSelectedRequest()
+        Else
+            LoadRequisitionData()
+        End If
+    End Sub
+
+    Private Sub LoadSelectedRequest()
+        Try
+            Dim requestData As DataRow = DatabaseConnection.GetRequestById(selectedRequestId.Value, selectedRequestType)
+            If requestData IsNot Nothing Then
+                ' Populate form fields
+                requestId.Text = SafeGetValue(requestData, "request_id")
+                requesterName.Text = SafeGetValue(requestData, "requesterName", "requester_name")
+                position.Text = SafeGetValue(requestData, "position")
+                ' Try to get department name first, fall back to department ID
+                Dim deptName As String = SafeGetValue(requestData, "departmentName")
+                If String.IsNullOrEmpty(deptName) Then
+                    deptName = SafeGetValue(requestData, "departmentId", "department_id")
+                End If
+                departmentId.Text = deptName
+                dateOfRequest.Text = SafeGetDateValue(requestData, "request_date", "dateOfRequest")
+                itemName.Text = SafeGetValue(requestData, "item_name", "itemName")
+                description.Text = SafeGetValue(requestData, "description")
+                quantityRequested.Text = SafeGetValue(requestData, "quantity", "quantityRequested")
+                unit.Text = SafeGetValue(requestData, "unit")
+                purpose.Text = SafeGetValue(requestData, "remarks", "purpose")
+                status.Text = SafeGetValue(requestData, "status")
+                remarks.Text = SafeGetValue(requestData, "remarks")
+
+                ' Populate approved date and approved by
+                Dim approvedDateValue As String = SafeGetDateValue(requestData, "approval_date", "approvedDate")
+                If Not String.IsNullOrEmpty(approvedDateValue) Then
+                    TextBox2.Text = approvedDateValue
+                End If
+                TextBox3.Text = SafeGetValue(requestData, "approved_by_name", "approvedBy")
+
+                ' Build requisition table with this single request
+                Dim dt As New DataTable()
+                dt.Columns.Add("request_id", GetType(Integer))
+                dt.Columns.Add("itemName", GetType(String))
+                dt.Columns.Add("unit", GetType(String))
+                dt.Columns.Add("description", GetType(String))
+                dt.Columns.Add("quantityRequested", GetType(Integer))
+                dt.Columns.Add("remarks", GetType(String))
+                dt.Columns.Add("status", GetType(String))
+
+                Dim newRow As DataRow = dt.NewRow()
+                newRow("request_id") = selectedRequestId.Value
+                newRow("itemName") = SafeGetValue(requestData, "item_name", "itemName")
+                newRow("unit") = SafeGetValue(requestData, "unit")
+                newRow("description") = SafeGetValue(requestData, "description")
+                newRow("quantityRequested") = SafeGetInt(requestData, "quantity", "quantityRequested", 1)
+                newRow("remarks") = SafeGetValue(requestData, "remarks")
+                newRow("status") = SafeGetValue(requestData, "status")
+                dt.Rows.Add(newRow)
+
+                requisitionTable = BuildRequisitionTable(dt)
+            Else
+                MessageBox.Show("Request not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                LoadRequisitionData()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading request data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            LoadRequisitionData()
+        End Try
+    End Sub
+
+    Private Function SafeGetValue(row As DataRow, ParamArray names() As String) As String
+        For Each name As String In names
+            If row.Table.Columns.Contains(name) AndAlso Not Convert.IsDBNull(row(name)) Then
+                Return row(name).ToString()
+            End If
+        Next
+        Return ""
+    End Function
+
+    Private Function SafeGetDateValue(row As DataRow, ParamArray names() As String) As String
+        For Each name As String In names
+            If row.Table.Columns.Contains(name) AndAlso Not Convert.IsDBNull(row(name)) Then
+                Try
+                    Dim dateValue As DateTime = Convert.ToDateTime(row(name))
+                    Return dateValue.ToString("MM/dd/yyyy")
+                Catch
+                    Return row(name).ToString()
+                End Try
+            End If
+        Next
+        Return ""
+    End Function
 
     Private Sub LoadRequisitionData()
         Try
@@ -137,8 +234,8 @@ Partial Public Class RequisitionIssueSlip
     End Sub
 
     Private Sub btn_Back_Click(sender As Object, e As EventArgs) Handles btn_Back.Click
-        Dim AdminDashboard As New AdminDashboard()
-        AdminDashboard.Show()
+        Dim AdminDashboard As New StaffDashboard()
+        StaffDashboard.Show()
         Me.Hide()
     End Sub
 
@@ -248,6 +345,14 @@ Partial Public Class RequisitionIssueSlip
     End Sub
 
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub Panel16_Paint(sender As Object, e As PaintEventArgs) Handles Panel16.Paint
+
+    End Sub
+
+    Private Sub requestId_TextChanged(sender As Object, e As EventArgs) Handles requestId.TextChanged
 
     End Sub
 End Class

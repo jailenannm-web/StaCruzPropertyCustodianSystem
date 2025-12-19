@@ -58,6 +58,31 @@ Public Class AdminDashboard
         End Try
     End Sub
 
+    ' New: load a Form into the dashboard panel (same behavior as other dashboards)
+    Public Sub LoadFormIntoPanel(ByVal formToLoad As Form)
+        Try
+            If System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime Then
+                Return
+            End If
+
+            If admin_PanelMain.Controls.Count > 0 Then
+                admin_PanelMain.Controls.Clear()
+            End If
+
+            formToLoad.TopLevel = False
+            formToLoad.Dock = DockStyle.Fill
+
+            admin_PanelMain.Controls.Add(formToLoad)
+            admin_PanelMain.Tag = formToLoad
+            formToLoad.Show()
+
+            admin_PanelMain.Visible = True
+            admin_PanelMain.BringToFront()
+        Catch ex As Exception
+            MessageBox.Show("Error loading form into panel: " & ex.Message)
+        End Try
+    End Sub
+
     Private Async Function LoadDashboardAsync() As Task
         If _isDashboardLoading Then Return
         _isDashboardLoading = True

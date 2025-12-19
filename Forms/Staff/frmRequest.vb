@@ -7,6 +7,10 @@ Imports Microsoft.VisualBasic
 Public Class frmRequest
     Private originalRequestData As DataTable
     Private isSearching As Boolean = False
+    
+    ' Static property to store selected request for requisition slip
+    Public Shared SelectedRequestId As Integer? = Nothing
+    Public Shared SelectedRequestType As String = ""
 
     Private Sub frmRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitializeFilters()
@@ -92,11 +96,25 @@ Public Class frmRequest
                     If row.Table.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")) Then
                         requestID = row("request_id").ToString()
                     End If
+                    If row.Table.Columns.Contains("requesterName") AndAlso Not IsDBNull(row("requesterName")) Then
+                        requesterName = row("requesterName").ToString()
+                    End If
+                    If row.Table.Columns.Contains("position") AndAlso Not IsDBNull(row("position")) Then
+                        position = row("position").ToString()
+                    End If
+                    If row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")) Then
+                        departmentId = row("departmentId").ToString()
+                    ElseIf row.Table.Columns.Contains("department_name") AndAlso Not IsDBNull(row("department_name")) Then
+                        departmentId = row("department_name").ToString()
+                    End If
                     If row.Table.Columns.Contains("request_date") AndAlso Not IsDBNull(row("request_date")) Then
                         requestDate = Convert.ToDateTime(row("request_date")).ToString("MM/dd/yyyy")
                     End If
                     If row.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
                         itemName = row("item_name").ToString()
+                    End If
+                    If row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")) Then
+                        description = row("description").ToString()
                     End If
                     If row.Table.Columns.Contains("quantity") AndAlso Not IsDBNull(row("quantity")) Then
                         quantity = row("quantity").ToString()
@@ -113,7 +131,15 @@ Public Class frmRequest
 
                     ' Match the column order in the designer: requestId, requesterName, position, departmentId, dateOfRequest, itemName, description, quantityRequested, unit, purpose, status, approvedBy, approvedDate, remarks
                     ' Note: Some columns are hidden in the designer
-                    DataGridView1.Rows.Add(requestID, requesterName, position, departmentId, requestDate, itemName, description, quantity, "", "", requestStatus, approvedBy, approvedDate, remarks)
+                    Dim unitVal As String = ""
+                    If row.Table.Columns.Contains("unit") AndAlso Not IsDBNull(row("unit")) Then
+                        unitVal = row("unit").ToString()
+                    End If
+                    Dim purposeVal As String = ""
+                    If row.Table.Columns.Contains("remarks") AndAlso Not IsDBNull(row("remarks")) Then
+                        purposeVal = row("remarks").ToString()
+                    End If
+                    DataGridView1.Rows.Add(requestID, requesterName, position, departmentId, requestDate, itemName, description, quantity, unitVal, purposeVal, requestStatus, approvedBy, approvedDate, remarks)
                 Catch rowEx As Exception
                     System.Diagnostics.Debug.WriteLine("Error processing row in frmRequest: " & rowEx.Message)
                 End Try
@@ -165,5 +191,29 @@ Public Class frmRequest
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
+    End Sub
+    
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        ' Store selected request ID and type when user selects a row
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            If selectedRow.Cells.Count > 0 AndAlso selectedRow.Cells(0).Value IsNot Nothing Then
+                Dim requestIdStr As String = selectedRow.Cells(0).Value.ToString()
+                Dim requestId As Integer
+                If Integer.TryParse(requestIdStr, requestId) Then
+                    SelectedRequestId = requestId
+                    
+                    ' Determine request type from original data
+                    If originalRequestData IsNot Nothing Then
+                        Dim foundRows() As DataRow = originalRequestData.Select("request_id = " & requestId.ToString())
+                        If foundRows.Length > 0 Then
+                            If foundRows(0).Table.Columns.Contains("request_type") AndAlso Not IsDBNull(foundRows(0)("request_type")) Then
+                                SelectedRequestType = foundRows(0)("request_type").ToString()
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
     End Sub
 End Class

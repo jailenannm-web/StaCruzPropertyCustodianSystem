@@ -120,6 +120,7 @@ Public Class UC_DepartmentManagement
 
         ' Wire up filter change events
         AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
+        AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
     End Sub
 
     Public Sub LoadDepartmentsData()
@@ -244,14 +245,24 @@ Public Class UC_DepartmentManagement
     End Sub
 
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
-        ' Reload data with filters
-        LoadDepartmentsData()
+        ' Apply search filter with current search text and filters
+        Dim searchText As String = ""
+        If departmentmanagementsearchbar IsNot Nothing Then
+            searchText = departmentmanagementsearchbar.Text
+        End If
+        ApplySearchFilter(searchText)
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New AddDepartment())
+        Else
+            ' Try SuperAdminDashboard
+            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+            If superAdminDashboard IsNot Nothing Then
+                superAdminDashboard.LoadUserControl(New AddDepartment())
+            End If
         End If
     End Sub
 
@@ -317,7 +328,13 @@ Public Class UC_DepartmentManagement
             If parentDashboard IsNot Nothing Then
                 parentDashboard.LoadUserControl(editForm)
             Else
-                MessageBox.Show("Unable to open EditDepartment screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                ' Try SuperAdminDashboard
+                Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+                If superAdminDashboard IsNot Nothing Then
+                    superAdminDashboard.LoadUserControl(editForm)
+                Else
+                    MessageBox.Show("Unable to open EditDepartment screen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
             End If
         Catch ex As Exception
             MessageBox.Show("Error opening edit form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -191,6 +191,12 @@ Public Class AddProperty
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New UC_PropertyManagement1())
+        Else
+            ' Try SuperAdminDashboard
+            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+            If superAdminDashboard IsNot Nothing Then
+                superAdminDashboard.LoadUserControl(New UC_PropertyManagement1())
+            End If
         End If
     End Sub
 

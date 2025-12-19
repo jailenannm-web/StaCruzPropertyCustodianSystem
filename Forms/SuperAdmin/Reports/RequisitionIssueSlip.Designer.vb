@@ -32,6 +32,10 @@ Partial Class RequisitionIssueSlip
         Me.requestId = New System.Windows.Forms.TextBox()
         Me.requesterName = New System.Windows.Forms.TextBox()
         Me.Panel16 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.departmentId = New System.Windows.Forms.TextBox()
+        Me.position = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btn_Back = New System.Windows.Forms.Button()
@@ -50,10 +54,6 @@ Partial Class RequisitionIssueSlip
         Me.Label4 = New System.Windows.Forms.Label()
         Me.dateOfRequest = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.position = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.departmentId = New System.Windows.Forms.TextBox()
         Me.status = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.remarks = New System.Windows.Forms.TextBox()
@@ -73,7 +73,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.entityName.AutoSize = True
         Me.entityName.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.entityName.Location = New System.Drawing.Point(3, 9)
+        Me.entityName.Location = New System.Drawing.Point(151, 26)
         Me.entityName.Name = "entityName"
         Me.entityName.Size = New System.Drawing.Size(78, 22)
         Me.entityName.TabIndex = 38
@@ -84,7 +84,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.fundCluster.AutoSize = True
         Me.fundCluster.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.fundCluster.Location = New System.Drawing.Point(573, 9)
+        Me.fundCluster.Location = New System.Drawing.Point(561, 25)
         Me.fundCluster.Name = "fundCluster"
         Me.fundCluster.Size = New System.Drawing.Size(115, 22)
         Me.fundCluster.TabIndex = 39
@@ -96,9 +96,9 @@ Partial Class RequisitionIssueSlip
         Me.requestId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.requestId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.requestId.Location = New System.Drawing.Point(97, 7)
+        Me.requestId.Location = New System.Drawing.Point(702, 23)
         Me.requestId.Name = "requestId"
-        Me.requestId.Size = New System.Drawing.Size(331, 22)
+        Me.requestId.Size = New System.Drawing.Size(253, 22)
         Me.requestId.TabIndex = 43
         '
         'requesterName
@@ -106,9 +106,9 @@ Partial Class RequisitionIssueSlip
         Me.requesterName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.requesterName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.requesterName.Location = New System.Drawing.Point(702, 9)
+        Me.requesterName.Location = New System.Drawing.Point(246, 25)
         Me.requesterName.Name = "requesterName"
-        Me.requesterName.Size = New System.Drawing.Size(331, 22)
+        Me.requesterName.Size = New System.Drawing.Size(253, 22)
         Me.requesterName.TabIndex = 45
         '
         'Panel16
@@ -126,6 +126,48 @@ Partial Class RequisitionIssueSlip
         Me.Panel16.Name = "Panel16"
         Me.Panel16.Size = New System.Drawing.Size(1209, 92)
         Me.Panel16.TabIndex = 47
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(167, 53)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(62, 22)
+        Me.Label1.TabIndex = 44
+        Me.Label1.Text = "Position:"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'departmentId
+        '
+        Me.departmentId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.departmentId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.departmentId.Location = New System.Drawing.Point(246, 53)
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Size = New System.Drawing.Size(253, 22)
+        Me.departmentId.TabIndex = 46
+        '
+        'position
+        '
+        Me.position.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.position.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.position.Location = New System.Drawing.Point(702, 52)
+        Me.position.Name = "position"
+        Me.position.Size = New System.Drawing.Size(253, 22)
+        Me.position.TabIndex = 44
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(573, 53)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(103, 22)
+        Me.Label2.TabIndex = 45
+        Me.Label2.Text = "Department ID:"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'RoundedButton1
         '
@@ -229,7 +271,7 @@ Partial Class RequisitionIssueSlip
         Me.purpose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.purpose.Location = New System.Drawing.Point(445, 167)
         Me.purpose.Name = "purpose"
-        Me.purpose.Size = New System.Drawing.Size(413, 22)
+        Me.purpose.Size = New System.Drawing.Size(307, 22)
         Me.purpose.TabIndex = 58
         '
         'Label8
@@ -250,7 +292,7 @@ Partial Class RequisitionIssueSlip
         Me.unit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.unit.Location = New System.Drawing.Point(445, 124)
         Me.unit.Name = "unit"
-        Me.unit.Size = New System.Drawing.Size(413, 22)
+        Me.unit.Size = New System.Drawing.Size(307, 22)
         Me.unit.TabIndex = 56
         '
         'Label7
@@ -271,7 +313,7 @@ Partial Class RequisitionIssueSlip
         Me.quantityRequested.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.quantityRequested.Location = New System.Drawing.Point(445, 253)
         Me.quantityRequested.Name = "quantityRequested"
-        Me.quantityRequested.Size = New System.Drawing.Size(413, 22)
+        Me.quantityRequested.Size = New System.Drawing.Size(307, 22)
         Me.quantityRequested.TabIndex = 54
         '
         'Label6
@@ -292,7 +334,7 @@ Partial Class RequisitionIssueSlip
         Me.description.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.description.Location = New System.Drawing.Point(445, 82)
         Me.description.Name = "description"
-        Me.description.Size = New System.Drawing.Size(413, 22)
+        Me.description.Size = New System.Drawing.Size(307, 22)
         Me.description.TabIndex = 52
         '
         'Label5
@@ -313,7 +355,7 @@ Partial Class RequisitionIssueSlip
         Me.itemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.itemName.Location = New System.Drawing.Point(445, 39)
         Me.itemName.Name = "itemName"
-        Me.itemName.Size = New System.Drawing.Size(413, 22)
+        Me.itemName.Size = New System.Drawing.Size(307, 22)
         Me.itemName.TabIndex = 50
         '
         'Label4
@@ -334,7 +376,7 @@ Partial Class RequisitionIssueSlip
         Me.dateOfRequest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.dateOfRequest.Location = New System.Drawing.Point(445, 211)
         Me.dateOfRequest.Name = "dateOfRequest"
-        Me.dateOfRequest.Size = New System.Drawing.Size(413, 22)
+        Me.dateOfRequest.Size = New System.Drawing.Size(307, 22)
         Me.dateOfRequest.TabIndex = 48
         '
         'Label3
@@ -348,48 +390,6 @@ Partial Class RequisitionIssueSlip
         Me.Label3.Text = "Date of Request:"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(13, 53)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(62, 22)
-        Me.Label1.TabIndex = 44
-        Me.Label1.Text = "Position:"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'position
-        '
-        Me.position.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.position.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.position.Location = New System.Drawing.Point(97, 51)
-        Me.position.Name = "position"
-        Me.position.Size = New System.Drawing.Size(331, 22)
-        Me.position.TabIndex = 44
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(573, 53)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(103, 22)
-        Me.Label2.TabIndex = 45
-        Me.Label2.Text = "Department ID:"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'departmentId
-        '
-        Me.departmentId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.departmentId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.departmentId.Location = New System.Drawing.Point(702, 53)
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Size = New System.Drawing.Size(331, 22)
-        Me.departmentId.TabIndex = 46
-        '
         'status
         '
         Me.status.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -397,7 +397,7 @@ Partial Class RequisitionIssueSlip
         Me.status.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.status.Location = New System.Drawing.Point(150, 23)
         Me.status.Name = "status"
-        Me.status.Size = New System.Drawing.Size(264, 22)
+        Me.status.Size = New System.Drawing.Size(214, 22)
         Me.status.TabIndex = 60
         '
         'Label9
@@ -418,7 +418,7 @@ Partial Class RequisitionIssueSlip
         Me.remarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.remarks.Location = New System.Drawing.Point(150, 103)
         Me.remarks.Name = "remarks"
-        Me.remarks.Size = New System.Drawing.Size(264, 22)
+        Me.remarks.Size = New System.Drawing.Size(214, 22)
         Me.remarks.TabIndex = 66
         '
         'Label12
@@ -439,7 +439,7 @@ Partial Class RequisitionIssueSlip
         Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox2.Location = New System.Drawing.Point(150, 66)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(264, 22)
+        Me.TextBox2.Size = New System.Drawing.Size(214, 22)
         Me.TextBox2.TabIndex = 64
         '
         'Label14
@@ -460,7 +460,7 @@ Partial Class RequisitionIssueSlip
         Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox3.Location = New System.Drawing.Point(150, 144)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(264, 22)
+        Me.TextBox3.Size = New System.Drawing.Size(214, 22)
         Me.TextBox3.TabIndex = 62
         '
         'Label15

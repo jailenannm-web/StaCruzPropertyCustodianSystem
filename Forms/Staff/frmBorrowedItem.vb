@@ -42,35 +42,59 @@ Public Class frmBorrowedItem
                         Dim statusVal As String = ""
                         Dim remarks As String = ""
                         
-                        ' Safely access columns
-                        If dt.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")) Then
-                            requestIDVal = row("request_id").ToString()
-                            borrowedId = requestIDVal ' Use request ID as borrowed ID for now
+                        ' Safely access columns - get borrowId first
+                        If row.Table.Columns.Contains("borrowId") AndAlso Not IsDBNull(row("borrowId")) Then
+                            borrowedId = row("borrowId").ToString()
                         End If
-                        If dt.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")) Then
+                        If row.Table.Columns.Contains("request_id") AndAlso Not IsDBNull(row("request_id")) Then
+                            requestIDVal = row("request_id").ToString()
+                        End If
+                        If row.Table.Columns.Contains("request_type") AndAlso Not IsDBNull(row("request_type")) Then
                             itemType = row("request_type").ToString()
                         End If
-                        If dt.Columns.Contains("serial_number") AndAlso Not IsDBNull(row("serial_number")) Then
-                            itemId = row("serial_number").ToString()
-                        ElseIf dt.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
+                        If row.Table.Columns.Contains("item_name") AndAlso Not IsDBNull(row("item_name")) Then
                             itemId = row("item_name").ToString()
+                        ElseIf row.Table.Columns.Contains("serial_number") AndAlso Not IsDBNull(row("serial_number")) Then
+                            itemId = row("serial_number").ToString()
                         End If
-                        If dt.Columns.Contains("request_date") AndAlso Not IsDBNull(row("request_date")) Then
-                            borrowDate = Convert.ToDateTime(row("request_date")).ToString("MM/dd/yyyy")
+                        If row.Table.Columns.Contains("borrowerName") AndAlso Not IsDBNull(row("borrowerName")) Then
+                            borrowerName = row("borrowerName").ToString()
                         End If
-                        If dt.Columns.Contains("expected_return_date") AndAlso Not IsDBNull(row("expected_return_date")) Then
-                            expectedReturn = Convert.ToDateTime(row("expected_return_date")).ToString("MM/dd/yyyy")
+                        If row.Table.Columns.Contains("borrowerPosition") AndAlso Not IsDBNull(row("borrowerPosition")) Then
+                            borrowerPosition = row("borrowerPosition").ToString()
                         End If
-                        If dt.Columns.Contains("accountability_status") AndAlso Not IsDBNull(row("accountability_status")) Then
+                        If row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")) Then
+                            departmentId = row("departmentId").ToString()
+                        End If
+                        If row.Table.Columns.Contains("request_date") AndAlso Not IsDBNull(row("request_date")) Then
+                            Try
+                                borrowDate = Convert.ToDateTime(row("request_date")).ToString("MM/dd/yyyy")
+                            Catch
+                                borrowDate = row("request_date").ToString()
+                            End Try
+                        End If
+                        If row.Table.Columns.Contains("expected_return_date") AndAlso Not IsDBNull(row("expected_return_date")) Then
+                            Try
+                                expectedReturn = Convert.ToDateTime(row("expected_return_date")).ToString("MM/dd/yyyy")
+                            Catch
+                            End Try
+                        End If
+                        If row.Table.Columns.Contains("actual_returned_date") AndAlso Not IsDBNull(row("actual_returned_date")) Then
+                            Try
+                                actualReturn = Convert.ToDateTime(row("actual_returned_date")).ToString("MM/dd/yyyy")
+                            Catch
+                            End Try
+                        End If
+                        If row.Table.Columns.Contains("condition_upon_return") AndAlso Not IsDBNull(row("condition_upon_return")) Then
+                            conditionReturn = row("condition_upon_return").ToString()
+                        End If
+                        If row.Table.Columns.Contains("accountability_status") AndAlso Not IsDBNull(row("accountability_status")) Then
                             statusVal = row("accountability_status").ToString()
-                        ElseIf dt.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
+                        ElseIf row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
                             statusVal = row("status").ToString()
                         End If
-                        If dt.Columns.Contains("actual_returned_date") AndAlso Not IsDBNull(row("actual_returned_date")) Then
-                            actualReturn = Convert.ToDateTime(row("actual_returned_date")).ToString("MM/dd/yyyy")
-                        End If
-                        If dt.Columns.Contains("condition_upon_return") AndAlso Not IsDBNull(row("condition_upon_return")) Then
-                            conditionReturn = row("condition_upon_return").ToString()
+                        If row.Table.Columns.Contains("remarks") AndAlso Not IsDBNull(row("remarks")) Then
+                            remarks = row("remarks").ToString()
                         End If
                         
                         DataGridView1.Rows.Add(borrowedId, requestIDVal, itemType, itemId, borrowerName, borrowerPosition, departmentId, borrowDate, expectedReturn, actualReturn, conditionReturn, statusVal, remarks)

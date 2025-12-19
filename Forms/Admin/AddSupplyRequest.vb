@@ -93,14 +93,104 @@ Public Class AddSupplyRequest
             Catch
             End Try
 
-            ' Pre-fill item name if provided
-            If Not String.IsNullOrEmpty(_prefillItemName) Then
-                itemName.Text = _prefillItemName
-            End If
+            ' Bind Item Name dropdown to available supplies
+            Try
+                If itemName IsNot Nothing Then
+                    ' Use Control intermediary to avoid direct cast issues
+                    Dim itemNameCombo As ComboBox = Nothing
+                    Dim ctl As Control = DirectCast(itemName, Control)
+                    itemNameCombo = TryCast(ctl, ComboBox)
+                    If itemNameCombo Is Nothing Then
+                        ' It's a TextBox, just set the text if provided
+                        If Not String.IsNullOrEmpty(_prefillItemName) Then
+                            itemName.Text = _prefillItemName
+                        End If
+                    Else
+                        ' It's a ComboBox, populate it
+                        Dim supplyTable As DataTable = DatabaseConnection.GetAvailableSuppliesForDropdown()
+                        If supplyTable IsNot Nothing AndAlso supplyTable.Rows.Count > 0 Then
+                            itemNameCombo.DataSource = supplyTable
+                            itemNameCombo.DisplayMember = "itemName"
+                            itemNameCombo.ValueMember = "itemName"
+                            
+                            ' Select pre-filled item if provided
+                            If Not String.IsNullOrEmpty(_prefillItemName) Then
+                                Try
+                                    Dim foundRow() As DataRow = supplyTable.Select("itemName = '" & _prefillItemName.Replace("'", "''") & "'")
+                                    If foundRow.Length > 0 Then
+                                        itemNameCombo.SelectedValue = _prefillItemName
+                                    Else
+                                        itemNameCombo.Text = _prefillItemName
+                                    End If
+                                Catch
+                                    itemNameCombo.Text = _prefillItemName
+                                End Try
+                            End If
+                        End If
+                    End If
+                End If
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("AddSupplyRequest_Load ItemName Dropdown Error: " & ex.Message)
+                ' Fallback: use as TextBox
+                If Not String.IsNullOrEmpty(_prefillItemName) Then
+                    itemName.Text = _prefillItemName
+                End If
+            End Try
 
-            ' Pre-fill description if provided
+            ' Pre-fill description, category, available quantity, location, and unit if provided
             If Not String.IsNullOrEmpty(_prefillItemDescription) Then
                 description.Text = _prefillItemDescription
+            End If
+            
+            ' Pre-fill category if provided
+            If Not String.IsNullOrEmpty(_prefillCategory) Then
+                Try
+                    ' Try to find a category control and set it
+                    Dim categoryControl As Control = Me.Controls.Find("category", True).FirstOrDefault()
+                    If categoryControl IsNot Nothing AndAlso TypeOf categoryControl Is TextBox Then
+                        CType(categoryControl, TextBox).Text = _prefillCategory
+                    ElseIf categoryControl IsNot Nothing AndAlso TypeOf categoryControl Is ComboBox Then
+                        CType(categoryControl, ComboBox).Text = _prefillCategory
+                    End If
+                Catch
+                End Try
+            End If
+            
+            ' Pre-fill available quantity if provided
+            If Not String.IsNullOrEmpty(_prefillAvailableQuantity) Then
+                Try
+                    Dim availableQtyControl As Control = Me.Controls.Find("availableQuantity", True).FirstOrDefault()
+                    If availableQtyControl IsNot Nothing AndAlso TypeOf availableQtyControl Is TextBox Then
+                        CType(availableQtyControl, TextBox).Text = _prefillAvailableQuantity
+                    ElseIf availableQtyControl IsNot Nothing AndAlso TypeOf availableQtyControl Is Label Then
+                        CType(availableQtyControl, Label).Text = "Available: " & _prefillAvailableQuantity
+                    End If
+                Catch
+                End Try
+            End If
+            
+            ' Pre-fill location if provided
+            If Not String.IsNullOrEmpty(_prefillLocation) Then
+                Try
+                    Dim locationControl As Control = Me.Controls.Find("location", True).FirstOrDefault()
+                    If locationControl IsNot Nothing AndAlso TypeOf locationControl Is TextBox Then
+                        CType(locationControl, TextBox).Text = _prefillLocation
+                    End If
+                Catch
+                End Try
+            End If
+            
+            ' Pre-fill unit if provided
+            If Not String.IsNullOrEmpty(_prefillUnitOfMeasure) Then
+                Try
+                    Dim unitControl As Control = Me.Controls.Find("unit", True).FirstOrDefault()
+                    If unitControl IsNot Nothing AndAlso TypeOf unitControl Is TextBox Then
+                        CType(unitControl, TextBox).Text = _prefillUnitOfMeasure
+                    ElseIf unitControl IsNot Nothing AndAlso TypeOf unitControl Is ComboBox Then
+                        CType(unitControl, ComboBox).Text = _prefillUnitOfMeasure
+                    End If
+                Catch
+                End Try
             End If
 
             ' Pre-fill requester name if provided
@@ -278,19 +368,90 @@ Public Class AddSupplyRequest
                 Return
             End If
 
-            ' Ensure item name is not empty - use itemName field, fallback to description
+            ' Ensure item name is not empty - handle both ComboBox and TextBox
             Dim itemNameText As String = ""
-            If itemName IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(itemName.Text) Then
-                itemNameText = itemName.Text.Trim()
-            ElseIf description IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(description.Text) Then
-                itemNameText = description.Text.Trim()
+            Dim itemNameCombo As ComboBox = Nothing
+            If itemName IsNot Nothing Then
+                Dim ctl As Control = DirectCast(itemName, Control)
+                itemNameCombo = TryCast(ctl, ComboBox)
+            End If
+            If itemNameCombo IsNot Nothing Then
+                ' It's a ComboBox
+                If itemNameCombo.SelectedValue IsNot Nothing Then
+                    itemNameText = itemNameCombo.SelectedValue.ToString()
+                ElseIf Not String.IsNullOrWhiteSpace(itemNameCombo.Text) Then
+                    itemNameText = itemNameCombo.Text.Trim()
+                End If
+            Else
+                ' It's a TextBox
+                If itemName IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(itemName.Text) Then
+                    itemNameText = itemName.Text.Trim()
+                ElseIf description IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(description.Text) Then
+                    itemNameText = description.Text.Trim()
+                End If
             End If
             
             If String.IsNullOrWhiteSpace(itemNameText) Then
-                MessageBox.Show("Please enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Please select or enter the item name.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 If itemName IsNot Nothing Then itemName.Focus()
                 Return
             End If
+
+            ' Get position and requester name from form if available
+            Dim positionText As String = ""
+            Dim requesterNameText As String = ""
+            Dim descriptionText As String = ""
+            Dim unitText As String = ""
+            
+            Try
+                Dim positionField As Control = Me.Controls.Find("TextBox2", True).FirstOrDefault()
+                If positionField IsNot Nothing AndAlso TypeOf positionField Is TextBox Then
+                    positionText = CType(positionField, TextBox).Text.Trim()
+                End If
+            Catch
+            End Try
+            
+            Try
+                Dim requesterField As Control = Me.Controls.Find("TextBox1", True).FirstOrDefault()
+                If requesterField IsNot Nothing AndAlso TypeOf requesterField Is TextBox Then
+                    requesterNameText = CType(requesterField, TextBox).Text.Trim()
+                End If
+            Catch
+            End Try
+            
+            If description IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(description.Text) Then
+                descriptionText = description.Text.Trim()
+            End If
+            
+            ' Get unit from form if available
+            Try
+                Dim unitControl As Control = Me.Controls.Find("unit", True).FirstOrDefault()
+                If unitControl Is Nothing Then
+                    ' Try in Panel1
+                    For Each ctrl As Control In Me.Controls
+                        For Each subCtrl As Control In ctrl.Controls
+                            If subCtrl.Name.ToLower().Contains("unit") Then
+                                unitControl = subCtrl
+                                Exit For
+                            End If
+                        Next
+                        If unitControl IsNot Nothing Then Exit For
+                    Next
+                End If
+                If unitControl IsNot Nothing Then
+                    If TypeOf unitControl Is ComboBox Then
+                        Dim unitCombo As ComboBox = CType(unitControl, ComboBox)
+                        If unitCombo.SelectedValue IsNot Nothing Then
+                            unitText = unitCombo.SelectedValue.ToString()
+                        ElseIf Not String.IsNullOrWhiteSpace(unitCombo.Text) Then
+                            unitText = unitCombo.Text.Trim()
+                        End If
+                    ElseIf TypeOf unitControl Is TextBox Then
+                        unitText = CType(unitControl, TextBox).Text.Trim()
+                    End If
+                End If
+            Catch
+            End Try
 
             ' Submit supply request
             Dim success As Boolean = DatabaseConnection.StaffSubmitSupplyRequest(
@@ -299,8 +460,10 @@ Public Class AddSupplyRequest
                 quantity,
                 purposeText,
                 deptID,
-                "", ' position - will be fetched from user record
-                "" ' requester name - will be fetched from user record
+                positionText, ' position
+                requesterNameText, ' requester name
+                descriptionText, ' description
+                unitText ' unit
             )
 
             If success Then

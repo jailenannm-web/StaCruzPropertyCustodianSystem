@@ -615,8 +615,14 @@ Public Class UC_PropertyManagement1
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(editForm)
         Else
-            MessageBox.Show("Error: Dashboard not found.", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ' Try SuperAdminDashboard
+            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+            If superAdminDashboard IsNot Nothing Then
+                superAdminDashboard.LoadUserControl(editForm)
+            Else
+                MessageBox.Show("Error: Dashboard not found.", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         End If
     End Sub
 

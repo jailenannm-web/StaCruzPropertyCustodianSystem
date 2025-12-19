@@ -8,7 +8,7 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Threading.Tasks
 Imports System.Collections.Generic
 Imports Microsoft.VisualBasic
-Partial Class SADashboard
+Public Partial Class SADashboard
     Private tmrSidebar As Object
     Private currentUC As UserControl = Nothing
     Private _isDashboardLoading As Boolean
@@ -307,8 +307,8 @@ Partial Class SADashboard
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
         Dim logout As New logout()
-        logout.Show()   ' Show the register form
-        Me.Hide()            ' Hide current login form instead of closing it
+        logout.Show() ' Show the register form
+        Me.Hide() ' Hide current login form instead of closing it
     End Sub
 
     Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint

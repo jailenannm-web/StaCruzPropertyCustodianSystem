@@ -30,6 +30,15 @@ Partial Class UC_DepartmentManagement
         Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.admin_deptmanagement = New System.Windows.Forms.DataGridView()
+        Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
+        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.departmentmanagementsearchbar = New System.Windows.Forms.TextBox()
+        ' Instantiate missing DataGridView columns to avoid NullReferenceException
         Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.departmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.headOfDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,15 +53,7 @@ Partial Class UC_DepartmentManagement
         Me.totalProperties = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.totalSupplies = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ttldepartmentmanagement = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
-        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.departmentmanagementsearchbar = New System.Windows.Forms.TextBox()
+
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -74,6 +75,36 @@ Partial Class UC_DepartmentManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.admin_deptmanagement.BackgroundColor = System.Drawing.Color.White
         Me.admin_deptmanagement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        ' Configure basic properties for new columns
+        Me.departmentId.HeaderText = "departmentId"
+        Me.departmentId.Name = "departmentId"
+        Me.departmentName.HeaderText = "departmentName"
+        Me.departmentName.Name = "departmentName"
+        Me.headOfDepartment.HeaderText = "headOfDepartment"
+        Me.headOfDepartment.Name = "headOfDepartment"
+        Me.email.HeaderText = "email"
+        Me.email.Name = "email"
+        Me.contactNumber.HeaderText = "contactNumber"
+        Me.contactNumber.Name = "contactNumber"
+        Me.location.HeaderText = "location"
+        Me.location.Name = "location"
+        Me.building.HeaderText = "building"
+        Me.building.Name = "building"
+        Me.floorNumber.HeaderText = "floorNumber"
+        Me.floorNumber.Name = "floorNumber"
+        Me.shortName.HeaderText = "shortName"
+        Me.shortName.Name = "shortName"
+        Me.officeCode.HeaderText = "officeCode"
+        Me.officeCode.Name = "officeCode"
+        Me.description.HeaderText = "description"
+        Me.description.Name = "description"
+        Me.totalProperties.HeaderText = "totalProperties"
+        Me.totalProperties.Name = "totalProperties"
+        Me.totalSupplies.HeaderText = "totalSupplies"
+        Me.totalSupplies.Name = "totalSupplies"
+        Me.status.HeaderText = "status"
+        Me.status.Name = "status"
+
         Me.admin_deptmanagement.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.departmentId, Me.departmentName, Me.headOfDepartment, Me.email, Me.contactNumber, Me.location, Me.building, Me.floorNumber, Me.shortName, Me.officeCode, Me.description, Me.totalProperties, Me.totalSupplies, Me.status})
         Me.admin_deptmanagement.Location = New System.Drawing.Point(59, 115)
         Me.admin_deptmanagement.Margin = New System.Windows.Forms.Padding(4)
@@ -164,22 +195,6 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
         '
-        'btnEdit
-        '
-        Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnEdit.CornerRadius = 15
-        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(1123, 705)
-        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(99, 34)
-        Me.btnEdit.TabIndex = 160
-        Me.btnEdit.Text = "Edit"
-        Me.btnEdit.UseVisualStyleBackColor = False
-        '
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
@@ -208,7 +223,6 @@ Partial Class UC_DepartmentManagement
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.departmentmanagementsearchbar)
         Me.Controls.Add(Me.btnAdd)
-        Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.pm_cbobx_status)
         Me.Controls.Add(Me.pm_cbobx_categ)
@@ -232,7 +246,6 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents pm_cbobx_status As ComboBox
     Friend WithEvents pm_cbobx_categ As ComboBox
     Friend WithEvents btnAdd As Resources.Controls.RoundedButton
-    Friend WithEvents btnEdit As Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As Resources.Controls.RoundedButton
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents departmentmanagementsearchbar As TextBox
