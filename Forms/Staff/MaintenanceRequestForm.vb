@@ -86,7 +86,7 @@ Public Class MaintenanceRequestForm
                 itemNameValue = itemNameCombo.Text.Trim()
             End If
         End If
-        
+
         If String.IsNullOrWhiteSpace(itemNameValue) Then
             MessageBox.Show("Please enter item name/property name", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             If itemNameCombo IsNot Nothing Then itemNameCombo.Focus()
