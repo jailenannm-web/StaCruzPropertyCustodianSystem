@@ -122,4 +122,33 @@ Public Class frmBorrowedItem
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
+
+    Private Sub btnBorrowReturn_Click(sender As Object, e As EventArgs) Handles btnBorrowReturn.Click
+        ' Check if a request is selected in My Request form
+        Dim RequisitionIssueSlip As RequisitionIssueSlip = Nothing
+
+        If frmRequest.SelectedRequestId.HasValue AndAlso Not String.IsNullOrEmpty(frmRequest.SelectedRequestType) Then
+            ' Open with selected request data
+            RequisitionIssueSlip = New RequisitionIssueSlip(frmRequest.SelectedRequestId.Value, frmRequest.SelectedRequestType)
+        Else
+            ' Open without pre-selected request (default behavior)
+            RequisitionIssueSlip = New RequisitionIssueSlip()
+        End If
+
+        RequisitionIssueSlip.Show()
+    End Sub
+
+    Private Sub Essuance_Click(sender As Object, e As EventArgs) Handles Essuance.Click
+        Dim RequisitionIssueSlip As RequisitionIssueSlip = Nothing
+
+        If frmRequest.SelectedRequestId.HasValue AndAlso Not String.IsNullOrEmpty(frmRequest.SelectedRequestType) Then
+            ' Open with selected request data
+            RequisitionIssueSlip = New RequisitionIssueSlip(frmRequest.SelectedRequestId.Value, frmRequest.SelectedRequestType)
+        Else
+            ' Open without pre-selected request (default behavior)
+            RequisitionIssueSlip = New RequisitionIssueSlip()
+        End If
+
+        RequisitionIssueSlip.Show()
+    End Sub
 End Class

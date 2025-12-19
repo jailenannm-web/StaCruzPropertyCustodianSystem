@@ -223,7 +223,7 @@ Partial Class UC_MaintenanceRequestManagement
         '
         Me.admin_label_DepartmentManagement.AutoSize = True
         Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 14.8!, System.Drawing.FontStyle.Bold)
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(21, 60)
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(59, 62)
         Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
         Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(483, 44)
         Me.admin_label_DepartmentManagement.TabIndex = 162
@@ -328,9 +328,9 @@ Partial Class UC_MaintenanceRequestManagement
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(520, 57)
+        Me.PictureBox2.Location = New System.Drawing.Point(567, 69)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(36, 44)
+        Me.PictureBox2.Size = New System.Drawing.Size(27, 32)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 177
         Me.PictureBox2.TabStop = False
@@ -338,11 +338,11 @@ Partial Class UC_MaintenanceRequestManagement
         'maintenancerequestmanagementsearchbar
         '
         Me.maintenancerequestmanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.maintenancerequestmanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.maintenancerequestmanagementsearchbar.Location = New System.Drawing.Point(563, 59)
+        Me.maintenancerequestmanagementsearchbar.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.maintenancerequestmanagementsearchbar.Location = New System.Drawing.Point(601, 73)
         Me.maintenancerequestmanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
         Me.maintenancerequestmanagementsearchbar.Name = "maintenancerequestmanagementsearchbar"
-        Me.maintenancerequestmanagementsearchbar.Size = New System.Drawing.Size(345, 42)
+        Me.maintenancerequestmanagementsearchbar.Size = New System.Drawing.Size(299, 27)
         Me.maintenancerequestmanagementsearchbar.TabIndex = 176
         '
         'UC_MaintenanceRequestManagement

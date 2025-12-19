@@ -263,4 +263,8 @@ Public Class EditUser
     Private Sub uc_um_edituser_Paint(sender As Object, e As PaintEventArgs) Handles uc_um_edituser.Paint
 
     End Sub
+
+    Private Sub EditUser_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

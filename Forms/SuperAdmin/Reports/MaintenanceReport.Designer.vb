@@ -701,7 +701,7 @@ Partial Class MaintenanceReport
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(695, 46)
         Me.Label30.TabIndex = 51
-        Me.Label30.Text = "Maintenace And Repair Records"
+        Me.Label30.Text = "Maintenance And Repair Records"
         '
         'systemname
         '

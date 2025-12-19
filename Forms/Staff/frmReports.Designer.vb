@@ -53,7 +53,7 @@ Partial Class frmReports
         Me.Essuance.Name = "Essuance"
         Me.Essuance.Size = New System.Drawing.Size(535, 80)
         Me.Essuance.TabIndex = 5
-        Me.Essuance.Text = "Propety acknowledgement Receipt"
+        Me.Essuance.Text = "Propety Acknowledgement Receipt"
         Me.Essuance.UseVisualStyleBackColor = False
         '
         'btnBorrowReturn

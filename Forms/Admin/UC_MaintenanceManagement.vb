@@ -323,12 +323,20 @@ Public Class UC_MaintenanceManagement
     End Sub
 
     Private Sub btnGenerateMaintenance_Click(sender As Object, e As EventArgs) Handles btnGenerateMaintenance.Click
-        ' Generate maintenance report
         Try
-            ' TODO: Implement maintenance report generation
-            MessageBox.Show("Maintenance report generation feature will be implemented.", "Feature Coming Soon", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' 1. Find the parent form and cast it to your AdminDashboard class
+            Dim parentDashboard = TryCast(Me.FindForm(), AdminDashboard)
+
+            If parentDashboard IsNot Nothing Then
+                ' 2. Call the public LoadUserControl method from the dashboard
+                parentDashboard.LoadUserControl(New MaintenanceManagementReport1())
+            Else
+                ' Fallback if the parent form isn't found or isn't AdminDashboard
+                MessageBox.Show("Unable to find the Dashboard container.", "Navigation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
         Catch ex As Exception
-            MessageBox.Show("Error generating report: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error navigating to report: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 

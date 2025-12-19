@@ -173,6 +173,12 @@
     <Compile Include="Forms\Staff\MaintenanceRequest.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Admin\MaintenanceManagementReport1.Designer.vb">
+      <DependentUpon>MaintenanceManagementReport1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\MaintenanceManagementReport1.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.Designer.vb">
       <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
     </Compile>
@@ -758,6 +764,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\LostStolenDamaged.resx">
       <DependentUpon>LostStolenDamaged.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\MaintenanceManagementReport1.resx">
+      <DependentUpon>MaintenanceManagementReport1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\MaintenanceReport.resx">
       <DependentUpon>MaintenanceReport.vb</DependentUpon>
