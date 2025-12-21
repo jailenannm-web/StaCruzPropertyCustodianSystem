@@ -254,7 +254,19 @@ Public Class UC_DepartmentManagement
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        ' Check SuperAdminDashboard first
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - btnAdd_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - IsSuperAdmin: " & SessionContext.IsSuperAdmin())
+        System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - ParentForm: " & If(Me.ParentForm IsNot Nothing, Me.ParentForm.GetType().Name, "NULL"))
+        
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(New AddDepartment())
+            System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - AddDepartment loaded into SADashboard")
+            Return
+        End If
+        
         Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
         If superAdminDashboard IsNot Nothing Then
             superAdminDashboard.LoadUserControl(New AddDepartment())
@@ -268,6 +280,10 @@ Public Class UC_DepartmentManagement
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs)
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - btnEdit_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - Selected Rows: " & admin_deptmanagement.SelectedRows.Count)
+        
         If admin_deptmanagement.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a department to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -325,7 +341,14 @@ Public Class UC_DepartmentManagement
             Dim editForm As New EditDepartment()
             editForm.LoadDepartmentData(departmentID, deptData)
 
-            ' Check SuperAdminDashboard first
+            ' Check SADashboard first (parent class)
+            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+            If saDashboard IsNot Nothing Then
+                saDashboard.LoadUserControl(editForm)
+                System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - EditDepartment loaded into SADashboard")
+                Return
+            End If
+            
             Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
             If superAdminDashboard IsNot Nothing Then
                 superAdminDashboard.LoadUserControl(editForm)
@@ -345,6 +368,10 @@ Public Class UC_DepartmentManagement
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - btnDelete_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - Selected Rows: " & admin_deptmanagement.SelectedRows.Count)
+        
         If admin_deptmanagement.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a department to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -385,10 +412,11 @@ Public Class UC_DepartmentManagement
             Return
         End If
 
-        ' Confirmation dialog
+        ' DELETE should permanently remove - show strong warning
         Dim result As DialogResult = MessageBox.Show(
-            "Are you sure you want to delete department '" & departmentName & "' (ID: " & departmentID.ToString() & ")?",
-            "Confirm Delete",
+            "Are you sure you want to PERMANENTLY DELETE department '" & departmentName & "' (ID: " & departmentID.ToString() & ")?" & Environment.NewLine & Environment.NewLine &
+            "This action cannot be undone. To temporarily disable a department, use Edit and change Status to Inactive instead.",
+            "Confirm Permanent Delete",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Warning
         )

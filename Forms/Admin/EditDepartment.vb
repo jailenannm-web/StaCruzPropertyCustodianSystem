@@ -304,7 +304,17 @@ Public Class EditDepartment
                 establishedDate = estPicker.Value.Date
             End If
 
-            ' Call the UpdateDepartment function
+            ' Get short name value
+            Dim shortNameCombo As ComboBox = FindControlOfType(Of ComboBox)("office_hours_cmbo")
+            Dim shortNameValue As String = If(shortNameCombo IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(shortNameCombo.Text), shortNameCombo.Text.Trim(), "")
+            
+            ' Get status value
+            Dim deptStatusValue As String = "Active"
+            If statusCombo IsNot Nothing AndAlso statusCombo.SelectedIndex >= 0 Then
+                deptStatusValue = statusCombo.SelectedItem.ToString()
+            End If
+            
+            ' Call the UpdateDepartment function with standard parameters only
             Dim success As Boolean = DatabaseConnection.UpdateDepartment(
                 _departmentId,
                 deptName,

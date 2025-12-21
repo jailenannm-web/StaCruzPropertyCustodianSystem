@@ -52,6 +52,7 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.departmentmanagementsearchbar = New System.Windows.Forms.TextBox()
+        Me.btnedit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -253,7 +254,7 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1123, 704)
+        Me.btnDelete.Location = New System.Drawing.Point(983, 704)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(99, 35)
@@ -281,11 +282,28 @@ Partial Class UC_DepartmentManagement
         Me.departmentmanagementsearchbar.Size = New System.Drawing.Size(367, 42)
         Me.departmentmanagementsearchbar.TabIndex = 158
         '
+        'btnedit
+        '
+        Me.btnedit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnedit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnedit.CornerRadius = 15
+        Me.btnedit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnedit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnedit.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnedit.Location = New System.Drawing.Point(1107, 705)
+        Me.btnedit.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnedit.Name = "btnedit"
+        Me.btnedit.Size = New System.Drawing.Size(99, 35)
+        Me.btnedit.TabIndex = 160
+        Me.btnedit.Text = "Edit"
+        Me.btnedit.UseVisualStyleBackColor = False
+        '
         'UC_DepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.btnedit)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.departmentmanagementsearchbar)
         Me.Controls.Add(Me.btnAdd)
@@ -329,4 +347,5 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents totalProperties As DataGridViewTextBoxColumn
     Friend WithEvents totalSupplies As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents btnedit As Resources.Controls.RoundedButton
 End Class

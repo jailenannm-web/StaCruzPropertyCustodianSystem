@@ -112,15 +112,29 @@ Public Class UC_PropertyRequestManagement
             Return
         End If
 
+        ' Check for SADashboard first (Super Admin)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Dim assignForm As New AssignRequestManagement()
+            Dim requestID As Integer = 0
+            If Integer.TryParse(requestIDValue.ToString(), requestID) Then
+                assignForm.RequestID = requestID
+            End If
+            saDashboard.LoadUserControl(assignForm)
+            Return
+        End If
+        
+        ' Check for AdminDashboard
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             Dim assignForm As New AssignRequestManagement()
-            ' Pass request ID to assign form using the RequestID property
             Dim requestID As Integer = 0
             If Integer.TryParse(requestIDValue.ToString(), requestID) Then
                 assignForm.RequestID = requestID
             End If
             parentDashboard.LoadUserControl(assignForm)
+        Else
+            MessageBox.Show("Unable to open assignment form. Parent dashboard not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 
@@ -542,11 +556,23 @@ Public Class UC_PropertyRequestManagement
             Return
         End If
 
+        ' Check for SADashboard first (Super Admin)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Dim assignForm As New AssignRequestManagement()
+            assignForm.RequestID = requestID
+            saDashboard.LoadUserControl(assignForm)
+            Return
+        End If
+        
+        ' Check for AdminDashboard
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             Dim assignForm As New AssignRequestManagement()
             assignForm.RequestID = requestID
             parentDashboard.LoadUserControl(assignForm)
+        Else
+            MessageBox.Show("Unable to open assignment form. Parent dashboard not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 

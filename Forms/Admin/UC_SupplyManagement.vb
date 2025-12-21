@@ -20,10 +20,16 @@ Public Class UC_SupplyManagement
 
     ' Ensure role-based UI and filters are initialized
     Private Sub ApplyRolePermissions()
+        ' SUPER ADMIN HAS UNRESTRICTED ACCESS - NO LIMITATIONS
         Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
         If btnAdd IsNot Nothing Then btnAdd.Enabled = hasFullAccess
         If btnEdit IsNot Nothing Then btnEdit.Enabled = hasFullAccess
         If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess
+        
+        ' Debug output
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - IsSuperAdmin: " & SessionContext.IsSuperAdmin())
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - hasFullAccess: " & hasFullAccess)
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - All buttons enabled: " & hasFullAccess)
         ' btnRefresh may not be present in this designer - avoid referencing undefined controls
     End Sub
 
@@ -361,11 +367,29 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - btnAdd_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - IsSuperAdmin: " & SessionContext.IsSuperAdmin())
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - ParentForm: " & If(Me.ParentForm IsNot Nothing, Me.ParentForm.GetType().Name, "NULL"))
+        
         ' Super Admin bypasses all restrictions
+
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(New AddSupply())
+            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - AddSupply loaded into SADashboard")
+            Return
+        End If
+        
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(New AddSupply())
+            Return
+        End If
 
         ' Get reference to the parent dashboard form
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-
         If parentDashboard IsNot Nothing Then
             ' Load the AddSupply UserControl
             parentDashboard.LoadUserControl(New AddSupply())
@@ -378,6 +402,9 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - btnEdit_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Selected Rows: " & pm_table.SelectedRows.Count)
 
         If pm_table.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a supply to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -409,7 +436,20 @@ Public Class UC_SupplyManagement
         Dim editForm As New EditSupply()
         editForm.LoadSupplyData(supplyID, supplyData)
 
-        ' Navigate into Admin Dashboard
+        ' Navigate into Dashboard - Check SADashboard first
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(editForm)
+            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - EditSupply loaded into SADashboard")
+            Return
+        End If
+        
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(editForm)
+            Return
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(editForm)
@@ -421,6 +461,10 @@ Public Class UC_SupplyManagement
 
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - btnDelete_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Selected Rows: " & pm_table.SelectedRows.Count)
+        
         ' Super Admin bypasses all restrictions
 
         If pm_table.SelectedRows.Count = 0 Then

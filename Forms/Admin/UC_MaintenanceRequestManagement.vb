@@ -57,15 +57,15 @@ Public Class UC_MaintenanceRequestManagement
             If propertyManagementGrid IsNot Nothing Then
                 For Each col As DataGridViewColumn In propertyManagementGrid.Columns
                     Select Case col.Name.ToLower()
-                        Case "requestid"
+                        Case "requestid", "request_id"
                             col.DataPropertyName = "requestId"
                             col.HeaderText = "Request ID"
                             col.Visible = True
-                        Case "itemname"
+                        Case "itemname", "item_name"
                             col.DataPropertyName = "itemName"
                             col.HeaderText = "Property / Item Name"
                             col.Visible = True
-                        Case "serialnumber"
+                        Case "serialnumber", "serial_number"
                             col.DataPropertyName = "serialNumber"
                             col.HeaderText = "Serial Number"
                             col.Visible = True
@@ -73,47 +73,50 @@ Public Class UC_MaintenanceRequestManagement
                             col.DataPropertyName = "location"
                             col.HeaderText = "Location"
                             col.Visible = True
-                        Case "departmentid"
+                        Case "department", "departmentid", "department_id", "departmentname", "department_name"
                             col.DataPropertyName = "departmentName"
                             col.HeaderText = "Department"
                             col.Visible = True
-                        Case "conditionbefore"
+                        Case "conditionbefore", "condition_before"
                             col.DataPropertyName = "conditionBefore"
                             col.HeaderText = "Condition Before"
                             col.Visible = True
-                        Case "typeofissue", "typeofmaintenance"
+                        Case "typeofissue", "type_of_issue", "typeofmaintenance"
                             col.DataPropertyName = "typeOfIssue"
                             col.HeaderText = "Type of Issue"
                             col.Visible = True
-                        Case "problemdescription"
+                        Case "problemdescription", "problem_description"
                             col.DataPropertyName = "problemDescription"
                             col.HeaderText = "Problem Description"
                             col.Visible = True
-                        Case "daterequested", "maintenancedate"
+                        Case "daterequested", "date_requested", "maintenancedate", "maintenance_date"
                             col.DataPropertyName = "dateRequested"
                             col.HeaderText = "Date Requested"
                             col.Visible = True
-                        Case "propertynumber"
+                            col.DefaultCellStyle.Format = "yyyy-MM-dd"
+                        Case "propertynumber", "property_number"
                             col.DataPropertyName = "propertyNumber"
                             col.HeaderText = "Property Number"
                             col.Visible = False ' Hide by default
-                        Case "targetdate"
+                        Case "targetdate", "target_date"
                             col.DataPropertyName = "targetDate"
                             col.HeaderText = "Target Date"
                             col.Visible = False ' Hide by default
-                        Case "completiondate"
+                            col.DefaultCellStyle.Format = "yyyy-MM-dd"
+                        Case "completiondate", "completion_date"
                             col.DataPropertyName = "completionDate"
                             col.HeaderText = "Completion Date"
                             col.Visible = False ' Hide by default
+                            col.DefaultCellStyle.Format = "yyyy-MM-dd"
                         Case "status"
                             col.DataPropertyName = "status"
                             col.HeaderText = "Status"
                             col.Visible = True
-                        Case "requestername", "requestedby"
+                        Case "requestername", "requester_name", "requestedby", "requested_by"
                             col.DataPropertyName = "requesterName"
                             col.HeaderText = "Requested By"
                             col.Visible = True
-                        Case "assignedtechnician"
+                        Case "assignedtechnician", "assigned_technician"
                             col.DataPropertyName = "assignedTechnician"
                             col.HeaderText = "Assigned Technician"
                             col.Visible = True
@@ -124,6 +127,8 @@ Public Class UC_MaintenanceRequestManagement
                             End If
                     End Select
                 Next
+                
+                System.Diagnostics.Debug.WriteLine($"[v0] Mapped {propertyManagementGrid.Columns.Count} columns for maintenance requests")
 
                 propertyManagementGrid.DataSource = dt
                 propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill

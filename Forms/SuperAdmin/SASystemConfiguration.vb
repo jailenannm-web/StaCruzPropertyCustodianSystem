@@ -60,19 +60,251 @@ Public Class SASystemConfiguration
     Private editingStatusId As Integer? = Nothing
     Private editingRoleId As Integer? = Nothing
 
+    ' Side panel navigation controls
+    Private pnlSideMenu As Panel
+    Private btnNavDatabase As Button
+    Private btnNavCategories As Button
+    Private btnNavStatus As Button
+    Private btnNavUserRoles As Button
+    Private btnNavLogs As Button
+    
+    ' Content panels for each section
+    Private pnlDatabaseSettings As Panel
+    Private pnlCategoryManagement As Panel
+    Private pnlStatusManagement As Panel
+    Private pnlUserRoles As Panel
+    Private pnlSystemLogs As Panel
+
     Private Sub SASystemConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             SuspendLayout()
+            SetupSideNavigationPanel()
+            SetupContentPanels()
             SetupStatusIndicator()
+            InitializeDynamicControls()
             ResumeLayout()
 
             LoadFallbackSettings()
             LoadAllModulesData()
+            ShowPanel(pnlDatabaseSettings) ' Show database settings by default
             ShowModuleStatus("System Configuration ready.", False)
         Catch ex As Exception
             ResumeLayout()
             ShowModuleStatus("Initialization failed: " & ex.Message, True)
             LogRecoveryEvent("Initialization", ex)
+        End Try
+    End Sub
+    
+    Private Sub SetupSideNavigationPanel()
+        ' Create side menu panel
+        pnlSideMenu = New Panel() With {
+            .BackColor = Color.FromArgb(30, 30, 30),
+            .Dock = DockStyle.Left,
+            .Width = 250,
+            .Padding = New Padding(10)
+        }
+        Controls.Add(pnlSideMenu)
+        pnlSideMenu.BringToFront()
+        
+        ' Title label
+        Dim lblMenuTitle As New Label() With {
+            .Text = "Configuration Menu",
+            .Font = New Font("Poppins", 12, FontStyle.Bold),
+            .ForeColor = Color.White,
+            .AutoSize = False,
+            .Height = 40,
+            .Width = 230,
+            .Location = New Point(10, 20),
+            .TextAlign = ContentAlignment.MiddleLeft
+        }
+        pnlSideMenu.Controls.Add(lblMenuTitle)
+        
+        ' Create navigation buttons
+        Dim yPosition As Integer = 80
+        
+        btnNavDatabase = CreateNavButton("Database Settings", yPosition)
+        AddHandler btnNavDatabase.Click, Sub() ShowPanel(pnlDatabaseSettings)
+        pnlSideMenu.Controls.Add(btnNavDatabase)
+        yPosition += 60
+        
+        btnNavCategories = CreateNavButton("Category Management", yPosition)
+        AddHandler btnNavCategories.Click, Sub() ShowPanel(pnlCategoryManagement)
+        pnlSideMenu.Controls.Add(btnNavCategories)
+        yPosition += 60
+        
+        btnNavStatus = CreateNavButton("Status Management", yPosition)
+        AddHandler btnNavStatus.Click, Sub() ShowPanel(pnlStatusManagement)
+        pnlSideMenu.Controls.Add(btnNavStatus)
+        yPosition += 60
+        
+        btnNavUserRoles = CreateNavButton("User Roles", yPosition)
+        AddHandler btnNavUserRoles.Click, Sub() ShowPanel(pnlUserRoles)
+        pnlSideMenu.Controls.Add(btnNavUserRoles)
+        yPosition += 60
+        
+        btnNavLogs = CreateNavButton("System Logs", yPosition)
+        AddHandler btnNavLogs.Click, Sub() ShowPanel(pnlSystemLogs)
+        pnlSideMenu.Controls.Add(btnNavLogs)
+    End Sub
+    
+    Private Function CreateNavButton(text As String, yPos As Integer) As Button
+        Dim btn As New Button() With {
+            .Text = text,
+            .Font = New Font("Poppins", 10, FontStyle.Regular),
+            .ForeColor = Color.White,
+            .BackColor = Color.FromArgb(50, 50, 50),
+            .FlatStyle = FlatStyle.Flat,
+            .Width = 230,
+            .Height = 50,
+            .Location = New Point(10, yPos),
+            .TextAlign = ContentAlignment.MiddleLeft,
+            .Padding = New Padding(15, 0, 0, 0),
+            .Cursor = Cursors.Hand
+        }
+        btn.FlatAppearance.BorderSize = 0
+        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(27, 60, 83)
+        btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(20, 45, 65)
+        Return btn
+    End Function
+    
+    Private Sub SetupContentPanels()
+        Dim contentX As Integer = 260 ' Start after side menu
+        Dim contentY As Integer = 100
+        Dim contentWidth As Integer = Me.ClientSize.Width - 270
+        Dim contentHeight As Integer = Me.ClientSize.Height - 110
+        
+        ' Database Settings Panel
+        pnlDatabaseSettings = New Panel() With {
+            .Location = New Point(contentX, contentY),
+            .Size = New Size(contentWidth, contentHeight),
+            .BackColor = Color.White,
+            .Visible = False,
+            .AutoScroll = True
+        }
+        Controls.Add(pnlDatabaseSettings)
+        
+        ' Category Management Panel
+        pnlCategoryManagement = New Panel() With {
+            .Location = New Point(contentX, contentY),
+            .Size = New Size(contentWidth, contentHeight),
+            .BackColor = Color.White,
+            .Visible = False,
+            .AutoScroll = True
+        }
+        Controls.Add(pnlCategoryManagement)
+        
+        ' Status Management Panel
+        pnlStatusManagement = New Panel() With {
+            .Location = New Point(contentX, contentY),
+            .Size = New Size(contentWidth, contentHeight),
+            .BackColor = Color.White,
+            .Visible = False,
+            .AutoScroll = True
+        }
+        Controls.Add(pnlStatusManagement)
+        
+        ' User Roles Panel
+        pnlUserRoles = New Panel() With {
+            .Location = New Point(contentX, contentY),
+            .Size = New Size(contentWidth, contentHeight),
+            .BackColor = Color.White,
+            .Visible = False,
+            .AutoScroll = True
+        }
+        Controls.Add(pnlUserRoles)
+        
+        ' System Logs Panel
+        pnlSystemLogs = New Panel() With {
+            .Location = New Point(contentX, contentY),
+            .Size = New Size(contentWidth, contentHeight),
+            .BackColor = Color.White,
+            .Visible = False,
+            .AutoScroll = True
+        }
+        Controls.Add(pnlSystemLogs)
+        
+        ' Move existing controls to appropriate panels
+        MoveControlsToPanels()
+    End Sub
+    
+    Private Sub ShowPanel(panelToShow As Panel)
+        ' Hide all content panels
+        pnlDatabaseSettings.Visible = False
+        pnlCategoryManagement.Visible = False
+        pnlStatusManagement.Visible = False
+        pnlUserRoles.Visible = False
+        pnlSystemLogs.Visible = False
+        
+        ' Reset button colors
+        ResetNavButtonColors()
+        
+        ' Show selected panel and highlight button
+        panelToShow.Visible = True
+        panelToShow.BringToFront()
+        
+        ' Highlight active button
+        If panelToShow Is pnlDatabaseSettings Then
+            HighlightButton(btnNavDatabase)
+        ElseIf panelToShow Is pnlCategoryManagement Then
+            HighlightButton(btnNavCategories)
+        ElseIf panelToShow Is pnlStatusManagement Then
+            HighlightButton(btnNavStatus)
+        ElseIf panelToShow Is pnlUserRoles Then
+            HighlightButton(btnNavUserRoles)
+        ElseIf panelToShow Is pnlSystemLogs Then
+            HighlightButton(btnNavLogs)
+        End If
+    End Sub
+    
+    Private Sub ResetNavButtonColors()
+        For Each btn In {btnNavDatabase, btnNavCategories, btnNavStatus, btnNavUserRoles, btnNavLogs}
+            If btn IsNot Nothing Then
+                btn.BackColor = Color.FromArgb(50, 50, 50)
+                btn.Font = New Font("Poppins", 10, FontStyle.Regular)
+            End If
+        Next
+    End Sub
+    
+    Private Sub HighlightButton(btn As Button)
+        If btn IsNot Nothing Then
+            btn.BackColor = Color.FromArgb(27, 60, 83)
+            btn.Font = New Font("Poppins", 10, FontStyle.Bold)
+        End If
+    End Sub
+    
+    Private Sub MoveControlsToPanels()
+        Try
+            ' Move database connection controls to pnlDatabaseSettings
+            If txtHost IsNot Nothing Then txtHost.Parent = pnlDatabaseSettings : txtHost.Location = New Point(200, 50)
+            If txtPort IsNot Nothing Then txtPort.Parent = pnlDatabaseSettings : txtPort.Location = New Point(200, 100)
+            If txtDBName IsNot Nothing Then txtDBName.Parent = pnlDatabaseSettings : txtDBName.Location = New Point(200, 150)
+            If txtUser IsNot Nothing Then txtUser.Parent = pnlDatabaseSettings : txtUser.Location = New Point(200, 200)
+            If txtPassword IsNot Nothing Then txtPassword.Parent = pnlDatabaseSettings : txtPassword.Location = New Point(200, 250)
+            If btnTestConn IsNot Nothing Then btnTestConn.Parent = pnlDatabaseSettings : btnTestConn.Location = New Point(200, 310)
+            If btnSaveConn IsNot Nothing Then btnSaveConn.Parent = pnlDatabaseSettings : btnSaveConn.Location = New Point(350, 310)
+            
+            ' Move corresponding labels
+            If DBHost IsNot Nothing Then DBHost.Parent = pnlDatabaseSettings : DBHost.Location = New Point(50, 55)
+            If port IsNot Nothing Then port.Parent = pnlDatabaseSettings : port.Location = New Point(50, 105)
+            If Label5 IsNot Nothing Then Label5.Parent = pnlDatabaseSettings : Label5.Location = New Point(50, 155)
+            If Label6 IsNot Nothing Then Label6.Parent = pnlDatabaseSettings : Label6.Location = New Point(50, 205)
+            If Label7 IsNot Nothing Then Label7.Parent = pnlDatabaseSettings : Label7.Location = New Point(50, 255)
+            
+            ' Add title to database panel
+            Dim lblDbTitle As New Label() With {
+                .Text = "Database Connection Settings",
+                .Font = New Font("Poppins", 14, FontStyle.Bold),
+                .Location = New Point(20, 10),
+                .AutoSize = True
+            }
+            pnlDatabaseSettings.Controls.Add(lblDbTitle)
+            
+            ' Move category/status controls to their respective panels
+            If comboCategoris IsNot Nothing Then comboCategoris.Parent = pnlCategoryManagement : comboCategoris.Location = New Point(50, 50)
+            If combostatus IsNot Nothing Then combostatus.Parent = pnlStatusManagement : combostatus.Location = New Point(50, 50)
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[SASystemConfig] Error moving controls: " & ex.Message)
         End Try
     End Sub
 
@@ -85,12 +317,185 @@ Public Class SASystemConfiguration
             .Font = New Font("Segoe UI", 9.0!, FontStyle.Bold),
             .ForeColor = Color.White,
             .BackColor = Color.FromArgb(64, 64, 64),
-            .Size = New Size(850, 28),
-            .Location = New Point(420, 210),
+            .Dock = DockStyle.Bottom,
+            .Height = 30,
             .Text = "Loading configuration..."
         }
         Controls.Add(lblStatusIndicator)
         lblStatusIndicator.BringToFront()
+    End Sub
+
+    Private Sub InitializeDynamicControls()
+        ' Initialize Status Management Controls
+        dgvStatuses = New DataGridView() With {
+            .Location = New Point(420, 650),
+            .Size = New Size(850, 300),
+            .AllowUserToAddRows = False,
+            .AllowUserToDeleteRows = False,
+            .ReadOnly = True,
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        }
+        Controls.Add(dgvStatuses)
+        AddHandler dgvStatuses.SelectionChanged, AddressOf dgvStatuses_SelectionChanged
+
+        ' Initialize Role Management Controls
+        cmbRoleSelector = New ComboBox() With {
+            .Location = New Point(420, 250),
+            .Size = New Size(300, 25),
+            .DropDownStyle = ComboBoxStyle.DropDownList
+        }
+        Controls.Add(cmbRoleSelector)
+
+        cmbRoleUsers = New ComboBox() With {
+            .Location = New Point(750, 250),
+            .Size = New Size(300, 25),
+            .DropDownStyle = ComboBoxStyle.DropDownList
+        }
+        Controls.Add(cmbRoleUsers)
+
+        ' Initialize Status Panel Controls
+        grpStatusPanel = New GroupBox() With {
+            .Text = "Status Management",
+            .Location = New Point(420, 400),
+            .Size = New Size(850, 220),
+            .Font = New Font("Poppins", 9.0!, FontStyle.Bold)
+        }
+
+        txtStatusName = New TextBox() With {
+            .Location = New Point(120, 30),
+            .Size = New Size(250, 25)
+        }
+        grpStatusPanel.Controls.Add(txtStatusName)
+
+        Dim lblStatusName As New Label() With {
+            .Text = "Status Name:",
+            .Location = New Point(20, 33),
+            .AutoSize = True,
+            .Font = New Font("Poppins", 8.0!)
+        }
+        grpStatusPanel.Controls.Add(lblStatusName)
+
+        cmbStatusType = New ComboBox() With {
+            .Location = New Point(120, 70),
+            .Size = New Size(250, 25),
+            .DropDownStyle = ComboBoxStyle.DropDownList
+        }
+        cmbStatusType.Items.AddRange(New String() {"property", "supply", "maintenance", "request"})
+        If cmbStatusType.Items.Count > 0 Then cmbStatusType.SelectedIndex = 0
+        grpStatusPanel.Controls.Add(cmbStatusType)
+
+        Dim lblStatusType As New Label() With {
+            .Text = "Status Type:",
+            .Location = New Point(20, 73),
+            .AutoSize = True,
+            .Font = New Font("Poppins", 8.0!)
+        }
+        grpStatusPanel.Controls.Add(lblStatusType)
+
+        chkStatusActive = New CheckBox() With {
+            .Text = "Active",
+            .Location = New Point(120, 110),
+            .Checked = True,
+            .Font = New Font("Poppins", 8.0!)
+        }
+        grpStatusPanel.Controls.Add(chkStatusActive)
+
+        btnSaveStatus = New Button() With {
+            .Text = "Save Status",
+            .Location = New Point(120, 150),
+            .Size = New Size(120, 40),
+            .BackColor = Color.FromArgb(27, 60, 83),
+            .ForeColor = Color.White,
+            .FlatStyle = FlatStyle.Flat,
+            .Font = New Font("Poppins", 8.0!, FontStyle.Bold),
+            .Cursor = Cursors.Hand
+        }
+        AddHandler btnSaveStatus.Click, AddressOf btnSaveStatus_Click
+        grpStatusPanel.Controls.Add(btnSaveStatus)
+
+        btnDeleteStatus = New Button() With {
+            .Text = "Delete Status",
+            .Location = New Point(250, 150),
+            .Size = New Size(120, 40),
+            .BackColor = Color.Firebrick,
+            .ForeColor = Color.White,
+            .FlatStyle = FlatStyle.Flat,
+            .Font = New Font("Poppins", 8.0!, FontStyle.Bold),
+            .Cursor = Cursors.Hand
+        }
+        AddHandler btnDeleteStatus.Click, AddressOf btnDeleteStatus_Click
+        grpStatusPanel.Controls.Add(btnDeleteStatus)
+
+        Controls.Add(grpStatusPanel)
+
+        ' Initialize Role Assignment Controls
+        grpRoleAssignment = New GroupBox() With {
+            .Text = "Role Assignment",
+            .Location = New Point(1300, 400),
+            .Size = New Size(600, 220),
+            .Font = New Font("Poppins", 9.0!, FontStyle.Bold)
+        }
+
+        Dim lblRole As New Label() With {
+            .Text = "Select Role:",
+            .Location = New Point(20, 40),
+            .AutoSize = True,
+            .Font = New Font("Poppins", 8.0!)
+        }
+        grpRoleAssignment.Controls.Add(lblRole)
+
+        Dim cmbRoleSelectorInGroup As New ComboBox() With {
+            .Location = New Point(120, 37),
+            .Size = New Size(300, 25),
+            .DropDownStyle = ComboBoxStyle.DropDownList
+        }
+        cmbRoleSelector = cmbRoleSelectorInGroup
+        grpRoleAssignment.Controls.Add(cmbRoleSelectorInGroup)
+
+        Dim lblUser As New Label() With {
+            .Text = "Select User:",
+            .Location = New Point(20, 80),
+            .AutoSize = True,
+            .Font = New Font("Poppins", 8.0!)
+        }
+        grpRoleAssignment.Controls.Add(lblUser)
+
+        Dim cmbRoleUsersInGroup As New ComboBox() With {
+            .Location = New Point(120, 77),
+            .Size = New Size(300, 25),
+            .DropDownStyle = ComboBoxStyle.DropDownList
+        }
+        cmbRoleUsers = cmbRoleUsersInGroup
+        grpRoleAssignment.Controls.Add(cmbRoleUsersInGroup)
+
+        btnAssignRole = New Button() With {
+            .Text = "Assign Role",
+            .Location = New Point(120, 120),
+            .Size = New Size(120, 40),
+            .BackColor = Color.FromArgb(27, 60, 83),
+            .ForeColor = Color.White,
+            .FlatStyle = FlatStyle.Flat,
+            .Font = New Font("Poppins", 8.0!, FontStyle.Bold),
+            .Cursor = Cursors.Hand
+        }
+        AddHandler btnAssignRole.Click, AddressOf btnAssignRole_Click
+        grpRoleAssignment.Controls.Add(btnAssignRole)
+
+        btnDeactivateRole = New Button() With {
+            .Text = "Toggle Role Status",
+            .Location = New Point(250, 120),
+            .Size = New Size(150, 40),
+            .BackColor = Color.DarkOrange,
+            .ForeColor = Color.White,
+            .FlatStyle = FlatStyle.Flat,
+            .Font = New Font("Poppins", 8.0!, FontStyle.Bold),
+            .Cursor = Cursors.Hand
+        }
+        AddHandler btnDeactivateRole.Click, AddressOf btnDeactivateRole_Click
+        grpRoleAssignment.Controls.Add(btnDeactivateRole)
+
+        Controls.Add(grpRoleAssignment)
     End Sub
 
 
@@ -463,11 +868,32 @@ Public Class SASystemConfiguration
 
     Private Sub LoadStatuses()
         Try
+            If dgvStatuses Is Nothing Then
+                LogRecoveryEvent("LoadStatuses", New Exception("dgvStatuses not initialized"))
+                Return
+            End If
+
             Using conn = GetModuleConnection()
                 If Not TryOpenModuleConnection(conn) Then
                     dgvStatuses.DataSource = Nothing
+                    ShowModuleStatus("Database connection unavailable", True)
                     Return
                 End If
+                
+                ' Check if category_statuses table exists
+                Dim tableExists As Boolean = False
+                Using cmdCheck As New MySqlCommand("SHOW TABLES LIKE 'category_statuses'", conn)
+                    Using reader = cmdCheck.ExecuteReader()
+                        tableExists = reader.HasRows
+                    End Using
+                End Using
+                
+                If Not tableExists Then
+                    ShowModuleStatus("Status table not found. Please run database setup script.", True)
+                    dgvStatuses.DataSource = Nothing
+                    Return
+                End If
+                
                 Dim query = "SELECT status_id, status_name, status_type, IF(is_active=1,'Yes','No') AS is_active FROM category_statuses ORDER BY status_type, status_name"
                 Using adapter As New MySqlDataAdapter(query, conn)
                     statusTable = New DataTable()
@@ -475,9 +901,11 @@ Public Class SASystemConfiguration
                 End Using
             End Using
             dgvStatuses.DataSource = statusTable
+            ShowModuleStatus("Statuses loaded successfully", False)
         Catch ex As Exception
             ShowModuleStatus("Unable to load statuses: " & ex.Message, True)
             LogRecoveryEvent("LoadStatuses", ex)
+            dgvStatuses.DataSource = Nothing
         End Try
     End Sub
 
@@ -503,7 +931,24 @@ Public Class SASystemConfiguration
 
         Try
             Using conn = GetModuleConnection()
-                If Not TryOpenModuleConnection(conn) Then Return
+                If Not TryOpenModuleConnection(conn) Then
+                    MessageBox.Show("Database connection unavailable.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+                
+                ' Check if table exists
+                Dim tableExists As Boolean = False
+                Using cmdCheck As New MySqlCommand("SHOW TABLES LIKE 'category_statuses'", conn)
+                    Using reader = cmdCheck.ExecuteReader()
+                        tableExists = reader.HasRows
+                    End Using
+                End Using
+                
+                If Not tableExists Then
+                    MessageBox.Show("Status table not found. Run tmp_rovodev_missing_tables.sql first.", "Setup Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
+                End If
+                
                 Using cmd As New MySqlCommand(sql, conn)
                     cmd.Parameters.AddWithValue("@name", name)
                     cmd.Parameters.AddWithValue("@type", typeValue)
@@ -533,7 +978,24 @@ Public Class SASystemConfiguration
 
         Try
             Using conn = GetModuleConnection()
-                If Not TryOpenModuleConnection(conn) Then Return
+                If Not TryOpenModuleConnection(conn) Then
+                    MessageBox.Show("Database connection unavailable.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+                
+                ' Check if table exists
+                Dim tableExists As Boolean = False
+                Using cmdCheck As New MySqlCommand("SHOW TABLES LIKE 'category_statuses'", conn)
+                    Using reader = cmdCheck.ExecuteReader()
+                        tableExists = reader.HasRows
+                    End Using
+                End Using
+                
+                If Not tableExists Then
+                    MessageBox.Show("Status table not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+                
                 Using cmd As New MySqlCommand("DELETE FROM category_statuses WHERE status_id=@id", conn)
                     cmd.Parameters.AddWithValue("@id", editingStatusId.Value)
                     cmd.ExecuteNonQuery()
@@ -600,11 +1062,40 @@ Public Class SASystemConfiguration
 
     Private Sub LoadRoleLookups()
         Try
+            If cmbRoleSelector Is Nothing Then
+                LogRecoveryEvent("LoadRoleLookups", New Exception("cmbRoleSelector not initialized"))
+                Return
+            End If
+
             Using conn = GetModuleConnection()
                 If Not TryOpenModuleConnection(conn) Then
                     cmbRoleSelector.DataSource = Nothing
                     Return
                 End If
+                
+                ' Check if user_roles table exists
+                Dim tableExists As Boolean = False
+                Using cmdCheck As New MySqlCommand("SHOW TABLES LIKE 'user_roles'", conn)
+                    Using reader = cmdCheck.ExecuteReader()
+                        tableExists = reader.HasRows
+                    End Using
+                End Using
+                
+                If Not tableExists Then
+                    ' Use default roles from users table if user_roles doesn't exist
+                    Dim items As New List(Of ComboBoxItem)
+                    items.Add(New ComboBoxItem(1, "SuperAdmin"))
+                    items.Add(New ComboBoxItem(2, "Admin"))
+                    items.Add(New ComboBoxItem(3, "Custodian"))
+                    items.Add(New ComboBoxItem(4, "Staff"))
+                    cmbRoleSelector.DataSource = Nothing
+                    cmbRoleSelector.DataSource = items
+                    cmbRoleSelector.DisplayMember = "DisplayText"
+                    cmbRoleSelector.ValueMember = "Key"
+                    cmbRoleSelector.SelectedIndex = 0
+                    Return
+                End If
+                
                 Using cmd As New MySqlCommand("SELECT role_id, role_name FROM user_roles WHERE is_active=1 ORDER BY role_name", conn)
                     Using reader = cmd.ExecuteReader()
                         Dim items As New List(Of ComboBoxItem)
@@ -621,17 +1112,34 @@ Public Class SASystemConfiguration
             End Using
         Catch ex As Exception
             LogRecoveryEvent("LoadRoleLookups", ex)
+            ' Fallback to default roles
+            If cmbRoleSelector IsNot Nothing Then
+                Dim items As New List(Of ComboBoxItem)
+                items.Add(New ComboBoxItem(1, "SuperAdmin"))
+                items.Add(New ComboBoxItem(2, "Admin"))
+                items.Add(New ComboBoxItem(3, "Custodian"))
+                items.Add(New ComboBoxItem(4, "Staff"))
+                cmbRoleSelector.DataSource = items
+                cmbRoleSelector.DisplayMember = "DisplayText"
+                cmbRoleSelector.ValueMember = "Key"
+                If items.Count > 0 Then cmbRoleSelector.SelectedIndex = 0
+            End If
         End Try
     End Sub
 
     Private Sub LoadUsersForAssignment()
         Try
+            If cmbRoleUsers Is Nothing Then
+                LogRecoveryEvent("LoadUsersForAssignment", New Exception("cmbRoleUsers not initialized"))
+                Return
+            End If
+
             Using conn = GetModuleConnection()
                 If Not TryOpenModuleConnection(conn) Then
                     cmbRoleUsers.DataSource = Nothing
                     Return
                 End If
-                Dim sql = "SELECT user_id, CONCAT(IFNULL(first_name,''),' ',IFNULL(last_name,'')) AS full_name FROM users ORDER BY full_name"
+                Dim sql = "SELECT userId AS user_id, CONCAT(IFNULL(firstName,''),' ',IFNULL(lastName,'')) AS full_name FROM users ORDER BY full_name"
                 Using cmd As New MySqlCommand(sql, conn)
                     Using reader = cmd.ExecuteReader()
                         Dim items As New List(Of ComboBoxItem)
@@ -647,6 +1155,7 @@ Public Class SASystemConfiguration
                 End Using
             End Using
         Catch ex As Exception
+            ShowModuleStatus("Unable to load users: " & ex.Message, True)
             LogRecoveryEvent("LoadUsers", ex)
         End Try
     End Sub
@@ -662,7 +1171,24 @@ Public Class SASystemConfiguration
 
         Try
             Using conn = GetModuleConnection()
-                If Not TryOpenModuleConnection(conn) Then Return
+                If Not TryOpenModuleConnection(conn) Then
+                    MessageBox.Show("Database connection unavailable.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+                
+                ' Check if table exists
+                Dim tableExists As Boolean = False
+                Using cmdCheck As New MySqlCommand("SHOW TABLES LIKE 'user_role_assignments'", conn)
+                    Using reader = cmdCheck.ExecuteReader()
+                        tableExists = reader.HasRows
+                    End Using
+                End Using
+                
+                If Not tableExists Then
+                    MessageBox.Show("Role assignment table not found. Run tmp_rovodev_missing_tables.sql first.", "Setup Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
+                End If
+                
                 Dim sql = "INSERT INTO user_role_assignments (user_id, role_id) VALUES (@user, @role) " &
                           "ON DUPLICATE KEY UPDATE assigned_at = CURRENT_TIMESTAMP"
                 Using cmd As New MySqlCommand(sql, conn)

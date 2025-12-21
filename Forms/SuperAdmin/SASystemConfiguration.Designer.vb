@@ -55,14 +55,15 @@ Partial Class SASystemConfiguration
         '
         'lblSystemConfig
         '
-        Me.lblSystemConfig.AutoSize = True
+        Me.lblSystemConfig.AutoSize = False
         Me.lblSystemConfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
         Me.lblSystemConfig.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold)
         Me.lblSystemConfig.ForeColor = System.Drawing.Color.White
-        Me.lblSystemConfig.Location = New System.Drawing.Point(40, 32)
+        Me.lblSystemConfig.Dock = DockStyle.Top
+        Me.lblSystemConfig.Height = 90
         Me.lblSystemConfig.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSystemConfig.Name = "lblSystemConfig"
-        Me.lblSystemConfig.Size = New System.Drawing.Size(395, 58)
+        Me.lblSystemConfig.Padding = New Padding(20, 20, 0, 0)
         Me.lblSystemConfig.TabIndex = 50
         Me.lblSystemConfig.Text = "System Configuration"
         '
@@ -103,15 +104,15 @@ Partial Class SASystemConfiguration
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
+        Me.Label3.AutoSize = False
         Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(33, 65)
+        Me.Label3.Font = New System.Drawing.Font("Poppins", 9!, System.Drawing.FontStyle.Regular)
+        Me.Label3.ForeColor = System.Drawing.Color.LightGray
+        Me.Label3.Location = New System.Drawing.Point(20, 60)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(429, 23)
+        Me.Label3.Size = New System.Drawing.Size(500, 25)
         Me.Label3.TabIndex = 159
-        Me.Label3.Text = "Manage system- wide settings, connection, backups, and logs"
+        Me.Label3.Text = "Manage system-wide settings, connection, backups, and logs"
         '
         'DBHost
         '

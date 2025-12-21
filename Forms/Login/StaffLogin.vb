@@ -5,6 +5,10 @@ Imports MySql.Data.MySqlClient
 Imports System.Data
 
 Public Class StaffLogin
+    ' Keyboard shortcut tracking for S+A+P combination
+    Private keyS_Pressed As Boolean = False
+    Private keyA_Pressed As Boolean = False
+    Private keyP_Pressed As Boolean = False
 
     ' Click on "Don't have account yet" label to go to StaffRegister
 
@@ -171,25 +175,109 @@ Public Class StaffLogin
         ' This is done silently without permission checks since no user is logged in yet
         Try
             DatabaseConnection.InitializeDefaultAccounts()
-            ' CreateTestStaffAccount is now handled by InitializeDefaultAccounts, so no need to call it separately
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Error initializing default accounts: " & ex.Message)
+            Logger.LogError("Error initializing default accounts", ex)
             ' Don't show error to user during initialization - it's handled silently
         End Try
 
-        ' SECRET BUTTON HIDDEN SETTINGS
-        btnSecretConfig.Width = 20
-        btnSecretConfig.Height = 20
-        btnSecretConfig.FlatStyle = FlatStyle.Flat
-        btnSecretConfig.FlatAppearance.BorderSize = 0
-        btnSecretConfig.BackColor = Me.BackColor
-        btnSecretConfig.ForeColor = Me.BackColor
-        btnSecretConfig.Text = ""
-        btnSecretConfig.TabStop = False
+        ' Early connectivity check to surface DB misconfiguration with friendly guidance
+        Try
+            Dim testConn = DatabaseConnection.GetConnection()
+            If testConn IsNot Nothing Then
+                If Not DatabaseConnection.SafeOpenConnection(testConn) Then
+                    Throw New Exception("Unable to open a database connection using the current settings.")
+                End If
+                ' Close after successful ping
+                If testConn.State = Data.ConnectionState.Open Then testConn.Close()
+                testConn.Dispose()
+            Else
+                Throw New Exception("DatabaseConnection.GetConnection returned Nothing.")
+            End If
+        Catch ex As Exception
+            Logger.LogError("Startup connectivity check failed", ex)
+            MessageBox.Show("Unable to connect to the database. Please ensure MySQL is running and connection settings are correct. The configuration screen will open now.", "Database Connection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Try
+                Dim cfg As New SASystemConfiguration()
+                cfg.Show()
+            Catch ex2 As Exception
+                Logger.LogError("Failed to open configuration screen", ex2)
+            End Try
+        End Try
+
+        ' Enable keyboard shortcut handling for S+A+P combination
+        Me.KeyPreview = True
     End Sub
-    Private Sub btnSecretConfig_Click(sender As Object, e As EventArgs) Handles btnSecretConfig.Click
-        Dim cfg As New SASystemConfiguration()
-        cfg.Show()
+    
+    ''' <summary>
+    ''' Handle KeyDown event to track S, A, P keys being pressed simultaneously
+    ''' </summary>
+    Protected Overrides Sub OnKeyDown(e As KeyEventArgs)
+        MyBase.OnKeyDown(e)
+        
+        ' Don't process if user is typing in username or password fields
+        If txb_Username.Focused OrElse txb_Password.Focused Then
+            Return
+        End If
+        
+        ' Track which keys are currently pressed
+        Select Case e.KeyCode
+            Case Keys.S
+                keyS_Pressed = True
+            Case Keys.A
+                keyA_Pressed = True
+            Case Keys.P
+                keyP_Pressed = True
+        End Select
+        
+        ' Check if all three keys are pressed simultaneously
+        If keyS_Pressed AndAlso keyA_Pressed AndAlso keyP_Pressed Then
+            ' Open System Configuration
+            OpenSystemConfiguration()
+            ' Reset key states
+            ResetKeyStates()
+            e.Handled = True
+        End If
+    End Sub
+    
+    ''' <summary>
+    ''' Handle KeyUp event to reset key states when released
+    ''' </summary>
+    Protected Overrides Sub OnKeyUp(e As KeyEventArgs)
+        MyBase.OnKeyUp(e)
+        
+        ' Reset key states when released
+        Select Case e.KeyCode
+            Case Keys.S
+                keyS_Pressed = False
+            Case Keys.A
+                keyA_Pressed = False
+            Case Keys.P
+                keyP_Pressed = False
+        End Select
+    End Sub
+    
+    ''' <summary>
+    ''' Reset all keyboard shortcut states
+    ''' </summary>
+    Private Sub ResetKeyStates()
+        keyS_Pressed = False
+        keyA_Pressed = False
+        keyP_Pressed = False
+    End Sub
+    
+    ''' <summary>
+    ''' Open System Configuration (hidden access via S+A+P shortcut)
+    ''' </summary>
+    Private Sub OpenSystemConfiguration()
+        Try
+            Dim cfg As New SASystemConfiguration()
+            cfg.Show()
+            System.Diagnostics.Debug.WriteLine("[v0] System Configuration opened via keyboard shortcut")
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] Error opening System Configuration: " & ex.Message)
+            MessageBox.Show("Unable to open System Configuration.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     ' Register link click - navigate to registration form

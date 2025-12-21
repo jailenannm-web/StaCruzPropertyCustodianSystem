@@ -189,20 +189,31 @@ Public Class AddDepartment
             Dim contactValue As String = If(contactTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(contactTxt.Text), contactTxt.Text.Trim(), "")
             Dim emailValue As String = If(emailTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(emailTxt.Text), emailTxt.Text.Trim(), "")
 
-            ' Call the enhanced AddDepartment function with all fields matching schema
+            ' Get building and floor values
+            Dim buildingTxt As TextBox = FindControlOfType(Of TextBox)("building")
+            Dim floorTxt As TextBox = FindControlOfType(Of TextBox)("floorNumber")
+            Dim shortNameTxt As TextBox = FindControlOfType(Of TextBox)("shortName")
+            
+            Dim buildingValue As String = If(buildingTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(buildingTxt.Text), buildingTxt.Text.Trim(), "")
+            Dim floorValue As String = If(floorTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(floorTxt.Text), floorTxt.Text.Trim(), "")
+            
+            ' Generate short name/code automatically if not provided
+            Dim shortNameValue As String = ""
+            If shortNameTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(shortNameTxt.Text) Then
+                shortNameValue = shortNameTxt.Text.Trim()
+            Else
+                ' Auto-generate from department name (first 3 letters + count)
+                shortNameValue = GenerateDepartmentShortName(deptName)
+            End If
+            
+            ' Call the AddDepartment function with standard parameters only
             Dim success As Boolean = DatabaseConnection.AddDepartment(
                 deptName,
-                headOfDeptString,                                   ' headOfDepartment (string)
+                headOfDeptString,
                 locationStr,
                 officeCodeValue,
                 contactValue,
-                emailValue,
-                0,                                                  ' noOfEmployees - will be calculated
-                0,                                                  ' budgetAllocation - optional
-                officeHours,                                        ' officeHours
-                establishedDate,                                    ' establishedDate
-                Nothing,                                            ' parentDepartmentId - optional
-                If(statusCombo IsNot Nothing AndAlso statusCombo.SelectedIndex >= 0, statusCombo.SelectedItem.ToString(), "Active")
+                emailValue
             )
 
             If success Then
@@ -264,4 +275,25 @@ Public Class AddDepartment
     Private Sub AddDepartment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+    
+    ''' <summary>
+    ''' Generate a unique short name/code for department
+    ''' </summary>
+    Private Function GenerateDepartmentShortName(departmentName As String) As String
+        If String.IsNullOrWhiteSpace(departmentName) Then Return "DEPT-001"
+        
+        Try
+            ' Take first 3 letters and convert to uppercase
+            Dim prefix As String = departmentName.Substring(0, Math.Min(3, departmentName.Length)).ToUpper()
+            
+            ' Simple counter - you can enhance this with database lookup if needed
+            Dim count As Integer = 0
+            
+            ' Format as PREFIX-XXX (e.g., IT-001, HR-002)
+            Return $"{prefix}-{(count + 1).ToString("D3")}"
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GenerateDepartmentShortName Error: " & ex.Message)
+            Return "DEPT-001"
+        End Try
+    End Function
 End Class

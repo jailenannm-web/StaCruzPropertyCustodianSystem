@@ -183,9 +183,65 @@ Public Class EditPropertyManagement
         End If
 
         txtLocation.Text = SafeValue("location")
-        txtRemarks.Text = SafeValue("description")
-        dtpDateCreated.Value = ParseDate("createdAt", Date.Today)
-        dtpDateUpdated.Value = ParseDate("updatedAt", Date.Today)
+        
+        ' txtRemarks is now used for status (not description)
+        ' Load status dropdown if it's a ComboBox
+        If txtRemarks IsNot Nothing Then
+            If TypeOf txtRemarks Is ComboBox Then
+                Dim remarksCombo As ComboBox = CType(txtRemarks, ComboBox)
+                If remarksCombo.Items.Count = 0 Then
+                    remarksCombo.Items.Clear()
+                    remarksCombo.Items.AddRange(New String() {"Available", "Borrowed", "Needs Repair", "For Disposal"})
+                End If
+                ' Set current status
+                Dim currentStatus As String = SafeValue("status")
+                Dim statusIndex As Integer = remarksCombo.FindStringExact(currentStatus)
+                If statusIndex >= 0 Then
+                    remarksCombo.SelectedIndex = statusIndex
+                Else
+                    remarksCombo.Text = currentStatus
+                End If
+            End If
+        End If
+        
+        ' Hide auto-generated fields (Date Created, Date Updated, Updated By)
+        If dtpDateCreated IsNot Nothing Then
+            dtpDateCreated.Visible = False
+            ' Hide corresponding label if exists
+            Dim allControls() As Control = Me.Controls.Find("Label", True)
+            For Each ctrl As Control In allControls
+                If TypeOf ctrl Is Label Then
+                    Dim lbl As Label = CType(ctrl, Label)
+                    If lbl.Text.Contains("Date Created") Then
+                        lbl.Visible = False
+                        Exit For
+                    End If
+                End If
+            Next
+        End If
+        
+        If dtpDateUpdated IsNot Nothing Then
+            dtpDateUpdated.Visible = False
+            ' Hide corresponding label if exists
+            Dim allControls() As Control = Me.Controls.Find("Label", True)
+            For Each ctrl As Control In allControls
+                If TypeOf ctrl Is Label Then
+                    Dim lbl As Label = CType(ctrl, Label)
+                    If lbl.Text.Contains("Date Updated") Then
+                        lbl.Visible = False
+                        Exit For
+                    End If
+                End If
+            Next
+        End If
+        
+        ' Note: Updated By field doesn't exist in current designer, but hide if found
+        Dim updatedByControls = Me.Controls.Find("updatedBy", True)
+        If updatedByControls IsNot Nothing AndAlso updatedByControls.Length > 0 Then
+            For Each ctrl In updatedByControls
+                ctrl.Visible = False
+            Next
+        End If
     End Sub
 
     Public Sub LoadPropertyData(
@@ -218,9 +274,24 @@ Public Class EditPropertyManagement
         txtAssignedEmployee.Text = assignedEmployee
         txtAssignedDepartment.Text = assignedDepartment
         txtLocation.Text = location
-        txtRemarks.Text = remarks
-        dtpDateCreated.Value = dateCreated
-        dtpDateUpdated.Value = dateUpdated
+        
+        ' txtRemarks now represents status - set it properly
+        If txtRemarks IsNot Nothing AndAlso TypeOf txtRemarks Is ComboBox Then
+            Dim remarksCombo As ComboBox = CType(txtRemarks, ComboBox)
+            If remarksCombo.Items.Count = 0 Then
+                remarksCombo.Items.AddRange(New String() {"Available", "Borrowed", "Needs Repair", "For Disposal"})
+            End If
+            Dim statusIndex As Integer = remarksCombo.FindStringExact(remarks)
+            If statusIndex >= 0 Then
+                remarksCombo.SelectedIndex = statusIndex
+            Else
+                remarksCombo.Text = remarks
+            End If
+        End If
+        
+        ' Hide auto-generated fields
+        If dtpDateCreated IsNot Nothing Then dtpDateCreated.Visible = False
+        If dtpDateUpdated IsNot Nothing Then dtpDateUpdated.Visible = False
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -279,19 +350,31 @@ Public Class EditPropertyManagement
                 End If
             End If
         End If
-        Dim statusValue As String = If(propertyRecord IsNot Nothing, SafeValue("status"), "active")
+        ' Get status from txtRemarks (which is now the status ComboBox)
+        Dim statusValue As String = "Available"
+        If txtRemarks IsNot Nothing Then
+            If TypeOf txtRemarks Is ComboBox Then
+                Dim remarksCombo As ComboBox = CType(txtRemarks, ComboBox)
+                statusValue = If(remarksCombo.SelectedItem IsNot Nothing, remarksCombo.SelectedItem.ToString(), If(Not String.IsNullOrEmpty(remarksCombo.Text), remarksCombo.Text, "Available"))
+            Else
+                statusValue = txtRemarks.Text.Trim()
+            End If
+        End If
+        
+        ' Use empty string for description (txtRemarks is now status, not description)
+        Dim descriptionValue As String = ""
 
         Dim updateOk = DatabaseConnection.UpdateProperty(
             PropertyIDValue,
             txtPropertyName.Text.Trim(),
             GetComboValue(cboCategory, "Others"),
-            txtRemarks.Text.Trim(),
+            descriptionValue,
             txtSerialNumber.Text.Trim(),
-            GetComboValue(conditionStatusCmbo, "good"),
+            GetComboValue(conditionStatusCmbo, "Good"),
             txtLocation.Text.Trim(),
             custodianId,
             departmentId,
-            warrantyDetails:=txtRemarks.Text.Trim(),
+            warrantyDetails:="",
             acquisitionDate:=dtpDatePurchased.Value,
             acquisitionCost:=costValue,
             supplierName:=txtSupplier.Text.Trim(),
@@ -309,6 +392,21 @@ Public Class EditPropertyManagement
     End Sub
 
     Private Sub NavigateBack()
+        ' Check SADashboard first
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(New UC_PropertyManagement1())
+            Return
+        End If
+        
+        ' Check SuperAdminDashboard
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(New UC_PropertyManagement1())
+            Return
+        End If
+        
+        ' Check AdminDashboard
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New UC_PropertyManagement1())

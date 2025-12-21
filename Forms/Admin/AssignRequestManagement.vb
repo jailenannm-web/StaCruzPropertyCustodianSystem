@@ -704,6 +704,14 @@ Public Class AssignRequestManagement
     End Sub
 
     Private Sub NavigateBack()
+        ' Check for SADashboard first (Super Admin)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(New UC_PropertyRequestManagement())
+            Return
+        End If
+        
+        ' Check for AdminDashboard
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New UC_PropertyRequestManagement())

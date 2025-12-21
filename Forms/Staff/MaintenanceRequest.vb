@@ -28,87 +28,53 @@ Partial Public Class MaintenanceRequest
             ' Load maintenance requests for the current staff member
             Dim dt As DataTable = DatabaseConnection.GetStaffMaintenanceRequests(SessionContext.CurrentUserID.Value)
 
-            ' Clear existing data
-            DataGridView1.Rows.Clear()
+            ' Use DataBinding instead of manual row addition for correct data mapping
+            DataGridView1.AutoGenerateColumns = False
+            DataGridView1.DataSource = Nothing
+            
+            ' Map DataGridView columns to database columns using DataPropertyName
+            ' This ensures data appears in correct columns
+            For Each col As DataGridViewColumn In DataGridView1.Columns
+                Select Case col.Index
+                    Case 0 ' PropertID column -> Property/Item Name
+                        col.DataPropertyName = "itemName"
+                        col.HeaderText = "Property/Item Name"
+                    Case 1 ' PropertyName column -> Serial No.
+                        col.DataPropertyName = "serialNumber"
+                        col.HeaderText = "Serial No."
+                    Case 2 ' Category column -> Location
+                        col.DataPropertyName = "location"
+                        col.HeaderText = "Location"
+                    Case 3 ' Description column -> Department
+                        col.DataPropertyName = "department"
+                        col.HeaderText = "Department"
+                    Case 4 ' SerialNumber column -> Condition Before
+                        col.DataPropertyName = "conditionBefore"
+                        col.HeaderText = "Condition Before"
+                    Case 5 ' AcquisitionDate column -> Type of Issue
+                        col.DataPropertyName = "typeOfIssue"
+                        col.HeaderText = "Type of Issue"
+                    Case 6 ' AcquisitionCost column -> Problem Description
+                        col.DataPropertyName = "problemDescription"
+                        col.HeaderText = "Problem Description"
+                    Case 7 ' Supplier column -> Date Requested
+                        col.DataPropertyName = "dateOfRequest"
+                        col.HeaderText = "Date Requested"
+                        col.DefaultCellStyle.Format = "yyyy-MM-dd"
+                    Case 8 ' ConditionStatus column -> Status
+                        col.DataPropertyName = "status"
+                        col.HeaderText = "Status"
+                End Select
+            Next
 
-            ' Populate DataGridView
-            ' Note: Column order must match the designer column order:
-            ' PropertID (Property/Item Name), PropertyName (Serial No.), Category (Location), 
-            ' Description (Department), SerialNumber (Condition Before), AcquisitionDate (Type of Issue),
-            ' AcquisitionCost (Problem Description), Supplier (Maintenance Date), ConditionStatus (Status)
-            If dt.Rows.Count > 0 Then
-                For Each row As DataRow In dt.Rows
-                    Try
-                        Dim itemName As String = ""
-                        Dim serialNo As String = ""
-                        Dim locationValue As String = ""
-                        Dim department As String = ""
-                        Dim conditionBefore As String = ""
-                        Dim typeOfIssue As String = ""
-                        Dim problemDesc As String = ""
-                        Dim maintenanceDate As String = ""
-                        Dim status As String = ""
-                        
-                        ' Safely access columns - use camelCase to match query results
-                        If dt.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")) Then
-                            itemName = row("itemName").ToString()
-                        End If
-                        If dt.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")) Then
-                            serialNo = row("serialNumber").ToString()
-                        End If
-                        If dt.Columns.Contains("location") AndAlso Not IsDBNull(row("location")) Then
-                            locationValue = row("location").ToString()
-                        End If
-                        If dt.Columns.Contains("department") AndAlso Not IsDBNull(row("department")) Then
-                            department = row("department").ToString()
-                        ElseIf dt.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")) Then
-                            department = row("departmentName").ToString()
-                        End If
-                        If dt.Columns.Contains("conditionBefore") AndAlso Not IsDBNull(row("conditionBefore")) Then
-                            conditionBefore = row("conditionBefore").ToString()
-                        End If
-                        If dt.Columns.Contains("typeOfIssue") AndAlso Not IsDBNull(row("typeOfIssue")) Then
-                            typeOfIssue = row("typeOfIssue").ToString()
-                        End If
-                        If dt.Columns.Contains("problemDescription") AndAlso Not IsDBNull(row("problemDescription")) Then
-                            problemDesc = row("problemDescription").ToString()
-                        End If
-                        If dt.Columns.Contains("dateOfRequest") AndAlso Not IsDBNull(row("dateOfRequest")) Then
-                            Try
-                                maintenanceDate = Convert.ToDateTime(row("dateOfRequest")).ToString("yyyy-MM-dd")
-                            Catch
-                                maintenanceDate = row("dateOfRequest").ToString()
-                            End Try
-                        ElseIf dt.Columns.Contains("dateRequested") AndAlso Not IsDBNull(row("dateRequested")) Then
-                            Try
-                                maintenanceDate = Convert.ToDateTime(row("dateRequested")).ToString("yyyy-MM-dd")
-                            Catch
-                                maintenanceDate = row("dateRequested").ToString()
-                            End Try
-                        End If
-                        If dt.Columns.Contains("status") AndAlso Not IsDBNull(row("status")) Then
-                            status = row("status").ToString()
-                        End If
-
-                        ' Add data in the correct column order matching the designer:
-                        ' Column 0: PropertID (shows as "Property/Item Name") -> itemName
-                        ' Column 1: PropertyName (shows as "Serial No.") -> serialNo
-                        ' Column 2: Category (shows as "Location") -> locationValue
-                        ' Column 3: Description -> department
-                        ' Column 4: SerialNumber -> conditionBefore
-                        ' Column 5: AcquisitionDate -> typeOfIssue
-                        ' Column 6: AcquisitionCost -> problemDesc
-                        ' Column 7: Supplier -> maintenanceDate
-                        ' Column 8: ConditionStatus -> status
-                        DataGridView1.Rows.Add(itemName, serialNo, locationValue, department, conditionBefore, typeOfIssue, problemDesc, maintenanceDate, status)
-                    Catch rowEx As Exception
-                        System.Diagnostics.Debug.WriteLine("Error processing row in MaintenanceRequest: " & rowEx.Message)
-                    End Try
-                Next
-            End If
-
-            ' Auto-size columns
+            ' Bind data source AFTER column mapping
+            DataGridView1.DataSource = dt
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            DataGridView1.ReadOnly = True
+            DataGridView1.AllowUserToAddRows = False
+            DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            
+            System.Diagnostics.Debug.WriteLine($"[v0] Loaded {dt.Rows.Count} maintenance requests for staff")
         Catch ex As Exception
             Dim errorMsg As String = "Unable to load maintenance requests. "
             If ex.Message.Contains("Connection") OrElse ex.Message.Contains("timeout") Then
@@ -117,6 +83,7 @@ Partial Public Class MaintenanceRequest
                 errorMsg &= "Please try again."
             End If
             MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            System.Diagnostics.Debug.WriteLine("[v0] LoadMaintenanceRequests Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
 

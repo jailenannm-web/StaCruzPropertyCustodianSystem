@@ -379,26 +379,27 @@ Public Class UC_PropertyManagement1
             End If
         End If
 
-        ' SuperAdmin and Admin have full access - enable buttons when selection exists
+        ' SUPER ADMIN HAS UNRESTRICTED ACCESS - buttons always enabled
         Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
-        If btnEdit IsNot Nothing Then btnEdit.Enabled = hasFullAccess AndAlso hasSelection
-        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess AndAlso hasSelection
+        
+        ' For Super Admin: buttons are always enabled (no selection check)
+        ' For others: require selection
+        If btnEdit IsNot Nothing Then btnEdit.Enabled = hasFullAccess
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess
     End Sub
 
 
 
 
     Private Sub ApplyRolePermissions()
-        ' Super Admin, Admin, and Custodian have full access - all buttons enabled
-        ' No restrictions - all buttons enabled for SuperAdmin and Admin
+        ' SUPER ADMIN HAS UNRESTRICTED ACCESS - NO LIMITATIONS
         Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin() OrElse SessionContext.IsCustodianAdmin() OrElse SessionContext.IsCustodian()
         canModifyProperties = hasFullAccess
 
+        ' Enable all buttons for Super Admin immediately (no selection required)
         If btnAdd IsNot Nothing Then btnAdd.Enabled = hasFullAccess
-        ' Edit/Delete will be enabled when a row is selected (handled in SelectionChanged)
-        ' SuperAdmin and Admin have full access - buttons will be enabled based on selection
-        If btnEdit IsNot Nothing Then btnEdit.Enabled = False ' Will be enabled when row is selected
-        If btnDelete IsNot Nothing Then btnDelete.Enabled = False ' Will be enabled when row is selected
+        If btnEdit IsNot Nothing Then btnEdit.Enabled = hasFullAccess
+        If btnDelete IsNot Nothing Then btnDelete.Enabled = hasFullAccess
         
         ' Also enable issuePropertySlip button if it exists
         Try
@@ -408,6 +409,14 @@ Public Class UC_PropertyManagement1
             End If
         Catch
         End Try
+        
+        ' Debug output
+        System.Diagnostics.Debug.WriteLine("[v0] ApplyRolePermissions - IsSuperAdmin: " & SessionContext.IsSuperAdmin())
+        System.Diagnostics.Debug.WriteLine("[v0] ApplyRolePermissions - IsAdmin: " & SessionContext.IsAdmin())
+        System.Diagnostics.Debug.WriteLine("[v0] ApplyRolePermissions - hasFullAccess: " & hasFullAccess)
+        System.Diagnostics.Debug.WriteLine("[v0] ApplyRolePermissions - btnAdd.Enabled: " & If(btnAdd IsNot Nothing, btnAdd.Enabled.ToString(), "NULL"))
+        System.Diagnostics.Debug.WriteLine("[v0] ApplyRolePermissions - btnEdit.Enabled: " & If(btnEdit IsNot Nothing, btnEdit.Enabled.ToString(), "NULL"))
+        System.Diagnostics.Debug.WriteLine("[v0] ApplyRolePermissions - btnDelete.Enabled: " & If(btnDelete IsNot Nothing, btnDelete.Enabled.ToString(), "NULL"))
     End Sub
 
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
@@ -517,8 +526,20 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - btnAdd_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - IsSuperAdmin: " & SessionContext.IsSuperAdmin())
+        System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - ParentForm: " & If(Me.ParentForm IsNot Nothing, Me.ParentForm.GetType().Name, "NULL"))
+        
         ' Super Admin and Admin bypass all restrictions
-        ' Check SuperAdminDashboard first
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(New AddProperty())
+            System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - AddProperty loaded into SADashboard")
+            Return
+        End If
+        
         Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
         If superAdminDashboard IsNot Nothing Then
             superAdminDashboard.LoadUserControl(New AddProperty())
@@ -539,6 +560,10 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - btnEdit_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - Selected Rows: " & If(propertyManagementGrid IsNot Nothing, propertyManagementGrid.SelectedRows.Count, 0))
+        
         ' Super Admin bypasses all restrictions
         If propertyManagementGrid Is Nothing OrElse propertyManagementGrid.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a property to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -637,7 +662,14 @@ Public Class UC_PropertyManagement1
             )
         End If
 
-        ' LOAD THE USER CONTROL TO DASHBOARD - Check SuperAdminDashboard first
+        ' LOAD THE USER CONTROL TO DASHBOARD - Check SADashboard first
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(editForm)
+            System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - EditProperty loaded into SADashboard")
+            Return
+        End If
+        
         Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
         If superAdminDashboard IsNot Nothing Then
             superAdminDashboard.LoadUserControl(editForm)
@@ -654,6 +686,10 @@ Public Class UC_PropertyManagement1
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - btnDelete_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - Selected Rows: " & propertyManagementGrid.SelectedRows.Count)
+        
         ' Super Admin bypasses all restrictions
 
         ' Check if a row is selected

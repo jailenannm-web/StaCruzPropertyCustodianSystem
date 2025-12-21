@@ -175,6 +175,22 @@ Public Class UC_SupplyRequestManagement
         If btnReject IsNot Nothing Then btnReject.Enabled = hasFullAccess
         If issueRequisition IsNot Nothing Then issueRequisition.Enabled = hasFullAccess
         If printPAR IsNot Nothing Then printPAR.Enabled = hasFullAccess
+        
+        ' Wire up Update button if it exists in the designer
+        Try
+            Dim found() As Control = Me.Controls.Find("btnUpdate", True)
+            If found IsNot Nothing AndAlso found.Length > 0 Then
+                Dim btn As Button = TryCast(found(0), Button)
+                If btn IsNot Nothing Then
+                    btn.Enabled = hasFullAccess
+                    ' Ensure click handler is wired
+                    RemoveHandler btn.Click, AddressOf btnUpdate_Click
+                    AddHandler btn.Click, AddressOf btnUpdate_Click
+                End If
+            End If
+        Catch
+            ' Ignore errors if button doesn't exist
+        End Try
     End Sub
 
     Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
@@ -356,11 +372,23 @@ Public Class UC_SupplyRequestManagement
         End If
 
         ' Open supply assignment form with request ID
+        ' Check for SADashboard first (Super Admin)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Dim assignForm As New AssignSupplyManagement()
+            assignForm.RequestID = requestID
+            saDashboard.LoadUserControl(assignForm)
+            Return
+        End If
+        
+        ' Check for AdminDashboard
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             Dim assignForm As New AssignSupplyManagement()
             assignForm.RequestID = requestID
             parentDashboard.LoadUserControl(assignForm)
+        Else
+            MessageBox.Show("Unable to open assignment form. Parent dashboard not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 
@@ -372,12 +400,32 @@ Public Class UC_SupplyRequestManagement
         ' Always redirect to Assign panel; pass RequestID when available.
         Dim requestID As Integer = TryGetSelectedRequestId()
 
+        ' Check for SADashboard first (Super Admin)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Dim assignForm As New AssignSupplyManagement()
+            If requestID > 0 Then assignForm.RequestID = requestID
+            saDashboard.LoadUserControl(assignForm)
+            Return
+        End If
+        
+        ' Check for AdminDashboard
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             Dim assignForm As New AssignSupplyManagement()
             If requestID > 0 Then assignForm.RequestID = requestID
             parentDashboard.LoadUserControl(assignForm)
+        Else
+            MessageBox.Show("Unable to open assignment form. Parent dashboard not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+    End Sub
+    
+    ''' <summary>
+    ''' Update button to refresh the supply request list
+    ''' </summary>
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs)
+        LoadSupplyRequestData()
+        MessageBox.Show("Supply request list refreshed successfully.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     Private Sub prm_table1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles prm_table1.CellContentClick

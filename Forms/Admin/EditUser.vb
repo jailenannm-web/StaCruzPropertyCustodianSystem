@@ -74,10 +74,12 @@ Public Class EditUser
 
         SetComboValue(suffixAdmin, suffixValue)
         SetComboValue(positionAdmin, position)
-        SetComboValue(usernameAdmin, userRole)
-        SetComboValue(Me.province, provinceValue)
-        SetComboValue(Me.municipality, municipalityValue)
-        SetComboValue(Me.barangay, barangayValue)
+        SetComboValue(usernameAdmin, userRole) ' This sets the role dropdown
+        
+        ' Set location dropdowns with proper DisplayMember/ValueMember
+        SetComboValueWithDataRow(Me.province, provinceValue)
+        SetComboValueWithDataRow(Me.municipality, municipalityValue)
+        SetComboValueWithDataRow(Me.barangay, barangayValue)
 
         editingUsername = username
         currentUserType = userRole ' Store the current user type
@@ -96,8 +98,136 @@ Public Class EditUser
             departmentID.AutoCompleteMode = AutoCompleteMode.SuggestAppend
             departmentID.AutoCompleteSource = AutoCompleteSource.CustomSource
             departmentID.AutoCompleteCustomSource = suggestions
+            
+            ' Load location dropdowns (Province, Municipality, Barangay)
+            LoadLocationDropdowns()
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] EditUser.LoadDepartmentOptions Exception: " & ex.Message)
+        End Try
+    End Sub
+    
+    Private Sub LoadLocationDropdowns()
+        Try
+            ' Load Province dropdown with proper DisplayMember/ValueMember
+            Dim provincesTable As DataTable = DatabaseConnection.GetProvinces()
+            If provincesTable IsNot Nothing AndAlso provincesTable.Rows.Count > 0 Then
+                province.DataSource = provincesTable
+                province.DisplayMember = "province_name"
+                province.ValueMember = "province_name"
+                province.SelectedIndex = -1
+            End If
+            
+            ' Add event handlers for cascading dropdowns
+            AddHandler province.SelectedIndexChanged, AddressOf Province_SelectedIndexChanged
+            AddHandler municipality.SelectedIndexChanged, AddressOf Municipality_SelectedIndexChanged
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] EditUser.LoadLocationDropdowns Exception: " & ex.Message)
+        End Try
+    End Sub
+    
+    Private Sub Province_SelectedIndexChanged(sender As Object, e As EventArgs)
+        Try
+            ' Clear municipality and barangay first
+            municipality.DataSource = Nothing
+            municipality.Items.Clear()
+            barangay.DataSource = Nothing
+            barangay.Items.Clear()
+            
+            ' Get the actual province name from the selected item
+            Dim selectedProvince As String = ""
+            
+            If province.SelectedItem IsNot Nothing Then
+                ' Check if it's a DataRowView
+                If TypeOf province.SelectedItem Is DataRowView Then
+                    Dim drv As DataRowView = CType(province.SelectedItem, DataRowView)
+                    ' Get the province_name from the DataRowView
+                    If drv.Row.Table.Columns.Contains("province_name") Then
+                        selectedProvince = drv.Row("province_name").ToString()
+                    End If
+                ElseIf TypeOf province.SelectedItem Is DataRow Then
+                    Dim dr As DataRow = CType(province.SelectedItem, DataRow)
+                    If dr.Table.Columns.Contains("province_name") Then
+                        selectedProvince = dr("province_name").ToString()
+                    End If
+                Else
+                    ' It's a simple string
+                    selectedProvince = province.SelectedItem.ToString()
+                End If
+            ElseIf province.SelectedValue IsNot Nothing Then
+                ' Fallback to SelectedValue
+                selectedProvince = province.SelectedValue.ToString()
+            End If
+            
+            If Not String.IsNullOrEmpty(selectedProvince) Then
+                System.Diagnostics.Debug.WriteLine("[v0] Province selected: " & selectedProvince)
+                
+                Dim municipalitiesTable As DataTable = DatabaseConnection.GetMunicipalities(selectedProvince)
+                
+                If municipalitiesTable IsNot Nothing AndAlso municipalitiesTable.Rows.Count > 0 Then
+                    System.Diagnostics.Debug.WriteLine("[v0] Loaded " & municipalitiesTable.Rows.Count & " municipalities")
+                    municipality.DataSource = municipalitiesTable
+                    municipality.DisplayMember = "municipality_name"
+                    municipality.ValueMember = "municipality_name"
+                    municipality.SelectedIndex = -1
+                Else
+                    System.Diagnostics.Debug.WriteLine("[v0] No municipalities loaded")
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] EditUser.Province_SelectedIndexChanged Exception: " & ex.Message)
+            MessageBox.Show("Error loading municipalities: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
+    End Sub
+    
+    Private Sub Municipality_SelectedIndexChanged(sender As Object, e As EventArgs)
+        Try
+            ' Clear barangay first
+            barangay.DataSource = Nothing
+            barangay.Items.Clear()
+            
+            ' Get the actual municipality name from the selected item
+            Dim selectedMunicipality As String = ""
+            
+            If municipality.SelectedItem IsNot Nothing Then
+                ' Check if it's a DataRowView
+                If TypeOf municipality.SelectedItem Is DataRowView Then
+                    Dim drv As DataRowView = CType(municipality.SelectedItem, DataRowView)
+                    ' Get the municipality_name from the DataRowView
+                    If drv.Row.Table.Columns.Contains("municipality_name") Then
+                        selectedMunicipality = drv.Row("municipality_name").ToString()
+                    End If
+                ElseIf TypeOf municipality.SelectedItem Is DataRow Then
+                    Dim dr As DataRow = CType(municipality.SelectedItem, DataRow)
+                    If dr.Table.Columns.Contains("municipality_name") Then
+                        selectedMunicipality = dr("municipality_name").ToString()
+                    End If
+                Else
+                    ' It's a simple string
+                    selectedMunicipality = municipality.SelectedItem.ToString()
+                End If
+            ElseIf municipality.SelectedValue IsNot Nothing Then
+                ' Fallback to SelectedValue
+                selectedMunicipality = municipality.SelectedValue.ToString()
+            End If
+            
+            If Not String.IsNullOrEmpty(selectedMunicipality) Then
+                System.Diagnostics.Debug.WriteLine("[v0] Municipality selected: " & selectedMunicipality)
+                
+                Dim barangaysTable As DataTable = DatabaseConnection.GetBarangays(selectedMunicipality)
+                
+                If barangaysTable IsNot Nothing AndAlso barangaysTable.Rows.Count > 0 Then
+                    System.Diagnostics.Debug.WriteLine("[v0] Loaded " & barangaysTable.Rows.Count & " barangays")
+                    barangay.DataSource = barangaysTable
+                    barangay.DisplayMember = "barangay_name"
+                    barangay.ValueMember = "barangay_name"
+                    barangay.SelectedIndex = -1
+                Else
+                    System.Diagnostics.Debug.WriteLine("[v0] No barangays loaded")
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] EditUser.Municipality_SelectedIndexChanged Exception: " & ex.Message)
+            MessageBox.Show("Error loading barangays: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
     End Sub
 
@@ -150,6 +280,9 @@ Public Class EditUser
 
         Dim positionValue As String = GetComboValue(positionAdmin, If(String.IsNullOrWhiteSpace(roleValue), "Administrator", roleValue))
 
+        ' Username validation is handled by the UpdateUserAccount function internally
+        ' No need for separate uniqueness check here as the function will validate
+        
         ' Use unified UpdateUserAccount function that handles both Admin/SuperAdmin and Staff
         Dim updateSuccess As Boolean = DatabaseConnection.UpdateUserAccount(
             adminIDValue,
@@ -202,6 +335,19 @@ Public Class EditUser
     End Sub
 
     Private Sub NavigateBackToList()
+        ' Check SADashboard first
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(New UC_UserManagement())
+            Return
+        End If
+        
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(New UC_UserManagement())
+            Return
+        End If
+        
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New UC_UserManagement())
@@ -212,7 +358,10 @@ Public Class EditUser
         If String.IsNullOrWhiteSpace(firstName.Text) Then Return "First name is required."
         If String.IsNullOrWhiteSpace(lastName.Text) Then Return "Last name is required."
         If String.IsNullOrWhiteSpace(email.Text) Then Return "Email is required."
-        If usernameAdmin.SelectedIndex = -1 Then Return "Please select a user role."
+        ' Role validation - if usernameAdmin has no selection, use currentUserType
+        If usernameAdmin.SelectedIndex = -1 AndAlso String.IsNullOrWhiteSpace(currentUserType) Then 
+            Return "Please select a user role."
+        End If
         Return ""
     End Function
 
@@ -257,6 +406,38 @@ Public Class EditUser
         Else
             combo.SelectedIndex = -1
             combo.Text = value
+        End If
+    End Sub
+    
+    Private Sub SetComboValueWithDataRow(combo As ComboBox, value As String)
+        If combo Is Nothing Then Return
+        If String.IsNullOrWhiteSpace(value) Then
+            combo.SelectedIndex = -1
+            Return
+        End If
+
+        ' Check if combo has DataRowView items
+        If combo.Items.Count > 0 AndAlso TypeOf combo.Items(0) Is DataRowView Then
+            ' Find matching item by display text
+            For i As Integer = 0 To combo.Items.Count - 1
+                Dim item As DataRowView = CType(combo.Items(i), DataRowView)
+                If combo.DisplayMember IsNot Nothing AndAlso Not String.IsNullOrEmpty(combo.DisplayMember) Then
+                    Try
+                        If item(combo.DisplayMember).ToString() = value Then
+                            combo.SelectedIndex = i
+                            Return
+                        End If
+                    Catch
+                        ' Continue if column doesn't exist
+                    End Try
+                End If
+            Next
+            ' If not found, try to set as text
+            combo.SelectedIndex = -1
+            combo.Text = value
+        Else
+            ' Use regular SetComboValue for string items
+            SetComboValue(combo, value)
         End If
     End Sub
 

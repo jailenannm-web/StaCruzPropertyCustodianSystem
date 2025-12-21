@@ -95,8 +95,11 @@ Public Partial Class SADashboard
             ' You can also calculate low stock items
             Dim lowStockCount As Integer = 0
             For Each row As DataRow In suppliesTable.Rows
-                If row("Status").ToString() = "Low Stock" Then
-                    lowStockCount += 1
+                ' Use stockStatus column (not Status)
+                If row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")) Then
+                    If row("stockStatus").ToString() = "Low Stock" Then
+                        lowStockCount += 1
+                    End If
                 End If
             Next
 

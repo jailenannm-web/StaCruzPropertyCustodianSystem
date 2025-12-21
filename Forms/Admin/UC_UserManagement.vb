@@ -229,26 +229,43 @@ Public Class UC_UserManagement
     End Function
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        ' Check SuperAdminDashboard first, then AdminDashboard
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - btnAdd_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - IsSuperAdmin: " & SessionContext.IsSuperAdmin())
+        System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - IsAdmin: " & SessionContext.IsAdmin())
+        System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - ParentForm Type: " & If(Me.ParentForm IsNot Nothing, Me.ParentForm.GetType().Name, "NULL"))
+        
+        ' Use AddUserManagement instead of StaffRegister for Admin/SuperAdmin
+        ' Check SADashboard first (parent class of SuperAdminDashboard)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Try
+                saDashboard.LoadUserControl(New AddUserManagement())
+                System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - AddUserManagement loaded into SADashboard")
+                Return
+            Catch ex As Exception
+                System.Diagnostics.Debug.WriteLine("[v0] SADashboard LoadUserControl Error: " & ex.Message)
+            End Try
+        End If
+        
         Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
         If superAdminDashboard IsNot Nothing Then
             Try
-                superAdminDashboard.loadFormIntoPanel(New StaffRegister())
+                superAdminDashboard.LoadUserControl(New AddUserManagement())
                 Return
             Catch ex As Exception
-                System.Diagnostics.Debug.WriteLine("[v0] SuperAdmin LoadFormIntoPanel Error: " & ex.Message)
+                System.Diagnostics.Debug.WriteLine("[v0] SuperAdmin LoadUserControl Error: " & ex.Message)
             End Try
         End If
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            ' StaffRegister is a Form, not a UserControl; use LoadFormIntoPanel if available
             Try
-                parentDashboard.LoadFormIntoPanel(New StaffRegister())
+                parentDashboard.LoadUserControl(New AddUserManagement())
                 Return
             Catch
                 ' Fallback: show as dialog
-                Dim frm As New StaffRegister()
+                Dim frm As New AddUserManagement()
                 frm.Show()
                 Return
             End Try
@@ -256,6 +273,10 @@ Public Class UC_UserManagement
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - btnEdit_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - Selected Rows: " & pm_table.SelectedRows.Count)
+        
         Dim selectedRow = GetSelectedRow()
         If selectedRow Is Nothing Then Return
 
@@ -309,7 +330,14 @@ Public Class UC_UserManagement
             SafeValue(userData, "username")
         )
 
-        ' Check SuperAdminDashboard first, then AdminDashboard
+        ' Check SADashboard first (parent class), then SuperAdminDashboard, then AdminDashboard
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(editForm)
+            System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - EditUser loaded into SADashboard")
+            Return
+        End If
+        
         Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
         If superAdminDashboard IsNot Nothing Then
             superAdminDashboard.LoadUserControl(editForm)
@@ -323,6 +351,10 @@ Public Class UC_UserManagement
     End Sub
 
     Private Sub btndelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        ' DEBUG: Confirm button click event fires
+        System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - btnDelete_Click FIRED")
+        System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - Selected Rows: " & pm_table.SelectedRows.Count)
+        
         Dim selectedRow = GetSelectedRow()
         If selectedRow Is Nothing Then Return
 
