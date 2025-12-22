@@ -5012,7 +5012,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE maintenance SET status = @status, remarks = @remarks WHERE maintenance_id = @maintenanceID"
+            Dim query As String = "UPDATE maintenance SET status = @status, remarks = @remarks WHERE maintenanceId = @maintenanceID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@status", status)
                 cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
@@ -8766,7 +8766,7 @@ Public Class DatabaseConnection
             End Using
 
             ' Check for duplicate department code
-            Dim checkCodeQuery As String = "SELECT COUNT(*) FROM departments WHERE LOWER(office_code) = LOWER(@departmentCode)"
+            Dim checkCodeQuery As String = "SELECT COUNT(*) FROM departments WHERE LOWER(officeCode) = LOWER(@departmentCode)"
             Using checkCmd As New MySqlCommand(checkCodeQuery, conn)
                 checkCmd.Parameters.AddWithValue("@departmentCode", departmentCode)
                 Dim codeCount As Integer = CInt(checkCmd.ExecuteScalar())

@@ -29,6 +29,22 @@ Partial Class UC_UserManagement
     Private Sub InitializeComponent()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
         Me.pm_table = New System.Windows.Forms.DataGridView()
+        Me.userId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.firstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.middleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fullName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.employeeId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.email = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fullAddress = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.role = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.passwordEncrypted = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lastLogin = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
         Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -37,19 +53,10 @@ Partial Class UC_UserManagement
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.userId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.firstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.middleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fullName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.employeeId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.passwordEncrypted = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lastLogin = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.usermanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_Dashboard
@@ -70,7 +77,7 @@ Partial Class UC_UserManagement
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.userId, Me.createdAt, Me.updatedAt, Me.firstName, Me.middleName, Me.lastName, Me.fullName, Me.departmentId, Me.employeeId, Me.contactNumber, Me.passwordEncrypted, Me.lastLogin})
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.userId, Me.createdAt, Me.updatedAt, Me.username, Me.firstName, Me.middleName, Me.lastName, Me.fullName, Me.departmentId, Me.employeeId, Me.contactNumber, Me.email, Me.fullAddress, Me.role, Me.passwordEncrypted, Me.lastLogin})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(53, 114)
         Me.pm_table.Name = "pm_table"
@@ -78,6 +85,125 @@ Partial Class UC_UserManagement
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 27
+        '
+        'userId
+        '
+        Me.userId.HeaderText = "user Id"
+        Me.userId.MinimumWidth = 6
+        Me.userId.Name = "userId"
+        Me.userId.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Visible = False
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Visible = False
+        Me.updatedAt.Width = 125
+        '
+        'username
+        '
+        Me.username.HeaderText = "Username"
+        Me.username.MinimumWidth = 6
+        Me.username.Name = "username"
+        Me.username.Width = 125
+        Me.username.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        '
+        'firstName
+        '
+        Me.firstName.HeaderText = "first Name"
+        Me.firstName.MinimumWidth = 6
+        Me.firstName.Name = "firstName"
+        Me.firstName.Width = 125
+        '
+        'middleName
+        '
+        Me.middleName.HeaderText = "middle Name"
+        Me.middleName.MinimumWidth = 6
+        Me.middleName.Name = "middleName"
+        Me.middleName.Width = 125
+        '
+        'lastName
+        '
+        Me.lastName.HeaderText = "last Name"
+        Me.lastName.MinimumWidth = 6
+        Me.lastName.Name = "lastName"
+        Me.lastName.Width = 125
+        '
+        'fullName
+        '
+        Me.fullName.HeaderText = "full Name"
+        Me.fullName.MinimumWidth = 6
+        Me.fullName.Name = "fullName"
+        Me.fullName.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "department Id"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'employeeId
+        '
+        Me.employeeId.HeaderText = "employeeId"
+        Me.employeeId.MinimumWidth = 6
+        Me.employeeId.Name = "employeeId"
+        Me.employeeId.Width = 125
+        '
+        'contactNumber
+        '
+        Me.contactNumber.HeaderText = "Contact Number"
+        Me.contactNumber.MinimumWidth = 6
+        Me.contactNumber.Name = "contactNumber"
+        Me.contactNumber.Width = 125
+        Me.contactNumber.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        '
+        'email
+        '
+        Me.email.HeaderText = "Email"
+        Me.email.MinimumWidth = 6
+        Me.email.Name = "email"
+        Me.email.Width = 125
+        '
+        'fullAddress
+        '
+        Me.fullAddress.HeaderText = "Full Address"
+        Me.fullAddress.MinimumWidth = 6
+        Me.fullAddress.Name = "fullAddress"
+        Me.fullAddress.Width = 200
+        Me.fullAddress.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        '
+        'role
+        '
+        Me.role.HeaderText = "Role"
+        Me.role.MinimumWidth = 6
+        Me.role.Name = "role"
+        Me.role.Width = 100
+        '
+        'passwordEncrypted
+        '
+        Me.passwordEncrypted.HeaderText = "passwordEncrypted"
+        Me.passwordEncrypted.MinimumWidth = 6
+        Me.passwordEncrypted.Name = "passwordEncrypted"
+        Me.passwordEncrypted.Visible = False
+        Me.passwordEncrypted.Width = 125
+        '
+        'lastLogin
+        '
+        Me.lastLogin.HeaderText = "lastLogin"
+        Me.lastLogin.MinimumWidth = 6
+        Me.lastLogin.Name = "lastLogin"
+        Me.lastLogin.Visible = False
+        Me.lastLogin.Width = 125
         '
         'cboRoleFilter
         '
@@ -189,99 +315,33 @@ Partial Class UC_UserManagement
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
-        'userId
+        'PictureBox2
         '
-        Me.userId.HeaderText = "user Id"
-        Me.userId.MinimumWidth = 6
-        Me.userId.Name = "userId"
-        Me.userId.Width = 125
+        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox2.Location = New System.Drawing.Point(403, 63)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(62, 32)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 179
+        Me.PictureBox2.TabStop = False
         '
-        'createdAt
+        'usermanagementsearchbar
         '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Visible = False
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Visible = False
-        Me.updatedAt.Width = 125
-        '
-        'firstName
-        '
-        Me.firstName.HeaderText = "first Name"
-        Me.firstName.MinimumWidth = 6
-        Me.firstName.Name = "firstName"
-        Me.firstName.Width = 125
-        '
-        'middleName
-        '
-        Me.middleName.HeaderText = "middle Name"
-        Me.middleName.MinimumWidth = 6
-        Me.middleName.Name = "middleName"
-        Me.middleName.Width = 125
-        '
-        'lastName
-        '
-        Me.lastName.HeaderText = "last Name"
-        Me.lastName.MinimumWidth = 6
-        Me.lastName.Name = "lastName"
-        Me.lastName.Width = 125
-        '
-        'fullName
-        '
-        Me.fullName.HeaderText = "full Name"
-        Me.fullName.MinimumWidth = 6
-        Me.fullName.Name = "fullName"
-        Me.fullName.Width = 125
-        '
-        'departmentId
-        '
-        Me.departmentId.HeaderText = "department Id"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
-        '
-        'employeeId
-        '
-        Me.employeeId.HeaderText = "employeeId"
-        Me.employeeId.MinimumWidth = 6
-        Me.employeeId.Name = "employeeId"
-        Me.employeeId.Width = 125
-        '
-        'contactNumber
-        '
-        Me.contactNumber.HeaderText = "contactNumber"
-        Me.contactNumber.MinimumWidth = 6
-        Me.contactNumber.Name = "contactNumber"
-        Me.contactNumber.Width = 125
-        '
-        'passwordEncrypted
-        '
-        Me.passwordEncrypted.HeaderText = "passwordEncrypted"
-        Me.passwordEncrypted.MinimumWidth = 6
-        Me.passwordEncrypted.Name = "passwordEncrypted"
-        Me.passwordEncrypted.Visible = False
-        Me.passwordEncrypted.Width = 125
-        '
-        'lastLogin
-        '
-        Me.lastLogin.HeaderText = "lastLogin"
-        Me.lastLogin.MinimumWidth = 6
-        Me.lastLogin.Name = "lastLogin"
-        Me.lastLogin.Visible = False
-        Me.lastLogin.Width = 125
+        Me.usermanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.usermanagementsearchbar.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.usermanagementsearchbar.Location = New System.Drawing.Point(472, 64)
+        Me.usermanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.usermanagementsearchbar.Name = "usermanagementsearchbar"
+        Me.usermanagementsearchbar.Size = New System.Drawing.Size(404, 27)
+        Me.usermanagementsearchbar.TabIndex = 178
         '
         'UC_UserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.usermanagementsearchbar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlusermanagement)
         Me.Controls.Add(Me.btnRefresh)
@@ -295,6 +355,7 @@ Partial Class UC_UserManagement
         Me.Name = "UC_UserManagement"
         Me.Size = New System.Drawing.Size(1394, 803)
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -312,6 +373,7 @@ Partial Class UC_UserManagement
     Friend WithEvents userId As DataGridViewTextBoxColumn
     Friend WithEvents createdAt As DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As DataGridViewTextBoxColumn
+    Friend WithEvents username As DataGridViewTextBoxColumn
     Friend WithEvents firstName As DataGridViewTextBoxColumn
     Friend WithEvents middleName As DataGridViewTextBoxColumn
     Friend WithEvents lastName As DataGridViewTextBoxColumn
@@ -319,6 +381,11 @@ Partial Class UC_UserManagement
     Friend WithEvents departmentId As DataGridViewTextBoxColumn
     Friend WithEvents employeeId As DataGridViewTextBoxColumn
     Friend WithEvents contactNumber As DataGridViewTextBoxColumn
+    Friend WithEvents email As DataGridViewTextBoxColumn
+    Friend WithEvents fullAddress As DataGridViewTextBoxColumn
+    Friend WithEvents role As DataGridViewTextBoxColumn
     Friend WithEvents passwordEncrypted As DataGridViewTextBoxColumn
     Friend WithEvents lastLogin As DataGridViewTextBoxColumn
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents usermanagementsearchbar As TextBox
 End Class

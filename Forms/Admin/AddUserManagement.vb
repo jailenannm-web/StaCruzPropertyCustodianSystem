@@ -109,13 +109,37 @@ Public Class AddUserManagement
             If municipal.DataSource IsNot Nothing Then municipal.DataSource = Nothing
             municipal.Items.Clear()
 
-            Dim selectedProvince As String = If(province.SelectedItem IsNot Nothing, province.SelectedItem.ToString(), "")
+            ' Get the actual province name from the selected item
+            Dim selectedProvince As String = ""
+            
+            If province.SelectedItem IsNot Nothing Then
+                ' Check if it's a DataRowView
+                If TypeOf province.SelectedItem Is DataRowView Then
+                    Dim drv As DataRowView = CType(province.SelectedItem, DataRowView)
+                    ' Get the province_name from the DataRowView
+                    If drv.Row.Table.Columns.Contains("province_name") Then
+                        selectedProvince = drv.Row("province_name").ToString()
+                    End If
+                ElseIf TypeOf province.SelectedItem Is DataRow Then
+                    Dim dr As DataRow = CType(province.SelectedItem, DataRow)
+                    If dr.Table.Columns.Contains("province_name") Then
+                        selectedProvince = dr("province_name").ToString()
+                    End If
+                Else
+                    ' It's a simple string
+                    selectedProvince = province.SelectedItem.ToString()
+                End If
+            ElseIf province.SelectedValue IsNot Nothing Then
+                ' Fallback to SelectedValue
+                selectedProvince = province.SelectedValue.ToString()
+            End If
+            
             If String.IsNullOrEmpty(selectedProvince) Then Return
 
             Dim municipalities As DataTable = DatabaseConnection.GetMunicipalities(selectedProvince)
             If municipalities IsNot Nothing AndAlso municipalities.Rows.Count > 0 Then
                 municipal.DisplayMember = "municipality_name"
-                municipal.ValueMember = "municipality_id"
+                municipal.ValueMember = "municipality_name"
                 municipal.DataSource = municipalities
             Else
                 municipal.Items.Add("Select Municipality")
@@ -139,13 +163,38 @@ Public Class AddUserManagement
     Private Sub LoadBarangayDropdown()
         Try
             barangay.Items.Clear()
-            Dim selectedMunicipality As String = If(municipal.SelectedItem IsNot Nothing, municipal.SelectedItem.ToString(), "")
+            
+            ' Get the actual municipality name from the selected item
+            Dim selectedMunicipality As String = ""
+            
+            If municipal.SelectedItem IsNot Nothing Then
+                ' Check if it's a DataRowView
+                If TypeOf municipal.SelectedItem Is DataRowView Then
+                    Dim drv As DataRowView = CType(municipal.SelectedItem, DataRowView)
+                    ' Get the municipality_name from the DataRowView
+                    If drv.Row.Table.Columns.Contains("municipality_name") Then
+                        selectedMunicipality = drv.Row("municipality_name").ToString()
+                    End If
+                ElseIf TypeOf municipal.SelectedItem Is DataRow Then
+                    Dim dr As DataRow = CType(municipal.SelectedItem, DataRow)
+                    If dr.Table.Columns.Contains("municipality_name") Then
+                        selectedMunicipality = dr("municipality_name").ToString()
+                    End If
+                Else
+                    ' It's a simple string
+                    selectedMunicipality = municipal.SelectedItem.ToString()
+                End If
+            ElseIf municipal.SelectedValue IsNot Nothing Then
+                ' Fallback to SelectedValue
+                selectedMunicipality = municipal.SelectedValue.ToString()
+            End If
+            
             If String.IsNullOrEmpty(selectedMunicipality) Then Return
 
             Dim barangays As DataTable = DatabaseConnection.GetBarangays(selectedMunicipality)
             If barangays IsNot Nothing AndAlso barangays.Rows.Count > 0 Then
                 barangay.DisplayMember = "barangay_name"
-                barangay.ValueMember = "barangay_id"
+                barangay.ValueMember = "barangay_name"
                 barangay.DataSource = barangays
             Else
                 barangay.Items.Add("Select Barangay")

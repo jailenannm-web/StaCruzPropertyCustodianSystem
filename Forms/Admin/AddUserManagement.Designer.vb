@@ -563,11 +563,13 @@ Partial Class AddUserManagement
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents uc_um_edituser As Resources.Controls.RoundedPanel
     Friend WithEvents suffix As System.Windows.Forms.ComboBox
+    Friend WithEvents suffixAdmin As System.Windows.Forms.ComboBox
     Friend WithEvents passwordEncrypted As System.Windows.Forms.TextBox
     Friend WithEvents barangay As System.Windows.Forms.ComboBox
     Friend WithEvents municipal As System.Windows.Forms.ComboBox
     Friend WithEvents province As System.Windows.Forms.ComboBox
     Friend WithEvents position As System.Windows.Forms.ComboBox
+    Friend WithEvents positionAdmin As System.Windows.Forms.ComboBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents employeeId As System.Windows.Forms.TextBox

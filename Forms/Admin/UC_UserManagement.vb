@@ -3,6 +3,7 @@ Imports System.Data
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
 Imports System.Linq
+Imports System.Collections.Generic
 
 Public Class UC_UserManagement
     Inherits UserControl
@@ -52,6 +53,18 @@ Public Class UC_UserManagement
         For Each column As DataGridViewColumn In pm_table.Columns
             column.SortMode = DataGridViewColumnSortMode.Automatic
         Next
+        
+        ' Hide columns that should not be displayed
+        ' Show only: userId, username, fullName, contactNumber, email, fullAddress, role
+        If pm_table.Columns.Contains("createdAt") Then pm_table.Columns("createdAt").Visible = False
+        If pm_table.Columns.Contains("updatedAt") Then pm_table.Columns("updatedAt").Visible = False
+        If pm_table.Columns.Contains("firstName") Then pm_table.Columns("firstName").Visible = False
+        If pm_table.Columns.Contains("middleName") Then pm_table.Columns("middleName").Visible = False
+        If pm_table.Columns.Contains("lastName") Then pm_table.Columns("lastName").Visible = False
+        If pm_table.Columns.Contains("departmentId") Then pm_table.Columns("departmentId").Visible = False
+        If pm_table.Columns.Contains("employeeId") Then pm_table.Columns("employeeId").Visible = False
+        If pm_table.Columns.Contains("passwordEncrypted") Then pm_table.Columns("passwordEncrypted").Visible = False
+        If pm_table.Columns.Contains("lastLogin") Then pm_table.Columns("lastLogin").Visible = False
     End Sub
 
     Private Sub ConfigureFilterControls()
@@ -145,13 +158,31 @@ Public Class UC_UserManagement
                     lastLoginValue = FormatDateValue(record("lastLogin"))
                 End If
 
+                ' ===== BUILD FULL ADDRESS FROM PROVINCE, MUNICIPALITY, BARANGAY =====
+                Dim province As String = SafeValue(record, "province_city")
+                Dim municipality As String = SafeValue(record, "municipality")
+                Dim barangay As String = SafeValue(record, "barangay")
+                
+                Dim addressParts As New List(Of String)
+                If Not String.IsNullOrWhiteSpace(barangay) Then addressParts.Add(barangay)
+                If Not String.IsNullOrWhiteSpace(municipality) Then addressParts.Add(municipality)
+                If Not String.IsNullOrWhiteSpace(province) Then addressParts.Add(province)
+                
+                Dim fullAddress As String = String.Join(", ", addressParts)
+                If String.IsNullOrWhiteSpace(fullAddress) Then fullAddress = "N/A"
+                
+                ' Get role from user_type field
+                Dim userRole As String = SafeValue(record, "user_type")
+                If String.IsNullOrWhiteSpace(userRole) Then userRole = "N/A"
+
                 ' ===== ADD ROW TO DATAGRIDVIEW IN CORRECT COLUMN ORDER =====
-                ' Column order from Designer: userId, createdAt, updatedAt, firstName, middleName, lastName, 
-                '                            fullName, departmentId, employeeId, contactNumber, passwordEncrypted, lastLogin
+                ' Column order from Designer: userId, createdAt, updatedAt, username, firstName, middleName, lastName, 
+                '                            fullName, departmentId, employeeId, contactNumber, email, fullAddress, role, passwordEncrypted, lastLogin
                 Dim rowIndex As Integer = pm_table.Rows.Add(
                     SafeValue(record, "userId"),                    ' userId
                     createdAtValue,                                  ' createdAt
                     updatedAtValue,                                  ' updatedAt
+                    SafeValue(record, "username"),                  ' username
                     firstName,                                       ' firstName
                     middleName,                                      ' middleName
                     lastName,                                        ' lastName
@@ -159,6 +190,9 @@ Public Class UC_UserManagement
                     SafeValue(record, "departmentId"),              ' departmentId
                     SafeValue(record, "employeeId"),                ' employeeId
                     SafeValue(record, "contactNumber"),            ' contactNumber
+                    SafeValue(record, "email"),                     ' email
+                    fullAddress,                                     ' fullAddress
+                    userRole,                                        ' role
                     "******",                                        ' passwordEncrypted (hidden)
                     lastLoginValue                                   ' lastLogin
                 )
@@ -310,24 +344,27 @@ Public Class UC_UserManagement
         End If
 
         ' Load user data into edit form
+        ' LoadUserData signature: userID, firstName, middleName, lastName, suffixValue, position, 
+        '                        departmentID, employeeID, contactNumber, email, userRole, 
+        '                        provinceValue, municipalityValue, barangayValue, password, dateRegistered, username
         editForm.LoadUserData(
-            userIdStr,
-            SafeValue(userData, "firstName"),
-            SafeValue(userData, "middleName"),
-            SafeValue(userData, "lastName"),
-            SafeValue(userData, "suffix"),
-            SafeValue(userData, "position"),
-            SafeValue(userData, "departmentId"),
-            SafeValue(userData, "employeeId"),
-            SafeValue(userData, "contactNumber"),
-            SafeValue(userData, "email"),
-            SafeValue(userData, "username"),
-            SafeValue(userData, "province"),
-            SafeValue(userData, "municipal"),
-            SafeValue(userData, "barangay"),
-            "",
-            dateAssignedValue,
-            SafeValue(userData, "username")
+            userIdStr,                                      ' userID
+            SafeValue(userData, "firstName"),              ' firstName
+            SafeValue(userData, "middleName"),             ' middleName
+            SafeValue(userData, "lastName"),               ' lastName
+            SafeValue(userData, "suffix"),                 ' suffixValue
+            SafeValue(userData, "position"),               ' position
+            SafeValue(userData, "departmentId"),           ' departmentID
+            SafeValue(userData, "employeeId"),             ' employeeID
+            SafeValue(userData, "contactNumber"),          ' contactNumber
+            SafeValue(userData, "email"),                  ' email
+            SafeValue(userData, "role"),                   ' userRole (FIXED: was "username")
+            SafeValue(userData, "province"),               ' provinceValue
+            SafeValue(userData, "municipal"),              ' municipalityValue
+            SafeValue(userData, "barangay"),               ' barangayValue
+            "",                                            ' password (empty - not loading)
+            dateAssignedValue,                             ' dateRegistered
+            SafeValue(userData, "username")                ' username
         )
 
         ' Check SADashboard first (parent class), then SuperAdminDashboard, then AdminDashboard
@@ -516,10 +553,27 @@ Public Class UC_UserManagement
                     lastLoginValue = FormatDateValue(record("lastLogin"))
                 End If
 
+                ' Build full address for search results
+                Dim province As String = SafeValue(record, "province_city")
+                Dim municipality As String = SafeValue(record, "municipality")
+                Dim barangay As String = SafeValue(record, "barangay")
+                
+                Dim addressParts As New List(Of String)
+                If Not String.IsNullOrWhiteSpace(barangay) Then addressParts.Add(barangay)
+                If Not String.IsNullOrWhiteSpace(municipality) Then addressParts.Add(municipality)
+                If Not String.IsNullOrWhiteSpace(province) Then addressParts.Add(province)
+                
+                Dim fullAddress As String = String.Join(", ", addressParts)
+                If String.IsNullOrWhiteSpace(fullAddress) Then fullAddress = "N/A"
+                
+                Dim userRole As String = SafeValue(record, "user_type")
+                If String.IsNullOrWhiteSpace(userRole) Then userRole = "N/A"
+
                 Dim rowIndex As Integer = pm_table.Rows.Add(
                     SafeValue(record, "userId"),
                     createdAtValue,
                     updatedAtValue,
+                    SafeValue(record, "username"),
                     firstName,
                     middleName,
                     lastName,
@@ -527,6 +581,9 @@ Public Class UC_UserManagement
                     SafeValue(record, "departmentId"),
                     SafeValue(record, "employeeId"),
                     SafeValue(record, "contactNumber"),
+                    SafeValue(record, "email"),
+                    fullAddress,
+                    userRole,
                     "******",
                     lastLoginValue
                 )
@@ -560,5 +617,13 @@ Public Class UC_UserManagement
         Finally
             isSearchingUsers = False
         End Try
+    End Sub
+
+    Private Sub maintenancerequestmanagementsearchbar_TextChanged(sender As Object, e As EventArgs) Handles usermanagementsearchbar.TextChanged
+
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+
     End Sub
 End Class

@@ -42,6 +42,7 @@ Partial Class EditDepartment
         Me.status = New System.Windows.Forms.Label()
         Me.budget_allocation = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.departmentHead = New System.Windows.Forms.ComboBox()
         Me.floorNumber = New System.Windows.Forms.TextBox()
         Me.location = New System.Windows.Forms.TextBox()
         Me.contactNumber = New System.Windows.Forms.TextBox()
@@ -55,7 +56,6 @@ Partial Class EditDepartment
         Me.department_name = New System.Windows.Forms.Label()
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
-        Me.departmentHead = New System.Windows.Forms.ComboBox()
         Me.RoundedPanel2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -68,7 +68,7 @@ Partial Class EditDepartment
         Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(52, 62)
         Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(287, 38)
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(267, 38)
         Me.admin_label_DepartmentManagement.TabIndex = 38
         Me.admin_label_DepartmentManagement.Text = "Edit Department"
         '
@@ -314,6 +314,17 @@ Partial Class EditDepartment
         Me.Panel1.Size = New System.Drawing.Size(553, 382)
         Me.Panel1.TabIndex = 64
         '
+        'departmentHead
+        '
+        Me.departmentHead.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.departmentHead.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.departmentHead.FormattingEnabled = True
+        Me.departmentHead.Location = New System.Drawing.Point(256, 98)
+        Me.departmentHead.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.departmentHead.Name = "departmentHead"
+        Me.departmentHead.Size = New System.Drawing.Size(239, 26)
+        Me.departmentHead.TabIndex = 70
+        '
         'floorNumber
         '
         Me.floorNumber.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -470,20 +481,9 @@ Partial Class EditDepartment
         Me.instructions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.instructions.Location = New System.Drawing.Point(19, 25)
         Me.instructions.Name = "instructions"
-        Me.instructions.Size = New System.Drawing.Size(267, 18)
+        Me.instructions.Size = New System.Drawing.Size(282, 18)
         Me.instructions.TabIndex = 40
         Me.instructions.Text = "Update the department information below."
-        '
-        'departmentHead
-        '
-        Me.departmentHead.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.departmentHead.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.departmentHead.FormattingEnabled = True
-        Me.departmentHead.Location = New System.Drawing.Point(256, 98)
-        Me.departmentHead.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.departmentHead.Name = "departmentHead"
-        Me.departmentHead.Size = New System.Drawing.Size(239, 26)
-        Me.departmentHead.TabIndex = 70
         '
         'EditDepartment
         '

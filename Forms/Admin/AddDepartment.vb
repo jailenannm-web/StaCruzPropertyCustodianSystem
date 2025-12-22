@@ -101,6 +101,19 @@ Public Class AddDepartment
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(New UC_DepartmentManagement())
+            Return
+        End If
+        
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(New UC_DepartmentManagement())
+            Return
+        End If
+        
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New UC_DepartmentManagement())
@@ -221,15 +234,36 @@ Public Class AddDepartment
                 ClearForm()
 
                 ' Return to department management and refresh
+                ' Check SADashboard first (parent class)
+                Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+                If saDashboard IsNot Nothing Then
+                    Dim deptManagement As New UC_DepartmentManagement()
+                    saDashboard.LoadUserControl(deptManagement)
+                    Try
+                        deptManagement.LoadDepartmentsData()
+                    Catch
+                    End Try
+                    Return
+                End If
+                
+                Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+                If superAdminDashboard IsNot Nothing Then
+                    Dim deptManagement As New UC_DepartmentManagement()
+                    superAdminDashboard.LoadUserControl(deptManagement)
+                    Try
+                        deptManagement.LoadDepartmentsData()
+                    Catch
+                    End Try
+                    Return
+                End If
+                
                 Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
                 If parentDashboard IsNot Nothing Then
                     Dim deptManagement As New UC_DepartmentManagement()
                     parentDashboard.LoadUserControl(deptManagement)
-                    ' Refresh the data - call method if it exists
                     Try
                         deptManagement.LoadDepartmentsData()
                     Catch
-                        ' Ignore if method not available
                     End Try
                 End If
             End If

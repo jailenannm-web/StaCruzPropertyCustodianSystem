@@ -39,9 +39,12 @@ Partial Class UC_SupplyManagement
         Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.supplymanagementsearchbar = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.supplymanagementssearchbar = New System.Windows.Forms.TextBox()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'admin_label_PropertyManagement
@@ -282,79 +285,46 @@ Partial Class UC_SupplyManagement
         Me.mnuPrintPARICS.Size = New System.Drawing.Size(190, 24)
         Me.mnuPrintPARICS.Text = "Print PAR/ICS"
         '
-        'supplyId
+        'PictureBox2
         '
-        Me.supplyId.HeaderText = "supplyId"
-        Me.supplyId.MinimumWidth = 6
-        Me.supplyId.Name = "supplyId"
-        Me.supplyId.Width = 125
+        Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(100, 50)
+        Me.PictureBox2.TabIndex = 1
+        Me.PictureBox2.TabStop = False
         '
-        'itemName
+        'supplymanagementsearchbar
         '
-        Me.itemName.HeaderText = "item Name"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 125
+        Me.supplymanagementsearchbar.Location = New System.Drawing.Point(0, 0)
+        Me.supplymanagementsearchbar.Name = "supplymanagementsearchbar"
+        Me.supplymanagementsearchbar.Size = New System.Drawing.Size(100, 22)
+        Me.supplymanagementsearchbar.TabIndex = 2
         '
-        'unitOfMeasure
+        'PictureBox1
         '
-        Me.unitOfMeasure.HeaderText = "unit Of Measure"
-        Me.unitOfMeasure.MinimumWidth = 6
-        Me.unitOfMeasure.Name = "unitOfMeasure"
-        Me.unitOfMeasure.Width = 125
+        Me.PictureBox1.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
+        Me.PictureBox1.Location = New System.Drawing.Point(493, 78)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(27, 32)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 179
+        Me.PictureBox1.TabStop = False
         '
-        'dateReceived
+        'supplymanagementssearchbar
         '
-        Me.dateReceived.HeaderText = "date Received"
-        Me.dateReceived.MinimumWidth = 6
-        Me.dateReceived.Name = "dateReceived"
-        Me.dateReceived.Width = 125
-        '
-        'unitCost
-        '
-        Me.unitCost.HeaderText = "unitCost"
-        Me.unitCost.MinimumWidth = 6
-        Me.unitCost.Name = "unitCost"
-        Me.unitCost.Width = 125
-        '
-        'totalCost
-        '
-        Me.totalCost.HeaderText = "totalCost"
-        Me.totalCost.MinimumWidth = 6
-        Me.totalCost.Name = "totalCost"
-        Me.totalCost.Width = 125
-        '
-        'sourceOfFunds
-        '
-        Me.sourceOfFunds.HeaderText = "source Of Funds"
-        Me.sourceOfFunds.MinimumWidth = 6
-        Me.sourceOfFunds.Name = "sourceOfFunds"
-        Me.sourceOfFunds.Width = 125
-        '
-        'stockStatus
-        '
-        Me.stockStatus.HeaderText = "stockStatus"
-        Me.stockStatus.MinimumWidth = 6
-        Me.stockStatus.Name = "stockStatus"
-        Me.stockStatus.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
+        Me.supplymanagementssearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.supplymanagementssearchbar.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.supplymanagementssearchbar.Location = New System.Drawing.Point(527, 82)
+        Me.supplymanagementssearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.supplymanagementssearchbar.Name = "supplymanagementssearchbar"
+        Me.supplymanagementssearchbar.Size = New System.Drawing.Size(410, 27)
+        Me.supplymanagementssearchbar.TabIndex = 178
         '
         'UC_SupplyManagement
         '
         Me.AutoScroll = True
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.supplymanagementssearchbar)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.supplymanagementsearchbar)
         Me.Controls.Add(Me.Label1)
@@ -372,6 +342,7 @@ Partial Class UC_SupplyManagement
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsActions.ResumeLayout(False)
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -407,4 +378,6 @@ Partial Class UC_SupplyManagement
     Friend WithEvents updatedAt As DataGridViewTextBoxColumn
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents supplymanagementsearchbar As TextBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents supplymanagementssearchbar As TextBox
 End Class

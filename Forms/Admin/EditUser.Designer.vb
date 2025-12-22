@@ -33,32 +33,34 @@ Partial Class EditUser
         Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.instructions = New System.Windows.Forms.Label()
         Me.uc_um_edituser = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.suffixAdmin = New System.Windows.Forms.ComboBox()
+        Me.role = New System.Windows.Forms.ComboBox()
+        Me.lblrole = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.username = New System.Windows.Forms.TextBox()
+        Me.passwordEncrypted = New System.Windows.Forms.TextBox()
         Me.barangay = New System.Windows.Forms.ComboBox()
-        Me.municipality = New System.Windows.Forms.ComboBox()
+        Me.municipal = New System.Windows.Forms.ComboBox()
         Me.province = New System.Windows.Forms.ComboBox()
-        Me.usernameAdmin = New System.Windows.Forms.ComboBox()
-        Me.positionAdmin = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.um_edituser_txtboxID = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.um_edituser_txtboxAddress = New System.Windows.Forms.Label()
+        Me.um_edituser_txtboxEmail = New System.Windows.Forms.Label()
+        Me.email = New System.Windows.Forms.TextBox()
+        Me.suffixAdmin = New System.Windows.Forms.ComboBox()
+        Me.positionAdmin = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.employeeID = New System.Windows.Forms.TextBox()
+        Me.employeeId = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.contactNumber = New System.Windows.Forms.TextBox()
+        Me.um_edituser_txtboxdepartment = New System.Windows.Forms.Label()
+        Me.um_useredit_txtboxposition = New System.Windows.Forms.Label()
+        Me.departmentId = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.middleName = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.userID = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.um_edituser_txtboxAddress = New System.Windows.Forms.Label()
-        Me.um_edituser_Password = New System.Windows.Forms.Label()
-        Me.password = New System.Windows.Forms.TextBox()
-        Me.um_edituser_txtboxUsername = New System.Windows.Forms.Label()
-        Me.um_edituser_txtboxEmail = New System.Windows.Forms.Label()
-        Me.email = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.contactNumber = New System.Windows.Forms.TextBox()
-        Me.um_edituser_txtboxdepartment = New System.Windows.Forms.Label()
-        Me.departmentID = New System.Windows.Forms.TextBox()
-        Me.um_useredit_txtboxposition = New System.Windows.Forms.Label()
         Me.um_edituser_lastname = New System.Windows.Forms.Label()
         Me.lastName = New System.Windows.Forms.TextBox()
         Me.um_edituser_fullname = New System.Windows.Forms.Label()
@@ -106,32 +108,34 @@ Partial Class EditUser
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.uc_um_edituser.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.uc_um_edituser.Controls.Add(Me.suffixAdmin)
+        Me.uc_um_edituser.Controls.Add(Me.role)
+        Me.uc_um_edituser.Controls.Add(Me.lblrole)
+        Me.uc_um_edituser.Controls.Add(Me.Label1)
+        Me.uc_um_edituser.Controls.Add(Me.username)
+        Me.uc_um_edituser.Controls.Add(Me.passwordEncrypted)
         Me.uc_um_edituser.Controls.Add(Me.barangay)
-        Me.uc_um_edituser.Controls.Add(Me.municipality)
+        Me.uc_um_edituser.Controls.Add(Me.municipal)
         Me.uc_um_edituser.Controls.Add(Me.province)
-        Me.uc_um_edituser.Controls.Add(Me.usernameAdmin)
-        Me.uc_um_edituser.Controls.Add(Me.positionAdmin)
         Me.uc_um_edituser.Controls.Add(Me.Label9)
+        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxID)
+        Me.uc_um_edituser.Controls.Add(Me.Label6)
+        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxAddress)
+        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxEmail)
+        Me.uc_um_edituser.Controls.Add(Me.email)
+        Me.uc_um_edituser.Controls.Add(Me.suffixAdmin)
+        Me.uc_um_edituser.Controls.Add(Me.positionAdmin)
         Me.uc_um_edituser.Controls.Add(Me.Label8)
-        Me.uc_um_edituser.Controls.Add(Me.employeeID)
+        Me.uc_um_edituser.Controls.Add(Me.employeeId)
         Me.uc_um_edituser.Controls.Add(Me.Label7)
+        Me.uc_um_edituser.Controls.Add(Me.Label2)
+        Me.uc_um_edituser.Controls.Add(Me.contactNumber)
+        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxdepartment)
+        Me.uc_um_edituser.Controls.Add(Me.um_useredit_txtboxposition)
+        Me.uc_um_edituser.Controls.Add(Me.departmentId)
         Me.uc_um_edituser.Controls.Add(Me.Label5)
         Me.uc_um_edituser.Controls.Add(Me.middleName)
         Me.uc_um_edituser.Controls.Add(Me.Label3)
         Me.uc_um_edituser.Controls.Add(Me.userID)
-        Me.uc_um_edituser.Controls.Add(Me.Label6)
-        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxAddress)
-        Me.uc_um_edituser.Controls.Add(Me.um_edituser_Password)
-        Me.uc_um_edituser.Controls.Add(Me.password)
-        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxUsername)
-        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxEmail)
-        Me.uc_um_edituser.Controls.Add(Me.email)
-        Me.uc_um_edituser.Controls.Add(Me.Label2)
-        Me.uc_um_edituser.Controls.Add(Me.contactNumber)
-        Me.uc_um_edituser.Controls.Add(Me.um_edituser_txtboxdepartment)
-        Me.uc_um_edituser.Controls.Add(Me.departmentID)
-        Me.uc_um_edituser.Controls.Add(Me.um_useredit_txtboxposition)
         Me.uc_um_edituser.Controls.Add(Me.um_edituser_lastname)
         Me.uc_um_edituser.Controls.Add(Me.lastName)
         Me.uc_um_edituser.Controls.Add(Me.um_edituser_fullname)
@@ -139,120 +143,304 @@ Partial Class EditUser
         Me.uc_um_edituser.CornerRadius = 5
         Me.uc_um_edituser.Location = New System.Drawing.Point(49, 211)
         Me.uc_um_edituser.Name = "uc_um_edituser"
-        Me.uc_um_edituser.Size = New System.Drawing.Size(1305, 575)
+        Me.uc_um_edituser.Size = New System.Drawing.Size(1305, 609)
         Me.uc_um_edituser.TabIndex = 0
         '
-        'suffixAdmin
+        'role
         '
-        Me.suffixAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.role.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.suffixAdmin.FormattingEnabled = True
-        Me.suffixAdmin.Location = New System.Drawing.Point(264, 268)
-        Me.suffixAdmin.Name = "suffixAdmin"
-        Me.suffixAdmin.Size = New System.Drawing.Size(345, 24)
-        Me.suffixAdmin.TabIndex = 71
+        Me.role.FormattingEnabled = True
+        Me.role.Items.AddRange(New Object() {"SuperAdmin", "Admin", "Custodian", "Staff"})
+        Me.role.Location = New System.Drawing.Point(846, 228)
+        Me.role.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.role.Name = "role"
+        Me.role.Size = New System.Drawing.Size(359, 24)
+        Me.role.TabIndex = 96
+        '
+        'lblrole
+        '
+        Me.lblrole.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblrole.AutoSize = True
+        Me.lblrole.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.lblrole.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.lblrole.Location = New System.Drawing.Point(697, 229)
+        Me.lblrole.Name = "lblrole"
+        Me.lblrole.Size = New System.Drawing.Size(39, 18)
+        Me.lblrole.TabIndex = 95
+        Me.lblrole.Text = "Role"
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(697, 101)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(77, 18)
+        Me.Label1.TabIndex = 94
+        Me.Label1.Text = "Username"
+        '
+        'username
+        '
+        Me.username.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.username.BackColor = System.Drawing.SystemColors.Window
+        Me.username.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.username.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.username.Location = New System.Drawing.Point(843, 101)
+        Me.username.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.username.MaxLength = 100
+        Me.username.Name = "username"
+        Me.username.Size = New System.Drawing.Size(362, 22)
+        Me.username.TabIndex = 93
+        '
+        'passwordEncrypted
+        '
+        Me.passwordEncrypted.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.passwordEncrypted.BackColor = System.Drawing.SystemColors.Window
+        Me.passwordEncrypted.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.passwordEncrypted.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.passwordEncrypted.Location = New System.Drawing.Point(843, 405)
+        Me.passwordEncrypted.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.passwordEncrypted.MaxLength = 100
+        Me.passwordEncrypted.Name = "passwordEncrypted"
+        Me.passwordEncrypted.Size = New System.Drawing.Size(362, 22)
+        Me.passwordEncrypted.TabIndex = 92
         '
         'barangay
         '
         Me.barangay.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.barangay.FormattingEnabled = True
-        Me.barangay.Location = New System.Drawing.Point(829, 277)
+        Me.barangay.Location = New System.Drawing.Point(845, 347)
+        Me.barangay.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.barangay.Name = "barangay"
-        Me.barangay.Size = New System.Drawing.Size(332, 24)
-        Me.barangay.TabIndex = 67
+        Me.barangay.Size = New System.Drawing.Size(360, 24)
+        Me.barangay.TabIndex = 91
         '
-        'municipality
+        'municipal
         '
-        Me.municipality.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.municipal.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.municipality.FormattingEnabled = True
-        Me.municipality.Location = New System.Drawing.Point(831, 215)
-        Me.municipality.Name = "municipality"
-        Me.municipality.Size = New System.Drawing.Size(330, 24)
-        Me.municipality.TabIndex = 66
+        Me.municipal.FormattingEnabled = True
+        Me.municipal.Location = New System.Drawing.Point(843, 281)
+        Me.municipal.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.municipal.Name = "municipal"
+        Me.municipal.Size = New System.Drawing.Size(362, 24)
+        Me.municipal.TabIndex = 90
         '
         'province
         '
         Me.province.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.province.FormattingEnabled = True
-        Me.province.Location = New System.Drawing.Point(816, 162)
+        Me.province.Location = New System.Drawing.Point(841, 162)
+        Me.province.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.province.Name = "province"
-        Me.province.Size = New System.Drawing.Size(345, 24)
-        Me.province.TabIndex = 65
-        '
-        'usernameAdmin
-        '
-        Me.usernameAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.usernameAdmin.FormattingEnabled = True
-        Me.usernameAdmin.Location = New System.Drawing.Point(816, 107)
-        Me.usernameAdmin.Name = "usernameAdmin"
-        Me.usernameAdmin.Size = New System.Drawing.Size(345, 24)
-        Me.usernameAdmin.TabIndex = 64
-        '
-        'positionAdmin
-        '
-        Me.positionAdmin.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.positionAdmin.FormattingEnabled = True
-        Me.positionAdmin.Location = New System.Drawing.Point(264, 322)
-        Me.positionAdmin.Name = "positionAdmin"
-        Me.positionAdmin.Size = New System.Drawing.Size(345, 24)
-        Me.positionAdmin.TabIndex = 63
+        Me.province.Size = New System.Drawing.Size(364, 24)
+        Me.province.TabIndex = 89
         '
         'Label9
         '
         Me.Label9.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.Label9.ForeColor = System.Drawing.Color.Black
-        Me.Label9.Location = New System.Drawing.Point(686, 215)
+        Me.Label9.Location = New System.Drawing.Point(697, 287)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(139, 26)
-        Me.Label9.TabIndex = 62
+        Me.Label9.Size = New System.Drawing.Size(113, 18)
+        Me.Label9.TabIndex = 88
         Me.Label9.Text = "Municipality/City"
+        '
+        'um_edituser_txtboxID
+        '
+        Me.um_edituser_txtboxID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxID.AutoSize = True
+        Me.um_edituser_txtboxID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.um_edituser_txtboxID.ForeColor = System.Drawing.Color.Black
+        Me.um_edituser_txtboxID.Location = New System.Drawing.Point(699, 409)
+        Me.um_edituser_txtboxID.Name = "um_edituser_txtboxID"
+        Me.um_edituser_txtboxID.Size = New System.Drawing.Size(75, 18)
+        Me.um_edituser_txtboxID.TabIndex = 87
+        Me.um_edituser_txtboxID.Text = "Password"
+        '
+        'Label6
+        '
+        Me.Label6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(699, 347)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(70, 18)
+        Me.Label6.TabIndex = 86
+        Me.Label6.Text = "Barangay"
+        '
+        'um_edituser_txtboxAddress
+        '
+        Me.um_edituser_txtboxAddress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxAddress.AutoSize = True
+        Me.um_edituser_txtboxAddress.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.um_edituser_txtboxAddress.ForeColor = System.Drawing.Color.Black
+        Me.um_edituser_txtboxAddress.Location = New System.Drawing.Point(697, 162)
+        Me.um_edituser_txtboxAddress.Name = "um_edituser_txtboxAddress"
+        Me.um_edituser_txtboxAddress.Size = New System.Drawing.Size(66, 18)
+        Me.um_edituser_txtboxAddress.TabIndex = 85
+        Me.um_edituser_txtboxAddress.Text = "Province"
+        '
+        'um_edituser_txtboxEmail
+        '
+        Me.um_edituser_txtboxEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxEmail.AutoSize = True
+        Me.um_edituser_txtboxEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.um_edituser_txtboxEmail.ForeColor = System.Drawing.Color.Black
+        Me.um_edituser_txtboxEmail.Location = New System.Drawing.Point(697, 52)
+        Me.um_edituser_txtboxEmail.Name = "um_edituser_txtboxEmail"
+        Me.um_edituser_txtboxEmail.Size = New System.Drawing.Size(45, 18)
+        Me.um_edituser_txtboxEmail.TabIndex = 84
+        Me.um_edituser_txtboxEmail.Text = "Email"
+        '
+        'email
+        '
+        Me.email.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.email.BackColor = System.Drawing.SystemColors.Window
+        Me.email.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.email.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.email.Location = New System.Drawing.Point(843, 52)
+        Me.email.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.email.MaxLength = 100
+        Me.email.Name = "email"
+        Me.email.Size = New System.Drawing.Size(362, 22)
+        Me.email.TabIndex = 83
+        '
+        'suffixAdmin
+        '
+        Me.suffixAdmin.FormattingEnabled = True
+        Me.suffixAdmin.Items.AddRange(New Object() {"None", "Jr.", "Sr.", "II", "III", "IV"})
+        Me.suffixAdmin.Location = New System.Drawing.Point(213, 277)
+        Me.suffixAdmin.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.suffixAdmin.Name = "suffixAdmin"
+        Me.suffixAdmin.Size = New System.Drawing.Size(324, 24)
+        Me.suffixAdmin.TabIndex = 81
+        '
+        'positionAdmin
+        '
+        Me.positionAdmin.FormattingEnabled = True
+        Me.positionAdmin.Items.AddRange(New Object() {"Teacher", "Staff", "Guard", "Principal", "Head admin", "IT", "Administrator", "Clerk", "Manager", "Supervisor", "Technician"})
+        Me.positionAdmin.Location = New System.Drawing.Point(210, 331)
+        Me.positionAdmin.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.positionAdmin.Name = "positionAdmin"
+        Me.positionAdmin.Size = New System.Drawing.Size(324, 24)
+        Me.positionAdmin.TabIndex = 80
         '
         'Label8
         '
         Me.Label8.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.Label8.ForeColor = System.Drawing.Color.Black
-        Me.Label8.Location = New System.Drawing.Point(132, 430)
+        Me.Label8.Location = New System.Drawing.Point(81, 439)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(104, 26)
-        Me.Label8.TabIndex = 60
+        Me.Label8.Size = New System.Drawing.Size(92, 18)
+        Me.Label8.TabIndex = 79
         Me.Label8.Text = "Employee ID"
         '
-        'employeeID
+        'employeeId
         '
-        Me.employeeID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.employeeID.BackColor = System.Drawing.SystemColors.Window
-        Me.employeeID.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.employeeID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.employeeID.Location = New System.Drawing.Point(262, 430)
-        Me.employeeID.MaxLength = 100
-        Me.employeeID.Name = "employeeID"
-        Me.employeeID.Size = New System.Drawing.Size(347, 27)
-        Me.employeeID.TabIndex = 59
+        Me.employeeId.BackColor = System.Drawing.SystemColors.Window
+        Me.employeeId.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.employeeId.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.employeeId.Location = New System.Drawing.Point(210, 439)
+        Me.employeeId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.employeeId.MaxLength = 100
+        Me.employeeId.Name = "employeeId"
+        Me.employeeId.Size = New System.Drawing.Size(326, 22)
+        Me.employeeId.TabIndex = 78
         '
         'Label7
         '
         Me.Label7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(134, 267)
+        Me.Label7.Location = New System.Drawing.Point(82, 276)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(52, 26)
-        Me.Label7.TabIndex = 58
+        Me.Label7.Size = New System.Drawing.Size(44, 18)
+        Me.Label7.TabIndex = 77
         Me.Label7.Text = "Suffix"
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(81, 504)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(117, 18)
+        Me.Label2.TabIndex = 76
+        Me.Label2.Text = "Contact Number"
+        '
+        'contactNumber
+        '
+        Me.contactNumber.BackColor = System.Drawing.SystemColors.Window
+        Me.contactNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.contactNumber.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.contactNumber.Location = New System.Drawing.Point(207, 500)
+        Me.contactNumber.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.contactNumber.MaxLength = 100
+        Me.contactNumber.Name = "contactNumber"
+        Me.contactNumber.Size = New System.Drawing.Size(327, 22)
+        Me.contactNumber.TabIndex = 75
+        '
+        'um_edituser_txtboxdepartment
+        '
+        Me.um_edituser_txtboxdepartment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_edituser_txtboxdepartment.AutoSize = True
+        Me.um_edituser_txtboxdepartment.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.um_edituser_txtboxdepartment.ForeColor = System.Drawing.Color.Black
+        Me.um_edituser_txtboxdepartment.Location = New System.Drawing.Point(81, 384)
+        Me.um_edituser_txtboxdepartment.Name = "um_edituser_txtboxdepartment"
+        Me.um_edituser_txtboxdepartment.Size = New System.Drawing.Size(103, 18)
+        Me.um_edituser_txtboxdepartment.TabIndex = 74
+        Me.um_edituser_txtboxdepartment.Text = "Department ID"
+        '
+        'um_useredit_txtboxposition
+        '
+        Me.um_useredit_txtboxposition.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.um_useredit_txtboxposition.AutoSize = True
+        Me.um_useredit_txtboxposition.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.um_useredit_txtboxposition.ForeColor = System.Drawing.Color.Black
+        Me.um_useredit_txtboxposition.Location = New System.Drawing.Point(81, 331)
+        Me.um_useredit_txtboxposition.Name = "um_useredit_txtboxposition"
+        Me.um_useredit_txtboxposition.Size = New System.Drawing.Size(62, 18)
+        Me.um_useredit_txtboxposition.TabIndex = 73
+        Me.um_useredit_txtboxposition.Text = "Position"
+        '
+        'departmentId
+        '
+        Me.departmentId.FormattingEnabled = True
+        Me.departmentId.Location = New System.Drawing.Point(213, 378)
+        Me.departmentId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Size = New System.Drawing.Size(324, 24)
+        Me.departmentId.TabIndex = 82
         '
         'Label5
         '
@@ -261,7 +449,7 @@ Partial Class EditUser
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(132, 162)
+        Me.Label5.Location = New System.Drawing.Point(80, 162)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(111, 26)
         Me.Label5.TabIndex = 56
@@ -274,10 +462,10 @@ Partial Class EditUser
         Me.middleName.BackColor = System.Drawing.SystemColors.Window
         Me.middleName.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.middleName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.middleName.Location = New System.Drawing.Point(262, 162)
+        Me.middleName.Location = New System.Drawing.Point(210, 162)
         Me.middleName.MaxLength = 100
         Me.middleName.Name = "middleName"
-        Me.middleName.Size = New System.Drawing.Size(347, 27)
+        Me.middleName.Size = New System.Drawing.Size(327, 27)
         Me.middleName.TabIndex = 55
         '
         'Label3
@@ -287,7 +475,7 @@ Partial Class EditUser
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(132, 55)
+        Me.Label3.Location = New System.Drawing.Point(80, 55)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(64, 26)
         Me.Label3.TabIndex = 54
@@ -300,167 +488,11 @@ Partial Class EditUser
         Me.userID.BackColor = System.Drawing.SystemColors.Window
         Me.userID.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.userID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.userID.Location = New System.Drawing.Point(262, 55)
+        Me.userID.Location = New System.Drawing.Point(210, 55)
         Me.userID.MaxLength = 100
         Me.userID.Name = "userID"
-        Me.userID.Size = New System.Drawing.Size(284, 27)
+        Me.userID.Size = New System.Drawing.Size(324, 27)
         Me.userID.TabIndex = 53
-        '
-        'Label6
-        '
-        Me.Label6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(686, 276)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(85, 26)
-        Me.Label6.TabIndex = 44
-        Me.Label6.Text = "Barangay"
-        '
-        'um_edituser_txtboxAddress
-        '
-        Me.um_edituser_txtboxAddress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxAddress.AutoSize = True
-        Me.um_edituser_txtboxAddress.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.um_edituser_txtboxAddress.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_txtboxAddress.Location = New System.Drawing.Point(686, 162)
-        Me.um_edituser_txtboxAddress.Name = "um_edituser_txtboxAddress"
-        Me.um_edituser_txtboxAddress.Size = New System.Drawing.Size(77, 26)
-        Me.um_edituser_txtboxAddress.TabIndex = 42
-        Me.um_edituser_txtboxAddress.Text = "Province"
-        '
-        'um_edituser_Password
-        '
-        Me.um_edituser_Password.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_Password.AutoSize = True
-        Me.um_edituser_Password.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.um_edituser_Password.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_Password.Location = New System.Drawing.Point(686, 321)
-        Me.um_edituser_Password.Name = "um_edituser_Password"
-        Me.um_edituser_Password.Size = New System.Drawing.Size(85, 26)
-        Me.um_edituser_Password.TabIndex = 40
-        Me.um_edituser_Password.Text = "Password"
-        '
-        'password
-        '
-        Me.password.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.password.BackColor = System.Drawing.SystemColors.Window
-        Me.password.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.password.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.password.Location = New System.Drawing.Point(829, 319)
-        Me.password.MaxLength = 100
-        Me.password.Name = "password"
-        Me.password.Size = New System.Drawing.Size(332, 27)
-        Me.password.TabIndex = 39
-        '
-        'um_edituser_txtboxUsername
-        '
-        Me.um_edituser_txtboxUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxUsername.AutoSize = True
-        Me.um_edituser_txtboxUsername.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.um_edituser_txtboxUsername.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_txtboxUsername.Location = New System.Drawing.Point(686, 108)
-        Me.um_edituser_txtboxUsername.Name = "um_edituser_txtboxUsername"
-        Me.um_edituser_txtboxUsername.Size = New System.Drawing.Size(89, 26)
-        Me.um_edituser_txtboxUsername.TabIndex = 38
-        Me.um_edituser_txtboxUsername.Text = "Username"
-        '
-        'um_edituser_txtboxEmail
-        '
-        Me.um_edituser_txtboxEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxEmail.AutoSize = True
-        Me.um_edituser_txtboxEmail.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.um_edituser_txtboxEmail.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_txtboxEmail.Location = New System.Drawing.Point(686, 54)
-        Me.um_edituser_txtboxEmail.Name = "um_edituser_txtboxEmail"
-        Me.um_edituser_txtboxEmail.Size = New System.Drawing.Size(53, 26)
-        Me.um_edituser_txtboxEmail.TabIndex = 36
-        Me.um_edituser_txtboxEmail.Text = "Email"
-        '
-        'email
-        '
-        Me.email.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.email.BackColor = System.Drawing.SystemColors.Window
-        Me.email.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.email.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.email.Location = New System.Drawing.Point(816, 54)
-        Me.email.MaxLength = 100
-        Me.email.Name = "email"
-        Me.email.Size = New System.Drawing.Size(347, 27)
-        Me.email.TabIndex = 35
-        '
-        'Label2
-        '
-        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(132, 481)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(138, 26)
-        Me.Label2.TabIndex = 34
-        Me.Label2.Text = "Contact Number"
-        '
-        'contactNumber
-        '
-        Me.contactNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.contactNumber.BackColor = System.Drawing.SystemColors.Window
-        Me.contactNumber.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.contactNumber.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.contactNumber.Location = New System.Drawing.Point(296, 481)
-        Me.contactNumber.MaxLength = 100
-        Me.contactNumber.Name = "contactNumber"
-        Me.contactNumber.Size = New System.Drawing.Size(313, 27)
-        Me.contactNumber.TabIndex = 33
-        '
-        'um_edituser_txtboxdepartment
-        '
-        Me.um_edituser_txtboxdepartment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_edituser_txtboxdepartment.AutoSize = True
-        Me.um_edituser_txtboxdepartment.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.um_edituser_txtboxdepartment.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_txtboxdepartment.Location = New System.Drawing.Point(132, 375)
-        Me.um_edituser_txtboxdepartment.Name = "um_edituser_txtboxdepartment"
-        Me.um_edituser_txtboxdepartment.Size = New System.Drawing.Size(121, 26)
-        Me.um_edituser_txtboxdepartment.TabIndex = 32
-        Me.um_edituser_txtboxdepartment.Text = "Department ID"
-        '
-        'departmentID
-        '
-        Me.departmentID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.departmentID.BackColor = System.Drawing.SystemColors.Window
-        Me.departmentID.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.departmentID.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.departmentID.Location = New System.Drawing.Point(262, 375)
-        Me.departmentID.MaxLength = 100
-        Me.departmentID.Name = "departmentID"
-        Me.departmentID.Size = New System.Drawing.Size(347, 27)
-        Me.departmentID.TabIndex = 31
-        '
-        'um_useredit_txtboxposition
-        '
-        Me.um_useredit_txtboxposition.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.um_useredit_txtboxposition.AutoSize = True
-        Me.um_useredit_txtboxposition.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.um_useredit_txtboxposition.ForeColor = System.Drawing.Color.Black
-        Me.um_useredit_txtboxposition.Location = New System.Drawing.Point(132, 322)
-        Me.um_useredit_txtboxposition.Name = "um_useredit_txtboxposition"
-        Me.um_useredit_txtboxposition.Size = New System.Drawing.Size(72, 26)
-        Me.um_useredit_txtboxposition.TabIndex = 30
-        Me.um_useredit_txtboxposition.Text = "Position"
         '
         'um_edituser_lastname
         '
@@ -469,7 +501,7 @@ Partial Class EditUser
         Me.um_edituser_lastname.AutoSize = True
         Me.um_edituser_lastname.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.um_edituser_lastname.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_lastname.Location = New System.Drawing.Point(132, 216)
+        Me.um_edituser_lastname.Location = New System.Drawing.Point(80, 216)
         Me.um_edituser_lastname.Name = "um_edituser_lastname"
         Me.um_edituser_lastname.Size = New System.Drawing.Size(90, 26)
         Me.um_edituser_lastname.TabIndex = 28
@@ -482,10 +514,10 @@ Partial Class EditUser
         Me.lastName.BackColor = System.Drawing.SystemColors.Window
         Me.lastName.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lastName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lastName.Location = New System.Drawing.Point(262, 216)
+        Me.lastName.Location = New System.Drawing.Point(210, 216)
         Me.lastName.MaxLength = 100
         Me.lastName.Name = "lastName"
-        Me.lastName.Size = New System.Drawing.Size(347, 27)
+        Me.lastName.Size = New System.Drawing.Size(327, 27)
         Me.lastName.TabIndex = 27
         '
         'um_edituser_fullname
@@ -495,7 +527,7 @@ Partial Class EditUser
         Me.um_edituser_fullname.AutoSize = True
         Me.um_edituser_fullname.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.um_edituser_fullname.ForeColor = System.Drawing.Color.Black
-        Me.um_edituser_fullname.Location = New System.Drawing.Point(132, 107)
+        Me.um_edituser_fullname.Location = New System.Drawing.Point(80, 107)
         Me.um_edituser_fullname.Name = "um_edituser_fullname"
         Me.um_edituser_fullname.Size = New System.Drawing.Size(92, 26)
         Me.um_edituser_fullname.TabIndex = 26
@@ -508,10 +540,10 @@ Partial Class EditUser
         Me.firstName.BackColor = System.Drawing.SystemColors.Window
         Me.firstName.Font = New System.Drawing.Font("Poppins", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.firstName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.firstName.Location = New System.Drawing.Point(262, 107)
+        Me.firstName.Location = New System.Drawing.Point(210, 107)
         Me.firstName.MaxLength = 100
         Me.firstName.Name = "firstName"
-        Me.firstName.Size = New System.Drawing.Size(347, 27)
+        Me.firstName.Size = New System.Drawing.Size(327, 27)
         Me.firstName.TabIndex = 25
         '
         'um_edituser_save
@@ -565,18 +597,6 @@ Partial Class EditUser
     Friend WithEvents firstName As TextBox
     Friend WithEvents um_edituser_lastname As Label
     Friend WithEvents lastName As TextBox
-    Friend WithEvents um_useredit_txtboxposition As Label
-    Friend WithEvents um_edituser_txtboxEmail As Label
-    Friend WithEvents email As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents contactNumber As TextBox
-    Friend WithEvents um_edituser_txtboxdepartment As Label
-    Friend WithEvents departmentID As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents um_edituser_txtboxAddress As Label
-    Friend WithEvents um_edituser_Password As Label
-    Friend WithEvents password As TextBox
-    Friend WithEvents um_edituser_txtboxUsername As Label
     Friend WithEvents um_edituser_save As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents um_edituser_backbtn As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_label_DepartmentManagement As Label
@@ -586,14 +606,28 @@ Partial Class EditUser
     Friend WithEvents middleName As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents userID As TextBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents employeeID As TextBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents positionAdmin As ComboBox
-    Friend WithEvents barangay As ComboBox
-    Friend WithEvents municipality As ComboBox
-    Friend WithEvents province As ComboBox
-    Friend WithEvents usernameAdmin As ComboBox
     Friend WithEvents suffixAdmin As ComboBox
+    Friend WithEvents positionAdmin As ComboBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents employeeId As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents contactNumber As TextBox
+    Friend WithEvents um_edituser_txtboxdepartment As Label
+    Friend WithEvents um_useredit_txtboxposition As Label
+    Friend WithEvents departmentId As ComboBox
+    Friend WithEvents role As ComboBox
+    Friend WithEvents lblrole As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents username As TextBox
+    Friend WithEvents passwordEncrypted As TextBox
+    Friend WithEvents barangay As ComboBox
+    Friend WithEvents municipal As ComboBox
+    Friend WithEvents province As ComboBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents um_edituser_txtboxID As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents um_edituser_txtboxAddress As Label
+    Friend WithEvents um_edituser_txtboxEmail As Label
+    Friend WithEvents email As TextBox
 End Class

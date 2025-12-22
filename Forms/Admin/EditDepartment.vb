@@ -218,6 +218,19 @@ Public Class EditDepartment
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(New UC_DepartmentManagement())
+            Return
+        End If
+        
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(New UC_DepartmentManagement())
+            Return
+        End If
+        
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New UC_DepartmentManagement())
@@ -329,6 +342,21 @@ Public Class EditDepartment
                 MessageBox.Show("Department updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Return to department management and refresh
+                ' Check SADashboard first (parent class)
+                Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+                If saDashboard IsNot Nothing Then
+                    Dim deptManagement As New UC_DepartmentManagement()
+                    saDashboard.LoadUserControl(deptManagement)
+                    Return
+                End If
+                
+                Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+                If superAdminDashboard IsNot Nothing Then
+                    Dim deptManagement As New UC_DepartmentManagement()
+                    superAdminDashboard.LoadUserControl(deptManagement)
+                    Return
+                End If
+                
                 Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
                 If parentDashboard IsNot Nothing Then
                     Dim deptManagement As New UC_DepartmentManagement()

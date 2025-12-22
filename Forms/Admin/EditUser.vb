@@ -66,23 +66,53 @@ Public Class EditUser
         Me.firstName.Text = firstName
         Me.middleName.Text = middleName
         Me.lastName.Text = lastName
-        Me.departmentID.Text = departmentID
         Me.employeeID.Text = employeeID
         Me.contactNumber.Text = contactNumber
         Me.email.Text = email
-        Me.password.Text = password
+        Me.passwordEncrypted.Text = password
+        Me.username.Text = username
 
         SetComboValue(suffixAdmin, suffixValue)
         SetComboValue(positionAdmin, position)
-        SetComboValue(usernameAdmin, userRole) ' This sets the role dropdown
+        SetComboValue(role, userRole) ' This sets the role dropdown
+        
+        ' Set department dropdown properly
+        SetDepartmentValue(departmentID)
         
         ' Set location dropdowns with proper DisplayMember/ValueMember
         SetComboValueWithDataRow(Me.province, provinceValue)
-        SetComboValueWithDataRow(Me.municipality, municipalityValue)
+        SetComboValueWithDataRow(Me.municipal, municipalityValue)
         SetComboValueWithDataRow(Me.barangay, barangayValue)
 
         editingUsername = username
         currentUserType = userRole ' Store the current user type
+    End Sub
+    
+    Private Sub SetDepartmentValue(deptID As String)
+        If Me.departmentId Is Nothing Then Return
+        If String.IsNullOrWhiteSpace(deptID) Then
+            Me.departmentId.SelectedIndex = -1
+            Return
+        End If
+        
+        Dim deptIdInt As Integer
+        If Integer.TryParse(deptID, deptIdInt) Then
+            ' Try to find the department by ID in the ComboBox
+            If TypeOf Me.departmentId Is ComboBox Then
+                Dim combo As ComboBox = CType(Me.departmentId, ComboBox)
+                If combo.DataSource IsNot Nothing AndAlso TypeOf combo.DataSource Is DataTable Then
+                    Dim dt As DataTable = CType(combo.DataSource, DataTable)
+                    For i As Integer = 0 To dt.Rows.Count - 1
+                        If dt.Rows(i)("department_id").ToString() = deptID Then
+                            combo.SelectedIndex = i
+                            Return
+                        End If
+                    Next
+                End If
+                ' Try using SelectedValue
+                combo.SelectedValue = deptIdInt
+            End If
+        End If
     End Sub
 
     Private Sub LoadDepartmentOptions()
@@ -90,14 +120,24 @@ Public Class EditUser
             departmentDirectory = DatabaseConnection.GetDepartmentLookup(True)
             If departmentDirectory Is Nothing Then Return
 
-            Dim suggestions As New AutoCompleteStringCollection()
-            For Each row As DataRow In departmentDirectory.Rows
-                suggestions.Add($"{row("department_id")} - {row("department_name")}")
-            Next
+            ' Convert departmentID TextBox to ComboBox if it isn't already
+            If TypeOf departmentID Is ComboBox Then
+                Dim deptCombo As ComboBox = CType(departmentID, ComboBox)
+                deptCombo.DataSource = departmentDirectory
+                deptCombo.DisplayMember = "department_name"
+                deptCombo.ValueMember = "department_id"
+                deptCombo.SelectedIndex = -1
+            Else
+                ' Fallback for TextBox with autocomplete
+                Dim suggestions As New AutoCompleteStringCollection()
+                For Each row As DataRow In departmentDirectory.Rows
+                    suggestions.Add($"{row("department_id")} - {row("department_name")}")
+                Next
 
-            departmentID.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            departmentID.AutoCompleteSource = AutoCompleteSource.CustomSource
-            departmentID.AutoCompleteCustomSource = suggestions
+                departmentID.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+                departmentID.AutoCompleteSource = AutoCompleteSource.CustomSource
+                departmentID.AutoCompleteCustomSource = suggestions
+            End If
             
             ' Load location dropdowns (Province, Municipality, Barangay)
             LoadLocationDropdowns()
@@ -119,7 +159,7 @@ Public Class EditUser
             
             ' Add event handlers for cascading dropdowns
             AddHandler province.SelectedIndexChanged, AddressOf Province_SelectedIndexChanged
-            AddHandler municipality.SelectedIndexChanged, AddressOf Municipality_SelectedIndexChanged
+            AddHandler municipal.SelectedIndexChanged, AddressOf Municipality_SelectedIndexChanged
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] EditUser.LoadLocationDropdowns Exception: " & ex.Message)
         End Try
@@ -128,8 +168,8 @@ Public Class EditUser
     Private Sub Province_SelectedIndexChanged(sender As Object, e As EventArgs)
         Try
             ' Clear municipality and barangay first
-            municipality.DataSource = Nothing
-            municipality.Items.Clear()
+            municipal.DataSource = Nothing
+            municipal.Items.Clear()
             barangay.DataSource = Nothing
             barangay.Items.Clear()
             
@@ -165,10 +205,10 @@ Public Class EditUser
                 
                 If municipalitiesTable IsNot Nothing AndAlso municipalitiesTable.Rows.Count > 0 Then
                     System.Diagnostics.Debug.WriteLine("[v0] Loaded " & municipalitiesTable.Rows.Count & " municipalities")
-                    municipality.DataSource = municipalitiesTable
-                    municipality.DisplayMember = "municipality_name"
-                    municipality.ValueMember = "municipality_name"
-                    municipality.SelectedIndex = -1
+                    municipal.DataSource = municipalitiesTable
+                    municipal.DisplayMember = "municipality_name"
+                    municipal.ValueMember = "municipality_name"
+                    municipal.SelectedIndex = -1
                 Else
                     System.Diagnostics.Debug.WriteLine("[v0] No municipalities loaded")
                 End If
@@ -188,26 +228,26 @@ Public Class EditUser
             ' Get the actual municipality name from the selected item
             Dim selectedMunicipality As String = ""
             
-            If municipality.SelectedItem IsNot Nothing Then
+            If municipal.SelectedItem IsNot Nothing Then
                 ' Check if it's a DataRowView
-                If TypeOf municipality.SelectedItem Is DataRowView Then
-                    Dim drv As DataRowView = CType(municipality.SelectedItem, DataRowView)
+                If TypeOf municipal.SelectedItem Is DataRowView Then
+                    Dim drv As DataRowView = CType(municipal.SelectedItem, DataRowView)
                     ' Get the municipality_name from the DataRowView
                     If drv.Row.Table.Columns.Contains("municipality_name") Then
                         selectedMunicipality = drv.Row("municipality_name").ToString()
                     End If
-                ElseIf TypeOf municipality.SelectedItem Is DataRow Then
-                    Dim dr As DataRow = CType(municipality.SelectedItem, DataRow)
+                ElseIf TypeOf municipal.SelectedItem Is DataRow Then
+                    Dim dr As DataRow = CType(municipal.SelectedItem, DataRow)
                     If dr.Table.Columns.Contains("municipality_name") Then
                         selectedMunicipality = dr("municipality_name").ToString()
                     End If
                 Else
                     ' It's a simple string
-                    selectedMunicipality = municipality.SelectedItem.ToString()
+                    selectedMunicipality = municipal.SelectedItem.ToString()
                 End If
-            ElseIf municipality.SelectedValue IsNot Nothing Then
+            ElseIf municipal.SelectedValue IsNot Nothing Then
                 ' Fallback to SelectedValue
-                selectedMunicipality = municipality.SelectedValue.ToString()
+                selectedMunicipality = municipal.SelectedValue.ToString()
             End If
             
             If Not String.IsNullOrEmpty(selectedMunicipality) Then
@@ -252,7 +292,7 @@ Public Class EditUser
 
         Dim deptID As Integer? = ResolveDepartmentId()
 
-        Dim roleValue As String = GetComboValue(usernameAdmin, currentUserType)
+        Dim roleValue As String = GetComboValue(role, currentUserType)
         ' Determine the new user type from dropdown
         Dim newUserTypeValue As String = If(String.Equals(roleValue, "SuperAdmin", StringComparison.OrdinalIgnoreCase), "SuperAdmin",
                                             If(String.Equals(roleValue, "Staff", StringComparison.OrdinalIgnoreCase), "Staff", "Admin"))
@@ -297,7 +337,7 @@ Public Class EditUser
             departmentID:=deptID,
             contactNumber:=contactNumber.Text.Trim(),
             barangay:=GetComboValue(barangay),
-            municipality:=GetComboValue(municipality),
+            municipality:=GetComboValue(municipal),
             provinceCity:=GetComboValue(province),
             employeeID:=employeeID.Text.Trim(),
             newUserType:=newUserTypeValue, ' New role (only applies to Admin/SuperAdmin)
@@ -310,11 +350,11 @@ Public Class EditUser
         )
 
         If updateSuccess Then
-            If Not String.IsNullOrWhiteSpace(password.Text) Then
+            If Not String.IsNullOrWhiteSpace(passwordEncrypted.Text) Then
                 ' Use unified ResetUserPassword function that handles both Admin/SuperAdmin and Staff
                 DatabaseConnection.ResetUserPassword(adminIDValue,
                                                      tableUserType, ' Use current user type to determine which table to update
-                                                     password.Text,
+                                                     passwordEncrypted.Text,
                                                      currentAdminID,
                                                      currentAdminType,
                                                      currentAdminUsername,
@@ -358,8 +398,8 @@ Public Class EditUser
         If String.IsNullOrWhiteSpace(firstName.Text) Then Return "First name is required."
         If String.IsNullOrWhiteSpace(lastName.Text) Then Return "Last name is required."
         If String.IsNullOrWhiteSpace(email.Text) Then Return "Email is required."
-        ' Role validation - if usernameAdmin has no selection, use currentUserType
-        If usernameAdmin.SelectedIndex = -1 AndAlso String.IsNullOrWhiteSpace(currentUserType) Then 
+        ' Role validation - if role has no selection, use currentUserType
+        If role.SelectedIndex = -1 AndAlso String.IsNullOrWhiteSpace(currentUserType) Then 
             Return "Please select a user role."
         End If
         Return ""
@@ -378,15 +418,26 @@ Public Class EditUser
     End Function
 
     Private Function ResolveDepartmentId() As Integer?
+        If TypeOf departmentID Is ComboBox Then
+            Dim combo As ComboBox = CType(departmentID, ComboBox)
+            If combo.SelectedValue IsNot Nothing Then
+                Dim parsedValue As Integer
+                If Integer.TryParse(combo.SelectedValue.ToString(), parsedValue) Then
+                    Return parsedValue
+                End If
+            End If
+        End If
+        
+        ' Fallback for TextBox
         Dim rawValue As String = departmentID.Text.Trim()
         If String.IsNullOrWhiteSpace(rawValue) Then Return Nothing
         Dim candidate As String = rawValue
         If rawValue.Contains("-") Then
             candidate = rawValue.Split("-"c)(0).Trim()
         End If
-        Dim parsed As Integer
-        If Integer.TryParse(candidate, parsed) Then
-            Return parsed
+        Dim parsedInt As Integer
+        If Integer.TryParse(candidate, parsedInt) Then
+            Return parsedInt
         End If
         Return Nothing
     End Function
@@ -416,25 +467,40 @@ Public Class EditUser
             Return
         End If
 
-        ' Check if combo has DataRowView items
-        If combo.Items.Count > 0 AndAlso TypeOf combo.Items(0) Is DataRowView Then
-            ' Find matching item by display text
-            For i As Integer = 0 To combo.Items.Count - 1
-                Dim item As DataRowView = CType(combo.Items(i), DataRowView)
-                If combo.DisplayMember IsNot Nothing AndAlso Not String.IsNullOrEmpty(combo.DisplayMember) Then
-                    Try
-                        If item(combo.DisplayMember).ToString() = value Then
-                            combo.SelectedIndex = i
-                            Return
-                        End If
-                    Catch
-                        ' Continue if column doesn't exist
-                    End Try
+        ' If combo has a DataSource with DataTable, search through the DataSource
+        If combo.DataSource IsNot Nothing AndAlso TypeOf combo.DataSource Is DataTable Then
+            Dim dt As DataTable = CType(combo.DataSource, DataTable)
+            Dim displayMember As String = If(String.IsNullOrEmpty(combo.DisplayMember), "", combo.DisplayMember)
+            Dim valueMember As String = If(String.IsNullOrEmpty(combo.ValueMember), "", combo.ValueMember)
+            
+            ' Search for matching value in the DataTable
+            For i As Integer = 0 To dt.Rows.Count - 1
+                Dim row As DataRow = dt.Rows(i)
+                ' Try to match against ValueMember or DisplayMember
+                If Not String.IsNullOrEmpty(valueMember) AndAlso dt.Columns.Contains(valueMember) Then
+                    If row(valueMember).ToString().Equals(value, StringComparison.OrdinalIgnoreCase) Then
+                        combo.SelectedIndex = i
+                        Return
+                    End If
+                End If
+                If Not String.IsNullOrEmpty(displayMember) AndAlso dt.Columns.Contains(displayMember) Then
+                    If row(displayMember).ToString().Equals(value, StringComparison.OrdinalIgnoreCase) Then
+                        combo.SelectedIndex = i
+                        Return
+                    End If
                 End If
             Next
-            ' If not found, try to set as text
+            ' If not found, set to -1
             combo.SelectedIndex = -1
-            combo.Text = value
+        ElseIf combo.Items.Count > 0 Then
+            ' Try regular string matching
+            For i As Integer = 0 To combo.Items.Count - 1
+                If combo.Items(i).ToString().Equals(value, StringComparison.OrdinalIgnoreCase) Then
+                    combo.SelectedIndex = i
+                    Return
+                End If
+            Next
+            combo.SelectedIndex = -1
         Else
             ' Use regular SetComboValue for string items
             SetComboValue(combo, value)
