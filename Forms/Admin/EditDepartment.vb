@@ -7,7 +7,7 @@ Imports Microsoft.VisualBasic
 Public Class EditDepartment
     Inherits UserControl
 
-    Private _departmentId As Integer = 0
+    Private currentDepartmentId As Integer = 0
 
     Public Sub New()
         InitializeComponent()
@@ -69,6 +69,9 @@ Public Class EditDepartment
                     cbHead.DisplayMember = "fullName"
                     cbHead.ValueMember = "userId"
                     cbHead.SelectedIndex = -1
+                    
+                    ' Wire up event handler for auto-fill
+                    AddHandler cbHead.SelectedIndexChanged, AddressOf DepartmentHead_SelectedIndexChanged
                 Else
                     cbHead.DataSource = Nothing
                     cbHead.Items.Clear()
@@ -90,7 +93,7 @@ Public Class EditDepartment
     ''' Load department data into the form for editing
     ''' </summary>
     Public Sub LoadDepartmentData(departmentId As Integer, deptData As DataRow)
-        _departmentId = departmentId
+        currentDepartmentId = departmentId
 
         Try
             ' Department Name
@@ -146,6 +149,12 @@ Public Class EditDepartment
                 Else
                     shortNameCombo.Text = shortNameVal
                 End If
+            End If
+            
+            ' Description
+            Dim descriptionTxt As TextBox = FindControlOfType(Of TextBox)("description")
+            If descriptionTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("description") Then
+                descriptionTxt.Text = If(IsDBNull(deptData("description")), "", deptData("description").ToString())
             End If
 
             ' Established Date
@@ -239,7 +248,7 @@ Public Class EditDepartment
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ' Validate department ID
-        If _departmentId <= 0 Then
+        If currentDepartmentId <= 0 Then
             MessageBox.Show("Invalid department ID. Cannot update.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
@@ -321,21 +330,29 @@ Public Class EditDepartment
             Dim shortNameCombo As ComboBox = FindControlOfType(Of ComboBox)("office_hours_cmbo")
             Dim shortNameValue As String = If(shortNameCombo IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(shortNameCombo.Text), shortNameCombo.Text.Trim(), "")
             
+            ' Get description value
+            Dim descriptionTxt As TextBox = FindControlOfType(Of TextBox)("description")
+            Dim descriptionValue As String = If(descriptionTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(descriptionTxt.Text), descriptionTxt.Text.Trim(), "")
+            
             ' Get status value
             Dim deptStatusValue As String = "Active"
             If statusCombo IsNot Nothing AndAlso statusCombo.SelectedIndex >= 0 Then
                 deptStatusValue = statusCombo.SelectedItem.ToString()
             End If
             
-            ' Call the UpdateDepartment function with standard parameters only
+            ' Call the UpdateDepartment function with all parameters including floorNumber, shortName, description
             Dim success As Boolean = DatabaseConnection.UpdateDepartment(
-                _departmentId,
+                currentDepartmentId,
                 deptName,
                 headOfDeptString,
                 locationStr,
                 officeCodeValue,
                 contactValue,
-                emailValue
+                emailValue,
+                buildingValue,
+                floorValue,
+                shortNameValue,
+                descriptionValue  ' description from form
             )
 
             If success Then
@@ -371,5 +388,42 @@ Public Class EditDepartment
 
     Private Sub EditDepartment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+    Private Sub description_TextChanged(sender As Object, e As EventArgs) Handles description.TextChanged
+
+    End Sub
+
+    ''' <summary>
+    ''' Auto-fill email and contact number when department head is selected
+    ''' </summary>
+    Private Sub DepartmentHead_SelectedIndexChanged(sender As Object, e As EventArgs)
+        Try
+            Dim cbHead As ComboBox = TryCast(sender, ComboBox)
+            If cbHead Is Nothing OrElse cbHead.SelectedIndex < 0 Then Return
+            
+            ' Get the selected user's data
+            If TypeOf cbHead.SelectedItem Is DataRowView Then
+                Dim drv As DataRowView = CType(cbHead.SelectedItem, DataRowView)
+                
+                ' Auto-fill email if available
+                If drv.Row.Table.Columns.Contains("email") AndAlso Not IsDBNull(drv.Row("email")) Then
+                    Dim emailTxt As TextBox = FindControlOfType(Of TextBox)("email")
+                    If emailTxt IsNot Nothing Then
+                        emailTxt.Text = drv.Row("email").ToString()
+                    End If
+                End If
+                
+                ' Auto-fill contact number if available
+                If drv.Row.Table.Columns.Contains("contactNumber") AndAlso Not IsDBNull(drv.Row("contactNumber")) Then
+                    Dim contactTxt As TextBox = FindControlOfType(Of TextBox)("contactNumber")
+                    If contactTxt IsNot Nothing Then
+                        contactTxt.Text = drv.Row("contactNumber").ToString()
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] DepartmentHead_SelectedIndexChanged Exception: " & ex.Message)
+        End Try
     End Sub
 End Class

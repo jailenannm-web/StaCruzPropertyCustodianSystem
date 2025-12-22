@@ -497,6 +497,6 @@ Partial Class AddSupply
     Friend WithEvents supplier As System.Windows.Forms.ComboBox
     Friend WithEvents totalCost As System.Windows.Forms.NumericUpDown
     Friend WithEvents unitCost As System.Windows.Forms.NumericUpDown
-    Friend WithEvents location As System.Windows.Forms.ComboBox
+    Friend Shadows WithEvents location As System.Windows.Forms.ComboBox
     Friend WithEvents description As System.Windows.Forms.ComboBox
 End Class

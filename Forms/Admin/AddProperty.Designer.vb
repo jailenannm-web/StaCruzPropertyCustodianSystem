@@ -476,7 +476,7 @@ Partial Class AddProperty
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents assignedEmployee As System.Windows.Forms.Label
     Friend WithEvents warrantyExpiration As System.Windows.Forms.Label
-    Friend WithEvents location As System.Windows.Forms.Label
+    Friend Shadows WithEvents location As System.Windows.Forms.Label
     Friend WithEvents remarks As System.Windows.Forms.Label
     Friend WithEvents totalCost As System.Windows.Forms.TextBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel

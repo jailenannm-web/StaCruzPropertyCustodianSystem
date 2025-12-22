@@ -522,7 +522,7 @@ Partial Class AssignSupplyManagement
     Friend WithEvents stockStatus As System.Windows.Forms.ComboBox
     Friend WithEvents quantityAvailable As System.Windows.Forms.NumericUpDown
     Friend WithEvents unitCost As System.Windows.Forms.NumericUpDown
-    Friend WithEvents location As System.Windows.Forms.ComboBox
+    Friend Shadows WithEvents location As System.Windows.Forms.ComboBox
     Friend WithEvents RoundedPanel3 As Resources.Controls.RoundedPanel
     Friend WithEvents RoundedPanel4 As Resources.Controls.RoundedPanel
     Friend WithEvents Label2 As System.Windows.Forms.Label

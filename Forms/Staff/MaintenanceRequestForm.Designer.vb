@@ -432,7 +432,7 @@ Partial Class MaintenanceRequestForm
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents department As System.Windows.Forms.ComboBox
-    Friend WithEvents location As System.Windows.Forms.ComboBox
+    Friend Shadows WithEvents location As System.Windows.Forms.ComboBox
     Friend WithEvents conditionBefore As System.Windows.Forms.ComboBox
     Friend WithEvents serialNumber As System.Windows.Forms.TextBox
     Friend WithEvents SAAddM_ServiceType As System.Windows.Forms.Label

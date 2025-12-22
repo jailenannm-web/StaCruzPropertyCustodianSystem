@@ -2171,7 +2171,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             ' Update password with timestamp
-            Dim query As String = "UPDATE users SET password = @password, updated_at = NOW() " &
+            Dim query As String = "UPDATE users SET password = @password, updatedAt = NOW() " &
                                  "WHERE userId = @adminID"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -4439,13 +4439,13 @@ Public Class DatabaseConnection
             Dim quantity As Integer = CInt(requestInfo("quantity"))
 
             If requestType = "supply" Then
-                Using cmd As New MySqlCommand("UPDATE supplies SET quantity = quantity + @qty, updated_at = NOW() WHERE supply_id = @supplyID", conn, transaction)
+                Using cmd As New MySqlCommand("UPDATE supplies SET quantity = quantity + @qty, updatedAt = NOW() WHERE supply_id = @supplyID", conn, transaction)
                     cmd.Parameters.AddWithValue("@qty", quantity)
                     cmd.Parameters.AddWithValue("@supplyID", requestInfo("supplyId"))
                     cmd.ExecuteNonQuery()
                 End Using
             ElseIf requestType = "property" Then
-                Using cmd As New MySqlCommand("UPDATE properties SET assigned_to = NULL, condition = @condition, status = 'Active', updated_at = NOW() WHERE property_id = @propertyID", conn, transaction)
+                Using cmd As New MySqlCommand("UPDATE properties SET assigned_to = NULL, condition = @condition, status = 'Active', updatedAt = NOW() WHERE property_id = @propertyID", conn, transaction)
                     cmd.Parameters.AddWithValue("@condition", conditionUponReturn)
                     cmd.Parameters.AddWithValue("@propertyID", requestInfo("propertyId"))
                     cmd.ExecuteNonQuery()
@@ -5492,24 +5492,22 @@ Public Class DatabaseConnection
 
         Try
             If Not String.IsNullOrWhiteSpace(username) Then
-                Dim adminQuery As New StringBuilder("SELECT COUNT(*) FROM users WHERE LOWER(username) = LOWER(@username)")
-                If excludeAdminID.HasValue Then adminQuery.Append(" AND user_id <> @excludeAdminID")
+                ' Check for duplicate username - exclude current user by userId
+                Dim userQuery As New StringBuilder("SELECT COUNT(*) FROM users WHERE LOWER(username) = LOWER(@username)")
+                If excludeAdminID.HasValue Then 
+                    userQuery.Append(" AND userId <> @excludeUserID")
+                ElseIf excludeStaffID.HasValue Then
+                    userQuery.Append(" AND userId <> @excludeUserID")
+                End If
 
-                Using cmd As New MySqlCommand(adminQuery.ToString(), conn)
+                Using cmd As New MySqlCommand(userQuery.ToString(), conn)
                     cmd.Parameters.AddWithValue("@username", username.Trim())
-                    If excludeAdminID.HasValue Then cmd.Parameters.AddWithValue("@excludeAdminID", excludeAdminID.Value)
-                    If Convert.ToInt32(cmd.ExecuteScalar()) > 0 Then
-                        Return "duplicate_username"
+                    If excludeAdminID.HasValue Then 
+                        cmd.Parameters.AddWithValue("@excludeUserID", excludeAdminID.Value)
+                    ElseIf excludeStaffID.HasValue Then 
+                        cmd.Parameters.AddWithValue("@excludeUserID", excludeStaffID.Value)
                     End If
-                End Using
-
-                ' Check Staff accounts in users table (all accounts are in users table)
-                Dim staffQuery As New StringBuilder("SELECT COUNT(*) FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'Staff'")
-                If excludeStaffID.HasValue Then staffQuery.Append(" AND user_id <> @excludeStaffID")
-
-                Using cmd As New MySqlCommand(staffQuery.ToString(), conn)
-                    cmd.Parameters.AddWithValue("@username", username.Trim())
-                    If excludeStaffID.HasValue Then cmd.Parameters.AddWithValue("@excludeStaffID", excludeStaffID.Value)
+                    
                     If Convert.ToInt32(cmd.ExecuteScalar()) > 0 Then
                         Return "duplicate_username"
                     End If
@@ -5517,15 +5515,22 @@ Public Class DatabaseConnection
             End If
 
             If Not String.IsNullOrWhiteSpace(email) Then
-                ' Check all accounts in users table (Admin, SuperAdmin, Staff, Custodian)
-                Dim adminEmailQuery As New StringBuilder("SELECT COUNT(*) FROM users WHERE LOWER(email) = LOWER(@email)")
-                If excludeAdminID.HasValue Then adminEmailQuery.Append(" AND user_id <> @excludeAdminID")
-                If excludeStaffID.HasValue Then adminEmailQuery.Append(" AND user_id <> @excludeStaffID")
+                ' Check for duplicate email - exclude current user by userId
+                Dim emailQuery As New StringBuilder("SELECT COUNT(*) FROM users WHERE LOWER(email) = LOWER(@email)")
+                If excludeAdminID.HasValue Then 
+                    emailQuery.Append(" AND userId <> @excludeUserID")
+                ElseIf excludeStaffID.HasValue Then
+                    emailQuery.Append(" AND userId <> @excludeUserID")
+                End If
 
-                Using cmd As New MySqlCommand(adminEmailQuery.ToString(), conn)
+                Using cmd As New MySqlCommand(emailQuery.ToString(), conn)
                     cmd.Parameters.AddWithValue("@email", email.Trim())
-                    If excludeAdminID.HasValue Then cmd.Parameters.AddWithValue("@excludeAdminID", excludeAdminID.Value)
-                    If excludeStaffID.HasValue Then cmd.Parameters.AddWithValue("@excludeStaffID", excludeStaffID.Value)
+                    If excludeAdminID.HasValue Then 
+                        cmd.Parameters.AddWithValue("@excludeUserID", excludeAdminID.Value)
+                    ElseIf excludeStaffID.HasValue Then 
+                        cmd.Parameters.AddWithValue("@excludeUserID", excludeStaffID.Value)
+                    End If
+                    
                     If Convert.ToInt32(cmd.ExecuteScalar()) > 0 Then
                         Return "duplicate_email"
                     End If
@@ -5537,6 +5542,33 @@ Public Class DatabaseConnection
         End Try
 
         Return String.Empty
+    End Function
+
+    ''' <summary>
+    ''' Get total user count from database
+    ''' </summary>
+    Public Shared Function GetTotalUserCount() As Integer
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return 0
+            If Not SafeOpenConnection(conn) Then Return 0
+
+            Using cmd As New MySqlCommand("SELECT COUNT(*) FROM users WHERE status = 'Active'", conn)
+                Return Convert.ToInt32(cmd.ExecuteScalar())
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetTotalUserCount Exception: " & ex.Message)
+            Return 0
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
     End Function
 
     ''' <summary>
@@ -5558,9 +5590,9 @@ Public Class DatabaseConnection
             Dim query As String = "UPDATE users SET firstName = @firstName, lastName = @lastName, " &
                                  "email = @email, contactNumber = @contactNumber, " &
                                  "middleName = @middleName, suffix = @suffix, " &
-                                 "house_no_street = @houseNoStreet, barangay = @barangay, " &
-                                 "municipality = @municipality, province_city = @provinceCity, " &
-                                 "updated_at = NOW() WHERE userId = @adminID"
+                                 "barangay = @barangay, " &
+                                 "municipal = @municipality, province = @provinceCity, " &
+                                 "updatedAt = NOW() WHERE userId = @adminID"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@firstName", firstName)
@@ -5618,7 +5650,7 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE users SET username = @newUsername, updated_at = NOW() WHERE userId = @adminID"
+            Dim query As String = "UPDATE users SET username = @newUsername, updatedAt = NOW() WHERE userId = @adminID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@newUsername", newUsername)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
@@ -5957,7 +5989,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return Nothing
 
             Dim query As String = "SELECT userId, firstName, middleName, lastName, suffix, position, " &
-                                 "departmentId, contactNumber, email, username, role, status, " &
+                                 "departmentId, contactNumber, email, username, role AS user_type, status, " &
                                  "employeeId, createdAt AS dateAssigned, lastLogin, createdAt, updatedAt, " &
                                  "province, municipal, barangay " &
                                  "FROM users WHERE userId = @userId LIMIT 1"
@@ -6355,8 +6387,8 @@ Public Class DatabaseConnection
             Dim updateQuery As String =
                 "UPDATE users SET firstName = @firstName, middleName = @middleName, lastName = @lastName, suffix = @suffix, " &
                 "position = @position, departmentId = @departmentID, contactNumber = @contactNumber, email = @email, username = @username, " &
-                "house_no_street = @houseNo, barangay = @barangay, municipality = @municipality, province_city = @province, " &
-                "employeeId = @employeeID, role = @userType, status = @status, updated_at = NOW() " &
+                "barangay = @barangay, municipal = @municipality, province = @province, " &
+                "employeeId = @employeeID, role = @userType, status = @status, updatedAt = NOW() " &
                 "WHERE userId = @adminID"
 
             Using cmd As New MySqlCommand(updateQuery, conn)
@@ -6435,7 +6467,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE users SET password = @password, updated_at = NOW() WHERE userId = @adminID"
+            Dim query As String = "UPDATE users SET password = @password, updatedAt = NOW() WHERE userId = @adminID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@password", hashedPassword)
                 cmd.Parameters.AddWithValue("@adminID", adminID)
@@ -6481,7 +6513,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             Dim statusValue As String = If(isActive, "Active", "Inactive")
-            Dim query As String = "UPDATE users SET status = @status, updated_at = NOW() WHERE userId = @adminID"
+            Dim query As String = "UPDATE users SET status = @status, updatedAt = NOW() WHERE userId = @adminID"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@status", statusValue)
@@ -6698,7 +6730,7 @@ Public Class DatabaseConnection
 
             ' All accounts are in users table, update based on role
             If userType = "Admin" OrElse userType = "SuperAdmin" OrElse userType = "Staff" OrElse userType = "Custodian" Then
-                query = "UPDATE users SET passwordEncrypted = @password, updated_at = NOW() WHERE userId = @userID"
+                query = "UPDATE users SET passwordEncrypted = @password, updatedAt = NOW() WHERE userId = @userID"
             Else
                 MessageBox.Show("Invalid user type specified.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return False
@@ -6805,9 +6837,9 @@ Public Class DatabaseConnection
 
                 query = "UPDATE users SET firstName = @firstName, middleName = @middleName, lastName = @lastName, " &
                        "suffix = @suffix, position = @position, departmentId = @departmentID, contactNumber = @contactNumber, " &
-                       "email = @email, username = @username, house_no_street = @houseNo, barangay = @barangay, " &
-                       "municipality = @municipality, province_city = @province, dateAssigned = @dateAssigned, " &
-                       "employeeId = @employeeID, role = @userType, status = @status, updated_at = NOW() " &
+                       "email = @email, username = @username, barangay = @barangay, " &
+                       "municipal = @municipality, province = @province, " &
+                       "employeeId = @employeeID, role = @userType, status = @status, updatedAt = NOW() " &
                        "WHERE userId = @userID"
 
                 Using cmd As New MySqlCommand(query, conn)
@@ -6870,7 +6902,7 @@ Public Class DatabaseConnection
                 query = "UPDATE users SET firstName = @firstName, lastName = @lastName, " &
                        "email = @email, username = @username, contactNumber = @contactNumber, " &
                        "departmentId = @departmentID, " &
-                       "position = @position, status = @status, updated_at = NOW() " &
+                       "position = @position, status = @status, updatedAt = NOW() " &
                        "WHERE userId = @userID AND role = 'Staff'"
 
                 Using cmd As New MySqlCommand(query, conn)
@@ -7113,7 +7145,7 @@ Public Class DatabaseConnection
             ' Note: users table doesn't have address column, it has province/municipal/barangay
             Dim updateQuery As String =
                 "UPDATE users SET firstName = @firstName, lastName = @lastName, email = @email, contactNumber = @contactNumber, " &
-                "departmentId = @departmentID, username = @username, position = @position, status = @status, updated_at = NOW() " &
+                "departmentId = @departmentID, username = @username, position = @position, status = @status, updatedAt = NOW() " &
                 "WHERE userId = @staffID AND role = 'Staff'"
 
             Using cmd As New MySqlCommand(updateQuery, conn)
@@ -7176,7 +7208,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             ' Update password in users table (all accounts are in users table)
-            Using cmd As New MySqlCommand("UPDATE users SET passwordEncrypted = @password, updated_at = NOW() WHERE userId = @staffID AND role = 'Staff'", conn)
+            Using cmd As New MySqlCommand("UPDATE users SET passwordEncrypted = @password, updatedAt = NOW() WHERE userId = @staffID AND role = 'Staff'", conn)
                 cmd.Parameters.AddWithValue("@password", hashedPassword)
                 cmd.Parameters.AddWithValue("@staffID", staffID)
 
@@ -7222,7 +7254,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             Dim statusValue As String = If(isActive, "Active", "Inactive")
-            Using cmd As New MySqlCommand("UPDATE users SET status = @status, updated_at = NOW() WHERE userId = @staffID AND role = 'Staff'", conn)
+            Using cmd As New MySqlCommand("UPDATE users SET status = @status, updatedAt = NOW() WHERE userId = @staffID AND role = 'Staff'", conn)
                 cmd.Parameters.AddWithValue("@status", statusValue)
                 cmd.Parameters.AddWithValue("@staffID", staffID)
 
@@ -7831,7 +7863,7 @@ Public Class DatabaseConnection
                     Dim totalDepreciation As Decimal = annualDepreciation * yearsUsed
 
                     ' Update depreciation value in database
-                    Dim updateQuery As String = "UPDATE properties SET depreciation_value = @depreciationValue, updated_at = NOW() WHERE property_id = @propertyID"
+                    Dim updateQuery As String = "UPDATE properties SET depreciation_value = @depreciationValue, updatedAt = NOW() WHERE property_id = @propertyID"
                     Using updateCmd As New MySqlCommand(updateQuery, conn)
                         updateCmd.Parameters.AddWithValue("@depreciationValue", totalDepreciation)
                         updateCmd.Parameters.AddWithValue("@propertyID", propertyID)
@@ -7915,7 +7947,7 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE properties SET assigned_to = @custodianID, updated_at = NOW() WHERE property_id = @propertyID"
+            Dim query As String = "UPDATE properties SET assigned_to = @custodianID, updatedAt = NOW() WHERE property_id = @propertyID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@custodianID", custodianID)
                 cmd.Parameters.AddWithValue("@propertyID", propertyID)
@@ -8005,7 +8037,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             Dim normalizedStatus As String = If(String.IsNullOrWhiteSpace(newStatus), "active", newStatus.Trim())
-            Dim updateSql As New StringBuilder("UPDATE properties SET status = @status, updated_at = NOW()")
+            Dim updateSql As New StringBuilder("UPDATE properties SET status = @status, updatedAt = NOW()")
             If Not String.IsNullOrWhiteSpace(conditionStatus) Then updateSql.Append(", condition = @condition")
             If disposalDate.HasValue OrElse normalizedStatus.Equals("disposed", StringComparison.OrdinalIgnoreCase) Then
                 updateSql.Append(", disposal_date = @disposalDate")
@@ -8732,10 +8764,12 @@ Public Class DatabaseConnection
     ''' </summary>
     Public Shared Function AddDepartment(departmentName As String, headOfDepartment As String, location As String,
                                         departmentCode As String, Optional contactNumber As String = "",
-                                        Optional email As String = "", Optional noOfEmployees As Integer = 0,
-                                        Optional budgetAllocation As Decimal = 0, Optional officeHours As String = "",
-                                        Optional establishedDate As Date? = Nothing, Optional parentDepartmentID As Integer? = Nothing,
-                                        Optional status As String = "active") As Boolean
+                                        Optional email As String = "", Optional building As String = "",
+                                        Optional floorNumber As String = "", Optional shortName As String = "",
+                                        Optional description As String = "", Optional status As String = "Active",
+                                        Optional noOfEmployees As Integer = 0, Optional budgetAllocation As Decimal = 0,
+                                        Optional officeHours As String = "", Optional establishedDate As DateTime? = Nothing,
+                                        Optional parentDepartmentID As Integer? = Nothing) As Boolean
         Dim conn As MySqlConnection = Nothing
         Try
             conn = GetConnection()
@@ -8818,11 +8852,9 @@ Public Class DatabaseConnection
             End If
 
             Dim query As String = "INSERT INTO departments (departmentName, headOfDepartment, location, officeCode, " &
-                                 "contactNumber, email, noOfEmployees, budgetAllocation, officeHours, establishedDate, " &
-                                 "parentDepartmentId, status) " &
+                                 "contactNumber, email, building, floorNumber, shortName, description, status, createdAt, updatedAt) " &
                                  "VALUES (@departmentName, @headOfDepartment, @location, @departmentCode, " &
-                                 "@contactNumber, @email, @noOfEmployees, @budgetAllocation, @officeHours, @establishedDate, " &
-                                 "@parentDepartmentID, @status)"
+                                 "@contactNumber, @email, @building, @floorNumber, @shortName, @description, @status, NOW(), NOW())"
 
             Using cmd As New MySqlCommand(query, conn)
                 Try
@@ -8923,7 +8955,9 @@ Public Class DatabaseConnection
     ''' </summary>
     Public Shared Function UpdateDepartment(departmentID As Integer, departmentName As String, headOfDepartment As String,
                                            location As String, departmentCode As String, Optional contactNumber As String = "",
-                                           Optional email As String = "") As Boolean
+                                           Optional email As String = "", Optional building As String = "",
+                                           Optional floorNumber As String = "", Optional shortName As String = "",
+                                           Optional description As String = "", Optional status As String = "Active") As Boolean
         Dim conn As MySqlConnection = Nothing
         Try
             conn = GetConnection()
@@ -8957,7 +8991,8 @@ Public Class DatabaseConnection
 
             Dim query As String = "UPDATE departments SET departmentName = @departmentName, headOfDepartment = @headOfDepartment, " &
                                  "location = @location, officeCode = @departmentCode, contactNumber = @contactNumber, " &
-                                 "email = @email, updatedAt = NOW() WHERE departmentId = @departmentID"
+                                 "email = @email, building = @building, floorNumber = @floorNumber, shortName = @shortName, " &
+                                 "description = @description, updatedAt = NOW() WHERE departmentId = @departmentID"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@departmentID", departmentID)
@@ -8965,8 +9000,13 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@headOfDepartment", headOfDepartment)
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@departmentCode", departmentCode)
-                cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(contactNumber), DBNull.Value, contactNumber))
-                cmd.Parameters.AddWithValue("@email", If(String.IsNullOrEmpty(email), DBNull.Value, email))
+                cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(contactNumber), DBNull.Value, CObj(contactNumber)))
+                cmd.Parameters.AddWithValue("@email", If(String.IsNullOrEmpty(email), DBNull.Value, CObj(email)))
+                cmd.Parameters.AddWithValue("@building", If(String.IsNullOrEmpty(building), DBNull.Value, CObj(building)))
+                cmd.Parameters.AddWithValue("@floorNumber", If(String.IsNullOrEmpty(floorNumber), DBNull.Value, CObj(floorNumber)))
+                cmd.Parameters.AddWithValue("@shortName", If(String.IsNullOrEmpty(shortName), DBNull.Value, CObj(shortName)))
+                cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, CObj(description)))
+                cmd.Parameters.AddWithValue("@status", status)
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
@@ -9298,3 +9338,4 @@ Public Class DatabaseConnection
 
 
 End Class
+

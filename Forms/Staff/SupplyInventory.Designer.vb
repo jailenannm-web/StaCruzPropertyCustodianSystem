@@ -232,7 +232,7 @@ Partial Class SupplyInventory
     Friend WithEvents description As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents unitofmeasure As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents quantityavail As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend Shadows WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents stockstatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnrequestsupply As Resources.Controls.RoundedButton

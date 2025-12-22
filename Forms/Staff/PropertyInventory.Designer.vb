@@ -237,7 +237,7 @@ Partial Class PropertyInventory
     Friend WithEvents itemname As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents category As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents description As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend Shadows WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents department As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents condition As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn

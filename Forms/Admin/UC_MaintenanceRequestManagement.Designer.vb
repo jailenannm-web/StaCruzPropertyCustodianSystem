@@ -383,7 +383,7 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents requestId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dateRequested As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents itemName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend Shadows WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents propertyNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents serialNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents departmentId As System.Windows.Forms.DataGridViewTextBoxColumn

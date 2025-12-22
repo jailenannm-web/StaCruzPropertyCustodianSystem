@@ -159,8 +159,8 @@ Public Class UC_UserManagement
                 End If
 
                 ' ===== BUILD FULL ADDRESS FROM PROVINCE, MUNICIPALITY, BARANGAY =====
-                Dim province As String = SafeValue(record, "province_city")
-                Dim municipality As String = SafeValue(record, "municipality")
+                Dim province As String = SafeValue(record, "province")
+                Dim municipality As String = SafeValue(record, "municipal")
                 Dim barangay As String = SafeValue(record, "barangay")
                 
                 Dim addressParts As New List(Of String)
@@ -224,7 +224,9 @@ Public Class UC_UserManagement
                 totalLabel = TryCast(foundControls(0), Label)
             End If
             If totalLabel IsNot Nothing Then
-                totalLabel.Text = If(records IsNot Nothing, records.Rows.Count.ToString(), "0")
+                ' Get accurate count from database instead of DataTable rows
+                Dim actualUserCount As Integer = DatabaseConnection.GetTotalUserCount()
+                totalLabel.Text = actualUserCount.ToString()
             End If
 
             ' Debug output
@@ -358,7 +360,7 @@ Public Class UC_UserManagement
             SafeValue(userData, "employeeId"),             ' employeeID
             SafeValue(userData, "contactNumber"),          ' contactNumber
             SafeValue(userData, "email"),                  ' email
-            SafeValue(userData, "role"),                   ' userRole (FIXED: was "username")
+            SafeValue(userData, "user_type"),              ' userRole (uses user_type column)
             SafeValue(userData, "province"),               ' provinceValue
             SafeValue(userData, "municipal"),              ' municipalityValue
             SafeValue(userData, "barangay"),               ' barangayValue
@@ -610,7 +612,9 @@ Public Class UC_UserManagement
                 totalLabel = TryCast(foundControls(0), Label)
             End If
             If totalLabel IsNot Nothing Then
-                totalLabel.Text = filtered.Count().ToString()
+                ' Show filtered count but note it's filtered
+                Dim actualUserCount As Integer = DatabaseConnection.GetTotalUserCount()
+                totalLabel.Text = $"{filtered.Count()} of {actualUserCount}"
             End If
         Catch ex As Exception
             MessageBox.Show("Error searching users: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

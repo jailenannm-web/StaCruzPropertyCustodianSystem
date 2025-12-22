@@ -338,7 +338,7 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents headOfDepartment As DataGridViewTextBoxColumn
     Friend WithEvents email As DataGridViewTextBoxColumn
     Friend WithEvents contactNumber As DataGridViewTextBoxColumn
-    Friend WithEvents location As DataGridViewTextBoxColumn
+    Friend Shadows WithEvents location As DataGridViewTextBoxColumn
     Friend WithEvents building As DataGridViewTextBoxColumn
     Friend WithEvents floorNumber As DataGridViewTextBoxColumn
     Friend WithEvents shortName As DataGridViewTextBoxColumn

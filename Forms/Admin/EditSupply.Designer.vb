@@ -499,7 +499,7 @@ Partial Class EditSupply
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents location As System.Windows.Forms.ComboBox
+    Friend Shadows WithEvents location As System.Windows.Forms.ComboBox
     Friend WithEvents supplier As System.Windows.Forms.ComboBox
     Friend WithEvents totalCost As System.Windows.Forms.NumericUpDown
     Friend WithEvents unitCost As System.Windows.Forms.NumericUpDown

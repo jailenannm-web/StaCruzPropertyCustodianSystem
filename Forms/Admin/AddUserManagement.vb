@@ -239,8 +239,10 @@ Public Class AddUserManagement
 
 
         Dim employeeCode As String = employeeId.Text.Trim()
-        Dim usernameValue As String = If(String.IsNullOrWhiteSpace(employeeCode), email.Text.Trim(), employeeCode)
+        ' Use the username field value if provided, otherwise generate from name
+        Dim usernameValue As String = username.Text.Trim()
         If String.IsNullOrWhiteSpace(usernameValue) Then
+            ' Generate username from first.last if username field is empty
             usernameValue = (firstName.Text.Trim() & "." & lastName.Text.Trim()).ToLowerInvariant()
         End If
 
@@ -323,9 +325,38 @@ Public Class AddUserManagement
     End Sub
 
     Private Sub NavigateBackToList()
+        ' Try to find AdminDashboard first
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             parentDashboard.LoadUserControl(New UC_UserManagement())
+            System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (AdminDashboard)")
+        Else
+            ' Try to find SADashboard
+            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+            If saDashboard IsNot Nothing Then
+                saDashboard.LoadUserControl(New UC_UserManagement())
+                System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (SADashboard)")
+            Else
+                ' Search up the control hierarchy
+                Dim currentParent As Control = Me.Parent
+                While currentParent IsNot Nothing
+                    Dim adminDash = TryCast(currentParent, AdminDashboard)
+                    If adminDash IsNot Nothing Then
+                        adminDash.LoadUserControl(New UC_UserManagement())
+                        System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found AdminDashboard in hierarchy")
+                        Exit While
+                    End If
+                    
+                    Dim saDash = TryCast(currentParent, SADashboard)
+                    If saDash IsNot Nothing Then
+                        saDash.LoadUserControl(New UC_UserManagement())
+                        System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found SADashboard in hierarchy")
+                        Exit While
+                    End If
+                    
+                    currentParent = currentParent.Parent
+                End While
+            End If
         End If
     End Sub
 

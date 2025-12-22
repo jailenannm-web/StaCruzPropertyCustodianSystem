@@ -492,7 +492,7 @@ Partial Class AddMaintenance1
     Friend WithEvents SAAddM_NextSched As System.Windows.Forms.Label
     Friend WithEvents SAAddM_Warranty As System.Windows.Forms.Label
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents location As System.Windows.Forms.ComboBox
+    Friend Shadows WithEvents location As System.Windows.Forms.ComboBox
     Friend WithEvents conditionBeforeMaint As System.Windows.Forms.ComboBox
     Friend WithEvents serialNumber As System.Windows.Forms.TextBox
     Friend WithEvents propertyItemName As System.Windows.Forms.TextBox

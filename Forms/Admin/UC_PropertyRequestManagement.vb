@@ -49,7 +49,7 @@ Public Class UC_PropertyRequestManagement
         MessageBox.Show("Delete request functionality here")
     End Sub
 
-    Private Sub assign_Click(sender As Object, e As EventArgs)
+    Private Sub Assign_Click(sender As Object, e As EventArgs)
         ' No restrictions for Super Admin, Admin, and Custodian
         ' Validate that a request is selected
         If prm_table1.SelectedRows.Count = 0 Then
@@ -142,17 +142,11 @@ Public Class UC_PropertyRequestManagement
         LoadRequestData()
         ApplyPermissionState()
 
-        ' Wire up search textbox if present
-        Dim searchNames As String() = {"prm_search", "propertyRequestSearch", "txtSearch", "txtbox_search", "admin_txtbox_search", "searchBox"}
-        For Each nm As String In searchNames
-            Dim found() As Control = Me.Controls.Find(nm, True)
-            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
-                Dim tb As TextBox = CType(found(0), TextBox)
-                RemoveHandler tb.TextChanged, AddressOf PropertyRequestSearch_TextChanged
-                AddHandler tb.TextChanged, AddressOf PropertyRequestSearch_TextChanged
-                Exit For
-            End If
-        Next
+        ' Wire up search textbox - use maintenancemanagementsearchbar from designer
+        If maintenancemanagementsearchbar IsNot Nothing Then
+            RemoveHandler maintenancemanagementsearchbar.TextChanged, AddressOf PropertyRequestSearch_TextChanged
+            AddHandler maintenancemanagementsearchbar.TextChanged, AddressOf PropertyRequestSearch_TextChanged
+        End If
     End Sub
 
     Private originalRequestData As DataTable = Nothing
@@ -353,25 +347,70 @@ Public Class UC_PropertyRequestManagement
     ' PRINT PAR LOGIC — FULLY CONNECTED TO PROPERTYCARD
     ' ----------------------------------------------------------------------
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click
-        Dim InventoryCustodianSlip As New InventoryCustodianSlip()
-        InventoryCustodianSlip.Show()
-    End Sub
-
-    Private Sub issuePropertyCard_Click(sender As Object, e As EventArgs) Handles issuePropertyCard.Click
-
-        If prm_table1.CurrentRow Is Nothing Then
-            MessageBox.Show("Please select a row first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        ' Validate selection
+        If prm_table1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a property request to print PAR/ICS.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        Dim row As DataGridViewRow = prm_table1.CurrentRow
+        Try
+            Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+            
+            ' Get request ID from DataTable
+            Dim requestId As Integer = 0
+            If dt IsNot Nothing Then
+                Dim rowIndex As Integer = selectedRow.Index
+                Dim dataRow As DataRow = dt.Rows(rowIndex)
+                If dt.Columns.Contains("requestId") Then
+                    requestId = Convert.ToInt32(dataRow("requestId"))
+                ElseIf dt.Columns.Contains("request_id") Then
+                    requestId = Convert.ToInt32(dataRow("request_id"))
+                End If
+            End If
+            
+            System.Diagnostics.Debug.WriteLine($"[v0] UC_PropertyRequestManagement - Opening PAR/ICS for requestId: {requestId}")
+            
+            ' Open InventoryCustodianSlip form with requestId for autofill
+            Dim icsForm As New InventoryCustodianSlip(requestId)
+            icsForm.Show()
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[v0] UC_PropertyRequestManagement - Print PAR/ICS error: {ex.Message}")
+            MessageBox.Show($"Error opening PAR/ICS form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
-        ' Convert DataGridViewRow → DataRow (or pass values manually)
-        Dim dt As DataTable = CType(prm_table1.DataSource, DataTable)
-        Dim dataRow As DataRow = dt.Rows(row.Index)
+    Private Sub issuePropertyCard_Click(sender As Object, e As EventArgs) Handles issuePropertyCard.Click
+        ' Validate selection
+        If prm_table1.SelectedRows.Count = 0 AndAlso prm_table1.CurrentRow Is Nothing Then
+            MessageBox.Show("Please select a property request to issue acknowledgment.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
-        Dim cardForm As New PropertyCard(dataRow)
-        cardForm.Show()
+        Try
+            Dim row As DataGridViewRow = If(prm_table1.SelectedRows.Count > 0, prm_table1.SelectedRows(0), prm_table1.CurrentRow)
+            Dim dt As DataTable = CType(prm_table1.DataSource, DataTable)
+            Dim dataRow As DataRow = dt.Rows(row.Index)
+            
+            ' Get request ID for better tracking
+            Dim requestId As Integer = 0
+            If dt.Columns.Contains("requestId") Then
+                requestId = Convert.ToInt32(dataRow("requestId"))
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestId = Convert.ToInt32(dataRow("request_id"))
+            End If
+            
+            System.Diagnostics.Debug.WriteLine($"[v0] UC_PropertyRequestManagement - Opening Property Card for requestId: {requestId}")
+
+            ' Open PropertyCard form with autofilled data
+            Dim cardForm As New PropertyCard(dataRow)
+            cardForm.Show()
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[v0] UC_PropertyRequestManagement - Issue property card error: {ex.Message}")
+            MessageBox.Show($"Error opening property card: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
 
@@ -519,61 +558,66 @@ Public Class UC_PropertyRequestManagement
             Return
         End If
 
-        Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
-        Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
-        
-        ' Get request ID from DataTable source
-        Dim requestIDValue As Object = Nothing
-        If dt IsNot Nothing Then
-            Dim rowIndex As Integer = selectedRow.Index
-            Dim dataRow As DataRow = dt.Rows(rowIndex)
-            If dt.Columns.Contains("requestId") Then
-                requestIDValue = dataRow("requestId")
-            ElseIf dt.Columns.Contains("request_id") Then
-                requestIDValue = dataRow("request_id")
+        Try
+            Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+            
+            ' Get request ID from DataTable source
+            Dim requestIDValue As Object = Nothing
+            If dt IsNot Nothing Then
+                Dim rowIndex As Integer = selectedRow.Index
+                Dim dataRow As DataRow = dt.Rows(rowIndex)
+                If dt.Columns.Contains("requestId") Then
+                    requestIDValue = dataRow("requestId")
+                ElseIf dt.Columns.Contains("request_id") Then
+                    requestIDValue = dataRow("request_id")
+                End If
             End If
-        End If
-        
-        ' Fallback to DataGridView cells
-        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) Then
-            If prm_table1.Columns.Contains("request_id") Then
-                requestIDValue = selectedRow.Cells("request_id").Value
-            ElseIf prm_table1.Columns.Contains("RequestID") Then
-                requestIDValue = selectedRow.Cells("RequestID").Value
-            ElseIf prm_table1.Columns.Count > 0 Then
-                requestIDValue = selectedRow.Cells(0).Value
+
+            ' Fallback to DataGridView cells
+            If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) Then
+                If prm_table1.Columns.Contains("request_id") Then
+                    requestIDValue = selectedRow.Cells("request_id").Value
+                ElseIf prm_table1.Columns.Contains("RequestID") Then
+                    requestIDValue = selectedRow.Cells("RequestID").Value
+                ElseIf prm_table1.Columns.Count > 0 Then
+                    requestIDValue = selectedRow.Cells(0).Value
+                End If
             End If
-        End If
 
-        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
-            MessageBox.Show("Invalid request selected. Please select a valid property request.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
+            If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
+                MessageBox.Show("Invalid request selected. Please select a valid property request.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
 
-        Dim requestID As Integer = 0
-        If Not Integer.TryParse(requestIDValue.ToString(), requestID) Then
-            MessageBox.Show("Invalid request ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
+            Dim requestID As Integer = 0
+            If Not Integer.TryParse(requestIDValue.ToString(), requestID) Then
+                MessageBox.Show("Invalid request ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
 
-        ' Check for SADashboard first (Super Admin)
-        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-        If saDashboard IsNot Nothing Then
-            Dim assignForm As New AssignRequestManagement()
-            assignForm.RequestID = requestID
-            saDashboard.LoadUserControl(assignForm)
-            Return
-        End If
-        
-        ' Check for AdminDashboard
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-        If parentDashboard IsNot Nothing Then
-            Dim assignForm As New AssignRequestManagement()
-            assignForm.RequestID = requestID
-            parentDashboard.LoadUserControl(assignForm)
-        Else
-            MessageBox.Show("Unable to open assignment form. Parent dashboard not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+            ' Check for SADashboard first (Super Admin)
+            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+            If saDashboard IsNot Nothing Then
+                Dim assignForm As New AssignRequestManagement()
+                assignForm.RequestID = requestID
+                saDashboard.LoadUserControl(assignForm)
+                Return
+            End If
+
+            ' Check for AdminDashboard
+            Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
+            If parentDashboard IsNot Nothing Then
+                Dim assignForm As New AssignRequestManagement()
+                assignForm.RequestID = requestID
+                parentDashboard.LoadUserControl(assignForm)
+            Else
+                MessageBox.Show("Unable to open assignment form. Parent dashboard not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error assigning request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("btnAssign_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+        End Try
     End Sub
 
 End Class

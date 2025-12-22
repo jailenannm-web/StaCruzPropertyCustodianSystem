@@ -691,5 +691,5 @@ Partial Class AssignRequestManagement
     Friend WithEvents propertyName As System.Windows.Forms.ComboBox
     Friend WithEvents cost As System.Windows.Forms.NumericUpDown
     Friend WithEvents remarks As System.Windows.Forms.ComboBox
-    Friend WithEvents location As System.Windows.Forms.ComboBox
+    Friend Shadows WithEvents location As System.Windows.Forms.ComboBox
 End Class

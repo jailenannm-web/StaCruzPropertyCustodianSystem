@@ -516,7 +516,7 @@ Partial Class MaintenanceManagementReport1
     Friend WithEvents lblPropertyCard As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents departmentId As System.Windows.Forms.TextBox
-    Friend WithEvents location As System.Windows.Forms.TextBox
+    Friend Shadows WithEvents location As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents serialId As System.Windows.Forms.TextBox

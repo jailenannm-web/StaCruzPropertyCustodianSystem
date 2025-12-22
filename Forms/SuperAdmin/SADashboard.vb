@@ -14,11 +14,21 @@ Public Partial Class SADashboard
     Private _isDashboardLoading As Boolean
 
     Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
+        ' Clear any loaded user controls to show dashboard
+        ' pnlContainer.Controls.Clear()
+        
+        ' Make sure dashboard stat panels are visible
+        ' If pnlTotalUsers IsNot Nothing Then pnlTotalUsers.Visible = True
+        ' If pnlProperties IsNot Nothing Then pnlProperties.Visible = True
+        ' If pnlSupplies IsNot Nothing Then pnlSupplies.Visible = True
+        ' If pnlMaintenance IsNot Nothing Then pnlMaintenance.Visible = True
 
         ' --- This code changes the active button color ---
         SetActiveButton(btnDashboard)
         ' Reload charts when dashboard button is clicked
         LoadDashboardChartsAsync()
+        
+        System.Diagnostics.Debug.WriteLine("[v0] SADashboard - Dashboard button clicked, showing dashboard")
     End Sub
 
     Private Sub SADashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load

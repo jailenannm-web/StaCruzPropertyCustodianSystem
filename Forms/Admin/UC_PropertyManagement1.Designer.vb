@@ -430,7 +430,7 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents sourceOfFunds As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents assignedTo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents departmentId As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend Shadows WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents condition As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents issuePropertySlip As Resources.Controls.RoundedButton

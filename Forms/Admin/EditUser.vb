@@ -33,6 +33,21 @@ Public Class EditUser
             canManageUsers = SessionContext.HasPermission(SessionContext.ModulePermission.ManageUsers)
             ApplyPermissionState()
         End If
+        
+        ' Check if address values were stored in Tag and need to be set now
+        If Me.province.Tag IsNot Nothing Then
+            Dim provinceVal As String = Me.province.Tag.ToString()
+            Dim municipalVal As String = If(Me.municipal.Tag IsNot Nothing, Me.municipal.Tag.ToString(), "")
+            Dim barangayVal As String = If(Me.barangay.Tag IsNot Nothing, Me.barangay.Tag.ToString(), "")
+            
+            ' Clear tags
+            Me.province.Tag = Nothing
+            Me.municipal.Tag = Nothing
+            Me.barangay.Tag = Nothing
+            
+            ' Set values now that dropdowns are loaded
+            SetLocationValues(provinceVal, municipalVal, barangayVal)
+        End If
     End Sub
 
     Private Sub ApplyPermissionState()
@@ -79,13 +94,58 @@ Public Class EditUser
         ' Set department dropdown properly
         SetDepartmentValue(departmentID)
         
-        ' Set location dropdowns with proper DisplayMember/ValueMember
-        SetComboValueWithDataRow(Me.province, provinceValue)
-        SetComboValueWithDataRow(Me.municipal, municipalityValue)
-        SetComboValueWithDataRow(Me.barangay, barangayValue)
+        ' Store address values to set after dropdowns are loaded
+        ' Set location dropdowns after ensuring they're populated
+        ' The Load event will populate dropdowns, then we set the values
+        If Me.province.DataSource Is Nothing Then
+            ' Dropdowns not yet loaded, store values for later
+            Me.province.Tag = provinceValue
+            Me.municipal.Tag = municipalityValue
+            Me.barangay.Tag = barangayValue
+        Else
+            ' Dropdowns already loaded, set values now
+            SetLocationValues(provinceValue, municipalityValue, barangayValue)
+        End If
 
         editingUsername = username
         currentUserType = userRole ' Store the current user type
+    End Sub
+    
+    Private Sub SetLocationValues(provinceValue As String, municipalityValue As String, barangayValue As String)
+        ' Remove event handlers temporarily to prevent cascading updates
+        RemoveHandler province.SelectedIndexChanged, AddressOf Province_SelectedIndexChanged
+        RemoveHandler municipal.SelectedIndexChanged, AddressOf Municipality_SelectedIndexChanged
+        
+        Try
+            ' Set province first
+            SetComboValueWithDataRow(Me.province, provinceValue)
+            
+            ' Load municipalities for selected province
+            If Not String.IsNullOrEmpty(provinceValue) Then
+                Dim municipalitiesTable As DataTable = DatabaseConnection.GetMunicipalities(provinceValue)
+                If municipalitiesTable IsNot Nothing AndAlso municipalitiesTable.Rows.Count > 0 Then
+                    municipal.DataSource = municipalitiesTable
+                    municipal.DisplayMember = "municipality_name"
+                    municipal.ValueMember = "municipality_name"
+                    SetComboValueWithDataRow(Me.municipal, municipalityValue)
+                End If
+            End If
+            
+            ' Load barangays for selected municipality
+            If Not String.IsNullOrEmpty(municipalityValue) Then
+                Dim barangaysTable As DataTable = DatabaseConnection.GetBarangays(municipalityValue)
+                If barangaysTable IsNot Nothing AndAlso barangaysTable.Rows.Count > 0 Then
+                    barangay.DataSource = barangaysTable
+                    barangay.DisplayMember = "barangay_name"
+                    barangay.ValueMember = "barangay_name"
+                    SetComboValueWithDataRow(Me.barangay, barangayValue)
+                End If
+            End If
+        Finally
+            ' Re-add event handlers
+            AddHandler province.SelectedIndexChanged, AddressOf Province_SelectedIndexChanged
+            AddHandler municipal.SelectedIndexChanged, AddressOf Municipality_SelectedIndexChanged
+        End Try
     End Sub
     
     Private Sub SetDepartmentValue(deptID As String)

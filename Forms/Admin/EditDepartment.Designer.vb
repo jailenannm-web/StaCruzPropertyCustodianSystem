@@ -30,13 +30,16 @@ Partial Class EditDepartment
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.departmentId = New System.Windows.Forms.TextBox()
+        Me.description = New System.Windows.Forms.TextBox()
+        Me.descriptionlbl = New System.Windows.Forms.Label()
+        Me.shortName = New System.Windows.Forms.TextBox()
         Me.officeCode = New System.Windows.Forms.TextBox()
         Me.building = New System.Windows.Forms.TextBox()
         Me.established_date = New System.Windows.Forms.Label()
-        Me.department_code = New System.Windows.Forms.Label()
+        Me.buildinglbl = New System.Windows.Forms.Label()
         Me.status_cmbo = New System.Windows.Forms.ComboBox()
-        Me.office_hours = New System.Windows.Forms.Label()
-        Me.office_hours_cmbo = New System.Windows.Forms.ComboBox()
+        Me.shortnamelbl = New System.Windows.Forms.Label()
         Me.parent_department_id = New System.Windows.Forms.Label()
         Me.established_date_date = New System.Windows.Forms.DateTimePicker()
         Me.status = New System.Windows.Forms.Label()
@@ -92,7 +95,7 @@ Partial Class EditDepartment
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(1028, 709)
+        Me.btnCancel.Location = New System.Drawing.Point(1027, 739)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(145, 34)
@@ -108,7 +111,7 @@ Partial Class EditDepartment
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSave.Location = New System.Drawing.Point(1181, 709)
+        Me.btnSave.Location = New System.Drawing.Point(1180, 739)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(145, 34)
@@ -126,7 +129,7 @@ Partial Class EditDepartment
         Me.RoundedPanel2.Location = New System.Drawing.Point(61, 215)
         Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(1264, 425)
+        Me.RoundedPanel2.Size = New System.Drawing.Size(1264, 501)
         Me.RoundedPanel2.TabIndex = 41
         '
         'Panel2
@@ -134,13 +137,16 @@ Partial Class EditDepartment
         Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.departmentId)
+        Me.Panel2.Controls.Add(Me.description)
+        Me.Panel2.Controls.Add(Me.descriptionlbl)
+        Me.Panel2.Controls.Add(Me.shortName)
         Me.Panel2.Controls.Add(Me.officeCode)
         Me.Panel2.Controls.Add(Me.building)
         Me.Panel2.Controls.Add(Me.established_date)
-        Me.Panel2.Controls.Add(Me.department_code)
+        Me.Panel2.Controls.Add(Me.buildinglbl)
         Me.Panel2.Controls.Add(Me.status_cmbo)
-        Me.Panel2.Controls.Add(Me.office_hours)
-        Me.Panel2.Controls.Add(Me.office_hours_cmbo)
+        Me.Panel2.Controls.Add(Me.shortnamelbl)
         Me.Panel2.Controls.Add(Me.parent_department_id)
         Me.Panel2.Controls.Add(Me.established_date_date)
         Me.Panel2.Controls.Add(Me.status)
@@ -148,8 +154,58 @@ Partial Class EditDepartment
         Me.Panel2.Location = New System.Drawing.Point(655, 18)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(537, 382)
+        Me.Panel2.Size = New System.Drawing.Size(537, 458)
         Me.Panel2.TabIndex = 65
+        '
+        'departmentId
+        '
+        Me.departmentId.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.departmentId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.departmentId.Location = New System.Drawing.Point(242, 250)
+        Me.departmentId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Size = New System.Drawing.Size(255, 24)
+        Me.departmentId.TabIndex = 110
+        '
+        'description
+        '
+        Me.description.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.description.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.description.Location = New System.Drawing.Point(244, 353)
+        Me.description.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.description.Multiline = True
+        Me.description.Name = "description"
+        Me.description.Size = New System.Drawing.Size(257, 83)
+        Me.description.TabIndex = 109
+        '
+        'descriptionlbl
+        '
+        Me.descriptionlbl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.descriptionlbl.AutoSize = True
+        Me.descriptionlbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.descriptionlbl.Location = New System.Drawing.Point(48, 353)
+        Me.descriptionlbl.Name = "descriptionlbl"
+        Me.descriptionlbl.Size = New System.Drawing.Size(83, 18)
+        Me.descriptionlbl.TabIndex = 108
+        Me.descriptionlbl.Text = "Description"
+        '
+        'shortName
+        '
+        Me.shortName.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.shortName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.shortName.Location = New System.Drawing.Point(244, 89)
+        Me.shortName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.shortName.Name = "shortName"
+        Me.shortName.Size = New System.Drawing.Size(255, 24)
+        Me.shortName.TabIndex = 107
         '
         'officeCode
         '
@@ -157,11 +213,11 @@ Partial Class EditDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.officeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.officeCode.Location = New System.Drawing.Point(243, 201)
+        Me.officeCode.Location = New System.Drawing.Point(244, 198)
         Me.officeCode.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.officeCode.Name = "officeCode"
         Me.officeCode.Size = New System.Drawing.Size(255, 24)
-        Me.officeCode.TabIndex = 71
+        Me.officeCode.TabIndex = 106
         '
         'building
         '
@@ -169,11 +225,11 @@ Partial Class EditDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.building.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.building.Location = New System.Drawing.Point(243, 41)
+        Me.building.Location = New System.Drawing.Point(244, 38)
         Me.building.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.building.Name = "building"
         Me.building.Size = New System.Drawing.Size(255, 24)
-        Me.building.TabIndex = 70
+        Me.building.TabIndex = 105
         '
         'established_date
         '
@@ -182,24 +238,24 @@ Partial Class EditDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.established_date.AutoSize = True
         Me.established_date.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.established_date.Location = New System.Drawing.Point(44, 151)
+        Me.established_date.Location = New System.Drawing.Point(45, 148)
         Me.established_date.Name = "established_date"
         Me.established_date.Size = New System.Drawing.Size(119, 18)
-        Me.established_date.TabIndex = 48
+        Me.established_date.TabIndex = 99
         Me.established_date.Text = "Established Date"
         '
-        'department_code
+        'buildinglbl
         '
-        Me.department_code.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.buildinglbl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.department_code.AutoSize = True
-        Me.department_code.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.department_code.Location = New System.Drawing.Point(44, 47)
-        Me.department_code.Name = "department_code"
-        Me.department_code.Size = New System.Drawing.Size(63, 18)
-        Me.department_code.TabIndex = 46
-        Me.department_code.Text = "Building "
+        Me.buildinglbl.AutoSize = True
+        Me.buildinglbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.buildinglbl.Location = New System.Drawing.Point(45, 44)
+        Me.buildinglbl.Name = "buildinglbl"
+        Me.buildinglbl.Size = New System.Drawing.Size(63, 18)
+        Me.buildinglbl.TabIndex = 97
+        Me.buildinglbl.Text = "Building "
         '
         'status_cmbo
         '
@@ -208,37 +264,24 @@ Partial Class EditDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.status_cmbo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.status_cmbo.FormattingEnabled = True
-        Me.status_cmbo.Location = New System.Drawing.Point(243, 256)
+        Me.status_cmbo.Location = New System.Drawing.Point(244, 305)
         Me.status_cmbo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.status_cmbo.Name = "status_cmbo"
         Me.status_cmbo.Size = New System.Drawing.Size(239, 26)
-        Me.status_cmbo.TabIndex = 62
+        Me.status_cmbo.TabIndex = 104
         '
-        'office_hours
+        'shortnamelbl
         '
-        Me.office_hours.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.shortnamelbl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.office_hours.AutoSize = True
-        Me.office_hours.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.office_hours.Location = New System.Drawing.Point(44, 98)
-        Me.office_hours.Name = "office_hours"
-        Me.office_hours.Size = New System.Drawing.Size(128, 18)
-        Me.office_hours.TabIndex = 47
-        Me.office_hours.Text = "Short Name/Code"
-        '
-        'office_hours_cmbo
-        '
-        Me.office_hours_cmbo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.office_hours_cmbo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.office_hours_cmbo.FormattingEnabled = True
-        Me.office_hours_cmbo.Location = New System.Drawing.Point(243, 91)
-        Me.office_hours_cmbo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.office_hours_cmbo.Name = "office_hours_cmbo"
-        Me.office_hours_cmbo.Size = New System.Drawing.Size(239, 26)
-        Me.office_hours_cmbo.TabIndex = 61
+        Me.shortnamelbl.AutoSize = True
+        Me.shortnamelbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.shortnamelbl.Location = New System.Drawing.Point(45, 95)
+        Me.shortnamelbl.Name = "shortnamelbl"
+        Me.shortnamelbl.Size = New System.Drawing.Size(128, 18)
+        Me.shortnamelbl.TabIndex = 98
+        Me.shortnamelbl.Text = "Short Name/Code"
         '
         'parent_department_id
         '
@@ -247,10 +290,10 @@ Partial Class EditDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.parent_department_id.AutoSize = True
         Me.parent_department_id.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.parent_department_id.Location = New System.Drawing.Point(44, 201)
+        Me.parent_department_id.Location = New System.Drawing.Point(45, 198)
         Me.parent_department_id.Name = "parent_department_id"
         Me.parent_department_id.Size = New System.Drawing.Size(87, 18)
-        Me.parent_department_id.TabIndex = 49
+        Me.parent_department_id.TabIndex = 100
         Me.parent_department_id.Text = "Office Code"
         '
         'established_date_date
@@ -259,11 +302,11 @@ Partial Class EditDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.established_date_date.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.established_date_date.Location = New System.Drawing.Point(243, 150)
+        Me.established_date_date.Location = New System.Drawing.Point(244, 147)
         Me.established_date_date.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.established_date_date.Name = "established_date_date"
         Me.established_date_date.Size = New System.Drawing.Size(239, 24)
-        Me.established_date_date.TabIndex = 60
+        Me.established_date_date.TabIndex = 103
         '
         'status
         '
@@ -272,11 +315,11 @@ Partial Class EditDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.status.AutoSize = True
         Me.status.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.status.Location = New System.Drawing.Point(44, 256)
+        Me.status.Location = New System.Drawing.Point(45, 253)
         Me.status.Name = "status"
-        Me.status.Size = New System.Drawing.Size(50, 18)
-        Me.status.TabIndex = 50
-        Me.status.Text = "Status"
+        Me.status.Size = New System.Drawing.Size(99, 18)
+        Me.status.TabIndex = 101
+        Me.status.Text = "DepartmentID"
         '
         'budget_allocation
         '
@@ -285,11 +328,11 @@ Partial Class EditDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.budget_allocation.AutoSize = True
         Me.budget_allocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.budget_allocation.Location = New System.Drawing.Point(44, 313)
+        Me.budget_allocation.Location = New System.Drawing.Point(45, 310)
         Me.budget_allocation.Name = "budget_allocation"
-        Me.budget_allocation.Size = New System.Drawing.Size(0, 18)
-        Me.budget_allocation.TabIndex = 51
-        Me.budget_allocation.Visible = False
+        Me.budget_allocation.Size = New System.Drawing.Size(50, 18)
+        Me.budget_allocation.TabIndex = 102
+        Me.budget_allocation.Text = "Status"
         '
         'Panel1
         '
@@ -311,7 +354,7 @@ Partial Class EditDepartment
         Me.Panel1.Location = New System.Drawing.Point(67, 18)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(553, 382)
+        Me.Panel1.Size = New System.Drawing.Size(553, 458)
         Me.Panel1.TabIndex = 64
         '
         'departmentHead
@@ -319,7 +362,7 @@ Partial Class EditDepartment
         Me.departmentHead.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.departmentHead.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.departmentHead.FormattingEnabled = True
-        Me.departmentHead.Location = New System.Drawing.Point(256, 98)
+        Me.departmentHead.Location = New System.Drawing.Point(256, 108)
         Me.departmentHead.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.departmentHead.Name = "departmentHead"
         Me.departmentHead.Size = New System.Drawing.Size(239, 26)
@@ -514,16 +557,7 @@ Partial Class EditDepartment
     Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
     Friend WithEvents instructions As System.Windows.Forms.Label
     Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
-    Friend WithEvents office_hours As System.Windows.Forms.Label
-    Friend WithEvents department_code As System.Windows.Forms.Label
-    Friend WithEvents parent_department_id As System.Windows.Forms.Label
-    Friend WithEvents established_date As System.Windows.Forms.Label
-    Friend WithEvents budget_allocation As System.Windows.Forms.Label
-    Friend WithEvents status As System.Windows.Forms.Label
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents status_cmbo As System.Windows.Forms.ComboBox
-    Friend WithEvents office_hours_cmbo As System.Windows.Forms.ComboBox
-    Friend WithEvents established_date_date As System.Windows.Forms.DateTimePicker
     Friend WithEvents ContextMenuStrip2 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
@@ -537,10 +571,22 @@ Partial Class EditDepartment
     Friend WithEvents btnCancel As Resources.Controls.RoundedButton
     Friend WithEvents btnSave As Resources.Controls.RoundedButton
     Friend WithEvents email As System.Windows.Forms.TextBox
-    Friend WithEvents location As System.Windows.Forms.TextBox
+    Friend Shadows WithEvents location As System.Windows.Forms.TextBox
     Friend WithEvents contactNumber As System.Windows.Forms.TextBox
     Friend WithEvents floorNumber As System.Windows.Forms.TextBox
+    Friend WithEvents departmentHead As System.Windows.Forms.ComboBox
+    Friend WithEvents departmentId As System.Windows.Forms.TextBox
+    Friend WithEvents description As System.Windows.Forms.TextBox
+    Friend WithEvents descriptionlbl As System.Windows.Forms.Label
+    Friend WithEvents shortName As System.Windows.Forms.TextBox
     Friend WithEvents officeCode As System.Windows.Forms.TextBox
     Friend WithEvents building As System.Windows.Forms.TextBox
-    Friend WithEvents departmentHead As System.Windows.Forms.ComboBox
+    Friend WithEvents established_date As System.Windows.Forms.Label
+    Friend WithEvents buildinglbl As System.Windows.Forms.Label
+    Friend WithEvents status_cmbo As System.Windows.Forms.ComboBox
+    Friend WithEvents shortnamelbl As System.Windows.Forms.Label
+    Friend WithEvents parent_department_id As System.Windows.Forms.Label
+    Friend WithEvents established_date_date As System.Windows.Forms.DateTimePicker
+    Friend WithEvents status As System.Windows.Forms.Label
+    Friend WithEvents budget_allocation As System.Windows.Forms.Label
 End Class

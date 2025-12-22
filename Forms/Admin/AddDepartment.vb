@@ -71,6 +71,9 @@ Public Class AddDepartment
                     cbHead.DisplayMember = "fullName"
                     cbHead.ValueMember = "userId"
                     cbHead.SelectedIndex = -1
+                    
+                    ' Wire up event handler for auto-fill
+                    AddHandler cbHead.SelectedIndexChanged, AddressOf DepartmentHead_SelectedIndexChanged
                 Else
                     cbHead.DataSource = Nothing
                     cbHead.Items.Clear()
@@ -206,6 +209,7 @@ Public Class AddDepartment
             Dim buildingTxt As TextBox = FindControlOfType(Of TextBox)("building")
             Dim floorTxt As TextBox = FindControlOfType(Of TextBox)("floorNumber")
             Dim shortNameTxt As TextBox = FindControlOfType(Of TextBox)("shortName")
+            Dim descriptionTxt As TextBox = FindControlOfType(Of TextBox)("description")
             
             Dim buildingValue As String = If(buildingTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(buildingTxt.Text), buildingTxt.Text.Trim(), "")
             Dim floorValue As String = If(floorTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(floorTxt.Text), floorTxt.Text.Trim(), "")
@@ -219,14 +223,21 @@ Public Class AddDepartment
                 shortNameValue = GenerateDepartmentShortName(deptName)
             End If
             
-            ' Call the AddDepartment function with standard parameters only
+            ' Get description value
+            Dim descriptionValue As String = If(descriptionTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(descriptionTxt.Text), descriptionTxt.Text.Trim(), "")
+            
+            ' Call the AddDepartment function with all parameters including building, floorNumber, shortName, description
             Dim success As Boolean = DatabaseConnection.AddDepartment(
                 deptName,
                 headOfDeptString,
                 locationStr,
                 officeCodeValue,
                 contactValue,
-                emailValue
+                emailValue,
+                buildingValue,
+                floorValue,
+                shortNameValue,
+                descriptionValue  ' description from form
             )
 
             If success Then
@@ -330,4 +341,37 @@ Public Class AddDepartment
             Return "DEPT-001"
         End Try
     End Function
+
+    ''' <summary>
+    ''' Auto-fill email and contact number when department head is selected
+    ''' </summary>
+    Private Sub DepartmentHead_SelectedIndexChanged(sender As Object, e As EventArgs)
+        Try
+            Dim cbHead As ComboBox = TryCast(sender, ComboBox)
+            If cbHead Is Nothing OrElse cbHead.SelectedIndex < 0 Then Return
+            
+            ' Get the selected user's data
+            If TypeOf cbHead.SelectedItem Is DataRowView Then
+                Dim drv As DataRowView = CType(cbHead.SelectedItem, DataRowView)
+                
+                ' Auto-fill email if available
+                If drv.Row.Table.Columns.Contains("email") AndAlso Not IsDBNull(drv.Row("email")) Then
+                    Dim emailTxt As TextBox = FindControlOfType(Of TextBox)("email")
+                    If emailTxt IsNot Nothing Then
+                        emailTxt.Text = drv.Row("email").ToString()
+                    End If
+                End If
+                
+                ' Auto-fill contact number if available
+                If drv.Row.Table.Columns.Contains("contactNumber") AndAlso Not IsDBNull(drv.Row("contactNumber")) Then
+                    Dim contactTxt As TextBox = FindControlOfType(Of TextBox)("contactNumber")
+                    If contactTxt IsNot Nothing Then
+                        contactTxt.Text = drv.Row("contactNumber").ToString()
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] DepartmentHead_SelectedIndexChanged Exception: " & ex.Message)
+        End Try
+    End Sub
 End Class

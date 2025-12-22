@@ -387,7 +387,7 @@ Partial Class UC_MaintenanceManagement
     Friend WithEvents requestId As DataGridViewTextBoxColumn
     Friend WithEvents propertyItemName As DataGridViewTextBoxColumn
     Friend WithEvents serialNumber As DataGridViewTextBoxColumn
-    Friend WithEvents location As DataGridViewTextBoxColumn
+    Friend Shadows WithEvents location As DataGridViewTextBoxColumn
     Friend WithEvents departmentId As DataGridViewTextBoxColumn
     Friend WithEvents conditionBeforeMaint As DataGridViewTextBoxColumn
     Friend WithEvents typeOfMaintenance As DataGridViewTextBoxColumn

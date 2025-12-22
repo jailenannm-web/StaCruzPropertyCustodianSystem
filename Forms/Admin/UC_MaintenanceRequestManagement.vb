@@ -281,7 +281,7 @@ Public Class UC_MaintenanceRequestManagement
         End Try
     End Sub
 
-    Private Sub assign_Click(sender As Object, e As EventArgs)
+    Private Sub Assign_Click(sender As Object, e As EventArgs)
         ' No restrictions for Super Admin, Admin, and Custodian
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)

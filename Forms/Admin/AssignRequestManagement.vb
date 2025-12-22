@@ -616,8 +616,39 @@ Public Class AssignRequestManagement
                 Integer.TryParse(propertyId.SelectedValue.ToString(), selectedPropertyID)
             End If
 
+            ' Validate that a property is selected - check both ComboBoxes with improved logic
+            If propertyId IsNot Nothing AndAlso propertyId.SelectedIndex >= 0 Then
+                If propertyId.SelectedValue IsNot Nothing Then
+                    Integer.TryParse(propertyId.SelectedValue.ToString(), selectedPropertyID)
+                    System.Diagnostics.Debug.WriteLine($"[v0] AssignRequestManagement - Property selected from propertyId (SelectedValue): {selectedPropertyID}")
+                ElseIf propertyId.SelectedItem IsNot Nothing Then
+                    ' Try to get from SelectedItem if DataRowView
+                    Dim drv As DataRowView = TryCast(propertyId.SelectedItem, DataRowView)
+                    If drv IsNot Nothing AndAlso drv.Row.Table.Columns.Contains("propertyId") Then
+                        Integer.TryParse(drv.Row("propertyId").ToString(), selectedPropertyID)
+                        System.Diagnostics.Debug.WriteLine($"[v0] AssignRequestManagement - Property selected from propertyId (DataRowView): {selectedPropertyID}")
+                    End If
+                End If
+            End If
+            
+            ' If still not found, check propertyName ComboBox
+            If selectedPropertyID <= 0 AndAlso propertyName IsNot Nothing AndAlso propertyName.SelectedIndex >= 0 Then
+                If propertyName.SelectedValue IsNot Nothing Then
+                    Integer.TryParse(propertyName.SelectedValue.ToString(), selectedPropertyID)
+                    System.Diagnostics.Debug.WriteLine($"[v0] AssignRequestManagement - Property selected from propertyName (SelectedValue): {selectedPropertyID}")
+                ElseIf propertyName.SelectedItem IsNot Nothing Then
+                    ' Try to get from SelectedItem if DataRowView
+                    Dim drv As DataRowView = TryCast(propertyName.SelectedItem, DataRowView)
+                    If drv IsNot Nothing AndAlso drv.Row.Table.Columns.Contains("propertyId") Then
+                        Integer.TryParse(drv.Row("propertyId").ToString(), selectedPropertyID)
+                        System.Diagnostics.Debug.WriteLine($"[v0] AssignRequestManagement - Property selected from propertyName (DataRowView): {selectedPropertyID}")
+                    End If
+                End If
+            End If
+            
             If selectedPropertyID <= 0 Then
-                MessageBox.Show("Please select a property to assign.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Please select a property to assign from the Property ID or Property Name dropdown.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                System.Diagnostics.Debug.WriteLine("[v0] AssignRequestManagement - Validation failed: No property selected")
                 Return
             End If
 
