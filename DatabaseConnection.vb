@@ -2270,7 +2270,17 @@ Public Class DatabaseConnection
                 Dim result As Integer = cmd.ExecuteNonQuery()
 
                 If result > 0 Then
-                    System.Diagnostics.Debug.WriteLine("[v0] Supply Added Successfully - Name: " & supplyName)
+                    ' Get the auto-generated supplyId
+                    Dim newSupplyId As Integer = 0
+                    Using idCmd As New MySqlCommand("SELECT LAST_INSERT_ID()", conn)
+                        Dim idObj = idCmd.ExecuteScalar()
+                        If idObj IsNot Nothing AndAlso Not IsDBNull(idObj) Then
+                            Integer.TryParse(idObj.ToString(), newSupplyId)
+                        End If
+                    End Using
+                    
+                    System.Diagnostics.Debug.WriteLine("[v0] Supply Added Successfully - Name: " & supplyName & ", Supply ID: " & newSupplyId)
+                    MessageBox.Show($"Supply added successfully!{Environment.NewLine}Supply ID: {newSupplyId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
                 Else
                     System.Diagnostics.Debug.WriteLine("[v0] Supply Add Failed - No rows affected")
@@ -2745,35 +2755,43 @@ Public Class DatabaseConnection
             ' Generate internal code if property number is provided or generated
             Dim internalCode As String = finalPropertyNumber ' Use property number as internal code
 
-            Dim query As String = "INSERT INTO properties (itemName, category, description, serialNumber, propertyNumber, " &
-                                 "acquisitionDate, acquisitionCost, `condition`, " &
-                                 "location, assignedTo, departmentId, status, totalCost, internalCodes) " &
-                                 "VALUES (@propertyName, @category, @description, @serialNumber, @propertyNumber, @acquisitionDate, " &
-                                 "@acquisitionCost, @conditionStatus, @location, " &
-                                 "@custodianID, @departmentID, 'Active', @acquisitionCost, @internalCodes)"
+            Dim query As String = "INSERT INTO properties (itemName, category, description, unitOfMeasure, serialNumber, propertyNumber, " &
+                                 "acquisitionDate, acquisitionCost, totalCost, sourceOfFunds, `condition`, " &
+                                 "location, assignedTo, departmentId, status, internalCodes) " &
+                                 "VALUES (@propertyName, @category, @description, @unitOfMeasure, @serialNumber, @propertyNumber, @acquisitionDate, " &
+                                 "@acquisitionCost, @totalCost, @sourceOfFunds, @conditionStatus, @location, " &
+                                 "@custodianID, @departmentID, 'Active', @internalCodes)"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@propertyName", propertyName)
                 cmd.Parameters.AddWithValue("@category", category)
                 cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
+                cmd.Parameters.AddWithValue("@unitOfMeasure", DBNull.Value) ' Can be added later if needed
                 cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrEmpty(serialNumber), DBNull.Value, serialNumber))
                 cmd.Parameters.AddWithValue("@propertyNumber", If(String.IsNullOrEmpty(finalPropertyNumber), DBNull.Value, finalPropertyNumber))
                 cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
                 cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
+                cmd.Parameters.AddWithValue("@totalCost", acquisitionCost) ' Default to same as acquisition cost
+                cmd.Parameters.AddWithValue("@sourceOfFunds", DBNull.Value) ' Can be added later if needed
                 cmd.Parameters.AddWithValue("@conditionStatus", conditionStatus)
-                ' Note: supplierName and supplierContact are not used in the INSERT statement
-                ' They are kept in function signature for backward compatibility but not inserted into database
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@warrantyDetails", If(String.IsNullOrEmpty(warrantyDetails), DBNull.Value, warrantyDetails))
-                cmd.Parameters.AddWithValue("@lifeSpan", If(lifeSpan.HasValue, lifeSpan.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@internalCodes", If(String.IsNullOrEmpty(internalCode), DBNull.Value, internalCode))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
-                    System.Diagnostics.Debug.WriteLine("[v0] Property Added Successfully: " & propertyName)
-                    MessageBox.Show("Property added successfully!", "Property Management", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ' Get the auto-generated propertyId
+                    Dim newPropertyId As Integer = 0
+                    Using idCmd As New MySqlCommand("SELECT LAST_INSERT_ID()", conn)
+                        Dim idObj = idCmd.ExecuteScalar()
+                        If idObj IsNot Nothing AndAlso Not IsDBNull(idObj) Then
+                            Integer.TryParse(idObj.ToString(), newPropertyId)
+                        End If
+                    End Using
+                    
+                    System.Diagnostics.Debug.WriteLine("[v0] Property Added Successfully: " & propertyName & ", Property ID: " & newPropertyId)
+                    MessageBox.Show($"Property added successfully!{Environment.NewLine}Property ID: {newPropertyId}{Environment.NewLine}Property Number: {finalPropertyNumber}", "Property Management", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
                 End If
             End Using
@@ -6852,11 +6870,9 @@ Public Class DatabaseConnection
                     cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrWhiteSpace(contactNumber), DBNull.Value, contactNumber.Trim()))
                     cmd.Parameters.AddWithValue("@email", email.Trim())
                     cmd.Parameters.AddWithValue("@username", username.Trim())
-                    cmd.Parameters.AddWithValue("@houseNo", If(String.IsNullOrWhiteSpace(houseNoStreet), DBNull.Value, houseNoStreet.Trim()))
                     cmd.Parameters.AddWithValue("@barangay", If(String.IsNullOrWhiteSpace(barangay), DBNull.Value, barangay.Trim()))
                     cmd.Parameters.AddWithValue("@municipality", If(String.IsNullOrWhiteSpace(municipality), DBNull.Value, municipality.Trim()))
                     cmd.Parameters.AddWithValue("@province", If(String.IsNullOrWhiteSpace(provinceCity), DBNull.Value, provinceCity.Trim()))
-                    cmd.Parameters.AddWithValue("@dateAssigned", If(dateAssigned.HasValue, dateAssigned.Value, DBNull.Value))
                     cmd.Parameters.AddWithValue("@employeeID", If(String.IsNullOrWhiteSpace(employeeID), DBNull.Value, employeeID.Trim()))
                     cmd.Parameters.AddWithValue("@userType", normalizedUserType)
                     cmd.Parameters.AddWithValue("@status", normalizedStatus)
@@ -6911,7 +6927,6 @@ Public Class DatabaseConnection
                     cmd.Parameters.AddWithValue("@email", email.Trim())
                     cmd.Parameters.AddWithValue("@username", username.Trim())
                     cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrWhiteSpace(contactNumber), DBNull.Value, contactNumber.Trim()))
-                    cmd.Parameters.AddWithValue("@houseNo", If(String.IsNullOrWhiteSpace(houseNoStreet), DBNull.Value, houseNoStreet.Trim()))
                     cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
                     cmd.Parameters.AddWithValue("@position", If(String.IsNullOrWhiteSpace(position), "Staff", position.Trim()))
                     cmd.Parameters.AddWithValue("@status", normalizedStatus)
@@ -7719,10 +7734,10 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return False
 
             Dim query As String = "UPDATE properties SET itemName = @propertyName, category = @category, " &
-                                 "description = @description, serialNumber = @serialNumber, `condition` = @conditionStatus, " &
+                                 "description = @description, unitOfMeasure = @unitOfMeasure, serialNumber = @serialNumber, `condition` = @conditionStatus, " &
                                  "location = @location, assignedTo = @custodianID, departmentId = @departmentID, " &
-                                 "acquisitionDate = @acquisitionDate, acquisitionCost = @acquisitionCost, " &
-                                 "status = @status, updatedAt = NOW() " &
+                                 "acquisitionDate = @acquisitionDate, acquisitionCost = @acquisitionCost, totalCost = @totalCost, " &
+                                 "sourceOfFunds = @sourceOfFunds, status = @status, updatedAt = NOW() " &
                                  "WHERE propertyId = @propertyID"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -7730,6 +7745,7 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@propertyName", propertyName)
                 cmd.Parameters.AddWithValue("@category", category)
                 cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
+                cmd.Parameters.AddWithValue("@unitOfMeasure", DBNull.Value) ' Can be added later if needed
                 cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrEmpty(serialNumber), DBNull.Value, serialNumber))
                 cmd.Parameters.AddWithValue("@conditionStatus", conditionStatus)
                 cmd.Parameters.AddWithValue("@location", location)
@@ -7737,6 +7753,8 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
                 cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
+                cmd.Parameters.AddWithValue("@totalCost", acquisitionCost) ' Default to same as acquisition cost
+                cmd.Parameters.AddWithValue("@sourceOfFunds", DBNull.Value) ' Can be added later if needed
                 cmd.Parameters.AddWithValue("@status", status)
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
@@ -8864,11 +8882,10 @@ Public Class DatabaseConnection
                     cmd.Parameters.AddWithValue("@departmentCode", departmentCode)
                     cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(contactNumber), DBNull.Value, contactNumber))
                     cmd.Parameters.AddWithValue("@email", If(String.IsNullOrEmpty(email), DBNull.Value, email))
-                    cmd.Parameters.AddWithValue("@noOfEmployees", noOfEmployees)
-                    cmd.Parameters.AddWithValue("@budgetAllocation", budgetAllocation)
-                    cmd.Parameters.AddWithValue("@officeHours", If(String.IsNullOrEmpty(officeHours), DBNull.Value, officeHours))
-                    cmd.Parameters.AddWithValue("@establishedDate", If(establishedDate.HasValue, establishedDate.Value, DBNull.Value))
-                    cmd.Parameters.AddWithValue("@parentDepartmentID", If(parentDepartmentID.HasValue, parentDepartmentID.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@building", If(String.IsNullOrEmpty(building), DBNull.Value, building))
+                    cmd.Parameters.AddWithValue("@floorNumber", If(String.IsNullOrEmpty(floorNumber), DBNull.Value, floorNumber))
+                    cmd.Parameters.AddWithValue("@shortName", If(String.IsNullOrEmpty(shortName), DBNull.Value, shortName))
+                    cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
                     cmd.Parameters.AddWithValue("@status", status)
 
                     System.Diagnostics.Debug.WriteLine("[v0] Executing INSERT with parameters: Name=" & departmentName & ", Code=" & departmentCode & ", Status=" & status)
