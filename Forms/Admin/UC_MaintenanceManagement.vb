@@ -179,11 +179,26 @@ Public Class UC_MaintenanceManagement
             Dim dataRow As DataRow = dt.Rows(rowIndex)
             ' Use camelCase to match database schema
             Dim maintenanceID As Integer = 0
-            If dt.Columns.Contains("maintenanceId") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
-            ElseIf dt.Columns.Contains("maintenance_id") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
+            If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(dataRow("maintenanceId")) Then
+                If Not Integer.TryParse(dataRow("maintenanceId").ToString(), maintenanceID) Then
+                    MessageBox.Show("Invalid maintenance ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+            ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(dataRow("maintenance_id")) Then
+                If Not Integer.TryParse(dataRow("maintenance_id").ToString(), maintenanceID) Then
+                    MessageBox.Show("Invalid maintenance ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+            Else
+                MessageBox.Show("Maintenance ID not found in selected record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
             End If
+            
+            If maintenanceID <= 0 Then
+                MessageBox.Show("Invalid maintenance ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
             Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
 
             If currentStatus = "completed" OrElse currentStatus = "approved" Then
@@ -314,11 +329,22 @@ Public Class UC_MaintenanceManagement
 
     Private Sub btnGenerateMaintenance_Click(sender As Object, e As EventArgs) Handles btnGenerateMaintenance.Click
         Try
-            ' 1. Find the parent form and cast it to your AdminDashboard class
-            Dim parentDashboard = TryCast(Me.FindForm(), AdminDashboard)
-
+            ' Check SADashboard first (parent class)
+            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+            If saDashboard IsNot Nothing Then
+                saDashboard.LoadUserControl(New MaintenanceManagementReport1())
+                Return
+            End If
+            
+            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+            If superAdminDashboard IsNot Nothing Then
+                superAdminDashboard.LoadUserControl(New MaintenanceManagementReport1())
+                Return
+            End If
+            
+            ' Check AdminDashboard
+            Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
             If parentDashboard IsNot Nothing Then
-                ' 2. Call the public LoadUserControl method from the dashboard
                 parentDashboard.LoadUserControl(New MaintenanceManagementReport1())
             Else
                 ' Fallback if the parent form isn't found or isn't AdminDashboard
@@ -349,10 +375,24 @@ Public Class UC_MaintenanceManagement
             Dim rowIndex As Integer = selectedRow.Index
             Dim dataRow As DataRow = dt.Rows(rowIndex)
             Dim maintenanceID As Integer = 0
-            If dt.Columns.Contains("maintenanceId") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
-            ElseIf dt.Columns.Contains("maintenance_id") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
+            If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(dataRow("maintenanceId")) Then
+                If Not Integer.TryParse(dataRow("maintenanceId").ToString(), maintenanceID) Then
+                    MessageBox.Show("Invalid maintenance ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+            ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(dataRow("maintenance_id")) Then
+                If Not Integer.TryParse(dataRow("maintenance_id").ToString(), maintenanceID) Then
+                    MessageBox.Show("Invalid maintenance ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+            Else
+                MessageBox.Show("Maintenance ID not found in selected record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
+            If maintenanceID <= 0 Then
+                MessageBox.Show("Invalid maintenance ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
             End If
 
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to reject this maintenance record?", "Confirm Rejection", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
@@ -360,8 +400,8 @@ Public Class UC_MaintenanceManagement
                 Dim remarks As String = InputBox("Enter rejection reason (optional):", "Reject Maintenance", "")
                 Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-                ' Update maintenance status using DatabaseConnection
-                If DatabaseConnection.SetMaintenanceStatus(maintenanceID, "For Review", adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, "Rejected: " & remarks) Then
+                ' Update maintenance status using DatabaseConnection - use "Rejected" status
+                If DatabaseConnection.SetMaintenanceStatus(maintenanceID, "Rejected", adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, "Rejected: " & remarks) Then
                     MessageBox.Show("Maintenance record rejected successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     LoadMaintenanceData()
                 Else

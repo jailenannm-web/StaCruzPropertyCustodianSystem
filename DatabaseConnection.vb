@@ -2210,7 +2210,7 @@ Public Class DatabaseConnection
                                      stock As Integer, unitCost As Decimal, totalValue As Decimal,
                                      status As String, location As String, description As String,
                                      uom As String, reorderLevel As Integer, supplierID As String,
-                                     Optional dateReceived As Date? = Nothing) As Boolean
+                                     Optional dateReceived As Date? = Nothing, Optional sourceOfFunds As String = Nothing) As Boolean
         If Not DemandPermission(SessionContext.ModulePermission.ModifySupplies, "add supplies") Then
             Return False
         End If
@@ -2265,7 +2265,7 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@uom", If(String.IsNullOrWhiteSpace(uom), DBNull.Value, uom))
                 cmd.Parameters.AddWithValue("@supplierName", If(String.IsNullOrWhiteSpace(supplierID), DBNull.Value, supplierID))
                 cmd.Parameters.AddWithValue("@dateReceived", receivedDate)
-                cmd.Parameters.AddWithValue("@sourceOfFunds", DBNull.Value) ' Can be set later if needed
+                cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrWhiteSpace(sourceOfFunds), DBNull.Value, sourceOfFunds))
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
 

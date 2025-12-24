@@ -438,19 +438,28 @@ Public Class EditUser
         ' Check SADashboard first
         Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
         If saDashboard IsNot Nothing Then
-            saDashboard.LoadUserControl(New UC_UserManagement())
+            Dim newUC As New UC_UserManagement()
+            saDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
             Return
         End If
         
         Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
         If superAdminDashboard IsNot Nothing Then
-            superAdminDashboard.LoadUserControl(New UC_UserManagement())
+            Dim newUC As New UC_UserManagement()
+            superAdminDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
             Return
         End If
         
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New UC_UserManagement())
+            Dim newUC As New UC_UserManagement()
+            parentDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
         End If
     End Sub
 

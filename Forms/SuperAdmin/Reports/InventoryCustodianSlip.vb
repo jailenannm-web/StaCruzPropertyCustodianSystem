@@ -27,10 +27,29 @@ Public Class InventoryCustodianSlip
         Try
             If requestID <= 0 Then Return
             
+            ' Try property requests first
             Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
             Dim requestRows() As DataRow = dt.Select($"requestId = {requestID}")
             If requestRows.Length = 0 Then
                 requestRows = dt.Select($"request_id = {requestID}")
+            End If
+            
+            ' If not found in property requests, try supply requests
+            If requestRows.Length = 0 Then
+                dt = DatabaseConnection.GetAllSuppliesRequests()
+                requestRows = dt.Select($"requestId = {requestID}")
+                If requestRows.Length = 0 Then
+                    requestRows = dt.Select($"request_id = {requestID}")
+                End If
+            End If
+            
+            ' If still not found, try maintenance requests
+            If requestRows.Length = 0 Then
+                dt = DatabaseConnection.GetAllMaintenanceRequests()
+                requestRows = dt.Select($"requestId = {requestID}")
+                If requestRows.Length = 0 Then
+                    requestRows = dt.Select($"request_id = {requestID}")
+                End If
             End If
             
             If requestRows.Length > 0 Then
@@ -49,6 +68,23 @@ Public Class InventoryCustodianSlip
         
         ' Wire up export buttons
         WireUpExportButtons()
+        
+        ' Wire up back button
+        WireUpBackButton()
+    End Sub
+    
+    Private Sub WireUpBackButton()
+        ' Find and wire up back button
+        Dim btnBackControls() As Control = Me.Controls.Find("btn_Back", True)
+        If btnBackControls IsNot Nothing AndAlso btnBackControls.Length > 0 AndAlso TypeOf btnBackControls(0) Is Button Then
+            Dim btnBack As Button = CType(btnBackControls(0), Button)
+            RemoveHandler btnBack.Click, AddressOf BackButton_Click
+            AddHandler btnBack.Click, AddressOf BackButton_Click
+        End If
+    End Sub
+    
+    Private Sub BackButton_Click(sender As Object, e As EventArgs)
+        Me.Close()
     End Sub
 
     Private Sub AutoFillFields()

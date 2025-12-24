@@ -158,16 +158,24 @@ Public Class UC_SupplyManagement
         AddHandler pm_table.SelectionChanged, AddressOf pm_table_SelectionChanged
 
         ' Wire up search textbox if present (try common names)
-        Dim searchNames As String() = {"pm_search", "pm_searchbar", "supplysearch", "supplymanagementsearchbar", "txtSearch", "txtbox_search", "searchBox", "admin_txtbox_search"}
+        Dim searchNames As String() = {"supplymanagementsearchbar", "pm_search", "pm_searchbar", "supplysearch", "txtSearch", "txtbox_search", "searchBox", "admin_txtbox_search"}
         For Each nm As String In searchNames
             Dim found() As Control = Me.Controls.Find(nm, True)
             If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
                 Dim tb As TextBox = CType(found(0), TextBox)
                 RemoveHandler tb.TextChanged, AddressOf SupplySearch_TextChanged
                 AddHandler tb.TextChanged, AddressOf SupplySearch_TextChanged
+                System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Wired search handler to: " & nm)
                 Exit For
             End If
         Next
+        
+        ' Also try direct access if control exists
+        If supplymanagementsearchbar IsNot Nothing Then
+            RemoveHandler supplymanagementsearchbar.TextChanged, AddressOf SupplySearch_TextChanged
+            AddHandler supplymanagementsearchbar.TextChanged, AddressOf SupplySearch_TextChanged
+            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Wired search handler directly to supplymanagementsearchbar")
+        End If
     End Sub
 
     ' Added method to load supplies from database

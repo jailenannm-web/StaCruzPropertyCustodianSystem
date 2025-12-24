@@ -41,6 +41,8 @@ Public Class AssignSupplyManagement
         LoadLocationDropdown()
         LoadUnitOfMeasureDropdown()
         LoadStockStatusDropdown()
+        ' Load all employees initially (not filtered by department)
+        LoadAllEmployees()
         ' Load available supplies
         LoadAvailableSupplies()
         EnsureSearchBox()
@@ -271,20 +273,32 @@ Public Class AssignSupplyManagement
     End Sub
 
     Private Sub Department_SelectedIndexChanged(sender As Object, e As EventArgs)
-        If department Is Nothing OrElse department.SelectedValue Is Nothing Then Return
+        If department Is Nothing OrElse department.SelectedValue Is Nothing Then
+            ' If no department selected, load all employees
+            LoadAllEmployees()
+            Return
+        End If
 
         Try
             Dim deptID As Integer
             If TypeOf department.SelectedValue Is DataRowView Then
                 Dim drv As DataRowView = CType(department.SelectedValue, DataRowView)
                 If drv.Row.Table.Columns.Contains("departmentId") Then
-                    If Not Integer.TryParse(drv.Row("departmentId").ToString(), deptID) Then Return
+                    If Not Integer.TryParse(drv.Row("departmentId").ToString(), deptID) Then
+                        LoadAllEmployees()
+                        Return
+                    End If
                 ElseIf drv.Row.Table.Columns.Contains("department_id") Then
-                    If Not Integer.TryParse(drv.Row("department_id").ToString(), deptID) Then Return
+                    If Not Integer.TryParse(drv.Row("department_id").ToString(), deptID) Then
+                        LoadAllEmployees()
+                        Return
+                    End If
                 Else
+                    LoadAllEmployees()
                     Return
                 End If
             ElseIf Not Integer.TryParse(department.SelectedValue.ToString(), deptID) Then
+                LoadAllEmployees()
                 Return
             End If
 
@@ -294,12 +308,25 @@ Public Class AssignSupplyManagement
                 employee.DisplayMember = "fullName"
                 employee.ValueMember = "userId"
             ElseIf employee IsNot Nothing Then
-                employee.DataSource = Nothing
-                employee.Items.Clear()
-                employee.Items.Add("No employees in this department")
+                ' If no employees in department, load all employees
+                LoadAllEmployees()
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Department_SelectedIndexChanged Exception: " & ex.Message)
+            LoadAllEmployees()
+        End Try
+    End Sub
+    
+    Private Sub LoadAllEmployees()
+        Try
+            Dim allUsersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
+            If allUsersTable IsNot Nothing AndAlso allUsersTable.Rows.Count > 0 AndAlso employee IsNot Nothing Then
+                employee.DataSource = allUsersTable
+                employee.DisplayMember = "fullName"
+                employee.ValueMember = "userId"
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadAllEmployees Exception: " & ex.Message)
         End Try
     End Sub
 

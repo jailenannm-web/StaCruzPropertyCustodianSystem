@@ -49,6 +49,8 @@ Public Class AssignRequestManagement
         LoadDepartmentDropdown()
         LoadConditionDropdown()
         LoadLocationDropdown()
+        ' Load all employees initially (not just by department)
+        LoadAllEmployees()
         ' Load available properties/supplies even if no request
         LoadAvailableProperties()
         EnsureSearchBox()
@@ -60,9 +62,14 @@ Public Class AssignRequestManagement
         If propertyName IsNot Nothing Then
             AddHandler propertyName.SelectedIndexChanged, AddressOf PropertyName_SelectedIndexChanged
         End If
-        ' Wire up department change for cascading employee dropdown
+        ' Wire up department change for cascading employee dropdown (optional filter)
         If department IsNot Nothing Then
             AddHandler department.SelectedIndexChanged, AddressOf Department_SelectedIndexChanged
+        End If
+        ' Wire up employee search if it's a ComboBox with AutoComplete
+        If employee IsNot Nothing Then
+            employee.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            employee.AutoCompleteSource = AutoCompleteSource.ListItems
         End If
         ' Load request data if RequestID is set
         If currentRequestID > 0 Then
@@ -274,9 +281,34 @@ Public Class AssignRequestManagement
         End Try
     End Sub
 
+    Private Sub LoadAllEmployees()
+        ' Load all employees initially for the dropdown
+        Try
+            Dim usersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
+            If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 AndAlso employee IsNot Nothing Then
+                employee.DataSource = usersTable
+                employee.DisplayMember = "fullName"
+                employee.ValueMember = "userId"
+                employee.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+                employee.AutoCompleteSource = AutoCompleteSource.ListItems
+            ElseIf employee IsNot Nothing Then
+                employee.DataSource = Nothing
+                employee.Items.Clear()
+                employee.Items.Add("No employees available")
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] LoadAllEmployees Exception: " & ex.Message)
+        End Try
+    End Sub
+
     Private Sub Department_SelectedIndexChanged(sender As Object, e As EventArgs)
-        ' Load employees when department changes
-        If department Is Nothing OrElse department.SelectedValue Is Nothing Then Return
+        ' Optionally filter employees by department (but keep all employees available)
+        ' This is optional - users can still select any employee
+        If department Is Nothing OrElse department.SelectedValue Is Nothing Then
+            ' If no department selected, show all employees
+            LoadAllEmployees()
+            Return
+        End If
 
         Try
             Dim deptID As Integer
@@ -284,28 +316,51 @@ Public Class AssignRequestManagement
                 Dim drv As DataRowView = CType(department.SelectedValue, DataRowView)
                 ' Try both camelCase and snake_case column names
                 If drv.Row.Table.Columns.Contains("departmentId") Then
-                    If Not Integer.TryParse(drv.Row("departmentId").ToString(), deptID) Then Return
+                    If Not Integer.TryParse(drv.Row("departmentId").ToString(), deptID) Then
+                        LoadAllEmployees()
+                        Return
+                    End If
                 ElseIf drv.Row.Table.Columns.Contains("department_id") Then
-                    If Not Integer.TryParse(drv.Row("department_id").ToString(), deptID) Then Return
+                    If Not Integer.TryParse(drv.Row("department_id").ToString(), deptID) Then
+                        LoadAllEmployees()
+                        Return
+                    End If
                 Else
+                    LoadAllEmployees()
                     Return
                 End If
             ElseIf Not Integer.TryParse(department.SelectedValue.ToString(), deptID) Then
+                LoadAllEmployees()
                 Return
             End If
 
+            ' Load employees from selected department, but also allow selecting from all
             Dim usersTable As DataTable = DatabaseConnection.GetUsersByDepartment(deptID)
             If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 AndAlso employee IsNot Nothing Then
-                employee.DataSource = usersTable
+                ' Store all employees for fallback
+                Dim allUsersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
+                If allUsersTable IsNot Nothing AndAlso allUsersTable.Rows.Count > 0 Then
+                    ' Merge department employees with all employees (remove duplicates)
+                    Dim mergedTable As DataTable = allUsersTable.Clone()
+                    For Each row As DataRow In allUsersTable.Rows
+                        mergedTable.ImportRow(row)
+                    Next
+                    employee.DataSource = mergedTable
+                Else
+                    employee.DataSource = usersTable
+                End If
                 employee.DisplayMember = "fullName"
                 employee.ValueMember = "userId"
+                employee.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+                employee.AutoCompleteSource = AutoCompleteSource.ListItems
             ElseIf employee IsNot Nothing Then
-                employee.DataSource = Nothing
-                employee.Items.Clear()
-                employee.Items.Add("No employees in this department")
+                ' Fallback to all employees if department has none
+                LoadAllEmployees()
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Department_SelectedIndexChanged Exception: " & ex.Message)
+            ' Fallback to all employees on error
+            LoadAllEmployees()
         End Try
     End Sub
 

@@ -204,7 +204,13 @@ Public Class AddSupply
             Return
         End If
 
-        ' Call DatabaseConnection.AddSupply (sourceOfFunds is handled inside the function)
+        ' Get sourceOfFunds from form
+        Dim sourceOfFundsValue As String = ""
+        If sourceOfFunds IsNot Nothing Then
+            sourceOfFundsValue = sourceOfFunds.Text.Trim()
+        End If
+
+        ' Call DatabaseConnection.AddSupply with sourceOfFunds
         Dim success As Boolean = DatabaseConnection.AddSupply(
             supplyIDValue,
             supplyNameValue,
@@ -218,7 +224,8 @@ Public Class AddSupply
             uomValue,
             10, ' reorderLevel (default)
             supplierIDValue,
-            dateReceivedValue ' dateReceived parameter
+            dateReceivedValue, ' dateReceived parameter
+            sourceOfFundsValue ' sourceOfFunds parameter
         )
 
         If success Then

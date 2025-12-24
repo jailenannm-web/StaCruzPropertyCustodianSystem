@@ -364,6 +364,8 @@ Public Class EditDepartment
                 If saDashboard IsNot Nothing Then
                     Dim deptManagement As New UC_DepartmentManagement()
                     saDashboard.LoadUserControl(deptManagement)
+                    ' Refresh the table after loading
+                    deptManagement.LoadDepartmentsData()
                     Return
                 End If
                 
@@ -371,6 +373,8 @@ Public Class EditDepartment
                 If superAdminDashboard IsNot Nothing Then
                     Dim deptManagement As New UC_DepartmentManagement()
                     superAdminDashboard.LoadUserControl(deptManagement)
+                    ' Refresh the table after loading
+                    deptManagement.LoadDepartmentsData()
                     Return
                 End If
                 
@@ -378,6 +382,8 @@ Public Class EditDepartment
                 If parentDashboard IsNot Nothing Then
                     Dim deptManagement As New UC_DepartmentManagement()
                     parentDashboard.LoadUserControl(deptManagement)
+                    ' Refresh the table after loading
+                    deptManagement.LoadDepartmentsData()
                 End If
             End If
         Catch ex As Exception

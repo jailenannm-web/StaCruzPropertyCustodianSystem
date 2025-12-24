@@ -980,6 +980,33 @@ Public Class UC_PropertyManagement1
                 End If
             End If
 
+            ' Verify property exists in originalData before opening
+            Dim propertyExists As Boolean = False
+            If originalData IsNot Nothing Then
+                Dim matchingRows = originalData.AsEnumerable().Where(Function(r)
+                    If r.Table.Columns.Contains("propertyId") AndAlso Not IsDBNull(r("propertyId")) Then
+                        Dim id As Integer = 0
+                        If Integer.TryParse(r("propertyId").ToString(), id) Then
+                            Return id = propertyID
+                        End If
+                    End If
+                    Return False
+                End Function)
+                propertyExists = matchingRows.Any()
+            End If
+            
+            If Not propertyExists Then
+                Dim result As DialogResult = MessageBox.Show(
+                    "Property ID " & propertyID.ToString() & " may not exist in the database." & Environment.NewLine &
+                    "Do you want to continue with fallback data?", 
+                    "Property Not Found", 
+                    MessageBoxButtons.YesNo, 
+                    MessageBoxIcon.Warning)
+                If result = DialogResult.No Then
+                    Return
+                End If
+            End If
+            
             ' Open Property Issuance Slip with property data
             Dim propertyIssuance As New PropertyIssuance(propertyID, propNumber)
             propertyIssuance.ShowDialog()

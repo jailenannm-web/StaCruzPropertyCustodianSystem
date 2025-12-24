@@ -114,7 +114,7 @@ Public Class UC_UserManagement
         End If
     End Sub
 
-    Private Sub RefreshUserTable()
+    Public Sub RefreshUserTable()
         Try
             pm_table.Rows.Clear()
 

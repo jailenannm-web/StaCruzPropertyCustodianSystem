@@ -15,7 +15,10 @@ Public Partial Class SADashboard
 
     Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
         ' Clear any loaded user controls to show dashboard
-        ' pnlContainer.Controls.Clear()
+        If pnlFormLoader IsNot Nothing Then
+            pnlFormLoader.Controls.Clear()
+        End If
+        currentUC = Nothing
         
         ' Make sure dashboard stat panels are visible
         ' If pnlTotalUsers IsNot Nothing Then pnlTotalUsers.Visible = True

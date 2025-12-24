@@ -310,7 +310,7 @@ Public Class UC_SupplyRequestManagement
     Private Sub issueRequisition_Click(sender As Object, e As EventArgs) Handles issueRequisition.Click
         ' Validate that a request is selected
         If prm_table1.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a supply request to assign.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Please select a supply request to issue RIS.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
@@ -351,49 +351,66 @@ Public Class UC_SupplyRequestManagement
             Return
         End If
 
-        ' Get request status to validate
-        Dim requestStatus As String = ""
-        If dt IsNot Nothing Then
-            Dim rowIndex As Integer = selectedRow.Index
-            Dim dataRow As DataRow = dt.Rows(rowIndex)
-            If dt.Columns.Contains("status") AndAlso Not IsDBNull(dataRow("status")) Then
-                requestStatus = dataRow("status").ToString().ToLower()
-            End If
-        Else
-            If prm_table1.Columns.Contains("status") Then
-                requestStatus = If(selectedRow.Cells("status").Value IsNot Nothing, selectedRow.Cells("status").Value.ToString().ToLower(), "")
-            End If
-        End If
-
-        ' Only allow assigning approved or pending requests
-        If Not String.IsNullOrEmpty(requestStatus) AndAlso requestStatus = "rejected" Then
-            MessageBox.Show("Cannot assign a rejected request. Please select an approved or pending request.", "Invalid Request Status", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Open supply assignment form with request ID
-        ' Check for SADashboard first (Super Admin)
-        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-        If saDashboard IsNot Nothing Then
-            Dim assignForm As New AssignSupplyManagement()
-            assignForm.RequestID = requestID
-            saDashboard.LoadUserControl(assignForm)
-            Return
-        End If
-        
-        ' Check for AdminDashboard
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-        If parentDashboard IsNot Nothing Then
-            Dim assignForm As New AssignSupplyManagement()
-            assignForm.RequestID = requestID
-            parentDashboard.LoadUserControl(assignForm)
-        Else
-            MessageBox.Show("Unable to open assignment form. Parent dashboard not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+        ' Open RequisitionIssueSlip form with request ID
+        Try
+            Dim risForm As New RequisitionIssueSlip(requestID, "supply")
+            risForm.Show()
+        Catch ex As Exception
+            MessageBox.Show("Error opening Requisition Issue Slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click
+        ' Validate that a request is selected
+        If prm_table1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a supply request to print PAR/ICS.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
+        Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+        Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+        
+        ' Get request ID from DataTable source
+        Dim requestIDValue As Object = Nothing
+        If dt IsNot Nothing Then
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
+        End If
+        
+        ' Fallback to DataGridView cells
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) Then
+            If prm_table1.Columns.Contains("request_id") Then
+                requestIDValue = selectedRow.Cells("request_id").Value
+            ElseIf prm_table1.Columns.Contains("RequestID") Then
+                requestIDValue = selectedRow.Cells("RequestID").Value
+            ElseIf prm_table1.Columns.Count > 0 Then
+                requestIDValue = selectedRow.Cells(0).Value
+            End If
+        End If
+
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
+            MessageBox.Show("Invalid request selected. Please select a valid supply request.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim requestID As Integer = 0
+        If Not Integer.TryParse(requestIDValue.ToString(), requestID) Then
+            MessageBox.Show("Invalid request ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Open InventoryCustodianSlip form with request ID
+        Try
+            Dim icsForm As New InventoryCustodianSlip(requestID)
+            icsForm.Show()
+        Catch ex As Exception
+            MessageBox.Show("Error opening Inventory Custodian Slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnAssignSupply_Click(sender As Object, e As EventArgs) Handles btnAssignSupply.Click

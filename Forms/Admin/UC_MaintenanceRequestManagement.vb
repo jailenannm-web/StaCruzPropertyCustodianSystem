@@ -217,16 +217,23 @@ Public Class UC_MaintenanceRequestManagement
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         ' No restrictions for Super Admin, Admin, and Custodian
 
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            saDashboard.LoadUserControl(New AddMaintenance1())
+            Return
+        End If
+        
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            superAdminDashboard.LoadUserControl(New AddMaintenance1())
+            Return
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
             ' Open AddMaintenance1 form for adding maintenance requests
             parentDashboard.LoadUserControl(New AddMaintenance1())
-        Else
-            ' Try SuperAdminDashboard
-            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-            If superAdminDashboard IsNot Nothing Then
-                superAdminDashboard.LoadUserControl(New AddMaintenance1())
-            End If
         End If
     End Sub
 
@@ -305,8 +312,56 @@ Public Class UC_MaintenanceRequestManagement
     ' PRINT PAR LOGIC � FULLY CONNECTED TO PROPERTYCARD
     ' ----------------------------------------------------------------------
     Private Sub printPAR_Click(sender As Object, e As EventArgs) Handles printPAR.Click
-        ' TODO: Implement maintenance report generation
-        MessageBox.Show("Maintenance report generation feature will be implemented.", "Feature Coming Soon", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        ' Validate that a request is selected
+        If propertyManagementGrid.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a maintenance request to print PAR/ICS.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim selectedRow As DataGridViewRow = propertyManagementGrid.SelectedRows(0)
+        Dim dt As DataTable = TryCast(propertyManagementGrid.DataSource, DataTable)
+        
+        ' Get request ID from DataTable source
+        Dim requestIDValue As Object = Nothing
+        If dt IsNot Nothing Then
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
+        End If
+        
+        ' Fallback to DataGridView cells
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) Then
+            If propertyManagementGrid.Columns.Contains("request_id") Then
+                requestIDValue = selectedRow.Cells("request_id").Value
+            ElseIf propertyManagementGrid.Columns.Contains("RequestID") Then
+                requestIDValue = selectedRow.Cells("RequestID").Value
+            ElseIf propertyManagementGrid.Columns.Count > 0 Then
+                requestIDValue = selectedRow.Cells(0).Value
+            End If
+        End If
+
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
+            MessageBox.Show("Invalid request selected. Please select a valid maintenance request.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim requestID As Integer = 0
+        If Not Integer.TryParse(requestIDValue.ToString(), requestID) Then
+            MessageBox.Show("Invalid request ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Open InventoryCustodianSlip form with request ID
+        Try
+            Dim icsForm As New InventoryCustodianSlip(requestID)
+            icsForm.Show()
+        Catch ex As Exception
+            MessageBox.Show("Error opening Inventory Custodian Slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
