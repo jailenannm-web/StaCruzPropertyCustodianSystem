@@ -8456,8 +8456,8 @@ Public Class DatabaseConnection
                 End If
             End Using
 
-            ' Check supply_requests table
-            Dim checkRequestedQuery As String = "SELECT COUNT(*) FROM supplies_requests WHERE itemName IN (SELECT itemName FROM supplies WHERE supplyId = @supplyID) AND status IN ('Pending', 'Approved')"
+            ' Check supply_requests table - use supplyId directly if the column exists, otherwise use itemName
+            Dim checkRequestedQuery As String = "SELECT COUNT(*) FROM supplies_requests WHERE (supplyId = @supplyID OR itemName IN (SELECT itemName FROM supplies WHERE supplyId = @supplyID)) AND status IN ('Pending', 'Approved')"
             Using checkCmd2 As New MySqlCommand(checkRequestedQuery, conn)
                 checkCmd2.Parameters.AddWithValue("@supplyID", supplyID)
                 Dim requestedCount As Integer = CInt(checkCmd2.ExecuteScalar())

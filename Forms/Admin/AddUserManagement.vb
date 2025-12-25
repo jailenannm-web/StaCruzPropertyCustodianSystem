@@ -111,7 +111,7 @@ Public Class AddUserManagement
 
             ' Get the actual province name from the selected item
             Dim selectedProvince As String = ""
-            
+
             If province.SelectedItem IsNot Nothing Then
                 ' Check if it's a DataRowView
                 If TypeOf province.SelectedItem Is DataRowView Then
@@ -133,7 +133,7 @@ Public Class AddUserManagement
                 ' Fallback to SelectedValue
                 selectedProvince = province.SelectedValue.ToString()
             End If
-            
+
             If String.IsNullOrEmpty(selectedProvince) Then Return
 
             Dim municipalities As DataTable = DatabaseConnection.GetMunicipalities(selectedProvince)

@@ -45,6 +45,15 @@ Public Partial Class SADashboard
 
     Public Sub LoadUserControl(uc As UserControl)
         Try
+            ' Store TableLayoutPanel1 reference before clearing (if it exists)
+            Dim dashboardContent As Control = Nothing
+            For Each ctrl As Control In pnlFormLoader.Controls
+                If ctrl.Name = "TableLayoutPanel1" Then
+                    dashboardContent = ctrl
+                    Exit For
+                End If
+            Next
+            
             ' Clear previous controls
             pnlFormLoader.Controls.Clear()
             currentUC = uc

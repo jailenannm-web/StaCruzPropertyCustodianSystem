@@ -169,37 +169,58 @@ Public Class UC_MaintenanceManagement
 
         Try
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
-            If dt Is Nothing Then
-                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
-            End If
-
-            Dim rowIndex As Integer = selectedRow.Index
-            Dim dataRow As DataRow = dt.Rows(rowIndex)
-            ' Use camelCase to match database schema
             Dim maintenanceID As Integer = 0
-            If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(dataRow("maintenanceId")) Then
-                If Not Integer.TryParse(dataRow("maintenanceId").ToString(), maintenanceID) Then
-                    MessageBox.Show("Invalid maintenance ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Return
+            
+            ' Try to get maintenanceID from the selected row - check multiple sources
+            ' First, try to get from DataGridView cell directly
+            If selectedRow.Cells("maintenanceId") IsNot Nothing AndAlso selectedRow.Cells("maintenanceId").Value IsNot Nothing Then
+                If Not Integer.TryParse(selectedRow.Cells("maintenanceId").Value.ToString(), maintenanceID) Then
+                    ' Try alternative column name
+                    If selectedRow.Cells("maintenance_id") IsNot Nothing AndAlso selectedRow.Cells("maintenance_id").Value IsNot Nothing Then
+                        Integer.TryParse(selectedRow.Cells("maintenance_id").Value.ToString(), maintenanceID)
+                    End If
+                Else
+                    Integer.TryParse(selectedRow.Cells("maintenanceId").Value.ToString(), maintenanceID)
                 End If
-            ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(dataRow("maintenance_id")) Then
-                If Not Integer.TryParse(dataRow("maintenance_id").ToString(), maintenanceID) Then
-                    MessageBox.Show("Invalid maintenance ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Return
+            ElseIf selectedRow.Cells("maintenance_id") IsNot Nothing AndAlso selectedRow.Cells("maintenance_id").Value IsNot Nothing Then
+                Integer.TryParse(selectedRow.Cells("maintenance_id").Value.ToString(), maintenanceID)
+            End If
+            
+            ' If still not found, try from DataSource
+            If maintenanceID <= 0 Then
+                Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
+                If dt IsNot Nothing Then
+                    Dim rowIndex As Integer = selectedRow.Index
+                    If rowIndex >= 0 AndAlso rowIndex < dt.Rows.Count Then
+                        Dim dataRow As DataRow = dt.Rows(rowIndex)
+                        If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(dataRow("maintenanceId")) Then
+                            Integer.TryParse(dataRow("maintenanceId").ToString(), maintenanceID)
+                        ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(dataRow("maintenance_id")) Then
+                            Integer.TryParse(dataRow("maintenance_id").ToString(), maintenanceID)
+                        End If
+                    End If
                 End If
-            Else
-                MessageBox.Show("Maintenance ID not found in selected record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
             End If
             
             If maintenanceID <= 0 Then
-                MessageBox.Show("Invalid maintenance ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Invalid maintenance ID. Unable to retrieve maintenance record ID from selected row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Diagnostics.Debug.WriteLine("[v0] UC_MaintenanceManagement - btnApprove: Could not get maintenanceID from selected row")
                 Return
             End If
             
-            Dim currentStatus As String = If(IsDBNull(dataRow("status")), "", dataRow("status").ToString().ToLower())
+            ' Get current status from selected row
+            Dim currentStatus As String = ""
+            If selectedRow.Cells("status") IsNot Nothing AndAlso selectedRow.Cells("status").Value IsNot Nothing Then
+                currentStatus = selectedRow.Cells("status").Value.ToString().ToLower()
+            Else
+                Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
+                If dt IsNot Nothing AndAlso selectedRow.Index >= 0 AndAlso selectedRow.Index < dt.Rows.Count Then
+                    Dim dataRow As DataRow = dt.Rows(selectedRow.Index)
+                    If dt.Columns.Contains("status") AndAlso Not IsDBNull(dataRow("status")) Then
+                        currentStatus = dataRow("status").ToString().ToLower()
+                    End If
+                End If
+            End If
 
             If currentStatus = "completed" OrElse currentStatus = "approved" Then
                 MessageBox.Show("This maintenance record is already approved/completed.", "Already Processed", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -366,32 +387,42 @@ Public Class UC_MaintenanceManagement
 
         Try
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
-            If dt Is Nothing Then
-                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
-            End If
-
-            Dim rowIndex As Integer = selectedRow.Index
-            Dim dataRow As DataRow = dt.Rows(rowIndex)
             Dim maintenanceID As Integer = 0
-            If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(dataRow("maintenanceId")) Then
-                If Not Integer.TryParse(dataRow("maintenanceId").ToString(), maintenanceID) Then
-                    MessageBox.Show("Invalid maintenance ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Return
+            
+            ' Try to get maintenanceID from the selected row - check multiple sources
+            ' First, try to get from DataGridView cell directly
+            If selectedRow.Cells("maintenanceId") IsNot Nothing AndAlso selectedRow.Cells("maintenanceId").Value IsNot Nothing Then
+                If Not Integer.TryParse(selectedRow.Cells("maintenanceId").Value.ToString(), maintenanceID) Then
+                    ' Try alternative column name
+                    If selectedRow.Cells("maintenance_id") IsNot Nothing AndAlso selectedRow.Cells("maintenance_id").Value IsNot Nothing Then
+                        Integer.TryParse(selectedRow.Cells("maintenance_id").Value.ToString(), maintenanceID)
+                    End If
+                Else
+                    Integer.TryParse(selectedRow.Cells("maintenanceId").Value.ToString(), maintenanceID)
                 End If
-            ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(dataRow("maintenance_id")) Then
-                If Not Integer.TryParse(dataRow("maintenance_id").ToString(), maintenanceID) Then
-                    MessageBox.Show("Invalid maintenance ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Return
+            ElseIf selectedRow.Cells("maintenance_id") IsNot Nothing AndAlso selectedRow.Cells("maintenance_id").Value IsNot Nothing Then
+                Integer.TryParse(selectedRow.Cells("maintenance_id").Value.ToString(), maintenanceID)
+            End If
+            
+            ' If still not found, try from DataSource
+            If maintenanceID <= 0 Then
+                Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
+                If dt IsNot Nothing Then
+                    Dim rowIndex As Integer = selectedRow.Index
+                    If rowIndex >= 0 AndAlso rowIndex < dt.Rows.Count Then
+                        Dim dataRow As DataRow = dt.Rows(rowIndex)
+                        If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(dataRow("maintenanceId")) Then
+                            Integer.TryParse(dataRow("maintenanceId").ToString(), maintenanceID)
+                        ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(dataRow("maintenance_id")) Then
+                            Integer.TryParse(dataRow("maintenance_id").ToString(), maintenanceID)
+                        End If
+                    End If
                 End If
-            Else
-                MessageBox.Show("Maintenance ID not found in selected record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
             End If
             
             If maintenanceID <= 0 Then
-                MessageBox.Show("Invalid maintenance ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Invalid maintenance ID. Unable to retrieve maintenance record ID from selected row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Diagnostics.Debug.WriteLine("[v0] UC_MaintenanceManagement - btnReject: Could not get maintenanceID from selected row")
                 Return
             End If
 
