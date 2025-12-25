@@ -49,6 +49,7 @@ Public Class AddUserManagement
 
     Private Sub LoadDepartmentDropdown()
         Try
+            departmentId.DataSource = Nothing ' Clear DataSource first
             departmentId.Items.Clear()
             Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
             If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 Then
@@ -68,6 +69,7 @@ Public Class AddUserManagement
     Private Sub LoadProvinceDropdown()
         Try
             RemoveHandler province.SelectedIndexChanged, AddressOf province_SelectedIndexChanged
+            province.DataSource = Nothing ' Clear DataSource first
             province.Items.Clear()
             Dim provinces As DataTable = DatabaseConnection.GetProvinces()
             If provinces IsNot Nothing AndAlso provinces.Rows.Count > 0 Then
@@ -87,6 +89,8 @@ Public Class AddUserManagement
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadProvinceDropdown Error: " & ex.Message)
             ' If GetProvinces doesn't exist, add common provinces manually
+            province.DataSource = Nothing ' Clear DataSource first
+            province.Items.Clear()
             province.Items.Add("Metro Manila")
             province.Items.Add("Cavite")
             province.Items.Add("Laguna")
@@ -149,7 +153,7 @@ Public Class AddUserManagement
             barangay.Items.Clear()
         Catch ex As Exception
             Debug.WriteLine("[v0] LoadMunicipalityDropdown Error: " & ex.Message)
-            municipal.DataSource = Nothing
+            municipal.DataSource = Nothing ' Clear DataSource before clearing items
             municipal.Items.Clear()
             municipal.Items.Add("Select Municipality")
         End Try
@@ -162,6 +166,7 @@ Public Class AddUserManagement
 
     Private Sub LoadBarangayDropdown()
         Try
+            barangay.DataSource = Nothing ' Clear DataSource first
             barangay.Items.Clear()
             
             ' Get the actual municipality name from the selected item
@@ -193,14 +198,19 @@ Public Class AddUserManagement
 
             Dim barangays As DataTable = DatabaseConnection.GetBarangays(selectedMunicipality)
             If barangays IsNot Nothing AndAlso barangays.Rows.Count > 0 Then
+                barangay.DataSource = Nothing ' Clear DataSource first
+                barangay.Items.Clear()
                 barangay.DisplayMember = "barangay_name"
                 barangay.ValueMember = "barangay_name"
                 barangay.DataSource = barangays
             Else
+                barangay.DataSource = Nothing ' Clear DataSource first
+                barangay.Items.Clear()
                 barangay.Items.Add("Select Barangay")
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadBarangayDropdown Error: " & ex.Message)
+            barangay.DataSource = Nothing ' Clear DataSource before clearing items
             barangay.Items.Clear()
             barangay.Items.Add("Select Barangay")
         End Try

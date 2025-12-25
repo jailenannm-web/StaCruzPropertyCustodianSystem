@@ -181,7 +181,7 @@ Public Class AddDepartment
 
         ' Get status
         Dim statusCombo As ComboBox = FindControlOfType(Of ComboBox)("status_cmbo")
-        Dim statusValue As String = "active"
+        Dim statusValue As String = "Active"
         If statusCombo IsNot Nothing AndAlso statusCombo.SelectedIndex >= 0 Then
             statusValue = statusCombo.SelectedItem.ToString()
         End If
@@ -226,7 +226,7 @@ Public Class AddDepartment
             ' Get description value
             Dim descriptionValue As String = If(descriptionTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(descriptionTxt.Text), descriptionTxt.Text.Trim(), "")
             
-            ' Call the AddDepartment function with all parameters including building, floorNumber, shortName, description
+            ' Call the AddDepartment function with all parameters including building, floorNumber, shortName, description, status
             Dim success As Boolean = DatabaseConnection.AddDepartment(
                 deptName,
                 headOfDeptString,
@@ -237,7 +237,8 @@ Public Class AddDepartment
                 buildingValue,
                 floorValue,
                 shortNameValue,
-                descriptionValue  ' description from form
+                descriptionValue,  ' description from form
+                statusValue        ' status from form
             )
 
             If success Then

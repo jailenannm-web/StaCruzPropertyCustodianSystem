@@ -96,6 +96,13 @@ Public Class EditDepartment
         currentDepartmentId = departmentId
 
         Try
+            ' Department ID (display only, should be read-only)
+            Dim deptIdTxt As TextBox = FindControlOfType(Of TextBox)("departmentId")
+            If deptIdTxt IsNot Nothing Then
+                deptIdTxt.Text = departmentId.ToString()
+                deptIdTxt.ReadOnly = True  ' Make it read-only so users can't change it
+            End If
+
             ' Department Name
             Dim deptNameTxt As TextBox = FindControlOfType(Of TextBox)("departmentName")
             If deptNameTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("departmentName") Then
@@ -138,17 +145,10 @@ Public Class EditDepartment
                 officeCodeTxt.Text = If(IsDBNull(deptData("officeCode")), "", deptData("officeCode").ToString())
             End If
 
-            ' Short Name (office_hours_cmbo is actually used for short name based on designer)
-            Dim shortNameCombo As ComboBox = FindControlOfType(Of ComboBox)("office_hours_cmbo")
-            If shortNameCombo IsNot Nothing AndAlso deptData.Table.Columns.Contains("shortName") Then
-                Dim shortNameVal As String = If(IsDBNull(deptData("shortName")), "", deptData("shortName").ToString())
-                ' Try to find and select the value, otherwise add it
-                Dim idx As Integer = shortNameCombo.FindStringExact(shortNameVal)
-                If idx >= 0 Then
-                    shortNameCombo.SelectedIndex = idx
-                Else
-                    shortNameCombo.Text = shortNameVal
-                End If
+            ' Short Name (use the actual shortName TextBox from designer)
+            Dim shortNameTxt As TextBox = FindControlOfType(Of TextBox)("shortName")
+            If shortNameTxt IsNot Nothing AndAlso deptData.Table.Columns.Contains("shortName") Then
+                shortNameTxt.Text = If(IsDBNull(deptData("shortName")), "", deptData("shortName").ToString())
             End If
             
             ' Description
@@ -326,9 +326,9 @@ Public Class EditDepartment
                 establishedDate = estPicker.Value.Date
             End If
 
-            ' Get short name value
-            Dim shortNameCombo As ComboBox = FindControlOfType(Of ComboBox)("office_hours_cmbo")
-            Dim shortNameValue As String = If(shortNameCombo IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(shortNameCombo.Text), shortNameCombo.Text.Trim(), "")
+            ' Get short name value (use the actual shortName TextBox from designer)
+            Dim shortNameTxt As TextBox = FindControlOfType(Of TextBox)("shortName")
+            Dim shortNameValue As String = If(shortNameTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(shortNameTxt.Text), shortNameTxt.Text.Trim(), "")
             
             ' Get description value
             Dim descriptionTxt As TextBox = FindControlOfType(Of TextBox)("description")
@@ -340,7 +340,7 @@ Public Class EditDepartment
                 deptStatusValue = statusCombo.SelectedItem.ToString()
             End If
             
-            ' Call the UpdateDepartment function with all parameters including floorNumber, shortName, description
+            ' Call the UpdateDepartment function with all parameters including floorNumber, shortName, description, status
             Dim success As Boolean = DatabaseConnection.UpdateDepartment(
                 currentDepartmentId,
                 deptName,
@@ -352,7 +352,8 @@ Public Class EditDepartment
                 buildingValue,
                 floorValue,
                 shortNameValue,
-                descriptionValue  ' description from form
+                descriptionValue,  ' description from form
+                deptStatusValue    ' status from form
             )
 
             If success Then

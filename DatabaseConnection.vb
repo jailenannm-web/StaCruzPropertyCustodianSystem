@@ -8553,6 +8553,73 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
+    ''' Delete a department permanently from the database with audit logging
+    ''' </summary>
+    Public Shared Function DeleteDepartment(departmentID As Integer) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Dim departmentName As String = ""
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+
+            If Not SafeOpenConnection(conn) Then Return False
+
+            ' First, get department details for audit log before deletion
+            Dim getDeptQuery As String = "SELECT departmentName FROM departments WHERE departmentId = @departmentId"
+            Using getDeptCmd As New MySqlCommand(getDeptQuery, conn)
+                getDeptCmd.Parameters.AddWithValue("@departmentId", departmentID)
+                Dim result = getDeptCmd.ExecuteScalar()
+                If result IsNot Nothing Then
+                    departmentName = result.ToString()
+                Else
+                    MessageBox.Show("Department not found.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return False
+                End If
+            End Using
+
+            ' Delete the department
+            Dim deleteQuery As String = "DELETE FROM departments WHERE departmentId = @departmentId"
+            Using deleteCmd As New MySqlCommand(deleteQuery, conn)
+                deleteCmd.Parameters.AddWithValue("@departmentId", departmentID)
+                Dim rowsAffected As Integer = deleteCmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    ' Log the deletion to audit trail
+                    Dim userId As Integer? = If(SessionContext.CurrentUserID > 0, SessionContext.CurrentUserID, Nothing)
+                    Dim userType As String = If(String.IsNullOrEmpty(SessionContext.CurrentRole), "System", SessionContext.CurrentRole)
+                    Dim username As String = If(String.IsNullOrEmpty(SessionContext.CurrentUsername), "System", SessionContext.CurrentUsername)
+                    
+                    LogActivity(userId, userType, username, "DELETE_DEPARTMENT", "departments",
+                               $"Permanently deleted department: {departmentName} (ID: {departmentID})", "", departmentID)
+                    
+                    System.Diagnostics.Debug.WriteLine($"[v0] DeleteDepartment - Department '{departmentName}' (ID: {departmentID}) deleted successfully and logged to audit trail")
+                    Return True
+                Else
+                    MessageBox.Show("No department was deleted. It may have already been removed.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return False
+                End If
+            End Using
+
+        Catch ex As MySqlException
+            System.Diagnostics.Debug.WriteLine("[v0] DeleteDepartment MySQL Exception: " & ex.Message)
+            MessageBox.Show("Database error while deleting department: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] DeleteDepartment Exception: " & ex.Message)
+            MessageBox.Show("Error deleting department: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch ex As Exception
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
     ''' Lightweight lookup list for department pickers (optionally include inactive records).
     ''' </summary>
     Public Shared Function GetDepartmentLookup(Optional includeInactive As Boolean = False) As DataTable
@@ -9046,7 +9113,7 @@ Public Class DatabaseConnection
             Dim query As String = "UPDATE departments SET departmentName = @departmentName, headOfDepartment = @headOfDepartment, " &
                                  "location = @location, officeCode = @departmentCode, contactNumber = @contactNumber, " &
                                  "email = @email, building = @building, floorNumber = @floorNumber, shortName = @shortName, " &
-                                 "description = @description, updatedAt = NOW() WHERE departmentId = @departmentID"
+                                 "description = @description, status = @status, updatedAt = NOW() WHERE departmentId = @departmentID"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@departmentID", departmentID)
@@ -9070,7 +9137,6 @@ Public Class DatabaseConnection
                         System.Diagnostics.Debug.WriteLine("[v0] UpdateDepartment headcount refresh failed: " & exHeadcount.Message)
                     End Try
                     System.Diagnostics.Debug.WriteLine("[v0] Department Updated Successfully - ID: " & departmentID)
-                    MessageBox.Show("Department updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
                 Else
                     MessageBox.Show("No changes were made. Department may not exist.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -9095,74 +9161,6 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Delete department only if no properties are linked to it (ENHANCED)
     ''' </summary>
-    Public Shared Function DeleteDepartment(departmentID As Integer) As Boolean
-        Dim conn As MySqlConnection = Nothing
-        Try
-            conn = GetConnection()
-            If conn Is Nothing Then Return False
-
-            If Not SafeOpenConnection(conn) Then Return False
-
-            ' Check if department has linked properties - skip ALL restrictions for SuperAdmin and Admin
-            Dim isSuperAdminOrAdmin As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin()
-            If Not isSuperAdminOrAdmin Then
-                Dim checkPropertiesQuery As String = "SELECT COUNT(*) FROM properties WHERE departmentId = @departmentID AND status != 'For Disposal' AND status != 'Lost'"
-                Using checkCmd As New MySqlCommand(checkPropertiesQuery, conn)
-                    checkCmd.Parameters.AddWithValue("@departmentID", departmentID)
-                    Dim propertyCount As Integer = CInt(checkCmd.ExecuteScalar())
-                    If propertyCount > 0 Then
-                        MessageBox.Show("Cannot delete department. It has " & propertyCount & " property/properties assigned to it. Please reassign or dispose properties first.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        Return False
-                    End If
-                End Using
-
-                ' Check if department has staff members - only for non-SuperAdmin/Admin
-                Dim checkStaffQuery As String = "SELECT COUNT(*) FROM users WHERE departmentId = @departmentID AND role = 'Staff' AND status = 'active'"
-                Using checkCmd As New MySqlCommand(checkStaffQuery, conn)
-                    checkCmd.Parameters.AddWithValue("@departmentID", departmentID)
-                    Dim staffCount As Integer = CInt(checkCmd.ExecuteScalar())
-                    If staffCount > 0 Then
-                        MessageBox.Show("Cannot delete department. It has " & staffCount & " active staff member(s). Please reassign staff first.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        Return False
-                    End If
-                End Using
-            End If
-
-            ' Delete department (soft delete by setting status to 'inactive')
-            Dim query As String = "UPDATE departments SET status = 'inactive', updatedAt = NOW() WHERE departmentId = @departmentID"
-            Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@departmentID", departmentID)
-
-                Dim result As Integer = cmd.ExecuteNonQuery()
-                If result > 0 Then
-                    Try
-                        RecalculateDepartmentHeadcount(departmentID)
-                    Catch exHeadcount As Exception
-                        System.Diagnostics.Debug.WriteLine("[v0] DeleteDepartment headcount refresh failed: " & exHeadcount.Message)
-                    End Try
-                    System.Diagnostics.Debug.WriteLine("[v0] Department Deleted (Inactivated) - ID: " & departmentID)
-                    MessageBox.Show("Department deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Return True
-                Else
-                    MessageBox.Show("Department not found or already deleted.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
-                End If
-            End Using
-        Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] DeleteDepartment Exception: " & ex.Message)
-            MessageBox.Show("Error deleting department: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-        Finally
-            If conn IsNot Nothing Then
-                Try
-                    If conn.State = ConnectionState.Open Then conn.Close()
-                    conn.Dispose()
-                Catch ex As Exception
-                End Try
-            End If
-        End Try
-    End Function
-
     ''' <summary>
     ''' Get department statistics (employee count and property count)
     ''' </summary>

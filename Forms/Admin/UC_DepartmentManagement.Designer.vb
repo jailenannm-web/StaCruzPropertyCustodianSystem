@@ -84,101 +84,102 @@ Partial Class UC_DepartmentManagement
         '
         'departmentId
         '
-        Me.departmentId.HeaderText = "departmentId"
+        Me.departmentId.HeaderText = "Department ID"
         Me.departmentId.MinimumWidth = 6
         Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
+        Me.departmentId.Width = 80
+        Me.departmentId.Visible = False
         '
         'departmentName
         '
-        Me.departmentName.HeaderText = "departmentName"
-        Me.departmentName.MinimumWidth = 6
+        Me.departmentName.HeaderText = "Department Name"
+        Me.departmentName.MinimumWidth = 150
         Me.departmentName.Name = "departmentName"
-        Me.departmentName.Width = 125
+        Me.departmentName.Width = 180
         '
         'headOfDepartment
         '
-        Me.headOfDepartment.HeaderText = "headOfDepartment"
-        Me.headOfDepartment.MinimumWidth = 6
+        Me.headOfDepartment.HeaderText = "Head of Department"
+        Me.headOfDepartment.MinimumWidth = 120
         Me.headOfDepartment.Name = "headOfDepartment"
-        Me.headOfDepartment.Width = 125
+        Me.headOfDepartment.Width = 150
         '
         'email
         '
-        Me.email.HeaderText = "email"
-        Me.email.MinimumWidth = 6
+        Me.email.HeaderText = "Email"
+        Me.email.MinimumWidth = 150
         Me.email.Name = "email"
-        Me.email.Width = 125
+        Me.email.Width = 180
         '
         'contactNumber
         '
-        Me.contactNumber.HeaderText = "contactNumber"
-        Me.contactNumber.MinimumWidth = 6
+        Me.contactNumber.HeaderText = "Contact Number"
+        Me.contactNumber.MinimumWidth = 100
         Me.contactNumber.Name = "contactNumber"
-        Me.contactNumber.Width = 125
+        Me.contactNumber.Width = 120
         '
         'location
         '
-        Me.location.HeaderText = "location"
-        Me.location.MinimumWidth = 6
+        Me.location.HeaderText = "Location"
+        Me.location.MinimumWidth = 100
         Me.location.Name = "location"
-        Me.location.Width = 125
+        Me.location.Width = 120
         '
         'building
         '
-        Me.building.HeaderText = "building"
-        Me.building.MinimumWidth = 6
+        Me.building.HeaderText = "Building"
+        Me.building.MinimumWidth = 80
         Me.building.Name = "building"
-        Me.building.Width = 125
+        Me.building.Width = 100
         '
         'floorNumber
         '
-        Me.floorNumber.HeaderText = "floorNumber"
-        Me.floorNumber.MinimumWidth = 6
+        Me.floorNumber.HeaderText = "Floor Number"
+        Me.floorNumber.MinimumWidth = 60
         Me.floorNumber.Name = "floorNumber"
-        Me.floorNumber.Width = 125
+        Me.floorNumber.Width = 80
         '
         'shortName
         '
-        Me.shortName.HeaderText = "shortName"
-        Me.shortName.MinimumWidth = 6
+        Me.shortName.HeaderText = "Short Name"
+        Me.shortName.MinimumWidth = 80
         Me.shortName.Name = "shortName"
-        Me.shortName.Width = 125
+        Me.shortName.Width = 100
         '
         'officeCode
         '
-        Me.officeCode.HeaderText = "officeCode"
-        Me.officeCode.MinimumWidth = 6
+        Me.officeCode.HeaderText = "Office Code"
+        Me.officeCode.MinimumWidth = 80
         Me.officeCode.Name = "officeCode"
-        Me.officeCode.Width = 125
+        Me.officeCode.Width = 100
         '
         'description
         '
-        Me.description.HeaderText = "description"
-        Me.description.MinimumWidth = 6
+        Me.description.HeaderText = "Description"
+        Me.description.MinimumWidth = 150
         Me.description.Name = "description"
-        Me.description.Width = 125
+        Me.description.Width = 200
         '
         'totalProperties
         '
-        Me.totalProperties.HeaderText = "totalProperties"
-        Me.totalProperties.MinimumWidth = 6
+        Me.totalProperties.HeaderText = "Total Properties"
+        Me.totalProperties.MinimumWidth = 60
         Me.totalProperties.Name = "totalProperties"
-        Me.totalProperties.Width = 125
+        Me.totalProperties.Width = 80
         '
         'totalSupplies
         '
-        Me.totalSupplies.HeaderText = "totalSupplies"
-        Me.totalSupplies.MinimumWidth = 6
+        Me.totalSupplies.HeaderText = "Total Supplies"
+        Me.totalSupplies.MinimumWidth = 60
         Me.totalSupplies.Name = "totalSupplies"
-        Me.totalSupplies.Width = 125
+        Me.totalSupplies.Width = 80
         '
         'status
         '
-        Me.status.HeaderText = "status"
-        Me.status.MinimumWidth = 6
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 80
         Me.status.Name = "status"
-        Me.status.Width = 125
+        Me.status.Width = 100
         '
         'ttldepartmentmanagement
         '

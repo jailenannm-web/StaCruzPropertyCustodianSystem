@@ -44,45 +44,14 @@ Public Class UC_DepartmentManagement
         admin_deptmanagement.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
         admin_deptmanagement.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        ' Set column headers and alignment
+        ' Set column alignment - headers are already set in Designer
         For Each col As DataGridViewColumn In admin_deptmanagement.Columns
             col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            ' Set HeaderText based on column name
-            Select Case col.Name.ToLower()
-                Case "departmentid"
-                    col.HeaderText = "Department ID"
-                    col.Visible = False
-                Case "departmentname"
-                    col.HeaderText = "Department Name"
-                Case "headofdepartment"
-                    col.HeaderText = "Head of Department"
-                Case "email"
-                    col.HeaderText = "Email"
-                Case "contactnumber"
-                    col.HeaderText = "Contact Number"
-                Case "location"
-                    col.HeaderText = "Location"
-                Case "building"
-                    col.HeaderText = "Building"
-                Case "floornumber"
-                    col.HeaderText = "Floor Number"
-                Case "shortname"
-                    col.HeaderText = "Short Name"
-                Case "officecode"
-                    col.HeaderText = "Office Code"
-                Case "description"
-                    col.HeaderText = "Description"
-                Case "totalproperties"
-                    col.HeaderText = "Total Properties"
-                Case "totalsupplies"
-                    col.HeaderText = "Total Supplies"
-                Case "status"
-                    col.HeaderText = "Status"
-            End Select
         Next
 
-        ' Auto size
-        admin_deptmanagement.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        ' Note: Column widths are set in Designer for better control
+        ' AutoSizeColumnsMode is set to None to respect Designer column widths
+        admin_deptmanagement.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
 
         ' Initialize filter dropdowns
         InitializeFilters()
@@ -414,9 +383,14 @@ Public Class UC_DepartmentManagement
 
         ' DELETE should permanently remove - show strong warning
         Dim result As DialogResult = MessageBox.Show(
-            "Are you sure you want to PERMANENTLY DELETE department '" & departmentName & "' (ID: " & departmentID.ToString() & ")?" & Environment.NewLine & Environment.NewLine &
-            "This action cannot be undone. To temporarily disable a department, use Edit and change Status to Inactive instead.",
-            "Confirm Permanent Delete",
+            "⚠️ WARNING: PERMANENT DELETION ⚠️" & Environment.NewLine & Environment.NewLine &
+            "Are you sure you want to PERMANENTLY DELETE this department?" & Environment.NewLine &
+            "Department: " & departmentName & Environment.NewLine &
+            "ID: " & departmentID.ToString() & Environment.NewLine & Environment.NewLine &
+            "This will COMPLETELY REMOVE all department data from the database!" & Environment.NewLine &
+            "This action CANNOT BE UNDONE!" & Environment.NewLine & Environment.NewLine &
+            "💡 TIP: To temporarily disable a department instead, use Edit → Change Status to Inactive.",
+            "⚠️ Confirm Permanent Deletion",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Warning
         )
