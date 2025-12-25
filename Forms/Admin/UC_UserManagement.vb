@@ -117,9 +117,20 @@ Public Class UC_UserManagement
     Public Sub RefreshUserTable()
         Try
             pm_table.Rows.Clear()
+            
+            ' Clear cached data to force fresh query
+            originalUserData = Nothing
 
             ' Use GetAllUsers to get both Admin/SuperAdmin (from users table) and Staff (from staff_accounts table)
             Dim records As DataTable = DatabaseConnection.GetAllUsers(currentStatusFilter, currentRoleFilter, "")
+
+            ' Debug: Log available columns
+            If records IsNot Nothing AndAlso records.Columns.Count > 0 Then
+                System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - Available columns in records:")
+                For Each col As DataColumn In records.Columns
+                    System.Diagnostics.Debug.WriteLine("[v0]   - " & col.ColumnName)
+                Next
+            End If
 
             ' Store original data for search
             If records IsNot Nothing AndAlso records.Rows.Count > 0 Then
@@ -163,6 +174,14 @@ Public Class UC_UserManagement
                 Dim municipality As String = SafeValue(record, "municipal")
                 Dim barangay As String = SafeValue(record, "barangay")
                 
+                ' Debug: Log first row's address values
+                If pm_table.Rows.Count = 0 Then
+                    System.Diagnostics.Debug.WriteLine($"[v0] UC_UserManagement - First row address:")
+                    System.Diagnostics.Debug.WriteLine($"[v0]   province = '{province}'")
+                    System.Diagnostics.Debug.WriteLine($"[v0]   municipality = '{municipality}'")
+                    System.Diagnostics.Debug.WriteLine($"[v0]   barangay = '{barangay}'")
+                End If
+                
                 Dim addressParts As New List(Of String)
                 If Not String.IsNullOrWhiteSpace(barangay) Then addressParts.Add(barangay)
                 If Not String.IsNullOrWhiteSpace(municipality) Then addressParts.Add(municipality)
@@ -170,6 +189,11 @@ Public Class UC_UserManagement
                 
                 Dim fullAddress As String = String.Join(", ", addressParts)
                 If String.IsNullOrWhiteSpace(fullAddress) Then fullAddress = "N/A"
+                
+                ' Debug: Log full address result
+                If pm_table.Rows.Count = 0 Then
+                    System.Diagnostics.Debug.WriteLine($"[v0]   fullAddress = '{fullAddress}'")
+                End If
                 
                 ' Get role from user_type field
                 Dim userRole As String = SafeValue(record, "user_type")
@@ -231,6 +255,7 @@ Public Class UC_UserManagement
 
             ' Debug output
             System.Diagnostics.Debug.WriteLine("[v0] User Management - Loaded " & If(records IsNot Nothing, records.Rows.Count, 0) & " users")
+            System.Diagnostics.Debug.WriteLine("[v0] User Management - Refresh completed at " & DateTime.Now.ToString("HH:mm:ss.fff"))
 
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] RefreshUserTable Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
@@ -556,8 +581,8 @@ Public Class UC_UserManagement
                 End If
 
                 ' Build full address for search results
-                Dim province As String = SafeValue(record, "province_city")
-                Dim municipality As String = SafeValue(record, "municipality")
+                Dim province As String = SafeValue(record, "province")
+                Dim municipality As String = SafeValue(record, "municipal")
                 Dim barangay As String = SafeValue(record, "barangay")
                 
                 Dim addressParts As New List(Of String)

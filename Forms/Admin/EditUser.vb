@@ -383,6 +383,16 @@ Public Class EditUser
         ' Username validation is handled by the UpdateUserAccount function internally
         ' No need for separate uniqueness check here as the function will validate
         
+        ' Extract address values with logging
+        Dim provinceValue As String = GetComboValue(province)
+        Dim municipalValue As String = GetComboValue(municipal)
+        Dim barangayValue As String = GetComboValue(barangay)
+        
+        System.Diagnostics.Debug.WriteLine("[v0] EditUser - Saving address values:")
+        System.Diagnostics.Debug.WriteLine("[v0]   Province: '" & provinceValue & "'")
+        System.Diagnostics.Debug.WriteLine("[v0]   Municipal: '" & municipalValue & "'")
+        System.Diagnostics.Debug.WriteLine("[v0]   Barangay: '" & barangayValue & "'")
+        
         ' Use unified UpdateUserAccount function that handles both Admin/SuperAdmin and Staff
         Dim updateSuccess As Boolean = DatabaseConnection.UpdateUserAccount(
             adminIDValue,
@@ -390,15 +400,15 @@ Public Class EditUser
             firstName.Text.Trim(),
             lastName.Text.Trim(),
             email.Text.Trim(),
-            editingUsername,
+            username.Text.Trim(),
             middleName:=middleName.Text.Trim(),
             suffix:=GetComboValue(suffixAdmin),
             position:=positionValue,
             departmentID:=deptID,
             contactNumber:=contactNumber.Text.Trim(),
-            barangay:=GetComboValue(barangay),
-            municipality:=GetComboValue(municipal),
-            provinceCity:=GetComboValue(province),
+            barangay:=barangayValue,
+            municipality:=municipalValue,
+            provinceCity:=provinceValue,
             employeeID:=employeeID.Text.Trim(),
             newUserType:=newUserTypeValue, ' New role (only applies to Admin/SuperAdmin)
             updatedByID:=currentAdminID,
@@ -440,8 +450,7 @@ Public Class EditUser
         If saDashboard IsNot Nothing Then
             Dim newUC As New UC_UserManagement()
             saDashboard.LoadUserControl(newUC)
-            ' Refresh the table after loading
-            newUC.RefreshUserTable()
+            ' UC_UserManagement Load event already calls RefreshUserTable
             Return
         End If
         
@@ -449,8 +458,7 @@ Public Class EditUser
         If superAdminDashboard IsNot Nothing Then
             Dim newUC As New UC_UserManagement()
             superAdminDashboard.LoadUserControl(newUC)
-            ' Refresh the table after loading
-            newUC.RefreshUserTable()
+            ' UC_UserManagement Load event already calls RefreshUserTable
             Return
         End If
         
@@ -458,8 +466,7 @@ Public Class EditUser
         If parentDashboard IsNot Nothing Then
             Dim newUC As New UC_UserManagement()
             parentDashboard.LoadUserControl(newUC)
-            ' Refresh the table after loading
-            newUC.RefreshUserTable()
+            ' UC_UserManagement Load event already calls RefreshUserTable
         End If
     End Sub
 
@@ -475,15 +482,54 @@ Public Class EditUser
     End Function
 
     Private Shared Function GetComboValue(combo As ComboBox, Optional fallback As String = "") As String
-        If combo Is Nothing Then Return fallback
+        If combo Is Nothing Then 
+            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - combo is Nothing, returning fallback: '" & fallback & "'")
+            Return fallback
+        End If
+        
+        System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - combo.Name: '" & combo.Name & "'")
+        System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - SelectedItem type: " & If(combo.SelectedItem IsNot Nothing, combo.SelectedItem.GetType().Name, "NULL"))
+        
         If combo.SelectedItem Is Nothing Then
             Dim manualValue As String = combo.Text
+            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - No SelectedItem, using Text: '" & manualValue & "'")
             If Not String.IsNullOrWhiteSpace(manualValue) Then
                 Return manualValue.Trim()
             End If
             Return If(String.IsNullOrWhiteSpace(fallback), "", fallback)
         End If
-        Return combo.SelectedItem.ToString()
+        
+        ' Handle DataRowView case - extract the actual value
+        If TypeOf combo.SelectedItem Is DataRowView Then
+            Dim drv As DataRowView = CType(combo.SelectedItem, DataRowView)
+            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - IS DataRowView!")
+            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - ValueMember: '" & combo.ValueMember & "'")
+            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - DisplayMember: '" & combo.DisplayMember & "'")
+            
+            ' Try to get the value using ValueMember first
+            If Not String.IsNullOrEmpty(combo.ValueMember) AndAlso drv.Row.Table.Columns.Contains(combo.ValueMember) Then
+                Dim value As String = drv.Row(combo.ValueMember).ToString()
+                System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - Extracted from ValueMember: '" & value & "'")
+                Return value
+            End If
+            ' Fallback to DisplayMember
+            If Not String.IsNullOrEmpty(combo.DisplayMember) AndAlso drv.Row.Table.Columns.Contains(combo.DisplayMember) Then
+                Dim value As String = drv.Row(combo.DisplayMember).ToString()
+                System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - Extracted from DisplayMember: '" & value & "'")
+                Return value
+            End If
+        End If
+        
+        ' Try SelectedValue as fallback
+        If combo.SelectedValue IsNot Nothing Then
+            Dim value As String = combo.SelectedValue.ToString()
+            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - Using SelectedValue: '" & value & "'")
+            Return value
+        End If
+        
+        Dim finalValue As String = combo.SelectedItem.ToString()
+        System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - Using ToString(): '" & finalValue & "'")
+        Return finalValue
     End Function
 
     Private Function ResolveDepartmentId() As Integer?

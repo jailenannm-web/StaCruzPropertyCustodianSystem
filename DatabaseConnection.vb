@@ -5810,6 +5810,9 @@ Public Class DatabaseConnection
             dt.Columns.Add("barangay", GetType(String))
             dt.Columns.Add("municipality", GetType(String))
             dt.Columns.Add("province_city", GetType(String))
+            ' Add duplicate columns with database column names for compatibility
+            dt.Columns.Add("province", GetType(String))
+            dt.Columns.Add("municipal", GetType(String))
 
             ' Determine available columns to avoid selecting missing ones
             Dim availableCols = GetUsersTableColumns(conn)
@@ -5869,7 +5872,9 @@ Public Class DatabaseConnection
             adminQuery.Append("COALESCE(employeeId, '') as employeeId, createdAt AS dateAssigned, lastLogin, createdAt, ")
             adminQuery.Append("COALESCE(barangay, '') as barangay, ")
             ' Use the previously built expressions so we don't depend on specific physical column names
-            adminQuery.Append(municipalityExpr & ", " & provinceCityExpr & " ")
+            adminQuery.Append(municipalityExpr & ", " & provinceCityExpr & ", ")
+            ' Add duplicate columns with actual database column names for UC_UserManagement compatibility
+            adminQuery.Append("COALESCE(province, '') as province, COALESCE(municipal, '') as municipal ")
             adminQuery.Append("FROM users WHERE role IN ('Admin','SuperAdmin')")
 
             If Not String.IsNullOrEmpty(statusFilter) Then
@@ -5882,7 +5887,10 @@ Public Class DatabaseConnection
             staffQuery.Append("COALESCE(CAST(departmentId AS CHAR), '') as departmentId, COALESCE(contactNumber, '') as contactNumber, ")
             staffQuery.Append("email, username, role AS user_type, status, ")
             staffQuery.Append("COALESCE(employeeId, '') as employeeId, createdAt AS dateAssigned, lastLogin, createdAt, ")
-            staffQuery.Append("COALESCE(province, '') as province_city, COALESCE(municipal, '') as municipality, COALESCE(barangay, '') as barangay, '' as house_no_street ")
+            staffQuery.Append("COALESCE(barangay, '') as barangay, ")
+            staffQuery.Append("COALESCE(municipal, '') as municipality, COALESCE(province, '') as province_city, ")
+            ' Add duplicate columns with actual database column names
+            staffQuery.Append("COALESCE(province, '') as province, COALESCE(municipal, '') as municipal, '' as house_no_street ")
             staffQuery.Append("FROM users WHERE role = 'Staff'")
 
             If Not String.IsNullOrEmpty(statusFilter) Then
@@ -5926,6 +5934,9 @@ Public Class DatabaseConnection
                             row("barangay") = SafeDbValue(record("barangay"))
                             row("municipality") = SafeDbValue(record("municipality"))
                             row("province_city") = SafeDbValue(record("province_city"))
+                            ' Add province and municipal columns for Staff records
+                            row("province") = If(record.Table.Columns.Contains("province"), SafeDbValue(record("province")), "")
+                            row("municipal") = If(record.Table.Columns.Contains("municipal"), SafeDbValue(record("municipal")), "")
                             dt.Rows.Add(row)
                         Next
                     End Using
@@ -5966,6 +5977,9 @@ Public Class DatabaseConnection
                             row("barangay") = SafeDbValue(record("barangay"))
                             row("municipality") = SafeDbValue(record("municipality"))
                             row("province_city") = SafeDbValue(record("province_city"))
+                            ' Add province and municipal columns for Admin/SuperAdmin records
+                            row("province") = If(record.Table.Columns.Contains("province"), SafeDbValue(record("province")), "")
+                            row("municipal") = If(record.Table.Columns.Contains("municipal"), SafeDbValue(record("municipal")), "")
                             dt.Rows.Add(row)
                         Next
                     End Using
@@ -6880,6 +6894,8 @@ Public Class DatabaseConnection
 
                     Dim rows As Integer = cmd.ExecuteNonQuery()
                     If rows > 0 Then
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Successfully updated " & rows & " row(s) for userID: " & userID & ", username: " & username)
+                        
                         ' Recalculate department headcount if department changed
                         If previousDepartmentID.HasValue AndAlso previousDepartmentID <> departmentID Then
                             Try
@@ -6899,6 +6915,8 @@ Public Class DatabaseConnection
                         LogCrudAction(updatedByID, updatedByType, updatedByName, moduleName, entityLabel, "Update",
                                       $"Updated {entityLabel.ToLower()} #{userID} ({normalizedUserType})", ipAddress)
                         Return True
+                    Else
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - WARNING: No rows updated for userID: " & userID)
                     End If
                 End Using
             ElseIf userType = "Staff" Then
@@ -6915,25 +6933,42 @@ Public Class DatabaseConnection
 
                 ' Update Staff account in users table (same table as Admin/SuperAdmin)
                 ' Note: users table doesn't have house_no_street, it has province, municipal, barangay
-                query = "UPDATE users SET firstName = @firstName, lastName = @lastName, " &
-                       "email = @email, username = @username, contactNumber = @contactNumber, " &
-                       "departmentId = @departmentID, " &
-                       "position = @position, status = @status, updatedAt = NOW() " &
+                query = "UPDATE users SET firstName = @firstName, middleName = @middleName, lastName = @lastName, " &
+                       "suffix = @suffix, email = @email, username = @username, contactNumber = @contactNumber, " &
+                       "departmentId = @departmentID, position = @position, " &
+                       "barangay = @barangay, municipal = @municipal, province = @province, " &
+                       "employeeId = @employeeID, status = @status, updatedAt = NOW() " &
                        "WHERE userId = @userID AND role = 'Staff'"
 
                 Using cmd As New MySqlCommand(query, conn)
+                    ' Debug: Log the SQL query and parameters
+                    System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Staff UPDATE Query: " & query)
+                    System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Parameters:")
+                    System.Diagnostics.Debug.WriteLine("[v0]   @barangay = '" & barangay & "'")
+                    System.Diagnostics.Debug.WriteLine("[v0]   @municipal = '" & municipality & "'")
+                    System.Diagnostics.Debug.WriteLine("[v0]   @province = '" & provinceCity & "'")
+                    System.Diagnostics.Debug.WriteLine("[v0]   @userID = " & userID)
+                    
                     cmd.Parameters.AddWithValue("@firstName", firstName.Trim())
+                    cmd.Parameters.AddWithValue("@middleName", If(String.IsNullOrWhiteSpace(middleName), DBNull.Value, middleName.Trim()))
                     cmd.Parameters.AddWithValue("@lastName", lastName.Trim())
+                    cmd.Parameters.AddWithValue("@suffix", If(String.IsNullOrWhiteSpace(suffix), DBNull.Value, suffix.Trim()))
                     cmd.Parameters.AddWithValue("@email", email.Trim())
                     cmd.Parameters.AddWithValue("@username", username.Trim())
                     cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrWhiteSpace(contactNumber), DBNull.Value, contactNumber.Trim()))
                     cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
                     cmd.Parameters.AddWithValue("@position", If(String.IsNullOrWhiteSpace(position), "Staff", position.Trim()))
+                    cmd.Parameters.AddWithValue("@barangay", If(String.IsNullOrWhiteSpace(barangay), DBNull.Value, barangay.Trim()))
+                    cmd.Parameters.AddWithValue("@municipal", If(String.IsNullOrWhiteSpace(municipality), DBNull.Value, municipality.Trim()))
+                    cmd.Parameters.AddWithValue("@province", If(String.IsNullOrWhiteSpace(provinceCity), DBNull.Value, provinceCity.Trim()))
+                    cmd.Parameters.AddWithValue("@employeeID", If(String.IsNullOrWhiteSpace(employeeID), DBNull.Value, employeeID.Trim()))
                     cmd.Parameters.AddWithValue("@status", normalizedStatus)
                     cmd.Parameters.AddWithValue("@userID", userID)
 
                     Dim rows As Integer = cmd.ExecuteNonQuery()
                     If rows > 0 Then
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Successfully updated " & rows & " Staff row(s) for userID: " & userID & ", username: " & username)
+                        
                         ' Recalculate department headcount if department changed
                         If previousDepartmentID.HasValue AndAlso previousDepartmentID <> departmentID Then
                             Try
@@ -6953,6 +6988,8 @@ Public Class DatabaseConnection
                         LogCrudAction(updatedByID, updatedByType, updatedByName, moduleName, entityLabel, "Update",
                                       $"Updated {entityLabel.ToLower()} #{userID} (Staff)", ipAddress)
                         Return True
+                    Else
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - WARNING: No Staff rows updated for userID: " & userID)
                     End If
                 End Using
             Else
