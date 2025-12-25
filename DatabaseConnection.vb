@@ -5810,6 +5810,9 @@ Public Class DatabaseConnection
             dt.Columns.Add("barangay", GetType(String))
             dt.Columns.Add("municipality", GetType(String))
             dt.Columns.Add("province_city", GetType(String))
+            ' Add duplicate columns with database column names for compatibility
+            dt.Columns.Add("province", GetType(String))
+            dt.Columns.Add("municipal", GetType(String))
 
             ' Determine available columns to avoid selecting missing ones
             Dim availableCols = GetUsersTableColumns(conn)
@@ -5869,7 +5872,9 @@ Public Class DatabaseConnection
             adminQuery.Append("COALESCE(employeeId, '') as employeeId, createdAt AS dateAssigned, lastLogin, createdAt, ")
             adminQuery.Append("COALESCE(barangay, '') as barangay, ")
             ' Use the previously built expressions so we don't depend on specific physical column names
-            adminQuery.Append(municipalityExpr & ", " & provinceCityExpr & " ")
+            adminQuery.Append(municipalityExpr & ", " & provinceCityExpr & ", ")
+            ' Add duplicate columns with actual database column names for UC_UserManagement compatibility
+            adminQuery.Append("COALESCE(province, '') as province, COALESCE(municipal, '') as municipal ")
             adminQuery.Append("FROM users WHERE role IN ('Admin','SuperAdmin')")
 
             If Not String.IsNullOrEmpty(statusFilter) Then
@@ -5882,7 +5887,10 @@ Public Class DatabaseConnection
             staffQuery.Append("COALESCE(CAST(departmentId AS CHAR), '') as departmentId, COALESCE(contactNumber, '') as contactNumber, ")
             staffQuery.Append("email, username, role AS user_type, status, ")
             staffQuery.Append("COALESCE(employeeId, '') as employeeId, createdAt AS dateAssigned, lastLogin, createdAt, ")
-            staffQuery.Append("COALESCE(province, '') as province_city, COALESCE(municipal, '') as municipality, COALESCE(barangay, '') as barangay, '' as house_no_street ")
+            staffQuery.Append("COALESCE(barangay, '') as barangay, ")
+            staffQuery.Append("COALESCE(municipal, '') as municipality, COALESCE(province, '') as province_city, ")
+            ' Add duplicate columns with actual database column names
+            staffQuery.Append("COALESCE(province, '') as province, COALESCE(municipal, '') as municipal, '' as house_no_street ")
             staffQuery.Append("FROM users WHERE role = 'Staff'")
 
             If Not String.IsNullOrEmpty(statusFilter) Then
@@ -5926,6 +5934,9 @@ Public Class DatabaseConnection
                             row("barangay") = SafeDbValue(record("barangay"))
                             row("municipality") = SafeDbValue(record("municipality"))
                             row("province_city") = SafeDbValue(record("province_city"))
+                            ' Add province and municipal columns for Staff records
+                            row("province") = If(record.Table.Columns.Contains("province"), SafeDbValue(record("province")), "")
+                            row("municipal") = If(record.Table.Columns.Contains("municipal"), SafeDbValue(record("municipal")), "")
                             dt.Rows.Add(row)
                         Next
                     End Using
@@ -5966,6 +5977,9 @@ Public Class DatabaseConnection
                             row("barangay") = SafeDbValue(record("barangay"))
                             row("municipality") = SafeDbValue(record("municipality"))
                             row("province_city") = SafeDbValue(record("province_city"))
+                            ' Add province and municipal columns for Admin/SuperAdmin records
+                            row("province") = If(record.Table.Columns.Contains("province"), SafeDbValue(record("province")), "")
+                            row("municipal") = If(record.Table.Columns.Contains("municipal"), SafeDbValue(record("municipal")), "")
                             dt.Rows.Add(row)
                         Next
                     End Using
@@ -6880,6 +6894,8 @@ Public Class DatabaseConnection
 
                     Dim rows As Integer = cmd.ExecuteNonQuery()
                     If rows > 0 Then
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Successfully updated " & rows & " row(s) for userID: " & userID & ", username: " & username)
+                        
                         ' Recalculate department headcount if department changed
                         If previousDepartmentID.HasValue AndAlso previousDepartmentID <> departmentID Then
                             Try
@@ -6899,6 +6915,8 @@ Public Class DatabaseConnection
                         LogCrudAction(updatedByID, updatedByType, updatedByName, moduleName, entityLabel, "Update",
                                       $"Updated {entityLabel.ToLower()} #{userID} ({normalizedUserType})", ipAddress)
                         Return True
+                    Else
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - WARNING: No rows updated for userID: " & userID)
                     End If
                 End Using
             ElseIf userType = "Staff" Then
@@ -6915,25 +6933,42 @@ Public Class DatabaseConnection
 
                 ' Update Staff account in users table (same table as Admin/SuperAdmin)
                 ' Note: users table doesn't have house_no_street, it has province, municipal, barangay
-                query = "UPDATE users SET firstName = @firstName, lastName = @lastName, " &
-                       "email = @email, username = @username, contactNumber = @contactNumber, " &
-                       "departmentId = @departmentID, " &
-                       "position = @position, status = @status, updatedAt = NOW() " &
+                query = "UPDATE users SET firstName = @firstName, middleName = @middleName, lastName = @lastName, " &
+                       "suffix = @suffix, email = @email, username = @username, contactNumber = @contactNumber, " &
+                       "departmentId = @departmentID, position = @position, " &
+                       "barangay = @barangay, municipal = @municipal, province = @province, " &
+                       "employeeId = @employeeID, status = @status, updatedAt = NOW() " &
                        "WHERE userId = @userID AND role = 'Staff'"
 
                 Using cmd As New MySqlCommand(query, conn)
+                    ' Debug: Log the SQL query and parameters
+                    System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Staff UPDATE Query: " & query)
+                    System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Parameters:")
+                    System.Diagnostics.Debug.WriteLine("[v0]   @barangay = '" & barangay & "'")
+                    System.Diagnostics.Debug.WriteLine("[v0]   @municipal = '" & municipality & "'")
+                    System.Diagnostics.Debug.WriteLine("[v0]   @province = '" & provinceCity & "'")
+                    System.Diagnostics.Debug.WriteLine("[v0]   @userID = " & userID)
+                    
                     cmd.Parameters.AddWithValue("@firstName", firstName.Trim())
+                    cmd.Parameters.AddWithValue("@middleName", If(String.IsNullOrWhiteSpace(middleName), DBNull.Value, middleName.Trim()))
                     cmd.Parameters.AddWithValue("@lastName", lastName.Trim())
+                    cmd.Parameters.AddWithValue("@suffix", If(String.IsNullOrWhiteSpace(suffix), DBNull.Value, suffix.Trim()))
                     cmd.Parameters.AddWithValue("@email", email.Trim())
                     cmd.Parameters.AddWithValue("@username", username.Trim())
                     cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrWhiteSpace(contactNumber), DBNull.Value, contactNumber.Trim()))
                     cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
                     cmd.Parameters.AddWithValue("@position", If(String.IsNullOrWhiteSpace(position), "Staff", position.Trim()))
+                    cmd.Parameters.AddWithValue("@barangay", If(String.IsNullOrWhiteSpace(barangay), DBNull.Value, barangay.Trim()))
+                    cmd.Parameters.AddWithValue("@municipal", If(String.IsNullOrWhiteSpace(municipality), DBNull.Value, municipality.Trim()))
+                    cmd.Parameters.AddWithValue("@province", If(String.IsNullOrWhiteSpace(provinceCity), DBNull.Value, provinceCity.Trim()))
+                    cmd.Parameters.AddWithValue("@employeeID", If(String.IsNullOrWhiteSpace(employeeID), DBNull.Value, employeeID.Trim()))
                     cmd.Parameters.AddWithValue("@status", normalizedStatus)
                     cmd.Parameters.AddWithValue("@userID", userID)
 
                     Dim rows As Integer = cmd.ExecuteNonQuery()
                     If rows > 0 Then
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Successfully updated " & rows & " Staff row(s) for userID: " & userID & ", username: " & username)
+                        
                         ' Recalculate department headcount if department changed
                         If previousDepartmentID.HasValue AndAlso previousDepartmentID <> departmentID Then
                             Try
@@ -6953,6 +6988,8 @@ Public Class DatabaseConnection
                         LogCrudAction(updatedByID, updatedByType, updatedByName, moduleName, entityLabel, "Update",
                                       $"Updated {entityLabel.ToLower()} #{userID} (Staff)", ipAddress)
                         Return True
+                    Else
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - WARNING: No Staff rows updated for userID: " & userID)
                     End If
                 End Using
             Else
@@ -8516,6 +8553,73 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
+    ''' Delete a department permanently from the database with audit logging
+    ''' </summary>
+    Public Shared Function DeleteDepartment(departmentID As Integer) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Dim departmentName As String = ""
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+
+            If Not SafeOpenConnection(conn) Then Return False
+
+            ' First, get department details for audit log before deletion
+            Dim getDeptQuery As String = "SELECT departmentName FROM departments WHERE departmentId = @departmentId"
+            Using getDeptCmd As New MySqlCommand(getDeptQuery, conn)
+                getDeptCmd.Parameters.AddWithValue("@departmentId", departmentID)
+                Dim result = getDeptCmd.ExecuteScalar()
+                If result IsNot Nothing Then
+                    departmentName = result.ToString()
+                Else
+                    MessageBox.Show("Department not found.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return False
+                End If
+            End Using
+
+            ' Delete the department
+            Dim deleteQuery As String = "DELETE FROM departments WHERE departmentId = @departmentId"
+            Using deleteCmd As New MySqlCommand(deleteQuery, conn)
+                deleteCmd.Parameters.AddWithValue("@departmentId", departmentID)
+                Dim rowsAffected As Integer = deleteCmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    ' Log the deletion to audit trail
+                    Dim userId As Integer? = If(SessionContext.CurrentUserID > 0, SessionContext.CurrentUserID, Nothing)
+                    Dim userType As String = If(String.IsNullOrEmpty(SessionContext.CurrentRole), "System", SessionContext.CurrentRole)
+                    Dim username As String = If(String.IsNullOrEmpty(SessionContext.CurrentUsername), "System", SessionContext.CurrentUsername)
+                    
+                    LogActivity(userId, userType, username, "DELETE_DEPARTMENT", "departments",
+                               $"Permanently deleted department: {departmentName} (ID: {departmentID})", "", departmentID)
+                    
+                    System.Diagnostics.Debug.WriteLine($"[v0] DeleteDepartment - Department '{departmentName}' (ID: {departmentID}) deleted successfully and logged to audit trail")
+                    Return True
+                Else
+                    MessageBox.Show("No department was deleted. It may have already been removed.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return False
+                End If
+            End Using
+
+        Catch ex As MySqlException
+            System.Diagnostics.Debug.WriteLine("[v0] DeleteDepartment MySQL Exception: " & ex.Message)
+            MessageBox.Show("Database error while deleting department: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] DeleteDepartment Exception: " & ex.Message)
+            MessageBox.Show("Error deleting department: " & ex.Message, "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch ex As Exception
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
     ''' Lightweight lookup list for department pickers (optionally include inactive records).
     ''' </summary>
     Public Shared Function GetDepartmentLookup(Optional includeInactive As Boolean = False) As DataTable
@@ -9009,7 +9113,7 @@ Public Class DatabaseConnection
             Dim query As String = "UPDATE departments SET departmentName = @departmentName, headOfDepartment = @headOfDepartment, " &
                                  "location = @location, officeCode = @departmentCode, contactNumber = @contactNumber, " &
                                  "email = @email, building = @building, floorNumber = @floorNumber, shortName = @shortName, " &
-                                 "description = @description, updatedAt = NOW() WHERE departmentId = @departmentID"
+                                 "description = @description, status = @status, updatedAt = NOW() WHERE departmentId = @departmentID"
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@departmentID", departmentID)
@@ -9033,7 +9137,6 @@ Public Class DatabaseConnection
                         System.Diagnostics.Debug.WriteLine("[v0] UpdateDepartment headcount refresh failed: " & exHeadcount.Message)
                     End Try
                     System.Diagnostics.Debug.WriteLine("[v0] Department Updated Successfully - ID: " & departmentID)
-                    MessageBox.Show("Department updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
                 Else
                     MessageBox.Show("No changes were made. Department may not exist.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -9058,74 +9161,6 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Delete department only if no properties are linked to it (ENHANCED)
     ''' </summary>
-    Public Shared Function DeleteDepartment(departmentID As Integer) As Boolean
-        Dim conn As MySqlConnection = Nothing
-        Try
-            conn = GetConnection()
-            If conn Is Nothing Then Return False
-
-            If Not SafeOpenConnection(conn) Then Return False
-
-            ' Check if department has linked properties - skip ALL restrictions for SuperAdmin and Admin
-            Dim isSuperAdminOrAdmin As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin()
-            If Not isSuperAdminOrAdmin Then
-                Dim checkPropertiesQuery As String = "SELECT COUNT(*) FROM properties WHERE departmentId = @departmentID AND status != 'For Disposal' AND status != 'Lost'"
-                Using checkCmd As New MySqlCommand(checkPropertiesQuery, conn)
-                    checkCmd.Parameters.AddWithValue("@departmentID", departmentID)
-                    Dim propertyCount As Integer = CInt(checkCmd.ExecuteScalar())
-                    If propertyCount > 0 Then
-                        MessageBox.Show("Cannot delete department. It has " & propertyCount & " property/properties assigned to it. Please reassign or dispose properties first.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        Return False
-                    End If
-                End Using
-
-                ' Check if department has staff members - only for non-SuperAdmin/Admin
-                Dim checkStaffQuery As String = "SELECT COUNT(*) FROM users WHERE departmentId = @departmentID AND role = 'Staff' AND status = 'active'"
-                Using checkCmd As New MySqlCommand(checkStaffQuery, conn)
-                    checkCmd.Parameters.AddWithValue("@departmentID", departmentID)
-                    Dim staffCount As Integer = CInt(checkCmd.ExecuteScalar())
-                    If staffCount > 0 Then
-                        MessageBox.Show("Cannot delete department. It has " & staffCount & " active staff member(s). Please reassign staff first.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        Return False
-                    End If
-                End Using
-            End If
-
-            ' Delete department (soft delete by setting status to 'inactive')
-            Dim query As String = "UPDATE departments SET status = 'inactive', updatedAt = NOW() WHERE departmentId = @departmentID"
-            Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@departmentID", departmentID)
-
-                Dim result As Integer = cmd.ExecuteNonQuery()
-                If result > 0 Then
-                    Try
-                        RecalculateDepartmentHeadcount(departmentID)
-                    Catch exHeadcount As Exception
-                        System.Diagnostics.Debug.WriteLine("[v0] DeleteDepartment headcount refresh failed: " & exHeadcount.Message)
-                    End Try
-                    System.Diagnostics.Debug.WriteLine("[v0] Department Deleted (Inactivated) - ID: " & departmentID)
-                    MessageBox.Show("Department deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Return True
-                Else
-                    MessageBox.Show("Department not found or already deleted.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
-                End If
-            End Using
-        Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] DeleteDepartment Exception: " & ex.Message)
-            MessageBox.Show("Error deleting department: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-        Finally
-            If conn IsNot Nothing Then
-                Try
-                    If conn.State = ConnectionState.Open Then conn.Close()
-                    conn.Dispose()
-                Catch ex As Exception
-                End Try
-            End If
-        End Try
-    End Function
-
     ''' <summary>
     ''' Get department statistics (employee count and property count)
     ''' </summary>

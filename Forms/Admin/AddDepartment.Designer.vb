@@ -146,10 +146,10 @@ Partial Class AddDepartment
         Me.Panel2.Controls.Add(Me.established_date)
         Me.Panel2.Controls.Add(Me.buildinglbl)
         Me.Panel2.Controls.Add(Me.status_cmbo)
+        Me.Panel2.Controls.Add(Me.status)
         Me.Panel2.Controls.Add(Me.shortnamelbl)
         Me.Panel2.Controls.Add(Me.parent_department_id)
         Me.Panel2.Controls.Add(Me.established_date_date)
-        Me.Panel2.Controls.Add(Me.status)
         Me.Panel2.Controls.Add(Me.budget_allocation)
         Me.Panel2.Location = New System.Drawing.Point(655, 18)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -163,11 +163,12 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.departmentId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.departmentId.Location = New System.Drawing.Point(241, 253)
+        Me.departmentId.Location = New System.Drawing.Point(248, 404)
         Me.departmentId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.departmentId.Name = "departmentId"
         Me.departmentId.Size = New System.Drawing.Size(255, 24)
         Me.departmentId.TabIndex = 96
+        Me.departmentId.Visible = False
         '
         'description
         '
@@ -175,11 +176,11 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.description.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.description.Location = New System.Drawing.Point(241, 356)
+        Me.description.Location = New System.Drawing.Point(248, 313)
         Me.description.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.description.Multiline = True
         Me.description.Name = "description"
-        Me.description.Size = New System.Drawing.Size(257, 74)
+        Me.description.Size = New System.Drawing.Size(257, 95)
         Me.description.TabIndex = 95
         '
         'descriptionlbl
@@ -189,7 +190,7 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.descriptionlbl.AutoSize = True
         Me.descriptionlbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.descriptionlbl.Location = New System.Drawing.Point(47, 356)
+        Me.descriptionlbl.Location = New System.Drawing.Point(44, 316)
         Me.descriptionlbl.Name = "descriptionlbl"
         Me.descriptionlbl.Size = New System.Drawing.Size(83, 18)
         Me.descriptionlbl.TabIndex = 94
@@ -264,7 +265,7 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.status_cmbo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.status_cmbo.FormattingEnabled = True
-        Me.status_cmbo.Location = New System.Drawing.Point(243, 308)
+        Me.status_cmbo.Location = New System.Drawing.Point(248, 256)
         Me.status_cmbo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.status_cmbo.Name = "status_cmbo"
         Me.status_cmbo.Size = New System.Drawing.Size(239, 26)
@@ -315,11 +316,12 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.status.AutoSize = True
         Me.status.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.status.Location = New System.Drawing.Point(44, 256)
+        Me.status.Location = New System.Drawing.Point(47, 410)
         Me.status.Name = "status"
         Me.status.Size = New System.Drawing.Size(99, 18)
         Me.status.TabIndex = 50
         Me.status.Text = "DepartmentID"
+        Me.status.Visible = False
         '
         'budget_allocation
         '
@@ -328,7 +330,7 @@ Partial Class AddDepartment
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.budget_allocation.AutoSize = True
         Me.budget_allocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.budget_allocation.Location = New System.Drawing.Point(44, 313)
+        Me.budget_allocation.Location = New System.Drawing.Point(47, 262)
         Me.budget_allocation.Name = "budget_allocation"
         Me.budget_allocation.Size = New System.Drawing.Size(50, 18)
         Me.budget_allocation.TabIndex = 51
