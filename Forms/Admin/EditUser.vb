@@ -383,6 +383,14 @@ Public Class EditUser
         ' Username validation is handled by the UpdateUserAccount function internally
         ' No need for separate uniqueness check here as the function will validate
         
+        ' Get the updated username from the form (not the original)
+        Dim updatedUsername As String = username.Text.Trim()
+        If String.IsNullOrWhiteSpace(updatedUsername) Then
+            MessageBox.Show("Username is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            username.Focus()
+            Return
+        End If
+        
         ' Use unified UpdateUserAccount function that handles both Admin/SuperAdmin and Staff
         Dim updateSuccess As Boolean = DatabaseConnection.UpdateUserAccount(
             adminIDValue,
@@ -390,7 +398,7 @@ Public Class EditUser
             firstName.Text.Trim(),
             lastName.Text.Trim(),
             email.Text.Trim(),
-            editingUsername,
+            updatedUsername, ' Use the updated username from the form
             middleName:=middleName.Text.Trim(),
             suffix:=GetComboValue(suffixAdmin),
             position:=positionValue,

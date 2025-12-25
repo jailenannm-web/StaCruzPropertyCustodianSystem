@@ -555,9 +555,11 @@ Public Class UC_UserManagement
                     lastLoginValue = FormatDateValue(record("lastLogin"))
                 End If
 
-                ' Build full address for search results
-                Dim province As String = SafeValue(record, "province_city")
-                Dim municipality As String = SafeValue(record, "municipality")
+                ' Build full address for search results - use same column names as RefreshUserTable
+                Dim province As String = SafeValue(record, "province")
+                If String.IsNullOrEmpty(province) Then province = SafeValue(record, "province_city")
+                Dim municipality As String = SafeValue(record, "municipal")
+                If String.IsNullOrEmpty(municipality) Then municipality = SafeValue(record, "municipality")
                 Dim barangay As String = SafeValue(record, "barangay")
                 
                 Dim addressParts As New List(Of String)

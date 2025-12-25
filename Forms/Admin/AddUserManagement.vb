@@ -162,11 +162,15 @@ Public Class AddUserManagement
 
     Private Sub LoadBarangayDropdown()
         Try
+            ' CRITICAL: Unbind DataSource BEFORE clearing items to avoid "Items collection cannot be modified" error
+            If barangay.DataSource IsNot Nothing Then
+                barangay.DataSource = Nothing
+            End If
             barangay.Items.Clear()
-            
+
             ' Get the actual municipality name from the selected item
             Dim selectedMunicipality As String = ""
-            
+
             If municipal.SelectedItem IsNot Nothing Then
                 ' Check if it's a DataRowView
                 If TypeOf municipal.SelectedItem Is DataRowView Then
@@ -188,7 +192,7 @@ Public Class AddUserManagement
                 ' Fallback to SelectedValue
                 selectedMunicipality = municipal.SelectedValue.ToString()
             End If
-            
+
             If String.IsNullOrEmpty(selectedMunicipality) Then Return
 
             Dim barangays As DataTable = DatabaseConnection.GetBarangays(selectedMunicipality)
@@ -201,6 +205,9 @@ Public Class AddUserManagement
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadBarangayDropdown Error: " & ex.Message)
+            If barangay.DataSource IsNot Nothing Then
+                barangay.DataSource = Nothing
+            End If
             barangay.Items.Clear()
             barangay.Items.Add("Select Barangay")
         End Try
@@ -325,38 +332,61 @@ Public Class AddUserManagement
     End Sub
 
     Private Sub NavigateBackToList()
-        ' Try to find AdminDashboard first
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Dim newUC As New UC_UserManagement()
+            saDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
+            System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (SADashboard)")
+            Return
+        End If
+
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            Dim newUC As New UC_UserManagement()
+            superAdminDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
+            System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (SuperAdminDashboard)")
+            Return
+        End If
+
+        ' Try to find AdminDashboard
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New UC_UserManagement())
+            Dim newUC As New UC_UserManagement()
+            parentDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
             System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (AdminDashboard)")
         Else
-            ' Try to find SADashboard
-            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-            If saDashboard IsNot Nothing Then
-                saDashboard.LoadUserControl(New UC_UserManagement())
-                System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (SADashboard)")
-            Else
-                ' Search up the control hierarchy
-                Dim currentParent As Control = Me.Parent
-                While currentParent IsNot Nothing
-                    Dim adminDash = TryCast(currentParent, AdminDashboard)
-                    If adminDash IsNot Nothing Then
-                        adminDash.LoadUserControl(New UC_UserManagement())
-                        System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found AdminDashboard in hierarchy")
-                        Exit While
-                    End If
-                    
-                    Dim saDash = TryCast(currentParent, SADashboard)
-                    If saDash IsNot Nothing Then
-                        saDash.LoadUserControl(New UC_UserManagement())
-                        System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found SADashboard in hierarchy")
-                        Exit While
-                    End If
-                    
-                    currentParent = currentParent.Parent
-                End While
-            End If
+            ' Search up the control hierarchy
+            Dim currentParent As Control = Me.Parent
+            While currentParent IsNot Nothing
+                Dim adminDash = TryCast(currentParent, AdminDashboard)
+                If adminDash IsNot Nothing Then
+                    Dim newUC As New UC_UserManagement()
+                    adminDash.LoadUserControl(newUC)
+                    ' Refresh the table after loading
+                    newUC.RefreshUserTable()
+                    System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found AdminDashboard in hierarchy")
+                    Exit While
+                End If
+
+                Dim saDash = TryCast(currentParent, SADashboard)
+                If saDash IsNot Nothing Then
+                    Dim newUC As New UC_UserManagement()
+                    saDash.LoadUserControl(newUC)
+                    ' Refresh the table after loading
+                    newUC.RefreshUserTable()
+                    System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found SADashboard in hierarchy")
+                    Exit While
+                End If
+
+                currentParent = currentParent.Parent
+            End While
         End If
     End Sub
 

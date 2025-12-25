@@ -17,19 +17,21 @@ Public Partial Class SADashboard
         ' Clear any loaded user controls to show dashboard
         If pnlFormLoader IsNot Nothing Then
             pnlFormLoader.Controls.Clear()
+            ' Make sure the TableLayoutPanel1 (dashboard content) is visible
+            If TableLayoutPanel1 IsNot Nothing Then
+                TableLayoutPanel1.Visible = True
+                pnlFormLoader.Controls.Add(TableLayoutPanel1)
+                TableLayoutPanel1.BringToFront()
+            End If
         End If
         currentUC = Nothing
-        
-        ' Make sure dashboard stat panels are visible
-        ' If pnlTotalUsers IsNot Nothing Then pnlTotalUsers.Visible = True
-        ' If pnlProperties IsNot Nothing Then pnlProperties.Visible = True
-        ' If pnlSupplies IsNot Nothing Then pnlSupplies.Visible = True
-        ' If pnlMaintenance IsNot Nothing Then pnlMaintenance.Visible = True
 
         ' --- This code changes the active button color ---
         SetActiveButton(btnDashboard)
         ' Reload charts when dashboard button is clicked
         LoadDashboardChartsAsync()
+        ' Reload supply stats
+        LoadSupplyStats()
         
         System.Diagnostics.Debug.WriteLine("[v0] SADashboard - Dashboard button clicked, showing dashboard")
     End Sub
