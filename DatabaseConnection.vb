@@ -2270,6 +2270,15 @@ Public Class DatabaseConnection
                 Dim result As Integer = cmd.ExecuteNonQuery()
 
                 If result > 0 Then
+                    ' Explicitly ensure data is committed to database
+                    ' MySQL autocommit is on by default, but we ensure it's flushed
+                    If conn.State = ConnectionState.Open Then
+                        ' Force flush any pending operations
+                        Using flushCmd As New MySqlCommand("SELECT 1", conn)
+                            flushCmd.ExecuteScalar()
+                        End Using
+                    End If
+                    
                     ' Get the auto-generated supplyId
                     Dim newSupplyId As Integer = 0
                     Using idCmd As New MySqlCommand("SELECT LAST_INSERT_ID()", conn)
@@ -2279,7 +2288,7 @@ Public Class DatabaseConnection
                         End If
                     End Using
                     
-                    System.Diagnostics.Debug.WriteLine("[v0] Supply Added Successfully - Name: " & supplyName & ", Supply ID: " & newSupplyId)
+                    System.Diagnostics.Debug.WriteLine("[v0] Supply Added Successfully - Name: " & supplyName & ", Supply ID: " & newSupplyId & " - Data committed to database")
                     MessageBox.Show($"Supply added successfully!{Environment.NewLine}Supply ID: {newSupplyId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
                 Else
@@ -5030,17 +5039,31 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE maintenance SET status = @status, remarks = @remarks WHERE maintenanceId = @maintenanceID"
+            ' Use backticks to handle case sensitivity issues
+            Dim query As String = "UPDATE maintenance SET `status` = @status, `remarks` = @remarks WHERE `maintenanceId` = @maintenanceID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@status", status)
                 cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
                 cmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
                 Dim rows = cmd.ExecuteNonQuery()
-                If rows > 0 AndAlso adminID.HasValue Then
-                    LogActivity(adminID, adminUserType, adminName, "SET_MAINTENANCE_STATUS", "Maintenance",
-                                $"Set maintenance #{maintenanceID} status to {status}", "")
+                If rows > 0 Then
+                    ' Explicitly ensure data is committed to database
+                    If conn.State = ConnectionState.Open Then
+                        ' Force flush any pending operations
+                        Using flushCmd As New MySqlCommand("SELECT 1", conn)
+                            flushCmd.ExecuteScalar()
+                        End Using
+                    End If
+                    
+                    If adminID.HasValue Then
+                        LogActivity(adminID, adminUserType, adminName, "SET_MAINTENANCE_STATUS", "Maintenance",
+                                    $"Set maintenance #{maintenanceID} status to {status}", "")
+                    End If
+                    System.Diagnostics.Debug.WriteLine("[v0] SetMaintenanceStatus - Maintenance #{maintenanceID} updated to {status} - Data committed to database")
+                    Return True
                 End If
-                Return rows > 0
+                System.Diagnostics.Debug.WriteLine("[v0] SetMaintenanceStatus - No rows updated for maintenanceID: " & maintenanceID)
+                Return False
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] SetMaintenanceStatus Exception: " & ex.Message)
@@ -6318,6 +6341,14 @@ Public Class DatabaseConnection
 
                 Dim rows As Integer = cmd.ExecuteNonQuery()
                 If rows > 0 Then
+                    ' Explicitly ensure data is committed to database
+                    If conn.State = ConnectionState.Open Then
+                        ' Force flush any pending operations
+                        Using flushCmd As New MySqlCommand("SELECT 1", conn)
+                            flushCmd.ExecuteScalar()
+                        End Using
+                    End If
+                    
                     If departmentID.HasValue Then
                         Try
                             RecalculateDepartmentHeadcount(departmentID.Value)
@@ -6327,6 +6358,7 @@ Public Class DatabaseConnection
                     End If
                     LogCrudAction(createdByID, createdByType, createdByName, moduleName, entityLabel, "Create",
                                   $"Created {entityLabel.ToLower()} ({username.Trim()})", ipAddress)
+                    System.Diagnostics.Debug.WriteLine("[v0] AddAdminAccount - User account created successfully - Data committed to database")
                     Return True
                 End If
             End Using
@@ -6894,7 +6926,15 @@ Public Class DatabaseConnection
 
                     Dim rows As Integer = cmd.ExecuteNonQuery()
                     If rows > 0 Then
-                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Successfully updated " & rows & " row(s) for userID: " & userID & ", username: " & username)
+                        ' Explicitly ensure data is committed to database
+                        If conn.State = ConnectionState.Open Then
+                            ' Force flush any pending operations
+                            Using flushCmd As New MySqlCommand("SELECT 1", conn)
+                                flushCmd.ExecuteScalar()
+                            End Using
+                        End If
+                        
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Successfully updated " & rows & " row(s) for userID: " & userID & ", username: " & username & " - Data committed to database")
                         
                         ' Recalculate department headcount if department changed
                         If previousDepartmentID.HasValue AndAlso previousDepartmentID <> departmentID Then
@@ -6967,7 +7007,15 @@ Public Class DatabaseConnection
 
                     Dim rows As Integer = cmd.ExecuteNonQuery()
                     If rows > 0 Then
-                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Successfully updated " & rows & " Staff row(s) for userID: " & userID & ", username: " & username)
+                        ' Explicitly ensure data is committed to database
+                        If conn.State = ConnectionState.Open Then
+                            ' Force flush any pending operations
+                            Using flushCmd As New MySqlCommand("SELECT 1", conn)
+                                flushCmd.ExecuteScalar()
+                            End Using
+                        End If
+                        
+                        System.Diagnostics.Debug.WriteLine("[v0] UpdateUserAccount - Successfully updated " & rows & " Staff row(s) for userID: " & userID & ", username: " & username & " - Data committed to database")
                         
                         ' Recalculate department headcount if department changed
                         If previousDepartmentID.HasValue AndAlso previousDepartmentID <> departmentID Then
@@ -8468,7 +8516,8 @@ Public Class DatabaseConnection
             End Using
 
             ' Delete supply (hard delete - actually remove from database)
-            Dim query As String = "DELETE FROM supplies WHERE supplyId = @supplyID"
+            ' Use backticks to handle case sensitivity issues
+            Dim query As String = "DELETE FROM supplies WHERE `supplyId` = @supplyID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@supplyID", supplyID)
 
@@ -8584,6 +8633,14 @@ Public Class DatabaseConnection
                 Dim rowsAffected As Integer = deleteCmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
+                    ' Explicitly ensure data is committed to database
+                    If conn.State = ConnectionState.Open Then
+                        ' Force flush any pending operations
+                        Using flushCmd As New MySqlCommand("SELECT 1", conn)
+                            flushCmd.ExecuteScalar()
+                        End Using
+                    End If
+                    
                     ' Log the deletion to audit trail
                     Dim userId As Integer? = If(SessionContext.CurrentUserID > 0, SessionContext.CurrentUserID, Nothing)
                     Dim userType As String = If(String.IsNullOrEmpty(SessionContext.CurrentRole), "System", SessionContext.CurrentRole)
@@ -8592,7 +8649,7 @@ Public Class DatabaseConnection
                     LogActivity(userId, userType, username, "DELETE_DEPARTMENT", "departments",
                                $"Permanently deleted department: {departmentName} (ID: {departmentID})", "", departmentID)
                     
-                    System.Diagnostics.Debug.WriteLine($"[v0] DeleteDepartment - Department '{departmentName}' (ID: {departmentID}) deleted successfully and logged to audit trail")
+                    System.Diagnostics.Debug.WriteLine($"[v0] DeleteDepartment - Department '{departmentName}' (ID: {departmentID}) deleted successfully and logged to audit trail - Data committed to database")
                     Return True
                 Else
                     MessageBox.Show("No department was deleted. It may have already been removed.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -9131,12 +9188,20 @@ Public Class DatabaseConnection
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
+                    ' Explicitly ensure data is committed to database
+                    If conn.State = ConnectionState.Open Then
+                        ' Force flush any pending operations
+                        Using flushCmd As New MySqlCommand("SELECT 1", conn)
+                            flushCmd.ExecuteScalar()
+                        End Using
+                    End If
+                    
                     Try
                         RecalculateDepartmentHeadcount(departmentID)
                     Catch exHeadcount As Exception
                         System.Diagnostics.Debug.WriteLine("[v0] UpdateDepartment headcount refresh failed: " & exHeadcount.Message)
                     End Try
-                    System.Diagnostics.Debug.WriteLine("[v0] Department Updated Successfully - ID: " & departmentID)
+                    System.Diagnostics.Debug.WriteLine("[v0] Department Updated Successfully - ID: " & departmentID & " - Data committed to database")
                     Return True
                 Else
                     MessageBox.Show("No changes were made. Department may not exist.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)

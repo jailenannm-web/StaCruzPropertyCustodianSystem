@@ -138,11 +138,12 @@ Public Class UC_MaintenanceManagement
                                                                  Return a.Contains(searchLower) OrElse b.Contains(searchLower) OrElse c.Contains(searchLower) OrElse d.Contains(searchLower)
                                                              End Function)
 
-            If filtered Is Nothing Then
+            Dim filteredList = filtered.ToList()
+            If filteredList Is Nothing OrElse filteredList.Count = 0 Then
                 DataGridView1.DataSource = Nothing
                 ttlMaintenancemanagement.Text = "0"
             Else
-                Dim dt As DataTable = filtered.CopyToDataTable()
+                Dim dt As DataTable = filteredList.CopyToDataTable()
                 DataGridView1.DataSource = dt
                 ttlMaintenancemanagement.Text = dt.Rows.Count.ToString()
             End If

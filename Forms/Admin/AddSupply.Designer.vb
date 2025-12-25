@@ -392,9 +392,12 @@ Partial Class AddSupply
         'unitCost
         '
         Me.unitCost.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.unitCost.DecimalPlaces = 2
         Me.unitCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.unitCost.Location = New System.Drawing.Point(239, 41)
         Me.unitCost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.unitCost.Maximum = New Decimal(New Integer() {999999999, 0, 0, 0})
+        Me.unitCost.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.unitCost.Name = "unitCost"
         Me.unitCost.Size = New System.Drawing.Size(240, 24)
         Me.unitCost.TabIndex = 76
@@ -402,9 +405,12 @@ Partial Class AddSupply
         'totalCost
         '
         Me.totalCost.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.totalCost.DecimalPlaces = 2
         Me.totalCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.totalCost.Location = New System.Drawing.Point(239, 92)
         Me.totalCost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.totalCost.Maximum = New Decimal(New Integer() {999999999, 0, 0, 0})
+        Me.totalCost.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.totalCost.Name = "totalCost"
         Me.totalCost.Size = New System.Drawing.Size(240, 24)
         Me.totalCost.TabIndex = 77

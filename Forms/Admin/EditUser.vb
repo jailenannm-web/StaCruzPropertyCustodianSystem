@@ -34,6 +34,9 @@ Public Class EditUser
             ApplyPermissionState()
         End If
         
+        ' Load location dropdowns first to ensure they're available
+        LoadLocationDropdowns()
+        
         ' Check if address values were stored in Tag and need to be set now
         If Me.province.Tag IsNot Nothing Then
             Dim provinceVal As String = Me.province.Tag.ToString()
@@ -117,28 +120,59 @@ Public Class EditUser
         RemoveHandler municipal.SelectedIndexChanged, AddressOf Municipality_SelectedIndexChanged
         
         Try
-            ' Set province first
-            SetComboValueWithDataRow(Me.province, provinceValue)
+            ' Ensure province dropdown is loaded first
+            If Me.province.DataSource Is Nothing Then
+                LoadLocationDropdowns()
+            End If
             
-            ' Load municipalities for selected province
+            ' Set province first
             If Not String.IsNullOrEmpty(provinceValue) Then
+                SetComboValueWithDataRow(Me.province, provinceValue)
+                
+                ' Wait a moment for the selection to register, then load municipalities
+                System.Threading.Thread.Sleep(100)
+                Application.DoEvents()
+                
+                ' Load municipalities for selected province
                 Dim municipalitiesTable As DataTable = DatabaseConnection.GetMunicipalities(provinceValue)
                 If municipalitiesTable IsNot Nothing AndAlso municipalitiesTable.Rows.Count > 0 Then
+                    municipal.DataSource = Nothing
+                    municipal.Items.Clear()
                     municipal.DataSource = municipalitiesTable
                     municipal.DisplayMember = "municipality_name"
                     municipal.ValueMember = "municipality_name"
-                    SetComboValueWithDataRow(Me.municipal, municipalityValue)
-                End If
-            End If
-            
-            ' Load barangays for selected municipality
-            If Not String.IsNullOrEmpty(municipalityValue) Then
-                Dim barangaysTable As DataTable = DatabaseConnection.GetBarangays(municipalityValue)
-                If barangaysTable IsNot Nothing AndAlso barangaysTable.Rows.Count > 0 Then
-                    barangay.DataSource = barangaysTable
-                    barangay.DisplayMember = "barangay_name"
-                    barangay.ValueMember = "barangay_name"
-                    SetComboValueWithDataRow(Me.barangay, barangayValue)
+                    
+                    ' Wait a moment for the DataSource to be set
+                    System.Threading.Thread.Sleep(100)
+                    Application.DoEvents()
+                    
+                    ' Set municipality value
+                    If Not String.IsNullOrEmpty(municipalityValue) Then
+                        SetComboValueWithDataRow(Me.municipal, municipalityValue)
+                        
+                        ' Wait a moment for the selection to register, then load barangays
+                        System.Threading.Thread.Sleep(100)
+                        Application.DoEvents()
+                        
+                        ' Load barangays for selected municipality
+                        Dim barangaysTable As DataTable = DatabaseConnection.GetBarangays(municipalityValue)
+                        If barangaysTable IsNot Nothing AndAlso barangaysTable.Rows.Count > 0 Then
+                            barangay.DataSource = Nothing
+                            barangay.Items.Clear()
+                            barangay.DataSource = barangaysTable
+                            barangay.DisplayMember = "barangay_name"
+                            barangay.ValueMember = "barangay_name"
+                            
+                            ' Wait a moment for the DataSource to be set
+                            System.Threading.Thread.Sleep(100)
+                            Application.DoEvents()
+                            
+                            ' Set barangay value
+                            If Not String.IsNullOrEmpty(barangayValue) Then
+                                SetComboValueWithDataRow(Me.barangay, barangayValue)
+                            End If
+                        End If
+                    End If
                 End If
             End If
         Finally
@@ -491,6 +525,29 @@ Public Class EditUser
             End If
             Return If(String.IsNullOrWhiteSpace(fallback), "", fallback)
         End If
+        
+        ' Handle DataRowView case - extract the actual value
+        If TypeOf combo.SelectedItem Is DataRowView Then
+            Dim drv As DataRowView = CType(combo.SelectedItem, DataRowView)
+            ' Try to get the value using ValueMember first
+            If Not String.IsNullOrEmpty(combo.ValueMember) AndAlso drv.Row.Table.Columns.Contains(combo.ValueMember) Then
+                Return drv.Row(combo.ValueMember).ToString()
+            End If
+            ' Fallback to DisplayMember
+            If Not String.IsNullOrEmpty(combo.DisplayMember) AndAlso drv.Row.Table.Columns.Contains(combo.DisplayMember) Then
+                Return drv.Row(combo.DisplayMember).ToString()
+            End If
+            ' If neither works, get first column value
+            If drv.Row.Table.Columns.Count > 0 Then
+                Return drv.Row(0).ToString()
+            End If
+        End If
+        
+        ' Try SelectedValue as fallback
+        If combo.SelectedValue IsNot Nothing Then
+            Return combo.SelectedValue.ToString()
+        End If
+        
         Return combo.SelectedItem.ToString()
     End Function
 
@@ -585,10 +642,6 @@ Public Class EditUser
     End Sub
 
     Private Sub uc_um_edituser_Paint(sender As Object, e As PaintEventArgs) Handles uc_um_edituser.Paint
-
-    End Sub
-
-    Private Sub EditUser_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

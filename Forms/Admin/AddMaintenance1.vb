@@ -17,10 +17,6 @@ Public Class AddMaintenance1
         EnsureModifyPermission()
     End Sub
 
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        NavigateBack()
-    End Sub
-    
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         NavigateBack()
     End Sub

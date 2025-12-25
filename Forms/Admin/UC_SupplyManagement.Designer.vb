@@ -295,10 +295,15 @@ Partial Class UC_SupplyManagement
         '
         'supplymanagementsearchbar
         '
-        Me.supplymanagementsearchbar.Location = New System.Drawing.Point(0, 0)
+        Me.supplymanagementsearchbar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supplymanagementsearchbar.Font = New System.Drawing.Font("Poppins", 10.0!, System.Drawing.FontStyle.Regular)
+        Me.supplymanagementsearchbar.Location = New System.Drawing.Point(527, 82)
+        Me.supplymanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
         Me.supplymanagementsearchbar.Name = "supplymanagementsearchbar"
-        Me.supplymanagementsearchbar.Size = New System.Drawing.Size(100, 22)
-        Me.supplymanagementsearchbar.TabIndex = 2
+        Me.supplymanagementsearchbar.Size = New System.Drawing.Size(410, 27)
+        Me.supplymanagementsearchbar.TabIndex = 178
+        Me.supplymanagementsearchbar.Text = "Search supplies..."
+        Me.supplymanagementsearchbar.ForeColor = System.Drawing.Color.Gray
         '
         'PictureBox1
         '
