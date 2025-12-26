@@ -159,40 +159,10 @@ Public Class UC_UserManagement
                 End If
 
                 ' ===== BUILD FULL ADDRESS FROM PROVINCE, MUNICIPALITY, BARANGAY =====
-                ' Ensure we get string values, not DataRowView objects
-                Dim province As String = ""
-                Dim municipality As String = ""
-                Dim barangay As String = ""
-                
-                ' Safely extract province value
-                If record.Table.Columns.Contains("province") AndAlso Not IsDBNull(record("province")) Then
-                    Dim provValue = record("province")
-                    If TypeOf provValue Is DataRowView Then
-                        province = CType(provValue, DataRowView).Row(0).ToString()
-                    Else
-                        province = provValue.ToString()
-                    End If
-                End If
-                
-                ' Safely extract municipality value
-                If record.Table.Columns.Contains("municipal") AndAlso Not IsDBNull(record("municipal")) Then
-                    Dim municValue = record("municipal")
-                    If TypeOf municValue Is DataRowView Then
-                        municipality = CType(municValue, DataRowView).Row(0).ToString()
-                    Else
-                        municipality = municValue.ToString()
-                    End If
-                End If
-                
-                ' Safely extract barangay value
-                If record.Table.Columns.Contains("barangay") AndAlso Not IsDBNull(record("barangay")) Then
-                    Dim brgyValue = record("barangay")
-                    If TypeOf brgyValue Is DataRowView Then
-                        barangay = CType(brgyValue, DataRowView).Row(0).ToString()
-                    Else
-                        barangay = brgyValue.ToString()
-                    End If
-                End If
+                ' Extract address components as strings
+                Dim province As String = SafeValue(record, "province")
+                Dim municipality As String = SafeValue(record, "municipal")
+                Dim barangay As String = SafeValue(record, "barangay")
                 
                 Dim addressParts As New List(Of String)
                 If Not String.IsNullOrWhiteSpace(barangay) Then addressParts.Add(barangay)
@@ -587,54 +557,18 @@ Public Class UC_UserManagement
                 End If
 
                 ' Build full address for search results - use same column names as RefreshUserTable
-                ' Ensure we get string values, not DataRowView objects
-                Dim province As String = ""
-                Dim municipality As String = ""
-                Dim barangay As String = ""
-                
-                ' Safely extract province value
-                If record.Table.Columns.Contains("province") AndAlso Not IsDBNull(record("province")) Then
-                    Dim provValue = record("province")
-                    If TypeOf provValue Is DataRowView Then
-                        province = CType(provValue, DataRowView).Row(0).ToString()
-                    Else
-                        province = provValue.ToString()
-                    End If
-                ElseIf record.Table.Columns.Contains("province_city") AndAlso Not IsDBNull(record("province_city")) Then
-                    Dim provValue = record("province_city")
-                    If TypeOf provValue Is DataRowView Then
-                        province = CType(provValue, DataRowView).Row(0).ToString()
-                    Else
-                        province = provValue.ToString()
-                    End If
+                ' Extract address components as strings
+                Dim province As String = SafeValue(record, "province")
+                If String.IsNullOrEmpty(province) Then
+                    province = SafeValue(record, "province_city")
                 End If
                 
-                ' Safely extract municipality value
-                If record.Table.Columns.Contains("municipal") AndAlso Not IsDBNull(record("municipal")) Then
-                    Dim municValue = record("municipal")
-                    If TypeOf municValue Is DataRowView Then
-                        municipality = CType(municValue, DataRowView).Row(0).ToString()
-                    Else
-                        municipality = municValue.ToString()
-                    End If
-                ElseIf record.Table.Columns.Contains("municipality") AndAlso Not IsDBNull(record("municipality")) Then
-                    Dim municValue = record("municipality")
-                    If TypeOf municValue Is DataRowView Then
-                        municipality = CType(municValue, DataRowView).Row(0).ToString()
-                    Else
-                        municipality = municValue.ToString()
-                    End If
+                Dim municipality As String = SafeValue(record, "municipal")
+                If String.IsNullOrEmpty(municipality) Then
+                    municipality = SafeValue(record, "municipality")
                 End If
                 
-                ' Safely extract barangay value
-                If record.Table.Columns.Contains("barangay") AndAlso Not IsDBNull(record("barangay")) Then
-                    Dim brgyValue = record("barangay")
-                    If TypeOf brgyValue Is DataRowView Then
-                        barangay = CType(brgyValue, DataRowView).Row(0).ToString()
-                    Else
-                        barangay = brgyValue.ToString()
-                    End If
-                End If
+                Dim barangay As String = SafeValue(record, "barangay")
                 
                 Dim addressParts As New List(Of String)
                 If Not String.IsNullOrWhiteSpace(barangay) Then addressParts.Add(barangay)

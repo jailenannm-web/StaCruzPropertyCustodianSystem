@@ -40,7 +40,6 @@ Public Class AddProperty
         LoadSuppliers()
 
         acquisitionDate.Value = Date.Today
-        warrantyExpirationDate.Value = Date.Today.AddYears(1)
     End Sub
 
     Private Sub LoadSuppliers()
@@ -120,7 +119,64 @@ Public Class AddProperty
         ' Reload users when department changes
         Dim deptID As Integer? = ResolveDepartmentId()
         LoadCustodians(deptID)
+        
+        ' Auto-fill location based on selected department
+        UpdateLocationFromDepartment()
     End Sub
+    
+    Private Sub UpdateLocationFromDepartment()
+        Try
+            If departmentDirectory Is Nothing OrElse departmentDirectory.Rows.Count = 0 Then Return
+            
+            Dim deptID As Integer? = ResolveDepartmentId()
+            If Not deptID.HasValue Then Return
+            
+            ' Find the selected department row
+            Dim selectedDept = departmentDirectory.AsEnumerable().
+                FirstOrDefault(Function(r) Convert.ToInt32(r("department_id")) = deptID.Value)
+            
+            If selectedDept IsNot Nothing Then
+                ' Get location from department (column might be 'location' or 'building')
+                Dim deptLocation As String = ""
+                If selectedDept.Table.Columns.Contains("location") AndAlso Not selectedDept.IsNull("location") Then
+                    deptLocation = selectedDept("location").ToString()
+                ElseIf selectedDept.Table.Columns.Contains("building") AndAlso Not selectedDept.IsNull("building") Then
+                    deptLocation = selectedDept("building").ToString()
+                End If
+                
+                ' Note: AddProperty doesn't have a location textbox in the UI
+                ' The location will be used when saving
+                System.Diagnostics.Debug.WriteLine("[v0] Department location: " & deptLocation)
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] UpdateLocationFromDepartment Exception: " & ex.Message)
+        End Try
+    End Sub
+    
+    Private Function GetDepartmentLocation() As String
+        Try
+            If departmentDirectory Is Nothing OrElse departmentDirectory.Rows.Count = 0 Then Return "Main Building"
+            
+            Dim deptID As Integer? = ResolveDepartmentId()
+            If Not deptID.HasValue Then Return "Main Building"
+            
+            ' Find the selected department row
+            Dim selectedDept = departmentDirectory.AsEnumerable().
+                FirstOrDefault(Function(r) Convert.ToInt32(r("department_id")) = deptID.Value)
+            
+            If selectedDept IsNot Nothing Then
+                ' Get location from department
+                If selectedDept.Table.Columns.Contains("location") AndAlso Not selectedDept.IsNull("location") Then
+                    Return selectedDept("location").ToString()
+                ElseIf selectedDept.Table.Columns.Contains("building") AndAlso Not selectedDept.IsNull("building") Then
+                    Return selectedDept("building").ToString()
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetDepartmentLocation Exception: " & ex.Message)
+        End Try
+        Return "Main Building"
+    End Function
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
@@ -133,7 +189,7 @@ Public Class AddProperty
         Dim departmentId As Integer? = ResolveDepartmentId()
         Dim custodianId As Integer? = ResolveCustodianId()
 
-        ' Parse acquisition cost
+        ' Parse acquisition cost (from totalCost field which is labeled "Acquisition Cost")
         Dim acquisitionCostValue As Decimal = 0
         If Not String.IsNullOrWhiteSpace(totalCost.Text) Then
             If Not Decimal.TryParse(totalCost.Text.Trim(), acquisitionCostValue) Then
@@ -149,29 +205,31 @@ Public Class AddProperty
             descriptionValue = description.Text.Trim()
         End If
 
-        ' Get property number if available
-        Dim propertyNumberValue As String = ""
-        If description IsNot Nothing Then
-            propertyNumberValue = description.Text.Trim()
+        ' Get unit of measure
+        Dim unitOfMeasureValue As String = ""
+        If unitOfMeasure IsNot Nothing Then
+            unitOfMeasureValue = unitOfMeasure.Text.Trim()
         End If
+
+        ' Get source of funds
+        Dim sourceOfFundsValue As String = GetComboValue(sourceOfFunds, "")
 
         Try
             Dim success = DatabaseConnection.AddProperty(
-                propertyId.Text.Trim(),                            ' propertyName
-                GetComboValue(category, "Others"),                       ' category
-                descriptionValue,                                        ' description
-                serialNumber.Text.Trim(),                                   ' serialNumber
-                acquisitionDate.Value,                                  ' acquisitionDate
-                acquisitionCostValue,                                   ' acquisitionCost
-                "",                                                      ' supplierName (not in current schema)
-                "",                                                      ' supplierContact (not in current schema)
-                GetComboValue(condition, "Good"),                       ' conditionStatus
-                If(ResolveDepartmentId().HasValue, "Department Location", "Main Building"), ' location (default since no input field)
-                custodianId,                                             ' custodianID
-                departmentId,                                            ' departmentID
-                warrantyExpirationDate.Value.ToShortDateString(),       ' warrantyDetails
-                Nothing,                                                 ' lifeSpan
-                propertyNumberValue                                      ' propertyNumber
+                propertyId.Text.Trim(),                            ' itemName (propertyId field is actually item name)
+                GetComboValue(category, "Others"),                 ' category
+                descriptionValue,                                  ' description
+                unitOfMeasureValue,                                ' unitOfMeasure
+                serialNumber.Text.Trim(),                          ' serialNumber
+                acquisitionDate.Value,                             ' acquisitionDate
+                acquisitionCostValue,                              ' acquisitionCost
+                "",                                                ' supplierName (not in current schema)
+                "",                                                ' supplierContact (not in current schema)
+                GetComboValue(condition, "Good"),                  ' conditionStatus
+                GetDepartmentLocation(), ' location from department
+                custodianId,                                       ' custodianID
+                departmentId,                                      ' departmentID
+                sourceOfFundsValue                                 ' sourceOfFunds
             )
 
             If success Then

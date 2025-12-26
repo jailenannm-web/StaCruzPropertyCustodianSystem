@@ -701,22 +701,40 @@ Public Class UC_PropertyManagement1
             Dim createdAt As Date = ParseDateCell(If(propertyRow.Table.Columns.Contains("createdAt"), propertyRow("createdAt"), If(propertyRow.Table.Columns.Contains("created_at"), propertyRow("created_at"), Nothing)), Date.Now)
             Dim updatedAt As Date = ParseDateCell(If(propertyRow.Table.Columns.Contains("updatedAt"), propertyRow("updatedAt"), If(propertyRow.Table.Columns.Contains("updated_at"), propertyRow("updated_at"), Nothing)), Date.Now)
 
+            ' Get additional fields from data
+            Dim description As String = If(propertyRow.Table.Columns.Contains("description") AndAlso Not IsDBNull(propertyRow("description")), propertyRow("description").ToString(), "")
+            Dim unitOfMeasure As String = If(propertyRow.Table.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(propertyRow("unitOfMeasure")), propertyRow("unitOfMeasure").ToString(), "")
+            Dim propertyNumber As String = If(propertyRow.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(propertyRow("propertyNumber")), propertyRow("propertyNumber").ToString(), "")
+            Dim internalCodes As String = If(propertyRow.Table.Columns.Contains("internalCodes") AndAlso Not IsDBNull(propertyRow("internalCodes")), propertyRow("internalCodes").ToString(), "")
+            Dim totalCost As Decimal = If(propertyRow.Table.Columns.Contains("totalCost") AndAlso Not IsDBNull(propertyRow("totalCost")), Convert.ToDecimal(propertyRow("totalCost")), cost)
+            Dim sourceOfFunds As String = If(propertyRow.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(propertyRow("sourceOfFunds")), propertyRow("sourceOfFunds").ToString(), "")
+            
+            ' Get departmentId
+            Dim departmentIDValueForEdit As Integer? = Nothing
+            If propertyRow.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(propertyRow("departmentId")) Then
+                Dim tempDeptID As Integer
+                If Integer.TryParse(propertyRow("departmentId").ToString(), tempDeptID) Then
+                    departmentIDValueForEdit = tempDeptID
+                End If
+            End If
+            
             editForm.LoadPropertyData(
                 propertyID,
                 propName,
                 propCategory,
                 propSerial,
-                propSupplier,
+                description,
+                unitOfMeasure,
                 propCondition,
                 cost,
                 datePurchased,
-                warrantyExp,
-                assignedEmployee,
-                assignedDepartment,
+                departmentIDValueForEdit,
                 loc,
                 st,
-                createdAt,
-                updatedAt
+                propertyNumber,
+                internalCodes,
+                totalCost,
+                sourceOfFunds
             )
         Else
             ' Fallback to DataGridView cells if originalData is not available
@@ -732,22 +750,32 @@ Public Class UC_PropertyManagement1
             Dim loc As String = If(propertyManagementGrid.Columns.Contains("location") AndAlso row.Cells("location").Value IsNot Nothing, row.Cells("location").Value.ToString(), "")
             Dim st As String = If(propertyManagementGrid.Columns.Contains("status") AndAlso row.Cells("status").Value IsNot Nothing, row.Cells("status").Value.ToString(), "")
 
+            ' Get additional fields from grid
+            Dim description As String = If(propertyManagementGrid.Columns.Contains("description") AndAlso row.Cells("description").Value IsNot Nothing, row.Cells("description").Value.ToString(), "")
+            Dim unitOfMeasure As String = If(propertyManagementGrid.Columns.Contains("unitOfMeasure") AndAlso row.Cells("unitOfMeasure").Value IsNot Nothing, row.Cells("unitOfMeasure").Value.ToString(), "")
+            Dim propertyNumber As String = If(propertyManagementGrid.Columns.Contains("propertyNumber") AndAlso row.Cells("propertyNumber").Value IsNot Nothing, row.Cells("propertyNumber").Value.ToString(), "")
+            Dim internalCodes As String = If(propertyManagementGrid.Columns.Contains("internalCodes") AndAlso row.Cells("internalCodes").Value IsNot Nothing, row.Cells("internalCodes").Value.ToString(), "")
+            Dim totalCost As Decimal = If(propertyManagementGrid.Columns.Contains("totalCost") AndAlso row.Cells("totalCost").Value IsNot Nothing, Convert.ToDecimal(row.Cells("totalCost").Value), cost)
+            Dim sourceOfFunds As String = If(propertyManagementGrid.Columns.Contains("sourceOfFunds") AndAlso row.Cells("sourceOfFunds").Value IsNot Nothing, row.Cells("sourceOfFunds").Value.ToString(), "")
+            Dim departmentIDValue As Integer? = Nothing
+            
             editForm.LoadPropertyData(
                 propertyID,
                 propName,
                 propCategory,
                 propSerial,
-                "", ' Supplier not in grid
+                description,
+                unitOfMeasure,
                 propCondition,
                 cost,
                 datePurchased,
-                warrantyExp,
-                assignedEmployee,
-                assignedDepartment,
+                departmentIDValue,
                 loc,
                 st,
-                Date.Now,
-                Date.Now
+                propertyNumber,
+                internalCodes,
+                totalCost,
+                sourceOfFunds
             )
         End If
 

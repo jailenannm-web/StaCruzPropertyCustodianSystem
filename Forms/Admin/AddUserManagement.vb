@@ -406,13 +406,35 @@ Public Class AddUserManagement
 
     Private Shared Function GetComboValue(combo As ComboBox, Optional fallback As String = "") As String
         If combo Is Nothing Then Return fallback
+        
         If combo.SelectedIndex >= 0 AndAlso combo.SelectedItem IsNot Nothing Then
+            ' Handle DataRowView case - extract the actual value
+            If TypeOf combo.SelectedItem Is DataRowView Then
+                Dim drv As DataRowView = CType(combo.SelectedItem, DataRowView)
+                ' Try to get the value using DisplayMember first (for location fields)
+                If Not String.IsNullOrEmpty(combo.DisplayMember) AndAlso drv.Row.Table.Columns.Contains(combo.DisplayMember) Then
+                    Return drv.Row(combo.DisplayMember).ToString()
+                End If
+                ' Fallback to ValueMember
+                If Not String.IsNullOrEmpty(combo.ValueMember) AndAlso drv.Row.Table.Columns.Contains(combo.ValueMember) Then
+                    Return drv.Row(combo.ValueMember).ToString()
+                End If
+                ' If neither works, get first column value
+                If drv.Row.Table.Columns.Count > 0 Then
+                    Return drv.Row(0).ToString()
+                End If
+            End If
+            
+            ' For non-DataRowView items (strings, etc.)
             Return combo.SelectedItem.ToString()
         End If
+        
+        ' Try manual text entry
         Dim manualValue As String = combo.Text
         If Not String.IsNullOrWhiteSpace(manualValue) Then
             Return manualValue.Trim()
         End If
+        
         Return If(String.IsNullOrWhiteSpace(fallback), "", fallback)
     End Function
 

@@ -2710,11 +2710,10 @@ Public Class DatabaseConnection
     ''' Add new property to database
     ''' </summary>
     Public Shared Function AddProperty(propertyName As String, category As String, description As String,
-                                       serialNumber As String, acquisitionDate As Date, acquisitionCost As Decimal,
-                                       supplierName As String, supplierContact As String, conditionStatus As String,
-                                       location As String, custodianID As Integer?, departmentID As Integer?,
-                                       warrantyDetails As String, lifeSpan As Integer?,
-                                       Optional propertyNumber As String = "") As Boolean
+                                       unitOfMeasure As String, serialNumber As String, acquisitionDate As Date, 
+                                       acquisitionCost As Decimal, supplierName As String, supplierContact As String, 
+                                       conditionStatus As String, location As String, custodianID As Integer?, 
+                                       departmentID As Integer?, sourceOfFunds As String) As Boolean
         If Not DemandPermission(SessionContext.ModulePermission.ModifyProperties, "add properties") Then
             Return False
         End If
@@ -2734,35 +2733,50 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            ' Calculate depreciation value if life span is provided
-            Dim depreciationValue As Decimal = 0
-            If lifeSpan.HasValue AndAlso lifeSpan.Value > 0 AndAlso acquisitionCost > 0 Then
-                ' Simple straight-line depreciation: (acquisition_cost / life_span) * years_used
-                ' For new property, years_used = 0, so depreciation = 0 initially
-                depreciationValue = 0
-            End If
+            ' Auto-generate property number: PROP-XXXXXX format
+            Dim finalPropertyNumber As String = ""
+            Dim maxPropNum As Integer = 0
+            Try
+                Using maxCmd As New MySqlCommand("SELECT COALESCE(MAX(CAST(SUBSTRING(propertyNumber, 6) AS UNSIGNED)), 0) FROM properties WHERE propertyNumber LIKE 'PROP-%'", conn)
+                    Dim maxVal As Object = maxCmd.ExecuteScalar()
+                    If maxVal IsNot Nothing AndAlso Not IsDBNull(maxVal) Then
+                        maxPropNum = Convert.ToInt32(maxVal)
+                    End If
+                End Using
+                finalPropertyNumber = "PROP-" & (maxPropNum + 1).ToString("D6")
+            Catch
+                ' Fallback to timestamp-based
+                finalPropertyNumber = "PROP-" & DateTime.Now.ToString("yyyyMMddHHmmss")
+            End Try
 
-            ' Auto-generate property number and internal code if not provided
-            Dim finalPropertyNumber As String = propertyNumber
-            If String.IsNullOrWhiteSpace(finalPropertyNumber) Then
-                ' Generate property number: PROP-XXXXXX format
-                Dim maxPropNum As Integer = 0
-                Try
-                    Using maxCmd As New MySqlCommand("SELECT COALESCE(MAX(CAST(SUBSTRING(propertyNumber, 6) AS UNSIGNED)), 0) FROM properties WHERE propertyNumber LIKE 'PROP-%'", conn)
-                        Dim maxVal As Object = maxCmd.ExecuteScalar()
-                        If maxVal IsNot Nothing AndAlso Not IsDBNull(maxVal) Then
-                            maxPropNum = Convert.ToInt32(maxVal)
-                        End If
-                    End Using
-                    finalPropertyNumber = "PROP-" & (maxPropNum + 1).ToString("D6")
-                Catch
-                    ' Fallback to timestamp-based
-                    finalPropertyNumber = "PROP-" & DateTime.Now.ToString("yyyyMMddHHmmss")
-                End Try
-            End If
+            ' Auto-generate internal code based on category and sequence
+            Dim internalCode As String = ""
+            Try
+                ' Get category prefix (first 3 letters uppercase)
+                Dim categoryPrefix As String = If(category.Length >= 3, category.Substring(0, 3).ToUpper(), category.ToUpper())
+                
+                ' Get current year
+                Dim yearCode As String = DateTime.Now.Year.ToString()
+                
+                ' Get sequence number for this category this year
+                Dim sequenceNum As Integer = 0
+                Using seqCmd As New MySqlCommand("SELECT COUNT(*) FROM properties WHERE category = @category AND YEAR(acquisitionDate) = YEAR(NOW())", conn)
+                    seqCmd.Parameters.AddWithValue("@category", category)
+                    Dim seqVal As Object = seqCmd.ExecuteScalar()
+                    If seqVal IsNot Nothing AndAlso Not IsDBNull(seqVal) Then
+                        sequenceNum = Convert.ToInt32(seqVal) + 1
+                    End If
+                End Using
+                
+                ' Format: CAT-YYYY-NNNN (e.g., FUR-2025-0001)
+                internalCode = categoryPrefix & "-" & yearCode & "-" & sequenceNum.ToString("D4")
+            Catch
+                ' Fallback to property number
+                internalCode = finalPropertyNumber
+            End Try
 
-            ' Generate internal code if property number is provided or generated
-            Dim internalCode As String = finalPropertyNumber ' Use property number as internal code
+            ' Calculate total cost (same as acquisition cost for new properties)
+            Dim totalCostValue As Decimal = acquisitionCost
 
             Dim query As String = "INSERT INTO properties (itemName, category, description, unitOfMeasure, serialNumber, propertyNumber, " &
                                  "acquisitionDate, acquisitionCost, totalCost, sourceOfFunds, `condition`, " &
@@ -2775,13 +2789,13 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@propertyName", propertyName)
                 cmd.Parameters.AddWithValue("@category", category)
                 cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
-                cmd.Parameters.AddWithValue("@unitOfMeasure", DBNull.Value) ' Can be added later if needed
+                cmd.Parameters.AddWithValue("@unitOfMeasure", If(String.IsNullOrEmpty(unitOfMeasure), DBNull.Value, unitOfMeasure))
                 cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrEmpty(serialNumber), DBNull.Value, serialNumber))
                 cmd.Parameters.AddWithValue("@propertyNumber", If(String.IsNullOrEmpty(finalPropertyNumber), DBNull.Value, finalPropertyNumber))
                 cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
                 cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
-                cmd.Parameters.AddWithValue("@totalCost", acquisitionCost) ' Default to same as acquisition cost
-                cmd.Parameters.AddWithValue("@sourceOfFunds", DBNull.Value) ' Can be added later if needed
+                cmd.Parameters.AddWithValue("@totalCost", totalCostValue)
+                cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrEmpty(sourceOfFunds), DBNull.Value, sourceOfFunds))
                 cmd.Parameters.AddWithValue("@conditionStatus", conditionStatus)
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
@@ -7792,10 +7806,10 @@ Public Class DatabaseConnection
     ''' Update existing property (ENHANCED)
     ''' </summary>
     Public Shared Function UpdateProperty(propertyID As Integer, propertyName As String, category As String,
-                                         description As String, serialNumber As String, conditionStatus As String,
-                                         location As String, custodianID As Integer?, departmentID As Integer?,
-                                         warrantyDetails As String, acquisitionDate As Date, acquisitionCost As Decimal,
-                                         supplierName As String, supplierContact As String, status As String) As Boolean
+                                         description As String, unitOfMeasure As String, serialNumber As String, 
+                                         conditionStatus As String, location As String, custodianID As Integer?, 
+                                         departmentID As Integer?, acquisitionDate As Date, acquisitionCost As Decimal,
+                                         sourceOfFunds As String, status As String) As Boolean
         ' SuperAdmin and Admin bypass all restrictions
         Dim isSuperAdminOrAdmin As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin()
         If Not isSuperAdminOrAdmin Then
@@ -7818,6 +7832,9 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
+            ' Calculate total cost (same as acquisition cost for properties without quantity)
+            Dim totalCostValue As Decimal = acquisitionCost
+
             Dim query As String = "UPDATE properties SET itemName = @propertyName, category = @category, " &
                                  "description = @description, unitOfMeasure = @unitOfMeasure, serialNumber = @serialNumber, `condition` = @conditionStatus, " &
                                  "location = @location, assignedTo = @custodianID, departmentId = @departmentID, " &
@@ -7830,7 +7847,7 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@propertyName", propertyName)
                 cmd.Parameters.AddWithValue("@category", category)
                 cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
-                cmd.Parameters.AddWithValue("@unitOfMeasure", DBNull.Value) ' Can be added later if needed
+                cmd.Parameters.AddWithValue("@unitOfMeasure", If(String.IsNullOrEmpty(unitOfMeasure), DBNull.Value, unitOfMeasure))
                 cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrEmpty(serialNumber), DBNull.Value, serialNumber))
                 cmd.Parameters.AddWithValue("@conditionStatus", conditionStatus)
                 cmd.Parameters.AddWithValue("@location", location)
@@ -7838,8 +7855,8 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
                 cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
                 cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
-                cmd.Parameters.AddWithValue("@totalCost", acquisitionCost) ' Default to same as acquisition cost
-                cmd.Parameters.AddWithValue("@sourceOfFunds", DBNull.Value) ' Can be added later if needed
+                cmd.Parameters.AddWithValue("@totalCost", totalCostValue)
+                cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrEmpty(sourceOfFunds), DBNull.Value, sourceOfFunds))
                 cmd.Parameters.AddWithValue("@status", status)
 
                 Dim result As Integer = cmd.ExecuteNonQuery()

@@ -34,6 +34,13 @@ Public Class EditUser
             ApplyPermissionState()
         End If
         
+        ' Check if department value was stored in Tag and set it now
+        If Me.departmentId IsNot Nothing AndAlso Me.departmentId.Tag IsNot Nothing Then
+            Dim deptIdValue As String = Me.departmentId.Tag.ToString()
+            Me.departmentId.Tag = Nothing
+            SetDepartmentValue(deptIdValue)
+        End If
+        
         ' Load location dropdowns first to ensure they're available
         LoadLocationDropdowns()
         
@@ -90,12 +97,25 @@ Public Class EditUser
         Me.passwordEncrypted.Text = password
         Me.username.Text = username
 
-        SetComboValue(suffixAdmin, suffixValue)
+        ' Set suffix - handle empty/null as "None"
+        Dim suffixToSet As String = If(String.IsNullOrWhiteSpace(suffixValue), "None", suffixValue)
+        SetComboValue(suffixAdmin, suffixToSet)
+        
         SetComboValue(positionAdmin, position)
         SetComboValue(role, userRole) ' This sets the role dropdown
         
-        ' Set department dropdown properly
-        SetDepartmentValue(departmentID)
+        ' Set department dropdown properly - ensure it's set AFTER LoadDepartmentOptions
+        ' Store the value to set after form is fully loaded
+        If departmentDirectory Is Nothing Then
+            ' Departments not yet loaded, will be loaded in EditUser_Load
+            ' Store value in Tag for later
+            If Me.departmentId IsNot Nothing Then
+                Me.departmentId.Tag = departmentID
+            End If
+        Else
+            ' Already loaded, set now
+            SetDepartmentValue(departmentID)
+        End If
         
         ' Store address values to set after dropdowns are loaded
         ' Set location dropdowns after ensuring they're populated
