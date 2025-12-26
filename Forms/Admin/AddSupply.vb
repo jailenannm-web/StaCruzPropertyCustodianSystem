@@ -33,78 +33,9 @@ Public Class AddSupply
 
         ' Load departments
         LoadDepartments()
-        
-        ' Load users for assignment
-        LoadUsers()
 
         ' Set default date to today
         dtpDateReceived.Value = Date.Today
-        
-        ' Dynamically create Assigned To control if it doesn't exist
-        CreateAssignedToControlIfNeeded()
-    End Sub
-    
-    Private Sub CreateAssignedToControlIfNeeded()
-        Try
-            ' Check if control already exists
-            Dim existingControls() As Control = Me.Controls.Find("cboAssignedTo", True)
-            If existingControls.Length > 0 Then
-                Return ' Control already exists
-            End If
-            
-            ' Find a reference control to position near (e.g., cboStockStatus)
-            Dim referenceControl As Control = Nothing
-            
-            ' Try to find stock status combo box
-            Dim stockControls() As Control = Me.Controls.Find("cboStockStatus", True)
-            If stockControls.Length > 0 Then
-                referenceControl = stockControls(0)
-            Else
-                ' Try to find category combo box
-                Dim catControls() As Control = Me.Controls.Find("cboCategory", True)
-                If catControls.Length > 0 Then
-                    referenceControl = catControls(0)
-                End If
-            End If
-            
-            If referenceControl Is Nothing Then
-                System.Diagnostics.Debug.WriteLine("Could not find reference control for positioning")
-                Return
-            End If
-            
-            ' Create Label
-            Dim lblAssignedTo As New Label()
-            lblAssignedTo.Name = "lblAssignedTo"
-            lblAssignedTo.Text = "Assigned To:"
-            lblAssignedTo.Font = New Font("Segoe UI", 10, FontStyle.Regular)
-            lblAssignedTo.AutoSize = True
-            lblAssignedTo.Location = New Point(referenceControl.Left - 150, referenceControl.Bottom + 10)
-            
-            ' Create ComboBox
-            Dim cboAssignedTo As New ComboBox()
-            cboAssignedTo.Name = "cboAssignedTo"
-            cboAssignedTo.DropDownStyle = ComboBoxStyle.DropDownList
-            cboAssignedTo.Font = New Font("Segoe UI", 10, FontStyle.Regular)
-            cboAssignedTo.Size = New Size(referenceControl.Width, 25)
-            cboAssignedTo.Location = New Point(referenceControl.Left, referenceControl.Bottom + 10)
-            
-            ' Add controls to form
-            If referenceControl.Parent IsNot Nothing Then
-                referenceControl.Parent.Controls.Add(lblAssignedTo)
-                referenceControl.Parent.Controls.Add(cboAssignedTo)
-            Else
-                Me.Controls.Add(lblAssignedTo)
-                Me.Controls.Add(cboAssignedTo)
-            End If
-            
-            System.Diagnostics.Debug.WriteLine("[v0] Assigned To control created dynamically in AddSupply")
-            
-            ' Reload users to populate the new control
-            LoadUsers()
-            
-        Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] Error creating Assigned To control: " & ex.Message)
-        End Try
     End Sub
 
     Private Sub LoadDepartments()
@@ -130,45 +61,13 @@ Public Class AddSupply
         End Try
     End Sub
     
-    Private usersDirectory As DataTable
-    
-    Private Sub LoadUsers()
-        Try
-            ' Load users for Assigned To dropdown
-            Using conn As MySqlConnection = DatabaseConnection.GetConnection()
-                If conn IsNot Nothing Then
-                    conn.Open()
-                    Using cmd As New MySqlCommand("SELECT userId, CONCAT(IFNULL(firstName,''), ' ', IFNULL(lastName,'')) AS fullName, employeeId FROM users WHERE status = 'Active' ORDER BY firstName, lastName", conn)
-                        Using adapter As New MySqlDataAdapter(cmd)
-                            usersDirectory = New DataTable()
-                            adapter.Fill(usersDirectory)
-
-                            If usersDirectory.Rows.Count > 0 Then
-                                ' Add a blank row for "Not Assigned"
-                                Dim blankRow As DataRow = usersDirectory.NewRow()
-                                blankRow("userId") = DBNull.Value
-                                blankRow("fullName") = "-- Not Assigned --"
-                                blankRow("employeeId") = DBNull.Value
-                                usersDirectory.Rows.InsertAt(blankRow, 0)
-
-                                ' Check if cboAssignedTo control exists
-                                Dim assignedToControls() As Control = Me.Controls.Find("cboAssignedTo", True)
-                                If assignedToControls.Length > 0 AndAlso TypeOf assignedToControls(0) Is ComboBox Then
-                                    Dim cboAssignedTo As ComboBox = CType(assignedToControls(0), ComboBox)
-                                    cboAssignedTo.DataSource = usersDirectory
-                                    cboAssignedTo.DisplayMember = "fullName"
-                                    cboAssignedTo.ValueMember = "userId"
-                                    cboAssignedTo.SelectedIndex = 0
-                                End If
-                            End If
-                        End Using
-                    End Using
-                End If
-            End Using
-        Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("LoadUsers Exception: " & ex.Message)
-        End Try
-    End Sub
+    ''' <summary>
+    ''' Note: Supplies don't have direct assignedTo field in database.
+    ''' When supplies are assigned to staff, they are tracked through:
+    ''' 1. The custodian table (for inventory tracking)
+    ''' 2. Quantity deduction from supplies table
+    ''' This happens during the assignment/request approval process, not during add/edit.
+    ''' </summary>
 
     Private Sub cboDepartment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDepartment.SelectedIndexChanged
         If cboDepartment.SelectedIndex > 0 AndAlso TypeOf cboDepartment.SelectedItem Is DepartmentItem Then
@@ -226,16 +125,6 @@ Public Class AddSupply
             ' Calculate total cost
             Dim totalCost As Decimal = numQuantity.Value * numUnitCost.Value
 
-            ' Get assigned user ID
-            Dim assignedTo As Integer? = Nothing
-            Dim assignedToControls() As Control = Me.Controls.Find("cboAssignedTo", True)
-            If assignedToControls.Length > 0 AndAlso TypeOf assignedToControls(0) Is ComboBox Then
-                Dim cboAssignedTo As ComboBox = CType(assignedToControls(0), ComboBox)
-                If cboAssignedTo.SelectedValue IsNot Nothing AndAlso Not cboAssignedTo.SelectedValue.Equals(DBNull.Value) Then
-                    assignedTo = CInt(cboAssignedTo.SelectedValue)
-                End If
-            End If
-
             Dim success = DatabaseConnection.AddSupply(
                 txtItemName.Text.Trim(),
                 GetComboValue(cboCategory, "Others"),
@@ -247,7 +136,6 @@ Public Class AddSupply
                 totalCost,
                 txtSupplier.Text.Trim(),
                 GetComboValue(cboSourceOfFunds, ""),
-                assignedTo,
                 txtLocation.Text.Trim(),
                 GetComboValue(cboStockStatus, "Available")
             )
