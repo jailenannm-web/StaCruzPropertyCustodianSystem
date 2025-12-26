@@ -188,16 +188,32 @@ Public Class AddProperty
     End Sub
 
     Private Sub NavigateBackToList()
-        ' Check SuperAdminDashboard first
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Dim propertyManagement As New UC_PropertyManagement1()
+            saDashboard.LoadUserControl(propertyManagement)
+            ' Refresh the table after loading
+            propertyManagement.LoadPropertiesData()
+            Return
+        End If
+        
+        ' Check SuperAdminDashboard
         Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
         If superAdminDashboard IsNot Nothing Then
-            superAdminDashboard.LoadUserControl(New UC_PropertyManagement1())
+            Dim propertyManagement As New UC_PropertyManagement1()
+            superAdminDashboard.LoadUserControl(propertyManagement)
+            ' Refresh the table after loading
+            propertyManagement.LoadPropertiesData()
             Return
         End If
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New UC_PropertyManagement1())
+            Dim propertyManagement As New UC_PropertyManagement1()
+            parentDashboard.LoadUserControl(propertyManagement)
+            ' Refresh the table after loading
+            propertyManagement.LoadPropertiesData()
         End If
     End Sub
 

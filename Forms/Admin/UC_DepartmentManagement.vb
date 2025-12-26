@@ -399,8 +399,13 @@ Public Class UC_DepartmentManagement
             Try
                 Dim success As Boolean = DatabaseConnection.DeleteDepartment(departmentID)
                 If success Then
+                    ' Clear the grid and reload to ensure deletion is reflected
+                    admin_deptmanagement.Rows.Clear()
+                    originalData = Nothing
                     LoadDepartmentsData() ' Refresh table
                     MessageBox.Show("Department deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("Failed to delete department. It may be in use or already deleted.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
             Catch ex As Exception
                 MessageBox.Show("Error deleting department: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

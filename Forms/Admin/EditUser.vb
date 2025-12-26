@@ -34,6 +34,9 @@ Public Class EditUser
             ApplyPermissionState()
         End If
         
+        ' Load location dropdowns first to ensure they're available
+        LoadLocationDropdowns()
+        
         ' Check if address values were stored in Tag and need to be set now
         If Me.province.Tag IsNot Nothing Then
             Dim provinceVal As String = Me.province.Tag.ToString()
@@ -117,28 +120,59 @@ Public Class EditUser
         RemoveHandler municipal.SelectedIndexChanged, AddressOf Municipality_SelectedIndexChanged
         
         Try
-            ' Set province first
-            SetComboValueWithDataRow(Me.province, provinceValue)
+            ' Ensure province dropdown is loaded first
+            If Me.province.DataSource Is Nothing Then
+                LoadLocationDropdowns()
+            End If
             
-            ' Load municipalities for selected province
+            ' Set province first
             If Not String.IsNullOrEmpty(provinceValue) Then
+                SetComboValueWithDataRow(Me.province, provinceValue)
+                
+                ' Wait a moment for the selection to register, then load municipalities
+                System.Threading.Thread.Sleep(100)
+                Application.DoEvents()
+                
+                ' Load municipalities for selected province
                 Dim municipalitiesTable As DataTable = DatabaseConnection.GetMunicipalities(provinceValue)
                 If municipalitiesTable IsNot Nothing AndAlso municipalitiesTable.Rows.Count > 0 Then
+                    municipal.DataSource = Nothing
+                    municipal.Items.Clear()
                     municipal.DataSource = municipalitiesTable
                     municipal.DisplayMember = "municipality_name"
                     municipal.ValueMember = "municipality_name"
-                    SetComboValueWithDataRow(Me.municipal, municipalityValue)
-                End If
-            End If
-            
-            ' Load barangays for selected municipality
-            If Not String.IsNullOrEmpty(municipalityValue) Then
-                Dim barangaysTable As DataTable = DatabaseConnection.GetBarangays(municipalityValue)
-                If barangaysTable IsNot Nothing AndAlso barangaysTable.Rows.Count > 0 Then
-                    barangay.DataSource = barangaysTable
-                    barangay.DisplayMember = "barangay_name"
-                    barangay.ValueMember = "barangay_name"
-                    SetComboValueWithDataRow(Me.barangay, barangayValue)
+                    
+                    ' Wait a moment for the DataSource to be set
+                    System.Threading.Thread.Sleep(100)
+                    Application.DoEvents()
+                    
+                    ' Set municipality value
+                    If Not String.IsNullOrEmpty(municipalityValue) Then
+                        SetComboValueWithDataRow(Me.municipal, municipalityValue)
+                        
+                        ' Wait a moment for the selection to register, then load barangays
+                        System.Threading.Thread.Sleep(100)
+                        Application.DoEvents()
+                        
+                        ' Load barangays for selected municipality
+                        Dim barangaysTable As DataTable = DatabaseConnection.GetBarangays(municipalityValue)
+                        If barangaysTable IsNot Nothing AndAlso barangaysTable.Rows.Count > 0 Then
+                            barangay.DataSource = Nothing
+                            barangay.Items.Clear()
+                            barangay.DataSource = barangaysTable
+                            barangay.DisplayMember = "barangay_name"
+                            barangay.ValueMember = "barangay_name"
+                            
+                            ' Wait a moment for the DataSource to be set
+                            System.Threading.Thread.Sleep(100)
+                            Application.DoEvents()
+                            
+                            ' Set barangay value
+                            If Not String.IsNullOrEmpty(barangayValue) Then
+                                SetComboValueWithDataRow(Me.barangay, barangayValue)
+                            End If
+                        End If
+                    End If
                 End If
             End If
         Finally
@@ -383,15 +417,13 @@ Public Class EditUser
         ' Username validation is handled by the UpdateUserAccount function internally
         ' No need for separate uniqueness check here as the function will validate
         
-        ' Extract address values with logging
-        Dim provinceValue As String = GetComboValue(province)
-        Dim municipalValue As String = GetComboValue(municipal)
-        Dim barangayValue As String = GetComboValue(barangay)
-        
-        System.Diagnostics.Debug.WriteLine("[v0] EditUser - Saving address values:")
-        System.Diagnostics.Debug.WriteLine("[v0]   Province: '" & provinceValue & "'")
-        System.Diagnostics.Debug.WriteLine("[v0]   Municipal: '" & municipalValue & "'")
-        System.Diagnostics.Debug.WriteLine("[v0]   Barangay: '" & barangayValue & "'")
+        ' Get the updated username from the form (not the original)
+        Dim updatedUsername As String = username.Text.Trim()
+        If String.IsNullOrWhiteSpace(updatedUsername) Then
+            MessageBox.Show("Username is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            username.Focus()
+            Return
+        End If
         
         ' Use unified UpdateUserAccount function that handles both Admin/SuperAdmin and Staff
         Dim updateSuccess As Boolean = DatabaseConnection.UpdateUserAccount(
@@ -400,15 +432,15 @@ Public Class EditUser
             firstName.Text.Trim(),
             lastName.Text.Trim(),
             email.Text.Trim(),
-            username.Text.Trim(),
+            updatedUsername, ' Use the updated username from the form
             middleName:=middleName.Text.Trim(),
             suffix:=GetComboValue(suffixAdmin),
             position:=positionValue,
             departmentID:=deptID,
             contactNumber:=contactNumber.Text.Trim(),
-            barangay:=barangayValue,
-            municipality:=municipalValue,
-            provinceCity:=provinceValue,
+            barangay:=GetComboValue(barangay),
+            municipality:=GetComboValue(municipal),
+            provinceCity:=GetComboValue(province),
             employeeID:=employeeID.Text.Trim(),
             newUserType:=newUserTypeValue, ' New role (only applies to Admin/SuperAdmin)
             updatedByID:=currentAdminID,
@@ -450,7 +482,8 @@ Public Class EditUser
         If saDashboard IsNot Nothing Then
             Dim newUC As New UC_UserManagement()
             saDashboard.LoadUserControl(newUC)
-            ' UC_UserManagement Load event already calls RefreshUserTable
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
             Return
         End If
         
@@ -458,7 +491,8 @@ Public Class EditUser
         If superAdminDashboard IsNot Nothing Then
             Dim newUC As New UC_UserManagement()
             superAdminDashboard.LoadUserControl(newUC)
-            ' UC_UserManagement Load event already calls RefreshUserTable
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
             Return
         End If
         
@@ -466,7 +500,8 @@ Public Class EditUser
         If parentDashboard IsNot Nothing Then
             Dim newUC As New UC_UserManagement()
             parentDashboard.LoadUserControl(newUC)
-            ' UC_UserManagement Load event already calls RefreshUserTable
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
         End If
     End Sub
 
@@ -482,17 +517,9 @@ Public Class EditUser
     End Function
 
     Private Shared Function GetComboValue(combo As ComboBox, Optional fallback As String = "") As String
-        If combo Is Nothing Then 
-            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - combo is Nothing, returning fallback: '" & fallback & "'")
-            Return fallback
-        End If
-        
-        System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - combo.Name: '" & combo.Name & "'")
-        System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - SelectedItem type: " & If(combo.SelectedItem IsNot Nothing, combo.SelectedItem.GetType().Name, "NULL"))
-        
+        If combo Is Nothing Then Return fallback
         If combo.SelectedItem Is Nothing Then
             Dim manualValue As String = combo.Text
-            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - No SelectedItem, using Text: '" & manualValue & "'")
             If Not String.IsNullOrWhiteSpace(manualValue) Then
                 Return manualValue.Trim()
             End If
@@ -502,34 +529,26 @@ Public Class EditUser
         ' Handle DataRowView case - extract the actual value
         If TypeOf combo.SelectedItem Is DataRowView Then
             Dim drv As DataRowView = CType(combo.SelectedItem, DataRowView)
-            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - IS DataRowView!")
-            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - ValueMember: '" & combo.ValueMember & "'")
-            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - DisplayMember: '" & combo.DisplayMember & "'")
-            
             ' Try to get the value using ValueMember first
             If Not String.IsNullOrEmpty(combo.ValueMember) AndAlso drv.Row.Table.Columns.Contains(combo.ValueMember) Then
-                Dim value As String = drv.Row(combo.ValueMember).ToString()
-                System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - Extracted from ValueMember: '" & value & "'")
-                Return value
+                Return drv.Row(combo.ValueMember).ToString()
             End If
             ' Fallback to DisplayMember
             If Not String.IsNullOrEmpty(combo.DisplayMember) AndAlso drv.Row.Table.Columns.Contains(combo.DisplayMember) Then
-                Dim value As String = drv.Row(combo.DisplayMember).ToString()
-                System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - Extracted from DisplayMember: '" & value & "'")
-                Return value
+                Return drv.Row(combo.DisplayMember).ToString()
+            End If
+            ' If neither works, get first column value
+            If drv.Row.Table.Columns.Count > 0 Then
+                Return drv.Row(0).ToString()
             End If
         End If
         
         ' Try SelectedValue as fallback
         If combo.SelectedValue IsNot Nothing Then
-            Dim value As String = combo.SelectedValue.ToString()
-            System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - Using SelectedValue: '" & value & "'")
-            Return value
+            Return combo.SelectedValue.ToString()
         End If
         
-        Dim finalValue As String = combo.SelectedItem.ToString()
-        System.Diagnostics.Debug.WriteLine("[v0] GetComboValue - Using ToString(): '" & finalValue & "'")
-        Return finalValue
+        Return combo.SelectedItem.ToString()
     End Function
 
     Private Function ResolveDepartmentId() As Integer?
@@ -623,10 +642,6 @@ Public Class EditUser
     End Sub
 
     Private Sub uc_um_edituser_Paint(sender As Object, e As PaintEventArgs) Handles uc_um_edituser.Paint
-
-    End Sub
-
-    Private Sub EditUser_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

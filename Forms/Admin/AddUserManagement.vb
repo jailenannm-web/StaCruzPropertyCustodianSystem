@@ -49,7 +49,6 @@ Public Class AddUserManagement
 
     Private Sub LoadDepartmentDropdown()
         Try
-            departmentId.DataSource = Nothing ' Clear DataSource first
             departmentId.Items.Clear()
             Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
             If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 Then
@@ -69,7 +68,6 @@ Public Class AddUserManagement
     Private Sub LoadProvinceDropdown()
         Try
             RemoveHandler province.SelectedIndexChanged, AddressOf province_SelectedIndexChanged
-            province.DataSource = Nothing ' Clear DataSource first
             province.Items.Clear()
             Dim provinces As DataTable = DatabaseConnection.GetProvinces()
             If provinces IsNot Nothing AndAlso provinces.Rows.Count > 0 Then
@@ -89,8 +87,6 @@ Public Class AddUserManagement
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadProvinceDropdown Error: " & ex.Message)
             ' If GetProvinces doesn't exist, add common provinces manually
-            province.DataSource = Nothing ' Clear DataSource first
-            province.Items.Clear()
             province.Items.Add("Metro Manila")
             province.Items.Add("Cavite")
             province.Items.Add("Laguna")
@@ -153,7 +149,7 @@ Public Class AddUserManagement
             barangay.Items.Clear()
         Catch ex As Exception
             Debug.WriteLine("[v0] LoadMunicipalityDropdown Error: " & ex.Message)
-            municipal.DataSource = Nothing ' Clear DataSource before clearing items
+            municipal.DataSource = Nothing
             municipal.Items.Clear()
             municipal.Items.Add("Select Municipality")
         End Try
@@ -166,7 +162,10 @@ Public Class AddUserManagement
 
     Private Sub LoadBarangayDropdown()
         Try
-            barangay.DataSource = Nothing ' Clear DataSource first
+            ' CRITICAL: Unbind DataSource BEFORE clearing items to avoid "Items collection cannot be modified" error
+            If barangay.DataSource IsNot Nothing Then
+                barangay.DataSource = Nothing
+            End If
             barangay.Items.Clear()
 
             ' Get the actual municipality name from the selected item
@@ -198,19 +197,17 @@ Public Class AddUserManagement
 
             Dim barangays As DataTable = DatabaseConnection.GetBarangays(selectedMunicipality)
             If barangays IsNot Nothing AndAlso barangays.Rows.Count > 0 Then
-                barangay.DataSource = Nothing ' Clear DataSource first
-                barangay.Items.Clear()
                 barangay.DisplayMember = "barangay_name"
                 barangay.ValueMember = "barangay_name"
                 barangay.DataSource = barangays
             Else
-                barangay.DataSource = Nothing ' Clear DataSource first
-                barangay.Items.Clear()
                 barangay.Items.Add("Select Barangay")
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] LoadBarangayDropdown Error: " & ex.Message)
-            barangay.DataSource = Nothing ' Clear DataSource before clearing items
+            If barangay.DataSource IsNot Nothing Then
+                barangay.DataSource = Nothing
+            End If
             barangay.Items.Clear()
             barangay.Items.Add("Select Barangay")
         End Try
@@ -335,38 +332,61 @@ Public Class AddUserManagement
     End Sub
 
     Private Sub NavigateBackToList()
-        ' Try to find AdminDashboard first
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Dim newUC As New UC_UserManagement()
+            saDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
+            System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (SADashboard)")
+            Return
+        End If
+
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            Dim newUC As New UC_UserManagement()
+            superAdminDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
+            System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (SuperAdminDashboard)")
+            Return
+        End If
+
+        ' Try to find AdminDashboard
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New UC_UserManagement())
+            Dim newUC As New UC_UserManagement()
+            parentDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.RefreshUserTable()
             System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (AdminDashboard)")
         Else
-            ' Try to find SADashboard
-            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-            If saDashboard IsNot Nothing Then
-                saDashboard.LoadUserControl(New UC_UserManagement())
-                System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (SADashboard)")
-            Else
-                ' Search up the control hierarchy
-                Dim currentParent As Control = Me.Parent
-                While currentParent IsNot Nothing
-                    Dim adminDash = TryCast(currentParent, AdminDashboard)
-                    If adminDash IsNot Nothing Then
-                        adminDash.LoadUserControl(New UC_UserManagement())
-                        System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found AdminDashboard in hierarchy")
-                        Exit While
-                    End If
-                    
-                    Dim saDash = TryCast(currentParent, SADashboard)
-                    If saDash IsNot Nothing Then
-                        saDash.LoadUserControl(New UC_UserManagement())
-                        System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found SADashboard in hierarchy")
-                        Exit While
-                    End If
-                    
-                    currentParent = currentParent.Parent
-                End While
-            End If
+            ' Search up the control hierarchy
+            Dim currentParent As Control = Me.Parent
+            While currentParent IsNot Nothing
+                Dim adminDash = TryCast(currentParent, AdminDashboard)
+                If adminDash IsNot Nothing Then
+                    Dim newUC As New UC_UserManagement()
+                    adminDash.LoadUserControl(newUC)
+                    ' Refresh the table after loading
+                    newUC.RefreshUserTable()
+                    System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found AdminDashboard in hierarchy")
+                    Exit While
+                End If
+
+                Dim saDash = TryCast(currentParent, SADashboard)
+                If saDash IsNot Nothing Then
+                    Dim newUC As New UC_UserManagement()
+                    saDash.LoadUserControl(newUC)
+                    ' Refresh the table after loading
+                    newUC.RefreshUserTable()
+                    System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Found SADashboard in hierarchy")
+                    Exit While
+                End If
+
+                currentParent = currentParent.Parent
+            End While
         End If
     End Sub
 
@@ -387,24 +407,6 @@ Public Class AddUserManagement
     Private Shared Function GetComboValue(combo As ComboBox, Optional fallback As String = "") As String
         If combo Is Nothing Then Return fallback
         If combo.SelectedIndex >= 0 AndAlso combo.SelectedItem IsNot Nothing Then
-            ' Handle DataRowView case - extract the actual value
-            If TypeOf combo.SelectedItem Is DataRowView Then
-                Dim drv As DataRowView = CType(combo.SelectedItem, DataRowView)
-                ' Try to get the value using ValueMember first
-                If Not String.IsNullOrEmpty(combo.ValueMember) AndAlso drv.Row.Table.Columns.Contains(combo.ValueMember) Then
-                    Return drv.Row(combo.ValueMember).ToString()
-                End If
-                ' Fallback to DisplayMember
-                If Not String.IsNullOrEmpty(combo.DisplayMember) AndAlso drv.Row.Table.Columns.Contains(combo.DisplayMember) Then
-                    Return drv.Row(combo.DisplayMember).ToString()
-                End If
-            End If
-            
-            ' Try SelectedValue as fallback
-            If combo.SelectedValue IsNot Nothing Then
-                Return combo.SelectedValue.ToString()
-            End If
-            
             Return combo.SelectedItem.ToString()
         End If
         Dim manualValue As String = combo.Text

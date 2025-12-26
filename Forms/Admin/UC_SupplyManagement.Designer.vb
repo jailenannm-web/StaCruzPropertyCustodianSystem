@@ -40,7 +40,7 @@ Partial Class UC_SupplyManagement
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.supplymanagementsearchbar = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.supplymanagementssearchbar = New System.Windows.Forms.TextBox()
+        ' Removed duplicate search field: supplymanagementssearchbar
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -295,10 +295,15 @@ Partial Class UC_SupplyManagement
         '
         'supplymanagementsearchbar
         '
-        Me.supplymanagementsearchbar.Location = New System.Drawing.Point(0, 0)
+        Me.supplymanagementsearchbar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.supplymanagementsearchbar.Font = New System.Drawing.Font("Poppins", 10.0!, System.Drawing.FontStyle.Regular)
+        Me.supplymanagementsearchbar.Location = New System.Drawing.Point(527, 82)
+        Me.supplymanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
         Me.supplymanagementsearchbar.Name = "supplymanagementsearchbar"
-        Me.supplymanagementsearchbar.Size = New System.Drawing.Size(100, 22)
-        Me.supplymanagementsearchbar.TabIndex = 2
+        Me.supplymanagementsearchbar.Size = New System.Drawing.Size(410, 27)
+        Me.supplymanagementsearchbar.TabIndex = 178
+        Me.supplymanagementsearchbar.Text = "Search supplies..."
+        Me.supplymanagementsearchbar.ForeColor = System.Drawing.Color.Gray
         '
         'PictureBox1
         '
@@ -309,22 +314,13 @@ Partial Class UC_SupplyManagement
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 179
         Me.PictureBox1.TabStop = False
-        '
-        'supplymanagementssearchbar
-        '
-        Me.supplymanagementssearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.supplymanagementssearchbar.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.supplymanagementssearchbar.Location = New System.Drawing.Point(527, 82)
-        Me.supplymanagementssearchbar.Margin = New System.Windows.Forms.Padding(4)
-        Me.supplymanagementssearchbar.Name = "supplymanagementssearchbar"
-        Me.supplymanagementssearchbar.Size = New System.Drawing.Size(410, 27)
-        Me.supplymanagementssearchbar.TabIndex = 178
+        ' Removed duplicate search field: supplymanagementssearchbar
         '
         'UC_SupplyManagement
         '
         Me.AutoScroll = True
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.supplymanagementssearchbar)
+        ' Removed duplicate search field: supplymanagementssearchbar
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.supplymanagementsearchbar)
         Me.Controls.Add(Me.Label1)
@@ -379,5 +375,5 @@ Partial Class UC_SupplyManagement
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents supplymanagementsearchbar As TextBox
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents supplymanagementssearchbar As TextBox
+    ' Removed duplicate search field: supplymanagementssearchbar
 End Class

@@ -242,9 +242,31 @@ Public Class AddSupply
     End Sub
 
     Private Sub NavigateBack()
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Dim newUC As New UC_SupplyManagement()
+            saDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.LoadSuppliesData()
+            Return
+        End If
+        
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            Dim newUC As New UC_SupplyManagement()
+            superAdminDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.LoadSuppliesData()
+            Return
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New UC_SupplyManagement())
+            Dim newUC As New UC_SupplyManagement()
+            parentDashboard.LoadUserControl(newUC)
+            ' Refresh the table after loading
+            newUC.LoadSuppliesData()
         Else
             Me.Parent?.Controls.Remove(Me)
         End If

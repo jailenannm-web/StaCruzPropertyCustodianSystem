@@ -707,13 +707,52 @@ Public Class AssignRequestManagement
                 Return
             End If
 
-            ' Validate employee selection
+            ' Validate employee selection - check both SelectedValue and SelectedItem
             Dim selectedEmployeeID As Integer = 0
-            If employee IsNot Nothing AndAlso employee.SelectedValue IsNot Nothing Then
-                Integer.TryParse(employee.SelectedValue.ToString(), selectedEmployeeID)
+            If employee IsNot Nothing Then
+                ' Try SelectedValue first
+                If employee.SelectedValue IsNot Nothing Then
+                    If TypeOf employee.SelectedValue Is DataRowView Then
+                        Dim drv As DataRowView = CType(employee.SelectedValue, DataRowView)
+                        If drv.Row.Table.Columns.Contains("userId") AndAlso Not IsDBNull(drv.Row("userId")) Then
+                            Integer.TryParse(drv.Row("userId").ToString(), selectedEmployeeID)
+                        End If
+                    Else
+                        Integer.TryParse(employee.SelectedValue.ToString(), selectedEmployeeID)
+                    End If
+                End If
+                
+                ' If still not found, try SelectedItem
+                If selectedEmployeeID <= 0 AndAlso employee.SelectedItem IsNot Nothing Then
+                    If TypeOf employee.SelectedItem Is DataRowView Then
+                        Dim drv As DataRowView = CType(employee.SelectedItem, DataRowView)
+                        If drv.Row.Table.Columns.Contains("userId") AndAlso Not IsDBNull(drv.Row("userId")) Then
+                            Integer.TryParse(drv.Row("userId").ToString(), selectedEmployeeID)
+                        End If
+                    End If
+                End If
+                
+                ' If still not found, try to find by name in the DataSource
+                If selectedEmployeeID <= 0 AndAlso Not String.IsNullOrWhiteSpace(employee.Text) AndAlso employee.DataSource IsNot Nothing Then
+                    Dim dt As DataTable = TryCast(employee.DataSource, DataTable)
+                    If dt IsNot Nothing Then
+                        Dim matchingRows = dt.AsEnumerable().Where(Function(r)
+                                                                      Dim fullName As String = If(r.Table.Columns.Contains("fullName") AndAlso Not IsDBNull(r("fullName")), r("fullName").ToString(), "")
+                                                                      Return fullName.Equals(employee.Text, StringComparison.OrdinalIgnoreCase)
+                                                                  End Function)
+                        If matchingRows.Any() Then
+                            Dim matchedRow = matchingRows.First()
+                            If matchedRow.Table.Columns.Contains("userId") AndAlso Not IsDBNull(matchedRow("userId")) Then
+                                Integer.TryParse(matchedRow("userId").ToString(), selectedEmployeeID)
+                            End If
+                        End If
+                    End If
+                End If
             End If
+            
             If selectedEmployeeID <= 0 Then
-                MessageBox.Show("Please select an employee to assign the property to.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Please select an employee from the dropdown list to assign the property to.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                If employee IsNot Nothing Then employee.Focus()
                 Return
             End If
 

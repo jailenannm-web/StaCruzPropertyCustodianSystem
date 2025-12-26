@@ -157,8 +157,34 @@ Public Class UC_SupplyManagement
         ' Wire up event handlers
         AddHandler pm_table.SelectionChanged, AddressOf pm_table_SelectionChanged
 
-        ' Wire up search textbox if present (try common names)
-        Dim searchNames As String() = {"supplymanagementsearchbar", "pm_search", "pm_searchbar", "supplysearch", "txtSearch", "txtbox_search", "searchBox", "admin_txtbox_search"}
+        ' Wire up search textbox - make it visible and functional
+        If supplymanagementsearchbar IsNot Nothing Then
+            ' Make search field visible and properly configured
+            supplymanagementsearchbar.Visible = True
+            supplymanagementsearchbar.BringToFront()
+            
+            ' Add placeholder text handling
+            AddHandler supplymanagementsearchbar.GotFocus, Sub()
+                                                               If supplymanagementsearchbar.ForeColor = Drawing.Color.Gray Then
+                                                                   supplymanagementsearchbar.Text = ""
+                                                                   supplymanagementsearchbar.ForeColor = Drawing.Color.Black
+                                                               End If
+                                                           End Sub
+            AddHandler supplymanagementsearchbar.LostFocus, Sub()
+                                                                If String.IsNullOrWhiteSpace(supplymanagementsearchbar.Text) Then
+                                                                    supplymanagementsearchbar.ForeColor = Drawing.Color.Gray
+                                                                    supplymanagementsearchbar.Text = "Search supplies..."
+                                                                End If
+                                                            End Sub
+            
+            ' Wire up search handler
+            RemoveHandler supplymanagementsearchbar.TextChanged, AddressOf SupplySearch_TextChanged
+            AddHandler supplymanagementsearchbar.TextChanged, AddressOf SupplySearch_TextChanged
+            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Wired search handler directly to supplymanagementsearchbar")
+        End If
+        
+        ' Also try to find search field by name as fallback
+        Dim searchNames As String() = {"pm_search", "pm_searchbar", "supplysearch", "txtSearch", "txtbox_search", "searchBox", "admin_txtbox_search"}
         For Each nm As String In searchNames
             Dim found() As Control = Me.Controls.Find(nm, True)
             If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
@@ -169,13 +195,6 @@ Public Class UC_SupplyManagement
                 Exit For
             End If
         Next
-        
-        ' Also try direct access if control exists
-        If supplymanagementsearchbar IsNot Nothing Then
-            RemoveHandler supplymanagementsearchbar.TextChanged, AddressOf SupplySearch_TextChanged
-            AddHandler supplymanagementsearchbar.TextChanged, AddressOf SupplySearch_TextChanged
-            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Wired search handler directly to supplymanagementsearchbar")
-        End If
     End Sub
 
     ' Added method to load supplies from database
@@ -371,6 +390,14 @@ Public Class UC_SupplyManagement
     Private Sub SupplySearch_TextChanged(sender As Object, e As EventArgs)
         Dim tb As TextBox = TryCast(sender, TextBox)
         If tb Is Nothing Then Return
+        
+        ' Skip placeholder text
+        If tb.ForeColor = Drawing.Color.Gray AndAlso (tb.Text = "Search supplies..." OrElse String.IsNullOrWhiteSpace(tb.Text)) Then
+            ' Clear search and show all
+            ApplySupplySearch("")
+            Return
+        End If
+        
         ApplySupplySearch(tb.Text)
     End Sub
 

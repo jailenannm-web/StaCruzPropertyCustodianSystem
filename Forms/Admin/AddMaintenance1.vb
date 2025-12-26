@@ -17,7 +17,7 @@ Public Class AddMaintenance1
         EnsureModifyPermission()
     End Sub
 
-    Private Sub btnBack_Click(sender As Object, e As EventArgs)
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         NavigateBack()
     End Sub
 
@@ -172,9 +172,25 @@ Public Class AddMaintenance1
     End Sub
 
     Private Sub NavigateBack()
+        ' Check SADashboard first (parent class)
+        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+        If saDashboard IsNot Nothing Then
+            Dim newUC As New UC_MaintenanceRequestManagement()
+            saDashboard.LoadUserControl(newUC)
+            Return
+        End If
+        
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        If superAdminDashboard IsNot Nothing Then
+            Dim newUC As New UC_MaintenanceRequestManagement()
+            superAdminDashboard.LoadUserControl(newUC)
+            Return
+        End If
+
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New UC_MaintenanceManagement())
+            Dim newUC As New UC_MaintenanceRequestManagement()
+            parentDashboard.LoadUserControl(newUC)
         Else
             Me.Parent?.Controls.Remove(Me)
         End If
