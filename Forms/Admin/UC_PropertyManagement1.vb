@@ -45,13 +45,27 @@ Public Class UC_PropertyManagement1
         propertyManagementGrid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
         propertyManagementGrid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        ' Column alignment
+        ' Column alignment - Left align text columns for better readability
         For Each col As DataGridViewColumn In propertyManagementGrid.Columns
-            col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            ' Left align text columns, center align shorter columns
+            If col.Name = "propertyId" OrElse col.Name = "propertyNumber" OrElse col.Name = "serialNumber" OrElse _
+               col.Name = "condition" OrElse col.Name = "status" Then
+                col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Else
+                col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            End If
+            
+            ' Enable word wrap for description and location columns
+            If col.Name = "description" OrElse col.Name = "location" OrElse col.Name = "assignedTo" Then
+                col.DefaultCellStyle.WrapMode = DataGridViewTriState.True
+            End If
         Next
 
-        ' Auto size
-        propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        ' Auto size columns to display all content properly
+        propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+        
+        ' Set specific column widths for better display
+        ConfigureColumnWidths()
 
         ' Initialize filter dropdowns
         InitializeFilters()
@@ -86,6 +100,78 @@ Public Class UC_PropertyManagement1
         Next
         Return Nothing
     End Function
+
+    Private Sub ConfigureColumnWidths()
+        ' Set specific widths for each column to ensure all data is visible
+        Try
+            If propertyManagementGrid.Columns.Count = 0 Then Return
+            
+            ' Set column widths based on content type
+            For Each col As DataGridViewColumn In propertyManagementGrid.Columns
+                Select Case col.Name
+                    Case "propertyId"
+                        col.Width = 80
+                        col.MinimumWidth = 80
+                    Case "itemName"
+                        col.Width = 150
+                        col.MinimumWidth = 120
+                    Case "category"
+                        col.Width = 130
+                        col.MinimumWidth = 100
+                    Case "description"
+                        col.Width = 200
+                        col.MinimumWidth = 150
+                    Case "unitOfMeasure"
+                        col.Width = 80
+                        col.MinimumWidth = 80
+                    Case "propertyNumber"
+                        col.Width = 100
+                        col.MinimumWidth = 100
+                    Case "serialNumber"
+                        col.Width = 120
+                        col.MinimumWidth = 100
+                    Case "acquisitionDate"
+                        col.Width = 100
+                        col.MinimumWidth = 100
+                    Case "acqusitionCost"
+                        col.Width = 100
+                        col.MinimumWidth = 100
+                    Case "totalCost"
+                        col.Width = 100
+                        col.MinimumWidth = 100
+                    Case "sourceOfFunds"
+                        col.Width = 150
+                        col.MinimumWidth = 120
+                    Case "assignedTo"
+                        col.Width = 180
+                        col.MinimumWidth = 150
+                    Case "departmentId"
+                        col.Width = 180
+                        col.MinimumWidth = 150
+                    Case "location"
+                        col.Width = 200
+                        col.MinimumWidth = 150
+                    Case "condition"
+                        col.Width = 110
+                        col.MinimumWidth = 100
+                    Case "status"
+                        col.Width = 100
+                        col.MinimumWidth = 90
+                    Case Else
+                        ' Default width for any other columns
+                        col.Width = 120
+                        col.MinimumWidth = 100
+                End Select
+            Next
+            
+            ' Enable horizontal scrollbar for better navigation
+            propertyManagementGrid.ScrollBars = ScrollBars.Both
+            propertyManagementGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] ConfigureColumnWidths Error: " & ex.Message)
+        End Try
+    End Sub
 
     Private Sub InitializeFilters()
         ' Populate status filter using dynamic lookup
@@ -351,6 +437,9 @@ Public Class UC_PropertyManagement1
                     ttlpropertymanagement.Text = "0"
                 End If
             End If
+            
+            ' Reapply column widths after loading data
+            ConfigureColumnWidths()
         Catch ex As Exception
             MessageBox.Show("Error loading properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Debug.WriteLine("[v0] Load Properties Error: " & ex.Message & Environment.NewLine & ex.StackTrace)

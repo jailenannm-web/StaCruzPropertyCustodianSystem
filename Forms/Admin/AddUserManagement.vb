@@ -115,7 +115,7 @@ Public Class AddUserManagement
 
             ' Get the actual province name from the selected item
             Dim selectedProvince As String = ""
-            
+
             If province.SelectedItem IsNot Nothing Then
                 ' Check if it's a DataRowView
                 If TypeOf province.SelectedItem Is DataRowView Then
@@ -137,7 +137,7 @@ Public Class AddUserManagement
                 ' Fallback to SelectedValue
                 selectedProvince = province.SelectedValue.ToString()
             End If
-            
+
             If String.IsNullOrEmpty(selectedProvince) Then Return
 
             Dim municipalities As DataTable = DatabaseConnection.GetMunicipalities(selectedProvince)
@@ -168,10 +168,10 @@ Public Class AddUserManagement
         Try
             barangay.DataSource = Nothing ' Clear DataSource first
             barangay.Items.Clear()
-            
+
             ' Get the actual municipality name from the selected item
             Dim selectedMunicipality As String = ""
-            
+
             If municipal.SelectedItem IsNot Nothing Then
                 ' Check if it's a DataRowView
                 If TypeOf municipal.SelectedItem Is DataRowView Then
@@ -193,7 +193,7 @@ Public Class AddUserManagement
                 ' Fallback to SelectedValue
                 selectedMunicipality = municipal.SelectedValue.ToString()
             End If
-            
+
             If String.IsNullOrEmpty(selectedMunicipality) Then Return
 
             Dim barangays As DataTable = DatabaseConnection.GetBarangays(selectedMunicipality)
