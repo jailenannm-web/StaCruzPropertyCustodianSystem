@@ -358,6 +358,7 @@ Partial Public Class DatabaseConnection
     
     ''' <summary>
     ''' Add a new property to the database with auto-generated propertyNumber and internalCodes
+    ''' Automatically creates borrowed_items record if property is assigned to a user
     ''' </summary>
     Public Shared Function AddProperty(itemName As String,
                                        category As String,
@@ -376,19 +377,23 @@ Partial Public Class DatabaseConnection
                                        status As String,
                                        internalCodes As String) As Boolean
         Dim conn As MySqlConnection = Nothing
+        Dim transaction As MySqlTransaction = Nothing
         Try
             conn = GetConnection()
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
             
+            ' Start transaction to ensure both property and borrowed_items are created together
+            transaction = conn.BeginTransaction()
+            
             ' Auto-generate propertyNumber if empty
             If String.IsNullOrWhiteSpace(propertyNumber) Then
-                propertyNumber = GeneratePropertyNumber()
+                propertyNumber = GeneratePropertyNumber(conn, transaction)
             End If
             
             ' Auto-generate internalCodes if empty
             If String.IsNullOrWhiteSpace(internalCodes) Then
-                internalCodes = GenerateInternalCode()
+                internalCodes = GenerateInternalCode(conn, transaction)
             End If
             
             ' Insert property into database
@@ -400,7 +405,8 @@ Partial Public Class DatabaseConnection
                                  "@sourceOfFunds, @assignedTo, @departmentId, @location, @condition, @status, @internalCodes, " &
                                  "NOW(), NOW())"
             
-            Using cmd As New MySqlCommand(query, conn)
+            Dim newPropertyId As Integer = 0
+            Using cmd As New MySqlCommand(query, conn, transaction)
                 cmd.Parameters.AddWithValue("@itemName", itemName)
                 cmd.Parameters.AddWithValue("@category", category)
                 cmd.Parameters.AddWithValue("@description", If(String.IsNullOrWhiteSpace(description), DBNull.Value, description))
@@ -419,14 +425,225 @@ Partial Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@internalCodes", internalCodes)
                 
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-                Return rowsAffected > 0
+                If rowsAffected <= 0 Then
+                    transaction.Rollback()
+                    Return False
+                End If
+                
+                ' Get the newly inserted property ID
+                Using idCmd As New MySqlCommand("SELECT LAST_INSERT_ID()", conn, transaction)
+                    newPropertyId = Convert.ToInt32(idCmd.ExecuteScalar())
+                End Using
             End Using
             
+            ' If property is assigned to a user, automatically create borrowed_items record
+            If assignedTo.HasValue AndAlso assignedTo.Value > 0 Then
+                CreateBorrowedItemRecord(conn, transaction, newPropertyId, assignedTo.Value, departmentId, itemName, propertyNumber, serialNumber)
+            End If
+            
+            ' Commit transaction
+            transaction.Commit()
+            System.Diagnostics.Debug.WriteLine($"[v0] AddProperty Success - ID: {newPropertyId}, AssignedTo: {If(assignedTo.HasValue, assignedTo.Value.ToString(), "None")}")
+            Return True
+            
         Catch ex As Exception
+            If transaction IsNot Nothing Then
+                Try
+                    transaction.Rollback()
+                Catch
+                End Try
+            End If
             System.Diagnostics.Debug.WriteLine("[v0] AddProperty Exception: " & ex.Message)
             MessageBox.Show("Error adding property: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Finally
+            If transaction IsNot Nothing Then
+                Try
+                    transaction.Dispose()
+                Catch
+                End Try
+            End If
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+    
+    ''' <summary>
+    ''' Create a borrowed_items record when a property is assigned to a user
+    ''' </summary>
+    Private Shared Sub CreateBorrowedItemRecord(conn As MySqlConnection, transaction As MySqlTransaction,
+                                                propertyId As Integer, userId As Integer,
+                                                departmentId As Integer?, itemName As String,
+                                                propertyNumber As String, serialNumber As String)
+        Try
+            ' Get user information
+            Dim borrowerName As String = ""
+            Dim borrowerPosition As String = ""
+            Dim userDeptId As Integer? = departmentId
+            
+            Using userCmd As New MySqlCommand("SELECT CONCAT(IFNULL(firstName,''), ' ', IFNULL(lastName,'')) AS fullName, position, departmentId FROM users WHERE userId = @userId", conn, transaction)
+                userCmd.Parameters.AddWithValue("@userId", userId)
+                Using reader As MySqlDataReader = userCmd.ExecuteReader()
+                    If reader.Read() Then
+                        borrowerName = If(reader.IsDBNull(0), "Unknown User", reader.GetString(0))
+                        borrowerPosition = If(reader.IsDBNull(1), Nothing, reader.GetString(1))
+                        If Not reader.IsDBNull(2) Then userDeptId = reader.GetInt32(2)
+                    End If
+                End Using
+            End Using
+            
+            ' Create borrowed_items record
+            Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, borrowerName, borrowerPosition, " &
+                                       "departmentId, borrowDate, expectedReturnDate, status, remarks, createdAt, updatedAt) " &
+                                       "VALUES ('property', @itemId, @borrowerName, @borrowerPosition, @departmentId, " &
+                                       "NOW(), DATE_ADD(NOW(), INTERVAL 365 DAY), 'Borrowed', @remarks, NOW(), NOW())"
+            
+            Using borrowCmd As New MySqlCommand(borrowQuery, conn, transaction)
+                borrowCmd.Parameters.AddWithValue("@itemId", propertyId)
+                borrowCmd.Parameters.AddWithValue("@borrowerName", borrowerName)
+                borrowCmd.Parameters.AddWithValue("@borrowerPosition", If(String.IsNullOrEmpty(borrowerPosition), DBNull.Value, borrowerPosition))
+                borrowCmd.Parameters.AddWithValue("@departmentId", If(userDeptId.HasValue, userDeptId.Value, DBNull.Value))
+                
+                Dim remarks As String = $"Property assigned: {itemName}"
+                If Not String.IsNullOrEmpty(propertyNumber) Then remarks &= $" (Property #: {propertyNumber})"
+                If Not String.IsNullOrEmpty(serialNumber) Then remarks &= $" (Serial #: {serialNumber})"
+                borrowCmd.Parameters.AddWithValue("@remarks", remarks)
+                
+                borrowCmd.ExecuteNonQuery()
+                System.Diagnostics.Debug.WriteLine($"[v0] Created borrowed_items record for propertyId: {propertyId}, userId: {userId}")
+            End Using
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] CreateBorrowedItemRecord Exception: " & ex.Message)
+            Throw ' Re-throw to rollback transaction
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Update an existing property in the database
+    ''' Automatically manages borrowed_items records when assignment changes
+    ''' </summary>
+    Public Shared Function UpdateProperty(propertyId As Integer,
+                                          itemName As String,
+                                          category As String,
+                                          description As String,
+                                          unitOfMeasure As String,
+                                          serialNumber As String,
+                                          condition As String,
+                                          location As String,
+                                          custodianId As Integer?,
+                                          departmentId As Integer?,
+                                          acquisitionDate As Date,
+                                          acquisitionCost As Decimal,
+                                          sourceOfFunds As String,
+                                          status As String) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Dim transaction As MySqlTransaction = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+            
+            ' Start transaction
+            transaction = conn.BeginTransaction()
+            
+            ' Get current assignedTo value before update
+            Dim oldAssignedTo As Integer? = Nothing
+            Dim propertyNumber As String = ""
+            Using checkCmd As New MySqlCommand("SELECT assignedTo, propertyNumber FROM properties WHERE propertyId = @propertyId", conn, transaction)
+                checkCmd.Parameters.AddWithValue("@propertyId", propertyId)
+                Using reader As MySqlDataReader = checkCmd.ExecuteReader()
+                    If reader.Read() Then
+                        If Not reader.IsDBNull(0) Then oldAssignedTo = reader.GetInt32(0)
+                        If Not reader.IsDBNull(1) Then propertyNumber = reader.GetString(1)
+                    End If
+                End Using
+            End Using
+            
+            ' Update property
+            Dim query As String = "UPDATE properties SET itemName = @itemName, category = @category, " &
+                                 "description = @description, unitOfMeasure = @unitOfMeasure, serialNumber = @serialNumber, " &
+                                 "`condition` = @condition, location = @location, assignedTo = @assignedTo, " &
+                                 "departmentId = @departmentId, acquisitionDate = @acquisitionDate, " &
+                                 "acquisitionCost = @acquisitionCost, sourceOfFunds = @sourceOfFunds, " &
+                                 "status = @status, updatedAt = NOW() WHERE propertyId = @propertyId"
+            
+            Using cmd As New MySqlCommand(query, conn, transaction)
+                cmd.Parameters.AddWithValue("@propertyId", propertyId)
+                cmd.Parameters.AddWithValue("@itemName", itemName)
+                cmd.Parameters.AddWithValue("@category", category)
+                cmd.Parameters.AddWithValue("@description", If(String.IsNullOrWhiteSpace(description), DBNull.Value, description))
+                cmd.Parameters.AddWithValue("@unitOfMeasure", If(String.IsNullOrWhiteSpace(unitOfMeasure), DBNull.Value, unitOfMeasure))
+                cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrWhiteSpace(serialNumber), DBNull.Value, serialNumber))
+                cmd.Parameters.AddWithValue("@condition", condition)
+                cmd.Parameters.AddWithValue("@location", location)
+                cmd.Parameters.AddWithValue("@assignedTo", If(custodianId.HasValue, custodianId.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, departmentId.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
+                cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
+                cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrWhiteSpace(sourceOfFunds), DBNull.Value, sourceOfFunds))
+                cmd.Parameters.AddWithValue("@status", status)
+                
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                If rowsAffected <= 0 Then
+                    transaction.Rollback()
+                    Return False
+                End If
+            End Using
+            
+            ' Handle borrowed_items based on assignment changes
+            ' Case 1: Property was not assigned, now it is assigned
+            If (Not oldAssignedTo.HasValue OrElse oldAssignedTo.Value = 0) AndAlso custodianId.HasValue AndAlso custodianId.Value > 0 Then
+                CreateBorrowedItemRecord(conn, transaction, propertyId, custodianId.Value, departmentId, itemName, propertyNumber, serialNumber)
+            
+            ' Case 2: Property was assigned to someone, now assigned to different user
+            ElseIf oldAssignedTo.HasValue AndAlso oldAssignedTo.Value > 0 AndAlso custodianId.HasValue AndAlso custodianId.Value > 0 AndAlso oldAssignedTo.Value <> custodianId.Value Then
+                ' Mark old borrowed_items as returned
+                Using returnCmd As New MySqlCommand("UPDATE borrowed_items SET status = 'Returned', actualReturnDate = NOW(), " &
+                                                   "updatedAt = NOW() WHERE itemType = 'property' AND itemId = @propertyId AND status = 'Borrowed'", conn, transaction)
+                    returnCmd.Parameters.AddWithValue("@propertyId", propertyId)
+                    returnCmd.ExecuteNonQuery()
+                End Using
+                
+                ' Create new borrowed_items record for new user
+                CreateBorrowedItemRecord(conn, transaction, propertyId, custodianId.Value, departmentId, itemName, propertyNumber, serialNumber)
+            
+            ' Case 3: Property was assigned, now unassigned (mark as returned)
+            ElseIf oldAssignedTo.HasValue AndAlso oldAssignedTo.Value > 0 AndAlso (Not custodianId.HasValue OrElse custodianId.Value = 0) Then
+                Using returnCmd As New MySqlCommand("UPDATE borrowed_items SET status = 'Returned', actualReturnDate = NOW(), " &
+                                                   "updatedAt = NOW() WHERE itemType = 'property' AND itemId = @propertyId AND status = 'Borrowed'", conn, transaction)
+                    returnCmd.Parameters.AddWithValue("@propertyId", propertyId)
+                    returnCmd.ExecuteNonQuery()
+                End Using
+            End If
+            
+            ' Commit transaction
+            transaction.Commit()
+            System.Diagnostics.Debug.WriteLine($"[v0] UpdateProperty Success - ID: {propertyId}, OldAssignedTo: {If(oldAssignedTo.HasValue, oldAssignedTo.Value.ToString(), "None")}, NewAssignedTo: {If(custodianId.HasValue, custodianId.Value.ToString(), "None")}")
+            Return True
+            
+        Catch ex As Exception
+            If transaction IsNot Nothing Then
+                Try
+                    transaction.Rollback()
+                Catch
+                End Try
+            End If
+            System.Diagnostics.Debug.WriteLine("[v0] UpdateProperty Exception: " & ex.Message)
+            MessageBox.Show("Error updating property: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If transaction IsNot Nothing Then
+                Try
+                    transaction.Dispose()
+                Catch
+                End Try
+            End If
             If conn IsNot Nothing Then
                 Try
                     If conn.State = ConnectionState.Open Then conn.Close()

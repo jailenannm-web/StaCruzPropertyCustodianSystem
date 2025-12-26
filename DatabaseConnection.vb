@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
@@ -2811,9 +2811,10 @@ Public Class DatabaseConnection
                         If idObj IsNot Nothing AndAlso Not IsDBNull(idObj) Then
                             Integer.TryParse(idObj.ToString(), newPropertyId)
                             
-                            ' If property is assigned to a user, create custodian record
+                            ' If property is assigned to a user, create custodian record AND borrowed_items record
                             If custodianID.HasValue AndAlso custodianID.Value > 0 AndAlso newPropertyId > 0 Then
                                 AddCustodianAssignment(custodianID.Value, departmentID, newPropertyId, "property")
+                                CreateBorrowedItemFromAssignment(custodianID.Value, departmentID, newPropertyId, "property")
                             End If
                         End If
                     End Using
@@ -7897,93 +7898,6 @@ Public Class DatabaseConnection
 
 
 
-    ''' <summary>
-    ''' Update existing property (ENHANCED)
-    ''' </summary>
-    Public Shared Function UpdateProperty(propertyID As Integer, propertyName As String, category As String,
-                                         description As String, unitOfMeasure As String, serialNumber As String, 
-                                         conditionStatus As String, location As String, custodianID As Integer?, 
-                                         departmentID As Integer?, acquisitionDate As Date, acquisitionCost As Decimal,
-                                         sourceOfFunds As String, status As String) As Boolean
-        ' SuperAdmin and Admin bypass all restrictions
-        Dim isSuperAdminOrAdmin As Boolean = SessionContext.IsSuperAdmin() OrElse SessionContext.IsAdmin()
-        If Not isSuperAdminOrAdmin Then
-            If Not DemandPermission(SessionContext.ModulePermission.ModifyProperties, "update properties") Then
-                Return False
-            End If
-        End If
-        Dim conn As MySqlConnection = Nothing
-        Try
-            ' Validate serial number uniqueness (excluding current property)
-            If Not String.IsNullOrEmpty(serialNumber) Then
-                If CheckDuplicateSerialNumber(serialNumber, propertyID) Then
-                    MessageBox.Show("Serial number already exists. Please use a different serial number.", "Duplicate Serial Number", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
-                End If
-            End If
-
-            conn = GetConnection()
-            If conn Is Nothing Then Return False
-
-            If Not SafeOpenConnection(conn) Then Return False
-
-            ' Calculate total cost (same as acquisition cost for properties without quantity)
-            Dim totalCostValue As Decimal = acquisitionCost
-
-            Dim query As String = "UPDATE properties SET itemName = @propertyName, category = @category, " &
-                                 "description = @description, unitOfMeasure = @unitOfMeasure, serialNumber = @serialNumber, `condition` = @conditionStatus, " &
-                                 "location = @location, assignedTo = @custodianID, departmentId = @departmentID, " &
-                                 "acquisitionDate = @acquisitionDate, acquisitionCost = @acquisitionCost, totalCost = @totalCost, " &
-                                 "sourceOfFunds = @sourceOfFunds, status = @status, updatedAt = NOW() " &
-                                 "WHERE propertyId = @propertyID"
-
-            Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@propertyID", propertyID)
-                cmd.Parameters.AddWithValue("@propertyName", propertyName)
-                cmd.Parameters.AddWithValue("@category", category)
-                cmd.Parameters.AddWithValue("@description", If(String.IsNullOrEmpty(description), DBNull.Value, description))
-                cmd.Parameters.AddWithValue("@unitOfMeasure", If(String.IsNullOrEmpty(unitOfMeasure), DBNull.Value, unitOfMeasure))
-                cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrEmpty(serialNumber), DBNull.Value, serialNumber))
-                cmd.Parameters.AddWithValue("@conditionStatus", conditionStatus)
-                cmd.Parameters.AddWithValue("@location", location)
-                cmd.Parameters.AddWithValue("@custodianID", If(custodianID.HasValue, custodianID.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@departmentID", If(departmentID.HasValue, departmentID.Value, DBNull.Value))
-                cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
-                cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
-                cmd.Parameters.AddWithValue("@totalCost", totalCostValue)
-                cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrEmpty(sourceOfFunds), DBNull.Value, sourceOfFunds))
-                cmd.Parameters.AddWithValue("@status", status)
-
-                Dim result As Integer = cmd.ExecuteNonQuery()
-                If result > 0 Then
-                    System.Diagnostics.Debug.WriteLine("[v0] Property Updated Successfully - ID: " & propertyID)
-                    
-                    ' Update custodian assignment if assigned to a user
-                    If custodianID.HasValue AndAlso custodianID.Value > 0 Then
-                        AddCustodianAssignment(custodianID.Value, departmentID, propertyID, "property")
-                    End If
-                    
-                    MessageBox.Show("Property updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Return True
-                Else
-                    MessageBox.Show("No changes were made. Property may not exist.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
-                End If
-            End Using
-        Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] UpdateProperty Exception: " & ex.Message)
-            MessageBox.Show("Error updating property: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-        Finally
-            If conn IsNot Nothing Then
-                Try
-                    If conn.State = ConnectionState.Open Then conn.Close()
-                    conn.Dispose()
-                Catch ex As Exception
-                End Try
-            End If
-        End Try
-    End Function
 
     ''' <summary>
     ''' Delete property (with validation)
@@ -8195,6 +8109,77 @@ Public Class DatabaseConnection
         Return False
     End Function
 
+    ''' <summary>
+    ''' Create borrowed_items record when property is assigned to user
+    ''' </summary>
+    Public Shared Function CreateBorrowedItemFromAssignment(userId As Integer, departmentId As Integer?, itemId As Integer, itemType As String) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+            
+            ' Get user details
+            Dim userName As String = ""
+            Dim userPosition As String = ""
+            
+            Dim userQuery As String = "SELECT CONCAT(firstName, ' ', lastName) as fullName, position FROM users WHERE userId = @userId"
+            Using userCmd As New MySqlCommand(userQuery, conn)
+                userCmd.Parameters.AddWithValue("@userId", userId)
+                Using reader = userCmd.ExecuteReader()
+                    If reader.Read() Then
+                        userName = If(reader.IsDBNull(0), "", reader.GetString(0))
+                        userPosition = If(reader.IsDBNull(1), "", reader.GetString(1))
+                    End If
+                End Using
+            End Using
+            
+            If String.IsNullOrEmpty(userName) Then Return False
+            
+            ' Check if borrowed item already exists for this assignment
+            Dim checkQuery As String = "SELECT borrowId FROM borrowed_items WHERE itemId = @itemId AND itemType = @itemType AND borrowerName = @userName AND status = 'Borrowed'"
+            Using checkCmd As New MySqlCommand(checkQuery, conn)
+                checkCmd.Parameters.AddWithValue("@itemId", itemId)
+                checkCmd.Parameters.AddWithValue("@itemType", itemType)
+                checkCmd.Parameters.AddWithValue("@userName", userName)
+                
+                Dim existing = checkCmd.ExecuteScalar()
+                If existing IsNot Nothing Then
+                    ' Already exists, no need to create
+                    Return True
+                End If
+            End Using
+            
+            ' Create borrowed_items record
+            Dim insertQuery As String = "INSERT INTO borrowed_items (requestId, itemType, itemId, borrowerName, borrowerPosition, departmentId, borrowDate, status, remarks, createdAt, updatedAt) " &
+                                        "VALUES (NULL, @itemType, @itemId, @borrowerName, @borrowerPosition, @departmentId, CURDATE(), 'Borrowed', @remarks, NOW(), NOW())"
+            
+            Using cmd As New MySqlCommand(insertQuery, conn)
+                cmd.Parameters.AddWithValue("@itemType", itemType)
+                cmd.Parameters.AddWithValue("@itemId", itemId)
+                cmd.Parameters.AddWithValue("@borrowerName", userName)
+                cmd.Parameters.AddWithValue("@borrowerPosition", userPosition)
+                cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, CObj(departmentId.Value), DBNull.Value))
+                cmd.Parameters.AddWithValue("@remarks", "Assigned by admin")
+                
+                Dim result As Integer = cmd.ExecuteNonQuery()
+                Return result > 0
+            End Using
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] CreateBorrowedItemFromAssignment Exception: " & ex.Message)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+    
     ''' <summary>
     ''' Add or update a custodian assignment record in the custodian table
     ''' </summary>

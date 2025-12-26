@@ -12,6 +12,8 @@ Public Class EditSupply
         InitializeForm()
     End Sub
 
+    Private usersDirectory As DataTable
+    
     Private Sub InitializeForm()
         ' Initialize Category dropdown
         If cboCategory.Items.Count = 0 Then
@@ -35,6 +37,47 @@ Public Class EditSupply
 
         ' Load departments
         LoadDepartments()
+        
+        ' Load users for assignment
+        LoadUsers()
+    End Sub
+    
+    Private Sub LoadUsers()
+        Try
+            ' Load users for Assigned To dropdown
+            Using conn As MySqlConnection = DatabaseConnection.GetConnection()
+                If conn IsNot Nothing Then
+                    conn.Open()
+                    Using cmd As New MySqlCommand("SELECT userId, CONCAT(IFNULL(firstName,''), ' ', IFNULL(lastName,'')) AS fullName, employeeId FROM users WHERE status = 'Active' ORDER BY firstName, lastName", conn)
+                        Using adapter As New MySqlDataAdapter(cmd)
+                            usersDirectory = New DataTable()
+                            adapter.Fill(usersDirectory)
+
+                            If usersDirectory.Rows.Count > 0 Then
+                                ' Add a blank row for "Not Assigned"
+                                Dim blankRow As DataRow = usersDirectory.NewRow()
+                                blankRow("userId") = DBNull.Value
+                                blankRow("fullName") = "-- Not Assigned --"
+                                blankRow("employeeId") = DBNull.Value
+                                usersDirectory.Rows.InsertAt(blankRow, 0)
+
+                                ' Check if cboAssignedTo control exists
+                                Dim assignedToControls() As Control = Me.Controls.Find("cboAssignedTo", True)
+                                If assignedToControls.Length > 0 AndAlso TypeOf assignedToControls(0) Is ComboBox Then
+                                    Dim cboAssignedTo As ComboBox = CType(assignedToControls(0), ComboBox)
+                                    cboAssignedTo.DataSource = usersDirectory
+                                    cboAssignedTo.DisplayMember = "fullName"
+                                    cboAssignedTo.ValueMember = "userId"
+                                    cboAssignedTo.SelectedIndex = 0
+                                End If
+                            End If
+                        End Using
+                    End Using
+                End If
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("LoadUsers Exception: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub LoadDepartments()
@@ -84,7 +127,7 @@ Public Class EditSupply
                              description As String, unitOfMeasure As String, quantity As Integer,
                              dateReceived As Date, unitCost As Decimal, totalCost As Decimal,
                              supplier As String, sourceOfFunds As String, location As String,
-                             stockStatus As String)
+                             stockStatus As String, Optional assignedToUserId As Integer? = Nothing)
         
         SupplyIDValue = supplyID
         txtSupplyID.Text = supplyID.ToString()
@@ -101,8 +144,36 @@ Public Class EditSupply
         txtLocation.Text = location
         SetComboValue(cboStockStatus, stockStatus)
         
+        ' Set assigned user
+        If assignedToUserId.HasValue Then
+            SetUserValue(assignedToUserId.Value)
+        End If
+        
         ' Try to match location with a department
         SetDepartmentByLocation(location)
+    End Sub
+    
+    Private Sub SetUserValue(userId As Integer)
+        ' Set the assigned user in the combo box
+        Dim assignedToControls() As Control = Me.Controls.Find("cboAssignedTo", True)
+        If assignedToControls.Length > 0 AndAlso TypeOf assignedToControls(0) Is ComboBox Then
+            Dim cboAssignedTo As ComboBox = CType(assignedToControls(0), ComboBox)
+            If cboAssignedTo.DataSource IsNot Nothing Then
+                For i As Integer = 0 To cboAssignedTo.Items.Count - 1
+                    cboAssignedTo.SelectedIndex = i
+                    If cboAssignedTo.SelectedValue IsNot Nothing AndAlso Not DBNull.Value.Equals(cboAssignedTo.SelectedValue) Then
+                        Dim selectedUserId As Integer
+                        If Integer.TryParse(cboAssignedTo.SelectedValue.ToString(), selectedUserId) Then
+                            If selectedUserId = userId Then
+                                Return ' Found and selected the user
+                            End If
+                        End If
+                    End If
+                Next
+                ' If not found, reset to "Not Assigned"
+                cboAssignedTo.SelectedIndex = 0
+            End If
+        End If
     End Sub
 
     Private Sub SetDepartmentByLocation(location As String)
@@ -184,6 +255,16 @@ Public Class EditSupply
             ' Calculate total cost
             Dim totalCost As Decimal = numQuantity.Value * numUnitCost.Value
 
+            ' Get assigned user ID
+            Dim assignedTo As Integer? = Nothing
+            Dim assignedToControls() As Control = Me.Controls.Find("cboAssignedTo", True)
+            If assignedToControls.Length > 0 AndAlso TypeOf assignedToControls(0) Is ComboBox Then
+                Dim cboAssignedTo As ComboBox = CType(assignedToControls(0), ComboBox)
+                If cboAssignedTo.SelectedValue IsNot Nothing AndAlso Not cboAssignedTo.SelectedValue.Equals(DBNull.Value) Then
+                    assignedTo = CInt(cboAssignedTo.SelectedValue)
+                End If
+            End If
+
             Dim success = DatabaseConnection.UpdateSupply(
                 SupplyIDValue,
                 txtItemName.Text.Trim(),
@@ -196,6 +277,7 @@ Public Class EditSupply
                 totalCost,
                 txtSupplier.Text.Trim(),
                 GetComboValue(cboSourceOfFunds, ""),
+                assignedTo,
                 txtLocation.Text.Trim(),
                 GetComboValue(cboStockStatus, "Available")
             )
@@ -238,5 +320,9 @@ Public Class EditSupply
         Catch
             txtTotalCost.Text = "0.00"
         End Try
+    End Sub
+
+    Private Sub pnlMain_Paint(sender As Object, e As PaintEventArgs) Handles pnlMain.Paint
+
     End Sub
 End Class

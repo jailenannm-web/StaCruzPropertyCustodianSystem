@@ -52,6 +52,7 @@ Partial Class frmBorrowedItem
         Me.colPropertyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.btnRequestMaintenance = New System.Windows.Forms.Button()
+        Me.btnReturnItem = New System.Windows.Forms.Button()
         Me.lblNoItems = New System.Windows.Forms.Label()
         Me.pnlTop.SuspendLayout()
         Me.pnlFilters.SuspendLayout()
@@ -366,6 +367,7 @@ Partial Class frmBorrowedItem
         '
         Me.pnlBottom.BackColor = System.Drawing.Color.White
         Me.pnlBottom.Controls.Add(Me.btnRequestMaintenance)
+        Me.pnlBottom.Controls.Add(Me.btnReturnItem)
         Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlBottom.Location = New System.Drawing.Point(0, 739)
         Me.pnlBottom.Margin = New System.Windows.Forms.Padding(4)
@@ -383,13 +385,30 @@ Partial Class frmBorrowedItem
         Me.btnRequestMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRequestMaintenance.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.btnRequestMaintenance.ForeColor = System.Drawing.Color.White
-        Me.btnRequestMaintenance.Location = New System.Drawing.Point(1306, 25)
+        Me.btnRequestMaintenance.Location = New System.Drawing.Point(1039, 25)
         Me.btnRequestMaintenance.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRequestMaintenance.Name = "btnRequestMaintenance"
         Me.btnRequestMaintenance.Size = New System.Drawing.Size(267, 48)
         Me.btnRequestMaintenance.TabIndex = 0
         Me.btnRequestMaintenance.Text = "🔧 Request Maintenance"
         Me.btnRequestMaintenance.UseVisualStyleBackColor = False
+        '
+        'btnReturnItem
+        '
+        Me.btnReturnItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(113, Byte), Integer))
+        Me.btnReturnItem.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnReturnItem.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnReturnItem.FlatAppearance.BorderSize = 0
+        Me.btnReturnItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReturnItem.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnReturnItem.ForeColor = System.Drawing.Color.White
+        Me.btnReturnItem.Location = New System.Drawing.Point(1306, 25)
+        Me.btnReturnItem.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnReturnItem.Name = "btnReturnItem"
+        Me.btnReturnItem.Size = New System.Drawing.Size(267, 48)
+        Me.btnReturnItem.TabIndex = 1
+        Me.btnReturnItem.Text = "↩️ Return Item"
+        Me.btnReturnItem.UseVisualStyleBackColor = False
         '
         'lblNoItems
         '
@@ -448,6 +467,7 @@ Partial Class frmBorrowedItem
     Friend WithEvents lblNeedsRepair As System.Windows.Forms.Label
     Friend WithEvents dgvBorrowedItems As System.Windows.Forms.DataGridView
     Friend WithEvents pnlBottom As System.Windows.Forms.Panel
+    Friend WithEvents btnReturnItem As System.Windows.Forms.Button
     Friend WithEvents btnRequestMaintenance As System.Windows.Forms.Button
     Friend WithEvents lblNoItems As System.Windows.Forms.Label
     Friend WithEvents colRequestId As System.Windows.Forms.DataGridViewTextBoxColumn

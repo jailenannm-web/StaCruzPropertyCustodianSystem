@@ -701,6 +701,15 @@ Public Class UC_PropertyManagement1
                 End If
             End If
             
+            ' Get assignedTo userId (not the employee name)
+            Dim assignedToUserId As Integer? = Nothing
+            If propertyRow.Table.Columns.Contains("assignedTo") AndAlso Not IsDBNull(propertyRow("assignedTo")) Then
+                Dim tempUserId As Integer
+                If Integer.TryParse(propertyRow("assignedTo").ToString(), tempUserId) Then
+                    assignedToUserId = tempUserId
+                End If
+            End If
+            
             editForm.LoadPropertyData(
                 propertyID,
                 propName,
@@ -717,7 +726,8 @@ Public Class UC_PropertyManagement1
                 propertyNumber,
                 internalCodes,
                 totalCost,
-                sourceOfFunds
+                sourceOfFunds,
+                assignedToUserId
             )
         Else
             ' Fallback to DataGridView cells if originalData is not available

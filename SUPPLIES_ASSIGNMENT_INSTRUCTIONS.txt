@@ -1,0 +1,18 @@
+﻿✅ SQL Script Updated: add_assignedTo_to_supplies.sql
+
+📋 STEP 1: RUN THIS SQL FIRST!
+
+1. Open phpMyAdmin (http://localhost/phpmyadmin)
+2. Select 'teamcruzim' database
+3. Click 'SQL' tab
+4. Import or paste: add_assignedTo_to_supplies.sql
+5. Click 'Go'
+
+This will:
+✓ Add assignedTo column to supplies table
+✓ Add index for performance
+✓ Add foreign key constraint to users table
+✓ Safe to run multiple times (checks if exists first)
+
+After running the SQL, let me know and I'll update the VB code!
+
