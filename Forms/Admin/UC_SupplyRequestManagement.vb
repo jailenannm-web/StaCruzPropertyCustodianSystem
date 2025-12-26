@@ -88,6 +88,10 @@ Public Class UC_SupplyRequestManagement
                             col.DataPropertyName = "quantityRequested"
                             col.HeaderText = "Quantity Requested"
                             col.Visible = True
+                        Case "unit"
+                            col.DataPropertyName = "unit"
+                            col.HeaderText = "Unit"
+                            col.Visible = True
                         Case "dateofrequest", "date_of_request"
                             col.DataPropertyName = "dateOfRequest"
                             col.HeaderText = "Date of Request"
@@ -96,8 +100,28 @@ Public Class UC_SupplyRequestManagement
                             col.DataPropertyName = "status"
                             col.HeaderText = "Status"
                             col.Visible = True
+                        Case "remarks"
+                            col.DataPropertyName = "remarks"
+                            col.HeaderText = "Remarks"
+                            col.Visible = True
+                        Case "approvedby", "approved_by"
+                            col.DataPropertyName = "approvedBy"
+                            col.HeaderText = "Approved By ID"
+                            col.Visible = False ' Hide ID column, show name instead
+                        Case "approvedbyname", "approved_by_name"
+                            col.DataPropertyName = "approvedByName"
+                            col.HeaderText = "Approved By"
+                            col.Visible = True
+                        Case "approveddate", "approved_date"
+                            col.DataPropertyName = "approvedDate"
+                            col.HeaderText = "Approved Date"
+                            col.Visible = True
+                            ' Format date column if it's a DateTime column
+                            If TypeOf col Is DataGridViewTextBoxColumn Then
+                                col.DefaultCellStyle.Format = "yyyy-MM-dd HH:mm"
+                            End If
                         Case Else
-                            ' Hide all other columns (departmentId, createdAt, updatedAt, approvedBy, approvedDate, etc.)
+                            ' Hide all other columns (departmentId, createdAt, updatedAt, etc.)
                             col.Visible = False
                     End Select
                 Next
@@ -477,7 +501,8 @@ Public Class UC_SupplyRequestManagement
                                                                  Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
                                                                  Dim purpose As String = If(row.Table.Columns.Contains("purpose") AndAlso Not IsDBNull(row("purpose")), row("purpose").ToString().ToLower(), String.Empty)
                                                                  Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
-                                                                 Return requester.Contains(searchLower) OrElse dept.Contains(searchLower) OrElse itemName.Contains(searchLower) OrElse purpose.Contains(searchLower) OrElse status.Contains(searchLower)
+                                                                 Dim remarks As String = If(row.Table.Columns.Contains("remarks") AndAlso Not IsDBNull(row("remarks")), row("remarks").ToString().ToLower(), String.Empty)
+                                                                 Return requester.Contains(searchLower) OrElse dept.Contains(searchLower) OrElse itemName.Contains(searchLower) OrElse purpose.Contains(searchLower) OrElse status.Contains(searchLower) OrElse remarks.Contains(searchLower)
                                                              End Function)
             If filtered Is Nothing OrElse Not filtered.Any() Then
                 prm_table1.DataSource = Nothing

@@ -618,34 +618,17 @@ Public Class UC_PropertyManagement1
         ' DEBUG: Confirm button click event fires
         System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - btnAdd_Click FIRED")
         System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - IsSuperAdmin: " & SessionContext.IsSuperAdmin())
-        System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - ParentForm: " & If(Me.ParentForm IsNot Nothing, Me.ParentForm.GetType().Name, "NULL"))
+        System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - Opening AddProperty control")
         
-        ' Super Admin and Admin bypass all restrictions
-        ' Check SADashboard first (parent class)
-        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-        If saDashboard IsNot Nothing Then
-            saDashboard.LoadUserControl(New AddProperty())
-            System.Diagnostics.Debug.WriteLine("[v0] UC_PropertyManagement - AddProperty loaded into SADashboard")
-            Return
+        ' Load AddProperty UserControl in parent dashboard
+        Dim parentForm = Me.FindForm()
+        If TypeOf parentForm Is SADashboard Then
+            Dim dashboard = CType(parentForm, SADashboard)
+            dashboard.LoadUserControl(New AddProperty())
+        ElseIf TypeOf parentForm Is AdminDashboard Then
+            Dim dashboard = CType(parentForm, AdminDashboard)
+            dashboard.LoadUserControl(New AddProperty())
         End If
-        
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-        If superAdminDashboard IsNot Nothing Then
-            superAdminDashboard.LoadUserControl(New AddProperty())
-            Return
-        End If
-
-        Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-        If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New AddProperty())
-            Return
-        End If
-
-        ' Fallback (should not usually happen)
-        Dim addRequest As New AddProperty()
-        addRequest.Dock = DockStyle.Fill
-        Me.Controls.Clear()
-        Me.Controls.Add(addRequest)
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click

@@ -1,397 +1,302 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Linq
 Imports System.Windows.Forms
-Imports Microsoft.VisualBasic
+Imports MySql.Data.MySqlClient
 Imports System.Collections.Generic
 
 Public Class PropertyInventory
-    Inherits System.Windows.Forms.UserControl
-
-    Public Sub New()
-        InitializeComponent()
-        Me.Dock = DockStyle.Fill
-    End Sub
-
     Private originalData As DataTable
     Private isSearching As Boolean = False
 
+    Public Sub New()
+        InitializeComponent()
+    End Sub
+
     Private Sub PropertyInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitializeFilters()
-        LoadPropertyData()
+        LoadPropertiesData()
         
-        ' Wire up search bar
-        AddHandler propertyinventorysearchbar.TextChanged, AddressOf PropertySearch_TextChanged
+        ' Wire up events
+        AddHandler txtSearch.TextChanged, AddressOf TxtSearch_TextChanged
+        AddHandler cboCategory.SelectedIndexChanged, AddressOf Filter_Changed
+        AddHandler cboCondition.SelectedIndexChanged, AddressOf Filter_Changed
+        AddHandler cboStatus.SelectedIndexChanged, AddressOf Filter_Changed
+        AddHandler dgvProperties.CellDoubleClick, AddressOf DgvProperties_CellDoubleClick
     End Sub
-    
+
     Private Sub InitializeFilters()
-        ' Initialize condition filter (replaced Status with Condition)
-        pm_cbobx_status.Items.Clear()
-        pm_cbobx_status.Items.Add("All Conditions")
-        pm_cbobx_status.Items.AddRange(New String() {"Good", "Damaged", "Needs Repair"})
-        pm_cbobx_status.SelectedIndex = 0
-        AddHandler pm_cbobx_status.SelectedIndexChanged, AddressOf Filter_Changed
-        
-        ' Initialize category filter
-        pm_cbobx_categ.Items.Clear()
-        pm_cbobx_categ.Items.Add("All Categories")
+        ' Initialize Category filter
+        cboCategory.Items.Clear()
+        cboCategory.Items.Add("All Categories")
+        cboCategory.Items.AddRange(New String() {
+            "Furniture", "Equipment", "Office Supplies", "IT Equipment",
+            "Laboratory Apparatus", "Books and Publications",
+            "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
+        })
+        cboCategory.SelectedIndex = 0
+
+        ' Initialize Condition filter
+        cboCondition.Items.Clear()
+        cboCondition.Items.Add("All Conditions")
+        cboCondition.Items.AddRange(New String() {"Good", "Needs Repair", "Damaged"})
+        cboCondition.SelectedIndex = 0
+
+        ' Initialize Status filter
+        cboStatus.Items.Clear()
+        cboStatus.Items.Add("All Status")
+        cboStatus.Items.AddRange(New String() {"Active", "Borrowed", "For Disposal", "Lost", "Cost"})
+        cboStatus.SelectedIndex = 0
+    End Sub
+
+    Private Sub LoadPropertiesData()
         Try
-            Dim categories As DataTable = DatabaseConnection.GetCategories("property")
-            If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
-                For Each row As DataRow In categories.Rows
-                    Dim categoryName As String = ""
-                    If row.Table.Columns.Contains("category_name") AndAlso Not Convert.IsDBNull(row("category_name")) Then
-                        categoryName = row("category_name").ToString()
-                    ElseIf row.Table.Columns.Contains("categoryName") AndAlso Not Convert.IsDBNull(row("categoryName")) Then
-                        categoryName = row("categoryName").ToString()
-                    ElseIf row.Table.Columns.Count > 0 AndAlso Not Convert.IsDBNull(row(0)) Then
-                        categoryName = row(0).ToString()
+            dgvProperties.Rows.Clear()
+            
+            ' Get filter values
+            Dim categoryFilter As String = If(cboCategory.SelectedIndex > 0, cboCategory.SelectedItem.ToString(), "")
+            Dim conditionFilter As String = If(cboCondition.SelectedIndex > 0, cboCondition.SelectedItem.ToString(), "")
+            Dim statusFilter As String = If(cboStatus.SelectedIndex > 0, cboStatus.SelectedItem.ToString(), "")
+
+            ' Load properties from database - using the same function as UC_PropertyManagement1
+            Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, conditionFilter, categoryFilter, Nothing, statusFilter)
+            
+            If dt Is Nothing Then
+                MessageBox.Show("Unable to connect to database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            ' Store original data for search
+            originalData = dt.Copy()
+
+            ' Populate DataGridView
+            If dt.Rows.Count > 0 Then
+                For Each row As DataRow In dt.Rows
+                    ' Extract all fields from database
+                    Dim propertyId As String = If(row.IsNull("propertyId"), "", row("propertyId").ToString())
+                    Dim itemName As String = If(row.IsNull("itemName"), "", row("itemName").ToString())
+                    Dim category As String = If(row.IsNull("category"), "", row("category").ToString())
+                    Dim description As String = If(row.IsNull("description"), "", row("description").ToString())
+                    Dim propertyNumber As String = If(row.IsNull("propertyNumber"), "", row("propertyNumber").ToString())
+                    Dim serialNumber As String = If(row.IsNull("serialNumber"), "", row("serialNumber").ToString())
+                    Dim location As String = If(row.IsNull("location"), "", row("location").ToString())
+                    Dim condition As String = If(row.IsNull("condition"), "Good", row("condition").ToString())
+                    Dim status As String = If(row.IsNull("status"), "Active", row("status").ToString())
+                    
+                    ' Get assigned employee name
+                    Dim assignedTo As String = ""
+                    If row.Table.Columns.Contains("assignedEmployee") AndAlso Not row.IsNull("assignedEmployee") Then
+                        assignedTo = row("assignedEmployee").ToString()
+                    ElseIf row.Table.Columns.Contains("assignedTo") AndAlso Not row.IsNull("assignedTo") Then
+                        assignedTo = row("assignedTo").ToString()
                     End If
-                    If Not String.IsNullOrEmpty(categoryName) AndAlso Not pm_cbobx_categ.Items.Contains(categoryName) Then
-                        pm_cbobx_categ.Items.Add(categoryName)
+                    
+                    ' Get department name
+                    Dim department As String = ""
+                    If row.Table.Columns.Contains("departmentName") AndAlso Not row.IsNull("departmentName") Then
+                        department = row("departmentName").ToString()
+                    ElseIf row.Table.Columns.Contains("assignedDepartment") AndAlso Not row.IsNull("assignedDepartment") Then
+                        department = row("assignedDepartment").ToString()
                     End If
+                    
+                    ' Hidden fields (for internal use)
+                    Dim acquisitionDate As String = ""
+                    If row.Table.Columns.Contains("acquisitionDate") AndAlso Not row.IsNull("acquisitionDate") Then
+                        acquisitionDate = Convert.ToDateTime(row("acquisitionDate")).ToString("yyyy-MM-dd")
+                    End If
+                    
+                    Dim acquisitionCost As String = ""
+                    If row.Table.Columns.Contains("acquisitionCost") AndAlso Not row.IsNull("acquisitionCost") Then
+                        acquisitionCost = Convert.ToDecimal(row("acquisitionCost")).ToString("N2")
+                    End If
+                    
+                    Dim sourceOfFunds As String = If(row.IsNull("sourceOfFunds"), "", row("sourceOfFunds").ToString())
+
+                    ' Add row to DataGridView
+                    dgvProperties.Rows.Add(
+                        propertyId,
+                        itemName,
+                        category,
+                        description,
+                        propertyNumber,
+                        serialNumber,
+                        location,
+                        condition,
+                        status,
+                        assignedTo,
+                        department,
+                        acquisitionDate,
+                        acquisitionCost,
+                        sourceOfFunds
+                    )
                 Next
             End If
-            ' Fallback to hardcoded categories
-            If pm_cbobx_categ.Items.Count <= 1 Then
-                pm_cbobx_categ.Items.AddRange(New String() {
-                    "Furniture", "Equipment", "Office Supplies", "IT Equipment",
-                    "Laboratory Apparatus", "Books and Publications",
-                    "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
-                })
-            End If
+
+            ' Update total count
+            lblTotal.Text = "Total Properties: " & dgvProperties.Rows.Count.ToString()
+
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("InitializeFilters Category Error: " & ex.Message)
-            pm_cbobx_categ.Items.AddRange(New String() {
-                "Furniture", "Equipment", "Office Supplies", "IT Equipment",
-                "Laboratory Apparatus", "Books and Publications",
-                "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
-            })
+            MessageBox.Show("Error loading properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("PropertyInventory LoadPropertiesData Error: " & ex.Message)
         End Try
-        pm_cbobx_categ.SelectedIndex = 0
-        AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
     End Sub
-    
+
+    Private Sub TxtSearch_TextChanged(sender As Object, e As EventArgs)
+        If isSearching Then Return
+        ApplySearch()
+    End Sub
+
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
-        LoadPropertyData()
+        LoadPropertiesData()
         ' Reapply search if there's search text
-        If Not String.IsNullOrWhiteSpace(propertyinventorysearchbar.Text) Then
-            PropertySearch_TextChanged(propertyinventorysearchbar, EventArgs.Empty)
+        If Not String.IsNullOrWhiteSpace(txtSearch.Text) Then
+            ApplySearch()
         End If
     End Sub
-    
-    Private Sub PropertySearch_TextChanged(sender As Object, e As EventArgs)
-        If isSearching Then Return
-        ApplyPropertySearch(propertyinventorysearchbar.Text)
-    End Sub
-    
-    Private Sub ApplyPropertySearch(searchText As String)
+
+    Private Sub ApplySearch()
         If originalData Is Nothing OrElse originalData.Rows.Count = 0 Then Return
         If isSearching Then Return
+        
         isSearching = True
         
         Try
-            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
-            Dim categoryFilter As String = If(pm_cbobx_categ.SelectedIndex > 0, pm_cbobx_categ.SelectedItem.ToString(), String.Empty)
-            Dim conditionFilterValue As String = If(pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
+            Dim searchText As String = txtSearch.Text.Trim().ToLower()
             
-            Dim filteredRows() As DataRow = originalData.AsEnumerable().Where(Function(row)
-                ' Apply category filter
-                If Not String.IsNullOrEmpty(categoryFilter) Then
-                    Dim cat As String = If(row.Table.Columns.Contains("category") AndAlso Not Convert.IsDBNull(row("category")), row("category").ToString(), String.Empty)
-                    If Not cat.Equals(categoryFilter, StringComparison.OrdinalIgnoreCase) Then Return False
-                End If
-                
-                ' Apply condition filter (replaced status filter)
-                If Not String.IsNullOrEmpty(conditionFilterValue) Then
-                    Dim rowCondition As String = If(row.Table.Columns.Contains("condition") AndAlso Not Convert.IsDBNull(row("condition")), row("condition").ToString(), String.Empty)
-                    If Not rowCondition.Equals(conditionFilterValue, StringComparison.OrdinalIgnoreCase) Then Return False
-                End If
-                
-                ' Apply search filter
-                If String.IsNullOrEmpty(searchLower) Then Return True
-                
-                Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not Convert.IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
-                Dim category As String = If(row.Table.Columns.Contains("category") AndAlso Not Convert.IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
-                Dim description As String = If(row.Table.Columns.Contains("description") AndAlso Not Convert.IsDBNull(row("description")), row("description").ToString().ToLower(), String.Empty)
-                Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not Convert.IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
-                
-                Return itemName.Contains(searchLower) OrElse category.Contains(searchLower) OrElse description.Contains(searchLower) OrElse location.Contains(searchLower)
-            End Function).ToArray()
+            dgvProperties.Rows.Clear()
             
-            propertyManagementGrid.Rows.Clear()
+            Dim filteredRows As IEnumerable(Of DataRow) = originalData.AsEnumerable()
+            
+            ' Apply search filter
+            If Not String.IsNullOrWhiteSpace(searchText) Then
+                filteredRows = filteredRows.Where(Function(row)
+                    Dim itemName As String = If(row.IsNull("itemName"), "", row("itemName").ToString().ToLower())
+                    Dim category As String = If(row.IsNull("category"), "", row("category").ToString().ToLower())
+                    Dim description As String = If(row.IsNull("description"), "", row("description").ToString().ToLower())
+                    Dim location As String = If(row.IsNull("location"), "", row("location").ToString().ToLower())
+                    Dim propertyNumber As String = If(row.IsNull("propertyNumber"), "", row("propertyNumber").ToString().ToLower())
+                    Dim serialNumber As String = If(row.IsNull("serialNumber"), "", row("serialNumber").ToString().ToLower())
+                    
+                    Return itemName.Contains(searchText) OrElse 
+                           category.Contains(searchText) OrElse 
+                           description.Contains(searchText) OrElse 
+                           location.Contains(searchText) OrElse 
+                           propertyNumber.Contains(searchText) OrElse 
+                           serialNumber.Contains(searchText)
+                End Function)
+            End If
+            
+            ' Populate filtered results
             For Each row As DataRow In filteredRows
-                Dim propertyNo As String = ""
-                Dim itemName As String = ""
-                Dim category As String = ""
-                Dim description As String = ""
-                Dim location As String = ""
+                Dim propertyId As String = If(row.IsNull("propertyId"), "", row("propertyId").ToString())
+                Dim itemName As String = If(row.IsNull("itemName"), "", row("itemName").ToString())
+                Dim category As String = If(row.IsNull("category"), "", row("category").ToString())
+                Dim description As String = If(row.IsNull("description"), "", row("description").ToString())
+                Dim propertyNumber As String = If(row.IsNull("propertyNumber"), "", row("propertyNumber").ToString())
+                Dim serialNumber As String = If(row.IsNull("serialNumber"), "", row("serialNumber").ToString())
+                Dim location As String = If(row.IsNull("location"), "", row("location").ToString())
+                Dim condition As String = If(row.IsNull("condition"), "Good", row("condition").ToString())
+                Dim status As String = If(row.IsNull("status"), "Active", row("status").ToString())
+                
+                Dim assignedTo As String = ""
+                If row.Table.Columns.Contains("assignedEmployee") AndAlso Not row.IsNull("assignedEmployee") Then
+                    assignedTo = row("assignedEmployee").ToString()
+                ElseIf row.Table.Columns.Contains("assignedTo") AndAlso Not row.IsNull("assignedTo") Then
+                    assignedTo = row("assignedTo").ToString()
+                End If
+                
                 Dim department As String = ""
-                Dim condition As String = ""
-                Dim propertyStatus As String = ""
+                If row.Table.Columns.Contains("departmentName") AndAlso Not row.IsNull("departmentName") Then
+                    department = row("departmentName").ToString()
+                ElseIf row.Table.Columns.Contains("assignedDepartment") AndAlso Not row.IsNull("assignedDepartment") Then
+                    department = row("assignedDepartment").ToString()
+                End If
                 
-                Try
-                    If row.Table.Columns.Contains("propertyNumber") AndAlso Not Convert.IsDBNull(row("propertyNumber")) Then
-                        propertyNo = row("propertyNumber").ToString()
-                    ElseIf row.Table.Columns.Contains("propertyId") AndAlso Not Convert.IsDBNull(row("propertyId")) Then
-                        propertyNo = row("propertyId").ToString()
-                    End If
-                    If row.Table.Columns.Contains("itemName") AndAlso Not Convert.IsDBNull(row("itemName")) Then
-                        itemName = row("itemName").ToString()
-                    End If
-                    If row.Table.Columns.Contains("category") AndAlso Not Convert.IsDBNull(row("category")) Then
-                        category = row("category").ToString()
-                    End If
-                    If row.Table.Columns.Contains("description") AndAlso Not Convert.IsDBNull(row("description")) Then
-                        description = row("description").ToString()
-                    End If
-                    If row.Table.Columns.Contains("location") AndAlso Not Convert.IsDBNull(row("location")) Then
-                        location = row("location").ToString()
-                    End If
-                    If row.Table.Columns.Contains("assignedDepartment") AndAlso Not Convert.IsDBNull(row("assignedDepartment")) Then
-                        department = row("assignedDepartment").ToString()
-                    End If
-                    If row.Table.Columns.Contains("condition") AndAlso Not Convert.IsDBNull(row("condition")) Then
-                        condition = row("condition").ToString()
-                    End If
-                    If row.Table.Columns.Contains("status") AndAlso Not Convert.IsDBNull(row("status")) Then
-                        propertyStatus = row("status").ToString()
-                    End If
-                Catch colEx As Exception
-                    System.Diagnostics.Debug.WriteLine("Column access error: " & colEx.Message)
-                End Try
+                Dim acquisitionDate As String = ""
+                If row.Table.Columns.Contains("acquisitionDate") AndAlso Not row.IsNull("acquisitionDate") Then
+                    acquisitionDate = Convert.ToDateTime(row("acquisitionDate")).ToString("yyyy-MM-dd")
+                End If
                 
-                Dim quantity As Integer = 1 ' Properties are typically 1 per item
+                Dim acquisitionCost As String = ""
+                If row.Table.Columns.Contains("acquisitionCost") AndAlso Not row.IsNull("acquisitionCost") Then
+                    acquisitionCost = Convert.ToDecimal(row("acquisitionCost")).ToString("N2")
+                End If
                 
-                propertyManagementGrid.Rows.Add(propertyNo, itemName, category, description, location, department, condition, propertyStatus, quantity)
+                Dim sourceOfFunds As String = If(row.IsNull("sourceOfFunds"), "", row("sourceOfFunds").ToString())
+
+                dgvProperties.Rows.Add(
+                    propertyId,
+                    itemName,
+                    category,
+                    description,
+                    propertyNumber,
+                    serialNumber,
+                    location,
+                    condition,
+                    status,
+                    assignedTo,
+                    department,
+                    acquisitionDate,
+                    acquisitionCost,
+                    sourceOfFunds
+                )
             Next
-        Catch ex As Exception
-            MessageBox.Show("Error searching properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            
+            lblTotal.Text = "Total Properties: " & dgvProperties.Rows.Count.ToString()
+            
         Finally
             isSearching = False
         End Try
     End Sub
 
-    Private Sub LoadPropertyData()
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        LoadPropertiesData()
+        txtSearch.Clear()
+        MessageBox.Show("Property inventory refreshed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    Private Sub btnRequest_Click(sender As Object, e As EventArgs) Handles btnRequest.Click
+        ' Open request form without pre-filled data
+        Dim parentDashboard = TryCast(Me.FindForm(), StaffDashboard)
+        If parentDashboard IsNot Nothing Then
+            parentDashboard.LoadUserControl(New AddPropertyRequest())
+        End If
+    End Sub
+
+    Private Sub DgvProperties_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProperties.CellDoubleClick
+        ' When user double-clicks a property, open request form with pre-filled data
+        If e.RowIndex < 0 Then Return
+        
         Try
-            ' Get filters
-            Dim categoryFilter As String = ""
-            Dim conditionFilter As String = ""
+            Dim row As DataGridViewRow = dgvProperties.Rows(e.RowIndex)
+            Dim itemName As String = If(row.Cells("colItemName").Value IsNot Nothing, row.Cells("colItemName").Value.ToString(), "")
+            Dim description As String = If(row.Cells("colDescription").Value IsNot Nothing, row.Cells("colDescription").Value.ToString(), "")
+            Dim assignedTo As String = If(row.Cells("colAssignedTo").Value IsNot Nothing, row.Cells("colAssignedTo").Value.ToString(), "")
+            Dim status As String = If(row.Cells("colStatus").Value IsNot Nothing, row.Cells("colStatus").Value.ToString(), "")
             
-            If pm_cbobx_categ.SelectedIndex > 0 Then
-                categoryFilter = pm_cbobx_categ.SelectedItem.ToString()
-            End If
-            If pm_cbobx_status.SelectedIndex > 0 Then
-                conditionFilter = pm_cbobx_status.SelectedItem.ToString()
-            End If
-            
-            ' Load all available properties from database with filters (condition replaces status)
-            Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, "", categoryFilter, Nothing, "")
-            ' Filter by condition in code since GetAllProperties doesn't support condition filter
-            
-            If dt Is Nothing Then
-                MessageBox.Show("Unable to connect to the database. Please ensure MySQL is running and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            ' Check if property is already assigned
+            If Not String.IsNullOrWhiteSpace(assignedTo) OrElse status = "Borrowed" Then
+                MessageBox.Show("This property is already assigned to someone. You cannot request an assigned property.", _
+                               "Property Already Assigned", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
             
-            ' Apply condition filter if specified
-            If Not String.IsNullOrEmpty(conditionFilter) Then
-                Dim conditionRows = dt.AsEnumerable().Where(Function(row)
-                    Dim rowCondition As String = If(row.Table.Columns.Contains("condition") AndAlso Not Convert.IsDBNull(row("condition")), row("condition").ToString(), String.Empty)
-                    Return rowCondition.Equals(conditionFilter, StringComparison.OrdinalIgnoreCase)
-                End Function).ToArray()
-                dt = conditionRows.CopyToDataTable()
+            ' Check if property is available
+            If status <> "Active" Then
+                MessageBox.Show("This property is not available for request. Current status: " & status, _
+                               "Property Not Available", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
             End If
             
-            ' Store original data for search
-            originalData = dt.Copy()
-            
-            ' Clear existing data
-            propertyManagementGrid.Rows.Clear()
-            
-            ' Populate DataGridView
-            If dt.Rows.Count > 0 Then
-                For Each row As DataRow In dt.Rows
-                    Dim propertyNo As String = ""
-                    Dim itemName As String = ""
-                    Dim category As String = ""
-                    Dim description As String = ""
-                    Dim location As String = ""
-                    Dim department As String = ""
-                    Dim condition As String = ""
-                    Dim propertyStatus As String = ""
-                    
-                    ' Handle different possible column names
-                    Try
-                        If row.Table.Columns.Contains("propertyNumber") AndAlso Not Convert.IsDBNull(row("propertyNumber")) Then
-                            propertyNo = row("propertyNumber").ToString()
-                        ElseIf row.Table.Columns.Contains("propertyId") AndAlso Not Convert.IsDBNull(row("propertyId")) Then
-                            propertyNo = row("propertyId").ToString()
-                        End If
-                        If row.Table.Columns.Contains("itemName") AndAlso Not Convert.IsDBNull(row("itemName")) Then
-                            itemName = row("itemName").ToString()
-                        End If
-                        If row.Table.Columns.Contains("category") AndAlso Not Convert.IsDBNull(row("category")) Then
-                            category = row("category").ToString()
-                        End If
-                        If row.Table.Columns.Contains("description") AndAlso Not Convert.IsDBNull(row("description")) Then
-                            description = row("description").ToString()
-                        End If
-                        If row.Table.Columns.Contains("location") AndAlso Not Convert.IsDBNull(row("location")) Then
-                            location = row("location").ToString()
-                        End If
-                        If row.Table.Columns.Contains("assignedDepartment") AndAlso Not Convert.IsDBNull(row("assignedDepartment")) Then
-                            department = row("assignedDepartment").ToString()
-                        End If
-                        If row.Table.Columns.Contains("condition") AndAlso Not Convert.IsDBNull(row("condition")) Then
-                            condition = row("condition").ToString()
-                        End If
-                        If row.Table.Columns.Contains("status") AndAlso Not Convert.IsDBNull(row("status")) Then
-                            propertyStatus = row("status").ToString()
-                        End If
-                    Catch colEx As Exception
-                        ' Handle column access errors gracefully
-                        System.Diagnostics.Debug.WriteLine("Column access error: " & colEx.Message)
-                    End Try
-                    
-                    Dim quantity As Integer = 1 ' Properties are typically 1 per item
-                    
-                    propertyManagementGrid.Rows.Add(propertyNo, itemName, category, description, location, department, condition, propertyStatus, quantity)
-                Next
+            ' Navigate to request form with pre-filled data
+            Dim parentDashboard = TryCast(Me.FindForm(), StaffDashboard)
+            If parentDashboard IsNot Nothing Then
+                Dim requestForm As New AddPropertyRequest(itemName, description, 1)
+                parentDashboard.LoadUserControl(requestForm)
             End If
             
-            ' Update total properties count after populating grid
-            UpdateTotalPropertiesCount(propertyManagementGrid.Rows.Count)
-            
-            ' Auto-size columns
-            propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         Catch ex As Exception
-            Dim errorMsg As String = "Unable to connect to the database. Please ensure MySQL is running and try again."
-            MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            System.Diagnostics.Debug.WriteLine("PropertyInventory LoadPropertyData Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+            MessageBox.Show("Error loading request form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-    End Sub
-    Private Sub btnrequestproperty_Click(sender As Object, e As System.EventArgs)
-        Dim addRequest As New AddPropertyRequest()
-        addRequest.Dock = DockStyle.Fill
-
-        ' Clear previous controls
-        Me.Controls.Clear()
-
-        ' Add new user control
-        Me.Controls.Add(addRequest)
-    End Sub
-
-    Private Sub btnrequestproperty_Click_1(sender As Object, e As System.EventArgs) Handles btnrequestproperty.Click
-        ' Load AddPropertyRequest into parent dashboard
-        Dim parentDashboard = TryCast(Me.ParentForm, StaffDashboard)
-        If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New AddPropertyRequest())
-        Else
-            ' Fallback: add directly to parent
-            Dim addPropertyRequest As New AddPropertyRequest()
-            addPropertyRequest.Dock = DockStyle.Fill
-            Me.Parent.Controls.Clear()
-            Me.Parent.Controls.Add(addPropertyRequest)
-        End If
-    End Sub
-    
-    Private Sub propertyManagementGrid_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles propertyManagementGrid.CellClick
-        ' Auto-fill property request form when clicking a row
-        If e.RowIndex >= 0 AndAlso e.RowIndex < propertyManagementGrid.Rows.Count Then
-            Try
-                Dim selectedRow As DataGridViewRow = propertyManagementGrid.Rows(e.RowIndex)
-                
-                ' Column order: propertyNo (0), itemName (1), category (2), description (3), location (4), department (5), condition (6), status (7), quantity (8)
-                Dim itemName As String = If(selectedRow.Cells.Count > 1 AndAlso selectedRow.Cells(1).Value IsNot Nothing, selectedRow.Cells(1).Value.ToString(), "")
-                Dim itemDescription As String = If(selectedRow.Cells.Count > 3 AndAlso selectedRow.Cells(3).Value IsNot Nothing, selectedRow.Cells(3).Value.ToString(), "")
-                
-                ' Get staff profile for auto-fill
-                Dim requesterName As String = ""
-                Dim position As String = ""
-                Dim department As String = ""
-                Dim currentDate As String = Date.Now.ToString("yyyy-MM-dd")
-                
-                If SessionContext.CurrentUserID.HasValue Then
-                    Try
-                        Dim profile As System.Collections.Generic.Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
-                        If profile IsNot Nothing AndAlso profile.Count > 0 Then
-                            ' Build full name
-                            Dim firstName As String = If(profile.ContainsKey("firstName"), profile("firstName").ToString(), "")
-                            Dim lastName As String = If(profile.ContainsKey("lastName"), profile("lastName").ToString(), "")
-                            Dim middleName As String = If(profile.ContainsKey("middleName") AndAlso profile("middleName") IsNot Nothing, profile("middleName").ToString(), "")
-                            requesterName = firstName & If(Not String.IsNullOrEmpty(middleName), " " & middleName, "") & " " & lastName
-                            
-                            ' Get position
-                            If profile.ContainsKey("position") AndAlso profile("position") IsNot Nothing Then
-                                position = profile("position").ToString()
-                            End If
-                            
-                            ' Get department name
-                            If profile.ContainsKey("departmentId") AndAlso profile("departmentId") IsNot Nothing Then
-                                Try
-                                    Dim deptID As Integer = Convert.ToInt32(profile("departmentId"))
-                                    Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
-                                    For Each row As DataRow In dt.Rows
-                                        Dim rowDeptID As Integer = 0
-                                        If row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")) Then
-                                            Integer.TryParse(row("departmentId").ToString(), rowDeptID)
-                                        ElseIf row.Table.Columns.Contains("department_id") AndAlso Not IsDBNull(row("department_id")) Then
-                                            Integer.TryParse(row("department_id").ToString(), rowDeptID)
-                                        End If
-                                        If rowDeptID = deptID Then
-                                            If row.Table.Columns.Contains("departmentName") Then
-                                                department = row("departmentName").ToString()
-                                            ElseIf row.Table.Columns.Contains("department_name") Then
-                                                department = row("department_name").ToString()
-                                            End If
-                                            Exit For
-                                        End If
-                                    Next
-                                Catch
-                                End Try
-                            End If
-                        End If
-                    Catch ex As Exception
-                        System.Diagnostics.Debug.WriteLine("GetStaffProfile Error in CellClick: " & ex.Message)
-                    End Try
-                End If
-                
-                ' Navigate to request form with pre-filled data
-                Dim parentDashboard = TryCast(Me.ParentForm, StaffDashboard)
-                If parentDashboard IsNot Nothing Then
-                    Dim requestForm As New AddPropertyRequest(itemName, itemDescription, requesterName, position, department, currentDate)
-                    parentDashboard.LoadUserControl(requestForm)
-                End If
-            Catch ex As Exception
-                System.Diagnostics.Debug.WriteLine("PropertyInventory CellClick Error: " & ex.Message)
-                MessageBox.Show("Error loading request form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        End If
-    End Sub
-    
-    Private Sub UpdateTotalPropertiesCount(count As Integer)
-        ' Find or create total count label
-        Dim totalLabel As Label = Nothing
-        For Each ctrl As Control In Me.Controls
-            If TypeOf ctrl Is Label AndAlso ctrl.Name = "lblTotalProperties" Then
-                totalLabel = CType(ctrl, Label)
-                Exit For
-            End If
-        Next
-        
-        If totalLabel Is Nothing Then
-            ' Create label if it doesn't exist
-            totalLabel = New System.Windows.Forms.Label()
-            totalLabel.Name = "lblTotalProperties"
-            totalLabel.AutoSize = True
-            totalLabel.Font = New System.Drawing.Font("Poppins", 10.0F, System.Drawing.FontStyle.Bold)
-            totalLabel.ForeColor = System.Drawing.Color.FromArgb(27, 60, 83)
-            totalLabel.Location = New System.Drawing.Point(Label3.Left, Label3.Bottom + 10)
-            Me.Controls.Add(totalLabel)
-            totalLabel.BringToFront()
-        End If
-        
-        totalLabel.Text = "Total Properties: " & count.ToString()
     End Sub
 End Class

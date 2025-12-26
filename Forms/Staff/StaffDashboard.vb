@@ -225,9 +225,11 @@ Public Class StaffDashboard
         ' --- This code changes the active button color ---
         SetActiveButton(btnBorrowedItem)
 
-        ' --- THIS IS THE NEW CODE ---
-        ' Load your new profile form
-        loadFormIntoPanel(New frmBorrowedItem())
+        ' Load borrowed items user control
+        Dim borrowedItemControl As New frmBorrowedItem()
+        pnlFormLoader.Controls.Clear()
+        borrowedItemControl.Dock = DockStyle.Fill
+        pnlFormLoader.Controls.Add(borrowedItemControl)
     End Sub
 
     Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click

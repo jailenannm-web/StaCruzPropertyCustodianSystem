@@ -1,9 +1,11 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Imports System.Windows.Forms
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class PropertyInventory
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,233 +22,394 @@ Partial Class PropertyInventory
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.propertyManagementGrid = New System.Windows.Forms.DataGridView()
-        Me.propertyno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.itemname = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.condition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantityavail = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnrequestproperty = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.propertyinventorysearchbar = New System.Windows.Forms.TextBox()
-        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
-        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
-        CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.pnlFilters = New System.Windows.Forms.Panel()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.lblSearch = New System.Windows.Forms.Label()
+        Me.cboCategory = New System.Windows.Forms.ComboBox()
+        Me.lblCategory = New System.Windows.Forms.Label()
+        Me.cboCondition = New System.Windows.Forms.ComboBox()
+        Me.lblCondition = New System.Windows.Forms.Label()
+        Me.cboStatus = New System.Windows.Forms.ComboBox()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.btnRefresh = New System.Windows.Forms.Button()
+        Me.dgvProperties = New System.Windows.Forms.DataGridView()
+        Me.colPropertyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPropertyNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colSerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colLocation = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCondition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAssignedTo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAcquisitionDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAcquisitionCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colSourceOfFunds = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lblTotal = New System.Windows.Forms.Label()
+        Me.btnRequest = New System.Windows.Forms.Button()
+        Me.pnlMain.SuspendLayout()
+        Me.pnlFilters.SuspendLayout()
+        CType(Me.dgvProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'propertyManagementGrid
+        'pnlMain
         '
-        Me.propertyManagementGrid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.pnlMain.BackColor = System.Drawing.Color.White
+        Me.pnlMain.Controls.Add(Me.btnRequest)
+        Me.pnlMain.Controls.Add(Me.lblTotal)
+        Me.pnlMain.Controls.Add(Me.dgvProperties)
+        Me.pnlMain.Controls.Add(Me.pnlFilters)
+        Me.pnlMain.Controls.Add(Me.lblTitle)
+        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMain.Location = New System.Drawing.Point(0, 0)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Padding = New System.Windows.Forms.Padding(20)
+        Me.pnlMain.Size = New System.Drawing.Size(1251, 889)
+        Me.pnlMain.TabIndex = 0
+        '
+        'lblTitle
+        '
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Font = New System.Drawing.Font("Poppins", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.lblTitle.Location = New System.Drawing.Point(20, 20)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(310, 53)
+        Me.lblTitle.TabIndex = 0
+        Me.lblTitle.Text = "Property Inventory"
+        '
+        'pnlFilters
+        '
+        Me.pnlFilters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(248, Byte), Integer), CType(CType(249, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.pnlFilters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlFilters.Controls.Add(Me.btnRefresh)
+        Me.pnlFilters.Controls.Add(Me.lblStatus)
+        Me.pnlFilters.Controls.Add(Me.cboStatus)
+        Me.pnlFilters.Controls.Add(Me.lblCondition)
+        Me.pnlFilters.Controls.Add(Me.cboCondition)
+        Me.pnlFilters.Controls.Add(Me.lblCategory)
+        Me.pnlFilters.Controls.Add(Me.cboCategory)
+        Me.pnlFilters.Controls.Add(Me.lblSearch)
+        Me.pnlFilters.Controls.Add(Me.txtSearch)
+        Me.pnlFilters.Location = New System.Drawing.Point(30, 90)
+        Me.pnlFilters.Name = "pnlFilters"
+        Me.pnlFilters.Padding = New System.Windows.Forms.Padding(15)
+        Me.pnlFilters.Size = New System.Drawing.Size(1191, 100)
+        Me.pnlFilters.TabIndex = 1
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtSearch.Location = New System.Drawing.Point(20, 45)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(300, 30)
+        Me.txtSearch.TabIndex = 1
+        '
+        'lblSearch
+        '
+        Me.lblSearch.AutoSize = True
+        Me.lblSearch.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.lblSearch.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblSearch.Location = New System.Drawing.Point(20, 20)
+        Me.lblSearch.Name = "lblSearch"
+        Me.lblSearch.Size = New System.Drawing.Size(128, 23)
+        Me.lblSearch.TabIndex = 0
+        Me.lblSearch.Text = "Search Properties"
+        '
+        'cboCategory
+        '
+        Me.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCategory.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboCategory.FormattingEnabled = True
+        Me.cboCategory.Location = New System.Drawing.Point(340, 45)
+        Me.cboCategory.Name = "cboCategory"
+        Me.cboCategory.Size = New System.Drawing.Size(200, 34)
+        Me.cboCategory.TabIndex = 3
+        '
+        'lblCategory
+        '
+        Me.lblCategory.AutoSize = True
+        Me.lblCategory.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.lblCategory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblCategory.Location = New System.Drawing.Point(340, 20)
+        Me.lblCategory.Name = "lblCategory"
+        Me.lblCategory.Size = New System.Drawing.Size(70, 23)
+        Me.lblCategory.TabIndex = 2
+        Me.lblCategory.Text = "Category"
+        '
+        'cboCondition
+        '
+        Me.cboCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCondition.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboCondition.FormattingEnabled = True
+        Me.cboCondition.Location = New System.Drawing.Point(560, 45)
+        Me.cboCondition.Name = "cboCondition"
+        Me.cboCondition.Size = New System.Drawing.Size(180, 34)
+        Me.cboCondition.TabIndex = 5
+        '
+        'lblCondition
+        '
+        Me.lblCondition.AutoSize = True
+        Me.lblCondition.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.lblCondition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblCondition.Location = New System.Drawing.Point(560, 20)
+        Me.lblCondition.Name = "lblCondition"
+        Me.lblCondition.Size = New System.Drawing.Size(75, 23)
+        Me.lblCondition.TabIndex = 4
+        Me.lblCondition.Text = "Condition"
+        '
+        'cboStatus
+        '
+        Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatus.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboStatus.FormattingEnabled = True
+        Me.cboStatus.Location = New System.Drawing.Point(760, 45)
+        Me.cboStatus.Name = "cboStatus"
+        Me.cboStatus.Size = New System.Drawing.Size(180, 34)
+        Me.cboStatus.TabIndex = 7
+        '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.lblStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblStatus.Location = New System.Drawing.Point(760, 20)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(51, 23)
+        Me.lblStatus.TabIndex = 6
+        Me.lblStatus.Text = "Status"
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnRefresh.FlatAppearance.BorderSize = 0
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnRefresh.ForeColor = System.Drawing.Color.White
+        Me.btnRefresh.Location = New System.Drawing.Point(960, 40)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(120, 40)
+        Me.btnRefresh.TabIndex = 8
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = False
+        '
+        'dgvProperties
+        '
+        Me.dgvProperties.AllowUserToAddRows = False
+        Me.dgvProperties.AllowUserToDeleteRows = False
+        Me.dgvProperties.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
-        Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyno, Me.itemname, Me.category, Me.description, Me.location, Me.department, Me.condition, Me.status, Me.quantityavail})
-        Me.propertyManagementGrid.Location = New System.Drawing.Point(3, 3)
-        Me.propertyManagementGrid.Name = "propertyManagementGrid"
-        Me.propertyManagementGrid.RowHeadersWidth = 51
-        Me.propertyManagementGrid.RowTemplate.Height = 24
-        Me.propertyManagementGrid.Size = New System.Drawing.Size(1269, 878)
-        Me.propertyManagementGrid.TabIndex = 46
+        Me.dgvProperties.BackgroundColor = System.Drawing.Color.White
+        Me.dgvProperties.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgvProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvProperties.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colPropertyId, Me.colItemName, Me.colCategory, Me.colDescription, Me.colPropertyNumber, Me.colSerialNumber, Me.colLocation, Me.colCondition, Me.colStatus, Me.colAssignedTo, Me.colDepartment, Me.colAcquisitionDate, Me.colAcquisitionCost, Me.colSourceOfFunds})
+        Me.dgvProperties.Location = New System.Drawing.Point(30, 210)
+        Me.dgvProperties.MultiSelect = False
+        Me.dgvProperties.Name = "dgvProperties"
+        Me.dgvProperties.ReadOnly = True
+        Me.dgvProperties.RowHeadersWidth = 51
+        Me.dgvProperties.RowTemplate.Height = 30
+        Me.dgvProperties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvProperties.Size = New System.Drawing.Size(1191, 570)
+        Me.dgvProperties.TabIndex = 2
         '
-        'propertyno
+        'colPropertyId
         '
-        Me.propertyno.HeaderText = "Property No."
-        Me.propertyno.MinimumWidth = 6
-        Me.propertyno.Name = "propertyno"
-        Me.propertyno.Width = 127
+        Me.colPropertyId.HeaderText = "Property ID"
+        Me.colPropertyId.MinimumWidth = 6
+        Me.colPropertyId.Name = "colPropertyId"
+        Me.colPropertyId.ReadOnly = True
+        Me.colPropertyId.Visible = False
+        Me.colPropertyId.Width = 100
         '
-        'itemname
+        'colItemName
         '
-        Me.itemname.HeaderText = "Item Name"
-        Me.itemname.MinimumWidth = 6
-        Me.itemname.Name = "itemname"
-        Me.itemname.Width = 170
+        Me.colItemName.HeaderText = "Item Name"
+        Me.colItemName.MinimumWidth = 6
+        Me.colItemName.Name = "colItemName"
+        Me.colItemName.ReadOnly = True
+        Me.colItemName.Width = 200
         '
-        'category
+        'colCategory
         '
-        Me.category.HeaderText = "Category"
-        Me.category.MinimumWidth = 6
-        Me.category.Name = "category"
-        Me.category.Width = 125
+        Me.colCategory.HeaderText = "Category"
+        Me.colCategory.MinimumWidth = 6
+        Me.colCategory.Name = "colCategory"
+        Me.colCategory.ReadOnly = True
+        Me.colCategory.Width = 150
         '
-        'description
+        'colDescription
         '
-        Me.description.HeaderText = "Description"
-        Me.description.MinimumWidth = 6
-        Me.description.Name = "description"
-        Me.description.Width = 170
+        Me.colDescription.HeaderText = "Description"
+        Me.colDescription.MinimumWidth = 6
+        Me.colDescription.Name = "colDescription"
+        Me.colDescription.ReadOnly = True
+        Me.colDescription.Width = 250
         '
-        'location
+        'colPropertyNumber
         '
-        Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
-        Me.location.Name = "location"
-        Me.location.Width = 125
+        Me.colPropertyNumber.HeaderText = "Property #"
+        Me.colPropertyNumber.MinimumWidth = 6
+        Me.colPropertyNumber.Name = "colPropertyNumber"
+        Me.colPropertyNumber.ReadOnly = True
+        Me.colPropertyNumber.Width = 120
         '
-        'department
+        'colSerialNumber
         '
-        Me.department.HeaderText = "Department"
-        Me.department.MinimumWidth = 6
-        Me.department.Name = "department"
-        Me.department.Width = 125
+        Me.colSerialNumber.HeaderText = "Serial #"
+        Me.colSerialNumber.MinimumWidth = 6
+        Me.colSerialNumber.Name = "colSerialNumber"
+        Me.colSerialNumber.ReadOnly = True
+        Me.colSerialNumber.Width = 120
         '
-        'condition
+        'colLocation
         '
-        Me.condition.HeaderText = "Condition"
-        Me.condition.MinimumWidth = 6
-        Me.condition.Name = "condition"
-        Me.condition.Width = 125
+        Me.colLocation.HeaderText = "Location"
+        Me.colLocation.MinimumWidth = 6
+        Me.colLocation.Name = "colLocation"
+        Me.colLocation.ReadOnly = True
+        Me.colLocation.Width = 150
         '
-        'status
+        'colCondition
         '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
+        Me.colCondition.HeaderText = "Condition"
+        Me.colCondition.MinimumWidth = 6
+        Me.colCondition.Name = "colCondition"
+        Me.colCondition.ReadOnly = True
+        Me.colCondition.Width = 120
         '
-        'quantityavail
+        'colStatus
         '
-        Me.quantityavail.HeaderText = "Quantity"
-        Me.quantityavail.MinimumWidth = 6
-        Me.quantityavail.Name = "quantityavail"
-        Me.quantityavail.Width = 100
+        Me.colStatus.HeaderText = "Status"
+        Me.colStatus.MinimumWidth = 6
+        Me.colStatus.Name = "colStatus"
+        Me.colStatus.ReadOnly = True
+        Me.colStatus.Width = 120
         '
-        'Label3
+        'colAssignedTo
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(74, 72)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(342, 58)
-        Me.Label3.TabIndex = 166
-        Me.Label3.Text = "Property Inventory"
+        Me.colAssignedTo.HeaderText = "Assigned To"
+        Me.colAssignedTo.MinimumWidth = 6
+        Me.colAssignedTo.Name = "colAssignedTo"
+        Me.colAssignedTo.ReadOnly = True
+        Me.colAssignedTo.Width = 150
         '
-        'TableLayoutPanel1
+        'colDepartment
         '
-        Me.TableLayoutPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.5!))
-        Me.TableLayoutPanel1.Controls.Add(Me.propertyManagementGrid, 0, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(84, 133)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1275, 884)
-        Me.TableLayoutPanel1.TabIndex = 167
+        Me.colDepartment.HeaderText = "Department"
+        Me.colDepartment.MinimumWidth = 6
+        Me.colDepartment.Name = "colDepartment"
+        Me.colDepartment.ReadOnly = True
+        Me.colDepartment.Width = 150
         '
-        'btnrequestproperty
+        'colAcquisitionDate
         '
-        Me.btnrequestproperty.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnrequestproperty.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnrequestproperty.CornerRadius = 15
-        Me.btnrequestproperty.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnrequestproperty.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnrequestproperty.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnrequestproperty.Location = New System.Drawing.Point(1142, 1063)
-        Me.btnrequestproperty.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnrequestproperty.Name = "btnrequestproperty"
-        Me.btnrequestproperty.Size = New System.Drawing.Size(217, 39)
-        Me.btnrequestproperty.TabIndex = 168
-        Me.btnrequestproperty.Text = "Request Property"
-        Me.btnrequestproperty.UseVisualStyleBackColor = False
+        Me.colAcquisitionDate.HeaderText = "Acquisition Date"
+        Me.colAcquisitionDate.MinimumWidth = 6
+        Me.colAcquisitionDate.Name = "colAcquisitionDate"
+        Me.colAcquisitionDate.ReadOnly = True
+        Me.colAcquisitionDate.Visible = False
+        Me.colAcquisitionDate.Width = 130
         '
-        'PictureBox2
+        'colAcquisitionCost
         '
-        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(437, 72)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 186
-        Me.PictureBox2.TabStop = False
+        Me.colAcquisitionCost.HeaderText = "Acquisition Cost"
+        Me.colAcquisitionCost.MinimumWidth = 6
+        Me.colAcquisitionCost.Name = "colAcquisitionCost"
+        Me.colAcquisitionCost.ReadOnly = True
+        Me.colAcquisitionCost.Visible = False
+        Me.colAcquisitionCost.Width = 130
         '
-        'propertyinventorysearchbar
+        'colSourceOfFunds
         '
-        Me.propertyinventorysearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.propertyinventorysearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertyinventorysearchbar.Location = New System.Drawing.Point(502, 72)
-        Me.propertyinventorysearchbar.Margin = New System.Windows.Forms.Padding(4)
-        Me.propertyinventorysearchbar.Name = "propertyinventorysearchbar"
-        Me.propertyinventorysearchbar.Size = New System.Drawing.Size(367, 42)
-        Me.propertyinventorysearchbar.TabIndex = 185
+        Me.colSourceOfFunds.HeaderText = "Source Of Funds"
+        Me.colSourceOfFunds.MinimumWidth = 6
+        Me.colSourceOfFunds.Name = "colSourceOfFunds"
+        Me.colSourceOfFunds.ReadOnly = True
+        Me.colSourceOfFunds.Visible = False
+        Me.colSourceOfFunds.Width = 150
         '
-        'pm_cbobx_status
+        'lblTotal
         '
-        Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(1084, 83)
-        Me.pm_cbobx_status.Name = "pm_cbobx_status"
-        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
-        Me.pm_cbobx_status.TabIndex = 183
-        Me.pm_cbobx_status.Text = "Condition"
+        Me.lblTotal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblTotal.AutoSize = True
+        Me.lblTotal.Font = New System.Drawing.Font("Poppins", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTotal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.lblTotal.Location = New System.Drawing.Point(30, 800)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(194, 30)
+        Me.lblTotal.TabIndex = 3
+        Me.lblTotal.Text = "Total Properties: 0"
         '
-        'pm_cbobx_categ
+        'btnRequest
         '
-        Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(909, 83)
-        Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
-        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
-        Me.pm_cbobx_categ.TabIndex = 184
-        Me.pm_cbobx_categ.Text = "Categories"
+        Me.btnRequest.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRequest.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(113, Byte), Integer))
+        Me.btnRequest.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnRequest.FlatAppearance.BorderSize = 0
+        Me.btnRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRequest.Font = New System.Drawing.Font("Poppins", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnRequest.ForeColor = System.Drawing.Color.White
+        Me.btnRequest.Location = New System.Drawing.Point(1041, 795)
+        Me.btnRequest.Name = "btnRequest"
+        Me.btnRequest.Size = New System.Drawing.Size(180, 45)
+        Me.btnRequest.TabIndex = 4
+        Me.btnRequest.Text = "Request Property"
+        Me.btnRequest.UseVisualStyleBackColor = False
         '
         'PropertyInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.propertyinventorysearchbar)
-        Me.Controls.Add(Me.pm_cbobx_status)
-        Me.Controls.Add(Me.pm_cbobx_categ)
-        Me.Controls.Add(Me.btnrequestproperty)
-        Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.pnlMain)
         Me.Name = "PropertyInventory"
-        Me.Size = New System.Drawing.Size(1467, 1175)
-        CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(1251, 889)
+        Me.pnlMain.ResumeLayout(False)
+        Me.pnlMain.PerformLayout()
+        Me.pnlFilters.ResumeLayout(False)
+        Me.pnlFilters.PerformLayout()
+        CType(Me.dgvProperties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents propertyManagementGrid As System.Windows.Forms.DataGridView
-    Friend WithEvents propertyno As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents itemname As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents category As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents description As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend Shadows WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents department As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents condition As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents quantityavail As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents btnrequestproperty As Resources.Controls.RoundedButton
-    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
-    Friend WithEvents propertyinventorysearchbar As System.Windows.Forms.TextBox
-    Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
-    Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox
+    Friend WithEvents pnlMain As Panel
+    Friend WithEvents lblTitle As Label
+    Friend WithEvents pnlFilters As Panel
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents lblSearch As Label
+    Friend WithEvents cboCategory As ComboBox
+    Friend WithEvents lblCategory As Label
+    Friend WithEvents cboCondition As ComboBox
+    Friend WithEvents lblCondition As Label
+    Friend WithEvents cboStatus As ComboBox
+    Friend WithEvents lblStatus As Label
+    Friend WithEvents btnRefresh As Button
+    Friend WithEvents dgvProperties As DataGridView
+    Friend WithEvents colPropertyId As DataGridViewTextBoxColumn
+    Friend WithEvents colItemName As DataGridViewTextBoxColumn
+    Friend WithEvents colCategory As DataGridViewTextBoxColumn
+    Friend WithEvents colDescription As DataGridViewTextBoxColumn
+    Friend WithEvents colPropertyNumber As DataGridViewTextBoxColumn
+    Friend WithEvents colSerialNumber As DataGridViewTextBoxColumn
+    Friend WithEvents colLocation As DataGridViewTextBoxColumn
+    Friend WithEvents colCondition As DataGridViewTextBoxColumn
+    Friend WithEvents colStatus As DataGridViewTextBoxColumn
+    Friend WithEvents colAssignedTo As DataGridViewTextBoxColumn
+    Friend WithEvents colDepartment As DataGridViewTextBoxColumn
+    Friend WithEvents colAcquisitionDate As DataGridViewTextBoxColumn
+    Friend WithEvents colAcquisitionCost As DataGridViewTextBoxColumn
+    Friend WithEvents colSourceOfFunds As DataGridViewTextBoxColumn
+    Friend WithEvents lblTotal As Label
+    Friend WithEvents btnRequest As Button
 End Class

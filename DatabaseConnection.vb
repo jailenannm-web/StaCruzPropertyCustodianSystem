@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
@@ -2810,6 +2810,11 @@ Public Class DatabaseConnection
                         Dim idObj = idCmd.ExecuteScalar()
                         If idObj IsNot Nothing AndAlso Not IsDBNull(idObj) Then
                             Integer.TryParse(idObj.ToString(), newPropertyId)
+                            
+                            ' If property is assigned to a user, create custodian record
+                            If custodianID.HasValue AndAlso custodianID.Value > 0 AndAlso newPropertyId > 0 Then
+                                AddCustodianAssignment(custodianID.Value, departmentID, newPropertyId, "property")
+                            End If
                         End If
                     End Using
                     
@@ -3047,7 +3052,7 @@ Public Class DatabaseConnection
             End If
             If String.IsNullOrEmpty(finalPosition) Then finalPosition = "Staff"
 
-            ' Note: property_requests table does NOT have userId column based on schema
+            ' Insert property request without requestedBy column (using name matching instead)
             Dim query As String = "INSERT INTO property_requests (requesterName, position, departmentId, dateOfRequest, " &
                                  "itemName, description, quantityRequested, unit, purpose, status) " &
                                  "VALUES (@requesterName, @position, @departmentID, CURDATE(), @itemName, " &
@@ -3072,7 +3077,7 @@ Public Class DatabaseConnection
                 End If
                 If String.IsNullOrEmpty(finalRequesterName) Then finalRequesterName = "Unknown"
 
-                ' Removed @userID parameter since property_requests table doesn't have userId column
+                ' Using name matching since database doesn't have requestedBy column
                 cmd.Parameters.AddWithValue("@requesterName", finalRequesterName)
                 cmd.Parameters.AddWithValue("@position", finalPosition)
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
@@ -3250,14 +3255,14 @@ Public Class DatabaseConnection
                 End Try
             End If
 
-            ' Note: supplies_requests table does NOT have userId column based on schema
+            ' Insert supply request without requestedBy column (using name matching instead)
             Dim query As String = "INSERT INTO supplies_requests (requesterName, position, departmentId, dateOfRequest, " &
                                  "itemName, description, quantityRequested, unit, purpose, status) " &
                                  "VALUES (@requesterName, @position, @departmentID, NOW(), @itemName, " &
                                  "@description, @quantity, @unit, @purpose, 'Pending')"
 
             Using cmd As New MySqlCommand(query, conn)
-                ' Removed @userID parameter since supplies_requests table doesn't have userId column
+                ' Using name matching since database doesn't have requestedBy column
                 cmd.Parameters.AddWithValue("@requesterName", If(String.IsNullOrEmpty(finalRequesterName), "Staff User", finalRequesterName))
                 cmd.Parameters.AddWithValue("@position", If(String.IsNullOrEmpty(finalPosition), "Staff", finalPosition))
                 cmd.Parameters.AddWithValue("@departmentID", If(finalDeptID.HasValue, finalDeptID.Value, DBNull.Value))
@@ -3390,15 +3395,22 @@ Public Class DatabaseConnection
                                  "pr.requestId AS requestId, " &
                                  "pr.requesterName AS requesterName, " &
                                  "IFNULL(pr.position, 'N/A') AS position, " &
+                                 "pr.departmentId AS departmentId, " &
                                  "IFNULL(d.departmentName, 'N/A') AS department, " &
                                  "pr.dateOfRequest AS dateOfRequest, " &
                                  "pr.itemName AS itemName, " &
                                  "IFNULL(pr.description, '') AS description, " &
                                  "pr.quantityRequested AS quantityRequested, " &
+                                 "IFNULL(pr.unit, '') AS unit, " &
                                  "pr.purpose AS purpose, " &
-                                 "pr.status AS status " &
+                                 "pr.status AS status, " &
+                                 "pr.approvedBy AS approvedBy, " &
+                                 "IFNULL(CONCAT(u.firstName, ' ', u.lastName), '') AS approvedByName, " &
+                                 "pr.approvedDate AS approvedDate, " &
+                                 "IFNULL(pr.remarks, '') AS remarks " &
                                  "FROM property_requests pr " &
                                  "LEFT JOIN departments d ON pr.departmentId = d.departmentId " &
+                                 "LEFT JOIN users u ON pr.approvedBy = u.userId " &
                                  "ORDER BY pr.dateOfRequest DESC, pr.requestId DESC"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -3436,7 +3448,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            ' Get staff user's full name to match requests (since tables don't have userId column)
+            ' Get staff user's full name to match requests by name
             Dim staffFullName As String = ""
             Try
                 Using nameCmd As New MySqlCommand("SELECT CONCAT(IFNULL(firstName,''), ' ', IFNULL(middleName,''), ' ', IFNULL(lastName,'')) AS fullName, " &
@@ -3447,67 +3459,69 @@ Public Class DatabaseConnection
                         If reader.Read() Then
                             Dim fullName As String = If(IsDBNull(reader("fullName")), "", reader("fullName").ToString().Trim())
                             Dim shortName As String = If(IsDBNull(reader("shortName")), "", reader("shortName").ToString().Trim())
-                            ' Try full name first, fallback to short name
                             staffFullName = If(String.IsNullOrEmpty(fullName) OrElse fullName.Trim().Equals("  "), shortName, fullName)
-                            If String.IsNullOrEmpty(staffFullName) Then
-                                staffFullName = "" ' Will match by requesterName if available
-                            End If
                         End If
                     End Using
                 End Using
             Catch
-                ' Continue without name matching - will show all requests (not ideal but won't break)
+                ' Continue without name matching
             End Try
 
-            ' Combine property requests and supply requests
+            ' Combine property requests, supply requests, and maintenance requests
             Dim query As String = ""
 
             If Not String.IsNullOrEmpty(requestTypeFilter) AndAlso requestTypeFilter.ToLower() = "property" Then
-                ' Only property requests - match by requesterName since no userId column
+                ' Only property requests - match by requesterName
                 query = "SELECT pr.requestId AS request_id, 'property' AS request_type, pr.status, pr.dateOfRequest AS request_date, " &
                         "pr.approvedDate AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
                         "NULL AS actual_returned_date, pr.quantityRequested AS quantity, " &
-                        "NULL AS penalty, NULL AS condition_upon_return, pr.purpose AS remarks, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, pr.purpose, pr.remarks, " &
                         "pr.itemName AS item_name, pr.description, pr.requesterName, pr.position, pr.departmentId, " &
-                        "d.departmentName AS department_name, pr.unit, NULL AS serial_number, '' AS property_location, NULL AS supply_location " &
+                        "d.departmentName AS department_name, pr.unit, NULL AS serial_number, '' AS property_location, NULL AS supply_location, " &
+                        "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approved_by_name " &
                         "FROM property_requests pr " &
-                        "LEFT JOIN departments d ON pr.departmentId = d.departmentId "
+                        "LEFT JOIN departments d ON pr.departmentId = d.departmentId " &
+                        "LEFT JOIN users u ON pr.approvedBy = u.userId "
                 If Not String.IsNullOrEmpty(staffFullName) Then
                     query &= "WHERE pr.requesterName LIKE @staffName "
                 Else
-                    query &= "WHERE 1=1 " ' Show all if can't match by name
+                    query &= "WHERE 1=1 "
                 End If
                 If Not String.IsNullOrEmpty(statusFilter) Then query &= "AND pr.status = @status "
                 If dateFrom.HasValue Then query &= "AND pr.dateOfRequest >= @dateFrom "
                 If dateTo.HasValue Then query &= "AND pr.dateOfRequest <= @dateTo "
             ElseIf Not String.IsNullOrEmpty(requestTypeFilter) AndAlso requestTypeFilter.ToLower() = "supply" Then
-                ' Only supply requests - match by requesterName since no userId column
+                ' Only supply requests - match by requesterName
                 query = "SELECT sr.requestId AS request_id, 'supply' AS request_type, sr.status, sr.dateOfRequest AS request_date, " &
                         "sr.approvedDate AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
                         "NULL AS actual_returned_date, sr.quantityRequested AS quantity, " &
-                        "NULL AS penalty, NULL AS condition_upon_return, sr.purpose AS remarks, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, sr.purpose, sr.remarks, " &
                         "sr.itemName AS item_name, sr.description, sr.requesterName, sr.position, sr.departmentId, " &
-                        "d.departmentName AS department_name, sr.unit, NULL AS serial_number, '' AS property_location, '' AS supply_location " &
+                        "d.departmentName AS department_name, sr.unit, NULL AS serial_number, '' AS property_location, '' AS supply_location, " &
+                        "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approved_by_name " &
                         "FROM supplies_requests sr " &
-                        "LEFT JOIN departments d ON sr.departmentId = d.departmentId "
+                        "LEFT JOIN departments d ON sr.departmentId = d.departmentId " &
+                        "LEFT JOIN users u ON sr.approvedBy = u.userId "
                 If Not String.IsNullOrEmpty(staffFullName) Then
                     query &= "WHERE sr.requesterName LIKE @staffName "
                 Else
-                    query &= "WHERE 1=1 " ' Show all if can't match by name
+                    query &= "WHERE 1=1 "
                 End If
                 If Not String.IsNullOrEmpty(statusFilter) Then query &= "AND sr.status = @status "
                 If dateFrom.HasValue Then query &= "AND sr.dateOfRequest >= @dateFrom "
                 If dateTo.HasValue Then query &= "AND sr.dateOfRequest <= @dateTo "
             Else
-                ' Show both - UNION ALL - match by requesterName since no userId column
+                ' Show both - UNION ALL - match by requesterName
                 Dim propQuery As String = "SELECT pr.requestId AS request_id, 'property' AS request_type, pr.status, pr.dateOfRequest AS request_date, " &
                         "pr.approvedDate AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
                         "NULL AS actual_returned_date, pr.quantityRequested AS quantity, " &
-                        "NULL AS penalty, NULL AS condition_upon_return, pr.purpose AS remarks, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, pr.purpose, pr.remarks, " &
                         "pr.itemName AS item_name, pr.description, pr.requesterName, pr.position, pr.departmentId, " &
-                        "d.departmentName AS department_name, pr.unit, NULL AS serial_number, '' AS property_location, NULL AS supply_location " &
+                        "d.departmentName AS department_name, pr.unit, NULL AS serial_number, '' AS property_location, NULL AS supply_location, " &
+                        "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approved_by_name " &
                         "FROM property_requests pr " &
-                        "LEFT JOIN departments d ON pr.departmentId = d.departmentId "
+                        "LEFT JOIN departments d ON pr.departmentId = d.departmentId " &
+                        "LEFT JOIN users u ON pr.approvedBy = u.userId "
                 If Not String.IsNullOrEmpty(staffFullName) Then
                     propQuery &= "WHERE pr.requesterName LIKE @staffName "
                 Else
@@ -3520,11 +3534,13 @@ Public Class DatabaseConnection
                 Dim supplyQuery As String = "SELECT sr.requestId AS request_id, 'supply' AS request_type, sr.status, sr.dateOfRequest AS request_date, " &
                         "sr.approvedDate AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
                         "NULL AS actual_returned_date, sr.quantityRequested AS quantity, " &
-                        "NULL AS penalty, NULL AS condition_upon_return, sr.purpose AS remarks, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, sr.purpose, sr.remarks, " &
                         "sr.itemName AS item_name, sr.description, sr.requesterName, sr.position, sr.departmentId, " &
-                        "d2.departmentName AS department_name, sr.unit, NULL AS serial_number, '' AS property_location, '' AS supply_location " &
+                        "d2.departmentName AS department_name, sr.unit, NULL AS serial_number, '' AS property_location, '' AS supply_location, " &
+                        "CONCAT(IFNULL(u2.firstName, ''), ' ', IFNULL(u2.lastName, '')) AS approved_by_name " &
                         "FROM supplies_requests sr " &
-                        "LEFT JOIN departments d2 ON sr.departmentId = d2.departmentId "
+                        "LEFT JOIN departments d2 ON sr.departmentId = d2.departmentId " &
+                        "LEFT JOIN users u2 ON sr.approvedBy = u2.userId "
                 If Not String.IsNullOrEmpty(staffFullName) Then
                     supplyQuery &= "WHERE sr.requesterName LIKE @staffName "
                 Else
@@ -3538,20 +3554,17 @@ Public Class DatabaseConnection
                 Dim maintQuery As String = "SELECT mr.requestId AS request_id, 'maintenance' AS request_type, mr.status, mr.dateRequested AS request_date, " &
                         "NULL AS approval_date, NULL AS release_date, NULL AS expected_return_date, " &
                         "NULL AS actual_returned_date, 1 AS quantity, " &
-                        "NULL AS penalty, NULL AS condition_upon_return, mr.problemDescription AS remarks, " &
+                        "NULL AS penalty, NULL AS condition_upon_return, mr.problemDescription AS purpose, mr.problemDescription AS remarks, " &
                         "mr.itemName AS item_name, mr.problemDescription AS description, " &
                         "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS requesterName, " &
                         "IFNULL(u.position, 'Staff') AS position, mr.departmentId, " &
                         "d3.departmentName AS department_name, '' AS unit, mr.serialNumber AS serial_number, " &
-                        "mr.location AS property_location, '' AS supply_location " &
+                        "mr.location AS property_location, '' AS supply_location, " &
+                        "'' AS approved_by_name " &
                         "FROM maintenance_requests mr " &
                         "LEFT JOIN departments d3 ON mr.departmentId = d3.departmentId " &
-                        "LEFT JOIN users u ON mr.requestedBy = u.userId "
-                If Not String.IsNullOrEmpty(staffFullName) Then
-                    maintQuery &= "WHERE mr.requestedBy = @staffID "
-                Else
-                    maintQuery &= "WHERE 1=1 "
-                End If
+                        "LEFT JOIN users u ON mr.requestedBy = u.userId " &
+                        "WHERE mr.requestedBy = @staffID "
                 If Not String.IsNullOrEmpty(statusFilter) Then maintQuery &= "AND mr.status = @status "
                 If dateFrom.HasValue Then maintQuery &= "AND mr.dateRequested >= @dateFrom "
                 If dateTo.HasValue Then maintQuery &= "AND mr.dateRequested <= @dateTo "
@@ -3564,7 +3577,7 @@ Public Class DatabaseConnection
             Using cmd As New MySqlCommand(query.ToString(), conn)
                 ' Add staff ID parameter for maintenance requests
                 cmd.Parameters.AddWithValue("@staffID", staffID)
-                ' Add staff name parameter for matching requests (since no userId column)
+                ' Add staff name parameter for matching property and supply requests by name
                 If Not String.IsNullOrEmpty(staffFullName) Then
                     cmd.Parameters.AddWithValue("@staffName", "%" & staffFullName & "%")
                 End If
@@ -3829,18 +3842,20 @@ Public Class DatabaseConnection
                     If Not reader.Read() Then
                         Throw New Exception("Request not found.")
                     End If
-                    Dim currentStatus As String = If(IsDBNull(reader("status")), "", reader("status").ToString().Trim())
+                    Dim currentStatus As String = If(reader.IsDBNull(reader.GetOrdinal("status")), "", reader("status").ToString().Trim())
                     If currentStatus.ToLower() <> "pending" Then
                         Throw New Exception("Only pending requests can be approved.")
                     End If
 
-                    ' Store request details for creating borrowed_items record
-                    requestDetails("itemName") = If(IsDBNull(reader("itemName")), "", reader("itemName").ToString())
-                    requestDetails("quantityRequested") = If(IsDBNull(reader("quantityRequested")), 1, Convert.ToInt32(reader("quantityRequested")))
-                    requestDetails("requesterName") = If(IsDBNull(reader("requesterName")), "", reader("requesterName").ToString())
-                    requestDetails("position") = If(IsDBNull(reader("position")), DBNull.Value, reader("position").ToString())
-                    requestDetails("departmentId") = If(IsDBNull(reader("departmentId")), DBNull.Value, reader("departmentId"))
-                    requestDetails("dateOfRequest") = If(IsDBNull(reader("dateOfRequest")), DateTime.Now, Convert.ToDateTime(reader("dateOfRequest")))
+                    ' Store request details for creating borrowed_items record and property assignment
+                    requestDetails("itemName") = If(reader.IsDBNull(reader.GetOrdinal("itemName")), "", reader("itemName").ToString())
+                    requestDetails("quantityRequested") = If(reader.IsDBNull(reader.GetOrdinal("quantityRequested")), 1, Convert.ToInt32(reader("quantityRequested")))
+                    requestDetails("requesterName") = If(reader.IsDBNull(reader.GetOrdinal("requesterName")), "", reader("requesterName").ToString())
+                    requestDetails("position") = If(reader.IsDBNull(reader.GetOrdinal("position")), DBNull.Value, reader("position").ToString())
+                    requestDetails("departmentId") = If(reader.IsDBNull(reader.GetOrdinal("departmentId")), DBNull.Value, reader("departmentId"))
+                    requestDetails("dateOfRequest") = If(reader.IsDBNull(reader.GetOrdinal("dateOfRequest")), DateTime.Now, Convert.ToDateTime(reader("dateOfRequest")))
+                    requestDetails("description") = If(reader.IsDBNull(reader.GetOrdinal("description")), "", reader("description").ToString())
+                    requestDetails("unit") = If(reader.IsDBNull(reader.GetOrdinal("unit")), "pcs", reader("unit").ToString())
                 End Using
             End Using
 
@@ -3853,19 +3868,93 @@ Public Class DatabaseConnection
                 updateRequest.ExecuteNonQuery()
             End Using
 
-            ' Create borrowed_items record automatically when request is approved
+            ' Find or create property and assign to requester
             Try
-                ' Find the property/item ID based on item name
-                Dim itemId As Integer = 0
-                Using findItemCmd As New MySqlCommand("SELECT propertyId FROM properties WHERE itemName = @itemName AND status = 'Active' LIMIT 1", conn, transaction)
-                    findItemCmd.Parameters.AddWithValue("@itemName", requestDetails("itemName").ToString())
-                    Dim itemResult As Object = findItemCmd.ExecuteScalar()
-                    If itemResult IsNot Nothing AndAlso Not IsDBNull(itemResult) Then
-                        itemId = Convert.ToInt32(itemResult)
+                ' Get the requester's userId from the users table by matching name
+                Dim requesterUserId As Integer? = Nothing
+                Using getUserCmd As New MySqlCommand("SELECT userId FROM users WHERE CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName) LIKE @requesterName OR CONCAT(firstName, ' ', lastName) LIKE @requesterName LIMIT 1", conn, transaction)
+                    getUserCmd.Parameters.AddWithValue("@requesterName", "%" & requestDetails("requesterName").ToString() & "%")
+                    Dim userResult As Object = getUserCmd.ExecuteScalar()
+                    If userResult IsNot Nothing AndAlso Not userResult.Equals(DBNull.Value) Then
+                        requesterUserId = Convert.ToInt32(userResult)
                     End If
                 End Using
 
-                ' If item found, create borrowed_items record
+                ' Find the property/item ID based on item name
+                Dim itemId As Integer = 0
+                Dim propertyExists As Boolean = False
+                Using findItemCmd As New MySqlCommand("SELECT propertyId FROM properties WHERE itemName = @itemName AND (status = 'Active' OR status = 'Borrowed') LIMIT 1", conn, transaction)
+                    findItemCmd.Parameters.AddWithValue("@itemName", requestDetails("itemName").ToString())
+                    Dim itemResult As Object = findItemCmd.ExecuteScalar()
+                    If itemResult IsNot Nothing AndAlso Not itemResult.Equals(DBNull.Value) Then
+                        itemId = Convert.ToInt32(itemResult)
+                        propertyExists = True
+                    End If
+                End Using
+
+                ' If property exists, update assignedTo field
+                If propertyExists AndAlso itemId > 0 AndAlso requesterUserId.HasValue Then
+                    Using updatePropertyCmd As New MySqlCommand("UPDATE properties SET assignedTo = @assignedTo, departmentId = @departmentId, status = 'Borrowed' WHERE propertyId = @propertyId", conn, transaction)
+                        updatePropertyCmd.Parameters.AddWithValue("@assignedTo", requesterUserId.Value)
+                        updatePropertyCmd.Parameters.AddWithValue("@departmentId", requestDetails("departmentId"))
+                        updatePropertyCmd.Parameters.AddWithValue("@propertyId", itemId)
+                        updatePropertyCmd.ExecuteNonQuery()
+                    End Using
+                ElseIf Not propertyExists Then
+                    ' Property doesn't exist, create new property record with assignedTo and auto-generated codes
+                    Dim description As String = If(requestDetails.ContainsKey("description"), requestDetails("description").ToString(), "")
+                    Dim unit As String = If(requestDetails.ContainsKey("unit"), requestDetails("unit").ToString(), "pcs")
+                    
+                    ' Get location from department if available
+                    Dim location As String = "Main Building"
+                    If Not requestDetails("departmentId").Equals(DBNull.Value) Then
+                        Using deptCmd As New MySqlCommand("SELECT location, building, floorNumber FROM departments WHERE departmentId = @deptId LIMIT 1", conn, transaction)
+                            deptCmd.Parameters.AddWithValue("@deptId", requestDetails("departmentId"))
+                            Using deptReader As MySqlDataReader = deptCmd.ExecuteReader()
+                                If deptReader.Read() Then
+                                    Dim locationParts As New List(Of String)
+                                    If Not deptReader.IsDBNull(deptReader.GetOrdinal("location")) Then
+                                        locationParts.Add(deptReader("location").ToString())
+                                    End If
+                                    If Not deptReader.IsDBNull(deptReader.GetOrdinal("building")) Then
+                                        locationParts.Add(deptReader("building").ToString())
+                                    End If
+                                    If Not deptReader.IsDBNull(deptReader.GetOrdinal("floorNumber")) Then
+                                        locationParts.Add("Floor " & deptReader("floorNumber").ToString())
+                                    End If
+                                    If locationParts.Count > 0 Then
+                                        location = String.Join(", ", locationParts)
+                                    End If
+                                End If
+                            End Using
+                        End Using
+                    End If
+                    
+                    ' Generate auto-generated codes
+                    Dim propertyNumber As String = DatabaseConnection.GeneratePropertyNumber(conn, transaction)
+                    Dim internalCode As String = DatabaseConnection.GenerateInternalCode(conn, transaction)
+                    
+                    Using insertPropertyCmd As New MySqlCommand("INSERT INTO properties (itemName, category, description, unitOfMeasure, propertyNumber, internalCodes, acquisitionDate, acquisitionCost, assignedTo, departmentId, location, `condition`, status, createdAt, updatedAt) " &
+                                                                "VALUES (@itemName, @category, @description, @unitOfMeasure, @propertyNumber, @internalCodes, @acquisitionDate, @acquisitionCost, @assignedTo, @departmentId, @location, 'Good', 'Active', NOW(), NOW())", conn, transaction)
+                        insertPropertyCmd.Parameters.AddWithValue("@itemName", requestDetails("itemName").ToString())
+                        insertPropertyCmd.Parameters.AddWithValue("@category", "General") ' Default category
+                        insertPropertyCmd.Parameters.AddWithValue("@description", description)
+                        insertPropertyCmd.Parameters.AddWithValue("@unitOfMeasure", unit)
+                        insertPropertyCmd.Parameters.AddWithValue("@propertyNumber", propertyNumber)
+                        insertPropertyCmd.Parameters.AddWithValue("@internalCodes", internalCode)
+                        insertPropertyCmd.Parameters.AddWithValue("@acquisitionDate", requestDetails("dateOfRequest"))
+                        insertPropertyCmd.Parameters.AddWithValue("@acquisitionCost", 0.0) ' Default cost
+                        insertPropertyCmd.Parameters.AddWithValue("@assignedTo", If(requesterUserId.HasValue, requesterUserId.Value, DBNull.Value))
+                        insertPropertyCmd.Parameters.AddWithValue("@departmentId", requestDetails("departmentId"))
+                        insertPropertyCmd.Parameters.AddWithValue("@location", location)
+                        insertPropertyCmd.ExecuteNonQuery()
+                        
+                        ' Get the newly created property ID
+                        itemId = Convert.ToInt32(insertPropertyCmd.LastInsertedId)
+                    End Using
+                End If
+
+                ' Create borrowed_items record if property exists or was created
                 If itemId > 0 Then
                     Using insertBorrowedCmd As New MySqlCommand("INSERT INTO borrowed_items (requestId, itemType, itemId, borrowerName, borrowerPosition, departmentId, borrowDate, expectedReturnDate, status, remarks) " &
                                                                 "VALUES (@requestId, 'property', @itemId, @borrowerName, @borrowerPosition, @departmentId, @borrowDate, @expectedReturnDate, 'Borrowed', @remarks)", conn, transaction)
@@ -3881,8 +3970,8 @@ Public Class DatabaseConnection
                     End Using
                 End If
             Catch borrowEx As Exception
-                ' Log but don't fail approval if borrowed_items creation fails
-                System.Diagnostics.Debug.WriteLine("[v0] Failed to create borrowed_items record: " & borrowEx.Message)
+                ' Log but don't fail approval if property assignment or borrowed_items creation fails
+                System.Diagnostics.Debug.WriteLine("[v0] Failed to assign property or create borrowed_items record: " & borrowEx.Message)
             End Try
 
             transaction.Commit()
@@ -4700,7 +4789,7 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return dt
             If Not SafeOpenConnection(conn) Then Return dt
 
-            ' Query supplies_requests table directly
+            ' Query supplies_requests table directly with approver name
             Dim query As String = "SELECT " &
                                  "sr.requestId AS requestId, " &
                                  "sr.requesterName AS requesterName, " &
@@ -4710,10 +4799,16 @@ Public Class DatabaseConnection
                                  "sr.itemName AS itemName, " &
                                  "IFNULL(sr.description, '') AS description, " &
                                  "sr.quantityRequested AS quantityRequested, " &
+                                 "IFNULL(sr.unit, '') AS unit, " &
                                  "sr.purpose AS purpose, " &
-                                 "sr.status AS status " &
+                                 "sr.status AS status, " &
+                                 "IFNULL(sr.remarks, '') AS remarks, " &
+                                 "sr.approvedBy AS approvedBy, " &
+                                 "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approvedByName, " &
+                                 "sr.approvedDate AS approvedDate " &
                                  "FROM supplies_requests sr " &
                                  "LEFT JOIN departments d ON sr.departmentId = d.departmentId " &
+                                 "LEFT JOIN users u ON sr.approvedBy = u.userId " &
                                  "ORDER BY sr.dateOfRequest DESC, sr.requestId DESC"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -7862,6 +7957,12 @@ Public Class DatabaseConnection
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
                     System.Diagnostics.Debug.WriteLine("[v0] Property Updated Successfully - ID: " & propertyID)
+                    
+                    ' Update custodian assignment if assigned to a user
+                    If custodianID.HasValue AndAlso custodianID.Value > 0 Then
+                        AddCustodianAssignment(custodianID.Value, departmentID, propertyID, "property")
+                    End If
+                    
                     MessageBox.Show("Property updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
                 Else
@@ -8092,6 +8193,149 @@ Public Class DatabaseConnection
             End If
         End Try
         Return False
+    End Function
+
+    ''' <summary>
+    ''' Add or update a custodian assignment record in the custodian table
+    ''' </summary>
+    Public Shared Function AddCustodianAssignment(userId As Integer, departmentId As Integer?, itemId As Integer, itemType As String) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            ' Check if assignment already exists
+            Dim checkQuery As String = "SELECT custodianId FROM custodian WHERE userId = @userId AND itemId = @itemId AND itemType = @itemType AND status = 'Active'"
+            Using checkCmd As New MySqlCommand(checkQuery, conn)
+                checkCmd.Parameters.AddWithValue("@userId", userId)
+                checkCmd.Parameters.AddWithValue("@itemId", itemId)
+                checkCmd.Parameters.AddWithValue("@itemType", itemType)
+                
+                Dim existing = checkCmd.ExecuteScalar()
+                If existing IsNot Nothing Then
+                    ' Update existing record
+                    Dim updateQuery As String = "UPDATE custodian SET departmentId = @departmentId, assignedDate = @assignedDate, updatedAt = NOW() WHERE custodianId = @custodianId"
+                    Using updateCmd As New MySqlCommand(updateQuery, conn)
+                        updateCmd.Parameters.AddWithValue("@custodianId", existing)
+                        updateCmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, CObj(departmentId.Value), DBNull.Value))
+                        updateCmd.Parameters.AddWithValue("@assignedDate", Date.Today)
+                        updateCmd.ExecuteNonQuery()
+                    End Using
+                    Return True
+                End If
+            End Using
+
+            ' Insert new assignment
+            Dim insertQuery As String = "INSERT INTO custodian (userId, departmentId, itemId, itemType, assignedDate, status, createdAt, updatedAt) " &
+                                        "VALUES (@userId, @departmentId, @itemId, @itemType, @assignedDate, 'Active', NOW(), NOW())"
+            Using cmd As New MySqlCommand(insertQuery, conn)
+                cmd.Parameters.AddWithValue("@userId", userId)
+                cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, CObj(departmentId.Value), DBNull.Value))
+                cmd.Parameters.AddWithValue("@itemId", itemId)
+                cmd.Parameters.AddWithValue("@itemType", itemType)
+                cmd.Parameters.AddWithValue("@assignedDate", Date.Today)
+
+                Dim result As Integer = cmd.ExecuteNonQuery()
+                Return result > 0
+            End Using
+
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] AddCustodianAssignment Exception: " & ex.Message)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Remove a custodian assignment (set status to Inactive)
+    ''' </summary>
+    Public Shared Function RemoveCustodianAssignment(userId As Integer, itemId As Integer, itemType As String) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+
+            Dim query As String = "UPDATE custodian SET status = 'Inactive', updatedAt = NOW() WHERE userId = @userId AND itemId = @itemId AND itemType = @itemType"
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@userId", userId)
+                cmd.Parameters.AddWithValue("@itemId", itemId)
+                cmd.Parameters.AddWithValue("@itemType", itemType)
+
+                cmd.ExecuteNonQuery()
+                Return True
+            End Using
+
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] RemoveCustodianAssignment Exception: " & ex.Message)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Get staff inventory (properties and supplies assigned to a user)
+    ''' </summary>
+    Public Shared Function GetStaffInventory(userId As Integer) As DataTable
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return dt
+            If Not SafeOpenConnection(conn) Then Return dt
+
+            ' Query to get both properties and supplies assigned to the staff
+            Dim query As String = "SELECT c.custodianId, c.itemType, c.itemId, c.assignedDate, " &
+                                 "CASE WHEN c.itemType = 'property' THEN p.itemName ELSE s.itemName END AS itemName, " &
+                                 "CASE WHEN c.itemType = 'property' THEN p.category ELSE s.category END AS category, " &
+                                 "CASE WHEN c.itemType = 'property' THEN p.description ELSE s.description END AS description, " &
+                                 "CASE WHEN c.itemType = 'property' THEN p.serialNumber ELSE NULL END AS serialNumber, " &
+                                 "CASE WHEN c.itemType = 'property' THEN p.propertyNumber ELSE NULL END AS propertyNumber, " &
+                                 "CASE WHEN c.itemType = 'property' THEN p.condition ELSE NULL END AS `condition`, " &
+                                 "CASE WHEN c.itemType = 'property' THEN p.acquisitionCost ELSE s.unitCost END AS cost, " &
+                                 "CASE WHEN c.itemType = 'supply' THEN s.quantity ELSE 1 END AS quantity, " &
+                                 "c.itemType, c.status, d.departmentName " &
+                                 "FROM custodian c " &
+                                 "LEFT JOIN properties p ON c.itemId = p.propertyId AND c.itemType = 'property' " &
+                                 "LEFT JOIN supplies s ON c.itemId = s.supplyId AND c.itemType = 'supply' " &
+                                 "LEFT JOIN departments d ON c.departmentId = d.departmentId " &
+                                 "WHERE c.userId = @userId AND c.status = 'Active' " &
+                                 "ORDER BY c.assignedDate DESC"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@userId", userId)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetStaffInventory Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return dt
     End Function
 
     ''' <summary>
@@ -8501,8 +8745,10 @@ Public Class DatabaseConnection
     ''' </summary>
     Public Shared Function DeleteSupply(supplyID As Integer) As Boolean
         If Not DemandPermission(SessionContext.ModulePermission.ModifySupplies, "delete supplies") Then
+            System.Diagnostics.Debug.WriteLine("[v0] DeleteSupply - Permission denied")
             Return False
         End If
+        System.Diagnostics.Debug.WriteLine("[v0] DeleteSupply - Starting deletion for supplyID: " & supplyID)
         Dim conn As MySqlConnection = Nothing
         Try
             conn = GetConnection()
@@ -8510,39 +8756,22 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return False
 
-            ' Check if supply is currently requested/borrowed
-            Dim checkBorrowedQuery As String = "SELECT COUNT(*) FROM borrowed_items WHERE itemId = @supplyID AND itemType = 'supply' AND status IN ('Borrowed')"
-            Using checkCmd As New MySqlCommand(checkBorrowedQuery, conn)
-                checkCmd.Parameters.AddWithValue("@supplyID", supplyID)
-                Dim borrowedCount As Integer = CInt(checkCmd.ExecuteScalar())
-                If borrowedCount > 0 Then
-                    MessageBox.Show("Cannot delete supply. It is currently borrowed.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
-                End If
-            End Using
-
-            ' Check supply_requests table - use supplyId directly if the column exists, otherwise use itemName
-            Dim checkRequestedQuery As String = "SELECT COUNT(*) FROM supplies_requests WHERE (supplyId = @supplyID OR itemName IN (SELECT itemName FROM supplies WHERE supplyId = @supplyID)) AND status IN ('Pending', 'Approved')"
-            Using checkCmd2 As New MySqlCommand(checkRequestedQuery, conn)
-                checkCmd2.Parameters.AddWithValue("@supplyID", supplyID)
-                Dim requestedCount As Integer = CInt(checkCmd2.ExecuteScalar())
-                If requestedCount > 0 Then
-                    MessageBox.Show("Cannot delete supply. It has pending or active requests.", "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
-                End If
-            End Using
-
+            ' Force delete - no checks, delete regardless of status or pending requests
+            System.Diagnostics.Debug.WriteLine("[v0] DeleteSupply - Force deleting supply (no status checks)")
+            
             ' Delete supply (hard delete - actually remove from database)
-            ' Use backticks to handle case sensitivity issues
-            Dim query As String = "DELETE FROM supplies WHERE `supplyId` = @supplyID"
+            Dim query As String = "DELETE FROM supplies WHERE supplyId = @supplyID"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@supplyID", supplyID)
 
                 Dim result As Integer = cmd.ExecuteNonQuery()
                 If result > 0 Then
                     System.Diagnostics.Debug.WriteLine("[v0] Supply Deleted - ID: " & supplyID)
+                    MessageBox.Show("Supply deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Return True
                 Else
+                    System.Diagnostics.Debug.WriteLine("[v0] DeleteSupply - No rows affected for supplyID: " & supplyID)
+                    MessageBox.Show("Supply not found or already deleted.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     Return False
                 End If
             End Using
@@ -9470,6 +9699,168 @@ Public Class DatabaseConnection
         End Try
     End Sub
 
+    ' =====================================================
+    ' SUPPLY MANAGEMENT FUNCTIONS
+    ' =====================================================
+
+    ''' <summary>
+    ''' Add a new supply item to the database
+    ''' </summary>
+    Public Shared Function AddSupply(itemName As String,
+                                     category As String,
+                                     description As String,
+                                     unitOfMeasure As String,
+                                     quantity As Integer,
+                                     dateReceived As Date,
+                                     unitCost As Decimal,
+                                     totalCost As Decimal,
+                                     supplier As String,
+                                     sourceOfFunds As String,
+                                     location As String,
+                                     stockStatus As String) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then
+                MessageBox.Show("Failed to establish database connection.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            If Not SafeOpenConnection(conn) Then
+                MessageBox.Show("Failed to open database connection.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            Dim query As String = "INSERT INTO supplies (itemName, category, description, unitOfMeasure, quantity, " &
+                                 "dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus, " &
+                                 "createdAt, updatedAt) " &
+                                 "VALUES (@itemName, @category, @description, @unitOfMeasure, @quantity, " &
+                                 "@dateReceived, @unitCost, @totalCost, @supplier, @sourceOfFunds, @location, @stockStatus, " &
+                                 "NOW(), NOW())"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@itemName", itemName)
+                cmd.Parameters.AddWithValue("@category", category)
+                cmd.Parameters.AddWithValue("@description", If(String.IsNullOrWhiteSpace(description), DBNull.Value, description))
+                cmd.Parameters.AddWithValue("@unitOfMeasure", unitOfMeasure)
+                cmd.Parameters.AddWithValue("@quantity", quantity)
+                cmd.Parameters.AddWithValue("@dateReceived", dateReceived)
+                cmd.Parameters.AddWithValue("@unitCost", unitCost)
+                cmd.Parameters.AddWithValue("@totalCost", totalCost)
+                cmd.Parameters.AddWithValue("@supplier", If(String.IsNullOrWhiteSpace(supplier), DBNull.Value, supplier))
+                cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrWhiteSpace(sourceOfFunds), DBNull.Value, sourceOfFunds))
+                cmd.Parameters.AddWithValue("@location", location)
+                cmd.Parameters.AddWithValue("@stockStatus", stockStatus)
+
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                Return rowsAffected > 0
+            End Using
+
+        Catch ex As MySqlException
+            System.Diagnostics.Debug.WriteLine("[v0] AddSupply MySQL Exception: " & ex.Message)
+            MessageBox.Show("Database error while adding supply: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] AddSupply Exception: " & ex.Message)
+            MessageBox.Show("Error adding supply: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Update an existing supply item in the database
+    ''' </summary>
+    Public Shared Function UpdateSupply(supplyId As Integer,
+                                        itemName As String,
+                                        category As String,
+                                        description As String,
+                                        unitOfMeasure As String,
+                                        quantity As Integer,
+                                        dateReceived As Date,
+                                        unitCost As Decimal,
+                                        totalCost As Decimal,
+                                        supplier As String,
+                                        sourceOfFunds As String,
+                                        location As String,
+                                        stockStatus As String) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then
+                MessageBox.Show("Failed to establish database connection.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            If Not SafeOpenConnection(conn) Then
+                MessageBox.Show("Failed to open database connection.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            Dim query As String = "UPDATE supplies SET " &
+                                 "itemName = @itemName, " &
+                                 "category = @category, " &
+                                 "description = @description, " &
+                                 "unitOfMeasure = @unitOfMeasure, " &
+                                 "quantity = @quantity, " &
+                                 "dateReceived = @dateReceived, " &
+                                 "unitCost = @unitCost, " &
+                                 "totalCost = @totalCost, " &
+                                 "supplier = @supplier, " &
+                                 "sourceOfFunds = @sourceOfFunds, " &
+                                 "location = @location, " &
+                                 "stockStatus = @stockStatus, " &
+                                 "updatedAt = NOW() " &
+                                 "WHERE supplyId = @supplyId"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@supplyId", supplyId)
+                cmd.Parameters.AddWithValue("@itemName", itemName)
+                cmd.Parameters.AddWithValue("@category", category)
+                cmd.Parameters.AddWithValue("@description", If(String.IsNullOrWhiteSpace(description), DBNull.Value, description))
+                cmd.Parameters.AddWithValue("@unitOfMeasure", unitOfMeasure)
+                cmd.Parameters.AddWithValue("@quantity", quantity)
+                cmd.Parameters.AddWithValue("@dateReceived", dateReceived)
+                cmd.Parameters.AddWithValue("@unitCost", unitCost)
+                cmd.Parameters.AddWithValue("@totalCost", totalCost)
+                cmd.Parameters.AddWithValue("@supplier", If(String.IsNullOrWhiteSpace(supplier), DBNull.Value, supplier))
+                cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrWhiteSpace(sourceOfFunds), DBNull.Value, sourceOfFunds))
+                cmd.Parameters.AddWithValue("@location", location)
+                cmd.Parameters.AddWithValue("@stockStatus", stockStatus)
+
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                Return rowsAffected > 0
+            End Using
+
+        Catch ex As MySqlException
+            System.Diagnostics.Debug.WriteLine("[v0] UpdateSupply MySQL Exception: " & ex.Message)
+            MessageBox.Show("Database error while updating supply: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] UpdateSupply Exception: " & ex.Message)
+            MessageBox.Show("Error updating supply: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Add a new property to the database
+    ''' </summary>
 
 End Class
 

@@ -1,12 +1,8 @@
-﻿Imports System
-Imports System.Drawing
-Imports System.Windows.Forms
-Imports Microsoft.VisualBasic
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmBorrowedItem
-    Inherits System.Windows.Forms.Form
+    Inherits System.Windows.Forms.UserControl
 
-    'Form overrides dispose to clean up the component list.
+    'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -26,294 +22,444 @@ Partial Class frmBorrowedItem
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblBorrowed = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.borrowedId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requestID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.itemType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.itemId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.borrowerName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.borrowerPosition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.borrowDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.expectedReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.actualReturnDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.conditionOnReturn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.borrowedItemsearchbar = New System.Windows.Forms.TextBox()
-        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
-        Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
-        Me.btnBorrowReturn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.Essuance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlTop = New System.Windows.Forms.Panel()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.btnRefresh = New System.Windows.Forms.Button()
+        Me.pnlFilters = New System.Windows.Forms.Panel()
+        Me.lblSearch = New System.Windows.Forms.Label()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.lblFilterStatus = New System.Windows.Forms.Label()
+        Me.cboFilterStatus = New System.Windows.Forms.ComboBox()
+        Me.lblFilterType = New System.Windows.Forms.Label()
+        Me.cboFilterType = New System.Windows.Forms.ComboBox()
+        Me.pnlStats = New System.Windows.Forms.Panel()
+        Me.lblTotalItems = New System.Windows.Forms.Label()
+        Me.lblPropertyCount = New System.Windows.Forms.Label()
+        Me.lblSupplyCount = New System.Windows.Forms.Label()
+        Me.lblNeedsRepair = New System.Windows.Forms.Label()
+        Me.dgvBorrowedItems = New System.Windows.Forms.DataGridView()
+        Me.colRequestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colItemType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPropertyNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colSerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCondition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colApprovedDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPurpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCanMaintenance = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPropertyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pnlBottom = New System.Windows.Forms.Panel()
+        Me.btnRequestMaintenance = New System.Windows.Forms.Button()
+        Me.lblNoItems = New System.Windows.Forms.Label()
+        Me.pnlTop.SuspendLayout()
+        Me.pnlFilters.SuspendLayout()
+        Me.pnlStats.SuspendLayout()
+        CType(Me.dgvBorrowedItems, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlBottom.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblBorrowed
+        'pnlTop
         '
-        Me.lblBorrowed.AutoSize = True
-        Me.lblBorrowed.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBorrowed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.lblBorrowed.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.lblBorrowed.Location = New System.Drawing.Point(75, 86)
-        Me.lblBorrowed.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblBorrowed.Name = "lblBorrowed"
-        Me.lblBorrowed.Size = New System.Drawing.Size(331, 58)
-        Me.lblBorrowed.TabIndex = 1
-        Me.lblBorrowed.Text = "My Borrowed Item"
+        Me.pnlTop.BackColor = System.Drawing.Color.White
+        Me.pnlTop.Controls.Add(Me.lblTitle)
+        Me.pnlTop.Controls.Add(Me.btnRefresh)
+        Me.pnlTop.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlTop.Location = New System.Drawing.Point(0, 0)
+        Me.pnlTop.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlTop.Name = "pnlTop"
+        Me.pnlTop.Padding = New System.Windows.Forms.Padding(27, 12, 27, 12)
+        Me.pnlTop.Size = New System.Drawing.Size(1600, 86)
+        Me.pnlTop.TabIndex = 0
         '
-        'DataGridView1
+        'lblTitle
         '
-        Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.borrowedId, Me.requestID, Me.itemType, Me.itemId, Me.borrowerName, Me.borrowerPosition, Me.departmentId, Me.borrowDate, Me.expectedReturnDate, Me.actualReturnDate, Me.conditionOnReturn, Me.status, Me.remarks})
-        Me.DataGridView1.Location = New System.Drawing.Point(4, 4)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1267, 876)
-        Me.DataGridView1.TabIndex = 2
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.lblTitle.Location = New System.Drawing.Point(27, 12)
+        Me.lblTitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(295, 41)
+        Me.lblTitle.TabIndex = 0
+        Me.lblTitle.Text = "My Borrowed Items"
         '
-        'borrowedId
+        'btnRefresh
         '
-        Me.borrowedId.HeaderText = "Borrowed ID"
-        Me.borrowedId.MinimumWidth = 6
-        Me.borrowedId.Name = "borrowedId"
-        Me.borrowedId.Width = 125
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnRefresh.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnRefresh.FlatAppearance.BorderSize = 0
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnRefresh.ForeColor = System.Drawing.Color.White
+        Me.btnRefresh.Location = New System.Drawing.Point(1413, 12)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(160, 62)
+        Me.btnRefresh.TabIndex = 1
+        Me.btnRefresh.Text = "🔄 Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = False
         '
-        'requestID
+        'pnlFilters
         '
-        Me.requestID.HeaderText = "Request ID"
-        Me.requestID.MinimumWidth = 6
-        Me.requestID.Name = "requestID"
-        Me.requestID.Width = 125
+        Me.pnlFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(245, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.pnlFilters.Controls.Add(Me.lblSearch)
+        Me.pnlFilters.Controls.Add(Me.txtSearch)
+        Me.pnlFilters.Controls.Add(Me.lblFilterStatus)
+        Me.pnlFilters.Controls.Add(Me.cboFilterStatus)
+        Me.pnlFilters.Controls.Add(Me.lblFilterType)
+        Me.pnlFilters.Controls.Add(Me.cboFilterType)
+        Me.pnlFilters.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlFilters.Location = New System.Drawing.Point(0, 86)
+        Me.pnlFilters.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlFilters.Name = "pnlFilters"
+        Me.pnlFilters.Padding = New System.Windows.Forms.Padding(27, 18, 27, 18)
+        Me.pnlFilters.Size = New System.Drawing.Size(1600, 98)
+        Me.pnlFilters.TabIndex = 1
         '
-        'itemType
+        'lblSearch
         '
-        Me.itemType.HeaderText = "Item Type"
-        Me.itemType.MinimumWidth = 6
-        Me.itemType.Name = "itemType"
-        Me.itemType.Width = 125
+        Me.lblSearch.AutoSize = True
+        Me.lblSearch.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.lblSearch.Location = New System.Drawing.Point(27, 22)
+        Me.lblSearch.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSearch.Name = "lblSearch"
+        Me.lblSearch.Size = New System.Drawing.Size(81, 20)
+        Me.lblSearch.TabIndex = 0
+        Me.lblSearch.Text = "🔍 Search:"
         '
-        'itemId
+        'txtSearch
         '
-        Me.itemId.HeaderText = "Item ID"
-        Me.itemId.MinimumWidth = 6
-        Me.itemId.Name = "itemId"
-        Me.itemId.Width = 125
+        Me.txtSearch.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.txtSearch.Location = New System.Drawing.Point(27, 47)
+        Me.txtSearch.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(399, 30)
+        Me.txtSearch.TabIndex = 1
         '
-        'borrowerName
+        'lblFilterStatus
         '
-        Me.borrowerName.HeaderText = "Borrower Name"
-        Me.borrowerName.MinimumWidth = 6
-        Me.borrowerName.Name = "borrowerName"
-        Me.borrowerName.Width = 125
+        Me.lblFilterStatus.AutoSize = True
+        Me.lblFilterStatus.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.lblFilterStatus.Location = New System.Drawing.Point(453, 22)
+        Me.lblFilterStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFilterStatus.Name = "lblFilterStatus"
+        Me.lblFilterStatus.Size = New System.Drawing.Size(109, 20)
+        Me.lblFilterStatus.TabIndex = 2
+        Me.lblFilterStatus.Text = "Filter by Status:"
         '
-        'borrowerPosition
+        'cboFilterStatus
         '
-        Me.borrowerPosition.HeaderText = "Borrower Position"
-        Me.borrowerPosition.MinimumWidth = 6
-        Me.borrowerPosition.Name = "borrowerPosition"
-        Me.borrowerPosition.Width = 125
+        Me.cboFilterStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboFilterStatus.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cboFilterStatus.FormattingEnabled = True
+        Me.cboFilterStatus.Location = New System.Drawing.Point(453, 47)
+        Me.cboFilterStatus.Margin = New System.Windows.Forms.Padding(4)
+        Me.cboFilterStatus.Name = "cboFilterStatus"
+        Me.cboFilterStatus.Size = New System.Drawing.Size(265, 31)
+        Me.cboFilterStatus.TabIndex = 3
         '
-        'departmentId
+        'lblFilterType
         '
-        Me.departmentId.HeaderText = "Department ID"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
+        Me.lblFilterType.AutoSize = True
+        Me.lblFilterType.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.lblFilterType.Location = New System.Drawing.Point(747, 22)
+        Me.lblFilterType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFilterType.Name = "lblFilterType"
+        Me.lblFilterType.Size = New System.Drawing.Size(100, 20)
+        Me.lblFilterType.TabIndex = 4
+        Me.lblFilterType.Text = "Filter by Type:"
         '
-        'borrowDate
+        'cboFilterType
         '
-        Me.borrowDate.HeaderText = "Borrow Date"
-        Me.borrowDate.MinimumWidth = 6
-        Me.borrowDate.Name = "borrowDate"
-        Me.borrowDate.Width = 125
+        Me.cboFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboFilterType.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cboFilterType.FormattingEnabled = True
+        Me.cboFilterType.Location = New System.Drawing.Point(747, 47)
+        Me.cboFilterType.Margin = New System.Windows.Forms.Padding(4)
+        Me.cboFilterType.Name = "cboFilterType"
+        Me.cboFilterType.Size = New System.Drawing.Size(265, 31)
+        Me.cboFilterType.TabIndex = 5
         '
-        'expectedReturnDate
+        'pnlStats
         '
-        Me.expectedReturnDate.HeaderText = "Expected Return Date"
-        Me.expectedReturnDate.MinimumWidth = 6
-        Me.expectedReturnDate.Name = "expectedReturnDate"
-        Me.expectedReturnDate.Width = 125
+        Me.pnlStats.BackColor = System.Drawing.Color.White
+        Me.pnlStats.Controls.Add(Me.lblTotalItems)
+        Me.pnlStats.Controls.Add(Me.lblPropertyCount)
+        Me.pnlStats.Controls.Add(Me.lblSupplyCount)
+        Me.pnlStats.Controls.Add(Me.lblNeedsRepair)
+        Me.pnlStats.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlStats.Location = New System.Drawing.Point(0, 184)
+        Me.pnlStats.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlStats.Name = "pnlStats"
+        Me.pnlStats.Padding = New System.Windows.Forms.Padding(27, 12, 27, 12)
+        Me.pnlStats.Size = New System.Drawing.Size(1600, 74)
+        Me.pnlStats.TabIndex = 2
         '
-        'actualReturnDate
+        'lblTotalItems
         '
-        Me.actualReturnDate.HeaderText = "Actual Return Date"
-        Me.actualReturnDate.MinimumWidth = 6
-        Me.actualReturnDate.Name = "actualReturnDate"
-        Me.actualReturnDate.Width = 125
+        Me.lblTotalItems.AutoSize = True
+        Me.lblTotalItems.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblTotalItems.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTotalItems.ForeColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.lblTotalItems.Location = New System.Drawing.Point(27, 12)
+        Me.lblTotalItems.Margin = New System.Windows.Forms.Padding(0, 0, 40, 0)
+        Me.lblTotalItems.Name = "lblTotalItems"
+        Me.lblTotalItems.Padding = New System.Windows.Forms.Padding(0, 12, 40, 0)
+        Me.lblTotalItems.Size = New System.Drawing.Size(158, 35)
+        Me.lblTotalItems.TabIndex = 0
+        Me.lblTotalItems.Text = "Total Items: 0"
         '
-        'conditionOnReturn
+        'lblPropertyCount
         '
-        Me.conditionOnReturn.HeaderText = "Condition On Return"
-        Me.conditionOnReturn.MinimumWidth = 6
-        Me.conditionOnReturn.Name = "conditionOnReturn"
-        Me.conditionOnReturn.Width = 125
+        Me.lblPropertyCount.AutoSize = True
+        Me.lblPropertyCount.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblPropertyCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(113, Byte), Integer))
+        Me.lblPropertyCount.Location = New System.Drawing.Point(240, 25)
+        Me.lblPropertyCount.Margin = New System.Windows.Forms.Padding(40, 0, 40, 0)
+        Me.lblPropertyCount.Name = "lblPropertyCount"
+        Me.lblPropertyCount.Padding = New System.Windows.Forms.Padding(0, 0, 40, 0)
+        Me.lblPropertyCount.Size = New System.Drawing.Size(145, 23)
+        Me.lblPropertyCount.TabIndex = 1
+        Me.lblPropertyCount.Text = "Properties: 0"
         '
-        'status
+        'lblSupplyCount
         '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
+        Me.lblSupplyCount.AutoSize = True
+        Me.lblSupplyCount.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblSupplyCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.lblSupplyCount.Location = New System.Drawing.Point(453, 25)
+        Me.lblSupplyCount.Margin = New System.Windows.Forms.Padding(40, 0, 40, 0)
+        Me.lblSupplyCount.Name = "lblSupplyCount"
+        Me.lblSupplyCount.Padding = New System.Windows.Forms.Padding(0, 0, 40, 0)
+        Me.lblSupplyCount.Size = New System.Drawing.Size(131, 23)
+        Me.lblSupplyCount.TabIndex = 2
+        Me.lblSupplyCount.Text = "Supplies: 0"
         '
-        'remarks
+        'lblNeedsRepair
         '
-        Me.remarks.HeaderText = "Remarks"
-        Me.remarks.MinimumWidth = 6
-        Me.remarks.Name = "remarks"
-        Me.remarks.Width = 125
+        Me.lblNeedsRepair.AutoSize = True
+        Me.lblNeedsRepair.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblNeedsRepair.ForeColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.lblNeedsRepair.Location = New System.Drawing.Point(653, 25)
+        Me.lblNeedsRepair.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblNeedsRepair.Name = "lblNeedsRepair"
+        Me.lblNeedsRepair.Size = New System.Drawing.Size(153, 23)
+        Me.lblNeedsRepair.TabIndex = 3
+        Me.lblNeedsRepair.Text = "Needs Attention: 0"
         '
-        'TableLayoutPanel1
+        'dgvBorrowedItems
         '
-        Me.TableLayoutPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.5!))
-        Me.TableLayoutPanel1.Controls.Add(Me.DataGridView1, 0, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(85, 147)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1275, 884)
-        Me.TableLayoutPanel1.TabIndex = 162
+        Me.dgvBorrowedItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvBorrowedItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colRequestId, Me.colItemType, Me.colItemName, Me.colPropertyNumber, Me.colSerialNumber, Me.colQuantity, Me.colCondition, Me.colApprovedDate, Me.colPurpose, Me.colRemarks, Me.colCanMaintenance, Me.colPropertyId})
+        Me.dgvBorrowedItems.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvBorrowedItems.Location = New System.Drawing.Point(0, 258)
+        Me.dgvBorrowedItems.Margin = New System.Windows.Forms.Padding(4)
+        Me.dgvBorrowedItems.Name = "dgvBorrowedItems"
+        Me.dgvBorrowedItems.RowHeadersWidth = 51
+        Me.dgvBorrowedItems.Size = New System.Drawing.Size(1600, 481)
+        Me.dgvBorrowedItems.TabIndex = 3
         '
-        'PictureBox2
+        'colRequestId
         '
-        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(420, 94)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 186
-        Me.PictureBox2.TabStop = False
+        Me.colRequestId.HeaderText = "Request ID"
+        Me.colRequestId.MinimumWidth = 6
+        Me.colRequestId.Name = "colRequestId"
+        Me.colRequestId.ReadOnly = True
+        Me.colRequestId.Visible = False
+        Me.colRequestId.Width = 125
         '
-        'borrowedItemsearchbar
+        'colItemType
         '
-        Me.borrowedItemsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.borrowedItemsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.borrowedItemsearchbar.Location = New System.Drawing.Point(485, 94)
-        Me.borrowedItemsearchbar.Margin = New System.Windows.Forms.Padding(4)
-        Me.borrowedItemsearchbar.Name = "borrowedItemsearchbar"
-        Me.borrowedItemsearchbar.Size = New System.Drawing.Size(367, 42)
-        Me.borrowedItemsearchbar.TabIndex = 185
+        Me.colItemType.HeaderText = "Type"
+        Me.colItemType.MinimumWidth = 6
+        Me.colItemType.Name = "colItemType"
+        Me.colItemType.ReadOnly = True
+        Me.colItemType.Width = 90
         '
-        'pm_cbobx_status
+        'colItemName
         '
-        Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(1067, 105)
-        Me.pm_cbobx_status.Name = "pm_cbobx_status"
-        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
-        Me.pm_cbobx_status.TabIndex = 183
-        Me.pm_cbobx_status.Text = "Status"
+        Me.colItemName.HeaderText = "Item Name"
+        Me.colItemName.MinimumWidth = 6
+        Me.colItemName.Name = "colItemName"
+        Me.colItemName.ReadOnly = True
+        Me.colItemName.Width = 200
         '
-        'pm_cbobx_categ
+        'colPropertyNumber
         '
-        Me.pm_cbobx_categ.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_cbobx_categ.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(892, 105)
-        Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
-        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
-        Me.pm_cbobx_categ.TabIndex = 184
-        Me.pm_cbobx_categ.Text = "Categories"
+        Me.colPropertyNumber.HeaderText = "Property No."
+        Me.colPropertyNumber.MinimumWidth = 6
+        Me.colPropertyNumber.Name = "colPropertyNumber"
+        Me.colPropertyNumber.ReadOnly = True
+        Me.colPropertyNumber.Width = 120
         '
-        'btnBorrowReturn
+        'colSerialNumber
         '
-        Me.btnBorrowReturn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBorrowReturn.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnBorrowReturn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnBorrowReturn.CornerRadius = 30
-        Me.btnBorrowReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBorrowReturn.Font = New System.Drawing.Font("Poppins", 10.0!)
-        Me.btnBorrowReturn.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnBorrowReturn.Location = New System.Drawing.Point(1140, 1061)
-        Me.btnBorrowReturn.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnBorrowReturn.Name = "btnBorrowReturn"
-        Me.btnBorrowReturn.Size = New System.Drawing.Size(220, 35)
-        Me.btnBorrowReturn.TabIndex = 187
-        Me.btnBorrowReturn.Text = "Borrow and Return Slip"
-        Me.btnBorrowReturn.UseVisualStyleBackColor = False
+        Me.colSerialNumber.HeaderText = "Serial No."
+        Me.colSerialNumber.MinimumWidth = 6
+        Me.colSerialNumber.Name = "colSerialNumber"
+        Me.colSerialNumber.ReadOnly = True
+        Me.colSerialNumber.Width = 120
         '
-        'Essuance
+        'colQuantity
         '
-        Me.Essuance.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Essuance.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Essuance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Essuance.CornerRadius = 30
-        Me.Essuance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Essuance.Font = New System.Drawing.Font("Poppins", 10.0!)
-        Me.Essuance.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Essuance.Location = New System.Drawing.Point(780, 1061)
-        Me.Essuance.Margin = New System.Windows.Forms.Padding(4)
-        Me.Essuance.Name = "Essuance"
-        Me.Essuance.Size = New System.Drawing.Size(352, 35)
-        Me.Essuance.TabIndex = 188
-        Me.Essuance.Text = "Propety Acknowledgement Receipt"
-        Me.Essuance.UseVisualStyleBackColor = False
+        Me.colQuantity.HeaderText = "Quantity"
+        Me.colQuantity.MinimumWidth = 6
+        Me.colQuantity.Name = "colQuantity"
+        Me.colQuantity.ReadOnly = True
+        Me.colQuantity.Width = 90
+        '
+        'colCondition
+        '
+        Me.colCondition.HeaderText = "Condition"
+        Me.colCondition.MinimumWidth = 6
+        Me.colCondition.Name = "colCondition"
+        Me.colCondition.ReadOnly = True
+        Me.colCondition.Width = 110
+        '
+        'colApprovedDate
+        '
+        Me.colApprovedDate.HeaderText = "Approved Date"
+        Me.colApprovedDate.MinimumWidth = 6
+        Me.colApprovedDate.Name = "colApprovedDate"
+        Me.colApprovedDate.ReadOnly = True
+        Me.colApprovedDate.Width = 130
+        '
+        'colPurpose
+        '
+        Me.colPurpose.HeaderText = "Purpose"
+        Me.colPurpose.MinimumWidth = 6
+        Me.colPurpose.Name = "colPurpose"
+        Me.colPurpose.ReadOnly = True
+        Me.colPurpose.Width = 150
+        '
+        'colRemarks
+        '
+        Me.colRemarks.HeaderText = "Remarks"
+        Me.colRemarks.MinimumWidth = 6
+        Me.colRemarks.Name = "colRemarks"
+        Me.colRemarks.ReadOnly = True
+        Me.colRemarks.Width = 150
+        '
+        'colCanMaintenance
+        '
+        Me.colCanMaintenance.HeaderText = "CanMaintenance"
+        Me.colCanMaintenance.MinimumWidth = 6
+        Me.colCanMaintenance.Name = "colCanMaintenance"
+        Me.colCanMaintenance.ReadOnly = True
+        Me.colCanMaintenance.Visible = False
+        Me.colCanMaintenance.Width = 125
+        '
+        'colPropertyId
+        '
+        Me.colPropertyId.HeaderText = "PropertyId"
+        Me.colPropertyId.MinimumWidth = 6
+        Me.colPropertyId.Name = "colPropertyId"
+        Me.colPropertyId.ReadOnly = True
+        Me.colPropertyId.Visible = False
+        Me.colPropertyId.Width = 125
+        '
+        'pnlBottom
+        '
+        Me.pnlBottom.BackColor = System.Drawing.Color.White
+        Me.pnlBottom.Controls.Add(Me.btnRequestMaintenance)
+        Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlBottom.Location = New System.Drawing.Point(0, 739)
+        Me.pnlBottom.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlBottom.Name = "pnlBottom"
+        Me.pnlBottom.Padding = New System.Windows.Forms.Padding(27, 25, 27, 25)
+        Me.pnlBottom.Size = New System.Drawing.Size(1600, 98)
+        Me.pnlBottom.TabIndex = 4
+        '
+        'btnRequestMaintenance
+        '
+        Me.btnRequestMaintenance.BackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.btnRequestMaintenance.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnRequestMaintenance.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnRequestMaintenance.FlatAppearance.BorderSize = 0
+        Me.btnRequestMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRequestMaintenance.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnRequestMaintenance.ForeColor = System.Drawing.Color.White
+        Me.btnRequestMaintenance.Location = New System.Drawing.Point(1306, 25)
+        Me.btnRequestMaintenance.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRequestMaintenance.Name = "btnRequestMaintenance"
+        Me.btnRequestMaintenance.Size = New System.Drawing.Size(267, 48)
+        Me.btnRequestMaintenance.TabIndex = 0
+        Me.btnRequestMaintenance.Text = "🔧 Request Maintenance"
+        Me.btnRequestMaintenance.UseVisualStyleBackColor = False
+        '
+        'lblNoItems
+        '
+        Me.lblNoItems.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblNoItems.Font = New System.Drawing.Font("Segoe UI", 14.0!)
+        Me.lblNoItems.ForeColor = System.Drawing.Color.Gray
+        Me.lblNoItems.Location = New System.Drawing.Point(0, 258)
+        Me.lblNoItems.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblNoItems.Name = "lblNoItems"
+        Me.lblNoItems.Size = New System.Drawing.Size(1600, 481)
+        Me.lblNoItems.TabIndex = 5
+        Me.lblNoItems.Text = "No borrowed items found. Your approved requests will appear here."
+        Me.lblNoItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblNoItems.Visible = False
         '
         'frmBorrowedItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1467, 1175)
-        Me.Controls.Add(Me.Essuance)
-        Me.Controls.Add(Me.btnBorrowReturn)
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.borrowedItemsearchbar)
-        Me.Controls.Add(Me.pm_cbobx_status)
-        Me.Controls.Add(Me.pm_cbobx_categ)
-        Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Controls.Add(Me.lblBorrowed)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Controls.Add(Me.lblNoItems)
+        Me.Controls.Add(Me.dgvBorrowedItems)
+        Me.Controls.Add(Me.pnlStats)
+        Me.Controls.Add(Me.pnlFilters)
+        Me.Controls.Add(Me.pnlTop)
+        Me.Controls.Add(Me.pnlBottom)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmBorrowedItem"
-        Me.Text = "frmBorrowedItem"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(1600, 837)
+        Me.pnlTop.ResumeLayout(False)
+        Me.pnlTop.PerformLayout()
+        Me.pnlFilters.ResumeLayout(False)
+        Me.pnlFilters.PerformLayout()
+        Me.pnlStats.ResumeLayout(False)
+        Me.pnlStats.PerformLayout()
+        CType(Me.dgvBorrowedItems, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlBottom.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents lblBorrowed As Label
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents borrowedItemsearchbar As TextBox
-    Friend WithEvents pm_cbobx_status As ComboBox
-    Friend WithEvents pm_cbobx_categ As ComboBox
-    Friend WithEvents borrowedId As DataGridViewTextBoxColumn
-    Friend WithEvents requestID As DataGridViewTextBoxColumn
-    Friend WithEvents itemType As DataGridViewTextBoxColumn
-    Friend WithEvents itemId As DataGridViewTextBoxColumn
-    Friend WithEvents borrowerName As DataGridViewTextBoxColumn
-    Friend WithEvents borrowerPosition As DataGridViewTextBoxColumn
-    Friend WithEvents departmentId As DataGridViewTextBoxColumn
-    Friend WithEvents borrowDate As DataGridViewTextBoxColumn
-    Friend WithEvents expectedReturnDate As DataGridViewTextBoxColumn
-    Friend WithEvents actualReturnDate As DataGridViewTextBoxColumn
-    Friend WithEvents conditionOnReturn As DataGridViewTextBoxColumn
-    Friend WithEvents status As DataGridViewTextBoxColumn
-    Friend WithEvents remarks As DataGridViewTextBoxColumn
-    Friend WithEvents btnBorrowReturn As Resources.Controls.RoundedButton
-    Friend WithEvents Essuance As Resources.Controls.RoundedButton
+    Friend WithEvents pnlTop As System.Windows.Forms.Panel
+    Friend WithEvents lblTitle As System.Windows.Forms.Label
+    Friend WithEvents btnRefresh As System.Windows.Forms.Button
+    Friend WithEvents pnlFilters As System.Windows.Forms.Panel
+    Friend WithEvents lblSearch As System.Windows.Forms.Label
+    Friend WithEvents txtSearch As System.Windows.Forms.TextBox
+    Friend WithEvents lblFilterStatus As System.Windows.Forms.Label
+    Friend WithEvents cboFilterStatus As System.Windows.Forms.ComboBox
+    Friend WithEvents lblFilterType As System.Windows.Forms.Label
+    Friend WithEvents cboFilterType As System.Windows.Forms.ComboBox
+    Friend WithEvents pnlStats As System.Windows.Forms.Panel
+    Friend WithEvents lblTotalItems As System.Windows.Forms.Label
+    Friend WithEvents lblPropertyCount As System.Windows.Forms.Label
+    Friend WithEvents lblSupplyCount As System.Windows.Forms.Label
+    Friend WithEvents lblNeedsRepair As System.Windows.Forms.Label
+    Friend WithEvents dgvBorrowedItems As System.Windows.Forms.DataGridView
+    Friend WithEvents pnlBottom As System.Windows.Forms.Panel
+    Friend WithEvents btnRequestMaintenance As System.Windows.Forms.Button
+    Friend WithEvents lblNoItems As System.Windows.Forms.Label
+    Friend WithEvents colRequestId As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colItemType As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colItemName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colPropertyNumber As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colSerialNumber As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colQuantity As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colCondition As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colApprovedDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colPurpose As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colRemarks As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colCanMaintenance As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colPropertyId As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

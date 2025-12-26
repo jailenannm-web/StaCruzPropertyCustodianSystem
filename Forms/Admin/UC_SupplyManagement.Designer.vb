@@ -17,12 +17,17 @@ Partial Class UC_SupplyManagement
         Me.pm_table = New System.Windows.Forms.DataGridView()
         Me.supplyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.supplier = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stockStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unitOfMeasure = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateReceived = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.unitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.totalCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.sourceOfFunds = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stockStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.admin_label_PM = New System.Windows.Forms.Label()
@@ -87,7 +92,7 @@ Partial Class UC_SupplyManagement
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.supplyId, Me.itemName, Me.unitOfMeasure, Me.dateReceived, Me.unitCost, Me.totalCost, Me.sourceOfFunds, Me.stockStatus, Me.createdAt, Me.updatedAt})
+        Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.supplyId, Me.itemName, Me.category, Me.description, Me.quantity, Me.supplier, Me.location, Me.stockStatus, Me.unitOfMeasure, Me.dateReceived, Me.unitCost, Me.totalCost, Me.sourceOfFunds, Me.createdAt, Me.updatedAt})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(62, 124)
         Me.pm_table.Name = "pm_table"
@@ -96,74 +101,113 @@ Partial Class UC_SupplyManagement
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 26
         '
-        'supplyId
+        'supplyId (HIDDEN)
         '
-        Me.supplyId.HeaderText = "supplyId"
+        Me.supplyId.HeaderText = "Supply ID"
         Me.supplyId.MinimumWidth = 6
         Me.supplyId.Name = "supplyId"
-        Me.supplyId.Width = 125
+        Me.supplyId.Visible = False
+        Me.supplyId.Width = 80
         '
         'itemName
         '
-        Me.itemName.HeaderText = "item Name"
+        Me.itemName.HeaderText = "Item Name"
         Me.itemName.MinimumWidth = 6
         Me.itemName.Name = "itemName"
-        Me.itemName.Width = 125
+        Me.itemName.Width = 180
         '
-        'unitOfMeasure
+        'category
         '
-        Me.unitOfMeasure.HeaderText = "unit Of Measure"
-        Me.unitOfMeasure.MinimumWidth = 6
-        Me.unitOfMeasure.Name = "unitOfMeasure"
-        Me.unitOfMeasure.Width = 125
+        Me.category.HeaderText = "Category"
+        Me.category.MinimumWidth = 6
+        Me.category.Name = "category"
+        Me.category.Width = 130
         '
-        'dateReceived
+        'description
         '
-        Me.dateReceived.HeaderText = "date Received"
-        Me.dateReceived.MinimumWidth = 6
-        Me.dateReceived.Name = "dateReceived"
-        Me.dateReceived.Width = 125
+        Me.description.HeaderText = "Description"
+        Me.description.MinimumWidth = 6
+        Me.description.Name = "description"
+        Me.description.Width = 200
         '
-        'unitCost
+        'quantity
         '
-        Me.unitCost.HeaderText = "unitCost"
-        Me.unitCost.MinimumWidth = 6
-        Me.unitCost.Name = "unitCost"
-        Me.unitCost.Width = 125
+        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.MinimumWidth = 6
+        Me.quantity.Name = "quantity"
+        Me.quantity.Width = 90
         '
-        'totalCost
+        'supplier
         '
-        Me.totalCost.HeaderText = "totalCost"
-        Me.totalCost.MinimumWidth = 6
-        Me.totalCost.Name = "totalCost"
-        Me.totalCost.Width = 125
+        Me.supplier.HeaderText = "Supplier"
+        Me.supplier.MinimumWidth = 6
+        Me.supplier.Name = "supplier"
+        Me.supplier.Width = 140
         '
-        'sourceOfFunds
+        'location
         '
-        Me.sourceOfFunds.HeaderText = "source Of Funds"
-        Me.sourceOfFunds.MinimumWidth = 6
-        Me.sourceOfFunds.Name = "sourceOfFunds"
-        Me.sourceOfFunds.Width = 125
+        Me.location.HeaderText = "Location"
+        Me.location.MinimumWidth = 6
+        Me.location.Name = "location"
+        Me.location.Width = 140
         '
         'stockStatus
         '
-        Me.stockStatus.HeaderText = "stockStatus"
+        Me.stockStatus.HeaderText = "Stock Status"
         Me.stockStatus.MinimumWidth = 6
         Me.stockStatus.Name = "stockStatus"
-        Me.stockStatus.Width = 125
+        Me.stockStatus.Width = 120
         '
-        'createdAt
+        'unitOfMeasure
         '
-        Me.createdAt.HeaderText = "createdAt"
+        Me.unitOfMeasure.HeaderText = "Unit"
+        Me.unitOfMeasure.MinimumWidth = 6
+        Me.unitOfMeasure.Name = "unitOfMeasure"
+        Me.unitOfMeasure.Width = 90
+        '
+        'dateReceived (HIDDEN)
+        '
+        Me.dateReceived.HeaderText = "Date Received"
+        Me.dateReceived.MinimumWidth = 6
+        Me.dateReceived.Name = "dateReceived"
+        Me.dateReceived.Visible = False
+        Me.dateReceived.Width = 110
+        '
+        'unitCost
+        '
+        Me.unitCost.HeaderText = "Unit Cost"
+        Me.unitCost.MinimumWidth = 6
+        Me.unitCost.Name = "unitCost"
+        Me.unitCost.Width = 110
+        '
+        'totalCost
+        '
+        Me.totalCost.HeaderText = "Total Cost"
+        Me.totalCost.MinimumWidth = 6
+        Me.totalCost.Name = "totalCost"
+        Me.totalCost.Width = 110
+        '
+        'sourceOfFunds
+        '
+        Me.sourceOfFunds.HeaderText = "Source Of Funds"
+        Me.sourceOfFunds.MinimumWidth = 6
+        Me.sourceOfFunds.Name = "sourceOfFunds"
+        Me.sourceOfFunds.Width = 160
+        '
+        'createdAt (HIDDEN)
+        '
+        Me.createdAt.HeaderText = "Created At"
         Me.createdAt.MinimumWidth = 6
         Me.createdAt.Name = "createdAt"
+        Me.createdAt.Visible = False
         Me.createdAt.Width = 125
         '
-        'updatedAt
+        'updatedAt (HIDDEN)
         '
-        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.HeaderText = "Updated At"
         Me.updatedAt.MinimumWidth = 6
         Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Visible = False
         Me.updatedAt.Width = 125
         '
         'admin_label_PM
@@ -364,12 +408,17 @@ Partial Class UC_SupplyManagement
     Friend WithEvents mnuPrintPARICS As ToolStripMenuItem
     Friend WithEvents supplyId As DataGridViewTextBoxColumn
     Friend WithEvents itemName As DataGridViewTextBoxColumn
+    Friend WithEvents category As DataGridViewTextBoxColumn
+    Friend WithEvents description As DataGridViewTextBoxColumn
+    Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents supplier As DataGridViewTextBoxColumn
+    Friend WithEvents location As DataGridViewTextBoxColumn
+    Friend WithEvents stockStatus As DataGridViewTextBoxColumn
     Friend WithEvents unitOfMeasure As DataGridViewTextBoxColumn
     Friend WithEvents dateReceived As DataGridViewTextBoxColumn
     Friend WithEvents unitCost As DataGridViewTextBoxColumn
     Friend WithEvents totalCost As DataGridViewTextBoxColumn
     Friend WithEvents sourceOfFunds As DataGridViewTextBoxColumn
-    Friend WithEvents stockStatus As DataGridViewTextBoxColumn
     Friend WithEvents createdAt As DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As DataGridViewTextBoxColumn
     Friend WithEvents PictureBox2 As PictureBox

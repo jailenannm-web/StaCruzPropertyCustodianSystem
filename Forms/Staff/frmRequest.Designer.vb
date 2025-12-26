@@ -161,7 +161,7 @@ Partial Class frmRequest
         Me.status.HeaderText = "Status"
         Me.status.MinimumWidth = 6
         Me.status.Name = "status"
-        Me.status.Visible = False
+        Me.status.Visible = True
         Me.status.Width = 125
         '
         'approvedBy
@@ -169,24 +169,24 @@ Partial Class frmRequest
         Me.approvedBy.HeaderText = "Approved By"
         Me.approvedBy.MinimumWidth = 6
         Me.approvedBy.Name = "approvedBy"
-        Me.approvedBy.Visible = False
-        Me.approvedBy.Width = 125
+        Me.approvedBy.Visible = True
+        Me.approvedBy.Width = 150
         '
         'approvedDate
         '
         Me.approvedDate.HeaderText = "Approved Date"
         Me.approvedDate.MinimumWidth = 6
         Me.approvedDate.Name = "approvedDate"
-        Me.approvedDate.Visible = False
-        Me.approvedDate.Width = 125
+        Me.approvedDate.Visible = True
+        Me.approvedDate.Width = 130
         '
         'remarks
         '
         Me.remarks.HeaderText = "Remarks"
         Me.remarks.MinimumWidth = 6
         Me.remarks.Name = "remarks"
-        Me.remarks.Visible = False
-        Me.remarks.Width = 125
+        Me.remarks.Visible = True
+        Me.remarks.Width = 200
         '
         'PictureBox2
         '

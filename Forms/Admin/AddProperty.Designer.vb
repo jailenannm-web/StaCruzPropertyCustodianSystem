@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class AddProperty
     Inherits System.Windows.Forms.UserControl
 
@@ -22,517 +22,514 @@ Partial Class AddProperty
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
-        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.sourceoffundslbs = New System.Windows.Forms.Label()
-        Me.sourceOfFunds = New System.Windows.Forms.ComboBox()
-        Me.assignedTo = New System.Windows.Forms.ComboBox()
-        Me.condition = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.acquisitionCost = New System.Windows.Forms.NumericUpDown()
-        Me.departmentId = New System.Windows.Forms.ComboBox()
-        Me.assignedEmployee = New System.Windows.Forms.Label()
-        Me.warrantyExpiration = New System.Windows.Forms.Label()
-        Me.location = New System.Windows.Forms.Label()
-        Me.remarks = New System.Windows.Forms.Label()
-        Me.totalCost = New System.Windows.Forms.TextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Unitodmeasuerlbl = New System.Windows.Forms.Label()
-        Me.unitOfMeasure = New System.Windows.Forms.TextBox()
-        Me.category = New System.Windows.Forms.ComboBox()
-        Me.acquisitionDate = New System.Windows.Forms.DateTimePicker()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.description = New System.Windows.Forms.TextBox()
-        Me.serialNumber = New System.Windows.Forms.TextBox()
-        Me.propertyId = New System.Windows.Forms.TextBox()
-        Me.cost = New System.Windows.Forms.Label()
-        Me.conditionStatus = New System.Windows.Forms.Label()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.lblItemName = New System.Windows.Forms.Label()
+        Me.txtItemName = New System.Windows.Forms.TextBox()
+        Me.lblCategory = New System.Windows.Forms.Label()
+        Me.cboCategory = New System.Windows.Forms.ComboBox()
+        Me.lblSerialNumber = New System.Windows.Forms.Label()
+        Me.txtSerialNumber = New System.Windows.Forms.TextBox()
         Me.lblDescription = New System.Windows.Forms.Label()
-        Me.property_Category = New System.Windows.Forms.Label()
-        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.instructions = New System.Windows.Forms.Label()
-        Me.RoundedPanel2.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        CType(Me.acquisitionCost, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
-        Me.RoundedPanel1.SuspendLayout()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.lblCondition = New System.Windows.Forms.Label()
+        Me.cboCondition = New System.Windows.Forms.ComboBox()
+        Me.lblUnitOfMeasure = New System.Windows.Forms.Label()
+        Me.txtUnitOfMeasure = New System.Windows.Forms.ComboBox()
+        Me.lblQuantity = New System.Windows.Forms.Label()
+        Me.txtQuantity = New System.Windows.Forms.NumericUpDown()
+        Me.lblAcquisitionCost = New System.Windows.Forms.Label()
+        Me.txtAcquisitionCost = New System.Windows.Forms.NumericUpDown()
+        Me.lblAcquisitionDate = New System.Windows.Forms.Label()
+        Me.dtpAcquisitionDate = New System.Windows.Forms.DateTimePicker()
+        Me.lblPropertyNumber = New System.Windows.Forms.Label()
+        Me.txtPropertyNumber = New System.Windows.Forms.TextBox()
+        Me.lblInternalCodes = New System.Windows.Forms.Label()
+        Me.txtInternalCodes = New System.Windows.Forms.TextBox()
+        Me.lblDepartment = New System.Windows.Forms.Label()
+        Me.cboDepartment = New System.Windows.Forms.ComboBox()
+        Me.lblAssignedTo = New System.Windows.Forms.Label()
+        Me.cboAssignedTo = New System.Windows.Forms.ComboBox()
+        Me.lblLocation = New System.Windows.Forms.Label()
+        Me.txtLocation = New System.Windows.Forms.TextBox()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.cboStatus = New System.Windows.Forms.ComboBox()
+        Me.lblTotalCost = New System.Windows.Forms.Label()
+        Me.txtTotalCost = New System.Windows.Forms.TextBox()
+        Me.lblSourceOfFunds = New System.Windows.Forms.Label()
+        Me.cboSourceOfFunds = New System.Windows.Forms.ComboBox()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        CType(Me.txtAcquisitionCost, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlMain.SuspendLayout()
+        CType(Me.txtQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'admin_label_DepartmentManagement
+        'lblTitle
         '
-        Me.admin_label_DepartmentManagement.AutoSize = True
-        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(32, 58)
-        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(379, 38)
-        Me.admin_label_DepartmentManagement.TabIndex = 42
-        Me.admin_label_DepartmentManagement.Text = "Property Register Form"
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Font = New System.Drawing.Font("Poppins", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTitle.Location = New System.Drawing.Point(20, 20)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(350, 47)
+        Me.lblTitle.TabIndex = 0
+        Me.lblTitle.Text = "Add Property"
         '
-        'btnCancel
+        'pnlMain
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnCancel.CornerRadius = 15
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(1004, 703)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
-        Me.btnCancel.TabIndex = 155
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = False
+        Me.pnlMain.BackColor = System.Drawing.Color.White
+        Me.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlMain.Controls.Add(Me.btnCancel)
+        Me.pnlMain.Controls.Add(Me.btnSave)
+        Me.pnlMain.Controls.Add(Me.cboSourceOfFunds)
+        Me.pnlMain.Controls.Add(Me.lblSourceOfFunds)
+        Me.pnlMain.Controls.Add(Me.txtTotalCost)
+        Me.pnlMain.Controls.Add(Me.lblTotalCost)
+        Me.pnlMain.Controls.Add(Me.cboStatus)
+        Me.pnlMain.Controls.Add(Me.lblStatus)
+        Me.pnlMain.Controls.Add(Me.txtLocation)
+        Me.pnlMain.Controls.Add(Me.lblLocation)
+        Me.pnlMain.Controls.Add(Me.cboAssignedTo)
+        Me.pnlMain.Controls.Add(Me.lblAssignedTo)
+        Me.pnlMain.Controls.Add(Me.cboDepartment)
+        Me.pnlMain.Controls.Add(Me.lblDepartment)
+        Me.pnlMain.Controls.Add(Me.txtPropertyNumber)
+        Me.pnlMain.Controls.Add(Me.lblPropertyNumber)
+        Me.pnlMain.Controls.Add(Me.txtInternalCodes)
+        Me.pnlMain.Controls.Add(Me.lblInternalCodes)
+        Me.pnlMain.Controls.Add(Me.dtpAcquisitionDate)
+        Me.pnlMain.Controls.Add(Me.lblAcquisitionDate)
+        Me.pnlMain.Controls.Add(Me.txtAcquisitionCost)
+        Me.pnlMain.Controls.Add(Me.lblAcquisitionCost)
+        Me.pnlMain.Controls.Add(Me.txtUnitOfMeasure)
+        Me.pnlMain.Controls.Add(Me.lblUnitOfMeasure)
+        Me.pnlMain.Controls.Add(Me.txtQuantity)
+        Me.pnlMain.Controls.Add(Me.lblQuantity)
+        Me.pnlMain.Controls.Add(Me.cboCondition)
+        Me.pnlMain.Controls.Add(Me.lblCondition)
+        Me.pnlMain.Controls.Add(Me.txtDescription)
+        Me.pnlMain.Controls.Add(Me.lblDescription)
+        Me.pnlMain.Controls.Add(Me.txtSerialNumber)
+        Me.pnlMain.Controls.Add(Me.lblSerialNumber)
+        Me.pnlMain.Controls.Add(Me.cboCategory)
+        Me.pnlMain.Controls.Add(Me.lblCategory)
+        Me.pnlMain.Controls.Add(Me.txtItemName)
+        Me.pnlMain.Controls.Add(Me.lblItemName)
+        Me.pnlMain.Location = New System.Drawing.Point(20, 80)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Size = New System.Drawing.Size(1240, 620)
+        Me.pnlMain.TabIndex = 1
         '
-        'btnSave
+        'lblItemName
         '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnSave.CornerRadius = 15
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSave.Location = New System.Drawing.Point(1157, 703)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(145, 34)
-        Me.btnSave.TabIndex = 154
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = False
+        Me.lblItemName.AutoSize = True
+        Me.lblItemName.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblItemName.Location = New System.Drawing.Point(30, 30)
+        Me.lblItemName.Name = "lblItemName"
+        Me.lblItemName.Size = New System.Drawing.Size(95, 26)
+        Me.lblItemName.TabIndex = 0
+        Me.lblItemName.Text = "Item Name"
         '
-        'RoundedPanel2
+        'txtItemName
         '
-        Me.RoundedPanel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedPanel2.Controls.Add(Me.Panel2)
-        Me.RoundedPanel2.Controls.Add(Me.Panel1)
-        Me.RoundedPanel2.CornerRadius = 5
-        Me.RoundedPanel2.Location = New System.Drawing.Point(39, 203)
-        Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(1264, 471)
-        Me.RoundedPanel2.TabIndex = 44
+        Me.txtItemName.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtItemName.Location = New System.Drawing.Point(180, 27)
+        Me.txtItemName.Name = "txtItemName"
+        Me.txtItemName.Size = New System.Drawing.Size(450, 30)
+        Me.txtItemName.TabIndex = 1
         '
-        'Panel2
+        'lblCategory
         '
-        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel2.Controls.Add(Me.sourceoffundslbs)
-        Me.Panel2.Controls.Add(Me.sourceOfFunds)
-        Me.Panel2.Controls.Add(Me.assignedTo)
-        Me.Panel2.Controls.Add(Me.condition)
-        Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.acquisitionCost)
-        Me.Panel2.Controls.Add(Me.departmentId)
-        Me.Panel2.Controls.Add(Me.assignedEmployee)
-        Me.Panel2.Controls.Add(Me.warrantyExpiration)
-        Me.Panel2.Controls.Add(Me.location)
-        Me.Panel2.Controls.Add(Me.remarks)
-        Me.Panel2.Controls.Add(Me.totalCost)
-        Me.Panel2.Location = New System.Drawing.Point(655, 18)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(537, 428)
-        Me.Panel2.TabIndex = 65
+        Me.lblCategory.AutoSize = True
+        Me.lblCategory.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblCategory.Location = New System.Drawing.Point(30, 70)
+        Me.lblCategory.Name = "lblCategory"
+        Me.lblCategory.Size = New System.Drawing.Size(82, 26)
+        Me.lblCategory.TabIndex = 2
+        Me.lblCategory.Text = "Category"
         '
-        'sourceoffundslbs
+        'cboCategory
         '
-        Me.sourceoffundslbs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sourceoffundslbs.AutoSize = True
-        Me.sourceoffundslbs.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sourceoffundslbs.Location = New System.Drawing.Point(46, 310)
-        Me.sourceoffundslbs.Name = "sourceoffundslbs"
-        Me.sourceoffundslbs.Size = New System.Drawing.Size(121, 18)
-        Me.sourceoffundslbs.TabIndex = 82
-        Me.sourceoffundslbs.Text = "Source Of Funds"
+        Me.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCategory.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboCategory.FormattingEnabled = True
+        Me.cboCategory.Location = New System.Drawing.Point(180, 67)
+        Me.cboCategory.Name = "cboCategory"
+        Me.cboCategory.Size = New System.Drawing.Size(450, 34)
+        Me.cboCategory.TabIndex = 3
         '
-        'sourceOfFunds
+        'lblSerialNumber
         '
-        Me.sourceOfFunds.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.sourceOfFunds.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sourceOfFunds.FormattingEnabled = True
-        Me.sourceOfFunds.Items.AddRange(New Object() {"General Fund", "Special Education Fund", "Trust Fund", "Donation", "Others"})
-        Me.sourceOfFunds.Location = New System.Drawing.Point(246, 302)
-        Me.sourceOfFunds.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.sourceOfFunds.Name = "sourceOfFunds"
-        Me.sourceOfFunds.Size = New System.Drawing.Size(239, 26)
-        Me.sourceOfFunds.TabIndex = 81
+        Me.lblSerialNumber.AutoSize = True
+        Me.lblSerialNumber.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblSerialNumber.Location = New System.Drawing.Point(30, 115)
+        Me.lblSerialNumber.Name = "lblSerialNumber"
+        Me.lblSerialNumber.Size = New System.Drawing.Size(119, 26)
+        Me.lblSerialNumber.TabIndex = 4
+        Me.lblSerialNumber.Text = "Serial Number"
         '
-        'assignedTo
+        'txtSerialNumber
         '
-        Me.assignedTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.assignedTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.assignedTo.FormattingEnabled = True
-        Me.assignedTo.Items.AddRange(New Object() {"MATH DEPARTMENT", "SCIENCE DEPARTMENT", "ENGLISH DEPARTMENT", "MAPEH DEPARMENT", "TLE DEPARTMENT"})
-        Me.assignedTo.Location = New System.Drawing.Point(250, 141)
-        Me.assignedTo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.assignedTo.Name = "assignedTo"
-        Me.assignedTo.Size = New System.Drawing.Size(239, 26)
-        Me.assignedTo.TabIndex = 80
-        '
-        'condition
-        '
-        Me.condition.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.condition.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.condition.FormattingEnabled = True
-        Me.condition.Items.AddRange(New Object() {"GOOD", "DAMAGE", "READY TO USE"})
-        Me.condition.Location = New System.Drawing.Point(246, 245)
-        Me.condition.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.condition.Name = "condition"
-        Me.condition.Size = New System.Drawing.Size(255, 26)
-        Me.condition.TabIndex = 77
-        '
-        'Label3
-        '
-        Me.Label3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(40, 248)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(71, 18)
-        Me.Label3.TabIndex = 75
-        Me.Label3.Text = "Condition"
-        '
-        'acquisitionCost
-        '
-        Me.acquisitionCost.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.acquisitionCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.acquisitionCost.Location = New System.Drawing.Point(248, 51)
-        Me.acquisitionCost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.acquisitionCost.Name = "acquisitionCost"
-        Me.acquisitionCost.Size = New System.Drawing.Size(253, 24)
-        Me.acquisitionCost.TabIndex = 69
-        '
-        'departmentId
-        '
-        Me.departmentId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.departmentId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.departmentId.FormattingEnabled = True
-        Me.departmentId.Items.AddRange(New Object() {"MATH DEPARTMENT", "SCIENCE DEPARTMENT", "ENGLISH DEPARTMENT", "MAPEH DEPARMENT", "TLE DEPARTMENT"})
-        Me.departmentId.Location = New System.Drawing.Point(250, 198)
-        Me.departmentId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Size = New System.Drawing.Size(239, 26)
-        Me.departmentId.TabIndex = 65
-        '
-        'assignedEmployee
-        '
-        Me.assignedEmployee.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.assignedEmployee.AutoSize = True
-        Me.assignedEmployee.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.assignedEmployee.Location = New System.Drawing.Point(40, 101)
-        Me.assignedEmployee.Name = "assignedEmployee"
-        Me.assignedEmployee.Size = New System.Drawing.Size(77, 18)
-        Me.assignedEmployee.TabIndex = 48
-        Me.assignedEmployee.Text = "Total Cost"
-        '
-        'warrantyExpiration
-        '
-        Me.warrantyExpiration.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.warrantyExpiration.AutoSize = True
-        Me.warrantyExpiration.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.warrantyExpiration.Location = New System.Drawing.Point(40, 53)
-        Me.warrantyExpiration.Name = "warrantyExpiration"
-        Me.warrantyExpiration.Size = New System.Drawing.Size(123, 18)
-        Me.warrantyExpiration.TabIndex = 47
-        Me.warrantyExpiration.Text = "Acquisistion Cost"
-        '
-        'location
-        '
-        Me.location.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.location.AutoSize = True
-        Me.location.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.location.Location = New System.Drawing.Point(40, 149)
-        Me.location.Name = "location"
-        Me.location.Size = New System.Drawing.Size(85, 18)
-        Me.location.TabIndex = 50
-        Me.location.Text = "Assigned to"
-        '
-        'remarks
-        '
-        Me.remarks.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.remarks.AutoSize = True
-        Me.remarks.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.remarks.Location = New System.Drawing.Point(40, 201)
-        Me.remarks.Name = "remarks"
-        Me.remarks.Size = New System.Drawing.Size(85, 18)
-        Me.remarks.TabIndex = 51
-        Me.remarks.Text = "Department"
-        '
-        'totalCost
-        '
-        Me.totalCost.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.totalCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.totalCost.Location = New System.Drawing.Point(250, 93)
-        Me.totalCost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.totalCost.Name = "totalCost"
-        Me.totalCost.Size = New System.Drawing.Size(239, 24)
-        Me.totalCost.TabIndex = 58
-        '
-        'Panel1
-        '
-        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.Controls.Add(Me.Unitodmeasuerlbl)
-        Me.Panel1.Controls.Add(Me.unitOfMeasure)
-        Me.Panel1.Controls.Add(Me.category)
-        Me.Panel1.Controls.Add(Me.acquisitionDate)
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.description)
-        Me.Panel1.Controls.Add(Me.serialNumber)
-        Me.Panel1.Controls.Add(Me.propertyId)
-        Me.Panel1.Controls.Add(Me.cost)
-        Me.Panel1.Controls.Add(Me.conditionStatus)
-        Me.Panel1.Controls.Add(Me.lblDescription)
-        Me.Panel1.Controls.Add(Me.property_Category)
-        Me.Panel1.Location = New System.Drawing.Point(67, 18)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(553, 428)
-        Me.Panel1.TabIndex = 64
-        '
-        'Unitodmeasuerlbl
-        '
-        Me.Unitodmeasuerlbl.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Unitodmeasuerlbl.AutoSize = True
-        Me.Unitodmeasuerlbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Unitodmeasuerlbl.Location = New System.Drawing.Point(28, 292)
-        Me.Unitodmeasuerlbl.Name = "Unitodmeasuerlbl"
-        Me.Unitodmeasuerlbl.Size = New System.Drawing.Size(113, 18)
-        Me.Unitodmeasuerlbl.TabIndex = 83
-        Me.Unitodmeasuerlbl.Text = "Unit of Measure"
-        '
-        'unitOfMeasure
-        '
-        Me.unitOfMeasure.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.unitOfMeasure.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.unitOfMeasure.Location = New System.Drawing.Point(196, 292)
-        Me.unitOfMeasure.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.unitOfMeasure.Name = "unitOfMeasure"
-        Me.unitOfMeasure.Size = New System.Drawing.Size(239, 24)
-        Me.unitOfMeasure.TabIndex = 82
-        '
-        'category
-        '
-        Me.category.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.category.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.category.FormattingEnabled = True
-        Me.category.Items.AddRange(New Object() {"MATH DEPARTMENT", "SCIENCE DEPARTMENT", "ENGLISH DEPARTMENT", "MAPEH DEPARMENT", "TLE DEPARTMENT"})
-        Me.category.Location = New System.Drawing.Point(195, 93)
-        Me.category.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.category.Name = "category"
-        Me.category.Size = New System.Drawing.Size(239, 26)
-        Me.category.TabIndex = 81
-        '
-        'acquisitionDate
-        '
-        Me.acquisitionDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.acquisitionDate.Location = New System.Drawing.Point(195, 243)
-        Me.acquisitionDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.acquisitionDate.Name = "acquisitionDate"
-        Me.acquisitionDate.Size = New System.Drawing.Size(216, 24)
-        Me.acquisitionDate.TabIndex = 78
-        '
-        'Label2
-        '
-        Me.Label2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(26, 251)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(114, 18)
-        Me.Label2.TabIndex = 73
-        Me.Label2.Text = "Acquisition Date"
-        '
-        'description
-        '
-        Me.description.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.description.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.description.Location = New System.Drawing.Point(195, 149)
-        Me.description.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.description.Name = "description"
-        Me.description.Size = New System.Drawing.Size(239, 24)
-        Me.description.TabIndex = 74
-        '
-        'serialNumber
-        '
-        Me.serialNumber.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.serialNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.serialNumber.Location = New System.Drawing.Point(195, 201)
-        Me.serialNumber.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.serialNumber.Name = "serialNumber"
-        Me.serialNumber.Size = New System.Drawing.Size(218, 24)
-        Me.serialNumber.TabIndex = 66
-        '
-        'propertyId
-        '
-        Me.propertyId.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.propertyId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertyId.Location = New System.Drawing.Point(196, 47)
-        Me.propertyId.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.propertyId.Name = "propertyId"
-        Me.propertyId.Size = New System.Drawing.Size(239, 24)
-        Me.propertyId.TabIndex = 64
-        '
-        'cost
-        '
-        Me.cost.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cost.AutoSize = True
-        Me.cost.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cost.Location = New System.Drawing.Point(28, 201)
-        Me.cost.Name = "cost"
-        Me.cost.Size = New System.Drawing.Size(102, 18)
-        Me.cost.TabIndex = 63
-        Me.cost.Text = "Serial Number"
-        '
-        'conditionStatus
-        '
-        Me.conditionStatus.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.conditionStatus.AutoSize = True
-        Me.conditionStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.conditionStatus.Location = New System.Drawing.Point(28, 149)
-        Me.conditionStatus.Name = "conditionStatus"
-        Me.conditionStatus.Size = New System.Drawing.Size(83, 18)
-        Me.conditionStatus.TabIndex = 62
-        Me.conditionStatus.Text = "Description"
+        Me.txtSerialNumber.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtSerialNumber.Location = New System.Drawing.Point(180, 112)
+        Me.txtSerialNumber.Name = "txtSerialNumber"
+        Me.txtSerialNumber.Size = New System.Drawing.Size(450, 30)
+        Me.txtSerialNumber.TabIndex = 5
         '
         'lblDescription
         '
-        Me.lblDescription.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblDescription.AutoSize = True
-        Me.lblDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescription.Location = New System.Drawing.Point(28, 95)
+        Me.lblDescription.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblDescription.Location = New System.Drawing.Point(30, 160)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(68, 18)
-        Me.lblDescription.TabIndex = 60
-        Me.lblDescription.Text = "Category"
+        Me.lblDescription.Size = New System.Drawing.Size(95, 26)
+        Me.lblDescription.TabIndex = 6
+        Me.lblDescription.Text = "Description"
         '
-        'property_Category
+        'txtDescription
         '
-        Me.property_Category.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.property_Category.AutoSize = True
-        Me.property_Category.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.property_Category.Location = New System.Drawing.Point(31, 53)
-        Me.property_Category.Name = "property_Category"
-        Me.property_Category.Size = New System.Drawing.Size(80, 18)
-        Me.property_Category.TabIndex = 59
-        Me.property_Category.Text = "Item Name"
+        Me.txtDescription.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtDescription.Location = New System.Drawing.Point(180, 157)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(450, 60)
+        Me.txtDescription.TabIndex = 7
         '
-        'RoundedPanel1
+        'lblCondition
         '
-        Me.RoundedPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedPanel1.Controls.Add(Me.instructions)
-        Me.RoundedPanel1.CornerRadius = 5
-        Me.RoundedPanel1.Location = New System.Drawing.Point(39, 112)
-        Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(1264, 71)
-        Me.RoundedPanel1.TabIndex = 43
+        Me.lblCondition.AutoSize = True
+        Me.lblCondition.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblCondition.Location = New System.Drawing.Point(30, 235)
+        Me.lblCondition.Name = "lblCondition"
+        Me.lblCondition.Size = New System.Drawing.Size(138, 26)
+        Me.lblCondition.TabIndex = 8
+        Me.lblCondition.Text = "Condition Status"
         '
-        'instructions
+        'cboCondition
         '
-        Me.instructions.AutoSize = True
-        Me.instructions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.instructions.Location = New System.Drawing.Point(19, 25)
-        Me.instructions.Name = "instructions"
-        Me.instructions.Size = New System.Drawing.Size(267, 18)
-        Me.instructions.TabIndex = 40
-        Me.instructions.Text = "Fill the required department information."
+        Me.cboCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCondition.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboCondition.FormattingEnabled = True
+        Me.cboCondition.Items.AddRange(New Object() {"Good", "Needs Repair", "Damaged"})
+        Me.cboCondition.Location = New System.Drawing.Point(180, 232)
+        Me.cboCondition.Name = "cboCondition"
+        Me.cboCondition.Size = New System.Drawing.Size(450, 34)
+        Me.cboCondition.TabIndex = 9
+        '
+        'lblUnitOfMeasure
+        '
+        Me.lblUnitOfMeasure.AutoSize = True
+        Me.lblUnitOfMeasure.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblUnitOfMeasure.Location = New System.Drawing.Point(30, 280)
+        Me.lblUnitOfMeasure.Name = "lblUnitOfMeasure"
+        Me.lblUnitOfMeasure.Size = New System.Drawing.Size(134, 26)
+        Me.lblUnitOfMeasure.TabIndex = 10
+        Me.lblUnitOfMeasure.Text = "Unit of Measure"
+        '
+        'txtUnitOfMeasure
+        '
+        Me.txtUnitOfMeasure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.txtUnitOfMeasure.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtUnitOfMeasure.FormattingEnabled = True
+        Me.txtUnitOfMeasure.Location = New System.Drawing.Point(180, 277)
+        Me.txtUnitOfMeasure.Name = "txtUnitOfMeasure"
+        Me.txtUnitOfMeasure.Size = New System.Drawing.Size(200, 34)
+        Me.txtUnitOfMeasure.TabIndex = 11
+        '
+        'lblQuantity
+        '
+        Me.lblQuantity.AutoSize = True
+        Me.lblQuantity.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblQuantity.Location = New System.Drawing.Point(400, 280)
+        Me.lblQuantity.Name = "lblQuantity"
+        Me.lblQuantity.Size = New System.Drawing.Size(78, 26)
+        Me.lblQuantity.TabIndex = 12
+        Me.lblQuantity.Text = "Quantity"
+        '
+        'txtQuantity
+        '
+        Me.txtQuantity.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtQuantity.Location = New System.Drawing.Point(490, 277)
+        Me.txtQuantity.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.txtQuantity.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.txtQuantity.Name = "txtQuantity"
+        Me.txtQuantity.Size = New System.Drawing.Size(140, 30)
+        Me.txtQuantity.TabIndex = 13
+        Me.txtQuantity.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'lblAcquisitionCost
+        '
+        Me.lblAcquisitionCost.AutoSize = True
+        Me.lblAcquisitionCost.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblAcquisitionCost.Location = New System.Drawing.Point(30, 325)
+        Me.lblAcquisitionCost.Name = "lblAcquisitionCost"
+        Me.lblAcquisitionCost.Size = New System.Drawing.Size(133, 26)
+        Me.lblAcquisitionCost.TabIndex = 12
+        Me.lblAcquisitionCost.Text = "Acquisition Cost"
+        '
+        'txtAcquisitionCost
+        '
+        Me.txtAcquisitionCost.DecimalPlaces = 2
+        Me.txtAcquisitionCost.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtAcquisitionCost.Location = New System.Drawing.Point(180, 322)
+        Me.txtAcquisitionCost.Maximum = New Decimal(New Integer() {999999999, 0, 0, 0})
+        Me.txtAcquisitionCost.Name = "txtAcquisitionCost"
+        Me.txtAcquisitionCost.Size = New System.Drawing.Size(450, 30)
+        Me.txtAcquisitionCost.TabIndex = 13
+        '
+        'lblAcquisitionDate
+        '
+        Me.lblAcquisitionDate.AutoSize = True
+        Me.lblAcquisitionDate.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblAcquisitionDate.Location = New System.Drawing.Point(30, 370)
+        Me.lblAcquisitionDate.Name = "lblAcquisitionDate"
+        Me.lblAcquisitionDate.Size = New System.Drawing.Size(135, 26)
+        Me.lblAcquisitionDate.TabIndex = 14
+        Me.lblAcquisitionDate.Text = "Acquisition Date"
+        '
+        'dtpAcquisitionDate
+        '
+        Me.dtpAcquisitionDate.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.dtpAcquisitionDate.Location = New System.Drawing.Point(180, 367)
+        Me.dtpAcquisitionDate.Name = "dtpAcquisitionDate"
+        Me.dtpAcquisitionDate.Size = New System.Drawing.Size(450, 30)
+        Me.dtpAcquisitionDate.TabIndex = 15
+        '
+        'lblPropertyNumber
+        '
+        Me.lblPropertyNumber.AutoSize = True
+        Me.lblPropertyNumber.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblPropertyNumber.Location = New System.Drawing.Point(680, 30)
+        Me.lblPropertyNumber.Name = "lblPropertyNumber"
+        Me.lblPropertyNumber.Size = New System.Drawing.Size(141, 26)
+        Me.lblPropertyNumber.TabIndex = 16
+        Me.lblPropertyNumber.Text = "Property Number"
+        '
+        'txtPropertyNumber
+        '
+        Me.txtPropertyNumber.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtPropertyNumber.Location = New System.Drawing.Point(870, 27)
+        Me.txtPropertyNumber.Name = "txtPropertyNumber"
+        Me.txtPropertyNumber.Size = New System.Drawing.Size(340, 30)
+        Me.txtPropertyNumber.TabIndex = 17
+        '
+        'lblInternalCodes
+        '
+        Me.lblInternalCodes.AutoSize = True
+        Me.lblInternalCodes.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblInternalCodes.Location = New System.Drawing.Point(680, 115)
+        Me.lblInternalCodes.Name = "lblInternalCodes"
+        Me.lblInternalCodes.Size = New System.Drawing.Size(119, 26)
+        Me.lblInternalCodes.TabIndex = 20
+        Me.lblInternalCodes.Text = "Internal Codes"
+        '
+        'txtInternalCodes
+        '
+        Me.txtInternalCodes.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtInternalCodes.Location = New System.Drawing.Point(870, 112)
+        Me.txtInternalCodes.Name = "txtInternalCodes"
+        Me.txtInternalCodes.Size = New System.Drawing.Size(340, 30)
+        Me.txtInternalCodes.TabIndex = 21
+        '
+        'lblDepartment
+        '
+        Me.lblDepartment.AutoSize = True
+        Me.lblDepartment.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblDepartment.Location = New System.Drawing.Point(680, 70)
+        Me.lblDepartment.Name = "lblDepartment"
+        Me.lblDepartment.Size = New System.Drawing.Size(103, 26)
+        Me.lblDepartment.TabIndex = 18
+        Me.lblDepartment.Text = "Department"
+        '
+        'cboDepartment
+        '
+        Me.cboDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboDepartment.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboDepartment.FormattingEnabled = True
+        Me.cboDepartment.Location = New System.Drawing.Point(870, 67)
+        Me.cboDepartment.Name = "cboDepartment"
+        Me.cboDepartment.Size = New System.Drawing.Size(340, 34)
+        Me.cboDepartment.TabIndex = 19
+        '
+        'lblAssignedTo
+        '
+        Me.lblAssignedTo.AutoSize = True
+        Me.lblAssignedTo.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblAssignedTo.Location = New System.Drawing.Point(680, 155)
+        Me.lblAssignedTo.Name = "lblAssignedTo"
+        Me.lblAssignedTo.Size = New System.Drawing.Size(103, 26)
+        Me.lblAssignedTo.TabIndex = 22
+        Me.lblAssignedTo.Text = "Assigned To"
+        '
+        'cboAssignedTo
+        '
+        Me.cboAssignedTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboAssignedTo.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboAssignedTo.FormattingEnabled = True
+        Me.cboAssignedTo.Location = New System.Drawing.Point(870, 152)
+        Me.cboAssignedTo.Name = "cboAssignedTo"
+        Me.cboAssignedTo.Size = New System.Drawing.Size(340, 34)
+        Me.cboAssignedTo.TabIndex = 23
+        '
+        'lblLocation
+        '
+        Me.lblLocation.AutoSize = True
+        Me.lblLocation.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblLocation.Location = New System.Drawing.Point(680, 200)
+        Me.lblLocation.Name = "lblLocation"
+        Me.lblLocation.Size = New System.Drawing.Size(76, 26)
+        Me.lblLocation.TabIndex = 24
+        Me.lblLocation.Text = "Location"
+        '
+        'txtLocation
+        '
+        Me.txtLocation.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtLocation.Location = New System.Drawing.Point(870, 197)
+        Me.txtLocation.Name = "txtLocation"
+        Me.txtLocation.Size = New System.Drawing.Size(340, 30)
+        Me.txtLocation.TabIndex = 25
+        '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblStatus.Location = New System.Drawing.Point(680, 245)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(59, 26)
+        Me.lblStatus.TabIndex = 26
+        Me.lblStatus.Text = "Status"
+        '
+        'cboStatus
+        '
+        Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatus.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboStatus.FormattingEnabled = True
+        Me.cboStatus.Items.AddRange(New Object() {"Active", "Borrowed", "For Disposal", "Lost"})
+        Me.cboStatus.Location = New System.Drawing.Point(870, 242)
+        Me.cboStatus.Name = "cboStatus"
+        Me.cboStatus.Size = New System.Drawing.Size(340, 34)
+        Me.cboStatus.TabIndex = 27
+        '
+        'lblTotalCost
+        '
+        Me.lblTotalCost.AutoSize = True
+        Me.lblTotalCost.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblTotalCost.Location = New System.Drawing.Point(680, 290)
+        Me.lblTotalCost.Name = "lblTotalCost"
+        Me.lblTotalCost.Size = New System.Drawing.Size(82, 26)
+        Me.lblTotalCost.TabIndex = 28
+        Me.lblTotalCost.Text = "Total Cost"
+        '
+        'txtTotalCost
+        '
+        Me.txtTotalCost.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtTotalCost.Location = New System.Drawing.Point(870, 287)
+        Me.txtTotalCost.Name = "txtTotalCost"
+        Me.txtTotalCost.Size = New System.Drawing.Size(340, 30)
+        Me.txtTotalCost.TabIndex = 29
+        '
+        'lblSourceOfFunds
+        '
+        Me.lblSourceOfFunds.AutoSize = True
+        Me.lblSourceOfFunds.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblSourceOfFunds.Location = New System.Drawing.Point(680, 335)
+        Me.lblSourceOfFunds.Name = "lblSourceOfFunds"
+        Me.lblSourceOfFunds.Size = New System.Drawing.Size(136, 26)
+        Me.lblSourceOfFunds.TabIndex = 30
+        Me.lblSourceOfFunds.Text = "Source of Funds"
+        '
+        'cboSourceOfFunds
+        '
+        Me.cboSourceOfFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboSourceOfFunds.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboSourceOfFunds.FormattingEnabled = True
+        Me.cboSourceOfFunds.Location = New System.Drawing.Point(870, 332)
+        Me.cboSourceOfFunds.Name = "cboSourceOfFunds"
+        Me.cboSourceOfFunds.Size = New System.Drawing.Size(340, 34)
+        Me.cboSourceOfFunds.TabIndex = 31
+        '
+        'btnSave
+        '
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.btnSave.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Poppins", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSave.ForeColor = System.Drawing.Color.White
+        Me.btnSave.Location = New System.Drawing.Point(1050, 550)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(160, 45)
+        Me.btnSave.TabIndex = 33
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
+        'btnCancel
+        '
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Poppins", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCancel.Location = New System.Drawing.Point(870, 550)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(160, 45)
+        Me.btnCancel.TabIndex = 32
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
         '
         'AddProperty
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.RoundedPanel2)
-        Me.Controls.Add(Me.RoundedPanel1)
-        Me.Controls.Add(Me.admin_label_DepartmentManagement)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Controls.Add(Me.pnlMain)
+        Me.Controls.Add(Me.lblTitle)
         Me.Name = "AddProperty"
-        Me.Size = New System.Drawing.Size(1351, 802)
-        Me.RoundedPanel2.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
-        CType(Me.acquisitionCost, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
-        Me.RoundedPanel1.ResumeLayout(False)
-        Me.RoundedPanel1.PerformLayout()
+        Me.Size = New System.Drawing.Size(1280, 720)
+        CType(Me.txtAcquisitionCost, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlMain.ResumeLayout(False)
+        Me.pnlMain.PerformLayout()
+        CType(Me.txtQuantity, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents assignedEmployee As System.Windows.Forms.Label
-    Friend WithEvents warrantyExpiration As System.Windows.Forms.Label
-    Friend Shadows WithEvents location As System.Windows.Forms.Label
-    Friend WithEvents remarks As System.Windows.Forms.Label
-    Friend WithEvents totalCost As System.Windows.Forms.TextBox
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents acquisitionCost As System.Windows.Forms.NumericUpDown
-    Friend WithEvents serialNumber As System.Windows.Forms.TextBox
-    Friend WithEvents propertyId As System.Windows.Forms.TextBox
-    Friend WithEvents cost As System.Windows.Forms.Label
-    Friend WithEvents conditionStatus As System.Windows.Forms.Label
+    Friend WithEvents lblTitle As System.Windows.Forms.Label
+    Friend WithEvents pnlMain As System.Windows.Forms.Panel
+    Friend WithEvents lblItemName As System.Windows.Forms.Label
+    Friend WithEvents txtItemName As System.Windows.Forms.TextBox
+    Friend WithEvents lblCategory As System.Windows.Forms.Label
+    Friend WithEvents cboCategory As System.Windows.Forms.ComboBox
+    Friend WithEvents lblSerialNumber As System.Windows.Forms.Label
+    Friend WithEvents txtSerialNumber As System.Windows.Forms.TextBox
     Friend WithEvents lblDescription As System.Windows.Forms.Label
-    Friend WithEvents property_Category As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
-    Friend WithEvents instructions As System.Windows.Forms.Label
-    Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
-    Friend WithEvents departmentId As System.Windows.Forms.ComboBox
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
-    Friend WithEvents btnSave As Resources.Controls.RoundedButton
-    Friend WithEvents description As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents condition As System.Windows.Forms.ComboBox
-    Friend WithEvents acquisitionDate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents assignedTo As System.Windows.Forms.ComboBox
-    Friend WithEvents category As System.Windows.Forms.ComboBox
-    Friend WithEvents Unitodmeasuerlbl As System.Windows.Forms.Label
-    Friend WithEvents unitOfMeasure As System.Windows.Forms.TextBox
-    Friend WithEvents sourceoffundslbs As System.Windows.Forms.Label
-    Friend WithEvents sourceOfFunds As System.Windows.Forms.ComboBox
+    Friend WithEvents txtDescription As System.Windows.Forms.TextBox
+    Friend WithEvents lblCondition As System.Windows.Forms.Label
+    Friend WithEvents cboCondition As System.Windows.Forms.ComboBox
+    Friend WithEvents lblUnitOfMeasure As System.Windows.Forms.Label
+    Friend WithEvents txtUnitOfMeasure As System.Windows.Forms.ComboBox
+    Friend WithEvents lblQuantity As System.Windows.Forms.Label
+    Friend WithEvents txtQuantity As System.Windows.Forms.NumericUpDown
+    Friend WithEvents lblAcquisitionCost As System.Windows.Forms.Label
+    Friend WithEvents txtAcquisitionCost As System.Windows.Forms.NumericUpDown
+    Friend WithEvents lblAcquisitionDate As System.Windows.Forms.Label
+    Friend WithEvents dtpAcquisitionDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents lblPropertyNumber As System.Windows.Forms.Label
+    Friend WithEvents txtPropertyNumber As System.Windows.Forms.TextBox
+    Friend WithEvents lblInternalCodes As System.Windows.Forms.Label
+    Friend WithEvents txtInternalCodes As System.Windows.Forms.TextBox
+    Friend WithEvents lblDepartment As System.Windows.Forms.Label
+    Friend WithEvents cboDepartment As System.Windows.Forms.ComboBox
+    Friend WithEvents lblAssignedTo As System.Windows.Forms.Label
+    Friend WithEvents cboAssignedTo As System.Windows.Forms.ComboBox
+    Friend WithEvents lblLocation As System.Windows.Forms.Label
+    Friend WithEvents txtLocation As System.Windows.Forms.TextBox
+    Friend WithEvents lblStatus As System.Windows.Forms.Label
+    Friend WithEvents cboStatus As System.Windows.Forms.ComboBox
+    Friend WithEvents lblTotalCost As System.Windows.Forms.Label
+    Friend WithEvents txtTotalCost As System.Windows.Forms.TextBox
+    Friend WithEvents lblSourceOfFunds As System.Windows.Forms.Label
+    Friend WithEvents cboSourceOfFunds As System.Windows.Forms.ComboBox
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
 End Class

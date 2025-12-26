@@ -129,6 +129,12 @@ Public Class frmRequest
                         remarks = row("remarks").ToString()
                     End If
 
+                    ' Get approved by name instead of ID
+                    Dim approvedByName As String = ""
+                    If row.Table.Columns.Contains("approved_by_name") AndAlso Not IsDBNull(row("approved_by_name")) Then
+                        approvedByName = row("approved_by_name").ToString()
+                    End If
+
                     ' Match the column order in the designer: requestId, requesterName, position, departmentId, dateOfRequest, itemName, description, quantityRequested, unit, purpose, status, approvedBy, approvedDate, remarks
                     ' Note: Some columns are hidden in the designer
                     Dim unitVal As String = ""
@@ -136,10 +142,10 @@ Public Class frmRequest
                         unitVal = row("unit").ToString()
                     End If
                     Dim purposeVal As String = ""
-                    If row.Table.Columns.Contains("remarks") AndAlso Not IsDBNull(row("remarks")) Then
-                        purposeVal = row("remarks").ToString()
+                    If row.Table.Columns.Contains("purpose") AndAlso Not IsDBNull(row("purpose")) Then
+                        purposeVal = row("purpose").ToString()
                     End If
-                    DataGridView1.Rows.Add(requestID, requesterName, position, departmentId, requestDate, itemName, description, quantity, unitVal, purposeVal, requestStatus, approvedBy, approvedDate, remarks)
+                    DataGridView1.Rows.Add(requestID, requesterName, position, departmentId, requestDate, itemName, description, quantity, unitVal, purposeVal, requestStatus, approvedByName, approvedDate, remarks)
                 Catch rowEx As Exception
                     System.Diagnostics.Debug.WriteLine("Error processing row in frmRequest: " & rowEx.Message)
                 End Try

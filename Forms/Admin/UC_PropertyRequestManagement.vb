@@ -462,7 +462,7 @@ Public Class UC_PropertyRequestManagement
             Dim remarks As String = InputBox("Enter approval remarks (optional):", "Approve Request", "")
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-            If DatabaseConnection.ApprovePropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
+            If DatabaseConnection.ApprovePropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, Nothing, Nothing, remarks) Then
                 MessageBox.Show("Request approved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadRequestData()
             Else

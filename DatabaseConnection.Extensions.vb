@@ -2,6 +2,7 @@ Imports System
 Imports System.Data
 Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
+Imports Microsoft.VisualBasic
 
 ''' <summary>
 ''' Extension methods for DatabaseConnection to support location dropdowns and utilities
@@ -225,6 +226,215 @@ Partial Public Class DatabaseConnection
             System.Diagnostics.Debug.WriteLine("[v0] GetBarangays Exception: " & ex.Message)
         End Try
         Return dt
+    End Function
+    
+    ''' <summary>
+    ''' Generate a unique property number in format: PROP-YYYY-####
+    ''' </summary>
+    Private Shared Function GeneratePropertyNumber() As String
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return ""
+            If Not SafeOpenConnection(conn) Then Return ""
+            
+            Return GeneratePropertyNumber(conn, Nothing)
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GeneratePropertyNumber Exception: " & ex.Message)
+            ' Fallback to timestamp-based number
+            Return "PROP-" & DateTime.Now.ToString("yyyy-MMddHHmmss")
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+    
+    ''' <summary>
+    ''' Generate a unique property number in format: PROP-YYYY-#### (with transaction support)
+    ''' </summary>
+    Friend Shared Function GeneratePropertyNumber(conn As MySqlConnection, transaction As MySqlTransaction) As String
+        Try
+            Dim year As String = DateTime.Now.Year.ToString()
+            Dim prefix As String = "PROP-" & year & "-"
+            
+            ' Get the highest number for this year
+            Dim query As String = "SELECT propertyNumber FROM properties WHERE propertyNumber LIKE @prefix ORDER BY propertyNumber DESC LIMIT 1"
+            Using cmd As New MySqlCommand(query, conn, transaction)
+                cmd.Parameters.AddWithValue("@prefix", prefix & "%")
+                Dim result = cmd.ExecuteScalar()
+                
+                If result IsNot Nothing AndAlso Not result.Equals(DBNull.Value) Then
+                    Dim lastNumber As String = result.ToString()
+                    ' Extract the number part (last 4 digits)
+                    Dim parts() As String = lastNumber.Split("-"c)
+                    If parts.Length = 3 Then
+                        Dim lastSeq As Integer = 0
+                        If Integer.TryParse(parts(2), lastSeq) Then
+                            Return prefix & (lastSeq + 1).ToString("D4")
+                        End If
+                    End If
+                End If
+                
+                ' If no existing number found, start with 0001
+                Return prefix & "0001"
+            End Using
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GeneratePropertyNumber Exception: " & ex.Message)
+            ' Fallback to timestamp-based number
+            Return "PROP-" & DateTime.Now.ToString("yyyy-MMddHHmmss")
+        End Try
+    End Function
+    
+    ''' <summary>
+    ''' Generate a unique internal code in format: IC-YYYY-####
+    ''' </summary>
+    Private Shared Function GenerateInternalCode() As String
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return ""
+            If Not SafeOpenConnection(conn) Then Return ""
+            
+            Return GenerateInternalCode(conn, Nothing)
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GenerateInternalCode Exception: " & ex.Message)
+            ' Fallback to timestamp-based code
+            Return "IC-" & DateTime.Now.ToString("yyyy-MMddHHmmss")
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+    
+    ''' <summary>
+    ''' Generate a unique internal code in format: IC-YYYY-#### (with transaction support)
+    ''' </summary>
+    Friend Shared Function GenerateInternalCode(conn As MySqlConnection, transaction As MySqlTransaction) As String
+        Try
+            Dim year As String = DateTime.Now.Year.ToString()
+            Dim prefix As String = "IC-" & year & "-"
+            
+            ' Get the highest number for this year
+            Dim query As String = "SELECT internalCodes FROM properties WHERE internalCodes LIKE @prefix ORDER BY internalCodes DESC LIMIT 1"
+            Using cmd As New MySqlCommand(query, conn, transaction)
+                cmd.Parameters.AddWithValue("@prefix", prefix & "%")
+                Dim result = cmd.ExecuteScalar()
+                
+                If result IsNot Nothing AndAlso Not result.Equals(DBNull.Value) Then
+                    Dim lastCode As String = result.ToString()
+                    ' Extract the number part (last 4 digits)
+                    Dim parts() As String = lastCode.Split("-"c)
+                    If parts.Length = 3 Then
+                        Dim lastSeq As Integer = 0
+                        If Integer.TryParse(parts(2), lastSeq) Then
+                            Return prefix & (lastSeq + 1).ToString("D4")
+                        End If
+                    End If
+                End If
+                
+                ' If no existing code found, start with 0001
+                Return prefix & "0001"
+            End Using
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GenerateInternalCode Exception: " & ex.Message)
+            ' Fallback to timestamp-based code
+            Return "IC-" & DateTime.Now.ToString("yyyy-MMddHHmmss")
+        End Try
+    End Function
+    
+    ''' <summary>
+    ''' Add a new property to the database with auto-generated propertyNumber and internalCodes
+    ''' </summary>
+    Public Shared Function AddProperty(itemName As String,
+                                       category As String,
+                                       description As String,
+                                       unitOfMeasure As String,
+                                       propertyNumber As String,
+                                       serialNumber As String,
+                                       acquisitionDate As Date,
+                                       acquisitionCost As Decimal,
+                                       totalCost As Decimal?,
+                                       sourceOfFunds As String,
+                                       assignedTo As Integer?,
+                                       departmentId As Integer?,
+                                       location As String,
+                                       condition As String,
+                                       status As String,
+                                       internalCodes As String) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+            
+            ' Auto-generate propertyNumber if empty
+            If String.IsNullOrWhiteSpace(propertyNumber) Then
+                propertyNumber = GeneratePropertyNumber()
+            End If
+            
+            ' Auto-generate internalCodes if empty
+            If String.IsNullOrWhiteSpace(internalCodes) Then
+                internalCodes = GenerateInternalCode()
+            End If
+            
+            ' Insert property into database
+            Dim query As String = "INSERT INTO properties (itemName, category, description, unitOfMeasure, " &
+                                 "propertyNumber, serialNumber, acquisitionDate, acquisitionCost, totalCost, " &
+                                 "sourceOfFunds, assignedTo, departmentId, location, `condition`, status, internalCodes, " &
+                                 "createdAt, updatedAt) VALUES (@itemName, @category, @description, @unitOfMeasure, " &
+                                 "@propertyNumber, @serialNumber, @acquisitionDate, @acquisitionCost, @totalCost, " &
+                                 "@sourceOfFunds, @assignedTo, @departmentId, @location, @condition, @status, @internalCodes, " &
+                                 "NOW(), NOW())"
+            
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@itemName", itemName)
+                cmd.Parameters.AddWithValue("@category", category)
+                cmd.Parameters.AddWithValue("@description", If(String.IsNullOrWhiteSpace(description), DBNull.Value, description))
+                cmd.Parameters.AddWithValue("@unitOfMeasure", If(String.IsNullOrWhiteSpace(unitOfMeasure), DBNull.Value, unitOfMeasure))
+                cmd.Parameters.AddWithValue("@propertyNumber", propertyNumber)
+                cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrWhiteSpace(serialNumber), DBNull.Value, serialNumber))
+                cmd.Parameters.AddWithValue("@acquisitionDate", acquisitionDate)
+                cmd.Parameters.AddWithValue("@acquisitionCost", acquisitionCost)
+                cmd.Parameters.AddWithValue("@totalCost", If(totalCost.HasValue, totalCost.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrWhiteSpace(sourceOfFunds), DBNull.Value, sourceOfFunds))
+                cmd.Parameters.AddWithValue("@assignedTo", If(assignedTo.HasValue, assignedTo.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, departmentId.Value, DBNull.Value))
+                cmd.Parameters.AddWithValue("@location", location)
+                cmd.Parameters.AddWithValue("@condition", condition)
+                cmd.Parameters.AddWithValue("@status", status)
+                cmd.Parameters.AddWithValue("@internalCodes", internalCodes)
+                
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                Return rowsAffected > 0
+            End Using
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] AddProperty Exception: " & ex.Message)
+            MessageBox.Show("Error adding property: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
     End Function
     
 End Class

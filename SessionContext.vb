@@ -36,6 +36,7 @@ Public Class SessionContext
     Private Shared _currentRole As String = ""
     Private Shared _currentFullName As String = ""
     Private Shared _currentDepartment As String = ""
+    Private Shared _currentUserPosition As String = ""
     Private Shared _isLoggedIn As Boolean = False
 
     ' ============================================================================
@@ -87,6 +88,15 @@ Public Class SessionContext
         End Set
     End Property
 
+    Public Shared Property CurrentUserPosition As String
+        Get
+            Return _currentUserPosition
+        End Get
+        Set(value As String)
+            _currentUserPosition = value
+        End Set
+    End Property
+
     Public Shared Property IsLoggedIn As Boolean
         Get
             Return _isLoggedIn
@@ -100,12 +110,13 @@ Public Class SessionContext
     ' SESSION MANAGEMENT METHODS
     ' ============================================================================
 
-    Public Shared Sub Login(userID As Integer, username As String, role As String, fullName As String, Optional department As String = "")
+    Public Shared Sub Login(userID As Integer, username As String, role As String, fullName As String, Optional department As String = "", Optional position As String = "")
         _currentUserID = userID
         _currentUsername = username
         _currentRole = role
         _currentFullName = fullName
         _currentDepartment = department
+        _currentUserPosition = position
         _isLoggedIn = True
 
         ' Update last login in database
@@ -118,6 +129,7 @@ Public Class SessionContext
         _currentRole = ""
         _currentFullName = ""
         _currentDepartment = ""
+        _currentUserPosition = ""
         _isLoggedIn = False
     End Sub
 
@@ -229,6 +241,7 @@ Public Class SessionContext
         info.Add("role", _currentRole)
         info.Add("fullName", _currentFullName)
         info.Add("department", _currentDepartment)
+        info.Add("position", _currentUserPosition)
         info.Add("isLoggedIn", _isLoggedIn)
         Return info
     End Function

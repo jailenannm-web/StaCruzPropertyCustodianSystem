@@ -222,9 +222,17 @@ Public Class UC_SupplyManagement
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
                     ' Use safe column access with correct camelCase column names from database
-                    ' Designer column order: supplyId, itemName, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, stockStatus, createdAt, updatedAt
+                    ' Designer column order: supplyId, itemName, category, description, quantity, supplier, location, stockStatus, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt
                     Dim supplyID As String = If(row.Table.Columns.Contains("supplyId") AndAlso Not IsDBNull(row("supplyId")), row("supplyId").ToString(), "")
                     Dim supplyName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString(), "")
+                    Dim categoryVal As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), "")
+                    Dim descriptionVal As String = If(row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")), row("description").ToString(), "")
+                    Dim quantityVal As String = If(row.Table.Columns.Contains("quantity") AndAlso Not IsDBNull(row("quantity")), row("quantity").ToString(), "0")
+                    Dim supplierVal As String = If(row.Table.Columns.Contains("supplier") AndAlso Not IsDBNull(row("supplier")), row("supplier").ToString(), "")
+                    Dim locationVal As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
+                    Dim status As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), "")
+                    
+                    ' Hidden columns
                     Dim unitOfMeasure As String = If(row.Table.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(row("unitOfMeasure")), row("unitOfMeasure").ToString(), "")
                     Dim acqDate As String = ""
                     If row.Table.Columns.Contains("dateReceived") AndAlso Not IsDBNull(row("dateReceived")) Then
@@ -248,12 +256,11 @@ Public Class UC_SupplyManagement
                         End If
                     End If
                     Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")
-                    Dim status As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), "")
                     Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
                     Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
 
-                    ' Add row matching Designer column order: supplyId, itemName, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, stockStatus, createdAt, updatedAt
-                    Dim rowIndex As Integer = pm_table.Rows.Add(supplyID, supplyName, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, status, createdAt, updatedAt)
+                    ' Add row matching Designer column order: supplyId, itemName, category, description, quantity, supplier, location, stockStatus, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt
+                    Dim rowIndex As Integer = pm_table.Rows.Add(supplyID, supplyName, categoryVal, descriptionVal, quantityVal, supplierVal, locationVal, status, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt)
                 Next
 
                 ' Update total count
@@ -309,6 +316,14 @@ Public Class UC_SupplyManagement
             For Each row As DataRow In filtered
                 Dim supplyID As String = If(row.Table.Columns.Contains("supplyId") AndAlso Not IsDBNull(row("supplyId")), row("supplyId").ToString(), "")
                 Dim supplyName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString(), "")
+                Dim categoryVal As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), "")
+                Dim descriptionVal As String = If(row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")), row("description").ToString(), "")
+                Dim quantityVal As String = If(row.Table.Columns.Contains("quantity") AndAlso Not IsDBNull(row("quantity")), row("quantity").ToString(), "0")
+                Dim supplierVal As String = If(row.Table.Columns.Contains("supplier") AndAlso Not IsDBNull(row("supplier")), row("supplier").ToString(), "")
+                Dim locationVal As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), "")
+                Dim status As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), "")
+                
+                ' Hidden columns
                 Dim unitOfMeasure As String = If(row.Table.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(row("unitOfMeasure")), row("unitOfMeasure").ToString(), "")
                 Dim acqDate As String = ""
                 If row.Table.Columns.Contains("dateReceived") AndAlso Not IsDBNull(row("dateReceived")) Then
@@ -332,11 +347,10 @@ Public Class UC_SupplyManagement
                     End If
                 End If
                 Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")
-                Dim status As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), "")
                 Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
                 Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
 
-                pm_table.Rows.Add(supplyID, supplyName, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, status, createdAt, updatedAt)
+                pm_table.Rows.Add(supplyID, supplyName, categoryVal, descriptionVal, quantityVal, supplierVal, locationVal, status, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt)
             Next
 
             If ttlSupplymanagement IsNot Nothing Then
@@ -469,7 +483,23 @@ Public Class UC_SupplyManagement
 
         ' Open EditSupply Form
         Dim editForm As New EditSupply()
-        editForm.LoadSupplyData(supplyID, supplyData)
+        
+        ' Extract data from DataRow with proper type conversion
+        Dim itemName As String = If(IsDBNull(supplyData("itemName")), "", supplyData("itemName").ToString())
+        Dim category As String = If(IsDBNull(supplyData("category")), "", supplyData("category").ToString())
+        Dim description As String = If(IsDBNull(supplyData("description")), "", supplyData("description").ToString())
+        Dim unitOfMeasure As String = If(IsDBNull(supplyData("unitOfMeasure")), "", supplyData("unitOfMeasure").ToString())
+        Dim quantity As Integer = If(IsDBNull(supplyData("quantity")), 0, CInt(supplyData("quantity")))
+        Dim dateReceived As Date = If(IsDBNull(supplyData("dateReceived")), Date.Today, CDate(supplyData("dateReceived")))
+        Dim unitCost As Decimal = If(IsDBNull(supplyData("unitCost")), 0D, CDec(supplyData("unitCost")))
+        Dim totalCost As Decimal = If(IsDBNull(supplyData("totalCost")), 0D, CDec(supplyData("totalCost")))
+        Dim supplier As String = If(IsDBNull(supplyData("supplier")), "", supplyData("supplier").ToString())
+        Dim sourceOfFunds As String = If(IsDBNull(supplyData("sourceOfFunds")), "", supplyData("sourceOfFunds").ToString())
+        Dim location As String = If(IsDBNull(supplyData("location")), "", supplyData("location").ToString())
+        Dim stockStatus As String = If(IsDBNull(supplyData("stockStatus")), "Available", supplyData("stockStatus").ToString())
+        
+        editForm.LoadSupplyData(supplyID, itemName, category, description, unitOfMeasure, quantity, 
+                               dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus)
 
         ' Navigate into Dashboard - Check SADashboard first
         Dim saDashboard = TryCast(Me.ParentForm, SADashboard)

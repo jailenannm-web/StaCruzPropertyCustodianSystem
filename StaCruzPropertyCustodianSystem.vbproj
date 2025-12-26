@@ -356,7 +356,7 @@
       <DependentUpon>frmBorrowedItem.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Staff\frmBorrowedItem.vb">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Staff\frmInventory.Designer.vb">
       <DependentUpon>frmInventory.vb</DependentUpon>
@@ -888,9 +888,9 @@
   <ItemGroup>
     <Folder Include="Forms\SuperAdmin\Department Management\" />
     <Folder Include="Forms\SuperAdmin\Maintenance\" />
-    <Folder Include="Resources\Fonts\" />
     <Folder Include="Forms\SuperAdmin\Property Management\" />
     <Folder Include="Forms\SuperAdmin\Supply Management\" />
+    <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
