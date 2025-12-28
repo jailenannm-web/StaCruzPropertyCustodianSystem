@@ -234,9 +234,7 @@ Partial Public Class RequisitionIssueSlip
     End Sub
 
     Private Sub btn_Back_Click(sender As Object, e As EventArgs) Handles btn_Back.Click
-        Dim AdminDashboard As New StaffDashboard()
-        StaffDashboard.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub btnCSV_Click(sender As Object, e As EventArgs) Handles btnCSV.Click

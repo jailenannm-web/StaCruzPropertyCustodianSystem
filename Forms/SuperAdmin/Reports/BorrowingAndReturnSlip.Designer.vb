@@ -39,11 +39,6 @@ Partial Class BorrowingAndReturnSlip
         Me.Label6 = New System.Windows.Forms.Label()
         Me.requestId = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.RoundedButton4 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedButton2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedButton3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.remarks = New System.Windows.Forms.TextBox()
         Me.Label34 = New System.Windows.Forms.Label()
@@ -63,6 +58,11 @@ Partial Class BorrowingAndReturnSlip
         Me.Label5 = New System.Windows.Forms.Label()
         Me.borrowedName = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.RoundedButton4 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedButton2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedButton3 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Panel11.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -71,14 +71,13 @@ Partial Class BorrowingAndReturnSlip
         '
         'Panel11
         '
-        Me.Panel11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel11.BackColor = System.Drawing.Color.White
         Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel11.Controls.Add(Me.lblPropertyCard)
-        Me.Panel11.Location = New System.Drawing.Point(338, 84)
+        Me.Panel11.Location = New System.Drawing.Point(254, 68)
+        Me.Panel11.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(892, 57)
+        Me.Panel11.Size = New System.Drawing.Size(670, 47)
         Me.Panel11.TabIndex = 366
         '
         'lblPropertyCard
@@ -87,48 +86,48 @@ Partial Class BorrowingAndReturnSlip
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPropertyCard.AutoSize = True
         Me.lblPropertyCard.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPropertyCard.Location = New System.Drawing.Point(266, 7)
+        Me.lblPropertyCard.Location = New System.Drawing.Point(200, 6)
+        Me.lblPropertyCard.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPropertyCard.Name = "lblPropertyCard"
-        Me.lblPropertyCard.Size = New System.Drawing.Size(396, 44)
+        Me.lblPropertyCard.Size = New System.Drawing.Size(318, 36)
         Me.lblPropertyCard.TabIndex = 38
         Me.lblPropertyCard.Text = "BORROWING AND RETURN SLIP"
         '
         'Panel2
         '
-        Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.borrowedId)
         Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Location = New System.Drawing.Point(338, 136)
+        Me.Panel2.Location = New System.Drawing.Point(254, 110)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(892, 50)
+        Me.Panel2.Size = New System.Drawing.Size(670, 41)
         Me.Panel2.TabIndex = 367
         '
         'borrowedId
         '
         Me.borrowedId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.borrowedId.Location = New System.Drawing.Point(331, 10)
+        Me.borrowedId.Location = New System.Drawing.Point(248, 8)
+        Me.borrowedId.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.borrowedId.Name = "borrowedId"
-        Me.borrowedId.Size = New System.Drawing.Size(357, 22)
+        Me.borrowedId.Size = New System.Drawing.Size(268, 20)
         Me.borrowedId.TabIndex = 55
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(222, 12)
+        Me.Label1.Location = New System.Drawing.Point(166, 10)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(87, 22)
+        Me.Label1.Size = New System.Drawing.Size(70, 17)
         Me.Label1.TabIndex = 38
         Me.Label1.Text = "Borrowed ID:"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Panel1
         '
-        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.itemType)
@@ -137,26 +136,29 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.requestId)
         Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Location = New System.Drawing.Point(338, 179)
+        Me.Panel1.Location = New System.Drawing.Point(254, 145)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(892, 64)
+        Me.Panel1.Size = New System.Drawing.Size(670, 52)
         Me.Panel1.TabIndex = 368
         '
         'itemType
         '
         Me.itemType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.itemType.Location = New System.Drawing.Point(397, 12)
+        Me.itemType.Location = New System.Drawing.Point(298, 10)
+        Me.itemType.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.itemType.Name = "itemType"
-        Me.itemType.Size = New System.Drawing.Size(218, 22)
+        Me.itemType.Size = New System.Drawing.Size(164, 20)
         Me.itemType.TabIndex = 333
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(316, 12)
+        Me.Label3.Location = New System.Drawing.Point(237, 10)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(73, 22)
+        Me.Label3.Size = New System.Drawing.Size(61, 17)
         Me.Label3.TabIndex = 332
         Me.Label3.Text = "Item Type:"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -164,18 +166,20 @@ Partial Class BorrowingAndReturnSlip
         'itemID
         '
         Me.itemID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.itemID.Location = New System.Drawing.Point(694, 13)
+        Me.itemID.Location = New System.Drawing.Point(520, 11)
+        Me.itemID.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.itemID.Name = "itemID"
-        Me.itemID.Size = New System.Drawing.Size(183, 22)
+        Me.itemID.Size = New System.Drawing.Size(138, 20)
         Me.itemID.TabIndex = 331
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(632, 14)
+        Me.Label6.Location = New System.Drawing.Point(474, 11)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(56, 22)
+        Me.Label6.Size = New System.Drawing.Size(46, 17)
         Me.Label6.TabIndex = 330
         Me.Label6.Text = "Item ID:"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -183,106 +187,26 @@ Partial Class BorrowingAndReturnSlip
         'requestId
         '
         Me.requestId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.requestId.Location = New System.Drawing.Point(87, 12)
+        Me.requestId.Location = New System.Drawing.Point(65, 10)
+        Me.requestId.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.requestId.Name = "requestId"
-        Me.requestId.Size = New System.Drawing.Size(203, 22)
+        Me.requestId.Size = New System.Drawing.Size(153, 20)
         Me.requestId.TabIndex = 55
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(3, 14)
+        Me.Label2.Location = New System.Drawing.Point(2, 11)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(78, 22)
+        Me.Label2.Size = New System.Drawing.Size(64, 17)
         Me.Label2.TabIndex = 38
         Me.Label2.Text = "Request ID:"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'RoundedButton4
-        '
-        Me.RoundedButton4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton4.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton4.CornerRadius = 15
-        Me.RoundedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton4.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton4.Location = New System.Drawing.Point(757, 838)
-        Me.RoundedButton4.Margin = New System.Windows.Forms.Padding(4)
-        Me.RoundedButton4.Name = "RoundedButton4"
-        Me.RoundedButton4.Size = New System.Drawing.Size(153, 34)
-        Me.RoundedButton4.TabIndex = 377
-        Me.RoundedButton4.Text = "Back"
-        Me.RoundedButton4.UseVisualStyleBackColor = False
-        '
-        'RoundedButton2
-        '
-        Me.RoundedButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton2.CornerRadius = 15
-        Me.RoundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton2.Location = New System.Drawing.Point(1077, 838)
-        Me.RoundedButton2.Margin = New System.Windows.Forms.Padding(4)
-        Me.RoundedButton2.Name = "RoundedButton2"
-        Me.RoundedButton2.Size = New System.Drawing.Size(153, 34)
-        Me.RoundedButton2.TabIndex = 376
-        Me.RoundedButton2.Text = "Generate PDF File"
-        Me.RoundedButton2.UseVisualStyleBackColor = False
-        '
-        'RoundedButton3
-        '
-        Me.RoundedButton3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton3.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton3.CornerRadius = 15
-        Me.RoundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton3.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton3.Location = New System.Drawing.Point(918, 838)
-        Me.RoundedButton3.Margin = New System.Windows.Forms.Padding(4)
-        Me.RoundedButton3.Name = "RoundedButton3"
-        Me.RoundedButton3.Size = New System.Drawing.Size(153, 34)
-        Me.RoundedButton3.TabIndex = 375
-        Me.RoundedButton3.Text = "Generate CSV File"
-        Me.RoundedButton3.UseVisualStyleBackColor = False
-        '
-        'RoundedButton1
-        '
-        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton1.CornerRadius = 15
-        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(926, 997)
-        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
-        Me.RoundedButton1.Name = "RoundedButton1"
-        Me.RoundedButton1.Size = New System.Drawing.Size(11, 7)
-        Me.RoundedButton1.TabIndex = 365
-        Me.RoundedButton1.Text = "Generate PDF File"
-        Me.RoundedButton1.UseVisualStyleBackColor = False
-        '
-        'btnCSV
-        '
-        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnCSV.CornerRadius = 15
-        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCSV.Location = New System.Drawing.Point(765, 997)
-        Me.btnCSV.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
-        Me.btnCSV.Name = "btnCSV"
-        Me.btnCSV.Size = New System.Drawing.Size(11, 7)
-        Me.btnCSV.TabIndex = 364
-        Me.btnCSV.Text = "Generate CSV File"
-        Me.btnCSV.UseVisualStyleBackColor = False
-        '
         'Panel10
         '
-        Me.Panel10.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel10.BackColor = System.Drawing.Color.White
         Me.Panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel10.Controls.Add(Me.remarks)
@@ -303,26 +227,29 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel10.Controls.Add(Me.Label5)
         Me.Panel10.Controls.Add(Me.borrowedName)
         Me.Panel10.Controls.Add(Me.Label4)
-        Me.Panel10.Location = New System.Drawing.Point(338, 242)
+        Me.Panel10.Location = New System.Drawing.Point(254, 197)
+        Me.Panel10.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(892, 527)
+        Me.Panel10.Size = New System.Drawing.Size(670, 429)
         Me.Panel10.TabIndex = 368
         '
         'remarks
         '
         Me.remarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.remarks.Location = New System.Drawing.Point(331, 421)
+        Me.remarks.Location = New System.Drawing.Point(248, 342)
+        Me.remarks.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.remarks.Name = "remarks"
-        Me.remarks.Size = New System.Drawing.Size(341, 22)
+        Me.remarks.Size = New System.Drawing.Size(256, 20)
         Me.remarks.TabIndex = 336
         '
         'Label34
         '
         Me.Label34.AutoSize = True
         Me.Label34.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.Location = New System.Drawing.Point(213, 421)
+        Me.Label34.Location = New System.Drawing.Point(160, 342)
+        Me.Label34.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(68, 22)
+        Me.Label34.Size = New System.Drawing.Size(55, 17)
         Me.Label34.TabIndex = 335
         Me.Label34.Text = "Remarks:"
         Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -330,18 +257,20 @@ Partial Class BorrowingAndReturnSlip
         'status
         '
         Me.status.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.status.Location = New System.Drawing.Point(331, 377)
+        Me.status.Location = New System.Drawing.Point(248, 306)
+        Me.status.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.status.Name = "status"
-        Me.status.Size = New System.Drawing.Size(341, 22)
+        Me.status.Size = New System.Drawing.Size(256, 20)
         Me.status.TabIndex = 334
         '
         'Label33
         '
         Me.Label33.AutoSize = True
         Me.Label33.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.Location = New System.Drawing.Point(213, 378)
+        Me.Label33.Location = New System.Drawing.Point(160, 307)
+        Me.Label33.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(53, 22)
+        Me.Label33.Size = New System.Drawing.Size(44, 17)
         Me.Label33.TabIndex = 68
         Me.Label33.Text = "Status:"
         Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -349,18 +278,20 @@ Partial Class BorrowingAndReturnSlip
         'conditionOnReturn
         '
         Me.conditionOnReturn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.conditionOnReturn.Location = New System.Drawing.Point(331, 330)
+        Me.conditionOnReturn.Location = New System.Drawing.Point(248, 268)
+        Me.conditionOnReturn.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.conditionOnReturn.Name = "conditionOnReturn"
-        Me.conditionOnReturn.Size = New System.Drawing.Size(341, 22)
+        Me.conditionOnReturn.Size = New System.Drawing.Size(256, 20)
         Me.conditionOnReturn.TabIndex = 67
         '
         'Label32
         '
         Me.Label32.AutoSize = True
         Me.Label32.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label32.Location = New System.Drawing.Point(188, 331)
+        Me.Label32.Location = New System.Drawing.Point(141, 269)
+        Me.Label32.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(136, 22)
+        Me.Label32.Size = New System.Drawing.Size(113, 17)
         Me.Label32.TabIndex = 66
         Me.Label32.Text = "Condition on Return:"
         Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -368,18 +299,20 @@ Partial Class BorrowingAndReturnSlip
         'actualReturnDate
         '
         Me.actualReturnDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.actualReturnDate.Location = New System.Drawing.Point(331, 281)
+        Me.actualReturnDate.Location = New System.Drawing.Point(248, 228)
+        Me.actualReturnDate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.actualReturnDate.Name = "actualReturnDate"
-        Me.actualReturnDate.Size = New System.Drawing.Size(341, 22)
+        Me.actualReturnDate.Size = New System.Drawing.Size(256, 20)
         Me.actualReturnDate.TabIndex = 65
         '
         'Label31
         '
         Me.Label31.AutoSize = True
         Me.Label31.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label31.Location = New System.Drawing.Point(186, 281)
+        Me.Label31.Location = New System.Drawing.Point(140, 228)
+        Me.Label31.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(129, 22)
+        Me.Label31.Size = New System.Drawing.Size(107, 17)
         Me.Label31.TabIndex = 64
         Me.Label31.Text = "Actual Return Date:"
         Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -387,18 +320,20 @@ Partial Class BorrowingAndReturnSlip
         'expectedReturnDate
         '
         Me.expectedReturnDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.expectedReturnDate.Location = New System.Drawing.Point(331, 238)
+        Me.expectedReturnDate.Location = New System.Drawing.Point(248, 193)
+        Me.expectedReturnDate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.expectedReturnDate.Name = "expectedReturnDate"
-        Me.expectedReturnDate.Size = New System.Drawing.Size(341, 22)
+        Me.expectedReturnDate.Size = New System.Drawing.Size(256, 20)
         Me.expectedReturnDate.TabIndex = 63
         '
         'Label30
         '
         Me.Label30.AutoSize = True
         Me.Label30.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(180, 238)
+        Me.Label30.Location = New System.Drawing.Point(135, 193)
+        Me.Label30.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(143, 22)
+        Me.Label30.Size = New System.Drawing.Size(119, 17)
         Me.Label30.TabIndex = 62
         Me.Label30.Text = "Expected Return Date:"
         Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -406,18 +341,20 @@ Partial Class BorrowingAndReturnSlip
         'borrowerDate
         '
         Me.borrowerDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.borrowerDate.Location = New System.Drawing.Point(315, 190)
+        Me.borrowerDate.Location = New System.Drawing.Point(236, 154)
+        Me.borrowerDate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.borrowerDate.Name = "borrowerDate"
-        Me.borrowerDate.Size = New System.Drawing.Size(357, 22)
+        Me.borrowerDate.Size = New System.Drawing.Size(268, 20)
         Me.borrowerDate.TabIndex = 61
         '
         'Label29
         '
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label29.Location = New System.Drawing.Point(197, 190)
+        Me.Label29.Location = New System.Drawing.Point(148, 154)
+        Me.Label29.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(101, 22)
+        Me.Label29.Size = New System.Drawing.Size(81, 17)
         Me.Label29.TabIndex = 60
         Me.Label29.Text = "Borrower Date:"
         Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -425,18 +362,20 @@ Partial Class BorrowingAndReturnSlip
         'departmentId
         '
         Me.departmentId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.departmentId.Location = New System.Drawing.Point(315, 138)
+        Me.departmentId.Location = New System.Drawing.Point(236, 112)
+        Me.departmentId.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.departmentId.Name = "departmentId"
-        Me.departmentId.Size = New System.Drawing.Size(357, 22)
+        Me.departmentId.Size = New System.Drawing.Size(268, 20)
         Me.departmentId.TabIndex = 59
         '
         'Label26
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(197, 138)
+        Me.Label26.Location = New System.Drawing.Point(148, 112)
+        Me.Label26.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(103, 22)
+        Me.Label26.Size = New System.Drawing.Size(85, 17)
         Me.Label26.TabIndex = 58
         Me.Label26.Text = "Department ID:"
         Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -444,18 +383,20 @@ Partial Class BorrowingAndReturnSlip
         'borrowerPosition
         '
         Me.borrowerPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.borrowerPosition.Location = New System.Drawing.Point(315, 92)
+        Me.borrowerPosition.Location = New System.Drawing.Point(236, 75)
+        Me.borrowerPosition.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.borrowerPosition.Name = "borrowerPosition"
-        Me.borrowerPosition.Size = New System.Drawing.Size(357, 22)
+        Me.borrowerPosition.Size = New System.Drawing.Size(268, 20)
         Me.borrowerPosition.TabIndex = 57
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(197, 92)
+        Me.Label5.Location = New System.Drawing.Point(148, 75)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(121, 22)
+        Me.Label5.Size = New System.Drawing.Size(97, 17)
         Me.Label5.TabIndex = 56
         Me.Label5.Text = "Borrower Position:"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -463,29 +404,108 @@ Partial Class BorrowingAndReturnSlip
         'borrowedName
         '
         Me.borrowedName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.borrowedName.Location = New System.Drawing.Point(315, 42)
+        Me.borrowedName.Location = New System.Drawing.Point(236, 34)
+        Me.borrowedName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.borrowedName.Name = "borrowedName"
-        Me.borrowedName.Size = New System.Drawing.Size(357, 22)
+        Me.borrowedName.Size = New System.Drawing.Size(268, 20)
         Me.borrowedName.TabIndex = 55
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(197, 44)
+        Me.Label4.Location = New System.Drawing.Point(148, 36)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(112, 22)
+        Me.Label4.Size = New System.Drawing.Size(90, 17)
         Me.Label4.TabIndex = 38
         Me.Label4.Text = "Borrowed Name:"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'RoundedButton4
+        '
+        Me.RoundedButton4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton4.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton4.CornerRadius = 15
+        Me.RoundedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton4.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton4.Location = New System.Drawing.Point(568, 681)
+        Me.RoundedButton4.Name = "RoundedButton4"
+        Me.RoundedButton4.Size = New System.Drawing.Size(115, 28)
+        Me.RoundedButton4.TabIndex = 377
+        Me.RoundedButton4.Text = "Back"
+        Me.RoundedButton4.UseVisualStyleBackColor = False
+        '
+        'RoundedButton2
+        '
+        Me.RoundedButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton2.CornerRadius = 15
+        Me.RoundedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton2.Location = New System.Drawing.Point(808, 681)
+        Me.RoundedButton2.Name = "RoundedButton2"
+        Me.RoundedButton2.Size = New System.Drawing.Size(115, 28)
+        Me.RoundedButton2.TabIndex = 376
+        Me.RoundedButton2.Text = "Generate PDF File"
+        Me.RoundedButton2.UseVisualStyleBackColor = False
+        '
+        'RoundedButton3
+        '
+        Me.RoundedButton3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton3.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton3.CornerRadius = 15
+        Me.RoundedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton3.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton3.Location = New System.Drawing.Point(688, 681)
+        Me.RoundedButton3.Name = "RoundedButton3"
+        Me.RoundedButton3.Size = New System.Drawing.Size(115, 28)
+        Me.RoundedButton3.TabIndex = 375
+        Me.RoundedButton3.Text = "Generate CSV File"
+        Me.RoundedButton3.UseVisualStyleBackColor = False
+        '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 15
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.RoundedButton1.Location = New System.Drawing.Point(694, 810)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(8, 6)
+        Me.RoundedButton1.TabIndex = 365
+        Me.RoundedButton1.Text = "Generate PDF File"
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
+        'btnCSV
+        '
+        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnCSV.CornerRadius = 15
+        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCSV.Location = New System.Drawing.Point(574, 810)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnCSV.Name = "btnCSV"
+        Me.btnCSV.Size = New System.Drawing.Size(8, 6)
+        Me.btnCSV.TabIndex = 364
+        Me.btnCSV.Text = "Generate CSV File"
+        Me.btnCSV.UseVisualStyleBackColor = False
+        '
         'BorrowingAndReturnSlip
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1569, 919)
+        Me.ClientSize = New System.Drawing.Size(1177, 747)
         Me.Controls.Add(Me.Panel10)
         Me.Controls.Add(Me.RoundedButton4)
         Me.Controls.Add(Me.RoundedButton2)
@@ -495,7 +515,7 @@ Partial Class BorrowingAndReturnSlip
         Me.Controls.Add(Me.Panel11)
         Me.Controls.Add(Me.RoundedButton1)
         Me.Controls.Add(Me.btnCSV)
-        Me.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "BorrowingAndReturnSlip"
         Me.Text = "BorrowingAndReturnSlip"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
