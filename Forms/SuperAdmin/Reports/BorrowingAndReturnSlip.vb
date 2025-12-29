@@ -122,8 +122,6 @@ Public Class BorrowingAndReturnSlip
     End Function
 
     Private Sub RoundedButton4_Click(sender As Object, e As EventArgs) Handles RoundedButton4.Click
-        Dim AdminDashboard As New AdminDashboard()
-        AdminDashboard.Show()
         Me.Close()
     End Sub
 
