@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5BA19DCE-6BE5-45B8-AADD-D54CAC6DE401}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>StaCruzPropertyCustodianSystem.UserListReport</StartupObject>
+    <StartupObject>StaCruzPropertyCustodianSystem.StaffLogin</StartupObject>
     <RootNamespace>StaCruzPropertyCustodianSystem</RootNamespace>
     <AssemblyName>StaCruzPropertyCustodianSystem</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -180,6 +180,18 @@
     <Compile Include="Forms\Admin\MaintenanceManagementReport1.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\DepartmentAllocationSummary,vb.Designer.vb">
+      <DependentUpon>DepartmentAllocationSummary,vb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\DepartmentAllocationSummary,vb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\MaintenanceRepairReportSummary.Designer.vb">
+      <DependentUpon>MaintenanceRepairReportSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\MaintenanceRepairReportSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.Designer.vb">
       <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
     </Compile>
@@ -192,19 +204,49 @@
     <Compile Include="Forms\SuperAdmin\Reports\PropertiesStock.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyInventoryReportSummary.Designer.vb">
+      <DependentUpon>PropertyInventoryReportSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyInventoryReportSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PropertyRequestReport.Designer.vb">
       <DependentUpon>PropertyRequestReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PropertyRequestReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyRequestReportSummary.Designer.vb">
+      <DependentUpon>PropertyRequestReportSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyRequestReportSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesInventoryReport.Designer.vb">
+      <DependentUpon>SuppliesInventoryReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesInventoryReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\SuppliesMaterials.Designer.vb">
       <DependentUpon>SuppliesMaterials.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesRequestReportSummary.Designer.vb">
+      <DependentUpon>SuppliesRequestReportSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesRequestReportSummary.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\UserListReport.Designer.vb">
       <DependentUpon>UserListReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\UserListReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\UserReportSummary.Designer.vb">
+      <DependentUpon>UserReportSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\UserReportSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\SuperAdminDashboard.vb">
@@ -773,6 +815,9 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\DepartmentAllocation.resx">
       <DependentUpon>DepartmentAllocation.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\DepartmentAllocationSummary,vb.resx">
+      <DependentUpon>DepartmentAllocationSummary,vb.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\InspectionandAcceptanceReport.resx">
       <DependentUpon>InspectionandAcceptanceReport.vb</DependentUpon>
     </EmbeddedResource>
@@ -788,6 +833,9 @@
     <EmbeddedResource Include="Forms\Admin\MaintenanceManagementReport1.resx">
       <DependentUpon>MaintenanceManagementReport1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\MaintenanceRepairReportSummary.resx">
+      <DependentUpon>MaintenanceRepairReportSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\MaintenanceReport.resx">
       <DependentUpon>MaintenanceReport.vb</DependentUpon>
     </EmbeddedResource>
@@ -800,11 +848,17 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyCard.resx">
       <DependentUpon>PropertyCard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyInventoryReportSummary.resx">
+      <DependentUpon>PropertyInventoryReportSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyIssuance.resx">
       <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyRequestReport.resx">
       <DependentUpon>PropertyRequestReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyRequestReportSummary.resx">
+      <DependentUpon>PropertyRequestReportSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PurchaseRequest.resx">
       <DependentUpon>PurchaseRequest.vb</DependentUpon>
@@ -818,8 +872,17 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\StockCard.resx">
       <DependentUpon>StockCard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\SuppliesInventoryReport.resx">
+      <DependentUpon>SuppliesInventoryReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\SuppliesRequestReportSummary.resx">
+      <DependentUpon>SuppliesRequestReportSummary.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\UserListReport.resx">
       <DependentUpon>UserListReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\UserReportSummary.resx">
+      <DependentUpon>UserReportSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\WasteMaterialsReport.resx">
       <DependentUpon>WasteMaterialsReport.vb</DependentUpon>

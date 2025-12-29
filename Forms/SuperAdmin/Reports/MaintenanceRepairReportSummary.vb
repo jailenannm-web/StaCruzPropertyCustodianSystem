@@ -1,0 +1,3 @@
+﻿Public Class MaintenanceRepairReportSummary
+
+End Class
