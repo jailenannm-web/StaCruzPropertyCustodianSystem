@@ -676,7 +676,7 @@ Partial Class PropertiesStock
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents condtion As System.Windows.Forms.ComboBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents location As System.Windows.Forms.TextBox
+    Friend Shadows WithEvents location As System.Windows.Forms.TextBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents departmentID As System.Windows.Forms.TextBox
     Friend WithEvents internalCodes As System.Windows.Forms.TextBox

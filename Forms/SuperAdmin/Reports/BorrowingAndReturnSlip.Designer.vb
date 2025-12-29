@@ -55,6 +55,15 @@ Partial Class BorrowingAndReturnSlip
         Me.Label5 = New System.Windows.Forms.Label()
         Me.borrowedName = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.borrowerPosition = New System.Windows.Forms.ComboBox()
+        Me.status = New System.Windows.Forms.ComboBox()
+        Me.RoundedButton1 = New Resources.Controls.RoundedButton()
+        Me.btnCSV = New Resources.Controls.RoundedButton()
+        Me.RoundedButton2 = New Resources.Controls.RoundedButton()
+        Me.RoundedButton3 = New Resources.Controls.RoundedButton()
+        Me.RoundedButton4 = New Resources.Controls.RoundedButton()
         Me.Panel11.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel10.SuspendLayout()
@@ -281,14 +290,18 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel10.Controls.Add(Me.borrowerDate)
         Me.Panel10.Controls.Add(Me.Label31)
         Me.Panel10.Controls.Add(Me.Label30)
-        Me.Panel10.Controls.Add(Me.borrowerDate)
-        Me.Panel10.Controls.Add(Me.Label29)
         Me.Panel10.Controls.Add(Me.departmentId)
         Me.Panel10.Controls.Add(Me.Label26)
         Me.Panel10.Controls.Add(Me.borrowerPosition)
         Me.Panel10.Controls.Add(Me.Label5)
         Me.Panel10.Controls.Add(Me.borrowedName)
         Me.Panel10.Controls.Add(Me.Label4)
+        Me.Panel10.Controls.Add(Me.status)
+        Me.Panel10.Controls.Add(Me.Label33)
+        Me.Panel10.Controls.Add(Me.conditionOnReturn)
+        Me.Panel10.Controls.Add(Me.Label32)
+        Me.Panel10.Controls.Add(Me.remarks)
+        Me.Panel10.Controls.Add(Me.Label34)
         Me.Panel10.Location = New System.Drawing.Point(338, 242)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(892, 527)
@@ -372,7 +385,6 @@ Partial Class BorrowingAndReturnSlip
         '
         'status
         '
-        Me.status.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.status.Location = New System.Drawing.Point(331, 377)
         Me.status.Name = "status"
         Me.status.Size = New System.Drawing.Size(341, 22)
@@ -408,63 +420,6 @@ Partial Class BorrowingAndReturnSlip
         Me.Label32.Text = "Condition on Return:"
         Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'actualReturnDate
-        '
-        Me.actualReturnDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.actualReturnDate.Location = New System.Drawing.Point(331, 281)
-        Me.actualReturnDate.Name = "actualReturnDate"
-        Me.actualReturnDate.Size = New System.Drawing.Size(341, 22)
-        Me.actualReturnDate.TabIndex = 65
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label31.Location = New System.Drawing.Point(186, 281)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(129, 22)
-        Me.Label31.TabIndex = 64
-        Me.Label31.Text = "Actual Return Date:"
-        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'expectedReturnDate
-        '
-        Me.expectedReturnDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.expectedReturnDate.Location = New System.Drawing.Point(331, 238)
-        Me.expectedReturnDate.Name = "expectedReturnDate"
-        Me.expectedReturnDate.Size = New System.Drawing.Size(341, 22)
-        Me.expectedReturnDate.TabIndex = 63
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(180, 238)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(143, 22)
-        Me.Label30.TabIndex = 62
-        Me.Label30.Text = "Expected Return Date:"
-        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'borrowerDate
-        '
-        Me.borrowerDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.borrowerDate.Location = New System.Drawing.Point(315, 190)
-        Me.borrowerDate.Name = "borrowerDate"
-        Me.borrowerDate.Size = New System.Drawing.Size(357, 22)
-        Me.borrowerDate.TabIndex = 61
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label29.Location = New System.Drawing.Point(197, 190)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(101, 22)
-        Me.Label29.TabIndex = 60
-        Me.Label29.Text = "Borrower Date:"
-        Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'departmentId
         '
         Me.departmentId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -486,7 +441,6 @@ Partial Class BorrowingAndReturnSlip
         '
         'borrowerPosition
         '
-        Me.borrowerPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.borrowerPosition.Location = New System.Drawing.Point(315, 92)
         Me.borrowerPosition.Name = "borrowerPosition"
         Me.borrowerPosition.Size = New System.Drawing.Size(357, 22)

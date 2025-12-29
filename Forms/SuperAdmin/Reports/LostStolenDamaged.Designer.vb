@@ -67,27 +67,43 @@ Partial Class LostStolenDamaged
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.DateTimePicker3 = New System.Windows.Forms.DateTimePicker()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.pcDatepicker = New System.Windows.Forms.DateTimePicker()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.pcPoliceStation = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.loststolen_chkboxNo = New System.Windows.Forms.CheckBox()
+        Me.loststolen_chkboxYes = New System.Windows.Forms.CheckBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.pcPropertyPlant = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pcPARDatepicker = New System.Windows.Forms.DateTimePicker()
+        Me.pcPARDate = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.pcPARNo = New System.Windows.Forms.Label()
+        Me.pcRLSDDPDatepicker = New System.Windows.Forms.DateTimePicker()
+        Me.pcRLSDDPDate = New System.Windows.Forms.Label()
+        Me.pcRLSDDPNo = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.pcDestroyed = New System.Windows.Forms.CheckBox()
+        Me.pcDamaged = New System.Windows.Forms.CheckBox()
+        Me.pcStolen = New System.Windows.Forms.CheckBox()
+        Me.pcLost = New System.Windows.Forms.CheckBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.propertyNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pcDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pcAcquisitionCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.pcCircumstances = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel16.SuspendLayout()
         Me.Panel15.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -684,39 +700,25 @@ Partial Class LostStolenDamaged
         '
         'Label13
         '
-        Me.pcPARNo.AutoSize = True
-        Me.pcPARNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pcPARNo.Location = New System.Drawing.Point(2, 54)
-        Me.pcPARNo.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.pcPARNo.Name = "pcPARNo"
-        Me.pcPARNo.Size = New System.Drawing.Size(58, 13)
-        Me.pcPARNo.TabIndex = 60
-        Me.pcPARNo.Text = "PAR No.:"
-        Me.pcPARNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(21, 140)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(50, 17)
+        Me.Label13.TabIndex = 64
+        Me.Label13.Text = "Label13"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'DateTimePicker2
         '
-        Me.pcRLSDDPDatepicker.Location = New System.Drawing.Point(77, 29)
-        Me.pcRLSDDPDatepicker.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.pcRLSDDPDatepicker.Name = "pcRLSDDPDatepicker"
-        Me.pcRLSDDPDatepicker.Size = New System.Drawing.Size(137, 20)
-        Me.pcRLSDDPDatepicker.TabIndex = 59
-        '
-        'pcRLSDDPDate
-        '
-        Me.pcRLSDDPDate.AutoSize = True
-        Me.pcRLSDDPDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pcRLSDDPDate.Location = New System.Drawing.Point(2, 29)
-        Me.pcRLSDDPDate.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.pcRLSDDPDate.Name = "pcRLSDDPDate"
-        Me.pcRLSDDPDate.Size = New System.Drawing.Size(91, 13)
-        Me.pcRLSDDPDate.TabIndex = 46
-        Me.pcRLSDDPDate.Text = "RLSDDP Date:"
-        Me.pcRLSDDPDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.DateTimePicker2.Location = New System.Drawing.Point(145, 140)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(181, 22)
+        Me.DateTimePicker2.TabIndex = 65
         '
         'TextBox6
         '
-        Me.pcRLSDDPNo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TextBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox6.Location = New System.Drawing.Point(182, 170)
         Me.TextBox6.Name = "TextBox6"
@@ -929,9 +931,9 @@ Partial Class LostStolenDamaged
         Me.TextBox12.Size = New System.Drawing.Size(181, 22)
         Me.TextBox12.TabIndex = 75
         '
-        'pcPropertyPlant
+        'TextBox13
         '
-        Me.pcPropertyPlant.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.TextBox13.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox13.Location = New System.Drawing.Point(183, 873)
         Me.TextBox13.Name = "TextBox13"
@@ -1013,7 +1015,7 @@ Partial Class LostStolenDamaged
     Friend WithEvents pcPoliceStation As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents loststolen_chkboxNo As CheckBox
-    Friend WithEvents pcPARDatepicker As TextBox
+    Friend WithEvents pcPARDatepicker As DateTimePicker
     Friend WithEvents pcPARDate As Label
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents pcPARNo As Label

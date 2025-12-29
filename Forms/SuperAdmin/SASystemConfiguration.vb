@@ -727,7 +727,7 @@ Public Class SASystemConfiguration
             .UserID = settings.Username,
             .Password = settings.Password,
             .Database = settings.DatabaseName,
-            .SslMode = MySqlSslMode.None,
+            .SslMode = MySqlSslMode.Disabled,
             .AllowZeroDateTime = True,
             .ConvertZeroDateTime = True,
             .AllowUserVariables = True,
