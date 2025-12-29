@@ -41,11 +41,18 @@ Partial Public Class RequisitionIssueSlip
                 If String.IsNullOrEmpty(deptName) Then
                     deptName = SafeGetValue(requestData, "departmentId", "department_id")
                 End If
-                departmentId.Text = deptName
+                If department IsNot Nothing AndAlso department.Items.Count > 0 Then
+                    Dim deptIndex As Integer = department.Items.IndexOf(deptName)
+                    If deptIndex >= 0 Then
+                        department.SelectedIndex = deptIndex
+                    Else
+                        department.Text = deptName
+                    End If
+                End If
                 dateOfRequest.Text = SafeGetDateValue(requestData, "request_date", "dateOfRequest")
                 itemName.Text = SafeGetValue(requestData, "item_name", "itemName")
                 description.Text = SafeGetValue(requestData, "description")
-                quantityRequested.Text = SafeGetValue(requestData, "quantity", "quantityRequested")
+                quantityRequesteed.Text = SafeGetValue(requestData, "quantity", "quantityRequested")
                 unit.Text = SafeGetValue(requestData, "unit")
                 purpose.Text = SafeGetValue(requestData, "remarks", "purpose")
                 status.Text = SafeGetValue(requestData, "status")
@@ -53,10 +60,22 @@ Partial Public Class RequisitionIssueSlip
 
                 ' Populate approved date and approved by
                 Dim approvedDateValue As String = SafeGetDateValue(requestData, "approval_date", "approvedDate")
-                If Not String.IsNullOrEmpty(approvedDateValue) Then
-                    TextBox2.Text = approvedDateValue
+                If Not String.IsNullOrEmpty(approvedDateValue) AndAlso approvedDate IsNot Nothing Then
+                    Try
+                        approvedDate.Value = DateTime.Parse(approvedDateValue)
+                    Catch
+                        approvedDate.Text = approvedDateValue
+                    End Try
                 End If
-                TextBox3.Text = SafeGetValue(requestData, "approved_by_name", "approvedBy")
+                If approvedBy IsNot Nothing Then
+                    Dim approvedByName As String = SafeGetValue(requestData, "approved_by_name", "approvedBy")
+                    Dim approvedIndex As Integer = approvedBy.Items.IndexOf(approvedByName)
+                    If approvedIndex >= 0 Then
+                        approvedBy.SelectedIndex = approvedIndex
+                    Else
+                        approvedBy.Text = approvedByName
+                    End If
+                End If
 
                 ' Build requisition table with this single request
                 Dim dt As New DataTable()
@@ -234,9 +253,7 @@ Partial Public Class RequisitionIssueSlip
     End Sub
 
     Private Sub btn_Back_Click(sender As Object, e As EventArgs) Handles btn_Back.Click
-        Dim AdminDashboard As New StaffDashboard()
-        StaffDashboard.Show()
-        Me.Hide()
+        Me.Close()
     End Sub
 
     Private Sub btnCSV_Click(sender As Object, e As EventArgs) Handles btnCSV.Click
@@ -284,11 +301,11 @@ Partial Public Class RequisitionIssueSlip
         Return 0
     End Function
 
-    Private Sub entityName_Click(sender As Object, e As EventArgs) Handles entityName.Click
+    Private Sub entityName_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub fundCluster_Click(sender As Object, e As EventArgs) Handles fundCluster.Click
+    Private Sub fundCluster_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
@@ -304,7 +321,7 @@ Partial Public Class RequisitionIssueSlip
 
     End Sub
 
-    Private Sub lblPropertyCard_Click(sender As Object, e As EventArgs) Handles lblPropertyCard.Click
+    Private Sub lblPropertyCard_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
@@ -328,31 +345,31 @@ Partial Public Class RequisitionIssueSlip
 
     End Sub
 
-    Private Sub departmentId_TextChanged_1(sender As Object, e As EventArgs) Handles departmentId.TextChanged
+    Private Sub departmentId_TextChanged_1(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub position_TextChanged(sender As Object, e As EventArgs) Handles position.TextChanged
+    Private Sub position_TextChanged(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub Label2_Click_1(sender As Object, e As EventArgs) Handles Label2.Click
+    Private Sub Label2_Click_1(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+    Private Sub Label1_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) 
 
     End Sub
 
-    Private Sub Panel16_Paint(sender As Object, e As PaintEventArgs) Handles Panel16.Paint
+    Private Sub Panel16_Paint(sender As Object, e As PaintEventArgs) 
 
     End Sub
 
-    Private Sub requestId_TextChanged(sender As Object, e As EventArgs) Handles requestId.TextChanged
+    Private Sub requestId_TextChanged(sender As Object, e As EventArgs) 
 
     End Sub
 End Class

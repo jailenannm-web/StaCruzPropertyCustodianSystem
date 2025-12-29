@@ -65,6 +65,8 @@ Public Class StaffDashboard
     End Sub
 
     Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
+
+
         Try
             ' --- THIS CHECK IS STILL NEEDED ---
             If Not isSidebarExpanded Then
@@ -74,13 +76,13 @@ Public Class StaffDashboard
             ' --- END OF CHECK ---
 
             SetActiveButton(btnDashboard)
-            
+
             ' Clear any existing user controls from the panel
             pnlFormLoader.Controls.Clear()
-            
+
             ' Show the dashboard panel
             pnlFormLoader.Visible = True
-            
+
             ' Load dashboard data
             LoadDashboardData()
         Catch ex As Exception
@@ -232,13 +234,13 @@ Public Class StaffDashboard
         pnlFormLoader.Controls.Add(borrowedItemControl)
     End Sub
 
-    Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
+    Private Sub btnReports_Click(sender As Object, e As EventArgs)
         If Not isSidebarExpanded Then
             ToggleSidebar()
         End If
 
         ' --- This code changes the active button color ---
-        SetActiveButton(btnReports)
+
 
         ' --- THIS IS THE NEW CODE ---
         ' Load your new profile form
@@ -250,17 +252,6 @@ Public Class StaffDashboard
         Dim logout As New logout()
         logout.Show()   ' Show the register form
         Me.Hide()            ' Hide current login form instead of closing it
-    End Sub
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles comboMonth.Click
-
-    End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub pnlFormLoader_Paint(sender As Object, e As PaintEventArgs) Handles pnlFormLoader.Paint
-
     End Sub
 
     ' This code is in your StaffDashboard.vb
@@ -327,125 +318,15 @@ Public Class StaffDashboard
         loadFormIntoPanel(New frmRequest())
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
-
-    End Sub
-
-    Private Sub admin_panel_borrowed_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub admin_panel_borrowed_Click_1(sender As Object, e As EventArgs) Handles admin_panel_borrowed.Click
-
-    End Sub
-
-    Private Sub RoundedPanel6_Paint(sender As Object, e As PaintEventArgs)
-
-    End Sub
-
-    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
-
-    End Sub
-
-    Private Sub admin_panel_PendingRequests_Paint(sender As Object, e As PaintEventArgs)
-
-    End Sub
-
-    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
-
-    End Sub
-
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Label2_Click_1(sender As Object, e As EventArgs) Handles Label2.Click
-
-    End Sub
-
-    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
-
-    End Sub
-
-    Private Sub tmrSidebar_Tick(sender As Object, e As EventArgs) Handles tmrSidebar.Tick
-
-    End Sub
-
-    Private Sub pnlMain_Paint(sender As Object, e As PaintEventArgs) Handles pnlMain.Paint
-
-    End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub txtPersonalHistory_Click(sender As Object, e As EventArgs) Handles txtPersonalHistory.Click
-
-    End Sub
-
-    Private Sub DataGridView1_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs)
-
-    End Sub
-
-    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
-
-    End Sub
-
-    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
-
-    End Sub
-
-    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
-
-    End Sub
-
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
-
-    End Sub
-
-    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
-
-    End Sub
-
-    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
-
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
-
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
-
-    End Sub
-
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
-
-    End Sub
-
-    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
-
-    End Sub
-
-
-
-    Private Sub icStaff_Click(sender As Object, e As EventArgs) Handles icStaff.Click
-
-    End Sub
-
-    Private Sub txtStaff_Click(sender As Object, e As EventArgs) Handles txtStaff.Click
-
-    End Sub
-
     Private Sub btnMaintenanceReq_Click(sender As Object, e As EventArgs) Handles btnMaintenanceReq.Click
         LoadUserControl(New MaintenanceRequest())
     End Sub
 
     Private Sub btnPropertyInventory_Click(sender As Object, e As EventArgs) Handles btnPropertyInventory.Click
         LoadUserControl(New PropertyInventory)
+    End Sub
+
+    Private Sub pnlFormLoader_Paint(sender As Object, e As PaintEventArgs)
+
     End Sub
 End Class

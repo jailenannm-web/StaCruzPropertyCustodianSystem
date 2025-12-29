@@ -288,7 +288,7 @@ Partial Class UC_Reports
         Me.reports_requisitionSlip.Name = "reports_requisitionSlip"
         Me.reports_requisitionSlip.Size = New System.Drawing.Size(374, 217)
         Me.reports_requisitionSlip.TabIndex = 11
-        Me.reports_requisitionSlip.Text = "Requisition and Issue Slip"
+        Me.reports_requisitionSlip.Text = "User Report"
         Me.reports_requisitionSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.reports_requisitionSlip.UseVisualStyleBackColor = False
         '
@@ -308,7 +308,7 @@ Partial Class UC_Reports
         Me.reports_StockCard.Name = "reports_StockCard"
         Me.reports_StockCard.Size = New System.Drawing.Size(376, 217)
         Me.reports_StockCard.TabIndex = 14
-        Me.reports_StockCard.Text = "Stock Card"
+        Me.reports_StockCard.Text = "Property Request Report"
         Me.reports_StockCard.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.reports_StockCard.UseVisualStyleBackColor = False
         '
@@ -328,7 +328,7 @@ Partial Class UC_Reports
         Me.reports_MaintenanceRepair.Name = "reports_MaintenanceRepair"
         Me.reports_MaintenanceRepair.Size = New System.Drawing.Size(374, 217)
         Me.reports_MaintenanceRepair.TabIndex = 12
-        Me.reports_MaintenanceRepair.Text = "Maintenance and Repair Report"
+        Me.reports_MaintenanceRepair.Text = "Department Allocation"
         Me.reports_MaintenanceRepair.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.reports_MaintenanceRepair.UseVisualStyleBackColor = False
         '
@@ -348,7 +348,7 @@ Partial Class UC_Reports
         Me.reports_PropertyCard.Name = "reports_PropertyCard"
         Me.reports_PropertyCard.Size = New System.Drawing.Size(374, 217)
         Me.reports_PropertyCard.TabIndex = 13
-        Me.reports_PropertyCard.Text = "Property Card"
+        Me.reports_PropertyCard.Text = "Property Inventort Report"
         Me.reports_PropertyCard.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.reports_PropertyCard.UseVisualStyleBackColor = False
         '
@@ -527,7 +527,7 @@ Partial Class UC_Reports
         Me.reports_InventoryCustodianSlip.Name = "reports_InventoryCustodianSlip"
         Me.reports_InventoryCustodianSlip.Size = New System.Drawing.Size(372, 217)
         Me.reports_InventoryCustodianSlip.TabIndex = 11
-        Me.reports_InventoryCustodianSlip.Text = "Inventory Custodian Slip"
+        Me.reports_InventoryCustodianSlip.Text = "Supplies Inventory Report"
         Me.reports_InventoryCustodianSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.reports_InventoryCustodianSlip.UseVisualStyleBackColor = False
         '
@@ -567,7 +567,7 @@ Partial Class UC_Reports
         Me.reports_InventorySummary.Name = "reports_InventorySummary"
         Me.reports_InventorySummary.Size = New System.Drawing.Size(372, 217)
         Me.reports_InventorySummary.TabIndex = 12
-        Me.reports_InventorySummary.Text = "Official Inventory Summary Report"
+        Me.reports_InventorySummary.Text = "Supplies Request Report"
         Me.reports_InventorySummary.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.reports_InventorySummary.UseVisualStyleBackColor = False
         '
@@ -587,7 +587,7 @@ Partial Class UC_Reports
         Me.reports_BorrowingReturnSlip.Name = "reports_BorrowingReturnSlip"
         Me.reports_BorrowingReturnSlip.Size = New System.Drawing.Size(372, 217)
         Me.reports_BorrowingReturnSlip.TabIndex = 13
-        Me.reports_BorrowingReturnSlip.Text = "Borrowing and Return Slip Report"
+        Me.reports_BorrowingReturnSlip.Text = "Maintenance & Repir Report"
         Me.reports_BorrowingReturnSlip.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.reports_BorrowingReturnSlip.UseVisualStyleBackColor = False
         '

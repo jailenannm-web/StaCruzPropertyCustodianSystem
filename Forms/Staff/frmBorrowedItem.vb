@@ -645,4 +645,14 @@ Public Class frmBorrowedItem
     Private Sub lblNoItems_Click(sender As Object, e As EventArgs) Handles lblNoItems.Click
 
     End Sub
+
+    Private Sub btnBorrowReturn_Click(sender As Object, e As EventArgs) Handles btnBorrowReturn.Click
+        Dim BorrowingAndReturnSlip As New BorrowingAndReturnSlip()
+        BorrowingAndReturnSlip.Show()
+    End Sub
+
+    Private Sub Essuance_Click(sender As Object, e As EventArgs) Handles Essuance.Click
+        Dim PropertyIssuance As New PropertyIssuance()
+        PropertyIssuance.Show()
+    End Sub
 End Class

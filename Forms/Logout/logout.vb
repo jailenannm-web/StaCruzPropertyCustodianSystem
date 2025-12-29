@@ -11,6 +11,8 @@ Public Class logout
     End Sub
 
     Private Sub btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
-        Me.Close()
+        Dim login As New StaffLogin()
+        StaffLogin.Show()   ' Show the register form
+        Me.Hide()
     End Sub
 End Class

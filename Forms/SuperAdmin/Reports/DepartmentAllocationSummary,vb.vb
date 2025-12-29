@@ -1,0 +1,3 @@
+﻿Public Class DepartmentAllocationSummary_vb
+
+End Class
