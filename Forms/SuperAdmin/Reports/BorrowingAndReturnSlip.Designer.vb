@@ -508,8 +508,8 @@ Partial Class BorrowingAndReturnSlip
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Panel11 As Panel
     Friend WithEvents lblPropertyCard As Label
     Friend WithEvents borrowedId As TextBox
@@ -519,9 +519,9 @@ Partial Class BorrowingAndReturnSlip
     Friend WithEvents Label6 As Label
     Friend WithEvents requestId As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton3 As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton4 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton4 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents itemType As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Panel10 As Panel

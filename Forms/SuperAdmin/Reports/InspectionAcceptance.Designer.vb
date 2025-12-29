@@ -477,7 +477,7 @@ Partial Class InspectionAcceptance
     Friend WithEvents description As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents unit As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents quantity As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btn_Back As System.Windows.Forms.Button
 End Class

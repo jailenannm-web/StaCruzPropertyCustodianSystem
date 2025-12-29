@@ -282,11 +282,11 @@ Partial Public Class RequisitionIssueSlip
         Return 0
     End Function
 
-    Private Sub entityName_Click(sender As Object, e As EventArgs) Handles entityName.Click
+    Private Sub entityName_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub fundCluster_Click(sender As Object, e As EventArgs) Handles fundCluster.Click
+    Private Sub fundCluster_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
@@ -302,7 +302,7 @@ Partial Public Class RequisitionIssueSlip
 
     End Sub
 
-    Private Sub lblPropertyCard_Click(sender As Object, e As EventArgs) Handles lblPropertyCard.Click
+    Private Sub lblPropertyCard_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
@@ -326,31 +326,31 @@ Partial Public Class RequisitionIssueSlip
 
     End Sub
 
-    Private Sub departmentId_TextChanged_1(sender As Object, e As EventArgs) Handles departmentId.TextChanged
+    Private Sub departmentId_TextChanged_1(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub position_TextChanged(sender As Object, e As EventArgs) Handles position.TextChanged
+    Private Sub position_TextChanged(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub Label2_Click_1(sender As Object, e As EventArgs) Handles Label2.Click
+    Private Sub Label2_Click_1(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+    Private Sub Label1_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) 
 
     End Sub
 
-    Private Sub Panel16_Paint(sender As Object, e As PaintEventArgs) Handles Panel16.Paint
+    Private Sub Panel16_Paint(sender As Object, e As PaintEventArgs) 
 
     End Sub
 
-    Private Sub requestId_TextChanged(sender As Object, e As EventArgs) Handles requestId.TextChanged
+    Private Sub requestId_TextChanged(sender As Object, e As EventArgs) 
 
     End Sub
 End Class

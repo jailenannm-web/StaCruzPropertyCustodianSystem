@@ -819,7 +819,7 @@ Partial Class SuppliesMaterials
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton3 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

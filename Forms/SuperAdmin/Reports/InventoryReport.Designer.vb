@@ -321,8 +321,8 @@ Partial Class InventoryReport
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents btn_Back As System.Windows.Forms.Button
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Panel11 As Panel
     Friend WithEvents lblPropertyCard As Label
     Friend WithEvents Reorder As DataGridViewTextBoxColumn
@@ -340,5 +340,5 @@ Partial Class InventoryReport
     Friend WithEvents Label1 As Label
     Friend WithEvents inventoryperiod As TextBox
     Friend WithEvents lblName As Label
-    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

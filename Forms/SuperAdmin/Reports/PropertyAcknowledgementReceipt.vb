@@ -1,4 +1,4 @@
-﻿Public Class PropertyRequestReport
+﻿Partial Public Class PropertyRequestReport
     Private Sub position_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles position.SelectedIndexChanged
 
     End Sub
@@ -16,6 +16,10 @@
     End Sub
 
     Private Sub approvedDate_ValueChanged(sender As Object, e As System.EventArgs) Handles approvedDate.ValueChanged
+
+    End Sub
+
+    Private Sub lblPropertyCard_Click(sender As Object, e As System.EventArgs) Handles lblPropertyCard.Click
 
     End Sub
 End Class

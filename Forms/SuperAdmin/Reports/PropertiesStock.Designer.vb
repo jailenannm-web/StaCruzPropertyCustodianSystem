@@ -49,6 +49,9 @@ Partial Class PropertiesStock
         Me.acquisitionDate = New System.Windows.Forms.DateTimePicker()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.internalCodes = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.status = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.condtion = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -58,9 +61,6 @@ Partial Class PropertiesStock
         Me.Label13 = New System.Windows.Forms.Label()
         Me.assignedTo = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.status = New System.Windows.Forms.ComboBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.internalCodes = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -389,6 +389,35 @@ Partial Class PropertiesStock
         Me.Panel3.Size = New System.Drawing.Size(892, 146)
         Me.Panel3.TabIndex = 372
         '
+        'internalCodes
+        '
+        Me.internalCodes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.internalCodes.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold)
+        Me.internalCodes.Location = New System.Drawing.Point(589, 95)
+        Me.internalCodes.Name = "internalCodes"
+        Me.internalCodes.Size = New System.Drawing.Size(272, 25)
+        Me.internalCodes.TabIndex = 399
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(468, 102)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(102, 22)
+        Me.Label17.TabIndex = 398
+        Me.Label17.Text = "Internal Codes:"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'status
+        '
+        Me.status.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold)
+        Me.status.FormattingEnabled = True
+        Me.status.Location = New System.Drawing.Point(116, 94)
+        Me.status.Name = "status"
+        Me.status.Size = New System.Drawing.Size(309, 30)
+        Me.status.TabIndex = 397
+        '
         'Label16
         '
         Me.Label16.AutoSize = True
@@ -479,35 +508,6 @@ Partial Class PropertiesStock
         Me.Label12.TabIndex = 392
         Me.Label12.Text = "Assigned To:"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'status
-        '
-        Me.status.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold)
-        Me.status.FormattingEnabled = True
-        Me.status.Location = New System.Drawing.Point(116, 94)
-        Me.status.Name = "status"
-        Me.status.Size = New System.Drawing.Size(309, 30)
-        Me.status.TabIndex = 397
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(468, 102)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(102, 22)
-        Me.Label17.TabIndex = 398
-        Me.Label17.Text = "Internal Codes:"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'internalCodes
-        '
-        Me.internalCodes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.internalCodes.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold)
-        Me.internalCodes.Location = New System.Drawing.Point(589, 95)
-        Me.internalCodes.Name = "internalCodes"
-        Me.internalCodes.Size = New System.Drawing.Size(272, 25)
-        Me.internalCodes.TabIndex = 399
         '
         'Panel4
         '
@@ -687,7 +687,7 @@ Partial Class PropertiesStock
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents btnBack As Resources.Controls.RoundedButton
-    Friend WithEvents btnPDF As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents btnBack As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

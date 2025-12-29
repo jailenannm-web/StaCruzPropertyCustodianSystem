@@ -192,14 +192,26 @@
     <Compile Include="Forms\SuperAdmin\Reports\PropertiesStock.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\PropertyRequestReport.Designer.vb">
-      <DependentUpon>PropertyRequestReport.vb</DependentUpon>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyAcknowledgementReceipt.Designer.vb">
+      <DependentUpon>PropertyAcknowledgementReceipt.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\PropertyRequestReport.vb">
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyAcknowledgementReceipt.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesAcknowledgementReceipt.Designer.vb">
+      <DependentUpon>SuppliesAcknowledgementReceipt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesAcknowledgementReceipt.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\SuppliesMaterials.Designer.vb">
       <DependentUpon>SuppliesMaterials.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesStock.Designer.vb">
+      <DependentUpon>SuppliesStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\SuppliesStock.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\UserListReport.Designer.vb">
       <DependentUpon>UserListReport.vb</DependentUpon>
@@ -803,8 +815,8 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyIssuance.resx">
       <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyRequestReport.resx">
-      <DependentUpon>PropertyRequestReport.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyAcknowledgementReceipt.resx">
+      <DependentUpon>PropertyAcknowledgementReceipt.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PurchaseRequest.resx">
       <DependentUpon>PurchaseRequest.vb</DependentUpon>
@@ -817,6 +829,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\StockCard.resx">
       <DependentUpon>StockCard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\SuppliesAcknowledgementReceipt.resx">
+      <DependentUpon>SuppliesAcknowledgementReceipt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\SuppliesStock.resx">
+      <DependentUpon>SuppliesStock.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\UserListReport.resx">
       <DependentUpon>UserListReport.vb</DependentUpon>

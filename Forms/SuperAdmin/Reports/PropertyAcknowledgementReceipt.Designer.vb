@@ -90,11 +90,11 @@ Partial Class PropertyRequestReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPropertyCard.AutoSize = True
         Me.lblPropertyCard.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPropertyCard.Location = New System.Drawing.Point(282, 11)
+        Me.lblPropertyCard.Location = New System.Drawing.Point(174, 8)
         Me.lblPropertyCard.Name = "lblPropertyCard"
-        Me.lblPropertyCard.Size = New System.Drawing.Size(368, 44)
+        Me.lblPropertyCard.Size = New System.Drawing.Size(527, 44)
         Me.lblPropertyCard.TabIndex = 38
-        Me.lblPropertyCard.Text = "PROPERTY REQUEST REPORT"
+        Me.lblPropertyCard.Text = "PROPERTY ACKNOWLEDGEMENT RECEIPT"
         '
         'Panel1
         '
@@ -559,7 +559,7 @@ Partial Class PropertyRequestReport
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel11)
         Me.Name = "PropertyRequestReport"
-        Me.Text = "PropertyRequestReport"
+        Me.Text = "Property Acknowledgement Receipt"
         Me.Panel11.ResumeLayout(False)
         Me.Panel11.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -612,8 +612,8 @@ Partial Class PropertyRequestReport
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents btnBack As Resources.Controls.RoundedButton
-    Friend WithEvents btnPDF As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents btnBack As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
 End Class

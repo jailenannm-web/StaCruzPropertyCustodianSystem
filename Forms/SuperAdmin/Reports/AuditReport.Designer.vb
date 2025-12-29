@@ -970,8 +970,8 @@ Partial Class AuditReport
     Friend WithEvents DateTimePicker3 As DateTimePicker
     Friend WithEvents Label8 As Label
     Friend WithEvents lblName As Label
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Button2 As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents DateTimePicker1 As DateTimePicker
