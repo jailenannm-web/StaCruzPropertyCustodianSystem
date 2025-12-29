@@ -412,7 +412,7 @@ Partial Class UC_SupplyManagement
     Friend WithEvents description As DataGridViewTextBoxColumn
     Friend WithEvents quantity As DataGridViewTextBoxColumn
     Friend WithEvents supplier As DataGridViewTextBoxColumn
-    Friend WithEvents location As DataGridViewTextBoxColumn
+    Friend WithEvents Shadows location As DataGridViewTextBoxColumn
     Friend WithEvents stockStatus As DataGridViewTextBoxColumn
     Friend WithEvents unitOfMeasure As DataGridViewTextBoxColumn
     Friend WithEvents dateReceived As DataGridViewTextBoxColumn

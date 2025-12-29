@@ -2859,7 +2859,8 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return dt
 
             Dim query As String = "SELECT p.propertyId, p.itemName, p.category, p.propertyNumber, p.serialNumber, " &
-                                 "p.acquisitionDate, p.acquisitionCost, p.condition, p.location, p.status, " &
+                                 "p.acquisitionDate, p.acquisitionCost, p.condition, " &
+                                 "COALESCE(d.location, p.location) AS location, p.status, " &
                                  "p.description, " &
                                  "CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,'')) AS assignedEmployee, " &
                                  "d.departmentName AS assignedDepartment " &
@@ -3871,15 +3872,34 @@ Public Class DatabaseConnection
 
             ' Find or create property and assign to requester
             Try
-                ' Get the requester's userId from the users table by matching name
+                ' Get the requester's userId from both users and staff_accounts tables by matching name
                 Dim requesterUserId As Integer? = Nothing
+                Dim requesterName As String = requestDetails("requesterName").ToString()
+                System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Looking for requester: {requesterName}")
+                
+                ' First try users table
                 Using getUserCmd As New MySqlCommand("SELECT userId FROM users WHERE CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName) LIKE @requesterName OR CONCAT(firstName, ' ', lastName) LIKE @requesterName LIMIT 1", conn, transaction)
-                    getUserCmd.Parameters.AddWithValue("@requesterName", "%" & requestDetails("requesterName").ToString() & "%")
+                    getUserCmd.Parameters.AddWithValue("@requesterName", "%" & requesterName & "%")
                     Dim userResult As Object = getUserCmd.ExecuteScalar()
                     If userResult IsNot Nothing AndAlso Not userResult.Equals(DBNull.Value) Then
                         requesterUserId = Convert.ToInt32(userResult)
+                        System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Found requester in users table, userId: {requesterUserId}")
                     End If
                 End Using
+                
+                ' If not found in users, try staff_accounts table (which links to users via userId)
+                If Not requesterUserId.HasValue Then
+                    Using getStaffCmd As New MySqlCommand("SELECT userId FROM staff_accounts WHERE CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName) LIKE @requesterName OR CONCAT(firstName, ' ', lastName) LIKE @requesterName LIMIT 1", conn, transaction)
+                        getStaffCmd.Parameters.AddWithValue("@requesterName", "%" & requesterName & "%")
+                        Dim staffResult As Object = getStaffCmd.ExecuteScalar()
+                        If staffResult IsNot Nothing AndAlso Not staffResult.Equals(DBNull.Value) Then
+                            requesterUserId = Convert.ToInt32(staffResult)
+                            System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Found requester in staff_accounts table, userId: {requesterUserId}")
+                        Else
+                            System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Requester NOT FOUND in either users or staff_accounts: {requesterName}")
+                        End If
+                    End Using
+                End If
 
                 ' Find the property/item ID based on item name
                 Dim itemId As Integer = 0
@@ -3893,13 +3913,62 @@ Public Class DatabaseConnection
                     End If
                 End Using
 
-                ' If property exists, update assignedTo field
+                ' If property exists, update assignedTo, department, and location fields
+                System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] propertyExists={propertyExists}, itemId={itemId}, requesterUserId={If(requesterUserId.HasValue, requesterUserId.Value.ToString(), "NULL")}")
+                
                 If propertyExists AndAlso itemId > 0 AndAlso requesterUserId.HasValue Then
-                    Using updatePropertyCmd As New MySqlCommand("UPDATE properties SET assignedTo = @assignedTo, departmentId = @departmentId, status = 'Borrowed' WHERE propertyId = @propertyId", conn, transaction)
+                    ' Get the requester's department and location from users or staff_accounts
+                    Dim requesterDeptId As Integer = 0
+                    Dim departmentLocation As String = ""
+                    
+                    ' First try to get department from users table
+                    Using getUserDeptCmd As New MySqlCommand("SELECT departmentId FROM users WHERE userId = @userId LIMIT 1", conn, transaction)
+                        getUserDeptCmd.Parameters.AddWithValue("@userId", requesterUserId.Value)
+                        Dim deptResult As Object = getUserDeptCmd.ExecuteScalar()
+                        If deptResult IsNot Nothing AndAlso Not deptResult.Equals(DBNull.Value) Then
+                            requesterDeptId = Convert.ToInt32(deptResult)
+                            System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Found requester's departmentId in users: {requesterDeptId}")
+                        End If
+                    End Using
+                    
+                    ' If not found in users, try staff_accounts
+                    If requesterDeptId = 0 Then
+                        Using getStaffDeptCmd As New MySqlCommand("SELECT departmentId FROM staff_accounts WHERE userId = @userId LIMIT 1", conn, transaction)
+                            getStaffDeptCmd.Parameters.AddWithValue("@userId", requesterUserId.Value)
+                            Dim deptResult As Object = getStaffDeptCmd.ExecuteScalar()
+                            If deptResult IsNot Nothing AndAlso Not deptResult.Equals(DBNull.Value) Then
+                                requesterDeptId = Convert.ToInt32(deptResult)
+                                System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Found requester's departmentId in staff_accounts: {requesterDeptId}")
+                            End If
+                        End Using
+                    End If
+                    
+                    ' Get the department's location
+                    If requesterDeptId > 0 Then
+                        Using deptLocationCmd As New MySqlCommand("SELECT location FROM departments WHERE departmentId = @deptId LIMIT 1", conn, transaction)
+                            deptLocationCmd.Parameters.AddWithValue("@deptId", requesterDeptId)
+                            Dim locResult As Object = deptLocationCmd.ExecuteScalar()
+                            If locResult IsNot Nothing AndAlso Not locResult.Equals(DBNull.Value) Then
+                                departmentLocation = locResult.ToString()
+                                System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Found department location: {departmentLocation}")
+                            Else
+                                System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Department {requesterDeptId} has no location")
+                            End If
+                        End Using
+                    Else
+                        System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Requester has no departmentId")
+                    End If
+                    
+                    ' Update property with assignedTo, departmentId, location, and status
+                    System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Updating propertyId={itemId}: assignedTo={requesterUserId.Value}, departmentId={requesterDeptId}, location={departmentLocation}")
+                    
+                    Using updatePropertyCmd As New MySqlCommand("UPDATE properties SET assignedTo = @assignedTo, departmentId = @departmentId, location = @location, status = 'Borrowed', updatedAt = NOW() WHERE propertyId = @propertyId", conn, transaction)
                         updatePropertyCmd.Parameters.AddWithValue("@assignedTo", requesterUserId.Value)
-                        updatePropertyCmd.Parameters.AddWithValue("@departmentId", requestDetails("departmentId"))
+                        updatePropertyCmd.Parameters.AddWithValue("@departmentId", If(requesterDeptId > 0, requesterDeptId, DBNull.Value))
+                        updatePropertyCmd.Parameters.AddWithValue("@location", If(String.IsNullOrEmpty(departmentLocation), DBNull.Value, departmentLocation))
                         updatePropertyCmd.Parameters.AddWithValue("@propertyId", itemId)
-                        updatePropertyCmd.ExecuteNonQuery()
+                        Dim rowsUpdated As Integer = updatePropertyCmd.ExecuteNonQuery()
+                        System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Property update complete: {rowsUpdated} rows affected")
                     End Using
                 ElseIf Not propertyExists Then
                     ' Property doesn't exist, create new property record with assignedTo and auto-generated codes
@@ -7721,13 +7790,16 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return dt
 
             ' Build query with optional filters - includes all required fields including description and internalCodes
+            ' Enhanced to show assigned user's name, department name, and department location
             Dim query As String = "SELECT p.propertyId, p.itemName, p.category, p.propertyNumber, p.serialNumber, " &
                                  "p.description, p.condition, p.acquisitionCost, p.acquisitionDate, " &
                                  "COALESCE(p.totalCost, p.acquisitionCost) AS totalCost, " &
                                  "p.sourceOfFunds, p.unitOfMeasure, " &
-                                 "p.assignedTo, CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,'')) AS assignedEmployee, " &
-                                 "p.departmentId, d.departmentName AS assignedDepartment, p.location, p.status, " &
-                                 "p.internalCodes, p.createdAt, p.updatedAt " &
+                                 "p.assignedTo, " &
+                                 "CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,'')) AS assignedEmployee, " &
+                                 "p.departmentId, d.departmentName AS assignedDepartment, " &
+                                 "COALESCE(d.location, p.location) AS location, " &
+                                 "p.status, p.internalCodes, p.createdAt, p.updatedAt " &
                                  "FROM properties p " &
                                  "LEFT JOIN users u ON p.assignedTo = u.userId " &
                                  "LEFT JOIN departments d ON p.departmentId = d.departmentId " &

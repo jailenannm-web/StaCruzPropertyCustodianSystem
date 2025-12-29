@@ -654,4 +654,158 @@ Partial Public Class DatabaseConnection
         End Try
     End Function
     
+    ''' <summary>
+    ''' Approve a property request and update the matching property with requester information
+    ''' </summary>
+    Private Shared Function ApprovePropertyRequest_Extensions(requestId As Integer,
+                                                   adminId As Integer,
+                                                   adminUsername As String,
+                                                   adminRole As String,
+                                                   Optional propertyId As Integer? = Nothing,
+                                                   Optional assignedUserId As Integer? = Nothing,
+                                                   Optional remarks As String = "") As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Dim transaction As MySqlTransaction = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+            
+            transaction = conn.BeginTransaction()
+            
+            ' Get request details including requester info
+            Dim requestQuery As String = "SELECT pr.requesterName, pr.itemName, pr.departmentId, " &
+                                         "d.location, pr.position, u.userId, u.fullName " &
+                                         "FROM property_requests pr " &
+                                         "LEFT JOIN departments d ON pr.departmentId = d.departmentId " &
+                                         "LEFT JOIN users u ON LOWER(CONCAT(u.firstName, ' ', u.lastName)) = LOWER(pr.requesterName) " &
+                                         "WHERE pr.requestId = @requestId"
+            
+            Dim requesterName As String = ""
+            Dim itemName As String = ""
+            Dim departmentId As Integer? = Nothing
+            Dim deptLocation As String = ""
+            Dim requesterUserId As Integer? = Nothing
+            Dim requesterFullName As String = ""
+            
+            Using cmd As New MySqlCommand(requestQuery, conn, transaction)
+                cmd.Parameters.AddWithValue("@requestId", requestId)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        requesterName = If(Not reader.IsDBNull(0), reader.GetString(0), "")
+                        itemName = If(Not reader.IsDBNull(1), reader.GetString(1), "")
+                        If Not reader.IsDBNull(2) Then departmentId = reader.GetInt32(2)
+                        deptLocation = If(Not reader.IsDBNull(3), reader.GetString(3), "")
+                        If Not reader.IsDBNull(5) Then requesterUserId = reader.GetInt32(5)
+                        requesterFullName = If(Not reader.IsDBNull(6), reader.GetString(6), "")
+                    Else
+                        transaction.Rollback()
+                        System.Diagnostics.Debug.WriteLine("[v0] ApprovePropertyRequest - Request not found: " & requestId)
+                        Return False
+                    End If
+                End Using
+            End Using
+            
+            ' Update property_requests status to Approved
+            Dim updateRequestQuery As String = "UPDATE property_requests SET status = 'Approved', " &
+                                               "approvedBy = @adminId, approvedDate = NOW(), " &
+                                               "remarks = @remarks, updatedAt = NOW() " &
+                                               "WHERE requestId = @requestId"
+            
+            Using cmd As New MySqlCommand(updateRequestQuery, conn, transaction)
+                cmd.Parameters.AddWithValue("@requestId", requestId)
+                cmd.Parameters.AddWithValue("@adminId", adminId)
+                cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrWhiteSpace(remarks), DBNull.Value, remarks))
+                cmd.ExecuteNonQuery()
+            End Using
+            
+            ' Find matching property by itemName (case-insensitive)
+            Dim findPropertyQuery As String = "SELECT propertyId FROM properties " &
+                                             "WHERE LOWER(itemName) = LOWER(@itemName) " &
+                                             "AND (assignedTo IS NULL OR assignedTo = 0) " &
+                                             "LIMIT 1"
+            
+            Dim matchedPropertyId As Integer? = Nothing
+            Using cmd As New MySqlCommand(findPropertyQuery, conn, transaction)
+                cmd.Parameters.AddWithValue("@itemName", itemName)
+                Dim result = cmd.ExecuteScalar()
+                If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                    matchedPropertyId = Convert.ToInt32(result)
+                End If
+            End Using
+            
+            ' If property found, update it with requester information
+            If matchedPropertyId.HasValue Then
+                ' Use requesterUserId if found, otherwise use assignedUserId parameter
+                Dim userIdToAssign As Integer? = If(requesterUserId.HasValue, requesterUserId, assignedUserId)
+                
+                Dim updatePropertyQuery As String = "UPDATE properties SET " &
+                                                   "assignedTo = @assignedTo, " &
+                                                   "departmentId = @departmentId, " &
+                                                   "location = @location, " &
+                                                   "status = 'Active', " &
+                                                   "updatedAt = NOW() " &
+                                                   "WHERE propertyId = @propertyId"
+                
+                Using cmd As New MySqlCommand(updatePropertyQuery, conn, transaction)
+                    cmd.Parameters.AddWithValue("@propertyId", matchedPropertyId.Value)
+                    cmd.Parameters.AddWithValue("@assignedTo", If(userIdToAssign.HasValue, userIdToAssign.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, departmentId.Value, DBNull.Value))
+                    cmd.Parameters.AddWithValue("@location", If(String.IsNullOrWhiteSpace(deptLocation), DBNull.Value, deptLocation))
+                    
+                    Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                    System.Diagnostics.Debug.WriteLine($"[v0] ApprovePropertyRequest - Updated property {matchedPropertyId.Value}, rows affected: {rowsAffected}")
+                End Using
+                
+                ' Create borrowed_items record if user is assigned
+                If userIdToAssign.HasValue AndAlso userIdToAssign.Value > 0 Then
+                    Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, borrowerName, " &
+                                               "borrowerPosition, departmentId, borrowDate, status, remarks, createdAt, updatedAt) " &
+                                               "VALUES ('property', @itemId, @borrowerName, @borrowerPosition, " &
+                                               "@departmentId, NOW(), 'Borrowed', @remarks, NOW(), NOW())"
+                    
+                    Using cmd As New MySqlCommand(borrowQuery, conn, transaction)
+                        cmd.Parameters.AddWithValue("@itemId", matchedPropertyId.Value)
+                        cmd.Parameters.AddWithValue("@borrowerName", If(String.IsNullOrWhiteSpace(requesterFullName), requesterName, requesterFullName))
+                        cmd.Parameters.AddWithValue("@borrowerPosition", DBNull.Value)
+                        cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, departmentId.Value, DBNull.Value))
+                        cmd.Parameters.AddWithValue("@remarks", "Approved property request #" & requestId)
+                        cmd.ExecuteNonQuery()
+                    End Using
+                End If
+            Else
+                System.Diagnostics.Debug.WriteLine($"[v0] ApprovePropertyRequest - No matching unassigned property found for: {itemName}")
+            End If
+            
+            transaction.Commit()
+            System.Diagnostics.Debug.WriteLine($"[v0] ApprovePropertyRequest Success - RequestId: {requestId}, PropertyId: {If(matchedPropertyId.HasValue, matchedPropertyId.Value.ToString(), "None")}")
+            Return True
+            
+        Catch ex As Exception
+            If transaction IsNot Nothing Then
+                Try
+                    transaction.Rollback()
+                Catch
+                End Try
+            End If
+            System.Diagnostics.Debug.WriteLine("[v0] ApprovePropertyRequest Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            MessageBox.Show("Error approving property request: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If transaction IsNot Nothing Then
+                Try
+                    transaction.Dispose()
+                Catch
+                End Try
+            End If
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+    
 End Class

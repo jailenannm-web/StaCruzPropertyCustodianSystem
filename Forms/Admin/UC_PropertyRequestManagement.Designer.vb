@@ -29,6 +29,20 @@ Partial Class UC_PropertyRequestManagement
     Private Sub InitializeComponent()
         Me.admin_label_PropertyRequestManagement = New System.Windows.Forms.Label()
         Me.prm_table1 = New System.Windows.Forms.DataGridView()
+        Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requesterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.position = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateOfReques = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.approvedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.request_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.employee_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.department_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -53,20 +67,6 @@ Partial Class UC_PropertyRequestManagement
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requesterName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.position = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.purpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.quantityRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateOfRequest = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dateOfReques = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.approvedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -96,6 +96,104 @@ Partial Class UC_PropertyRequestManagement
         Me.prm_table1.RowTemplate.Height = 24
         Me.prm_table1.Size = New System.Drawing.Size(1270, 573)
         Me.prm_table1.TabIndex = 34
+        '
+        'requestId
+        '
+        Me.requestId.HeaderText = "Request ID"
+        Me.requestId.MinimumWidth = 6
+        Me.requestId.Name = "requestId"
+        Me.requestId.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "Department ID"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'requesterName
+        '
+        Me.requesterName.HeaderText = "Requester Name"
+        Me.requesterName.MinimumWidth = 6
+        Me.requesterName.Name = "requesterName"
+        Me.requesterName.Width = 125
+        '
+        'position
+        '
+        Me.position.HeaderText = "Position"
+        Me.position.MinimumWidth = 6
+        Me.position.Name = "position"
+        Me.position.Width = 125
+        '
+        'itemName
+        '
+        Me.itemName.HeaderText = "Item Name"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 125
+        '
+        'description
+        '
+        Me.description.HeaderText = "Description"
+        Me.description.MinimumWidth = 6
+        Me.description.Name = "description"
+        Me.description.Width = 125
+        '
+        'purpose
+        '
+        Me.purpose.HeaderText = "Purpose"
+        Me.purpose.MinimumWidth = 6
+        Me.purpose.Name = "purpose"
+        Me.purpose.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 125
+        '
+        'quantityRequested
+        '
+        Me.quantityRequested.HeaderText = "Quantity Requested"
+        Me.quantityRequested.MinimumWidth = 6
+        Me.quantityRequested.Name = "quantityRequested"
+        Me.quantityRequested.Width = 125
+        '
+        'dateOfRequest
+        '
+        Me.dateOfRequest.HeaderText = "Date Of Request"
+        Me.dateOfRequest.MinimumWidth = 6
+        Me.dateOfRequest.Name = "dateOfRequest"
+        Me.dateOfRequest.Width = 125
+        '
+        'dateOfReques
+        '
+        Me.dateOfReques.HeaderText = "DateOfRequest"
+        Me.dateOfReques.MinimumWidth = 6
+        Me.dateOfReques.Name = "dateOfReques"
+        Me.dateOfReques.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "updatedAt"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "createdAt"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Width = 125
+        '
+        'approvedBy
+        '
+        Me.approvedBy.HeaderText = "approvedDate"
+        Me.approvedBy.MinimumWidth = 6
+        Me.approvedBy.Name = "approvedBy"
+        Me.approvedBy.Width = 125
         '
         'request_id
         '
@@ -247,6 +345,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnAssign.TabIndex = 162
         Me.btnAssign.Text = "Assign"
         Me.btnAssign.UseVisualStyleBackColor = False
+        Me.btnAssign.Visible = False
         '
         'printPAR
         '
@@ -342,104 +441,6 @@ Partial Class UC_PropertyRequestManagement
         Me.assign.Text = "Assign"
         Me.assign.UseVisualStyleBackColor = False
         '
-        'requestId
-        '
-        Me.requestId.HeaderText = "Request ID"
-        Me.requestId.MinimumWidth = 6
-        Me.requestId.Name = "requestId"
-        Me.requestId.Width = 125
-        '
-        'departmentId
-        '
-        Me.departmentId.HeaderText = "Department ID"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
-        '
-        'requesterName
-        '
-        Me.requesterName.HeaderText = "Requester Name"
-        Me.requesterName.MinimumWidth = 6
-        Me.requesterName.Name = "requesterName"
-        Me.requesterName.Width = 125
-        '
-        'position
-        '
-        Me.position.HeaderText = "Position"
-        Me.position.MinimumWidth = 6
-        Me.position.Name = "position"
-        Me.position.Width = 125
-        '
-        'itemName
-        '
-        Me.itemName.HeaderText = "Item Name"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 125
-        '
-        'description
-        '
-        Me.description.HeaderText = "Description"
-        Me.description.MinimumWidth = 6
-        Me.description.Name = "description"
-        Me.description.Width = 125
-        '
-        'purpose
-        '
-        Me.purpose.HeaderText = "Purpose"
-        Me.purpose.MinimumWidth = 6
-        Me.purpose.Name = "purpose"
-        Me.purpose.Width = 125
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
-        '
-        'quantityRequested
-        '
-        Me.quantityRequested.HeaderText = "Quantity Requested"
-        Me.quantityRequested.MinimumWidth = 6
-        Me.quantityRequested.Name = "quantityRequested"
-        Me.quantityRequested.Width = 125
-        '
-        'dateOfRequest
-        '
-        Me.dateOfRequest.HeaderText = "Date Of Request"
-        Me.dateOfRequest.MinimumWidth = 6
-        Me.dateOfRequest.Name = "dateOfRequest"
-        Me.dateOfRequest.Width = 125
-        '
-        'dateOfReques
-        '
-        Me.dateOfReques.HeaderText = "DateOfRequest"
-        Me.dateOfReques.MinimumWidth = 6
-        Me.dateOfReques.Name = "dateOfReques"
-        Me.dateOfReques.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "updatedAt"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "createdAt"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Width = 125
-        '
-        'approvedBy
-        '
-        Me.approvedBy.HeaderText = "approvedDate"
-        Me.approvedBy.MinimumWidth = 6
-        Me.approvedBy.Name = "approvedBy"
-        Me.approvedBy.Width = 125
-        '
         'UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -468,9 +469,9 @@ Partial Class UC_PropertyRequestManagement
 
     Friend WithEvents admin_label_PropertyRequestManagement As Label
     Friend WithEvents prm_table1 As DataGridView
-    Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
-    Friend WithEvents btnApprove As Resources.Controls.RoundedButton
-    Friend WithEvents btnReject As Resources.Controls.RoundedButton
+    Friend WithEvents prm_btn_update As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnApprove As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnReject As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents request_id As DataGridViewTextBoxColumn
     Friend WithEvents employee_id As DataGridViewTextBoxColumn
     Friend WithEvents department_id As DataGridViewTextBoxColumn
@@ -484,12 +485,12 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents remarks As DataGridViewTextBoxColumn
     Friend WithEvents penalty As DataGridViewTextBoxColumn
     Friend WithEvents updated_at As DataGridViewTextBoxColumn
-    Friend WithEvents assign As Resources.Controls.RoundedButton
+    Friend WithEvents assign As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlpropertyrequestmanagement As Label
-    Friend WithEvents issuePropertyCard As Resources.Controls.RoundedButton
-    Friend WithEvents printPAR As Resources.Controls.RoundedButton
-    Friend WithEvents btnAssign As Resources.Controls.RoundedButton
+    Friend WithEvents issuePropertyCard As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents printPAR As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnAssign As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents maintenancemanagementsearchbar As TextBox
     Friend WithEvents requestId As DataGridViewTextBoxColumn
