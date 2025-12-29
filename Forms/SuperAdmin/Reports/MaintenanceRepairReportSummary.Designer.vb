@@ -39,18 +39,6 @@ Partial Class MaintenanceRepairReportSummary
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.dateReport = New System.Windows.Forms.DateTimePicker()
-        Me.school = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -68,6 +56,18 @@ Partial Class MaintenanceRepairReportSummary
         Me.requestedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateReport = New System.Windows.Forms.DateTimePicker()
+        Me.school = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.btn_Back = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -280,6 +280,127 @@ Partial Class MaintenanceRepairReportSummary
         Me.DataGridView1.Size = New System.Drawing.Size(1027, 374)
         Me.DataGridView1.TabIndex = 0
         '
+        'requestId
+        '
+        Me.requestId.HeaderText = "Request ID"
+        Me.requestId.MinimumWidth = 6
+        Me.requestId.Name = "requestId"
+        Me.requestId.Width = 125
+        '
+        'dateRequested
+        '
+        Me.dateRequested.HeaderText = "Date Requested"
+        Me.dateRequested.MinimumWidth = 6
+        Me.dateRequested.Name = "dateRequested"
+        Me.dateRequested.Width = 125
+        '
+        'itemName
+        '
+        Me.itemName.HeaderText = "Item Name"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 125
+        '
+        'propertyNumber
+        '
+        Me.propertyNumber.HeaderText = "Property Number"
+        Me.propertyNumber.MinimumWidth = 6
+        Me.propertyNumber.Name = "propertyNumber"
+        Me.propertyNumber.Width = 125
+        '
+        'serialNumber
+        '
+        Me.serialNumber.HeaderText = "Serial Number"
+        Me.serialNumber.MinimumWidth = 6
+        Me.serialNumber.Name = "serialNumber"
+        Me.serialNumber.Width = 125
+        '
+        'departmentId
+        '
+        Me.departmentId.HeaderText = "Department ID"
+        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.Name = "departmentId"
+        Me.departmentId.Width = 125
+        '
+        'location
+        '
+        Me.location.HeaderText = "Location"
+        Me.location.MinimumWidth = 6
+        Me.location.Name = "location"
+        Me.location.Width = 125
+        '
+        'conditionBefore
+        '
+        Me.conditionBefore.HeaderText = "Condition Before"
+        Me.conditionBefore.MinimumWidth = 6
+        Me.conditionBefore.Name = "conditionBefore"
+        Me.conditionBefore.Width = 125
+        '
+        'typeOfIssue
+        '
+        Me.typeOfIssue.HeaderText = "Type of Issue"
+        Me.typeOfIssue.MinimumWidth = 6
+        Me.typeOfIssue.Name = "typeOfIssue"
+        Me.typeOfIssue.Width = 125
+        '
+        'problemDescription
+        '
+        Me.problemDescription.HeaderText = "Problem Description"
+        Me.problemDescription.MinimumWidth = 6
+        Me.problemDescription.Name = "problemDescription"
+        Me.problemDescription.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 125
+        '
+        'assignedTechnician
+        '
+        Me.assignedTechnician.HeaderText = "Assigned Technician"
+        Me.assignedTechnician.MinimumWidth = 6
+        Me.assignedTechnician.Name = "assignedTechnician"
+        Me.assignedTechnician.Width = 125
+        '
+        'targetDate
+        '
+        Me.targetDate.HeaderText = "Target Date"
+        Me.targetDate.MinimumWidth = 6
+        Me.targetDate.Name = "targetDate"
+        Me.targetDate.Width = 125
+        '
+        'completionDate
+        '
+        Me.completionDate.HeaderText = "Completition Date"
+        Me.completionDate.MinimumWidth = 6
+        Me.completionDate.Name = "completionDate"
+        Me.completionDate.Width = 125
+        '
+        'requestedBy
+        '
+        Me.requestedBy.HeaderText = "Requested By"
+        Me.requestedBy.MinimumWidth = 6
+        Me.requestedBy.Name = "requestedBy"
+        Me.requestedBy.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "Created at"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Visible = False
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "Updated at"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Visible = False
+        Me.updatedAt.Width = 125
+        '
         'dateReport
         '
         Me.dateReport.Location = New System.Drawing.Point(906, 236)
@@ -419,127 +540,6 @@ Partial Class MaintenanceRepairReportSummary
         Me.Label1.TabIndex = 374
         Me.Label1.Text = "Republic of the Philippines"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'requestId
-        '
-        Me.requestId.HeaderText = "Request ID"
-        Me.requestId.MinimumWidth = 6
-        Me.requestId.Name = "requestId"
-        Me.requestId.Width = 125
-        '
-        'dateRequested
-        '
-        Me.dateRequested.HeaderText = "Date Requested"
-        Me.dateRequested.MinimumWidth = 6
-        Me.dateRequested.Name = "dateRequested"
-        Me.dateRequested.Width = 125
-        '
-        'itemName
-        '
-        Me.itemName.HeaderText = "Item Name"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 125
-        '
-        'propertyNumber
-        '
-        Me.propertyNumber.HeaderText = "Property Number"
-        Me.propertyNumber.MinimumWidth = 6
-        Me.propertyNumber.Name = "propertyNumber"
-        Me.propertyNumber.Width = 125
-        '
-        'serialNumber
-        '
-        Me.serialNumber.HeaderText = "Serial Number"
-        Me.serialNumber.MinimumWidth = 6
-        Me.serialNumber.Name = "serialNumber"
-        Me.serialNumber.Width = 125
-        '
-        'departmentId
-        '
-        Me.departmentId.HeaderText = "Department ID"
-        Me.departmentId.MinimumWidth = 6
-        Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
-        '
-        'location
-        '
-        Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
-        Me.location.Name = "location"
-        Me.location.Width = 125
-        '
-        'conditionBefore
-        '
-        Me.conditionBefore.HeaderText = "Condition Before"
-        Me.conditionBefore.MinimumWidth = 6
-        Me.conditionBefore.Name = "conditionBefore"
-        Me.conditionBefore.Width = 125
-        '
-        'typeOfIssue
-        '
-        Me.typeOfIssue.HeaderText = "Type of Issue"
-        Me.typeOfIssue.MinimumWidth = 6
-        Me.typeOfIssue.Name = "typeOfIssue"
-        Me.typeOfIssue.Width = 125
-        '
-        'problemDescription
-        '
-        Me.problemDescription.HeaderText = "Problem Description"
-        Me.problemDescription.MinimumWidth = 6
-        Me.problemDescription.Name = "problemDescription"
-        Me.problemDescription.Width = 125
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
-        '
-        'assignedTechnician
-        '
-        Me.assignedTechnician.HeaderText = "Assigned Technician"
-        Me.assignedTechnician.MinimumWidth = 6
-        Me.assignedTechnician.Name = "assignedTechnician"
-        Me.assignedTechnician.Width = 125
-        '
-        'targetDate
-        '
-        Me.targetDate.HeaderText = "Target Date"
-        Me.targetDate.MinimumWidth = 6
-        Me.targetDate.Name = "targetDate"
-        Me.targetDate.Width = 125
-        '
-        'completionDate
-        '
-        Me.completionDate.HeaderText = "Completition Date"
-        Me.completionDate.MinimumWidth = 6
-        Me.completionDate.Name = "completionDate"
-        Me.completionDate.Width = 125
-        '
-        'requestedBy
-        '
-        Me.requestedBy.HeaderText = "Requested By"
-        Me.requestedBy.MinimumWidth = 6
-        Me.requestedBy.Name = "requestedBy"
-        Me.requestedBy.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "Created at"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Visible = False
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "Updated at"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Visible = False
-        Me.updatedAt.Width = 125
         '
         'btn_Back
         '
