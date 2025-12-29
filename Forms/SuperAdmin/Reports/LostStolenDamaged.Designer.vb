@@ -1066,7 +1066,7 @@ Partial Class LostStolenDamaged
     Friend WithEvents TextBox11 As TextBox
     Friend WithEvents Label25 As Label
     Friend WithEvents Label22 As Label
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

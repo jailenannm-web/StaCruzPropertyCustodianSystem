@@ -22,6 +22,7 @@ Partial Class UserListReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.lblPropertyCard = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -695,7 +696,7 @@ Partial Class UserListReport
     Friend WithEvents DateTimePicker3 As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents DateTimePicker2 As System.Windows.Forms.DateTimePicker
-    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
-    Friend WithEvents btnPDF As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

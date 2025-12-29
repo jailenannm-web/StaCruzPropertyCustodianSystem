@@ -610,7 +610,7 @@ Partial Class PropertyCard
     Friend WithEvents pcPropertyPlant As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel11 As Panel
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btn_Back As Button
 End Class

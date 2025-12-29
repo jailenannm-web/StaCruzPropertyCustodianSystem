@@ -1,14 +1,9 @@
-﻿Imports System
-Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Drawing.Drawing2D
-Imports System.Windows.Forms
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class RequisitionIssueSlip
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class SuppliesAcknowledgementReceipt
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,11 +20,11 @@ Partial Class RequisitionIssueSlip
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnBack = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btn_Back = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -67,7 +62,7 @@ Partial Class RequisitionIssueSlip
         Me.requestID = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.lblPropertyCard = New System.Windows.Forms.Label()
+        Me.lblSuppliesAcknowledgementReceipt = New System.Windows.Forms.Label()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -75,21 +70,37 @@ Partial Class RequisitionIssueSlip
         Me.Panel11.SuspendLayout()
         Me.SuspendLayout()
         '
-        'RoundedButton1
+        'btnBack
         '
-        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton1.CornerRadius = 15
-        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(1205, 874)
-        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.RoundedButton1.Name = "RoundedButton1"
-        Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
-        Me.RoundedButton1.TabIndex = 368
-        Me.RoundedButton1.Text = "Generate PDF File"
-        Me.RoundedButton1.UseVisualStyleBackColor = False
+        Me.btnBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnBack.CornerRadius = 15
+        Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBack.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnBack.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnBack.Location = New System.Drawing.Point(700, 766)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(153, 34)
+        Me.btnBack.TabIndex = 388
+        Me.btnBack.Text = "Back"
+        Me.btnBack.UseVisualStyleBackColor = False
+        '
+        'btnPDF
+        '
+        Me.btnPDF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnPDF.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnPDF.CornerRadius = 15
+        Me.btnPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPDF.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnPDF.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnPDF.Location = New System.Drawing.Point(1020, 766)
+        Me.btnPDF.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnPDF.Name = "btnPDF"
+        Me.btnPDF.Size = New System.Drawing.Size(153, 34)
+        Me.btnPDF.TabIndex = 387
+        Me.btnPDF.Text = "Generate PDF File"
+        Me.btnPDF.UseVisualStyleBackColor = False
         '
         'btnCSV
         '
@@ -99,28 +110,13 @@ Partial Class RequisitionIssueSlip
         Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCSV.Location = New System.Drawing.Point(1044, 874)
-        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCSV.Location = New System.Drawing.Point(861, 766)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCSV.Name = "btnCSV"
         Me.btnCSV.Size = New System.Drawing.Size(153, 34)
-        Me.btnCSV.TabIndex = 367
+        Me.btnCSV.TabIndex = 386
         Me.btnCSV.Text = "Generate CSV File"
         Me.btnCSV.UseVisualStyleBackColor = False
-        '
-        'btn_Back
-        '
-        Me.btn_Back.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btn_Back.ForeColor = System.Drawing.Color.White
-        Me.btn_Back.Location = New System.Drawing.Point(901, 874)
-        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.btn_Back.Name = "btn_Back"
-        Me.btn_Back.Size = New System.Drawing.Size(112, 34)
-        Me.btn_Back.TabIndex = 366
-        Me.btn_Back.Text = "Back"
-        Me.btn_Back.UseVisualStyleBackColor = False
         '
         'Panel4
         '
@@ -132,10 +128,10 @@ Partial Class RequisitionIssueSlip
         Me.Panel4.Controls.Add(Me.Label16)
         Me.Panel4.Controls.Add(Me.DateTimePicker1)
         Me.Panel4.Controls.Add(Me.Label15)
-        Me.Panel4.Location = New System.Drawing.Point(338, 742)
+        Me.Panel4.Location = New System.Drawing.Point(281, 683)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(892, 66)
-        Me.Panel4.TabIndex = 377
+        Me.Panel4.TabIndex = 385
         '
         'DateTimePicker2
         '
@@ -189,10 +185,10 @@ Partial Class RequisitionIssueSlip
         Me.Panel3.Controls.Add(Me.Label12)
         Me.Panel3.Controls.Add(Me.status)
         Me.Panel3.Controls.Add(Me.Label11)
-        Me.Panel3.Location = New System.Drawing.Point(338, 519)
+        Me.Panel3.Location = New System.Drawing.Point(281, 460)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(892, 224)
-        Me.Panel3.TabIndex = 376
+        Me.Panel3.TabIndex = 384
         '
         'remarks
         '
@@ -290,10 +286,10 @@ Partial Class RequisitionIssueSlip
         Me.Panel2.Controls.Add(Me.Label7)
         Me.Panel2.Controls.Add(Me.itemName)
         Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Location = New System.Drawing.Point(338, 337)
+        Me.Panel2.Location = New System.Drawing.Point(281, 278)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(892, 183)
-        Me.Panel2.TabIndex = 375
+        Me.Panel2.TabIndex = 383
         '
         'Label10
         '
@@ -413,10 +409,10 @@ Partial Class RequisitionIssueSlip
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.requestID)
         Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Location = New System.Drawing.Point(338, 191)
+        Me.Panel1.Location = New System.Drawing.Point(281, 132)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(892, 147)
-        Me.Panel1.TabIndex = 374
+        Me.Panel1.TabIndex = 382
         '
         'Label4
         '
@@ -523,41 +519,39 @@ Partial Class RequisitionIssueSlip
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel11.BackColor = System.Drawing.Color.White
         Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel11.Controls.Add(Me.lblPropertyCard)
-        Me.Panel11.Location = New System.Drawing.Point(338, 135)
+        Me.Panel11.Controls.Add(Me.lblSuppliesAcknowledgementReceipt)
+        Me.Panel11.Location = New System.Drawing.Point(281, 76)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Size = New System.Drawing.Size(892, 57)
-        Me.Panel11.TabIndex = 373
+        Me.Panel11.TabIndex = 381
         '
-        'lblPropertyCard
+        'lblSuppliesAcknowledgementReceipt
         '
-        Me.lblPropertyCard.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.lblSuppliesAcknowledgementReceipt.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblPropertyCard.AutoSize = True
-        Me.lblPropertyCard.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPropertyCard.Location = New System.Drawing.Point(310, 12)
-        Me.lblPropertyCard.Name = "lblPropertyCard"
-        Me.lblPropertyCard.Size = New System.Drawing.Size(306, 44)
-        Me.lblPropertyCard.TabIndex = 38
-        Me.lblPropertyCard.Text = "REQUISITION ISSUE SLIP"
+        Me.lblSuppliesAcknowledgementReceipt.AutoSize = True
+        Me.lblSuppliesAcknowledgementReceipt.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSuppliesAcknowledgementReceipt.Location = New System.Drawing.Point(205, 12)
+        Me.lblSuppliesAcknowledgementReceipt.Name = "lblSuppliesAcknowledgementReceipt"
+        Me.lblSuppliesAcknowledgementReceipt.Size = New System.Drawing.Size(510, 44)
+        Me.lblSuppliesAcknowledgementReceipt.TabIndex = 38
+        Me.lblSuppliesAcknowledgementReceipt.Text = "SUPPLIES ACKNOWLEDGEMENT RECEIPT"
         '
-        'RequisitionIssueSlip
+        'SuppliesAcknowledgementReceipt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1569, 942)
+        Me.ClientSize = New System.Drawing.Size(1455, 876)
+        Me.Controls.Add(Me.btnBack)
+        Me.Controls.Add(Me.btnPDF)
+        Me.Controls.Add(Me.btnCSV)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel11)
-        Me.Controls.Add(Me.RoundedButton1)
-        Me.Controls.Add(Me.btnCSV)
-        Me.Controls.Add(Me.btn_Back)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Name = "RequisitionIssueSlip"
-        Me.Text = "RequisitionIssueSlip"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.Name = "SuppliesAcknowledgementReceipt"
+        Me.Text = "Supplies Acknowledgement Receipt"
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.Panel3.ResumeLayout(False)
@@ -571,45 +565,46 @@ Partial Class RequisitionIssueSlip
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+
+    Friend WithEvents btnBack As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents btn_Back As Button
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents DateTimePicker2 As DateTimePicker
-    Friend WithEvents Label16 As Label
-    Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents Label15 As Label
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents remarks As TextBox
-    Friend WithEvents Label14 As Label
-    Friend WithEvents approvedDate As DateTimePicker
-    Friend WithEvents Label13 As Label
-    Friend WithEvents approvedBy As ComboBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents status As ComboBox
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents Label10 As Label
-    Friend WithEvents purpose As TextBox
-    Friend WithEvents unit As ComboBox
-    Friend WithEvents quantityRequesteed As ComboBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents description As TextBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents itemName As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label4 As Label
-    Friend WithEvents dateOfRequest As DateTimePicker
-    Friend WithEvents department As ComboBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents position As ComboBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents requesterName As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents requestID As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Panel11 As Panel
-    Friend WithEvents lblPropertyCard As Label
+    Friend WithEvents Panel4 As System.Windows.Forms.Panel
+    Friend WithEvents DateTimePicker2 As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Panel3 As System.Windows.Forms.Panel
+    Friend WithEvents remarks As System.Windows.Forms.TextBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents approvedDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents approvedBy As System.Windows.Forms.ComboBox
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents status As System.Windows.Forms.ComboBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents purpose As System.Windows.Forms.TextBox
+    Friend WithEvents unit As System.Windows.Forms.ComboBox
+    Friend WithEvents quantityRequesteed As System.Windows.Forms.ComboBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents description As System.Windows.Forms.TextBox
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents itemName As System.Windows.Forms.TextBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents dateOfRequest As System.Windows.Forms.DateTimePicker
+    Friend WithEvents department As System.Windows.Forms.ComboBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents position As System.Windows.Forms.ComboBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents requesterName As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents requestID As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Panel11 As System.Windows.Forms.Panel
+    Friend WithEvents lblSuppliesAcknowledgementReceipt As System.Windows.Forms.Label
 End Class

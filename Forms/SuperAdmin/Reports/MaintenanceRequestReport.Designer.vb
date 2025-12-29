@@ -3,12 +3,13 @@ Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
+Imports StaCruzPropertyCustodianSystem.Resources.Controls
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class RequisitionIssueSlip
+Partial Class MaintenanceReport
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,11 +26,14 @@ Partial Class RequisitionIssueSlip
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.components = New System.ComponentModel.Container()
         Me.btn_Back = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnBack = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -75,21 +79,65 @@ Partial Class RequisitionIssueSlip
         Me.Panel11.SuspendLayout()
         Me.SuspendLayout()
         '
-        'RoundedButton1
+        'btn_Back
         '
-        Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton1.CornerRadius = 15
-        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(1205, 874)
-        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.RoundedButton1.Name = "RoundedButton1"
-        Me.RoundedButton1.Size = New System.Drawing.Size(153, 34)
-        Me.RoundedButton1.TabIndex = 368
-        Me.RoundedButton1.Text = "Generate PDF File"
-        Me.RoundedButton1.UseVisualStyleBackColor = False
+        Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Back.ForeColor = System.Drawing.Color.White
+        Me.btn_Back.Location = New System.Drawing.Point(857, 1129)
+        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Back.Name = "btn_Back"
+        Me.btn_Back.Size = New System.Drawing.Size(235, 52)
+        Me.btn_Back.TabIndex = 80
+        Me.btn_Back.Text = "Back"
+        Me.btn_Back.UseVisualStyleBackColor = False
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Poppins SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.Color.White
+        Me.Button1.Location = New System.Drawing.Point(1189, 1129)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(235, 52)
+        Me.Button1.TabIndex = 81
+        Me.Button1.Text = "Save"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'btnBack
+        '
+        Me.btnBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnBack.CornerRadius = 15
+        Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBack.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnBack.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnBack.Location = New System.Drawing.Point(956, 744)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(153, 34)
+        Me.btnBack.TabIndex = 388
+        Me.btnBack.Text = "Back"
+        Me.btnBack.UseVisualStyleBackColor = False
+        '
+        'btnPDF
+        '
+        Me.btnPDF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnPDF.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnPDF.CornerRadius = 15
+        Me.btnPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPDF.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnPDF.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnPDF.Location = New System.Drawing.Point(1276, 744)
+        Me.btnPDF.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnPDF.Name = "btnPDF"
+        Me.btnPDF.Size = New System.Drawing.Size(153, 34)
+        Me.btnPDF.TabIndex = 387
+        Me.btnPDF.Text = "Generate PDF File"
+        Me.btnPDF.UseVisualStyleBackColor = False
         '
         'btnCSV
         '
@@ -99,28 +147,13 @@ Partial Class RequisitionIssueSlip
         Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCSV.Location = New System.Drawing.Point(1044, 874)
-        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCSV.Location = New System.Drawing.Point(1117, 744)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCSV.Name = "btnCSV"
         Me.btnCSV.Size = New System.Drawing.Size(153, 34)
-        Me.btnCSV.TabIndex = 367
+        Me.btnCSV.TabIndex = 386
         Me.btnCSV.Text = "Generate CSV File"
         Me.btnCSV.UseVisualStyleBackColor = False
-        '
-        'btn_Back
-        '
-        Me.btn_Back.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btn_Back.ForeColor = System.Drawing.Color.White
-        Me.btn_Back.Location = New System.Drawing.Point(901, 874)
-        Me.btn_Back.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.btn_Back.Name = "btn_Back"
-        Me.btn_Back.Size = New System.Drawing.Size(112, 34)
-        Me.btn_Back.TabIndex = 366
-        Me.btn_Back.Text = "Back"
-        Me.btn_Back.UseVisualStyleBackColor = False
         '
         'Panel4
         '
@@ -132,10 +165,10 @@ Partial Class RequisitionIssueSlip
         Me.Panel4.Controls.Add(Me.Label16)
         Me.Panel4.Controls.Add(Me.DateTimePicker1)
         Me.Panel4.Controls.Add(Me.Label15)
-        Me.Panel4.Location = New System.Drawing.Point(338, 742)
+        Me.Panel4.Location = New System.Drawing.Point(537, 661)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(892, 66)
-        Me.Panel4.TabIndex = 377
+        Me.Panel4.TabIndex = 385
         '
         'DateTimePicker2
         '
@@ -149,6 +182,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.ForeColor = System.Drawing.Color.Black
         Me.Label16.Location = New System.Drawing.Point(522, 22)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(81, 22)
@@ -168,6 +202,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.Black
         Me.Label15.Location = New System.Drawing.Point(20, 22)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(78, 22)
@@ -189,10 +224,10 @@ Partial Class RequisitionIssueSlip
         Me.Panel3.Controls.Add(Me.Label12)
         Me.Panel3.Controls.Add(Me.status)
         Me.Panel3.Controls.Add(Me.Label11)
-        Me.Panel3.Location = New System.Drawing.Point(338, 519)
+        Me.Panel3.Location = New System.Drawing.Point(537, 438)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(892, 224)
-        Me.Panel3.TabIndex = 376
+        Me.Panel3.TabIndex = 384
         '
         'remarks
         '
@@ -208,6 +243,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.ForeColor = System.Drawing.Color.Black
         Me.Label14.Location = New System.Drawing.Point(82, 108)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(68, 22)
@@ -227,6 +263,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.ForeColor = System.Drawing.Color.Black
         Me.Label13.Location = New System.Drawing.Point(522, 62)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(105, 22)
@@ -247,6 +284,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.ForeColor = System.Drawing.Color.Black
         Me.Label12.Location = New System.Drawing.Point(15, 62)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(91, 22)
@@ -267,6 +305,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.ForeColor = System.Drawing.Color.Black
         Me.Label11.Location = New System.Drawing.Point(15, 17)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(53, 22)
@@ -290,15 +329,16 @@ Partial Class RequisitionIssueSlip
         Me.Panel2.Controls.Add(Me.Label7)
         Me.Panel2.Controls.Add(Me.itemName)
         Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Location = New System.Drawing.Point(338, 337)
+        Me.Panel2.Location = New System.Drawing.Point(537, 256)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(892, 183)
-        Me.Panel2.TabIndex = 375
+        Me.Panel2.TabIndex = 383
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.Black
         Me.Label10.Location = New System.Drawing.Point(522, 58)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(63, 22)
@@ -349,6 +389,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.Black
         Me.Label8.Location = New System.Drawing.Point(522, 19)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(66, 22)
@@ -370,6 +411,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.Black
         Me.Label7.Location = New System.Drawing.Point(15, 56)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(83, 22)
@@ -390,6 +432,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.Black
         Me.Label6.Location = New System.Drawing.Point(15, 19)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(81, 22)
@@ -413,15 +456,16 @@ Partial Class RequisitionIssueSlip
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.requestID)
         Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Location = New System.Drawing.Point(338, 191)
+        Me.Panel1.Location = New System.Drawing.Point(537, 110)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(892, 147)
-        Me.Panel1.TabIndex = 374
+        Me.Panel1.TabIndex = 382
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.Black
         Me.Label4.Location = New System.Drawing.Point(522, 99)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(110, 22)
@@ -450,6 +494,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.Black
         Me.Label3.Location = New System.Drawing.Point(15, 99)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(88, 22)
@@ -470,6 +515,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.Black
         Me.Label5.Location = New System.Drawing.Point(522, 58)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(62, 22)
@@ -490,6 +536,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(15, 58)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(115, 22)
@@ -510,6 +557,7 @@ Partial Class RequisitionIssueSlip
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(522, 18)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(78, 22)
@@ -524,10 +572,10 @@ Partial Class RequisitionIssueSlip
         Me.Panel11.BackColor = System.Drawing.Color.White
         Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel11.Controls.Add(Me.lblPropertyCard)
-        Me.Panel11.Location = New System.Drawing.Point(338, 135)
+        Me.Panel11.Location = New System.Drawing.Point(537, 54)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Size = New System.Drawing.Size(892, 57)
-        Me.Panel11.TabIndex = 373
+        Me.Panel11.TabIndex = 381
         '
         'lblPropertyCard
         '
@@ -535,28 +583,33 @@ Partial Class RequisitionIssueSlip
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblPropertyCard.AutoSize = True
         Me.lblPropertyCard.Font = New System.Drawing.Font("Poppins", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPropertyCard.Location = New System.Drawing.Point(310, 12)
+        Me.lblPropertyCard.ForeColor = System.Drawing.Color.Black
+        Me.lblPropertyCard.Location = New System.Drawing.Point(174, 8)
         Me.lblPropertyCard.Name = "lblPropertyCard"
-        Me.lblPropertyCard.Size = New System.Drawing.Size(306, 44)
+        Me.lblPropertyCard.Size = New System.Drawing.Size(527, 44)
         Me.lblPropertyCard.TabIndex = 38
-        Me.lblPropertyCard.Text = "REQUISITION ISSUE SLIP"
+        Me.lblPropertyCard.Text = "PROPERTY ACKNOWLEDGEMENT RECEIPT"
         '
-        'RequisitionIssueSlip
+        'MaintenanceReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1569, 942)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(1924, 1055)
+        Me.Controls.Add(Me.btnBack)
+        Me.Controls.Add(Me.btnPDF)
+        Me.Controls.Add(Me.btnCSV)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel11)
-        Me.Controls.Add(Me.RoundedButton1)
-        Me.Controls.Add(Me.btnCSV)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btn_Back)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Name = "RequisitionIssueSlip"
-        Me.Text = "RequisitionIssueSlip"
+        Me.ForeColor = System.Drawing.Color.Transparent
+        Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.Name = "MaintenanceReport"
+        Me.Text = "MaintenanceReport"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
@@ -571,9 +624,11 @@ Partial Class RequisitionIssueSlip
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btn_Back As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnBack As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents btn_Back As Button
     Friend WithEvents Panel4 As Panel
     Friend WithEvents DateTimePicker2 As DateTimePicker
     Friend WithEvents Label16 As Label

@@ -333,7 +333,7 @@ Partial Class DepartmentAllocation
     Friend WithEvents Office As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Department As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TotalDepartment As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Button2 As Button
 End Class
