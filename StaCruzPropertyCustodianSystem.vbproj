@@ -676,12 +676,10 @@
     <Compile Include="Forms\SuperAdmin\Reports\LostStolenDamaged.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\MaintenanceReport.Designer.vb">
-      <DependentUpon>MaintenanceReport.vb</DependentUpon>
+    <Compile Include="Forms\SuperAdmin\Reports\MaintenanceRequestReport.Designer.vb">
+      <DependentUpon>MaintenanceRequestReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\MaintenanceReport.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\MaintenanceRequestReport.vb" />
     <Compile Include="Forms\SuperAdmin\Reports\PropertyCard.Designer.vb">
       <DependentUpon>PropertyCard.vb</DependentUpon>
     </Compile>
@@ -800,8 +798,8 @@
     <EmbeddedResource Include="Forms\Admin\MaintenanceManagementReport1.resx">
       <DependentUpon>MaintenanceManagementReport1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Reports\MaintenanceReport.resx">
-      <DependentUpon>MaintenanceReport.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\MaintenanceRequestReport.resx">
+      <DependentUpon>MaintenanceRequestReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.resx">
       <DependentUpon>PhysicalCountInventories.vb</DependentUpon>

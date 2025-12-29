@@ -41,11 +41,18 @@ Partial Public Class RequisitionIssueSlip
                 If String.IsNullOrEmpty(deptName) Then
                     deptName = SafeGetValue(requestData, "departmentId", "department_id")
                 End If
-                departmentId.Text = deptName
+                If department IsNot Nothing AndAlso department.Items.Count > 0 Then
+                    Dim deptIndex As Integer = department.Items.IndexOf(deptName)
+                    If deptIndex >= 0 Then
+                        department.SelectedIndex = deptIndex
+                    Else
+                        department.Text = deptName
+                    End If
+                End If
                 dateOfRequest.Text = SafeGetDateValue(requestData, "request_date", "dateOfRequest")
                 itemName.Text = SafeGetValue(requestData, "item_name", "itemName")
                 description.Text = SafeGetValue(requestData, "description")
-                quantityRequested.Text = SafeGetValue(requestData, "quantity", "quantityRequested")
+                quantityRequesteed.Text = SafeGetValue(requestData, "quantity", "quantityRequested")
                 unit.Text = SafeGetValue(requestData, "unit")
                 purpose.Text = SafeGetValue(requestData, "remarks", "purpose")
                 status.Text = SafeGetValue(requestData, "status")
@@ -53,10 +60,22 @@ Partial Public Class RequisitionIssueSlip
 
                 ' Populate approved date and approved by
                 Dim approvedDateValue As String = SafeGetDateValue(requestData, "approval_date", "approvedDate")
-                If Not String.IsNullOrEmpty(approvedDateValue) Then
-                    TextBox2.Text = approvedDateValue
+                If Not String.IsNullOrEmpty(approvedDateValue) AndAlso approvedDate IsNot Nothing Then
+                    Try
+                        approvedDate.Value = DateTime.Parse(approvedDateValue)
+                    Catch
+                        approvedDate.Text = approvedDateValue
+                    End Try
                 End If
-                TextBox3.Text = SafeGetValue(requestData, "approved_by_name", "approvedBy")
+                If approvedBy IsNot Nothing Then
+                    Dim approvedByName As String = SafeGetValue(requestData, "approved_by_name", "approvedBy")
+                    Dim approvedIndex As Integer = approvedBy.Items.IndexOf(approvedByName)
+                    If approvedIndex >= 0 Then
+                        approvedBy.SelectedIndex = approvedIndex
+                    Else
+                        approvedBy.Text = approvedByName
+                    End If
+                End If
 
                 ' Build requisition table with this single request
                 Dim dt As New DataTable()
