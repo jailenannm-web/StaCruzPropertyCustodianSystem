@@ -1,4 +1,4 @@
-﻿Partial Public Class PropertyRequestReport
+﻿Partial Class PropertyAcknowledgementReceipt
     Private Sub position_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles position.SelectedIndexChanged
 
     End Sub

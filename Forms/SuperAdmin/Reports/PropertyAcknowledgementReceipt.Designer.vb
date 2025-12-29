@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class PropertyRequestReport
+Partial Class PropertyAcknowledgementReceipt
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -545,7 +545,7 @@ Partial Class PropertyRequestReport
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
         '
-        'PropertyRequestReport
+        'PropertyAcknowledgementReceipt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -558,7 +558,7 @@ Partial Class PropertyRequestReport
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel11)
-        Me.Name = "PropertyRequestReport"
+        Me.Name = "PropertyAcknowledgementReceipt"
         Me.Text = "Property Acknowledgement Receipt"
         Me.Panel11.ResumeLayout(False)
         Me.Panel11.PerformLayout()
