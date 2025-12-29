@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5BA19DCE-6BE5-45B8-AADD-D54CAC6DE401}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>StaCruzPropertyCustodianSystem.StaffLogin</StartupObject>
+    <StartupObject>StaCruzPropertyCustodianSystem.UserListReport</StartupObject>
     <RootNamespace>StaCruzPropertyCustodianSystem</RootNamespace>
     <AssemblyName>StaCruzPropertyCustodianSystem</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -186,8 +186,26 @@
     <Compile Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertiesStock.Designer.vb">
+      <DependentUpon>PropertiesStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertiesStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyRequestReport.Designer.vb">
+      <DependentUpon>PropertyRequestReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\PropertyRequestReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\SuppliesMaterials.Designer.vb">
       <DependentUpon>SuppliesMaterials.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\UserListReport.Designer.vb">
+      <DependentUpon>UserListReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SuperAdmin\Reports\UserListReport.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SuperAdmin\SuperAdminDashboard.vb">
       <SubType>Form</SubType>
@@ -776,11 +794,17 @@
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PhysicalCountInventories.resx">
       <DependentUpon>PhysicalCountInventories.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertiesStock.resx">
+      <DependentUpon>PropertiesStock.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyCard.resx">
       <DependentUpon>PropertyCard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyIssuance.resx">
       <DependentUpon>PropertyIssuance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyRequestReport.resx">
+      <DependentUpon>PropertyRequestReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PurchaseRequest.resx">
       <DependentUpon>PurchaseRequest.vb</DependentUpon>
@@ -793,6 +817,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\StockCard.resx">
       <DependentUpon>StockCard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SuperAdmin\Reports\UserListReport.resx">
+      <DependentUpon>UserListReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\WasteMaterialsReport.resx">
       <DependentUpon>WasteMaterialsReport.vb</DependentUpon>
