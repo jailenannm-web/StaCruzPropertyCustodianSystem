@@ -58,6 +58,35 @@ Public Module ReportExportHelper
         End Using
     End Sub
 
+    Public Sub ExportAuditReportToPdf(auditData As DataRow, suggestedFileName As String, Optional successMessage As String = "Audit report exported successfully to PDF.")
+        If auditData Is Nothing Then
+            MessageBox.Show("No audit data to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Using dialog As New SaveFileDialog()
+            dialog.Filter = "PDF Files|*.pdf"
+            dialog.FileName = suggestedFileName
+            dialog.AddExtension = True
+            dialog.DefaultExt = "pdf"
+            If dialog.ShowDialog() = DialogResult.OK Then
+                Try
+                    Dim filePath = dialog.FileName
+                    ' Ensure extension
+                    If Not filePath.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) Then
+                        filePath = filePath & ".pdf"
+                    End If
+
+                    Dim pdfBytes = BuildAuditReportPdf(auditData)
+                    File.WriteAllBytes(filePath, pdfBytes)
+                    MessageBox.Show(successMessage, "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show("Failed to export PDF file: " & ex.Message, "Export", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End If
+        End Using
+    End Sub
+
     Private Sub WriteCsv(table As DataTable, filePath As String, Optional isBulkExport As Boolean = False)
         ' Use UTF8 with BOM so Excel recognizes encoding reliably
         Using writer As New StreamWriter(filePath, False, New UTF8Encoding(True))
@@ -333,6 +362,239 @@ Public Module ReportExportHelper
     Private Function EscapePdfText(text As String) As String
         If text Is Nothing Then text = String.Empty
         Return text.Replace("\", "\\").Replace("(", "\(").Replace(")", "\)").Replace(Environment.NewLine, "\n")
+    End Function
+
+    Private Function BuildAuditReportPdf(auditData As DataRow) As Byte()
+        ' Helper function to safely get column value
+        Dim GetValue As Func(Of String, String) = Function(colName As String) As String
+            If auditData.Table.Columns.Contains(colName) AndAlso Not Convert.IsDBNull(auditData(colName)) Then
+                Return auditData(colName).ToString()
+            End If
+            Return ""
+        End Function
+
+        ' Extract data
+        Dim createdAt As DateTime? = Nothing
+        If auditData.Table.Columns.Contains("createdAt") AndAlso Not Convert.IsDBNull(auditData("createdAt")) Then
+            createdAt = Convert.ToDateTime(auditData("createdAt"))
+        End If
+
+        Dim dateFrom As String = If(createdAt.HasValue, createdAt.Value.ToString("dddd, dd MMMM yyyy"), "")
+        Dim dateTo As String = dateFrom
+        Dim timeFrom As String = If(createdAt.HasValue, createdAt.Value.ToString("HH:mm:ss"), "")
+        Dim timeTo As String = timeFrom
+
+        Dim username As String = GetValue("username")
+        If String.IsNullOrWhiteSpace(username) Then username = "System"
+        
+        Dim userId As String = GetValue("userId")
+        Dim logId As String = GetValue("logId")
+        Dim description As String = GetValue("description")
+        
+        ' Handle both "module" and "tableName" column names
+        Dim tableName As String = GetValue("module")
+        If String.IsNullOrWhiteSpace(tableName) Then
+            tableName = GetValue("tableName")
+        End If
+        
+        Dim recordId As String = GetValue("recordId")
+        Dim action As String = GetValue("action")
+        Dim ipAddress As String = GetValue("ipAddress")
+        Dim userAgent As String = GetValue("userAgent")
+        Dim status As String = "Completed" ' Default status
+
+        ' Build PDF content
+        Dim streamContent As String = BuildAuditReportPdfContent(
+            dateFrom, dateTo, timeFrom, timeTo,
+            username, userId, logId, description,
+            tableName, recordId, action,
+            ipAddress, userAgent, status
+        )
+        
+        Dim streamBytes = Encoding.UTF8.GetBytes(streamContent)
+
+        Dim objects As New List(Of Byte())()
+        ' PDF objects
+        objects.Add(Encoding.ASCII.GetBytes("1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj" & Environment.NewLine))
+        objects.Add(Encoding.ASCII.GetBytes("2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj" & Environment.NewLine))
+        objects.Add(Encoding.ASCII.GetBytes("3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >> endobj" & Environment.NewLine))
+
+        Dim streamBuilder As New StringBuilder()
+        streamBuilder.AppendLine("4 0 obj << /Length " & streamBytes.Length & " >>")
+        streamBuilder.AppendLine("stream")
+        streamBuilder.Append(streamContent)
+        streamBuilder.AppendLine("endstream")
+        streamBuilder.AppendLine("endobj")
+        objects.Add(Encoding.UTF8.GetBytes(streamBuilder.ToString()))
+
+        objects.Add(Encoding.ASCII.GetBytes("5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj" & Environment.NewLine))
+        objects.Add(Encoding.ASCII.GetBytes("6 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> endobj" & Environment.NewLine))
+
+        Using ms As New MemoryStream()
+            Using bw As New BinaryWriter(ms, Encoding.ASCII, True)
+                ' PDF header
+                bw.Write(Encoding.ASCII.GetBytes("%PDF-1.4" & Environment.NewLine))
+                Dim offsets As New List(Of Long)()
+                For Each objBytes In objects
+                    offsets.Add(ms.Position)
+                    bw.Write(objBytes)
+                Next
+
+                Dim xrefPosition As Long = ms.Position
+                bw.Write(Encoding.ASCII.GetBytes("xref" & Environment.NewLine & "0 " & (objects.Count + 1).ToString() & Environment.NewLine))
+                bw.Write(Encoding.ASCII.GetBytes("0000000000 65535 f " & Environment.NewLine))
+                For Each off As Long In offsets
+                    bw.Write(Encoding.ASCII.GetBytes(off.ToString("D10") & " 00000 n " & Environment.NewLine))
+                Next
+
+                bw.Write(Encoding.ASCII.GetBytes("trailer" & Environment.NewLine & "<< /Size " & (objects.Count + 1).ToString() & " /Root 1 0 R >>" & Environment.NewLine))
+                bw.Write(Encoding.ASCII.GetBytes("startxref" & Environment.NewLine & xrefPosition.ToString() & Environment.NewLine & "%%EOF"))
+            End Using
+            Return ms.ToArray()
+        End Using
+    End Function
+
+    Private Function BuildAuditReportPdfContent(
+        dateFrom As String, dateTo As String, timeFrom As String, timeTo As String,
+        userName As String, userId As String, logId As String, description As String,
+        tableName As String, recordId As String, action As String,
+        ipAddress As String, userAgent As String, status As String) As String
+        
+        Dim builder As New StringBuilder()
+        Dim y As Integer = 740
+        
+        ' Draw border rectangle (outer box)
+        builder.AppendLine("0.5 w") ' Line width
+        builder.AppendLine("50 50 512 692 re S") ' Rectangle: x y width height
+        
+        ' Draw header box with background
+        builder.AppendLine("0.9 g") ' Light gray fill
+        builder.AppendLine("50 710 512 32 re f") ' Filled rectangle for header
+        builder.AppendLine("0 g") ' Back to black
+        builder.AppendLine("50 710 512 32 re S") ' Border for header
+        
+        ' Title - AUDIT REPORT (Bold, centered)
+        builder.AppendLine("BT /F2 18 Tf 250 718 Td (AUDIT REPORT) Tj ET")
+        
+        y = 685
+        
+        ' Date range section with boxes
+        ' From label and date box
+        builder.AppendLine("BT /F1 10 Tf 70 " & y & " Td (From :) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 150 20 re S") ' Date box
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(dateFrom) & ") Tj ET")
+        
+        ' To label and date box
+        builder.AppendLine("BT /F1 10 Tf 320 " & y & " Td (To :) Tj ET")
+        builder.AppendLine("360 " & (y - 5) & " 150 20 re S") ' Date box
+        builder.AppendLine("BT /F1 9 Tf 365 " & (y - 1) & " Td (" & EscapePdfText(dateTo) & ") Tj ET")
+        
+        y -= 40
+        
+        ' User section
+        builder.AppendLine("BT /F1 10 Tf 70 " & y & " Td (User :) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 380 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(userName) & ") Tj ET")
+        
+        y -= 30
+        
+        ' User ID section
+        builder.AppendLine("BT /F1 10 Tf 70 " & y & " Td (User ID :) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 380 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(userId) & ") Tj ET")
+        
+        y -= 30
+        
+        ' Log ID section
+        builder.AppendLine("BT /F1 10 Tf 70 " & y & " Td (Log ID :) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 380 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(logId) & ") Tj ET")
+        
+        y -= 40
+        
+        ' Description section (larger box)
+        builder.AppendLine("BT /F1 10 Tf 70 " & y & " Td (Description :) Tj ET")
+        builder.AppendLine("70 " & (y - 95) & " 472 90 re S") ' Large box for description
+        
+        ' Word wrap description text
+        Dim descLines As List(Of String) = WrapText(description, 65)
+        Dim descY As Integer = y - 15
+        For Each line As String In descLines.Take(5) ' Limit to 5 lines
+            builder.AppendLine("BT /F1 9 Tf 75 " & descY & " Td (" & EscapePdfText(line) & ") Tj ET")
+            descY -= 12
+        Next
+        
+        y -= 110
+        
+        ' Two-column section
+        ' Left column
+        Dim leftX As Integer = 70
+        Dim rightX As Integer = 320
+        
+        ' Table Name
+        builder.AppendLine("BT /F1 10 Tf " & leftX & " " & y & " Td (table Name :) Tj ET")
+        builder.AppendLine(leftX & " " & (y - 25) & " 220 20 re S")
+        builder.AppendLine("BT /F1 9 Tf " & (leftX + 5) & " " & (y - 21) & " Td (" & EscapePdfText(tableName) & ") Tj ET")
+        
+        ' IP Address
+        builder.AppendLine("BT /F1 10 Tf " & rightX & " " & y & " Td (IP Address :) Tj ET")
+        builder.AppendLine(rightX & " " & (y - 25) & " 222 20 re S")
+        builder.AppendLine("BT /F1 9 Tf " & (rightX + 5) & " " & (y - 21) & " Td (" & EscapePdfText(ipAddress) & ") Tj ET")
+        
+        y -= 40
+        
+        ' Record ID
+        builder.AppendLine("BT /F1 10 Tf " & leftX & " " & y & " Td (Record ID :) Tj ET")
+        builder.AppendLine(leftX & " " & (y - 25) & " 220 20 re S")
+        builder.AppendLine("BT /F1 9 Tf " & (leftX + 5) & " " & (y - 21) & " Td (" & EscapePdfText(recordId) & ") Tj ET")
+        
+        ' User Agent (truncated if too long)
+        Dim userAgentShort As String = If(userAgent.Length > 30, userAgent.Substring(0, 27) & "...", userAgent)
+        builder.AppendLine("BT /F1 10 Tf " & rightX & " " & y & " Td (User Agent :) Tj ET")
+        builder.AppendLine(rightX & " " & (y - 25) & " 222 20 re S")
+        builder.AppendLine("BT /F1 9 Tf " & (rightX + 5) & " " & (y - 21) & " Td (" & EscapePdfText(userAgentShort) & ") Tj ET")
+        
+        y -= 40
+        
+        ' Action
+        builder.AppendLine("BT /F1 10 Tf " & leftX & " " & y & " Td (Action :) Tj ET")
+        builder.AppendLine(leftX & " " & (y - 25) & " 220 20 re S")
+        builder.AppendLine("BT /F1 9 Tf " & (leftX + 5) & " " & (y - 21) & " Td (" & EscapePdfText(action) & ") Tj ET")
+        
+        ' Status
+        builder.AppendLine("BT /F1 10 Tf " & rightX & " " & y & " Td (Status :) Tj ET")
+        builder.AppendLine(rightX & " " & (y - 25) & " 222 20 re S")
+        builder.AppendLine("BT /F1 9 Tf " & (rightX + 5) & " " & (y - 21) & " Td (" & EscapePdfText(status) & ") Tj ET")
+        
+        Return builder.ToString()
+    End Function
+
+    Private Function WrapText(text As String, maxChars As Integer) As List(Of String)
+        Dim lines As New List(Of String)()
+        If String.IsNullOrWhiteSpace(text) Then
+            lines.Add("")
+            Return lines
+        End If
+
+        Dim words As String() = text.Split(" "c)
+        Dim currentLine As New StringBuilder()
+        
+        For Each word As String In words
+            If currentLine.Length + word.Length + 1 > maxChars Then
+                If currentLine.Length > 0 Then
+                    lines.Add(currentLine.ToString())
+                    currentLine.Clear()
+                End If
+            End If
+            If currentLine.Length > 0 Then currentLine.Append(" ")
+            currentLine.Append(word)
+        Next
+        
+        If currentLine.Length > 0 Then
+            lines.Add(currentLine.ToString())
+        End If
+        
+        Return lines
     End Function
 End Module
 

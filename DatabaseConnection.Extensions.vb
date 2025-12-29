@@ -498,13 +498,14 @@ Partial Public Class DatabaseConnection
             End Using
             
             ' Create borrowed_items record
-            Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, borrowerName, borrowerPosition, " &
-                                       "departmentId, borrowDate, expectedReturnDate, status, remarks, createdAt, updatedAt) " &
-                                       "VALUES ('property', @itemId, @borrowerName, @borrowerPosition, @departmentId, " &
-                                       "NOW(), DATE_ADD(NOW(), INTERVAL 365 DAY), 'Borrowed', @remarks, NOW(), NOW())"
+            Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, itemName, borrowerName, borrowerPosition, " &
+                                       "departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
+                                       "VALUES ('property', @itemId, @itemName, @borrowerName, @borrowerPosition, @departmentId, " &
+                                       "NOW(), NULL, 'Borrowed', @remarks, NOW(), NOW())"
             
             Using borrowCmd As New MySqlCommand(borrowQuery, conn, transaction)
                 borrowCmd.Parameters.AddWithValue("@itemId", propertyId)
+                borrowCmd.Parameters.AddWithValue("@itemName", itemName)
                 borrowCmd.Parameters.AddWithValue("@borrowerName", borrowerName)
                 borrowCmd.Parameters.AddWithValue("@borrowerPosition", If(String.IsNullOrEmpty(borrowerPosition), DBNull.Value, borrowerPosition))
                 borrowCmd.Parameters.AddWithValue("@departmentId", If(userDeptId.HasValue, userDeptId.Value, DBNull.Value))
@@ -759,13 +760,14 @@ Partial Public Class DatabaseConnection
                 
                 ' Create borrowed_items record if user is assigned
                 If userIdToAssign.HasValue AndAlso userIdToAssign.Value > 0 Then
-                    Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, borrowerName, " &
-                                               "borrowerPosition, departmentId, borrowDate, status, remarks, createdAt, updatedAt) " &
-                                               "VALUES ('property', @itemId, @borrowerName, @borrowerPosition, " &
-                                               "@departmentId, NOW(), 'Borrowed', @remarks, NOW(), NOW())"
+                    Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, itemName, borrowerName, " &
+                                               "borrowerPosition, departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
+                                               "VALUES ('property', @itemId, @itemName, @borrowerName, @borrowerPosition, " &
+                                               "@departmentId, NOW(), NULL, 'Borrowed', @remarks, NOW(), NOW())"
                     
                     Using cmd As New MySqlCommand(borrowQuery, conn, transaction)
                         cmd.Parameters.AddWithValue("@itemId", matchedPropertyId.Value)
+                        cmd.Parameters.AddWithValue("@itemName", itemName)
                         cmd.Parameters.AddWithValue("@borrowerName", If(String.IsNullOrWhiteSpace(requesterFullName), requesterName, requesterFullName))
                         cmd.Parameters.AddWithValue("@borrowerPosition", DBNull.Value)
                         cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, departmentId.Value, DBNull.Value))
@@ -807,5 +809,88 @@ Partial Public Class DatabaseConnection
             End If
         End Try
     End Function
-    
+
+    ''' <summary>
+    ''' Assign a supply to a user and update quantity
+    ''' </summary>
+    Public Shared Function AssignSupplyToUser(supplyId As Integer, userId As Integer, quantity As Integer,
+                                             Optional departmentId As Integer? = Nothing,
+                                             Optional purpose As String = "") As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Dim transaction As MySqlTransaction = Nothing
+        Try
+            conn = DatabaseConnection.GetConnection()
+            If conn Is Nothing Then Return False
+            If Not DatabaseConnection.SafeOpenConnection(conn) Then Return False
+
+            transaction = conn.BeginTransaction()
+
+            ' Check available quantity
+            Dim availableQty As Integer = 0
+            Using checkCmd As New MySqlCommand("SELECT quantity FROM supplies WHERE supplyId = @supplyId", conn, transaction)
+                checkCmd.Parameters.AddWithValue("@supplyId", supplyId)
+                Dim result = checkCmd.ExecuteScalar()
+                If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                    Integer.TryParse(result.ToString(), availableQty)
+                End If
+            End Using
+
+            If availableQty < quantity Then
+                System.Diagnostics.Debug.WriteLine($"[v0] AssignSupplyToUser - Insufficient quantity. Available: {availableQty}, Requested: {quantity}")
+                Return False
+            End If
+
+            ' Update supply: deduct quantity and set assignedTo
+            Using updateCmd As New MySqlCommand("UPDATE supplies SET quantity = quantity - @qty, assignedTo = @userId, updatedAt = NOW() WHERE supplyId = @supplyId", conn, transaction)
+                updateCmd.Parameters.AddWithValue("@qty", quantity)
+                updateCmd.Parameters.AddWithValue("@userId", userId)
+                updateCmd.Parameters.AddWithValue("@supplyId", supplyId)
+                updateCmd.ExecuteNonQuery()
+            End Using
+
+            ' Create borrowed_items record for tracking
+            Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, itemName, borrowerName, borrowerPosition, " &
+                                        "departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
+                                        "SELECT 'supply', s.supplyId, s.itemName, CONCAT(u.firstName, ' ', u.lastName), u.position, " &
+                                        "@departmentId, NOW(), NULL, 'Borrowed', @remarks, NOW(), NOW() " &
+                                        "FROM supplies s, users u WHERE s.supplyId = @supplyId AND u.userId = @userId"
+
+            Using borrowCmd As New MySqlCommand(borrowQuery, conn, transaction)
+                borrowCmd.Parameters.AddWithValue("@supplyId", supplyId)
+                borrowCmd.Parameters.AddWithValue("@userId", userId)
+                borrowCmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, departmentId.Value, DBNull.Value))
+                borrowCmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(purpose), "Supply assigned", purpose))
+                borrowCmd.ExecuteNonQuery()
+            End Using
+
+            transaction.Commit()
+            System.Diagnostics.Debug.WriteLine($"[v0] AssignSupplyToUser Success - SupplyId: {supplyId}, UserId: {userId}, Quantity: {quantity}")
+            Return True
+
+        Catch ex As Exception
+            If transaction IsNot Nothing Then
+                Try
+                    transaction.Rollback()
+                Catch
+                End Try
+            End If
+            System.Diagnostics.Debug.WriteLine("[v0] AssignSupplyToUser Exception: " & ex.Message & vbCrLf & ex.StackTrace)
+            Return False
+        Finally
+            If transaction IsNot Nothing Then
+                Try
+                    transaction.Dispose()
+                Catch
+                End Try
+            End If
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
 End Class

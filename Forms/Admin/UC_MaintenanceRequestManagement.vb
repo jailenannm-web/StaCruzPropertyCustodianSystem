@@ -510,9 +510,9 @@ Public Class UC_MaintenanceRequestManagement
             End If
 
             ' Open Property Issuance Slip with maintenance request data
-            Dim propertyIssuance As New PropertyIssuance()
-            ' TODO: If PropertyIssuance accepts maintenance request data, pass it here
-            propertyIssuance.Show()
+            Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt()
+            ' TODO: If PropertyAcknowledgementReceipt accepts maintenance request data, pass it here
+            propertyAcknowledgement.Show()
         Catch ex As Exception
             MessageBox.Show("Error opening property slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try

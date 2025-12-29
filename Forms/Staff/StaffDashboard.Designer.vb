@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -667,5 +667,5 @@ Partial Class StaffDashboard
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents pnlMain As Resources.Controls.RoundedPanel
+    Friend WithEvents pnlMain As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
 End Class

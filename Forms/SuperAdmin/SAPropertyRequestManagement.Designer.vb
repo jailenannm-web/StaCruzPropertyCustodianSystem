@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -297,7 +297,7 @@ Partial Class SAPropertyRequestManagement
     Friend WithEvents UpdatedAt As DataGridViewTextBoxColumn
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents btnUpdate As Resources.Controls.RoundedButton
-    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
-    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
+    Friend WithEvents btnUpdate As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

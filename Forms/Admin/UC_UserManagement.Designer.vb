@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -362,12 +362,12 @@ Partial Class UC_UserManagement
     End Sub
     Friend WithEvents admin_label_Dashboard As Label
     Friend WithEvents pm_table As DataGridView
-    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
-    Friend WithEvents btnEdit As Resources.Controls.RoundedButton
-    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnEdit As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents cboRoleFilter As ComboBox
     Friend WithEvents cboStatusFilter As ComboBox
-    Friend WithEvents btnRefresh As Resources.Controls.RoundedButton
+    Friend WithEvents btnRefresh As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlusermanagement As Label
     Friend WithEvents userId As DataGridViewTextBoxColumn

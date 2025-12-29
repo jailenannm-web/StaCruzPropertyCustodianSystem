@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class AddUser
     Inherits System.Windows.Forms.Form
 
@@ -557,12 +557,12 @@ Partial Class AddUser
 
     End Sub
 
-    Friend WithEvents um_edituser_save As Resources.Controls.RoundedButton
-    Friend WithEvents um_edituser_backbtn As Resources.Controls.RoundedButton
+    Friend WithEvents um_edituser_save As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents um_edituser_backbtn As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents instructions As System.Windows.Forms.Label
-    Friend WithEvents uc_um_edituser As Resources.Controls.RoundedPanel
+    Friend WithEvents uc_um_edituser As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents um_edituser_txtboxCreated As System.Windows.Forms.TextBox
     Friend WithEvents um_edituser_txtStatus As System.Windows.Forms.Label

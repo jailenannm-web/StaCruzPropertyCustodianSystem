@@ -294,13 +294,11 @@ Public Class audit
                 Return
             End If
 
-            ' Create detailed export table
-            Dim exportTable As DataTable = AuditReportAdmin.CreateExportTableFromDataRow(auditData)
             Dim logIdStr As String = If(Convert.IsDBNull(auditData("logId")), DateTime.Now.ToString("yyyyMMdd_HHmmss"), auditData("logId").ToString())
             Dim fileName As String = "audit_report_" & logIdStr & ".pdf"
 
-            ReportExportHelper.ExportDataTableToPdf(exportTable, fileName, 
-                "Sta Cruz Property Custodian System - Audit Report", 
+            ' Use the specialized audit report PDF export
+            ReportExportHelper.ExportAuditReportToPdf(auditData, fileName, 
                 "Audit report exported successfully to PDF.")
         Catch ex As Exception
             MessageBox.Show("Error exporting PDF: " & ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -28,13 +28,15 @@ Partial Class EditSupply
         Me.btnSave = New System.Windows.Forms.Button()
         Me.cboStockStatus = New System.Windows.Forms.ComboBox()
         Me.lblStockStatus = New System.Windows.Forms.Label()
+        Me.cboAssignedTo = New System.Windows.Forms.ComboBox()
+        Me.lblAssignedTo = New System.Windows.Forms.Label()
         Me.txtLocation = New System.Windows.Forms.TextBox()
         Me.lblLocation = New System.Windows.Forms.Label()
         Me.cboDepartment = New System.Windows.Forms.ComboBox()
         Me.lblDepartment = New System.Windows.Forms.Label()
         Me.cboSourceOfFunds = New System.Windows.Forms.ComboBox()
         Me.lblSourceOfFunds = New System.Windows.Forms.Label()
-        Me.txtSupplier = New System.Windows.Forms.TextBox()
+        Me.cboSupplier = New System.Windows.Forms.ComboBox()
         Me.lblSupplier = New System.Windows.Forms.Label()
         Me.txtTotalCost = New System.Windows.Forms.TextBox()
         Me.lblTotalCost = New System.Windows.Forms.Label()
@@ -44,7 +46,7 @@ Partial Class EditSupply
         Me.lblDateReceived = New System.Windows.Forms.Label()
         Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.lblQuantity = New System.Windows.Forms.Label()
-        Me.txtUnitOfMeasure = New System.Windows.Forms.TextBox()
+        Me.cboUnitOfMeasure = New System.Windows.Forms.ComboBox()
         Me.lblUnitOfMeasure = New System.Windows.Forms.Label()
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.lblDescription = New System.Windows.Forms.Label()
@@ -77,13 +79,15 @@ Partial Class EditSupply
         Me.pnlMain.Controls.Add(Me.btnSave)
         Me.pnlMain.Controls.Add(Me.cboStockStatus)
         Me.pnlMain.Controls.Add(Me.lblStockStatus)
+        Me.pnlMain.Controls.Add(Me.cboAssignedTo)
+        Me.pnlMain.Controls.Add(Me.lblAssignedTo)
         Me.pnlMain.Controls.Add(Me.txtLocation)
         Me.pnlMain.Controls.Add(Me.lblLocation)
         Me.pnlMain.Controls.Add(Me.cboDepartment)
         Me.pnlMain.Controls.Add(Me.lblDepartment)
         Me.pnlMain.Controls.Add(Me.cboSourceOfFunds)
         Me.pnlMain.Controls.Add(Me.lblSourceOfFunds)
-        Me.pnlMain.Controls.Add(Me.txtSupplier)
+        Me.pnlMain.Controls.Add(Me.cboSupplier)
         Me.pnlMain.Controls.Add(Me.lblSupplier)
         Me.pnlMain.Controls.Add(Me.txtTotalCost)
         Me.pnlMain.Controls.Add(Me.lblTotalCost)
@@ -93,7 +97,7 @@ Partial Class EditSupply
         Me.pnlMain.Controls.Add(Me.lblDateReceived)
         Me.pnlMain.Controls.Add(Me.numQuantity)
         Me.pnlMain.Controls.Add(Me.lblQuantity)
-        Me.pnlMain.Controls.Add(Me.txtUnitOfMeasure)
+        Me.pnlMain.Controls.Add(Me.cboUnitOfMeasure)
         Me.pnlMain.Controls.Add(Me.lblUnitOfMeasure)
         Me.pnlMain.Controls.Add(Me.txtDescription)
         Me.pnlMain.Controls.Add(Me.lblDescription)
@@ -141,19 +145,19 @@ Partial Class EditSupply
         Me.cboStockStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboStockStatus.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.cboStockStatus.FormattingEnabled = True
-        Me.cboStockStatus.Location = New System.Drawing.Point(830, 202)
+        Me.cboStockStatus.Location = New System.Drawing.Point(830, 247)
         Me.cboStockStatus.Name = "cboStockStatus"
         Me.cboStockStatus.Size = New System.Drawing.Size(380, 34)
-        Me.cboStockStatus.TabIndex = 27
+        Me.cboStockStatus.TabIndex = 29
         '
         'lblStockStatus
         '
         Me.lblStockStatus.AutoSize = True
         Me.lblStockStatus.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.lblStockStatus.Location = New System.Drawing.Point(680, 205)
+        Me.lblStockStatus.Location = New System.Drawing.Point(680, 250)
         Me.lblStockStatus.Name = "lblStockStatus"
         Me.lblStockStatus.Size = New System.Drawing.Size(104, 26)
-        Me.lblStockStatus.TabIndex = 26
+        Me.lblStockStatus.TabIndex = 28
         Me.lblStockStatus.Text = "Stock Status"
         '
         'txtLocation
@@ -175,6 +179,26 @@ Partial Class EditSupply
         Me.lblLocation.Size = New System.Drawing.Size(129, 26)
         Me.lblLocation.TabIndex = 24
         Me.lblLocation.Text = "Location (Auto)"
+        '
+        'lblAssignedTo
+        '
+        Me.lblAssignedTo.AutoSize = True
+        Me.lblAssignedTo.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblAssignedTo.Location = New System.Drawing.Point(680, 205)
+        Me.lblAssignedTo.Name = "lblAssignedTo"
+        Me.lblAssignedTo.Size = New System.Drawing.Size(103, 26)
+        Me.lblAssignedTo.TabIndex = 26
+        Me.lblAssignedTo.Text = "Assigned To"
+        '
+        'cboAssignedTo
+        '
+        Me.cboAssignedTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboAssignedTo.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboAssignedTo.FormattingEnabled = True
+        Me.cboAssignedTo.Location = New System.Drawing.Point(830, 202)
+        Me.cboAssignedTo.Name = "cboAssignedTo"
+        Me.cboAssignedTo.Size = New System.Drawing.Size(380, 34)
+        Me.cboAssignedTo.TabIndex = 27
         '
         'cboDepartment
         '
@@ -216,13 +240,14 @@ Partial Class EditSupply
         Me.lblSourceOfFunds.TabIndex = 20
         Me.lblSourceOfFunds.Text = "Source of Funds"
         '
-        'txtSupplier
+        'cboSupplier
         '
-        Me.txtSupplier.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.txtSupplier.Location = New System.Drawing.Point(830, 27)
-        Me.txtSupplier.Name = "txtSupplier"
-        Me.txtSupplier.Size = New System.Drawing.Size(380, 30)
-        Me.txtSupplier.TabIndex = 19
+        Me.cboSupplier.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboSupplier.FormattingEnabled = True
+        Me.cboSupplier.Location = New System.Drawing.Point(830, 27)
+        Me.cboSupplier.Name = "cboSupplier"
+        Me.cboSupplier.Size = New System.Drawing.Size(380, 34)
+        Me.cboSupplier.TabIndex = 19
         '
         'lblSupplier
         '
@@ -312,13 +337,14 @@ Partial Class EditSupply
         Me.lblQuantity.TabIndex = 10
         Me.lblQuantity.Text = "Quantity"
         '
-        'txtUnitOfMeasure
+        'cboUnitOfMeasure
         '
-        Me.txtUnitOfMeasure.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.txtUnitOfMeasure.Location = New System.Drawing.Point(180, 227)
-        Me.txtUnitOfMeasure.Name = "txtUnitOfMeasure"
-        Me.txtUnitOfMeasure.Size = New System.Drawing.Size(450, 30)
-        Me.txtUnitOfMeasure.TabIndex = 9
+        Me.cboUnitOfMeasure.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboUnitOfMeasure.FormattingEnabled = True
+        Me.cboUnitOfMeasure.Location = New System.Drawing.Point(180, 227)
+        Me.cboUnitOfMeasure.Name = "cboUnitOfMeasure"
+        Me.cboUnitOfMeasure.Size = New System.Drawing.Size(450, 34)
+        Me.cboUnitOfMeasure.TabIndex = 9
         '
         'lblUnitOfMeasure
         '
@@ -436,7 +462,7 @@ Partial Class EditSupply
     Friend WithEvents lblDescription As System.Windows.Forms.Label
     Friend WithEvents txtDescription As System.Windows.Forms.TextBox
     Friend WithEvents lblUnitOfMeasure As System.Windows.Forms.Label
-    Friend WithEvents txtUnitOfMeasure As System.Windows.Forms.TextBox
+    Friend WithEvents cboUnitOfMeasure As System.Windows.Forms.ComboBox
     Friend WithEvents lblQuantity As System.Windows.Forms.Label
     Friend WithEvents numQuantity As System.Windows.Forms.NumericUpDown
     Friend WithEvents lblDateReceived As System.Windows.Forms.Label
@@ -446,13 +472,15 @@ Partial Class EditSupply
     Friend WithEvents lblTotalCost As System.Windows.Forms.Label
     Friend WithEvents txtTotalCost As System.Windows.Forms.TextBox
     Friend WithEvents lblSupplier As System.Windows.Forms.Label
-    Friend WithEvents txtSupplier As System.Windows.Forms.TextBox
+    Friend WithEvents cboSupplier As System.Windows.Forms.ComboBox
     Friend WithEvents lblSourceOfFunds As System.Windows.Forms.Label
     Friend WithEvents cboSourceOfFunds As System.Windows.Forms.ComboBox
     Friend WithEvents lblDepartment As System.Windows.Forms.Label
     Friend WithEvents cboDepartment As System.Windows.Forms.ComboBox
     Friend WithEvents lblLocation As System.Windows.Forms.Label
     Friend WithEvents txtLocation As System.Windows.Forms.TextBox
+    Friend WithEvents lblAssignedTo As System.Windows.Forms.Label
+    Friend WithEvents cboAssignedTo As System.Windows.Forms.ComboBox
     Friend WithEvents lblStockStatus As System.Windows.Forms.Label
     Friend WithEvents cboStockStatus As System.Windows.Forms.ComboBox
     Friend WithEvents btnSave As System.Windows.Forms.Button

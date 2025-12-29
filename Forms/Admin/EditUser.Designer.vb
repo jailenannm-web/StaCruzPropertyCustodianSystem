@@ -600,7 +600,7 @@ Partial Class EditUser
     Friend WithEvents um_edituser_save As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents um_edituser_backbtn As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_label_DepartmentManagement As Label
-    Friend WithEvents RoundedPanel1 As RoundedPanel
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents instructions As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents middleName As TextBox

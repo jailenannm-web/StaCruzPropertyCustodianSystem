@@ -8625,7 +8625,7 @@ Public Class DatabaseConnection
             If Not SafeOpenConnection(conn) Then Return Nothing
 
             Dim query As String = "SELECT supplyId, itemName, category, description, unitOfMeasure, quantity, " &
-                                  "supplier, unitCost, location, stockStatus, dateReceived, totalCost, sourceOfFunds " &
+                                  "dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus, assignedTo " &
                                   "FROM supplies WHERE supplyId = @supplyID LIMIT 1"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -9761,6 +9761,76 @@ Public Class DatabaseConnection
     ' =====================================================
 
     ''' <summary>
+    ''' Get all unique suppliers from the supplies table
+    ''' </summary>
+    Public Shared Function GetAllSuppliers() As List(Of String)
+        Dim suppliers As New List(Of String)()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return suppliers
+            If Not SafeOpenConnection(conn) Then Return suppliers
+
+            Dim query As String = "SELECT DISTINCT supplier FROM supplies WHERE supplier IS NOT NULL AND supplier != '' ORDER BY supplier"
+            Using cmd As New MySqlCommand(query, conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not reader.IsDBNull(0) Then
+                            suppliers.Add(reader.GetString(0))
+                        End If
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllSuppliers Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return suppliers
+    End Function
+
+    ''' <summary>
+    ''' Get all unique unit of measures from the supplies table
+    ''' </summary>
+    Public Shared Function GetAllUnitOfMeasures() As List(Of String)
+        Dim units As New List(Of String)()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return units
+            If Not SafeOpenConnection(conn) Then Return units
+
+            Dim query As String = "SELECT DISTINCT unitOfMeasure FROM supplies WHERE unitOfMeasure IS NOT NULL AND unitOfMeasure != '' ORDER BY unitOfMeasure"
+            Using cmd As New MySqlCommand(query, conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not reader.IsDBNull(0) Then
+                            units.Add(reader.GetString(0))
+                        End If
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetAllUnitOfMeasures Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return units
+    End Function
+
+    ''' <summary>
     ''' Add a new supply item to the database
     ''' </summary>
     Public Shared Function AddSupply(itemName As String,
@@ -9774,7 +9844,8 @@ Public Class DatabaseConnection
                                      supplier As String,
                                      sourceOfFunds As String,
                                      location As String,
-                                     stockStatus As String) As Boolean
+                                     stockStatus As String,
+                                     Optional assignedTo As Integer? = Nothing) As Boolean
         Dim conn As MySqlConnection = Nothing
         Try
             conn = GetConnection()
@@ -9788,12 +9859,49 @@ Public Class DatabaseConnection
                 Return False
             End If
 
-            Dim query As String = "INSERT INTO supplies (itemName, category, description, unitOfMeasure, quantity, " &
-                                 "dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus, " &
-                                 "createdAt, updatedAt) " &
-                                 "VALUES (@itemName, @category, @description, @unitOfMeasure, @quantity, " &
-                                 "@dateReceived, @unitCost, @totalCost, @supplier, @sourceOfFunds, @location, @stockStatus, " &
-                                 "NOW(), NOW())"
+            ' Check if assignedTo column exists before trying to insert
+            Dim hasAssignedTo As Boolean = False
+            Dim hasTimestamps As Boolean = False
+            
+            Try
+                Using checkCmd As New MySqlCommand("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'supplies' AND COLUMN_NAME = 'assignedTo'", conn)
+                    hasAssignedTo = (Convert.ToInt32(checkCmd.ExecuteScalar()) > 0)
+                End Using
+                Using checkCmd As New MySqlCommand("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'supplies' AND COLUMN_NAME = 'createdAt'", conn)
+                    hasTimestamps = (Convert.ToInt32(checkCmd.ExecuteScalar()) > 0)
+                End Using
+            Catch
+                ' If check fails, assume columns don't exist
+                hasAssignedTo = False
+                hasTimestamps = False
+            End Try
+            
+            Dim query As String
+            If hasAssignedTo AndAlso hasTimestamps Then
+                query = "INSERT INTO supplies (itemName, category, description, unitOfMeasure, quantity, " &
+                       "dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus, " &
+                       "assignedTo, createdAt, updatedAt) " &
+                       "VALUES (@itemName, @category, @description, @unitOfMeasure, @quantity, " &
+                       "@dateReceived, @unitCost, @totalCost, @supplier, @sourceOfFunds, @location, @stockStatus, " &
+                       "@assignedTo, NOW(), NOW())"
+            ElseIf hasAssignedTo Then
+                query = "INSERT INTO supplies (itemName, category, description, unitOfMeasure, quantity, " &
+                       "dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus, assignedTo) " &
+                       "VALUES (@itemName, @category, @description, @unitOfMeasure, @quantity, " &
+                       "@dateReceived, @unitCost, @totalCost, @supplier, @sourceOfFunds, @location, @stockStatus, @assignedTo)"
+            ElseIf hasTimestamps Then
+                query = "INSERT INTO supplies (itemName, category, description, unitOfMeasure, quantity, " &
+                       "dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus, " &
+                       "createdAt, updatedAt) " &
+                       "VALUES (@itemName, @category, @description, @unitOfMeasure, @quantity, " &
+                       "@dateReceived, @unitCost, @totalCost, @supplier, @sourceOfFunds, @location, @stockStatus, " &
+                       "NOW(), NOW())"
+            Else
+                query = "INSERT INTO supplies (itemName, category, description, unitOfMeasure, quantity, " &
+                       "dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus) " &
+                       "VALUES (@itemName, @category, @description, @unitOfMeasure, @quantity, " &
+                       "@dateReceived, @unitCost, @totalCost, @supplier, @sourceOfFunds, @location, @stockStatus)"
+            End If
 
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@itemName", itemName)
@@ -9808,6 +9916,7 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrWhiteSpace(sourceOfFunds), DBNull.Value, sourceOfFunds))
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@stockStatus", stockStatus)
+                cmd.Parameters.AddWithValue("@assignedTo", If(assignedTo.HasValue, CObj(assignedTo.Value), DBNull.Value))
 
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
                 Return rowsAffected > 0
@@ -9846,6 +9955,7 @@ Public Class DatabaseConnection
                                         totalCost As Decimal,
                                         supplier As String,
                                         sourceOfFunds As String,
+                                        assignedTo As Integer?,
                                         location As String,
                                         stockStatus As String) As Boolean
         Dim conn As MySqlConnection = Nothing
@@ -9861,6 +9971,23 @@ Public Class DatabaseConnection
                 Return False
             End If
 
+            ' Check if assignedTo and updatedAt columns exist before trying to update
+            Dim hasAssignedTo As Boolean = False
+            Dim hasUpdatedAt As Boolean = False
+            
+            Try
+                Using checkCmd As New MySqlCommand("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'supplies' AND COLUMN_NAME = 'assignedTo'", conn)
+                    hasAssignedTo = (Convert.ToInt32(checkCmd.ExecuteScalar()) > 0)
+                End Using
+                Using checkCmd As New MySqlCommand("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'supplies' AND COLUMN_NAME = 'updatedAt'", conn)
+                    hasUpdatedAt = (Convert.ToInt32(checkCmd.ExecuteScalar()) > 0)
+                End Using
+            Catch
+                ' If check fails, assume columns don't exist
+                hasAssignedTo = False
+                hasUpdatedAt = False
+            End Try
+            
             Dim query As String = "UPDATE supplies SET " &
                                  "itemName = @itemName, " &
                                  "category = @category, " &
@@ -9872,9 +9999,10 @@ Public Class DatabaseConnection
                                  "totalCost = @totalCost, " &
                                  "supplier = @supplier, " &
                                  "sourceOfFunds = @sourceOfFunds, " &
+                                 If(hasAssignedTo, "assignedTo = @assignedTo, ", "") &
                                  "location = @location, " &
-                                 "stockStatus = @stockStatus, " &
-                                 "updatedAt = NOW() " &
+                                 "stockStatus = @stockStatus" &
+                                 If(hasUpdatedAt, ", updatedAt = NOW() ", " ") &
                                  "WHERE supplyId = @supplyId"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -9889,6 +10017,9 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@totalCost", totalCost)
                 cmd.Parameters.AddWithValue("@supplier", If(String.IsNullOrWhiteSpace(supplier), DBNull.Value, supplier))
                 cmd.Parameters.AddWithValue("@sourceOfFunds", If(String.IsNullOrWhiteSpace(sourceOfFunds), DBNull.Value, sourceOfFunds))
+                If hasAssignedTo Then
+                    cmd.Parameters.AddWithValue("@assignedTo", If(assignedTo.HasValue, CObj(assignedTo.Value), DBNull.Value))
+                End If
                 cmd.Parameters.AddWithValue("@location", location)
                 cmd.Parameters.AddWithValue("@stockStatus", stockStatus)
 

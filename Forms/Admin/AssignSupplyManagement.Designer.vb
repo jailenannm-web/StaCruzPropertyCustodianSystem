@@ -501,8 +501,8 @@ Partial Class AssignSupplyManagement
     End Sub
 
     Friend WithEvents admin_label_AssignSupply As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
@@ -523,8 +523,8 @@ Partial Class AssignSupplyManagement
     Friend WithEvents quantityAvailable As System.Windows.Forms.NumericUpDown
     Friend WithEvents unitCost As System.Windows.Forms.NumericUpDown
     Friend Shadows WithEvents location As System.Windows.Forms.ComboBox
-    Friend WithEvents RoundedPanel3 As Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedPanel4 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel4 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label13 As System.Windows.Forms.Label
@@ -534,7 +534,7 @@ Partial Class AssignSupplyManagement
     Friend WithEvents employee As System.Windows.Forms.ComboBox
     Friend WithEvents quantityToAssign As System.Windows.Forms.NumericUpDown
     Friend WithEvents assignmentPurpose As System.Windows.Forms.TextBox
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
-    Friend WithEvents btnSave As Resources.Controls.RoundedButton
+    Friend WithEvents btnCancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnSave As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class
 

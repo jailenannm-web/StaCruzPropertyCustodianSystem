@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class AssignRequestManagement
     Inherits System.Windows.Forms.UserControl
 
@@ -659,15 +659,15 @@ Partial Class AssignRequestManagement
     Friend WithEvents um_edituser_fullname As System.Windows.Forms.Label
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents suppier As System.Windows.Forms.TextBox
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents warrantyExpiration As System.Windows.Forms.DateTimePicker
     Friend WithEvents datePurchased As System.Windows.Forms.DateTimePicker
     Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
-    Friend WithEvents btnSave As Resources.Controls.RoundedButton
+    Friend WithEvents btnCancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnSave As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Label18 As System.Windows.Forms.Label
@@ -676,7 +676,7 @@ Partial Class AssignRequestManagement
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents DateCreatedlbl As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel4 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel4 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents DateUpdatedlbl As System.Windows.Forms.Label
     Friend WithEvents UpdatedBylbl As System.Windows.Forms.Label
@@ -686,7 +686,7 @@ Partial Class AssignRequestManagement
     Friend WithEvents updatedBy As System.Windows.Forms.ComboBox
     Friend WithEvents department As System.Windows.Forms.ComboBox
     Friend WithEvents employee As System.Windows.Forms.ComboBox
-    Friend WithEvents RoundedPanel3 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents propertyId As System.Windows.Forms.ComboBox
     Friend WithEvents propertyName As System.Windows.Forms.ComboBox
     Friend WithEvents cost As System.Windows.Forms.NumericUpDown

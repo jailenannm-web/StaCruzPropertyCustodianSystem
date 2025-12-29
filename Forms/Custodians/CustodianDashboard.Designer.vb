@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class CustodianDashboard
     Inherits System.Windows.Forms.Form
 
@@ -1143,50 +1143,50 @@ Partial Class CustodianDashboard
     End Sub
 
     Friend WithEvents admin_PanelSidebar As System.Windows.Forms.Panel
-    Friend WithEvents admin_btn_Logout As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_reports As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_MaintenanceManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_PropertyRequestManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_SuppliesManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_PropertyManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_dashboard As Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_Logout As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_reports As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_MaintenanceManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_PropertyRequestManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_SuppliesManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_PropertyManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_dashboard As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_TitleProfile As System.Windows.Forms.Label
     Friend WithEvents admin_picProfile As System.Windows.Forms.PictureBox
     Friend WithEvents admin_PanelMain As System.Windows.Forms.Panel
     Friend WithEvents TableLayoutPanel4 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents RoundedPanel11 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel11 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_SystemAlerts As System.Windows.Forms.DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel13 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel13 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_RecentPropertyRequests As System.Windows.Forms.DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel7 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel7 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_PendingRequest As System.Windows.Forms.DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel6 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel6 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_TotalSupplies As System.Windows.Forms.DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel12 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel12 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_RequestTrends As System.Windows.Forms.DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel8 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel8 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_ScheduleMaintenance As System.Windows.Forms.DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel9 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel9 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_PropertyConditionStatus As System.Windows.Forms.DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel10 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel10 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_InventoryStatusOverview As System.Windows.Forms.DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel5 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel5 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_TotalProperty As System.Windows.Forms.DataVisualization.Charting.Chart
     Friend WithEvents TableLayoutPanel3 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel3 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents admin_panel_borrowed As System.Windows.Forms.Label
-    Friend WithEvents admin_panel_PendingRequests As Resources.Controls.RoundedPanel
+    Friend WithEvents admin_panel_PendingRequests As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents admin_label_Dashboard As System.Windows.Forms.Label
     Friend WithEvents comboFilter As System.Windows.Forms.ComboBox
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

@@ -26,14 +26,40 @@ Public Class PropertyInventory
     End Sub
 
     Private Sub InitializeFilters()
-        ' Initialize Category filter
+        ' Initialize Category filter - Load from database to ensure consistency
         cboCategory.Items.Clear()
         cboCategory.Items.Add("All Categories")
-        cboCategory.Items.AddRange(New String() {
-            "Furniture", "Equipment", "Office Supplies", "IT Equipment",
-            "Laboratory Apparatus", "Books and Publications",
-            "Building and Fixtures", "Vehicles", "Tools and Instruments", "Others"
-        })
+        
+        Try
+            ' Load categories from database
+            Dim categoriesTable As DataTable = DatabaseConnection.GetCategories("property")
+            If categoriesTable IsNot Nothing AndAlso categoriesTable.Rows.Count > 0 Then
+                For Each row As DataRow In categoriesTable.Rows
+                    Dim catName As String = ""
+                    If row.Table.Columns.Contains("categoryName") AndAlso Not row.IsNull("categoryName") Then
+                        catName = row("categoryName").ToString()
+                    ElseIf row.Table.Columns.Contains("category_name") AndAlso Not row.IsNull("category_name") Then
+                        catName = row("category_name").ToString()
+                    End If
+                    
+                    If Not String.IsNullOrEmpty(catName) AndAlso Not cboCategory.Items.Contains(catName) Then
+                        cboCategory.Items.Add(catName)
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[PropertyInventory] Error loading categories: " & ex.Message)
+        End Try
+        
+        ' Add fallback categories if none were loaded from database
+        If cboCategory.Items.Count = 1 Then
+            cboCategory.Items.AddRange(New String() {
+                "Office Equipment", "IT Equipment", "Furniture", "Vehicles",
+                "Laboratory Apparatus", "Books and Publications",
+                "Building and Fixtures", "Tools and Instruments", "Others"
+            })
+        End If
+        
         cboCategory.SelectedIndex = 0
 
         ' Initialize Condition filter
@@ -269,8 +295,10 @@ Public Class PropertyInventory
         
         Try
             Dim row As DataGridViewRow = dgvProperties.Rows(e.RowIndex)
+            Dim propertyId As String = If(row.Cells("colPropertyId").Value IsNot Nothing, row.Cells("colPropertyId").Value.ToString(), "")
             Dim itemName As String = If(row.Cells("colItemName").Value IsNot Nothing, row.Cells("colItemName").Value.ToString(), "")
             Dim description As String = If(row.Cells("colDescription").Value IsNot Nothing, row.Cells("colDescription").Value.ToString(), "")
+            Dim departmentName As String = If(row.Cells("colDepartment").Value IsNot Nothing, row.Cells("colDepartment").Value.ToString(), "")
             Dim assignedTo As String = If(row.Cells("colAssignedTo").Value IsNot Nothing, row.Cells("colAssignedTo").Value.ToString(), "")
             Dim status As String = If(row.Cells("colStatus").Value IsNot Nothing, row.Cells("colStatus").Value.ToString(), "")
             
@@ -288,7 +316,7 @@ Public Class PropertyInventory
                 Return
             End If
             
-            ' Navigate to request form with pre-filled data
+            ' Navigate to request form with pre-filled data (itemName, description, quantity)
             Dim parentDashboard = TryCast(Me.FindForm(), StaffDashboard)
             If parentDashboard IsNot Nothing Then
                 Dim requestForm As New AddPropertyRequest(itemName, description, 1)

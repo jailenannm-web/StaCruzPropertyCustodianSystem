@@ -204,14 +204,26 @@ Public Class UC_SupplyManagement
             Dim categoryFilter As String = ""
             Dim statusFilter As String = ""
 
-            ' Get filter values
+            ' Get filter values - exclude "All" and similar default options
             If pm_cbobx_categ IsNot Nothing AndAlso pm_cbobx_categ.SelectedIndex > 0 Then
-                categoryFilter = pm_cbobx_categ.SelectedItem.ToString()
+                Dim selectedCat As String = pm_cbobx_categ.SelectedItem.ToString()
+                If Not selectedCat.Equals("All", StringComparison.OrdinalIgnoreCase) AndAlso 
+                   Not selectedCat.Equals("All Categories", StringComparison.OrdinalIgnoreCase) AndAlso
+                   Not selectedCat.Equals("Categories", StringComparison.OrdinalIgnoreCase) Then
+                    categoryFilter = selectedCat
+                End If
             End If
+            
             If pm_cbobx_status IsNot Nothing AndAlso pm_cbobx_status.SelectedIndex > 0 Then
-                statusFilter = pm_cbobx_status.SelectedItem.ToString()
+                Dim selectedStatus As String = pm_cbobx_status.SelectedItem.ToString()
+                If Not selectedStatus.Equals("All Status", StringComparison.OrdinalIgnoreCase) AndAlso
+                   Not selectedStatus.Equals("All", StringComparison.OrdinalIgnoreCase) AndAlso
+                   Not selectedStatus.Equals("Status", StringComparison.OrdinalIgnoreCase) Then
+                    statusFilter = selectedStatus
+                End If
             End If
 
+            System.Diagnostics.Debug.WriteLine($"[v0] LoadSuppliesData - Category Filter: '{categoryFilter}', Status Filter: '{statusFilter}'")
             Dim dt As DataTable = DatabaseConnection.GetAllSupplies(categoryFilter, statusFilter)
             If dt Is Nothing Then
                 originalData = Nothing
@@ -256,11 +268,25 @@ Public Class UC_SupplyManagement
                         End If
                     End If
                     Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")
+                    ' Get assigned user name if exists
+                    Dim assignedToName As String = ""
+                    If row.Table.Columns.Contains("assignedTo") AndAlso Not IsDBNull(row("assignedTo")) Then
+                        Dim assignedToId As Integer = CInt(row("assignedTo"))
+                        ' Try to get user name from users table
+                        Dim userDt As DataTable = DatabaseConnection.GetAllUsers()
+                        If userDt IsNot Nothing Then
+                            Dim userRow As DataRow = userDt.AsEnumerable().FirstOrDefault(Function(u) Not IsDBNull(u("userId")) AndAlso CInt(u("userId")) = assignedToId)
+                            If userRow IsNot Nothing Then
+                                assignedToName = userRow("fullName").ToString()
+                            End If
+                        End If
+                    End If
+                    
                     Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
                     Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
 
-                    ' Add row matching Designer column order: supplyId, itemName, category, description, quantity, supplier, location, stockStatus, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt
-                    Dim rowIndex As Integer = pm_table.Rows.Add(supplyID, supplyName, categoryVal, descriptionVal, quantityVal, supplierVal, locationVal, status, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt)
+                    ' Add row matching Designer column order: supplyId, itemName, category, description, quantity, supplier, assignedTo, location, stockStatus, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt
+                    Dim rowIndex As Integer = pm_table.Rows.Add(supplyID, supplyName, categoryVal, descriptionVal, quantityVal, supplierVal, assignedToName, locationVal, status, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt)
                 Next
 
                 ' Update total count
@@ -346,11 +372,25 @@ Public Class UC_SupplyManagement
                         totalCost = Format(cost, "0.00")
                     End If
                 End If
+                ' Get assigned user name if exists
+                Dim assignedToName As String = ""
+                If row.Table.Columns.Contains("assignedTo") AndAlso Not IsDBNull(row("assignedTo")) Then
+                    Dim assignedToId As Integer = CInt(row("assignedTo"))
+                    ' Try to get user name from users table
+                    Dim userDt As DataTable = DatabaseConnection.GetAllUsers()
+                    If userDt IsNot Nothing Then
+                        Dim userRow As DataRow = userDt.AsEnumerable().FirstOrDefault(Function(u) Not IsDBNull(u("userId")) AndAlso CInt(u("userId")) = assignedToId)
+                        If userRow IsNot Nothing Then
+                            assignedToName = userRow("fullName").ToString()
+                        End If
+                    End If
+                End If
+                
                 Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")
                 Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
                 Dim updatedAt As String = If(row.Table.Columns.Contains("updatedAt") AndAlso Not IsDBNull(row("updatedAt")), Convert.ToDateTime(row("updatedAt")).ToString("yyyy-MM-dd"), "")
 
-                pm_table.Rows.Add(supplyID, supplyName, categoryVal, descriptionVal, quantityVal, supplierVal, locationVal, status, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt)
+                pm_table.Rows.Add(supplyID, supplyName, categoryVal, descriptionVal, quantityVal, supplierVal, assignedToName, locationVal, status, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt)
             Next
 
             If ttlSupplymanagement IsNot Nothing Then
@@ -498,8 +538,14 @@ Public Class UC_SupplyManagement
         Dim location As String = If(IsDBNull(supplyData("location")), "", supplyData("location").ToString())
         Dim stockStatus As String = If(IsDBNull(supplyData("stockStatus")), "Available", supplyData("stockStatus").ToString())
         
+        ' Get assignedTo if it exists in the data
+        Dim assignedToUserId As Integer? = Nothing
+        If supplyData.Table.Columns.Contains("assignedTo") AndAlso Not IsDBNull(supplyData("assignedTo")) Then
+            assignedToUserId = CInt(supplyData("assignedTo"))
+        End If
+        
         editForm.LoadSupplyData(supplyID, itemName, category, description, unitOfMeasure, quantity, 
-                               dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus)
+                               dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus, assignedToUserId)
 
         ' Navigate into Dashboard - Check SADashboard first
         Dim saDashboard = TryCast(Me.ParentForm, SADashboard)

@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class UC_MaintenanceRequestManagement
     Inherits System.Windows.Forms.UserControl
 
@@ -374,12 +374,12 @@ Partial Class UC_MaintenanceRequestManagement
     Friend WithEvents ttlpropertymanagement As System.Windows.Forms.Label
     Friend WithEvents propertyManagementGrid As System.Windows.Forms.DataGridView
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
-    Friend WithEvents printPAR As Resources.Controls.RoundedButton
-    Friend WithEvents btnApprove As Resources.Controls.RoundedButton
-    Friend WithEvents btnReject As Resources.Controls.RoundedButton
-    Friend WithEvents Delete As Resources.Controls.RoundedButton
-    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
-    Friend WithEvents prm_btn_update As Resources.Controls.RoundedButton
+    Friend WithEvents printPAR As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnApprove As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnReject As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents Delete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents prm_btn_update As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents requestId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dateRequested As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents itemName As System.Windows.Forms.DataGridViewTextBoxColumn

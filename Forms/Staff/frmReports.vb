@@ -2,8 +2,8 @@
 
 Public Class frmReports
     Private Sub btnRequestReport_Click(sender As Object, e As System.EventArgs) Handles Essuance.Click
-        Dim PropertyIssuance As New PropertyIssuance()
-        PropertyIssuance.Show()
+        Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt()
+        propertyAcknowledgement.Show()
     End Sub
 
 

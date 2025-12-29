@@ -23,17 +23,25 @@ Public Class UC_SupplyRequestManagement
         LoadSupplyRequestData()
         ApplyPermissionState()
 
-        ' Wire up search textbox if present
-        Dim searchNames As String() = {"prm_search", "supplyRequestSearch", "txtSearch", "txtbox_search", "admin_txtbox_search"}
-        For Each nm As String In searchNames
-            Dim found() As Control = Me.Controls.Find(nm, True)
-            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
-                Dim tb As TextBox = CType(found(0), TextBox)
-                RemoveHandler tb.TextChanged, AddressOf SupplyRequestSearch_TextChanged
-                AddHandler tb.TextChanged, AddressOf SupplyRequestSearch_TextChanged
-                Exit For
-            End If
-        Next
+        ' Wire up search textbox - directly access supplyrequestmanagementsearchbar
+        If supplyrequestmanagementsearchbar IsNot Nothing Then
+            RemoveHandler supplyrequestmanagementsearchbar.TextChanged, AddressOf SupplyRequestSearch_TextChanged
+            AddHandler supplyrequestmanagementsearchbar.TextChanged, AddressOf SupplyRequestSearch_TextChanged
+            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyRequestManagement - Search bar wired directly to supplyrequestmanagementsearchbar")
+        Else
+            ' Fallback: try to find it by name
+            Dim searchNames As String() = {"supplyrequestmanagementsearchbar", "prm_search", "supplyRequestSearch", "txtSearch", "txtbox_search", "admin_txtbox_search"}
+            For Each nm As String In searchNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                    Dim tb As TextBox = CType(found(0), TextBox)
+                    RemoveHandler tb.TextChanged, AddressOf SupplyRequestSearch_TextChanged
+                    AddHandler tb.TextChanged, AddressOf SupplyRequestSearch_TextChanged
+                    System.Diagnostics.Debug.WriteLine($"[v0] UC_SupplyRequestManagement - Search bar wired via Controls.Find: {nm}")
+                    Exit For
+                End If
+            Next
+        End If
     End Sub
 
     Private Sub LoadSupplyRequestData()

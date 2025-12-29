@@ -457,12 +457,6 @@
     <Compile Include="Forms\SuperAdmin\Reports\InspectionandAcceptanceReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.Designer.vb">
-      <DependentUpon>PropertyIssuance.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuperAdmin\Reports\PropertyIssuance.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\SuperAdmin\Reports\PurchaseRequest.Designer.vb">
       <DependentUpon>PurchaseRequest.vb</DependentUpon>
     </Compile>
@@ -823,9 +817,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyInventoryReportSummary.resx">
       <DependentUpon>PropertyInventoryReportSummary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyIssuance.resx">
-      <DependentUpon>PropertyIssuance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SuperAdmin\Reports\PropertyAcknowledgementReceipt.resx">
       <DependentUpon>PropertyAcknowledgementReceipt.vb</DependentUpon>

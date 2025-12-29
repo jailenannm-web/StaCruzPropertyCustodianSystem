@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class PropertyTransaction
     Inherits System.Windows.Forms.Form
 
@@ -332,17 +332,17 @@ Partial Class PropertyTransaction
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents pnlTransaction As System.Windows.Forms.Panel
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton3 As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents propertyID As System.Windows.Forms.TextBox
     Friend WithEvents propertyName As System.Windows.Forms.TextBox
     Friend WithEvents propertyDescription As System.Windows.Forms.TextBox
     Friend WithEvents propertyQuantity As System.Windows.Forms.TextBox
     Friend WithEvents serialNumber As System.Windows.Forms.TextBox
     Friend WithEvents propertyCategory As System.Windows.Forms.ComboBox
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedButton4 As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton5 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedButton4 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton5 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

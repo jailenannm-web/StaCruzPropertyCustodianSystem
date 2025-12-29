@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class MaintenanceRequestForm
     Inherits System.Windows.Forms.UserControl
 
@@ -425,11 +425,11 @@ Partial Class MaintenanceRequestForm
 
     End Sub
 
-    Friend WithEvents btnSave As Resources.Controls.RoundedButton
+    Friend WithEvents btnSave As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents instructions As System.Windows.Forms.Label
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents btnCancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents department As System.Windows.Forms.ComboBox
     Friend Shadows WithEvents location As System.Windows.Forms.ComboBox
@@ -442,7 +442,7 @@ Partial Class MaintenanceRequestForm
     Friend WithEvents propertylbs As System.Windows.Forms.Label
     Friend WithEvents SAAddM_ServiceProvided As System.Windows.Forms.Label
     Friend WithEvents SAAddM_Providercontact As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents typesOfIssue As System.Windows.Forms.ComboBox

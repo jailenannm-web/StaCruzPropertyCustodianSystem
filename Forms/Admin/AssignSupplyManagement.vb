@@ -639,66 +639,46 @@ Public Class AssignSupplyManagement
             Dim adminName As String = SessionContext.CurrentUsername
             Dim adminUserType As String = SessionContext.CurrentRole
 
-            ' Direct assignment: request workflow is optional. If a request exists, we will release it; otherwise create one.
+            ' Get department ID
+            Dim deptId As Integer? = Nothing
+            If department IsNot Nothing AndAlso department.SelectedValue IsNot Nothing Then
+                Dim d As Integer = 0
+                If Integer.TryParse(department.SelectedValue.ToString(), d) Then deptId = d
+            End If
 
-            ' Update supply quantity (deduct from inventory)
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                ' Check if enough quantity is available
-                Dim availableQty As Integer = 0
-                Using checkCmd As New MySqlCommand("SELECT quantity FROM supplies WHERE supplyId = @supplyID", conn)
-                    checkCmd.Parameters.AddWithValue("@supplyID", selectedSupplyID)
-                    Dim result = checkCmd.ExecuteScalar()
-                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
-                        Integer.TryParse(result.ToString(), availableQty)
-                    End If
-                End Using
+            ' Get assignment purpose
+            Dim purposeText As String = If(assignmentPurpose IsNot Nothing, assignmentPurpose.Text, "Supply assigned by admin")
 
-                If availableQty < qtyToAssign Then
-                    MessageBox.Show($"Insufficient supply quantity. Available: {availableQty}, Requested: {qtyToAssign}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    If conn.State = ConnectionState.Open Then conn.Close()
-                    Return
+            ' Use AssignSupplyToUser function which handles:
+            ' 1. Quantity validation
+            ' 2. Deducting from inventory
+            ' 3. Setting assignedTo
+            ' 4. Creating borrowed_items record automatically
+            Dim success As Boolean = DatabaseConnection.AssignSupplyToUser(selectedSupplyID, selectedEmployeeID, qtyToAssign, deptId, purposeText)
+
+            If success Then
+                ' If this assignment is related to a supply request, update the request status
+                If currentRequestID > 0 Then
+                    Try
+                        Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+                        If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                            Using updateCmd As New MySqlCommand("UPDATE supplies_requests SET status = 'Released', releasedBy = @adminName, releasedDate = NOW(), updatedAt = NOW() WHERE requestId = @requestID", conn)
+                                updateCmd.Parameters.AddWithValue("@adminName", adminName)
+                                updateCmd.Parameters.AddWithValue("@requestID", currentRequestID)
+                                updateCmd.ExecuteNonQuery()
+                            End Using
+                            If conn.State = ConnectionState.Open Then conn.Close()
+                        End If
+                    Catch ex As Exception
+                        System.Diagnostics.Debug.WriteLine("[v0] Error updating supply request status: " & ex.Message)
+                        ' Don't fail the assignment if request update fails
+                    End Try
                 End If
 
-                ' Deduct from inventory
-                Using cmd As New MySqlCommand("UPDATE supplies SET quantity = quantity - @qty, updatedAt = NOW() WHERE supplyId = @supplyID", conn)
-                    cmd.Parameters.AddWithValue("@qty", qtyToAssign)
-                    cmd.Parameters.AddWithValue("@supplyID", selectedSupplyID)
-                    If cmd.ExecuteNonQuery() > 0 Then
-                        Dim deptId As Integer? = Nothing
-                        If department IsNot Nothing AndAlso department.SelectedValue IsNot Nothing Then
-                            Dim d As Integer = 0
-                            If Integer.TryParse(department.SelectedValue.ToString(), d) Then deptId = d
-                        End If
-
-                        Dim purposeText As String = If(assignmentPurpose IsNot Nothing, assignmentPurpose.Text, "")
-
-                        If currentRequestID > 0 Then
-                            ' Update existing request to Released and (optionally) set the target userId for staff borrowed view
-                            Try
-                                Using updateCmd As New MySqlCommand("UPDATE supplies_requests SET status = 'Released', userId = @userId, releasedBy = @adminName, releasedDate = NOW(), updatedAt = NOW() WHERE requestId = @requestID", conn)
-                                    updateCmd.Parameters.AddWithValue("@adminName", adminName)
-                                    updateCmd.Parameters.AddWithValue("@requestID", currentRequestID)
-                                    updateCmd.Parameters.AddWithValue("@userId", selectedEmployeeID)
-                                    updateCmd.ExecuteNonQuery()
-                                End Using
-                            Catch
-                                ' ignore if schema differs; direct insert below still ensures borrowed view
-                            End Try
-                        End If
-
-                        ' Ensure a Released record exists for the selected employee so it appears in My Borrowed Items.
-                        Dim newReqId As Integer = DatabaseConnection.CreateDirectSupplyRelease(selectedEmployeeID, selectedSupplyID, deptId,
-                                                                                               If(supplyName IsNot Nothing, supplyName.Text, ""),
-                                                                                               qtyToAssign, purposeText, adminName, Date.Today)
-
-                        MessageBox.Show("Supply assigned successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        NavigateBack()
-                    Else
-                        MessageBox.Show("Failed to update supply quantity.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                End Using
-                If conn.State = ConnectionState.Open Then conn.Close()
+                MessageBox.Show($"Supply assigned successfully to employee!{Environment.NewLine}{Environment.NewLine}The supply will now appear in their 'My Borrowed Items' page.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                NavigateBack()
+            Else
+                MessageBox.Show("Failed to assign supply. Please check if sufficient quantity is available.", "Assignment Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Catch ex As Exception
             MessageBox.Show("Error assigning supply: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

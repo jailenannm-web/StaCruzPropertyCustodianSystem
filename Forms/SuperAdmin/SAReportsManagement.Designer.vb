@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -964,6 +964,6 @@ Partial Class SAReportsManagement
     Friend WithEvents btnPreviewAR As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton3 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

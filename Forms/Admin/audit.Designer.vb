@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class audit
     Inherits System.Windows.Forms.UserControl
 
@@ -200,9 +200,9 @@ Partial Class audit
     End Sub
     Friend WithEvents dtFrom As System.Windows.Forms.DateTimePicker
     Friend WithEvents dtTo As System.Windows.Forms.DateTimePicker
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
+    Friend WithEvents btnCancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents cmbLogType As System.Windows.Forms.ComboBox
-    Friend WithEvents btnSave As Resources.Controls.RoundedButton
+    Friend WithEvents btnSave As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents logId As System.Windows.Forms.DataGridViewTextBoxColumn

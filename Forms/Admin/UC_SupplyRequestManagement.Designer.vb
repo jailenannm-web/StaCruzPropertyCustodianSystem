@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class UC_SupplyRequestManagement
     Inherits System.Windows.Forms.UserControl
 
@@ -25,6 +25,7 @@ Partial Class UC_SupplyRequestManagement
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.issueRequisition = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAssignSupply = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnUpdate = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
         Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -101,6 +102,22 @@ Partial Class UC_SupplyRequestManagement
         Me.btnAssignSupply.Text = "Assign"
         Me.btnAssignSupply.UseVisualStyleBackColor = False
         Me.btnAssignSupply.Visible = False
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnUpdate.CornerRadius = 15
+        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdate.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdate.Location = New System.Drawing.Point(1026, 61)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(99, 34)
+        Me.btnUpdate.TabIndex = 181
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = False
         '
         'Label1
         '
@@ -326,6 +343,7 @@ Partial Class UC_SupplyRequestManagement
         Me.Controls.Add(Me.issueRequisition)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlpropertyrequestmanagement)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAssignSupply)
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnReject)
@@ -340,13 +358,14 @@ Partial Class UC_SupplyRequestManagement
 
     End Sub
 
-    Friend WithEvents printPAR As Resources.Controls.RoundedButton
-    Friend WithEvents issueRequisition As Resources.Controls.RoundedButton
+    Friend WithEvents printPAR As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents issueRequisition As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ttlpropertyrequestmanagement As System.Windows.Forms.Label
-    Friend WithEvents btnApprove As Resources.Controls.RoundedButton
-    Friend WithEvents btnReject As Resources.Controls.RoundedButton
-    Friend WithEvents btnAssignSupply As Resources.Controls.RoundedButton
+    Friend WithEvents btnApprove As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnReject As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnAssignSupply As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnUpdate As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents prm_table1 As System.Windows.Forms.DataGridView
     Friend WithEvents admin_label_SupplyRequestManagement As System.Windows.Forms.Label
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox

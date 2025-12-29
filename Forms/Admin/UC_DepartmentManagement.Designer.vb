@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -330,8 +330,8 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents Label1 As Label
     Friend WithEvents pm_cbobx_status As ComboBox
     Friend WithEvents pm_cbobx_categ As ComboBox
-    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
-    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents departmentmanagementsearchbar As TextBox
     Friend WithEvents departmentId As DataGridViewTextBoxColumn
@@ -348,5 +348,5 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents totalProperties As DataGridViewTextBoxColumn
     Friend WithEvents totalSupplies As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
-    Friend WithEvents btnedit As Resources.Controls.RoundedButton
+    Friend WithEvents btnedit As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

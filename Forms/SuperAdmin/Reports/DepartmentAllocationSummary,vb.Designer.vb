@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class DepartmentAllocationSummary_vb
     Inherits System.Windows.Forms.Form
 
@@ -639,7 +639,7 @@ Partial Class DepartmentAllocationSummary_vb
     Friend WithEvents headOfDepartment As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents email As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents contactNumber As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Shadows location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents building As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents floorNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents shortName As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -662,7 +662,7 @@ Partial Class DepartmentAllocationSummary_vb
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents btn_Back As Resources.Controls.RoundedButton
-    Friend WithEvents btnPDF As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents btn_Back As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class UC_PropertyManagement1
     Inherits System.Windows.Forms.UserControl
 
@@ -403,9 +403,9 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
     Friend WithEvents filter As System.Windows.Forms.ComboBox
     Friend WithEvents propertyManagementGrid As System.Windows.Forms.DataGridView
-    Friend WithEvents btnEdit As Resources.Controls.RoundedButton
-    Friend WithEvents btnAdd As Resources.Controls.RoundedButton
-    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents btnEdit As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ttlpropertymanagement As System.Windows.Forms.Label
     Friend WithEvents cmsActions As System.Windows.Forms.ContextMenuStrip
@@ -414,7 +414,7 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents mnuLostDamaged As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuViewDetails As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuPrintPARICS As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents generatePropertyCard As Resources.Controls.RoundedButton
+    Friend WithEvents generatePropertyCard As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents propertymanagementsearchbar As System.Windows.Forms.TextBox
     Friend WithEvents propertyId As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -433,5 +433,5 @@ Partial Class UC_PropertyManagement1
     Friend Shadows WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents condition As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents issuePropertySlip As Resources.Controls.RoundedButton
+    Friend WithEvents issuePropertySlip As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

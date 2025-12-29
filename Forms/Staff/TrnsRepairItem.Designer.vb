@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class TrnsRepairItem
     Inherits System.Windows.Forms.Form
 
@@ -142,7 +142,7 @@ Partial Class TrnsRepairItem
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedButton2 As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton3 As Resources.Controls.RoundedButton
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

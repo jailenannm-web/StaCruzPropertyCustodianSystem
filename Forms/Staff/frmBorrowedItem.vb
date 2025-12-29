@@ -67,6 +67,56 @@ Public Class frmBorrowedItem
         
         cboFilterType.Items.AddRange(New String() {"All", "Property", "Supply"})
         cboFilterType.SelectedIndex = 0
+        
+        ' Add selection changed handler to enable/disable buttons based on item type
+        AddHandler dgvBorrowedItems.SelectionChanged, AddressOf dgvBorrowedItems_SelectionChanged
+    End Sub
+    
+    ''' <summary>
+    ''' Handle row selection to enable/disable buttons based on item type
+    ''' Properties: All buttons enabled
+    ''' Supplies: Only Return Item enabled, others disabled
+    ''' </summary>
+    Private Sub dgvBorrowedItems_SelectionChanged(sender As Object, e As EventArgs)
+        Try
+            If dgvBorrowedItems.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = dgvBorrowedItems.SelectedRows(0)
+                Dim itemType As String = If(selectedRow.Cells("colItemType").Value?.ToString(), "").ToLower()
+                
+                ' Enable/disable buttons based on item type
+                Dim isProperty As Boolean = (itemType = "property")
+                
+                ' Request Maintenance - Only for properties
+                If btnRequestMaintenance IsNot Nothing Then
+                    btnRequestMaintenance.Enabled = isProperty
+                End If
+                
+                ' Borrow and Return Slip - Only for properties
+                If btnBorrowReturn IsNot Nothing Then
+                    btnBorrowReturn.Enabled = isProperty
+                End If
+                
+                ' Property Acknowledgement Receipt (Essuance) - Only for properties
+                If Essuance IsNot Nothing Then
+                    Essuance.Enabled = isProperty
+                End If
+                
+                ' Return Item - Always enabled for both types
+                If btnReturnItem IsNot Nothing Then
+                    btnReturnItem.Enabled = True
+                End If
+                
+                System.Diagnostics.Debug.WriteLine($"[v0] Selection changed - Type: {itemType}, IsProperty: {isProperty}")
+            Else
+                ' No selection - disable all buttons
+                If btnRequestMaintenance IsNot Nothing Then btnRequestMaintenance.Enabled = False
+                If btnBorrowReturn IsNot Nothing Then btnBorrowReturn.Enabled = False
+                If Essuance IsNot Nothing Then Essuance.Enabled = False
+                If btnReturnItem IsNot Nothing Then btnReturnItem.Enabled = False
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] SelectionChanged Error: " & ex.Message)
+        End Try
     End Sub
 
     ''' <summary>
@@ -104,6 +154,7 @@ Public Class frmBorrowedItem
 
     ''' <summary>
     ''' Get borrowed items from borrowed_items table joined with properties/supplies
+    ''' Returns proper columns based on item type
     ''' </summary>
     Private Function GetBorrowedItemsFromDatabase() As DataTable
         Dim dt As New DataTable()
@@ -116,14 +167,26 @@ Public Class frmBorrowedItem
 
             ' Get borrowed items from borrowed_items table with property/supply details
             ' FILTER OUT RETURNED ITEMS - only show currently borrowed items
+            ' Include all relevant columns for both properties and supplies
             Dim query As String = "SELECT " &
                                  "bi.borrowId, bi.requestId, bi.itemType, bi.itemId, " &
-                                 "bi.borrowDate, bi.expectedReturnDate, bi.status AS borrowStatus, bi.remarks, " &
+                                 "bi.borrowDate, bi.returnReason, bi.status AS borrowStatus, bi.remarks, " &
+                                 "bi.borrowerName, bi.departmentId, " &
                                  "CASE " &
                                  "  WHEN bi.itemType = 'property' THEN p.itemName " &
                                  "  WHEN bi.itemType = 'supply' THEN s.itemName " &
                                  "  ELSE 'Unknown' " &
                                  "END AS itemName, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'property' THEN p.category " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.category " &
+                                 "  ELSE NULL " &
+                                 "END AS category, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'property' THEN p.description " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.description " &
+                                 "  ELSE NULL " &
+                                 "END AS description, " &
                                  "CASE " &
                                  "  WHEN bi.itemType = 'property' THEN p.propertyNumber " &
                                  "  ELSE NULL " &
@@ -133,9 +196,51 @@ Public Class frmBorrowedItem
                                  "  ELSE NULL " &
                                  "END AS serialNumber, " &
                                  "CASE " &
+                                 "  WHEN bi.itemType = 'property' THEN p.acquisitionDate " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.dateReceived " &
+                                 "  ELSE NULL " &
+                                 "END AS acquisitionDate, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'property' THEN p.acquisitionCost " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.unitCost " &
+                                 "  ELSE NULL " &
+                                 "END AS unitCost, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'property' THEN p.totalCost " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.totalCost " &
+                                 "  ELSE NULL " &
+                                 "END AS totalCost, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'property' THEN p.sourceOfFunds " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.sourceOfFunds " &
+                                 "  ELSE NULL " &
+                                 "END AS sourceOfFunds, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'property' THEN p.location " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.location " &
+                                 "  ELSE NULL " &
+                                 "END AS location, " &
+                                 "CASE " &
                                  "  WHEN bi.itemType = 'property' THEN p.condition " &
                                  "  ELSE 'N/A' " &
                                  "END AS `condition`, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'property' THEN p.status " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.stockStatus " &
+                                 "  ELSE NULL " &
+                                 "END AS itemStatus, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.unitOfMeasure " &
+                                 "  ELSE NULL " &
+                                 "END AS unitOfMeasure, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.quantity " &
+                                 "  ELSE 1 " &
+                                 "END AS quantity, " &
+                                 "CASE " &
+                                 "  WHEN bi.itemType = 'supply' THEN s.supplier " &
+                                 "  ELSE NULL " &
+                                 "END AS supplier, " &
                                  "CASE " &
                                  "  WHEN bi.itemType = 'property' THEN p.description " &
                                  "  WHEN bi.itemType = 'supply' THEN s.description " &
@@ -182,18 +287,16 @@ Public Class frmBorrowedItem
 
     ''' <summary>
     ''' Add borrowed item row to grid (from borrowed_items table)
+    ''' Displays different columns based on item type (property vs supply)
     ''' </summary>
     Private Sub AddBorrowedItemRowToGrid(row As DataRow)
         Try
             Dim borrowId As String = If(row.IsNull("borrowId"), "", row("borrowId").ToString())
-            Dim itemType As String = If(row.IsNull("itemType"), "property", row("itemType").ToString())
+            Dim itemType As String = If(row.IsNull("itemType"), "property", row("itemType").ToString()).ToLower()
             Dim itemName As String = If(row.IsNull("itemName"), "", row("itemName").ToString())
-            Dim propertyNumber As String = If(row.IsNull("propertyNumber"), "N/A", If(String.IsNullOrEmpty(row("propertyNumber").ToString()), "N/A", row("propertyNumber").ToString()))
-            Dim serialNumber As String = If(row.IsNull("serialNumber"), "N/A", If(String.IsNullOrEmpty(row("serialNumber").ToString()), "N/A", row("serialNumber").ToString()))
-            Dim quantity As String = If(row.IsNull("quantity"), "1", row("quantity").ToString())
-            Dim condition As String = If(row.IsNull("condition"), "N/A", row("condition").ToString())
+            
+            ' Common fields for both types
             Dim borrowDate As String = ""
-
             If Not row.IsNull("borrowDate") Then
                 Try
                     borrowDate = Convert.ToDateTime(row("borrowDate")).ToString("MMM dd, yyyy")
@@ -201,27 +304,61 @@ Public Class frmBorrowedItem
                     borrowDate = row("borrowDate").ToString()
                 End Try
             End If
-
+            
             Dim borrowStatus As String = If(row.IsNull("borrowStatus"), "", row("borrowStatus").ToString())
             Dim remarks As String = If(row.IsNull("remarks"), "", row("remarks").ToString())
             Dim itemId As String = If(row.IsNull("itemId"), "", row("itemId").ToString())
+            
+            ' Property-specific fields
+            Dim propertyNumber As String = "N/A"
+            Dim serialNumber As String = "N/A"
+            Dim condition As String = "N/A"
+            Dim quantity As String = "1 Unit"
+            
+            ' Supply-specific fields
+            Dim unitOfMeasure As String = ""
+            Dim supplier As String = ""
+            
+            If itemType = "property" Then
+                ' Property fields
+                propertyNumber = If(row.IsNull("propertyNumber"), "N/A", If(String.IsNullOrEmpty(row("propertyNumber").ToString()), "N/A", row("propertyNumber").ToString()))
+                serialNumber = If(row.IsNull("serialNumber"), "N/A", If(String.IsNullOrEmpty(row("serialNumber").ToString()), "N/A", row("serialNumber").ToString()))
+                condition = If(row.IsNull("condition"), "Good", row("condition").ToString())
+                quantity = "1 Unit"
+            ElseIf itemType = "supply" Then
+                ' Supply fields
+                Dim qtyValue As Integer = If(row.IsNull("quantity"), 1, Convert.ToInt32(row("quantity")))
+                unitOfMeasure = If(row.IsNull("unitOfMeasure"), "Unit", row("unitOfMeasure").ToString())
+                quantity = qtyValue.ToString() & " " & unitOfMeasure
+                supplier = If(row.IsNull("supplier"), "N/A", If(String.IsNullOrEmpty(row("supplier").ToString()), "N/A", row("supplier").ToString()))
+                propertyNumber = "N/A"  ' Supplies don't have property numbers
+                serialNumber = "N/A"    ' Supplies don't have serial numbers
+                condition = "N/A"       ' Supplies don't have condition (use stockStatus instead)
+            End If
 
-            ' Allow maintenance requests for ALL borrowed items (to report condition)
-            Dim canRequestMaintenance As Boolean = (itemType.ToLower() = "property") AndAlso Not String.IsNullOrEmpty(itemId)
+            ' Allow maintenance requests only for properties
+            Dim canRequestMaintenance As Boolean = (itemType = "property") AndAlso Not String.IsNullOrEmpty(itemId)
 
+            ' Format display type
+            Dim displayType As String = If(itemType = "property", "Property", "Supply")
+            
+            ' Get category from database row
+            Dim category As String = If(row.IsNull("category"), "", row("category").ToString())
+            
+            ' Format purpose (use borrowStatus as purpose display)
+            Dim purpose As String = borrowStatus
+            
+            ' Add row with new column structure: BorrowId (hidden), Type, ItemName, Category, Quantity, Condition, Purpose, Remarks, ItemId (hidden)
             dgvBorrowedItems.Rows.Add(
-                borrowId,
-                itemType,
-                itemName,
-                propertyNumber,
-                serialNumber,
-                quantity,
-                condition,
-                borrowDate,
-                borrowStatus,
-                remarks,
-                canRequestMaintenance,
-                itemId
+                borrowId,          ' colBorrowId (hidden)
+                displayType,       ' colItemType (Type)
+                itemName,          ' colItemName (Item Name)
+                category,          ' colCategory (Category)
+                quantity,          ' colQuantity (Quantity)
+                condition,         ' colCondition (Condition)
+                purpose,           ' colPurpose (Purpose)
+                remarks,           ' colRemarks (Remarks)
+                itemId            ' colItemId (hidden)
             )
 
             ' Color code by condition
@@ -312,18 +449,19 @@ Public Class frmBorrowedItem
                 If row.IsNewRow Then Continue For
 
                 Dim itemName As String = If(row.Cells("colItemName").Value?.ToString(), "").ToLower()
-                Dim propertyNumber As String = If(row.Cells("colPropertyNumber").Value?.ToString(), "").ToLower()
-                Dim serialNumber As String = If(row.Cells("colSerialNumber").Value?.ToString(), "").ToLower()
+                Dim category As String = If(row.Cells("colCategory").Value?.ToString(), "").ToLower()
+                Dim remarks As String = If(row.Cells("colRemarks").Value?.ToString(), "").ToLower()
                 Dim itemType As String = If(row.Cells("colItemType").Value?.ToString(), "")
                 Dim condition As String = If(row.Cells("colCondition").Value?.ToString(), "")
 
                 Dim matchesSearch As Boolean = String.IsNullOrEmpty(searchText) OrElse
                                               itemName.Contains(searchText) OrElse
-                                              propertyNumber.Contains(searchText) OrElse
-                                              serialNumber.Contains(searchText)
+                                              category.Contains(searchText) OrElse
+                                              remarks.Contains(searchText)
 
                 Dim matchesStatus As Boolean = filterStatus = "All" OrElse
                                               (filterStatus = "Approved") OrElse
+                                              (filterStatus = "Needs Repair" AndAlso (condition = "Needs Repair" Or condition = "Damaged")) OrElse
                                               (filterStatus = condition)
 
                 Dim matchesType As Boolean = filterType = "All" OrElse
@@ -365,14 +503,34 @@ Public Class frmBorrowedItem
 
         ' Get item details
         Dim itemName As String = If(selectedRow.Cells("colItemName").Value?.ToString(), "")
-        Dim propertyNumber As String = If(selectedRow.Cells("colPropertyNumber").Value?.ToString(), "N/A")
-        Dim serialNumber As String = If(selectedRow.Cells("colSerialNumber").Value?.ToString(), "N/A")
-        Dim itemId As String = If(selectedRow.Cells("colPropertyId").Value?.ToString(), "")
+        Dim itemId As String = If(selectedRow.Cells("colItemId").Value?.ToString(), "")
 
         If String.IsNullOrEmpty(itemId) Then
             MessageBox.Show("Cannot request maintenance: Item ID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
+
+        ' Get property details from database (propertyNumber and serialNumber not in grid anymore)
+        Dim propertyNumber As String = "N/A"
+        Dim serialNumber As String = "N/A"
+        
+        Try
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                Using cmd As New MySqlCommand("SELECT propertyNumber, serialNumber FROM properties WHERE propertyId = @propertyId", conn)
+                    cmd.Parameters.AddWithValue("@propertyId", itemId)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            propertyNumber = If(reader.IsDBNull(reader.GetOrdinal("propertyNumber")), "N/A", reader("propertyNumber").ToString())
+                            serialNumber = If(reader.IsDBNull(reader.GetOrdinal("serialNumber")), "N/A", reader("serialNumber").ToString())
+                        End If
+                    End Using
+                End Using
+                If conn.State = ConnectionState.Open Then conn.Close()
+            End If
+        Catch dbEx As Exception
+            System.Diagnostics.Debug.WriteLine("Error retrieving property details: " & dbEx.Message)
+        End Try
 
         ' Open maintenance request form (UserControl)
         Try
@@ -432,8 +590,9 @@ Public Class frmBorrowedItem
         End If
 
         Dim selectedRow As DataGridViewRow = dgvBorrowedItems.SelectedRows(0)
-        Dim borrowId As String = If(selectedRow.Cells("colRequestId").Value?.ToString(), "")
+        Dim borrowId As String = If(selectedRow.Cells("colBorrowId").Value?.ToString(), "")
         Dim itemName As String = If(selectedRow.Cells("colItemName").Value?.ToString(), "")
+        Dim itemType As String = If(selectedRow.Cells("colItemType").Value?.ToString(), "").ToLower()
         Dim currentStatus As String = If(selectedRow.Cells("colPurpose").Value?.ToString(), "")
 
         ' Check if already returned
@@ -442,19 +601,23 @@ Public Class frmBorrowedItem
             Return
         End If
 
-        ' Show return dialog
+        ' Show return dialog - different for properties vs supplies
+        Dim itemTypeLabel As String = If(itemType = "property", "property", "supply")
         Dim result As DialogResult = MessageBox.Show(
-            $"Return Item: {itemName}{Environment.NewLine}{Environment.NewLine}" &
-            $"Are you sure you want to mark this item as returned?",
+            $"Return {itemTypeLabel}: {itemName}{Environment.NewLine}{Environment.NewLine}" &
+            $"Are you sure you want to mark this {itemTypeLabel} as returned?",
             "Confirm Return",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Question)
 
         If result = DialogResult.Yes Then
-            ' Show condition selection dialog
+            ' For properties: Show condition selection dialog
+            ' For supplies: Show return reason dialog
+            If itemType = "property" Then
+                ' Show condition selection dialog for properties
             Dim conditionDialog As New Form()
             conditionDialog.Text = "Item Condition on Return"
-            conditionDialog.Size = New Size(500, 250)
+            conditionDialog.Size = New Size(500, 350)
             conditionDialog.StartPosition = FormStartPosition.CenterParent
             conditionDialog.FormBorderStyle = FormBorderStyle.FixedDialog
             conditionDialog.MaximizeBox = False
@@ -482,19 +645,42 @@ Public Class frmBorrowedItem
             rbDamaged.Location = New Point(40, 130)
             rbDamaged.Size = New Size(400, 25)
 
+            Dim lblReasonLabel As New Label()
+            lblReasonLabel.Text = "Return Reason:"
+            lblReasonLabel.Location = New Point(20, 170)
+            lblReasonLabel.Size = New Size(120, 25)
+            lblReasonLabel.Font = New Font("Segoe UI", 9)
+
+            Dim txtReturnReason As New TextBox()
+            txtReturnReason.Location = New Point(140, 170)
+            txtReturnReason.Size = New Size(320, 25)
+            txtReturnReason.ForeColor = System.Drawing.SystemColors.WindowText
+
+            Dim lblRemarksLabel As New Label()
+            lblRemarksLabel.Text = "Additional Remarks:"
+            lblRemarksLabel.Location = New Point(20, 205)
+            lblRemarksLabel.Size = New Size(150, 25)
+            lblRemarksLabel.Font = New Font("Segoe UI", 9)
+
+            Dim txtRemarks As New TextBox()
+            txtRemarks.Location = New Point(20, 230)
+            txtRemarks.Size = New Size(440, 50)
+            txtRemarks.Multiline = True
+            txtRemarks.ScrollBars = ScrollBars.Vertical
+
             Dim btnOK As New Button()
             btnOK.Text = "Confirm Return"
-            btnOK.Location = New Point(280, 170)
+            btnOK.Location = New Point(280, 290)
             btnOK.Size = New Size(120, 35)
             btnOK.DialogResult = DialogResult.OK
 
             Dim btnCancel As New Button()
             btnCancel.Text = "Cancel"
-            btnCancel.Location = New Point(150, 170)
+            btnCancel.Location = New Point(150, 290)
             btnCancel.Size = New Size(120, 35)
             btnCancel.DialogResult = DialogResult.Cancel
 
-            conditionDialog.Controls.AddRange(New Control() {lblQuestion, rbGood, rbNeedsRepair, rbDamaged, btnOK, btnCancel})
+            conditionDialog.Controls.AddRange(New Control() {lblQuestion, rbGood, rbNeedsRepair, rbDamaged, lblReasonLabel, txtReturnReason, lblRemarksLabel, txtRemarks, btnOK, btnCancel})
             conditionDialog.AcceptButton = btnOK
             conditionDialog.CancelButton = btnCancel
 
@@ -507,12 +693,130 @@ Public Class frmBorrowedItem
                     condition = "Damaged"
                 End If
 
-                ' Update borrowed_items table
-                If UpdateBorrowedItemReturn(borrowId, condition) Then
-                    MessageBox.Show($"Item returned successfully!{Environment.NewLine}Condition: {condition}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    LoadApprovedRequests() ' Refresh the grid
-                Else
-                    MessageBox.Show("Failed to update return information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                ' Get return reason and remarks
+                Dim returnReason As String = txtReturnReason.Text.Trim()
+                Dim remarks As String = txtRemarks.Text.Trim()
+
+                ' Update borrowed_items table with condition, return reason, and remarks separately
+                Try
+                    Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+                    If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                        Dim query As String = "UPDATE borrowed_items SET status = 'Returned', actualReturnDate = NOW(), conditionOnReturn = @condition, returnReason = @returnReason, remarks = @remarks, updatedAt = NOW() WHERE borrowId = @borrowId"
+                        Using cmd As New MySqlCommand(query, conn)
+                            cmd.Parameters.AddWithValue("@borrowId", borrowId)
+                            cmd.Parameters.AddWithValue("@condition", condition)
+                            cmd.Parameters.AddWithValue("@returnReason", If(String.IsNullOrEmpty(returnReason), DBNull.Value, CObj(returnReason)))
+                            cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, CObj(remarks)))
+                            
+                            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                            If rowsAffected > 0 Then
+                                MessageBox.Show($"Property '{itemName}' returned successfully!{Environment.NewLine}Condition: {condition}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                LoadApprovedRequests() ' Refresh the grid
+                            Else
+                                MessageBox.Show("No record was updated. Please try again.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            End If
+                        End Using
+                        If conn.State = ConnectionState.Open Then conn.Close()
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show($"Failed to return property. Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    System.Diagnostics.Debug.WriteLine("[v0] Property return error: " & ex.Message)
+                End Try
+            End If
+            Else
+                ' Supply return - show reason dialog
+                Dim reasonDialog As New Form()
+                reasonDialog.Text = "Supply Return Reason"
+                reasonDialog.Size = New Size(500, 300)
+                reasonDialog.StartPosition = FormStartPosition.CenterParent
+                reasonDialog.FormBorderStyle = FormBorderStyle.FixedDialog
+                reasonDialog.MaximizeBox = False
+                reasonDialog.MinimizeBox = False
+
+                Dim lblQuestion As New Label()
+                lblQuestion.Text = $"Why are you returning '{itemName}'?"
+                lblQuestion.Location = New Point(20, 20)
+                lblQuestion.Size = New Size(440, 40)
+                lblQuestion.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+
+                Dim lblReasonLabel As New Label()
+                lblReasonLabel.Text = "Return Reason:"
+                lblReasonLabel.Location = New Point(20, 70)
+                lblReasonLabel.Size = New Size(120, 25)
+                lblReasonLabel.Font = New Font("Segoe UI", 9)
+
+                Dim cboReason As New ComboBox()
+                cboReason.Location = New Point(140, 70)
+                cboReason.Size = New Size(320, 25)
+                cboReason.DropDownStyle = ComboBoxStyle.DropDownList
+                cboReason.Items.AddRange(New String() {
+                    "Completed usage",
+                    "No longer needed",
+                    "Defective/Damaged",
+                    "Wrong item received",
+                    "Excess quantity",
+                    "Project completed",
+                    "Other"
+                })
+                cboReason.SelectedIndex = 0
+
+                Dim lblRemarksLabel As New Label()
+                lblRemarksLabel.Text = "Additional Remarks:"
+                lblRemarksLabel.Location = New Point(20, 110)
+                lblRemarksLabel.Size = New Size(150, 25)
+                lblRemarksLabel.Font = New Font("Segoe UI", 9)
+
+                Dim txtRemarks As New TextBox()
+                txtRemarks.Location = New Point(20, 135)
+                txtRemarks.Size = New Size(440, 80)
+                txtRemarks.Multiline = True
+                txtRemarks.ScrollBars = ScrollBars.Vertical
+
+                Dim btnOK As New Button()
+                btnOK.Text = "Confirm Return"
+                btnOK.Location = New Point(280, 225)
+                btnOK.Size = New Size(120, 35)
+                btnOK.DialogResult = DialogResult.OK
+
+                Dim btnCancel As New Button()
+                btnCancel.Text = "Cancel"
+                btnCancel.Location = New Point(150, 225)
+                btnCancel.Size = New Size(120, 35)
+                btnCancel.DialogResult = DialogResult.Cancel
+
+                reasonDialog.Controls.AddRange(New Control() {lblQuestion, lblReasonLabel, cboReason, lblRemarksLabel, txtRemarks, btnOK, btnCancel})
+                reasonDialog.AcceptButton = btnOK
+                reasonDialog.CancelButton = btnCancel
+
+                If reasonDialog.ShowDialog() = DialogResult.OK Then
+                    ' Get return reason and remarks
+                    Dim returnReason As String = cboReason.SelectedItem.ToString()
+                    Dim remarks As String = txtRemarks.Text.Trim()
+
+                    ' Update borrowed_items record for supply (save return reason and remarks separately)
+                    Try
+                        Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+                        If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                            Dim query As String = "UPDATE borrowed_items SET status = 'Returned', actualReturnDate = NOW(), returnReason = @returnReason, remarks = @remarks, updatedAt = NOW() WHERE borrowId = @borrowId"
+                            Using cmd As New MySqlCommand(query, conn)
+                                cmd.Parameters.AddWithValue("@borrowId", borrowId)
+                                cmd.Parameters.AddWithValue("@returnReason", returnReason)
+                                cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, CObj(remarks)))
+                                
+                                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                                If rowsAffected > 0 Then
+                                    MessageBox.Show($"Supply '{itemName}' returned successfully!{Environment.NewLine}{Environment.NewLine}Reason: {returnReason}", "Return Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                    LoadApprovedRequests() ' Refresh the list
+                                Else
+                                    MessageBox.Show("No record was updated. Please try again.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                End If
+                            End Using
+                            If conn.State = ConnectionState.Open Then conn.Close()
+                        End If
+                    Catch ex As Exception
+                        MessageBox.Show($"Failed to return supply. Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        System.Diagnostics.Debug.WriteLine("[v0] Supply return error: " & ex.Message)
+                    End Try
                 End If
             End If
         End If
@@ -646,13 +950,81 @@ Public Class frmBorrowedItem
 
     End Sub
 
+    ''' <summary>
+    ''' Click on Total Items label to show all items
+    ''' </summary>
+    Private Sub lblTotalItems_Click(sender As Object, e As EventArgs) Handles lblTotalItems.Click
+        ' Reset filters to show all items
+        cboFilterType.SelectedIndex = 0 ' All
+        cboFilterStatus.SelectedIndex = 0 ' All
+        txtSearch.Text = ""
+        
+        ' Visual feedback
+        HighlightLabel(lblTotalItems)
+    End Sub
+
+    ''' <summary>
+    ''' Click on Properties label to filter properties only
+    ''' </summary>
+    Private Sub lblPropertyCount_Click(sender As Object, e As EventArgs) Handles lblPropertyCount.Click
+        ' Set filter to show only properties
+        cboFilterType.SelectedIndex = 1 ' Property
+        cboFilterStatus.SelectedIndex = 0 ' All
+        
+        ' Visual feedback
+        HighlightLabel(lblPropertyCount)
+    End Sub
+
+    ''' <summary>
+    ''' Click on Supplies label to filter supplies only
+    ''' </summary>
+    Private Sub lblSupplyCount_Click(sender As Object, e As EventArgs) Handles lblSupplyCount.Click
+        ' Set filter to show only supplies
+        cboFilterType.SelectedIndex = 2 ' Supply
+        cboFilterStatus.SelectedIndex = 0 ' All
+        
+        ' Visual feedback
+        HighlightLabel(lblSupplyCount)
+    End Sub
+
+    ''' <summary>
+    ''' Click on Needs Attention label to filter items needing repair
+    ''' </summary>
+    Private Sub lblNeedsRepair_Click(sender As Object, e As EventArgs) Handles lblNeedsRepair.Click
+        ' Set filter to show only items needing attention (Needs Repair or Damaged)
+        cboFilterType.SelectedIndex = 0 ' All
+        cboFilterStatus.SelectedIndex = 2 ' Needs Repair
+        
+        ' Visual feedback
+        HighlightLabel(lblNeedsRepair)
+    End Sub
+
+    ''' <summary>
+    ''' Provide visual feedback when label is clicked
+    ''' </summary>
+    Private Sub HighlightLabel(clickedLabel As Label)
+        ' Flash the label to show it was clicked
+        Dim originalFont = clickedLabel.Font
+        clickedLabel.Font = New Font(originalFont.FontFamily, originalFont.Size, FontStyle.Bold Or FontStyle.Underline)
+        
+        ' Reset after short delay
+        Dim timer As New Timer()
+        timer.Interval = 200
+        AddHandler timer.Tick, Sub(s, e)
+                                   clickedLabel.Font = originalFont
+                                   timer.Stop()
+                                   timer.Dispose()
+                               End Sub
+        timer.Start()
+    End Sub
+
     Private Sub btnBorrowReturn_Click(sender As Object, e As EventArgs) Handles btnBorrowReturn.Click
         Dim BorrowingAndReturnSlip As New BorrowingAndReturnSlip()
         BorrowingAndReturnSlip.Show()
     End Sub
 
     Private Sub Essuance_Click(sender As Object, e As EventArgs) Handles Essuance.Click
-        Dim PropertyIssuance As New PropertyIssuance()
-        PropertyIssuance.Show()
+        Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt()
+        propertyAcknowledgement.Show()
     End Sub
 End Class

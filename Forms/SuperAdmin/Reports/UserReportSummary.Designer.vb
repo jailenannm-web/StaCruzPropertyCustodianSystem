@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class UserReportSummary
     Inherits System.Windows.Forms.Form
 
@@ -637,7 +637,7 @@ Partial Class UserReportSummary
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents receivedDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents btn_Back As Resources.Controls.RoundedButton
-    Friend WithEvents btnPDF As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents btn_Back As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

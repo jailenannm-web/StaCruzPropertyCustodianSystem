@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Windows.Forms
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
@@ -360,7 +360,7 @@ Partial Class frmInventory
     Friend WithEvents Label1 As Label
     Friend WithEvents lblSuppliesManagement As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents btnrequestproperty As Resources.Controls.RoundedButton
-    Friend WithEvents btnrequestsupply As Resources.Controls.RoundedButton
+    Friend WithEvents btnrequestproperty As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnrequestsupply As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 End Class

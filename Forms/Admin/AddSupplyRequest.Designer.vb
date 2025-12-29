@@ -1,9 +1,11 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Imports System.Windows.Forms
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class AddSupplyRequest
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,422 +22,380 @@ Partial Class AddSupplyRequest
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.instructions = New System.Windows.Forms.Label()
-        Me.sqr_property_id = New System.Windows.Forms.Label()
-        Me.sqr_department_id = New System.Windows.Forms.Label()
-        Me.sqr_employeeID = New System.Windows.Forms.Label()
-        Me.sqr_request_id = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.approved_by = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.position = New System.Windows.Forms.TextBox()
-        Me.requesterName = New System.Windows.Forms.TextBox()
-        Me.quantityRequest = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.itemName = New System.Windows.Forms.TextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.department = New System.Windows.Forms.ComboBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
-        Me.unit = New System.Windows.Forms.ComboBox()
-        Me.quantityRequested = New System.Windows.Forms.NumericUpDown()
-        Me.purpose = New System.Windows.Forms.TextBox()
-        Me.description = New System.Windows.Forms.TextBox()
-        Me.Panel1.SuspendLayout()
-        Me.RoundedPanel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        Me.RoundedPanel2.SuspendLayout()
-        CType(Me.quantityRequested, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.pnlForm = New System.Windows.Forms.Panel()
+        Me.lblRequesterInfo = New System.Windows.Forms.Label()
+        Me.lblRequesterName = New System.Windows.Forms.Label()
+        Me.txtRequesterName = New System.Windows.Forms.TextBox()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.txtPosition = New System.Windows.Forms.TextBox()
+        Me.lblDepartment = New System.Windows.Forms.Label()
+        Me.cboDepartment = New System.Windows.Forms.ComboBox()
+        Me.lblDateOfRequest = New System.Windows.Forms.Label()
+        Me.dtpDateOfRequest = New System.Windows.Forms.DateTimePicker()
+        Me.lblRequestDetails = New System.Windows.Forms.Label()
+        Me.lblItemName = New System.Windows.Forms.Label()
+        Me.txtItemName = New System.Windows.Forms.TextBox()
+        Me.lblDescription = New System.Windows.Forms.Label()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.lblQuantity = New System.Windows.Forms.Label()
+        Me.numQuantity = New System.Windows.Forms.NumericUpDown()
+        Me.lblUnit = New System.Windows.Forms.Label()
+        Me.cboUnit = New System.Windows.Forms.ComboBox()
+        Me.lblPurpose = New System.Windows.Forms.Label()
+        Me.txtPurpose = New System.Windows.Forms.TextBox()
+        Me.btnSubmit = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.pnlMain.SuspendLayout()
+        Me.pnlForm.SuspendLayout()
+        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'instructions
+        'pnlMain
         '
-        Me.instructions.AutoSize = True
-        Me.instructions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.instructions.Location = New System.Drawing.Point(19, 25)
-        Me.instructions.Name = "instructions"
-        Me.instructions.Size = New System.Drawing.Size(189, 18)
-        Me.instructions.TabIndex = 40
-        Me.instructions.Text = "Fill the required information."
+        Me.pnlMain.BackColor = System.Drawing.Color.White
+        Me.pnlMain.Controls.Add(Me.btnCancel)
+        Me.pnlMain.Controls.Add(Me.btnSubmit)
+        Me.pnlMain.Controls.Add(Me.pnlForm)
+        Me.pnlMain.Controls.Add(Me.lblTitle)
+        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMain.Location = New System.Drawing.Point(0, 0)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Padding = New System.Windows.Forms.Padding(30)
+        Me.pnlMain.Size = New System.Drawing.Size(1251, 889)
+        Me.pnlMain.TabIndex = 0
         '
-        'sqr_property_id
+        'lblTitle
         '
-        Me.sqr_property_id.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Font = New System.Drawing.Font("Poppins", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.lblTitle.Location = New System.Drawing.Point(30, 30)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(330, 53)
+        Me.lblTitle.TabIndex = 0
+        Me.lblTitle.Text = "Add Supply Request"
+        '
+        'pnlForm
+        '
+        Me.pnlForm.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sqr_property_id.AutoSize = True
-        Me.sqr_property_id.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sqr_property_id.Location = New System.Drawing.Point(43, 201)
-        Me.sqr_property_id.Name = "sqr_property_id"
-        Me.sqr_property_id.Size = New System.Drawing.Size(115, 18)
-        Me.sqr_property_id.TabIndex = 61
-        Me.sqr_property_id.Text = "Date of Request"
+        Me.pnlForm.AutoScroll = True
+        Me.pnlForm.BackColor = System.Drawing.Color.FromArgb(CType(CType(248, Byte), Integer), CType(CType(249, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.pnlForm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlForm.Controls.Add(Me.txtPurpose)
+        Me.pnlForm.Controls.Add(Me.lblPurpose)
+        Me.pnlForm.Controls.Add(Me.cboUnit)
+        Me.pnlForm.Controls.Add(Me.lblUnit)
+        Me.pnlForm.Controls.Add(Me.numQuantity)
+        Me.pnlForm.Controls.Add(Me.lblQuantity)
+        Me.pnlForm.Controls.Add(Me.txtDescription)
+        Me.pnlForm.Controls.Add(Me.lblDescription)
+        Me.pnlForm.Controls.Add(Me.txtItemName)
+        Me.pnlForm.Controls.Add(Me.lblItemName)
+        Me.pnlForm.Controls.Add(Me.lblRequestDetails)
+        Me.pnlForm.Controls.Add(Me.dtpDateOfRequest)
+        Me.pnlForm.Controls.Add(Me.lblDateOfRequest)
+        Me.pnlForm.Controls.Add(Me.cboDepartment)
+        Me.pnlForm.Controls.Add(Me.lblDepartment)
+        Me.pnlForm.Controls.Add(Me.txtPosition)
+        Me.pnlForm.Controls.Add(Me.lblPosition)
+        Me.pnlForm.Controls.Add(Me.txtRequesterName)
+        Me.pnlForm.Controls.Add(Me.lblRequesterName)
+        Me.pnlForm.Controls.Add(Me.lblRequesterInfo)
+        Me.pnlForm.Location = New System.Drawing.Point(40, 100)
+        Me.pnlForm.Name = "pnlForm"
+        Me.pnlForm.Padding = New System.Windows.Forms.Padding(30)
+        Me.pnlForm.Size = New System.Drawing.Size(1171, 680)
+        Me.pnlForm.TabIndex = 1
         '
-        'sqr_department_id
+        'lblRequesterInfo
         '
-        Me.sqr_department_id.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sqr_department_id.AutoSize = True
-        Me.sqr_department_id.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sqr_department_id.Location = New System.Drawing.Point(43, 151)
-        Me.sqr_department_id.Name = "sqr_department_id"
-        Me.sqr_department_id.Size = New System.Drawing.Size(85, 18)
-        Me.sqr_department_id.TabIndex = 60
-        Me.sqr_department_id.Text = "Department"
+        Me.lblRequesterInfo.AutoSize = True
+        Me.lblRequesterInfo.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.lblRequesterInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.lblRequesterInfo.Location = New System.Drawing.Point(30, 30)
+        Me.lblRequesterInfo.Name = "lblRequesterInfo"
+        Me.lblRequesterInfo.Size = New System.Drawing.Size(225, 36)
+        Me.lblRequesterInfo.TabIndex = 0
+        Me.lblRequesterInfo.Text = "Requester Information"
         '
-        'sqr_employeeID
+        'lblRequesterName
         '
-        Me.sqr_employeeID.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sqr_employeeID.AutoSize = True
-        Me.sqr_employeeID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sqr_employeeID.Location = New System.Drawing.Point(43, 98)
-        Me.sqr_employeeID.Name = "sqr_employeeID"
-        Me.sqr_employeeID.Size = New System.Drawing.Size(62, 18)
-        Me.sqr_employeeID.TabIndex = 59
-        Me.sqr_employeeID.Text = "Position"
+        Me.lblRequesterName.AutoSize = True
+        Me.lblRequesterName.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblRequesterName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblRequesterName.Location = New System.Drawing.Point(35, 80)
+        Me.lblRequesterName.Name = "lblRequesterName"
+        Me.lblRequesterName.Size = New System.Drawing.Size(141, 26)
+        Me.lblRequesterName.TabIndex = 1
+        Me.lblRequesterName.Text = "Requester Name *"
         '
-        'sqr_request_id
+        'txtRequesterName
         '
-        Me.sqr_request_id.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sqr_request_id.AutoSize = True
-        Me.sqr_request_id.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sqr_request_id.Location = New System.Drawing.Point(43, 47)
-        Me.sqr_request_id.Name = "sqr_request_id"
-        Me.sqr_request_id.Size = New System.Drawing.Size(137, 18)
-        Me.sqr_request_id.TabIndex = 58
-        Me.sqr_request_id.Text = "Name of Requester"
+        Me.txtRequesterName.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(232, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.txtRequesterName.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtRequesterName.Location = New System.Drawing.Point(40, 110)
+        Me.txtRequesterName.Name = "txtRequesterName"
+        Me.txtRequesterName.ReadOnly = True
+        Me.txtRequesterName.Size = New System.Drawing.Size(500, 30)
+        Me.txtRequesterName.TabIndex = 2
         '
-        'Label3
+        'lblPosition
         '
-        Me.Label3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(29, 52)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(83, 18)
-        Me.Label3.TabIndex = 91
-        Me.Label3.Text = "Description"
+        Me.lblPosition.AutoSize = True
+        Me.lblPosition.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblPosition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblPosition.Location = New System.Drawing.Point(585, 80)
+        Me.lblPosition.Name = "lblPosition"
+        Me.lblPosition.Size = New System.Drawing.Size(72, 26)
+        Me.lblPosition.TabIndex = 3
+        Me.lblPosition.Text = "Position"
         '
-        'approved_by
+        'txtPosition
         '
-        Me.approved_by.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.approved_by.AutoSize = True
-        Me.approved_by.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.approved_by.Location = New System.Drawing.Point(29, 194)
-        Me.approved_by.Name = "approved_by"
-        Me.approved_by.Size = New System.Drawing.Size(120, 18)
-        Me.approved_by.TabIndex = 46
-        Me.approved_by.Text = "Purpose/Reason"
+        Me.txtPosition.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(232, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.txtPosition.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtPosition.Location = New System.Drawing.Point(590, 110)
+        Me.txtPosition.Name = "txtPosition"
+        Me.txtPosition.ReadOnly = True
+        Me.txtPosition.Size = New System.Drawing.Size(500, 30)
+        Me.txtPosition.TabIndex = 4
         '
-        'Label4
+        'lblDepartment
         '
-        Me.Label4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(29, 98)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(137, 18)
-        Me.Label4.TabIndex = 85
-        Me.Label4.Text = "Quantity Requested"
+        Me.lblDepartment.AutoSize = True
+        Me.lblDepartment.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblDepartment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblDepartment.Location = New System.Drawing.Point(35, 160)
+        Me.lblDepartment.Name = "lblDepartment"
+        Me.lblDepartment.Size = New System.Drawing.Size(103, 26)
+        Me.lblDepartment.TabIndex = 5
+        Me.lblDepartment.Text = "Department"
         '
-        'position
+        'cboDepartment
         '
-        Me.position.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.position.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.position.Location = New System.Drawing.Point(223, 95)
-        Me.position.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.position.Name = "position"
-        Me.position.Size = New System.Drawing.Size(288, 24)
-        Me.position.TabIndex = 76
+        Me.cboDepartment.BackColor = System.Drawing.Color.White
+        Me.cboDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboDepartment.Enabled = False
+        Me.cboDepartment.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboDepartment.FormattingEnabled = True
+        Me.cboDepartment.Location = New System.Drawing.Point(40, 190)
+        Me.cboDepartment.Name = "cboDepartment"
+        Me.cboDepartment.Size = New System.Drawing.Size(500, 34)
+        Me.cboDepartment.TabIndex = 6
         '
-        'requesterName
+        'lblDateOfRequest
         '
-        Me.requesterName.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.requesterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.requesterName.Location = New System.Drawing.Point(223, 44)
-        Me.requesterName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.requesterName.Name = "requesterName"
-        Me.requesterName.Size = New System.Drawing.Size(288, 24)
-        Me.requesterName.TabIndex = 64
+        Me.lblDateOfRequest.AutoSize = True
+        Me.lblDateOfRequest.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblDateOfRequest.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblDateOfRequest.Location = New System.Drawing.Point(585, 160)
+        Me.lblDateOfRequest.Name = "lblDateOfRequest"
+        Me.lblDateOfRequest.Size = New System.Drawing.Size(132, 26)
+        Me.lblDateOfRequest.TabIndex = 7
+        Me.lblDateOfRequest.Text = "Date of Request *"
         '
-        'quantityRequest
+        'dtpDateOfRequest
         '
-        Me.quantityRequest.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.quantityRequest.AutoSize = True
-        Me.quantityRequest.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.quantityRequest.Location = New System.Drawing.Point(44, 252)
-        Me.quantityRequest.Name = "quantityRequest"
-        Me.quantityRequest.Size = New System.Drawing.Size(80, 18)
-        Me.quantityRequest.TabIndex = 62
-        Me.quantityRequest.Text = "Item Name"
+        Me.dtpDateOfRequest.CalendarFont = New System.Drawing.Font("Poppins", 9.0!)
+        Me.dtpDateOfRequest.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.dtpDateOfRequest.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateOfRequest.Location = New System.Drawing.Point(590, 190)
+        Me.dtpDateOfRequest.Name = "dtpDateOfRequest"
+        Me.dtpDateOfRequest.Size = New System.Drawing.Size(500, 30)
+        Me.dtpDateOfRequest.TabIndex = 8
         '
-        'Label1
+        'lblRequestDetails
         '
-        Me.Label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(29, 144)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(34, 18)
-        Me.Label1.TabIndex = 86
-        Me.Label1.Text = "Unit"
+        Me.lblRequestDetails.AutoSize = True
+        Me.lblRequestDetails.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.lblRequestDetails.ForeColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.lblRequestDetails.Location = New System.Drawing.Point(30, 260)
+        Me.lblRequestDetails.Name = "lblRequestDetails"
+        Me.lblRequestDetails.Size = New System.Drawing.Size(161, 36)
+        Me.lblRequestDetails.TabIndex = 9
+        Me.lblRequestDetails.Text = "Request Details"
         '
-        'itemName
+        'lblItemName
         '
-        Me.itemName.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.itemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.itemName.Location = New System.Drawing.Point(223, 250)
-        Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.itemName.Name = "itemName"
-        Me.itemName.Size = New System.Drawing.Size(288, 24)
-        Me.itemName.TabIndex = 88
+        Me.lblItemName.AutoSize = True
+        Me.lblItemName.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblItemName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblItemName.Location = New System.Drawing.Point(35, 310)
+        Me.lblItemName.Name = "lblItemName"
+        Me.lblItemName.Size = New System.Drawing.Size(102, 26)
+        Me.lblItemName.TabIndex = 10
+        Me.lblItemName.Text = "Item Name *"
         '
-        'Panel1
+        'txtItemName
         '
-        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.Controls.Add(Me.department)
-        Me.Panel1.Controls.Add(Me.itemName)
-        Me.Panel1.Controls.Add(Me.DateTimePicker1)
-        Me.Panel1.Controls.Add(Me.position)
-        Me.Panel1.Controls.Add(Me.requesterName)
-        Me.Panel1.Controls.Add(Me.quantityRequest)
-        Me.Panel1.Controls.Add(Me.sqr_property_id)
-        Me.Panel1.Controls.Add(Me.sqr_department_id)
-        Me.Panel1.Controls.Add(Me.sqr_employeeID)
-        Me.Panel1.Controls.Add(Me.sqr_request_id)
-        Me.Panel1.Location = New System.Drawing.Point(67, 18)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(553, 415)
-        Me.Panel1.TabIndex = 64
+        Me.txtItemName.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtItemName.Location = New System.Drawing.Point(40, 340)
+        Me.txtItemName.Name = "txtItemName"
+        Me.txtItemName.Size = New System.Drawing.Size(1050, 30)
+        Me.txtItemName.TabIndex = 11
         '
-        'department
+        'lblDescription
         '
-        Me.department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.department.FormattingEnabled = True
-        Me.department.Location = New System.Drawing.Point(223, 151)
-        Me.department.Name = "department"
-        Me.department.Size = New System.Drawing.Size(288, 26)
-        Me.department.TabIndex = 128
+        Me.lblDescription.AutoSize = True
+        Me.lblDescription.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblDescription.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblDescription.Location = New System.Drawing.Point(35, 390)
+        Me.lblDescription.Name = "lblDescription"
+        Me.lblDescription.Size = New System.Drawing.Size(99, 26)
+        Me.lblDescription.TabIndex = 12
+        Me.lblDescription.Text = "Description"
         '
-        'DateTimePicker1
+        'txtDescription
         '
-        Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.DateTimePicker1.Location = New System.Drawing.Point(223, 201)
-        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(288, 24)
-        Me.DateTimePicker1.TabIndex = 79
+        Me.txtDescription.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtDescription.Location = New System.Drawing.Point(40, 420)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDescription.Size = New System.Drawing.Size(1050, 80)
+        Me.txtDescription.TabIndex = 13
         '
-        'RoundedPanel1
+        'lblQuantity
         '
-        Me.RoundedPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedPanel1.Controls.Add(Me.instructions)
-        Me.RoundedPanel1.CornerRadius = 5
-        Me.RoundedPanel1.Location = New System.Drawing.Point(109, 68)
-        Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(1264, 71)
-        Me.RoundedPanel1.TabIndex = 157
+        Me.lblQuantity.AutoSize = True
+        Me.lblQuantity.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblQuantity.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblQuantity.Location = New System.Drawing.Point(35, 520)
+        Me.lblQuantity.Name = "lblQuantity"
+        Me.lblQuantity.Size = New System.Drawing.Size(162, 26)
+        Me.lblQuantity.TabIndex = 14
+        Me.lblQuantity.Text = "Quantity Requested *"
         '
-        'Panel2
+        'numQuantity
         '
-        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel2.Controls.Add(Me.unit)
-        Me.Panel2.Controls.Add(Me.quantityRequested)
-        Me.Panel2.Controls.Add(Me.purpose)
-        Me.Panel2.Controls.Add(Me.description)
-        Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.approved_by)
-        Me.Panel2.Controls.Add(Me.Label4)
-        Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Location = New System.Drawing.Point(656, 18)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(537, 415)
-        Me.Panel2.TabIndex = 65
+        Me.numQuantity.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.numQuantity.Location = New System.Drawing.Point(40, 550)
+        Me.numQuantity.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.numQuantity.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.numQuantity.Name = "numQuantity"
+        Me.numQuantity.Size = New System.Drawing.Size(500, 30)
+        Me.numQuantity.TabIndex = 15
+        Me.numQuantity.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'lblUnit
+        '
+        Me.lblUnit.AutoSize = True
+        Me.lblUnit.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblUnit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblUnit.Location = New System.Drawing.Point(585, 520)
+        Me.lblUnit.Name = "lblUnit"
+        Me.lblUnit.Size = New System.Drawing.Size(119, 26)
+        Me.lblUnit.TabIndex = 16
+        Me.lblUnit.Text = "Unit of Measure"
+        '
+        'cboUnit
+        '
+        Me.cboUnit.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cboUnit.FormattingEnabled = True
+        Me.cboUnit.Items.AddRange(New Object() {"Piece", "Box", "Set", "Pack", "Unit", "Ream", "Bundle", "Dozen", "Liter", "Kilogram", "Meter", "Gallon", "Sack", "Bottle", "Others"})
+        Me.cboUnit.Location = New System.Drawing.Point(590, 550)
+        Me.cboUnit.Name = "cboUnit"
+        Me.cboUnit.Size = New System.Drawing.Size(500, 34)
+        Me.cboUnit.TabIndex = 17
+        '
+        'lblPurpose
+        '
+        Me.lblPurpose.AutoSize = True
+        Me.lblPurpose.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblPurpose.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblPurpose.Location = New System.Drawing.Point(35, 600)
+        Me.lblPurpose.Name = "lblPurpose"
+        Me.lblPurpose.Size = New System.Drawing.Size(82, 26)
+        Me.lblPurpose.TabIndex = 18
+        Me.lblPurpose.Text = "Purpose *"
+        '
+        'txtPurpose
+        '
+        Me.txtPurpose.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtPurpose.Location = New System.Drawing.Point(40, 630)
+        Me.txtPurpose.Multiline = True
+        Me.txtPurpose.Name = "txtPurpose"
+        Me.txtPurpose.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtPurpose.Size = New System.Drawing.Size(1050, 100)
+        Me.txtPurpose.TabIndex = 19
+        '
+        'btnSubmit
+        '
+        Me.btnSubmit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSubmit.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.btnSubmit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSubmit.FlatAppearance.BorderSize = 0
+        Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSubmit.Font = New System.Drawing.Font("Poppins", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSubmit.ForeColor = System.Drawing.Color.White
+        Me.btnSubmit.Location = New System.Drawing.Point(1051, 805)
+        Me.btnSubmit.Name = "btnSubmit"
+        Me.btnSubmit.Size = New System.Drawing.Size(160, 45)
+        Me.btnSubmit.TabIndex = 2
+        Me.btnSubmit.Text = "Submit"
+        Me.btnSubmit.UseVisualStyleBackColor = False
         '
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnCancel.CornerRadius = 15
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(149, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(166, Byte), Integer))
+        Me.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCancel.FlatAppearance.BorderSize = 0
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(1001, 738)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCancel.Font = New System.Drawing.Font("Poppins", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCancel.Location = New System.Drawing.Point(871, 805)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
-        Me.btnCancel.TabIndex = 160
+        Me.btnCancel.Size = New System.Drawing.Size(160, 45)
+        Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
-        '
-        'btnSave
-        '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnSave.CornerRadius = 15
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSave.Location = New System.Drawing.Point(1155, 738)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(145, 34)
-        Me.btnSave.TabIndex = 159
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = False
-        '
-        'RoundedPanel2
-        '
-        Me.RoundedPanel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedPanel2.Controls.Add(Me.Panel2)
-        Me.RoundedPanel2.Controls.Add(Me.Panel1)
-        Me.RoundedPanel2.CornerRadius = 5
-        Me.RoundedPanel2.Location = New System.Drawing.Point(109, 158)
-        Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(1264, 458)
-        Me.RoundedPanel2.TabIndex = 158
-        '
-        'admin_label_DepartmentManagement
-        '
-        Me.admin_label_DepartmentManagement.AutoSize = True
-        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(99, 8)
-        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(352, 38)
-        Me.admin_label_DepartmentManagement.TabIndex = 156
-        Me.admin_label_DepartmentManagement.Text = "Supply Request Form"
-        '
-        'unit
-        '
-        Me.unit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.unit.FormattingEnabled = True
-        Me.unit.Location = New System.Drawing.Point(177, 145)
-        Me.unit.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.unit.Name = "unit"
-        Me.unit.Size = New System.Drawing.Size(291, 26)
-        Me.unit.TabIndex = 99
-        '
-        'quantityRequested
-        '
-        Me.quantityRequested.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.quantityRequested.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.quantityRequested.Location = New System.Drawing.Point(177, 97)
-        Me.quantityRequested.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.quantityRequested.Name = "quantityRequested"
-        Me.quantityRequested.Size = New System.Drawing.Size(291, 24)
-        Me.quantityRequested.TabIndex = 98
-        '
-        'purpose
-        '
-        Me.purpose.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.purpose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.purpose.Location = New System.Drawing.Point(177, 198)
-        Me.purpose.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.purpose.Multiline = True
-        Me.purpose.Name = "purpose"
-        Me.purpose.Size = New System.Drawing.Size(288, 158)
-        Me.purpose.TabIndex = 97
-        '
-        'description
-        '
-        Me.description.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.description.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.description.Location = New System.Drawing.Point(177, 53)
-        Me.description.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.description.Name = "description"
-        Me.description.Size = New System.Drawing.Size(291, 24)
-        Me.description.TabIndex = 96
         '
         'AddSupplyRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.RoundedPanel1)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.RoundedPanel2)
-        Me.Controls.Add(Me.admin_label_DepartmentManagement)
+        Me.Controls.Add(Me.pnlMain)
         Me.Name = "AddSupplyRequest"
-        Me.Size = New System.Drawing.Size(1473, 810)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
-        Me.RoundedPanel1.ResumeLayout(False)
-        Me.RoundedPanel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
-        Me.RoundedPanel2.ResumeLayout(False)
-        CType(Me.quantityRequested, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(1251, 889)
+        Me.pnlMain.ResumeLayout(False)
+        Me.pnlMain.PerformLayout()
+        Me.pnlForm.ResumeLayout(False)
+        Me.pnlForm.PerformLayout()
+        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents instructions As System.Windows.Forms.Label
-    Friend WithEvents sqr_property_id As System.Windows.Forms.Label
-    Friend WithEvents sqr_department_id As System.Windows.Forms.Label
-    Friend WithEvents sqr_employeeID As System.Windows.Forms.Label
-    Friend WithEvents sqr_request_id As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents approved_by As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents position As System.Windows.Forms.TextBox
-    Friend WithEvents requesterName As System.Windows.Forms.TextBox
-    Friend WithEvents quantityRequest As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents itemName As System.Windows.Forms.TextBox
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
-    Friend WithEvents btnSave As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
-    Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
-    Friend WithEvents department As System.Windows.Forms.ComboBox
-    Friend WithEvents unit As System.Windows.Forms.ComboBox
-    Friend WithEvents quantityRequested As System.Windows.Forms.NumericUpDown
-    Friend WithEvents purpose As System.Windows.Forms.TextBox
-    Friend WithEvents description As System.Windows.Forms.TextBox
+    Friend WithEvents pnlMain As Panel
+    Friend WithEvents lblTitle As Label
+    Friend WithEvents pnlForm As Panel
+    Friend WithEvents lblRequesterInfo As Label
+    Friend WithEvents lblRequesterName As Label
+    Friend WithEvents txtRequesterName As TextBox
+    Friend WithEvents lblPosition As Label
+    Friend WithEvents txtPosition As TextBox
+    Friend WithEvents lblDepartment As Label
+    Friend WithEvents cboDepartment As ComboBox
+    Friend WithEvents lblDateOfRequest As Label
+    Friend WithEvents dtpDateOfRequest As DateTimePicker
+    Friend WithEvents lblRequestDetails As Label
+    Friend WithEvents lblItemName As Label
+    Friend WithEvents txtItemName As TextBox
+    Friend WithEvents lblDescription As Label
+    Friend WithEvents txtDescription As TextBox
+    Friend WithEvents lblQuantity As Label
+    Friend WithEvents numQuantity As NumericUpDown
+    Friend WithEvents lblUnit As Label
+    Friend WithEvents cboUnit As ComboBox
+    Friend WithEvents lblPurpose As Label
+    Friend WithEvents txtPurpose As TextBox
+    Friend WithEvents btnSubmit As Button
+    Friend WithEvents btnCancel As Button
 End Class

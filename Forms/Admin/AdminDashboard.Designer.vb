@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -1342,25 +1342,25 @@ Partial Class AdminDashboard
     Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents RoundedPanel3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
-    Friend WithEvents RoundedPanel7 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel7 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_PendingRequest As DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel6 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel6 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_TotalSupplies As DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel8 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel8 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_ScheduleMaintenance As DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel9 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel9 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_PropertyConditionStatus As DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel10 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel10 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_InventoryStatusOverview As DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel5 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel5 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_TotalProperty As DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel11 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel11 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_SystemAlerts As DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel13 As Resources.Controls.RoundedPanel
-    Friend WithEvents RoundedPanel12 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel13 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel12 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents SAChart_RecentPropertyRequests As DataVisualization.Charting.Chart
     Friend WithEvents SAChart_RequestTrends As DataVisualization.Charting.Chart
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label4 As Label
@@ -1378,16 +1378,16 @@ Partial Class AdminDashboard
     Friend WithEvents lblPropertyConditionStatus As Label
     Friend WithEvents lblInventoryStatusOverview As Label
     Friend WithEvents lblTotalProperty As Label
-    Friend WithEvents admin_btn_suppliesRequestManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_MaintenanceRequest As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_Logout As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_reports As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_MaintenanceManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_PropertyRequestManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_DepartmentManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_SuppliesManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_PropertyManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_UserManagement As Resources.Controls.RoundedButton
-    Friend WithEvents admin_btn_dashboard As Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_suppliesRequestManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_MaintenanceRequest As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_Logout As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_reports As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_MaintenanceManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_PropertyRequestManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_DepartmentManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_SuppliesManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_PropertyManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_UserManagement As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents admin_btn_dashboard As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

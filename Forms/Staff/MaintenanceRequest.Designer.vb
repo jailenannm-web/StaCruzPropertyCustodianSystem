@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class MaintenanceRequest
 
 
@@ -244,7 +244,7 @@ Partial Class MaintenanceRequest
     Friend WithEvents Supplier As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ConditionStatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Protected Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
-    Protected Friend WithEvents RoundedButton1 As Resources.Controls.RoundedButton
+    Protected Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents maintenancerequestssearchbar As System.Windows.Forms.TextBox
     Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox

@@ -1,4 +1,5 @@
 Imports System
+Imports System.Collections.Generic
 Imports System.Data
 Imports System.Linq
 Imports System.Windows.Forms
@@ -33,6 +34,15 @@ Public Class AddSupply
 
         ' Load departments
         LoadDepartments()
+        
+        ' Load users for assignment
+        LoadUsers()
+        
+        ' Load suppliers
+        LoadSuppliers()
+        
+        ' Load unit of measures
+        LoadUnitOfMeasures()
 
         ' Set default date to today
         dtpDateReceived.Value = Date.Today
@@ -61,6 +71,66 @@ Public Class AddSupply
         End Try
     End Sub
     
+    Private Sub LoadUsers()
+        Try
+            ' Load users for Assigned To dropdown
+            Using conn As MySqlConnection = DatabaseConnection.GetConnection()
+                If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                    Using cmd As New MySqlCommand("SELECT userId, CONCAT(IFNULL(firstName,''), ' ', IFNULL(lastName,'')) AS fullName FROM users WHERE status = 'Active' ORDER BY firstName, lastName", conn)
+                        Using reader As MySqlDataReader = cmd.ExecuteReader()
+                            cboAssignedTo.Items.Clear()
+                            cboAssignedTo.Items.Add("-- Not Assigned --")
+
+                            While reader.Read()
+                                Dim userItem As New UserItem() With {
+                                    .UserId = CInt(reader("userId")),
+                                    .FullName = reader("fullName").ToString()
+                                }
+                                cboAssignedTo.Items.Add(userItem)
+                            End While
+
+                            cboAssignedTo.SelectedIndex = 0
+                        End Using
+                    End Using
+                End If
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading users: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub LoadSuppliers()
+        Try
+            Dim suppliers As List(Of String) = DatabaseConnection.GetAllSuppliers()
+            cboSupplier.Items.Clear()
+            cboSupplier.Items.Add("-- Select or Type Supplier --")
+
+            For Each supplier As String In suppliers
+                cboSupplier.Items.Add(supplier)
+            Next
+
+            cboSupplier.SelectedIndex = 0
+        Catch ex As Exception
+            MessageBox.Show("Error loading suppliers: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub LoadUnitOfMeasures()
+        Try
+            Dim units As List(Of String) = DatabaseConnection.GetAllUnitOfMeasures()
+            cboUnitOfMeasure.Items.Clear()
+            cboUnitOfMeasure.Items.Add("-- Select or Type Unit --")
+
+            For Each unit As String In units
+                cboUnitOfMeasure.Items.Add(unit)
+            Next
+
+            cboUnitOfMeasure.SelectedIndex = 0
+        Catch ex As Exception
+            MessageBox.Show("Error loading unit of measures: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
     ''' <summary>
     ''' Note: Supplies don't have direct assignedTo field in database.
     ''' When supplies are assigned to staff, they are tracked through:
@@ -89,6 +159,16 @@ Public Class AddSupply
         End Function
     End Class
 
+    ' Helper class to store user information
+    Private Class UserItem
+        Public Property UserId As Integer
+        Public Property FullName As String
+
+        Public Overrides Function ToString() As String
+            Return FullName
+        End Function
+    End Class
+
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ' Validate required fields
         If String.IsNullOrWhiteSpace(txtItemName.Text) Then
@@ -103,9 +183,9 @@ Public Class AddSupply
             Return
         End If
 
-        If String.IsNullOrWhiteSpace(txtUnitOfMeasure.Text) Then
+        If cboUnitOfMeasure.SelectedIndex <= 0 AndAlso String.IsNullOrWhiteSpace(cboUnitOfMeasure.Text) Then
             MessageBox.Show("Please enter the unit of measure.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtUnitOfMeasure.Focus()
+            cboUnitOfMeasure.Focus()
             Return
         End If
 
@@ -125,23 +205,70 @@ Public Class AddSupply
             ' Calculate total cost
             Dim totalCost As Decimal = numQuantity.Value * numUnitCost.Value
 
+            ' Get assignedTo user ID (if selected)
+            Dim assignedToId As Integer? = Nothing
+            If cboAssignedTo.SelectedIndex > 0 AndAlso TypeOf cboAssignedTo.SelectedItem Is UserItem Then
+                assignedToId = CType(cboAssignedTo.SelectedItem, UserItem).UserId
+            End If
+
             Dim success = DatabaseConnection.AddSupply(
                 txtItemName.Text.Trim(),
                 GetComboValue(cboCategory, "Others"),
                 txtDescription.Text.Trim(),
-                txtUnitOfMeasure.Text.Trim(),
+                GetComboValue(cboUnitOfMeasure, ""),
                 CInt(numQuantity.Value),
                 dtpDateReceived.Value,
                 numUnitCost.Value,
                 totalCost,
-                txtSupplier.Text.Trim(),
+                GetComboValue(cboSupplier, ""),
                 GetComboValue(cboSourceOfFunds, ""),
                 txtLocation.Text.Trim(),
-                GetComboValue(cboStockStatus, "Available")
+                GetComboValue(cboStockStatus, "Available"),
+                assignedToId
             )
 
             If success Then
-                MessageBox.Show("Supply added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                ' If supply is assigned to a user, create borrowed_items record
+                If assignedToId.HasValue AndAlso assignedToId.Value > 0 Then
+                    Try
+                        Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+                        If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                            ' Get the newly created supply ID
+                            Dim newSupplyId As Integer = 0
+                            Using cmd As New MySqlCommand("SELECT LAST_INSERT_ID()", conn)
+                                Dim result = cmd.ExecuteScalar()
+                                If result IsNot Nothing Then
+                                    newSupplyId = Convert.ToInt32(result)
+                                End If
+                            End Using
+
+                            If newSupplyId > 0 Then
+                                ' Create borrowed_items record
+                                Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, itemName, borrowerName, borrowerPosition, " &
+                                                            "departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
+                                                            "SELECT 'supply', s.supplyId, s.itemName, CONCAT(u.firstName, ' ', u.lastName), u.position, " &
+                                                            "u.departmentId, NOW(), NULL, 'Borrowed', @remarks, NOW(), NOW() " &
+                                                            "FROM supplies s, users u WHERE s.supplyId = @supplyId AND u.userId = @userId"
+
+                                Using borrowCmd As New MySqlCommand(borrowQuery, conn)
+                                    borrowCmd.Parameters.AddWithValue("@supplyId", newSupplyId)
+                                    borrowCmd.Parameters.AddWithValue("@userId", assignedToId.Value)
+                                    borrowCmd.Parameters.AddWithValue("@remarks", "Supply assigned: " & txtItemName.Text.Trim())
+                                    borrowCmd.ExecuteNonQuery()
+                                End Using
+
+                                System.Diagnostics.Debug.WriteLine($"[v0] AddSupply - Created borrowed_items record for supplyId: {newSupplyId}, userId: {assignedToId.Value}")
+                            End If
+
+                            If conn.State = ConnectionState.Open Then conn.Close()
+                        End If
+                    Catch ex As Exception
+                        System.Diagnostics.Debug.WriteLine("[v0] AddSupply - Error creating borrowed_items: " & ex.Message)
+                        ' Don't fail the add operation if borrowed_items creation fails
+                    End Try
+                End If
+
+                MessageBox.Show("Supply added successfully!" & If(assignedToId.HasValue, Environment.NewLine & "The supply will appear in the assigned user's 'My Borrowed Items'.", ""), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 NavigateBackToList()
             End If
         Catch ex As Exception

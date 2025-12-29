@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -372,15 +372,15 @@ Partial Class UC_MaintenanceManagement
     End Sub
 
     Friend WithEvents admin_label_MaintenanceManagement As Label
-    Friend WithEvents btnApprove As Resources.Controls.RoundedButton
-    Friend WithEvents btnDelete As Resources.Controls.RoundedButton
+    Friend WithEvents btnApprove As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlMaintenancemanagement As Label
-    Friend WithEvents btnRefresh As Resources.Controls.RoundedButton
-    Friend WithEvents btnGenerateMaintenance As Resources.Controls.RoundedButton
-    Friend WithEvents btnReject As Resources.Controls.RoundedButton
-    Friend WithEvents btnAssign As Resources.Controls.RoundedButton
+    Friend WithEvents btnRefresh As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnGenerateMaintenance As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnReject As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnAssign As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents maintenancemanagementsearchbar As TextBox
     Friend WithEvents maintenanceId As DataGridViewTextBoxColumn

@@ -392,6 +392,6 @@ Partial Class AuditReportAdmin
     Friend WithEvents txtIPAddress As TextBox
     Friend WithEvents txtUserAgent As TextBox
     Friend WithEvents btnBack As Button
-    Friend WithEvents btnGenerateCSV As Resources.Controls.RoundedButton
-    Friend WithEvents btnGeneratePDF As Resources.Controls.RoundedButton
+    Friend WithEvents btnGenerateCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnGeneratePDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

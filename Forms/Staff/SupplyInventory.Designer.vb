@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class SupplyInventory
     Inherits System.Windows.Forms.UserControl
 
@@ -311,7 +311,7 @@ Partial Class SupplyInventory
     Friend Shadows WithEvents location As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents stockstatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents btnrequestsupply As Resources.Controls.RoundedButton
+    Friend WithEvents btnrequestsupply As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents supplyinventorysearchbar As System.Windows.Forms.TextBox
     Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
     Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox

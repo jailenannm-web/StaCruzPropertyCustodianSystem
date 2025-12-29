@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class SuppliesInventoryReport
     Inherits System.Windows.Forms.Form
 
@@ -656,7 +656,7 @@ Partial Class SuppliesInventoryReport
     Friend WithEvents remarks As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents createdAt As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btn_Back As Resources.Controls.RoundedButton
-    Friend WithEvents btnPDF As Resources.Controls.RoundedButton
-    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents btn_Back As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

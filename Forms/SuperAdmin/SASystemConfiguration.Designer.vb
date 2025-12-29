@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -336,7 +336,7 @@ Partial Class SASystemConfiguration
     Friend WithEvents comboCategoris As ComboBox
     Friend WithEvents combostatus As ComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents pm_as_propertyman As Resources.Controls.RoundedPanel
+    Friend WithEvents pm_as_propertyman As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents DBHost As Label
     Friend WithEvents txtHost As TextBox
     Friend WithEvents txtPort As TextBox

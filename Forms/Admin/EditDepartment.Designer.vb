@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class EditDepartment
     Inherits System.Windows.Forms.UserControl
 
@@ -554,9 +554,9 @@ Partial Class EditDepartment
     End Sub
 
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents instructions As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel2 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents ContextMenuStrip2 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
@@ -568,8 +568,8 @@ Partial Class EditDepartment
     Friend WithEvents lblemail As System.Windows.Forms.Label
     Friend WithEvents head_of_department As System.Windows.Forms.Label
     Friend WithEvents department_name As System.Windows.Forms.Label
-    Friend WithEvents btnCancel As Resources.Controls.RoundedButton
-    Friend WithEvents btnSave As Resources.Controls.RoundedButton
+    Friend WithEvents btnCancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnSave As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents email As System.Windows.Forms.TextBox
     Friend Shadows WithEvents location As System.Windows.Forms.TextBox
     Friend WithEvents contactNumber As System.Windows.Forms.TextBox

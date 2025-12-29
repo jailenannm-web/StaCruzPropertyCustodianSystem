@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class AddUserManagement1
     Inherits System.Windows.Forms.UserControl
 
@@ -556,10 +556,10 @@ Partial Class AddUserManagement1
 
     End Sub
 
-    Friend WithEvents RoundedPanel1 As Resources.Controls.RoundedPanel
+    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents instructions As System.Windows.Forms.Label
     Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
-    Friend WithEvents uc_um_edituser As Resources.Controls.RoundedPanel
+    Friend WithEvents uc_um_edituser As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
     Friend WithEvents province As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents suffixAdmin As System.Windows.Forms.ComboBox
@@ -590,6 +590,6 @@ Partial Class AddUserManagement1
     Friend WithEvents lastName As System.Windows.Forms.TextBox
     Friend WithEvents um_edituser_fullname As System.Windows.Forms.Label
     Friend WithEvents firstName As System.Windows.Forms.TextBox
-    Friend WithEvents um_edituser_save As Resources.Controls.RoundedButton
-    Friend WithEvents um_edituser_backbtn As Resources.Controls.RoundedButton
+    Friend WithEvents um_edituser_save As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents um_edituser_backbtn As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

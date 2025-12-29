@@ -968,8 +968,8 @@ Public Class UC_PropertyManagement1
             End If
 
             If propertyID > 0 Then
-                Dim propertyIssuance As New PropertyIssuance(propertyID)
-                propertyIssuance.ShowDialog()
+                Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt(propertyID)
+                propertyAcknowledgement.ShowDialog()
             End If
         Catch ex As Exception
             MessageBox.Show("Error opening property slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1079,7 +1079,7 @@ Public Class UC_PropertyManagement1
                 Return
             End If
 
-            System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] Opening PropertyIssuance with PropertyID: " & propertyID.ToString())
+            System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] Opening PropertyAcknowledgementReceipt with PropertyID: " & propertyID.ToString())
 
             ' Get propertyNumber if available
             Dim propNumber As String = ""
@@ -1118,8 +1118,8 @@ Public Class UC_PropertyManagement1
             End If
             
             ' Open Property Issuance Slip with property data
-            Dim propertyIssuance As New PropertyIssuance(propertyID, propNumber)
-            propertyIssuance.ShowDialog()
+            Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt(propertyID, propNumber)
+            propertyAcknowledgement.ShowDialog()
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show("Error opening property slip: " & ex.Message & Environment.NewLine & "Stack Trace: " & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1177,8 +1177,8 @@ Public Class UC_PropertyManagement1
                 End If
 
                 ' Open Property Issuance Slip with property data
-                Dim propertyIssuance As New PropertyIssuance(propertyID, propNumber)
-                propertyIssuance.ShowDialog()
+                Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt(propertyID, propNumber)
+                propertyAcknowledgement.ShowDialog()
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("Error opening property slip on double-click: " & ex.Message)

@@ -72,9 +72,9 @@ Partial Class AuditReportAdmin
         Me.lblFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFrom.Location = New System.Drawing.Point(50, 80)
         Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(50, 18)
+        Me.lblFrom.Size = New System.Drawing.Size(100, 18)
         Me.lblFrom.TabIndex = 1
-        Me.lblFrom.Text = "From :"
+        Me.lblFrom.Text = "Date Created :"
         '
         'lblTo
         '
@@ -82,24 +82,27 @@ Partial Class AuditReportAdmin
         Me.lblTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTo.Location = New System.Drawing.Point(350, 80)
         Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(35, 18)
+        Me.lblTo.Size = New System.Drawing.Size(50, 18)
         Me.lblTo.TabIndex = 2
-        Me.lblTo.Text = "To :"
+        Me.lblTo.Text = "Time :"
         '
         'dtpFrom
         '
         Me.dtpFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpFrom.Location = New System.Drawing.Point(110, 78)
+        Me.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short
+        Me.dtpFrom.Location = New System.Drawing.Point(160, 78)
         Me.dtpFrom.Name = "dtpFrom"
-        Me.dtpFrom.Size = New System.Drawing.Size(220, 24)
+        Me.dtpFrom.Size = New System.Drawing.Size(150, 24)
         Me.dtpFrom.TabIndex = 3
         '
         'dtpTo
         '
         Me.dtpTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpTo.Location = New System.Drawing.Point(390, 78)
+        Me.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtpTo.Location = New System.Drawing.Point(400, 78)
         Me.dtpTo.Name = "dtpTo"
-        Me.dtpTo.Size = New System.Drawing.Size(220, 24)
+        Me.dtpTo.ShowUpDown = True
+        Me.dtpTo.Size = New System.Drawing.Size(120, 24)
         Me.dtpTo.TabIndex = 4
         '
         'lblUserName
@@ -395,6 +398,6 @@ Partial Class AuditReportAdmin
     Friend WithEvents txtIPAddress As TextBox
     Friend WithEvents txtUserAgent As TextBox
     Friend WithEvents btnBack As Button
-    Friend WithEvents btnGenerateCSV As Resources.Controls.RoundedButton
-    Friend WithEvents btnGeneratePDF As Resources.Controls.RoundedButton
+    Friend WithEvents btnGenerateCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnGeneratePDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class
