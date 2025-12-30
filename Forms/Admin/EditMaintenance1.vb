@@ -1,8 +1,14 @@
 Imports System
 Imports System.Data
+Imports System.Drawing
 Imports System.Windows.Forms
+Imports MySql.Data.MySqlClient
 Imports Microsoft.VisualBasic
 
+''' <summary>
+''' Edit Maintenance Form
+''' Allows users to edit existing maintenance records based on the database schema
+''' </summary>
 Public Class EditMaintenance1
     Inherits UserControl
 
@@ -36,136 +42,209 @@ Public Class EditMaintenance1
     Private Sub LoadMaintenanceData()
         Try
             If _maintenanceID <= 0 Then Return
+            
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn Is Nothing Then
+                MessageBox.Show("Unable to connect to database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
 
-            Dim dt As DataTable = DatabaseConnection.GetAllMaintenance()
-            For Each row As DataRow In dt.Rows
-                Dim rowID As Integer = 0
-                If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(row("maintenanceId")) Then
-                    rowID = Convert.ToInt32(row("maintenanceId"))
-                ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(row("maintenance_id")) Then
-                    rowID = Convert.ToInt32(row("maintenance_id"))
-                End If
+            If Not DatabaseConnection.SafeOpenConnection(conn) Then
+                MessageBox.Show("Failed to open database connection.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            ' Setup combo boxes
+            SetupComboBoxes()
+
+            Dim query As String = "SELECT m.* " &
+                                 "FROM maintenance m " &
+                                 "WHERE m.maintenanceId = @maintenanceID"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@maintenanceID", _maintenanceID)
                 
-                If rowID = _maintenanceID Then
-                    ' Load data into form fields
-                    ' Note: Adjust field names based on actual form controls
-                    Try
-                        If dt.Columns.Contains("propertyItemName") AndAlso Not IsDBNull(row("propertyItemName")) Then
-                            ' propertyNameTxt.Text = row("propertyItemName").ToString()
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        ' Populate form fields (read-only property info)
+                        propertyNameTxt.Text = If(IsDBNull(reader("propertyItemName")), "", reader("propertyItemName").ToString())
+                        serialNumberTxt.Text = If(IsDBNull(reader("serialNumber")), "", reader("serialNumber").ToString())
+                        propertyLocation.Text = If(IsDBNull(reader("location")), "", reader("location").ToString())
+                        
+                        ' Condition Before
+                        If Not IsDBNull(reader("conditionBeforeMaint")) Then
+                            conditionStatusCmbo.SelectedItem = reader("conditionBeforeMaint").ToString()
                         End If
-                        If dt.Columns.Contains("maintenanceDate") AndAlso Not IsDBNull(row("maintenanceDate")) Then
-                            ' DateTimePicker1.Value = Convert.ToDateTime(row("maintenanceDate"))
+                        
+                        ' Type of Maintenance
+                        If Not IsDBNull(reader("typeOfMaintenance")) Then
+                            categoryCmbo.SelectedItem = reader("typeOfMaintenance").ToString()
                         End If
-                        If dt.Columns.Contains("typeOfMaintenance") AndAlso Not IsDBNull(row("typeOfMaintenance")) Then
-                            ' ComboBox3.SelectedItem = row("typeOfMaintenance").ToString()
+                        
+                        ' Assigned Technician
+                        assignedEmployeeTxt.Text = If(IsDBNull(reader("assignedTechnician")), "", reader("assignedTechnician").ToString())
+                        
+                        ' Maintenance Date
+                        If Not IsDBNull(reader("maintenanceDate")) Then
+                            datePurchasedDate.Value = Convert.ToDateTime(reader("maintenanceDate"))
                         End If
-                        If dt.Columns.Contains("maintenanceDetails") AndAlso Not IsDBNull(row("maintenanceDetails")) Then
-                            ' TextBox1.Text = row("maintenanceDetails").ToString()
+                        
+                        ' Maintenance Details
+                        supplierTxt.Text = If(IsDBNull(reader("maintenanceDetails")), "", reader("maintenanceDetails").ToString())
+                        
+                        ' Diagnosis
+                        TextBox1.Text = If(IsDBNull(reader("diagnosis")), "", reader("diagnosis").ToString())
+                        
+                        ' Action Taken
+                        TextBox2.Text = If(IsDBNull(reader("actionTaken")), "", reader("actionTaken").ToString())
+                        
+                        ' Parts Replaced
+                        TextBox3.Text = If(IsDBNull(reader("partsReplaced")), "", reader("partsReplaced").ToString())
+                        
+                        ' Cost
+                        If Not IsDBNull(reader("costMaterialsLabor")) Then
+                            no_of_employees_numeric.Value = Convert.ToDecimal(reader("costMaterialsLabor"))
                         End If
-                        If dt.Columns.Contains("assignedTechnician") AndAlso Not IsDBNull(row("assignedTechnician")) Then
-                            ' assignedEmployeeTxt.Text = row("assignedTechnician").ToString()
+                        
+                        ' Condition After
+                        If Not IsDBNull(reader("conditionAfterMaint")) Then
+                            ComboBox1.SelectedItem = reader("conditionAfterMaint").ToString()
                         End If
-                        If dt.Columns.Contains("costMaterialsLabor") AndAlso Not IsDBNull(row("costMaterialsLabor")) Then
-                            ' Label3.Text = row("costMaterialsLabor").ToString()
+                        
+                        ' Status
+                        If Not IsDBNull(reader("status")) Then
+                            ComboBox2.SelectedItem = reader("status").ToString()
                         End If
-                    Catch
-                    End Try
-                    Exit For
-                End If
-            Next
+                        
+                    Else
+                        MessageBox.Show("Maintenance record not found.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        NavigateBack()
+                    End If
+                End Using
+            End Using
+            
+            If conn.State = ConnectionState.Open Then conn.Close()
+            
         Catch ex As Exception
-            MessageBox.Show("Error loading maintenance data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error loading maintenance data: " & ex.Message, "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("LoadMaintenanceData Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub
+
+    Private Sub SetupComboBoxes()
+        ' Condition Before Maintenance
+        If conditionStatusCmbo.Items.Count = 0 Then
+            conditionStatusCmbo.Items.AddRange(New Object() {"Good", "Needs Repair", "Damaged"})
+        End If
+        
+        ' Type of Maintenance
+        If categoryCmbo.Items.Count = 0 Then
+            categoryCmbo.Items.AddRange(New Object() {"Repair", "Replace", "Servicing"})
+        End If
+        
+        ' Condition After Maintenance
+        If ComboBox1.Items.Count = 0 Then
+            ComboBox1.Items.AddRange(New Object() {"Good", "Needs Further Repair"})
+        End If
+        
+        ' Status
+        If ComboBox2.Items.Count = 0 Then
+            ComboBox2.Items.AddRange(New Object() {"Completed", "Ongoing", "For Review"})
+        End If
+    End Sub
+
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs)
         NavigateBack()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If Not EnsureModifyPermission() Then
-            Return
-        End If
-        
-        If _maintenanceID <= 0 Then
-            MessageBox.Show("No maintenance record selected for editing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
-        
         Try
+            ' Check permissions
+            If Not EnsureModifyPermission() Then Return
+            
+            If _maintenanceID <= 0 Then
+                MessageBox.Show("No maintenance record selected for editing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
             ' Validate required fields
-            ' Note: Adjust field names based on actual form controls
-            ' For now, using placeholder logic
-            
-            ' Get service date (assuming DateTimePicker1 exists)
-            Dim serviceDate As Date = Date.Today
-            ' If DateTimePicker1 IsNot Nothing Then serviceDate = DateTimePicker1.Value
-            
-            ' Get service type (assuming ComboBox3 exists)
-            Dim serviceType As String = "Repair"
-            ' If ComboBox3.SelectedIndex >= 0 Then serviceType = ComboBox3.SelectedItem.ToString()
-            
-            ' Get description (assuming TextBox1 exists)
-            Dim description As String = ""
-            ' If TextBox1 IsNot Nothing Then description = TextBox1.Text.Trim()
-            
-            ' Get service provider (assuming TextBox2 exists)
-            Dim serviceProvider As String = ""
-            ' If TextBox2 IsNot Nothing Then serviceProvider = TextBox2.Text.Trim()
-            
-            ' Get provider contact (assuming TextBox3 exists)
-            Dim providerContact As String = ""
-            ' If TextBox3 IsNot Nothing Then providerContact = TextBox3.Text.Trim()
-            
-            ' Get cost (assuming Label3 or TextBox exists)
-            Dim cost As Decimal = 0
-            ' If Label3 IsNot Nothing Then Decimal.TryParse(Label3.Text, cost)
-            
-            ' Get technician assigned (assuming assignedEmployeeTxt exists)
-            Dim technicianAssigned As String = ""
-            ' If assignedEmployeeTxt IsNot Nothing Then technicianAssigned = assignedEmployeeTxt.Text.Trim()
-            
-            ' Get status (assuming conditionStatusCmbo exists)
-            Dim status As String = "Ongoing"
-            ' If conditionStatusCmbo.SelectedIndex >= 0 Then status = conditionStatusCmbo.SelectedItem.ToString()
-            
-            ' Get admin info
-            Dim adminID As Integer? = Nothing
-            Dim adminName As String = ""
-            Dim adminUserType As String = ""
-            If SessionContext.CurrentUserID.HasValue Then
-                adminID = SessionContext.CurrentUserID.Value
-                adminName = SessionContext.CurrentUsername
-                adminUserType = SessionContext.CurrentRole
+            If String.IsNullOrWhiteSpace(propertyNameTxt.Text) Then
+                MessageBox.Show("Property Item Name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                propertyNameTxt.Focus()
+                Return
             End If
             
-            ' Update maintenance record
-            Dim success As Boolean = DatabaseConnection.UpdateMaintenanceEntry(
-                _maintenanceID,
-                serviceDate,
-                serviceType,
-                description,
-                serviceProvider,
-                providerContact,
-                cost,
-                Nothing, ' nextSchedule
-                technicianAssigned,
-                status,
-                "", ' remarks
-                0, ' maintenanceIntervalDays
-                adminID,
-                adminName,
-                adminUserType
-            )
-            
-            If success Then
-                MessageBox.Show("Maintenance record updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                NavigateBack()
-            Else
-                MessageBox.Show("Failed to update maintenance record. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If categoryCmbo.SelectedIndex < 0 Then
+                MessageBox.Show("Type of Maintenance is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                categoryCmbo.Focus()
+                Return
             End If
+
+            ' Prepare data for update
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn Is Nothing Then
+                MessageBox.Show("Unable to connect to database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            If Not DatabaseConnection.SafeOpenConnection(conn) Then
+                MessageBox.Show("Failed to open database connection.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            Dim query As String = "UPDATE maintenance SET " &
+                "conditionBeforeMaint = @conditionBeforeMaint, " &
+                "typeOfMaintenance = @typeOfMaintenance, " &
+                "assignedTechnician = @assignedTechnician, " &
+                "maintenanceDate = @maintenanceDate, " &
+                "maintenanceDetails = @maintenanceDetails, " &
+                "costMaterialsLabor = @costMaterialsLabor, " &
+                "conditionAfterMaint = @conditionAfterMaint, " &
+                "status = @status, " &
+                "diagnosis = @diagnosis, " &
+                "actionTaken = @actionTaken, " &
+                "partsReplaced = @partsReplaced, " &
+                "updatedAt = NOW() " &
+                "WHERE maintenanceId = @maintenanceID"
+
+            Using cmd As New MySqlCommand(query, conn)
+                ' Add parameters
+                cmd.Parameters.AddWithValue("@maintenanceID", _maintenanceID)
+                cmd.Parameters.AddWithValue("@conditionBeforeMaint", If(conditionStatusCmbo.SelectedItem IsNot Nothing, conditionStatusCmbo.SelectedItem.ToString(), "Good"))
+                cmd.Parameters.AddWithValue("@typeOfMaintenance", categoryCmbo.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@assignedTechnician", If(String.IsNullOrWhiteSpace(assignedEmployeeTxt.Text), DBNull.Value, CType(assignedEmployeeTxt.Text.Trim(), Object)))
+                cmd.Parameters.AddWithValue("@maintenanceDate", datePurchasedDate.Value.Date)
+                cmd.Parameters.AddWithValue("@maintenanceDetails", If(String.IsNullOrWhiteSpace(supplierTxt.Text), DBNull.Value, CType(supplierTxt.Text.Trim(), Object)))
+                cmd.Parameters.AddWithValue("@costMaterialsLabor", no_of_employees_numeric.Value)
+                cmd.Parameters.AddWithValue("@conditionAfterMaint", If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), DBNull.Value))
+                cmd.Parameters.AddWithValue("@status", If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "Ongoing"))
+                cmd.Parameters.AddWithValue("@diagnosis", If(String.IsNullOrWhiteSpace(TextBox1.Text), DBNull.Value, CType(TextBox1.Text.Trim(), Object)))
+                cmd.Parameters.AddWithValue("@actionTaken", If(String.IsNullOrWhiteSpace(TextBox2.Text), DBNull.Value, CType(TextBox2.Text.Trim(), Object)))
+                cmd.Parameters.AddWithValue("@partsReplaced", If(String.IsNullOrWhiteSpace(TextBox3.Text), DBNull.Value, CType(TextBox3.Text.Trim(), Object)))
+
+                ' Execute update
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Maintenance record updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    
+                    ' Audit logging can be added later if needed
+                    
+                    ' Navigate back
+                    NavigateBack()
+                Else
+                    MessageBox.Show("Failed to update maintenance record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End Using
+            
+            If conn.State = ConnectionState.Open Then conn.Close()
+            
+        Catch ex As MySqlException
+            MessageBox.Show("Database error: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("EditMaintenance1 SQL Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         Catch ex As Exception
-            MessageBox.Show("Error updating maintenance record: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving maintenance: " & ex.Message, "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             System.Diagnostics.Debug.WriteLine("EditMaintenance1 btnSave_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
         End Try
     End Sub

@@ -220,20 +220,20 @@ Public Class UC_MaintenanceRequestManagement
         ' Check SADashboard first (parent class)
         Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
         If saDashboard IsNot Nothing Then
-            saDashboard.LoadUserControl(New AddMaintenance1())
+            saDashboard.LoadUserControl(New EditMaintenance1())
             Return
         End If
         
         Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
         If superAdminDashboard IsNot Nothing Then
-            superAdminDashboard.LoadUserControl(New AddMaintenance1())
+            superAdminDashboard.LoadUserControl(New EditMaintenance1())
             Return
         End If
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
         If parentDashboard IsNot Nothing Then
-            ' Open AddMaintenance1 form for adding maintenance requests
-            parentDashboard.LoadUserControl(New AddMaintenance1())
+            ' Open EditMaintenance1 form for adding/editing maintenance
+            parentDashboard.LoadUserControl(New EditMaintenance1())
         End If
     End Sub
 
@@ -395,16 +395,35 @@ Public Class UC_MaintenanceRequestManagement
                 Return
             End If
 
-            Dim remarks As String = InputBox("Enter approval remarks (optional):", "Approve Maintenance Request", "")
-            Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
+            ' Ask for technician assignment using professional dialog
+            Using techDialog As New AssignTechnicianDialog()
+                If techDialog.ShowDialog() <> DialogResult.OK Then
+                    Return ' User cancelled
+                End If
+                
+                Dim assignedTechnician As String = techDialog.TechnicianName
+                If String.IsNullOrWhiteSpace(assignedTechnician) Then
+                    MessageBox.Show("Technician assignment is required to approve the maintenance request.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
+                End If
 
-            ' Update maintenance request status to approved
-            If DatabaseConnection.ApproveMaintenanceRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
-                MessageBox.Show("Maintenance request approved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                LoadMaintenanceRequestData()
-            Else
-                MessageBox.Show("Failed to approve maintenance request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+                ' Ask for approval remarks using professional dialog
+                Dim remarks As String = ""
+                Using remarksDialog As New RemarksDialog("Approval Remarks", "Approve", "Enter any remarks for this approval (optional)")
+                    If remarksDialog.ShowDialog() = DialogResult.OK Then
+                        remarks = remarksDialog.Remarks
+                    End If
+                End Using
+                Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
+
+                ' Update maintenance request status to approved with assigned technician
+                If DatabaseConnection.ApproveMaintenanceRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks, assignedTechnician) Then
+                    MessageBox.Show("Maintenance request approved successfully and assigned to " & assignedTechnician & ".", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    LoadMaintenanceRequestData()
+                Else
+                    MessageBox.Show("Failed to approve maintenance request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End Using
         Catch ex As Exception
             Dim errorMsg As String = "An error occurred while approving the maintenance request."
             If TypeOf ex Is MySqlException Then
@@ -447,11 +466,18 @@ Public Class UC_MaintenanceRequestManagement
                 Return
             End If
 
-            Dim remarks As String = InputBox("Enter rejection reason (required):", "Reject Maintenance Request", "")
-            If String.IsNullOrWhiteSpace(remarks) Then
-                MessageBox.Show("Rejection reason is required.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
+            ' Ask for rejection reason using professional dialog
+            Dim remarks As String = ""
+            Using remarksDialog As New RemarksDialog("Rejection Reason", "Reject Request", "Please provide a reason for rejecting this maintenance request (required)")
+                If remarksDialog.ShowDialog() <> DialogResult.OK Then
+                    Return ' User cancelled
+                End If
+                remarks = remarksDialog.Remarks
+                If String.IsNullOrWhiteSpace(remarks) Then
+                    MessageBox.Show("Rejection reason is required.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
+                End If
+            End Using
 
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 

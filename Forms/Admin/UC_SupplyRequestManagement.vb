@@ -263,11 +263,18 @@ Public Class UC_SupplyRequestManagement
                 Return
             End If
 
-            Dim remarks As String = InputBox("Enter rejection reason (required):", "Reject Supply Request", "")
-            If String.IsNullOrWhiteSpace(remarks) Then
-                MessageBox.Show("Rejection reason is required.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
+            ' Ask for rejection reason using professional dialog
+            Dim remarks As String = ""
+            Using remarksDialog As New RemarksDialog("Rejection Reason", "Reject Request", "Please provide a reason for rejecting this supply request (required)")
+                If remarksDialog.ShowDialog() <> DialogResult.OK Then
+                    Return ' User cancelled
+                End If
+                remarks = remarksDialog.Remarks
+                If String.IsNullOrWhiteSpace(remarks) Then
+                    MessageBox.Show("Rejection reason is required.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
+                End If
+            End Using
 
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
@@ -325,7 +332,14 @@ Public Class UC_SupplyRequestManagement
                 Return
             End If
 
-            Dim remarks As String = InputBox("Enter approval remarks (optional):", "Approve Supply Request", "")
+            ' Ask for approval remarks using professional dialog
+            Dim remarks As String = ""
+            Using remarksDialog As New RemarksDialog("Approval Remarks", "Approve Request", "Enter any remarks for this supply request approval (optional)")
+                If remarksDialog.ShowDialog() = DialogResult.OK Then
+                    remarks = remarksDialog.Remarks
+                End If
+            End Using
+            
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
             If DatabaseConnection.ApproveSupplyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then

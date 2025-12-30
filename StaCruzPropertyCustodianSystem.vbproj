@@ -238,12 +238,6 @@
     <Compile Include="Forms\Admin\AddDepartment.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Admin\AddMaintenance1.Designer.vb">
-      <DependentUpon>AddMaintenance1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Admin\AddMaintenance1.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Forms\Admin\AddProperty.Designer.vb">
       <DependentUpon>AddProperty.vb</DependentUpon>
     </Compile>
@@ -284,6 +278,12 @@
       <DependentUpon>AssignRequestManagement.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Admin\AssignRequestManagement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\AddMaintenance.Designer.vb">
+      <DependentUpon>AddMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin\AddMaintenance.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Admin\EditMaintenance1.Designer.vb">
@@ -480,9 +480,6 @@
     <EmbeddedResource Include="Forms\Admin\AddDepartment.resx">
       <DependentUpon>AddDepartment.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Admin\AddMaintenance1.resx">
-      <DependentUpon>AddMaintenance1.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\AddProperty.resx">
       <DependentUpon>AddProperty.vb</DependentUpon>
     </EmbeddedResource>
@@ -512,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\EditDepartment.resx">
       <DependentUpon>EditDepartment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin\AddMaintenance.resx">
+      <DependentUpon>AddMaintenance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Admin\EditMaintenance1.resx">
       <DependentUpon>EditMaintenance1.vb</DependentUpon>
@@ -755,9 +755,7 @@
   </ItemGroup>
   <!-- CUSTOM CONTROLS -->
   <ItemGroup>
-    <Compile Include="Resources\Controls\RoundedButton.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Resources\Controls\RoundedButton.vb" />
     <Compile Include="Resources\Controls\RoundedPanel.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -941,4 +939,12 @@
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <ItemGroup>
+    <Compile Include="Forms\Admin\AssignTechnicianDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\RemarksDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

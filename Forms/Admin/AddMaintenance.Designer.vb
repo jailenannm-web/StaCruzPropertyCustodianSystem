@@ -2,7 +2,7 @@ Imports System
 Imports System.Windows.Forms
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class EditMaintenance1
+Partial Class AddMaintenance
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
@@ -31,37 +31,39 @@ Partial Class EditMaintenance1
         Me.pnlBasicInfo = New System.Windows.Forms.Panel()
         Me.lblBasicInfo = New System.Windows.Forms.Label()
         Me.lblPropertyItemName = New System.Windows.Forms.Label()
-        Me.propertyNameTxt = New System.Windows.Forms.TextBox()
+        Me.cmbPropertyItem = New System.Windows.Forms.ComboBox()
         Me.lblSerialNumber = New System.Windows.Forms.Label()
-        Me.serialNumberTxt = New System.Windows.Forms.TextBox()
+        Me.txtSerialNumber = New System.Windows.Forms.TextBox()
         Me.lblLocation = New System.Windows.Forms.Label()
-        Me.propertyLocation = New System.Windows.Forms.TextBox()
+        Me.txtLocation = New System.Windows.Forms.TextBox()
+        Me.lblDepartment = New System.Windows.Forms.Label()
+        Me.cmbDepartment = New System.Windows.Forms.ComboBox()
         Me.pnlMaintenanceInfo = New System.Windows.Forms.Panel()
         Me.lblMaintenanceInfo = New System.Windows.Forms.Label()
         Me.lblConditionBefore = New System.Windows.Forms.Label()
-        Me.conditionStatusCmbo = New System.Windows.Forms.ComboBox()
+        Me.cmbConditionBefore = New System.Windows.Forms.ComboBox()
         Me.lblTypeOfMaintenance = New System.Windows.Forms.Label()
-        Me.categoryCmbo = New System.Windows.Forms.ComboBox()
+        Me.cmbTypeOfMaintenance = New System.Windows.Forms.ComboBox()
         Me.lblAssignedTechnician = New System.Windows.Forms.Label()
-        Me.assignedEmployeeTxt = New System.Windows.Forms.TextBox()
+        Me.cmbAssignedTechnician = New System.Windows.Forms.ComboBox()
         Me.lblMaintenanceDate = New System.Windows.Forms.Label()
-        Me.datePurchasedDate = New System.Windows.Forms.DateTimePicker()
+        Me.dtpMaintenanceDate = New System.Windows.Forms.DateTimePicker()
         Me.lblStatus = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.cmbStatus = New System.Windows.Forms.ComboBox()
         Me.pnlDetails = New System.Windows.Forms.Panel()
         Me.lblDetailsInfo = New System.Windows.Forms.Label()
         Me.lblMaintenanceDetails = New System.Windows.Forms.Label()
-        Me.supplierTxt = New System.Windows.Forms.TextBox()
+        Me.txtMaintenanceDetails = New System.Windows.Forms.TextBox()
         Me.lblDiagnosis = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtDiagnosis = New System.Windows.Forms.TextBox()
         Me.lblActionTaken = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtActionTaken = New System.Windows.Forms.TextBox()
         Me.lblPartsReplaced = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtPartsReplaced = New System.Windows.Forms.TextBox()
         Me.lblCost = New System.Windows.Forms.Label()
-        Me.no_of_employees_numeric = New System.Windows.Forms.NumericUpDown()
+        Me.txtCost = New System.Windows.Forms.TextBox()
         Me.lblConditionAfter = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmbConditionAfter = New System.Windows.Forms.ComboBox()
         Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.pnlMain.SuspendLayout()
@@ -80,7 +82,7 @@ Partial Class EditMaintenance1
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(285, 60)
         Me.lblTitle.TabIndex = 0
-        Me.lblTitle.Text = "Edit Maintenance"
+        Me.lblTitle.Text = "Add Maintenance"
         '
         'pnlMain
         '
@@ -119,11 +121,13 @@ Partial Class EditMaintenance1
         Me.pnlBasicInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlBasicInfo.Controls.Add(Me.lblBasicInfo)
         Me.pnlBasicInfo.Controls.Add(Me.lblPropertyItemName)
-        Me.pnlBasicInfo.Controls.Add(Me.propertyNameTxt)
+        Me.pnlBasicInfo.Controls.Add(Me.cmbPropertyItem)
         Me.pnlBasicInfo.Controls.Add(Me.lblSerialNumber)
-        Me.pnlBasicInfo.Controls.Add(Me.serialNumberTxt)
+        Me.pnlBasicInfo.Controls.Add(Me.txtSerialNumber)
         Me.pnlBasicInfo.Controls.Add(Me.lblLocation)
-        Me.pnlBasicInfo.Controls.Add(Me.propertyLocation)
+        Me.pnlBasicInfo.Controls.Add(Me.txtLocation)
+        Me.pnlBasicInfo.Controls.Add(Me.lblDepartment)
+        Me.pnlBasicInfo.Controls.Add(Me.cmbDepartment)
         Me.pnlBasicInfo.Location = New System.Drawing.Point(20, 20)
         Me.pnlBasicInfo.Name = "pnlBasicInfo"
         Me.pnlBasicInfo.Size = New System.Drawing.Size(1080, 150)
@@ -151,15 +155,15 @@ Partial Class EditMaintenance1
         Me.lblPropertyItemName.TabIndex = 1
         Me.lblPropertyItemName.Text = "Property Item Name *"
         '
-        'propertyNameTxt
+        'cmbPropertyItem
         '
-        Me.propertyNameTxt.BackColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(239, Byte), Integer))
-        Me.propertyNameTxt.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.propertyNameTxt.Location = New System.Drawing.Point(25, 85)
-        Me.propertyNameTxt.Name = "propertyNameTxt"
-        Me.propertyNameTxt.ReadOnly = True
-        Me.propertyNameTxt.Size = New System.Drawing.Size(340, 34)
-        Me.propertyNameTxt.TabIndex = 2
+        Me.cmbPropertyItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbPropertyItem.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cmbPropertyItem.FormattingEnabled = True
+        Me.cmbPropertyItem.Location = New System.Drawing.Point(25, 85)
+        Me.cmbPropertyItem.Name = "cmbPropertyItem"
+        Me.cmbPropertyItem.Size = New System.Drawing.Size(340, 34)
+        Me.cmbPropertyItem.TabIndex = 2
         '
         'lblSerialNumber
         '
@@ -172,15 +176,15 @@ Partial Class EditMaintenance1
         Me.lblSerialNumber.TabIndex = 3
         Me.lblSerialNumber.Text = "Serial Number"
         '
-        'serialNumberTxt
+        'txtSerialNumber
         '
-        Me.serialNumberTxt.BackColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(239, Byte), Integer))
-        Me.serialNumberTxt.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.serialNumberTxt.Location = New System.Drawing.Point(390, 85)
-        Me.serialNumberTxt.Name = "serialNumberTxt"
-        Me.serialNumberTxt.ReadOnly = True
-        Me.serialNumberTxt.Size = New System.Drawing.Size(325, 34)
-        Me.serialNumberTxt.TabIndex = 4
+        Me.txtSerialNumber.BackColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.txtSerialNumber.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtSerialNumber.Location = New System.Drawing.Point(390, 85)
+        Me.txtSerialNumber.Name = "txtSerialNumber"
+        Me.txtSerialNumber.ReadOnly = True
+        Me.txtSerialNumber.Size = New System.Drawing.Size(325, 34)
+        Me.txtSerialNumber.TabIndex = 4
         '
         'lblLocation
         '
@@ -193,15 +197,39 @@ Partial Class EditMaintenance1
         Me.lblLocation.TabIndex = 5
         Me.lblLocation.Text = "Location"
         '
-        'propertyLocation
+        'txtLocation
         '
-        Me.propertyLocation.BackColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(239, Byte), Integer))
-        Me.propertyLocation.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.propertyLocation.Location = New System.Drawing.Point(740, 85)
-        Me.propertyLocation.Name = "propertyLocation"
-        Me.propertyLocation.ReadOnly = True
-        Me.propertyLocation.Size = New System.Drawing.Size(310, 34)
-        Me.propertyLocation.TabIndex = 6
+        Me.txtLocation.BackColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(236, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.txtLocation.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtLocation.Location = New System.Drawing.Point(740, 85)
+        Me.txtLocation.Name = "txtLocation"
+        Me.txtLocation.ReadOnly = True
+        Me.txtLocation.Size = New System.Drawing.Size(310, 34)
+        Me.txtLocation.TabIndex = 6
+        '
+        'lblDepartment
+        '
+        Me.lblDepartment.AutoSize = True
+        Me.lblDepartment.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblDepartment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(41, Byte), Integer))
+        Me.lblDepartment.Location = New System.Drawing.Point(20, 55)
+        Me.lblDepartment.Name = "lblDepartment"
+        Me.lblDepartment.Size = New System.Drawing.Size(102, 26)
+        Me.lblDepartment.TabIndex = 7
+        Me.lblDepartment.Text = "Department"
+        Me.lblDepartment.Visible = False
+        '
+        'cmbDepartment
+        '
+        Me.cmbDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbDepartment.Enabled = False
+        Me.cmbDepartment.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cmbDepartment.FormattingEnabled = True
+        Me.cmbDepartment.Location = New System.Drawing.Point(25, 85)
+        Me.cmbDepartment.Name = "cmbDepartment"
+        Me.cmbDepartment.Size = New System.Drawing.Size(340, 34)
+        Me.cmbDepartment.TabIndex = 8
+        Me.cmbDepartment.Visible = False
         '
         'pnlMaintenanceInfo
         '
@@ -209,15 +237,15 @@ Partial Class EditMaintenance1
         Me.pnlMaintenanceInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlMaintenanceInfo.Controls.Add(Me.lblMaintenanceInfo)
         Me.pnlMaintenanceInfo.Controls.Add(Me.lblConditionBefore)
-        Me.pnlMaintenanceInfo.Controls.Add(Me.conditionStatusCmbo)
+        Me.pnlMaintenanceInfo.Controls.Add(Me.cmbConditionBefore)
         Me.pnlMaintenanceInfo.Controls.Add(Me.lblTypeOfMaintenance)
-        Me.pnlMaintenanceInfo.Controls.Add(Me.categoryCmbo)
+        Me.pnlMaintenanceInfo.Controls.Add(Me.cmbTypeOfMaintenance)
         Me.pnlMaintenanceInfo.Controls.Add(Me.lblAssignedTechnician)
-        Me.pnlMaintenanceInfo.Controls.Add(Me.assignedEmployeeTxt)
+        Me.pnlMaintenanceInfo.Controls.Add(Me.cmbAssignedTechnician)
         Me.pnlMaintenanceInfo.Controls.Add(Me.lblMaintenanceDate)
-        Me.pnlMaintenanceInfo.Controls.Add(Me.datePurchasedDate)
+        Me.pnlMaintenanceInfo.Controls.Add(Me.dtpMaintenanceDate)
         Me.pnlMaintenanceInfo.Controls.Add(Me.lblStatus)
-        Me.pnlMaintenanceInfo.Controls.Add(Me.ComboBox2)
+        Me.pnlMaintenanceInfo.Controls.Add(Me.cmbStatus)
         Me.pnlMaintenanceInfo.Location = New System.Drawing.Point(20, 180)
         Me.pnlMaintenanceInfo.Name = "pnlMaintenanceInfo"
         Me.pnlMaintenanceInfo.Size = New System.Drawing.Size(1080, 150)
@@ -245,16 +273,16 @@ Partial Class EditMaintenance1
         Me.lblConditionBefore.TabIndex = 1
         Me.lblConditionBefore.Text = "Condition Before"
         '
-        'conditionStatusCmbo
+        'cmbConditionBefore
         '
-        Me.conditionStatusCmbo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.conditionStatusCmbo.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.conditionStatusCmbo.FormattingEnabled = True
-        Me.conditionStatusCmbo.Items.AddRange(New Object() {"Good", "Needs Repair", "Damaged"})
-        Me.conditionStatusCmbo.Location = New System.Drawing.Point(25, 85)
-        Me.conditionStatusCmbo.Name = "conditionStatusCmbo"
-        Me.conditionStatusCmbo.Size = New System.Drawing.Size(200, 34)
-        Me.conditionStatusCmbo.TabIndex = 2
+        Me.cmbConditionBefore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbConditionBefore.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cmbConditionBefore.FormattingEnabled = True
+        Me.cmbConditionBefore.Items.AddRange(New Object() {"Good", "Needs Repair", "Damaged"})
+        Me.cmbConditionBefore.Location = New System.Drawing.Point(25, 85)
+        Me.cmbConditionBefore.Name = "cmbConditionBefore"
+        Me.cmbConditionBefore.Size = New System.Drawing.Size(200, 34)
+        Me.cmbConditionBefore.TabIndex = 2
         '
         'lblTypeOfMaintenance
         '
@@ -267,16 +295,16 @@ Partial Class EditMaintenance1
         Me.lblTypeOfMaintenance.TabIndex = 3
         Me.lblTypeOfMaintenance.Text = "Type of Maintenance *"
         '
-        'categoryCmbo
+        'cmbTypeOfMaintenance
         '
-        Me.categoryCmbo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.categoryCmbo.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.categoryCmbo.FormattingEnabled = True
-        Me.categoryCmbo.Items.AddRange(New Object() {"Repair", "Replace", "Servicing"})
-        Me.categoryCmbo.Location = New System.Drawing.Point(250, 85)
-        Me.categoryCmbo.Name = "categoryCmbo"
-        Me.categoryCmbo.Size = New System.Drawing.Size(200, 34)
-        Me.categoryCmbo.TabIndex = 4
+        Me.cmbTypeOfMaintenance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTypeOfMaintenance.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cmbTypeOfMaintenance.FormattingEnabled = True
+        Me.cmbTypeOfMaintenance.Items.AddRange(New Object() {"Repair", "Replace", "Servicing"})
+        Me.cmbTypeOfMaintenance.Location = New System.Drawing.Point(250, 85)
+        Me.cmbTypeOfMaintenance.Name = "cmbTypeOfMaintenance"
+        Me.cmbTypeOfMaintenance.Size = New System.Drawing.Size(200, 34)
+        Me.cmbTypeOfMaintenance.TabIndex = 4
         '
         'lblAssignedTechnician
         '
@@ -289,13 +317,15 @@ Partial Class EditMaintenance1
         Me.lblAssignedTechnician.TabIndex = 5
         Me.lblAssignedTechnician.Text = "Assigned Technician"
         '
-        'assignedEmployeeTxt
+        'cmbAssignedTechnician
         '
-        Me.assignedEmployeeTxt.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.assignedEmployeeTxt.Location = New System.Drawing.Point(475, 85)
-        Me.assignedEmployeeTxt.Name = "assignedEmployeeTxt"
-        Me.assignedEmployeeTxt.Size = New System.Drawing.Size(240, 34)
-        Me.assignedEmployeeTxt.TabIndex = 6
+        Me.cmbAssignedTechnician.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbAssignedTechnician.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cmbAssignedTechnician.FormattingEnabled = True
+        Me.cmbAssignedTechnician.Location = New System.Drawing.Point(475, 85)
+        Me.cmbAssignedTechnician.Name = "cmbAssignedTechnician"
+        Me.cmbAssignedTechnician.Size = New System.Drawing.Size(240, 34)
+        Me.cmbAssignedTechnician.TabIndex = 6
         '
         'lblMaintenanceDate
         '
@@ -308,36 +338,39 @@ Partial Class EditMaintenance1
         Me.lblMaintenanceDate.TabIndex = 7
         Me.lblMaintenanceDate.Text = "Maintenance Date"
         '
-        'datePurchasedDate
+        'dtpMaintenanceDate
         '
-        Me.datePurchasedDate.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.datePurchasedDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.datePurchasedDate.Location = New System.Drawing.Point(740, 85)
-        Me.datePurchasedDate.Name = "datePurchasedDate"
-        Me.datePurchasedDate.Size = New System.Drawing.Size(310, 34)
-        Me.datePurchasedDate.TabIndex = 8
+        Me.dtpMaintenanceDate.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.dtpMaintenanceDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpMaintenanceDate.Location = New System.Drawing.Point(740, 85)
+        Me.dtpMaintenanceDate.Name = "dtpMaintenanceDate"
+        Me.dtpMaintenanceDate.Size = New System.Drawing.Size(310, 34)
+        Me.dtpMaintenanceDate.TabIndex = 8
         '
         'lblStatus
         '
         Me.lblStatus.AutoSize = True
         Me.lblStatus.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.lblStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(37, Byte), Integer), CType(CType(41, Byte), Integer))
-        Me.lblStatus.Location = New System.Drawing.Point(735, 55)
+        Me.lblStatus.Location = New System.Drawing.Point(940, 55)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(58, 26)
         Me.lblStatus.TabIndex = 9
         Me.lblStatus.Text = "Status"
+        Me.lblStatus.Visible = False
         '
-        'ComboBox2
+        'cmbStatus
         '
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Completed", "Ongoing", "For Review"})
-        Me.ComboBox2.Location = New System.Drawing.Point(740, 85)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(200, 34)
-        Me.ComboBox2.TabIndex = 10
+        Me.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbStatus.Enabled = False
+        Me.cmbStatus.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cmbStatus.FormattingEnabled = True
+        Me.cmbStatus.Items.AddRange(New Object() {"Completed", "Ongoing", "For Review"})
+        Me.cmbStatus.Location = New System.Drawing.Point(945, 85)
+        Me.cmbStatus.Name = "cmbStatus"
+        Me.cmbStatus.Size = New System.Drawing.Size(105, 34)
+        Me.cmbStatus.TabIndex = 10
+        Me.cmbStatus.Visible = False
         '
         'pnlDetails
         '
@@ -345,17 +378,17 @@ Partial Class EditMaintenance1
         Me.pnlDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlDetails.Controls.Add(Me.lblDetailsInfo)
         Me.pnlDetails.Controls.Add(Me.lblMaintenanceDetails)
-        Me.pnlDetails.Controls.Add(Me.supplierTxt)
+        Me.pnlDetails.Controls.Add(Me.txtMaintenanceDetails)
         Me.pnlDetails.Controls.Add(Me.lblDiagnosis)
-        Me.pnlDetails.Controls.Add(Me.TextBox1)
+        Me.pnlDetails.Controls.Add(Me.txtDiagnosis)
         Me.pnlDetails.Controls.Add(Me.lblActionTaken)
-        Me.pnlDetails.Controls.Add(Me.TextBox2)
+        Me.pnlDetails.Controls.Add(Me.txtActionTaken)
         Me.pnlDetails.Controls.Add(Me.lblPartsReplaced)
-        Me.pnlDetails.Controls.Add(Me.TextBox3)
+        Me.pnlDetails.Controls.Add(Me.txtPartsReplaced)
         Me.pnlDetails.Controls.Add(Me.lblCost)
-        Me.pnlDetails.Controls.Add(Me.no_of_employees_numeric)
+        Me.pnlDetails.Controls.Add(Me.txtCost)
         Me.pnlDetails.Controls.Add(Me.lblConditionAfter)
-        Me.pnlDetails.Controls.Add(Me.ComboBox1)
+        Me.pnlDetails.Controls.Add(Me.cmbConditionAfter)
         Me.pnlDetails.Location = New System.Drawing.Point(20, 340)
         Me.pnlDetails.Name = "pnlDetails"
         Me.pnlDetails.Size = New System.Drawing.Size(1080, 255)
@@ -383,15 +416,15 @@ Partial Class EditMaintenance1
         Me.lblMaintenanceDetails.TabIndex = 1
         Me.lblMaintenanceDetails.Text = "Maintenance Details"
         '
-        'supplierTxt
+        'txtMaintenanceDetails
         '
-        Me.supplierTxt.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.supplierTxt.Location = New System.Drawing.Point(25, 85)
-        Me.supplierTxt.Multiline = True
-        Me.supplierTxt.Name = "supplierTxt"
-        Me.supplierTxt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.supplierTxt.Size = New System.Drawing.Size(340, 60)
-        Me.supplierTxt.TabIndex = 2
+        Me.txtMaintenanceDetails.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtMaintenanceDetails.Location = New System.Drawing.Point(25, 85)
+        Me.txtMaintenanceDetails.Multiline = True
+        Me.txtMaintenanceDetails.Name = "txtMaintenanceDetails"
+        Me.txtMaintenanceDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtMaintenanceDetails.Size = New System.Drawing.Size(340, 60)
+        Me.txtMaintenanceDetails.TabIndex = 2
         '
         'lblCost
         '
@@ -404,15 +437,14 @@ Partial Class EditMaintenance1
         Me.lblCost.TabIndex = 9
         Me.lblCost.Text = "Cost (Materials/Labor)"
         '
-        'no_of_employees_numeric
+        'txtCost
         '
-        Me.no_of_employees_numeric.DecimalPlaces = 2
-        Me.no_of_employees_numeric.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.no_of_employees_numeric.Location = New System.Drawing.Point(25, 190)
-        Me.no_of_employees_numeric.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
-        Me.no_of_employees_numeric.Name = "no_of_employees_numeric"
-        Me.no_of_employees_numeric.Size = New System.Drawing.Size(200, 34)
-        Me.no_of_employees_numeric.TabIndex = 10
+        Me.txtCost.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtCost.Location = New System.Drawing.Point(25, 190)
+        Me.txtCost.Name = "txtCost"
+        Me.txtCost.Size = New System.Drawing.Size(200, 34)
+        Me.txtCost.TabIndex = 10
+        Me.txtCost.Text = "0.00"
         '
         'lblConditionAfter
         '
@@ -425,16 +457,16 @@ Partial Class EditMaintenance1
         Me.lblConditionAfter.TabIndex = 11
         Me.lblConditionAfter.Text = "Condition After"
         '
-        'ComboBox1
+        'cmbConditionAfter
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Good", "Needs Further Repair"})
-        Me.ComboBox1.Location = New System.Drawing.Point(250, 190)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(240, 34)
-        Me.ComboBox1.TabIndex = 12
+        Me.cmbConditionAfter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbConditionAfter.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.cmbConditionAfter.FormattingEnabled = True
+        Me.cmbConditionAfter.Items.AddRange(New Object() {"Good", "Needs Further Repair"})
+        Me.cmbConditionAfter.Location = New System.Drawing.Point(250, 190)
+        Me.cmbConditionAfter.Name = "cmbConditionAfter"
+        Me.cmbConditionAfter.Size = New System.Drawing.Size(240, 34)
+        Me.cmbConditionAfter.TabIndex = 12
         '
         'lblDiagnosis
         '
@@ -447,15 +479,15 @@ Partial Class EditMaintenance1
         Me.lblDiagnosis.TabIndex = 3
         Me.lblDiagnosis.Text = "Diagnosis"
         '
-        'TextBox1
+        'txtDiagnosis
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.TextBox1.Location = New System.Drawing.Point(390, 85)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox1.Size = New System.Drawing.Size(325, 60)
-        Me.TextBox1.TabIndex = 4
+        Me.txtDiagnosis.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtDiagnosis.Location = New System.Drawing.Point(390, 85)
+        Me.txtDiagnosis.Multiline = True
+        Me.txtDiagnosis.Name = "txtDiagnosis"
+        Me.txtDiagnosis.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDiagnosis.Size = New System.Drawing.Size(325, 60)
+        Me.txtDiagnosis.TabIndex = 4
         '
         'lblActionTaken
         '
@@ -468,15 +500,15 @@ Partial Class EditMaintenance1
         Me.lblActionTaken.TabIndex = 5
         Me.lblActionTaken.Text = "Action Taken"
         '
-        'TextBox2
+        'txtActionTaken
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.TextBox2.Location = New System.Drawing.Point(740, 85)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox2.Size = New System.Drawing.Size(310, 60)
-        Me.TextBox2.TabIndex = 6
+        Me.txtActionTaken.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtActionTaken.Location = New System.Drawing.Point(740, 85)
+        Me.txtActionTaken.Multiline = True
+        Me.txtActionTaken.Name = "txtActionTaken"
+        Me.txtActionTaken.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtActionTaken.Size = New System.Drawing.Size(310, 60)
+        Me.txtActionTaken.TabIndex = 6
         '
         'lblPartsReplaced
         '
@@ -489,15 +521,15 @@ Partial Class EditMaintenance1
         Me.lblPartsReplaced.TabIndex = 7
         Me.lblPartsReplaced.Text = "Parts Replaced"
         '
-        'TextBox3
+        'txtPartsReplaced
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.TextBox3.Location = New System.Drawing.Point(515, 190)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox3.Size = New System.Drawing.Size(535, 34)
-        Me.TextBox3.TabIndex = 8
+        Me.txtPartsReplaced.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.txtPartsReplaced.Location = New System.Drawing.Point(515, 190)
+        Me.txtPartsReplaced.Multiline = True
+        Me.txtPartsReplaced.Name = "txtPartsReplaced"
+        Me.txtPartsReplaced.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtPartsReplaced.Size = New System.Drawing.Size(535, 34)
+        Me.txtPartsReplaced.TabIndex = 8
         '
         'btnSave
         '
@@ -553,38 +585,39 @@ Partial Class EditMaintenance1
     Friend WithEvents pnlBasicInfo As Panel
     Friend WithEvents lblBasicInfo As Label
     Friend WithEvents lblPropertyItemName As Label
-    Friend WithEvents propertyNameTxt As TextBox
+    Friend WithEvents cmbPropertyItem As ComboBox
     Friend WithEvents lblSerialNumber As Label
-    Friend WithEvents serialNumberTxt As TextBox
+    Friend WithEvents txtSerialNumber As TextBox
     Friend WithEvents lblLocation As Label
-    Friend WithEvents propertyLocation As TextBox
+    Friend WithEvents txtLocation As TextBox
+    Friend WithEvents lblDepartment As Label
+    Friend WithEvents cmbDepartment As ComboBox
     Friend WithEvents pnlMaintenanceInfo As Panel
     Friend WithEvents lblMaintenanceInfo As Label
     Friend WithEvents lblConditionBefore As Label
-    Friend WithEvents conditionStatusCmbo As ComboBox
+    Friend WithEvents cmbConditionBefore As ComboBox
     Friend WithEvents lblTypeOfMaintenance As Label
-    Friend WithEvents categoryCmbo As ComboBox
+    Friend WithEvents cmbTypeOfMaintenance As ComboBox
     Friend WithEvents lblAssignedTechnician As Label
-    Friend WithEvents assignedEmployeeTxt As TextBox
+    Friend WithEvents cmbAssignedTechnician As ComboBox
     Friend WithEvents lblMaintenanceDate As Label
-    Friend WithEvents datePurchasedDate As DateTimePicker
+    Friend WithEvents dtpMaintenanceDate As DateTimePicker
     Friend WithEvents lblStatus As Label
-    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents cmbStatus As ComboBox
     Friend WithEvents pnlDetails As Panel
     Friend WithEvents lblDetailsInfo As Label
     Friend WithEvents lblMaintenanceDetails As Label
-    Friend WithEvents supplierTxt As TextBox
+    Friend WithEvents txtMaintenanceDetails As TextBox
     Friend WithEvents lblDiagnosis As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtDiagnosis As TextBox
     Friend WithEvents lblActionTaken As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtActionTaken As TextBox
     Friend WithEvents lblPartsReplaced As Label
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents txtPartsReplaced As TextBox
     Friend WithEvents lblCost As Label
-    Friend WithEvents no_of_employees_numeric As NumericUpDown
+    Friend WithEvents txtCost As TextBox
     Friend WithEvents lblConditionAfter As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbConditionAfter As ComboBox
     Friend WithEvents btnSave As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnCancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class
-

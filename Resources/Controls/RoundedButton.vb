@@ -5,10 +5,24 @@ Imports System.ComponentModel
 
 Namespace Resources.Controls
     <ToolboxItem(True)>
+    <DesignerCategory("Code")>
     Public Class RoundedButton
         Inherits Button
 
-        Public Property CornerRadius As Integer = 15
+        Private _cornerRadius As Integer = 15
+        
+        <Category("Appearance")>
+        <Description("The radius of the button corners")>
+        <DefaultValue(15)>
+        Public Property CornerRadius As Integer
+            Get
+                Return _cornerRadius
+            End Get
+            Set(value As Integer)
+                _cornerRadius = value
+                Me.Invalidate()
+            End Set
+        End Property
 
         Protected Overrides Sub OnPaint(pevent As PaintEventArgs)
             ' WinForms Designer can create controls with very small (even 0x0) bounds during initialization.

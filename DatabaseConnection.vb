@@ -4089,10 +4089,10 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
-    ''' Approve a maintenance request
+    ''' Approve a maintenance request and assign a technician
     ''' </summary>
     Public Shared Function ApproveMaintenanceRequest(requestID As Integer, adminID As Integer, adminName As String,
-                                                     adminUserType As String, Optional remarks As String = "") As Boolean
+                                                     adminUserType As String, Optional remarks As String = "", Optional assignedTechnician As String = "") As Boolean
         If Not DemandPermission(SessionContext.ModulePermission.ModifyMaintenance, "approve maintenance requests") Then
             Return False
         End If
@@ -4102,26 +4102,72 @@ Public Class DatabaseConnection
             If conn Is Nothing Then Return False
             If Not SafeOpenConnection(conn) Then Return False
 
-            Dim query As String = "UPDATE maintenance_requests SET status = 'Approved', " &
-                                 "updatedAt = NOW() " &
-                                 "WHERE requestId = @requestID"
-
-            Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@adminID", adminID)
-                cmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
+            ' Step 1: Get the maintenance request details
+            Dim requestData As DataRow = Nothing
+            Dim getRequestQuery As String = "SELECT * FROM maintenance_requests WHERE requestId = @requestID"
+            
+            Using cmd As New MySqlCommand(getRequestQuery, conn)
                 cmd.Parameters.AddWithValue("@requestID", requestID)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    Dim dt As New DataTable()
+                    adapter.Fill(dt)
+                    If dt.Rows.Count = 0 Then
+                        MessageBox.Show("Maintenance request not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Return False
+                    End If
+                    requestData = dt.Rows(0)
+                End Using
+            End Using
 
-                Dim result As Integer = cmd.ExecuteNonQuery()
-                If result > 0 Then
+            ' Step 2: Update maintenance_requests status to 'Approved'
+            Dim updateQuery As String = "UPDATE maintenance_requests SET status = 'Approved', " &
+                                       "assignedTechnician = @assignedTechnician, " &
+                                       "updatedAt = NOW() " &
+                                       "WHERE requestId = @requestID"
+
+            Using cmd As New MySqlCommand(updateQuery, conn)
+                cmd.Parameters.AddWithValue("@assignedTechnician", If(String.IsNullOrEmpty(assignedTechnician), DBNull.Value, assignedTechnician))
+                cmd.Parameters.AddWithValue("@requestID", requestID)
+                cmd.ExecuteNonQuery()
+            End Using
+
+            ' Step 3: Create a new record in the maintenance table
+            Dim insertMaintenanceQuery As String = "INSERT INTO maintenance " &
+                                                  "(requestId, propertyItemName, serialNumber, location, departmentId, " &
+                                                  "conditionBeforeMaint, typeOfMaintenance, assignedTechnician, maintenanceDate, " &
+                                                  "maintenanceDetails, status, createdAt, updatedAt) " &
+                                                  "VALUES (@requestId, @propertyItemName, @serialNumber, @location, @departmentId, " &
+                                                  "@conditionBeforeMaint, @typeOfMaintenance, @assignedTechnician, @maintenanceDate, " &
+                                                  "@maintenanceDetails, @status, NOW(), NOW())"
+
+            Using cmd As New MySqlCommand(insertMaintenanceQuery, conn)
+                cmd.Parameters.AddWithValue("@requestId", requestID)
+                cmd.Parameters.AddWithValue("@propertyItemName", If(IsDBNull(requestData("itemName")), DBNull.Value, requestData("itemName")))
+                cmd.Parameters.AddWithValue("@serialNumber", If(IsDBNull(requestData("serialNumber")), DBNull.Value, requestData("serialNumber")))
+                cmd.Parameters.AddWithValue("@location", If(IsDBNull(requestData("location")), DBNull.Value, requestData("location")))
+                cmd.Parameters.AddWithValue("@departmentId", If(IsDBNull(requestData("departmentId")), DBNull.Value, requestData("departmentId")))
+                cmd.Parameters.AddWithValue("@conditionBeforeMaint", If(IsDBNull(requestData("conditionBefore")), "Needs Repair", requestData("conditionBefore")))
+                cmd.Parameters.AddWithValue("@typeOfMaintenance", If(IsDBNull(requestData("typeOfIssue")), "Repair", requestData("typeOfIssue")))
+                cmd.Parameters.AddWithValue("@assignedTechnician", If(String.IsNullOrEmpty(assignedTechnician), DBNull.Value, assignedTechnician))
+                cmd.Parameters.AddWithValue("@maintenanceDate", Date.Now)
+                cmd.Parameters.AddWithValue("@maintenanceDetails", If(IsDBNull(requestData("problemDescription")), DBNull.Value, requestData("problemDescription")))
+                cmd.Parameters.AddWithValue("@status", "Ongoing") ' Default status when maintenance starts
+                
+                Dim insertResult As Integer = cmd.ExecuteNonQuery()
+                If insertResult > 0 Then
+                    Dim techInfo As String = If(Not String.IsNullOrEmpty(assignedTechnician), $" and assigned to {assignedTechnician}", "")
                     LogActivity(adminID, adminUserType, adminName, "APPROVE_MAINTENANCE_REQUEST", "Maintenance Request",
-                                $"Approved maintenance request #{requestID}", "")
+                                $"Approved maintenance request #{requestID}{techInfo} - Created maintenance record", "")
                     Return True
+                Else
+                    MessageBox.Show("Failed to create maintenance record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return False
                 End If
             End Using
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] ApproveMaintenanceRequest Exception: " & ex.Message)
             Dim errorMsg As String = GetUserFriendlyErrorMessage(ex, "approve maintenance request")
-            MessageBox.Show(errorMsg, "Approval Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(errorMsg & Environment.NewLine & "Details: " & ex.Message, "Approval Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         Finally
             If conn IsNot Nothing Then
@@ -4952,6 +4998,55 @@ Public Class DatabaseConnection
     End Function
 
     ''' <summary>
+    ''' Get list of users who can be assigned as technicians (Active users with Admin, Custodian, or Staff roles)
+    ''' </summary>
+    Public Shared Function GetTechnicians() As DataTable
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return dt
+            If Not SafeOpenConnection(conn) Then Return dt
+
+            ' Create columns for dropdown
+            dt.Columns.Add("userId", GetType(Integer))
+            dt.Columns.Add("fullName", GetType(String))
+            dt.Columns.Add("displayText", GetType(String))
+            dt.Columns.Add("position", GetType(String))
+            dt.Columns.Add("departmentName", GetType(String))
+
+            Dim query As String = "SELECT u.userId, " &
+                                 "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS fullName, " &
+                                 "u.position, " &
+                                 "d.departmentName, " &
+                                 "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, ''), " &
+                                 "CASE WHEN u.position IS NOT NULL THEN CONCAT(' (', u.position, ')') ELSE '' END) AS displayText " &
+                                 "FROM users u " &
+                                 "LEFT JOIN departments d ON u.departmentId = d.departmentId " &
+                                 "WHERE u.status = 'Active' " &
+                                 "AND u.role IN ('Admin', 'Custodian', 'Staff') " &
+                                 "ORDER BY u.firstName, u.lastName"
+
+            Using cmd As New MySqlCommand(query, conn)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] GetTechnicians Exception: " & ex.Message)
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+        Return dt
+    End Function
+
+    ''' <summary>
     ''' Get all maintenance requests
     ''' </summary>
     Public Shared Function GetAllMaintenanceRequests() As DataTable
@@ -5197,7 +5292,7 @@ Public Class DatabaseConnection
                                                   Optional technicianAssigned As String = "", Optional status As String = "ongoing",
                                                   Optional remarks As String = "", Optional maintenanceIntervalDays As Integer = 0,
                                                   Optional adminID As Integer? = Nothing, Optional adminName As String = "",
-                                                  Optional adminUserType As String = "") As Boolean
+                                                  Optional adminUserType As String = "", Optional conditionAfterMaint As String = "Good") As Boolean
         If Not DemandPermission(SessionContext.ModulePermission.ModifyMaintenance, "update maintenance records") Then
             Return False
         End If
@@ -5228,13 +5323,46 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@diagnosis", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
                 cmd.Parameters.AddWithValue("@actionTaken", If(String.IsNullOrEmpty(serviceProvider), DBNull.Value, serviceProvider))
                 cmd.Parameters.AddWithValue("@partsReplaced", If(String.IsNullOrEmpty(providerContact), DBNull.Value, providerContact))
-                cmd.Parameters.AddWithValue("@conditionAfterMaint", "Good")
+                cmd.Parameters.AddWithValue("@conditionAfterMaint", If(String.IsNullOrEmpty(conditionAfterMaint), "Good", conditionAfterMaint))
                 cmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
 
                 Dim rows = cmd.ExecuteNonQuery()
-                If rows > 0 AndAlso adminID.HasValue Then
-                    LogActivity(adminID, adminUserType, adminName, "UPDATE_MAINTENANCE", "Maintenance",
-                                $"Updated maintenance #{maintenanceID} (status: {status})", "")
+                If rows > 0 Then
+                    ' Update the property condition based on conditionAfterMaint when status is Completed
+                    If status.ToLower() = "completed" AndAlso Not String.IsNullOrEmpty(conditionAfterMaint) Then
+                        Try
+                            ' Get property number from maintenance record
+                            Dim propQuery As String = "SELECT m.propertyItemName, m.serialNumber FROM maintenance m WHERE m.maintenanceId = @maintenanceID"
+                            Dim propertyNumber As String = Nothing
+                            Using propCmd As New MySqlCommand(propQuery, conn)
+                                propCmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
+                                Using reader As MySqlDataReader = propCmd.ExecuteReader()
+                                    If reader.Read() Then
+                                        propertyNumber = If(reader.IsDBNull(reader.GetOrdinal("serialNumber")), Nothing, reader.GetString("serialNumber"))
+                                    End If
+                                End Using
+                            End Using
+                            
+                            ' Update property condition if we found the property
+                            If Not String.IsNullOrEmpty(propertyNumber) Then
+                                Dim updatePropQuery As String = "UPDATE properties SET `condition` = @condition, updatedAt = NOW() WHERE serialNumber = @serialNumber OR propertyNumber = @propertyNumber"
+                                Using updateCmd As New MySqlCommand(updatePropQuery, conn)
+                                    updateCmd.Parameters.AddWithValue("@condition", conditionAfterMaint)
+                                    updateCmd.Parameters.AddWithValue("@serialNumber", propertyNumber)
+                                    updateCmd.Parameters.AddWithValue("@propertyNumber", propertyNumber)
+                                    updateCmd.ExecuteNonQuery()
+                                    System.Diagnostics.Debug.WriteLine($"[v0] Property condition updated to: {conditionAfterMaint} after maintenance completion")
+                                End Using
+                            End If
+                        Catch updateEx As Exception
+                            System.Diagnostics.Debug.WriteLine($"[v0] Error updating property condition after maintenance: {updateEx.Message}")
+                        End Try
+                    End If
+                    
+                    If adminID.HasValue Then
+                        LogActivity(adminID, adminUserType, adminName, "UPDATE_MAINTENANCE", "Maintenance",
+                                    $"Updated maintenance #{maintenanceID} (status: {status})", "")
+                    End If
                 End If
                 Return rows > 0
             End Using

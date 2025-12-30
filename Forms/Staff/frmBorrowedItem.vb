@@ -510,19 +510,27 @@ Public Class frmBorrowedItem
             Return
         End If
 
-        ' Get property details from database (propertyNumber and serialNumber not in grid anymore)
+        ' Get property details from database (all fields needed for maintenance request form)
         Dim propertyNumber As String = "N/A"
         Dim serialNumber As String = "N/A"
+        Dim location As String = ""
+        Dim departmentId As Integer? = Nothing
+        Dim condition As String = "Good"
         
         Try
             Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
             If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                Using cmd As New MySqlCommand("SELECT propertyNumber, serialNumber FROM properties WHERE propertyId = @propertyId", conn)
+                Using cmd As New MySqlCommand("SELECT propertyNumber, serialNumber, location, departmentId, `condition` FROM properties WHERE propertyId = @propertyId", conn)
                     cmd.Parameters.AddWithValue("@propertyId", itemId)
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
                         If reader.Read() Then
                             propertyNumber = If(reader.IsDBNull(reader.GetOrdinal("propertyNumber")), "N/A", reader("propertyNumber").ToString())
                             serialNumber = If(reader.IsDBNull(reader.GetOrdinal("serialNumber")), "N/A", reader("serialNumber").ToString())
+                            location = If(reader.IsDBNull(reader.GetOrdinal("location")), "", reader("location").ToString())
+                            If Not reader.IsDBNull(reader.GetOrdinal("departmentId")) Then
+                                departmentId = reader.GetInt32("departmentId")
+                            End If
+                            condition = If(reader.IsDBNull(reader.GetOrdinal("condition")), "Good", reader("condition").ToString())
                         End If
                     End Using
                 End Using
@@ -544,16 +552,19 @@ Public Class frmBorrowedItem
                 ' Create the maintenance request user control
                 Dim maintenanceForm As New MaintenanceRequestForm()
 
-                ' Pre-fill item details
-                Try
-                    maintenanceForm.SetItemDetails(itemName, propertyNumber, serialNumber, itemId)
-                Catch setItemEx As Exception
-                    System.Diagnostics.Debug.WriteLine("[v0] SetItemDetails error: " & setItemEx.Message)
-                End Try
-
-                ' Load the maintenance form into the dashboard using LoadUserControl
+                ' Load the maintenance form into the dashboard first
                 Dim dashboard As StaffDashboard = CType(parentControl, StaffDashboard)
                 dashboard.LoadUserControl(maintenanceForm)
+                
+                ' Pre-fill all property details AFTER the form is loaded
+                Try
+                    ' Use BeginInvoke to ensure the form is fully loaded before setting values
+                    maintenanceForm.BeginInvoke(New Action(Sub()
+                        maintenanceForm.SetPropertyDetails(itemName, propertyNumber, serialNumber, location, departmentId, condition)
+                    End Sub))
+                Catch setItemEx As Exception
+                    System.Diagnostics.Debug.WriteLine("[v0] SetPropertyDetails error: " & setItemEx.Message)
+                End Try
                 
                 System.Diagnostics.Debug.WriteLine("[v0] MaintenanceRequestForm loaded successfully")
             Else

@@ -205,7 +205,7 @@ Public Class MaintenanceRequestForm
     End Sub
     
     ''' <summary>
-    ''' Public method to pre-fill item details when called from frmBorrowedItem
+    ''' Public method to pre-fill item details when called from frmBorrowedItem (DEPRECATED - use SetPropertyDetails)
     ''' </summary>
     Public Sub SetItemDetails(itemName As String, propertyNumber As String, serialNumber As String, propertyId As String)
         Try
@@ -245,6 +245,63 @@ Public Class MaintenanceRequestForm
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] SetItemDetails Exception: " & ex.Message)
             ' Fallback: just set the text fields
+            Try
+                cboItemName.Text = itemName
+                txtPropertyNumber.Text = propertyNumber
+                txtSerialNumber.Text = serialNumber
+            Catch
+            End Try
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Public method to pre-fill ALL property details when called from frmBorrowedItem
+    ''' This will auto-populate Item Name, Property Number, Serial Number, Location, Department, and Condition
+    ''' </summary>
+    Public Sub SetPropertyDetails(itemName As String, propertyNumber As String, serialNumber As String, location As String, departmentId As Integer?, condition As String)
+        Try
+            System.Diagnostics.Debug.WriteLine($"[v0] SetPropertyDetails called - itemName: {itemName}, location: {location}, deptId: {departmentId}, condition: {condition}")
+            
+            ' Set item name (as text, not dropdown selection)
+            cboItemName.Text = itemName
+            
+            ' Set property number and serial number
+            txtPropertyNumber.Text = If(String.IsNullOrEmpty(propertyNumber) OrElse propertyNumber = "N/A", "", propertyNumber)
+            txtSerialNumber.Text = If(String.IsNullOrEmpty(serialNumber) OrElse serialNumber = "N/A", "", serialNumber)
+            
+            ' Set location
+            txtLocation.Text = If(String.IsNullOrEmpty(location), "", location)
+            
+            ' Set department
+            If departmentId.HasValue Then
+                For i As Integer = 0 To cboDepartment.Items.Count - 1
+                    Try
+                        Dim item = CType(cboDepartment.Items(i), KeyValuePair(Of Integer, String))
+                        If item.Key = departmentId.Value Then
+                            cboDepartment.SelectedIndex = i
+                            System.Diagnostics.Debug.WriteLine($"[v0] Department set to index {i}: {item.Value}")
+                            Exit For
+                        End If
+                    Catch
+                        Continue For
+                    End Try
+                Next
+            End If
+            
+            ' Set condition before maintenance
+            If Not String.IsNullOrEmpty(condition) Then
+                Dim condIndex As Integer = cboConditionBefore.FindStringExact(condition)
+                If condIndex >= 0 Then
+                    cboConditionBefore.SelectedIndex = condIndex
+                    System.Diagnostics.Debug.WriteLine($"[v0] Condition set to: {condition}")
+                End If
+            End If
+            
+            System.Diagnostics.Debug.WriteLine("[v0] All property details pre-filled successfully!")
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] SetPropertyDetails Exception: " & ex.Message)
+            ' Fallback: just set the basic text fields
             Try
                 cboItemName.Text = itemName
                 txtPropertyNumber.Text = propertyNumber
@@ -334,6 +391,21 @@ Public Class MaintenanceRequestForm
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
                 
                 If rowsAffected > 0 Then
+                    ' Update the property condition based on the maintenance request
+                    If Not String.IsNullOrWhiteSpace(txtPropertyNumber.Text) Then
+                        Try
+                            Dim updateQuery As String = "UPDATE properties SET `condition` = @condition, updatedAt = NOW() WHERE propertyNumber = @propertyNumber"
+                            Using updateCmd As New MySqlCommand(updateQuery, conn)
+                                updateCmd.Parameters.AddWithValue("@condition", cboConditionBefore.SelectedItem.ToString())
+                                updateCmd.Parameters.AddWithValue("@propertyNumber", txtPropertyNumber.Text.Trim())
+                                updateCmd.ExecuteNonQuery()
+                                System.Diagnostics.Debug.WriteLine($"[v0] Property condition updated to: {cboConditionBefore.SelectedItem.ToString()}")
+                            End Using
+                        Catch updateEx As Exception
+                            System.Diagnostics.Debug.WriteLine($"[v0] Error updating property condition: {updateEx.Message}")
+                        End Try
+                    End If
+                    
                     MessageBox.Show("Maintenance request submitted successfully!" & Environment.NewLine & Environment.NewLine &
                                    "Your request has been sent to the maintenance department for review.", 
                                    "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)

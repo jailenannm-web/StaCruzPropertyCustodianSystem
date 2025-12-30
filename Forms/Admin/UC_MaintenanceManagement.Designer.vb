@@ -28,34 +28,25 @@ Partial Class UC_MaintenanceManagement
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.admin_label_MaintenanceManagement = New System.Windows.Forms.Label()
-        Me.btnApprove = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.maintenanceId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.propertyItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.serialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.conditionBeforeMaint = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.typeOfMaintenance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.assignedTechnician = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.maintenanceDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.maintenanceDetail = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.costMaterialsLabor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.conditionAfterMaint = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.diagnosis = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.actionTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.partsReplaced = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ttlMaintenancemanagement = New System.Windows.Forms.Label()
-        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnGenerateMaintenance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.maintenancemanagementsearchbar = New System.Windows.Forms.TextBox()
+        Me.btnGenerateMaintenance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAddMaintenance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -70,172 +61,118 @@ Partial Class UC_MaintenanceManagement
         Me.admin_label_MaintenanceManagement.TabIndex = 34
         Me.admin_label_MaintenanceManagement.Text = "Maintenance Management"
         '
-        'btnApprove
-        '
-        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnApprove.CornerRadius = 15
-        Me.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnApprove.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnApprove.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnApprove.Location = New System.Drawing.Point(1229, 705)
-        Me.btnApprove.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnApprove.Name = "btnApprove"
-        Me.btnApprove.Size = New System.Drawing.Size(99, 34)
-        Me.btnApprove.TabIndex = 152
-        Me.btnApprove.Text = "Approve"
-        Me.btnApprove.UseVisualStyleBackColor = False
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
-        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1015, 705)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(99, 35)
-        Me.btnDelete.TabIndex = 153
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = False
-        '
         'DataGridView1
         '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.maintenanceId, Me.requestId, Me.propertyItemName, Me.serialNumber, Me.location, Me.departmentId, Me.conditionBeforeMaint, Me.typeOfMaintenance, Me.assignedTechnician, Me.maintenanceDate, Me.maintenanceDetail, Me.costMaterialsLabor, Me.conditionAfterMaint, Me.status, Me.diagnosis, Me.actionTaken, Me.partsReplaced})
-        Me.DataGridView1.GridColor = System.Drawing.Color.White
+        Me.DataGridView1.ColumnHeadersHeight = 40
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyItemName, Me.location, Me.departmentId, Me.conditionBeforeMaint, Me.typeOfMaintenance, Me.assignedTechnician, Me.maintenanceDate, Me.costMaterialsLabor, Me.conditionAfterMaint, Me.status})
+        Me.DataGridView1.GridColor = System.Drawing.Color.LightGray
         Me.DataGridView1.Location = New System.Drawing.Point(58, 109)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
+        Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.RowHeadersWidth = 30
+        Me.DataGridView1.RowTemplate.Height = 35
+        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView1.Size = New System.Drawing.Size(1270, 573)
         Me.DataGridView1.TabIndex = 155
         '
-        'maintenanceId
-        '
-        Me.maintenanceId.HeaderText = "Maintenance ID"
-        Me.maintenanceId.MinimumWidth = 6
-        Me.maintenanceId.Name = "maintenanceId"
-        Me.maintenanceId.Width = 125
-        '
-        'requestId
-        '
-        Me.requestId.HeaderText = "Request ID"
-        Me.requestId.MinimumWidth = 6
-        Me.requestId.Name = "requestId"
-        Me.requestId.Width = 125
-        '
         'propertyItemName
         '
-        Me.propertyItemName.HeaderText = "Property Item Name"
-        Me.propertyItemName.MinimumWidth = 6
+        Me.propertyItemName.DataPropertyName = "propertyItemName"
+        Me.propertyItemName.FillWeight = 150.0!
+        Me.propertyItemName.HeaderText = "Property Item"
+        Me.propertyItemName.MinimumWidth = 120
         Me.propertyItemName.Name = "propertyItemName"
-        Me.propertyItemName.Width = 125
-        '
-        'serialNumber
-        '
-        Me.serialNumber.HeaderText = "Serial Number"
-        Me.serialNumber.MinimumWidth = 6
-        Me.serialNumber.Name = "serialNumber"
-        Me.serialNumber.Width = 125
+        Me.propertyItemName.ReadOnly = True
         '
         'location
         '
+        Me.location.DataPropertyName = "location"
+        Me.location.FillWeight = 120.0!
         Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
+        Me.location.MinimumWidth = 100
         Me.location.Name = "location"
-        Me.location.Width = 125
+        Me.location.ReadOnly = True
         '
         'departmentId
         '
-        Me.departmentId.HeaderText = "Department ID"
-        Me.departmentId.MinimumWidth = 6
+        Me.departmentId.DataPropertyName = "departmentName"
+        Me.departmentId.HeaderText = "Department"
+        Me.departmentId.MinimumWidth = 80
         Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 125
+        Me.departmentId.ReadOnly = True
         '
         'conditionBeforeMaint
         '
-        Me.conditionBeforeMaint.HeaderText = "Condition Before Maint"
-        Me.conditionBeforeMaint.MinimumWidth = 6
+        Me.conditionBeforeMaint.DataPropertyName = "conditionBeforeMaint"
+        Me.conditionBeforeMaint.FillWeight = 90.0!
+        Me.conditionBeforeMaint.HeaderText = "Condition Before"
+        Me.conditionBeforeMaint.MinimumWidth = 80
         Me.conditionBeforeMaint.Name = "conditionBeforeMaint"
-        Me.conditionBeforeMaint.Width = 125
+        Me.conditionBeforeMaint.ReadOnly = True
         '
         'typeOfMaintenance
         '
-        Me.typeOfMaintenance.HeaderText = "Type of Maintenance"
-        Me.typeOfMaintenance.MinimumWidth = 6
+        Me.typeOfMaintenance.DataPropertyName = "typeOfMaintenance"
+        Me.typeOfMaintenance.FillWeight = 80.0!
+        Me.typeOfMaintenance.HeaderText = "Type"
+        Me.typeOfMaintenance.MinimumWidth = 70
         Me.typeOfMaintenance.Name = "typeOfMaintenance"
-        Me.typeOfMaintenance.Width = 125
+        Me.typeOfMaintenance.ReadOnly = True
         '
         'assignedTechnician
         '
-        Me.assignedTechnician.HeaderText = "Assigned Technician"
-        Me.assignedTechnician.MinimumWidth = 6
+        Me.assignedTechnician.DataPropertyName = "assignedTechnician"
+        Me.assignedTechnician.FillWeight = 120.0!
+        Me.assignedTechnician.HeaderText = "Technician"
+        Me.assignedTechnician.MinimumWidth = 100
         Me.assignedTechnician.Name = "assignedTechnician"
-        Me.assignedTechnician.Width = 125
+        Me.assignedTechnician.ReadOnly = True
         '
         'maintenanceDate
         '
-        Me.maintenanceDate.HeaderText = "Maintenance Date"
-        Me.maintenanceDate.MinimumWidth = 6
+        Me.maintenanceDate.DataPropertyName = "maintenanceDate"
+        Me.maintenanceDate.FillWeight = 80.0!
+        Me.maintenanceDate.HeaderText = "Date"
+        Me.maintenanceDate.MinimumWidth = 80
         Me.maintenanceDate.Name = "maintenanceDate"
-        Me.maintenanceDate.Width = 125
-        '
-        'maintenanceDetail
-        '
-        Me.maintenanceDetail.HeaderText = "Maintenance Detail"
-        Me.maintenanceDetail.MinimumWidth = 6
-        Me.maintenanceDetail.Name = "maintenanceDetail"
-        Me.maintenanceDetail.Width = 125
+        Me.maintenanceDate.ReadOnly = True
         '
         'costMaterialsLabor
         '
-        Me.costMaterialsLabor.HeaderText = "Cost Materials Labor"
-        Me.costMaterialsLabor.MinimumWidth = 6
+        Me.costMaterialsLabor.DataPropertyName = "costMaterialsLabor"
+        Me.costMaterialsLabor.FillWeight = 70.0!
+        Me.costMaterialsLabor.HeaderText = "Cost"
+        Me.costMaterialsLabor.MinimumWidth = 60
         Me.costMaterialsLabor.Name = "costMaterialsLabor"
-        Me.costMaterialsLabor.Width = 125
+        Me.costMaterialsLabor.ReadOnly = True
         '
         'conditionAfterMaint
         '
-        Me.conditionAfterMaint.HeaderText = "Condition After Maint"
-        Me.conditionAfterMaint.MinimumWidth = 6
+        Me.conditionAfterMaint.DataPropertyName = "conditionAfterMaint"
+        Me.conditionAfterMaint.FillWeight = 90.0!
+        Me.conditionAfterMaint.HeaderText = "Condition After"
+        Me.conditionAfterMaint.MinimumWidth = 80
         Me.conditionAfterMaint.Name = "conditionAfterMaint"
-        Me.conditionAfterMaint.Width = 125
+        Me.conditionAfterMaint.ReadOnly = True
         '
         'status
         '
+        Me.status.DataPropertyName = "status"
+        Me.status.FillWeight = 70.0!
         Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
+        Me.status.MinimumWidth = 70
         Me.status.Name = "status"
-        Me.status.Width = 125
-        '
-        'diagnosis
-        '
-        Me.diagnosis.HeaderText = "Diagnosis"
-        Me.diagnosis.MinimumWidth = 6
-        Me.diagnosis.Name = "diagnosis"
-        Me.diagnosis.Width = 125
-        '
-        'actionTaken
-        '
-        Me.actionTaken.HeaderText = "Action Taken"
-        Me.actionTaken.MinimumWidth = 6
-        Me.actionTaken.Name = "actionTaken"
-        Me.actionTaken.Width = 125
-        '
-        'partsReplaced
-        '
-        Me.partsReplaced.HeaderText = "Parts Replaced"
-        Me.partsReplaced.MinimumWidth = 6
-        Me.partsReplaced.Name = "partsReplaced"
-        Me.partsReplaced.Width = 125
+        Me.status.ReadOnly = True
         '
         'Label1
         '
@@ -261,89 +198,84 @@ Partial Class UC_MaintenanceManagement
         Me.ttlMaintenancemanagement.TabIndex = 156
         Me.ttlMaintenancemanagement.Text = "0"
         '
-        'btnRefresh
-        '
-        Me.btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnRefresh.CornerRadius = 15
-        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnRefresh.Location = New System.Drawing.Point(993, 63)
-        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(99, 34)
-        Me.btnRefresh.TabIndex = 166
-        Me.btnRefresh.Text = "Refresh"
-        Me.btnRefresh.UseVisualStyleBackColor = False
-        '
-        'btnGenerateMaintenance
-        '
-        Me.btnGenerateMaintenance.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGenerateMaintenance.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnGenerateMaintenance.CornerRadius = 15
-        Me.btnGenerateMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGenerateMaintenance.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnGenerateMaintenance.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnGenerateMaintenance.Location = New System.Drawing.Point(1100, 63)
-        Me.btnGenerateMaintenance.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnGenerateMaintenance.Name = "btnGenerateMaintenance"
-        Me.btnGenerateMaintenance.Size = New System.Drawing.Size(228, 35)
-        Me.btnGenerateMaintenance.TabIndex = 167
-        Me.btnGenerateMaintenance.Text = "Generate Maintenance Report"
-        Me.btnGenerateMaintenance.UseVisualStyleBackColor = False
-        '
-        'btnReject
-        '
-        Me.btnReject.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnReject.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnReject.CornerRadius = 15
-        Me.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReject.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnReject.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReject.Location = New System.Drawing.Point(1122, 704)
-        Me.btnReject.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnReject.Name = "btnReject"
-        Me.btnReject.Size = New System.Drawing.Size(99, 34)
-        Me.btnReject.TabIndex = 168
-        Me.btnReject.Text = "Reject"
-        Me.btnReject.UseVisualStyleBackColor = False
-        '
-        'btnAssign
-        '
-        Me.btnAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAssign.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAssign.CornerRadius = 15
-        Me.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAssign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnAssign.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAssign.Location = New System.Drawing.Point(898, 706)
-        Me.btnAssign.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAssign.Name = "btnAssign"
-        Me.btnAssign.Size = New System.Drawing.Size(99, 34)
-        Me.btnAssign.TabIndex = 169
-        Me.btnAssign.Text = "Assign"
-        Me.btnAssign.UseVisualStyleBackColor = False
-        '
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
         Me.PictureBox2.Location = New System.Drawing.Point(543, 55)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
+        Me.PictureBox2.Size = New System.Drawing.Size(40, 40)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 171
         Me.PictureBox2.TabStop = False
         '
         'maintenancemanagementsearchbar
         '
-        Me.maintenancemanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.maintenancemanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.maintenancemanagementsearchbar.Location = New System.Drawing.Point(608, 55)
+        Me.maintenancemanagementsearchbar.Font = New System.Drawing.Font("Poppins", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.maintenancemanagementsearchbar.Location = New System.Drawing.Point(590, 58)
         Me.maintenancemanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
         Me.maintenancemanagementsearchbar.Name = "maintenancemanagementsearchbar"
-        Me.maintenancemanagementsearchbar.Size = New System.Drawing.Size(367, 42)
+        Me.maintenancemanagementsearchbar.Size = New System.Drawing.Size(170, 34)
         Me.maintenancemanagementsearchbar.TabIndex = 170
+        '
+        'btnGenerateMaintenance
+        '
+        Me.btnGenerateMaintenance.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGenerateMaintenance.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnGenerateMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGenerateMaintenance.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnGenerateMaintenance.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnGenerateMaintenance.Location = New System.Drawing.Point(1023, 57)
+        Me.btnGenerateMaintenance.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnGenerateMaintenance.Name = "btnGenerateMaintenance"
+        Me.btnGenerateMaintenance.Size = New System.Drawing.Size(305, 35)
+        Me.btnGenerateMaintenance.TabIndex = 167
+        Me.btnGenerateMaintenance.Text = "Generate Maintenance Report"
+        Me.btnGenerateMaintenance.UseVisualStyleBackColor = False
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRefresh.Location = New System.Drawing.Point(916, 57)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(99, 35)
+        Me.btnRefresh.TabIndex = 166
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = False
+        '
+        'btnAddMaintenance
+        '
+        Me.btnAddMaintenance.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAddMaintenance.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnAddMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddMaintenance.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnAddMaintenance.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAddMaintenance.Location = New System.Drawing.Point(768, 57)
+        Me.btnAddMaintenance.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAddMaintenance.Name = "btnAddMaintenance"
+        Me.btnAddMaintenance.Size = New System.Drawing.Size(140, 35)
+        Me.btnAddMaintenance.TabIndex = 168
+        Me.btnAddMaintenance.Text = "Add Maintenance"
+        Me.btnAddMaintenance.UseVisualStyleBackColor = False
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Location = New System.Drawing.Point(1015, 705)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(99, 35)
+        Me.btnDelete.TabIndex = 153
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = False
         '
         'UC_MaintenanceManagement
         '
@@ -352,14 +284,12 @@ Partial Class UC_MaintenanceManagement
         Me.AutoScroll = True
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.maintenancemanagementsearchbar)
-        Me.Controls.Add(Me.btnAssign)
-        Me.Controls.Add(Me.btnReject)
         Me.Controls.Add(Me.btnGenerateMaintenance)
         Me.Controls.Add(Me.btnRefresh)
+        Me.Controls.Add(Me.btnAddMaintenance)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlMaintenancemanagement)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.admin_label_MaintenanceManagement)
         Me.Name = "UC_MaintenanceManagement"
@@ -372,32 +302,23 @@ Partial Class UC_MaintenanceManagement
     End Sub
 
     Friend WithEvents admin_label_MaintenanceManagement As Label
-    Friend WithEvents btnApprove As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlMaintenancemanagement As Label
+    Friend WithEvents btnAddMaintenance As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnRefresh As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnGenerateMaintenance As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents btnReject As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents btnAssign As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents maintenancemanagementsearchbar As TextBox
-    Friend WithEvents maintenanceId As DataGridViewTextBoxColumn
-    Friend WithEvents requestId As DataGridViewTextBoxColumn
     Friend WithEvents propertyItemName As DataGridViewTextBoxColumn
-    Friend WithEvents serialNumber As DataGridViewTextBoxColumn
     Friend Shadows WithEvents location As DataGridViewTextBoxColumn
     Friend WithEvents departmentId As DataGridViewTextBoxColumn
     Friend WithEvents conditionBeforeMaint As DataGridViewTextBoxColumn
     Friend WithEvents typeOfMaintenance As DataGridViewTextBoxColumn
     Friend WithEvents assignedTechnician As DataGridViewTextBoxColumn
     Friend WithEvents maintenanceDate As DataGridViewTextBoxColumn
-    Friend WithEvents maintenanceDetail As DataGridViewTextBoxColumn
     Friend WithEvents costMaterialsLabor As DataGridViewTextBoxColumn
     Friend WithEvents conditionAfterMaint As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
-    Friend WithEvents diagnosis As DataGridViewTextBoxColumn
-    Friend WithEvents actionTaken As DataGridViewTextBoxColumn
-    Friend WithEvents partsReplaced As DataGridViewTextBoxColumn
 End Class

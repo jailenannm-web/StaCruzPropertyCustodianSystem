@@ -1,255 +1,447 @@
-Imports System.Drawing.Drawing2D
-Imports System.Diagnostics
 Imports System
 Imports System.Data
-Imports System.Linq
-Imports MySql.Data.MySqlClient
 Imports System.Drawing
+Imports System.Linq
 Imports System.Windows.Forms
+Imports System.Collections.Generic
+Imports MySql.Data.MySqlClient
 Imports Microsoft.VisualBasic
+
+''' <summary>
+''' Maintenance Management User Control
+''' Displays and manages maintenance records with proper database alignment
+''' </summary>
 Public Class UC_MaintenanceManagement
     Inherits UserControl
 
-    Private canModifyMaintenance As Boolean = False
+    ' ================================================================
+    ' PRIVATE FIELDS
+    ' ================================================================
     Private originalData As DataTable
     Private isSearching As Boolean = False
+    Private currentFilter As String = ""
 
+    ' ================================================================
+    ' CONSTRUCTOR
+    ' ================================================================
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
-
     End Sub
 
-
-
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
-
-    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
-        ' Allow editing by double-clicking a row
-        If e.RowIndex >= 0 Then
-            btnEdit_Click(sender, e)
-        End If
-    End Sub
-
+    ' ================================================================
+    ' LOAD EVENT - Initialize the control
+    ' ================================================================
     Private Sub UC_MaintenanceManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Make grid read-only
-        DataGridView1.ReadOnly = True
-        DataGridView1.AllowUserToAddRows = False
-        DataGridView1.AllowUserToDeleteRows = False
-        DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        LoadMaintenanceData()
+        Try
+            ' Configure DataGridView appearance
+            ConfigureDataGridView()
+            
+            ' Load maintenance data from database
+            LoadMaintenanceData()
+            
+            ' Wire up search functionality
+            SetupSearchFunctionality()
+            
+            ' Apply permission-based button states
+            ApplyPermissions()
+        Catch ex As Exception
+            MessageBox.Show("Error initializing Maintenance Management: " & ex.Message, "Initialization Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
-        ' Wire search textbox if present
-        Dim searchNames As String() = {"maintenanceSearch", "maintenance_search", "txtSearch", "txtbox_search", "admin_txtbox_search", "DataGridSearch"}
-        For Each nm As String In searchNames
-            Dim found() As Control = Me.Controls.Find(nm, True)
-            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
-                Dim tb As TextBox = CType(found(0), TextBox)
-                RemoveHandler tb.TextChanged, AddressOf MaintenanceSearch_TextChanged
-                AddHandler tb.TextChanged, AddressOf MaintenanceSearch_TextChanged
-                Exit For
-            End If
+    ' ================================================================
+    ' DATAGRIDVIEW CONFIGURATION
+    ' ================================================================
+    Private Sub ConfigureDataGridView()
+        With DataGridView1
+            .AutoGenerateColumns = False
+            .ReadOnly = True
+            .AllowUserToAddRows = False
+            .AllowUserToDeleteRows = False
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .MultiSelect = False
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            .RowHeadersVisible = True
+            .RowHeadersWidth = 50
+            .EnableHeadersVisualStyles = False
+            .BackgroundColor = Color.FromArgb(248, 249, 250)
+            .GridColor = Color.FromArgb(222, 226, 230)
+            .BorderStyle = BorderStyle.None
+            
+            ' Column header styling - Modern professional look
+            .ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(33, 37, 41) ' Dark gray-black
+            .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+            .ColumnHeadersDefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
+            .ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            .ColumnHeadersDefaultCellStyle.Padding = New Padding(10, 0, 0, 0)
+            .ColumnHeadersHeight = 45
+            
+            ' Row styling - Clean and modern
+            .DefaultCellStyle.Font = New Font("Poppins", 9)
+            .DefaultCellStyle.BackColor = Color.White
+            .DefaultCellStyle.ForeColor = Color.FromArgb(33, 37, 41)
+            .DefaultCellStyle.SelectionBackColor = Color.FromArgb(13, 110, 253) ' Bootstrap primary blue
+            .DefaultCellStyle.SelectionForeColor = Color.White
+            .DefaultCellStyle.Padding = New Padding(10, 5, 10, 5)
+            .RowTemplate.Height = 40
+            
+            ' Alternating row colors for better readability
+            .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 249, 250)
+            .AlternatingRowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(13, 110, 253)
+        End With
+        
+        ' Map columns to database fields (using camelCase to match schema)
+        MapDataGridColumns()
+    End Sub
+
+    ' ================================================================
+    ' MAP DATAGRIDVIEW COLUMNS TO DATABASE FIELDS
+    ' ================================================================
+    Private Sub MapDataGridColumns()
+        ' Column mapping based on maintenance table schema
+        Dim columnMappings As New Dictionary(Of String, String) From {
+            {"maintenanceId", "maintenanceId"},
+            {"requestId", "requestId"},
+            {"propertyItemName", "propertyItemName"},
+            {"serialNumber", "serialNumber"},
+            {"location", "location"},
+            {"departmentId", "departmentName"},
+            {"conditionBeforeMaint", "conditionBeforeMaint"},
+            {"typeOfMaintenance", "typeOfMaintenance"},
+            {"assignedTechnician", "assignedTechnician"},
+            {"maintenanceDate", "maintenanceDate"},
+            {"maintenanceDetail", "maintenanceDetails"},
+            {"costMaterialsLabor", "costMaterialsLabor"},
+            {"conditionAfterMaint", "conditionAfterMaint"},
+            {"status", "status"},
+            {"diagnosis", "diagnosis"},
+            {"actionTaken", "actionTaken"},
+            {"partsReplaced", "partsReplaced"}
+        }
+        
+        ' Apply mappings and configure visibility
+        For Each col As DataGridViewColumn In DataGridView1.Columns
+            Dim colNameLower As String = col.Name.ToLower()
+            
+            ' Set DataPropertyName based on mapping
+            For Each mapping In columnMappings
+                If mapping.Key.ToLower() = colNameLower Then
+                    col.DataPropertyName = mapping.Value
+                    Exit For
+                End If
+            Next
+            
+            ' Configure column visibility and appearance - Optimized for database structure
+            Select Case colNameLower
+                Case "maintenanceid"
+                    col.HeaderText = "ID"
+                    col.Visible = True
+                    col.Width = 60
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
+                    
+                Case "requestid"
+                    col.HeaderText = "Req ID"
+                    col.Visible = True
+                    col.Width = 70
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(13, 110, 253) ' Blue for links
+                    
+                Case "propertyitemname"
+                    col.HeaderText = "Property Item"
+                    col.Visible = True
+                    col.MinimumWidth = 180
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                    col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
+                    
+                Case "serialnumber"
+                    col.HeaderText = "Serial Number"
+                    col.Visible = True
+                    col.Width = 110
+                    col.DefaultCellStyle.Font = New Font("Consolas", 9) ' Monospace for serial numbers
+                    
+                Case "location"
+                    col.HeaderText = "Location"
+                    col.Visible = True
+                    col.Width = 140
+                    
+                Case "departmentid"
+                    col.HeaderText = "Department"
+                    col.Visible = True
+                    col.Width = 140
+                    
+                Case "conditionbeforemaint"
+                    col.HeaderText = "Initial Condition"
+                    col.Visible = True
+                    col.Width = 130
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    
+                Case "typeofmaintenance"
+                    col.HeaderText = "Type"
+                    col.Visible = True
+                    col.Width = 90
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
+                    
+                Case "assignedtechnician"
+                    col.HeaderText = "Technician"
+                    col.Visible = True
+                    col.Width = 150
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(111, 66, 193) ' Purple for people
+                    
+                Case "maintenancedate"
+                    col.HeaderText = "Date"
+                    col.Visible = True
+                    col.Width = 110
+                    col.DefaultCellStyle.Format = "MMM dd, yyyy"
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    
+                Case "maintenancedetail"
+                    col.HeaderText = "Details"
+                    col.Visible = False ' Hide by default, too long for grid
+                    
+                Case "costmaterialslabor"
+                    col.HeaderText = "Cost (₱)"
+                    col.Visible = True
+                    col.Width = 110
+                    col.DefaultCellStyle.Format = "#,##0.00"
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(220, 53, 69) ' Red for cost
+                    
+                Case "conditionaftermaint"
+                    col.HeaderText = "After Condition"
+                    col.Visible = True
+                    col.Width = 130
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    
+                Case "status"
+                    col.HeaderText = "Status"
+                    col.Visible = True
+                    col.Width = 110
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
+                    
+                Case "diagnosis"
+                    col.HeaderText = "Diagnosis"
+                    col.Visible = False ' Too detailed for main view
+                    
+                Case "actiontaken"
+                    col.HeaderText = "Action Taken"
+                    col.Visible = False ' Show in detail view
+                    
+                Case "partsreplaced"
+                    col.HeaderText = "Parts Replaced"
+                    col.Visible = False ' Show in detail view
+                    
+                Case Else
+                    col.Visible = False
+            End Select
         Next
     End Sub
 
+    ' ================================================================
+    ' LOAD MAINTENANCE DATA FROM DATABASE
+    ' ================================================================
     Private Sub LoadMaintenanceData()
         Try
+            ' Get maintenance data using DatabaseConnection
             Dim maintenanceData As DataTable = DatabaseConnection.GetAllMaintenance()
-            originalData = If(maintenanceData IsNot Nothing, maintenanceData.Copy(), Nothing)
             
-            ' Configure DataGrid columns before setting DataSource
-            DataGridView1.AutoGenerateColumns = False
-            
-            ' Map columns and set visibility
-            For Each col As DataGridViewColumn In DataGridView1.Columns
-                Select Case col.Name.ToLower()
-                    Case "maintenanceid"
-                        col.DataPropertyName = "maintenanceId"
-                        col.HeaderText = "Maintenance ID"
-                        col.Visible = True
-                    Case "propertyitemname"
-                        col.DataPropertyName = "propertyItemName"
-                        col.HeaderText = "Property Item Name"
-                        col.Visible = True
-                    Case "location"
-                        col.DataPropertyName = "location"
-                        col.HeaderText = "Location"
-                        col.Visible = True
-                    Case "conditionbeforemaint"
-                        col.DataPropertyName = "conditionBeforeMaint"
-                        col.HeaderText = "Condition Before"
-                        col.Visible = True
-                    Case "typeofmaintenance"
-                        col.DataPropertyName = "typeOfMaintenance"
-                        col.HeaderText = "Type of Maintenance"
-                        col.Visible = True
-                    Case "assignedtechnician"
-                        col.DataPropertyName = "assignedTechnician"
-                        col.HeaderText = "Assigned Technician"
-                        col.Visible = True
-                    Case "status"
-                        col.DataPropertyName = "status"
-                        col.HeaderText = "Status"
-                        col.Visible = True
-                    Case "actiontaken"
-                        col.DataPropertyName = "actionTaken"
-                        col.HeaderText = "Action Taken"
-                        col.Visible = True
-                    Case Else
-                        ' Hide all other columns
-                        col.Visible = False
-                End Select
-            Next
-            
-            If maintenanceData IsNot Nothing AndAlso maintenanceData.Rows.Count > 0 Then
-                DataGridView1.DataSource = maintenanceData
-                ttlMaintenancemanagement.Text = maintenanceData.Rows.Count.ToString()
-            Else
+            If maintenanceData Is Nothing Then
+                MessageBox.Show("Unable to load maintenance records. Please check your database connection.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                originalData = Nothing
                 DataGridView1.DataSource = Nothing
                 ttlMaintenancemanagement.Text = "0"
+                Return
             End If
+            
+            ' Store original data for filtering
+            originalData = maintenanceData.Copy()
+            
+            ' Bind to DataGridView
+            DataGridView1.DataSource = maintenanceData
+            
+            ' Update total count
+            ttlMaintenancemanagement.Text = maintenanceData.Rows.Count.ToString()
+            
+            ' Apply status-based row coloring
+            ApplyStatusColoring()
+            
+            System.Diagnostics.Debug.WriteLine($"[UC_MaintenanceManagement] Loaded {maintenanceData.Rows.Count} maintenance records")
+            
         Catch ex As Exception
-            MessageBox.Show("Error loading maintenance data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error loading maintenance data: " & ex.Message, "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             ttlMaintenancemanagement.Text = "0"
         End Try
     End Sub
 
-    Private Sub MaintenanceSearch_TextChanged(sender As Object, e As EventArgs)
-        Dim tb As TextBox = TryCast(sender, TextBox)
-        If tb Is Nothing Then Return
-        ApplyMaintenanceSearch(tb.Text)
+    ' ================================================================
+    ' APPLY STATUS-BASED ROW COLORING - Modern Professional Design
+    ' ================================================================
+    Private Sub ApplyStatusColoring()
+        Try
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                If row.Cells("status").Value IsNot Nothing Then
+                    Dim status As String = row.Cells("status").Value.ToString().ToLower()
+                    
+                    Select Case status
+                        Case "ongoing"
+                            ' Modern yellow/amber - In Progress
+                            row.DefaultCellStyle.BackColor = Color.FromArgb(255, 243, 205) ' Soft yellow
+                            row.DefaultCellStyle.ForeColor = Color.FromArgb(102, 77, 3) ' Dark amber text
+                            row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 193, 7) ' Bootstrap warning
+                            row.DefaultCellStyle.SelectionForeColor = Color.FromArgb(33, 37, 41)
+                            
+                        Case "completed"
+                            ' Modern green - Success
+                            row.DefaultCellStyle.BackColor = Color.FromArgb(212, 237, 218) ' Soft green
+                            row.DefaultCellStyle.ForeColor = Color.FromArgb(21, 87, 36) ' Dark green text
+                            row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(25, 135, 84) ' Bootstrap success
+                            row.DefaultCellStyle.SelectionForeColor = Color.White
+                            
+                        Case "for review"
+                            ' Modern red - Needs Attention
+                            row.DefaultCellStyle.BackColor = Color.FromArgb(248, 215, 218) ' Soft red
+                            row.DefaultCellStyle.ForeColor = Color.FromArgb(114, 28, 36) ' Dark red text
+                            row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(220, 53, 69) ' Bootstrap danger
+                            row.DefaultCellStyle.SelectionForeColor = Color.White
+                    End Select
+                    
+                    ' Add status badge indicator in the status cell
+                    If row.Cells("status").Style IsNot Nothing Then
+                        row.Cells("status").Style.Font = New Font("Poppins", 9, FontStyle.Bold)
+                        row.Cells("status").Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                    End If
+                End If
+            Next
+        Catch ex As Exception
+            ' Silently fail on coloring errors
+            System.Diagnostics.Debug.WriteLine($"[UC_MaintenanceManagement] Status coloring error: {ex.Message}")
+        End Try
     End Sub
 
-    Private Sub ApplyMaintenanceSearch(searchText As String)
-        If originalData Is Nothing Then Return
+    ' ================================================================
+    ' SEARCH FUNCTIONALITY
+    ' ================================================================
+    Private Sub SetupSearchFunctionality()
+        ' Wire up the search textbox
+        If maintenancemanagementsearchbar IsNot Nothing Then
+            AddHandler maintenancemanagementsearchbar.TextChanged, AddressOf SearchTextChanged
+        End If
+    End Sub
+
+    Private Sub SearchTextChanged(sender As Object, e As EventArgs)
         If isSearching Then Return
-        isSearching = True
+        
         Try
-            Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
-
-            Dim filtered = originalData.AsEnumerable().Where(Function(row)
-                                                                 If String.IsNullOrEmpty(searchLower) Then Return True
-                                                                 ' Check common fields: propertyItemName, maintenanceDetails, assignedTechnician, status (camelCase)
-                                                                 Dim a As String = If(row.Table.Columns.Contains("propertyItemName") AndAlso Not IsDBNull(row("propertyItemName")), row("propertyItemName").ToString().ToLower(), String.Empty)
-                                                                 Dim b As String = If(row.Table.Columns.Contains("maintenanceDetails") AndAlso Not IsDBNull(row("maintenanceDetails")), row("maintenanceDetails").ToString().ToLower(), String.Empty)
-                                                                 Dim c As String = If(row.Table.Columns.Contains("assignedTechnician") AndAlso Not IsDBNull(row("assignedTechnician")), row("assignedTechnician").ToString().ToLower(), String.Empty)
-                                                                 Dim d As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
-                                                                 Return a.Contains(searchLower) OrElse b.Contains(searchLower) OrElse c.Contains(searchLower) OrElse d.Contains(searchLower)
-                                                             End Function)
-
-            Dim filteredList = filtered.ToList()
-            If filteredList Is Nothing OrElse filteredList.Count = 0 Then
-                DataGridView1.DataSource = Nothing
-                ttlMaintenancemanagement.Text = "0"
+            isSearching = True
+            Dim searchText As String = maintenancemanagementsearchbar.Text.Trim().ToLower()
+            
+            If String.IsNullOrEmpty(searchText) Then
+                ' Restore original data
+                DataGridView1.DataSource = originalData.Copy()
+                ttlMaintenancemanagement.Text = originalData.Rows.Count.ToString()
             Else
-                Dim dt As DataTable = filteredList.CopyToDataTable()
-                DataGridView1.DataSource = dt
-                ttlMaintenancemanagement.Text = dt.Rows.Count.ToString()
+                ' Filter data
+                Dim filteredData = originalData.AsEnumerable().Where(Function(row)
+                    Dim itemName As String = If(row.Table.Columns.Contains("propertyItemName") AndAlso Not IsDBNull(row("propertyItemName")), row("propertyItemName").ToString().ToLower(), "")
+                    Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), "")
+                    Dim technician As String = If(row.Table.Columns.Contains("assignedTechnician") AndAlso Not IsDBNull(row("assignedTechnician")), row("assignedTechnician").ToString().ToLower(), "")
+                    Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), "")
+                    Dim typeOfMaint As String = If(row.Table.Columns.Contains("typeOfMaintenance") AndAlso Not IsDBNull(row("typeOfMaintenance")), row("typeOfMaintenance").ToString().ToLower(), "")
+                    
+                    Return itemName.Contains(searchText) OrElse 
+                           location.Contains(searchText) OrElse 
+                           technician.Contains(searchText) OrElse 
+                           status.Contains(searchText) OrElse 
+                           typeOfMaint.Contains(searchText)
+                End Function).ToList()
+                
+                If filteredData.Count > 0 Then
+                    Dim filteredTable As DataTable = filteredData.CopyToDataTable()
+                    DataGridView1.DataSource = filteredTable
+                    ttlMaintenancemanagement.Text = filteredTable.Rows.Count.ToString()
+                Else
+                    DataGridView1.DataSource = Nothing
+                    ttlMaintenancemanagement.Text = "0"
+                End If
             End If
+            
+            ApplyStatusColoring()
+            
         Catch ex As Exception
-            ' If there are no matches CopyToDataTable will throw � handle gracefully
-            If TypeOf ex Is InvalidOperationException Then
-                DataGridView1.DataSource = Nothing
-                ttlMaintenancemanagement.Text = "0"
-            Else
-                MessageBox.Show("Error searching maintenance records: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            System.Diagnostics.Debug.WriteLine($"[UC_MaintenanceManagement] Search error: {ex.Message}")
         Finally
             isSearching = False
         End Try
     End Sub
 
-    Private Sub btnApprove_Click(sender As Object, e As EventArgs) Handles btnApprove.Click
-        ' No restrictions for Super Admin, Admin, and Custodian
+    ' ================================================================
+    ' PERMISSION-BASED BUTTON STATES
+    ' ================================================================
+    Private Sub ApplyPermissions()
+        Dim hasFullAccess As Boolean = SessionContext.IsSuperAdmin() OrElse 
+                                       SessionContext.IsAdmin() OrElse 
+                                       SessionContext.IsCustodian()
+        
+        btnDelete.Visible = SessionContext.IsSuperAdmin() ' Only SuperAdmin can delete
+        btnDelete.Enabled = hasFullAccess
+        
+        btnRefresh.Visible = True
+        btnRefresh.Enabled = True ' Everyone can refresh
+        
+        btnGenerateMaintenance.Visible = True
+        btnGenerateMaintenance.Enabled = True ' Everyone can view reports
+    End Sub
 
-        If DataGridView1.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a maintenance record to approve.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
+    ' ================================================================
+    ' BUTTON CLICK HANDLERS - Aligned with Maintenance Management Purpose
+    ' ================================================================
+    
+    ''' <summary>
+    ''' Add Maintenance - Open form to add new maintenance record
+    ''' </summary>
+    Private Sub btnAddMaintenance_Click(sender As Object, e As EventArgs) Handles btnAddMaintenance.Click
         Try
-            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-            Dim maintenanceID As Integer = 0
-            
-            ' Try to get maintenanceID from the selected row - check multiple sources
-            ' First, try to get from DataGridView cell directly
-            If selectedRow.Cells("maintenanceId") IsNot Nothing AndAlso selectedRow.Cells("maintenanceId").Value IsNot Nothing Then
-                If Not Integer.TryParse(selectedRow.Cells("maintenanceId").Value.ToString(), maintenanceID) Then
-                    ' Try alternative column name
-                    If selectedRow.Cells("maintenance_id") IsNot Nothing AndAlso selectedRow.Cells("maintenance_id").Value IsNot Nothing Then
-                        Integer.TryParse(selectedRow.Cells("maintenance_id").Value.ToString(), maintenanceID)
-                    End If
-                Else
-                    Integer.TryParse(selectedRow.Cells("maintenanceId").Value.ToString(), maintenanceID)
-                End If
-            ElseIf selectedRow.Cells("maintenance_id") IsNot Nothing AndAlso selectedRow.Cells("maintenance_id").Value IsNot Nothing Then
-                Integer.TryParse(selectedRow.Cells("maintenance_id").Value.ToString(), maintenanceID)
-            End If
-            
-            ' If still not found, try from DataSource
-            If maintenanceID <= 0 Then
-                Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
-                If dt IsNot Nothing Then
-                    Dim rowIndex As Integer = selectedRow.Index
-                    If rowIndex >= 0 AndAlso rowIndex < dt.Rows.Count Then
-                        Dim dataRow As DataRow = dt.Rows(rowIndex)
-                        If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(dataRow("maintenanceId")) Then
-                            Integer.TryParse(dataRow("maintenanceId").ToString(), maintenanceID)
-                        ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(dataRow("maintenance_id")) Then
-                            Integer.TryParse(dataRow("maintenance_id").ToString(), maintenanceID)
-                        End If
-                    End If
-                End If
-            End If
-            
-            If maintenanceID <= 0 Then
-                MessageBox.Show("Invalid maintenance ID. Unable to retrieve maintenance record ID from selected row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                System.Diagnostics.Debug.WriteLine("[v0] UC_MaintenanceManagement - btnApprove: Could not get maintenanceID from selected row")
+            ' Navigate to add maintenance form
+            Dim adminDashboard = TryCast(Me.ParentForm, AdminDashboard)
+            If adminDashboard IsNot Nothing Then
+                Dim addForm As New AddMaintenance()
+                adminDashboard.LoadUserControl(addForm)
                 Return
             End If
             
-            ' Get current status from selected row
-            Dim currentStatus As String = ""
-            If selectedRow.Cells("status") IsNot Nothing AndAlso selectedRow.Cells("status").Value IsNot Nothing Then
-                currentStatus = selectedRow.Cells("status").Value.ToString().ToLower()
-            Else
-                Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
-                If dt IsNot Nothing AndAlso selectedRow.Index >= 0 AndAlso selectedRow.Index < dt.Rows.Count Then
-                    Dim dataRow As DataRow = dt.Rows(selectedRow.Index)
-                    If dt.Columns.Contains("status") AndAlso Not IsDBNull(dataRow("status")) Then
-                        currentStatus = dataRow("status").ToString().ToLower()
-                    End If
-                End If
-            End If
-
-            If currentStatus = "completed" OrElse currentStatus = "approved" Then
-                MessageBox.Show("This maintenance record is already approved/completed.", "Already Processed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+            If saDashboard IsNot Nothing Then
+                Dim addForm As New AddMaintenance()
+                saDashboard.LoadUserControl(addForm)
                 Return
             End If
-
-            ' Update maintenance status to approved/completed using SetMaintenanceStatus
-            Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
-            If DatabaseConnection.SetMaintenanceStatus(maintenanceID, "Completed", adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, "Approved by " & SessionContext.CurrentRole) Then
-                MessageBox.Show("Maintenance record approved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                LoadMaintenanceData()
-            Else
-                MessageBox.Show("Failed to approve maintenance record. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            
+            MessageBox.Show("Unable to open add form. Please try again.", "Navigation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            Dim errorMsg As String = "An error occurred while approving the maintenance record."
-            If TypeOf ex Is MySqlException Then
-                errorMsg = "Database error: Unable to approve the maintenance record. Please check your connection and try again."
-            ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
-                errorMsg = "Invalid data format. Please refresh the list and try again."
-            End If
-            MessageBox.Show(errorMsg & Environment.NewLine & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error opening add maintenance form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Refresh - Reload maintenance data from database
+    ''' </summary>
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        LoadMaintenanceData()
+        MessageBox.Show("Maintenance records refreshed successfully.", "Refreshed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    ''' <summary>
+    ''' Delete - Remove maintenance record (SuperAdmin only)
+    ''' </summary>
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        ' No restrictions for Super Admin, Admin, and Custodian
+        If Not SessionContext.IsSuperAdmin() Then
+            MessageBox.Show("Only Super Admins can delete maintenance records.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
         If DataGridView1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a maintenance record to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -257,102 +449,37 @@ Public Class UC_MaintenanceManagement
         End If
 
         Try
-            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
-            If dt Is Nothing Then
-                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
-            End If
-
-            Dim rowIndex As Integer = selectedRow.Index
-            Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = 0
-            If dt.Columns.Contains("maintenanceId") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
-            ElseIf dt.Columns.Contains("maintenance_id") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
-            End If
+            Dim maintenanceID As Integer = GetSelectedMaintenanceID()
+            If maintenanceID <= 0 Then Return
 
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this maintenance record? This action cannot be undone.", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
-            If result = DialogResult.Yes Then
-                ' Delete maintenance record
-                Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-                If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                    Using cmd As New MySqlCommand("DELETE FROM maintenance WHERE maintenanceId = @maintenanceID", conn)
-                        cmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
-                        If cmd.ExecuteNonQuery() > 0 Then
-                            MessageBox.Show("Maintenance record deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                            LoadMaintenanceData()
-                        Else
-                            MessageBox.Show("Failed to delete maintenance record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        End If
-                    End Using
-                    If conn.State = ConnectionState.Open Then conn.Close()
-                End If
+            If result <> DialogResult.Yes Then Return
+
+            ' Delete from database
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                Using cmd As New MySqlCommand("DELETE FROM maintenance WHERE maintenanceId = @maintenanceID", conn)
+                    cmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
+                    If cmd.ExecuteNonQuery() > 0 Then
+                        MessageBox.Show("Maintenance record deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        LoadMaintenanceData()
+                    Else
+                        MessageBox.Show("Failed to delete maintenance record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                End Using
+                If conn.State = ConnectionState.Open Then conn.Close()
             End If
         Catch ex As Exception
-            Dim errorMsg As String = "An error occurred while deleting the maintenance record."
-            If TypeOf ex Is MySqlException Then
-                errorMsg = "Database error: Unable to delete the maintenance record. Please check your connection and try again."
-            ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
-                errorMsg = "Invalid data format. Please refresh the list and try again."
-            End If
-            MessageBox.Show(errorMsg & Environment.NewLine & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error deleting maintenance: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs)
-        ' No restrictions for Super Admin, Admin, and Custodian
-
-        If DataGridView1.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a maintenance record to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        Try
-            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
-            If dt Is Nothing Then
-                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
-            End If
-
-            Dim rowIndex As Integer = selectedRow.Index
-            Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = 0
-            If dt.Columns.Contains("maintenanceId") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
-            ElseIf dt.Columns.Contains("maintenance_id") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
-            End If
-
-            ' Get reference to the parent dashboard form
-            Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-
-            If parentDashboard IsNot Nothing Then
-                ' Load EditMaintenance1 with maintenance ID
-                Dim editForm As New EditMaintenance1()
-                editForm.MaintenanceID = maintenanceID
-                parentDashboard.LoadUserControl(editForm)
-            Else
-                ' Fallback: add directly to the parent container
-                Dim editForm As New EditMaintenance1()
-                editForm.MaintenanceID = maintenanceID
-                Me.Parent.Controls.Add(editForm)
-                editForm.BringToFront()
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Error loading maintenance record for editing: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
-    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        LoadMaintenanceData()
-    End Sub
-
+    ''' <summary>
+    ''' Generate Maintenance Report
+    ''' </summary>
     Private Sub btnGenerateMaintenance_Click(sender As Object, e As EventArgs) Handles btnGenerateMaintenance.Click
         Try
-            ' Check SADashboard first (parent class)
+            ' Navigate to maintenance report
             Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
             If saDashboard IsNot Nothing Then
                 saDashboard.LoadUserControl(New MaintenanceManagementReport1())
@@ -365,143 +492,151 @@ Public Class UC_MaintenanceManagement
                 Return
             End If
             
-            ' Check AdminDashboard
-            Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
-            If parentDashboard IsNot Nothing Then
-                parentDashboard.LoadUserControl(New MaintenanceManagementReport1())
+            Dim adminDashboard = TryCast(Me.ParentForm, AdminDashboard)
+            If adminDashboard IsNot Nothing Then
+                adminDashboard.LoadUserControl(New MaintenanceManagementReport1())
             Else
-                ' Fallback if the parent form isn't found or isn't AdminDashboard
-                MessageBox.Show("Unable to find the Dashboard container.", "Navigation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Unable to navigate to report.", "Navigation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-
         Catch ex As Exception
-            MessageBox.Show("Error navigating to report: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error opening maintenance report: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
-        ' No restrictions for Super Admin, Admin, and Custodian
-
-        If DataGridView1.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a maintenance record to reject.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
+    ' ================================================================
+    ' HELPER METHODS
+    ' ================================================================
+    
+    Private Function GetSelectedMaintenanceID() As Integer
         Try
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
             Dim maintenanceID As Integer = 0
             
-            ' Try to get maintenanceID from the selected row - check multiple sources
-            ' First, try to get from DataGridView cell directly
+            ' Try to get from cell
             If selectedRow.Cells("maintenanceId") IsNot Nothing AndAlso selectedRow.Cells("maintenanceId").Value IsNot Nothing Then
-                If Not Integer.TryParse(selectedRow.Cells("maintenanceId").Value.ToString(), maintenanceID) Then
-                    ' Try alternative column name
-                    If selectedRow.Cells("maintenance_id") IsNot Nothing AndAlso selectedRow.Cells("maintenance_id").Value IsNot Nothing Then
-                        Integer.TryParse(selectedRow.Cells("maintenance_id").Value.ToString(), maintenanceID)
-                    End If
-                Else
-                    Integer.TryParse(selectedRow.Cells("maintenanceId").Value.ToString(), maintenanceID)
-                End If
-            ElseIf selectedRow.Cells("maintenance_id") IsNot Nothing AndAlso selectedRow.Cells("maintenance_id").Value IsNot Nothing Then
-                Integer.TryParse(selectedRow.Cells("maintenance_id").Value.ToString(), maintenanceID)
+                Integer.TryParse(selectedRow.Cells("maintenanceId").Value.ToString(), maintenanceID)
             End If
             
-            ' If still not found, try from DataSource
+            ' Try from DataSource if not found
             If maintenanceID <= 0 Then
                 Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
-                If dt IsNot Nothing Then
-                    Dim rowIndex As Integer = selectedRow.Index
-                    If rowIndex >= 0 AndAlso rowIndex < dt.Rows.Count Then
-                        Dim dataRow As DataRow = dt.Rows(rowIndex)
-                        If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(dataRow("maintenanceId")) Then
-                            Integer.TryParse(dataRow("maintenanceId").ToString(), maintenanceID)
-                        ElseIf dt.Columns.Contains("maintenance_id") AndAlso Not IsDBNull(dataRow("maintenance_id")) Then
-                            Integer.TryParse(dataRow("maintenance_id").ToString(), maintenanceID)
-                        End If
+                If dt IsNot Nothing AndAlso selectedRow.Index < dt.Rows.Count Then
+                    Dim dataRow As DataRow = dt.Rows(selectedRow.Index)
+                    If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(dataRow("maintenanceId")) Then
+                        Integer.TryParse(dataRow("maintenanceId").ToString(), maintenanceID)
                     End If
                 End If
             End If
             
             If maintenanceID <= 0 Then
-                MessageBox.Show("Invalid maintenance ID. Unable to retrieve maintenance record ID from selected row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                System.Diagnostics.Debug.WriteLine("[v0] UC_MaintenanceManagement - btnReject: Could not get maintenanceID from selected row")
-                Return
+                MessageBox.Show("Invalid maintenance ID. Unable to retrieve record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-
-            Dim result As DialogResult = MessageBox.Show("Are you sure you want to reject this maintenance record?", "Confirm Rejection", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If result = DialogResult.Yes Then
-                Dim remarks As String = InputBox("Enter rejection reason (optional):", "Reject Maintenance", "")
-                Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
-
-                ' Update maintenance status using DatabaseConnection - use "Rejected" status
-                If DatabaseConnection.SetMaintenanceStatus(maintenanceID, "Rejected", adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, "Rejected: " & remarks) Then
-                    MessageBox.Show("Maintenance record rejected successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    LoadMaintenanceData()
-                Else
-                    MessageBox.Show("Failed to reject maintenance record. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            
+            Return maintenanceID
+        Catch ex As Exception
+            MessageBox.Show("Error getting maintenance ID: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return 0
+        End Try
+    End Function
+    
+    Private Function GetSelectedCellValue(columnName As String) As Object
+        Try
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                If selectedRow.Cells(columnName) IsNot Nothing Then
+                    Return selectedRow.Cells(columnName).Value
                 End If
             End If
+            Return Nothing
         Catch ex As Exception
-            Dim errorMsg As String = "An error occurred while rejecting the maintenance record."
-            If TypeOf ex Is MySqlException Then
-                errorMsg = "Database error: Unable to reject the maintenance record. Please check your connection and try again."
-            ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
-                errorMsg = "Invalid data format. Please refresh the list and try again."
-            End If
-            MessageBox.Show(errorMsg & Environment.NewLine & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return Nothing
         End Try
-    End Sub
+    End Function
 
-    Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
-        ' No restrictions for Super Admin, Admin, and Custodian
-
-        If DataGridView1.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a maintenance record to assign a technician.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
+    ' ================================================================
+    ' DATAGRIDVIEW EVENTS - Main Interaction for Maintenance Management
+    ' ================================================================
+    
+    ''' <summary>
+    ''' Double-click to edit maintenance record
+    ''' This is where technicians/admins update:
+    ''' - diagnosis, actionTaken, partsReplaced
+    ''' - costMaterialsLabor, conditionAfterMaint
+    ''' - status (Ongoing -> Completed or For Review)
+    ''' </summary>
+    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
+        If e.RowIndex < 0 Then Return ' Ignore header clicks
+        
         Try
-            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
-            If dt Is Nothing Then
-                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim maintenanceID As Integer = GetSelectedMaintenanceID()
+            If maintenanceID <= 0 Then Return
+            
+            ' Get maintenance details for editing
+            Dim maintenanceData As DataRow = GetMaintenanceDetails(maintenanceID)
+            If maintenanceData Is Nothing Then
+                MessageBox.Show("Unable to load maintenance details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
-
-            Dim rowIndex As Integer = selectedRow.Index
-            Dim dataRow As DataRow = dt.Rows(rowIndex)
-            Dim maintenanceID As Integer = 0
-            If dt.Columns.Contains("maintenanceId") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenanceId"))
-            ElseIf dt.Columns.Contains("maintenance_id") Then
-                maintenanceID = Convert.ToInt32(dataRow("maintenance_id"))
-            End If
-
-            If maintenanceID <= 0 Then
-                MessageBox.Show("Invalid maintenance record selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            
+            ' Navigate to edit form
+            Dim adminDashboard = TryCast(Me.ParentForm, AdminDashboard)
+            If adminDashboard IsNot Nothing Then
+                Dim editForm As New EditMaintenance1()
+                editForm.MaintenanceID = maintenanceID
+                adminDashboard.LoadUserControl(editForm)
                 Return
             End If
-
-            ' Open AssignTechnician form
-            Dim assignForm As New AssignTechnician()
-            assignForm.MaintenanceID = maintenanceID
-            Dim result As DialogResult = assignForm.ShowDialog()
-
-            ' Refresh data after assignment
-            If result = DialogResult.OK Then
-                LoadMaintenanceData()
+            
+            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+            If saDashboard IsNot Nothing Then
+                Dim editForm As New EditMaintenance1()
+                editForm.MaintenanceID = maintenanceID
+                saDashboard.LoadUserControl(editForm)
+                Return
             End If
-
+            
+            MessageBox.Show("Unable to open edit form. Please try again.", "Navigation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            
         Catch ex As Exception
-            Dim errorMsg As String = "An error occurred while assigning the technician."
-            If TypeOf ex Is MySqlException Then
-                errorMsg = "Database error: Unable to assign technician. Please check your connection and try again."
-            ElseIf TypeOf ex Is InvalidCastException OrElse TypeOf ex Is FormatException Then
-                errorMsg = "Invalid data format. Please refresh the list and try again."
-            End If
-            MessageBox.Show(errorMsg & Environment.NewLine & "Details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error opening maintenance details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+    
+    ''' <summary>
+    ''' Get full maintenance details for editing
+    ''' </summary>
+    Private Function GetMaintenanceDetails(maintenanceID As Integer) As DataRow
+        Try
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn Is Nothing Then Return Nothing
+            
+            If Not DatabaseConnection.SafeOpenConnection(conn) Then Return Nothing
+            
+            Dim query As String = "SELECT m.*, d.departmentName " &
+                                 "FROM maintenance m " &
+                                 "LEFT JOIN departments d ON m.departmentId = d.departmentId " &
+                                 "WHERE m.maintenanceId = @maintenanceID"
+            
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
+                
+                Using adapter As New MySqlDataAdapter(cmd)
+                    Dim dt As New DataTable()
+                    adapter.Fill(dt)
+                    
+                    If dt.Rows.Count > 0 Then
+                        Return dt.Rows(0)
+                    End If
+                End Using
+            End Using
+            
+            If conn.State = ConnectionState.Open Then conn.Close()
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[UC_MaintenanceManagement] GetMaintenanceDetails error: {ex.Message}")
+        End Try
+        
+        Return Nothing
+    End Function
 
 End Class
-
