@@ -1,9 +1,9 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MaintenanceRequestForm
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,435 +20,468 @@ Partial Class MaintenanceRequestForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.admin_label_DepartmentManagement = New System.Windows.Forms.Label()
-        Me.instructions = New System.Windows.Forms.Label()
-        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.RoundedPanel1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.itemName = New System.Windows.Forms.ComboBox()
-        Me.department = New System.Windows.Forms.ComboBox()
-        Me.location = New System.Windows.Forms.ComboBox()
-        Me.conditionBefore = New System.Windows.Forms.ComboBox()
-        Me.serialNumber = New System.Windows.Forms.TextBox()
-        Me.SAAddM_ServiceType = New System.Windows.Forms.Label()
-        Me.SAAddM_ServiceDate = New System.Windows.Forms.Label()
-        Me.SAAddM_CustodianID = New System.Windows.Forms.Label()
-        Me.serialnumberlbs = New System.Windows.Forms.Label()
-        Me.propertylbs = New System.Windows.Forms.Label()
-        Me.SAAddM_ServiceProvided = New System.Windows.Forms.Label()
-        Me.SAAddM_Providercontact = New System.Windows.Forms.Label()
-        Me.RoundedPanel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.user = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.typesOfIssue = New System.Windows.Forms.ComboBox()
-        Me.SAAddM_Description = New System.Windows.Forms.Label()
-        Me.targetDate = New System.Windows.Forms.DateTimePicker()
-        Me.problemDescription = New System.Windows.Forms.TextBox()
-        Me.RoundedPanel1.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.RoundedPanel2.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.lblSubtitle = New System.Windows.Forms.Label()
+        Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.grpItemDetails = New System.Windows.Forms.GroupBox()
+        Me.lblItemName = New System.Windows.Forms.Label()
+        Me.cboItemName = New System.Windows.Forms.ComboBox()
+        Me.lblPropertyNumber = New System.Windows.Forms.Label()
+        Me.txtPropertyNumber = New System.Windows.Forms.TextBox()
+        Me.lblSerialNumber = New System.Windows.Forms.Label()
+        Me.txtSerialNumber = New System.Windows.Forms.TextBox()
+        Me.lblDepartment = New System.Windows.Forms.Label()
+        Me.cboDepartment = New System.Windows.Forms.ComboBox()
+        Me.lblLocation = New System.Windows.Forms.Label()
+        Me.txtLocation = New System.Windows.Forms.TextBox()
+        Me.grpRequestDetails = New System.Windows.Forms.GroupBox()
+        Me.lblDateRequested = New System.Windows.Forms.Label()
+        Me.dtpDateRequested = New System.Windows.Forms.DateTimePicker()
+        Me.lblConditionBefore = New System.Windows.Forms.Label()
+        Me.cboConditionBefore = New System.Windows.Forms.ComboBox()
+        Me.lblTypeOfIssue = New System.Windows.Forms.Label()
+        Me.cboTypeOfIssue = New System.Windows.Forms.ComboBox()
+        Me.lblTargetDate = New System.Windows.Forms.Label()
+        Me.dtpTargetDate = New System.Windows.Forms.DateTimePicker()
+        Me.lblProblemDescription = New System.Windows.Forms.Label()
+        Me.txtProblemDescription = New System.Windows.Forms.TextBox()
+        Me.pnlFooter = New System.Windows.Forms.Panel()
+        Me.lblRequestedBy = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSubmit = New System.Windows.Forms.Button()
+        Me.pnlHeader.SuspendLayout()
+        Me.pnlMain.SuspendLayout()
+        Me.grpItemDetails.SuspendLayout()
+        Me.grpRequestDetails.SuspendLayout()
+        Me.pnlFooter.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnSave
+        'pnlHeader
         '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnSave.CornerRadius = 15
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSave.Location = New System.Drawing.Point(1084, 696)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(145, 34)
-        Me.btnSave.TabIndex = 177
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = False
+        Me.pnlHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.pnlHeader.Controls.Add(Me.lblTitle)
+        Me.pnlHeader.Controls.Add(Me.lblSubtitle)
+        Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
+        Me.pnlHeader.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlHeader.Name = "pnlHeader"
+        Me.pnlHeader.Padding = New System.Windows.Forms.Padding(40, 25, 40, 25)
+        Me.pnlHeader.Size = New System.Drawing.Size(1600, 148)
+        Me.pnlHeader.TabIndex = 0
         '
-        'admin_label_DepartmentManagement
+        'lblTitle
         '
-        Me.admin_label_DepartmentManagement.AutoSize = True
-        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(32, 60)
-        Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(443, 38)
-        Me.admin_label_DepartmentManagement.TabIndex = 174
-        Me.admin_label_DepartmentManagement.Text = "Maintenance Request Form"
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 20.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTitle.ForeColor = System.Drawing.Color.White
+        Me.lblTitle.Location = New System.Drawing.Point(40, 25)
+        Me.lblTitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(420, 46)
+        Me.lblTitle.TabIndex = 0
+        Me.lblTitle.Text = "🔧 Maintenance Request"
         '
-        'instructions
+        'lblSubtitle
         '
-        Me.instructions.AutoSize = True
-        Me.instructions.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.instructions.Location = New System.Drawing.Point(19, 25)
-        Me.instructions.Name = "instructions"
-        Me.instructions.Size = New System.Drawing.Size(267, 18)
-        Me.instructions.TabIndex = 40
-        Me.instructions.Text = "Fill the required department information."
+        Me.lblSubtitle.AutoSize = True
+        Me.lblSubtitle.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(189, Byte), Integer), CType(CType(195, Byte), Integer), CType(CType(199, Byte), Integer))
+        Me.lblSubtitle.Location = New System.Drawing.Point(40, 80)
+        Me.lblSubtitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSubtitle.Name = "lblSubtitle"
+        Me.lblSubtitle.Size = New System.Drawing.Size(655, 23)
+        Me.lblSubtitle.TabIndex = 1
+        Me.lblSubtitle.Text = "Submit a maintenance request for repair, replacement, or servicing of property it" &
+    "ems"
+        '
+        'pnlMain
+        '
+        Me.pnlMain.AutoScroll = True
+        Me.pnlMain.BackColor = System.Drawing.Color.White
+        Me.pnlMain.Controls.Add(Me.grpItemDetails)
+        Me.pnlMain.Controls.Add(Me.grpRequestDetails)
+        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMain.Location = New System.Drawing.Point(0, 148)
+        Me.pnlMain.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Padding = New System.Windows.Forms.Padding(40, 25, 40, 25)
+        Me.pnlMain.Size = New System.Drawing.Size(1600, 714)
+        Me.pnlMain.TabIndex = 1
+        '
+        'grpItemDetails
+        '
+        Me.grpItemDetails.Controls.Add(Me.lblItemName)
+        Me.grpItemDetails.Controls.Add(Me.cboItemName)
+        Me.grpItemDetails.Controls.Add(Me.lblPropertyNumber)
+        Me.grpItemDetails.Controls.Add(Me.txtPropertyNumber)
+        Me.grpItemDetails.Controls.Add(Me.lblSerialNumber)
+        Me.grpItemDetails.Controls.Add(Me.txtSerialNumber)
+        Me.grpItemDetails.Controls.Add(Me.lblDepartment)
+        Me.grpItemDetails.Controls.Add(Me.cboDepartment)
+        Me.grpItemDetails.Controls.Add(Me.lblLocation)
+        Me.grpItemDetails.Controls.Add(Me.txtLocation)
+        Me.grpItemDetails.Dock = System.Windows.Forms.DockStyle.Top
+        Me.grpItemDetails.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.grpItemDetails.Location = New System.Drawing.Point(40, 493)
+        Me.grpItemDetails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpItemDetails.Name = "grpItemDetails"
+        Me.grpItemDetails.Padding = New System.Windows.Forms.Padding(27, 25, 27, 25)
+        Me.grpItemDetails.Size = New System.Drawing.Size(1499, 345)
+        Me.grpItemDetails.TabIndex = 0
+        Me.grpItemDetails.TabStop = False
+        Me.grpItemDetails.Text = "Item/Property Details"
+        '
+        'lblItemName
+        '
+        Me.lblItemName.AutoSize = True
+        Me.lblItemName.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblItemName.Location = New System.Drawing.Point(31, 49)
+        Me.lblItemName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblItemName.Name = "lblItemName"
+        Me.lblItemName.Size = New System.Drawing.Size(182, 23)
+        Me.lblItemName.TabIndex = 0
+        Me.lblItemName.Text = "Item Name / Property:"
+        '
+        'cboItemName
+        '
+        Me.cboItemName.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cboItemName.FormattingEnabled = True
+        Me.cboItemName.Location = New System.Drawing.Point(36, 80)
+        Me.cboItemName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboItemName.Name = "cboItemName"
+        Me.cboItemName.Size = New System.Drawing.Size(692, 31)
+        Me.cboItemName.TabIndex = 1
+        '
+        'lblPropertyNumber
+        '
+        Me.lblPropertyNumber.AutoSize = True
+        Me.lblPropertyNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblPropertyNumber.Location = New System.Drawing.Point(760, 49)
+        Me.lblPropertyNumber.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPropertyNumber.Name = "lblPropertyNumber"
+        Me.lblPropertyNumber.Size = New System.Drawing.Size(147, 23)
+        Me.lblPropertyNumber.TabIndex = 2
+        Me.lblPropertyNumber.Text = "Property Number:"
+        '
+        'txtPropertyNumber
+        '
+        Me.txtPropertyNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.txtPropertyNumber.Location = New System.Drawing.Point(765, 80)
+        Me.txtPropertyNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPropertyNumber.Name = "txtPropertyNumber"
+        Me.txtPropertyNumber.Size = New System.Drawing.Size(332, 30)
+        Me.txtPropertyNumber.TabIndex = 3
+        '
+        'lblSerialNumber
+        '
+        Me.lblSerialNumber.AutoSize = True
+        Me.lblSerialNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblSerialNumber.Location = New System.Drawing.Point(1120, 49)
+        Me.lblSerialNumber.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSerialNumber.Name = "lblSerialNumber"
+        Me.lblSerialNumber.Size = New System.Drawing.Size(123, 23)
+        Me.lblSerialNumber.TabIndex = 4
+        Me.lblSerialNumber.Text = "Serial Number:"
+        '
+        'txtSerialNumber
+        '
+        Me.txtSerialNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.txtSerialNumber.Location = New System.Drawing.Point(1125, 80)
+        Me.txtSerialNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSerialNumber.Name = "txtSerialNumber"
+        Me.txtSerialNumber.Size = New System.Drawing.Size(332, 30)
+        Me.txtSerialNumber.TabIndex = 5
+        '
+        'lblDepartment
+        '
+        Me.lblDepartment.AutoSize = True
+        Me.lblDepartment.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblDepartment.Location = New System.Drawing.Point(31, 135)
+        Me.lblDepartment.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDepartment.Name = "lblDepartment"
+        Me.lblDepartment.Size = New System.Drawing.Size(106, 23)
+        Me.lblDepartment.TabIndex = 6
+        Me.lblDepartment.Text = "Department:"
+        '
+        'cboDepartment
+        '
+        Me.cboDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboDepartment.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cboDepartment.FormattingEnabled = True
+        Me.cboDepartment.Location = New System.Drawing.Point(36, 166)
+        Me.cboDepartment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboDepartment.Name = "cboDepartment"
+        Me.cboDepartment.Size = New System.Drawing.Size(692, 31)
+        Me.cboDepartment.TabIndex = 7
+        '
+        'lblLocation
+        '
+        Me.lblLocation.AutoSize = True
+        Me.lblLocation.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblLocation.Location = New System.Drawing.Point(31, 222)
+        Me.lblLocation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLocation.Name = "lblLocation"
+        Me.lblLocation.Size = New System.Drawing.Size(79, 23)
+        Me.lblLocation.TabIndex = 8
+        Me.lblLocation.Text = "Location:"
+        '
+        'txtLocation
+        '
+        Me.txtLocation.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.txtLocation.Location = New System.Drawing.Point(36, 252)
+        Me.txtLocation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtLocation.Name = "txtLocation"
+        Me.txtLocation.Size = New System.Drawing.Size(692, 30)
+        Me.txtLocation.TabIndex = 9
+        '
+        'grpRequestDetails
+        '
+        Me.grpRequestDetails.Controls.Add(Me.lblDateRequested)
+        Me.grpRequestDetails.Controls.Add(Me.dtpDateRequested)
+        Me.grpRequestDetails.Controls.Add(Me.lblConditionBefore)
+        Me.grpRequestDetails.Controls.Add(Me.cboConditionBefore)
+        Me.grpRequestDetails.Controls.Add(Me.lblTypeOfIssue)
+        Me.grpRequestDetails.Controls.Add(Me.cboTypeOfIssue)
+        Me.grpRequestDetails.Controls.Add(Me.lblTargetDate)
+        Me.grpRequestDetails.Controls.Add(Me.dtpTargetDate)
+        Me.grpRequestDetails.Controls.Add(Me.lblProblemDescription)
+        Me.grpRequestDetails.Controls.Add(Me.txtProblemDescription)
+        Me.grpRequestDetails.Dock = System.Windows.Forms.DockStyle.Top
+        Me.grpRequestDetails.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.grpRequestDetails.Location = New System.Drawing.Point(40, 25)
+        Me.grpRequestDetails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpRequestDetails.Name = "grpRequestDetails"
+        Me.grpRequestDetails.Padding = New System.Windows.Forms.Padding(27, 25, 27, 25)
+        Me.grpRequestDetails.Size = New System.Drawing.Size(1499, 468)
+        Me.grpRequestDetails.TabIndex = 1
+        Me.grpRequestDetails.TabStop = False
+        Me.grpRequestDetails.Text = "Maintenance Request Details"
+        '
+        'lblDateRequested
+        '
+        Me.lblDateRequested.AutoSize = True
+        Me.lblDateRequested.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblDateRequested.Location = New System.Drawing.Point(31, 49)
+        Me.lblDateRequested.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDateRequested.Name = "lblDateRequested"
+        Me.lblDateRequested.Size = New System.Drawing.Size(135, 23)
+        Me.lblDateRequested.TabIndex = 0
+        Me.lblDateRequested.Text = "Date Requested:"
+        '
+        'dtpDateRequested
+        '
+        Me.dtpDateRequested.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.dtpDateRequested.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateRequested.Location = New System.Drawing.Point(36, 80)
+        Me.dtpDateRequested.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpDateRequested.Name = "dtpDateRequested"
+        Me.dtpDateRequested.Size = New System.Drawing.Size(332, 30)
+        Me.dtpDateRequested.TabIndex = 1
+        '
+        'lblConditionBefore
+        '
+        Me.lblConditionBefore.AutoSize = True
+        Me.lblConditionBefore.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblConditionBefore.Location = New System.Drawing.Point(396, 49)
+        Me.lblConditionBefore.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblConditionBefore.Name = "lblConditionBefore"
+        Me.lblConditionBefore.Size = New System.Drawing.Size(143, 23)
+        Me.lblConditionBefore.TabIndex = 2
+        Me.lblConditionBefore.Text = "Condition Before:"
+        '
+        'cboConditionBefore
+        '
+        Me.cboConditionBefore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboConditionBefore.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cboConditionBefore.FormattingEnabled = True
+        Me.cboConditionBefore.Location = New System.Drawing.Point(401, 80)
+        Me.cboConditionBefore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboConditionBefore.Name = "cboConditionBefore"
+        Me.cboConditionBefore.Size = New System.Drawing.Size(332, 31)
+        Me.cboConditionBefore.TabIndex = 3
+        '
+        'lblTypeOfIssue
+        '
+        Me.lblTypeOfIssue.AutoSize = True
+        Me.lblTypeOfIssue.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblTypeOfIssue.Location = New System.Drawing.Point(761, 49)
+        Me.lblTypeOfIssue.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTypeOfIssue.Name = "lblTypeOfIssue"
+        Me.lblTypeOfIssue.Size = New System.Drawing.Size(112, 23)
+        Me.lblTypeOfIssue.TabIndex = 4
+        Me.lblTypeOfIssue.Text = "Type of Issue:"
+        '
+        'cboTypeOfIssue
+        '
+        Me.cboTypeOfIssue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboTypeOfIssue.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cboTypeOfIssue.FormattingEnabled = True
+        Me.cboTypeOfIssue.Location = New System.Drawing.Point(767, 80)
+        Me.cboTypeOfIssue.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboTypeOfIssue.Name = "cboTypeOfIssue"
+        Me.cboTypeOfIssue.Size = New System.Drawing.Size(332, 31)
+        Me.cboTypeOfIssue.TabIndex = 5
+        '
+        'lblTargetDate
+        '
+        Me.lblTargetDate.AutoSize = True
+        Me.lblTargetDate.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblTargetDate.Location = New System.Drawing.Point(1125, 49)
+        Me.lblTargetDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTargetDate.Name = "lblTargetDate"
+        Me.lblTargetDate.Size = New System.Drawing.Size(102, 23)
+        Me.lblTargetDate.TabIndex = 6
+        Me.lblTargetDate.Text = "Target Date:"
+        '
+        'dtpTargetDate
+        '
+        Me.dtpTargetDate.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.dtpTargetDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpTargetDate.Location = New System.Drawing.Point(1131, 80)
+        Me.dtpTargetDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpTargetDate.Name = "dtpTargetDate"
+        Me.dtpTargetDate.Size = New System.Drawing.Size(332, 30)
+        Me.dtpTargetDate.TabIndex = 7
+        '
+        'lblProblemDescription
+        '
+        Me.lblProblemDescription.AutoSize = True
+        Me.lblProblemDescription.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblProblemDescription.Location = New System.Drawing.Point(31, 135)
+        Me.lblProblemDescription.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblProblemDescription.Name = "lblProblemDescription"
+        Me.lblProblemDescription.Size = New System.Drawing.Size(264, 23)
+        Me.lblProblemDescription.TabIndex = 8
+        Me.lblProblemDescription.Text = "Problem Description (Required): *"
+        '
+        'txtProblemDescription
+        '
+        Me.txtProblemDescription.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.txtProblemDescription.Location = New System.Drawing.Point(36, 166)
+        Me.txtProblemDescription.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtProblemDescription.Multiline = True
+        Me.txtProblemDescription.Name = "txtProblemDescription"
+        Me.txtProblemDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtProblemDescription.Size = New System.Drawing.Size(1439, 245)
+        Me.txtProblemDescription.TabIndex = 9
+        '
+        'pnlFooter
+        '
+        Me.pnlFooter.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.pnlFooter.Controls.Add(Me.lblRequestedBy)
+        Me.pnlFooter.Controls.Add(Me.btnCancel)
+        Me.pnlFooter.Controls.Add(Me.btnSubmit)
+        Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlFooter.Location = New System.Drawing.Point(0, 862)
+        Me.pnlFooter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlFooter.Name = "pnlFooter"
+        Me.pnlFooter.Padding = New System.Windows.Forms.Padding(40, 25, 40, 25)
+        Me.pnlFooter.Size = New System.Drawing.Size(1600, 123)
+        Me.pnlFooter.TabIndex = 2
+        '
+        'lblRequestedBy
+        '
+        Me.lblRequestedBy.AutoSize = True
+        Me.lblRequestedBy.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblRequestedBy.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblRequestedBy.ForeColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.lblRequestedBy.Location = New System.Drawing.Point(40, 25)
+        Me.lblRequestedBy.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblRequestedBy.Name = "lblRequestedBy"
+        Me.lblRequestedBy.Padding = New System.Windows.Forms.Padding(0, 18, 0, 0)
+        Me.lblRequestedBy.Size = New System.Drawing.Size(117, 41)
+        Me.lblRequestedBy.TabIndex = 0
+        Me.lblRequestedBy.Text = "Requested By:"
         '
         'btnCancel
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.btnCancel.CornerRadius = 15
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(149, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(166, Byte), Integer))
+        Me.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCancel.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnCancel.FlatAppearance.BorderSize = 0
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Location = New System.Drawing.Point(932, 696)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCancel.Location = New System.Drawing.Point(1173, 25)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(145, 34)
-        Me.btnCancel.TabIndex = 178
+        Me.btnCancel.Size = New System.Drawing.Size(187, 73)
+        Me.btnCancel.TabIndex = 1
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
         '
-        'RoundedPanel1
+        'btnSubmit
         '
-        Me.RoundedPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedPanel1.Controls.Add(Me.instructions)
-        Me.RoundedPanel1.CornerRadius = 5
-        Me.RoundedPanel1.Location = New System.Drawing.Point(19, 121)
-        Me.RoundedPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.RoundedPanel1.Name = "RoundedPanel1"
-        Me.RoundedPanel1.Size = New System.Drawing.Size(1261, 43)
-        Me.RoundedPanel1.TabIndex = 175
-        '
-        'Panel1
-        '
-        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.Controls.Add(Me.itemName)
-        Me.Panel1.Controls.Add(Me.department)
-        Me.Panel1.Controls.Add(Me.location)
-        Me.Panel1.Controls.Add(Me.conditionBefore)
-        Me.Panel1.Controls.Add(Me.serialNumber)
-        Me.Panel1.Controls.Add(Me.SAAddM_ServiceType)
-        Me.Panel1.Controls.Add(Me.SAAddM_ServiceDate)
-        Me.Panel1.Controls.Add(Me.SAAddM_CustodianID)
-        Me.Panel1.Controls.Add(Me.serialnumberlbs)
-        Me.Panel1.Controls.Add(Me.propertylbs)
-        Me.Panel1.Location = New System.Drawing.Point(45, 18)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(572, 336)
-        Me.Panel1.TabIndex = 64
-        '
-        'itemName
-        '
-        Me.itemName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.itemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.itemName.FormattingEnabled = True
-        Me.itemName.Location = New System.Drawing.Point(257, 44)
-        Me.itemName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.itemName.Name = "itemName"
-        Me.itemName.Size = New System.Drawing.Size(273, 26)
-        Me.itemName.TabIndex = 73
-        '
-        'department
-        '
-        Me.department.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.department.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.department.FormattingEnabled = True
-        Me.department.Location = New System.Drawing.Point(255, 197)
-        Me.department.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.department.Name = "department"
-        Me.department.Size = New System.Drawing.Size(273, 26)
-        Me.department.TabIndex = 72
-        '
-        'location
-        '
-        Me.location.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.location.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.location.FormattingEnabled = True
-        Me.location.Location = New System.Drawing.Point(255, 144)
-        Me.location.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.location.Name = "location"
-        Me.location.Size = New System.Drawing.Size(273, 26)
-        Me.location.TabIndex = 71
-        '
-        'conditionBefore
-        '
-        Me.conditionBefore.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.conditionBefore.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.conditionBefore.FormattingEnabled = True
-        Me.conditionBefore.Location = New System.Drawing.Point(279, 249)
-        Me.conditionBefore.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.conditionBefore.Name = "conditionBefore"
-        Me.conditionBefore.Size = New System.Drawing.Size(251, 26)
-        Me.conditionBefore.TabIndex = 70
-        '
-        'serialNumber
-        '
-        Me.serialNumber.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.serialNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.serialNumber.Location = New System.Drawing.Point(255, 95)
-        Me.serialNumber.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.serialNumber.Name = "serialNumber"
-        Me.serialNumber.Size = New System.Drawing.Size(273, 24)
-        Me.serialNumber.TabIndex = 66
-        '
-        'SAAddM_ServiceType
-        '
-        Me.SAAddM_ServiceType.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SAAddM_ServiceType.AutoSize = True
-        Me.SAAddM_ServiceType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SAAddM_ServiceType.Location = New System.Drawing.Point(43, 256)
-        Me.SAAddM_ServiceType.Name = "SAAddM_ServiceType"
-        Me.SAAddM_ServiceType.Size = New System.Drawing.Size(207, 18)
-        Me.SAAddM_ServiceType.TabIndex = 62
-        Me.SAAddM_ServiceType.Text = "Condition Before Maintenance"
-        '
-        'SAAddM_ServiceDate
-        '
-        Me.SAAddM_ServiceDate.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SAAddM_ServiceDate.AutoSize = True
-        Me.SAAddM_ServiceDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SAAddM_ServiceDate.Location = New System.Drawing.Point(43, 201)
-        Me.SAAddM_ServiceDate.Name = "SAAddM_ServiceDate"
-        Me.SAAddM_ServiceDate.Size = New System.Drawing.Size(85, 18)
-        Me.SAAddM_ServiceDate.TabIndex = 61
-        Me.SAAddM_ServiceDate.Text = "Department"
-        '
-        'SAAddM_CustodianID
-        '
-        Me.SAAddM_CustodianID.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SAAddM_CustodianID.AutoSize = True
-        Me.SAAddM_CustodianID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SAAddM_CustodianID.Location = New System.Drawing.Point(43, 151)
-        Me.SAAddM_CustodianID.Name = "SAAddM_CustodianID"
-        Me.SAAddM_CustodianID.Size = New System.Drawing.Size(65, 18)
-        Me.SAAddM_CustodianID.TabIndex = 60
-        Me.SAAddM_CustodianID.Text = "Location"
-        '
-        'serialnumberlbs
-        '
-        Me.serialnumberlbs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.serialnumberlbs.AutoSize = True
-        Me.serialnumberlbs.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.serialnumberlbs.Location = New System.Drawing.Point(43, 98)
-        Me.serialnumberlbs.Name = "serialnumberlbs"
-        Me.serialnumberlbs.Size = New System.Drawing.Size(102, 18)
-        Me.serialnumberlbs.TabIndex = 59
-        Me.serialnumberlbs.Text = "Serial Number"
-        '
-        'propertylbs
-        '
-        Me.propertylbs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.propertylbs.AutoSize = True
-        Me.propertylbs.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertylbs.Location = New System.Drawing.Point(43, 47)
-        Me.propertylbs.Name = "propertylbs"
-        Me.propertylbs.Size = New System.Drawing.Size(148, 18)
-        Me.propertylbs.TabIndex = 58
-        Me.propertylbs.Text = "Property / Item Name"
-        '
-        'SAAddM_ServiceProvided
-        '
-        Me.SAAddM_ServiceProvided.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SAAddM_ServiceProvided.AutoSize = True
-        Me.SAAddM_ServiceProvided.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SAAddM_ServiceProvided.Location = New System.Drawing.Point(44, 95)
-        Me.SAAddM_ServiceProvided.Name = "SAAddM_ServiceProvided"
-        Me.SAAddM_ServiceProvided.Size = New System.Drawing.Size(143, 18)
-        Me.SAAddM_ServiceProvided.TabIndex = 46
-        Me.SAAddM_ServiceProvided.Text = "Problem Description"
-        '
-        'SAAddM_Providercontact
-        '
-        Me.SAAddM_Providercontact.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SAAddM_Providercontact.AutoSize = True
-        Me.SAAddM_Providercontact.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SAAddM_Providercontact.Location = New System.Drawing.Point(44, 146)
-        Me.SAAddM_Providercontact.Name = "SAAddM_Providercontact"
-        Me.SAAddM_Providercontact.Size = New System.Drawing.Size(127, 18)
-        Me.SAAddM_Providercontact.TabIndex = 47
-        Me.SAAddM_Providercontact.Text = "Maintenance Date"
-        '
-        'RoundedPanel2
-        '
-        Me.RoundedPanel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RoundedPanel2.Controls.Add(Me.Panel2)
-        Me.RoundedPanel2.Controls.Add(Me.Panel1)
-        Me.RoundedPanel2.CornerRadius = 5
-        Me.RoundedPanel2.Location = New System.Drawing.Point(19, 214)
-        Me.RoundedPanel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.RoundedPanel2.Name = "RoundedPanel2"
-        Me.RoundedPanel2.Size = New System.Drawing.Size(1261, 379)
-        Me.RoundedPanel2.TabIndex = 176
-        '
-        'Panel2
-        '
-        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel2.Controls.Add(Me.user)
-        Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Controls.Add(Me.typesOfIssue)
-        Me.Panel2.Controls.Add(Me.SAAddM_Description)
-        Me.Panel2.Controls.Add(Me.targetDate)
-        Me.Panel2.Controls.Add(Me.problemDescription)
-        Me.Panel2.Controls.Add(Me.SAAddM_ServiceProvided)
-        Me.Panel2.Controls.Add(Me.SAAddM_Providercontact)
-        Me.Panel2.Location = New System.Drawing.Point(685, 18)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(525, 336)
-        Me.Panel2.TabIndex = 65
-        '
-        'user
-        '
-        Me.user.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.user.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.user.Location = New System.Drawing.Point(265, 194)
-        Me.user.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.user.Name = "user"
-        Me.user.Size = New System.Drawing.Size(227, 24)
-        Me.user.TabIndex = 77
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(44, 197)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(100, 18)
-        Me.Label1.TabIndex = 76
-        Me.Label1.Text = "Requested By"
-        '
-        'typesOfIssue
-        '
-        Me.typesOfIssue.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.typesOfIssue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.typesOfIssue.FormattingEnabled = True
-        Me.typesOfIssue.Location = New System.Drawing.Point(265, 39)
-        Me.typesOfIssue.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.typesOfIssue.Name = "typesOfIssue"
-        Me.typesOfIssue.Size = New System.Drawing.Size(227, 26)
-        Me.typesOfIssue.TabIndex = 75
-        '
-        'SAAddM_Description
-        '
-        Me.SAAddM_Description.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SAAddM_Description.AutoSize = True
-        Me.SAAddM_Description.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SAAddM_Description.Location = New System.Drawing.Point(44, 47)
-        Me.SAAddM_Description.Name = "SAAddM_Description"
-        Me.SAAddM_Description.Size = New System.Drawing.Size(96, 18)
-        Me.SAAddM_Description.TabIndex = 74
-        Me.SAAddM_Description.Text = "Type of Issue"
-        '
-        'targetDate
-        '
-        Me.targetDate.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.targetDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.targetDate.Location = New System.Drawing.Point(265, 146)
-        Me.targetDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.targetDate.Name = "targetDate"
-        Me.targetDate.Size = New System.Drawing.Size(227, 24)
-        Me.targetDate.TabIndex = 75
-        '
-        'problemDescription
-        '
-        Me.problemDescription.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.problemDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.problemDescription.Location = New System.Drawing.Point(265, 92)
-        Me.problemDescription.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.problemDescription.Name = "problemDescription"
-        Me.problemDescription.Size = New System.Drawing.Size(227, 24)
-        Me.problemDescription.TabIndex = 68
+        Me.btnSubmit.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(113, Byte), Integer))
+        Me.btnSubmit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSubmit.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnSubmit.FlatAppearance.BorderSize = 0
+        Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSubmit.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSubmit.ForeColor = System.Drawing.Color.White
+        Me.btnSubmit.Location = New System.Drawing.Point(1360, 25)
+        Me.btnSubmit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSubmit.Name = "btnSubmit"
+        Me.btnSubmit.Size = New System.Drawing.Size(200, 73)
+        Me.btnSubmit.TabIndex = 2
+        Me.btnSubmit.Text = "✓ Submit Request"
+        Me.btnSubmit.UseVisualStyleBackColor = False
         '
         'MaintenanceRequestForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.admin_label_DepartmentManagement)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.RoundedPanel1)
-        Me.Controls.Add(Me.RoundedPanel2)
+        Me.Controls.Add(Me.pnlMain)
+        Me.Controls.Add(Me.pnlFooter)
+        Me.Controls.Add(Me.pnlHeader)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "MaintenanceRequestForm"
-        Me.Size = New System.Drawing.Size(1299, 790)
-        Me.RoundedPanel1.ResumeLayout(False)
-        Me.RoundedPanel1.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
-        Me.RoundedPanel2.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.Size = New System.Drawing.Size(1600, 985)
+        Me.pnlHeader.ResumeLayout(False)
+        Me.pnlHeader.PerformLayout()
+        Me.pnlMain.ResumeLayout(False)
+        Me.grpItemDetails.ResumeLayout(False)
+        Me.grpItemDetails.PerformLayout()
+        Me.grpRequestDetails.ResumeLayout(False)
+        Me.grpRequestDetails.PerformLayout()
+        Me.pnlFooter.ResumeLayout(False)
+        Me.pnlFooter.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents btnSave As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents admin_label_DepartmentManagement As System.Windows.Forms.Label
-    Friend WithEvents instructions As System.Windows.Forms.Label
-    Friend WithEvents btnCancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents RoundedPanel1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents department As System.Windows.Forms.ComboBox
-    Friend Shadows WithEvents location As System.Windows.Forms.ComboBox
-    Friend WithEvents conditionBefore As System.Windows.Forms.ComboBox
-    Friend WithEvents serialNumber As System.Windows.Forms.TextBox
-    Friend WithEvents SAAddM_ServiceType As System.Windows.Forms.Label
-    Friend WithEvents SAAddM_ServiceDate As System.Windows.Forms.Label
-    Friend WithEvents SAAddM_CustodianID As System.Windows.Forms.Label
-    Friend WithEvents serialnumberlbs As System.Windows.Forms.Label
-    Friend WithEvents propertylbs As System.Windows.Forms.Label
-    Friend WithEvents SAAddM_ServiceProvided As System.Windows.Forms.Label
-    Friend WithEvents SAAddM_Providercontact As System.Windows.Forms.Label
-    Friend WithEvents RoundedPanel2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents typesOfIssue As System.Windows.Forms.ComboBox
-    Friend WithEvents SAAddM_Description As System.Windows.Forms.Label
-    Friend WithEvents targetDate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents problemDescription As System.Windows.Forms.TextBox
-    Friend WithEvents user As System.Windows.Forms.TextBox
-    Friend WithEvents itemName As System.Windows.Forms.ComboBox
+    Friend WithEvents pnlHeader As System.Windows.Forms.Panel
+    Friend WithEvents lblTitle As System.Windows.Forms.Label
+    Friend WithEvents lblSubtitle As System.Windows.Forms.Label
+    Friend WithEvents pnlMain As System.Windows.Forms.Panel
+    Friend WithEvents grpItemDetails As System.Windows.Forms.GroupBox
+    Friend WithEvents lblItemName As System.Windows.Forms.Label
+    Friend WithEvents cboItemName As System.Windows.Forms.ComboBox
+    Friend WithEvents lblPropertyNumber As System.Windows.Forms.Label
+    Friend WithEvents txtPropertyNumber As System.Windows.Forms.TextBox
+    Friend WithEvents lblSerialNumber As System.Windows.Forms.Label
+    Friend WithEvents txtSerialNumber As System.Windows.Forms.TextBox
+    Friend WithEvents lblDepartment As System.Windows.Forms.Label
+    Friend WithEvents cboDepartment As System.Windows.Forms.ComboBox
+    Friend WithEvents lblLocation As System.Windows.Forms.Label
+    Friend WithEvents txtLocation As System.Windows.Forms.TextBox
+    Friend WithEvents grpRequestDetails As System.Windows.Forms.GroupBox
+    Friend WithEvents lblDateRequested As System.Windows.Forms.Label
+    Friend WithEvents dtpDateRequested As System.Windows.Forms.DateTimePicker
+    Friend WithEvents lblConditionBefore As System.Windows.Forms.Label
+    Friend WithEvents cboConditionBefore As System.Windows.Forms.ComboBox
+    Friend WithEvents lblTypeOfIssue As System.Windows.Forms.Label
+    Friend WithEvents cboTypeOfIssue As System.Windows.Forms.ComboBox
+    Friend WithEvents lblTargetDate As System.Windows.Forms.Label
+    Friend WithEvents dtpTargetDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents lblProblemDescription As System.Windows.Forms.Label
+    Friend WithEvents txtProblemDescription As System.Windows.Forms.TextBox
+    Friend WithEvents pnlFooter As System.Windows.Forms.Panel
+    Friend WithEvents lblRequestedBy As System.Windows.Forms.Label
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnSubmit As System.Windows.Forms.Button
 End Class

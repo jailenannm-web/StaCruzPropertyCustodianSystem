@@ -544,39 +544,25 @@ Public Class frmBorrowedItem
                 ' Create the maintenance request user control
                 Dim maintenanceForm As New MaintenanceRequestForm()
 
-                ' Try to pre-fill item details using reflection
+                ' Pre-fill item details
                 Try
-                    Dim formType As Type = maintenanceForm.GetType()
-                    Dim setItemMethod = formType.GetMethod("SetItemDetails")
-
-                    If setItemMethod IsNot Nothing Then
-                        setItemMethod.Invoke(maintenanceForm, New Object() {itemName, propertyNumber, serialNumber, itemId})
-                    End If
-                Catch reflectionEx As Exception
-                    System.Diagnostics.Debug.WriteLine("SetItemDetails not found: " & reflectionEx.Message)
+                    maintenanceForm.SetItemDetails(itemName, propertyNumber, serialNumber, itemId)
+                Catch setItemEx As Exception
+                    System.Diagnostics.Debug.WriteLine("[v0] SetItemDetails error: " & setItemEx.Message)
                 End Try
 
-                ' Load the maintenance form into the dashboard
+                ' Load the maintenance form into the dashboard using LoadUserControl
                 Dim dashboard As StaffDashboard = CType(parentControl, StaffDashboard)
-                Dim dashboardType As Type = dashboard.GetType()
-                Dim loadMethod = dashboardType.GetMethod("loadFormIntoPanel")
-
-                If loadMethod IsNot Nothing Then
-                    loadMethod.Invoke(dashboard, New Object() {maintenanceForm})
-                Else
-                    ' Fallback: clear panel and add control
-                    Dim panel = dashboard.Controls("pnlContent")
-                    If panel IsNot Nothing Then
-                        panel.Controls.Clear()
-                        panel.Controls.Add(maintenanceForm)
-                    End If
-                End If
+                dashboard.LoadUserControl(maintenanceForm)
+                
+                System.Diagnostics.Debug.WriteLine("[v0] MaintenanceRequestForm loaded successfully")
             Else
                 MessageBox.Show("Cannot find parent dashboard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Diagnostics.Debug.WriteLine("[v0] Parent dashboard not found")
             End If
         Catch ex As Exception
             MessageBox.Show("Error opening maintenance request form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            System.Diagnostics.Debug.WriteLine("MaintenanceRequestForm error: " & ex.Message)
+            System.Diagnostics.Debug.WriteLine("[v0] MaintenanceRequestForm error: " & ex.Message)
         End Try
     End Sub
 
@@ -925,25 +911,30 @@ Public Class frmBorrowedItem
     Private Sub dgvBorrowedItems_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvBorrowedItems.CellDoubleClick
         If e.RowIndex < 0 Then Return
         
-        Dim row As DataGridViewRow = dgvBorrowedItems.Rows(e.RowIndex)
-        Dim itemName As String = If(row.Cells("colItemName").Value?.ToString(), "")
-        Dim itemType As String = If(row.Cells("colItemType").Value?.ToString(), "")
-        Dim quantity As String = If(row.Cells("colQuantity").Value?.ToString(), "")
-        Dim condition As String = If(row.Cells("colCondition").Value?.ToString(), "")
-        Dim approvedDate As String = If(row.Cells("colApprovedDate").Value?.ToString(), "")
-        Dim purpose As String = If(row.Cells("colPurpose").Value?.ToString(), "")
-        Dim remarks As String = If(row.Cells("colRemarks").Value?.ToString(), "")
-        
-        Dim details As String = $"Item Details:{Environment.NewLine}{Environment.NewLine}" &
-                               $"Item Name: {itemName}{Environment.NewLine}" &
-                               $"Type: {itemType}{Environment.NewLine}" &
-                               $"Quantity: {quantity}{Environment.NewLine}" &
-                               $"Condition: {condition}{Environment.NewLine}" &
-                               $"Approved Date: {approvedDate}{Environment.NewLine}" &
-                               $"Purpose: {purpose}{Environment.NewLine}" &
-                               $"Remarks: {remarks}"
-        
-        MessageBox.Show(details, "Item Details", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            Dim row As DataGridViewRow = dgvBorrowedItems.Rows(e.RowIndex)
+            Dim itemName As String = If(row.Cells("colItemName").Value?.ToString(), "")
+            Dim itemType As String = If(row.Cells("colItemType").Value?.ToString(), "")
+            Dim category As String = If(row.Cells("colCategory").Value?.ToString(), "")
+            Dim quantity As String = If(row.Cells("colQuantity").Value?.ToString(), "")
+            Dim condition As String = If(row.Cells("colCondition").Value?.ToString(), "")
+            Dim purpose As String = If(row.Cells("colPurpose").Value?.ToString(), "")
+            Dim remarks As String = If(row.Cells("colRemarks").Value?.ToString(), "")
+            
+            Dim details As String = $"Item Details:{Environment.NewLine}{Environment.NewLine}" &
+                                   $"Item Name: {itemName}{Environment.NewLine}" &
+                                   $"Type: {itemType}{Environment.NewLine}" &
+                                   $"Category: {category}{Environment.NewLine}" &
+                                   $"Quantity: {quantity}{Environment.NewLine}" &
+                                   $"Condition: {condition}{Environment.NewLine}" &
+                                   $"Purpose: {purpose}{Environment.NewLine}" &
+                                   $"Remarks: {remarks}"
+            
+            MessageBox.Show(details, "Item Details", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] dgvBorrowedItems_CellDoubleClick error: " & ex.Message)
+            MessageBox.Show("Error displaying item details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub lblNoItems_Click(sender As Object, e As EventArgs) Handles lblNoItems.Click

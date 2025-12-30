@@ -1,206 +1,402 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Windows.Forms
+Imports System.Collections.Generic
+Imports MySql.Data.MySqlClient
 
+''' <summary>
+''' Professional Maintenance Request Form
+''' Allows staff to submit maintenance requests for properties they have borrowed
+''' Matches the maintenance_requests table schema
+''' </summary>
 Public Class MaintenanceRequestForm
     Inherits System.Windows.Forms.UserControl
-
+    
+    Private prefilledPropertyId As Integer? = Nothing
+    
     Public Sub New()
         InitializeComponent()
         Me.Dock = DockStyle.Fill
+    End Sub
+    
+    Private Sub MaintenanceRequestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitializeForm()
     End Sub
-
-    ' Helper: find control by name and cast to expected type
-    Private Function FindControlOfType(Of T As Control)(name As String) As T
-        Dim matches = Me.Controls.Find(name, True)
-        If matches Is Nothing OrElse matches.Length = 0 Then Return Nothing
-        Return TryCast(matches(0), T)
-    End Function
-
+    
+    ''' <summary>
+    ''' Initialize form controls and load data
+    ''' </summary>
     Private Sub InitializeForm()
-        ' Populate condition status combo
-        Dim condCombo As ComboBox = FindControlOfType(Of ComboBox)("conditionBefore")
-        If condCombo IsNot Nothing Then
-            condCombo.Items.Clear()
-            condCombo.Items.AddRange(New String() {"Good", "Needs Repair", "Damaged"})
-            condCombo.SelectedIndex = 0
-        End If
-
-        ' Populate type of issue combo (named 'department' in designer)
-        Dim issueTypeCombo As ComboBox = FindControlOfType(Of ComboBox)("department")
-        If issueTypeCombo IsNot Nothing Then
-            issueTypeCombo.Items.Clear()
-            issueTypeCombo.Items.AddRange(New String() {"Repair", "Replace", "Servicing"})
-            issueTypeCombo.SelectedIndex = 0
-        End If
-
-        ' Load departments into typesOfIssue (ComboBox4 in your description)
-        Dim typesCombo As ComboBox = FindControlOfType(Of ComboBox)("typesOfIssue")
         Try
-            Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
-            If typesCombo IsNot Nothing Then
-                typesCombo.Items.Clear()
-                typesCombo.Items.Add("Select Department")
-                If dt IsNot Nothing Then
-                    For Each row As DataRow In dt.Rows
-                        If dt.Columns.Contains("departmentName") Then
-                            typesCombo.Items.Add(row("departmentName").ToString())
-                        ElseIf dt.Columns.Contains("department_name") Then
-                            typesCombo.Items.Add(row("department_name").ToString())
-                        End If
-                    Next
-                End If
-                typesCombo.SelectedIndex = 0
+            ' Set date requested to today (read-only)
+            dtpDateRequested.Value = Date.Today
+            dtpDateRequested.Enabled = False
+            
+            ' Set target date to 7 days from now
+            dtpTargetDate.Value = Date.Today.AddDays(7)
+            dtpTargetDate.MinDate = Date.Today
+            
+            ' Load departments
+            LoadDepartments()
+            
+            ' Load condition before options
+            cboConditionBefore.Items.Clear()
+            cboConditionBefore.Items.AddRange(New String() {"Good", "Needs Repair", "Damaged"})
+            cboConditionBefore.SelectedIndex = 1 ' Default to "Needs Repair"
+            
+            ' Load type of issue options
+            cboTypeOfIssue.Items.Clear()
+            cboTypeOfIssue.Items.AddRange(New String() {"Repair", "Replace", "Servicing"})
+            cboTypeOfIssue.SelectedIndex = 0 ' Default to "Repair"
+            
+            ' Load properties (only items the user has borrowed)
+            LoadBorrowedProperties()
+            
+            ' Set requesting user info
+            If SessionContext.CurrentUserID.HasValue Then
+                lblRequestedBy.Text = $"Requested By: {SessionContext.CurrentFullName}"
             End If
+            
+        Catch ex As Exception
+            MessageBox.Show("Error initializing form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Load departments into combo box
+    ''' </summary>
+    Private Sub LoadDepartments()
+        Try
+            cboDepartment.Items.Clear()
+            cboDepartment.Items.Add(New KeyValuePair(Of Integer, String)(-1, "-- Select Department --"))
+            
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                Dim query As String = "SELECT departmentId, departmentName FROM departments WHERE status = 'Active' ORDER BY departmentName"
+                Using cmd As New MySqlCommand(query, conn)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        While reader.Read()
+                            cboDepartment.Items.Add(New KeyValuePair(Of Integer, String)(
+                                reader.GetInt32("departmentId"),
+                                reader.GetString("departmentName")
+                            ))
+                        End While
+                    End Using
+                End Using
+                If conn.State = ConnectionState.Open Then conn.Close()
+            End If
+            
+            cboDepartment.DisplayMember = "Value"
+            cboDepartment.ValueMember = "Key"
+            cboDepartment.SelectedIndex = 0
+            
         Catch ex As Exception
             MessageBox.Show("Error loading departments: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
-        ' Populate location ComboBox with common locations
-        Dim locationCombo As ComboBox = FindControlOfType(Of ComboBox)("location")
-        If locationCombo IsNot Nothing Then
-            locationCombo.Items.Clear()
-            locationCombo.Items.AddRange(New String() {"Main Building", "Annex Building", "Warehouse", "Storage Room", "Office", "Laboratory", "Classroom", "Other"})
-            If locationCombo.Items.Count > 0 Then locationCombo.SelectedIndex = 0
-        End If
     End Sub
-
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        ' Find relevant controls - itemName is a ComboBox, not TextBox
-        Dim itemNameCombo As ComboBox = FindControlOfType(Of ComboBox)("itemName")
-        Dim probDescTxt As TextBox = FindControlOfType(Of TextBox)("problemDescription")
-        Dim deptIssueCombo As ComboBox = FindControlOfType(Of ComboBox)("department")
-        Dim typesCombo As ComboBox = FindControlOfType(Of ComboBox)("typesOfIssue")
-        Dim condCombo As ComboBox = FindControlOfType(Of ComboBox)("conditionBefore")
-        Dim serialTxt As TextBox = FindControlOfType(Of TextBox)("serialNumber")
-        Dim locationCombo As ComboBox = FindControlOfType(Of ComboBox)("location") ' location is a ComboBox
-        Dim targetPicker As DateTimePicker = FindControlOfType(Of DateTimePicker)("targetDate")
-
-        ' Validate required fields - itemName is a ComboBox
-        Dim itemNameValue As String = ""
-        If itemNameCombo IsNot Nothing Then
-            If itemNameCombo.SelectedItem IsNot Nothing Then
-                itemNameValue = itemNameCombo.SelectedItem.ToString()
-            ElseIf Not String.IsNullOrWhiteSpace(itemNameCombo.Text) Then
-                itemNameValue = itemNameCombo.Text.Trim()
+    
+    ''' <summary>
+    ''' Load properties that the user has borrowed
+    ''' </summary>
+    Private Sub LoadBorrowedProperties()
+        Try
+            cboItemName.Items.Clear()
+            cboItemName.Items.Add(New With {.PropertyId = -1, .DisplayText = "-- Select Property or Enter Manually --"})
+            
+            If Not SessionContext.CurrentUserID.HasValue Then Return
+            
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                ' Get properties from borrowed_items for current user
+                Dim query As String = "SELECT DISTINCT p.propertyId, p.itemName, p.propertyNumber, p.serialNumber, p.departmentId, p.location, p.condition " &
+                                     "FROM borrowed_items bi " &
+                                     "INNER JOIN properties p ON bi.itemId = p.propertyId AND bi.itemType = 'property' " &
+                                     "WHERE bi.status = 'Borrowed' " &
+                                     "AND (bi.borrowerName LIKE CONCAT((SELECT firstName FROM users WHERE userId = @userId), '%') " &
+                                     "   OR bi.borrowerName = (SELECT CONCAT(firstName, ' ', lastName) FROM users WHERE userId = @userId) " &
+                                     "   OR bi.borrowerName = (SELECT fullName FROM users WHERE userId = @userId)) " &
+                                     "ORDER BY p.itemName"
+                
+                Using cmd As New MySqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@userId", SessionContext.CurrentUserID.Value)
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        While reader.Read()
+                            Dim displayText As String = reader.GetString("itemName")
+                            If Not reader.IsDBNull(reader.GetOrdinal("propertyNumber")) Then
+                                displayText &= " (" & reader.GetString("propertyNumber") & ")"
+                            End If
+                            
+                            cboItemName.Items.Add(New With {
+                                .PropertyId = reader.GetInt32("propertyId"),
+                                .DisplayText = displayText,
+                                .ItemName = reader.GetString("itemName"),
+                                .PropertyNumber = If(reader.IsDBNull(reader.GetOrdinal("propertyNumber")), "", reader.GetString("propertyNumber")),
+                                .SerialNumber = If(reader.IsDBNull(reader.GetOrdinal("serialNumber")), "", reader.GetString("serialNumber")),
+                                .DepartmentId = If(reader.IsDBNull(reader.GetOrdinal("departmentId")), CType(Nothing, Integer?), reader.GetInt32("departmentId")),
+                                .Location = If(reader.IsDBNull(reader.GetOrdinal("location")), "", reader.GetString("location")),
+                                .Condition = If(reader.IsDBNull(reader.GetOrdinal("condition")), "Good", reader.GetString("condition"))
+                            })
+                        End While
+                    End Using
+                End Using
+                If conn.State = ConnectionState.Open Then conn.Close()
             End If
-        End If
-
-        If String.IsNullOrWhiteSpace(itemNameValue) Then
-            MessageBox.Show("Please enter item name/property name", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            If itemNameCombo IsNot Nothing Then itemNameCombo.Focus()
-            Return
-        End If
-
-        If probDescTxt Is Nothing OrElse String.IsNullOrWhiteSpace(probDescTxt.Text) Then
-            MessageBox.Show("Please enter the problem description.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            If probDescTxt IsNot Nothing Then probDescTxt.Focus()
-            Return
-        End If
-
-        If deptIssueCombo Is Nothing OrElse deptIssueCombo.SelectedIndex < 0 Then
-            MessageBox.Show("Please select the type of issue.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            If deptIssueCombo IsNot Nothing Then deptIssueCombo.Focus()
-            Return
-        End If
-
-        If Not SessionContext.CurrentUserID.HasValue Then
-            MessageBox.Show("User session not found. Please log in again.", "Session Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Get department ID if selected
-        Dim departmentID As Integer? = Nothing
-        If typesCombo IsNot Nothing AndAlso typesCombo.SelectedIndex > 0 Then
-            Try
-                Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
-                If dt IsNot Nothing AndAlso typesCombo.SelectedIndex - 1 < dt.Rows.Count Then
-                    If dt.Columns.Contains("departmentId") Then
-                        departmentID = Convert.ToInt32(dt.Rows(typesCombo.SelectedIndex - 1)("departmentId"))
-                    ElseIf dt.Columns.Contains("department_id") Then
-                        departmentID = Convert.ToInt32(dt.Rows(typesCombo.SelectedIndex - 1)("department_id"))
+            
+            cboItemName.DisplayMember = "DisplayText"
+            cboItemName.SelectedIndex = 0
+            
+        Catch ex As Exception
+            MessageBox.Show("Error loading properties: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' When a property is selected, auto-fill related fields
+    ''' </summary>
+    Private Sub cboItemName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboItemName.SelectedIndexChanged
+        Try
+            If cboItemName.SelectedIndex > 0 AndAlso cboItemName.SelectedItem IsNot Nothing Then
+                Dim selectedItem = cboItemName.SelectedItem
+                
+                ' Get property using reflection
+                Dim propIdProp = selectedItem.GetType().GetProperty("PropertyId")
+                Dim propertyId As Integer = CInt(propIdProp.GetValue(selectedItem))
+                
+                If propertyId > 0 Then
+                    ' Auto-fill fields
+                    Dim propNumProp = selectedItem.GetType().GetProperty("PropertyNumber")
+                    Dim serialProp = selectedItem.GetType().GetProperty("SerialNumber")
+                    Dim deptIdProp = selectedItem.GetType().GetProperty("DepartmentId")
+                    Dim locationProp = selectedItem.GetType().GetProperty("Location")
+                    Dim conditionProp = selectedItem.GetType().GetProperty("Condition")
+                    
+                    txtPropertyNumber.Text = CStr(propNumProp.GetValue(selectedItem))
+                    txtSerialNumber.Text = CStr(serialProp.GetValue(selectedItem))
+                    txtLocation.Text = CStr(locationProp.GetValue(selectedItem))
+                    
+                    ' Set department
+                    Dim deptId As Integer? = CType(deptIdProp.GetValue(selectedItem), Integer?)
+                    If deptId.HasValue Then
+                        For i As Integer = 0 To cboDepartment.Items.Count - 1
+                            Dim item = CType(cboDepartment.Items(i), KeyValuePair(Of Integer, String))
+                            If item.Key = deptId.Value Then
+                                cboDepartment.SelectedIndex = i
+                                Exit For
+                            End If
+                        Next
+                    End If
+                    
+                    ' Set condition
+                    Dim condition As String = CStr(conditionProp.GetValue(selectedItem))
+                    Dim condIndex As Integer = cboConditionBefore.FindStringExact(condition)
+                    If condIndex >= 0 Then
+                        cboConditionBefore.SelectedIndex = condIndex
                     End If
                 End If
+            Else
+                ' Clear auto-filled fields if manual entry is selected
+                txtPropertyNumber.Clear()
+                txtSerialNumber.Clear()
+                txtLocation.Clear()
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("Error auto-filling fields: " & ex.Message)
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Public method to pre-fill item details when called from frmBorrowedItem
+    ''' </summary>
+    Public Sub SetItemDetails(itemName As String, propertyNumber As String, serialNumber As String, propertyId As String)
+        Try
+            System.Diagnostics.Debug.WriteLine($"[v0] SetItemDetails called - itemName: {itemName}, propertyId: {propertyId}")
+            
+            ' Try to find and select the property in the combo box
+            Dim foundMatch As Boolean = False
+            For i As Integer = 1 To cboItemName.Items.Count - 1
+                Try
+                    Dim item = cboItemName.Items(i)
+                    Dim propIdProp = item.GetType().GetProperty("PropertyId")
+                    If propIdProp IsNot Nothing Then
+                        Dim itemPropId As Integer = CInt(propIdProp.GetValue(item))
+                        
+                        If itemPropId.ToString() = propertyId Then
+                            cboItemName.SelectedIndex = i
+                            foundMatch = True
+                            System.Diagnostics.Debug.WriteLine($"[v0] Found property match at index {i}")
+                            Return
+                        End If
+                    End If
+                Catch itemEx As Exception
+                    System.Diagnostics.Debug.WriteLine($"[v0] Error checking item at index {i}: " & itemEx.Message)
+                    Continue For
+                End Try
+            Next
+            
+            ' If not found in borrowed items, set as manual entry
+            If Not foundMatch Then
+                System.Diagnostics.Debug.WriteLine("[v0] Property not found in dropdown, setting manual entry")
+                ' Don't set SelectedIndex to 0, just set the text directly
+                cboItemName.Text = itemName
+                txtPropertyNumber.Text = propertyNumber
+                txtSerialNumber.Text = serialNumber
+            End If
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] SetItemDetails Exception: " & ex.Message)
+            ' Fallback: just set the text fields
+            Try
+                cboItemName.Text = itemName
+                txtPropertyNumber.Text = propertyNumber
+                txtSerialNumber.Text = serialNumber
             Catch
             End Try
-        End If
-
-        ' Get condition and type of issue safely
-        Dim conditionBeforeValue As String = "Good"
-        If condCombo IsNot Nothing AndAlso condCombo.SelectedItem IsNot Nothing Then
-            conditionBeforeValue = condCombo.SelectedItem.ToString()
-        End If
-
-        Dim typeOfIssue As String = "Repair"
-        If deptIssueCombo IsNot Nothing AndAlso deptIssueCombo.SelectedItem IsNot Nothing Then
-            typeOfIssue = deptIssueCombo.SelectedItem.ToString()
-        End If
-
-        ' Get target date safely
-        Dim targetDateValue As Date? = Nothing
-        If targetPicker IsNot Nothing AndAlso targetPicker.Value > Date.Today Then
-            targetDateValue = targetPicker.Value
-        End If
-
-        ' Get location value from ComboBox
-        Dim locationValue As String = ""
-        If locationCombo IsNot Nothing Then
-            If locationCombo.SelectedItem IsNot Nothing Then
-                locationValue = locationCombo.SelectedItem.ToString()
-            ElseIf Not String.IsNullOrWhiteSpace(locationCombo.Text) Then
-                locationValue = locationCombo.Text.Trim()
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Submit maintenance request
+    ''' </summary>
+    Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+        Try
+            ' Validate required fields
+            If cboItemName.SelectedIndex = 0 AndAlso String.IsNullOrWhiteSpace(cboItemName.Text) Then
+                MessageBox.Show("Please select or enter an item name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                cboItemName.Focus()
+                Return
             End If
-        End If
-
-        ' Submit maintenance request - use safe null coalescing for optional controls
-        Dim success As Boolean = DatabaseConnection.SubmitMaintenanceRequest(
-            SessionContext.CurrentUserID.Value,
-            itemNameValue, ' Use the validated itemNameValue
-            "", ' property number - optional
-            If(serialTxt IsNot Nothing, serialTxt.Text.Trim(), ""),
-            departmentID,
-            locationValue, ' location from ComboBox
-            conditionBeforeValue,
-            typeOfIssue,
-            If(probDescTxt IsNot Nothing, probDescTxt.Text.Trim(), ""), ' problem description
-            targetDateValue
-        )
-
-        If success Then
-            MessageBox.Show("Maintenance request submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            ' Navigate back to maintenance request list
-            Dim parentDashboard = TryCast(Me.ParentForm, StaffDashboard)
-            If parentDashboard IsNot Nothing Then
-                parentDashboard.LoadUserControl(New MaintenanceRequest())
+            
+            If cboTypeOfIssue.SelectedIndex < 0 Then
+                MessageBox.Show("Please select the type of issue.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                cboTypeOfIssue.Focus()
+                Return
+            End If
+            
+            If String.IsNullOrWhiteSpace(txtProblemDescription.Text) Then
+                MessageBox.Show("Please describe the problem.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtProblemDescription.Focus()
+                Return
+            End If
+            
+            If Not SessionContext.CurrentUserID.HasValue Then
+                MessageBox.Show("User session not found. Please log in again.", "Session Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+            
+            ' Get item name
+            Dim itemName As String = ""
+            If cboItemName.SelectedIndex > 0 Then
+                Dim selectedItem = cboItemName.SelectedItem
+                Dim itemNameProp = selectedItem.GetType().GetProperty("ItemName")
+                itemName = CStr(itemNameProp.GetValue(selectedItem))
             Else
-                ' If not in dashboard, try to close/remove this control
-                Dim parentForm = TryCast(Me.Parent, Form)
-                If parentForm IsNot Nothing Then
-                    parentForm.Close()
-                ElseIf Me.Parent IsNot Nothing Then
+                itemName = cboItemName.Text.Trim()
+            End If
+            
+            ' Get department ID
+            Dim departmentId As Integer? = Nothing
+            If cboDepartment.SelectedIndex > 0 Then
+                Dim selectedDept = CType(cboDepartment.SelectedItem, KeyValuePair(Of Integer, String))
+                departmentId = selectedDept.Key
+            End If
+            
+            ' Insert maintenance request
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn Is Nothing Then
+                MessageBox.Show("Database connection failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
+            If Not DatabaseConnection.SafeOpenConnection(conn) Then
+                MessageBox.Show("Could not open database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
+            Dim query As String = "INSERT INTO maintenance_requests " &
+                                 "(dateRequested, itemName, propertyNumber, serialNumber, departmentId, location, " &
+                                 "conditionBefore, typeOfIssue, problemDescription, status, targetDate, requestedBy, createdAt, updatedAt) " &
+                                 "VALUES (@dateRequested, @itemName, @propertyNumber, @serialNumber, @departmentId, @location, " &
+                                 "@conditionBefore, @typeOfIssue, @problemDescription, 'Pending', @targetDate, @requestedBy, NOW(), NOW())"
+            
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@dateRequested", dtpDateRequested.Value.Date)
+                cmd.Parameters.AddWithValue("@itemName", itemName)
+                cmd.Parameters.AddWithValue("@propertyNumber", If(String.IsNullOrWhiteSpace(txtPropertyNumber.Text), DBNull.Value, txtPropertyNumber.Text.Trim()))
+                cmd.Parameters.AddWithValue("@serialNumber", If(String.IsNullOrWhiteSpace(txtSerialNumber.Text), DBNull.Value, txtSerialNumber.Text.Trim()))
+                cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, CObj(departmentId.Value), DBNull.Value))
+                cmd.Parameters.AddWithValue("@location", If(String.IsNullOrWhiteSpace(txtLocation.Text), DBNull.Value, txtLocation.Text.Trim()))
+                cmd.Parameters.AddWithValue("@conditionBefore", cboConditionBefore.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@typeOfIssue", cboTypeOfIssue.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@problemDescription", txtProblemDescription.Text.Trim())
+                cmd.Parameters.AddWithValue("@targetDate", If(dtpTargetDate.Value > Date.Today, CObj(dtpTargetDate.Value.Date), DBNull.Value))
+                cmd.Parameters.AddWithValue("@requestedBy", SessionContext.CurrentUserID.Value)
+                
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Maintenance request submitted successfully!" & Environment.NewLine & Environment.NewLine &
+                                   "Your request has been sent to the maintenance department for review.", 
+                                   "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    
+                    ' Navigate back to borrowed items or maintenance requests
+                    NavigateBack()
+                Else
+                    MessageBox.Show("Failed to submit maintenance request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End Using
+            
+            If conn.State = ConnectionState.Open Then conn.Close()
+            
+        Catch ex As Exception
+            MessageBox.Show("Error submitting maintenance request: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Cancel and go back
+    ''' </summary>
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        NavigateBack()
+    End Sub
+    
+    ''' <summary>
+    ''' Navigate back to the previous form
+    ''' </summary>
+    Private Sub NavigateBack()
+        Try
+            ' Find the parent StaffDashboard
+            Dim parentControl As Control = Me.Parent
+            While parentControl IsNot Nothing AndAlso Not (TypeOf parentControl Is StaffDashboard)
+                parentControl = parentControl.Parent
+            End While
+            
+            If TypeOf parentControl Is StaffDashboard Then
+                Dim dashboard As StaffDashboard = CType(parentControl, StaffDashboard)
+                ' Load the borrowed items form
+                Dim borrowedItemsForm As New frmBorrowedItem()
+                
+                ' Use reflection to call loadFormIntoPanel
+                Dim dashboardType As Type = dashboard.GetType()
+                Dim loadMethod = dashboardType.GetMethod("loadFormIntoPanel")
+                
+                If loadMethod IsNot Nothing Then
+                    loadMethod.Invoke(dashboard, New Object() {borrowedItemsForm})
+                Else
+                    ' Fallback
+                    Dim panel = dashboard.Controls("pnlContent")
+                    If panel IsNot Nothing Then
+                        panel.Controls.Clear()
+                        panel.Controls.Add(borrowedItemsForm)
+                    End If
+                End If
+            Else
+                ' If not in dashboard, just remove this control
+                If Me.Parent IsNot Nothing Then
                     Me.Parent.Controls.Remove(Me)
                 End If
             End If
-        Else
-            MessageBox.Show("Unable to submit maintenance request. Please verify all required fields are filled and try again.", "Request Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        End If
-    End Sub
-
-    Private Sub btnCancel_Click(sender As Object, e As System.EventArgs) Handles btnCancel.Click
-        ' Navigate back to maintenance request list
-        Dim parentDashboard = TryCast(Me.ParentForm, StaffDashboard)
-        If parentDashboard IsNot Nothing Then
-            parentDashboard.LoadUserControl(New MaintenanceRequest())
-        Else
-            ' If not in dashboard, try to close/remove this control
-            If Me.Parent IsNot Nothing Then
-                Me.Parent.Controls.Remove(Me)
-            End If
-        End If
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("NavigateBack error: " & ex.Message)
+        End Try
     End Sub
 End Class
