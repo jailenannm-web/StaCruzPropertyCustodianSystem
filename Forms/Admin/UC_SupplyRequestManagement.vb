@@ -329,8 +329,26 @@ Public Class UC_SupplyRequestManagement
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
             If DatabaseConnection.ApproveSupplyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
-                MessageBox.Show("Supply request approved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Supply request approved successfully. The supply has been assigned to the requester.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadSupplyRequestData()
+                
+                ' Notify UC_SupplyManagement to refresh if it exists
+                Try
+                    Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+                    If saDashboard IsNot Nothing Then
+                        ' Find UC_SupplyManagement in the dashboard panel and refresh it
+                        For Each ctrl As Control In saDashboard.pnlFormLoader.Controls
+                            If TypeOf ctrl Is UC_SupplyManagement Then
+                                Dim supplyMgmt As UC_SupplyManagement = DirectCast(ctrl, UC_SupplyManagement)
+                                supplyMgmt.LoadSuppliesData()
+                                System.Diagnostics.Debug.WriteLine("[v0] Refreshed UC_SupplyManagement after approval")
+                                Exit For
+                            End If
+                        Next
+                    End If
+                Catch refreshEx As Exception
+                    System.Diagnostics.Debug.WriteLine("[v0] Could not refresh UC_SupplyManagement: " & refreshEx.Message)
+                End Try
             Else
                 MessageBox.Show("Failed to approve supply request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If

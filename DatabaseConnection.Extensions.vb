@@ -498,14 +498,13 @@ Partial Public Class DatabaseConnection
             End Using
             
             ' Create borrowed_items record
-            Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, itemName, borrowerName, borrowerPosition, " &
+            Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, borrowerName, borrowerPosition, " &
                                        "departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
-                                       "VALUES ('property', @itemId, @itemName, @borrowerName, @borrowerPosition, @departmentId, " &
+                                       "VALUES ('property', @itemId, @borrowerName, @borrowerPosition, @departmentId, " &
                                        "NOW(), NULL, 'Borrowed', @remarks, NOW(), NOW())"
             
             Using borrowCmd As New MySqlCommand(borrowQuery, conn, transaction)
                 borrowCmd.Parameters.AddWithValue("@itemId", propertyId)
-                borrowCmd.Parameters.AddWithValue("@itemName", itemName)
                 borrowCmd.Parameters.AddWithValue("@borrowerName", borrowerName)
                 borrowCmd.Parameters.AddWithValue("@borrowerPosition", If(String.IsNullOrEmpty(borrowerPosition), DBNull.Value, borrowerPosition))
                 borrowCmd.Parameters.AddWithValue("@departmentId", If(userDeptId.HasValue, userDeptId.Value, DBNull.Value))
@@ -760,18 +759,18 @@ Partial Public Class DatabaseConnection
                 
                 ' Create borrowed_items record if user is assigned
                 If userIdToAssign.HasValue AndAlso userIdToAssign.Value > 0 Then
-                    Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, itemName, borrowerName, " &
+                    Dim borrowQuery As String = "INSERT INTO borrowed_items (requestId, itemType, itemId, borrowerName, " &
                                                "borrowerPosition, departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
-                                               "VALUES ('property', @itemId, @itemName, @borrowerName, @borrowerPosition, " &
+                                               "VALUES (@requestId, 'property', @itemId, @borrowerName, @borrowerPosition, " &
                                                "@departmentId, NOW(), NULL, 'Borrowed', @remarks, NOW(), NOW())"
                     
                     Using cmd As New MySqlCommand(borrowQuery, conn, transaction)
+                        cmd.Parameters.AddWithValue("@requestId", requestId)
                         cmd.Parameters.AddWithValue("@itemId", matchedPropertyId.Value)
-                        cmd.Parameters.AddWithValue("@itemName", itemName)
                         cmd.Parameters.AddWithValue("@borrowerName", If(String.IsNullOrWhiteSpace(requesterFullName), requesterName, requesterFullName))
                         cmd.Parameters.AddWithValue("@borrowerPosition", DBNull.Value)
                         cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, departmentId.Value, DBNull.Value))
-                        cmd.Parameters.AddWithValue("@remarks", "Approved property request #" & requestId)
+                        cmd.Parameters.AddWithValue("@remarks", "Approved property request #" & requestId & " - Item: " & itemName)
                         cmd.ExecuteNonQuery()
                     End Using
                 End If
@@ -849,10 +848,10 @@ Partial Public Class DatabaseConnection
             End Using
 
             ' Create borrowed_items record for tracking
-            Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, itemName, borrowerName, borrowerPosition, " &
+            Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, borrowerName, borrowerPosition, " &
                                         "departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
-                                        "SELECT 'supply', s.supplyId, s.itemName, CONCAT(u.firstName, ' ', u.lastName), u.position, " &
-                                        "@departmentId, NOW(), NULL, 'Borrowed', @remarks, NOW(), NOW() " &
+                                        "SELECT 'supply', s.supplyId, CONCAT(u.firstName, ' ', u.lastName), u.position, " &
+                                        "@departmentId, NOW(), NULL, 'Borrowed', CONCAT(@remarks, ' - Item: ', s.itemName), NOW(), NOW() " &
                                         "FROM supplies s, users u WHERE s.supplyId = @supplyId AND u.userId = @userId"
 
             Using borrowCmd As New MySqlCommand(borrowQuery, conn, transaction)

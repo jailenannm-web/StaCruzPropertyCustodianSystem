@@ -320,12 +320,10 @@ Public Class EditSupply
 
             ' Get assigned user ID
             Dim assignedTo As Integer? = Nothing
-            Dim assignedToControls() As Control = Me.Controls.Find("cboAssignedTo", True)
-            If assignedToControls.Length > 0 AndAlso TypeOf assignedToControls(0) Is ComboBox Then
-                Dim cboAssignedTo As ComboBox = CType(assignedToControls(0), ComboBox)
-                If cboAssignedTo.SelectedValue IsNot Nothing AndAlso Not cboAssignedTo.SelectedValue.Equals(DBNull.Value) Then
-                    assignedTo = CInt(cboAssignedTo.SelectedValue)
-                End If
+            If cboAssignedTo.SelectedIndex > 0 AndAlso TypeOf cboAssignedTo.SelectedItem Is UserItem Then
+                Dim selectedUser As UserItem = CType(cboAssignedTo.SelectedItem, UserItem)
+                assignedTo = selectedUser.UserId
+                System.Diagnostics.Debug.WriteLine($"[v0] EditSupply - Selected user: {selectedUser.FullName} (ID: {selectedUser.UserId})")
             End If
 
             Dim success = DatabaseConnection.UpdateSupply(
@@ -380,10 +378,10 @@ Public Class EditSupply
                                 System.Diagnostics.Debug.WriteLine($"[v0] EditSupply - Updated borrowed_items record borrowId: {existingBorrowId}, new userId: {assignedTo.Value}")
                             Else
                                 ' Create new borrowed_items record
-                                Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, itemName, borrowerName, borrowerPosition, " &
+                                Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, borrowerName, borrowerPosition, " &
                                                             "departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
-                                                            "SELECT 'supply', s.supplyId, s.itemName, CONCAT(u.firstName, ' ', u.lastName), u.position, " &
-                                                            "u.departmentId, NOW(), NULL, 'Borrowed', @remarks, NOW(), NOW() " &
+                                                            "SELECT 'supply', s.supplyId, CONCAT(u.firstName, ' ', u.lastName), u.position, " &
+                                                            "u.departmentId, NOW(), NULL, 'Borrowed', CONCAT(@remarks, ' - Item: ', s.itemName), NOW(), NOW() " &
                                                             "FROM supplies s, users u WHERE s.supplyId = @supplyId AND u.userId = @userId"
 
                                 Using borrowCmd As New MySqlCommand(borrowQuery, conn)

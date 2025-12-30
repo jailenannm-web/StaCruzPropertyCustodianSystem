@@ -993,7 +993,7 @@ Public Class frmBorrowedItem
     Private Sub lblNeedsRepair_Click(sender As Object, e As EventArgs) Handles lblNeedsRepair.Click
         ' Set filter to show only items needing attention (Needs Repair or Damaged)
         cboFilterType.SelectedIndex = 0 ' All
-        cboFilterStatus.SelectedIndex = 2 ' Needs Repair
+        cboFilterStatus.SelectedIndex = 3 ' Needs Repair (Index 3 in combo box: All, Approved, Good Condition, Needs Repair, Damaged)
         
         ' Visual feedback
         HighlightLabel(lblNeedsRepair)

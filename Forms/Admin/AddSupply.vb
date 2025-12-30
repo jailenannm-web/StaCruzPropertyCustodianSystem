@@ -244,10 +244,10 @@ Public Class AddSupply
 
                             If newSupplyId > 0 Then
                                 ' Create borrowed_items record
-                                Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, itemName, borrowerName, borrowerPosition, " &
+                                Dim borrowQuery As String = "INSERT INTO borrowed_items (itemType, itemId, borrowerName, borrowerPosition, " &
                                                             "departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
-                                                            "SELECT 'supply', s.supplyId, s.itemName, CONCAT(u.firstName, ' ', u.lastName), u.position, " &
-                                                            "u.departmentId, NOW(), NULL, 'Borrowed', @remarks, NOW(), NOW() " &
+                                                            "SELECT 'supply', s.supplyId, CONCAT(u.firstName, ' ', u.lastName), u.position, " &
+                                                            "u.departmentId, NOW(), NULL, 'Borrowed', CONCAT(@remarks, ' - Item: ', s.itemName), NOW(), NOW() " &
                                                             "FROM supplies s, users u WHERE s.supplyId = @supplyId AND u.userId = @userId"
 
                                 Using borrowCmd As New MySqlCommand(borrowQuery, conn)

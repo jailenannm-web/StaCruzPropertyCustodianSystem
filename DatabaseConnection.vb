@@ -2862,7 +2862,13 @@ Public Class DatabaseConnection
                                  "p.acquisitionDate, p.acquisitionCost, p.condition, " &
                                  "COALESCE(d.location, p.location) AS location, p.status, " &
                                  "p.description, " &
-                                 "CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,'')) AS assignedEmployee, " &
+                                 "CASE " &
+                                 "  WHEN p.assignedTo IS NOT NULL THEN " &
+                                 "    CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,''), " &
+                                 "           CASE WHEN d.departmentName IS NOT NULL THEN CONCAT(' - ', d.departmentName) ELSE '' END, " &
+                                 "           CASE WHEN d.location IS NOT NULL THEN CONCAT(' - ', d.location) ELSE '' END) " &
+                                 "  ELSE '' " &
+                                 "END AS assignedEmployee, " &
                                  "d.departmentName AS assignedDepartment " &
                                  "FROM properties p " &
                                  "LEFT JOIN users u ON p.assignedTo = u.userId " &
@@ -3877,9 +3883,15 @@ Public Class DatabaseConnection
                 Dim requesterName As String = requestDetails("requesterName").ToString()
                 System.Diagnostics.Debug.WriteLine($"[ApprovePropertyRequest] Looking for requester: {requesterName}")
                 
-                ' First try users table
-                Using getUserCmd As New MySqlCommand("SELECT userId FROM users WHERE CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName) LIKE @requesterName OR CONCAT(firstName, ' ', lastName) LIKE @requesterName LIMIT 1", conn, transaction)
-                    getUserCmd.Parameters.AddWithValue("@requesterName", "%" & requesterName & "%")
+                ' First try users table - try fullName column and various name combinations
+                Using getUserCmd As New MySqlCommand("SELECT userId FROM users WHERE " &
+                                                    "fullName LIKE @requesterName OR " &
+                                                    "CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName, ' ', IFNULL(suffix, '')) LIKE @requesterName OR " &
+                                                    "CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName) LIKE @requesterName OR " &
+                                                    "CONCAT(firstName, ' ', lastName, ' ', IFNULL(suffix, '')) LIKE @requesterName OR " &
+                                                    "CONCAT(firstName, ' ', lastName) LIKE @requesterName " &
+                                                    "LIMIT 1", conn, transaction)
+                    getUserCmd.Parameters.AddWithValue("@requesterName", "%" & requesterName.Trim() & "%")
                     Dim userResult As Object = getUserCmd.ExecuteScalar()
                     If userResult IsNot Nothing AndAlso Not userResult.Equals(DBNull.Value) Then
                         requesterUserId = Convert.ToInt32(userResult)
@@ -3887,10 +3899,16 @@ Public Class DatabaseConnection
                     End If
                 End Using
                 
-                ' If not found in users, try staff_accounts table (which links to users via userId)
+                ' If not found in users, try staff_accounts table (which has its own fullName column)
                 If Not requesterUserId.HasValue Then
-                    Using getStaffCmd As New MySqlCommand("SELECT userId FROM staff_accounts WHERE CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName) LIKE @requesterName OR CONCAT(firstName, ' ', lastName) LIKE @requesterName LIMIT 1", conn, transaction)
-                        getStaffCmd.Parameters.AddWithValue("@requesterName", "%" & requesterName & "%")
+                    Using getStaffCmd As New MySqlCommand("SELECT userId FROM staff_accounts WHERE " &
+                                                         "fullName LIKE @requesterName OR " &
+                                                         "CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName, ' ', IFNULL(suffix, '')) LIKE @requesterName OR " &
+                                                         "CONCAT(firstName, ' ', IFNULL(middleName, ''), ' ', lastName) LIKE @requesterName OR " &
+                                                         "CONCAT(firstName, ' ', lastName, ' ', IFNULL(suffix, '')) LIKE @requesterName OR " &
+                                                         "CONCAT(firstName, ' ', lastName) LIKE @requesterName " &
+                                                         "LIMIT 1", conn, transaction)
+                        getStaffCmd.Parameters.AddWithValue("@requesterName", "%" & requesterName.Trim() & "%")
                         Dim staffResult As Object = getStaffCmd.ExecuteScalar()
                         If staffResult IsNot Nothing AndAlso Not staffResult.Equals(DBNull.Value) Then
                             requesterUserId = Convert.ToInt32(staffResult)
@@ -4026,16 +4044,15 @@ Public Class DatabaseConnection
 
                 ' Create borrowed_items record if property exists or was created
                 If itemId > 0 Then
-                    Using insertBorrowedCmd As New MySqlCommand("INSERT INTO borrowed_items (requestId, itemType, itemId, borrowerName, borrowerPosition, departmentId, borrowDate, expectedReturnDate, status, remarks) " &
-                                                                "VALUES (@requestId, 'property', @itemId, @borrowerName, @borrowerPosition, @departmentId, @borrowDate, @expectedReturnDate, 'Borrowed', @remarks)", conn, transaction)
+                    Using insertBorrowedCmd As New MySqlCommand("INSERT INTO borrowed_items (requestId, itemType, itemId, borrowerName, borrowerPosition, departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
+                                                                "VALUES (@requestId, 'property', @itemId, @borrowerName, @borrowerPosition, @departmentId, @borrowDate, NULL, 'Borrowed', @remarks, NOW(), NOW())", conn, transaction)
                         insertBorrowedCmd.Parameters.AddWithValue("@requestId", requestID)
                         insertBorrowedCmd.Parameters.AddWithValue("@itemId", itemId)
                         insertBorrowedCmd.Parameters.AddWithValue("@borrowerName", requestDetails("requesterName").ToString())
                         insertBorrowedCmd.Parameters.AddWithValue("@borrowerPosition", If(requestDetails("position") Is DBNull.Value, DBNull.Value, requestDetails("position").ToString()))
                         insertBorrowedCmd.Parameters.AddWithValue("@departmentId", requestDetails("departmentId"))
                         insertBorrowedCmd.Parameters.AddWithValue("@borrowDate", requestDetails("dateOfRequest"))
-                        insertBorrowedCmd.Parameters.AddWithValue("@expectedReturnDate", If(expectedReturnDate.HasValue, expectedReturnDate.Value, DBNull.Value))
-                        insertBorrowedCmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
+                        insertBorrowedCmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), "Approved property request #" & requestID, remarks))
                         insertBorrowedCmd.ExecuteNonQuery()
                     End Using
                 End If
@@ -4274,17 +4291,52 @@ Public Class DatabaseConnection
                     End If
                 End Using
 
-                ' If item found, create borrowed_items record
+                ' If item found, update supply with assignedTo and location, then create borrowed_items record
                 If itemId > 0 Then
-                    Using insertBorrowedCmd As New MySqlCommand("INSERT INTO borrowed_items (requestId, itemType, itemId, borrowerName, borrowerPosition, departmentId, borrowDate, status, remarks) " &
-                                                                "VALUES (@requestId, 'supply', @itemId, @borrowerName, @borrowerPosition, @departmentId, @borrowDate, 'Borrowed', @remarks)", conn, transaction)
+                    ' Get requester's userId and department location
+                    Dim requesterUserId As Integer? = Nothing
+                    Dim departmentLocation As String = ""
+                    Dim requesterName As String = requestDetails("requesterName").ToString()
+                    
+                    ' Try to find user in users table with fullName column and various name combinations
+                    Using userCmd As New MySqlCommand("SELECT u.userId, d.location FROM users u " &
+                                                     "LEFT JOIN departments d ON u.departmentId = d.departmentId " &
+                                                     "WHERE u.fullName LIKE @requesterName OR " &
+                                                     "CONCAT(u.firstName, ' ', IFNULL(u.middleName, ''), ' ', u.lastName, ' ', IFNULL(u.suffix, '')) LIKE @requesterName OR " &
+                                                     "CONCAT(u.firstName, ' ', IFNULL(u.middleName, ''), ' ', u.lastName) LIKE @requesterName OR " &
+                                                     "CONCAT(u.firstName, ' ', u.lastName, ' ', IFNULL(u.suffix, '')) LIKE @requesterName OR " &
+                                                     "CONCAT(u.firstName, ' ', u.lastName) LIKE @requesterName " &
+                                                     "LIMIT 1", conn, transaction)
+                        userCmd.Parameters.AddWithValue("@requesterName", "%" & requesterName.Trim() & "%")
+                        Using reader As MySqlDataReader = userCmd.ExecuteReader()
+                            If reader.Read() Then
+                                If Not reader.IsDBNull(0) Then requesterUserId = reader.GetInt32(0)
+                                If Not reader.IsDBNull(1) Then departmentLocation = reader.GetString(1)
+                            End If
+                        End Using
+                    End Using
+                    
+                    ' Update supply with assignedTo, departmentId, and location
+                    If requesterUserId.HasValue Then
+                        Using updateSupplyCmd As New MySqlCommand("UPDATE supplies SET assignedTo = @assignedTo, location = @location, updatedAt = NOW() WHERE supplyId = @supplyId", conn, transaction)
+                            updateSupplyCmd.Parameters.AddWithValue("@assignedTo", requesterUserId.Value)
+                            updateSupplyCmd.Parameters.AddWithValue("@location", If(String.IsNullOrEmpty(departmentLocation), DBNull.Value, departmentLocation))
+                            updateSupplyCmd.Parameters.AddWithValue("@supplyId", itemId)
+                            updateSupplyCmd.ExecuteNonQuery()
+                            System.Diagnostics.Debug.WriteLine($"[v0] Updated supply {itemId} - assignedTo: {requesterUserId.Value}, location: {departmentLocation}")
+                        End Using
+                    End If
+                    
+                    ' Create borrowed_items record
+                    Using insertBorrowedCmd As New MySqlCommand("INSERT INTO borrowed_items (requestId, itemType, itemId, borrowerName, borrowerPosition, departmentId, borrowDate, returnReason, status, remarks, createdAt, updatedAt) " &
+                                                                "VALUES (@requestId, 'supply', @itemId, @borrowerName, @borrowerPosition, @departmentId, @borrowDate, NULL, 'Borrowed', @remarks, NOW(), NOW())", conn, transaction)
                         insertBorrowedCmd.Parameters.AddWithValue("@requestId", requestID)
                         insertBorrowedCmd.Parameters.AddWithValue("@itemId", itemId)
                         insertBorrowedCmd.Parameters.AddWithValue("@borrowerName", requestDetails("requesterName").ToString())
                         insertBorrowedCmd.Parameters.AddWithValue("@borrowerPosition", If(requestDetails("position") Is DBNull.Value, DBNull.Value, requestDetails("position").ToString()))
                         insertBorrowedCmd.Parameters.AddWithValue("@departmentId", requestDetails("departmentId"))
                         insertBorrowedCmd.Parameters.AddWithValue("@borrowDate", requestDetails("dateOfRequest"))
-                        insertBorrowedCmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), DBNull.Value, remarks))
+                        insertBorrowedCmd.Parameters.AddWithValue("@remarks", If(String.IsNullOrEmpty(remarks), "Approved supply request #" & requestID, remarks))
                         insertBorrowedCmd.ExecuteNonQuery()
                     End Using
                 End If
@@ -4723,7 +4775,7 @@ Public Class DatabaseConnection
 
             ' Query borrowed_items table directly
             Dim query As String = "SELECT bi.borrowId, bi.requestId AS request_id, bi.itemType AS request_type, bi.status, " &
-                                 "bi.borrowDate AS request_date, bi.expectedReturnDate AS expected_return_date, " &
+                                 "bi.borrowDate AS request_date, bi.returnReason, " &
                                  "bi.actualReturnDate AS actual_returned_date, bi.conditionOnReturn AS condition_upon_return, " &
                                  "bi.borrowerName, bi.borrowerPosition, bi.departmentId, " &
                                  "CASE " &
@@ -4740,7 +4792,6 @@ Public Class DatabaseConnection
                                  "  WHEN bi.status = 'Returned' THEN 'Returned' " &
                                  "  WHEN bi.status = 'Overdue' THEN 'Overdue' " &
                                  "  WHEN bi.status = 'Lost' THEN 'Lost' " &
-                                 "  WHEN bi.expectedReturnDate IS NOT NULL AND bi.expectedReturnDate < CURDATE() AND bi.status = 'Borrowed' THEN 'Overdue' " &
                                  "  WHEN bi.status = 'Borrowed' THEN 'Borrowed' " &
                                  "  ELSE bi.status " &
                                  "END AS accountability_status " &
@@ -7796,7 +7847,13 @@ Public Class DatabaseConnection
                                  "COALESCE(p.totalCost, p.acquisitionCost) AS totalCost, " &
                                  "p.sourceOfFunds, p.unitOfMeasure, " &
                                  "p.assignedTo, " &
-                                 "CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,'')) AS assignedEmployee, " &
+                                 "CASE " &
+                                 "  WHEN p.assignedTo IS NOT NULL THEN " &
+                                 "    CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,''), " &
+                                 "           CASE WHEN d.departmentName IS NOT NULL THEN CONCAT(' - ', d.departmentName) ELSE '' END, " &
+                                 "           CASE WHEN d.location IS NOT NULL THEN CONCAT(' - ', d.location) ELSE '' END) " &
+                                 "  ELSE '' " &
+                                 "END AS assignedEmployee, " &
                                  "p.departmentId, d.departmentName AS assignedDepartment, " &
                                  "COALESCE(d.location, p.location) AS location, " &
                                  "p.status, p.internalCodes, p.createdAt, p.updatedAt " &
@@ -8564,20 +8621,33 @@ Public Class DatabaseConnection
 
             Dim query As New System.Text.StringBuilder()
             query.Append("SELECT ")
-            query.Append("supplyId, itemName, category, description, unitOfMeasure, quantity, ")
-            query.Append("unitCost, totalCost, dateReceived, supplier, sourceOfFunds, location, stockStatus, createdAt, updatedAt ")
-            query.Append("FROM supplies WHERE 1=1 ")
+            query.Append("s.supplyId, s.itemName, s.category, s.description, s.unitOfMeasure, s.quantity, ")
+            query.Append("s.unitCost, s.totalCost, s.dateReceived, s.supplier, s.sourceOfFunds, s.location, s.stockStatus, ")
+            query.Append("s.assignedTo, ")
+            query.Append("CASE ")
+            query.Append("  WHEN s.assignedTo IS NOT NULL THEN ")
+            query.Append("    CONCAT(IFNULL(u.firstName,''), ' ', IFNULL(u.lastName,''), ")
+            query.Append("           CASE WHEN d.departmentName IS NOT NULL THEN CONCAT(' - ', d.departmentName) ELSE '' END, ")
+            query.Append("           CASE WHEN d.location IS NOT NULL THEN CONCAT(' - ', d.location) ELSE '' END) ")
+            query.Append("  ELSE '' ")
+            query.Append("END AS assignedEmployee, ")
+            query.Append("d.departmentName AS assignedDepartment, ")
+            query.Append("s.createdAt, s.updatedAt ")
+            query.Append("FROM supplies s ")
+            query.Append("LEFT JOIN users u ON s.assignedTo = u.userId ")
+            query.Append("LEFT JOIN departments d ON u.departmentId = d.departmentId ")
+            query.Append("WHERE 1=1 ")
             ' Filter out soft-deleted supplies (those with stockStatus = 'Out of Stock' and quantity = 0)
-            query.Append("AND NOT (stockStatus = 'Out of Stock' AND quantity = 0)")
+            query.Append("AND NOT (s.stockStatus = 'Out of Stock' AND s.quantity = 0)")
 
             If Not String.IsNullOrEmpty(category) Then
-                query.Append(" AND category = @category")
+                query.Append(" AND s.category = @category")
             End If
             If Not String.IsNullOrEmpty(status) Then
-                query.Append(" AND stockStatus = @status")
+                query.Append(" AND s.stockStatus = @status")
             End If
 
-            query.Append(" ORDER BY createdAt DESC, dateReceived DESC")
+            query.Append(" ORDER BY s.createdAt DESC, s.dateReceived DESC")
 
             Using cmd As New MySqlCommand(query.ToString(), conn)
                 If Not String.IsNullOrEmpty(category) Then cmd.Parameters.AddWithValue("@category", category)

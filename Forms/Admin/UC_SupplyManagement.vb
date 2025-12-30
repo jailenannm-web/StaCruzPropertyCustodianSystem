@@ -268,18 +268,10 @@ Public Class UC_SupplyManagement
                         End If
                     End If
                     Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")
-                    ' Get assigned user name if exists
+                    ' Get assigned user name if exists - now using assignedEmployee column from query
                     Dim assignedToName As String = ""
-                    If row.Table.Columns.Contains("assignedTo") AndAlso Not IsDBNull(row("assignedTo")) Then
-                        Dim assignedToId As Integer = CInt(row("assignedTo"))
-                        ' Try to get user name from users table
-                        Dim userDt As DataTable = DatabaseConnection.GetAllUsers()
-                        If userDt IsNot Nothing Then
-                            Dim userRow As DataRow = userDt.AsEnumerable().FirstOrDefault(Function(u) Not IsDBNull(u("userId")) AndAlso CInt(u("userId")) = assignedToId)
-                            If userRow IsNot Nothing Then
-                                assignedToName = userRow("fullName").ToString()
-                            End If
-                        End If
+                    If row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")) Then
+                        assignedToName = row("assignedEmployee").ToString()
                     End If
                     
                     Dim createdAt As String = If(row.Table.Columns.Contains("createdAt") AndAlso Not IsDBNull(row("createdAt")), Convert.ToDateTime(row("createdAt")).ToString("yyyy-MM-dd"), "")
@@ -372,18 +364,10 @@ Public Class UC_SupplyManagement
                         totalCost = Format(cost, "0.00")
                     End If
                 End If
-                ' Get assigned user name if exists
+                ' Get assigned user name if exists - now using assignedEmployee column from query
                 Dim assignedToName As String = ""
-                If row.Table.Columns.Contains("assignedTo") AndAlso Not IsDBNull(row("assignedTo")) Then
-                    Dim assignedToId As Integer = CInt(row("assignedTo"))
-                    ' Try to get user name from users table
-                    Dim userDt As DataTable = DatabaseConnection.GetAllUsers()
-                    If userDt IsNot Nothing Then
-                        Dim userRow As DataRow = userDt.AsEnumerable().FirstOrDefault(Function(u) Not IsDBNull(u("userId")) AndAlso CInt(u("userId")) = assignedToId)
-                        If userRow IsNot Nothing Then
-                            assignedToName = userRow("fullName").ToString()
-                        End If
-                    End If
+                If row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")) Then
+                    assignedToName = row("assignedEmployee").ToString()
                 End If
                 
                 Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString(), "")

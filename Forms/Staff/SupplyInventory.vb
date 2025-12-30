@@ -194,6 +194,18 @@ Public Class SupplyInventory
             ' Clear existing data
             propertyManagementGrid.Rows.Clear()
             
+            ' Add "Assigned To" column if it doesn't exist (before the last column which is stockStatus)
+            If Not propertyManagementGrid.Columns.Contains("assignedTo") Then
+                Dim assignedToColumn As New DataGridViewTextBoxColumn()
+                assignedToColumn.Name = "assignedTo"
+                assignedToColumn.HeaderText = "Assigned To"
+                assignedToColumn.Width = 200
+                ' Insert at index 7 (after location, before stockStatus)
+                ' Columns: 0=supplyID, 1=itemName, 2=category, 3=description, 4=unitOfMeasure, 5=quantity, 6=location, 7=assignedTo, 8=stockStatus
+                propertyManagementGrid.Columns.Insert(7, assignedToColumn)
+                System.Diagnostics.Debug.WriteLine("[v0] Added 'Assigned To' column to SupplyInventory grid at index 7")
+            End If
+            
             ' Populate DataGridView
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows
@@ -204,6 +216,7 @@ Public Class SupplyInventory
                     Dim unitOfMeasure As String = ""
                     Dim quantity As String = "0"
                     Dim location As String = ""
+                    Dim assignedTo As String = ""
                     Dim stockStatus As String = ""
                     
                     ' Handle different possible column names
@@ -237,6 +250,11 @@ Public Class SupplyInventory
                             location = row("location").ToString()
                         End If
                         
+                        ' Get assignedEmployee column (shows "Name - Dept - Location")
+                        If row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")) Then
+                            assignedTo = row("assignedEmployee").ToString()
+                        End If
+                        
                         If row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")) Then
                             stockStatus = row("stockStatus").ToString()
                         End If
@@ -244,7 +262,8 @@ Public Class SupplyInventory
                         System.Diagnostics.Debug.WriteLine("Column access error: " & colEx.Message)
                     End Try
                     
-                    propertyManagementGrid.Rows.Add(supplyID, itemName, category, description, unitOfMeasure, quantity, location, stockStatus)
+                    ' Add row with correct column order: supplyID, itemName, category, description, unitOfMeasure, quantity, location, assignedTo, stockStatus
+                    propertyManagementGrid.Rows.Add(supplyID, itemName, category, description, unitOfMeasure, quantity, location, assignedTo, stockStatus)
                 Next
             End If
             

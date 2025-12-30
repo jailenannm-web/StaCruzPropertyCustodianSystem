@@ -283,6 +283,7 @@ Partial Class frmBorrowedItem
         Me.colItemType.MinimumWidth = 6
         Me.colItemType.Name = "colItemType"
         Me.colItemType.ReadOnly = True
+        Me.colItemType.Width = 125
         '
         'colItemName
         '
@@ -306,6 +307,7 @@ Partial Class frmBorrowedItem
         Me.colQuantity.MinimumWidth = 6
         Me.colQuantity.Name = "colQuantity"
         Me.colQuantity.ReadOnly = True
+        Me.colQuantity.Width = 125
         '
         'colCondition
         '

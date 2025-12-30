@@ -463,8 +463,26 @@ Public Class UC_PropertyRequestManagement
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
             If DatabaseConnection.ApprovePropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks:=remarks) Then
-                MessageBox.Show("Request approved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Request approved successfully. The property has been assigned to the requester.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadRequestData()
+                
+                ' Notify UC_PropertyManagement1 to refresh if it exists
+                Try
+                    Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+                    If saDashboard IsNot Nothing Then
+                        ' Find UC_PropertyManagement1 in the dashboard panel and refresh it
+                        For Each ctrl As Control In saDashboard.pnlFormLoader.Controls
+                            If TypeOf ctrl Is UC_PropertyManagement1 Then
+                                Dim propMgmt As UC_PropertyManagement1 = DirectCast(ctrl, UC_PropertyManagement1)
+                                propMgmt.LoadPropertiesData()
+                                System.Diagnostics.Debug.WriteLine("[v0] Refreshed UC_PropertyManagement1 after approval")
+                                Exit For
+                            End If
+                        Next
+                    End If
+                Catch refreshEx As Exception
+                    System.Diagnostics.Debug.WriteLine("[v0] Could not refresh UC_PropertyManagement1: " & refreshEx.Message)
+                End Try
             Else
                 MessageBox.Show("Failed to approve request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
