@@ -97,20 +97,44 @@ Public Module ReportExportHelper
                                               Not isBulkExport
             
             If isKeyValueFormat Then
-                ' Professional key-value format for single audit record
-                ' Add header section
-                writer.WriteLine(QuoteCsvValue("AUDIT REPORT"))
+                ' Professional key-value format for single record (Requisition, Audit, etc.)
+                Dim reportTitle As String = "REPORT"
+                
+                ' Detect report type from first row
+                If table.Rows.Count > 0 Then
+                    Dim firstField As String = If(Convert.IsDBNull(table.Rows(0)("Field")), "", table.Rows(0)("Field").ToString())
+                    If firstField.Contains("REQUISITION") Then
+                        reportTitle = "REQUISITION ISSUE SLIP"
+                    ElseIf firstField.Contains("AUDIT") Then
+                        reportTitle = "AUDIT REPORT"
+                    End If
+                End If
+                
+                ' Add professional header
+                writer.WriteLine(QuoteCsvValue(reportTitle))
                 writer.WriteLine("")
                 writer.WriteLine(QuoteCsvValue("Sta Cruz Property Custodian System"))
-                writer.WriteLine(QuoteCsvValue("Report Generated: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")))
+                writer.WriteLine(QuoteCsvValue("Generated: " & DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss")))
                 writer.WriteLine("")
-                writer.WriteLine(QuoteCsvValue(New String("="c, 78)))
+                writer.WriteLine(QuoteCsvValue(New String("="c, 80)))
                 writer.WriteLine("")
                 
+                ' Column headers for better readability
+                writer.WriteLine(QuoteCsvValue("Field") & "," & QuoteCsvValue("Value"))
+                writer.WriteLine(QuoteCsvValue(New String("-"c, 30)) & "," & QuoteCsvValue(New String("-"c, 50)))
+                
                 ' Write field-value pairs with proper formatting
+                Dim isFirstDataRow As Boolean = True
                 For Each row As DataRow In table.Rows
                     Dim fieldName As String = If(Convert.IsDBNull(row("Field")), "", Convert.ToString(row("Field")))
                     Dim fieldValue As String = If(Convert.IsDBNull(row("Value")), "", Convert.ToString(row("Value")))
+                    
+                    ' Skip the title row if it's already in header
+                    If isFirstDataRow AndAlso (fieldName.Contains("REQUISITION") OrElse fieldName.Contains("AUDIT")) Then
+                        isFirstDataRow = False
+                        Continue For
+                    End If
+                    isFirstDataRow = False
                     
                     ' Skip empty separator rows
                     If String.IsNullOrWhiteSpace(fieldName) AndAlso String.IsNullOrWhiteSpace(fieldValue) Then
@@ -123,8 +147,10 @@ Public Module ReportExportHelper
                 
                 ' Add footer
                 writer.WriteLine("")
-                writer.WriteLine(QuoteCsvValue(New String("="c, 78)))
+                writer.WriteLine(QuoteCsvValue(New String("="c, 80)))
                 writer.WriteLine(QuoteCsvValue("End of Report"))
+                writer.WriteLine("")
+                writer.WriteLine(QuoteCsvValue("This is an official document from Sta Cruz Property Custodian System"))
             Else
                 ' Professional table format for bulk exports
                 ' Add header section (as comments/metadata rows)
@@ -595,6 +621,281 @@ Public Module ReportExportHelper
         End If
         
         Return lines
+    End Function
+
+    ''' <summary>
+    ''' Export Requisition Issue Slip to PDF with proper form layout
+    ''' </summary>
+    Public Sub ExportRequisitionSlipToPdf(requestData As DataRow, suggestedFileName As String)
+        If requestData Is Nothing Then
+            MessageBox.Show("No data to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Using dialog As New SaveFileDialog()
+            dialog.Filter = "PDF Files|*.pdf"
+            dialog.FileName = suggestedFileName
+            dialog.AddExtension = True
+            dialog.DefaultExt = "pdf"
+            If dialog.ShowDialog() = DialogResult.OK Then
+                Try
+                    Dim filePath = dialog.FileName
+                    If Not filePath.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) Then
+                        filePath = filePath & ".pdf"
+                    End If
+
+                    Dim pdfBytes = BuildRequisitionSlipPdf(requestData)
+                    File.WriteAllBytes(filePath, pdfBytes)
+                    MessageBox.Show("Requisition Issue Slip exported successfully to PDF.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch ex As Exception
+                    MessageBox.Show("Failed to export PDF file: " & ex.Message, "Export", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End If
+        End Using
+    End Sub
+
+    Private Function BuildRequisitionSlipPdf(requestData As DataRow) As Byte()
+        ' Helper function to safely get column value
+        Dim GetValue As Func(Of String, String) = Function(colName As String) As String
+            If requestData.Table.Columns.Contains(colName) AndAlso Not Convert.IsDBNull(requestData(colName)) Then
+                Return requestData(colName).ToString()
+            End If
+            Return ""
+        End Function
+
+        Dim GetDateValue As Func(Of String, String) = Function(colName As String) As String
+            If requestData.Table.Columns.Contains(colName) AndAlso Not Convert.IsDBNull(requestData(colName)) Then
+                Dim dateObj = requestData(colName)
+                If TypeOf dateObj Is DateTime Then
+                    Return CType(dateObj, DateTime).ToString("dddd, dd MMMM yyyy")
+                ElseIf TypeOf dateObj Is String Then
+                    Dim parsedDate As DateTime
+                    If DateTime.TryParse(CStr(dateObj), parsedDate) Then
+                        Return parsedDate.ToString("dddd, dd MMMM yyyy")
+                    End If
+                End If
+            End If
+            Return ""
+        End Function
+
+        ' Extract data
+        Dim requestId As String = GetValue("request_id")
+        If String.IsNullOrEmpty(requestId) Then requestId = GetValue("requestId")
+        
+        Dim requesterName As String = GetValue("requesterName")
+        If String.IsNullOrEmpty(requesterName) Then requesterName = GetValue("requester_name")
+        
+        Dim position As String = GetValue("position")
+        Dim department As String = GetValue("departmentName")
+        If String.IsNullOrEmpty(department) Then department = GetValue("department")
+        
+        Dim dateOfRequest As String = GetDateValue("dateOfRequest")
+        If String.IsNullOrEmpty(dateOfRequest) Then dateOfRequest = GetDateValue("request_date")
+        
+        Dim itemName As String = GetValue("itemName")
+        If String.IsNullOrEmpty(itemName) Then itemName = GetValue("item_name")
+        
+        Dim quantity As String = GetValue("quantityRequested")
+        If String.IsNullOrEmpty(quantity) Then quantity = GetValue("quantity")
+        
+        Dim unit As String = GetValue("unit")
+        Dim description As String = GetValue("description")
+        Dim purpose As String = GetValue("purpose")
+        Dim status As String = GetValue("status")
+        
+        Dim approvedBy As String = GetValue("approved_by_name")
+        If String.IsNullOrEmpty(approvedBy) Then approvedBy = GetValue("approvedBy")
+        
+        Dim approvedDate As String = GetDateValue("approvedDate")
+        If String.IsNullOrEmpty(approvedDate) Then approvedDate = GetDateValue("approval_date")
+        
+        Dim remarks As String = GetValue("remarks")
+        
+        Dim createdAt As String = GetDateValue("createdAt")
+        If String.IsNullOrEmpty(createdAt) Then createdAt = DateTime.Now.ToString("dddd, dd MMMM yyyy")
+        
+        Dim updatedAt As String = GetDateValue("updatedAt")
+        If String.IsNullOrEmpty(updatedAt) Then updatedAt = createdAt
+
+        ' Build PDF content
+        Dim streamContent As String = BuildRequisitionSlipPdfContent(
+            requestId, requesterName, position, department,
+            dateOfRequest, itemName, quantity, unit,
+            description, purpose, status, approvedBy,
+            approvedDate, remarks, createdAt, updatedAt
+        )
+        
+        Dim streamBytes = Encoding.UTF8.GetBytes(streamContent)
+
+        Dim objects As New List(Of Byte())()
+        objects.Add(Encoding.ASCII.GetBytes("1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj" & Environment.NewLine))
+        objects.Add(Encoding.ASCII.GetBytes("2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj" & Environment.NewLine))
+        objects.Add(Encoding.ASCII.GetBytes("3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >> endobj" & Environment.NewLine))
+
+        Dim streamBuilder As New StringBuilder()
+        streamBuilder.AppendLine("4 0 obj << /Length " & streamBytes.Length & " >>")
+        streamBuilder.AppendLine("stream")
+        streamBuilder.Append(streamContent)
+        streamBuilder.AppendLine("endstream")
+        streamBuilder.AppendLine("endobj")
+        objects.Add(Encoding.UTF8.GetBytes(streamBuilder.ToString()))
+
+        objects.Add(Encoding.ASCII.GetBytes("5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj" & Environment.NewLine))
+        objects.Add(Encoding.ASCII.GetBytes("6 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> endobj" & Environment.NewLine))
+
+        Using ms As New MemoryStream()
+            Using bw As New BinaryWriter(ms, Encoding.ASCII, True)
+                bw.Write(Encoding.ASCII.GetBytes("%PDF-1.4" & Environment.NewLine))
+                Dim offsets As New List(Of Long)()
+                For Each objBytes In objects
+                    offsets.Add(ms.Position)
+                    bw.Write(objBytes)
+                Next
+
+                Dim xrefPosition As Long = ms.Position
+                bw.Write(Encoding.ASCII.GetBytes("xref" & Environment.NewLine & "0 " & (objects.Count + 1).ToString() & Environment.NewLine))
+                bw.Write(Encoding.ASCII.GetBytes("0000000000 65535 f " & Environment.NewLine))
+                For Each off As Long In offsets
+                    bw.Write(Encoding.ASCII.GetBytes(off.ToString("D10") & " 00000 n " & Environment.NewLine))
+                Next
+
+                bw.Write(Encoding.ASCII.GetBytes("trailer" & Environment.NewLine & "<< /Size " & (objects.Count + 1).ToString() & " /Root 1 0 R >>" & Environment.NewLine))
+                bw.Write(Encoding.ASCII.GetBytes("startxref" & Environment.NewLine & xrefPosition.ToString() & Environment.NewLine & "%%EOF"))
+            End Using
+            Return ms.ToArray()
+        End Using
+    End Function
+
+    Private Function BuildRequisitionSlipPdfContent(
+        requestId As String, requesterName As String, position As String, department As String,
+        dateOfRequest As String, itemName As String, quantity As String, unit As String,
+        description As String, purpose As String, status As String, approvedBy As String,
+        approvedDate As String, remarks As String, createdAt As String, updatedAt As String) As String
+        
+        Dim builder As New StringBuilder()
+        Dim y As Integer = 740
+        
+        ' Draw outer border
+        builder.AppendLine("0.5 w")
+        builder.AppendLine("40 40 532 712 re S")
+        
+        ' Draw header box with background
+        builder.AppendLine("0.9 g")
+        builder.AppendLine("40 720 532 32 re f")
+        builder.AppendLine("0 g")
+        builder.AppendLine("40 720 532 32 re S")
+        
+        ' Title - REQUISITION ISSUE SLIP (Bold, centered)
+        builder.AppendLine("BT /F2 18 Tf 175 728 Td (REQUISITION ISSUE SLIP) Tj ET")
+        
+        y = 695
+        
+        ' First row: Request ID (right aligned)
+        builder.AppendLine("BT /F1 10 Tf 380 " & y & " Td (Request ID:) Tj ET")
+        builder.AppendLine("450 " & (y - 5) & " 110 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 455 " & (y - 1) & " Td (" & EscapePdfText(requestId) & ") Tj ET")
+        
+        y -= 40
+        
+        ' Second row: Requester Name and Position
+        builder.AppendLine("BT /F1 10 Tf 50 " & y & " Td (Requester Name:) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 200 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(requesterName) & ") Tj ET")
+        
+        builder.AppendLine("BT /F1 10 Tf 360 " & y & " Td (Position:) Tj ET")
+        builder.AppendLine("420 " & (y - 5) & " 140 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 425 " & (y - 1) & " Td (" & EscapePdfText(position) & ") Tj ET")
+        
+        y -= 30
+        
+        ' Third row: Department and Date of Request
+        builder.AppendLine("BT /F1 10 Tf 50 " & y & " Td (Department:) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 200 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(department) & ") Tj ET")
+        
+        builder.AppendLine("BT /F1 10 Tf 360 " & y & " Td (Date of Request:) Tj ET")
+        builder.AppendLine("455 " & (y - 5) & " 105 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 460 " & (y - 1) & " Td (" & EscapePdfText(dateOfRequest) & ") Tj ET")
+        
+        y -= 40
+        
+        ' Fourth row: Item Name and Quantity
+        builder.AppendLine("BT /F1 10 Tf 50 " & y & " Td (Item Name:) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 200 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(itemName) & ") Tj ET")
+        
+        builder.AppendLine("BT /F1 10 Tf 360 " & y & " Td (Quantity:) Tj ET")
+        builder.AppendLine("420 " & (y - 5) & " 60 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 425 " & (y - 1) & " Td (" & EscapePdfText(quantity) & ") Tj ET")
+        
+        builder.AppendLine("BT /F1 10 Tf 490 " & y & " Td (Unit:) Tj ET")
+        builder.AppendLine("520 " & (y - 5) & " 40 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 525 " & (y - 1) & " Td (" & EscapePdfText(unit) & ") Tj ET")
+        
+        y -= 40
+        
+        ' Description section
+        builder.AppendLine("BT /F1 10 Tf 50 " & y & " Td (Description:) Tj ET")
+        builder.AppendLine("50 " & (y - 95) & " 250 90 re S")
+        Dim descLines As List(Of String) = WrapText(description, 35)
+        Dim descY As Integer = y - 15
+        For Each line As String In descLines.Take(5)
+            builder.AppendLine("BT /F1 9 Tf 55 " & descY & " Td (" & EscapePdfText(line) & ") Tj ET")
+            descY -= 12
+        Next
+        
+        ' Purpose section
+        builder.AppendLine("BT /F1 10 Tf 310 " & y & " Td (Purpose:) Tj ET")
+        builder.AppendLine("310 " & (y - 95) & " 250 90 re S")
+        Dim purposeLines As List(Of String) = WrapText(purpose, 35)
+        Dim purposeY As Integer = y - 15
+        For Each line As String In purposeLines.Take(5)
+            builder.AppendLine("BT /F1 9 Tf 315 " & purposeY & " Td (" & EscapePdfText(line) & ") Tj ET")
+            purposeY -= 12
+        Next
+        
+        y -= 110
+        
+        ' Status row
+        builder.AppendLine("BT /F1 10 Tf 50 " & y & " Td (Status:) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 200 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(status) & ") Tj ET")
+        
+        y -= 40
+        
+        ' Approved By and Approved Date
+        builder.AppendLine("BT /F1 10 Tf 50 " & y & " Td (Approved By:) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 200 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(approvedBy) & ") Tj ET")
+        
+        builder.AppendLine("BT /F1 10 Tf 360 " & y & " Td (Approved Date:) Tj ET")
+        builder.AppendLine("455 " & (y - 5) & " 105 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 460 " & (y - 1) & " Td (" & EscapePdfText(approvedDate) & ") Tj ET")
+        
+        y -= 40
+        
+        ' Remarks section
+        builder.AppendLine("BT /F1 10 Tf 50 " & y & " Td (Remarks:) Tj ET")
+        builder.AppendLine("50 " & (y - 75) & " 510 70 re S")
+        Dim remarksLines As List(Of String) = WrapText(remarks, 75)
+        Dim remarksY As Integer = y - 15
+        For Each line As String In remarksLines.Take(4)
+            builder.AppendLine("BT /F1 9 Tf 55 " & remarksY & " Td (" & EscapePdfText(line) & ") Tj ET")
+            remarksY -= 12
+        Next
+        
+        y -= 90
+        
+        ' Created and Updated dates
+        builder.AppendLine("BT /F1 10 Tf 50 " & y & " Td (Created at:) Tj ET")
+        builder.AppendLine("145 " & (y - 5) & " 150 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(createdAt) & ") Tj ET")
+        
+        builder.AppendLine("BT /F1 10 Tf 360 " & y & " Td (Updated at:) Tj ET")
+        builder.AppendLine("455 " & (y - 5) & " 105 20 re S")
+        builder.AppendLine("BT /F1 9 Tf 460 " & (y - 1) & " Td (" & EscapePdfText(updatedAt) & ") Tj ET")
+        
+        Return builder.ToString()
     End Function
 End Module
 

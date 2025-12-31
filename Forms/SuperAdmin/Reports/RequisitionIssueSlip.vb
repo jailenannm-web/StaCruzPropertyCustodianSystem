@@ -32,6 +32,13 @@ Partial Public Class RequisitionIssueSlip
         Try
             Dim requestData As DataRow = DatabaseConnection.GetRequestById(selectedRequestId.Value, selectedRequestType)
             If requestData IsNot Nothing Then
+                ' Debug: Log all columns and values
+                System.Diagnostics.Debug.WriteLine("[v0] ===== Request Data Loaded =====")
+                For Each col As DataColumn In requestData.Table.Columns
+                    Dim value As String = If(Convert.IsDBNull(requestData(col.ColumnName)), "NULL", requestData(col.ColumnName).ToString())
+                    System.Diagnostics.Debug.WriteLine($"[v0] {col.ColumnName} = {value}")
+                Next
+                System.Diagnostics.Debug.WriteLine("[v0] =================================")
                 ' Populate form fields
                 requestId.Text = SafeGetValue(requestData, "request_id")
                 requesterName.Text = SafeGetValue(requestData, "requesterName", "requester_name")
@@ -49,7 +56,44 @@ Partial Public Class RequisitionIssueSlip
                         department.Text = deptName
                     End If
                 End If
-                dateOfRequest.Text = SafeGetDateValue(requestData, "request_date", "dateOfRequest")
+                ' Handle dateOfRequest properly
+                If dateOfRequest IsNot Nothing Then
+                    Try
+                        Dim dateObj As Object = Nothing
+                        If requestData.Table.Columns.Contains("request_date") AndAlso Not Convert.IsDBNull(requestData("request_date")) Then
+                            dateObj = requestData("request_date")
+                        ElseIf requestData.Table.Columns.Contains("dateOfRequest") AndAlso Not Convert.IsDBNull(requestData("dateOfRequest")) Then
+                            dateObj = requestData("dateOfRequest")
+                        End If
+
+                        System.Diagnostics.Debug.WriteLine($"[v0] dateOfRequest dateObj type: {If(dateObj IsNot Nothing, dateObj.GetType().Name, "NULL")}, value: {If(dateObj IsNot Nothing, dateObj.ToString(), "NULL")}")
+
+                        If dateObj IsNot Nothing Then
+                            Dim parsedDate As DateTime
+                            ' Try to parse regardless of type
+                            If TypeOf dateObj Is DateTime Then
+                                parsedDate = CType(dateObj, DateTime)
+                                dateOfRequest.Value = parsedDate
+                                dateOfRequest.Format = DateTimePickerFormat.Custom
+                                dateOfRequest.CustomFormat = "dddd, dd MMMM yyyy"
+                                dateOfRequest.ShowCheckBox = False
+                                System.Diagnostics.Debug.WriteLine($"[v0] Set dateOfRequest from DateTime: {parsedDate}")
+                            ElseIf DateTime.TryParse(dateObj.ToString(), parsedDate) Then
+                                dateOfRequest.Value = parsedDate
+                                dateOfRequest.Format = DateTimePickerFormat.Custom
+                                dateOfRequest.CustomFormat = "dddd, dd MMMM yyyy"
+                                dateOfRequest.ShowCheckBox = False
+                                System.Diagnostics.Debug.WriteLine($"[v0] Set dateOfRequest from parsed string: {parsedDate}")
+                            Else
+                                System.Diagnostics.Debug.WriteLine("[v0] Could not parse date of request")
+                            End If
+                        Else
+                            System.Diagnostics.Debug.WriteLine("[v0] No date of request found")
+                        End If
+                    Catch ex As Exception
+                        System.Diagnostics.Debug.WriteLine("[v0] Date of request parsing error: " & ex.Message & " - " & ex.StackTrace)
+                    End Try
+                End If
                 itemName.Text = SafeGetValue(requestData, "item_name", "itemName")
                 description.Text = SafeGetValue(requestData, "description")
                 quantityRequesteed.Text = SafeGetValue(requestData, "quantity", "quantityRequested")
@@ -59,19 +103,42 @@ Partial Public Class RequisitionIssueSlip
                 remarks.Text = SafeGetValue(requestData, "remarks")
 
                 ' Populate approved date and approved by
-                Dim approvedDateValue As String = SafeGetDateValue(requestData, "approval_date", "approvedDate")
-                If Not String.IsNullOrEmpty(approvedDateValue) AndAlso approvedDate IsNot Nothing Then
+                If approvedDate IsNot Nothing Then
                     Try
-                        Dim parsedDate As DateTime
-                        If DateTime.TryParse(approvedDateValue, parsedDate) Then
-                            approvedDate.Value = parsedDate
+                        ' Try to get the date value directly from the DataRow
+                        Dim approvedDateObj As Object = Nothing
+                        If requestData.Table.Columns.Contains("approval_date") AndAlso Not Convert.IsDBNull(requestData("approval_date")) Then
+                            approvedDateObj = requestData("approval_date")
+                        ElseIf requestData.Table.Columns.Contains("approvedDate") AndAlso Not Convert.IsDBNull(requestData("approvedDate")) Then
+                            approvedDateObj = requestData("approvedDate")
+                        End If
+
+                        System.Diagnostics.Debug.WriteLine($"[v0] approvedDate dateObj type: {If(approvedDateObj IsNot Nothing, approvedDateObj.GetType().Name, "NULL")}, value: {If(approvedDateObj IsNot Nothing, approvedDateObj.ToString(), "NULL")}")
+
+                        If approvedDateObj IsNot Nothing Then
+                            Dim parsedDate As DateTime
+                            ' Try to parse regardless of type
+                            If TypeOf approvedDateObj Is DateTime Then
+                                parsedDate = CType(approvedDateObj, DateTime)
+                                approvedDate.Value = parsedDate
+                                approvedDate.Format = DateTimePickerFormat.Custom
+                                approvedDate.CustomFormat = "dddd, dd MMMM yyyy"
+                                approvedDate.ShowCheckBox = False
+                                System.Diagnostics.Debug.WriteLine($"[v0] Set approvedDate from DateTime: {parsedDate}")
+                            ElseIf DateTime.TryParse(approvedDateObj.ToString(), parsedDate) Then
+                                approvedDate.Value = parsedDate
+                                approvedDate.Format = DateTimePickerFormat.Custom
+                                approvedDate.CustomFormat = "dddd, dd MMMM yyyy"
+                                approvedDate.ShowCheckBox = False
+                                System.Diagnostics.Debug.WriteLine($"[v0] Set approvedDate from parsed string: {parsedDate}")
+                            Else
+                                System.Diagnostics.Debug.WriteLine("[v0] Could not parse approved date")
+                            End If
                         Else
-                            ' If parsing fails, just set to current date or leave as is
-                            System.Diagnostics.Debug.WriteLine($"[v0] Could not parse date: {approvedDateValue}")
+                            System.Diagnostics.Debug.WriteLine("[v0] No approved date found")
                         End If
                     Catch ex As Exception
-                        System.Diagnostics.Debug.WriteLine("[v0] Date parsing error: " & ex.Message)
-                        ' Just skip if date is invalid
+                        System.Diagnostics.Debug.WriteLine("[v0] Approved date parsing error: " & ex.Message & " - " & ex.StackTrace)
                     End Try
                 End If
                 If approvedBy IsNot Nothing Then
@@ -277,13 +344,74 @@ Partial Public Class RequisitionIssueSlip
     End Sub
 
     Private Sub btnCSV_Click(sender As Object, e As EventArgs) Handles btnCSV.Click
-        Dim fileName As String = "requisition_issue_slip_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".csv"
-        ReportExportHelper.ExportDataTableToCsv(requisitionTable, fileName)
+        Try
+            ' If we have a selected request, export that specific request data as CSV
+            If selectedRequestId.HasValue AndAlso Not String.IsNullOrEmpty(selectedRequestType) Then
+                Dim requestData As DataRow = DatabaseConnection.GetRequestById(selectedRequestId.Value, selectedRequestType)
+                If requestData IsNot Nothing Then
+                    ' Convert single request to a key-value DataTable for CSV export
+                    Dim csvTable As New DataTable()
+                    csvTable.Columns.Add("Field", GetType(String))
+                    csvTable.Columns.Add("Value", GetType(String))
+
+                    ' Add header
+                    csvTable.Rows.Add("REQUISITION ISSUE SLIP", "")
+                    csvTable.Rows.Add("", "")
+                    
+                    ' Add all fields
+                    csvTable.Rows.Add("Request ID", SafeGetValue(requestData, "request_id", "requestId"))
+                    csvTable.Rows.Add("Requester Name", SafeGetValue(requestData, "requesterName", "requester_name"))
+                    csvTable.Rows.Add("Position", SafeGetValue(requestData, "position"))
+                    csvTable.Rows.Add("Department", SafeGetValue(requestData, "departmentName", "department"))
+                    csvTable.Rows.Add("Date of Request", SafeGetDateValue(requestData, "request_date", "dateOfRequest"))
+                    csvTable.Rows.Add("Item Name", SafeGetValue(requestData, "item_name", "itemName"))
+                    csvTable.Rows.Add("Quantity", SafeGetValue(requestData, "quantity", "quantityRequested"))
+                    csvTable.Rows.Add("Unit", SafeGetValue(requestData, "unit"))
+                    csvTable.Rows.Add("Description", SafeGetValue(requestData, "description"))
+                    csvTable.Rows.Add("Purpose", SafeGetValue(requestData, "purpose"))
+                    csvTable.Rows.Add("Status", SafeGetValue(requestData, "status"))
+                    csvTable.Rows.Add("Approved By", SafeGetValue(requestData, "approved_by_name", "approvedBy"))
+                    csvTable.Rows.Add("Approved Date", SafeGetDateValue(requestData, "approval_date", "approvedDate"))
+                    csvTable.Rows.Add("Remarks", SafeGetValue(requestData, "remarks"))
+
+                    Dim fileName As String = "requisition_slip_" & selectedRequestId.Value.ToString() & "_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".csv"
+                    ReportExportHelper.ExportDataTableToCsv(csvTable, fileName)
+                Else
+                    MessageBox.Show("Request data not found.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            ElseIf requisitionTable IsNot Nothing AndAlso requisitionTable.Rows.Count > 0 Then
+                ' Export all requisitions
+                Dim fileName As String = "requisition_issue_slip_all_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".csv"
+                ReportExportHelper.ExportDataTableToCsv(requisitionTable, fileName, , True)
+            Else
+                MessageBox.Show("No data to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error exporting CSV: " & ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub RoundedButton1_Click(sender As Object, e As EventArgs) Handles RoundedButton1.Click
-        Dim fileName As String = "requisition_issue_slip_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".pdf"
-        ReportExportHelper.ExportDataTableToPdf(requisitionTable, fileName, "Requisition and Issue Slip")
+        Try
+            ' If we have a selected request, use the specialized PDF export
+            If selectedRequestId.HasValue AndAlso Not String.IsNullOrEmpty(selectedRequestType) Then
+                Dim requestData As DataRow = DatabaseConnection.GetRequestById(selectedRequestId.Value, selectedRequestType)
+                If requestData IsNot Nothing Then
+                    Dim fileName As String = "requisition_slip_" & selectedRequestId.Value.ToString() & "_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".pdf"
+                    ReportExportHelper.ExportRequisitionSlipToPdf(requestData, fileName)
+                Else
+                    MessageBox.Show("Request data not found.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            ElseIf requisitionTable IsNot Nothing AndAlso requisitionTable.Rows.Count > 0 Then
+                ' Export all requisitions as table
+                Dim fileName As String = "requisition_issue_slip_all_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".pdf"
+                ReportExportHelper.ExportDataTableToPdf(requisitionTable, fileName, "Requisition and Issue Slip")
+            Else
+                MessageBox.Show("No data to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error exporting PDF: " & ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Function SafeGetString(row As DataRow, ParamArray names() As String) As String

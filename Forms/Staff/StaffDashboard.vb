@@ -51,12 +51,23 @@ Public Class StaffDashboard
         ' Set Dashboard as the active button on startup
         SetActiveButton(btnDashboard)
 
+        ' CLEAR the panel first
+        pnlFormLoader.Controls.Clear()
+        
         ' Show the form loader panel with dashboard content
         pnlFormLoader.Visible = True
         pnlFormLoader.BringToFront()
 
-        ' Load dashboard data on startup
-        LoadDashboardData()
+        ' Load modern dashboard on startup
+        Try
+            Dim dashboardContent As New StaffDashboardContent()
+            dashboardContent.Dock = DockStyle.Fill
+            pnlFormLoader.Controls.Add(dashboardContent)
+            System.Diagnostics.Debug.WriteLine("[v0] Modern dashboard loaded on startup")
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] Dashboard load error: " & ex.Message)
+            MessageBox.Show("Error loading dashboard: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
 
         ' (Your other load code... like sidebar setup)
     End Sub
@@ -74,27 +85,19 @@ Public Class StaffDashboard
 
             SetActiveButton(btnDashboard)
 
-            ' Clear any user control children (but keep the dashboard controls)
-            Dim controlsToRemove As New List(Of Control)
-            For Each ctrl As Control In pnlFormLoader.Controls
-                ' Remove only user controls that were added for other pages
-                If TypeOf ctrl Is UserControl Then
-                    controlsToRemove.Add(ctrl)
-                End If
-            Next
-            For Each ctrl In controlsToRemove
-                pnlFormLoader.Controls.Remove(ctrl)
-                ctrl.Dispose()
-            Next
+            ' Clear all controls from panel
+            pnlFormLoader.Controls.Clear()
 
-            ' SHOW the form loader panel (it contains the dashboard)
+            ' Load new modern dashboard
+            Dim dashboardContent As New StaffDashboardContent()
+            dashboardContent.Dock = DockStyle.Fill
+            pnlFormLoader.Controls.Add(dashboardContent)
+            
+            ' SHOW the form loader panel
             pnlFormLoader.Visible = True
             pnlFormLoader.BringToFront()
-
-            ' Reload dashboard data
-            LoadDashboardData()
             
-            System.Diagnostics.Debug.WriteLine("[v0] Dashboard loaded - pnlFormLoader shown with dashboard content")
+            System.Diagnostics.Debug.WriteLine("[v0] Modern dashboard loaded with 3D charts")
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("btnDashboard_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show("Error loading dashboard: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

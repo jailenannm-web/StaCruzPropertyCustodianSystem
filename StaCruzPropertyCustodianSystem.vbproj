@@ -612,6 +612,9 @@
     <Compile Include="Forms\Staff\StaffDashboard.Designer.vb">
       <DependentUpon>StaffDashboard.vb</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Staff\StaffDashboardContent.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="Forms\Staff\frmReports.resx">
       <DependentUpon>frmReports.vb</DependentUpon>
     </EmbeddedResource>
