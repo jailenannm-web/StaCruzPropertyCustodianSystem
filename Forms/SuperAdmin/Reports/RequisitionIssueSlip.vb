@@ -197,14 +197,27 @@ Partial Public Class RequisitionIssueSlip
                 Try
                     ' Try to convert to DateTime
                     Dim dateValue As DateTime
-                    If DateTime.TryParse(row(name).ToString(), dateValue) Then
-                        Return dateValue.ToString("MM/dd/yyyy")
-                    ElseIf TypeOf row(name) Is DateTime Then
-                        Return CType(row(name), DateTime).ToString("MM/dd/yyyy")
+                    If TypeOf row(name) Is DateTime Then
+                        dateValue = CType(row(name), DateTime)
+                        ' Format date based on whether it includes time
+                        If dateValue.TimeOfDay = TimeSpan.Zero Then
+                            ' Date only (no time component)
+                            Return dateValue.ToString("dddd, dd MMMM yyyy")
+                        Else
+                            ' Date with time
+                            Return dateValue.ToString("dddd, dd MMMM yyyy HH:mm:ss")
+                        End If
+                    ElseIf DateTime.TryParse(row(name).ToString(), dateValue) Then
+                        ' Format date based on whether it includes time
+                        If dateValue.TimeOfDay = TimeSpan.Zero Then
+                            Return dateValue.ToString("dddd, dd MMMM yyyy")
+                        Else
+                            Return dateValue.ToString("dddd, dd MMMM yyyy HH:mm:ss")
+                        End If
                     Else
                         ' Return the string value as-is if it's not parseable
-                        Dim strValue As String = row(name).ToString()
-                        ' Only return if it's not an obvious non-date value
+                        Dim strValue As String = row(name).ToString().Trim()
+                        ' Only return if it's not empty and looks like a date
                         If Not String.IsNullOrWhiteSpace(strValue) AndAlso strValue.Length < 50 Then
                             Return strValue
                         End If
@@ -358,18 +371,28 @@ Partial Public Class RequisitionIssueSlip
                     csvTable.Rows.Add("REQUISITION ISSUE SLIP", "")
                     csvTable.Rows.Add("", "")
                     
-                    ' Add all fields
+                    ' Add all fields with proper grouping
+                    csvTable.Rows.Add("=== REQUEST INFORMATION ===", "")
                     csvTable.Rows.Add("Request ID", SafeGetValue(requestData, "request_id", "requestId"))
+                    csvTable.Rows.Add("Date of Request", SafeGetDateValue(requestData, "request_date", "dateOfRequest"))
+                    csvTable.Rows.Add("Status", SafeGetValue(requestData, "status"))
+                    csvTable.Rows.Add("", "")
+                    
+                    csvTable.Rows.Add("=== REQUESTER DETAILS ===", "")
                     csvTable.Rows.Add("Requester Name", SafeGetValue(requestData, "requesterName", "requester_name"))
                     csvTable.Rows.Add("Position", SafeGetValue(requestData, "position"))
                     csvTable.Rows.Add("Department", SafeGetValue(requestData, "departmentName", "department"))
-                    csvTable.Rows.Add("Date of Request", SafeGetDateValue(requestData, "request_date", "dateOfRequest"))
+                    csvTable.Rows.Add("", "")
+                    
+                    csvTable.Rows.Add("=== ITEM DETAILS ===", "")
                     csvTable.Rows.Add("Item Name", SafeGetValue(requestData, "item_name", "itemName"))
-                    csvTable.Rows.Add("Quantity", SafeGetValue(requestData, "quantity", "quantityRequested"))
-                    csvTable.Rows.Add("Unit", SafeGetValue(requestData, "unit"))
+                    csvTable.Rows.Add("Quantity Requested", SafeGetValue(requestData, "quantity", "quantityRequested"))
+                    csvTable.Rows.Add("Unit of Measure", SafeGetValue(requestData, "unit"))
                     csvTable.Rows.Add("Description", SafeGetValue(requestData, "description"))
                     csvTable.Rows.Add("Purpose", SafeGetValue(requestData, "purpose"))
-                    csvTable.Rows.Add("Status", SafeGetValue(requestData, "status"))
+                    csvTable.Rows.Add("", "")
+                    
+                    csvTable.Rows.Add("=== APPROVAL INFORMATION ===", "")
                     csvTable.Rows.Add("Approved By", SafeGetValue(requestData, "approved_by_name", "approvedBy"))
                     csvTable.Rows.Add("Approved Date", SafeGetDateValue(requestData, "approval_date", "approvedDate"))
                     csvTable.Rows.Add("Remarks", SafeGetValue(requestData, "remarks"))

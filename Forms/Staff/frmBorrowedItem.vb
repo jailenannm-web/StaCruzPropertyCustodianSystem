@@ -70,12 +70,47 @@ Public Class frmBorrowedItem
         
         ' Add selection changed handler to enable/disable buttons based on item type
         AddHandler dgvBorrowedItems.SelectionChanged, AddressOf dgvBorrowedItems_SelectionChanged
+        
+        ' Initialize transaction history DataGridView
+        InitializeTransactionHistoryGrid()
+    End Sub
+    
+    ''' <summary>
+    ''' Initialize the transaction history DataGridView
+    ''' </summary>
+    Private Sub InitializeTransactionHistoryGrid()
+        With dgvTransactionHistory
+            .AutoGenerateColumns = False
+            .AllowUserToAddRows = False
+            .AllowUserToDeleteRows = False
+            .ReadOnly = True
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .MultiSelect = False
+            .BackgroundColor = Color.White
+            .BorderStyle = BorderStyle.None
+            .EnableHeadersVisualStyles = False
+            
+            ' Header styling
+            .ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(52, 73, 94)
+            .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+            .ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+            .ColumnHeadersDefaultCellStyle.Padding = New Padding(5)
+            .ColumnHeadersHeight = 40
+            
+            ' Row styling
+            .DefaultCellStyle.SelectionBackColor = Color.FromArgb(41, 128, 185)
+            .DefaultCellStyle.SelectionForeColor = Color.White
+            .DefaultCellStyle.Font = New Font("Segoe UI", 9)
+            .RowTemplate.Height = 35
+            .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 247, 250)
+        End With
     End Sub
     
     ''' <summary>
     ''' Handle row selection to enable/disable buttons based on item type
     ''' Properties: All buttons enabled
     ''' Supplies: Only Return Item enabled, others disabled
+    ''' Also loads transaction history for the selected item
     ''' </summary>
     Private Sub dgvBorrowedItems_SelectionChanged(sender As Object, e As EventArgs)
         Try
@@ -126,6 +161,12 @@ Public Class frmBorrowedItem
                 End If
                 
                 System.Diagnostics.Debug.WriteLine($"[v0] Selection changed - Type: {itemType}, IsProperty: {isProperty}")
+                
+                ' Load transaction history for selected item
+                Dim itemId As String = selectedRow.Cells("colItemId").Value?.ToString()
+                If Not String.IsNullOrEmpty(itemId) Then
+                    LoadTransactionHistory(itemId, itemType)
+                End If
             Else
                 ' No selection - disable all buttons
                 If btnRequestMaintenance IsNot Nothing Then btnRequestMaintenance.Enabled = False
@@ -133,6 +174,10 @@ Public Class frmBorrowedItem
                 If Essuance IsNot Nothing Then Essuance.Enabled = False
                 If btnReturnItem IsNot Nothing Then btnReturnItem.Enabled = False
                 If btnViewMaintenanceStatus IsNot Nothing Then btnViewMaintenanceStatus.Enabled = False
+                
+                ' Clear transaction history
+                dgvTransactionHistory.Rows.Clear()
+                lblTransactionTitle.Text = "📋 Transaction History for Item"
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] SelectionChanged Error: " & ex.Message)
@@ -495,6 +540,126 @@ Public Class frmBorrowedItem
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Load transaction history for a specific item
+    ''' Shows all borrow/return records for the selected item
+    ''' </summary>
+    Private Sub LoadTransactionHistory(itemId As String, itemType As String)
+        Try
+            dgvTransactionHistory.Rows.Clear()
+            
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn Is Nothing Then Return
+            If Not DatabaseConnection.SafeOpenConnection(conn) Then Return
+            
+            ' Get item name for display
+            Dim itemName As String = ""
+            If dgvBorrowedItems.SelectedRows.Count > 0 Then
+                itemName = dgvBorrowedItems.SelectedRows(0).Cells("colItemName").Value?.ToString()
+            End If
+            
+            ' Update title with item name
+            lblTransactionTitle.Text = $"📋 Transaction History for: {itemName}"
+            
+            ' Query to get ALL transaction history for this item (including returned items)
+            Dim query As String = "SELECT bi.borrowId, bi.borrowDate, bi.actualReturnDate, bi.status, " &
+                                 "bi.conditionOnReturn, bi.returnReason, bi.remarks " &
+                                 "FROM borrowed_items bi " &
+                                 "WHERE bi.itemId = @itemId AND bi.itemType = @itemType " &
+                                 "ORDER BY bi.borrowDate DESC"
+            
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@itemId", itemId)
+                cmd.Parameters.AddWithValue("@itemType", itemType.ToLower())
+                
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim borrowId As String = reader("borrowId").ToString()
+                        Dim borrowDate As String = ""
+                        Dim returnDate As String = "Not Returned"
+                        Dim status As String = If(reader.IsDBNull(reader.GetOrdinal("status")), "", reader("status").ToString())
+                        Dim condition As String = If(reader.IsDBNull(reader.GetOrdinal("conditionOnReturn")), "N/A", reader("conditionOnReturn").ToString())
+                        Dim returnReason As String = If(reader.IsDBNull(reader.GetOrdinal("returnReason")), "", reader("returnReason").ToString())
+                        Dim remarks As String = If(reader.IsDBNull(reader.GetOrdinal("remarks")), "", reader("remarks").ToString())
+                        
+                        ' Format borrow date
+                        If Not reader.IsDBNull(reader.GetOrdinal("borrowDate")) Then
+                            borrowDate = Convert.ToDateTime(reader("borrowDate")).ToString("MMM dd, yyyy")
+                        End If
+                        
+                        ' Format return date
+                        If Not reader.IsDBNull(reader.GetOrdinal("actualReturnDate")) Then
+                            returnDate = Convert.ToDateTime(reader("actualReturnDate")).ToString("MMM dd, yyyy")
+                        End If
+                        
+                        ' Add row to grid
+                        dgvTransactionHistory.Rows.Add(
+                            borrowId,
+                            borrowDate,
+                            returnDate,
+                            status,
+                            condition,
+                            returnReason,
+                            remarks
+                        )
+                        
+                        ' Color code by status
+                        Dim lastRow As DataGridViewRow = dgvTransactionHistory.Rows(dgvTransactionHistory.Rows.Count - 1)
+                        Select Case status.ToLower()
+                            Case "returned"
+                                lastRow.DefaultCellStyle.BackColor = Color.FromArgb(236, 253, 245)
+                            Case "borrowed"
+                                lastRow.DefaultCellStyle.BackColor = Color.FromArgb(254, 243, 199)
+                            Case "overdue"
+                                lastRow.DefaultCellStyle.BackColor = Color.FromArgb(254, 226, 226)
+                        End Select
+                    End While
+                End Using
+            End Using
+            
+            If conn.State = ConnectionState.Open Then conn.Close()
+            
+            ' Show message if no history
+            If dgvTransactionHistory.Rows.Count = 0 Then
+                lblTransactionTitle.Text = $"📋 No Transaction History for: {itemName}"
+            End If
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[LoadTransactionHistory] Error: {ex.Message}")
+            MessageBox.Show("Error loading transaction history: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Toggle transaction history panel visibility
+    ''' </summary>
+    Private Sub btnToggleHistory_Click(sender As Object, e As EventArgs) Handles btnToggleHistory.Click
+        If pnlTransactionHistory.Visible Then
+            ' Hide the panel
+            pnlTransactionHistory.Visible = False
+            btnToggleHistory.Text = "📋 Show Transaction History"
+        Else
+            ' Show the panel
+            pnlTransactionHistory.Visible = True
+            btnToggleHistory.Text = "📋 Hide Transaction History"
+            
+            ' Reload history if an item is selected
+            If dgvBorrowedItems.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = dgvBorrowedItems.SelectedRows(0)
+                Dim itemId As String = selectedRow.Cells("colItemId").Value?.ToString()
+                Dim itemType As String = selectedRow.Cells("colItemType").Value?.ToString()
+                
+                If Not String.IsNullOrEmpty(itemId) AndAlso Not String.IsNullOrEmpty(itemType) Then
+                    LoadTransactionHistory(itemId, itemType)
+                End If
+            Else
+                MessageBox.Show("Please select an item to view its transaction history.", "Select Item", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                pnlTransactionHistory.Visible = False
+                btnToggleHistory.Text = "📋 Show Transaction History"
+            End If
+        End If
+    End Sub
+    
     ''' <summary>
     ''' Refresh button
     ''' </summary>
@@ -1078,13 +1243,90 @@ Public Class frmBorrowedItem
         timer.Start()
     End Sub
 
-    Private Sub btnBorrowReturn_Click(sender As Object, e As EventArgs) Handles btnBorrowReturn.Click
-        Dim BorrowingAndReturnSlip As New BorrowingAndReturnSlip()
-        BorrowingAndReturnSlip.Show()
-    End Sub
 
+    ''' <summary>
+    ''' Generate Borrowing and Return Slip for selected item
+    ''' </summary>
+    Private Sub btnBorrowReturn_Click(sender As Object, e As EventArgs) Handles btnBorrowReturn.Click
+        If dgvBorrowedItems.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select an item to generate Borrowing and Return Slip.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Dim selectedRow As DataGridViewRow = dgvBorrowedItems.SelectedRows(0)
+        Dim itemType As String = If(selectedRow.Cells("colItemType").Value?.ToString(), "")
+
+        If itemType.ToLower() <> "property" Then
+            MessageBox.Show("Borrowing and Return Slip is only available for properties, not supplies.", "Not Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Dim borrowId As String = If(selectedRow.Cells("colBorrowId").Value?.ToString(), "")
+        Dim itemName As String = If(selectedRow.Cells("colItemName").Value?.ToString(), "")
+
+        If String.IsNullOrEmpty(borrowId) Then
+            MessageBox.Show("Cannot generate slip: Borrow ID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Try
+            ' Open the Borrowing and Return Slip report form with the selected item
+            Dim reportForm As New BorrowingAndReturnSlip(Convert.ToInt32(borrowId), itemName)
+            reportForm.ShowDialog()
+        Catch ex As Exception
+            MessageBox.Show("Error opening Borrowing and Return Slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine($"[btnBorrowReturn] Error: {ex.Message}")
+        End Try
+    End Sub
+    
     Private Sub Essuance_Click(sender As Object, e As EventArgs) Handles Essuance.Click
-        Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt()
-        propertyAcknowledgement.Show()
+        ' Check if a property is selected
+        If dgvBorrowedItems.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a property to view the acknowledgement receipt.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Dim selectedRow As DataGridViewRow = dgvBorrowedItems.SelectedRows(0)
+        Dim itemType As String = If(selectedRow.Cells("colItemType").Value?.ToString(), "").ToLower()
+        
+        ' Only allow for properties
+        If itemType <> "property" Then
+            MessageBox.Show("Property Acknowledgement Receipt is only available for properties, not supplies.", "Not Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        ' Get the request ID from the selected borrowed item
+        Dim borrowId As String = If(selectedRow.Cells("colBorrowId").Value?.ToString(), "")
+        
+        If String.IsNullOrEmpty(borrowId) Then
+            MessageBox.Show("Cannot open receipt: Borrow ID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Get the request ID from borrowed_items table
+        Dim requestId As Integer? = Nothing
+        Try
+            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                Using cmd As New MySqlCommand("SELECT requestId FROM borrowed_items WHERE borrowId = @borrowId", conn)
+                    cmd.Parameters.AddWithValue("@borrowId", borrowId)
+                    Dim result As Object = cmd.ExecuteScalar()
+                    If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                        requestId = Convert.ToInt32(result)
+                    End If
+                End Using
+                If conn.State = ConnectionState.Open Then conn.Close()
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("[v0] Error getting request ID: " & ex.Message)
+        End Try
+
+        ' Open the Property Acknowledgement Receipt with the request ID
+        If requestId.HasValue Then
+            Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt(requestId.Value, "property")
+            propertyAcknowledgement.Show()
+        Else
+            MessageBox.Show("Cannot open receipt: Request information not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
     End Sub
 End Class

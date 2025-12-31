@@ -3708,8 +3708,10 @@ Public Class DatabaseConnection
             Dim query As String = ""
 
             If requestType.ToLower() = "property" Then
-                query = "SELECT pr.requestId AS request_id, 'property' AS request_type, pr.status, pr.dateOfRequest AS request_date, " &
-                        "pr.approvedDate AS approval_date, pr.quantityRequested AS quantity, " &
+                query = "SELECT pr.requestId AS request_id, 'property' AS request_type, pr.status, " &
+                        "DATE_FORMAT(pr.dateOfRequest, '%Y-%m-%d') AS request_date, pr.dateOfRequest, " &
+                        "DATE_FORMAT(pr.approvedDate, '%Y-%m-%d %H:%i:%s') AS approval_date, pr.approvedDate, " &
+                        "pr.quantityRequested AS quantity, " &
                         "pr.itemName AS item_name, pr.description, pr.purpose, pr.remarks, pr.unit, " &
                         "pr.requesterName, pr.position, pr.departmentId, d.departmentName, " &
                         "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approved_by_name " &
@@ -3718,8 +3720,10 @@ Public Class DatabaseConnection
                         "LEFT JOIN departments d ON pr.departmentId = d.departmentId " &
                         "WHERE pr.requestId = @requestId LIMIT 1"
             ElseIf requestType.ToLower() = "supply" Then
-                query = "SELECT sr.requestId AS request_id, 'supply' AS request_type, sr.status, sr.dateOfRequest AS request_date, " &
-                        "sr.approvedDate AS approval_date, sr.quantityRequested AS quantity, " &
+                query = "SELECT sr.requestId AS request_id, 'supply' AS request_type, sr.status, " &
+                        "DATE_FORMAT(sr.dateOfRequest, '%Y-%m-%d') AS request_date, sr.dateOfRequest, " &
+                        "DATE_FORMAT(sr.approvedDate, '%Y-%m-%d %H:%i:%s') AS approval_date, sr.approvedDate, " &
+                        "sr.quantityRequested AS quantity, " &
                         "sr.itemName AS item_name, sr.description, sr.purpose, sr.remarks, sr.unit, " &
                         "sr.requesterName, sr.position, sr.departmentId, d.departmentName, " &
                         "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approved_by_name " &

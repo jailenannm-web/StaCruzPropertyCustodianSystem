@@ -908,11 +908,13 @@ Partial Class SAReportsManagement
         Me.PerformLayout()
 
     End Sub
+    
+    'Windows Form Designer generated code
     Friend WithEvents lblReportsManagement As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents RoundedButton1 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnPreviewRIS As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents Panel2 As Panel
     Friend WithEvents lblRequisitionIssueSlip As Label
     Friend WithEvents Panel3 As Panel
     Friend WithEvents lblMaintenacneReport As Label
@@ -937,6 +939,8 @@ Partial Class SAReportsManagement
     Friend WithEvents Panel11 As Panel
     Friend WithEvents Label6 As Label
     Friend WithEvents Panel12 As Panel
+    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents RoundedButton3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Panel13 As Panel
     Friend WithEvents Label7 As Label
     Friend WithEvents Panel14 As Panel
@@ -964,6 +968,4 @@ Partial Class SAReportsManagement
     Friend WithEvents btnPreviewAR As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents RoundedButton2 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents RoundedButton3 As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class

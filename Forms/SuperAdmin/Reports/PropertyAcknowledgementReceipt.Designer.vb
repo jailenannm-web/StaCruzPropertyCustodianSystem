@@ -495,7 +495,6 @@ Partial Class PropertyAcknowledgementReceipt
         '
         Me.btnBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnBack.CornerRadius = 15
         Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBack.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnBack.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -511,7 +510,6 @@ Partial Class PropertyAcknowledgementReceipt
         '
         Me.btnPDF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnPDF.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnPDF.CornerRadius = 15
         Me.btnPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPDF.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnPDF.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -527,7 +525,6 @@ Partial Class PropertyAcknowledgementReceipt
         '
         Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnCSV.CornerRadius = 15
         Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
