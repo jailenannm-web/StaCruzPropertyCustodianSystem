@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Collections.Generic
 Imports System.Data
 Imports System.Diagnostics
 Imports System.Drawing
@@ -50,9 +51,9 @@ Public Class StaffDashboard
         ' Set Dashboard as the active button on startup
         SetActiveButton(btnDashboard)
 
-        ' Hide the form loader panel initially to show the main dashboard
-        pnlFormLoader.Visible = False
-        pnlFormLoader.SendToBack()
+        ' Show the form loader panel with dashboard content
+        pnlFormLoader.Visible = True
+        pnlFormLoader.BringToFront()
 
         ' Load dashboard data on startup
         LoadDashboardData()
@@ -73,17 +74,27 @@ Public Class StaffDashboard
 
             SetActiveButton(btnDashboard)
 
-            ' Clear any existing user controls from the panel
-            pnlFormLoader.Controls.Clear()
+            ' Clear any user control children (but keep the dashboard controls)
+            Dim controlsToRemove As New List(Of Control)
+            For Each ctrl As Control In pnlFormLoader.Controls
+                ' Remove only user controls that were added for other pages
+                If TypeOf ctrl Is UserControl Then
+                    controlsToRemove.Add(ctrl)
+                End If
+            Next
+            For Each ctrl In controlsToRemove
+                pnlFormLoader.Controls.Remove(ctrl)
+                ctrl.Dispose()
+            Next
 
-            ' IMPORTANT: Hide the form loader panel to show the main dashboard
-            pnlFormLoader.Visible = False
-            pnlFormLoader.SendToBack()
+            ' SHOW the form loader panel (it contains the dashboard)
+            pnlFormLoader.Visible = True
+            pnlFormLoader.BringToFront()
 
-            ' Reload dashboard data (this updates the main form's controls)
+            ' Reload dashboard data
             LoadDashboardData()
             
-            System.Diagnostics.Debug.WriteLine("[v0] Dashboard loaded - pnlFormLoader hidden, showing main dashboard")
+            System.Diagnostics.Debug.WriteLine("[v0] Dashboard loaded - pnlFormLoader shown with dashboard content")
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("btnDashboard_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show("Error loading dashboard: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
