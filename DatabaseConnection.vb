@@ -4091,8 +4091,9 @@ Public Class DatabaseConnection
     ''' <summary>
     ''' Approve a maintenance request and assign a technician
     ''' </summary>
-    Public Shared Function ApproveMaintenanceRequest(requestID As Integer, adminID As Integer, adminName As String,
-                                                     adminUserType As String, Optional remarks As String = "", Optional assignedTechnician As String = "") As Boolean
+    Public Shared Function ApproveMaintenanceRequest(requestID As Integer, assignedTechnician As String, 
+                                                     targetDate As Date, adminID As Integer, 
+                                                     Optional remarks As String = "", Optional conditionBefore As String = "") As Boolean
         If Not DemandPermission(SessionContext.ModulePermission.ModifyMaintenance, "approve maintenance requests") Then
             Return False
         End If
@@ -4119,14 +4120,16 @@ Public Class DatabaseConnection
                 End Using
             End Using
 
-            ' Step 2: Update maintenance_requests status to 'Approved'
+            ' Step 2: Update maintenance_requests status to 'Approved' with target date
             Dim updateQuery As String = "UPDATE maintenance_requests SET status = 'Approved', " &
                                        "assignedTechnician = @assignedTechnician, " &
+                                       "targetDate = @targetDate, " &
                                        "updatedAt = NOW() " &
                                        "WHERE requestId = @requestID"
 
             Using cmd As New MySqlCommand(updateQuery, conn)
                 cmd.Parameters.AddWithValue("@assignedTechnician", If(String.IsNullOrEmpty(assignedTechnician), DBNull.Value, assignedTechnician))
+                cmd.Parameters.AddWithValue("@targetDate", targetDate)
                 cmd.Parameters.AddWithValue("@requestID", requestID)
                 cmd.ExecuteNonQuery()
             End Using
@@ -4146,18 +4149,35 @@ Public Class DatabaseConnection
                 cmd.Parameters.AddWithValue("@serialNumber", If(IsDBNull(requestData("serialNumber")), DBNull.Value, requestData("serialNumber")))
                 cmd.Parameters.AddWithValue("@location", If(IsDBNull(requestData("location")), DBNull.Value, requestData("location")))
                 cmd.Parameters.AddWithValue("@departmentId", If(IsDBNull(requestData("departmentId")), DBNull.Value, requestData("departmentId")))
-                cmd.Parameters.AddWithValue("@conditionBeforeMaint", If(IsDBNull(requestData("conditionBefore")), "Needs Repair", requestData("conditionBefore")))
+                
+                ' Use conditionBefore parameter if provided, otherwise from request
+                Dim conditionBeforeValue As String = If(Not String.IsNullOrEmpty(conditionBefore), 
+                                                        conditionBefore, 
+                                                        If(IsDBNull(requestData("conditionBefore")), "Needs Repair", requestData("conditionBefore").ToString()))
+                cmd.Parameters.AddWithValue("@conditionBeforeMaint", conditionBeforeValue)
+                
                 cmd.Parameters.AddWithValue("@typeOfMaintenance", If(IsDBNull(requestData("typeOfIssue")), "Repair", requestData("typeOfIssue")))
                 cmd.Parameters.AddWithValue("@assignedTechnician", If(String.IsNullOrEmpty(assignedTechnician), DBNull.Value, assignedTechnician))
-                cmd.Parameters.AddWithValue("@maintenanceDate", Date.Now)
-                cmd.Parameters.AddWithValue("@maintenanceDetails", If(IsDBNull(requestData("problemDescription")), DBNull.Value, requestData("problemDescription")))
+                cmd.Parameters.AddWithValue("@maintenanceDate", targetDate) ' Use the target date from approval
+                
+                ' Combine problem description with any remarks
+                Dim maintenanceDetails As String = If(IsDBNull(requestData("problemDescription")), "", requestData("problemDescription").ToString())
+                If Not String.IsNullOrEmpty(remarks) Then
+                    maintenanceDetails = maintenanceDetails & Environment.NewLine & "Approval Notes: " & remarks
+                End If
+                cmd.Parameters.AddWithValue("@maintenanceDetails", If(String.IsNullOrEmpty(maintenanceDetails), DBNull.Value, maintenanceDetails))
+                
                 cmd.Parameters.AddWithValue("@status", "Ongoing") ' Default status when maintenance starts
                 
                 Dim insertResult As Integer = cmd.ExecuteNonQuery()
                 If insertResult > 0 Then
+                    ' Get admin details for logging
+                    Dim adminName As String = If(String.IsNullOrEmpty(SessionContext.CurrentFullName), "Admin", SessionContext.CurrentFullName)
+                    Dim adminUserType As String = If(String.IsNullOrEmpty(SessionContext.CurrentRole), "Admin", SessionContext.CurrentRole)
+                    
                     Dim techInfo As String = If(Not String.IsNullOrEmpty(assignedTechnician), $" and assigned to {assignedTechnician}", "")
                     LogActivity(adminID, adminUserType, adminName, "APPROVE_MAINTENANCE_REQUEST", "Maintenance Request",
-                                $"Approved maintenance request #{requestID}{techInfo} - Created maintenance record", "")
+                                $"Approved maintenance request #{requestID}{techInfo} - Created maintenance record for {targetDate:yyyy-MM-dd}", "")
                     Return True
                 Else
                     MessageBox.Show("Failed to create maintenance record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -5199,12 +5219,15 @@ Public Class DatabaseConnection
 
             If Not SafeOpenConnection(conn) Then Return dt
 
-            Dim query As String = "SELECT m.maintenanceId, m.propertyItemName, " &
-                                 "m.location, m.conditionBeforeMaint, " &
+            Dim query As String = "SELECT m.maintenanceId, m.requestId, m.propertyItemName, " &
+                                 "m.serialNumber, m.location, m.departmentId, " &
+                                 "d.departmentName, m.conditionBeforeMaint, " &
                                  "m.maintenanceDate, m.typeOfMaintenance, m.maintenanceDetails, " &
                                  "m.assignedTechnician, m.costMaterialsLabor, m.status, " &
-                                 "m.diagnosis, m.actionTaken, m.partsReplaced " &
+                                 "m.conditionAfterMaint, m.diagnosis, m.actionTaken, m.partsReplaced, " &
+                                 "m.createdAt, m.updatedAt " &
                                  "FROM maintenance m " &
+                                 "LEFT JOIN departments d ON m.departmentId = d.departmentId " &
                                  "ORDER BY m.maintenanceDate DESC"
 
             Using cmd As New MySqlCommand(query, conn)
