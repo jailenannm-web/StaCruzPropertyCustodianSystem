@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Windows.Forms
@@ -3694,72 +3694,6 @@ Public Class DatabaseConnection
         End Try
     End Function
 
-    ''' <summary>
-    ''' Get a single request by ID and type (property or supply) for auto-filling forms
-    ''' </summary>
-    Public Shared Function GetRequestById(requestId As Integer, requestType As String) As DataRow
-        Dim dt As New DataTable()
-        Dim conn As MySqlConnection = Nothing
-        Try
-            conn = GetConnection()
-            If conn Is Nothing Then Return Nothing
-            If Not SafeOpenConnection(conn) Then Return Nothing
-
-            Dim query As String = ""
-
-            If requestType.ToLower() = "property" Then
-                query = "SELECT pr.requestId AS request_id, 'property' AS request_type, pr.status, " &
-                        "DATE_FORMAT(pr.dateOfRequest, '%Y-%m-%d') AS request_date, pr.dateOfRequest, " &
-                        "DATE_FORMAT(pr.approvedDate, '%Y-%m-%d %H:%i:%s') AS approval_date, pr.approvedDate, " &
-                        "pr.quantityRequested AS quantity, " &
-                        "pr.itemName AS item_name, pr.description, pr.purpose, pr.remarks, pr.unit, " &
-                        "pr.requesterName, pr.position, pr.departmentId, d.departmentName, " &
-                        "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approved_by_name " &
-                        "FROM property_requests pr " &
-                        "LEFT JOIN users u ON pr.approvedBy = u.userId " &
-                        "LEFT JOIN departments d ON pr.departmentId = d.departmentId " &
-                        "WHERE pr.requestId = @requestId LIMIT 1"
-            ElseIf requestType.ToLower() = "supply" Then
-                query = "SELECT sr.requestId AS request_id, 'supply' AS request_type, sr.status, " &
-                        "DATE_FORMAT(sr.dateOfRequest, '%Y-%m-%d') AS request_date, sr.dateOfRequest, " &
-                        "DATE_FORMAT(sr.approvedDate, '%Y-%m-%d %H:%i:%s') AS approval_date, sr.approvedDate, " &
-                        "sr.quantityRequested AS quantity, " &
-                        "sr.itemName AS item_name, sr.description, sr.purpose, sr.remarks, sr.unit, " &
-                        "sr.requesterName, sr.position, sr.departmentId, d.departmentName, " &
-                        "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approved_by_name " &
-                        "FROM supplies_requests sr " &
-                        "LEFT JOIN users u ON sr.approvedBy = u.userId " &
-                        "LEFT JOIN departments d ON sr.departmentId = d.departmentId " &
-                        "WHERE sr.requestId = @requestId LIMIT 1"
-            Else
-                Return Nothing
-            End If
-
-            Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@requestId", requestId)
-                Using adapter As New MySqlDataAdapter(cmd)
-                    adapter.Fill(dt)
-                End Using
-            End Using
-        Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine("[v0] GetRequestById Exception: " & ex.Message)
-            Return Nothing
-        Finally
-            If conn IsNot Nothing Then
-                Try
-                    If conn.State = ConnectionState.Open Then conn.Close()
-                    conn.Dispose()
-                Catch
-                End Try
-            End If
-        End Try
-
-        If dt.Rows.Count > 0 Then
-            Return dt.Rows(0)
-        End If
-
-        Return Nothing
-    End Function
 
     ''' <summary>
     ''' Load detailed property/supply requests with optional filters for admin dashboard
@@ -10428,6 +10362,261 @@ Public Class DatabaseConnection
         Catch ex As Exception
             Logger.LogError("GetMaintenanceByItem Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show("Error retrieving maintenance information: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return Nothing
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Get property data by propertyId for Property Acknowledgement Receipt
+    ''' Returns a DataRow with all property information including related data
+    ''' </summary>
+    Public Shared Function GetPropertyById(propertyId As Integer) As DataRow
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return Nothing
+            If Not SafeOpenConnection(conn) Then Return Nothing
+
+            ' Query to get property with related information
+            Dim query As String = "SELECT " &
+                "p.propertyId AS request_id, " &
+                "p.propertyId, " &
+                "p.itemName AS item_name, " &
+                "p.itemName, " &
+                "p.category, " &
+                "p.description, " &
+                "p.unitOfMeasure AS unit, " &
+                "p.propertyNumber AS property_number, " &
+                "p.serialNumber AS serial_number, " &
+                "p.acquisitionDate AS request_date, " &
+                "p.acquisitionDate AS dateOfRequest, " &
+                "p.acquisitionCost, " &
+                "p.totalCost, " &
+                "p.sourceOfFunds, " &
+                "p.location, " &
+                "p.condition, " &
+                "p.status, " &
+                "p.createdAt, " &
+                "p.updatedAt, " &
+                "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS requester_name, " &
+                "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS requesterName, " &
+                "u.position, " &
+                "u.position AS requester_position, " &
+                "d.departmentName, " &
+                "d.departmentName AS department, " &
+                "CONCAT(IFNULL(approver.firstName, ''), ' ', IFNULL(approver.lastName, '')) AS approved_by_name, " &
+                "CONCAT(IFNULL(approver.firstName, ''), ' ', IFNULL(approver.lastName, '')) AS approvedBy, " &
+                "p.createdAt AS approval_date, " &
+                "p.createdAt AS approvedDate, " &
+                "1 AS quantity, " &
+                "1 AS quantityRequested, " &
+                "'Property issued' AS purpose, " &
+                "'Property Acknowledgement Receipt' AS remarks " &
+                "FROM properties p " &
+                "LEFT JOIN users u ON p.assignedTo = u.userId " &
+                "LEFT JOIN departments d ON p.departmentId = d.departmentId " &
+                "LEFT JOIN users approver ON approver.role = 'Admin' " &
+                "WHERE p.propertyId = @propertyId " &
+                "LIMIT 1"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@propertyId", propertyId)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+
+            If dt.Rows.Count > 0 Then
+                System.Diagnostics.Debug.WriteLine($"[GetPropertyById] Found property {propertyId}")
+                Return dt.Rows(0)
+            Else
+                System.Diagnostics.Debug.WriteLine($"[GetPropertyById] Property {propertyId} not found")
+                Return Nothing
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[GetPropertyById] Exception: {ex.Message}")
+            Return Nothing
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Get request data by requestId and type (property or supply) for reports
+    ''' Returns a DataRow with all request information
+    ''' </summary>
+    Public Shared Function GetRequestById(requestId As Integer, requestType As String) As DataRow
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return Nothing
+            If Not SafeOpenConnection(conn) Then Return Nothing
+
+            Dim query As String = ""
+            
+            If requestType.ToLower() = "property" Then
+                query = "SELECT " &
+                    "pr.requestId AS request_id, " &
+                    "pr.requestId, " &
+                    "pr.requesterName AS requester_name, " &
+                    "pr.requesterName, " &
+                    "pr.position, " &
+                    "pr.dateOfRequest AS request_date, " &
+                    "pr.dateOfRequest, " &
+                    "pr.itemName AS item_name, " &
+                    "pr.itemName, " &
+                    "pr.description, " &
+                    "pr.quantityRequested AS quantity, " &
+                    "pr.quantityRequested, " &
+                    "pr.unit, " &
+                    "pr.purpose, " &
+                    "pr.status, " &
+                    "pr.remarks, " &
+                    "pr.approvedDate AS approval_date, " &
+                    "pr.approvedDate, " &
+                    "pr.createdAt, " &
+                    "pr.updatedAt, " &
+                    "d.departmentName, " &
+                    "d.departmentName AS department, " &
+                    "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approved_by_name, " &
+                    "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approvedBy " &
+                    "FROM property_requests pr " &
+                    "LEFT JOIN departments d ON pr.departmentId = d.departmentId " &
+                    "LEFT JOIN users u ON pr.approvedBy = u.userId " &
+                    "WHERE pr.requestId = @requestId " &
+                    "LIMIT 1"
+            Else ' supply
+                query = "SELECT " &
+                    "sr.requestId AS request_id, " &
+                    "sr.requestId, " &
+                    "sr.requesterName AS requester_name, " &
+                    "sr.requesterName, " &
+                    "sr.position, " &
+                    "sr.dateOfRequest AS request_date, " &
+                    "sr.dateOfRequest, " &
+                    "sr.itemName AS item_name, " &
+                    "sr.itemName, " &
+                    "sr.description, " &
+                    "sr.quantityRequested AS quantity, " &
+                    "sr.quantityRequested, " &
+                    "sr.unit, " &
+                    "sr.purpose, " &
+                    "sr.status, " &
+                    "sr.remarks, " &
+                    "sr.approvedDate AS approval_date, " &
+                    "sr.approvedDate, " &
+                    "sr.createdAt, " &
+                    "sr.updatedAt, " &
+                    "d.departmentName, " &
+                    "d.departmentName AS department, " &
+                    "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approved_by_name, " &
+                    "CONCAT(IFNULL(u.firstName, ''), ' ', IFNULL(u.lastName, '')) AS approvedBy " &
+                    "FROM supplies_requests sr " &
+                    "LEFT JOIN departments d ON sr.departmentId = d.departmentId " &
+                    "LEFT JOIN users u ON sr.approvedBy = u.userId " &
+                    "WHERE sr.requestId = @requestId " &
+                    "LIMIT 1"
+            End If
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@requestId", requestId)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+
+            If dt.Rows.Count > 0 Then
+                System.Diagnostics.Debug.WriteLine($"[GetRequestById] Found {requestType} request {requestId}")
+                Return dt.Rows(0)
+            Else
+                System.Diagnostics.Debug.WriteLine($"[GetRequestById] {requestType} request {requestId} not found")
+                Return Nothing
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[GetRequestById] Exception: {ex.Message}")
+            Return Nothing
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Get maintenance record by maintenanceId for Maintenance Management Report
+    ''' Returns a DataRow with all maintenance information including related data
+    ''' </summary>
+    Public Shared Function GetMaintenanceById(maintenanceId As Integer) As DataRow
+        Dim dt As New DataTable()
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return Nothing
+            If Not SafeOpenConnection(conn) Then Return Nothing
+
+            ' Query to get maintenance with related information
+            Dim query As String = "SELECT " &
+                "m.maintenanceId, " &
+                "m.requestId, " &
+                "m.propertyItemName, " &
+                "m.serialNumber, " &
+                "m.location, " &
+                "m.departmentId, " &
+                "d.departmentName, " &
+                "m.conditionBeforeMaint, " &
+                "m.typeOfMaintenance, " &
+                "m.assignedTechnician, " &
+                "m.maintenanceDate, " &
+                "m.maintenanceDetails, " &
+                "m.costMaterialsLabor, " &
+                "m.conditionAfterMaint, " &
+                "m.status, " &
+                "m.diagnosis, " &
+                "m.actionTaken, " &
+                "m.partsReplaced, " &
+                "m.createdAt, " &
+                "m.updatedAt " &
+                "FROM maintenance m " &
+                "LEFT JOIN departments d ON m.departmentId = d.departmentId " &
+                "WHERE m.maintenanceId = @maintenanceId " &
+                "LIMIT 1"
+
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@maintenanceId", maintenanceId)
+                Using adapter As New MySqlDataAdapter(cmd)
+                    adapter.Fill(dt)
+                End Using
+            End Using
+
+            If dt.Rows.Count > 0 Then
+                System.Diagnostics.Debug.WriteLine($"[GetMaintenanceById] Found maintenance {maintenanceId}")
+                Return dt.Rows(0)
+            Else
+                System.Diagnostics.Debug.WriteLine($"[GetMaintenanceById] Maintenance {maintenanceId} not found")
+                Return Nothing
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[GetMaintenanceById] Exception: {ex.Message}")
             Return Nothing
         Finally
             If conn IsNot Nothing Then

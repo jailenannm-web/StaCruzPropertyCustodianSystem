@@ -479,26 +479,34 @@ Public Class UC_MaintenanceManagement
     ''' </summary>
     Private Sub btnGenerateMaintenance_Click(sender As Object, e As EventArgs) Handles btnGenerateMaintenance.Click
         Try
-            ' Navigate to maintenance report
-            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-            If saDashboard IsNot Nothing Then
-                saDashboard.LoadUserControl(New MaintenanceManagementReport1())
+            ' Get selected maintenance ID
+            If DataGridView1.SelectedRows.Count = 0 Then
+                MessageBox.Show("Please select a maintenance record first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
-            
-            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-            If superAdminDashboard IsNot Nothing Then
-                superAdminDashboard.LoadUserControl(New MaintenanceManagementReport1())
+
+            Dim maintenanceID As Integer = GetSelectedMaintenanceID()
+            If maintenanceID <= 0 Then
+                MessageBox.Show("Invalid maintenance record selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
+
+            System.Diagnostics.Debug.WriteLine($"[GenerateMaintenanceReport] Opening report for maintenance ID: {maintenanceID}")
+
+            ' Open detailed maintenance report with selected record in a new form
+            Dim reportForm As New Form()
+            reportForm.Text = "Maintenance Management Report"
+            reportForm.Size = New Size(1200, 900)
+            reportForm.StartPosition = FormStartPosition.CenterScreen
             
-            Dim adminDashboard = TryCast(Me.ParentForm, AdminDashboard)
-            If adminDashboard IsNot Nothing Then
-                adminDashboard.LoadUserControl(New MaintenanceManagementReport1())
-            Else
-                MessageBox.Show("Unable to navigate to report.", "Navigation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            Dim reportControl As New MaintenanceManagementReport1(maintenanceID)
+            reportControl.Dock = DockStyle.Fill
+            reportForm.Controls.Add(reportControl)
+            
+            reportForm.ShowDialog()
+
         Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[GenerateMaintenanceReport] Error: {ex.Message}")
             MessageBox.Show("Error opening maintenance report: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub

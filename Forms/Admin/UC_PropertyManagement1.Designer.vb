@@ -297,7 +297,6 @@ Partial Class UC_PropertyManagement1
         '
         Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnEdit.CornerRadius = 15
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -313,7 +312,6 @@ Partial Class UC_PropertyManagement1
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -329,7 +327,6 @@ Partial Class UC_PropertyManagement1
         '
         Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -345,7 +342,6 @@ Partial Class UC_PropertyManagement1
         '
         Me.generatePropertyCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.generatePropertyCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.generatePropertyCard.CornerRadius = 15
         Me.generatePropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.generatePropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.generatePropertyCard.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -362,14 +358,13 @@ Partial Class UC_PropertyManagement1
         '
         Me.issuePropertySlip.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.issuePropertySlip.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.issuePropertySlip.CornerRadius = 15
         Me.issuePropertySlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.issuePropertySlip.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.issuePropertySlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertySlip.Location = New System.Drawing.Point(998, 82)
+        Me.issuePropertySlip.Location = New System.Drawing.Point(1002, 84)
         Me.issuePropertySlip.Margin = New System.Windows.Forms.Padding(4)
         Me.issuePropertySlip.Name = "issuePropertySlip"
-        Me.issuePropertySlip.Size = New System.Drawing.Size(153, 33)
+        Me.issuePropertySlip.Size = New System.Drawing.Size(149, 31)
         Me.issuePropertySlip.TabIndex = 177
         Me.issuePropertySlip.Text = "Issue Property Slip"
         Me.issuePropertySlip.UseVisualStyleBackColor = False

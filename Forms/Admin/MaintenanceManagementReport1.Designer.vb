@@ -22,21 +22,6 @@ Partial Class MaintenanceManagementReport1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.conditionAfterMaintenance = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.maintenanceDetail = New System.Windows.Forms.TextBox()
-        Me.costMaterialsLabor = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.maintenanceDate = New System.Windows.Forms.DateTimePicker()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.assignedTechnician = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.typeOfMaintenance = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.conditionBeforeMaintenance = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.departmentId = New System.Windows.Forms.TextBox()
@@ -61,168 +46,29 @@ Partial Class MaintenanceManagementReport1
         Me.Label15 = New System.Windows.Forms.Label()
         Me.diagnosis = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.Panel4.SuspendLayout()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.conditionBeforeMaintenance = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.typeOfMaintenance = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.assignedTechnician = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.maintenanceDate = New System.Windows.Forms.DateTimePicker()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.costMaterialsLabor = New System.Windows.Forms.TextBox()
+        Me.maintenanceDetail = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.conditionAfterMaintenance = New System.Windows.Forms.TextBox()
+        Me.btnBack = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.Panel1.SuspendLayout()
         Me.Panel11.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Panel4
-        '
-        Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel4.BackColor = System.Drawing.Color.White
-        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.conditionAfterMaintenance)
-        Me.Panel4.Controls.Add(Me.Label17)
-        Me.Panel4.Controls.Add(Me.maintenanceDetail)
-        Me.Panel4.Controls.Add(Me.costMaterialsLabor)
-        Me.Panel4.Controls.Add(Me.Label9)
-        Me.Panel4.Controls.Add(Me.maintenanceDate)
-        Me.Panel4.Controls.Add(Me.Label8)
-        Me.Panel4.Controls.Add(Me.Label7)
-        Me.Panel4.Controls.Add(Me.assignedTechnician)
-        Me.Panel4.Controls.Add(Me.Label6)
-        Me.Panel4.Controls.Add(Me.typeOfMaintenance)
-        Me.Panel4.Controls.Add(Me.Label5)
-        Me.Panel4.Controls.Add(Me.conditionBeforeMaintenance)
-        Me.Panel4.Controls.Add(Me.Label10)
-        Me.Panel4.Location = New System.Drawing.Point(183, 340)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(913, 477)
-        Me.Panel4.TabIndex = 61
-        '
-        'conditionAfterMaintenance
-        '
-        Me.conditionAfterMaintenance.Location = New System.Drawing.Point(75, 392)
-        Me.conditionAfterMaintenance.Multiline = True
-        Me.conditionAfterMaintenance.Name = "conditionAfterMaintenance"
-        Me.conditionAfterMaintenance.Size = New System.Drawing.Size(793, 61)
-        Me.conditionAfterMaintenance.TabIndex = 67
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(11, 358)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(189, 22)
-        Me.Label17.TabIndex = 66
-        Me.Label17.Text = "Condition After Maintenance:"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'maintenanceDetail
-        '
-        Me.maintenanceDetail.Location = New System.Drawing.Point(75, 225)
-        Me.maintenanceDetail.Multiline = True
-        Me.maintenanceDetail.Name = "maintenanceDetail"
-        Me.maintenanceDetail.Size = New System.Drawing.Size(793, 61)
-        Me.maintenanceDetail.TabIndex = 65
-        '
-        'costMaterialsLabor
-        '
-        Me.costMaterialsLabor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.costMaterialsLabor.Location = New System.Drawing.Point(631, 308)
-        Me.costMaterialsLabor.Name = "costMaterialsLabor"
-        Me.costMaterialsLabor.Size = New System.Drawing.Size(269, 22)
-        Me.costMaterialsLabor.TabIndex = 64
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(473, 308)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(140, 22)
-        Me.Label9.TabIndex = 64
-        Me.Label9.Text = "Cost Materials Labor:"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'maintenanceDate
-        '
-        Me.maintenanceDate.Location = New System.Drawing.Point(161, 308)
-        Me.maintenanceDate.Name = "maintenanceDate"
-        Me.maintenanceDate.Size = New System.Drawing.Size(277, 22)
-        Me.maintenanceDate.TabIndex = 63
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(11, 309)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(125, 22)
-        Me.Label8.TabIndex = 62
-        Me.Label8.Text = "Maintenance Date:"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(11, 191)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(131, 22)
-        Me.Label7.TabIndex = 60
-        Me.Label7.Text = "Maintenance Detail:"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'assignedTechnician
-        '
-        Me.assignedTechnician.FormattingEnabled = True
-        Me.assignedTechnician.Location = New System.Drawing.Point(618, 18)
-        Me.assignedTechnician.Name = "assignedTechnician"
-        Me.assignedTechnician.Size = New System.Drawing.Size(282, 24)
-        Me.assignedTechnician.TabIndex = 59
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(473, 20)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(139, 22)
-        Me.Label6.TabIndex = 58
-        Me.Label6.Text = "Assigned Technician:"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'typeOfMaintenance
-        '
-        Me.typeOfMaintenance.FormattingEnabled = True
-        Me.typeOfMaintenance.Location = New System.Drawing.Point(176, 18)
-        Me.typeOfMaintenance.Name = "typeOfMaintenance"
-        Me.typeOfMaintenance.Size = New System.Drawing.Size(262, 24)
-        Me.typeOfMaintenance.TabIndex = 57
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(11, 20)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(140, 22)
-        Me.Label5.TabIndex = 56
-        Me.Label5.Text = "Type of Maintenance:"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'conditionBeforeMaintenance
-        '
-        Me.conditionBeforeMaintenance.Location = New System.Drawing.Point(75, 102)
-        Me.conditionBeforeMaintenance.Multiline = True
-        Me.conditionBeforeMaintenance.Name = "conditionBeforeMaintenance"
-        Me.conditionBeforeMaintenance.Size = New System.Drawing.Size(793, 61)
-        Me.conditionBeforeMaintenance.TabIndex = 55
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(11, 67)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(198, 22)
-        Me.Label10.TabIndex = 38
-        Me.Label10.Text = "Condition Before Maintenance:"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Panel1
         '
@@ -482,31 +328,232 @@ Partial Class MaintenanceManagementReport1
         Me.Label16.Text = "Status:"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(11, 67)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(198, 22)
+        Me.Label10.TabIndex = 38
+        Me.Label10.Text = "Condition Before Maintenance:"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'conditionBeforeMaintenance
+        '
+        Me.conditionBeforeMaintenance.Location = New System.Drawing.Point(75, 102)
+        Me.conditionBeforeMaintenance.Multiline = True
+        Me.conditionBeforeMaintenance.Name = "conditionBeforeMaintenance"
+        Me.conditionBeforeMaintenance.Size = New System.Drawing.Size(793, 61)
+        Me.conditionBeforeMaintenance.TabIndex = 55
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(11, 20)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(140, 22)
+        Me.Label5.TabIndex = 56
+        Me.Label5.Text = "Type of Maintenance:"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'typeOfMaintenance
+        '
+        Me.typeOfMaintenance.FormattingEnabled = True
+        Me.typeOfMaintenance.Location = New System.Drawing.Point(176, 18)
+        Me.typeOfMaintenance.Name = "typeOfMaintenance"
+        Me.typeOfMaintenance.Size = New System.Drawing.Size(262, 24)
+        Me.typeOfMaintenance.TabIndex = 57
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(473, 20)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(139, 22)
+        Me.Label6.TabIndex = 58
+        Me.Label6.Text = "Assigned Technician:"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'assignedTechnician
+        '
+        Me.assignedTechnician.FormattingEnabled = True
+        Me.assignedTechnician.Location = New System.Drawing.Point(618, 18)
+        Me.assignedTechnician.Name = "assignedTechnician"
+        Me.assignedTechnician.Size = New System.Drawing.Size(282, 24)
+        Me.assignedTechnician.TabIndex = 59
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(11, 191)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(131, 22)
+        Me.Label7.TabIndex = 60
+        Me.Label7.Text = "Maintenance Detail:"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(11, 309)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(125, 22)
+        Me.Label8.TabIndex = 62
+        Me.Label8.Text = "Maintenance Date:"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'maintenanceDate
+        '
+        Me.maintenanceDate.Location = New System.Drawing.Point(161, 308)
+        Me.maintenanceDate.Name = "maintenanceDate"
+        Me.maintenanceDate.Size = New System.Drawing.Size(277, 22)
+        Me.maintenanceDate.TabIndex = 63
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(473, 308)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(140, 22)
+        Me.Label9.TabIndex = 64
+        Me.Label9.Text = "Cost Materials Labor:"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'costMaterialsLabor
+        '
+        Me.costMaterialsLabor.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.costMaterialsLabor.Location = New System.Drawing.Point(631, 308)
+        Me.costMaterialsLabor.Name = "costMaterialsLabor"
+        Me.costMaterialsLabor.Size = New System.Drawing.Size(269, 22)
+        Me.costMaterialsLabor.TabIndex = 64
+        '
+        'maintenanceDetail
+        '
+        Me.maintenanceDetail.Location = New System.Drawing.Point(75, 225)
+        Me.maintenanceDetail.Multiline = True
+        Me.maintenanceDetail.Name = "maintenanceDetail"
+        Me.maintenanceDetail.Size = New System.Drawing.Size(793, 61)
+        Me.maintenanceDetail.TabIndex = 65
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Poppins SemiBold", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(11, 358)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(189, 22)
+        Me.Label17.TabIndex = 66
+        Me.Label17.Text = "Condition After Maintenance:"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Panel4
+        '
+        Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel4.BackColor = System.Drawing.Color.White
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.conditionAfterMaintenance)
+        Me.Panel4.Controls.Add(Me.Label17)
+        Me.Panel4.Controls.Add(Me.maintenanceDetail)
+        Me.Panel4.Controls.Add(Me.costMaterialsLabor)
+        Me.Panel4.Controls.Add(Me.Label9)
+        Me.Panel4.Controls.Add(Me.maintenanceDate)
+        Me.Panel4.Controls.Add(Me.Label8)
+        Me.Panel4.Controls.Add(Me.Label7)
+        Me.Panel4.Controls.Add(Me.assignedTechnician)
+        Me.Panel4.Controls.Add(Me.Label6)
+        Me.Panel4.Controls.Add(Me.typeOfMaintenance)
+        Me.Panel4.Controls.Add(Me.Label5)
+        Me.Panel4.Controls.Add(Me.conditionBeforeMaintenance)
+        Me.Panel4.Controls.Add(Me.Label10)
+        Me.Panel4.Location = New System.Drawing.Point(183, 340)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(913, 477)
+        Me.Panel4.TabIndex = 61
+        '
+        'conditionAfterMaintenance
+        '
+        Me.conditionAfterMaintenance.Location = New System.Drawing.Point(75, 392)
+        Me.conditionAfterMaintenance.Multiline = True
+        Me.conditionAfterMaintenance.Name = "conditionAfterMaintenance"
+        Me.conditionAfterMaintenance.Size = New System.Drawing.Size(793, 61)
+        Me.conditionAfterMaintenance.TabIndex = 67
+        '
+        'btnBack
+        '
+        Me.btnBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBack.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnBack.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnBack.Location = New System.Drawing.Point(623, 962)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(153, 34)
+        Me.btnBack.TabIndex = 383
+        Me.btnBack.Text = "Back"
+        Me.btnBack.UseVisualStyleBackColor = False
+        '
+        'btnPDF
+        '
+        Me.btnPDF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnPDF.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPDF.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnPDF.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnPDF.Location = New System.Drawing.Point(943, 962)
+        Me.btnPDF.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnPDF.Name = "btnPDF"
+        Me.btnPDF.Size = New System.Drawing.Size(153, 34)
+        Me.btnPDF.TabIndex = 382
+        Me.btnPDF.Text = "Generate PDF File"
+        Me.btnPDF.UseVisualStyleBackColor = False
+        '
+        'btnCSV
+        '
+        Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCSV.Location = New System.Drawing.Point(784, 962)
+        Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCSV.Name = "btnCSV"
+        Me.btnCSV.Size = New System.Drawing.Size(153, 34)
+        Me.btnCSV.TabIndex = 381
+        Me.btnCSV.Text = "Generate CSV File"
+        Me.btnCSV.UseVisualStyleBackColor = False
+        '
         'MaintenanceManagementReport1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnBack)
+        Me.Controls.Add(Me.btnPDF)
+        Me.Controls.Add(Me.btnCSV)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel11)
         Me.Name = "MaintenanceManagementReport1"
         Me.Size = New System.Drawing.Size(1339, 1110)
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel11.ResumeLayout(False)
         Me.Panel11.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents Panel4 As System.Windows.Forms.Panel
-    Friend WithEvents conditionBeforeMaintenance As System.Windows.Forms.TextBox
-    Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents fundCluster As System.Windows.Forms.Label
     Friend WithEvents requestId As System.Windows.Forms.TextBox
@@ -522,18 +569,6 @@ Partial Class MaintenanceManagementReport1
     Friend WithEvents serialId As System.Windows.Forms.TextBox
     Friend WithEvents propertyItemName As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents assignedTechnician As System.Windows.Forms.ComboBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents typeOfMaintenance As System.Windows.Forms.ComboBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents maintenanceDate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents costMaterialsLabor As System.Windows.Forms.TextBox
-    Friend WithEvents conditionAfterMaintenance As System.Windows.Forms.TextBox
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents maintenanceDetail As System.Windows.Forms.TextBox
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents partsReplaced As System.Windows.Forms.TextBox
@@ -543,4 +578,22 @@ Partial Class MaintenanceManagementReport1
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents actionTaken As System.Windows.Forms.ComboBox
     Friend WithEvents status As System.Windows.Forms.ComboBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents conditionBeforeMaintenance As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents typeOfMaintenance As System.Windows.Forms.ComboBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents assignedTechnician As System.Windows.Forms.ComboBox
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents maintenanceDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents costMaterialsLabor As System.Windows.Forms.TextBox
+    Friend WithEvents maintenanceDetail As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Panel4 As System.Windows.Forms.Panel
+    Friend WithEvents conditionAfterMaintenance As System.Windows.Forms.TextBox
+    Friend WithEvents btnBack As Resources.Controls.RoundedButton
+    Friend WithEvents btnPDF As Resources.Controls.RoundedButton
+    Friend WithEvents btnCSV As Resources.Controls.RoundedButton
 End Class

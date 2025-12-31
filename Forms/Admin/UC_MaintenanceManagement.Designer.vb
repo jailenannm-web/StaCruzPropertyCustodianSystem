@@ -77,7 +77,7 @@ Partial Class UC_MaintenanceManagement
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.maintenanceId, Me.requestId, Me.propertyItemName, Me.serialNumber, Me.location, Me.departmentId, Me.conditionBeforeMaint, Me.typeOfMaintenance, Me.assignedTechnician, Me.maintenanceDate, Me.costMaterialsLabor, Me.conditionAfterMaint, Me.status})
         Me.DataGridView1.GridColor = System.Drawing.Color.LightGray
-        Me.DataGridView1.Location = New System.Drawing.Point(58, 109)
+        Me.DataGridView1.Location = New System.Drawing.Point(72, 109)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
@@ -95,7 +95,6 @@ Partial Class UC_MaintenanceManagement
         Me.maintenanceId.MinimumWidth = 60
         Me.maintenanceId.Name = "maintenanceId"
         Me.maintenanceId.ReadOnly = True
-        Me.maintenanceId.Width = 60
         '
         'requestId
         '
@@ -104,7 +103,6 @@ Partial Class UC_MaintenanceManagement
         Me.requestId.MinimumWidth = 70
         Me.requestId.Name = "requestId"
         Me.requestId.ReadOnly = True
-        Me.requestId.Width = 70
         '
         'propertyItemName
         '
@@ -122,7 +120,6 @@ Partial Class UC_MaintenanceManagement
         Me.serialNumber.MinimumWidth = 110
         Me.serialNumber.Name = "serialNumber"
         Me.serialNumber.ReadOnly = True
-        Me.serialNumber.Width = 110
         '
         'location
         '

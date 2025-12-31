@@ -5,7 +5,7 @@ Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 Imports StaCruzPropertyCustodianSystem.Resources.Controls
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class MaintenanceReport
+Partial Class MaintenanceRequestReport
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.

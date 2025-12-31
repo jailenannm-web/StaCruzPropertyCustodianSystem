@@ -3,12 +3,12 @@ Imports System.Linq
 Imports System
 Imports System.Drawing
 Imports Microsoft.VisualBasic
-Public Class MaintenanceReport
+Public Class MaintenanceRequestReport
     Private Sub TextBox3_TextChanged(sender As Object, e As System.EventArgs)
 
     End Sub
 
-    Private Sub MaintenanceReport_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub MaintenanceRequestReport_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
 
     End Sub
 

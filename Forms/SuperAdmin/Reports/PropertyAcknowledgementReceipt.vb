@@ -18,7 +18,14 @@ Partial Class PropertyAcknowledgementReceipt
         InitializeComponent()
     End Sub
 
-    ' Constructor with request ID and type
+    ' Constructor with property ID (single integer parameter)
+    Public Sub New(propertyID As Integer)
+        InitializeComponent()
+        ' Load property data directly from properties table
+        LoadPropertyData(propertyID)
+    End Sub
+    
+    ' Constructor with request ID and type (two parameters)
     Public Sub New(requestID As Integer, requestType As String)
         InitializeComponent()
         currentRequestID = requestID
@@ -26,36 +33,28 @@ Partial Class PropertyAcknowledgementReceipt
         LoadRequestData(requestID, requestType)
     End Sub
 
-    ' Constructor with property ID (legacy support)
-    Public Sub New(propertyID As Integer)
-        InitializeComponent()
-        ' Try to find a request for this property
-        LoadPropertyRequestById(propertyID)
-    End Sub
-
-    Private Sub LoadPropertyRequestById(propertyID As Integer)
+    Private Sub LoadPropertyData(propertyID As Integer)
         Try
-            ' Find the most recent property request for this property
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
-                Dim query As String = "SELECT pr.requestId FROM property_requests pr " &
-                                    "INNER JOIN properties p ON pr.itemName = p.itemName " &
-                                    "WHERE p.propertyId = @propertyId " &
-                                    "AND pr.status = 'Approved' " &
-                                    "ORDER BY pr.approvedDate DESC LIMIT 1"
-                Using cmd As New MySqlCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@propertyId", propertyID)
-                    Dim result As Object = cmd.ExecuteScalar()
-                    If result IsNot Nothing Then
-                        currentRequestID = Convert.ToInt32(result)
-                        currentRequestType = "property"
-                        LoadRequestData(currentRequestID.Value, currentRequestType)
-                    End If
-                End Using
-                If conn.State = ConnectionState.Open Then conn.Close()
+            System.Diagnostics.Debug.WriteLine($"[PropertyAcknowledgementReceipt] Loading property ID: {propertyID}")
+            
+            ' Get property data directly from properties table
+            requestData = DatabaseConnection.GetPropertyById(propertyID)
+            
+            If requestData Is Nothing Then
+                MessageBox.Show("Property data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
             End If
+            
+            ' Store property ID for reference
+            currentRequestID = propertyID
+            currentRequestType = "property"
+            
+            ' Populate form fields
+            PopulateFormFields()
+            
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine($"[PropertyAcknowledgementReceipt] Error loading property request: {ex.Message}")
+            System.Diagnostics.Debug.WriteLine($"[PropertyAcknowledgementReceipt] Error loading property: {ex.Message}")
+            MessageBox.Show($"Error loading property data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -84,85 +83,175 @@ Partial Class PropertyAcknowledgementReceipt
         Try
             If requestData Is Nothing Then Return
 
-            ' Request Information
-            requestID.Text = SafeGetValue(requestData, "request_id", "requestId")
-            requesterName.Text = SafeGetValue(requestData, "requesterName", "requester_name")
+            ' Request Information - Use propertyId as request_id for properties
+            Dim reqId As String = SafeGetValue(requestData, "request_id", "requestId", "propertyId")
+            If Not String.IsNullOrEmpty(reqId) Then
+                requestID.Text = reqId
+            End If
+            
+            ' Requester Name - use assigned user or "N/A" if not assigned
+            Dim requesterValue As String = SafeGetValue(requestData, "requesterName", "requester_name")
+            If String.IsNullOrEmpty(requesterValue) Then
+                requesterValue = "Not Assigned"
+            End If
+            requesterName.Text = requesterValue
             
             ' Position - set as textbox value or combobox
-            Dim posValue As String = SafeGetValue(requestData, "position")
+            Dim posValue As String = SafeGetValue(requestData, "position", "requester_position")
+            If String.IsNullOrEmpty(posValue) Then
+                posValue = "N/A"
+            End If
             If Not String.IsNullOrEmpty(posValue) Then
-                position.Items.Clear()
-                position.Items.Add(posValue)
-                position.SelectedIndex = 0
+                If position.Items.Count = 0 Then
+                    position.Items.Add(posValue)
+                End If
+                position.Text = posValue
+                If position.Items.Contains(posValue) Then
+                    position.SelectedItem = posValue
+                End If
             End If
             
             ' Department - set as combobox
             Dim deptValue As String = SafeGetValue(requestData, "departmentName", "department")
+            If String.IsNullOrEmpty(deptValue) Then
+                deptValue = "N/A"
+            End If
             If Not String.IsNullOrEmpty(deptValue) Then
-                department.Items.Clear()
-                department.Items.Add(deptValue)
-                department.SelectedIndex = 0
+                If department.Items.Count = 0 Then
+                    department.Items.Add(deptValue)
+                End If
+                department.Text = deptValue
+                If department.Items.Contains(deptValue) Then
+                    department.SelectedItem = deptValue
+                End If
             End If
             
-            ' Set Date of Request
-            Dim requestDate As String = SafeGetValue(requestData, "request_date", "dateOfRequest")
+            ' Set Date of Request - use acquisitionDate for properties
+            Dim requestDate As String = SafeGetValue(requestData, "request_date", "dateOfRequest", "acquisitionDate")
             If Not String.IsNullOrEmpty(requestDate) Then
                 Dim parsedDate As DateTime
                 If DateTime.TryParse(requestDate, parsedDate) Then
                     dateOfRequest.Value = parsedDate
+                Else
+                    dateOfRequest.Value = DateTime.Now
                 End If
+            Else
+                dateOfRequest.Value = DateTime.Now
             End If
 
             ' Item Details
             itemName.Text = SafeGetValue(requestData, "item_name", "itemName")
             description.Text = SafeGetValue(requestData, "description")
-            purpose.Text = SafeGetValue(requestData, "purpose")
+            
+            ' Purpose - use default if empty
+            Dim purposeValue As String = SafeGetValue(requestData, "purpose")
+            If String.IsNullOrEmpty(purposeValue) Then
+                purposeValue = "Property issued for use"
+            End If
+            purpose.Text = purposeValue
             
             ' Quantity and Unit
             Dim quantityValue As String = SafeGetValue(requestData, "quantity", "quantityRequested")
+            If String.IsNullOrEmpty(quantityValue) Then
+                quantityValue = "1"
+            End If
             If Not String.IsNullOrEmpty(quantityValue) Then
-                quantityRequesteed.Items.Clear()
-                quantityRequesteed.Items.Add(quantityValue)
-                quantityRequesteed.SelectedIndex = 0
+                If quantityRequesteed.Items.Count = 0 Then
+                    quantityRequesteed.Items.Add(quantityValue)
+                End If
+                quantityRequesteed.Text = quantityValue
+                If quantityRequesteed.Items.Contains(quantityValue) Then
+                    quantityRequesteed.SelectedItem = quantityValue
+                End If
             End If
             
-            Dim unitValue As String = SafeGetValue(requestData, "unit")
+            Dim unitValue As String = SafeGetValue(requestData, "unit", "unitOfMeasure")
+            If String.IsNullOrEmpty(unitValue) Then
+                unitValue = "pc"
+            End If
             If Not String.IsNullOrEmpty(unitValue) Then
-                unit.Items.Clear()
-                unit.Items.Add(unitValue)
-                unit.SelectedIndex = 0
+                If unit.Items.Count = 0 Then
+                    unit.Items.Add(unitValue)
+                End If
+                unit.Text = unitValue
+                If unit.Items.Contains(unitValue) Then
+                    unit.SelectedItem = unitValue
+                End If
             End If
 
             ' Status and Approval
             Dim statusValue As String = SafeGetValue(requestData, "status")
+            If String.IsNullOrEmpty(statusValue) Then
+                statusValue = "Active"
+            End If
             If Not String.IsNullOrEmpty(statusValue) Then
-                status.Items.Clear()
-                status.Items.Add(statusValue)
-                status.SelectedIndex = 0
+                If status.Items.Count = 0 Then
+                    status.Items.Add(statusValue)
+                End If
+                status.Text = statusValue
+                If status.Items.Contains(statusValue) Then
+                    status.SelectedItem = statusValue
+                End If
             End If
             
             Dim approvedByValue As String = SafeGetValue(requestData, "approved_by_name", "approvedBy")
+            If String.IsNullOrEmpty(approvedByValue) Then
+                approvedByValue = "Administrator"
+            End If
             If Not String.IsNullOrEmpty(approvedByValue) Then
-                approvedBy.Items.Clear()
-                approvedBy.Items.Add(approvedByValue)
-                approvedBy.SelectedIndex = 0
+                If approvedBy.Items.Count = 0 Then
+                    approvedBy.Items.Add(approvedByValue)
+                End If
+                approvedBy.Text = approvedByValue
+                If approvedBy.Items.Contains(approvedByValue) Then
+                    approvedBy.SelectedItem = approvedByValue
+                End If
             End If
             
             ' Set Approved Date
-            Dim approvalDate As String = SafeGetValue(requestData, "approval_date", "approvedDate")
+            Dim approvalDate As String = SafeGetValue(requestData, "approval_date", "approvedDate", "createdAt")
             If Not String.IsNullOrEmpty(approvalDate) Then
                 Dim parsedDate As DateTime
                 If DateTime.TryParse(approvalDate, parsedDate) Then
                     approvedDate.Value = parsedDate
+                Else
+                    approvedDate.Value = DateTime.Now
                 End If
+            Else
+                approvedDate.Value = DateTime.Now
             End If
 
             ' Remarks
-            remarks.Text = SafeGetValue(requestData, "remarks")
+            Dim remarksValue As String = SafeGetValue(requestData, "remarks")
+            If String.IsNullOrEmpty(remarksValue) Then
+                remarksValue = "Property Acknowledgement Receipt"
+            End If
+            remarks.Text = remarksValue
 
-            ' Set Created/Updated dates to current date
-            DateTimePicker1.Value = DateTime.Now
-            DateTimePicker2.Value = DateTime.Now
+            ' Set Created/Updated dates from data or current date
+            Dim createdValue As String = SafeGetValue(requestData, "createdAt")
+            If Not String.IsNullOrEmpty(createdValue) Then
+                Dim parsedDate As DateTime
+                If DateTime.TryParse(createdValue, parsedDate) Then
+                    DateTimePicker1.Value = parsedDate
+                Else
+                    DateTimePicker1.Value = DateTime.Now
+                End If
+            Else
+                DateTimePicker1.Value = DateTime.Now
+            End If
+            
+            Dim updatedValue As String = SafeGetValue(requestData, "updatedAt")
+            If Not String.IsNullOrEmpty(updatedValue) Then
+                Dim parsedDate As DateTime
+                If DateTime.TryParse(updatedValue, parsedDate) Then
+                    DateTimePicker2.Value = parsedDate
+                Else
+                    DateTimePicker2.Value = DateTime.Now
+                End If
+            Else
+                DateTimePicker2.Value = DateTime.Now
+            End If
             
             System.Diagnostics.Debug.WriteLine("[PropertyAcknowledgementReceipt] Form populated successfully")
             
@@ -507,4 +596,8 @@ Partial Class PropertyAcknowledgementReceipt
         
         Return builder.ToString()
     End Function
+
+    Private Sub PropertyAcknowledgementReceipt_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

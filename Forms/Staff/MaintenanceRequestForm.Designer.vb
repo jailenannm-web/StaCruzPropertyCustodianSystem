@@ -66,7 +66,7 @@ Partial Class MaintenanceRequestForm
         Me.pnlHeader.Controls.Add(Me.lblSubtitle)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
-        Me.pnlHeader.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlHeader.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Padding = New System.Windows.Forms.Padding(40, 25, 40, 25)
         Me.pnlHeader.Size = New System.Drawing.Size(1600, 148)
@@ -106,7 +106,7 @@ Partial Class MaintenanceRequestForm
         Me.pnlMain.Controls.Add(Me.grpRequestDetails)
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 148)
-        Me.pnlMain.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlMain.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.Padding = New System.Windows.Forms.Padding(40, 25, 40, 25)
         Me.pnlMain.Size = New System.Drawing.Size(1600, 714)
@@ -127,7 +127,7 @@ Partial Class MaintenanceRequestForm
         Me.grpItemDetails.Dock = System.Windows.Forms.DockStyle.Top
         Me.grpItemDetails.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.grpItemDetails.Location = New System.Drawing.Point(40, 493)
-        Me.grpItemDetails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpItemDetails.Margin = New System.Windows.Forms.Padding(4)
         Me.grpItemDetails.Name = "grpItemDetails"
         Me.grpItemDetails.Padding = New System.Windows.Forms.Padding(27, 25, 27, 25)
         Me.grpItemDetails.Size = New System.Drawing.Size(1499, 345)
@@ -151,7 +151,7 @@ Partial Class MaintenanceRequestForm
         Me.cboItemName.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.cboItemName.FormattingEnabled = True
         Me.cboItemName.Location = New System.Drawing.Point(36, 80)
-        Me.cboItemName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboItemName.Margin = New System.Windows.Forms.Padding(4)
         Me.cboItemName.Name = "cboItemName"
         Me.cboItemName.Size = New System.Drawing.Size(692, 31)
         Me.cboItemName.TabIndex = 1
@@ -171,7 +171,7 @@ Partial Class MaintenanceRequestForm
         '
         Me.txtPropertyNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.txtPropertyNumber.Location = New System.Drawing.Point(765, 80)
-        Me.txtPropertyNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPropertyNumber.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPropertyNumber.Name = "txtPropertyNumber"
         Me.txtPropertyNumber.Size = New System.Drawing.Size(332, 30)
         Me.txtPropertyNumber.TabIndex = 3
@@ -191,7 +191,7 @@ Partial Class MaintenanceRequestForm
         '
         Me.txtSerialNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.txtSerialNumber.Location = New System.Drawing.Point(1125, 80)
-        Me.txtSerialNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSerialNumber.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSerialNumber.Name = "txtSerialNumber"
         Me.txtSerialNumber.Size = New System.Drawing.Size(332, 30)
         Me.txtSerialNumber.TabIndex = 5
@@ -213,7 +213,7 @@ Partial Class MaintenanceRequestForm
         Me.cboDepartment.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.cboDepartment.FormattingEnabled = True
         Me.cboDepartment.Location = New System.Drawing.Point(36, 166)
-        Me.cboDepartment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboDepartment.Margin = New System.Windows.Forms.Padding(4)
         Me.cboDepartment.Name = "cboDepartment"
         Me.cboDepartment.Size = New System.Drawing.Size(692, 31)
         Me.cboDepartment.TabIndex = 7
@@ -233,7 +233,7 @@ Partial Class MaintenanceRequestForm
         '
         Me.txtLocation.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.txtLocation.Location = New System.Drawing.Point(36, 252)
-        Me.txtLocation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtLocation.Margin = New System.Windows.Forms.Padding(4)
         Me.txtLocation.Name = "txtLocation"
         Me.txtLocation.Size = New System.Drawing.Size(692, 30)
         Me.txtLocation.TabIndex = 9
@@ -253,7 +253,7 @@ Partial Class MaintenanceRequestForm
         Me.grpRequestDetails.Dock = System.Windows.Forms.DockStyle.Top
         Me.grpRequestDetails.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.grpRequestDetails.Location = New System.Drawing.Point(40, 25)
-        Me.grpRequestDetails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpRequestDetails.Margin = New System.Windows.Forms.Padding(4)
         Me.grpRequestDetails.Name = "grpRequestDetails"
         Me.grpRequestDetails.Padding = New System.Windows.Forms.Padding(27, 25, 27, 25)
         Me.grpRequestDetails.Size = New System.Drawing.Size(1499, 468)
@@ -277,7 +277,7 @@ Partial Class MaintenanceRequestForm
         Me.dtpDateRequested.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.dtpDateRequested.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpDateRequested.Location = New System.Drawing.Point(36, 80)
-        Me.dtpDateRequested.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpDateRequested.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpDateRequested.Name = "dtpDateRequested"
         Me.dtpDateRequested.Size = New System.Drawing.Size(332, 30)
         Me.dtpDateRequested.TabIndex = 1
@@ -299,7 +299,7 @@ Partial Class MaintenanceRequestForm
         Me.cboConditionBefore.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.cboConditionBefore.FormattingEnabled = True
         Me.cboConditionBefore.Location = New System.Drawing.Point(401, 80)
-        Me.cboConditionBefore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboConditionBefore.Margin = New System.Windows.Forms.Padding(4)
         Me.cboConditionBefore.Name = "cboConditionBefore"
         Me.cboConditionBefore.Size = New System.Drawing.Size(332, 31)
         Me.cboConditionBefore.TabIndex = 3
@@ -321,7 +321,7 @@ Partial Class MaintenanceRequestForm
         Me.cboTypeOfIssue.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.cboTypeOfIssue.FormattingEnabled = True
         Me.cboTypeOfIssue.Location = New System.Drawing.Point(767, 80)
-        Me.cboTypeOfIssue.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboTypeOfIssue.Margin = New System.Windows.Forms.Padding(4)
         Me.cboTypeOfIssue.Name = "cboTypeOfIssue"
         Me.cboTypeOfIssue.Size = New System.Drawing.Size(332, 31)
         Me.cboTypeOfIssue.TabIndex = 5
@@ -342,7 +342,7 @@ Partial Class MaintenanceRequestForm
         Me.dtpTargetDate.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.dtpTargetDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpTargetDate.Location = New System.Drawing.Point(1131, 80)
-        Me.dtpTargetDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpTargetDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpTargetDate.Name = "dtpTargetDate"
         Me.dtpTargetDate.Size = New System.Drawing.Size(332, 30)
         Me.dtpTargetDate.TabIndex = 7
@@ -362,7 +362,7 @@ Partial Class MaintenanceRequestForm
         '
         Me.txtProblemDescription.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.txtProblemDescription.Location = New System.Drawing.Point(36, 166)
-        Me.txtProblemDescription.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtProblemDescription.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProblemDescription.Multiline = True
         Me.txtProblemDescription.Name = "txtProblemDescription"
         Me.txtProblemDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -377,7 +377,7 @@ Partial Class MaintenanceRequestForm
         Me.pnlFooter.Controls.Add(Me.btnSubmit)
         Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlFooter.Location = New System.Drawing.Point(0, 862)
-        Me.pnlFooter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlFooter.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlFooter.Name = "pnlFooter"
         Me.pnlFooter.Padding = New System.Windows.Forms.Padding(40, 25, 40, 25)
         Me.pnlFooter.Size = New System.Drawing.Size(1600, 123)
@@ -407,7 +407,7 @@ Partial Class MaintenanceRequestForm
         Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.btnCancel.ForeColor = System.Drawing.Color.White
         Me.btnCancel.Location = New System.Drawing.Point(1173, 25)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(187, 73)
         Me.btnCancel.TabIndex = 1
@@ -424,7 +424,7 @@ Partial Class MaintenanceRequestForm
         Me.btnSubmit.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.btnSubmit.ForeColor = System.Drawing.Color.White
         Me.btnSubmit.Location = New System.Drawing.Point(1360, 25)
-        Me.btnSubmit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSubmit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(200, 73)
         Me.btnSubmit.TabIndex = 2
@@ -438,7 +438,7 @@ Partial Class MaintenanceRequestForm
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.pnlFooter)
         Me.Controls.Add(Me.pnlHeader)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "MaintenanceRequestForm"
         Me.Size = New System.Drawing.Size(1600, 985)
         Me.pnlHeader.ResumeLayout(False)

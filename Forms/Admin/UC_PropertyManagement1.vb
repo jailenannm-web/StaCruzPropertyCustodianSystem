@@ -1118,7 +1118,7 @@ Public Class UC_PropertyManagement1
             End If
             
             ' Open Property Issuance Slip with property data
-            Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt(propertyID, propNumber)
+            Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt(propertyID)
             propertyAcknowledgement.ShowDialog()
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[IssuePropertySlip] Exception: " & ex.Message & Environment.NewLine & ex.StackTrace)
@@ -1177,7 +1177,7 @@ Public Class UC_PropertyManagement1
                 End If
 
                 ' Open Property Issuance Slip with property data
-                Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt(propertyID, propNumber)
+                Dim propertyAcknowledgement As New PropertyAcknowledgementReceipt(propertyID)
                 propertyAcknowledgement.ShowDialog()
             End If
         Catch ex As Exception
