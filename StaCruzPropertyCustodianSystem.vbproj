@@ -231,6 +231,7 @@
     <Compile Include="Forms\SuperAdmin\SuperAdminDashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Utilities\AuditLogger.vb" />
     <Compile Include="Utilities\Logger.vb" />
     <Compile Include="Utilities\ReportExportHelper.vb" />
     <Compile Include="DatabaseConnection.vb" />

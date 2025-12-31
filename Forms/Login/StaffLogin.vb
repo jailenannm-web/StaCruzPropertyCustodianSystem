@@ -64,6 +64,9 @@ Public Class StaffLogin
                     SessionContext.SetCurrentUser(userIDValue, username, userType)
                     My.Settings.LoggedInuser = username
                     My.Settings.Save()
+                    
+                    ' Log successful login to audit_logs
+                    AuditLogger.LogLogin(userIDValue, username, userType, True)
 
                     MessageBox.Show("Login successful! Welcome, " & username & " (" & userType & ").", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -107,6 +110,9 @@ Public Class StaffLogin
                     SessionContext.SetCurrentUser(staffID, username, "Staff")
                     My.Settings.LoggedInuser = username
                     My.Settings.Save()
+                    
+                    ' Log successful login to audit_logs
+                    AuditLogger.LogLogin(staffID, username, "Staff", True)
 
                     MessageBox.Show("Login successful! Welcome, " & username & " (Staff).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -115,6 +121,9 @@ Public Class StaffLogin
                     MessageBox.Show("Failed to retrieve user ID. Please contact administrator.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             Else
+                ' Log failed login attempt
+                AuditLogger.LogLogin(0, username, "Unknown", False)
+                
                 ' Show generic error message - detailed checking would require accessing private methods
                 MessageBox.Show("Invalid username or password. Please check your credentials and try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 txb_Password.Clear()
