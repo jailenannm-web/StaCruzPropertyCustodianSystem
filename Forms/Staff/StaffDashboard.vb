@@ -50,9 +50,9 @@ Public Class StaffDashboard
         ' Set Dashboard as the active button on startup
         SetActiveButton(btnDashboard)
 
-        ' --- ADD THIS LINE ---
-        ' Hide the form loader panel to show your pnlMain
-        pnlFormLoader.Visible = True
+        ' Hide the form loader panel initially to show the main dashboard
+        pnlFormLoader.Visible = False
+        pnlFormLoader.SendToBack()
 
         ' Load dashboard data on startup
         LoadDashboardData()
@@ -65,26 +65,25 @@ Public Class StaffDashboard
     End Sub
 
     Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
-
-
         Try
-            ' --- THIS CHECK IS STILL NEEDED ---
+            ' Expand sidebar if collapsed
             If Not isSidebarExpanded Then
-                ' If the panel is collapsed, expand it.
                 ToggleSidebar()
             End If
-            ' --- END OF CHECK ---
 
             SetActiveButton(btnDashboard)
 
             ' Clear any existing user controls from the panel
             pnlFormLoader.Controls.Clear()
 
-            ' Show the dashboard panel
-            pnlFormLoader.Visible = True
+            ' IMPORTANT: Hide the form loader panel to show the main dashboard
+            pnlFormLoader.Visible = False
+            pnlFormLoader.SendToBack()
 
-            ' Load dashboard data
+            ' Reload dashboard data (this updates the main form's controls)
             LoadDashboardData()
+            
+            System.Diagnostics.Debug.WriteLine("[v0] Dashboard loaded - pnlFormLoader hidden, showing main dashboard")
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("btnDashboard_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
             MessageBox.Show("Error loading dashboard: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -119,6 +119,7 @@ Public Class SupplyInventory
             End Function)
             
             propertyManagementGrid.Rows.Clear()
+            
             For Each row As DataRow In filteredRows
                 Dim supplyID As String = ""
                 Dim itemName As String = ""
@@ -160,10 +161,38 @@ Public Class SupplyInventory
                 
                 propertyManagementGrid.Rows.Add(supplyID, itemName, category, description, unitOfMeasure, quantity, location, stockStatus)
             Next
+            
+            ' Update total after search/filter
+            UpdateTotalSupplyCount()
         Catch ex As Exception
             MessageBox.Show("Error searching supplies: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             isSearching = False
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Refresh button click handler
+    ''' </summary>
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        Try
+            ' Clear search bar
+            supplyinventorysearchbar.Text = ""
+            
+            ' Reset filters
+            pm_cbobx_categ.SelectedIndex = 0
+            pm_cbobx_status.SelectedIndex = 0
+            
+            ' Reload data
+            LoadSupplyData()
+            
+            ' Show success message
+            MessageBox.Show("Supply Inventory successfully Refreshed!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            
+            System.Diagnostics.Debug.WriteLine("[v0] Supply inventory refreshed successfully")
+        Catch ex As Exception
+            MessageBox.Show("Error refreshing supply inventory: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("btnRefresh_Click Error: " & ex.Message)
         End Try
     End Sub
 
@@ -269,10 +298,28 @@ Public Class SupplyInventory
             
             ' Auto-size columns
             propertyManagementGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            
+            ' Update total supply count
+            UpdateTotalSupplyCount()
         Catch ex As Exception
             Dim errorMsg As String = "Unable to connect to the database. Please ensure MySQL is running and try again."
             MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             System.Diagnostics.Debug.WriteLine("SupplyInventory LoadSupplyData Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Update the total supply count label
+    ''' </summary>
+    Private Sub UpdateTotalSupplyCount()
+        Try
+            If lblTotal IsNot Nothing Then
+                Dim totalCount As Integer = propertyManagementGrid.Rows.Count
+                lblTotal.Text = $"Total Supply: {totalCount}"
+                System.Diagnostics.Debug.WriteLine($"[v0] Updated total supply count: {totalCount}")
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("UpdateTotalSupplyCount Error: " & ex.Message)
         End Try
     End Sub
     Private Sub btnrequestsupply_Click(sender As Object, e As System.EventArgs)

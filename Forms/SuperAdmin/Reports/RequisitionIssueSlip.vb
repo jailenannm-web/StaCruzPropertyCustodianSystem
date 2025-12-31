@@ -62,9 +62,16 @@ Partial Public Class RequisitionIssueSlip
                 Dim approvedDateValue As String = SafeGetDateValue(requestData, "approval_date", "approvedDate")
                 If Not String.IsNullOrEmpty(approvedDateValue) AndAlso approvedDate IsNot Nothing Then
                     Try
-                        approvedDate.Value = DateTime.Parse(approvedDateValue)
-                    Catch
-                        approvedDate.Text = approvedDateValue
+                        Dim parsedDate As DateTime
+                        If DateTime.TryParse(approvedDateValue, parsedDate) Then
+                            approvedDate.Value = parsedDate
+                        Else
+                            ' If parsing fails, just set to current date or leave as is
+                            System.Diagnostics.Debug.WriteLine($"[v0] Could not parse date: {approvedDateValue}")
+                        End If
+                    Catch ex As Exception
+                        System.Diagnostics.Debug.WriteLine("[v0] Date parsing error: " & ex.Message)
+                        ' Just skip if date is invalid
                     End Try
                 End If
                 If approvedBy IsNot Nothing Then
@@ -121,10 +128,23 @@ Partial Public Class RequisitionIssueSlip
         For Each name As String In names
             If row.Table.Columns.Contains(name) AndAlso Not Convert.IsDBNull(row(name)) Then
                 Try
-                    Dim dateValue As DateTime = Convert.ToDateTime(row(name))
-                    Return dateValue.ToString("MM/dd/yyyy")
-                Catch
-                    Return row(name).ToString()
+                    ' Try to convert to DateTime
+                    Dim dateValue As DateTime
+                    If DateTime.TryParse(row(name).ToString(), dateValue) Then
+                        Return dateValue.ToString("MM/dd/yyyy")
+                    ElseIf TypeOf row(name) Is DateTime Then
+                        Return CType(row(name), DateTime).ToString("MM/dd/yyyy")
+                    Else
+                        ' Return the string value as-is if it's not parseable
+                        Dim strValue As String = row(name).ToString()
+                        ' Only return if it's not an obvious non-date value
+                        If Not String.IsNullOrWhiteSpace(strValue) AndAlso strValue.Length < 50 Then
+                            Return strValue
+                        End If
+                    End If
+                Catch ex As Exception
+                    System.Diagnostics.Debug.WriteLine($"[v0] SafeGetDateValue error for column '{name}': {ex.Message}")
+                    ' Return empty instead of crashing
                 End Try
             End If
         Next

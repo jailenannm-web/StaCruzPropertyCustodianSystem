@@ -10272,6 +10272,111 @@ Public Class DatabaseConnection
     ''' </summary>
 
     ''' <summary>
+    ''' Update staff account profile information
+    ''' </summary>
+    Public Shared Function UpdateStaffAccount(
+        userId As Integer,
+        firstName As String,
+        lastName As String,
+        email As String,
+        username As String,
+        contactNumber As String,
+        address As String,
+        departmentId As Integer?,
+        position As String,
+        status As String,
+        updatedBy As Integer,
+        updatedByType As String,
+        updatedByName As String,
+        ipAddress As String
+    ) As Boolean
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return False
+            If Not SafeOpenConnection(conn) Then Return False
+            
+            ' Update both users and staff_accounts tables
+            Dim updateUserQuery As String = "UPDATE users SET " &
+                                           "firstName = @firstName, " &
+                                           "lastName = @lastName, " &
+                                           "email = @email, " &
+                                           "username = @username, " &
+                                           "contactNumber = @contactNumber, " &
+                                           "departmentId = @departmentId, " &
+                                           "position = @position, " &
+                                           "status = @status, " &
+                                           "updatedAt = NOW() " &
+                                           "WHERE userId = @userId"
+            
+            Using cmd As New MySqlCommand(updateUserQuery, conn)
+                cmd.Parameters.AddWithValue("@userId", userId)
+                cmd.Parameters.AddWithValue("@firstName", firstName)
+                cmd.Parameters.AddWithValue("@lastName", lastName)
+                cmd.Parameters.AddWithValue("@email", email)
+                cmd.Parameters.AddWithValue("@username", username)
+                cmd.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(contactNumber), DBNull.Value, contactNumber))
+                cmd.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, CObj(departmentId.Value), DBNull.Value))
+                cmd.Parameters.AddWithValue("@position", If(String.IsNullOrEmpty(position), "Staff", position))
+                cmd.Parameters.AddWithValue("@status", status)
+                
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                
+                If rowsAffected > 0 Then
+                    ' Also update staff_accounts table if record exists
+                    Dim updateStaffQuery As String = "UPDATE staff_accounts SET " &
+                                                    "firstName = @firstName, " &
+                                                    "lastName = @lastName, " &
+                                                    "email = @email, " &
+                                                    "username = @username, " &
+                                                    "contactNumber = @contactNumber, " &
+                                                    "departmentId = @departmentId, " &
+                                                    "position = @position, " &
+                                                    "status = @status, " &
+                                                    "updatedAt = NOW() " &
+                                                    "WHERE userId = @userId"
+                    
+                    Using cmdStaff As New MySqlCommand(updateStaffQuery, conn)
+                        cmdStaff.Parameters.AddWithValue("@userId", userId)
+                        cmdStaff.Parameters.AddWithValue("@firstName", firstName)
+                        cmdStaff.Parameters.AddWithValue("@lastName", lastName)
+                        cmdStaff.Parameters.AddWithValue("@email", email)
+                        cmdStaff.Parameters.AddWithValue("@username", username)
+                        cmdStaff.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(contactNumber), DBNull.Value, contactNumber))
+                        cmdStaff.Parameters.AddWithValue("@departmentId", If(departmentId.HasValue, CObj(departmentId.Value), DBNull.Value))
+                        cmdStaff.Parameters.AddWithValue("@position", If(String.IsNullOrEmpty(position), "Staff", position))
+                        cmdStaff.Parameters.AddWithValue("@status", status)
+                        
+                        cmdStaff.ExecuteNonQuery() ' Don't fail if staff_accounts record doesn't exist
+                    End Using
+                    
+                    ' Update session context with new values
+                    SessionContext.CurrentFullName = firstName & " " & lastName
+                    SessionContext.CurrentUsername = username
+                    
+                    System.Diagnostics.Debug.WriteLine($"[v0] Updated profile for userId: {userId}")
+                    Return True
+                Else
+                    Return False
+                End If
+            End Using
+            
+        Catch ex As Exception
+            Logger.LogError("UpdateStaffAccount Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+            MessageBox.Show("Error updating profile: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
+    ''' <summary>
     ''' Get maintenance record by property item name and serial number
     ''' Used to show maintenance status for borrowed items
     ''' </summary>
