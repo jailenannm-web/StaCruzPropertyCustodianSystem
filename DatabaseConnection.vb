@@ -10271,5 +10271,65 @@ Public Class DatabaseConnection
     ''' Add a new property to the database
     ''' </summary>
 
+    ''' <summary>
+    ''' Get maintenance record by property item name and serial number
+    ''' Used to show maintenance status for borrowed items
+    ''' </summary>
+    Public Shared Function GetMaintenanceByItem(itemName As String, Optional serialNumber As String = "") As DataRow
+        Dim conn As MySqlConnection = Nothing
+        Try
+            conn = GetConnection()
+            If conn Is Nothing Then Return Nothing
+            If Not SafeOpenConnection(conn) Then Return Nothing
+            
+            Dim query As String = "SELECT m.maintenanceId, m.requestId, m.propertyItemName, " &
+                                 "m.serialNumber, m.location, m.departmentId, d.departmentName, " &
+                                 "m.conditionBeforeMaint, m.maintenanceDate, m.typeOfMaintenance, " &
+                                 "m.maintenanceDetails, m.assignedTechnician, m.costMaterialsLabor, " &
+                                 "m.status, m.conditionAfterMaint, m.diagnosis, m.actionTaken, " &
+                                 "m.partsReplaced, m.createdAt, m.updatedAt " &
+                                 "FROM maintenance m " &
+                                 "LEFT JOIN departments d ON m.departmentId = d.departmentId " &
+                                 "WHERE m.propertyItemName = @itemName "
+            
+            If Not String.IsNullOrEmpty(serialNumber) Then
+                query &= "AND m.serialNumber = @serialNumber "
+            End If
+            
+            query &= "ORDER BY m.maintenanceDate DESC LIMIT 1"
+            
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@itemName", itemName)
+                If Not String.IsNullOrEmpty(serialNumber) Then
+                    cmd.Parameters.AddWithValue("@serialNumber", serialNumber)
+                End If
+                
+                Using adapter As New MySqlDataAdapter(cmd)
+                    Dim dt As New DataTable()
+                    adapter.Fill(dt)
+                    
+                    If dt.Rows.Count > 0 Then
+                        Return dt.Rows(0)
+                    End If
+                End Using
+            End Using
+            
+            Return Nothing
+            
+        Catch ex As Exception
+            Logger.LogError("GetMaintenanceByItem Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+            MessageBox.Show("Error retrieving maintenance information: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return Nothing
+        Finally
+            If conn IsNot Nothing Then
+                Try
+                    If conn.State = ConnectionState.Open Then conn.Close()
+                    conn.Dispose()
+                Catch
+                End Try
+            End If
+        End Try
+    End Function
+
 End Class
 

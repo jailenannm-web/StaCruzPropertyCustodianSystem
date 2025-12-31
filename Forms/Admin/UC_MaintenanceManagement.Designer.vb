@@ -29,7 +29,10 @@ Partial Class UC_MaintenanceManagement
     Private Sub InitializeComponent()
         Me.admin_label_MaintenanceManagement = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.maintenanceId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.requestId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.propertyItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.serialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.conditionBeforeMaint = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -72,7 +75,7 @@ Partial Class UC_MaintenanceManagement
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeight = 40
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyItemName, Me.location, Me.departmentId, Me.conditionBeforeMaint, Me.typeOfMaintenance, Me.assignedTechnician, Me.maintenanceDate, Me.costMaterialsLabor, Me.conditionAfterMaint, Me.status})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.maintenanceId, Me.requestId, Me.propertyItemName, Me.serialNumber, Me.location, Me.departmentId, Me.conditionBeforeMaint, Me.typeOfMaintenance, Me.assignedTechnician, Me.maintenanceDate, Me.costMaterialsLabor, Me.conditionAfterMaint, Me.status})
         Me.DataGridView1.GridColor = System.Drawing.Color.LightGray
         Me.DataGridView1.Location = New System.Drawing.Point(58, 109)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
@@ -85,6 +88,24 @@ Partial Class UC_MaintenanceManagement
         Me.DataGridView1.Size = New System.Drawing.Size(1270, 573)
         Me.DataGridView1.TabIndex = 155
         '
+        'maintenanceId
+        '
+        Me.maintenanceId.DataPropertyName = "maintenanceId"
+        Me.maintenanceId.HeaderText = "ID"
+        Me.maintenanceId.MinimumWidth = 60
+        Me.maintenanceId.Name = "maintenanceId"
+        Me.maintenanceId.ReadOnly = True
+        Me.maintenanceId.Width = 60
+        '
+        'requestId
+        '
+        Me.requestId.DataPropertyName = "requestId"
+        Me.requestId.HeaderText = "Req ID"
+        Me.requestId.MinimumWidth = 70
+        Me.requestId.Name = "requestId"
+        Me.requestId.ReadOnly = True
+        Me.requestId.Width = 70
+        '
         'propertyItemName
         '
         Me.propertyItemName.DataPropertyName = "propertyItemName"
@@ -93,6 +114,15 @@ Partial Class UC_MaintenanceManagement
         Me.propertyItemName.MinimumWidth = 120
         Me.propertyItemName.Name = "propertyItemName"
         Me.propertyItemName.ReadOnly = True
+        '
+        'serialNumber
+        '
+        Me.serialNumber.DataPropertyName = "serialNumber"
+        Me.serialNumber.HeaderText = "Serial Number"
+        Me.serialNumber.MinimumWidth = 110
+        Me.serialNumber.Name = "serialNumber"
+        Me.serialNumber.ReadOnly = True
+        Me.serialNumber.Width = 110
         '
         'location
         '
@@ -311,7 +341,10 @@ Partial Class UC_MaintenanceManagement
     Friend WithEvents btnGenerateMaintenance As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents maintenancemanagementsearchbar As TextBox
+    Friend WithEvents maintenanceId As DataGridViewTextBoxColumn
+    Friend WithEvents requestId As DataGridViewTextBoxColumn
     Friend WithEvents propertyItemName As DataGridViewTextBoxColumn
+    Friend WithEvents serialNumber As DataGridViewTextBoxColumn
     Friend Shadows WithEvents location As DataGridViewTextBoxColumn
     Friend WithEvents departmentId As DataGridViewTextBoxColumn
     Friend WithEvents conditionBeforeMaint As DataGridViewTextBoxColumn

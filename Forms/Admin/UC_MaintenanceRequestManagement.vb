@@ -402,6 +402,8 @@ Public Class UC_MaintenanceRequestManagement
                 End If
                 
                 Dim assignedTechnician As String = techDialog.TechnicianName
+                Dim targetDate As Date = techDialog.TargetDate
+                
                 If String.IsNullOrWhiteSpace(assignedTechnician) Then
                     MessageBox.Show("Technician assignment is required to approve the maintenance request.", "Required Field", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     Return
@@ -414,11 +416,14 @@ Public Class UC_MaintenanceRequestManagement
                         remarks = remarksDialog.Remarks
                     End If
                 End Using
+                
                 Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
+                Dim condition As String = If(IsDBNull(dataRow("conditionBefore")), "Needs Repair", dataRow("conditionBefore").ToString())
 
                 ' Update maintenance request status to approved with assigned technician
-                If DatabaseConnection.ApproveMaintenanceRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks, assignedTechnician) Then
-                    MessageBox.Show("Maintenance request approved successfully and assigned to " & assignedTechnician & ".", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                ' Parameters: requestID, assignedTechnician, targetDate, adminID, remarks, conditionBefore
+                If DatabaseConnection.ApproveMaintenanceRequest(requestID, assignedTechnician, targetDate, adminID, remarks, condition) Then
+                    MessageBox.Show("Maintenance request approved successfully and assigned to " & assignedTechnician & " for " & targetDate.ToString("yyyy-MM-dd") & ".", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     LoadMaintenanceRequestData()
                 Else
                     MessageBox.Show("Failed to approve maintenance request. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

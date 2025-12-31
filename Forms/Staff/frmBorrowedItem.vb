@@ -106,6 +106,25 @@ Public Class frmBorrowedItem
                     btnReturnItem.Enabled = True
                 End If
                 
+                ' Enable View Maintenance Status button if item has maintenance record
+                If btnViewMaintenanceStatus IsNot Nothing Then
+                    Dim itemName As String = selectedRow.Cells("colItemName").Value?.ToString()
+                    If Not String.IsNullOrEmpty(itemName) AndAlso isProperty Then
+                        Try
+                            ' Check if there's a maintenance record for this item
+                            System.Diagnostics.Debug.WriteLine($"[v0] Checking maintenance for item: {itemName}")
+                            Dim maintenanceRecord As DataRow = DatabaseConnection.GetMaintenanceByItem(itemName)
+                            btnViewMaintenanceStatus.Enabled = (maintenanceRecord IsNot Nothing)
+                            System.Diagnostics.Debug.WriteLine($"[v0] Maintenance record found: {maintenanceRecord IsNot Nothing}, Button enabled: {btnViewMaintenanceStatus.Enabled}")
+                        Catch ex As Exception
+                            System.Diagnostics.Debug.WriteLine($"[v0] Error checking maintenance: {ex.Message}")
+                            btnViewMaintenanceStatus.Enabled = False
+                        End Try
+                    Else
+                        btnViewMaintenanceStatus.Enabled = False
+                    End If
+                End If
+                
                 System.Diagnostics.Debug.WriteLine($"[v0] Selection changed - Type: {itemType}, IsProperty: {isProperty}")
             Else
                 ' No selection - disable all buttons
@@ -113,6 +132,7 @@ Public Class frmBorrowedItem
                 If btnBorrowReturn IsNot Nothing Then btnBorrowReturn.Enabled = False
                 If Essuance IsNot Nothing Then Essuance.Enabled = False
                 If btnReturnItem IsNot Nothing Then btnReturnItem.Enabled = False
+                If btnViewMaintenanceStatus IsNot Nothing Then btnViewMaintenanceStatus.Enabled = False
             End If
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] SelectionChanged Error: " & ex.Message)
@@ -480,6 +500,44 @@ Public Class frmBorrowedItem
     ''' </summary>
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         LoadApprovedRequests()
+    End Sub
+
+    ''' <summary>
+    ''' View maintenance status for selected item
+    ''' </summary>
+    Private Sub btnViewMaintenanceStatus_Click(sender As Object, e As EventArgs) Handles btnViewMaintenanceStatus.Click
+        If dgvBorrowedItems.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select an item to view maintenance status.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Dim selectedRow As DataGridViewRow = dgvBorrowedItems.SelectedRows(0)
+        Dim itemName As String = If(selectedRow.Cells("colItemName").Value?.ToString(), "")
+
+        If String.IsNullOrEmpty(itemName) Then
+            MessageBox.Show("Cannot view maintenance status: Item name not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Get maintenance record from database
+        Dim maintenanceRecord As DataRow = DatabaseConnection.GetMaintenanceByItem(itemName)
+        
+        If maintenanceRecord Is Nothing Then
+            MessageBox.Show($"No maintenance record found for '{itemName}'.{Environment.NewLine}{Environment.NewLine}" &
+                          "This item may not be under maintenance yet.", 
+                          "No Maintenance Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        ' Show maintenance status dialog
+        Try
+            Using statusDialog As New MaintenanceStatusDialog(maintenanceRecord)
+                statusDialog.ShowDialog()
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error displaying maintenance status: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("[v0] MaintenanceStatusDialog error: " & ex.Message)
+        End Try
     End Sub
 
     ''' <summary>

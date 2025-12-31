@@ -50,6 +50,7 @@ Partial Class frmBorrowedItem
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.Essuance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnBorrowReturn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnViewMaintenanceStatus = New System.Windows.Forms.Button()
         Me.btnRequestMaintenance = New System.Windows.Forms.Button()
         Me.btnReturnItem = New System.Windows.Forms.Button()
         Me.lblNoItems = New System.Windows.Forms.Label()
@@ -347,6 +348,7 @@ Partial Class frmBorrowedItem
         Me.pnlBottom.BackColor = System.Drawing.Color.White
         Me.pnlBottom.Controls.Add(Me.Essuance)
         Me.pnlBottom.Controls.Add(Me.btnBorrowReturn)
+        Me.pnlBottom.Controls.Add(Me.btnViewMaintenanceStatus)
         Me.pnlBottom.Controls.Add(Me.btnRequestMaintenance)
         Me.pnlBottom.Controls.Add(Me.btnReturnItem)
         Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -365,7 +367,7 @@ Partial Class frmBorrowedItem
         Me.Essuance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Essuance.Font = New System.Drawing.Font("Poppins Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Essuance.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Essuance.Location = New System.Drawing.Point(405, 28)
+        Me.Essuance.Location = New System.Drawing.Point(102, 23)
         Me.Essuance.Margin = New System.Windows.Forms.Padding(4)
         Me.Essuance.Name = "Essuance"
         Me.Essuance.Size = New System.Drawing.Size(333, 46)
@@ -381,13 +383,31 @@ Partial Class frmBorrowedItem
         Me.btnBorrowReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBorrowReturn.Font = New System.Drawing.Font("Poppins Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBorrowReturn.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnBorrowReturn.Location = New System.Drawing.Point(747, 27)
+        Me.btnBorrowReturn.Location = New System.Drawing.Point(457, 23)
         Me.btnBorrowReturn.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBorrowReturn.Name = "btnBorrowReturn"
         Me.btnBorrowReturn.Size = New System.Drawing.Size(285, 47)
         Me.btnBorrowReturn.TabIndex = 5
         Me.btnBorrowReturn.Text = "Borrow and Return Slip"
         Me.btnBorrowReturn.UseVisualStyleBackColor = False
+        '
+        'btnViewMaintenanceStatus
+        '
+        Me.btnViewMaintenanceStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.btnViewMaintenanceStatus.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnViewMaintenanceStatus.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnViewMaintenanceStatus.Enabled = False
+        Me.btnViewMaintenanceStatus.FlatAppearance.BorderSize = 0
+        Me.btnViewMaintenanceStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnViewMaintenanceStatus.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnViewMaintenanceStatus.ForeColor = System.Drawing.Color.White
+        Me.btnViewMaintenanceStatus.Location = New System.Drawing.Point(772, 25)
+        Me.btnViewMaintenanceStatus.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnViewMaintenanceStatus.Name = "btnViewMaintenanceStatus"
+        Me.btnViewMaintenanceStatus.Size = New System.Drawing.Size(267, 48)
+        Me.btnViewMaintenanceStatus.TabIndex = 7
+        Me.btnViewMaintenanceStatus.Text = "🔍 View Maintenance Status"
+        Me.btnViewMaintenanceStatus.UseVisualStyleBackColor = False
         '
         'btnRequestMaintenance
         '
@@ -481,6 +501,7 @@ Partial Class frmBorrowedItem
     Friend WithEvents dgvBorrowedItems As System.Windows.Forms.DataGridView
     Friend WithEvents pnlBottom As System.Windows.Forms.Panel
     Friend WithEvents btnReturnItem As System.Windows.Forms.Button
+    Friend WithEvents btnViewMaintenanceStatus As System.Windows.Forms.Button
     Friend WithEvents btnRequestMaintenance As System.Windows.Forms.Button
     Friend WithEvents lblNoItems As System.Windows.Forms.Label
     Friend WithEvents colBorrowId As System.Windows.Forms.DataGridViewTextBoxColumn

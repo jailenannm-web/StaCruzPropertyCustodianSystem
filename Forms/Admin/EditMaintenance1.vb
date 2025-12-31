@@ -227,6 +227,12 @@ Public Class EditMaintenance1
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
                 
                 If rowsAffected > 0 Then
+                    ' If status changed to "Completed", update the maintenance_requests.completionDate
+                    Dim newStatus As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
+                    If newStatus = "Completed" Then
+                        UpdateMaintenanceRequestCompletionDate(conn, _maintenanceID)
+                    End If
+                    
                     MessageBox.Show("Maintenance record updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     
                     ' Audit logging can be added later if needed
@@ -260,6 +266,47 @@ Public Class EditMaintenance1
         Else
             Me.Parent?.Controls.Remove(Me)
         End If
+    End Sub
+
+    ''' <summary>
+    ''' Update the maintenance_requests.completionDate when maintenance is completed
+    ''' </summary>
+    Private Sub UpdateMaintenanceRequestCompletionDate(conn As MySqlConnection, maintenanceID As Integer)
+        Try
+            ' First, get the requestId from the maintenance record
+            Dim requestId As Integer? = Nothing
+            Dim getRequestIdQuery As String = "SELECT requestId FROM maintenance WHERE maintenanceId = @maintenanceID"
+            
+            Using cmd As New MySqlCommand(getRequestIdQuery, conn)
+                cmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
+                Dim result = cmd.ExecuteScalar()
+                If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                    requestId = Convert.ToInt32(result)
+                End If
+            End Using
+            
+            ' If we have a requestId, update the completionDate
+            If requestId.HasValue Then
+                Dim updateRequestQuery As String = "UPDATE maintenance_requests SET " &
+                    "completionDate = CURDATE(), " &
+                    "status = 'Completed', " &
+                    "updatedAt = NOW() " &
+                    "WHERE requestId = @requestId"
+                
+                Using cmd As New MySqlCommand(updateRequestQuery, conn)
+                    cmd.Parameters.AddWithValue("@requestId", requestId.Value)
+                    Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                    
+                    If rowsAffected > 0 Then
+                        System.Diagnostics.Debug.WriteLine($"[v0] Updated maintenance_requests.completionDate for requestId: {requestId.Value}")
+                    End If
+                End Using
+            End If
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[v0] Error updating completionDate: {ex.Message}")
+            ' Don't show error to user - this is a secondary action
+        End Try
     End Sub
 
     Private Function EnsureModifyPermission() As Boolean

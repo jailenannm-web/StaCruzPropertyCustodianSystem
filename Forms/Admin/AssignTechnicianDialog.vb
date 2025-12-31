@@ -16,6 +16,8 @@ Public Class AssignTechnicianDialog
     Private cboTechnician As ComboBox
     Private lblDepartment As Label
     Private txtDepartment As TextBox
+    Private lblTargetDate As Label
+    Private dtpTargetDate As DateTimePicker
     Private btnAssign As Button
     Private btnCancel As Button
     Private pnlHeader As Panel
@@ -59,6 +61,18 @@ Public Class AssignTechnicianDialog
         End Get
     End Property
 
+    ''' <summary>
+    ''' Get or set the target date for maintenance
+    ''' </summary>
+    Public Property TargetDate As Date
+        Get
+            Return dtpTargetDate.Value
+        End Get
+        Set(value As Date)
+            dtpTargetDate.Value = value
+        End Set
+    End Property
+
     Public Sub New()
         InitializeComponent()
         LoadTechnicians()
@@ -67,7 +81,7 @@ Public Class AssignTechnicianDialog
     Private Sub InitializeComponent()
         ' Form settings
         Me.Text = "Assign Technician"
-        Me.Size = New Size(500, 320)
+        Me.Size = New Size(500, 380)
         Me.StartPosition = FormStartPosition.CenterParent
         Me.FormBorderStyle = FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -132,12 +146,31 @@ Public Class AssignTechnicianDialog
         txtDepartment.Text = "Select a technician to view details"
         Me.Controls.Add(txtDepartment)
 
+        ' Target Date Label
+        lblTargetDate = New Label()
+        lblTargetDate.Text = "Target Completion Date:"
+        lblTargetDate.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        lblTargetDate.ForeColor = Color.White
+        lblTargetDate.Location = New Point(20, 220)
+        lblTargetDate.AutoSize = True
+        Me.Controls.Add(lblTargetDate)
+
+        ' Target Date Picker
+        dtpTargetDate = New DateTimePicker()
+        dtpTargetDate.Font = New Font("Segoe UI", 11)
+        dtpTargetDate.Location = New Point(20, 245)
+        dtpTargetDate.Size = New Size(450, 30)
+        dtpTargetDate.Format = DateTimePickerFormat.Short
+        dtpTargetDate.MinDate = DateTime.Now
+        dtpTargetDate.Value = DateTime.Now.AddDays(7) ' Default to 1 week from now
+        Me.Controls.Add(dtpTargetDate)
+
         ' Assign Button
         btnAssign = New Button()
         btnAssign.Text = "Assign"
         btnAssign.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         btnAssign.Size = New Size(200, 40)
-        btnAssign.Location = New Point(270, 235)
+        btnAssign.Location = New Point(270, 295)
         btnAssign.BackColor = Color.FromArgb(46, 204, 113)  ' Green
         btnAssign.ForeColor = Color.White
         btnAssign.FlatStyle = FlatStyle.Flat
@@ -153,7 +186,7 @@ Public Class AssignTechnicianDialog
         btnCancel.Text = "Cancel"
         btnCancel.Font = New Font("Segoe UI", 10)
         btnCancel.Size = New Size(200, 40)
-        btnCancel.Location = New Point(20, 235)
+        btnCancel.Location = New Point(20, 295)
         btnCancel.BackColor = Color.FromArgb(149, 165, 166)  ' Gray
         btnCancel.ForeColor = Color.White
         btnCancel.FlatStyle = FlatStyle.Flat
@@ -166,8 +199,9 @@ Public Class AssignTechnicianDialog
 
         ' Set tab order
         cboTechnician.TabIndex = 0
-        btnAssign.TabIndex = 1
-        btnCancel.TabIndex = 2
+        dtpTargetDate.TabIndex = 1
+        btnAssign.TabIndex = 2
+        btnCancel.TabIndex = 3
 
         ' Accept button
         Me.AcceptButton = btnAssign
