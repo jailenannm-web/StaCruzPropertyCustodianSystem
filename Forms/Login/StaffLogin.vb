@@ -1,8 +1,10 @@
 ﻿Imports System
 Imports System.Collections.Generic
 Imports System.Windows.Forms
+Imports System.Drawing
 Imports MySql.Data.MySqlClient
 Imports System.Data
+Imports Microsoft.VisualBasic
 
 Public Class StaffLogin
     ' Keyboard shortcut tracking for S+A+P combination
@@ -207,8 +209,7 @@ Public Class StaffLogin
             Logger.LogError("Startup connectivity check failed", ex)
             MessageBox.Show("Unable to connect to the database. Please ensure MySQL is running and connection settings are correct. The configuration screen will open now.", "Database Connection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Try
-                Dim cfg As New SASystemConfiguration()
-                cfg.Show()
+                OpenSystemConfiguration()
             Catch ex2 As Exception
                 Logger.LogError("Failed to open configuration screen", ex2)
             End Try
@@ -280,12 +281,27 @@ Public Class StaffLogin
     ''' </summary>
     Private Sub OpenSystemConfiguration()
         Try
+            ' Create a wrapper form for the UserControl
+            Dim configForm As New Form()
+            configForm.Text = "System Configuration"
+            configForm.Size = New Size(1400, 850)
+            configForm.StartPosition = FormStartPosition.CenterScreen
+            configForm.FormBorderStyle = FormBorderStyle.FixedSingle
+            configForm.MaximizeBox = False
+            configForm.MinimizeBox = True
+            configForm.Icon = Me.Icon ' Use same icon as login form
+            
+            ' Create and add the UserControl
             Dim cfg As New SASystemConfiguration()
-            cfg.Show()
+            cfg.Dock = DockStyle.Fill
+            configForm.Controls.Add(cfg)
+            
+            ' Show the form
+            configForm.ShowDialog()
             System.Diagnostics.Debug.WriteLine("[v0] System Configuration opened via keyboard shortcut")
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Error opening System Configuration: " & ex.Message)
-            MessageBox.Show("Unable to open System Configuration.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Unable to open System Configuration." & vbCrLf & vbCrLf & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 

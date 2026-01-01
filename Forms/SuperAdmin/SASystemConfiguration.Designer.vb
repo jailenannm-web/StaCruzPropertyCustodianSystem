@@ -1,14 +1,13 @@
 Imports System
-Imports System.ComponentModel
 Imports System.Drawing
-Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
+
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class SASystemConfiguration
-    Inherits System.Windows.Forms.Form
+    Inherits System.Windows.Forms.UserControl
 
-    'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    'UserControl overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,329 +24,389 @@ Partial Class SASystemConfiguration
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SASystemConfiguration))
-        Me.lblSystemConfig = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.DBHost = New System.Windows.Forms.Label()
-        Me.txtHost = New System.Windows.Forms.TextBox()
-        Me.txtPort = New System.Windows.Forms.TextBox()
-        Me.port = New System.Windows.Forms.Label()
-        Me.txtDBName = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtUser = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtPassword = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnTestConn = New System.Windows.Forms.Button()
-        Me.btnSaveConn = New System.Windows.Forms.Button()
-        Me.combostatus = New System.Windows.Forms.ComboBox()
-        Me.comboCategoris = New System.Windows.Forms.ComboBox()
-        Me.pm_as_propertyman = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.pm_as_propertyman.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.lblSubtitle = New System.Windows.Forms.Label()
+        Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.grpDatabaseSettings = New System.Windows.Forms.GroupBox()
+        Me.lblDbHost = New System.Windows.Forms.Label()
+        Me.txtDbHost = New System.Windows.Forms.TextBox()
+        Me.lblDbPort = New System.Windows.Forms.Label()
+        Me.txtDbPort = New System.Windows.Forms.TextBox()
+        Me.lblDbName = New System.Windows.Forms.Label()
+        Me.txtDbName = New System.Windows.Forms.TextBox()
+        Me.lblDbUser = New System.Windows.Forms.Label()
+        Me.txtDbUser = New System.Windows.Forms.TextBox()
+        Me.lblDbPassword = New System.Windows.Forms.Label()
+        Me.txtDbPassword = New System.Windows.Forms.TextBox()
+        Me.btnTestConnection = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.grpSystemSettings = New System.Windows.Forms.GroupBox()
+        Me.lblSystemName = New System.Windows.Forms.Label()
+        Me.txtSystemName = New System.Windows.Forms.TextBox()
+        Me.lblOrgName = New System.Windows.Forms.Label()
+        Me.txtOrgName = New System.Windows.Forms.TextBox()
+        Me.pnlButtons = New System.Windows.Forms.Panel()
+        Me.btnSave = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCancel = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnRefresh = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.lblConnectionStatus = New System.Windows.Forms.Label()
+        Me.pnlHeader.SuspendLayout()
+        Me.pnlMain.SuspendLayout()
+        Me.grpDatabaseSettings.SuspendLayout()
+        Me.grpSystemSettings.SuspendLayout()
+        Me.pnlButtons.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblSystemConfig
+        'pnlHeader
         '
-        Me.lblSystemConfig.AutoSize = False
-        Me.lblSystemConfig.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.lblSystemConfig.Font = New System.Drawing.Font("Poppins", 19.8!, System.Drawing.FontStyle.Bold)
-        Me.lblSystemConfig.ForeColor = System.Drawing.Color.White
-        Me.lblSystemConfig.Dock = DockStyle.Top
-        Me.lblSystemConfig.Height = 90
-        Me.lblSystemConfig.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblSystemConfig.Name = "lblSystemConfig"
-        Me.lblSystemConfig.Padding = New Padding(20, 20, 0, 0)
-        Me.lblSystemConfig.TabIndex = 50
-        Me.lblSystemConfig.Text = "System Configuration"
+        Me.pnlHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pnlHeader.Controls.Add(Me.lblTitle)
+        Me.pnlHeader.Controls.Add(Me.lblSubtitle)
+        Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
+        Me.pnlHeader.Name = "pnlHeader"
+        Me.pnlHeader.Padding = New System.Windows.Forms.Padding(30, 20, 30, 20)
+        Me.pnlHeader.Size = New System.Drawing.Size(1394, 100)
+        Me.pnlHeader.TabIndex = 0
         '
-        'TextBox1
+        'lblTitle
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.TextBox1.Location = New System.Drawing.Point(738, 53)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(563, 27)
-        Me.TextBox1.TabIndex = 157
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Font = New System.Drawing.Font("Poppins SemiBold", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTitle.ForeColor = System.Drawing.Color.White
+        Me.lblTitle.Location = New System.Drawing.Point(30, 20)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(284, 42)
+        Me.lblTitle.TabIndex = 0
+        Me.lblTitle.Text = "System Configuration"
         '
-        'Label2
+        'lblSubtitle
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label2.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(1411, 56)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(53, 23)
-        Me.Label2.TabIndex = 156
-        Me.Label2.Text = "Status"
+        Me.lblSubtitle.AutoSize = True
+        Me.lblSubtitle.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.lblSubtitle.Location = New System.Drawing.Point(33, 60)
+        Me.lblSubtitle.Name = "lblSubtitle"
+        Me.lblSubtitle.Size = New System.Drawing.Size(388, 22)
+        Me.lblSubtitle.TabIndex = 1
+        Me.lblSubtitle.Text = "Manage system settings, database connection, and configuration"
         '
-        'Label1
+        'pnlMain
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(1649, 55)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(83, 23)
-        Me.Label1.TabIndex = 155
-        Me.Label1.Text = "Categories"
+        Me.pnlMain.AutoScroll = True
+        Me.pnlMain.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(244, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.pnlMain.Controls.Add(Me.grpDatabaseSettings)
+        Me.pnlMain.Controls.Add(Me.grpSystemSettings)
+        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMain.Location = New System.Drawing.Point(0, 100)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Padding = New System.Windows.Forms.Padding(30, 20, 30, 80)
+        Me.pnlMain.Size = New System.Drawing.Size(1394, 703)
+        Me.pnlMain.TabIndex = 1
         '
-        'Label3
+        'grpDatabaseSettings
         '
-        Me.Label3.AutoSize = False
-        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label3.Font = New System.Drawing.Font("Poppins", 9!, System.Drawing.FontStyle.Regular)
-        Me.Label3.ForeColor = System.Drawing.Color.LightGray
-        Me.Label3.Location = New System.Drawing.Point(20, 60)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(500, 25)
-        Me.Label3.TabIndex = 159
-        Me.Label3.Text = "Manage system-wide settings, connection, backups, and logs"
+        Me.grpDatabaseSettings.BackColor = System.Drawing.Color.White
+        Me.grpDatabaseSettings.Controls.Add(Me.lblDbHost)
+        Me.grpDatabaseSettings.Controls.Add(Me.txtDbHost)
+        Me.grpDatabaseSettings.Controls.Add(Me.lblDbPort)
+        Me.grpDatabaseSettings.Controls.Add(Me.txtDbPort)
+        Me.grpDatabaseSettings.Controls.Add(Me.lblDbName)
+        Me.grpDatabaseSettings.Controls.Add(Me.txtDbName)
+        Me.grpDatabaseSettings.Controls.Add(Me.lblDbUser)
+        Me.grpDatabaseSettings.Controls.Add(Me.txtDbUser)
+        Me.grpDatabaseSettings.Controls.Add(Me.lblDbPassword)
+        Me.grpDatabaseSettings.Controls.Add(Me.txtDbPassword)
+        Me.grpDatabaseSettings.Controls.Add(Me.btnTestConnection)
+        Me.grpDatabaseSettings.Controls.Add(Me.lblConnectionStatus)
+        Me.grpDatabaseSettings.Font = New System.Drawing.Font("Poppins SemiBold", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.grpDatabaseSettings.Location = New System.Drawing.Point(30, 20)
+        Me.grpDatabaseSettings.Name = "grpDatabaseSettings"
+        Me.grpDatabaseSettings.Padding = New System.Windows.Forms.Padding(20)
+        Me.grpDatabaseSettings.Size = New System.Drawing.Size(650, 450)
+        Me.grpDatabaseSettings.TabIndex = 0
+        Me.grpDatabaseSettings.TabStop = False
+        Me.grpDatabaseSettings.Text = "Database Connection Settings"
         '
-        'DBHost
+        'lblDbHost
         '
-        Me.DBHost.AutoSize = True
-        Me.DBHost.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.DBHost.Location = New System.Drawing.Point(577, 311)
-        Me.DBHost.Name = "DBHost"
-        Me.DBHost.Size = New System.Drawing.Size(59, 23)
-        Me.DBHost.TabIndex = 162
-        Me.DBHost.Text = "DB Host"
+        Me.lblDbHost.AutoSize = True
+        Me.lblDbHost.Font = New System.Drawing.Font("Poppins", 9.5!)
+        Me.lblDbHost.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblDbHost.Location = New System.Drawing.Point(25, 50)
+        Me.lblDbHost.Name = "lblDbHost"
+        Me.lblDbHost.Size = New System.Drawing.Size(107, 23)
+        Me.lblDbHost.TabIndex = 0
+        Me.lblDbHost.Text = "Database Host"
         '
-        'txtHost
+        'txtDbHost
         '
-        Me.txtHost.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.txtHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtHost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtHost.Location = New System.Drawing.Point(688, 307)
-        Me.txtHost.Name = "txtHost"
-        Me.txtHost.Size = New System.Drawing.Size(419, 28)
-        Me.txtHost.TabIndex = 163
+        Me.txtDbHost.Font = New System.Drawing.Font("Poppins", 10.0!)
+        Me.txtDbHost.Location = New System.Drawing.Point(25, 75)
+        Me.txtDbHost.Name = "txtDbHost"
+        Me.txtDbHost.Size = New System.Drawing.Size(400, 27)
+        Me.txtDbHost.TabIndex = 1
         '
-        'txtPort
+        'lblDbPort
         '
-        Me.txtPort.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPort.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtPort.Location = New System.Drawing.Point(688, 354)
-        Me.txtPort.Name = "txtPort"
-        Me.txtPort.Size = New System.Drawing.Size(419, 28)
-        Me.txtPort.TabIndex = 165
+        Me.lblDbPort.AutoSize = True
+        Me.lblDbPort.Font = New System.Drawing.Font("Poppins", 9.5!)
+        Me.lblDbPort.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblDbPort.Location = New System.Drawing.Point(450, 50)
+        Me.lblDbPort.Name = "lblDbPort"
+        Me.lblDbPort.Size = New System.Drawing.Size(38, 23)
+        Me.lblDbPort.TabIndex = 2
+        Me.lblDbPort.Text = "Port"
         '
-        'port
+        'txtDbPort
         '
-        Me.port.AutoSize = True
-        Me.port.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.port.Location = New System.Drawing.Point(577, 359)
-        Me.port.Name = "port"
-        Me.port.Size = New System.Drawing.Size(56, 23)
-        Me.port.TabIndex = 164
-        Me.port.Text = "DB Port"
+        Me.txtDbPort.Font = New System.Drawing.Font("Poppins", 10.0!)
+        Me.txtDbPort.Location = New System.Drawing.Point(450, 75)
+        Me.txtDbPort.Name = "txtDbPort"
+        Me.txtDbPort.Size = New System.Drawing.Size(165, 27)
+        Me.txtDbPort.TabIndex = 3
         '
-        'txtDBName
+        'lblDbName
         '
-        Me.txtDBName.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.txtDBName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDBName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtDBName.Location = New System.Drawing.Point(688, 404)
-        Me.txtDBName.Name = "txtDBName"
-        Me.txtDBName.Size = New System.Drawing.Size(419, 28)
-        Me.txtDBName.TabIndex = 167
+        Me.lblDbName.AutoSize = True
+        Me.lblDbName.Font = New System.Drawing.Font("Poppins", 9.5!)
+        Me.lblDbName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblDbName.Location = New System.Drawing.Point(25, 120)
+        Me.lblDbName.Name = "lblDbName"
+        Me.lblDbName.Size = New System.Drawing.Size(113, 23)
+        Me.lblDbName.TabIndex = 4
+        Me.lblDbName.Text = "Database Name"
         '
-        'Label5
+        'txtDbName
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.Label5.Location = New System.Drawing.Point(577, 409)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(71, 23)
-        Me.Label5.TabIndex = 166
-        Me.Label5.Text = "DB Name"
+        Me.txtDbName.Font = New System.Drawing.Font("Poppins", 10.0!)
+        Me.txtDbName.Location = New System.Drawing.Point(25, 145)
+        Me.txtDbName.Name = "txtDbName"
+        Me.txtDbName.Size = New System.Drawing.Size(590, 27)
+        Me.txtDbName.TabIndex = 5
         '
-        'txtUser
+        'lblDbUser
         '
-        Me.txtUser.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtUser.Location = New System.Drawing.Point(688, 459)
-        Me.txtUser.Name = "txtUser"
-        Me.txtUser.Size = New System.Drawing.Size(419, 28)
-        Me.txtUser.TabIndex = 169
+        Me.lblDbUser.AutoSize = True
+        Me.lblDbUser.Font = New System.Drawing.Font("Poppins", 9.5!)
+        Me.lblDbUser.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblDbUser.Location = New System.Drawing.Point(25, 190)
+        Me.lblDbUser.Name = "lblDbUser"
+        Me.lblDbUser.Size = New System.Drawing.Size(73, 23)
+        Me.lblDbUser.TabIndex = 6
+        Me.lblDbUser.Text = "Username"
         '
-        'Label6
+        'txtDbUser
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.Label6.Location = New System.Drawing.Point(577, 464)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(59, 23)
-        Me.Label6.TabIndex = 168
-        Me.Label6.Text = "DB User"
+        Me.txtDbUser.Font = New System.Drawing.Font("Poppins", 10.0!)
+        Me.txtDbUser.Location = New System.Drawing.Point(25, 215)
+        Me.txtDbUser.Name = "txtDbUser"
+        Me.txtDbUser.Size = New System.Drawing.Size(590, 27)
+        Me.txtDbUser.TabIndex = 7
         '
-        'txtPassword
+        'lblDbPassword
         '
-        Me.txtPassword.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.8!)
-        Me.txtPassword.Location = New System.Drawing.Point(688, 512)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(419, 28)
-        Me.txtPassword.TabIndex = 171
+        Me.lblDbPassword.AutoSize = True
+        Me.lblDbPassword.Font = New System.Drawing.Font("Poppins", 9.5!)
+        Me.lblDbPassword.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblDbPassword.Location = New System.Drawing.Point(25, 260)
+        Me.lblDbPassword.Name = "lblDbPassword"
+        Me.lblDbPassword.Size = New System.Drawing.Size(74, 23)
+        Me.lblDbPassword.TabIndex = 8
+        Me.lblDbPassword.Text = "Password"
         '
-        'Label7
+        'txtDbPassword
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.Label7.Location = New System.Drawing.Point(577, 517)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(94, 23)
-        Me.Label7.TabIndex = 170
-        Me.Label7.Text = "DB Password"
+        Me.txtDbPassword.Font = New System.Drawing.Font("Poppins", 10.0!)
+        Me.txtDbPassword.Location = New System.Drawing.Point(25, 285)
+        Me.txtDbPassword.Name = "txtDbPassword"
+        Me.txtDbPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
+        Me.txtDbPassword.Size = New System.Drawing.Size(590, 27)
+        Me.txtDbPassword.TabIndex = 9
+        Me.txtDbPassword.UseSystemPasswordChar = True
         '
-        'btnTestConn
+        'btnTestConnection
         '
-        Me.btnTestConn.BackColor = System.Drawing.Color.Black
-        Me.btnTestConn.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnTestConn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTestConn.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnTestConn.ForeColor = System.Drawing.Color.White
-        Me.btnTestConn.Location = New System.Drawing.Point(851, 582)
-        Me.btnTestConn.Name = "btnTestConn"
-        Me.btnTestConn.Size = New System.Drawing.Size(131, 46)
-        Me.btnTestConn.TabIndex = 172
-        Me.btnTestConn.Text = "Test Connection"
-        Me.btnTestConn.UseVisualStyleBackColor = False
+        Me.btnTestConnection.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(180, Byte), Integer))
+        Me.btnTestConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTestConnection.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnTestConnection.ForeColor = System.Drawing.Color.White
+        Me.btnTestConnection.Location = New System.Drawing.Point(25, 340)
+        Me.btnTestConnection.Name = "btnTestConnection"
+        Me.btnTestConnection.Size = New System.Drawing.Size(180, 40)
+        Me.btnTestConnection.TabIndex = 10
+        Me.btnTestConnection.Text = "Test Connection"
+        Me.btnTestConnection.UseVisualStyleBackColor = False
         '
-        'btnSaveConn
+        'lblConnectionStatus
         '
-        Me.btnSaveConn.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnSaveConn.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnSaveConn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveConn.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.btnSaveConn.ForeColor = System.Drawing.Color.White
-        Me.btnSaveConn.Location = New System.Drawing.Point(988, 582)
-        Me.btnSaveConn.Name = "btnSaveConn"
-        Me.btnSaveConn.Size = New System.Drawing.Size(119, 46)
-        Me.btnSaveConn.TabIndex = 173
-        Me.btnSaveConn.Text = "Save Settings"
-        Me.btnSaveConn.UseVisualStyleBackColor = False
+        Me.lblConnectionStatus.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.lblConnectionStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.lblConnectionStatus.Location = New System.Drawing.Point(25, 395)
+        Me.lblConnectionStatus.Name = "lblConnectionStatus"
+        Me.lblConnectionStatus.Size = New System.Drawing.Size(590, 30)
+        Me.lblConnectionStatus.TabIndex = 11
+        Me.lblConnectionStatus.Text = "Status: Not tested"
+        Me.lblConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'combostatus
+        'grpSystemSettings
         '
-        Me.combostatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.combostatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.combostatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.combostatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.combostatus.FormattingEnabled = True
-        Me.combostatus.Location = New System.Drawing.Point(1472, 55)
-        Me.combostatus.Margin = New System.Windows.Forms.Padding(4)
-        Me.combostatus.Name = "combostatus"
-        Me.combostatus.Size = New System.Drawing.Size(144, 23)
-        Me.combostatus.TabIndex = 1
+        Me.grpSystemSettings.BackColor = System.Drawing.Color.White
+        Me.grpSystemSettings.Controls.Add(Me.lblSystemName)
+        Me.grpSystemSettings.Controls.Add(Me.txtSystemName)
+        Me.grpSystemSettings.Controls.Add(Me.lblOrgName)
+        Me.grpSystemSettings.Controls.Add(Me.txtOrgName)
+        Me.grpSystemSettings.Font = New System.Drawing.Font("Poppins SemiBold", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.grpSystemSettings.Location = New System.Drawing.Point(714, 20)
+        Me.grpSystemSettings.Name = "grpSystemSettings"
+        Me.grpSystemSettings.Padding = New System.Windows.Forms.Padding(20)
+        Me.grpSystemSettings.Size = New System.Drawing.Size(650, 250)
+        Me.grpSystemSettings.TabIndex = 1
+        Me.grpSystemSettings.TabStop = False
+        Me.grpSystemSettings.Text = "System Settings"
         '
-        'comboCategoris
+        'lblSystemName
         '
-        Me.comboCategoris.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.comboCategoris.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.comboCategoris.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.comboCategoris.ForeColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(104, Byte), Integer), CType(CType(130, Byte), Integer))
-        Me.comboCategoris.FormattingEnabled = True
-        Me.comboCategoris.Location = New System.Drawing.Point(1740, 55)
-        Me.comboCategoris.Margin = New System.Windows.Forms.Padding(4)
-        Me.comboCategoris.Name = "comboCategoris"
-        Me.comboCategoris.Size = New System.Drawing.Size(144, 23)
-        Me.comboCategoris.TabIndex = 0
+        Me.lblSystemName.AutoSize = True
+        Me.lblSystemName.Font = New System.Drawing.Font("Poppins", 9.5!)
+        Me.lblSystemName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblSystemName.Location = New System.Drawing.Point(25, 50)
+        Me.lblSystemName.Name = "lblSystemName"
+        Me.lblSystemName.Size = New System.Drawing.Size(101, 23)
+        Me.lblSystemName.TabIndex = 0
+        Me.lblSystemName.Text = "System Name"
         '
-        'pm_as_propertyman
+        'txtSystemName
         '
-        Me.pm_as_propertyman.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_as_propertyman.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.pm_as_propertyman.Controls.Add(Me.comboCategoris)
-        Me.pm_as_propertyman.Controls.Add(Me.combostatus)
-        Me.pm_as_propertyman.Controls.Add(Me.lblSystemConfig)
-        Me.pm_as_propertyman.Controls.Add(Me.Label1)
-        Me.pm_as_propertyman.Controls.Add(Me.Label2)
-        Me.pm_as_propertyman.Controls.Add(Me.TextBox1)
-        Me.pm_as_propertyman.CornerRadius = 20
-        Me.pm_as_propertyman.Location = New System.Drawing.Point(-13, -8)
-        Me.pm_as_propertyman.Name = "pm_as_propertyman"
-        Me.pm_as_propertyman.Size = New System.Drawing.Size(1973, 124)
-        Me.pm_as_propertyman.TabIndex = 160
+        Me.txtSystemName.Font = New System.Drawing.Font("Poppins", 10.0!)
+        Me.txtSystemName.Location = New System.Drawing.Point(25, 75)
+        Me.txtSystemName.Multiline = True
+        Me.txtSystemName.Name = "txtSystemName"
+        Me.txtSystemName.Size = New System.Drawing.Size(590, 50)
+        Me.txtSystemName.TabIndex = 1
         '
-        'PictureBox2
+        'lblOrgName
         '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(672, 36)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(49, 41)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 158
-        Me.PictureBox2.TabStop = False
+        Me.lblOrgName.AutoSize = True
+        Me.lblOrgName.Font = New System.Drawing.Font("Poppins", 9.5!)
+        Me.lblOrgName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblOrgName.Location = New System.Drawing.Point(25, 140)
+        Me.lblOrgName.Name = "lblOrgName"
+        Me.lblOrgName.Size = New System.Drawing.Size(139, 23)
+        Me.lblOrgName.TabIndex = 2
+        Me.lblOrgName.Text = "Organization Name"
+        '
+        'txtOrgName
+        '
+        Me.txtOrgName.Font = New System.Drawing.Font("Poppins", 10.0!)
+        Me.txtOrgName.Location = New System.Drawing.Point(25, 165)
+        Me.txtOrgName.Name = "txtOrgName"
+        Me.txtOrgName.Size = New System.Drawing.Size(590, 27)
+        Me.txtOrgName.TabIndex = 3
+        '
+        'pnlButtons
+        '
+        Me.pnlButtons.BackColor = System.Drawing.Color.White
+        Me.pnlButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlButtons.Controls.Add(Me.btnSave)
+        Me.pnlButtons.Controls.Add(Me.btnCancel)
+        Me.pnlButtons.Controls.Add(Me.btnRefresh)
+        Me.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlButtons.Location = New System.Drawing.Point(0, 743)
+        Me.pnlButtons.Name = "pnlButtons"
+        Me.pnlButtons.Padding = New System.Windows.Forms.Padding(30, 10, 30, 10)
+        Me.pnlButtons.Size = New System.Drawing.Size(1394, 60)
+        Me.pnlButtons.TabIndex = 2
+        '
+        'btnSave
+        '
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnSave.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSave.ForeColor = System.Drawing.Color.White
+        Me.btnSave.Location = New System.Drawing.Point(1030, 10)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(150, 38)
+        Me.btnSave.TabIndex = 0
+        Me.btnSave.Text = "Save Settings"
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
+        'btnCancel
+        '
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(108, Byte), Integer), CType(CType(117, Byte), Integer), CType(CType(125, Byte), Integer))
+        Me.btnCancel.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCancel.Location = New System.Drawing.Point(1180, 10)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(90, 38)
+        Me.btnCancel.TabIndex = 1
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(180, Byte), Integer))
+        Me.btnRefresh.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnRefresh.ForeColor = System.Drawing.Color.White
+        Me.btnRefresh.Location = New System.Drawing.Point(1270, 10)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(92, 38)
+        Me.btnRefresh.TabIndex = 2
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = False
         '
         'SASystemConfiguration
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.ClientSize = New System.Drawing.Size(1942, 1102)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.btnSaveConn)
-        Me.Controls.Add(Me.btnTestConn)
-        Me.Controls.Add(Me.txtPassword)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.txtUser)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.txtDBName)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.txtPort)
-        Me.Controls.Add(Me.port)
-        Me.Controls.Add(Me.txtHost)
-        Me.Controls.Add(Me.DBHost)
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.pm_as_propertyman)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.Controls.Add(Me.pnlButtons)
+        Me.Controls.Add(Me.pnlMain)
+        Me.Controls.Add(Me.pnlHeader)
         Me.Name = "SASystemConfiguration"
-        Me.Text = "SASystemConfiguration"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.pm_as_propertyman.ResumeLayout(False)
-        Me.pm_as_propertyman.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(1394, 803)
+        Me.pnlHeader.ResumeLayout(False)
+        Me.pnlHeader.PerformLayout()
+        Me.pnlMain.ResumeLayout(False)
+        Me.grpDatabaseSettings.ResumeLayout(False)
+        Me.grpDatabaseSettings.PerformLayout()
+        Me.grpSystemSettings.ResumeLayout(False)
+        Me.grpSystemSettings.PerformLayout()
+        Me.pnlButtons.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblSystemConfig As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents comboCategoris As ComboBox
-    Friend WithEvents combostatus As ComboBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents pm_as_propertyman As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel
-    Friend WithEvents DBHost As Label
-    Friend WithEvents txtHost As TextBox
-    Friend WithEvents txtPort As TextBox
-    Friend WithEvents port As Label
-    Friend WithEvents txtDBName As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents txtUser As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents txtPassword As TextBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents btnTestConn As Button
-    Friend WithEvents btnSaveConn As Button
-    Friend WithEvents PictureBox2 As PictureBox
+
+    Friend WithEvents pnlHeader As Panel
+    Friend WithEvents lblTitle As Label
+    Friend WithEvents lblSubtitle As Label
+    Friend WithEvents pnlMain As Panel
+    Friend WithEvents grpDatabaseSettings As GroupBox
+    Friend WithEvents lblDbHost As Label
+    Friend WithEvents txtDbHost As TextBox
+    Friend WithEvents lblDbPort As Label
+    Friend WithEvents txtDbPort As TextBox
+    Friend WithEvents lblDbName As Label
+    Friend WithEvents txtDbName As TextBox
+    Friend WithEvents lblDbUser As Label
+    Friend WithEvents txtDbUser As TextBox
+    Friend WithEvents lblDbPassword As Label
+    Friend WithEvents txtDbPassword As TextBox
+    Friend WithEvents btnTestConnection As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents lblConnectionStatus As Label
+    Friend WithEvents grpSystemSettings As GroupBox
+    Friend WithEvents lblSystemName As Label
+    Friend WithEvents txtSystemName As TextBox
+    Friend WithEvents lblOrgName As Label
+    Friend WithEvents txtOrgName As TextBox
+    Friend WithEvents pnlButtons As Panel
+    Friend WithEvents btnSave As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnCancel As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnRefresh As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
 End Class
