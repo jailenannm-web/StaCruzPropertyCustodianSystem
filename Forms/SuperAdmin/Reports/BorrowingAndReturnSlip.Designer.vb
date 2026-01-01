@@ -213,7 +213,7 @@ Partial Class BorrowingAndReturnSlip
         Me.Panel10.Controls.Add(Me.Label32)
         Me.Panel10.Controls.Add(Me.remarks)
         Me.Panel10.Controls.Add(Me.Label34)
-        Me.Panel10.Location = New System.Drawing.Point(451, 298)
+        Me.Panel10.Location = New System.Drawing.Point(451, 297)
         Me.Panel10.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(1189, 648)

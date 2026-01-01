@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Linq
@@ -448,16 +448,10 @@ Public Class UC_SupplyManagement
         ' Super Admin bypasses all restrictions
 
         ' Check SADashboard first (parent class)
-        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-        If saDashboard IsNot Nothing Then
-            saDashboard.LoadUserControl(New AddSupply())
+        Dim superAdmin = TryCast(Me.ParentForm, SADashboard)
+        If superAdmin IsNot Nothing Then
+            superAdmin.LoadUserControl(New AddSupply())
             System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - AddSupply loaded into SADashboard")
-            Return
-        End If
-        
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-        If superAdminDashboard IsNot Nothing Then
-            superAdminDashboard.LoadUserControl(New AddSupply())
             Return
         End If
 
@@ -532,16 +526,10 @@ Public Class UC_SupplyManagement
                                dateReceived, unitCost, totalCost, supplier, sourceOfFunds, location, stockStatus, assignedToUserId)
 
         ' Navigate into Dashboard - Check SADashboard first
-        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-        If saDashboard IsNot Nothing Then
-            saDashboard.LoadUserControl(editForm)
+        Dim superAdmin = TryCast(Me.ParentForm, SADashboard)
+        If superAdmin IsNot Nothing Then
+            superAdmin.LoadUserControl(editForm)
             System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - EditSupply loaded into SADashboard")
-            Return
-        End If
-        
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-        If superAdminDashboard IsNot Nothing Then
-            superAdminDashboard.LoadUserControl(editForm)
             Return
         End If
 

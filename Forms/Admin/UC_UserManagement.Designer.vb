@@ -53,6 +53,7 @@ Partial Class UC_UserManagement
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnUserReport = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.usermanagementsearchbar = New System.Windows.Forms.TextBox()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -315,6 +316,22 @@ Partial Class UC_UserManagement
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
+        'btnUserReport
+        '
+        Me.btnUserReport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUserReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnUserReport.CornerRadius = 15
+        Me.btnUserReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUserReport.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnUserReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUserReport.Location = New System.Drawing.Point(879, 709)
+        Me.btnUserReport.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnUserReport.Name = "btnUserReport"
+        Me.btnUserReport.Size = New System.Drawing.Size(124, 34)
+        Me.btnUserReport.TabIndex = 391
+        Me.btnUserReport.Text = "User Report"
+        Me.btnUserReport.UseVisualStyleBackColor = False
+        '
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
@@ -347,6 +364,7 @@ Partial Class UC_UserManagement
         Me.Controls.Add(Me.btnRefresh)
         Me.Controls.Add(Me.cboStatusFilter)
         Me.Controls.Add(Me.cboRoleFilter)
+        Me.Controls.Add(Me.btnUserReport)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
@@ -368,6 +386,7 @@ Partial Class UC_UserManagement
     Friend WithEvents cboRoleFilter As ComboBox
     Friend WithEvents cboStatusFilter As ComboBox
     Friend WithEvents btnRefresh As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnUserReport As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents Label1 As Label
     Friend WithEvents ttlusermanagement As Label
     Friend WithEvents userId As DataGridViewTextBoxColumn

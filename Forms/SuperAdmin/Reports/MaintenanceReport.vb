@@ -5,6 +5,7 @@ Imports System.Data
 Imports System.Drawing
 Imports System.IO
 Imports System.Text
+Imports System.Collections.Generic
 Imports Microsoft.VisualBasic
 Imports MySql.Data.MySqlClient
 
@@ -273,63 +274,122 @@ Partial Public Class MaintenanceReport
             saveDialog.FileName = $"MaintenanceReport_{If(currentMaintenanceID.HasValue, currentMaintenanceID.Value.ToString(), DateTime.Now.ToString("yyyyMMdd"))}.csv"
             
             If saveDialog.ShowDialog() = DialogResult.OK Then
-                Dim csv As New StringBuilder()
+                Using writer As New StreamWriter(saveDialog.FileName, False, Encoding.UTF8)
+                    ' ================================================================
+                    ' HEADER SECTION - Professional Title
+                    ' ================================================================
+                    writer.WriteLine("╔════════════════════════════════════════════════════════════════════════════╗")
+                    writer.WriteLine("║             MAINTENANCE MANAGEMENT REPORT - DETAILED VIEW                 ║")
+                    writer.WriteLine("║        Property Custodian System - Division of Camarines Norte            ║")
+                    writer.WriteLine("╚════════════════════════════════════════════════════════════════════════════╝")
+                    writer.WriteLine()
+                    
+                    ' Report metadata
+                    writer.WriteLine($"Report Generated: {DateTime.Now.ToString("MMMM dd, yyyy - hh:mm:ss tt")}")
+                    writer.WriteLine($"Maintenance ID: {If(currentMaintenanceID.HasValue, "MNT-" & currentMaintenanceID.Value.ToString().PadLeft(6, "0"c), "N/A")}")
+                    writer.WriteLine($"Status: {GetTextBoxValue(status)}")
+                    writer.WriteLine()
+                    writer.WriteLine("─────────────────────────────────────────────────────────────────────────────")
+                    writer.WriteLine()
+                    
+                    ' ================================================================
+                    ' SECTION 1: PROPERTY INFORMATION
+                    ' ================================================================
+                    writer.WriteLine("┌─────────────────────────────────────────────────────────────────────────┐")
+                    writer.WriteLine("│  SECTION 1: PROPERTY INFORMATION                                        │")
+                    writer.WriteLine("└─────────────────────────────────────────────────────────────────────────┘")
+                    writer.WriteLine()
+                    writer.WriteLine($"  Property Name        : {GetTextBoxValue(systemname)}")
+                    writer.WriteLine($"  Serial Number        : {GetTextBoxValue(serialNumber)}")
+                    writer.WriteLine($"  Manufacturer         : {GetTextBoxValue(manufacturer)}")
+                    writer.WriteLine($"  National Board No.   : {GetTextBoxValue(nationalboardno)}")
+                    writer.WriteLine($"  Location             : {GetTextBoxValue(TextBox7)}")
+                    writer.WriteLine($"  Department ID        : {GetFieldValue("departmentId")}")
+                    writer.WriteLine()
+                    
+                    ' ================================================================
+                    ' SECTION 2: MAINTENANCE DETAILS
+                    ' ================================================================
+                    writer.WriteLine("┌─────────────────────────────────────────────────────────────────────────┐")
+                    writer.WriteLine("│  SECTION 2: MAINTENANCE DETAILS                                         │")
+                    writer.WriteLine("└─────────────────────────────────────────────────────────────────────────┘")
+                    writer.WriteLine()
+                    writer.WriteLine($"  Request ID                : {GetFieldValue("requestId")}")
+                    writer.WriteLine($"  Type of Maintenance       : {GetComboBoxValue(ComboBox1)}")
+                    writer.WriteLine($"  Maintenance Date          : {DateTimePicker1.Value.ToString("MMMM dd, yyyy")}")
+                    writer.WriteLine($"  Assigned Technician       : {GetTextBoxValue(mechanicname)}")
+                    writer.WriteLine($"  Technician Contact        : {GetTextBoxValue(mechanicnumber)}")
+                    writer.WriteLine($"  Cost (Materials & Labor)  : {FormatCurrency(GetTextBoxValue(TextBox11))}")
+                    writer.WriteLine()
+                    
+                    ' ================================================================
+                    ' SECTION 3: CONDITION ASSESSMENT
+                    ' ================================================================
+                    writer.WriteLine("┌─────────────────────────────────────────────────────────────────────────┐")
+                    writer.WriteLine("│  SECTION 3: CONDITION ASSESSMENT                                        │")
+                    writer.WriteLine("└─────────────────────────────────────────────────────────────────────────┘")
+                    writer.WriteLine()
+                    writer.WriteLine($"  Condition Before Maintenance  : {GetTextBoxValue(shutdownmaintenance)}")
+                    writer.WriteLine($"  Condition After Maintenance   : {GetTextBoxValue(maintenanceinspection)}")
+                    writer.WriteLine($"  Pressure Test Result          : {GetTextBoxValue(pressuretest)}")
+                    writer.WriteLine()
+                    
+                    ' ================================================================
+                    ' SECTION 4: TECHNICAL INFORMATION
+                    ' ================================================================
+                    writer.WriteLine("┌─────────────────────────────────────────────────────────────────────────┐")
+                    writer.WriteLine("│  SECTION 4: TECHNICAL INFORMATION                                       │")
+                    writer.WriteLine("└─────────────────────────────────────────────────────────────────────────┘")
+                    writer.WriteLine()
+                    writer.WriteLine("  DIAGNOSIS / SYSTEM FAILURE:")
+                    writer.WriteLine($"  {WrapText(GetTextBoxValue(systemfailure), 70)}")
+                    writer.WriteLine()
+                    writer.WriteLine("  ACTION TAKEN / PREVENTIVE MAINTENANCE:")
+                    writer.WriteLine($"  {WrapText(GetTextBoxValue(preventivemaintenance), 70)}")
+                    writer.WriteLine()
+                    writer.WriteLine("  MAINTENANCE DESCRIPTION:")
+                    writer.WriteLine($"  {WrapText(GetTextBoxValue(maintenancedescription), 70)}")
+                    writer.WriteLine()
+                    
+                    ' ================================================================
+                    ' SECTION 5: CUSTODIAN INFORMATION
+                    ' ================================================================
+                    writer.WriteLine("┌─────────────────────────────────────────────────────────────────────────┐")
+                    writer.WriteLine("│  SECTION 5: CUSTODIAN INFORMATION                                       │")
+                    writer.WriteLine("└─────────────────────────────────────────────────────────────────────────┘")
+                    writer.WriteLine()
+                    writer.WriteLine($"  Custodian Name       : {GetTextBoxValue(custodianname)}")
+                    writer.WriteLine($"  Custodian Contact    : {GetTextBoxValue(custodiannumber)}")
+                    writer.WriteLine()
+                    
+                    ' ================================================================
+                    ' SECTION 6: TIMELINE & STATUS
+                    ' ================================================================
+                    writer.WriteLine("┌─────────────────────────────────────────────────────────────────────────┐")
+                    writer.WriteLine("│  SECTION 6: TIMELINE & STATUS                                           │")
+                    writer.WriteLine("└─────────────────────────────────────────────────────────────────────────┘")
+                    writer.WriteLine()
+                    writer.WriteLine($"  Current Status       : {GetTextBoxValue(status)}")
+                    writer.WriteLine($"  Record Created       : {DateTimePicker2.Value.ToString("MMMM dd, yyyy - hh:mm:ss tt")}")
+                    writer.WriteLine($"  Last Updated         : {DateTimePicker4.Value.ToString("MMMM dd, yyyy - hh:mm:ss tt")}")
+                    writer.WriteLine()
+                    
+                    ' ================================================================
+                    ' FOOTER
+                    ' ================================================================
+                    writer.WriteLine("─────────────────────────────────────────────────────────────────────────────")
+                    writer.WriteLine()
+                    writer.WriteLine("                          *** END OF REPORT ***")
+                    writer.WriteLine()
+                    writer.WriteLine($"This report was automatically generated by the Property Custodian System")
+                    writer.WriteLine($"Generated by: {Environment.UserName}")
+                    writer.WriteLine($"Export Date: {DateTime.Now.ToString("MMMM dd, yyyy - hh:mm:ss tt")}")
+                    writer.WriteLine()
+                    writer.WriteLine("For questions or concerns, please contact the Property Management Office.")
+                    writer.WriteLine("─────────────────────────────────────────────────────────────────────────────")
+                End Using
                 
-                ' Header
-                csv.AppendLine("MAINTENANCE MANAGEMENT REPORT")
-                csv.AppendLine("")
-                
-                ' Basic Information Section
-                csv.AppendLine("=== BASIC INFORMATION ===")
-                csv.AppendLine($"Maintenance ID,{If(currentMaintenanceID.HasValue, currentMaintenanceID.Value.ToString(), "N/A")}")
-                csv.AppendLine($"Request ID,{GetFieldValue("requestId")}")
-                csv.AppendLine($"Property Item Name,{GetTextBoxValue(systemname)}")
-                csv.AppendLine($"Serial Number,{GetTextBoxValue(serialNumber)}")
-                csv.AppendLine($"Location,{GetTextBoxValue(TextBox7)}")
-                csv.AppendLine($"Department ID,{GetFieldValue("departmentId")}")
-                csv.AppendLine("")
-                
-                ' Maintenance Details Section
-                csv.AppendLine("=== MAINTENANCE DETAILS ===")
-                csv.AppendLine($"Type of Maintenance,{GetComboBoxValue(ComboBox1)}")
-                csv.AppendLine($"Assigned Technician,{GetTextBoxValue(mechanicname)}")
-                csv.AppendLine($"Maintenance Date,{DateTimePicker1.Value.ToString("yyyy-MM-dd")}")
-                csv.AppendLine($"Condition Before Maintenance,{GetTextBoxValue(shutdownmaintenance)}")
-                csv.AppendLine($"Condition After Maintenance,{GetTextBoxValue(maintenanceinspection)}")
-                csv.AppendLine("")
-                
-                ' Technical Information Section
-                csv.AppendLine("=== TECHNICAL INFORMATION ===")
-                csv.AppendLine($"Diagnosis/System Failure,{GetTextBoxValue(systemfailure)}")
-                csv.AppendLine($"Action Taken/Preventive Maintenance,{GetTextBoxValue(preventivemaintenance)}")
-                csv.AppendLine($"Maintenance Description,{GetTextBoxValue(maintenancedescription)}")
-                csv.AppendLine($"Cost Materials Labor,{GetTextBoxValue(TextBox11)}")
-                csv.AppendLine("")
-                
-                ' Status Section
-                csv.AppendLine("=== STATUS ===")
-                csv.AppendLine($"Status,{GetTextBoxValue(status)}")
-                csv.AppendLine($"Created At,{DateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss")}")
-                csv.AppendLine($"Updated At,{DateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss")}")
-                csv.AppendLine("")
-                
-                ' Additional Fields Section
-                csv.AppendLine("=== ADDITIONAL INFORMATION ===")
-                csv.AppendLine($"Custodian Name,{GetTextBoxValue(custodianname)}")
-                csv.AppendLine($"Custodian Number,{GetTextBoxValue(custodiannumber)}")
-                csv.AppendLine($"Mechanic Number,{GetTextBoxValue(mechanicnumber)}")
-                csv.AppendLine($"Manufacturer,{GetTextBoxValue(manufacturer)}")
-                csv.AppendLine($"National Board No,{GetTextBoxValue(nationalboardno)}")
-                csv.AppendLine($"Pressure Test,{GetTextBoxValue(pressuretest)}")
-                csv.AppendLine("")
-                
-                csv.AppendLine("=== END OF REPORT ===")
-                csv.AppendLine($"Generated on: {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}")
-                
-                ' Write to file
-                File.WriteAllText(saveDialog.FileName, csv.ToString(), Encoding.UTF8)
-                
-                MessageBox.Show($"CSV exported successfully to:{vbCrLf}{saveDialog.FileName}", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show($"Professional CSV report exported successfully!{vbCrLf}{vbCrLf}File: {saveDialog.FileName}", "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
             
         Catch ex As Exception
@@ -367,5 +427,56 @@ Partial Public Class MaintenanceReport
         Catch ex As Exception
         End Try
         Return "N/A"
+    End Function
+    
+    ' Helper function to wrap long text
+    Private Function WrapText(text As String, maxWidth As Integer) As String
+        If String.IsNullOrEmpty(text) OrElse text = "N/A" Then
+            Return "N/A"
+        End If
+        
+        Dim lines As New List(Of String)()
+        Dim words() As String = text.Split(" "c)
+        Dim currentLine As String = ""
+        
+        For Each word As String In words
+            If (currentLine.Length + word.Length + 1) <= maxWidth Then
+                If currentLine.Length > 0 Then
+                    currentLine &= " " & word
+                Else
+                    currentLine = word
+                End If
+            Else
+                If currentLine.Length > 0 Then
+                    lines.Add(currentLine)
+                End If
+                currentLine = word
+            End If
+        Next
+        
+        If currentLine.Length > 0 Then
+            lines.Add(currentLine)
+        End If
+        
+        ' Join lines with proper indentation
+        Return String.Join(vbCrLf & "  ", lines)
+    End Function
+    
+    ' Helper function to format currency
+    Private Function FormatCurrency(value As String) As String
+        If String.IsNullOrEmpty(value) OrElse value = "N/A" Then
+            Return "₱ 0.00"
+        End If
+        
+        Try
+            Dim amount As Decimal
+            If Decimal.TryParse(value.Replace("₱", "").Replace(",", "").Trim(), amount) Then
+                Return "₱ " & amount.ToString("N2")
+            End If
+        Catch ex As Exception
+            ' If parsing fails, return as-is with peso sign
+        End Try
+        
+        Return "₱ " & value
     End Function
 End Class

@@ -507,7 +507,7 @@ Public Class EditUser
             Return
         End If
         
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SADashboard)
         If superAdminDashboard IsNot Nothing Then
             Dim newUC As New UC_UserManagement()
             superAdminDashboard.LoadUserControl(newUC)

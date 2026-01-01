@@ -1,4 +1,4 @@
-﻿Imports System.Drawing.Drawing2D
+Imports System.Drawing.Drawing2D
 Imports System.Diagnostics
 Imports System
 Imports System.Drawing
@@ -229,16 +229,10 @@ Public Class UC_DepartmentManagement
         System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - ParentForm: " & If(Me.ParentForm IsNot Nothing, Me.ParentForm.GetType().Name, "NULL"))
         
         ' Check SADashboard first (parent class)
-        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-        If saDashboard IsNot Nothing Then
-            saDashboard.LoadUserControl(New AddDepartment())
+        Dim superAdmin = TryCast(Me.ParentForm, SADashboard)
+        If superAdmin IsNot Nothing Then
+            superAdmin.LoadUserControl(New AddDepartment())
             System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - AddDepartment loaded into SADashboard")
-            Return
-        End If
-        
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-        If superAdminDashboard IsNot Nothing Then
-            superAdminDashboard.LoadUserControl(New AddDepartment())
             Return
         End If
 
@@ -311,16 +305,10 @@ Public Class UC_DepartmentManagement
             editForm.LoadDepartmentData(departmentID, deptData)
 
             ' Check SADashboard first (parent class)
-            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-            If saDashboard IsNot Nothing Then
-                saDashboard.LoadUserControl(editForm)
+            Dim superAdmin = TryCast(Me.ParentForm, SADashboard)
+            If superAdmin IsNot Nothing Then
+                superAdmin.LoadUserControl(editForm)
                 System.Diagnostics.Debug.WriteLine("[v0] UC_DepartmentManagement - EditDepartment loaded into SADashboard")
-                Return
-            End If
-            
-            Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-            If superAdminDashboard IsNot Nothing Then
-                superAdminDashboard.LoadUserControl(editForm)
                 Return
             End If
 
@@ -333,6 +321,28 @@ Public Class UC_DepartmentManagement
         Catch ex As Exception
             MessageBox.Show("Error opening edit form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             System.Diagnostics.Debug.WriteLine("[v0] btnEdit_Click Error: " & ex.Message & Environment.NewLine & ex.StackTrace)
+        End Try
+    End Sub
+
+    Private Sub btnDepartmentReport_Click(sender As Object, e As EventArgs) Handles btnDepartmentReport.Click
+        Try
+            System.Diagnostics.Debug.WriteLine("[v0] Opening Department Allocation Report")
+            Dim reportForm As New DepartmentAllocationSummary_vb()
+            reportForm.ShowDialog()
+        Catch ex As Exception
+            MessageBox.Show("Error opening Department Allocation Report: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("[v0] Department Report Error: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub DepartmentAllocationSummarybtn_Click(sender As Object, e As EventArgs) Handles DepartmentAllocationSummarybtn.Click
+        Try
+            System.Diagnostics.Debug.WriteLine("[v0] Opening Department Allocation Summary from existing button")
+            Dim reportForm As New DepartmentAllocationSummary_vb()
+            reportForm.ShowDialog()
+        Catch ex As Exception
+            MessageBox.Show("Error opening Department Allocation Summary: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Diagnostics.Debug.WriteLine("[v0] Department Allocation Error: " & ex.Message)
         End Try
     End Sub
 
@@ -383,14 +393,14 @@ Public Class UC_DepartmentManagement
 
         ' DELETE should permanently remove - show strong warning
         Dim result As DialogResult = MessageBox.Show(
-            "⚠️ WARNING: PERMANENT DELETION ⚠️" & Environment.NewLine & Environment.NewLine &
+            "?? WARNING: PERMANENT DELETION ??" & Environment.NewLine & Environment.NewLine &
             "Are you sure you want to PERMANENTLY DELETE this department?" & Environment.NewLine &
             "Department: " & departmentName & Environment.NewLine &
             "ID: " & departmentID.ToString() & Environment.NewLine & Environment.NewLine &
             "This will COMPLETELY REMOVE all department data from the database!" & Environment.NewLine &
             "This action CANNOT BE UNDONE!" & Environment.NewLine & Environment.NewLine &
-            "💡 TIP: To temporarily disable a department instead, use Edit → Change Status to Inactive.",
-            "⚠️ Confirm Permanent Deletion",
+            "?? TIP: To temporarily disable a department instead, use Edit ? Change Status to Inactive.",
+            "?? Confirm Permanent Deletion",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Warning
         )

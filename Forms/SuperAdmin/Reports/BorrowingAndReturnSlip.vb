@@ -340,117 +340,171 @@ Public Class BorrowingAndReturnSlip
         Dim borPosValue As String = If(borrowerPosition.SelectedItem IsNot Nothing, borrowerPosition.SelectedItem.ToString(), borrowerPosition.Text)
         Dim borPos As String = EscapePdfText(borPosValue)
         Dim deptId As String = EscapePdfText(departmentId.Text)
-        Dim borDate As String = EscapePdfText(borrowerDate.Value.ToString("dddd, dd MMMM yyyy"))
-        Dim expDate As String = EscapePdfText(expectedReturnDate.Value.ToString("dddd, dd MMMM yyyy"))
-        Dim actDate As String = EscapePdfText(actualReturnDate.Value.ToString("dddd, dd MMMM yyyy"))
+        Dim borDate As String = EscapePdfText(borrowerDate.Value.ToString("dddd, d MMMM yyyy"))
+        Dim expDate As String = EscapePdfText(expectedReturnDate.Value.ToString("dddd, d MMMM yyyy"))
+        Dim actDate As String = EscapePdfText(actualReturnDate.Value.ToString("dddd, d MMMM yyyy"))
         Dim condRet As String = EscapePdfText(conditionOnReturn.Text)
         Dim statValue As String = If(status.SelectedItem IsNot Nothing, status.SelectedItem.ToString(), status.Text)
         Dim stat As String = EscapePdfText(statValue)
         Dim remarksText As String = EscapePdfText(remarks.Text)
 
-        ' PDF dimensions (A4 = 595x842 points)
+        ' PDF dimensions (A4 = 595x842 points, Y=0 at bottom)
         Dim pageWidth As Integer = 595
         Dim pageHeight As Integer = 842
-        Dim margin As Integer = 75
-        Dim contentWidth As Integer = pageWidth - (2 * margin)
+        Dim marginLeft As Integer = 20
+        Dim marginRight As Integer = 20
+        Dim marginTop As Integer = 20
+        Dim marginBottom As Integer = 20
+        Dim contentWidth As Integer = pageWidth - marginLeft - marginRight
 
-        ' Set line width for borders
+        ' Set line width and color for borders
         builder.AppendLine("1 w")
+        builder.AppendLine("0 0 0 RG")
+        builder.AppendLine("0 0 0 rg")
 
         ' ===== OUTER BORDER =====
-        builder.AppendLine($"{margin} {margin} {contentWidth} {pageHeight - (2 * margin)} re S")
+        Dim borderX As Integer = marginLeft
+        Dim borderBottom As Integer = marginBottom
+        Dim borderTop As Integer = pageHeight - marginTop
+        Dim borderWidth As Integer = contentWidth
+        Dim borderHeight As Integer = pageHeight - marginTop - marginBottom
+        builder.AppendLine($"{borderX} {borderBottom} {borderWidth} {borderHeight} re S")
 
-        ' ===== TITLE HEADER =====
-        Dim titleY As Integer = pageHeight - 100
-        Dim titleHeight As Integer = 50
-        builder.AppendLine($"{margin} {titleY} {contentWidth} {titleHeight} re S")
-        builder.AppendLine($"BT /F2 18 Tf {pageWidth / 2 - 150} {titleY + 15} Td (BORROWING AND RETURN SLIP) Tj ET")
+        ' ===== TITLE SECTION =====
+        Dim titleTop As Integer = borderTop - 30
+        Dim titleBottom As Integer = borderTop - 60
+        Dim titleHeight As Integer = 30
+        builder.AppendLine($"{borderX} {titleBottom} {borderWidth} {titleHeight} re S")
+        builder.AppendLine($"BT /F2 14 Tf {borderX + 100} {titleBottom + 8} Td (BORROWING AND RETURN SLIP) Tj ET")
 
-        ' ===== FIRST ROW: Request ID, Item Type, Item ID =====
-        Dim row1Y As Integer = titleY - 70
-        Dim row1Height As Integer = 70
+        ' ===== ROW 1: Request ID, Item Type, Item ID =====
+        Dim row1Top As Integer = titleBottom - 40
+        Dim row1Bottom As Integer = titleBottom - 70
+        Dim row1Height As Integer = 35
         Dim col1Width As Integer = CInt(contentWidth / 3)
         
-        ' Draw outer box for row
-        builder.AppendLine($"{margin} {row1Y} {contentWidth} {row1Height} re S")
+        builder.AppendLine($"{borderX} {row1Bottom} {borderWidth} {row1Height} re S")
         ' Vertical dividers
-        builder.AppendLine($"{margin + col1Width} {row1Y} m {margin + col1Width} {row1Y + row1Height} l S")
-        builder.AppendLine($"{margin + (2 * col1Width)} {row1Y} m {margin + (2 * col1Width)} {row1Y + row1Height} l S")
+        builder.AppendLine($"{borderX + col1Width} {row1Bottom} m {borderX + col1Width} {row1Top} l S")
+        builder.AppendLine($"{borderX + (2 * col1Width)} {row1Bottom} m {borderX + (2 * col1Width)} {row1Top} l S")
         
-        ' Request ID - Label and value on same line
-        builder.AppendLine($"BT /F2 10 Tf {margin + 8} {row1Y + 40} Td (Request ID:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + 15} {row1Y + 20} Td ({reqId}) Tj ET")
+        ' Column 1: Request ID
+        builder.AppendLine($"BT /F2 10 Tf {borderX + 5} {row1Bottom + 20} Td (Request ID:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + 5} {row1Bottom + 4} {col1Width - 10} 12 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + 7} {row1Bottom + 6} Td ({reqId}) Tj ET")
         
-        ' Item Type - Label and value on same line
-        builder.AppendLine($"BT /F2 10 Tf {margin + col1Width + 8} {row1Y + 40} Td (Item Type:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + col1Width + 15} {row1Y + 20} Td ({itmType}) Tj ET")
+        ' Column 2: Item Type
+        builder.AppendLine($"BT /F2 10 Tf {borderX + col1Width + 5} {row1Bottom + 20} Td (Item Type:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + col1Width + 5} {row1Bottom + 4} {col1Width - 10} 12 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + col1Width + 7} {row1Bottom + 6} Td ({itmType}) Tj ET")
         
-        ' Item ID - Label and value on same line
-        builder.AppendLine($"BT /F2 10 Tf {margin + (2 * col1Width) + 8} {row1Y + 40} Td (Item ID:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + (2 * col1Width) + 15} {row1Y + 20} Td ({itmId}) Tj ET")
+        ' Column 3: Item ID
+        builder.AppendLine($"BT /F2 10 Tf {borderX + (2 * col1Width) + 5} {row1Bottom + 20} Td (Item ID:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + (2 * col1Width) + 5} {row1Bottom + 4} {col1Width - 10} 12 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + (2 * col1Width) + 7} {row1Bottom + 6} Td ({itmId}) Tj ET")
 
-        ' ===== SECOND ROW: Borrower Date and Return Dates =====
-        Dim row2Y As Integer = row1Y - 120
-        Dim row2Height As Integer = 120
-        Dim leftColWidth As Integer = CInt(contentWidth / 2)
+        ' ===== ROW 2: Dates Section =====
+        Dim row2Top As Integer = row1Bottom - 5
+        Dim row2Bottom As Integer = row1Bottom - 65
+        Dim row2Height As Integer = 60
+        Dim halfWidth As Integer = CInt(contentWidth / 2)
         
-        ' Draw outer box
-        builder.AppendLine($"{margin} {row2Y} {contentWidth} {row2Height} re S")
+        builder.AppendLine($"{borderX} {row2Bottom} {borderWidth} {row2Height} re S")
         ' Vertical divider
-        builder.AppendLine($"{margin + leftColWidth} {row2Y} m {margin + leftColWidth} {row2Y + row2Height} l S")
-        ' Horizontal divider in right column
-        builder.AppendLine($"{margin + leftColWidth} {row2Y + 60} m {margin + contentWidth} {row2Y + 60} l S")
+        builder.AppendLine($"{borderX + halfWidth} {row2Bottom} m {borderX + halfWidth} {row2Top} l S")
+        ' Horizontal divider for right column
+        builder.AppendLine($"{borderX + halfWidth} {row2Bottom + 30} m {borderX + contentWidth} {row2Bottom + 30} l S")
         
-        ' Borrower Date (left side)
-        builder.AppendLine($"BT /F2 10 Tf {margin + 15} {row2Y + 90} Td (Borrower Date:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + 25} {row2Y + 50} Td ({borDate}) Tj ET")
+        ' Left: Borrower Date
+        builder.AppendLine($"BT /F2 10 Tf {borderX + 5} {row2Bottom + 42} Td (Borrower Date:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + 5} {row2Bottom + 8} {halfWidth - 10} 20 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + 7} {row2Bottom + 14} Td ({borDate}) Tj ET")
         
-        ' Expected Return Date (top right)
-        builder.AppendLine($"BT /F2 10 Tf {margin + leftColWidth + 15} {row2Y + 90} Td (Expected Return Date:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + leftColWidth + 25} {row2Y + 70} Td ({expDate}) Tj ET")
+        ' Right: Expected Return Date
+        builder.AppendLine($"BT /F2 10 Tf {borderX + halfWidth + 5} {row2Bottom + 48} Td (Expected Return Date:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + halfWidth + 5} {row2Bottom + 32} {halfWidth - 10} 12 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + halfWidth + 7} {row2Bottom + 36} Td ({expDate}) Tj ET")
         
-        ' Actual Return Date (bottom right)
-        builder.AppendLine($"BT /F2 10 Tf {margin + leftColWidth + 15} {row2Y + 40} Td (Actual Return Date:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + leftColWidth + 25} {row2Y + 20} Td ({actDate}) Tj ET")
+        ' Right: Actual Return Date
+        builder.AppendLine($"BT /F2 10 Tf {borderX + halfWidth + 5} {row2Bottom + 20} Td (Actual Return Date:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + halfWidth + 5} {row2Bottom + 4} {halfWidth - 10} 12 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + halfWidth + 7} {row2Bottom + 8} Td ({actDate}) Tj ET")
 
         ' ===== REMAINING ROWS =====
-        Dim rowHeight As Integer = 50
-        Dim currentY As Integer = row2Y - rowHeight
+        Dim rowHeight As Integer = 32
+        Dim labelWidth As Integer = 120
+        Dim currentTop As Integer = row2Bottom - 5
+        Dim currentBottom As Integer = currentTop - rowHeight
 
         ' Borrowed Name
-        builder.AppendLine($"{margin} {currentY} {contentWidth} {rowHeight} re S")
-        builder.AppendLine($"BT /F2 10 Tf {margin + 15} {currentY + 25} Td (Borrowed Name:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + 150} {currentY + 25} Td ({borName}) Tj ET")
-        currentY -= rowHeight
+        builder.AppendLine($"{borderX} {currentBottom} {borderWidth} {rowHeight} re S")
+        builder.AppendLine($"BT /F2 10 Tf {borderX + 5} {currentBottom + 14} Td (Borrowed Name:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + labelWidth + 2} {currentBottom + 4} {contentWidth - labelWidth - 7} 20 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + labelWidth + 5} {currentBottom + 10} Td ({borName}) Tj ET")
+        currentTop = currentBottom
+        currentBottom = currentTop - rowHeight
 
         ' Borrower Position
-        builder.AppendLine($"{margin} {currentY} {contentWidth} {rowHeight} re S")
-        builder.AppendLine($"BT /F2 10 Tf {margin + 15} {currentY + 25} Td (Borrower Position:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + 150} {currentY + 25} Td ({borPos}) Tj ET")
-        currentY -= rowHeight
+        builder.AppendLine($"{borderX} {currentBottom} {borderWidth} {rowHeight} re S")
+        builder.AppendLine($"BT /F2 10 Tf {borderX + 5} {currentBottom + 14} Td (Borrower Position:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + labelWidth + 2} {currentBottom + 4} {contentWidth - labelWidth - 7} 20 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + labelWidth + 5} {currentBottom + 10} Td ({borPos}) Tj ET")
+        currentTop = currentBottom
+        currentBottom = currentTop - rowHeight
 
         ' Department ID
-        builder.AppendLine($"{margin} {currentY} {contentWidth} {rowHeight} re S")
-        builder.AppendLine($"BT /F2 10 Tf {margin + 15} {currentY + 25} Td (Department ID:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + 150} {currentY + 25} Td ({deptId}) Tj ET")
-        currentY -= rowHeight
+        builder.AppendLine($"{borderX} {currentBottom} {borderWidth} {rowHeight} re S")
+        builder.AppendLine($"BT /F2 10 Tf {borderX + 5} {currentBottom + 14} Td (Department ID:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + labelWidth + 2} {currentBottom + 4} {contentWidth - labelWidth - 7} 20 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + labelWidth + 5} {currentBottom + 10} Td ({deptId}) Tj ET")
+        currentTop = currentBottom
+        currentBottom = currentTop - rowHeight
 
         ' Condition on Return
-        builder.AppendLine($"{margin} {currentY} {contentWidth} {rowHeight} re S")
-        builder.AppendLine($"BT /F2 10 Tf {margin + 15} {currentY + 25} Td (Condition on Return:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + 160} {currentY + 25} Td ({condRet}) Tj ET")
-        currentY -= rowHeight
+        builder.AppendLine($"{borderX} {currentBottom} {borderWidth} {rowHeight} re S")
+        builder.AppendLine($"BT /F2 10 Tf {borderX + 5} {currentBottom + 14} Td (Condition on Return:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + labelWidth + 2} {currentBottom + 4} {contentWidth - labelWidth - 7} 20 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + labelWidth + 5} {currentBottom + 10} Td ({condRet}) Tj ET")
+        currentTop = currentBottom
+        currentBottom = currentTop - rowHeight
 
         ' Status
-        builder.AppendLine($"{margin} {currentY} {contentWidth} {rowHeight} re S")
-        builder.AppendLine($"BT /F2 10 Tf {margin + 15} {currentY + 25} Td (Status:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + 150} {currentY + 25} Td ({stat}) Tj ET")
-        currentY -= rowHeight
+        builder.AppendLine($"{borderX} {currentBottom} {borderWidth} {rowHeight} re S")
+        builder.AppendLine($"BT /F2 10 Tf {borderX + 5} {currentBottom + 14} Td (Status:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + labelWidth + 2} {currentBottom + 4} {contentWidth - labelWidth - 7} 20 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + labelWidth + 5} {currentBottom + 10} Td ({stat}) Tj ET")
+        currentTop = currentBottom
+        currentBottom = currentTop - rowHeight
 
         ' Remarks
-        builder.AppendLine($"{margin} {currentY} {contentWidth} {rowHeight} re S")
-        builder.AppendLine($"BT /F2 10 Tf {margin + 15} {currentY + 25} Td (Remarks:) Tj ET")
-        builder.AppendLine($"BT /F1 10 Tf {margin + 150} {currentY + 25} Td ({remarksText}) Tj ET")
+        builder.AppendLine($"{borderX} {currentBottom} {borderWidth} {rowHeight} re S")
+        builder.AppendLine($"BT /F2 10 Tf {borderX + 5} {currentBottom + 14} Td (Remarks:) Tj ET")
+        builder.AppendLine($"0.5 w")
+        builder.AppendLine($"{borderX + labelWidth + 2} {currentBottom + 4} {contentWidth - labelWidth - 7} 20 re S")
+        builder.AppendLine($"1 w")
+        builder.AppendLine($"BT /F1 9 Tf {borderX + labelWidth + 5} {currentBottom + 10} Td ({remarksText}) Tj ET")
 
         Return builder.ToString()
     End Function

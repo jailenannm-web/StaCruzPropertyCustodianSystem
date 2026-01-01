@@ -666,10 +666,33 @@ Public Module ReportExportHelper
         Dim GetDateValue As Func(Of String, String) = Function(colName As String) As String
             If requestData.Table.Columns.Contains(colName) AndAlso Not Convert.IsDBNull(requestData(colName)) Then
                 Dim dateObj = requestData(colName)
+                Dim parsedDate As DateTime
+                
+                ' Handle DateTime
                 If TypeOf dateObj Is DateTime Then
                     Return CType(dateObj, DateTime).ToString("dddd, dd MMMM yyyy")
+                ' Handle MySqlDateTime using reflection
+                ElseIf dateObj.GetType().Name = "MySqlDateTime" OrElse dateObj.GetType().FullName.Contains("MySqlDateTime") Then
+                    Try
+                        Dim typeObj = dateObj.GetType()
+                        Dim isValidProp = typeObj.GetProperty("IsValidDateTime")
+                        Dim getDateTimeMethod = typeObj.GetMethod("GetDateTime")
+                        
+                        If isValidProp IsNot Nothing AndAlso getDateTimeMethod IsNot Nothing Then
+                            Dim isValid As Boolean = CBool(isValidProp.GetValue(dateObj))
+                            If isValid Then
+                                parsedDate = CType(getDateTimeMethod.Invoke(dateObj, Nothing), DateTime)
+                                Return parsedDate.ToString("dddd, dd MMMM yyyy")
+                            End If
+                        End If
+                    Catch ex As Exception
+                        ' Fall back to string parsing
+                        If DateTime.TryParse(dateObj.ToString(), parsedDate) Then
+                            Return parsedDate.ToString("dddd, dd MMMM yyyy")
+                        End If
+                    End Try
+                ' Handle String
                 ElseIf TypeOf dateObj Is String Then
-                    Dim parsedDate As DateTime
                     If DateTime.TryParse(CStr(dateObj), parsedDate) Then
                         Return parsedDate.ToString("dddd, dd MMMM yyyy")
                     End If
@@ -705,11 +728,14 @@ Public Module ReportExportHelper
         
         Dim approvedBy As String = GetValue("approved_by_name")
         If String.IsNullOrEmpty(approvedBy) Then approvedBy = GetValue("approvedBy")
+        If String.IsNullOrEmpty(approvedBy) Then approvedBy = "Pending Approval"
         
         Dim approvedDate As String = GetDateValue("approvedDate")
         If String.IsNullOrEmpty(approvedDate) Then approvedDate = GetDateValue("approval_date")
+        If String.IsNullOrEmpty(approvedDate) Then approvedDate = "Pending"
         
         Dim remarks As String = GetValue("remarks")
+        If String.IsNullOrEmpty(remarks) Then remarks = "No remarks"
         
         Dim createdAt As String = GetDateValue("createdAt")
         If String.IsNullOrEmpty(createdAt) Then createdAt = DateTime.Now.ToString("dddd, dd MMMM yyyy")
@@ -814,8 +840,9 @@ Public Module ReportExportHelper
         builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(department) & ") Tj ET")
         
         builder.AppendLine("BT /F1 10 Tf 360 " & y & " Td (Date of Request:) Tj ET")
-        builder.AppendLine("455 " & (y - 5) & " 105 20 re S")
-        builder.AppendLine("BT /F1 9 Tf 460 " & (y - 1) & " Td (" & EscapePdfText(dateOfRequest) & ") Tj ET")
+        builder.AppendLine("455 " & (y - 5) & " 107 20 re S")
+        ' Use smaller font (7pt) for long date text to prevent overflow
+        builder.AppendLine("BT /F1 7 Tf 458 " & (y) & " Td (" & EscapePdfText(dateOfRequest) & ") Tj ET")
         
         y -= 40
         
@@ -869,8 +896,9 @@ Public Module ReportExportHelper
         builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(approvedBy) & ") Tj ET")
         
         builder.AppendLine("BT /F1 10 Tf 360 " & y & " Td (Approved Date:) Tj ET")
-        builder.AppendLine("455 " & (y - 5) & " 105 20 re S")
-        builder.AppendLine("BT /F1 9 Tf 460 " & (y - 1) & " Td (" & EscapePdfText(approvedDate) & ") Tj ET")
+        builder.AppendLine("455 " & (y - 5) & " 107 20 re S")
+        ' Use smaller font (7pt) for long date text to prevent overflow
+        builder.AppendLine("BT /F1 7 Tf 458 " & (y) & " Td (" & EscapePdfText(approvedDate) & ") Tj ET")
         
         y -= 40
         
@@ -889,11 +917,13 @@ Public Module ReportExportHelper
         ' Created and Updated dates
         builder.AppendLine("BT /F1 10 Tf 50 " & y & " Td (Created at:) Tj ET")
         builder.AppendLine("145 " & (y - 5) & " 150 20 re S")
-        builder.AppendLine("BT /F1 9 Tf 150 " & (y - 1) & " Td (" & EscapePdfText(createdAt) & ") Tj ET")
+        ' Use smaller font (7pt) for long date text
+        builder.AppendLine("BT /F1 7 Tf 148 " & (y) & " Td (" & EscapePdfText(createdAt) & ") Tj ET")
         
         builder.AppendLine("BT /F1 10 Tf 360 " & y & " Td (Updated at:) Tj ET")
-        builder.AppendLine("455 " & (y - 5) & " 105 20 re S")
-        builder.AppendLine("BT /F1 9 Tf 460 " & (y - 1) & " Td (" & EscapePdfText(updatedAt) & ") Tj ET")
+        builder.AppendLine("455 " & (y - 5) & " 107 20 re S")
+        ' Use smaller font (7pt) for long date text
+        builder.AppendLine("BT /F1 7 Tf 458 " & (y) & " Td (" & EscapePdfText(updatedAt) & ") Tj ET")
         
         Return builder.ToString()
     End Function

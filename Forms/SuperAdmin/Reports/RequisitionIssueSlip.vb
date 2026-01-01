@@ -44,16 +44,29 @@ Partial Public Class RequisitionIssueSlip
                 requesterName.Text = SafeGetValue(requestData, "requesterName", "requester_name")
                 position.Text = SafeGetValue(requestData, "position")
                 ' Try to get department name first, fall back to department ID
-                Dim deptName As String = SafeGetValue(requestData, "departmentName")
+                Dim deptName As String = SafeGetValue(requestData, "departmentName", "department")
                 If String.IsNullOrEmpty(deptName) Then
                     deptName = SafeGetValue(requestData, "departmentId", "department_id")
                 End If
-                If department IsNot Nothing AndAlso department.Items.Count > 0 Then
-                    Dim deptIndex As Integer = department.Items.IndexOf(deptName)
-                    If deptIndex >= 0 Then
-                        department.SelectedIndex = deptIndex
+                ' Always set the text, whether it's in the dropdown or not
+                If department IsNot Nothing Then
+                    If department.Items.Count > 0 Then
+                        Dim deptIndex As Integer = department.Items.IndexOf(deptName)
+                        If deptIndex >= 0 Then
+                            department.SelectedIndex = deptIndex
+                        Else
+                            ' Add the department to items if not exists, then select it
+                            If Not String.IsNullOrEmpty(deptName) Then
+                                department.Items.Add(deptName)
+                                department.SelectedItem = deptName
+                            End If
+                        End If
                     Else
-                        department.Text = deptName
+                        ' No items in ComboBox, just set text directly
+                        If Not String.IsNullOrEmpty(deptName) Then
+                            department.Items.Add(deptName)
+                            department.SelectedItem = deptName
+                        End If
                     End If
                 End If
                 ' Handle dateOfRequest properly
@@ -78,6 +91,32 @@ Partial Public Class RequisitionIssueSlip
                                 dateOfRequest.CustomFormat = "dddd, dd MMMM yyyy"
                                 dateOfRequest.ShowCheckBox = False
                                 System.Diagnostics.Debug.WriteLine($"[v0] Set dateOfRequest from DateTime: {parsedDate}")
+                            ElseIf dateObj.GetType().Name = "MySqlDateTime" OrElse dateObj.GetType().FullName.Contains("MySqlDateTime") Then
+                                ' Handle MySqlDateTime type - use reflection to be safe
+                                Try
+                                    Dim typeObj = dateObj.GetType()
+                                    Dim isValidMethod = typeObj.GetProperty("IsValidDateTime")
+                                    Dim getDateTimeMethod = typeObj.GetMethod("GetDateTime")
+                                    
+                                    If isValidMethod IsNot Nothing AndAlso getDateTimeMethod IsNot Nothing Then
+                                        Dim isValid As Boolean = CBool(isValidMethod.GetValue(dateObj))
+                                        System.Diagnostics.Debug.WriteLine($"[v0] MySqlDateTime IsValid: {isValid}")
+                                        
+                                        If isValid Then
+                                            parsedDate = CType(getDateTimeMethod.Invoke(dateObj, Nothing), DateTime)
+                                            ' Set format BEFORE setting value
+                                            dateOfRequest.Format = DateTimePickerFormat.Custom
+                                            dateOfRequest.CustomFormat = "dddd, dd MMMM yyyy"
+                                            dateOfRequest.ShowCheckBox = False
+                                            dateOfRequest.Value = parsedDate
+                                            dateOfRequest.Refresh() ' Force refresh to update display
+                                            System.Diagnostics.Debug.WriteLine($"[v0] Set dateOfRequest from MySqlDateTime: {parsedDate} -> Display: {dateOfRequest.Text}")
+                                        End If
+                                    End If
+                                Catch ex As Exception
+                                    System.Diagnostics.Debug.WriteLine($"[v0] MySqlDateTime conversion error: {ex.Message}")
+                                    System.Diagnostics.Debug.WriteLine($"[v0] Stack: {ex.StackTrace}")
+                                End Try
                             ElseIf DateTime.TryParse(dateObj.ToString(), parsedDate) Then
                                 dateOfRequest.Value = parsedDate
                                 dateOfRequest.Format = DateTimePickerFormat.Custom
@@ -125,6 +164,32 @@ Partial Public Class RequisitionIssueSlip
                                 approvedDate.CustomFormat = "dddd, dd MMMM yyyy"
                                 approvedDate.ShowCheckBox = False
                                 System.Diagnostics.Debug.WriteLine($"[v0] Set approvedDate from DateTime: {parsedDate}")
+                            ElseIf approvedDateObj.GetType().Name = "MySqlDateTime" OrElse approvedDateObj.GetType().FullName.Contains("MySqlDateTime") Then
+                                ' Handle MySqlDateTime type - use reflection to be safe
+                                Try
+                                    Dim typeObj = approvedDateObj.GetType()
+                                    Dim isValidMethod = typeObj.GetProperty("IsValidDateTime")
+                                    Dim getDateTimeMethod = typeObj.GetMethod("GetDateTime")
+                                    
+                                    If isValidMethod IsNot Nothing AndAlso getDateTimeMethod IsNot Nothing Then
+                                        Dim isValid As Boolean = CBool(isValidMethod.GetValue(approvedDateObj))
+                                        System.Diagnostics.Debug.WriteLine($"[v0] MySqlDateTime IsValid: {isValid}")
+                                        
+                                        If isValid Then
+                                            parsedDate = CType(getDateTimeMethod.Invoke(approvedDateObj, Nothing), DateTime)
+                                            ' Set format BEFORE setting value
+                                            approvedDate.Format = DateTimePickerFormat.Custom
+                                            approvedDate.CustomFormat = "dddd, dd MMMM yyyy"
+                                            approvedDate.ShowCheckBox = False
+                                            approvedDate.Value = parsedDate
+                                            approvedDate.Refresh() ' Force refresh to update display
+                                            System.Diagnostics.Debug.WriteLine($"[v0] Set approvedDate from MySqlDateTime: {parsedDate} -> Display: {approvedDate.Text}")
+                                        End If
+                                    End If
+                                Catch ex As Exception
+                                    System.Diagnostics.Debug.WriteLine($"[v0] MySqlDateTime conversion error: {ex.Message}")
+                                    System.Diagnostics.Debug.WriteLine($"[v0] Stack: {ex.StackTrace}")
+                                End Try
                             ElseIf DateTime.TryParse(approvedDateObj.ToString(), parsedDate) Then
                                 approvedDate.Value = parsedDate
                                 approvedDate.Format = DateTimePickerFormat.Custom
@@ -195,20 +260,40 @@ Partial Public Class RequisitionIssueSlip
         For Each name As String In names
             If row.Table.Columns.Contains(name) AndAlso Not Convert.IsDBNull(row(name)) Then
                 Try
-                    ' Try to convert to DateTime
                     Dim dateValue As DateTime
-                    If TypeOf row(name) Is DateTime Then
-                        dateValue = CType(row(name), DateTime)
-                        ' Format date based on whether it includes time
+                    Dim dateObj As Object = row(name)
+                    
+                    ' Handle DateTime
+                    If TypeOf dateObj Is DateTime Then
+                        dateValue = CType(dateObj, DateTime)
                         If dateValue.TimeOfDay = TimeSpan.Zero Then
-                            ' Date only (no time component)
                             Return dateValue.ToString("dddd, dd MMMM yyyy")
                         Else
-                            ' Date with time
                             Return dateValue.ToString("dddd, dd MMMM yyyy HH:mm:ss")
                         End If
-                    ElseIf DateTime.TryParse(row(name).ToString(), dateValue) Then
-                        ' Format date based on whether it includes time
+                    ' Handle MySqlDateTime using reflection
+                    ElseIf dateObj.GetType().Name = "MySqlDateTime" OrElse dateObj.GetType().FullName.Contains("MySqlDateTime") Then
+                        Try
+                            Dim typeObj = dateObj.GetType()
+                            Dim isValidMethod = typeObj.GetProperty("IsValidDateTime")
+                            Dim getDateTimeMethod = typeObj.GetMethod("GetDateTime")
+                            
+                            If isValidMethod IsNot Nothing AndAlso getDateTimeMethod IsNot Nothing Then
+                                Dim isValid As Boolean = CBool(isValidMethod.GetValue(dateObj))
+                                If isValid Then
+                                    dateValue = CType(getDateTimeMethod.Invoke(dateObj, Nothing), DateTime)
+                                    If dateValue.TimeOfDay = TimeSpan.Zero Then
+                                        Return dateValue.ToString("dddd, dd MMMM yyyy")
+                                    Else
+                                        Return dateValue.ToString("dddd, dd MMMM yyyy HH:mm:ss")
+                                    End If
+                                End If
+                            End If
+                        Catch mySqlEx As Exception
+                            System.Diagnostics.Debug.WriteLine($"[v0] MySqlDateTime error for column '{name}': {mySqlEx.Message}")
+                        End Try
+                    ' Try parsing string
+                    ElseIf DateTime.TryParse(dateObj.ToString(), dateValue) Then
                         If dateValue.TimeOfDay = TimeSpan.Zero Then
                             Return dateValue.ToString("dddd, dd MMMM yyyy")
                         Else
@@ -216,15 +301,13 @@ Partial Public Class RequisitionIssueSlip
                         End If
                     Else
                         ' Return the string value as-is if it's not parseable
-                        Dim strValue As String = row(name).ToString().Trim()
-                        ' Only return if it's not empty and looks like a date
+                        Dim strValue As String = dateObj.ToString().Trim()
                         If Not String.IsNullOrWhiteSpace(strValue) AndAlso strValue.Length < 50 Then
                             Return strValue
                         End If
                     End If
                 Catch ex As Exception
                     System.Diagnostics.Debug.WriteLine($"[v0] SafeGetDateValue error for column '{name}': {ex.Message}")
-                    ' Return empty instead of crashing
                 End Try
             End If
         Next

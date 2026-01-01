@@ -65,6 +65,20 @@ Partial Class UserReportSummary
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.chkDateFilter = New System.Windows.Forms.CheckBox()
+        Me.dtpDateTo = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.cboDepartmentFilter = New System.Windows.Forms.ComboBox()
+        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
+        Me.cboRoleFilter = New System.Windows.Forms.ComboBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.btnApplyFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnClearFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btn_Back = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -76,15 +90,15 @@ Partial Class UserReportSummary
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
         '
-        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(509, 59)
+        Me.Label1.Location = New System.Drawing.Point(542, 45)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(163, 17)
         Me.Label1.TabIndex = 374
@@ -93,11 +107,10 @@ Partial Class UserReportSummary
         '
         'Label2
         '
-        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(512, 80)
+        Me.Label2.Location = New System.Drawing.Point(545, 66)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 17)
         Me.Label2.TabIndex = 375
@@ -106,11 +119,10 @@ Partial Class UserReportSummary
         '
         'Label3
         '
-        Me.Label3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(462, 101)
+        Me.Label3.Location = New System.Drawing.Point(495, 87)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(257, 17)
         Me.Label3.TabIndex = 376
@@ -306,6 +318,8 @@ Partial Class UserReportSummary
         '
         'DataGridView1
         '
+        Me.DataGridView1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.userID, Me.fullName, Me.position, Me.employeeID, Me.departmentID, Me.email, Me.contactNumber, Me.username, Me.Address, Me.role, Me.status, Me.createdAt, Me.updatedAt, Me.lastLogin})
@@ -460,11 +474,10 @@ Partial Class UserReportSummary
         '
         'Label6
         '
-        Me.Label6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Times New Roman", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(461, 190)
+        Me.Label6.Location = New System.Drawing.Point(494, 176)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(271, 20)
         Me.Label6.TabIndex = 381
@@ -475,7 +488,7 @@ Partial Class UserReportSummary
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(976, 59)
+        Me.PictureBox2.Location = New System.Drawing.Point(801, 69)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(130, 125)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -485,7 +498,7 @@ Partial Class UserReportSummary
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(79, 59)
+        Me.PictureBox1.Location = New System.Drawing.Point(271, 66)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(130, 125)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -494,11 +507,10 @@ Partial Class UserReportSummary
         '
         'Label5
         '
-        Me.Label5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(469, 140)
+        Me.Label5.Location = New System.Drawing.Point(502, 126)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(218, 17)
         Me.Label5.TabIndex = 378
@@ -507,22 +519,180 @@ Partial Class UserReportSummary
         '
         'Label4
         '
-        Me.Label4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(533, 121)
+        Me.Label4.Location = New System.Drawing.Point(566, 107)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(107, 17)
         Me.Label4.TabIndex = 377
         Me.Label4.Text = "Region V - Bicol"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnApplyFilters)
+        Me.GroupBox1.Controls.Add(Me.btnClearFilters)
+        Me.GroupBox1.Controls.Add(Me.chkDateFilter)
+        Me.GroupBox1.Controls.Add(Me.dtpDateTo)
+        Me.GroupBox1.Controls.Add(Me.dtpDateFrom)
+        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.Label15)
+        Me.GroupBox1.Controls.Add(Me.cboDepartmentFilter)
+        Me.GroupBox1.Controls.Add(Me.cboStatusFilter)
+        Me.GroupBox1.Controls.Add(Me.cboRoleFilter)
+        Me.GroupBox1.Controls.Add(Me.Label17)
+        Me.GroupBox1.Controls.Add(Me.Label18)
+        Me.GroupBox1.Controls.Add(Me.Label19)
+        Me.GroupBox1.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 59)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(130, 865)
+        Me.GroupBox1.TabIndex = 383
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Filters"
+        '
+        'chkDateFilter
+        '
+        Me.chkDateFilter.AutoSize = True
+        Me.chkDateFilter.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.chkDateFilter.Location = New System.Drawing.Point(10, 280)
+        Me.chkDateFilter.Name = "chkDateFilter"
+        Me.chkDateFilter.Size = New System.Drawing.Size(118, 27)
+        Me.chkDateFilter.TabIndex = 399
+        Me.chkDateFilter.Text = "Filter by Date"
+        Me.chkDateFilter.UseVisualStyleBackColor = True
+        '
+        'dtpDateTo
+        '
+        Me.dtpDateTo.Font = New System.Drawing.Font("Poppins", 7.0!)
+        Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateTo.Location = New System.Drawing.Point(10, 400)
+        Me.dtpDateTo.Name = "dtpDateTo"
+        Me.dtpDateTo.Size = New System.Drawing.Size(110, 25)
+        Me.dtpDateTo.TabIndex = 398
+        '
+        'dtpDateFrom
+        '
+        Me.dtpDateFrom.Font = New System.Drawing.Font("Poppins", 7.0!)
+        Me.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateFrom.Location = New System.Drawing.Point(10, 340)
+        Me.dtpDateFrom.Name = "dtpDateFrom"
+        Me.dtpDateFrom.Size = New System.Drawing.Size(110, 25)
+        Me.dtpDateFrom.TabIndex = 397
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.Label16.Location = New System.Drawing.Point(6, 375)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(60, 23)
+        Me.Label16.TabIndex = 396
+        Me.Label16.Text = "To Date"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.Label15.Location = New System.Drawing.Point(6, 315)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(78, 23)
+        Me.Label15.TabIndex = 395
+        Me.Label15.Text = "From Date"
+        '
+        'cboDepartmentFilter
+        '
+        Me.cboDepartmentFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboDepartmentFilter.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.cboDepartmentFilter.FormattingEnabled = True
+        Me.cboDepartmentFilter.Location = New System.Drawing.Point(10, 220)
+        Me.cboDepartmentFilter.Name = "cboDepartmentFilter"
+        Me.cboDepartmentFilter.Size = New System.Drawing.Size(110, 31)
+        Me.cboDepartmentFilter.TabIndex = 394
+        '
+        'cboStatusFilter
+        '
+        Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatusFilter.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.cboStatusFilter.FormattingEnabled = True
+        Me.cboStatusFilter.Location = New System.Drawing.Point(10, 145)
+        Me.cboStatusFilter.Name = "cboStatusFilter"
+        Me.cboStatusFilter.Size = New System.Drawing.Size(110, 31)
+        Me.cboStatusFilter.TabIndex = 393
+        '
+        'cboRoleFilter
+        '
+        Me.cboRoleFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRoleFilter.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.cboRoleFilter.FormattingEnabled = True
+        Me.cboRoleFilter.Location = New System.Drawing.Point(10, 70)
+        Me.cboRoleFilter.Name = "cboRoleFilter"
+        Me.cboRoleFilter.Size = New System.Drawing.Size(110, 31)
+        Me.cboRoleFilter.TabIndex = 392
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.Label17.Location = New System.Drawing.Point(6, 195)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(89, 23)
+        Me.Label17.TabIndex = 391
+        Me.Label17.Text = "Department"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.Label18.Location = New System.Drawing.Point(6, 120)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(52, 23)
+        Me.Label18.TabIndex = 390
+        Me.Label18.Text = "Status"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.Label19.Location = New System.Drawing.Point(6, 45)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(37, 23)
+        Me.Label19.TabIndex = 389
+        Me.Label19.Text = "Role"
+        '
+        'btnApplyFilters
+        '
+        Me.btnApplyFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnApplyFilters.CornerRadius = 10
+        Me.btnApplyFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnApplyFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnApplyFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnApplyFilters.Location = New System.Drawing.Point(10, 450)
+        Me.btnApplyFilters.Name = "btnApplyFilters"
+        Me.btnApplyFilters.Size = New System.Drawing.Size(110, 30)
+        Me.btnApplyFilters.TabIndex = 400
+        Me.btnApplyFilters.Text = "Apply Filters"
+        Me.btnApplyFilters.UseVisualStyleBackColor = False
+        '
+        'btnClearFilters
+        '
+        Me.btnClearFilters.BackColor = System.Drawing.Color.Gray
+        Me.btnClearFilters.CornerRadius = 10
+        Me.btnClearFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClearFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnClearFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnClearFilters.Location = New System.Drawing.Point(10, 490)
+        Me.btnClearFilters.Name = "btnClearFilters"
+        Me.btnClearFilters.Size = New System.Drawing.Size(110, 30)
+        Me.btnClearFilters.TabIndex = 401
+        Me.btnClearFilters.Text = "Clear Filters"
+        Me.btnClearFilters.UseVisualStyleBackColor = False
+        '
         'btn_Back
         '
         Me.btn_Back.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Back.CornerRadius = 15
         Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btn_Back.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -538,7 +708,6 @@ Partial Class UserReportSummary
         '
         Me.btnPDF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnPDF.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnPDF.CornerRadius = 15
         Me.btnPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPDF.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnPDF.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -554,7 +723,6 @@ Partial Class UserReportSummary
         '
         Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnCSV.CornerRadius = 15
         Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -573,6 +741,7 @@ Partial Class UserReportSummary
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.ClientSize = New System.Drawing.Size(1480, 1055)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btn_Back)
         Me.Controls.Add(Me.btnPDF)
         Me.Controls.Add(Me.btnCSV)
@@ -591,6 +760,8 @@ Partial Class UserReportSummary
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -640,4 +811,18 @@ Partial Class UserReportSummary
     Friend WithEvents btn_Back As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents cboRoleFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents cboStatusFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents cboDepartmentFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents dtpDateFrom As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpDateTo As System.Windows.Forms.DateTimePicker
+    Friend WithEvents chkDateFilter As System.Windows.Forms.CheckBox
+    Friend WithEvents btnApplyFilters As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnClearFilters As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label19 As System.Windows.Forms.Label
 End Class

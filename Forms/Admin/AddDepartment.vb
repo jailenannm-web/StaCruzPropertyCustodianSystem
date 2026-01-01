@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Windows.Forms
 Imports System.Text.RegularExpressions
@@ -105,15 +105,9 @@ Public Class AddDepartment
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         ' Check SADashboard first (parent class)
-        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-        If saDashboard IsNot Nothing Then
-            saDashboard.LoadUserControl(New UC_DepartmentManagement())
-            Return
-        End If
-        
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-        If superAdminDashboard IsNot Nothing Then
-            superAdminDashboard.LoadUserControl(New UC_DepartmentManagement())
+        Dim superAdmin = TryCast(Me.ParentForm, SADashboard)
+        If superAdmin IsNot Nothing Then
+            superAdmin.LoadUserControl(New UC_DepartmentManagement())
             Return
         End If
         
@@ -247,21 +241,10 @@ Public Class AddDepartment
 
                 ' Return to department management and refresh
                 ' Check SADashboard first (parent class)
-                Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-                If saDashboard IsNot Nothing Then
+                Dim superAdmin = TryCast(Me.ParentForm, SADashboard)
+                If superAdmin IsNot Nothing Then
                     Dim deptManagement As New UC_DepartmentManagement()
-                    saDashboard.LoadUserControl(deptManagement)
-                    Try
-                        deptManagement.LoadDepartmentsData()
-                    Catch
-                    End Try
-                    Return
-                End If
-                
-                Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-                If superAdminDashboard IsNot Nothing Then
-                    Dim deptManagement As New UC_DepartmentManagement()
-                    superAdminDashboard.LoadUserControl(deptManagement)
+                    superAdmin.LoadUserControl(deptManagement)
                     Try
                         deptManagement.LoadDepartmentsData()
                     Catch

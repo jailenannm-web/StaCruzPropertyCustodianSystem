@@ -8,7 +8,10 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Threading.Tasks
 Imports System.Collections.Generic
 Imports Microsoft.VisualBasic
-Public Partial Class SADashboard
+
+Partial Class SADashboard
+    Inherits System.Windows.Forms.Form
+    
     Private tmrSidebar As Object
     Private currentUC As UserControl = Nothing
     Private _isDashboardLoading As Boolean

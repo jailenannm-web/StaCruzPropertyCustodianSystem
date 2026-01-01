@@ -50,9 +50,11 @@ Partial Class UC_DepartmentManagement
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDepartmentReport = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.departmentmanagementsearchbar = New System.Windows.Forms.TextBox()
         Me.btnedit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.DepartmentAllocationSummarybtn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.admin_deptmanagement, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -87,8 +89,8 @@ Partial Class UC_DepartmentManagement
         Me.departmentId.HeaderText = "Department ID"
         Me.departmentId.MinimumWidth = 6
         Me.departmentId.Name = "departmentId"
-        Me.departmentId.Width = 80
         Me.departmentId.Visible = False
+        Me.departmentId.Width = 80
         '
         'departmentName
         '
@@ -130,7 +132,7 @@ Partial Class UC_DepartmentManagement
         Me.building.HeaderText = "Building"
         Me.building.MinimumWidth = 80
         Me.building.Name = "building"
-        Me.building.Width = 100
+        Me.building.Width = 125
         '
         'floorNumber
         '
@@ -144,14 +146,14 @@ Partial Class UC_DepartmentManagement
         Me.shortName.HeaderText = "Short Name"
         Me.shortName.MinimumWidth = 80
         Me.shortName.Name = "shortName"
-        Me.shortName.Width = 100
+        Me.shortName.Width = 125
         '
         'officeCode
         '
         Me.officeCode.HeaderText = "Office Code"
         Me.officeCode.MinimumWidth = 80
         Me.officeCode.Name = "officeCode"
-        Me.officeCode.Width = 100
+        Me.officeCode.Width = 125
         '
         'description
         '
@@ -179,7 +181,7 @@ Partial Class UC_DepartmentManagement
         Me.status.HeaderText = "Status"
         Me.status.MinimumWidth = 80
         Me.status.Name = "status"
-        Me.status.Width = 100
+        Me.status.Width = 125
         '
         'ttldepartmentmanagement
         '
@@ -235,7 +237,6 @@ Partial Class UC_DepartmentManagement
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -251,7 +252,6 @@ Partial Class UC_DepartmentManagement
         '
         Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -262,6 +262,21 @@ Partial Class UC_DepartmentManagement
         Me.btnDelete.TabIndex = 157
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
+        '
+        'btnDepartmentReport
+        '
+        Me.btnDepartmentReport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDepartmentReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnDepartmentReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDepartmentReport.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnDepartmentReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDepartmentReport.Location = New System.Drawing.Point(820, 704)
+        Me.btnDepartmentReport.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDepartmentReport.Name = "btnDepartmentReport"
+        Me.btnDepartmentReport.Size = New System.Drawing.Size(155, 35)
+        Me.btnDepartmentReport.TabIndex = 400
+        Me.btnDepartmentReport.Text = "Department Report"
+        Me.btnDepartmentReport.UseVisualStyleBackColor = False
         '
         'PictureBox2
         '
@@ -287,7 +302,6 @@ Partial Class UC_DepartmentManagement
         '
         Me.btnedit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnedit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnedit.CornerRadius = 15
         Me.btnedit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnedit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnedit.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -299,14 +313,31 @@ Partial Class UC_DepartmentManagement
         Me.btnedit.Text = "Edit"
         Me.btnedit.UseVisualStyleBackColor = False
         '
+        'DepartmentAllocationSummarybtn
+        '
+        Me.DepartmentAllocationSummarybtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DepartmentAllocationSummarybtn.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.DepartmentAllocationSummarybtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.DepartmentAllocationSummarybtn.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.DepartmentAllocationSummarybtn.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.DepartmentAllocationSummarybtn.Location = New System.Drawing.Point(794, 704)
+        Me.DepartmentAllocationSummarybtn.Margin = New System.Windows.Forms.Padding(4)
+        Me.DepartmentAllocationSummarybtn.Name = "DepartmentAllocationSummarybtn"
+        Me.DepartmentAllocationSummarybtn.Size = New System.Drawing.Size(181, 36)
+        Me.DepartmentAllocationSummarybtn.TabIndex = 392
+        Me.DepartmentAllocationSummarybtn.Text = "Department Allocation Summary"
+        Me.DepartmentAllocationSummarybtn.UseVisualStyleBackColor = False
+        '
         'UC_DepartmentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.DepartmentAllocationSummarybtn)
         Me.Controls.Add(Me.btnedit)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.departmentmanagementsearchbar)
+        Me.Controls.Add(Me.btnDepartmentReport)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.pm_cbobx_status)
@@ -332,6 +363,7 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents pm_cbobx_categ As ComboBox
     Friend WithEvents btnAdd As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnDelete As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnDepartmentReport As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents departmentmanagementsearchbar As TextBox
     Friend WithEvents departmentId As DataGridViewTextBoxColumn
@@ -349,4 +381,5 @@ Partial Class UC_DepartmentManagement
     Friend WithEvents totalSupplies As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
     Friend WithEvents btnedit As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents DepartmentAllocationSummarybtn As Resources.Controls.RoundedButton
 End Class

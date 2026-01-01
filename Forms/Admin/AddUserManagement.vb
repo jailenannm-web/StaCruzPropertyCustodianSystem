@@ -343,13 +343,13 @@ Public Class AddUserManagement
             Return
         End If
 
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SADashboard)
         If superAdminDashboard IsNot Nothing Then
             Dim newUC As New UC_UserManagement()
             superAdminDashboard.LoadUserControl(newUC)
             ' Refresh the table after loading
             newUC.RefreshUserTable()
-            System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (SuperAdminDashboard)")
+            System.Diagnostics.Debug.WriteLine("[v0] AddUserManagement - Navigated back to UC_UserManagement (SADashboard)")
             Return
         End If
 

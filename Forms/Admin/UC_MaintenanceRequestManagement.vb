@@ -224,7 +224,7 @@ Public Class UC_MaintenanceRequestManagement
             Return
         End If
         
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SADashboard)
         If superAdminDashboard IsNot Nothing Then
             superAdminDashboard.LoadUserControl(New EditMaintenance1())
             Return

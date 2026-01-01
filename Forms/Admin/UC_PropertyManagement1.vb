@@ -780,7 +780,7 @@ Public Class UC_PropertyManagement1
             Return
         End If
         
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
+        Dim superAdminDashboard = TryCast(Me.ParentForm, SADashboard)
         If superAdminDashboard IsNot Nothing Then
             superAdminDashboard.LoadUserControl(editForm)
             Return

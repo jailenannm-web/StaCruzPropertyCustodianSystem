@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Data
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
@@ -273,26 +273,17 @@ Public Class UC_UserManagement
         System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - ParentForm Type: " & If(Me.ParentForm IsNot Nothing, Me.ParentForm.GetType().Name, "NULL"))
         
         ' Use AddUserManagement instead of StaffRegister for Admin/SuperAdmin
-        ' Check SADashboard first (parent class of SuperAdminDashboard)
-        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-        If saDashboard IsNot Nothing Then
+        ' Check SADashboard first (parent class)
+        Dim superAdmin = TryCast(Me.ParentForm, SADashboard)
+        If superAdmin IsNot Nothing Then
             Try
-                saDashboard.LoadUserControl(New AddUserManagement())
+                superAdmin.LoadUserControl(New AddUserManagement())
                 System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - AddUserManagement loaded into SADashboard")
                 Return
             Catch ex As Exception
                 System.Diagnostics.Debug.WriteLine("[v0] SADashboard LoadUserControl Error: " & ex.Message)
             End Try
-        End If
-        
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-        If superAdminDashboard IsNot Nothing Then
-            Try
-                superAdminDashboard.LoadUserControl(New AddUserManagement())
-                Return
-            Catch ex As Exception
-                System.Diagnostics.Debug.WriteLine("[v0] SuperAdmin LoadUserControl Error: " & ex.Message)
-            End Try
+            Return
         End If
 
         Dim parentDashboard = TryCast(Me.ParentForm, AdminDashboard)
@@ -370,17 +361,11 @@ Public Class UC_UserManagement
             SafeValue(userData, "username")                ' username
         )
 
-        ' Check SADashboard first (parent class), then SuperAdminDashboard, then AdminDashboard
-        Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
-        If saDashboard IsNot Nothing Then
-            saDashboard.LoadUserControl(editForm)
+        ' Check SADashboard first (parent class), then AdminDashboard
+        Dim superAdmin = TryCast(Me.ParentForm, SADashboard)
+        If superAdmin IsNot Nothing Then
+            superAdmin.LoadUserControl(editForm)
             System.Diagnostics.Debug.WriteLine("[v0] UC_UserManagement - EditUser loaded into SADashboard")
-            Return
-        End If
-        
-        Dim superAdminDashboard = TryCast(Me.ParentForm, SuperAdminDashboard)
-        If superAdminDashboard IsNot Nothing Then
-            superAdminDashboard.LoadUserControl(editForm)
             Return
         End If
 
@@ -639,5 +624,15 @@ Public Class UC_UserManagement
 
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
 
+    End Sub
+
+    Private Sub btnUserReport_Click(sender As Object, e As EventArgs) Handles btnUserReport.Click
+        ' Open UserReportSummary form
+        Try
+            Dim reportForm As New UserReportSummary()
+            reportForm.ShowDialog()
+        Catch ex As Exception
+            MessageBox.Show("Error opening User Report: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class

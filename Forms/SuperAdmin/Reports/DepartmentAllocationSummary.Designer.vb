@@ -39,23 +39,6 @@ Partial Class DepartmentAllocationSummary_vb
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.departmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.departmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.headOfDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.email = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.building = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.floorNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.shortName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.officeCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.totalProperties = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.totalSupplies = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateReport = New System.Windows.Forms.DateTimePicker()
         Me.school = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -68,9 +51,37 @@ Partial Class DepartmentAllocationSummary_vb
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnApplyFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnClearFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.chkDateFilter = New System.Windows.Forms.CheckBox()
+        Me.dtpDateTo = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.cboDepartmentFilter = New System.Windows.Forms.ComboBox()
+        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.btn_Back = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.departmentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.departmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.headOfDepartment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.email = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.contactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.totalProperties = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.totalSupplies = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.building = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.floorNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.shortName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.officeCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -79,6 +90,7 @@ Partial Class DepartmentAllocationSummary_vb
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -270,136 +282,17 @@ Partial Class DepartmentAllocationSummary_vb
         '
         'DataGridView1
         '
+        Me.DataGridView1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.departmentID, Me.departmentName, Me.Column1, Me.headOfDepartment, Me.email, Me.contactNumber, Me.location, Me.building, Me.floorNumber, Me.shortName, Me.officeCode, Me.description, Me.totalProperties, Me.totalSupplies, Me.status, Me.createdAt, Me.updatedAt})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.departmentID, Me.departmentName, Me.headOfDepartment, Me.email, Me.contactNumber, Me.location, Me.totalProperties, Me.totalSupplies, Me.building, Me.floorNumber, Me.shortName, Me.officeCode, Me.description, Me.status, Me.createdAt, Me.updatedAt})
         Me.DataGridView1.Location = New System.Drawing.Point(-1, -2)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
         Me.DataGridView1.RowTemplate.Height = 24
         Me.DataGridView1.Size = New System.Drawing.Size(1027, 374)
         Me.DataGridView1.TabIndex = 0
-        '
-        'departmentID
-        '
-        Me.departmentID.HeaderText = "Department ID"
-        Me.departmentID.MinimumWidth = 6
-        Me.departmentID.Name = "departmentID"
-        Me.departmentID.Width = 125
-        '
-        'departmentName
-        '
-        Me.departmentName.HeaderText = "Department Name"
-        Me.departmentName.MinimumWidth = 6
-        Me.departmentName.Name = "departmentName"
-        Me.departmentName.Width = 125
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Column1"
-        Me.Column1.MinimumWidth = 6
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 125
-        '
-        'headOfDepartment
-        '
-        Me.headOfDepartment.HeaderText = "Department Head"
-        Me.headOfDepartment.MinimumWidth = 6
-        Me.headOfDepartment.Name = "headOfDepartment"
-        Me.headOfDepartment.Width = 125
-        '
-        'email
-        '
-        Me.email.HeaderText = "Email"
-        Me.email.MinimumWidth = 6
-        Me.email.Name = "email"
-        Me.email.Width = 125
-        '
-        'contactNumber
-        '
-        Me.contactNumber.HeaderText = "Contact Number"
-        Me.contactNumber.MinimumWidth = 6
-        Me.contactNumber.Name = "contactNumber"
-        Me.contactNumber.Width = 125
-        '
-        'location
-        '
-        Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
-        Me.location.Name = "location"
-        Me.location.Width = 125
-        '
-        'building
-        '
-        Me.building.HeaderText = "Building"
-        Me.building.MinimumWidth = 6
-        Me.building.Name = "building"
-        Me.building.Width = 125
-        '
-        'floorNumber
-        '
-        Me.floorNumber.HeaderText = "Floor Number"
-        Me.floorNumber.MinimumWidth = 6
-        Me.floorNumber.Name = "floorNumber"
-        Me.floorNumber.Width = 125
-        '
-        'shortName
-        '
-        Me.shortName.HeaderText = "Short Name"
-        Me.shortName.MinimumWidth = 6
-        Me.shortName.Name = "shortName"
-        Me.shortName.Width = 125
-        '
-        'officeCode
-        '
-        Me.officeCode.HeaderText = "Office Code"
-        Me.officeCode.MinimumWidth = 6
-        Me.officeCode.Name = "officeCode"
-        Me.officeCode.Width = 125
-        '
-        'description
-        '
-        Me.description.HeaderText = "Description"
-        Me.description.MinimumWidth = 6
-        Me.description.Name = "description"
-        Me.description.Width = 125
-        '
-        'totalProperties
-        '
-        Me.totalProperties.HeaderText = "Total Properties"
-        Me.totalProperties.MinimumWidth = 6
-        Me.totalProperties.Name = "totalProperties"
-        Me.totalProperties.Width = 125
-        '
-        'totalSupplies
-        '
-        Me.totalSupplies.HeaderText = "Total Supplies"
-        Me.totalSupplies.MinimumWidth = 6
-        Me.totalSupplies.Name = "totalSupplies"
-        Me.totalSupplies.Width = 125
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "Created at"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Visible = False
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "Updated at"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Visible = False
-        Me.updatedAt.Width = 125
         '
         'dateReport
         '
@@ -541,11 +434,148 @@ Partial Class DepartmentAllocationSummary_vb
         Me.Label1.Text = "Republic of the Philippines"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnApplyFilters)
+        Me.GroupBox1.Controls.Add(Me.btnClearFilters)
+        Me.GroupBox1.Controls.Add(Me.chkDateFilter)
+        Me.GroupBox1.Controls.Add(Me.dtpDateTo)
+        Me.GroupBox1.Controls.Add(Me.dtpDateFrom)
+        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.Label15)
+        Me.GroupBox1.Controls.Add(Me.cboDepartmentFilter)
+        Me.GroupBox1.Controls.Add(Me.cboStatusFilter)
+        Me.GroupBox1.Controls.Add(Me.Label18)
+        Me.GroupBox1.Controls.Add(Me.Label19)
+        Me.GroupBox1.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 59)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(130, 865)
+        Me.GroupBox1.TabIndex = 384
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Filters"
+        '
+        'btnApplyFilters
+        '
+        Me.btnApplyFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnApplyFilters.CornerRadius = 10
+        Me.btnApplyFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnApplyFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnApplyFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnApplyFilters.Location = New System.Drawing.Point(10, 380)
+        Me.btnApplyFilters.Name = "btnApplyFilters"
+        Me.btnApplyFilters.Size = New System.Drawing.Size(110, 30)
+        Me.btnApplyFilters.TabIndex = 400
+        Me.btnApplyFilters.Text = "Apply Filters"
+        Me.btnApplyFilters.UseVisualStyleBackColor = False
+        '
+        'btnClearFilters
+        '
+        Me.btnClearFilters.BackColor = System.Drawing.Color.Gray
+        Me.btnClearFilters.CornerRadius = 10
+        Me.btnClearFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClearFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnClearFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnClearFilters.Location = New System.Drawing.Point(10, 420)
+        Me.btnClearFilters.Name = "btnClearFilters"
+        Me.btnClearFilters.Size = New System.Drawing.Size(110, 30)
+        Me.btnClearFilters.TabIndex = 401
+        Me.btnClearFilters.Text = "Clear Filters"
+        Me.btnClearFilters.UseVisualStyleBackColor = False
+        '
+        'chkDateFilter
+        '
+        Me.chkDateFilter.AutoSize = True
+        Me.chkDateFilter.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.chkDateFilter.Location = New System.Drawing.Point(10, 210)
+        Me.chkDateFilter.Name = "chkDateFilter"
+        Me.chkDateFilter.Size = New System.Drawing.Size(118, 27)
+        Me.chkDateFilter.TabIndex = 399
+        Me.chkDateFilter.Text = "Filter by Date"
+        Me.chkDateFilter.UseVisualStyleBackColor = True
+        '
+        'dtpDateTo
+        '
+        Me.dtpDateTo.Font = New System.Drawing.Font("Poppins", 7.0!)
+        Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateTo.Location = New System.Drawing.Point(10, 330)
+        Me.dtpDateTo.Name = "dtpDateTo"
+        Me.dtpDateTo.Size = New System.Drawing.Size(110, 25)
+        Me.dtpDateTo.TabIndex = 398
+        '
+        'dtpDateFrom
+        '
+        Me.dtpDateFrom.Font = New System.Drawing.Font("Poppins", 7.0!)
+        Me.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateFrom.Location = New System.Drawing.Point(10, 270)
+        Me.dtpDateFrom.Name = "dtpDateFrom"
+        Me.dtpDateFrom.Size = New System.Drawing.Size(110, 25)
+        Me.dtpDateFrom.TabIndex = 397
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.Label16.Location = New System.Drawing.Point(6, 305)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(60, 23)
+        Me.Label16.TabIndex = 396
+        Me.Label16.Text = "To Date"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.Label15.Location = New System.Drawing.Point(6, 245)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(78, 23)
+        Me.Label15.TabIndex = 395
+        Me.Label15.Text = "From Date"
+        '
+        'cboDepartmentFilter
+        '
+        Me.cboDepartmentFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboDepartmentFilter.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.cboDepartmentFilter.FormattingEnabled = True
+        Me.cboDepartmentFilter.Location = New System.Drawing.Point(10, 150)
+        Me.cboDepartmentFilter.Name = "cboDepartmentFilter"
+        Me.cboDepartmentFilter.Size = New System.Drawing.Size(110, 31)
+        Me.cboDepartmentFilter.TabIndex = 394
+        '
+        'cboStatusFilter
+        '
+        Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatusFilter.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.cboStatusFilter.FormattingEnabled = True
+        Me.cboStatusFilter.Location = New System.Drawing.Point(10, 70)
+        Me.cboStatusFilter.Name = "cboStatusFilter"
+        Me.cboStatusFilter.Size = New System.Drawing.Size(110, 31)
+        Me.cboStatusFilter.TabIndex = 393
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.Label18.Location = New System.Drawing.Point(6, 45)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(52, 23)
+        Me.Label18.TabIndex = 390
+        Me.Label18.Text = "Status"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Poppins", 7.8!)
+        Me.Label19.Location = New System.Drawing.Point(6, 125)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(89, 23)
+        Me.Label19.TabIndex = 389
+        Me.Label19.Text = "Department"
+        '
         'btn_Back
         '
         Me.btn_Back.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_Back.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btn_Back.CornerRadius = 15
         Me.btn_Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_Back.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btn_Back.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -561,7 +591,6 @@ Partial Class DepartmentAllocationSummary_vb
         '
         Me.btnPDF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnPDF.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnPDF.CornerRadius = 15
         Me.btnPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPDF.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnPDF.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -577,7 +606,6 @@ Partial Class DepartmentAllocationSummary_vb
         '
         Me.btnCSV.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCSV.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnCSV.CornerRadius = 15
         Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -589,12 +617,133 @@ Partial Class DepartmentAllocationSummary_vb
         Me.btnCSV.Text = "Generate CSV File"
         Me.btnCSV.UseVisualStyleBackColor = False
         '
+        'departmentID
+        '
+        Me.departmentID.HeaderText = "Department ID"
+        Me.departmentID.MinimumWidth = 6
+        Me.departmentID.Name = "departmentID"
+        Me.departmentID.Visible = False
+        Me.departmentID.Width = 125
+        '
+        'departmentName
+        '
+        Me.departmentName.HeaderText = "Department Name"
+        Me.departmentName.MinimumWidth = 6
+        Me.departmentName.Name = "departmentName"
+        Me.departmentName.Width = 125
+        '
+        'headOfDepartment
+        '
+        Me.headOfDepartment.HeaderText = "Department Head"
+        Me.headOfDepartment.MinimumWidth = 6
+        Me.headOfDepartment.Name = "headOfDepartment"
+        Me.headOfDepartment.Width = 125
+        '
+        'email
+        '
+        Me.email.HeaderText = "Email"
+        Me.email.MinimumWidth = 6
+        Me.email.Name = "email"
+        Me.email.Width = 125
+        '
+        'contactNumber
+        '
+        Me.contactNumber.HeaderText = "Contact Number"
+        Me.contactNumber.MinimumWidth = 6
+        Me.contactNumber.Name = "contactNumber"
+        Me.contactNumber.Width = 125
+        '
+        'location
+        '
+        Me.location.HeaderText = "Location"
+        Me.location.MinimumWidth = 6
+        Me.location.Name = "location"
+        Me.location.Width = 125
+        '
+        'totalProperties
+        '
+        Me.totalProperties.HeaderText = "Total Properties"
+        Me.totalProperties.MinimumWidth = 6
+        Me.totalProperties.Name = "totalProperties"
+        Me.totalProperties.Width = 125
+        '
+        'totalSupplies
+        '
+        Me.totalSupplies.HeaderText = "Total Supplies"
+        Me.totalSupplies.MinimumWidth = 6
+        Me.totalSupplies.Name = "totalSupplies"
+        Me.totalSupplies.Width = 125
+        '
+        'building
+        '
+        Me.building.HeaderText = "Building"
+        Me.building.MinimumWidth = 6
+        Me.building.Name = "building"
+        Me.building.Visible = False
+        Me.building.Width = 125
+        '
+        'floorNumber
+        '
+        Me.floorNumber.HeaderText = "Floor Number"
+        Me.floorNumber.MinimumWidth = 6
+        Me.floorNumber.Name = "floorNumber"
+        Me.floorNumber.Visible = False
+        Me.floorNumber.Width = 125
+        '
+        'shortName
+        '
+        Me.shortName.HeaderText = "Short Name"
+        Me.shortName.MinimumWidth = 6
+        Me.shortName.Name = "shortName"
+        Me.shortName.Visible = False
+        Me.shortName.Width = 125
+        '
+        'officeCode
+        '
+        Me.officeCode.HeaderText = "Office Code"
+        Me.officeCode.MinimumWidth = 6
+        Me.officeCode.Name = "officeCode"
+        Me.officeCode.Visible = False
+        Me.officeCode.Width = 125
+        '
+        'description
+        '
+        Me.description.HeaderText = "Description"
+        Me.description.MinimumWidth = 6
+        Me.description.Name = "description"
+        Me.description.Visible = False
+        Me.description.Width = 125
+        '
+        'status
+        '
+        Me.status.HeaderText = "Status"
+        Me.status.MinimumWidth = 6
+        Me.status.Name = "status"
+        Me.status.Width = 125
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "Created at"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Visible = False
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "Updated at"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Visible = False
+        Me.updatedAt.Width = 125
+        '
         'DepartmentAllocationSummary_vb
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(1497, 1049)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btn_Back)
         Me.Controls.Add(Me.btnPDF)
         Me.Controls.Add(Me.btnCSV)
@@ -613,6 +762,8 @@ Partial Class DepartmentAllocationSummary_vb
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -665,4 +816,16 @@ Partial Class DepartmentAllocationSummary_vb
     Friend WithEvents btn_Back As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnPDF As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnCSV As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents cboStatusFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents cboDepartmentFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents chkDateFilter As System.Windows.Forms.CheckBox
+    Friend WithEvents dtpDateFrom As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpDateTo As System.Windows.Forms.DateTimePicker
+    Friend WithEvents btnApplyFilters As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnClearFilters As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label19 As System.Windows.Forms.Label
 End Class

@@ -474,22 +474,36 @@ Partial Class PropertyAcknowledgementReceipt
             Return text.Replace("\", "\\").Replace("(", "\(").Replace(")", "\)").Replace(vbCr, " ").Replace(vbLf, " ")
         End Function
         
-        ' Helper to draw multi-line text in a box
+        ' Helper to draw multi-line text in a box with word wrapping
         Dim DrawMultiLineText As Action(Of Integer, Integer, Integer, Integer, String) = Sub(x As Integer, yPos As Integer, width As Integer, height As Integer, text As String)
             ' Draw box
             builder.AppendLine($"{x} {yPos - height} {width} {height} re S")
             
-            ' Draw text inside box (simplified - just first line for now)
-            Dim textY As Integer = yPos - 15
+            ' Draw text inside box with proper wrapping
             Dim escapedText As String = EscapePdfText(text)
             
-            ' Split into lines if too long
-            Dim maxChars As Integer = If(width > 300, 60, 30)
-            If escapedText.Length > maxChars Then
-                escapedText = escapedText.Substring(0, maxChars) & "..."
-            End If
+            ' Calculate characters per line based on width and font size
+            Dim charsPerLine As Integer = CInt((width - 10) / 4.5) ' Approximate for 8pt font
+            Dim maxLines As Integer = CInt((height - 10) / 12) ' Approximate for 8pt font with line spacing
             
-            builder.AppendLine($"BT /F1 8 Tf {x + 5} {textY} Td ({escapedText}) Tj ET")
+            Dim startY As Integer = yPos - 12
+            Dim lineCount As Integer = 0
+            Dim currentPos As Integer = 0
+            
+            While currentPos < escapedText.Length AndAlso lineCount < maxLines
+                Dim lineLength As Integer = Math.Min(charsPerLine, escapedText.Length - currentPos)
+                Dim lineText As String = escapedText.Substring(currentPos, lineLength)
+                
+                ' Truncate with ellipsis if we're on the last line and there's more text
+                If lineCount = maxLines - 1 AndAlso currentPos + lineLength < escapedText.Length Then
+                    lineText = lineText.Substring(0, Math.Max(0, lineText.Length - 3)) & "..."
+                End If
+                
+                builder.AppendLine($"BT /F1 8 Tf {x + 5} {startY - (lineCount * 12)} Td ({lineText}) Tj ET")
+                
+                currentPos += lineLength
+                lineCount += 1
+            End While
         End Sub
         
         ' Draw outer border

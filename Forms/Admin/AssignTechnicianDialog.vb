@@ -177,8 +177,8 @@ Public Class AssignTechnicianDialog
         btnAssign.FlatAppearance.BorderSize = 0
         btnAssign.Cursor = Cursors.Hand
         AddHandler btnAssign.Click, AddressOf BtnAssign_Click
-        AddHandler btnAssign.MouseEnter, Sub() btnAssign.BackColor = Color.FromArgb(39, 174, 96)
-        AddHandler btnAssign.MouseLeave, Sub() btnAssign.BackColor = Color.FromArgb(46, 204, 113)
+        AddHandler btnAssign.MouseEnter, AddressOf BtnAssign_MouseEnter
+        AddHandler btnAssign.MouseLeave, AddressOf BtnAssign_MouseLeave
         Me.Controls.Add(btnAssign)
 
         ' Cancel Button
@@ -193,8 +193,8 @@ Public Class AssignTechnicianDialog
         btnCancel.FlatAppearance.BorderSize = 0
         btnCancel.Cursor = Cursors.Hand
         AddHandler btnCancel.Click, AddressOf BtnCancel_Click
-        AddHandler btnCancel.MouseEnter, Sub() btnCancel.BackColor = Color.FromArgb(127, 140, 141)
-        AddHandler btnCancel.MouseLeave, Sub() btnCancel.BackColor = Color.FromArgb(149, 165, 166)
+        AddHandler btnCancel.MouseEnter, AddressOf BtnCancel_MouseEnter
+        AddHandler btnCancel.MouseLeave, AddressOf BtnCancel_MouseLeave
         Me.Controls.Add(btnCancel)
 
         ' Set tab order
@@ -291,5 +291,21 @@ Public Class AssignTechnicianDialog
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs)
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
+    End Sub
+
+    Private Sub BtnAssign_MouseEnter(sender As Object, e As EventArgs)
+        btnAssign.BackColor = Color.FromArgb(39, 174, 96)
+    End Sub
+
+    Private Sub BtnAssign_MouseLeave(sender As Object, e As EventArgs)
+        btnAssign.BackColor = Color.FromArgb(46, 204, 113)
+    End Sub
+
+    Private Sub BtnCancel_MouseEnter(sender As Object, e As EventArgs)
+        btnCancel.BackColor = Color.FromArgb(127, 140, 141)
+    End Sub
+
+    Private Sub BtnCancel_MouseLeave(sender As Object, e As EventArgs)
+        btnCancel.BackColor = Color.FromArgb(149, 165, 166)
     End Sub
 End Class
