@@ -45,7 +45,7 @@ Partial Public Class MaintenanceReport
             System.Diagnostics.Debug.WriteLine($"[MaintenanceReport] Loading maintenance ID: {maintenanceId}")
             
             ' Get maintenance data from database
-            maintenanceData = DatabaseConnection.GetMaintenanceById(maintenanceId)
+            maintenanceData = modDB.GetMaintenanceById(maintenanceId)
             
             If maintenanceData Is Nothing Then
                 MessageBox.Show("Maintenance record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

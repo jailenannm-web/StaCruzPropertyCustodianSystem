@@ -35,7 +35,7 @@ Public Class SAUserManagement
             DataGridView1.Rows.Clear()
             
             ' Get all users from database
-            Dim dt As DataTable = DatabaseConnection.GetAllUsers("", "", "")
+            Dim dt As DataTable = modDB.GetAllUsers("", "", "")
             
             If dt IsNot Nothing Then
                 originalUserData = dt.Copy()

@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Windows.Forms
 Imports System.Linq
@@ -160,7 +160,7 @@ Public Class AssignSupplyManagement
                 category.Items.Clear()
                 ' Try to load from database first
                 Try
-                    Dim categoriesTable As DataTable = DatabaseConnection.GetCategories("supply")
+                    Dim categoriesTable As DataTable = modDB.GetCategories("supply")
                     If categoriesTable IsNot Nothing AndAlso categoriesTable.Rows.Count > 0 Then
                         category.DataSource = categoriesTable
                         If categoriesTable.Columns.Contains("categoryName") Then
@@ -193,7 +193,7 @@ Public Class AssignSupplyManagement
 
     Private Sub LoadDepartmentDropdown()
         Try
-            Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
+            Dim deptTable As DataTable = modDB.GetDepartmentLookup(True)
             If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 AndAlso department IsNot Nothing Then
                 department.DataSource = deptTable
                 If deptTable.Columns.Contains("departmentName") Then
@@ -217,7 +217,7 @@ Public Class AssignSupplyManagement
             If location IsNot Nothing Then
                 location.Items.Clear()
                 Try
-                    Dim locationsTable As DataTable = DatabaseConnection.GetLocations()
+                    Dim locationsTable As DataTable = modDB.GetLocations()
                     If locationsTable IsNot Nothing AndAlso locationsTable.Rows.Count > 0 Then
                         For Each row As DataRow In locationsTable.Rows
                             Dim locName As String = ""
@@ -302,7 +302,7 @@ Public Class AssignSupplyManagement
                 Return
             End If
 
-            Dim usersTable As DataTable = DatabaseConnection.GetUsersByDepartment(deptID)
+            Dim usersTable As DataTable = modDB.GetUsersByDepartment(deptID)
             If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 AndAlso employee IsNot Nothing Then
                 employee.DataSource = usersTable
                 employee.DisplayMember = "fullName"
@@ -319,7 +319,7 @@ Public Class AssignSupplyManagement
     
     Private Sub LoadAllEmployees()
         Try
-            Dim allUsersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
+            Dim allUsersTable As DataTable = modDB.GetActiveUsersForAssignment(Nothing)
             If allUsersTable IsNot Nothing AndAlso allUsersTable.Rows.Count > 0 AndAlso employee IsNot Nothing Then
                 employee.DataSource = allUsersTable
                 employee.DisplayMember = "fullName"
@@ -370,7 +370,7 @@ Public Class AssignSupplyManagement
 
     Private Sub AutoFillSupplyDetails(sID As Integer)
         ' Get supply details from database
-        Dim supplyData As DataRow = DatabaseConnection.GetSupplyById(sID)
+        Dim supplyData As DataRow = modDB.GetSupplyById(sID)
         If supplyData Is Nothing Then Return
 
         ' Auto-fill Supply Name dropdown (sync with Supply ID selection)
@@ -501,7 +501,7 @@ Public Class AssignSupplyManagement
         If currentRequestID > 0 Then
             Try
                 ' Try supply requests
-                Dim dtSupply As DataTable = DatabaseConnection.GetAllSuppliesRequests()
+                Dim dtSupply As DataTable = modDB.GetAllSuppliesRequests()
                 Dim requestRows() As DataRow = dtSupply.Select("requestId = " & currentRequestID)
                 If requestRows.Length = 0 Then
                     requestRows = dtSupply.Select("request_id = " & currentRequestID)
@@ -554,7 +554,7 @@ Public Class AssignSupplyManagement
 
     Private Sub LoadAvailableSupplies()
         Try
-            Dim suppliesTable As DataTable = DatabaseConnection.GetAllSupplies()
+            Dim suppliesTable As DataTable = modDB.GetAllSupplies()
             If suppliesTable Is Nothing OrElse suppliesTable.Rows.Count = 0 Then Return
 
             ' Filter for available supplies with quantity > 0
@@ -654,14 +654,14 @@ Public Class AssignSupplyManagement
             ' 2. Deducting from inventory
             ' 3. Setting assignedTo
             ' 4. Creating borrowed_items record automatically
-            Dim success As Boolean = DatabaseConnection.AssignSupplyToUser(selectedSupplyID, selectedEmployeeID, qtyToAssign, deptId, purposeText)
+            Dim success As Boolean = modDB.AssignSupplyToUser(selectedSupplyID, selectedEmployeeID, qtyToAssign, deptId, purposeText)
 
             If success Then
                 ' If this assignment is related to a supply request, update the request status
                 If currentRequestID > 0 Then
                     Try
-                        Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-                        If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                        Dim conn As MySqlConnection = modDB.GetConnection()
+                        If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                             Using updateCmd As New MySqlCommand("UPDATE supplies_requests SET status = 'Released', releasedBy = @adminName, releasedDate = NOW(), updatedAt = NOW() WHERE requestId = @requestID", conn)
                                 updateCmd.Parameters.AddWithValue("@adminName", adminName)
                                 updateCmd.Parameters.AddWithValue("@requestID", currentRequestID)

@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Linq
 Imports System.Windows.Forms
@@ -32,7 +32,7 @@ Public Class PropertyInventory
         
         Try
             ' Load categories from database
-            Dim categoriesTable As DataTable = DatabaseConnection.GetCategories("property")
+            Dim categoriesTable As DataTable = modDB.GetCategories("property")
             If categoriesTable IsNot Nothing AndAlso categoriesTable.Rows.Count > 0 Then
                 For Each row As DataRow In categoriesTable.Rows
                     Dim catName As String = ""
@@ -85,7 +85,7 @@ Public Class PropertyInventory
             Dim statusFilter As String = If(cboStatus.SelectedIndex > 0, cboStatus.SelectedItem.ToString(), "")
 
             ' Load properties from database - using the same function as UC_PropertyManagement1
-            Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, conditionFilter, categoryFilter, Nothing, statusFilter)
+            Dim dt As DataTable = modDB.GetAllProperties(Nothing, conditionFilter, categoryFilter, Nothing, statusFilter)
             
             If dt Is Nothing Then
                 MessageBox.Show("Unable to connect to database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)

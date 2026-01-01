@@ -50,7 +50,7 @@ Public Class AddUserManagement
     Private Sub LoadDepartmentDropdown()
         Try
             departmentId.Items.Clear()
-            Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
+            Dim deptTable As DataTable = modDB.GetDepartmentLookup(True)
             If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 Then
                 departmentId.DisplayMember = "department_name"
                 departmentId.ValueMember = "department_id"
@@ -69,7 +69,7 @@ Public Class AddUserManagement
         Try
             RemoveHandler province.SelectedIndexChanged, AddressOf province_SelectedIndexChanged
             province.Items.Clear()
-            Dim provinces As DataTable = DatabaseConnection.GetProvinces()
+            Dim provinces As DataTable = modDB.GetProvinces()
             If provinces IsNot Nothing AndAlso provinces.Rows.Count > 0 Then
                 province.DisplayMember = "province_name"
                 province.ValueMember = "province_id"
@@ -136,7 +136,7 @@ Public Class AddUserManagement
 
             If String.IsNullOrEmpty(selectedProvince) Then Return
 
-            Dim municipalities As DataTable = DatabaseConnection.GetMunicipalities(selectedProvince)
+            Dim municipalities As DataTable = modDB.GetMunicipalities(selectedProvince)
             If municipalities IsNot Nothing AndAlso municipalities.Rows.Count > 0 Then
                 municipal.DisplayMember = "municipality_name"
                 municipal.ValueMember = "municipality_name"
@@ -195,7 +195,7 @@ Public Class AddUserManagement
 
             If String.IsNullOrEmpty(selectedMunicipality) Then Return
 
-            Dim barangays As DataTable = DatabaseConnection.GetBarangays(selectedMunicipality)
+            Dim barangays As DataTable = modDB.GetBarangays(selectedMunicipality)
             If barangays IsNot Nothing AndAlso barangays.Rows.Count > 0 Then
                 barangay.DisplayMember = "barangay_name"
                 barangay.ValueMember = "barangay_name"
@@ -294,7 +294,7 @@ Public Class AddUserManagement
         End If
 
 
-        Dim success As Boolean = DatabaseConnection.AddAdminAccount(
+        Dim success As Boolean = modDB.AddAdminAccount(
             firstName.Text.Trim(),
             lastName.Text.Trim(),
             email.Text.Trim(),

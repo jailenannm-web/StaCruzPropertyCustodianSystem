@@ -30,7 +30,7 @@ Partial Public Class RequisitionIssueSlip
 
     Private Sub LoadSelectedRequest()
         Try
-            Dim requestData As DataRow = DatabaseConnection.GetRequestById(selectedRequestId.Value, selectedRequestType)
+            Dim requestData As DataRow = modDB.GetRequestById(selectedRequestId.Value, selectedRequestType)
             If requestData IsNot Nothing Then
                 ' Debug: Log all columns and values
                 System.Diagnostics.Debug.WriteLine("[v0] ===== Request Data Loaded =====")
@@ -233,8 +233,8 @@ Partial Public Class RequisitionIssueSlip
 
     Private Sub LoadRequisitionData()
         Try
-            ' Load supply requests using DatabaseConnection function
-            Dim dt As DataTable = DatabaseConnection.GetAllSuppliesRequests()
+            ' Load supply requests using modDB function
+            Dim dt As DataTable = modDB.GetAllSuppliesRequests()
             If dt Is Nothing OrElse dt.Rows.Count = 0 Then
                 requisitionTable = New DataTable()
                 Return
@@ -360,7 +360,7 @@ Partial Public Class RequisitionIssueSlip
         Try
             ' If we have a selected request, export that specific request data as CSV
             If selectedRequestId.HasValue AndAlso Not String.IsNullOrEmpty(selectedRequestType) Then
-                Dim requestData As DataRow = DatabaseConnection.GetRequestById(selectedRequestId.Value, selectedRequestType)
+                Dim requestData As DataRow = modDB.GetRequestById(selectedRequestId.Value, selectedRequestType)
                 If requestData IsNot Nothing Then
                     ' Convert single request to a key-value DataTable for CSV export
                     Dim csvTable As New DataTable()
@@ -418,7 +418,7 @@ Partial Public Class RequisitionIssueSlip
         Try
             ' If we have a selected request, use the specialized PDF export
             If selectedRequestId.HasValue AndAlso Not String.IsNullOrEmpty(selectedRequestType) Then
-                Dim requestData As DataRow = DatabaseConnection.GetRequestById(selectedRequestId.Value, selectedRequestType)
+                Dim requestData As DataRow = modDB.GetRequestById(selectedRequestId.Value, selectedRequestType)
                 If requestData IsNot Nothing Then
                     Dim fileName As String = "requisition_slip_" & selectedRequestId.Value.ToString() & "_" & DateTime.Now.ToString("yyyyMMdd_HHmm") & ".pdf"
                     ReportExportHelper.ExportRequisitionSlipToPdf(requestData, fileName)

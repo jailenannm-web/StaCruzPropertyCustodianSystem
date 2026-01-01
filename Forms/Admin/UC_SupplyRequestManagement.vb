@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Drawing
 Imports System.Data
 Imports System.Windows.Forms
@@ -46,7 +46,7 @@ Public Class UC_SupplyRequestManagement
 
     Private Sub LoadSupplyRequestData()
         Try
-            Dim dt As DataTable = DatabaseConnection.GetAllSuppliesRequests()
+            Dim dt As DataTable = modDB.GetAllSuppliesRequests()
 
             If dt Is Nothing Then
                 MessageBox.Show("Unable to load supply requests. Please check your database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -278,7 +278,7 @@ Public Class UC_SupplyRequestManagement
 
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-            If DatabaseConnection.RejectSupplyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
+            If modDB.RejectSupplyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
                 MessageBox.Show("Supply request rejected successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadSupplyRequestData()
             Else
@@ -342,7 +342,7 @@ Public Class UC_SupplyRequestManagement
             
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-            If DatabaseConnection.ApproveSupplyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
+            If modDB.ApproveSupplyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
                 MessageBox.Show("Supply request approved successfully. The supply has been assigned to the requester.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadSupplyRequestData()
                 

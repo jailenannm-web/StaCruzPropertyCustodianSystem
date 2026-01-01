@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
@@ -47,7 +47,7 @@ Public Class AssignTechnician
         Try
             If _maintenanceID <= 0 Then Return
 
-            Dim dt As DataTable = DatabaseConnection.GetAllMaintenance()
+            Dim dt As DataTable = modDB.GetAllMaintenance()
             For Each row As DataRow In dt.Rows
                 Dim rowID As Integer = 0
                 If dt.Columns.Contains("maintenanceId") AndAlso Not IsDBNull(row("maintenanceId")) Then
@@ -124,7 +124,7 @@ Public Class AssignTechnician
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
             ' Update maintenance record with assigned technician
-            If DatabaseConnection.UpdateMaintenanceEntry(_maintenanceID, serviceDate, serviceType, description, "", "", cost, Nothing, selectedTechnician, "Assigned", "", 0, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
+            If modDB.UpdateMaintenanceEntry(_maintenanceID, serviceDate, serviceType, description, "", "", cost, Nothing, selectedTechnician, "Assigned", "", 0, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole) Then
                 MessageBox.Show("Technician assigned successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.DialogResult = DialogResult.OK
                 Me.Close()

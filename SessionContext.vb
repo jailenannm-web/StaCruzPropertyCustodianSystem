@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Text
@@ -120,7 +120,7 @@ Public Class SessionContext
         _isLoggedIn = True
 
         ' Update last login in database
-        DatabaseConnection.UpdateLastLogin(userID)
+        modDB.UpdateLastLogin(userID)
     End Sub
 
     Public Shared Sub Logout()
@@ -145,7 +145,7 @@ Public Class SessionContext
         _isLoggedIn = True
 
         ' Update last login in database
-        DatabaseConnection.UpdateLastLogin(userID)
+        modDB.UpdateLastLogin(userID)
     End Sub
 
     ''' <summary>

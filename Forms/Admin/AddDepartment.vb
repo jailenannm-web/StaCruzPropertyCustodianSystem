@@ -64,7 +64,7 @@ Public Class AddDepartment
             Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
             Dim tbHead As TextBox = FindControlOfType(Of TextBox)("departmentHead")
 
-            Dim usersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
+            Dim usersTable As DataTable = modDB.GetActiveUsersForAssignment(Nothing)
             If cbHead IsNot Nothing Then
                 If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 Then
                     cbHead.DataSource = usersTable
@@ -227,7 +227,7 @@ Public Class AddDepartment
             Dim descriptionValue As String = If(descriptionTxt IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(descriptionTxt.Text), descriptionTxt.Text.Trim(), "")
             
             ' Call the AddDepartment function with all parameters including building, floorNumber, shortName, description, status
-            Dim success As Boolean = DatabaseConnection.AddDepartment(
+            Dim success As Boolean = modDB.AddDepartment(
                 deptName,
                 headOfDeptString,
                 locationStr,

@@ -1,4 +1,4 @@
-Imports System.Drawing.Drawing2D
+﻿Imports System.Drawing.Drawing2D
 Imports System.Diagnostics
 Imports System
 Imports System.Data
@@ -14,7 +14,7 @@ Public Class UC_AddSupply
         Me.Dock = DockStyle.Fill
         ' Load categories from database
         Try
-            Dim categories As DataTable = DatabaseConnection.GetCategories("supply")
+            Dim categories As DataTable = modDB.GetCategories("supply")
             If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
                 pm_as_cmbobxCateg.Items.Clear()
                 For Each row As DataRow In categories.Rows
@@ -77,7 +77,7 @@ Public Class UC_AddSupply
             End If
             
             ' Call database function with all required parameters including dateReceived
-            Dim success As Boolean = DatabaseConnection.AddSupply(
+            Dim success As Boolean = modDB.AddSupply(
                 um_as_txtSupplyID.Text.Trim(),
                 pm_as_txtName.Text.Trim(),
                 pm_as_cmbobxCateg.SelectedItem.ToString(),

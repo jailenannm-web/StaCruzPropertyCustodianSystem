@@ -38,7 +38,7 @@ Partial Class PropertyAcknowledgementReceipt
             System.Diagnostics.Debug.WriteLine($"[PropertyAcknowledgementReceipt] Loading property ID: {propertyID}")
             
             ' Get property data directly from properties table
-            requestData = DatabaseConnection.GetPropertyById(propertyID)
+            requestData = modDB.GetPropertyById(propertyID)
             
             If requestData Is Nothing Then
                 MessageBox.Show("Property data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -63,7 +63,7 @@ Partial Class PropertyAcknowledgementReceipt
             System.Diagnostics.Debug.WriteLine($"[PropertyAcknowledgementReceipt] Loading request ID: {requestID}, Type: {requestType}")
             
             ' Get request data from database
-            requestData = DatabaseConnection.GetRequestById(requestID, requestType)
+            requestData = modDB.GetRequestById(requestID, requestType)
             
             If requestData Is Nothing Then
                 MessageBox.Show("Request data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

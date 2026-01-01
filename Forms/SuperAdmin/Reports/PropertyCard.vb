@@ -36,7 +36,7 @@ Public Class PropertyCard
         Try
             If requestID <= 0 Then Return
             
-            Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
+            Dim dt As DataTable = modDB.GetAllPropertyRequests()
             Dim requestRows() As DataRow = dt.Select($"requestId = {requestID}")
             If requestRows.Length = 0 Then
                 requestRows = dt.Select($"request_id = {requestID}")
@@ -171,7 +171,7 @@ Public Class PropertyCard
             Not HasColumn("warranty_details")
 
         If needsRefresh AndAlso propertyID > 0 Then
-            Dim detailedRow As DataRow = DatabaseConnection.GetPropertyDetails(propertyID)
+            Dim detailedRow As DataRow = modDB.GetPropertyDetails(propertyID)
             If detailedRow IsNot Nothing Then
                 propertyData = detailedRow
             End If

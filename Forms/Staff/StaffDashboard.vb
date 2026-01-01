@@ -111,7 +111,7 @@ Public Class StaffDashboard
             End If
 
             ' Load recent requests for the DataGridView
-            Dim dt As DataTable = DatabaseConnection.GetStaffRequests(SessionContext.CurrentUserID.Value)
+            Dim dt As DataTable = modDB.GetStaffRequests(SessionContext.CurrentUserID.Value)
 
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 ' Clear existing data
@@ -183,7 +183,7 @@ Public Class StaffDashboard
             ' Get pending requests count
             Dim pendingRequests As Integer = 0
             Try
-                Dim dtPending As DataTable = DatabaseConnection.GetStaffRequests(SessionContext.CurrentUserID.Value, "Pending", "", Nothing, Nothing)
+                Dim dtPending As DataTable = modDB.GetStaffRequests(SessionContext.CurrentUserID.Value, "Pending", "", Nothing, Nothing)
                 If dtPending IsNot Nothing Then
                     pendingRequests = dtPending.Rows.Count
                 End If
@@ -193,7 +193,7 @@ Public Class StaffDashboard
             ' Get borrowed items count
             Dim borrowedItems As Integer = 0
             Try
-                Dim dtBorrowed As DataTable = DatabaseConnection.GetStaffBorrowedItems(SessionContext.CurrentUserID.Value, False)
+                Dim dtBorrowed As DataTable = modDB.GetStaffBorrowedItems(SessionContext.CurrentUserID.Value, False)
                 If dtBorrowed IsNot Nothing Then
                     borrowedItems = dtBorrowed.Rows.Count
                 End If
@@ -262,7 +262,7 @@ Public Class StaffDashboard
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        Dim logout As New logout()
+        Dim logout As New Form1()
         logout.Show()   ' Show the register form
         Me.Hide()            ' Hide current login form instead of closing it
     End Sub

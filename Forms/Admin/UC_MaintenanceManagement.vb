@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Linq
@@ -246,8 +246,8 @@ Public Class UC_MaintenanceManagement
     ' ================================================================
     Private Sub LoadMaintenanceData()
         Try
-            ' Get maintenance data using DatabaseConnection
-            Dim maintenanceData As DataTable = DatabaseConnection.GetAllMaintenance()
+            ' Get maintenance data using modDB
+            Dim maintenanceData As DataTable = modDB.GetAllMaintenance()
             
             If maintenanceData Is Nothing Then
                 MessageBox.Show("Unable to load maintenance records. Please check your database connection.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -456,8 +456,8 @@ Public Class UC_MaintenanceManagement
             If result <> DialogResult.Yes Then Return
 
             ' Delete from database
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 Using cmd As New MySqlCommand("DELETE FROM maintenance WHERE maintenanceId = @maintenanceID", conn)
                     cmd.Parameters.AddWithValue("@maintenanceID", maintenanceID)
                     If cmd.ExecuteNonQuery() > 0 Then
@@ -615,10 +615,10 @@ Public Class UC_MaintenanceManagement
     ''' </summary>
     Private Function GetMaintenanceDetails(maintenanceID As Integer) As DataRow
         Try
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            Dim conn As MySqlConnection = modDB.GetConnection()
             If conn Is Nothing Then Return Nothing
             
-            If Not DatabaseConnection.SafeOpenConnection(conn) Then Return Nothing
+            If Not modDB.SafeOpenConnection(conn) Then Return Nothing
             
             Dim query As String = "SELECT m.*, d.departmentName " &
                                  "FROM maintenance m " &

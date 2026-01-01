@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.IO
@@ -60,8 +60,8 @@ Public Class MaintenanceManagementReport1
 
     Private Sub LoadTechnicians()
         Try
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 Dim query As String = "SELECT DISTINCT assignedTechnician FROM maintenance WHERE assignedTechnician IS NOT NULL AND assignedTechnician <> '' ORDER BY assignedTechnician"
                 
                 Using cmd As New MySqlCommand(query, conn)
@@ -84,8 +84,8 @@ Public Class MaintenanceManagementReport1
             currentMaintenanceID = maintenanceId
             Debug.WriteLine($"[MaintenanceManagementReport1] Loading data for ID: {maintenanceId}")
             
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 Dim query As String = "SELECT m.*, d.departmentName " &
                                      "FROM maintenance m " &
                                      "LEFT JOIN departments d ON m.departmentId = d.departmentId " &

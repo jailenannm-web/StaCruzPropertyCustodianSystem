@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
@@ -70,8 +70,8 @@ Public Class AddSupplyRequest
             ' Load user details from database using direct query
             Dim conn As MySqlConnection = Nothing
             Try
-                conn = DatabaseConnection.GetConnection()
-                If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                conn = modDB.GetConnection()
+                If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                     Dim query As String = "SELECT firstName, middleName, lastName, suffix, position, departmentId FROM users WHERE userId = @userId LIMIT 1"
                     Using cmd As New MySqlCommand(query, conn)
                         cmd.Parameters.AddWithValue("@userId", currentUserId)
@@ -130,7 +130,7 @@ Public Class AddSupplyRequest
 
     Private Sub LoadDepartments()
         Try
-            Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
+            Dim dt As DataTable = modDB.GetAllDepartments()
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 cboDepartment.Items.Clear()
                 cboDepartment.Items.Add("-- Select Department --")
@@ -194,8 +194,8 @@ Public Class AddSupplyRequest
             ' Query database for existing supply with this item name
             Dim conn As MySqlConnection = Nothing
             Try
-                conn = DatabaseConnection.GetConnection()
-                If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                conn = modDB.GetConnection()
+                If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                     ' Search for supply with matching item name (case-insensitive)
                     Dim query As String = "SELECT unitOfMeasure FROM supplies WHERE LOWER(itemName) = LOWER(@itemName) AND unitOfMeasure IS NOT NULL LIMIT 1"
                     Using cmd As New MySqlCommand(query, conn)
@@ -272,8 +272,8 @@ Public Class AddSupplyRequest
             Dim purpose As String = txtPurpose.Text.Trim()
 
             ' Insert into supplies_requests table
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 Try
                     Dim query As String = "INSERT INTO supplies_requests (requesterName, position, departmentId, dateOfRequest, " &
                                          "itemName, description, quantityRequested, unit, purpose, status, createdAt, updatedAt) " &

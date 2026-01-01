@@ -1,7 +1,7 @@
 ﻿Imports System
 Imports System.Windows.Forms
 
-Public Class logout
+Public Class Form1
 
 
     Private Sub btn_Logic_Click(sender As Object, e As EventArgs) Handles btn_Cancel.Click

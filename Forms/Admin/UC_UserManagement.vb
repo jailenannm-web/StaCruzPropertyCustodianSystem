@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
@@ -93,7 +93,7 @@ Public Class UC_UserManagement
         Dim savedUsername As String = My.Settings.LoggedInuser
         If String.IsNullOrWhiteSpace(savedUsername) Then Return
 
-        Dim context = DatabaseConnection.GetAdminContextByUsername(savedUsername)
+        Dim context = modDB.GetAdminContextByUsername(savedUsername)
         If context Is Nothing OrElse context.Count = 0 Then Return
 
         If context.ContainsKey("user_id") Then
@@ -119,7 +119,7 @@ Public Class UC_UserManagement
             pm_table.Rows.Clear()
 
             ' Use GetAllUsers to get both Admin/SuperAdmin (from users table) and Staff (from staff_accounts table)
-            Dim records As DataTable = DatabaseConnection.GetAllUsers(currentStatusFilter, currentRoleFilter, "")
+            Dim records As DataTable = modDB.GetAllUsers(currentStatusFilter, currentRoleFilter, "")
 
             ' Store original data for search
             If records IsNot Nothing AndAlso records.Rows.Count > 0 Then
@@ -226,7 +226,7 @@ Public Class UC_UserManagement
             End If
             If totalLabel IsNot Nothing Then
                 ' Get accurate count from database instead of DataTable rows
-                Dim actualUserCount As Integer = DatabaseConnection.GetTotalUserCount()
+                Dim actualUserCount As Integer = modDB.GetTotalUserCount()
                 totalLabel.Text = actualUserCount.ToString()
             End If
 
@@ -340,7 +340,7 @@ Public Class UC_UserManagement
         End If
 
         ' Get full user data from database
-        Dim userData As DataRow = DatabaseConnection.GetUserById(userId)
+        Dim userData As DataRow = modDB.GetUserById(userId)
         If userData Is Nothing Then
             MessageBox.Show("User data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
@@ -409,7 +409,7 @@ Public Class UC_UserManagement
                                            "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If confirmation <> DialogResult.Yes Then Return
 
-        Dim success = DatabaseConnection.DeleteAdminAccount(userIDValue,
+        Dim success = modDB.DeleteAdminAccount(userIDValue,
                                                             currentAdminID,
                                                             currentAdminType,
                                                             currentAdminUsername,
@@ -495,7 +495,7 @@ Public Class UC_UserManagement
         If originalUserData Is Nothing Then
             ' Store original data on first search
             Try
-                Dim dt As DataTable = DatabaseConnection.GetAllUsers(currentStatusFilter, currentRoleFilter, "")
+                Dim dt As DataTable = modDB.GetAllUsers(currentStatusFilter, currentRoleFilter, "")
                 If dt IsNot Nothing Then
                     originalUserData = dt.Copy()
                 End If
@@ -623,7 +623,7 @@ Public Class UC_UserManagement
             End If
             If totalLabel IsNot Nothing Then
                 ' Show filtered count but note it's filtered
-                Dim actualUserCount As Integer = DatabaseConnection.GetTotalUserCount()
+                Dim actualUserCount As Integer = modDB.GetTotalUserCount()
                 totalLabel.Text = $"{filtered.Count()} of {actualUserCount}"
             End If
         Catch ex As Exception

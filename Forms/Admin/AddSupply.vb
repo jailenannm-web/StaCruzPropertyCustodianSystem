@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Linq
@@ -50,7 +50,7 @@ Public Class AddSupply
 
     Private Sub LoadDepartments()
         Try
-            Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
+            Dim dt As DataTable = modDB.GetAllDepartments()
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 cboDepartment.Items.Clear()
                 cboDepartment.Items.Add("-- Select Department --")
@@ -74,8 +74,8 @@ Public Class AddSupply
     Private Sub LoadUsers()
         Try
             ' Load users for Assigned To dropdown
-            Using conn As MySqlConnection = DatabaseConnection.GetConnection()
-                If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Using conn As MySqlConnection = modDB.GetConnection()
+                If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                     Using cmd As New MySqlCommand("SELECT userId, CONCAT(IFNULL(firstName,''), ' ', IFNULL(lastName,'')) AS fullName FROM users WHERE status = 'Active' ORDER BY firstName, lastName", conn)
                         Using reader As MySqlDataReader = cmd.ExecuteReader()
                             cboAssignedTo.Items.Clear()
@@ -101,7 +101,7 @@ Public Class AddSupply
 
     Private Sub LoadSuppliers()
         Try
-            Dim suppliers As List(Of String) = DatabaseConnection.GetAllSuppliers()
+            Dim suppliers As List(Of String) = modDB.GetAllSuppliers()
             cboSupplier.Items.Clear()
             cboSupplier.Items.Add("-- Select or Type Supplier --")
 
@@ -117,7 +117,7 @@ Public Class AddSupply
 
     Private Sub LoadUnitOfMeasures()
         Try
-            Dim units As List(Of String) = DatabaseConnection.GetAllUnitOfMeasures()
+            Dim units As List(Of String) = modDB.GetAllUnitOfMeasures()
             cboUnitOfMeasure.Items.Clear()
             cboUnitOfMeasure.Items.Add("-- Select or Type Unit --")
 
@@ -211,7 +211,7 @@ Public Class AddSupply
                 assignedToId = CType(cboAssignedTo.SelectedItem, UserItem).UserId
             End If
 
-            Dim success = DatabaseConnection.AddSupply(
+            Dim success = modDB.AddSupply(
                 txtItemName.Text.Trim(),
                 GetComboValue(cboCategory, "Others"),
                 txtDescription.Text.Trim(),
@@ -231,8 +231,8 @@ Public Class AddSupply
                 ' If supply is assigned to a user, create borrowed_items record
                 If assignedToId.HasValue AndAlso assignedToId.Value > 0 Then
                     Try
-                        Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-                        If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                        Dim conn As MySqlConnection = modDB.GetConnection()
+                        If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                             ' Get the newly created supply ID
                             Dim newSupplyId As Integer = 0
                             Using cmd As New MySqlCommand("SELECT LAST_INSERT_ID()", conn)

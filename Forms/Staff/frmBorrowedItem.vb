@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
@@ -148,7 +148,7 @@ Public Class frmBorrowedItem
                         Try
                             ' Check if there's a maintenance record for this item
                             System.Diagnostics.Debug.WriteLine($"[v0] Checking maintenance for item: {itemName}")
-                            Dim maintenanceRecord As DataRow = DatabaseConnection.GetMaintenanceByItem(itemName)
+                            Dim maintenanceRecord As DataRow = modDB.GetMaintenanceByItem(itemName)
                             btnViewMaintenanceStatus.Enabled = (maintenanceRecord IsNot Nothing)
                             System.Diagnostics.Debug.WriteLine($"[v0] Maintenance record found: {maintenanceRecord IsNot Nothing}, Button enabled: {btnViewMaintenanceStatus.Enabled}")
                         Catch ex As Exception
@@ -226,9 +226,9 @@ Public Class frmBorrowedItem
         Dim conn As MySqlConnection = Nothing
 
         Try
-            conn = DatabaseConnection.GetConnection()
+            conn = modDB.GetConnection()
             If conn Is Nothing Then Return dt
-            If Not DatabaseConnection.SafeOpenConnection(conn) Then Return dt
+            If Not modDB.SafeOpenConnection(conn) Then Return dt
 
             ' Get borrowed items from borrowed_items table with property/supply details
             ' FILTER OUT RETURNED ITEMS - only show currently borrowed items
@@ -548,9 +548,9 @@ Public Class frmBorrowedItem
         Try
             dgvTransactionHistory.Rows.Clear()
             
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            Dim conn As MySqlConnection = modDB.GetConnection()
             If conn Is Nothing Then Return
-            If Not DatabaseConnection.SafeOpenConnection(conn) Then Return
+            If Not modDB.SafeOpenConnection(conn) Then Return
             
             ' Get item name for display
             Dim itemName As String = ""
@@ -685,7 +685,7 @@ Public Class frmBorrowedItem
         End If
 
         ' Get maintenance record from database
-        Dim maintenanceRecord As DataRow = DatabaseConnection.GetMaintenanceByItem(itemName)
+        Dim maintenanceRecord As DataRow = modDB.GetMaintenanceByItem(itemName)
         
         If maintenanceRecord Is Nothing Then
             MessageBox.Show($"No maintenance record found for '{itemName}'.{Environment.NewLine}{Environment.NewLine}" &
@@ -741,8 +741,8 @@ Public Class frmBorrowedItem
         Dim condition As String = "Good"
         
         Try
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 Using cmd As New MySqlCommand("SELECT propertyNumber, serialNumber, location, departmentId, `condition` FROM properties WHERE propertyId = @propertyId", conn)
                     cmd.Parameters.AddWithValue("@propertyId", itemId)
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
@@ -919,8 +919,8 @@ Public Class frmBorrowedItem
 
                 ' Update borrowed_items table with condition, return reason, and remarks separately
                 Try
-                    Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-                    If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                    Dim conn As MySqlConnection = modDB.GetConnection()
+                    If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                         Dim query As String = "UPDATE borrowed_items SET status = 'Returned', actualReturnDate = NOW(), conditionOnReturn = @condition, returnReason = @returnReason, remarks = @remarks, updatedAt = NOW() WHERE borrowId = @borrowId"
                         Using cmd As New MySqlCommand(query, conn)
                             cmd.Parameters.AddWithValue("@borrowId", borrowId)
@@ -1015,8 +1015,8 @@ Public Class frmBorrowedItem
 
                     ' Update borrowed_items record for supply (save return reason and remarks separately)
                     Try
-                        Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-                        If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                        Dim conn As MySqlConnection = modDB.GetConnection()
+                        If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                             Dim query As String = "UPDATE borrowed_items SET status = 'Returned', actualReturnDate = NOW(), returnReason = @returnReason, remarks = @remarks, updatedAt = NOW() WHERE borrowId = @borrowId"
                             Using cmd As New MySqlCommand(query, conn)
                                 cmd.Parameters.AddWithValue("@borrowId", borrowId)
@@ -1051,9 +1051,9 @@ Public Class frmBorrowedItem
         Dim transaction As MySqlTransaction = Nothing
         
         Try
-            conn = DatabaseConnection.GetConnection()
+            conn = modDB.GetConnection()
             If conn Is Nothing Then Return False
-            If Not DatabaseConnection.SafeOpenConnection(conn) Then Return False
+            If Not modDB.SafeOpenConnection(conn) Then Return False
 
             ' Start transaction to ensure both updates succeed or fail together
             transaction = conn.BeginTransaction()
@@ -1306,8 +1306,8 @@ Public Class frmBorrowedItem
         ' Get the request ID from borrowed_items table
         Dim requestId As Integer? = Nothing
         Try
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 Using cmd As New MySqlCommand("SELECT requestId FROM borrowed_items WHERE borrowId = @borrowId", conn)
                     cmd.Parameters.AddWithValue("@borrowId", borrowId)
                     Dim result As Object = cmd.ExecuteScalar()

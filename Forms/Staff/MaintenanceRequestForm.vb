@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Windows.Forms
 Imports System.Collections.Generic
@@ -70,8 +70,8 @@ Public Class MaintenanceRequestForm
             cboDepartment.Items.Clear()
             cboDepartment.Items.Add(New KeyValuePair(Of Integer, String)(-1, "-- Select Department --"))
             
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 Dim query As String = "SELECT departmentId, departmentName FROM departments WHERE status = 'Active' ORDER BY departmentName"
                 Using cmd As New MySqlCommand(query, conn)
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
@@ -105,8 +105,8 @@ Public Class MaintenanceRequestForm
             
             If Not SessionContext.CurrentUserID.HasValue Then Return
             
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 ' Get properties from borrowed_items for current user
                 Dim query As String = "SELECT DISTINCT p.propertyId, p.itemName, p.propertyNumber, p.serialNumber, p.departmentId, p.location, p.condition " &
                                      "FROM borrowed_items bi " &
@@ -358,13 +358,13 @@ Public Class MaintenanceRequestForm
             End If
             
             ' Insert maintenance request
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            Dim conn As MySqlConnection = modDB.GetConnection()
             If conn Is Nothing Then
                 MessageBox.Show("Database connection failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
             
-            If Not DatabaseConnection.SafeOpenConnection(conn) Then
+            If Not modDB.SafeOpenConnection(conn) Then
                 MessageBox.Show("Could not open database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If

@@ -97,7 +97,7 @@ Public Class AddUserManagement1
 
     Private Sub LoadDepartmentOptions()
         Try
-            departmentDirectory = DatabaseConnection.GetDepartmentLookup(True)
+            departmentDirectory = modDB.GetDepartmentLookup(True)
             If departmentDirectory Is Nothing Then Return
 
             Dim suggestions As New AutoCompleteStringCollection()

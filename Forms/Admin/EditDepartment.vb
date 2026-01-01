@@ -62,7 +62,7 @@ Public Class EditDepartment
         Try
             Dim cbHead As ComboBox = FindControlOfType(Of ComboBox)("departmentHead")
 
-            Dim usersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
+            Dim usersTable As DataTable = modDB.GetActiveUsersForAssignment(Nothing)
             If cbHead IsNot Nothing Then
                 If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 Then
                     cbHead.DataSource = usersTable
@@ -341,7 +341,7 @@ Public Class EditDepartment
             End If
             
             ' Call the UpdateDepartment function with all parameters including floorNumber, shortName, description, status
-            Dim success As Boolean = DatabaseConnection.UpdateDepartment(
+            Dim success As Boolean = modDB.UpdateDepartment(
                 currentDepartmentId,
                 deptName,
                 headOfDeptString,

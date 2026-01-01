@@ -37,7 +37,7 @@ Public Class SupplyInventory
         pm_cbobx_categ.Items.Clear()
         pm_cbobx_categ.Items.Add("All Categories")
         Try
-            Dim categories As DataTable = DatabaseConnection.GetCategories("supply")
+            Dim categories As DataTable = modDB.GetCategories("supply")
             If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
                 For Each row As DataRow In categories.Rows
                     Dim categoryName As String = ""
@@ -210,7 +210,7 @@ Public Class SupplyInventory
             End If
             
             ' Load all available supplies from database with filters
-            Dim dt As DataTable = DatabaseConnection.GetAllSupplies(categoryFilter, statusFilter)
+            Dim dt As DataTable = modDB.GetAllSupplies(categoryFilter, statusFilter)
             
             If dt Is Nothing Then
                 MessageBox.Show("Unable to connect to the database. Please ensure MySQL is running and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -369,7 +369,7 @@ Public Class SupplyInventory
                 
                 If SessionContext.CurrentUserID.HasValue Then
                     Try
-                        Dim profile As Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
+                        Dim profile As Dictionary(Of String, Object) = modDB.GetStaffProfile(SessionContext.CurrentUserID.Value)
                         If profile IsNot Nothing AndAlso profile.Count > 0 Then
                             ' Build full name
                             Dim firstName As String = If(profile.ContainsKey("firstName"), profile("firstName").ToString(), "")
@@ -388,7 +388,7 @@ Public Class SupplyInventory
                                     Dim deptIDValue As Object = profile("departmentId")
                                     Dim deptID As Integer = 0
                                     If Integer.TryParse(deptIDValue.ToString(), deptID) AndAlso deptID > 0 Then
-                                        Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
+                                        Dim dt As DataTable = modDB.GetAllDepartments()
                                         If dt IsNot Nothing Then
                                             For Each deptRow As DataRow In dt.Rows
                                                 Dim rowDeptID As Integer = 0

@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Linq
 Imports System.Windows.Forms
@@ -50,7 +50,7 @@ Public Class EditPropertyManagement
 
     Private Sub LoadDepartments()
         Try
-            departmentDirectory = DatabaseConnection.GetAllDepartments()
+            departmentDirectory = modDB.GetAllDepartments()
             If departmentDirectory IsNot Nothing AndAlso departmentDirectory.Rows.Count > 0 Then
                 cboDepartment.DataSource = departmentDirectory.Copy()
                 cboDepartment.DisplayMember = "departmentName"
@@ -64,7 +64,7 @@ Public Class EditPropertyManagement
     Private Sub LoadUsers()
         Try
             ' Load users for Assigned To dropdown
-            Using conn As MySqlConnection = DatabaseConnection.GetConnection()
+            Using conn As MySqlConnection = modDB.GetConnection()
                 If conn IsNot Nothing Then
                     conn.Open()
                     Using cmd As New MySqlCommand("SELECT userId, CONCAT(IFNULL(firstName,''), ' ', IFNULL(lastName,'')) AS fullName, employeeId FROM users WHERE status = 'Active' ORDER BY firstName, lastName", conn)
@@ -231,7 +231,7 @@ Public Class EditPropertyManagement
         End Try
 
         Try
-            Dim success = DatabaseConnection.UpdateProperty(
+            Dim success = modDB.UpdateProperty(
                 PropertyIDValue,
                 txtItemName.Text.Trim(),
                 GetComboValue(cboCategory, "Others"),

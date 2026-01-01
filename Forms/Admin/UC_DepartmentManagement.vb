@@ -95,7 +95,7 @@ Public Class UC_DepartmentManagement
     Public Sub LoadDepartmentsData()
         Try
             admin_deptmanagement.Rows.Clear()
-            Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
+            Dim dt As DataTable = modDB.GetAllDepartments()
             originalData = dt.Copy()
 
             If dt.Rows.Count > 0 Then
@@ -280,7 +280,7 @@ Public Class UC_DepartmentManagement
         End If
 
         ' Get department data from database - use GetAllDepartments and filter
-        Dim allDepts As DataTable = DatabaseConnection.GetAllDepartments()
+        Dim allDepts As DataTable = modDB.GetAllDepartments()
         Dim deptData As DataRow = Nothing
         If allDepts IsNot Nothing Then
             ' Use LINQ to find matching department
@@ -397,7 +397,7 @@ Public Class UC_DepartmentManagement
 
         If result = DialogResult.Yes Then
             Try
-                Dim success As Boolean = DatabaseConnection.DeleteDepartment(departmentID)
+                Dim success As Boolean = modDB.DeleteDepartment(departmentID)
                 If success Then
                     ' Clear the grid and reload to ensure deletion is reflected
                     admin_deptmanagement.Rows.Clear()

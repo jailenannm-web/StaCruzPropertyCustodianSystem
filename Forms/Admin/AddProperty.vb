@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Linq
 Imports System.Collections.Generic
@@ -73,7 +73,7 @@ Public Class AddProperty
 
     Private Sub LoadDepartments()
         Try
-            departmentDirectory = DatabaseConnection.GetAllDepartments()
+            departmentDirectory = modDB.GetAllDepartments()
             If departmentDirectory IsNot Nothing AndAlso departmentDirectory.Rows.Count > 0 Then
                 cboDepartment.DataSource = departmentDirectory.Copy()
                 cboDepartment.DisplayMember = "departmentName"
@@ -128,7 +128,7 @@ Public Class AddProperty
     Private Sub LoadUsers()
         Try
             ' Load users for Assigned To dropdown
-            Using conn As MySqlConnection = DatabaseConnection.GetConnection()
+            Using conn As MySqlConnection = modDB.GetConnection()
                 If conn IsNot Nothing Then
                     conn.Open()
                     Using cmd As New MySqlCommand("SELECT userId, CONCAT(IFNULL(firstName,''), ' ', IFNULL(lastName,'')) AS fullName, employeeId FROM users WHERE status = 'Active' ORDER BY firstName, lastName", conn)
@@ -242,7 +242,7 @@ Public Class AddProperty
             Dim sourceOfFunds As String = If(cboSourceOfFunds.SelectedIndex >= 0, cboSourceOfFunds.SelectedItem.ToString(), "")
 
             ' Insert property into database (propertyNumber and internalCodes will be auto-generated)
-            Dim success As Boolean = DatabaseConnection.AddProperty(
+            Dim success As Boolean = modDB.AddProperty(
                 itemName, category, description, unitOfMeasure,
                 propertyNumber, serialNumber, acquisitionDate, acquisitionCost,
                 totalCost, sourceOfFunds, assignedTo, departmentId,

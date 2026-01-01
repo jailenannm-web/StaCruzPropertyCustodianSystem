@@ -6,9 +6,9 @@ Imports MySql.Data.MySqlClient
 Public Class frmConfig
     Private Sub btnTestConnection_Click(sender As Object, e As EventArgs) Handles btnTestConnection.Click
         Try
-            ' Use DatabaseConnection.GetConnection() to ensure proper connection string handling
+            ' Use modDB.GetConnection() to ensure proper connection string handling
             ' This fixes compatibility issues with MySql.Data 8.0.33
-            Using conn As MySqlConnection = DatabaseConnection.GetConnection()
+            Using conn As MySqlConnection = modDB.GetConnection()
                 conn.Open()
                 MessageBox.Show("Connected to teamcruzim successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End Using

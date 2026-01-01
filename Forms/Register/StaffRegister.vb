@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Windows.Forms
 Imports System.Data
@@ -99,7 +99,7 @@ Public Class StaffRegister
         System.Diagnostics.Debug.WriteLine("[v0] Registration Attempt - Position: " & position & ", Username: " & username)
 
         ' Pass all parameters to RegisterStaff function
-        If DatabaseConnection.RegisterStaff(firstName, lastName, email, contactNumber, address, departmentID, username, password, position, middleName, suffix, employeeId, province, municipal, barangay) Then
+        If modDB.RegisterStaff(firstName, lastName, email, contactNumber, address, departmentID, username, password, position, middleName, suffix, employeeId, province, municipal, barangay) Then
             MessageBox.Show("Registration successful! You can now login with your new account.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             Dim staffLogin As New StaffLogin()
@@ -150,7 +150,7 @@ Public Class StaffRegister
     ' Load departments into dropdown
     Private Sub LoadDepartments()
         Try
-            Dim departments As DataTable = DatabaseConnection.GetAllDepartments()
+            Dim departments As DataTable = modDB.GetAllDepartments()
             cb_Department.Items.Clear()
             cb_Department.Items.Add("")
             

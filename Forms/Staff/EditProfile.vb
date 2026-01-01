@@ -21,7 +21,7 @@ Public Class EditProfile
                 Return
             End If
             
-            Dim profile As Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
+            Dim profile As Dictionary(Of String, Object) = modDB.GetStaffProfile(SessionContext.CurrentUserID.Value)
             
             If profile IsNot Nothing AndAlso profile.Count > 0 Then
                 ' Populate edit fields - use camelCase to match database
@@ -97,7 +97,7 @@ Public Class EditProfile
             Dim position As String = If(String.IsNullOrWhiteSpace(txb_Position.Text), "Staff", txb_Position.Text.Trim())
             
             ' Update profile using UpdateStaffAccount (staff can update their own profile)
-            Dim success As Boolean = DatabaseConnection.UpdateStaffAccount(
+            Dim success As Boolean = modDB.UpdateStaffAccount(
                 SessionContext.CurrentUserID.Value,
                 firstName,
                 lastName,

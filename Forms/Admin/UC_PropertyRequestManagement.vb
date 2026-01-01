@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
@@ -161,7 +161,7 @@ Public Class UC_PropertyRequestManagement
     Private Sub ApplyPropertyRequestSearch(searchText As String)
         If originalRequestData Is Nothing Then
             Try
-                Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
+                Dim dt As DataTable = modDB.GetAllPropertyRequests()
                 If dt IsNot Nothing Then
                     originalRequestData = dt.Copy()
                 End If
@@ -252,7 +252,7 @@ Public Class UC_PropertyRequestManagement
 
     Private Sub LoadRequestData()
         Try
-            Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
+            Dim dt As DataTable = modDB.GetAllPropertyRequests()
 
             If dt Is Nothing Then
                 MessageBox.Show("Unable to load property requests. Please check your database connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -469,7 +469,7 @@ Public Class UC_PropertyRequestManagement
             
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-            If DatabaseConnection.ApprovePropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks:=remarks) Then
+            If modDB.ApprovePropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks:=remarks) Then
                 MessageBox.Show("Request approved successfully. The property has been assigned to the requester.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadRequestData()
                 
@@ -560,7 +560,7 @@ Public Class UC_PropertyRequestManagement
 
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
-            If DatabaseConnection.RejectPropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
+            If modDB.RejectPropertyRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
                 MessageBox.Show("Request rejected successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadRequestData()
             Else

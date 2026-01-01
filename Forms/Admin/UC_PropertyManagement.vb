@@ -52,7 +52,7 @@ Public Class UC_PropertyManagement
     Public Sub LoadSuppliesData()
         Try
             pm_table.Rows.Clear()
-            Dim dt As DataTable = DatabaseConnection.GetAllProperties()
+            Dim dt As DataTable = modDB.GetAllProperties()
 
             If dt.Rows.Count > 0 Then
                 For Each row As DataRow In dt.Rows

@@ -26,7 +26,7 @@ Partial Public Class MaintenanceRequest
             End If
 
             ' Load maintenance requests for the current staff member
-            Dim dt As DataTable = DatabaseConnection.GetStaffMaintenanceRequests(SessionContext.CurrentUserID.Value)
+            Dim dt As DataTable = modDB.GetStaffMaintenanceRequests(SessionContext.CurrentUserID.Value)
 
             ' Use DataBinding instead of manual row addition for correct data mapping
             DataGridView1.AutoGenerateColumns = False

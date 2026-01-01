@@ -36,9 +36,9 @@ Public Class BorrowingAndReturnSlip
     ''' </summary>
     Private Sub LoadBorrowingDataForItem(borrowId As Integer)
         Try
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            Dim conn As MySqlConnection = modDB.GetConnection()
             If conn Is Nothing Then Return
-            If Not DatabaseConnection.SafeOpenConnection(conn) Then Return
+            If Not modDB.SafeOpenConnection(conn) Then Return
 
             ' Get the borrowed item record with all transaction details
             Dim query As String = "SELECT bi.*, " &
@@ -80,10 +80,13 @@ Public Class BorrowingAndReturnSlip
                         End If
                         
                         ' Note: expectedReturnDate column was removed and replaced with returnReason
-                        ' Set a default expected return date (30 days from borrow date) if needed
+                        ' Set a default expected return date (30 days from borrow date) for display purposes
                         If Not row.IsNull("borrowDate") Then
                             expectedReturnDate.Value = Convert.ToDateTime(row("borrowDate")).AddDays(30)
                         End If
+                        
+                        ' Display returnReason if available (this is now a text field, not a date)
+                        ' The expectedReturnDate control is kept for backward compatibility in the form UI
                         
                         If Not row.IsNull("actualReturnDate") Then
                             actualReturnDate.Value = Convert.ToDateTime(row("actualReturnDate"))
@@ -103,7 +106,7 @@ Public Class BorrowingAndReturnSlip
     Private Sub LoadBorrowingData()
         Try
             ' Load property requests that have been approved/borrowed/returned
-            Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
+            Dim dt As DataTable = modDB.GetAllPropertyRequests()
             If dt Is Nothing Then
                 borrowingTable = New DataTable()
                 Return

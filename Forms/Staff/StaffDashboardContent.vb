@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Drawing
@@ -488,7 +488,7 @@ Public Class StaffDashboardContent
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing
         Try
-            conn = DatabaseConnection.GetConnection()
+            conn = modDB.GetConnection()
             If conn Is Nothing Then Return Nothing
             
             conn.Open()

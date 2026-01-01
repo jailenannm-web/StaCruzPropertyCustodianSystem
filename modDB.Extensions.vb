@@ -5,9 +5,9 @@ Imports MySql.Data.MySqlClient
 Imports Microsoft.VisualBasic
 
 ''' <summary>
-''' Extension methods for DatabaseConnection to support location dropdowns and utilities
+''' Extension methods for modDB to support location dropdowns and utilities
 ''' </summary>
-Partial Public Class DatabaseConnection
+Partial Public Class modDB
     
     ''' <summary>
     ''' Get list of provinces for location dropdown - Bicol Region, Philippines
@@ -818,9 +818,9 @@ Partial Public Class DatabaseConnection
         Dim conn As MySqlConnection = Nothing
         Dim transaction As MySqlTransaction = Nothing
         Try
-            conn = DatabaseConnection.GetConnection()
+            conn = modDB.GetConnection()
             If conn Is Nothing Then Return False
-            If Not DatabaseConnection.SafeOpenConnection(conn) Then Return False
+            If Not modDB.SafeOpenConnection(conn) Then Return False
 
             transaction = conn.BeginTransaction()
 

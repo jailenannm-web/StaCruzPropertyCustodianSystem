@@ -131,7 +131,7 @@
   </ItemGroup>
   <!-- STAFF FORMS -->
   <ItemGroup>
-    <Compile Include="DatabaseConnection.Extensions.vb" />
+    <Compile Include="modDB.Extensions.vb" />
     <Compile Include="Forms\Admin\AssignSupplyManagement.Designer.vb">
       <DependentUpon>AssignSupplyManagement.vb</DependentUpon>
     </Compile>
@@ -234,7 +234,7 @@
     <Compile Include="Utilities\AuditLogger.vb" />
     <Compile Include="Utilities\Logger.vb" />
     <Compile Include="Utilities\ReportExportHelper.vb" />
-    <Compile Include="DatabaseConnection.vb" />
+    <Compile Include="modDB.vb" />
     <Compile Include="SessionContext.vb" />
     <Compile Include="Forms\Admin\AddDepartment.Designer.vb">
       <DependentUpon>AddDepartment.vb</DependentUpon>
@@ -374,10 +374,10 @@
     <Compile Include="Forms\frmConfig.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Logout\logout.Designer.vb">
-      <DependentUpon>logout.vb</DependentUpon>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Logout\logout.vb">
+    <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Register\StaffRegister.Designer.vb">
@@ -571,8 +571,8 @@
     <EmbeddedResource Include="Forms\frmConfig.resx">
       <DependentUpon>frmConfig.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Logout\logout.resx">
-      <DependentUpon>logout.vb</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Register\StaffRegister.resx">
       <DependentUpon>StaffRegister.vb</DependentUpon>

@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Windows.Forms
 
@@ -8,7 +8,7 @@ Public Class AuditReportAdmin
 
     Public Sub LoadAuditRecord(logId As Integer)
         Try
-            auditData = DatabaseConnection.GetAuditLogById(logId)
+            auditData = modDB.GetAuditLogById(logId)
 
             If auditData Is Nothing Then
                 MessageBox.Show("Audit record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

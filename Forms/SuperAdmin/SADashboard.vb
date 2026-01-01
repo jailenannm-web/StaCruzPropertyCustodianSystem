@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Diagnostics
 Imports System.Drawing
@@ -110,7 +110,7 @@ Public Partial Class SADashboard
     Private Sub LoadSupplyStats()
         Try
             ' Get all supplies from database
-            Dim suppliesTable As DataTable = DatabaseConnection.GetAllSupplies()
+            Dim suppliesTable As DataTable = modDB.GetAllSupplies()
 
             ' Display in dashboard (you'll need to add labels/controls for this)
             ' Example: lblTotalSupplies.Text = suppliesTable.Rows.Count.ToString()
@@ -139,14 +139,14 @@ Public Partial Class SADashboard
         Cursor = Cursors.WaitCursor
 
         Try
-            Dim propertyCategoryTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetPropertyCountsByCategory())
-            Dim supplyBreakdownTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetSupplyInventoryBreakdown())
-            Dim requestStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetRequestStatusCounts())
-            Dim supplyStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetSupplyStatusCounts())
-            Dim propertyConditionTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetPropertyConditionCounts())
-            Dim maintenanceStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetMaintenanceStatusCounts())
-            Dim requestTrendTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetBorrowingTrendData(6))
-            Dim departmentUsageTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetDepartmentInventoryDistribution())
+            Dim propertyCategoryTask As Task(Of DataTable) = Task.Run(Function() modDB.GetPropertyCountsByCategory())
+            Dim supplyBreakdownTask As Task(Of DataTable) = Task.Run(Function() modDB.GetSupplyInventoryBreakdown())
+            Dim requestStatusTask As Task(Of DataTable) = Task.Run(Function() modDB.GetRequestStatusCounts())
+            Dim supplyStatusTask As Task(Of DataTable) = Task.Run(Function() modDB.GetSupplyStatusCounts())
+            Dim propertyConditionTask As Task(Of DataTable) = Task.Run(Function() modDB.GetPropertyConditionCounts())
+            Dim maintenanceStatusTask As Task(Of DataTable) = Task.Run(Function() modDB.GetMaintenanceStatusCounts())
+            Dim requestTrendTask As Task(Of DataTable) = Task.Run(Function() modDB.GetBorrowingTrendData(6))
+            Dim departmentUsageTask As Task(Of DataTable) = Task.Run(Function() modDB.GetDepartmentInventoryDistribution())
 
             Await Task.WhenAll(propertyCategoryTask, supplyBreakdownTask, requestStatusTask,
                                supplyStatusTask, propertyConditionTask, maintenanceStatusTask,
@@ -333,7 +333,7 @@ Public Partial Class SADashboard
 
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        Dim logout As New logout()
+        Dim logout As New Form1()
         logout.Show() ' Show the register form
         Me.Hide() ' Hide current login form instead of closing it
     End Sub

@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Diagnostics
@@ -89,15 +89,15 @@ Public Class AdminDashboard
         Cursor = Cursors.WaitCursor
 
         Try
-            Dim summaryTask As Task(Of Dictionary(Of String, Integer)) = Task.Run(Function() DatabaseConnection.GetAdminDashboardSummary())
-            Dim propertyCategoryTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetPropertyCountsByCategory())
-            Dim supplyBreakdownTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetSupplyInventoryBreakdown())
-            Dim requestStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetRequestStatusCounts())
-            Dim supplyStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetSupplyStatusCounts())
-            Dim propertyConditionTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetPropertyConditionCounts())
-            Dim maintenanceStatusTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetMaintenanceStatusCounts())
-            Dim requestTrendTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetBorrowingTrendData(6))
-            Dim departmentUsageTask As Task(Of DataTable) = Task.Run(Function() DatabaseConnection.GetDepartmentInventoryDistribution())
+            Dim summaryTask As Task(Of Dictionary(Of String, Integer)) = Task.Run(Function() modDB.GetAdminDashboardSummary())
+            Dim propertyCategoryTask As Task(Of DataTable) = Task.Run(Function() modDB.GetPropertyCountsByCategory())
+            Dim supplyBreakdownTask As Task(Of DataTable) = Task.Run(Function() modDB.GetSupplyInventoryBreakdown())
+            Dim requestStatusTask As Task(Of DataTable) = Task.Run(Function() modDB.GetRequestStatusCounts())
+            Dim supplyStatusTask As Task(Of DataTable) = Task.Run(Function() modDB.GetSupplyStatusCounts())
+            Dim propertyConditionTask As Task(Of DataTable) = Task.Run(Function() modDB.GetPropertyConditionCounts())
+            Dim maintenanceStatusTask As Task(Of DataTable) = Task.Run(Function() modDB.GetMaintenanceStatusCounts())
+            Dim requestTrendTask As Task(Of DataTable) = Task.Run(Function() modDB.GetBorrowingTrendData(6))
+            Dim departmentUsageTask As Task(Of DataTable) = Task.Run(Function() modDB.GetDepartmentInventoryDistribution())
 
             Await Task.WhenAll(summaryTask, propertyCategoryTask, supplyBreakdownTask, requestStatusTask,
                                supplyStatusTask, propertyConditionTask, maintenanceStatusTask,

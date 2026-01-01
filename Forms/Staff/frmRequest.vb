@@ -167,7 +167,7 @@ Public Class frmRequest
             End If
 
             ' Load all requests for the current staff member
-            Dim dt As DataTable = DatabaseConnection.GetStaffRequests(SessionContext.CurrentUserID.Value)
+            Dim dt As DataTable = modDB.GetStaffRequests(SessionContext.CurrentUserID.Value)
             originalRequestData = dt.Copy()
             
             ' Apply current filters

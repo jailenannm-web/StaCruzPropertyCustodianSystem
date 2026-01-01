@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Net
 Imports System.Net.Sockets
@@ -17,8 +17,8 @@ Public Class AuditLogger
     ''' <param name="userRole">Role of the user (SuperAdmin, Admin, Custodian, Staff)</param>
     Public Shared Sub LogAction(userId As Integer?, action As String, tableName As String, recordId As Integer?, description As String, userRole As String)
         Try
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 
                 ' Get IP Address
                 Dim ipAddress As String = GetLocalIPAddress()

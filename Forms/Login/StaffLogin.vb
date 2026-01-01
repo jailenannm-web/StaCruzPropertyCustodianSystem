@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
@@ -38,7 +38,7 @@ Public Class StaffLogin
             ' Try to authenticate as Admin/SuperAdmin/Custodian first (checks hardcoded credentials first)
             Dim adminResult As Dictionary(Of String, String) = Nothing
             Try
-                adminResult = DatabaseConnection.ValidateAdminLogin(username, password)
+                adminResult = modDB.ValidateAdminLogin(username, password)
             Catch ex As Exception
                 System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - ValidateAdminLogin Exception: " & ex.Message)
                 System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - ValidateAdminLogin StackTrace: " & ex.StackTrace)
@@ -85,7 +85,7 @@ Public Class StaffLogin
             ' Try to authenticate as Staff (registered accounts only, not hardcoded Custodian)
             Dim staffResult As Dictionary(Of String, String) = Nothing
             Try
-                staffResult = DatabaseConnection.AuthenticateStaff(username, password)
+                staffResult = modDB.AuthenticateStaff(username, password)
             Catch ex As Exception
                 System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - AuthenticateStaff Exception: " & ex.Message)
                 System.Diagnostics.Debug.WriteLine("[v0] StaffLogin - AuthenticateStaff StackTrace: " & ex.StackTrace)
@@ -183,7 +183,7 @@ Public Class StaffLogin
         ' Initialize default accounts (including hardcoded staff account)
         ' This is done silently without permission checks since no user is logged in yet
         Try
-            DatabaseConnection.InitializeDefaultAccounts()
+            modDB.InitializeDefaultAccounts()
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("[v0] Error initializing default accounts: " & ex.Message)
             Logger.LogError("Error initializing default accounts", ex)
@@ -192,16 +192,16 @@ Public Class StaffLogin
 
         ' Early connectivity check to surface DB misconfiguration with friendly guidance
         Try
-            Dim testConn = DatabaseConnection.GetConnection()
+            Dim testConn = modDB.GetConnection()
             If testConn IsNot Nothing Then
-                If Not DatabaseConnection.SafeOpenConnection(testConn) Then
+                If Not modDB.SafeOpenConnection(testConn) Then
                     Throw New Exception("Unable to open a database connection using the current settings.")
                 End If
                 ' Close after successful ping
                 If testConn.State = Data.ConnectionState.Open Then testConn.Close()
                 testConn.Dispose()
             Else
-                Throw New Exception("DatabaseConnection.GetConnection returned Nothing.")
+                Throw New Exception("modDB.GetConnection returned Nothing.")
             End If
         Catch ex As Exception
             Logger.LogError("Startup connectivity check failed", ex)

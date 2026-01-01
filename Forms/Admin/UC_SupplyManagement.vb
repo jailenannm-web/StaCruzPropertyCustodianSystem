@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Linq
@@ -42,7 +42,7 @@ Public Class UC_SupplyManagement
 
                 ' Load categories from database - get unique categories from supplies table
                 Try
-                    Dim categories As DataTable = DatabaseConnection.GetCategories("supply")
+                    Dim categories As DataTable = modDB.GetCategories("supply")
                     If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
                         For Each row As DataRow In categories.Rows
                             Dim categoryName As String = ""
@@ -61,8 +61,8 @@ Public Class UC_SupplyManagement
                     ' Also get unique categories directly from supplies table as fallback
                     If pm_cbobx_categ.Items.Count <= 1 Then ' Only "All" item
                         Try
-                            Dim conn = DatabaseConnection.GetConnection()
-                            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                            Dim conn = modDB.GetConnection()
+                            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                                 Dim query As String = "SELECT DISTINCT category FROM supplies WHERE category IS NOT NULL AND category != '' ORDER BY category"
                                 Using cmd As New MySql.Data.MySqlClient.MySqlCommand(query, conn)
                                     Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
@@ -224,7 +224,7 @@ Public Class UC_SupplyManagement
             End If
 
             System.Diagnostics.Debug.WriteLine($"[v0] LoadSuppliesData - Category Filter: '{categoryFilter}', Status Filter: '{statusFilter}'")
-            Dim dt As DataTable = DatabaseConnection.GetAllSupplies(categoryFilter, statusFilter)
+            Dim dt As DataTable = modDB.GetAllSupplies(categoryFilter, statusFilter)
             If dt Is Nothing Then
                 originalData = Nothing
                 Return
@@ -499,7 +499,7 @@ Public Class UC_SupplyManagement
         End If
 
         ' Get supply data from DB
-        Dim supplyData As DataRow = DatabaseConnection.GetSupplyById(supplyID)
+        Dim supplyData As DataRow = modDB.GetSupplyById(supplyID)
         If supplyData Is Nothing Then
             MessageBox.Show("Supply not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
@@ -600,7 +600,7 @@ Public Class UC_SupplyManagement
 
         If result = DialogResult.Yes Then
             Try
-                Dim success As Boolean = DatabaseConnection.DeleteSupply(supplyID)
+                Dim success As Boolean = modDB.DeleteSupply(supplyID)
                 If success Then
                     ' Refresh table to show updated data
                     LoadSuppliesData()

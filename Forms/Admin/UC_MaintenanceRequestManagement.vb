@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
@@ -38,7 +38,7 @@ Public Class UC_MaintenanceRequestManagement
 
     Private Sub LoadMaintenanceRequestData()
         Try
-            Dim dt As DataTable = DatabaseConnection.GetAllMaintenanceRequests()
+            Dim dt As DataTable = modDB.GetAllMaintenanceRequests()
 
             If propertyManagementGrid IsNot Nothing Then
                 propertyManagementGrid.AutoGenerateColumns = False
@@ -268,9 +268,9 @@ Public Class UC_MaintenanceRequestManagement
 
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this maintenance request? This action cannot be undone.", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
             If result = DialogResult.Yes Then
-                ' Delete maintenance request using DatabaseConnection
-                Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-                If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+                ' Delete maintenance request using modDB
+                Dim conn As MySqlConnection = modDB.GetConnection()
+                If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                     Using cmd As New MySqlCommand("DELETE FROM maintenance_requests WHERE requestId = @requestID", conn)
                         cmd.Parameters.AddWithValue("@requestID", requestID)
                         If cmd.ExecuteNonQuery() > 0 Then
@@ -422,7 +422,7 @@ Public Class UC_MaintenanceRequestManagement
 
                 ' Update maintenance request status to approved with assigned technician
                 ' Parameters: requestID, assignedTechnician, targetDate, adminID, remarks, conditionBefore
-                If DatabaseConnection.ApproveMaintenanceRequest(requestID, assignedTechnician, targetDate, adminID, remarks, condition) Then
+                If modDB.ApproveMaintenanceRequest(requestID, assignedTechnician, targetDate, adminID, remarks, condition) Then
                     MessageBox.Show("Maintenance request approved successfully and assigned to " & assignedTechnician & " for " & targetDate.ToString("yyyy-MM-dd") & ".", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     LoadMaintenanceRequestData()
                 Else
@@ -487,7 +487,7 @@ Public Class UC_MaintenanceRequestManagement
             Dim adminID As Integer = If(SessionContext.CurrentUserID.HasValue, SessionContext.CurrentUserID.Value, 0)
 
             ' Update maintenance request status to rejected
-            If DatabaseConnection.RejectMaintenanceRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
+            If modDB.RejectMaintenanceRequest(requestID, adminID, SessionContext.CurrentUsername, SessionContext.CurrentRole, remarks) Then
                 MessageBox.Show("Maintenance request rejected successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadMaintenanceRequestData()
             Else

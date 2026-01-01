@@ -23,7 +23,7 @@ Public Class frmProfile
                 Return
             End If
             
-            Dim profile As Dictionary(Of String, Object) = DatabaseConnection.GetStaffProfile(SessionContext.CurrentUserID.Value)
+            Dim profile As Dictionary(Of String, Object) = modDB.GetStaffProfile(SessionContext.CurrentUserID.Value)
             
             If profile IsNot Nothing AndAlso profile.Count > 0 Then
                 ' Populate profile fields - GetStaffProfile returns camelCase keys
@@ -42,7 +42,7 @@ Public Class frmProfile
                 If profile.ContainsKey("departmentId") AndAlso profile("departmentId") IsNot Nothing Then
                     Try
                         Dim deptID As Integer = Convert.ToInt32(profile("departmentId"))
-                        Dim dt As DataTable = DatabaseConnection.GetAllDepartments()
+                        Dim dt As DataTable = modDB.GetAllDepartments()
                         For Each row As DataRow In dt.Rows
                             Dim rowDeptID As Integer = 0
                             If row.Table.Columns.Contains("departmentId") AndAlso Not IsDBNull(row("departmentId")) Then

@@ -8,7 +8,7 @@ Imports Microsoft.VisualBasic
 Imports System.Linq
 Imports System.Text
 
-Public Class DatabaseConnection
+Public Class modDB
     ' Fixed the UnhandledException event handler syntax - removed incorrect += operator usage
     Shared Sub New()
         ' Suppress ReplicationManager initialization errors at application level
@@ -3955,11 +3955,11 @@ Public Class DatabaseConnection
                             End Using
                         End Using
                     End If
-                    
+
                     ' Generate auto-generated codes
-                    Dim propertyNumber As String = DatabaseConnection.GeneratePropertyNumber(conn, transaction)
-                    Dim internalCode As String = DatabaseConnection.GenerateInternalCode(conn, transaction)
-                    
+                    Dim propertyNumber As String = modDB.GeneratePropertyNumber(conn, transaction)
+                    Dim internalCode As String = modDB.GenerateInternalCode(conn, transaction)
+
                     Using insertPropertyCmd As New MySqlCommand("INSERT INTO properties (itemName, category, description, unitOfMeasure, propertyNumber, internalCodes, acquisitionDate, acquisitionCost, assignedTo, departmentId, location, `condition`, status, createdAt, updatedAt) " &
                                                                 "VALUES (@itemName, @category, @description, @unitOfMeasure, @propertyNumber, @internalCodes, @acquisitionDate, @acquisitionCost, @assignedTo, @departmentId, @location, 'Good', 'Active', NOW(), NOW())", conn, transaction)
                         insertPropertyCmd.Parameters.AddWithValue("@itemName", requestDetails("itemName").ToString())

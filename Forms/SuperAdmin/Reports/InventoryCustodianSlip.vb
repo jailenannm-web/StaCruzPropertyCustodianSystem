@@ -28,7 +28,7 @@ Public Class InventoryCustodianSlip
             If requestID <= 0 Then Return
             
             ' Try property requests first
-            Dim dt As DataTable = DatabaseConnection.GetAllPropertyRequests()
+            Dim dt As DataTable = modDB.GetAllPropertyRequests()
             Dim requestRows() As DataRow = dt.Select($"requestId = {requestID}")
             If requestRows.Length = 0 Then
                 requestRows = dt.Select($"request_id = {requestID}")
@@ -36,7 +36,7 @@ Public Class InventoryCustodianSlip
             
             ' If not found in property requests, try supply requests
             If requestRows.Length = 0 Then
-                dt = DatabaseConnection.GetAllSuppliesRequests()
+                dt = modDB.GetAllSuppliesRequests()
                 requestRows = dt.Select($"requestId = {requestID}")
                 If requestRows.Length = 0 Then
                     requestRows = dt.Select($"request_id = {requestID}")
@@ -45,7 +45,7 @@ Public Class InventoryCustodianSlip
             
             ' If still not found, try maintenance requests
             If requestRows.Length = 0 Then
-                dt = DatabaseConnection.GetAllMaintenanceRequests()
+                dt = modDB.GetAllMaintenanceRequests()
                 requestRows = dt.Select($"requestId = {requestID}")
                 If requestRows.Length = 0 Then
                     requestRows = dt.Select($"request_id = {requestID}")

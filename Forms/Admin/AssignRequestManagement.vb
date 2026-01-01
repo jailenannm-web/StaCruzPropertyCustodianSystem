@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Windows.Forms
 Imports System.Linq
@@ -174,7 +174,7 @@ Public Class AssignRequestManagement
                 ComboBox1.Items.Clear()
                 ' Try to load from database first
                 Try
-                    Dim categoriesTable As DataTable = DatabaseConnection.GetCategories("property")
+                    Dim categoriesTable As DataTable = modDB.GetCategories("property")
                     If categoriesTable IsNot Nothing AndAlso categoriesTable.Rows.Count > 0 Then
                         ' Use DataSource with proper DisplayMember
                         ComboBox1.DataSource = categoriesTable
@@ -212,7 +212,7 @@ Public Class AssignRequestManagement
 
     Private Sub LoadDepartmentDropdown()
         Try
-            Dim deptTable As DataTable = DatabaseConnection.GetDepartmentLookup(True)
+            Dim deptTable As DataTable = modDB.GetDepartmentLookup(True)
             If deptTable IsNot Nothing AndAlso deptTable.Rows.Count > 0 AndAlso department IsNot Nothing Then
                 department.DataSource = deptTable
                 ' Use camelCase column names if available, fallback to snake_case
@@ -249,7 +249,7 @@ Public Class AssignRequestManagement
                 location.Items.Clear()
                 ' Try to load from database first
                 Try
-                    Dim locationsTable As DataTable = DatabaseConnection.GetLocations()
+                    Dim locationsTable As DataTable = modDB.GetLocations()
                     If locationsTable IsNot Nothing AndAlso locationsTable.Rows.Count > 0 Then
                         For Each row As DataRow In locationsTable.Rows
                             Dim locName As String = ""
@@ -284,7 +284,7 @@ Public Class AssignRequestManagement
     Private Sub LoadAllEmployees()
         ' Load all employees initially for the dropdown
         Try
-            Dim usersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
+            Dim usersTable As DataTable = modDB.GetActiveUsersForAssignment(Nothing)
             If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 AndAlso employee IsNot Nothing Then
                 employee.DataSource = usersTable
                 employee.DisplayMember = "fullName"
@@ -335,10 +335,10 @@ Public Class AssignRequestManagement
             End If
 
             ' Load employees from selected department, but also allow selecting from all
-            Dim usersTable As DataTable = DatabaseConnection.GetUsersByDepartment(deptID)
+            Dim usersTable As DataTable = modDB.GetUsersByDepartment(deptID)
             If usersTable IsNot Nothing AndAlso usersTable.Rows.Count > 0 AndAlso employee IsNot Nothing Then
                 ' Store all employees for fallback
-                Dim allUsersTable As DataTable = DatabaseConnection.GetActiveUsersForAssignment(Nothing)
+                Dim allUsersTable As DataTable = modDB.GetActiveUsersForAssignment(Nothing)
                 If allUsersTable IsNot Nothing AndAlso allUsersTable.Rows.Count > 0 Then
                     ' Merge department employees with all employees (remove duplicates)
                     Dim mergedTable As DataTable = allUsersTable.Clone()
@@ -406,7 +406,7 @@ Public Class AssignRequestManagement
 
     Private Sub AutoFillPropertyDetails(propID As Integer)
         ' Get property details from database
-        Dim propertyData As DataRow = DatabaseConnection.GetPropertyDetails(propID)
+        Dim propertyData As DataRow = modDB.GetPropertyDetails(propID)
         If propertyData Is Nothing Then Return
 
         ' Auto-fill Property Name dropdown (sync with Property ID selection)
@@ -557,7 +557,7 @@ Public Class AssignRequestManagement
         If currentRequestID > 0 Then
             Try
                 ' Try property requests first
-                Dim dtProperty As DataTable = DatabaseConnection.GetAllPropertyRequests()
+                Dim dtProperty As DataTable = modDB.GetAllPropertyRequests()
                 Dim requestRows() As DataRow = dtProperty.Select("requestId = " & currentRequestID)
                 If requestRows.Length = 0 Then
                     ' Try snake_case column name as fallback
@@ -570,7 +570,7 @@ Public Class AssignRequestManagement
                 End If
 
                 ' Try supply requests
-                Dim dtSupply As DataTable = DatabaseConnection.GetAllSuppliesRequests()
+                Dim dtSupply As DataTable = modDB.GetAllSuppliesRequests()
                 requestRows = dtSupply.Select("requestId = " & currentRequestID)
                 If requestRows.Length = 0 Then
                     ' Try snake_case column name as fallback
@@ -625,7 +625,7 @@ Public Class AssignRequestManagement
     Private Sub LoadAvailableProperties()
         ' Load properties that are available (can assign even without request)
         Try
-            Dim propertiesTable As DataTable = DatabaseConnection.GetAllProperties()
+            Dim propertiesTable As DataTable = modDB.GetAllProperties()
             If propertiesTable Is Nothing OrElse propertiesTable.Rows.Count = 0 Then Return
 
             ' Filter for available properties (status = 'Active' or 'Available')
@@ -791,8 +791,8 @@ Public Class AssignRequestManagement
             Dim purposeText As String = If(assignmentPurpose IsNot Nothing, assignmentPurpose.Text, "")
 
             ' Update property with assignment
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
-            If conn IsNot Nothing AndAlso DatabaseConnection.SafeOpenConnection(conn) Then
+            Dim conn As MySqlConnection = modDB.GetConnection()
+            If conn IsNot Nothing AndAlso modDB.SafeOpenConnection(conn) Then
                 Using cmd As New MySqlCommand("UPDATE properties SET assignedTo = @userID, departmentId = @deptID, location = @location, status = 'Assigned', updatedAt = NOW() WHERE propertyId = @propertyID", conn)
                     cmd.Parameters.AddWithValue("@userID", selectedEmployeeID)
                     cmd.Parameters.AddWithValue("@deptID", If(deptIdOpt.HasValue, deptIdOpt.Value, DBNull.Value))
@@ -804,13 +804,13 @@ Public Class AssignRequestManagement
                 ' If there is an existing request, try to mark it Released but do not block if it doesn't update.
                 If currentRequestID > 0 Then
                     Try
-                        DatabaseConnection.ReleasePropertyRequest(currentRequestID, adminID, adminName, adminUserType, Date.Today, Nothing)
+                        modDB.ReleasePropertyRequest(currentRequestID, adminID, adminName, adminUserType, Date.Today, Nothing)
                     Catch
                     End Try
                 End If
 
                 ' Ensure a Released request record exists for My Borrowed Items view.
-                DatabaseConnection.CreateDirectPropertyRelease(selectedEmployeeID, selectedPropertyID, deptIdOpt,
+                modDB.CreateDirectPropertyRelease(selectedEmployeeID, selectedPropertyID, deptIdOpt,
                                                               If(propertyName IsNot Nothing, propertyName.Text, ""),
                                                               1, purposeText, adminName, Date.Today)
 

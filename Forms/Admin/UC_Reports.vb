@@ -47,7 +47,7 @@ Public Class UC_Reports
         PreviewReport("Property Card")
 
         ' Get a sample DataRow to pass
-        Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, "", "", Nothing)
+        Dim dt As DataTable = modDB.GetAllProperties(Nothing, "", "", Nothing)
         If dt.Rows.Count = 0 Then
             MessageBox.Show("No properties available to preview.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return

@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
@@ -43,13 +43,13 @@ Public Class EditMaintenance1
         Try
             If _maintenanceID <= 0 Then Return
             
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            Dim conn As MySqlConnection = modDB.GetConnection()
             If conn Is Nothing Then
                 MessageBox.Show("Unable to connect to database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
 
-            If Not DatabaseConnection.SafeOpenConnection(conn) Then
+            If Not modDB.SafeOpenConnection(conn) Then
                 MessageBox.Show("Failed to open database connection.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
@@ -182,13 +182,13 @@ Public Class EditMaintenance1
             End If
 
             ' Prepare data for update
-            Dim conn As MySqlConnection = DatabaseConnection.GetConnection()
+            Dim conn As MySqlConnection = modDB.GetConnection()
             If conn Is Nothing Then
                 MessageBox.Show("Unable to connect to database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
 
-            If Not DatabaseConnection.SafeOpenConnection(conn) Then
+            If Not modDB.SafeOpenConnection(conn) Then
                 MessageBox.Show("Failed to open database connection.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If

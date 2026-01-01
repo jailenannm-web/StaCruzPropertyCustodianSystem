@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
@@ -154,7 +154,7 @@ Public Class EditUser
                 Application.DoEvents()
                 
                 ' Load municipalities for selected province
-                Dim municipalitiesTable As DataTable = DatabaseConnection.GetMunicipalities(provinceValue)
+                Dim municipalitiesTable As DataTable = modDB.GetMunicipalities(provinceValue)
                 If municipalitiesTable IsNot Nothing AndAlso municipalitiesTable.Rows.Count > 0 Then
                     municipal.DataSource = Nothing
                     municipal.Items.Clear()
@@ -175,7 +175,7 @@ Public Class EditUser
                         Application.DoEvents()
                         
                         ' Load barangays for selected municipality
-                        Dim barangaysTable As DataTable = DatabaseConnection.GetBarangays(municipalityValue)
+                        Dim barangaysTable As DataTable = modDB.GetBarangays(municipalityValue)
                         If barangaysTable IsNot Nothing AndAlso barangaysTable.Rows.Count > 0 Then
                             barangay.DataSource = Nothing
                             barangay.Items.Clear()
@@ -231,7 +231,7 @@ Public Class EditUser
 
     Private Sub LoadDepartmentOptions()
         Try
-            departmentDirectory = DatabaseConnection.GetDepartmentLookup(True)
+            departmentDirectory = modDB.GetDepartmentLookup(True)
             If departmentDirectory Is Nothing Then Return
 
             ' Convert departmentID TextBox to ComboBox if it isn't already
@@ -263,7 +263,7 @@ Public Class EditUser
     Private Sub LoadLocationDropdowns()
         Try
             ' Load Province dropdown with proper DisplayMember/ValueMember
-            Dim provincesTable As DataTable = DatabaseConnection.GetProvinces()
+            Dim provincesTable As DataTable = modDB.GetProvinces()
             If provincesTable IsNot Nothing AndAlso provincesTable.Rows.Count > 0 Then
                 province.DataSource = provincesTable
                 province.DisplayMember = "province_name"
@@ -315,7 +315,7 @@ Public Class EditUser
             If Not String.IsNullOrEmpty(selectedProvince) Then
                 System.Diagnostics.Debug.WriteLine("[v0] Province selected: " & selectedProvince)
                 
-                Dim municipalitiesTable As DataTable = DatabaseConnection.GetMunicipalities(selectedProvince)
+                Dim municipalitiesTable As DataTable = modDB.GetMunicipalities(selectedProvince)
                 
                 If municipalitiesTable IsNot Nothing AndAlso municipalitiesTable.Rows.Count > 0 Then
                     System.Diagnostics.Debug.WriteLine("[v0] Loaded " & municipalitiesTable.Rows.Count & " municipalities")
@@ -367,7 +367,7 @@ Public Class EditUser
             If Not String.IsNullOrEmpty(selectedMunicipality) Then
                 System.Diagnostics.Debug.WriteLine("[v0] Municipality selected: " & selectedMunicipality)
                 
-                Dim barangaysTable As DataTable = DatabaseConnection.GetBarangays(selectedMunicipality)
+                Dim barangaysTable As DataTable = modDB.GetBarangays(selectedMunicipality)
                 
                 If barangaysTable IsNot Nothing AndAlso barangaysTable.Rows.Count > 0 Then
                     System.Diagnostics.Debug.WriteLine("[v0] Loaded " & barangaysTable.Rows.Count & " barangays")
@@ -446,7 +446,7 @@ Public Class EditUser
         End If
         
         ' Use unified UpdateUserAccount function that handles both Admin/SuperAdmin and Staff
-        Dim updateSuccess As Boolean = DatabaseConnection.UpdateUserAccount(
+        Dim updateSuccess As Boolean = modDB.UpdateUserAccount(
             adminIDValue,
             tableUserType, ' Use current user type to determine which table to update
             firstName.Text.Trim(),
@@ -474,7 +474,7 @@ Public Class EditUser
         If updateSuccess Then
             If Not String.IsNullOrWhiteSpace(passwordEncrypted.Text) Then
                 ' Use unified ResetUserPassword function that handles both Admin/SuperAdmin and Staff
-                DatabaseConnection.ResetUserPassword(adminIDValue,
+                modDB.ResetUserPassword(adminIDValue,
                                                      tableUserType, ' Use current user type to determine which table to update
                                                      passwordEncrypted.Text,
                                                      currentAdminID,

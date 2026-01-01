@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Data
 Imports System.Diagnostics
 Imports System.Drawing
@@ -197,7 +197,7 @@ Public Class UC_PropertyManagement1
             categoryFilter.Items.Clear()
             categoryFilter.Items.Add("All Categories")
             Try
-                Dim categories As DataTable = DatabaseConnection.GetCategories("property")
+                Dim categories As DataTable = modDB.GetCategories("property")
                 If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
                     For Each row As DataRow In categories.Rows
                         Dim categoryName As String = ""
@@ -247,7 +247,7 @@ Public Class UC_PropertyManagement1
             locationFilter.Items.Clear()
             locationFilter.Items.Add("All Locations")
             Try
-                Dim locations As DataTable = DatabaseConnection.GetLocations()
+                Dim locations As DataTable = modDB.GetLocations()
                 If locations IsNot Nothing AndAlso locations.Rows.Count > 0 Then
                     For Each row As DataRow In locations.Rows
                         Dim locationName As String = ""
@@ -350,7 +350,7 @@ Public Class UC_PropertyManagement1
                 End If
             Next
 
-            Dim dt As DataTable = DatabaseConnection.GetAllProperties(Nothing, conditionFilter, categoryFilter, Nothing, statusFilter)
+            Dim dt As DataTable = modDB.GetAllProperties(Nothing, conditionFilter, categoryFilter, Nothing, statusFilter)
             originalData = dt.Copy()
 
             ' Hide columns that should not be visible
@@ -841,7 +841,7 @@ Public Class UC_PropertyManagement1
 
         If result = DialogResult.Yes Then
             Try
-                Dim success As Boolean = DatabaseConnection.DeleteProperty(propertyID)
+                Dim success As Boolean = modDB.DeleteProperty(propertyID)
                 If success Then
                     LoadPropertiesData() ' Refresh table
                     MessageBox.Show("Property deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -895,7 +895,7 @@ Public Class UC_PropertyManagement1
             )
 
             If result = DialogResult.Yes Then
-                Dim countGenerated As Integer = DatabaseConnection.GeneratePropertyCodesForExisting()
+                Dim countGenerated As Integer = modDB.GeneratePropertyCodesForExisting()
                 If countGenerated > 0 Then
                     MessageBox.Show($"Successfully generated property codes for {countGenerated} property/properties.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' Refresh the grid to show new codes
