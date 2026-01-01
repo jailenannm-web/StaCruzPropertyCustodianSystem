@@ -82,9 +82,12 @@ Public Class UC_DepartmentManagement
         pm_cbobx_status.Items.AddRange(New String() {"Active", "Inactive"})
         pm_cbobx_status.SelectedIndex = 0
 
-        ' Categories filter not needed for departments, but keep for consistency
+        ' Repurpose category filter for location/building filter
         pm_cbobx_categ.Items.Clear()
-        pm_cbobx_categ.Items.Add("All")
+        pm_cbobx_categ.Items.Add("All Locations")
+        
+        ' Populate unique locations from data after loading
+        ' This will be done in LoadDepartmentsData
         pm_cbobx_categ.SelectedIndex = 0
 
         ' Wire up filter change events
@@ -124,6 +127,9 @@ Public Class UC_DepartmentManagement
                 If ttldepartmentmanagement IsNot Nothing Then
                     ttldepartmentmanagement.Text = dt.Rows.Count.ToString()
                 End If
+                
+                ' Populate location filter with unique locations
+                PopulateLocationFilter()
             End If
 
             ' Apply status filter if selected
@@ -220,6 +226,52 @@ Public Class UC_DepartmentManagement
             searchText = departmentmanagementsearchbar.Text
         End If
         ApplySearchFilter(searchText)
+    End Sub
+    
+    Private Sub PopulateLocationFilter()
+        If originalData Is Nothing Then Return
+        
+        Try
+            ' Get current selection to restore it
+            Dim currentSelection As String = If(pm_cbobx_categ.SelectedItem IsNot Nothing, pm_cbobx_categ.SelectedItem.ToString(), "All Locations")
+            
+            ' Remove event handler temporarily to avoid triggering filter
+            RemoveHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
+            
+            ' Get unique locations from data
+            Dim locations = originalData.AsEnumerable() _
+                .Where(Function(r) r.Table.Columns.Contains("location") AndAlso Not IsDBNull(r("location"))) _
+                .Select(Function(r) r("location").ToString().Trim()) _
+                .Where(Function(loc) Not String.IsNullOrEmpty(loc)) _
+                .Distinct() _
+                .OrderBy(Function(loc) loc) _
+                .ToList()
+            
+            ' Rebuild dropdown
+            pm_cbobx_categ.Items.Clear()
+            pm_cbobx_categ.Items.Add("All Locations")
+            
+            For Each location As String In locations
+                pm_cbobx_categ.Items.Add(location)
+            Next
+            
+            ' Restore previous selection or default to first
+            Dim indexToSelect As Integer = pm_cbobx_categ.Items.IndexOf(currentSelection)
+            If indexToSelect >= 0 Then
+                pm_cbobx_categ.SelectedIndex = indexToSelect
+            Else
+                pm_cbobx_categ.SelectedIndex = 0
+            End If
+            
+            ' Re-attach event handler
+            AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
+        Catch ex As Exception
+            ' If error, just set to default
+            pm_cbobx_categ.Items.Clear()
+            pm_cbobx_categ.Items.Add("All Locations")
+            pm_cbobx_categ.SelectedIndex = 0
+            AddHandler pm_cbobx_categ.SelectedIndexChanged, AddressOf Filter_Changed
+        End Try
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -451,24 +503,38 @@ Public Class UC_DepartmentManagement
             If pm_cbobx_status.SelectedItem IsNot Nothing Then
                 statusFilter = pm_cbobx_status.SelectedItem.ToString()
             End If
+            
+            Dim locationFilter As String = "All Locations"
+            If pm_cbobx_categ.SelectedItem IsNot Nothing Then
+                locationFilter = pm_cbobx_categ.SelectedItem.ToString()
+            End If
 
             Dim filtered = originalData.AsEnumerable().Where(Function(row)
-                                                                 ' If status column exists and a specific status is selected, enforce it
+                                                                 ' Filter by status
                                                                  If statusFilter <> "All Status" Then
                                                                      If Not row.Table.Columns.Contains("status") Then Return False
                                                                      Dim statusVal As String = If(IsDBNull(row("status")), String.Empty, row("status").ToString())
                                                                      If Not String.Equals(statusVal, statusFilter, StringComparison.OrdinalIgnoreCase) Then Return False
                                                                  End If
+                                                                 
+                                                                 ' Filter by location
+                                                                 If locationFilter <> "All Locations" Then
+                                                                     If Not row.Table.Columns.Contains("location") Then Return False
+                                                                     Dim locationVal As String = If(IsDBNull(row("location")), String.Empty, row("location").ToString())
+                                                                     If Not String.Equals(locationVal, locationFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                 End If
 
-                                                                 ' If no search text provided, include this row (status already checked)
+                                                                 ' If no search text provided, include this row (filters already checked)
                                                                  If String.IsNullOrEmpty(searchLower) Then Return True
 
-                                                                 ' Check searchable fields: departmentName, headOfDepartment, officeCode
+                                                                 ' Check searchable fields: departmentName, headOfDepartment, officeCode, location, building
                                                                  Dim nameVal As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString().ToLower(), String.Empty)
                                                                  Dim headVal As String = If(row.Table.Columns.Contains("headOfDepartment") AndAlso Not IsDBNull(row("headOfDepartment")), row("headOfDepartment").ToString().ToLower(), String.Empty)
                                                                  Dim codeVal As String = If(row.Table.Columns.Contains("officeCode") AndAlso Not IsDBNull(row("officeCode")), row("officeCode").ToString().ToLower(), String.Empty)
+                                                                 Dim locSearchVal As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
+                                                                 Dim buildVal As String = If(row.Table.Columns.Contains("building") AndAlso Not IsDBNull(row("building")), row("building").ToString().ToLower(), String.Empty)
 
-                                                                 Return nameVal.Contains(searchLower) OrElse headVal.Contains(searchLower) OrElse codeVal.Contains(searchLower)
+                                                                 Return nameVal.Contains(searchLower) OrElse headVal.Contains(searchLower) OrElse codeVal.Contains(searchLower) OrElse locSearchVal.Contains(searchLower) OrElse buildVal.Contains(searchLower)
                                                              End Function)
 
             admin_deptmanagement.Rows.Clear()

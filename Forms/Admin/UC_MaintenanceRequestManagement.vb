@@ -20,20 +20,81 @@ Public Class UC_MaintenanceRequestManagement
     End Sub
 
     Private Sub UC_MaintenanceRequestManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitializeFilters()
         LoadMaintenanceRequestData()
         ApplyPermissionState()
 
-        ' Wire search textbox if present
-        Dim searchNames As String() = {"prm_search", "maintenanceRequestSearch", "txtSearch", "txtbox_search", "admin_txtbox_search"}
-        For Each nm As String In searchNames
+        ' Wire search textbox - check maintenancerequestmanagementsearchbar first
+        If maintenancerequestmanagementsearchbar IsNot Nothing Then
+            RemoveHandler maintenancerequestmanagementsearchbar.TextChanged, AddressOf RequestSearch_TextChanged
+            AddHandler maintenancerequestmanagementsearchbar.TextChanged, AddressOf RequestSearch_TextChanged
+        Else
+            ' Fallback: search for other possible control names
+            Dim searchNames As String() = {"prm_search", "maintenanceRequestSearch", "txtSearch", "txtbox_search", "admin_txtbox_search"}
+            For Each nm As String In searchNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                    Dim tb As TextBox = CType(found(0), TextBox)
+                    RemoveHandler tb.TextChanged, AddressOf RequestSearch_TextChanged
+                    AddHandler tb.TextChanged, AddressOf RequestSearch_TextChanged
+                    Exit For
+                End If
+            Next
+        End If
+    End Sub
+    
+    Private Sub InitializeFilters()
+        ' Initialize status filter if it exists
+        Dim statusFilterNames() As String = {"pm_cbobx_status", "statusFilter", "cbStatus", "filter"}
+        For Each nm As String In statusFilterNames
             Dim found() As Control = Me.Controls.Find(nm, True)
-            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
-                Dim tb As TextBox = CType(found(0), TextBox)
-                RemoveHandler tb.TextChanged, AddressOf RequestSearch_TextChanged
-                AddHandler tb.TextChanged, AddressOf RequestSearch_TextChanged
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                Dim statusCb As ComboBox = CType(found(0), ComboBox)
+                statusCb.Items.Clear()
+                statusCb.Items.Add("All Status")
+                statusCb.Items.AddRange(New String() {"Pending", "Approved", "In Progress", "Completed", "Rejected"})
+                statusCb.SelectedIndex = 0
+                AddHandler statusCb.SelectedIndexChanged, AddressOf Filter_Changed
                 Exit For
             End If
         Next
+        
+        ' Initialize maintenance type filter if it exists
+        Dim typeFilterNames() As String = {"pm_cbobx_categ", "categoryFilter", "cbCategory", "typeFilter"}
+        For Each nm As String In typeFilterNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                Dim typeCb As ComboBox = CType(found(0), ComboBox)
+                typeCb.Items.Clear()
+                typeCb.Items.Add("All Types")
+                typeCb.Items.AddRange(New String() {"Preventive", "Corrective", "Emergency", "Routine"})
+                typeCb.SelectedIndex = 0
+                AddHandler typeCb.SelectedIndexChanged, AddressOf Filter_Changed
+                Exit For
+            End If
+        Next
+    End Sub
+    
+    Private Sub Filter_Changed(sender As Object, e As EventArgs)
+        ' Reload search with filters
+        Dim searchText As String = ""
+        
+        ' Check maintenancerequestmanagementsearchbar first
+        If maintenancerequestmanagementsearchbar IsNot Nothing Then
+            searchText = maintenancerequestmanagementsearchbar.Text
+        Else
+            ' Fallback: search for other possible control names
+            Dim searchNames As String() = {"prm_search", "maintenanceRequestSearch", "txtSearch", "txtbox_search", "admin_txtbox_search"}
+            For Each nm As String In searchNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
+                    searchText = CType(found(0), TextBox).Text
+                    Exit For
+                End If
+            Next
+        End If
+        
+        ApplyRequestSearch(searchText)
     End Sub
 
     Private Sub LoadMaintenanceRequestData()
@@ -157,19 +218,69 @@ Public Class UC_MaintenanceRequestManagement
         isSearching = True
         Try
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
-            If String.IsNullOrEmpty(searchLower) Then
-                If propertyManagementGrid IsNot Nothing Then propertyManagementGrid.DataSource = originalData.Copy()
-                If ttlpropertymanagement IsNot Nothing Then ttlpropertymanagement.Text = originalData.Rows.Count.ToString()
-                isSearching = False
-                Return
-            End If
+            
+            ' Get filter values
+            Dim statusFilter As String = String.Empty
+            Dim statusFilterNames() As String = {"pm_cbobx_status", "statusFilter", "cbStatus", "filter"}
+            For Each nm As String In statusFilterNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                    Dim cb As ComboBox = CType(found(0), ComboBox)
+                    If cb.SelectedIndex > 0 Then
+                        statusFilter = cb.SelectedItem.ToString()
+                    End If
+                    Exit For
+                End If
+            Next
+            
+            Dim typeFilter As String = String.Empty
+            Dim typeFilterNames() As String = {"pm_cbobx_categ", "categoryFilter", "cbCategory", "typeFilter"}
+            For Each nm As String In typeFilterNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                    Dim cb As ComboBox = CType(found(0), ComboBox)
+                    If cb.SelectedIndex > 0 Then
+                        typeFilter = cb.SelectedItem.ToString()
+                    End If
+                    Exit For
+                End If
+            Next
 
             Dim filtered = originalData.AsEnumerable().Where(Function(row)
+                                                                 ' Apply status filter
+                                                                 If Not String.IsNullOrEmpty(statusFilter) Then
+                                                                     Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), String.Empty)
+                                                                     If Not String.Equals(rowStatus, statusFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                 End If
+                                                                 
+                                                                 ' Apply type filter (check multiple possible column names)
+                                                                 If Not String.IsNullOrEmpty(typeFilter) Then
+                                                                     Dim rowType As String = String.Empty
+                                                                     If row.Table.Columns.Contains("typeOfIssue") AndAlso Not IsDBNull(row("typeOfIssue")) Then
+                                                                         rowType = row("typeOfIssue").ToString()
+                                                                     ElseIf row.Table.Columns.Contains("typeOfMaintenance") AndAlso Not IsDBNull(row("typeOfMaintenance")) Then
+                                                                         rowType = row("typeOfMaintenance").ToString()
+                                                                     End If
+                                                                     If Not String.Equals(rowType, typeFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                 End If
+                                                                 
+                                                                 ' Apply search filter
+                                                                 If String.IsNullOrEmpty(searchLower) Then Return True
+                                                                 
                                                                  Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
                                                                  Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
                                                                  Dim maintType As String = If(row.Table.Columns.Contains("typeOfMaintenance") AndAlso Not IsDBNull(row("typeOfMaintenance")), row("typeOfMaintenance").ToString().ToLower(), String.Empty)
+                                                                 Dim issueType As String = If(row.Table.Columns.Contains("typeOfIssue") AndAlso Not IsDBNull(row("typeOfIssue")), row("typeOfIssue").ToString().ToLower(), String.Empty)
                                                                  Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
-                                                                 Return itemName.Contains(searchLower) OrElse location.Contains(searchLower) OrElse maintType.Contains(searchLower) OrElse status.Contains(searchLower)
+                                                                 Dim serialNum As String = If(row.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")), row("serialNumber").ToString().ToLower(), String.Empty)
+                                                                 Dim propNum As String = If(row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")), row("propertyNumber").ToString().ToLower(), String.Empty)
+                                                                 Dim dept As String = If(row.Table.Columns.Contains("departmentName") AndAlso Not IsDBNull(row("departmentName")), row("departmentName").ToString().ToLower(), String.Empty)
+                                                                 Dim requester As String = If(row.Table.Columns.Contains("requesterName") AndAlso Not IsDBNull(row("requesterName")), row("requesterName").ToString().ToLower(), String.Empty)
+                                                                 Dim technician As String = If(row.Table.Columns.Contains("assignedTechnician") AndAlso Not IsDBNull(row("assignedTechnician")), row("assignedTechnician").ToString().ToLower(), String.Empty)
+                                                                 Dim problem As String = If(row.Table.Columns.Contains("problemDescription") AndAlso Not IsDBNull(row("problemDescription")), row("problemDescription").ToString().ToLower(), String.Empty)
+                                                                 Dim condition As String = If(row.Table.Columns.Contains("conditionBefore") AndAlso Not IsDBNull(row("conditionBefore")), row("conditionBefore").ToString().ToLower(), String.Empty)
+                                                                 
+                                                                 Return itemName.Contains(searchLower) OrElse location.Contains(searchLower) OrElse maintType.Contains(searchLower) OrElse issueType.Contains(searchLower) OrElse status.Contains(searchLower) OrElse serialNum.Contains(searchLower) OrElse propNum.Contains(searchLower) OrElse dept.Contains(searchLower) OrElse requester.Contains(searchLower) OrElse technician.Contains(searchLower) OrElse problem.Contains(searchLower) OrElse condition.Contains(searchLower)
                                                              End Function)
 
             Dim filteredList = filtered.ToList()

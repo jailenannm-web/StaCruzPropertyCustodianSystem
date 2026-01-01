@@ -50,6 +50,7 @@ Partial Class UC_SupplyRequestManagement
         Me.admin_label_SupplyRequestManagement = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.supplyrequestmanagementsearchbar = New System.Windows.Forms.TextBox()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -58,7 +59,6 @@ Partial Class UC_SupplyRequestManagement
         '
         Me.printPAR.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.printPAR.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.printPAR.CornerRadius = 15
         Me.printPAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.printPAR.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.printPAR.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -74,7 +74,6 @@ Partial Class UC_SupplyRequestManagement
         '
         Me.issueRequisition.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.issueRequisition.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.issueRequisition.CornerRadius = 15
         Me.issueRequisition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.issueRequisition.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.issueRequisition.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -90,11 +89,10 @@ Partial Class UC_SupplyRequestManagement
         '
         Me.btnAssignSupply.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAssignSupply.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAssignSupply.CornerRadius = 15
         Me.btnAssignSupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAssignSupply.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAssignSupply.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAssignSupply.Location = New System.Drawing.Point(1026, 62)
+        Me.btnAssignSupply.Location = New System.Drawing.Point(895, 59)
         Me.btnAssignSupply.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAssignSupply.Name = "btnAssignSupply"
         Me.btnAssignSupply.Size = New System.Drawing.Size(99, 34)
@@ -107,11 +105,10 @@ Partial Class UC_SupplyRequestManagement
         '
         Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnUpdate.CornerRadius = 15
         Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdate.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdate.Location = New System.Drawing.Point(1026, 61)
+        Me.btnUpdate.Location = New System.Drawing.Point(895, 58)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(99, 34)
@@ -147,11 +144,10 @@ Partial Class UC_SupplyRequestManagement
         '
         Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnApprove.CornerRadius = 15
         Me.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnApprove.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnApprove.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnApprove.Location = New System.Drawing.Point(1238, 62)
+        Me.btnApprove.Location = New System.Drawing.Point(1107, 59)
         Me.btnApprove.Margin = New System.Windows.Forms.Padding(4)
         Me.btnApprove.Name = "btnApprove"
         Me.btnApprove.Size = New System.Drawing.Size(99, 34)
@@ -163,11 +159,10 @@ Partial Class UC_SupplyRequestManagement
         '
         Me.btnReject.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnReject.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnReject.CornerRadius = 15
         Me.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnReject.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnReject.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReject.Location = New System.Drawing.Point(1132, 61)
+        Me.btnReject.Location = New System.Drawing.Point(1001, 58)
         Me.btnReject.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReject.Name = "btnReject"
         Me.btnReject.Size = New System.Drawing.Size(99, 35)
@@ -306,17 +301,17 @@ Partial Class UC_SupplyRequestManagement
         'admin_label_SupplyRequestManagement
         '
         Me.admin_label_SupplyRequestManagement.AutoSize = True
-        Me.admin_label_SupplyRequestManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admin_label_SupplyRequestManagement.Font = New System.Drawing.Font("Poppins Black", 17.8!, System.Drawing.FontStyle.Bold)
         Me.admin_label_SupplyRequestManagement.Location = New System.Drawing.Point(57, 46)
         Me.admin_label_SupplyRequestManagement.Name = "admin_label_SupplyRequestManagement"
-        Me.admin_label_SupplyRequestManagement.Size = New System.Drawing.Size(531, 58)
+        Me.admin_label_SupplyRequestManagement.Size = New System.Drawing.Size(482, 53)
         Me.admin_label_SupplyRequestManagement.TabIndex = 162
         Me.admin_label_SupplyRequestManagement.Text = "Supply Request Management"
         '
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(634, 52)
+        Me.PictureBox2.Location = New System.Drawing.Point(537, 49)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(36, 44)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -327,16 +322,30 @@ Partial Class UC_SupplyRequestManagement
         '
         Me.supplyrequestmanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.supplyrequestmanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.supplyrequestmanagementsearchbar.Location = New System.Drawing.Point(677, 54)
+        Me.supplyrequestmanagementsearchbar.Location = New System.Drawing.Point(580, 51)
         Me.supplyrequestmanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
         Me.supplyrequestmanagementsearchbar.Name = "supplyrequestmanagementsearchbar"
-        Me.supplyrequestmanagementsearchbar.Size = New System.Drawing.Size(345, 42)
+        Me.supplyrequestmanagementsearchbar.Size = New System.Drawing.Size(312, 42)
         Me.supplyrequestmanagementsearchbar.TabIndex = 178
+        '
+        'pm_cbobx_status
+        '
+        Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1213, 61)
+        Me.pm_cbobx_status.Name = "pm_cbobx_status"
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
+        Me.pm_cbobx_status.TabIndex = 182
+        Me.pm_cbobx_status.Text = "Status"
         '
         'UC_SupplyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.pm_cbobx_status)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.supplyrequestmanagementsearchbar)
         Me.Controls.Add(Me.printPAR)
@@ -386,4 +395,5 @@ Partial Class UC_SupplyRequestManagement
     Friend WithEvents approvedDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents createdAt As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
 End Class

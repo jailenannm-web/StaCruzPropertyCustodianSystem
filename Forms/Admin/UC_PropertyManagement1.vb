@@ -540,14 +540,76 @@ Public Class UC_PropertyManagement1
 
         Try
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
+            
+            ' Get all filter values
             Dim statusCb As ComboBox = FindStatusComboBox()
             Dim statusFilter As String = If(statusCb IsNot Nothing AndAlso statusCb.SelectedIndex > 0, statusCb.SelectedItem.ToString(), String.Empty)
+            
+            ' Get category filter
+            Dim categoryFilter As String = String.Empty
+            Dim categoryNames() As String = {"pm_cbobx_categ", "categoryFilter", "cbCategory"}
+            For Each nm As String In categoryNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                    Dim cb As ComboBox = CType(found(0), ComboBox)
+                    If cb.SelectedIndex > 0 Then
+                        categoryFilter = cb.SelectedItem.ToString()
+                    End If
+                    Exit For
+                End If
+            Next
+            
+            ' Get location filter
+            Dim locationFilter As String = String.Empty
+            Dim locationNames() As String = {"pm_cbobx_location", "locationFilter", "cbLocation"}
+            For Each nm As String In locationNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                    Dim cb As ComboBox = CType(found(0), ComboBox)
+                    If cb.SelectedIndex > 0 Then
+                        locationFilter = cb.SelectedItem.ToString()
+                    End If
+                    Exit For
+                End If
+            Next
+            
+            ' Get condition filter
+            Dim conditionFilter As String = String.Empty
+            Dim conditionNames() As String = {"pm_cbobx_condition", "conditionFilter", "cbCondition"}
+            For Each nm As String In conditionNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                    Dim cb As ComboBox = CType(found(0), ComboBox)
+                    If cb.SelectedIndex > 0 Then
+                        conditionFilter = cb.SelectedItem.ToString()
+                    End If
+                    Exit For
+                End If
+            Next
 
             Dim filteredRows As IEnumerable(Of DataRow) = originalData.AsEnumerable().Where(Function(row)
                                                                                                 ' Apply status filter
                                                                                                 If Not String.IsNullOrEmpty(statusFilter) Then
-                                                                                                    Dim rowStatusValue As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
-                                                                                                    If rowStatusValue <> statusFilter.ToLower() Then Return False
+                                                                                                    Dim rowStatusValue As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), String.Empty)
+                                                                                                    If Not String.Equals(rowStatusValue, statusFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                                                End If
+                                                                                                
+                                                                                                ' Apply category filter
+                                                                                                If Not String.IsNullOrEmpty(categoryFilter) Then
+                                                                                                    Dim rowCategoryValue As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), String.Empty)
+                                                                                                    If Not String.Equals(rowCategoryValue, categoryFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                                                End If
+                                                                                                
+                                                                                                ' Apply location filter
+                                                                                                If Not String.IsNullOrEmpty(locationFilter) Then
+                                                                                                    Dim rowLocationValue As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString(), String.Empty)
+                                                                                                    If Not String.Equals(rowLocationValue, locationFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                                                End If
+                                                                                                
+                                                                                                ' Apply condition filter
+                                                                                                If Not String.IsNullOrEmpty(conditionFilter) Then
+                                                                                                    Dim rowConditionValue As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString(), String.Empty)
+                                                                                                    If Not String.Equals(rowConditionValue, conditionFilter, StringComparison.OrdinalIgnoreCase) Then Return False
                                                                                                 End If
 
                                                                                                 ' Apply search filter
@@ -560,8 +622,10 @@ Public Class UC_PropertyManagement1
                                                                                                 Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
                                                                                                 Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString().ToLower(), String.Empty)
                                                                                                 Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
+                                                                                                Dim propertyNum As String = If(row.Table.Columns.Contains("propertyNumber") AndAlso Not IsDBNull(row("propertyNumber")), row("propertyNumber").ToString().ToLower(), String.Empty)
+                                                                                                Dim serialNum As String = If(row.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")), row("serialNumber").ToString().ToLower(), String.Empty)
 
-                                                                                                Return itemName.Contains(searchLower) OrElse category.Contains(searchLower) OrElse description.Contains(searchLower) OrElse assignedEmployee.Contains(searchLower) OrElse location.Contains(searchLower) OrElse condition.Contains(searchLower) OrElse rowStatus.Contains(searchLower)
+                                                                                                Return itemName.Contains(searchLower) OrElse category.Contains(searchLower) OrElse description.Contains(searchLower) OrElse assignedEmployee.Contains(searchLower) OrElse location.Contains(searchLower) OrElse condition.Contains(searchLower) OrElse rowStatus.Contains(searchLower) OrElse propertyNum.Contains(searchLower) OrElse serialNum.Contains(searchLower)
                                                                                             End Function)
 
             propertyManagementGrid.Rows.Clear()

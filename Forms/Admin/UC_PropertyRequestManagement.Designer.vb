@@ -67,6 +67,7 @@ Partial Class UC_PropertyRequestManagement
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -332,13 +333,12 @@ Partial Class UC_PropertyRequestManagement
         '
         'btnAssign
         '
-        Me.btnAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAssign.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAssign.CornerRadius = 15
         Me.btnAssign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAssign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAssign.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAssign.Location = New System.Drawing.Point(915, 77)
+        Me.btnAssign.Location = New System.Drawing.Point(915, 722)
         Me.btnAssign.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAssign.Name = "btnAssign"
         Me.btnAssign.Size = New System.Drawing.Size(99, 34)
@@ -349,45 +349,42 @@ Partial Class UC_PropertyRequestManagement
         '
         'printPAR
         '
-        Me.printPAR.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.printPAR.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.printPAR.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.printPAR.CornerRadius = 15
         Me.printPAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.printPAR.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.printPAR.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.printPAR.Location = New System.Drawing.Point(1179, 722)
+        Me.printPAR.Location = New System.Drawing.Point(1043, 68)
         Me.printPAR.Margin = New System.Windows.Forms.Padding(4)
         Me.printPAR.Name = "printPAR"
-        Me.printPAR.Size = New System.Drawing.Size(153, 33)
+        Me.printPAR.Size = New System.Drawing.Size(129, 33)
         Me.printPAR.TabIndex = 161
         Me.printPAR.Text = "Print PAR/ICS"
         Me.printPAR.UseVisualStyleBackColor = False
         '
         'issuePropertyCard
         '
-        Me.issuePropertyCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.issuePropertyCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.issuePropertyCard.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.issuePropertyCard.CornerRadius = 15
         Me.issuePropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.issuePropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.issuePropertyCard.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertyCard.Location = New System.Drawing.Point(1018, 722)
+        Me.issuePropertyCard.Location = New System.Drawing.Point(902, 68)
         Me.issuePropertyCard.Margin = New System.Windows.Forms.Padding(4)
         Me.issuePropertyCard.Name = "issuePropertyCard"
-        Me.issuePropertyCard.Size = New System.Drawing.Size(153, 33)
+        Me.issuePropertyCard.Size = New System.Drawing.Size(139, 30)
         Me.issuePropertyCard.TabIndex = 160
         Me.issuePropertyCard.Text = "Issue Property Acknoledgement "
         Me.issuePropertyCard.UseVisualStyleBackColor = False
         '
         'btnApprove
         '
-        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnApprove.CornerRadius = 15
         Me.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnApprove.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnApprove.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnApprove.Location = New System.Drawing.Point(1233, 77)
+        Me.btnApprove.Location = New System.Drawing.Point(1233, 722)
         Me.btnApprove.Margin = New System.Windows.Forms.Padding(4)
         Me.btnApprove.Name = "btnApprove"
         Me.btnApprove.Size = New System.Drawing.Size(99, 34)
@@ -397,13 +394,12 @@ Partial Class UC_PropertyRequestManagement
         '
         'btnReject
         '
-        Me.btnReject.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReject.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnReject.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnReject.CornerRadius = 15
         Me.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnReject.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnReject.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReject.Location = New System.Drawing.Point(1127, 76)
+        Me.btnReject.Location = New System.Drawing.Point(1127, 721)
         Me.btnReject.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReject.Name = "btnReject"
         Me.btnReject.Size = New System.Drawing.Size(99, 35)
@@ -413,13 +409,12 @@ Partial Class UC_PropertyRequestManagement
         '
         'prm_btn_update
         '
-        Me.prm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.prm_btn_update.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prm_btn_update.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.prm_btn_update.CornerRadius = 15
         Me.prm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.prm_btn_update.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.prm_btn_update.ForeColor = System.Drawing.Color.White
-        Me.prm_btn_update.Location = New System.Drawing.Point(1021, 76)
+        Me.prm_btn_update.Location = New System.Drawing.Point(1021, 721)
         Me.prm_btn_update.Name = "prm_btn_update"
         Me.prm_btn_update.Size = New System.Drawing.Size(99, 34)
         Me.prm_btn_update.TabIndex = 57
@@ -430,7 +425,6 @@ Partial Class UC_PropertyRequestManagement
         '
         Me.assign.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.assign.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.assign.CornerRadius = 15
         Me.assign.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.assign.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.assign.ForeColor = System.Drawing.Color.White
@@ -441,11 +435,25 @@ Partial Class UC_PropertyRequestManagement
         Me.assign.Text = "Assign"
         Me.assign.UseVisualStyleBackColor = False
         '
+        'pm_cbobx_status
+        '
+        Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1179, 73)
+        Me.pm_cbobx_status.Name = "pm_cbobx_status"
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
+        Me.pm_cbobx_status.TabIndex = 174
+        Me.pm_cbobx_status.Text = "Status"
+        '
         'UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.pm_cbobx_status)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.maintenancemanagementsearchbar)
         Me.Controls.Add(Me.btnAssign)
@@ -507,4 +515,5 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents updatedAt As DataGridViewTextBoxColumn
     Friend WithEvents createdAt As DataGridViewTextBoxColumn
     Friend WithEvents approvedBy As DataGridViewTextBoxColumn
+    Friend WithEvents pm_cbobx_status As ComboBox
 End Class

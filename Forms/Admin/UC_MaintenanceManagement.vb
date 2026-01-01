@@ -19,6 +19,7 @@ Public Class UC_MaintenanceManagement
     ' ================================================================
     Private originalData As DataTable
     Private isSearching As Boolean = False
+    Private isFiltering As Boolean = False
     Private currentFilter As String = ""
 
     ' ================================================================
@@ -36,6 +37,9 @@ Public Class UC_MaintenanceManagement
         Try
             ' Configure DataGridView appearance
             ConfigureDataGridView()
+            
+            ' Initialize filters
+            InitializeFilters()
             
             ' Load maintenance data from database
             LoadMaintenanceData()
@@ -323,6 +327,24 @@ Public Class UC_MaintenanceManagement
     End Sub
 
     ' ================================================================
+    ' INITIALIZE FILTERS
+    ' ================================================================
+    Private Sub InitializeFilters()
+        Try
+            ' Set default filter values
+            If cmbStatusFilter IsNot Nothing Then
+                cmbStatusFilter.SelectedIndex = 0 ' "All Status"
+            End If
+            
+            If cmbTypeFilter IsNot Nothing Then
+                cmbTypeFilter.SelectedIndex = 0 ' "All Types"
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[UC_MaintenanceManagement] InitializeFilters error: {ex.Message}")
+        End Try
+    End Sub
+
+    ' ================================================================
     ' SEARCH FUNCTIONALITY
     ' ================================================================
     Private Sub SetupSearchFunctionality()
@@ -333,48 +355,100 @@ Public Class UC_MaintenanceManagement
     End Sub
 
     Private Sub SearchTextChanged(sender As Object, e As EventArgs)
-        If isSearching Then Return
+        ApplyFilters()
+    End Sub
+
+    ' ================================================================
+    ' FILTER EVENT HANDLERS
+    ' ================================================================
+    Private Sub cmbStatusFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStatusFilter.SelectedIndexChanged
+        If Not isFiltering Then
+            ApplyFilters()
+        End If
+    End Sub
+
+    Private Sub cmbTypeFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTypeFilter.SelectedIndexChanged
+        If Not isFiltering Then
+            ApplyFilters()
+        End If
+    End Sub
+
+    ' ================================================================
+    ' APPLY ALL FILTERS (Search, Status, Type)
+    ' ================================================================
+    Private Sub ApplyFilters()
+        If isSearching OrElse isFiltering Then Return
         
         Try
             isSearching = True
-            Dim searchText As String = maintenancemanagementsearchbar.Text.Trim().ToLower()
+            isFiltering = True
             
-            If String.IsNullOrEmpty(searchText) Then
-                ' Restore original data
-                DataGridView1.DataSource = originalData.Copy()
-                ttlMaintenancemanagement.Text = originalData.Rows.Count.ToString()
-            Else
-                ' Filter data
-                Dim filteredData = originalData.AsEnumerable().Where(Function(row)
+            ' Get filter values
+            Dim searchText As String = If(maintenancemanagementsearchbar IsNot Nothing, maintenancemanagementsearchbar.Text.Trim().ToLower(), "")
+            Dim statusFilter As String = If(cmbStatusFilter IsNot Nothing AndAlso cmbStatusFilter.SelectedIndex > 0, cmbStatusFilter.SelectedItem.ToString(), "")
+            Dim typeFilter As String = If(cmbTypeFilter IsNot Nothing AndAlso cmbTypeFilter.SelectedIndex > 0, cmbTypeFilter.SelectedItem.ToString(), "")
+            
+            ' Start with original data
+            If originalData Is Nothing OrElse originalData.Rows.Count = 0 Then
+                DataGridView1.DataSource = Nothing
+                ttlMaintenancemanagement.Text = "0"
+                Return
+            End If
+            
+            ' Apply filters
+            Dim filteredData = originalData.AsEnumerable().Where(Function(row)
+                ' Search filter
+                Dim matchesSearch As Boolean = True
+                If Not String.IsNullOrEmpty(searchText) Then
                     Dim itemName As String = If(row.Table.Columns.Contains("propertyItemName") AndAlso Not IsDBNull(row("propertyItemName")), row("propertyItemName").ToString().ToLower(), "")
                     Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), "")
                     Dim technician As String = If(row.Table.Columns.Contains("assignedTechnician") AndAlso Not IsDBNull(row("assignedTechnician")), row("assignedTechnician").ToString().ToLower(), "")
                     Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), "")
                     Dim typeOfMaint As String = If(row.Table.Columns.Contains("typeOfMaintenance") AndAlso Not IsDBNull(row("typeOfMaintenance")), row("typeOfMaintenance").ToString().ToLower(), "")
+                    Dim serialNum As String = If(row.Table.Columns.Contains("serialNumber") AndAlso Not IsDBNull(row("serialNumber")), row("serialNumber").ToString().ToLower(), "")
                     
-                    Return itemName.Contains(searchText) OrElse 
-                           location.Contains(searchText) OrElse 
-                           technician.Contains(searchText) OrElse 
-                           status.Contains(searchText) OrElse 
-                           typeOfMaint.Contains(searchText)
-                End Function).ToList()
-                
-                If filteredData.Count > 0 Then
-                    Dim filteredTable As DataTable = filteredData.CopyToDataTable()
-                    DataGridView1.DataSource = filteredTable
-                    ttlMaintenancemanagement.Text = filteredTable.Rows.Count.ToString()
-                Else
-                    DataGridView1.DataSource = Nothing
-                    ttlMaintenancemanagement.Text = "0"
+                    matchesSearch = itemName.Contains(searchText) OrElse 
+                                   location.Contains(searchText) OrElse 
+                                   technician.Contains(searchText) OrElse 
+                                   status.Contains(searchText) OrElse 
+                                   typeOfMaint.Contains(searchText) OrElse
+                                   serialNum.Contains(searchText)
                 End If
+                
+                ' Status filter
+                Dim matchesStatus As Boolean = True
+                If Not String.IsNullOrEmpty(statusFilter) Then
+                    Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
+                    matchesStatus = rowStatus.Equals(statusFilter, StringComparison.OrdinalIgnoreCase)
+                End If
+                
+                ' Type filter
+                Dim matchesType As Boolean = True
+                If Not String.IsNullOrEmpty(typeFilter) Then
+                    Dim rowType As String = If(row.Table.Columns.Contains("typeOfMaintenance") AndAlso Not IsDBNull(row("typeOfMaintenance")), row("typeOfMaintenance").ToString(), "")
+                    matchesType = rowType.Equals(typeFilter, StringComparison.OrdinalIgnoreCase)
+                End If
+                
+                Return matchesSearch AndAlso matchesStatus AndAlso matchesType
+            End Function).ToList()
+            
+            ' Update DataGridView
+            If filteredData.Count > 0 Then
+                Dim filteredTable As DataTable = filteredData.CopyToDataTable()
+                DataGridView1.DataSource = filteredTable
+                ttlMaintenancemanagement.Text = filteredTable.Rows.Count.ToString()
+            Else
+                DataGridView1.DataSource = Nothing
+                ttlMaintenancemanagement.Text = "0"
             End If
             
             ApplyStatusColoring()
             
         Catch ex As Exception
-            System.Diagnostics.Debug.WriteLine($"[UC_MaintenanceManagement] Search error: {ex.Message}")
+            System.Diagnostics.Debug.WriteLine($"[UC_MaintenanceManagement] ApplyFilters error: {ex.Message}")
         Finally
             isSearching = False
+            isFiltering = False
         End Try
     End Sub
 
@@ -388,6 +462,9 @@ Public Class UC_MaintenanceManagement
         
         btnDelete.Visible = SessionContext.IsSuperAdmin() ' Only SuperAdmin can delete
         btnDelete.Enabled = hasFullAccess
+        
+        btnEdit.Visible = True
+        btnEdit.Enabled = hasFullAccess ' Admin/SuperAdmin/Custodian can edit
         
         btnRefresh.Visible = True
         btnRefresh.Enabled = True ' Everyone can refresh
@@ -423,6 +500,43 @@ Public Class UC_MaintenanceManagement
             MessageBox.Show("Unable to open add form. Please try again.", "Navigation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             MessageBox.Show("Error opening add maintenance form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Edit - Open edit form for selected maintenance record
+    ''' </summary>
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If DataGridView1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a maintenance record to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Try
+            Dim maintenanceID As Integer = GetSelectedMaintenanceID()
+            If maintenanceID <= 0 Then Return
+            
+            ' Navigate to edit form
+            Dim adminDashboard = TryCast(Me.ParentForm, AdminDashboard)
+            If adminDashboard IsNot Nothing Then
+                Dim editForm As New EditMaintenance1()
+                editForm.MaintenanceID = maintenanceID
+                adminDashboard.LoadUserControl(editForm)
+                Return
+            End If
+            
+            Dim saDashboard = TryCast(Me.ParentForm, SADashboard)
+            If saDashboard IsNot Nothing Then
+                Dim editForm As New EditMaintenance1()
+                editForm.MaintenanceID = maintenanceID
+                saDashboard.LoadUserControl(editForm)
+                Return
+            End If
+            
+            MessageBox.Show("Unable to open edit form. Please try again.", "Navigation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            
+        Catch ex As Exception
+            MessageBox.Show("Error opening edit form: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 

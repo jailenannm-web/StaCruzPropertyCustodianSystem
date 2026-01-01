@@ -139,6 +139,7 @@ Public Class UC_PropertyRequestManagement
     End Sub
 
     Private Sub UC_PropertyRequestManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitializeFilters()
         LoadRequestData()
         ApplyPermissionState()
 
@@ -147,6 +148,66 @@ Public Class UC_PropertyRequestManagement
             RemoveHandler maintenancemanagementsearchbar.TextChanged, AddressOf PropertyRequestSearch_TextChanged
             AddHandler maintenancemanagementsearchbar.TextChanged, AddressOf PropertyRequestSearch_TextChanged
         End If
+    End Sub
+    
+    Private Sub InitializeFilters()
+        ' Initialize status filter if it exists
+        Dim statusFilterNames() As String = {"pm_cbobx_status", "statusFilter", "cbStatus", "filter"}
+        For Each nm As String In statusFilterNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                Dim statusCb As ComboBox = CType(found(0), ComboBox)
+                statusCb.Items.Clear()
+                statusCb.Items.Add("All Status")
+                statusCb.Items.AddRange(New String() {"Pending", "Approved", "Rejected", "Assigned"})
+                statusCb.SelectedIndex = 0
+                AddHandler statusCb.SelectedIndexChanged, AddressOf Filter_Changed
+                Exit For
+            End If
+        Next
+        
+        ' Initialize category filter if it exists
+        Dim categoryFilterNames() As String = {"pm_cbobx_categ", "categoryFilter", "cbCategory"}
+        For Each nm As String In categoryFilterNames
+            Dim found() As Control = Me.Controls.Find(nm, True)
+            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                Dim categoryCb As ComboBox = CType(found(0), ComboBox)
+                categoryCb.Items.Clear()
+                categoryCb.Items.Add("All Categories")
+                Try
+                    Dim categories As DataTable = modDB.GetCategories("property")
+                    If categories IsNot Nothing AndAlso categories.Rows.Count > 0 Then
+                        For Each row As DataRow In categories.Rows
+                            Dim categoryName As String = ""
+                            If row.Table.Columns.Contains("category_name") AndAlso Not IsDBNull(row("category_name")) Then
+                                categoryName = row("category_name").ToString()
+                            ElseIf row.Table.Columns.Contains("categoryName") AndAlso Not IsDBNull(row("categoryName")) Then
+                                categoryName = row("categoryName").ToString()
+                            ElseIf row.Table.Columns.Count > 0 AndAlso Not IsDBNull(row(0)) Then
+                                categoryName = row(0).ToString()
+                            End If
+                            If Not String.IsNullOrEmpty(categoryName) AndAlso Not categoryCb.Items.Contains(categoryName) Then
+                                categoryCb.Items.Add(categoryName)
+                            End If
+                        Next
+                    End If
+                Catch ex As Exception
+                    System.Diagnostics.Debug.WriteLine("[v0] InitializeFilters Category Exception: " & ex.Message)
+                End Try
+                categoryCb.SelectedIndex = 0
+                AddHandler categoryCb.SelectedIndexChanged, AddressOf Filter_Changed
+                Exit For
+            End If
+        Next
+    End Sub
+    
+    Private Sub Filter_Changed(sender As Object, e As EventArgs)
+        ' Reload data with filters
+        Dim searchText As String = ""
+        If maintenancemanagementsearchbar IsNot Nothing Then
+            searchText = maintenancemanagementsearchbar.Text
+        End If
+        ApplyPropertyRequestSearch(searchText)
     End Sub
 
     Private originalRequestData As DataTable = Nothing
@@ -177,23 +238,58 @@ Public Class UC_PropertyRequestManagement
         Try
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
             
-            If String.IsNullOrEmpty(searchLower) Then
-                prm_table1.DataSource = originalRequestData.Copy()
-                Dim totalLabel As Label = Nothing
-                Dim foundControls() As Control = Me.Controls.Find("ttlpropertyrequestmanagement", True)
-                If foundControls.Length > 0 Then totalLabel = TryCast(foundControls(0), Label)
-                If totalLabel IsNot Nothing Then totalLabel.Text = originalRequestData.Rows.Count.ToString()
-                isSearchingRequests = False
-                Return
-            End If
+            ' Get filter values
+            Dim statusFilter As String = String.Empty
+            Dim statusFilterNames() As String = {"pm_cbobx_status", "statusFilter", "cbStatus", "filter"}
+            For Each nm As String In statusFilterNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                    Dim cb As ComboBox = CType(found(0), ComboBox)
+                    If cb.SelectedIndex > 0 Then
+                        statusFilter = cb.SelectedItem.ToString()
+                    End If
+                    Exit For
+                End If
+            Next
+            
+            Dim categoryFilter As String = String.Empty
+            Dim categoryFilterNames() As String = {"pm_cbobx_categ", "categoryFilter", "cbCategory"}
+            For Each nm As String In categoryFilterNames
+                Dim found() As Control = Me.Controls.Find(nm, True)
+                If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is ComboBox Then
+                    Dim cb As ComboBox = CType(found(0), ComboBox)
+                    If cb.SelectedIndex > 0 Then
+                        categoryFilter = cb.SelectedItem.ToString()
+                    End If
+                    Exit For
+                End If
+            Next
 
             Dim filtered = originalRequestData.AsEnumerable().Where(Function(row)
+                ' Apply status filter
+                If Not String.IsNullOrEmpty(statusFilter) Then
+                    Dim rowStatus As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), String.Empty)
+                    If Not String.Equals(rowStatus, statusFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                End If
+                
+                ' Apply category filter (if category column exists)
+                If Not String.IsNullOrEmpty(categoryFilter) Then
+                    Dim rowCategory As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), String.Empty)
+                    If Not String.Equals(rowCategory, categoryFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                End If
+                
+                ' Apply search filter
+                If String.IsNullOrEmpty(searchLower) Then Return True
+                
                 Dim requester As String = If(row.Table.Columns.Contains("requesterName") AndAlso Not IsDBNull(row("requesterName")), row("requesterName").ToString().ToLower(), String.Empty)
                 Dim dept As String = If(row.Table.Columns.Contains("department") AndAlso Not IsDBNull(row("department")), row("department").ToString().ToLower(), String.Empty)
                 Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
                 Dim purpose As String = If(row.Table.Columns.Contains("purpose") AndAlso Not IsDBNull(row("purpose")), row("purpose").ToString().ToLower(), String.Empty)
                 Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString().ToLower(), String.Empty)
-                Return requester.Contains(searchLower) OrElse dept.Contains(searchLower) OrElse itemName.Contains(searchLower) OrElse purpose.Contains(searchLower) OrElse status.Contains(searchLower)
+                Dim position As String = If(row.Table.Columns.Contains("position") AndAlso Not IsDBNull(row("position")), row("position").ToString().ToLower(), String.Empty)
+                Dim description As String = If(row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")), row("description").ToString().ToLower(), String.Empty)
+                
+                Return requester.Contains(searchLower) OrElse dept.Contains(searchLower) OrElse itemName.Contains(searchLower) OrElse purpose.Contains(searchLower) OrElse status.Contains(searchLower) OrElse position.Contains(searchLower) OrElse description.Contains(searchLower)
             End Function)
 
             If filtered Is Nothing OrElse Not filtered.Any() Then

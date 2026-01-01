@@ -302,32 +302,56 @@ Public Class UC_SupplyManagement
         isSearching = True
         Try
             Dim searchLower As String = If(String.IsNullOrWhiteSpace(searchText), String.Empty, searchText.Trim().ToLower())
-            Dim categoryFilter As String = If(pm_cbobx_categ IsNot Nothing AndAlso pm_cbobx_categ.SelectedIndex > 0, pm_cbobx_categ.SelectedItem.ToString(), String.Empty)
-            Dim statusFilter As String = If(pm_cbobx_status IsNot Nothing AndAlso pm_cbobx_status.SelectedIndex > 0, pm_cbobx_status.SelectedItem.ToString(), String.Empty)
+            
+            ' Get filter values - exclude "All" variations
+            Dim categoryFilter As String = String.Empty
+            If pm_cbobx_categ IsNot Nothing AndAlso pm_cbobx_categ.SelectedIndex > 0 Then
+                Dim selectedCat As String = pm_cbobx_categ.SelectedItem.ToString()
+                If Not selectedCat.Equals("All", StringComparison.OrdinalIgnoreCase) AndAlso 
+                   Not selectedCat.Equals("All Categories", StringComparison.OrdinalIgnoreCase) Then
+                    categoryFilter = selectedCat
+                End If
+            End If
+            
+            Dim statusFilter As String = String.Empty
+            If pm_cbobx_status IsNot Nothing AndAlso pm_cbobx_status.SelectedIndex > 0 Then
+                Dim selectedStatus As String = pm_cbobx_status.SelectedItem.ToString()
+                If Not selectedStatus.Equals("All Status", StringComparison.OrdinalIgnoreCase) AndAlso
+                   Not selectedStatus.Equals("All", StringComparison.OrdinalIgnoreCase) Then
+                    statusFilter = selectedStatus
+                End If
+            End If
 
             Dim filtered = originalData.AsEnumerable().Where(Function(row)
-                                                                 ' category
+                                                                 ' Apply category filter
                                                                  If Not String.IsNullOrEmpty(categoryFilter) Then
                                                                      If Not row.Table.Columns.Contains("category") Then Return False
-                                                                     Dim cat As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString(), String.Empty)
-                                                                     If Not cat.Equals(categoryFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                     Dim cat As String = If(Not IsDBNull(row("category")), row("category").ToString(), String.Empty)
+                                                                     If Not String.Equals(cat, categoryFilter, StringComparison.OrdinalIgnoreCase) Then Return False
                                                                  End If
-                                                                 ' status
+                                                                 
+                                                                 ' Apply status filter
                                                                  If Not String.IsNullOrEmpty(statusFilter) Then
                                                                      If Not row.Table.Columns.Contains("stockStatus") Then Return False
-                                                                     Dim st As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), String.Empty)
-                                                                     If Not st.Equals(statusFilter, StringComparison.OrdinalIgnoreCase) Then Return False
+                                                                     Dim st As String = If(Not IsDBNull(row("stockStatus")), row("stockStatus").ToString(), String.Empty)
+                                                                     If Not String.Equals(st, statusFilter, StringComparison.OrdinalIgnoreCase) Then Return False
                                                                  End If
+                                                                 
+                                                                 ' Apply search filter
                                                                  If String.IsNullOrEmpty(searchLower) Then Return True
-                                                                 ' searchable fields: itemName, category, description, supplier/sourceOfFunds, unitOfMeasure, location, stockStatus
+                                                                 
+                                                                 ' Searchable fields: itemName, category, description, supplier, sourceOfFunds, unitOfMeasure, location, stockStatus, assignedEmployee
                                                                  Dim itemName As String = If(row.Table.Columns.Contains("itemName") AndAlso Not IsDBNull(row("itemName")), row("itemName").ToString().ToLower(), String.Empty)
                                                                  Dim catVal As String = If(row.Table.Columns.Contains("category") AndAlso Not IsDBNull(row("category")), row("category").ToString().ToLower(), String.Empty)
                                                                  Dim desc As String = If(row.Table.Columns.Contains("description") AndAlso Not IsDBNull(row("description")), row("description").ToString().ToLower(), String.Empty)
-                                                                 Dim supplier As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString().ToLower(), String.Empty)
+                                                                 Dim supplier As String = If(row.Table.Columns.Contains("supplier") AndAlso Not IsDBNull(row("supplier")), row("supplier").ToString().ToLower(), String.Empty)
+                                                                 Dim sourceOfFunds As String = If(row.Table.Columns.Contains("sourceOfFunds") AndAlso Not IsDBNull(row("sourceOfFunds")), row("sourceOfFunds").ToString().ToLower(), String.Empty)
                                                                  Dim uom As String = If(row.Table.Columns.Contains("unitOfMeasure") AndAlso Not IsDBNull(row("unitOfMeasure")), row("unitOfMeasure").ToString().ToLower(), String.Empty)
                                                                  Dim location As String = If(row.Table.Columns.Contains("location") AndAlso Not IsDBNull(row("location")), row("location").ToString().ToLower(), String.Empty)
                                                                  Dim stockSt As String = If(row.Table.Columns.Contains("stockStatus") AndAlso Not IsDBNull(row("stockStatus")), row("stockStatus").ToString().ToLower(), String.Empty)
-                                                                 Return itemName.Contains(searchLower) OrElse catVal.Contains(searchLower) OrElse desc.Contains(searchLower) OrElse supplier.Contains(searchLower) OrElse uom.Contains(searchLower) OrElse location.Contains(searchLower) OrElse stockSt.Contains(searchLower)
+                                                                 Dim assignedEmp As String = If(row.Table.Columns.Contains("assignedEmployee") AndAlso Not IsDBNull(row("assignedEmployee")), row("assignedEmployee").ToString().ToLower(), String.Empty)
+                                                                 
+                                                                 Return itemName.Contains(searchLower) OrElse catVal.Contains(searchLower) OrElse desc.Contains(searchLower) OrElse supplier.Contains(searchLower) OrElse sourceOfFunds.Contains(searchLower) OrElse uom.Contains(searchLower) OrElse location.Contains(searchLower) OrElse stockSt.Contains(searchLower) OrElse assignedEmp.Contains(searchLower)
                                                              End Function)
 
             pm_table.Rows.Clear()
