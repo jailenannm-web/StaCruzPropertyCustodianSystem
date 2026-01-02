@@ -40,6 +40,7 @@ Partial Class frmBorrowedItem
         Me.pnlTransactionHistory = New System.Windows.Forms.Panel()
         Me.lblTransactionTitle = New System.Windows.Forms.Label()
         Me.btnToggleHistory = New System.Windows.Forms.Button()
+        Me.btnGenerateSlipFromHistory = New System.Windows.Forms.Button()
         Me.dgvTransactionHistory = New System.Windows.Forms.DataGridView()
         Me.colHistBorrowId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colHistBorrowDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -275,6 +276,7 @@ Partial Class frmBorrowedItem
         'pnlTransactionHistory
         '
         Me.pnlTransactionHistory.BackColor = System.Drawing.Color.FromArgb(CType(CType(245, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.pnlTransactionHistory.Controls.Add(Me.btnGenerateSlipFromHistory)
         Me.pnlTransactionHistory.Controls.Add(Me.lblTransactionTitle)
         Me.pnlTransactionHistory.Controls.Add(Me.dgvTransactionHistory)
         Me.pnlTransactionHistory.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -282,7 +284,7 @@ Partial Class frmBorrowedItem
         Me.pnlTransactionHistory.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlTransactionHistory.Name = "pnlTransactionHistory"
         Me.pnlTransactionHistory.Padding = New System.Windows.Forms.Padding(27, 12, 27, 12)
-        Me.pnlTransactionHistory.Size = New System.Drawing.Size(1600, 200)
+        Me.pnlTransactionHistory.Size = New System.Drawing.Size(1600, 250)
         Me.pnlTransactionHistory.TabIndex = 6
         Me.pnlTransactionHistory.Visible = False
         '
@@ -297,6 +299,22 @@ Partial Class frmBorrowedItem
         Me.lblTransactionTitle.Size = New System.Drawing.Size(314, 28)
         Me.lblTransactionTitle.TabIndex = 0
         Me.lblTransactionTitle.Text = "📋 Transaction History for Item"
+        '
+        'btnGenerateSlipFromHistory
+        '
+        Me.btnGenerateSlipFromHistory.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGenerateSlipFromHistory.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnGenerateSlipFromHistory.Enabled = False
+        Me.btnGenerateSlipFromHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGenerateSlipFromHistory.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGenerateSlipFromHistory.ForeColor = System.Drawing.Color.White
+        Me.btnGenerateSlipFromHistory.Location = New System.Drawing.Point(1350, 205)
+        Me.btnGenerateSlipFromHistory.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnGenerateSlipFromHistory.Name = "btnGenerateSlipFromHistory"
+        Me.btnGenerateSlipFromHistory.Size = New System.Drawing.Size(220, 40)
+        Me.btnGenerateSlipFromHistory.TabIndex = 2
+        Me.btnGenerateSlipFromHistory.Text = "📄 Generate Slip"
+        Me.btnGenerateSlipFromHistory.UseVisualStyleBackColor = False
         '
         'btnToggleHistory
         '
@@ -341,6 +359,7 @@ Partial Class frmBorrowedItem
         Me.colHistBorrowId.MinimumWidth = 6
         Me.colHistBorrowId.Name = "colHistBorrowId"
         Me.colHistBorrowId.ReadOnly = True
+        Me.colHistBorrowId.Visible = False
         Me.colHistBorrowId.Width = 125
         '
         'colHistBorrowDate
@@ -349,7 +368,7 @@ Partial Class frmBorrowedItem
         Me.colHistBorrowDate.MinimumWidth = 6
         Me.colHistBorrowDate.Name = "colHistBorrowDate"
         Me.colHistBorrowDate.ReadOnly = True
-        Me.colHistBorrowDate.Width = 150
+        Me.colHistBorrowDate.Width = 130
         '
         'colHistReturnDate
         '
@@ -357,7 +376,7 @@ Partial Class frmBorrowedItem
         Me.colHistReturnDate.MinimumWidth = 6
         Me.colHistReturnDate.Name = "colHistReturnDate"
         Me.colHistReturnDate.ReadOnly = True
-        Me.colHistReturnDate.Width = 150
+        Me.colHistReturnDate.Width = 130
         '
         'colHistStatus
         '
@@ -365,7 +384,7 @@ Partial Class frmBorrowedItem
         Me.colHistStatus.MinimumWidth = 6
         Me.colHistStatus.Name = "colHistStatus"
         Me.colHistStatus.ReadOnly = True
-        Me.colHistStatus.Width = 120
+        Me.colHistStatus.Width = 100
         '
         'colHistCondition
         '
@@ -373,23 +392,23 @@ Partial Class frmBorrowedItem
         Me.colHistCondition.MinimumWidth = 6
         Me.colHistCondition.Name = "colHistCondition"
         Me.colHistCondition.ReadOnly = True
-        Me.colHistCondition.Width = 120
+        Me.colHistCondition.Width = 110
         '
         'colHistReturnReason
         '
-        Me.colHistReturnReason.HeaderText = "Return Reason"
+        Me.colHistReturnReason.HeaderText = "Notes"
         Me.colHistReturnReason.MinimumWidth = 6
         Me.colHistReturnReason.Name = "colHistReturnReason"
         Me.colHistReturnReason.ReadOnly = True
-        Me.colHistReturnReason.Width = 200
+        Me.colHistReturnReason.Width = 180
         '
         'colHistRemarks
         '
+        Me.colHistRemarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.colHistRemarks.HeaderText = "Remarks"
         Me.colHistRemarks.MinimumWidth = 6
         Me.colHistRemarks.Name = "colHistRemarks"
         Me.colHistRemarks.ReadOnly = True
-        Me.colHistRemarks.Width = 250
         '
         'dgvBorrowedItems
         '
@@ -655,6 +674,7 @@ Partial Class frmBorrowedItem
     Friend WithEvents pnlTransactionHistory As System.Windows.Forms.Panel
     Friend WithEvents lblTransactionTitle As System.Windows.Forms.Label
     Friend WithEvents btnToggleHistory As System.Windows.Forms.Button
+    Friend WithEvents btnGenerateSlipFromHistory As System.Windows.Forms.Button
     Friend WithEvents dgvTransactionHistory As System.Windows.Forms.DataGridView
     Friend WithEvents colHistBorrowId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colHistBorrowDate As System.Windows.Forms.DataGridViewTextBoxColumn

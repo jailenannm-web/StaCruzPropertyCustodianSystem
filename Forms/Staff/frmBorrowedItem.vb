@@ -95,7 +95,7 @@ Public Class frmBorrowedItem
             .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
             .ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
             .ColumnHeadersDefaultCellStyle.Padding = New Padding(5)
-            .ColumnHeadersHeight = 40
+            .ColumnHeadersHeight = 40  ' Fixed: Use ColumnHeadersHeight property instead of Height
             
             ' Row styling
             .DefaultCellStyle.SelectionBackColor = Color.FromArgb(41, 128, 185)
@@ -104,6 +104,93 @@ Public Class frmBorrowedItem
             .RowTemplate.Height = 35
             .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 247, 250)
         End With
+        
+        ' Add double-click handler to generate slip for returned items
+        AddHandler dgvTransactionHistory.CellDoubleClick, AddressOf dgvTransactionHistory_CellDoubleClick
+        
+        ' Add selection changed handler to enable/disable generate slip button
+        AddHandler dgvTransactionHistory.SelectionChanged, AddressOf dgvTransactionHistory_SelectionChanged
+    End Sub
+    
+    ''' <summary>
+    ''' Handle selection change in transaction history to enable/disable Generate Slip button
+    ''' </summary>
+    Private Sub dgvTransactionHistory_SelectionChanged(sender As Object, e As EventArgs)
+        Try
+            If dgvTransactionHistory.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = dgvTransactionHistory.SelectedRows(0)
+                Dim status As String = selectedRow.Cells(3).Value?.ToString() ' Status column
+                
+                ' Enable button only if selected item is returned
+                If btnGenerateSlipFromHistory IsNot Nothing Then
+                    btnGenerateSlipFromHistory.Enabled = (status.ToLower() = "returned")
+                End If
+            Else
+                ' No selection - disable button
+                If btnGenerateSlipFromHistory IsNot Nothing Then
+                    btnGenerateSlipFromHistory.Enabled = False
+                End If
+            End If
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[dgvTransactionHistory_SelectionChanged] Error: {ex.Message}")
+            If btnGenerateSlipFromHistory IsNot Nothing Then
+                btnGenerateSlipFromHistory.Enabled = False
+            End If
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Handle double-click on transaction history to generate Borrowing and Return Slip for returned items
+    ''' </summary>
+    Private Sub dgvTransactionHistory_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs)
+        Try
+            ' Ignore header clicks
+            If e.RowIndex < 0 Then Return
+            
+            ' Get the selected transaction
+            Dim selectedRow As DataGridViewRow = dgvTransactionHistory.Rows(e.RowIndex)
+            Dim borrowId As String = selectedRow.Cells(0).Value?.ToString() ' First column is borrowId
+            Dim status As String = selectedRow.Cells(3).Value?.ToString() ' Fourth column is status
+            Dim returnDate As String = selectedRow.Cells(2).Value?.ToString() ' Third column is return date
+            
+            ' Check if the item has been returned
+            If status.ToLower() <> "returned" Then
+                MessageBox.Show("You can only generate a Borrowing and Return Slip for returned items." & Environment.NewLine & Environment.NewLine &
+                              "This item status is: " & status, 
+                              "Item Not Returned", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+            
+            ' Check if return date is set
+            If String.IsNullOrEmpty(returnDate) Or returnDate = "Not Returned" Then
+                MessageBox.Show("Cannot generate slip: Return date not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+            
+            If String.IsNullOrEmpty(borrowId) Then
+                MessageBox.Show("Cannot generate slip: Borrow ID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
+            ' Get item name from main grid
+            Dim itemName As String = ""
+            If dgvBorrowedItems.SelectedRows.Count > 0 Then
+                itemName = dgvBorrowedItems.SelectedRows(0).Cells("colItemName").Value?.ToString()
+            End If
+            
+            ' Open the Borrowing and Return Slip report form
+            Try
+                Dim reportForm As New BorrowingAndReturnSlip(Convert.ToInt32(borrowId), itemName)
+                reportForm.ShowDialog()
+            Catch ex As Exception
+                MessageBox.Show("Error opening Borrowing and Return Slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                System.Diagnostics.Debug.WriteLine($"[dgvTransactionHistory_CellDoubleClick] Error: {ex.Message}")
+            End Try
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[dgvTransactionHistory_CellDoubleClick] Error: {ex.Message}")
+            MessageBox.Show("Error generating slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
     
     ''' <summary>
@@ -558,13 +645,26 @@ Public Class frmBorrowedItem
                 itemName = dgvBorrowedItems.SelectedRows(0).Cells("colItemName").Value?.ToString()
             End If
             
-            ' Update title with item name
-            lblTransactionTitle.Text = $"📋 Transaction History for: {itemName}"
+            ' Update title with item name and instruction
+            lblTransactionTitle.Text = $"📋 Transaction History for: {itemName} (Double-click returned items to generate slip)"
             
             ' Query to get ALL transaction history for this item (including returned items)
+            ' Note: Shows conditionOnReturn for returned items, or current property condition for borrowed items
             Dim query As String = "SELECT bi.borrowId, bi.borrowDate, bi.actualReturnDate, bi.status, " &
-                                 "bi.conditionOnReturn, bi.returnReason, bi.remarks " &
+                                 "CASE " &
+                                 "  WHEN bi.status = 'Returned' AND bi.conditionOnReturn IS NOT NULL THEN bi.conditionOnReturn " &
+                                 "  WHEN bi.itemType = 'property' THEN p.condition " &
+                                 "  ELSE 'N/A' " &
+                                 "END AS displayCondition, " &
+                                 "CASE " &
+                                 "  WHEN bi.actualReturnDate IS NOT NULL THEN 'Item returned' " &
+                                 "  WHEN bi.status = 'Borrowed' THEN 'Currently borrowed' " &
+                                 "  ELSE '' " &
+                                 "END AS returnReason, " &
+                                 "bi.remarks " &
                                  "FROM borrowed_items bi " &
+                                 "LEFT JOIN properties p ON bi.itemId = p.propertyId AND bi.itemType = 'property' " &
+                                 "LEFT JOIN supplies s ON bi.itemId = s.supplyId AND bi.itemType = 'supply' " &
                                  "WHERE bi.itemId = @itemId AND bi.itemType = @itemType " &
                                  "ORDER BY bi.borrowDate DESC"
             
@@ -578,18 +678,26 @@ Public Class frmBorrowedItem
                         Dim borrowDate As String = ""
                         Dim returnDate As String = "Not Returned"
                         Dim status As String = If(reader.IsDBNull(reader.GetOrdinal("status")), "", reader("status").ToString())
-                        Dim condition As String = If(reader.IsDBNull(reader.GetOrdinal("conditionOnReturn")), "N/A", reader("conditionOnReturn").ToString())
+                        Dim condition As String = If(reader.IsDBNull(reader.GetOrdinal("displayCondition")), "N/A", reader("displayCondition").ToString())
                         Dim returnReason As String = If(reader.IsDBNull(reader.GetOrdinal("returnReason")), "", reader("returnReason").ToString())
                         Dim remarks As String = If(reader.IsDBNull(reader.GetOrdinal("remarks")), "", reader("remarks").ToString())
                         
                         ' Format borrow date
                         If Not reader.IsDBNull(reader.GetOrdinal("borrowDate")) Then
-                            borrowDate = Convert.ToDateTime(reader("borrowDate")).ToString("MMM dd, yyyy")
+                            Try
+                                borrowDate = Convert.ToDateTime(reader("borrowDate")).ToString("MMM dd, yyyy")
+                            Catch
+                                borrowDate = reader("borrowDate").ToString()
+                            End Try
                         End If
                         
                         ' Format return date
                         If Not reader.IsDBNull(reader.GetOrdinal("actualReturnDate")) Then
-                            returnDate = Convert.ToDateTime(reader("actualReturnDate")).ToString("MMM dd, yyyy")
+                            Try
+                                returnDate = Convert.ToDateTime(reader("actualReturnDate")).ToString("MMM dd, yyyy")
+                            Catch
+                                returnDate = reader("actualReturnDate").ToString()
+                            End Try
                         End If
                         
                         ' Add row to grid
@@ -607,10 +715,13 @@ Public Class frmBorrowedItem
                         Dim lastRow As DataGridViewRow = dgvTransactionHistory.Rows(dgvTransactionHistory.Rows.Count - 1)
                         Select Case status.ToLower()
                             Case "returned"
-                                lastRow.DefaultCellStyle.BackColor = Color.FromArgb(236, 253, 245)
+                                ' Orange for returned items
+                                lastRow.DefaultCellStyle.BackColor = Color.FromArgb(255, 237, 213)
                             Case "borrowed"
-                                lastRow.DefaultCellStyle.BackColor = Color.FromArgb(254, 243, 199)
+                                ' Green for currently borrowed items
+                                lastRow.DefaultCellStyle.BackColor = Color.FromArgb(236, 253, 245)
                             Case "overdue"
+                                ' Red for overdue items
                                 lastRow.DefaultCellStyle.BackColor = Color.FromArgb(254, 226, 226)
                         End Select
                     End While
@@ -622,6 +733,19 @@ Public Class frmBorrowedItem
             ' Show message if no history
             If dgvTransactionHistory.Rows.Count = 0 Then
                 lblTransactionTitle.Text = $"📋 No Transaction History for: {itemName}"
+            Else
+                ' Add instruction for returned items
+                Dim hasReturnedItems As Boolean = False
+                For Each row As DataGridViewRow In dgvTransactionHistory.Rows
+                    If row.Cells(3).Value?.ToString().ToLower() = "returned" Then
+                        hasReturnedItems = True
+                        Exit For
+                    End If
+                Next
+                
+                If hasReturnedItems Then
+                    lblTransactionTitle.Text = $"📋 Transaction History for: {itemName} (Double-click returned items to generate slip)"
+                End If
             End If
             
         Catch ex As Exception
@@ -1276,6 +1400,57 @@ Public Class frmBorrowedItem
         Catch ex As Exception
             MessageBox.Show("Error opening Borrowing and Return Slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             System.Diagnostics.Debug.WriteLine($"[btnBorrowReturn] Error: {ex.Message}")
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Generate Borrowing and Return Slip from transaction history button
+    ''' </summary>
+    Private Sub btnGenerateSlipFromHistory_Click(sender As Object, e As EventArgs) Handles btnGenerateSlipFromHistory.Click
+        Try
+            If dgvTransactionHistory.SelectedRows.Count = 0 Then
+                MessageBox.Show("Please select a transaction from the history to generate a slip.", 
+                              "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+            
+            Dim selectedRow As DataGridViewRow = dgvTransactionHistory.SelectedRows(0)
+            Dim borrowId As String = selectedRow.Cells(0).Value?.ToString() ' BorrowId column
+            Dim status As String = selectedRow.Cells(3).Value?.ToString() ' Status column
+            Dim returnDate As String = selectedRow.Cells(2).Value?.ToString() ' Return date column
+            
+            ' Validate item is returned
+            If status.ToLower() <> "returned" Then
+                MessageBox.Show("You can only generate a Borrowing and Return Slip for returned items." & Environment.NewLine & Environment.NewLine &
+                              "This item status is: " & status, 
+                              "Item Not Returned", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+            
+            ' Validate return date exists
+            If String.IsNullOrEmpty(returnDate) Or returnDate = "Not Returned" Then
+                MessageBox.Show("Cannot generate slip: Return date not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+            
+            If String.IsNullOrEmpty(borrowId) Then
+                MessageBox.Show("Cannot generate slip: Borrow ID not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
+            ' Get item name from main grid
+            Dim itemName As String = ""
+            If dgvBorrowedItems.SelectedRows.Count > 0 Then
+                itemName = dgvBorrowedItems.SelectedRows(0).Cells("colItemName").Value?.ToString()
+            End If
+            
+            ' Open the Borrowing and Return Slip report form
+            Dim reportForm As New BorrowingAndReturnSlip(Convert.ToInt32(borrowId), itemName)
+            reportForm.ShowDialog()
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[btnGenerateSlipFromHistory_Click] Error: {ex.Message}")
+            MessageBox.Show("Error generating slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     

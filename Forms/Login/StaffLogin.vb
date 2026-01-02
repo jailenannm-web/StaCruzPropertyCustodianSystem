@@ -63,14 +63,36 @@ Public Class StaffLogin
                 End If
 
                 If userIDValue > 0 AndAlso Not String.IsNullOrEmpty(userType) Then
-                    SessionContext.SetCurrentUser(userIDValue, username, userType)
+                    ' Construct full name from firstName, middleName, and lastName (to match database fullName format)
+                    Dim firstName As String = If(adminResult.ContainsKey("firstName"), adminResult("firstName"), "")
+                    Dim middleName As String = If(adminResult.ContainsKey("middleName"), adminResult("middleName"), "")
+                    Dim lastName As String = If(adminResult.ContainsKey("lastName"), adminResult("lastName"), "")
+                    
+                    ' Build full name with middle name if available (matches database generated fullName column)
+                    Dim fullName As String = ""
+                    If Not String.IsNullOrEmpty(middleName) Then
+                        fullName = $"{firstName} {middleName} {lastName}".Trim()
+                    Else
+                        fullName = $"{firstName} {lastName}".Trim()
+                    End If
+                    
+                    If String.IsNullOrEmpty(fullName) Then
+                        fullName = username ' Fallback to username if no name available
+                    End If
+                    
+                    ' Get department and position if available
+                    Dim department As String = If(adminResult.ContainsKey("departmentId"), adminResult("departmentId"), "")
+                    Dim position As String = If(adminResult.ContainsKey("position"), adminResult("position"), userType)
+                    
+                    ' Use the proper Login method with full information
+                    SessionContext.Login(userIDValue, username, userType, fullName, department, position)
                     My.Settings.LoggedInuser = username
                     My.Settings.Save()
                     
                     ' Log successful login to audit_logs
                     AuditLogger.LogLogin(userIDValue, username, userType, True)
 
-                    MessageBox.Show("Login successful! Welcome, " & username & " (" & userType & ").", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show("Login successful! Welcome, " & fullName & " (" & userType & ").", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                     If userType = "SuperAdmin" Then
                         OpenDashboard(New SADashboard())
@@ -109,14 +131,36 @@ Public Class StaffLogin
                 End If
                 
                 If staffID > 0 Then
-                    SessionContext.SetCurrentUser(staffID, username, "Staff")
+                    ' Construct full name from firstName, middleName, and lastName (to match database fullName format)
+                    Dim firstName As String = If(staffResult.ContainsKey("firstName"), staffResult("firstName"), "")
+                    Dim middleName As String = If(staffResult.ContainsKey("middleName"), staffResult("middleName"), "")
+                    Dim lastName As String = If(staffResult.ContainsKey("lastName"), staffResult("lastName"), "")
+                    
+                    ' Build full name with middle name if available (matches database generated fullName column)
+                    Dim fullName As String = ""
+                    If Not String.IsNullOrEmpty(middleName) Then
+                        fullName = $"{firstName} {middleName} {lastName}".Trim()
+                    Else
+                        fullName = $"{firstName} {lastName}".Trim()
+                    End If
+                    
+                    If String.IsNullOrEmpty(fullName) Then
+                        fullName = username ' Fallback to username if no name available
+                    End If
+                    
+                    ' Get department and position if available
+                    Dim department As String = If(staffResult.ContainsKey("departmentId"), staffResult("departmentId"), "")
+                    Dim position As String = If(staffResult.ContainsKey("position"), staffResult("position"), "Staff")
+                    
+                    ' Use the proper Login method with full information
+                    SessionContext.Login(staffID, username, "Staff", fullName, department, position)
                     My.Settings.LoggedInuser = username
                     My.Settings.Save()
                     
                     ' Log successful login to audit_logs
                     AuditLogger.LogLogin(staffID, username, "Staff", True)
 
-                    MessageBox.Show("Login successful! Welcome, " & username & " (Staff).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show("Login successful! Welcome, " & fullName & " (Staff).", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                     OpenDashboard(New StaffDashboard())
                 Else

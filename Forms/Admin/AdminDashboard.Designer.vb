@@ -30,6 +30,7 @@ Partial Class AdminDashboard
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminDashboard))
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
@@ -57,8 +58,8 @@ Partial Class AdminDashboard
         Dim ChartArea9 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend9 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminDashboard))
         Me.admin_PanelSidebar = New System.Windows.Forms.Panel()
+        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_btn_suppliesRequestManagement = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_btn_MaintenanceRequest = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_btn_Logout = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -124,7 +125,6 @@ Partial Class AdminDashboard
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.admin_txtbox_search = New System.Windows.Forms.TextBox()
         Me.admin_panel2 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedPanel()
-        Me.RoundedButton1 = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.admin_PanelSidebar.SuspendLayout()
         CType(Me.admin_picProfile, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.admin_PanelMain.SuspendLayout()
@@ -181,6 +181,28 @@ Partial Class AdminDashboard
         Me.admin_PanelSidebar.Size = New System.Drawing.Size(380, 1055)
         Me.admin_PanelSidebar.TabIndex = 1
         '
+        'RoundedButton1
+        '
+        Me.RoundedButton1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.RoundedButton1.CornerRadius = 5
+        Me.RoundedButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.RoundedButton1.FlatAppearance.BorderSize = 0
+        Me.RoundedButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.RoundedButton1.ForeColor = System.Drawing.Color.White
+        Me.RoundedButton1.Image = CType(resources.GetObject("RoundedButton1.Image"), System.Drawing.Image)
+        Me.RoundedButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.RoundedButton1.Location = New System.Drawing.Point(39, 850)
+        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(5)
+        Me.RoundedButton1.Name = "RoundedButton1"
+        Me.RoundedButton1.Size = New System.Drawing.Size(306, 56)
+        Me.RoundedButton1.TabIndex = 12
+        Me.RoundedButton1.Text = "Audit Log"
+        Me.RoundedButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.RoundedButton1.UseVisualStyleBackColor = False
+        '
         'admin_btn_suppliesRequestManagement
         '
         Me.admin_btn_suppliesRequestManagement.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -208,7 +230,7 @@ Partial Class AdminDashboard
         Me.admin_btn_MaintenanceRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.admin_btn_MaintenanceRequest.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.admin_btn_MaintenanceRequest.ForeColor = System.Drawing.Color.White
-        Me.admin_btn_MaintenanceRequest.Location = New System.Drawing.Point(39, 785)
+        Me.admin_btn_MaintenanceRequest.Location = New System.Drawing.Point(39, 791)
         Me.admin_btn_MaintenanceRequest.Margin = New System.Windows.Forms.Padding(4)
         Me.admin_btn_MaintenanceRequest.Name = "admin_btn_MaintenanceRequest"
         Me.admin_btn_MaintenanceRequest.Size = New System.Drawing.Size(306, 56)
@@ -250,7 +272,7 @@ Partial Class AdminDashboard
         Me.admin_btn_reports.ForeColor = System.Drawing.Color.White
         Me.admin_btn_reports.Image = CType(resources.GetObject("admin_btn_reports.Image"), System.Drawing.Image)
         Me.admin_btn_reports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.admin_btn_reports.Location = New System.Drawing.Point(39, 843)
+        Me.admin_btn_reports.Location = New System.Drawing.Point(39, 912)
         Me.admin_btn_reports.Margin = New System.Windows.Forms.Padding(5)
         Me.admin_btn_reports.Name = "admin_btn_reports"
         Me.admin_btn_reports.Size = New System.Drawing.Size(306, 56)
@@ -258,6 +280,7 @@ Partial Class AdminDashboard
         Me.admin_btn_reports.Text = "Reports"
         Me.admin_btn_reports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.admin_btn_reports.UseVisualStyleBackColor = False
+        Me.admin_btn_reports.Visible = False
         '
         'admin_btn_MaintenanceManagement
         '
@@ -1239,28 +1262,6 @@ Partial Class AdminDashboard
         Me.admin_panel2.Name = "admin_panel2"
         Me.admin_panel2.Size = New System.Drawing.Size(200, 100)
         Me.admin_panel2.TabIndex = 0
-        '
-        'RoundedButton1
-        '
-        Me.RoundedButton1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton1.CornerRadius = 5
-        Me.RoundedButton1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.RoundedButton1.FlatAppearance.BorderSize = 0
-        Me.RoundedButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(58, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.RoundedButton1.ForeColor = System.Drawing.Color.White
-        Me.RoundedButton1.Image = CType(resources.GetObject("RoundedButton1.Image"), System.Drawing.Image)
-        Me.RoundedButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.RoundedButton1.Location = New System.Drawing.Point(38, 903)
-        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(5)
-        Me.RoundedButton1.Name = "RoundedButton1"
-        Me.RoundedButton1.Size = New System.Drawing.Size(306, 56)
-        Me.RoundedButton1.TabIndex = 12
-        Me.RoundedButton1.Text = "Audit Log"
-        Me.RoundedButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.RoundedButton1.UseVisualStyleBackColor = False
         '
         'AdminDashboard
         '

@@ -330,7 +330,7 @@ Partial Class SADashboard
 
     End Sub
 
-    Private Sub RoundedPanel11_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel11.Paint
+    Private Sub RoundedPanel11_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
@@ -453,7 +453,7 @@ Partial Class SADashboard
 
     End Sub
 
-    Private Sub SAChart_SystemAlerts_Click(sender As Object, e As EventArgs) Handles SAChart_SystemAlerts.Click
+    Private Sub SAChart_SystemAlerts_Click(sender As Object, e As EventArgs)
 
     End Sub
 

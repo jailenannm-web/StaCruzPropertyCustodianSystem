@@ -1009,7 +1009,7 @@ Public Class modDB
                 ' Ensure account exists in database and get full details (users table stores all accounts)
                 InitializeDefaultAccounts()
                 Dim hardcodedQuery As String =
-                    "SELECT userId, firstName, lastName, email, contactNumber, departmentId, username, passwordEncrypted, status " &
+                    "SELECT userId, firstName, middleName, lastName, email, contactNumber, departmentId, username, passwordEncrypted, status " &
                     "FROM users WHERE LOWER(username) = LOWER(@username) AND role = 'Staff' LIMIT 1;"
                 Using cmd As New MySqlCommand(hardcodedQuery, conn)
                     cmd.Parameters.AddWithValue("@username", hardcodedStaffUsername)
@@ -1021,6 +1021,7 @@ Public Class modDB
                             result("userId") = uid.ToString()
                             result("user_id") = uid.ToString()
                             result("firstName") = If(IsDBNull(reader("firstName")), "", reader("firstName").ToString())
+                            result("middleName") = If(IsDBNull(reader("middleName")), "", reader("middleName").ToString())
                             result("lastName") = If(IsDBNull(reader("lastName")), "", reader("lastName").ToString())
                             result("email") = If(IsDBNull(reader("email")), "", reader("email").ToString())
                             result("contactNumber") = If(IsDBNull(reader("contactNumber")), "", reader("contactNumber").ToString())
@@ -1112,6 +1113,7 @@ Public Class modDB
             result("userId") = userID.ToString()
             result("user_id") = userID.ToString()
             If row.Table.Columns.Contains("firstName") Then result("firstName") = SafeDbValue(row("firstName"))
+            If row.Table.Columns.Contains("middleName") Then result("middleName") = SafeDbValue(row("middleName"))
             If row.Table.Columns.Contains("lastName") Then result("lastName") = SafeDbValue(row("lastName"))
             If row.Table.Columns.Contains("email") Then result("email") = SafeDbValue(row("email"))
             If row.Table.Columns.Contains("contactNumber") Then result("contactNumber") = SafeDbValue(row("contactNumber"))
@@ -1560,7 +1562,7 @@ Public Class modDB
                     If conn IsNot Nothing AndAlso SafeOpenConnection(conn) Then
                         InitializeDefaultAccounts()
 
-                        Dim query As String = "SELECT userId, firstName, lastName, email, username, role AS user_type, passwordEncrypted " &
+                        Dim query As String = "SELECT userId, firstName, middleName, lastName, email, username, role AS user_type, passwordEncrypted " &
                                              "FROM users WHERE LOWER(username) = LOWER(@username) " &
                                              "AND role = 'SuperAdmin' " &
                                              "AND status = 'Active'"
@@ -1572,6 +1574,7 @@ Public Class modDB
                                     result("userId") = reader("userId").ToString()
                                     result("user_id") = reader("userId").ToString()
                                     result("firstName") = reader("firstName").ToString()
+                                    result("middleName") = If(IsDBNull(reader("middleName")), "", reader("middleName").ToString())
                                     result("lastName") = reader("lastName").ToString()
                                     result("email") = reader("email").ToString()
                                     result("username") = reader("username").ToString()
@@ -1619,7 +1622,7 @@ Public Class modDB
                     If conn IsNot Nothing AndAlso SafeOpenConnection(conn) Then
                         InitializeDefaultAccounts()
 
-                        Dim query As String = "SELECT userId, firstName, lastName, email, username, role AS user_type, passwordEncrypted " &
+                        Dim query As String = "SELECT userId, firstName, middleName, lastName, email, username, role AS user_type, passwordEncrypted " &
                                              "FROM users WHERE LOWER(username) = LOWER(@username) " &
                                                          "AND role = 'Admin' " &
                                              "AND status = 'Active'"
@@ -1631,6 +1634,7 @@ Public Class modDB
                                     result("userId") = reader("userId").ToString()
                                     result("user_id") = reader("userId").ToString()
                                     result("firstName") = reader("firstName").ToString()
+                                    result("middleName") = If(IsDBNull(reader("middleName")), "", reader("middleName").ToString())
                                     result("lastName") = reader("lastName").ToString()
                                     result("email") = reader("email").ToString()
                                     result("username") = reader("username").ToString()
@@ -1680,7 +1684,7 @@ Public Class modDB
             InitializeDefaultAccounts()
 
             ' Query uses role column (not user_type) - alias it as user_type for compatibility
-            Dim query As String = "SELECT userId, firstName, lastName, email, username, role AS user_type, passwordEncrypted " &
+            Dim query As String = "SELECT userId, firstName, middleName, lastName, email, username, role AS user_type, passwordEncrypted " &
                                  "FROM users WHERE LOWER(username) = LOWER(@username) " &
                                  "AND (role = 'Admin' OR role = 'SuperAdmin') " &
                                  "AND LOWER(status) = 'active'"
@@ -1695,6 +1699,7 @@ Public Class modDB
                             result("userId") = reader("userId").ToString()
                             result("user_id") = reader("userId").ToString()
                             result("firstName") = reader("firstName").ToString()
+                            result("middleName") = If(IsDBNull(reader("middleName")), "", reader("middleName").ToString())
                             result("lastName") = reader("lastName").ToString()
                             result("email") = reader("email").ToString()
                             result("username") = reader("username").ToString()
@@ -2007,7 +2012,8 @@ Public Class modDB
             ' Get staff profile from users table (same table as Admin/SuperAdmin)
             Dim query As String =
                 "SELECT userId, firstName, middleName, lastName, suffix, position, departmentId, " &
-                "contactNumber, email, username, employeeId, status, lastLogin, createdAt " &
+                "contactNumber, email, username, employeeId, province, municipal, barangay, " &
+                "status, lastLogin, createdAt " &
                 "FROM users WHERE userId = @staffID AND role = 'Staff'"
 
             Using cmd As New MySqlCommand(query, conn)
@@ -2026,6 +2032,9 @@ Public Class modDB
                         profile("email") = If(IsDBNull(reader("email")), "", reader("email").ToString())
                         profile("username") = If(IsDBNull(reader("username")), "", reader("username").ToString())
                         profile("employeeId") = If(IsDBNull(reader("employeeId")), "", reader("employeeId").ToString())
+                        profile("province") = If(IsDBNull(reader("province")), "", reader("province").ToString())
+                        profile("municipal") = If(IsDBNull(reader("municipal")), "", reader("municipal").ToString())
+                        profile("barangay") = If(IsDBNull(reader("barangay")), "", reader("barangay").ToString())
                         profile("status") = If(IsDBNull(reader("status")), "", reader("status").ToString())
                         profile("lastLogin") = If(IsDBNull(reader("lastLogin")), Nothing, reader("lastLogin"))
                         profile("createdAt") = If(IsDBNull(reader("createdAt")), Nothing, reader("createdAt"))
