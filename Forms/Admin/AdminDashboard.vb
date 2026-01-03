@@ -114,7 +114,7 @@ Public Class AdminDashboard
             BindChartData(SAChart_ScheduleMaintenance, Await maintenanceStatusTask, SeriesChartType.Pie)
             BindChartData(SAChart_RequestTrends, Await requestTrendTask, SeriesChartType.Line, showValueLabels:=False)
             BindChartData(SAChart_RecentPropertyRequests, Await departmentUsageTask, SeriesChartType.Column)
-            BindChartData(SAChart_SystemAlerts, BuildAlertsData(summary), SeriesChartType.Pie)
+
         Catch ex As Exception
             Debug.WriteLine("Dashboard load error: " & ex.Message)
             MessageBox.Show("Unable to load dashboard data. Please try again or check the database connection.",
@@ -128,10 +128,7 @@ Public Class AdminDashboard
     Private Sub UpdateSummaryCards(summary As Dictionary(Of String, Integer))
         If summary Is Nothing Then Return
 
-        Label4.Text = SafeSummaryRead(summary, "total_properties").ToString("N0")
-        Label5.Text = SafeSummaryRead(summary, "pending_requests").ToString("N0")
-        Label6.Text = $"{SafeSummaryRead(summary, "borrowed_items"):N0} / {SafeSummaryRead(summary, "returned_items"):N0}"
-        Label2.Text = SafeSummaryRead(summary, "needs_repair").ToString("N0")
+
 
         ApplyChartTitle(SAChart_TotalSupplies, $"Total Supplies: {SafeSummaryRead(summary, "total_supplies"):N0}")
         ApplyChartTitle(SAChart_PendingRequest,
@@ -139,8 +136,7 @@ Public Class AdminDashboard
                         $"{SafeSummaryRead(summary, "approved_requests"):N0}/{SafeSummaryRead(summary, "declined_requests"):N0}")
         ApplyChartTitle(SAChart_ScheduleMaintenance,
                         $"Open Maintenance Alerts: {SafeSummaryRead(summary, "maintenance_alerts"):N0}")
-        ApplyChartTitle(SAChart_SystemAlerts,
-                        $"Warranty Alerts: {SafeSummaryRead(summary, "warranty_alerts"):N0}")
+
     End Sub
 
     Private Sub ApplyChartTitle(chart As Chart, titleText As String)
@@ -315,7 +311,7 @@ Public Class AdminDashboard
         admin_btn_MaintenanceManagement.PerformClick()
     End Sub
 
-    Private Sub PendingRequestsCard_Click(sender As Object, e As EventArgs) Handles admin_panel_PendingRequests.Click, Label1.Click, Label5.Click
+    Private Sub PendingRequestsCard_Click(sender As Object, e As EventArgs)
         admin_btn_PropertyRequestManagement.PerformClick()
     End Sub
 
@@ -369,15 +365,15 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub SAChart_SystemAlerts_Click(sender As Object, e As EventArgs) Handles SAChart_SystemAlerts.Click
+    Private Sub SAChart_SystemAlerts_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+    Private Sub Label6_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+    Private Sub Label2_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -389,11 +385,11 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub TableLayoutPanel3_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel3.Paint
+    Private Sub TableLayoutPanel3_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
@@ -413,11 +409,11 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub RoundedPanel11_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel11.Paint
+    Private Sub RoundedPanel11_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub lblSystemAlerts_Click(sender As Object, e As EventArgs) Handles lblSystemAlerts.Click
+    Private Sub lblSystemAlerts_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -513,40 +509,58 @@ Public Class AdminDashboard
 
     End Sub
 
-    Private Sub RoundedPanel2_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel2.Paint
+    Private Sub RoundedPanel2_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+    Private Sub Label7_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub RoundedPanel3_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel3.Paint
+    Private Sub RoundedPanel3_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub Label4_Click_1(sender As Object, e As EventArgs) Handles Label4.Click
+    Private Sub Label4_Click_1(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+    Private Sub Label3_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub RoundedPanel1_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel1.Paint
+    Private Sub RoundedPanel1_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub admin_panel_borrowed_Click(sender As Object, e As EventArgs) Handles admin_panel_borrowed.Click
+    Private Sub admin_panel_borrowed_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub admin_panel_PendingRequests_Paint(sender As Object, e As PaintEventArgs) Handles admin_panel_PendingRequests.Paint
+    Private Sub admin_panel_PendingRequests_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
     Private Sub admin_btn_Logout_Click(sender As Object, e As EventArgs) Handles admin_btn_Logout.Click
-
+        Try
+            ' Log the logout action
+            If SessionContext.CurrentUserID.HasValue Then
+                AuditLogger.LogAction(SessionContext.CurrentUserID.Value, "LOGOUT", "users", 0, 
+                                     $"User {SessionContext.CurrentUsername} logged out")
+            End If
+            
+            ' Clear session
+            SessionContext.Reset()
+            
+            ' Show login form
+            Dim loginForm As New StaffLogin()
+            loginForm.Show()
+            
+            ' Close current dashboard
+            Me.Close()
+        Catch ex As Exception
+            MessageBox.Show("Error during logout: " & ex.Message, "Logout Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub admin_panel2_Paint(sender As Object, e As PaintEventArgs) Handles admin_panel2.Paint

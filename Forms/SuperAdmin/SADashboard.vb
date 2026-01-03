@@ -336,9 +336,25 @@ Partial Class SADashboard
 
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        Dim logout As New Form1()
-        logout.Show() ' Show the register form
-        Me.Hide() ' Hide current login form instead of closing it
+        Try
+            ' Log the logout action
+            If SessionContext.CurrentUserID.HasValue Then
+                AuditLogger.LogAction(SessionContext.CurrentUserID.Value, "LOGOUT", "users", 0, 
+                                     $"User {SessionContext.CurrentUsername} logged out")
+            End If
+            
+            ' Clear session
+            SessionContext.Reset()
+            
+            ' Show login form
+            Dim loginForm As New StaffLogin()
+            loginForm.Show()
+            
+            ' Close current dashboard
+            Me.Close()
+        Catch ex As Exception
+            MessageBox.Show("Error during logout: " & ex.Message, "Logout Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint

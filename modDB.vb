@@ -2448,9 +2448,15 @@ Public Class modDB
         Return summary
     End Function
 
+    ''' <summary>
+    ''' Dashboard: Get property counts by category for Total Property chart
+    ''' </summary>
     Public Shared Function GetPropertyCountsByCategory() As DataTable
         Dim query As String = "SELECT IFNULL(category, 'Uncategorized') AS label, COUNT(*) AS total " &
-                              "FROM properties GROUP BY category ORDER BY label"
+                              "FROM properties " &
+                              "WHERE status IN ('Active', 'Borrowed') " &
+                              "GROUP BY category " &
+                              "ORDER BY total DESC"
         Return ExecuteLookupDataTable(query)
     End Function
 
@@ -2460,9 +2466,21 @@ Public Class modDB
         Return ExecuteLookupDataTable(query)
     End Function
 
+    ''' <summary>
+    ''' Dashboard: Get supply counts for Inventory Status Overview (Active/Low Stock/Out of Stock)
+    ''' </summary>
     Public Shared Function GetSupplyStatusCounts() As DataTable
-        Dim query As String = "SELECT IFNULL(stockStatus, 'unspecified') AS label, COUNT(*) AS total " &
-                              "FROM supplies GROUP BY stockStatus ORDER BY stockStatus"
+        Dim query As String = "SELECT " &
+                              "CASE " &
+                              "  WHEN stockStatus = 'Available' THEN 'Available' " &
+                              "  WHEN stockStatus = 'Low Stock' THEN 'Low Stock' " &
+                              "  WHEN stockStatus = 'Out of Stock' THEN 'Out of Stock' " &
+                              "  ELSE 'Unknown' " &
+                              "END AS label, " &
+                              "COUNT(*) AS total " &
+                              "FROM supplies " &
+                              "GROUP BY label " &
+                              "ORDER BY FIELD(label, 'Available', 'Low Stock', 'Out of Stock', 'Unknown')"
         Return ExecuteLookupDataTable(query)
     End Function
 
@@ -2472,42 +2490,105 @@ Public Class modDB
         Return ExecuteLookupDataTable(query)
     End Function
 
+    ''' <summary>
+    ''' Dashboard: Get property condition counts (Good/Needs Repair/Damaged)
+    ''' </summary>
     Public Shared Function GetPropertyConditionCounts() As DataTable
-        ' Use backticks to escape 'condition' reserved word in MySQL
-        Dim query As String = "SELECT IFNULL(`condition`, 'unspecified') AS label, COUNT(*) AS total " &
-                              "FROM properties GROUP BY `condition` ORDER BY `condition`"
+        Dim query As String = "SELECT " &
+                              "CASE " &
+                              "  WHEN `condition` = 'Good' THEN 'Good' " &
+                              "  WHEN `condition` = 'Needs Repair' THEN 'Needs Repair' " &
+                              "  WHEN `condition` = 'Damaged' THEN 'Damaged' " &
+                              "  ELSE 'Unknown' " &
+                              "END AS label, " &
+                              "COUNT(*) AS total " &
+                              "FROM properties " &
+                              "WHERE status IN ('Active', 'Borrowed') " &
+                              "GROUP BY label " &
+                              "ORDER BY FIELD(label, 'Good', 'Needs Repair', 'Damaged', 'Unknown')"
         Return ExecuteLookupDataTable(query)
     End Function
 
+    ''' <summary>
+    ''' Dashboard: Get maintenance status counts (Pending/Approved/In Progress/Completed)
+    ''' </summary>
     Public Shared Function GetMaintenanceStatusCounts() As DataTable
-        Dim query As String = "SELECT IFNULL(status, 'unspecified') AS label, COUNT(*) AS total " &
-                              "FROM maintenance GROUP BY status ORDER BY status"
+        Dim query As String = "SELECT " &
+                              "CASE " &
+                              "  WHEN status = 'Pending' THEN 'Pending' " &
+                              "  WHEN status = 'Approved' THEN 'Approved' " &
+                              "  WHEN status = 'In Progress' THEN 'In Progress' " &
+                              "  WHEN status = 'Completed' THEN 'Completed' " &
+                              "  WHEN status = 'Ongoing' THEN 'Ongoing' " &
+                              "  WHEN status = 'For Review' THEN 'For Review' " &
+                              "  ELSE 'Other' " &
+                              "END AS label, " &
+                              "COUNT(*) AS total " &
+                              "FROM maintenance_requests " &
+                              "GROUP BY label " &
+                              "ORDER BY FIELD(label, 'Pending', 'Approved', 'In Progress', 'Ongoing', 'Completed', 'For Review', 'Other')"
         Return ExecuteLookupDataTable(query)
     End Function
 
+    ''' <summary>
+    ''' Dashboard: Get pending request counts by type (Property/Supply/Maintenance)
+    ''' </summary>
     Public Shared Function GetRequestStatusCounts() As DataTable
-        Dim query As String = "SELECT IFNULL(status, 'unspecified') AS label, COUNT(*) AS total " &
-                              "FROM property_requests GROUP BY status ORDER BY status"
+        Dim query As String = "SELECT 'Property Requests' AS label, COUNT(*) AS total " &
+                              "FROM property_requests WHERE status = 'Pending' " &
+                              "UNION ALL " &
+                              "SELECT 'Supply Requests' AS label, COUNT(*) AS total " &
+                              "FROM supplies_requests WHERE status = 'Pending' " &
+                              "UNION ALL " &
+                              "SELECT 'Maintenance Requests' AS label, COUNT(*) AS total " &
+                              "FROM maintenance_requests WHERE status = 'Pending' " &
+                              "ORDER BY label"
         Return ExecuteLookupDataTable(query)
     End Function
 
+    ''' <summary>
+    ''' Dashboard: Get recent property requests by month (for Recent Property Requests chart)
+    ''' </summary>
     Public Shared Function GetDepartmentInventoryDistribution() As DataTable
-        Dim query As String = "SELECT IFNULL(d.departmentName, 'Unassigned') AS label, COUNT(*) AS total " &
-                              "FROM properties p " &
-                              "LEFT JOIN departments d ON p.departmentId = d.departmentId " &
-                              "GROUP BY label ORDER BY label"
+        Dim query As String = "SELECT DATE_FORMAT(dateOfRequest, '%b %Y') AS label, COUNT(*) AS total " &
+                              "FROM property_requests " &
+                              "WHERE dateOfRequest >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) " &
+                              "GROUP BY DATE_FORMAT(dateOfRequest, '%Y-%m'), DATE_FORMAT(dateOfRequest, '%b %Y') " &
+                              "ORDER BY DATE_FORMAT(dateOfRequest, '%Y-%m')"
         Return ExecuteLookupDataTable(query)
     End Function
 
+    ''' <summary>
+    ''' Dashboard: Get request trends over time (all request types combined)
+    ''' </summary>
     Public Shared Function GetBorrowingTrendData(monthsBack As Integer) As DataTable
         Dim sanitizedMonths As Integer = Math.Max(1, Math.Min(24, monthsBack))
         Dim fromDate As Date = Date.Today.AddMonths(-sanitizedMonths)
 
-        Dim query As String = "SELECT DATE_FORMAT(dateOfRequest, '%b %Y') AS label, COUNT(*) AS total " &
-                              "FROM property_requests " &
-                              "WHERE dateOfRequest >= @fromDate " &
-                              "GROUP BY DATE_FORMAT(dateOfRequest, '%Y-%m') " &
-                              "ORDER BY DATE_FORMAT(dateOfRequest, '%Y-%m')"
+        Dim query As String = "SELECT label, SUM(total) AS total FROM (" &
+                              "  SELECT DATE_FORMAT(dateOfRequest, '%b %Y') AS label, " &
+                              "         DATE_FORMAT(dateOfRequest, '%Y-%m') AS sortKey, " &
+                              "         COUNT(*) AS total " &
+                              "  FROM property_requests " &
+                              "  WHERE dateOfRequest >= @fromDate " &
+                              "  GROUP BY DATE_FORMAT(dateOfRequest, '%Y-%m'), DATE_FORMAT(dateOfRequest, '%b %Y') " &
+                              "  UNION ALL " &
+                              "  SELECT DATE_FORMAT(dateOfRequest, '%b %Y') AS label, " &
+                              "         DATE_FORMAT(dateOfRequest, '%Y-%m') AS sortKey, " &
+                              "         COUNT(*) AS total " &
+                              "  FROM supplies_requests " &
+                              "  WHERE dateOfRequest >= @fromDate " &
+                              "  GROUP BY DATE_FORMAT(dateOfRequest, '%Y-%m'), DATE_FORMAT(dateOfRequest, '%b %Y') " &
+                              "  UNION ALL " &
+                              "  SELECT DATE_FORMAT(dateRequested, '%b %Y') AS label, " &
+                              "         DATE_FORMAT(dateRequested, '%Y-%m') AS sortKey, " &
+                              "         COUNT(*) AS total " &
+                              "  FROM maintenance_requests " &
+                              "  WHERE dateRequested >= @fromDate " &
+                              "  GROUP BY DATE_FORMAT(dateRequested, '%Y-%m'), DATE_FORMAT(dateRequested, '%b %Y') " &
+                              ") AS combined " &
+                              "GROUP BY label, sortKey " &
+                              "ORDER BY sortKey"
 
         Dim parameters As New Dictionary(Of String, Object) From {
             {"@fromDate", fromDate}
@@ -2516,9 +2597,15 @@ Public Class modDB
         Return ExecuteLookupDataTable(query, parameters)
     End Function
 
+    ''' <summary>
+    ''' Dashboard: Get supply inventory breakdown by category (Total Supplies chart)
+    ''' </summary>
     Public Shared Function GetSupplyInventoryBreakdown() As DataTable
         Dim query As String = "SELECT IFNULL(category, 'Uncategorized') AS label, SUM(quantity) AS total " &
-                              "FROM supplies GROUP BY category ORDER BY label"
+                              "FROM supplies " &
+                              "WHERE stockStatus IN ('Available', 'Low Stock') " &
+                              "GROUP BY category " &
+                              "ORDER BY total DESC"
         Return ExecuteLookupDataTable(query)
     End Function
 
