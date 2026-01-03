@@ -60,6 +60,8 @@ Partial Class UC_PropertyRequestManagement
         Me.ttlpropertyrequestmanagement = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.maintenancemanagementsearchbar = New System.Windows.Forms.TextBox()
+        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
+        Me.issueRequisition = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAssign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.printPAR = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.issuePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -67,7 +69,6 @@ Partial Class UC_PropertyRequestManagement
         Me.btnReject = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.prm_btn_update = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.assign = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         CType(Me.prm_table1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -331,6 +332,34 @@ Partial Class UC_PropertyRequestManagement
         Me.maintenancemanagementsearchbar.Size = New System.Drawing.Size(340, 42)
         Me.maintenancemanagementsearchbar.TabIndex = 172
         '
+        'pm_cbobx_status
+        '
+        Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1179, 73)
+        Me.pm_cbobx_status.Name = "pm_cbobx_status"
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
+        Me.pm_cbobx_status.TabIndex = 174
+        Me.pm_cbobx_status.Text = "Status"
+        '
+        'issueRequisition
+        '
+        Me.issueRequisition.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.issueRequisition.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.issueRequisition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.issueRequisition.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.issueRequisition.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.issueRequisition.Location = New System.Drawing.Point(1002, 68)
+        Me.issueRequisition.Margin = New System.Windows.Forms.Padding(4)
+        Me.issueRequisition.Name = "issueRequisition"
+        Me.issueRequisition.Size = New System.Drawing.Size(153, 33)
+        Me.issueRequisition.TabIndex = 175
+        Me.issueRequisition.Text = "Issue RIS"
+        Me.issueRequisition.UseVisualStyleBackColor = False
+        '
         'btnAssign
         '
         Me.btnAssign.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -354,13 +383,14 @@ Partial Class UC_PropertyRequestManagement
         Me.printPAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.printPAR.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.printPAR.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.printPAR.Location = New System.Drawing.Point(1043, 68)
+        Me.printPAR.Location = New System.Drawing.Point(779, 20)
         Me.printPAR.Margin = New System.Windows.Forms.Padding(4)
         Me.printPAR.Name = "printPAR"
         Me.printPAR.Size = New System.Drawing.Size(129, 33)
         Me.printPAR.TabIndex = 161
         Me.printPAR.Text = "Print PAR/ICS"
         Me.printPAR.UseVisualStyleBackColor = False
+        Me.printPAR.Visible = False
         '
         'issuePropertyCard
         '
@@ -369,13 +399,14 @@ Partial Class UC_PropertyRequestManagement
         Me.issuePropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.issuePropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.issuePropertyCard.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertyCard.Location = New System.Drawing.Point(902, 68)
+        Me.issuePropertyCard.Location = New System.Drawing.Point(632, 23)
         Me.issuePropertyCard.Margin = New System.Windows.Forms.Padding(4)
         Me.issuePropertyCard.Name = "issuePropertyCard"
         Me.issuePropertyCard.Size = New System.Drawing.Size(139, 30)
         Me.issuePropertyCard.TabIndex = 160
         Me.issuePropertyCard.Text = "Issue Property Acknoledgement "
         Me.issuePropertyCard.UseVisualStyleBackColor = False
+        Me.issuePropertyCard.Visible = False
         '
         'btnApprove
         '
@@ -435,24 +466,12 @@ Partial Class UC_PropertyRequestManagement
         Me.assign.Text = "Assign"
         Me.assign.UseVisualStyleBackColor = False
         '
-        'pm_cbobx_status
-        '
-        Me.pm_cbobx_status.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pm_cbobx_status.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(1179, 73)
-        Me.pm_cbobx_status.Name = "pm_cbobx_status"
-        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
-        Me.pm_cbobx_status.TabIndex = 174
-        Me.pm_cbobx_status.Text = "Status"
-        '
         'UC_PropertyRequestManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.issueRequisition)
         Me.Controls.Add(Me.pm_cbobx_status)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.maintenancemanagementsearchbar)
@@ -516,4 +535,5 @@ Partial Class UC_PropertyRequestManagement
     Friend WithEvents createdAt As DataGridViewTextBoxColumn
     Friend WithEvents approvedBy As DataGridViewTextBoxColumn
     Friend WithEvents pm_cbobx_status As ComboBox
+    Friend WithEvents issueRequisition As Resources.Controls.RoundedButton
 End Class

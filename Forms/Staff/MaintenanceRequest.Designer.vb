@@ -22,7 +22,6 @@ Partial Class MaintenanceRequest
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.PropertID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -40,6 +39,7 @@ Partial Class MaintenanceRequest
         Me.maintenancerequestssearchbar = New System.Windows.Forms.TextBox()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
+        Me.btnGenerateMaintenance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,7 +139,6 @@ Partial Class MaintenanceRequest
         '
         Me.RoundedButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RoundedButton1.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.RoundedButton1.CornerRadius = 15
         Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -212,10 +211,26 @@ Partial Class MaintenanceRequest
         Me.pm_cbobx_categ.TabIndex = 180
         Me.pm_cbobx_categ.Text = "Categories"
         '
+        'btnGenerateMaintenance
+        '
+        Me.btnGenerateMaintenance.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGenerateMaintenance.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnGenerateMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGenerateMaintenance.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnGenerateMaintenance.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnGenerateMaintenance.Location = New System.Drawing.Point(856, 1073)
+        Me.btnGenerateMaintenance.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnGenerateMaintenance.Name = "btnGenerateMaintenance"
+        Me.btnGenerateMaintenance.Size = New System.Drawing.Size(225, 45)
+        Me.btnGenerateMaintenance.TabIndex = 183
+        Me.btnGenerateMaintenance.Text = "Generate Maintenance Report"
+        Me.btnGenerateMaintenance.UseVisualStyleBackColor = False
+        '
         'MaintenanceRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnGenerateMaintenance)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.maintenancerequestssearchbar)
         Me.Controls.Add(Me.pm_cbobx_status)
@@ -249,4 +264,5 @@ Partial Class MaintenanceRequest
     Friend WithEvents maintenancerequestssearchbar As System.Windows.Forms.TextBox
     Friend WithEvents pm_cbobx_status As System.Windows.Forms.ComboBox
     Friend WithEvents pm_cbobx_categ As System.Windows.Forms.ComboBox
+    Friend WithEvents btnGenerateMaintenance As Resources.Controls.RoundedButton
 End Class

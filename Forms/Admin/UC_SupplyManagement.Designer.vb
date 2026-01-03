@@ -93,7 +93,7 @@ Partial Class UC_SupplyManagement
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.supplyId, Me.itemName, Me.category, Me.description, Me.quantity, Me.supplier, Me.assignedTo, Me.location, Me.stockStatus, Me.unitOfMeasure, Me.dateReceived, Me.unitCost, Me.totalCost, Me.sourceOfFunds, Me.createdAt, Me.updatedAt})
-        Me.pm_table.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.pm_table.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(62, 124)
         Me.pm_table.Name = "pm_table"

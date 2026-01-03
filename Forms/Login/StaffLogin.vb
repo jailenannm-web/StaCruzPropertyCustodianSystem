@@ -183,7 +183,12 @@ Public Class StaffLogin
     End Sub
 
     ' Cancel button click
-
+    Private Sub btn_Cancel_Click(sender As Object, e As EventArgs) Handles btn_Cancel.Click
+        ' Clear the textboxes
+        txb_Username.Clear()
+        txb_Password.Clear()
+        txb_Username.Focus()
+    End Sub
 
     Private Sub txb_Password_TextChanged(sender As Object, e As EventArgs) Handles txb_Password.TextChanged
 

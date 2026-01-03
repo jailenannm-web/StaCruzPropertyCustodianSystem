@@ -367,8 +367,8 @@ Public Class UC_PropertyManagement1
             If propertyManagementGrid.Columns.Contains("createdAt") Then propertyManagementGrid.Columns("createdAt").Visible = False
             If propertyManagementGrid.Columns.Contains("updatedAt") Then propertyManagementGrid.Columns("updatedAt").Visible = False
 
-            ' Show only required columns: propertyId, itemName, category, description, assignedTo, location, condition, status
-            If propertyManagementGrid.Columns.Contains("propertyId") Then propertyManagementGrid.Columns("propertyId").Visible = True
+            ' Show only required columns: itemName, category, description, assignedTo, location, condition, status
+            If propertyManagementGrid.Columns.Contains("propertyId") Then propertyManagementGrid.Columns("propertyId").Visible = False
             If propertyManagementGrid.Columns.Contains("itemName") Then propertyManagementGrid.Columns("itemName").Visible = True
             If propertyManagementGrid.Columns.Contains("category") Then propertyManagementGrid.Columns("category").Visible = True
             If propertyManagementGrid.Columns.Contains("description") Then propertyManagementGrid.Columns("description").Visible = True

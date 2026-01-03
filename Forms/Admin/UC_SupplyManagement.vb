@@ -126,24 +126,69 @@ Public Class UC_SupplyManagement
         pm_table.EnableHeadersVisualStyles = False
 
         ' Font & colors
-        pm_table.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+        pm_table.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
         pm_table.DefaultCellStyle.BackColor = Color.White
         pm_table.DefaultCellStyle.ForeColor = Color.Black
+        pm_table.DefaultCellStyle.WrapMode = DataGridViewTriState.False
         pm_table.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
 
         ' Header styling
-        pm_table.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        pm_table.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
         pm_table.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
         pm_table.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
         pm_table.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
+        ' Configure column widths to show full content
+        pm_table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+        
+        ' Set specific column widths - optimized for important columns only
+        If pm_table.Columns.Count >= 16 Then
+            pm_table.Columns(0).Width = 50   ' supplyId (HIDDEN)
+            pm_table.Columns(1).Width = 150  ' itemName (wider since we hide some columns)
+            pm_table.Columns(2).Width = 120  ' category (wider)
+            pm_table.Columns(3).Width = 200  ' description (much wider)
+            pm_table.Columns(4).Width = 80   ' quantity
+            pm_table.Columns(5).Width = 100  ' supplier (HIDDEN)
+            pm_table.Columns(6).Width = 150  ' assignedTo (wider)
+            pm_table.Columns(7).Width = 120  ' location (wider)
+            pm_table.Columns(8).Width = 100  ' stockStatus
+            pm_table.Columns(9).Width = 100  ' unitOfMeasure (Unit)
+            pm_table.Columns(10).Width = 90  ' dateReceived (hidden)
+            pm_table.Columns(11).Width = 80  ' unitCost (HIDDEN)
+            pm_table.Columns(12).Width = 100 ' totalCost (Total Cost)
+            pm_table.Columns(13).Width = 110 ' sourceOfFunds (HIDDEN)
+            pm_table.Columns(14).Width = 100 ' createdAt (hidden)
+            pm_table.Columns(15).Width = 100 ' updatedAt (hidden)
+            
+            ' Hide requested columns: supplyId, unitCost, supplier, sourceOfFunds
+            pm_table.Columns(0).Visible = False  ' supplyId - HIDDEN per request
+            pm_table.Columns(1).Visible = True   ' itemName
+            pm_table.Columns(2).Visible = True   ' category
+            pm_table.Columns(3).Visible = True   ' description
+            pm_table.Columns(4).Visible = True   ' quantity
+            pm_table.Columns(5).Visible = False  ' supplier - HIDDEN per request
+            pm_table.Columns(6).Visible = True   ' assignedTo
+            pm_table.Columns(7).Visible = True   ' location
+            pm_table.Columns(8).Visible = True   ' stockStatus
+            pm_table.Columns(9).Visible = True   ' unitOfMeasure (Unit)
+            pm_table.Columns(10).Visible = False ' dateReceived
+            pm_table.Columns(11).Visible = False ' unitCost - HIDDEN per request
+            pm_table.Columns(12).Visible = True  ' totalCost (Total Cost - still visible)
+            pm_table.Columns(13).Visible = False ' sourceOfFunds - HIDDEN per request
+            pm_table.Columns(14).Visible = False ' createdAt
+            pm_table.Columns(15).Visible = False ' updatedAt
+        End If
+        
         ' Column alignment
         For Each col As DataGridViewColumn In pm_table.Columns
-            col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            If col.Index = 1 OrElse col.Index = 3 Then ' itemName, description
+                col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            ElseIf col.Index = 4 OrElse col.Index = 11 OrElse col.Index = 12 Then ' quantity, costs
+                col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Else
+                col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            End If
         Next
-
-        ' Auto size
-        pm_table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
         ' No restrictions - all buttons enabled for Super Admin, Admin, and Custodian
         ApplyRolePermissions()
@@ -163,6 +208,11 @@ Public Class UC_SupplyManagement
             supplymanagementsearchbar.Visible = True
             supplymanagementsearchbar.BringToFront()
             
+            ' Set initial placeholder WITHOUT triggering events
+            RemoveHandler supplymanagementsearchbar.TextChanged, AddressOf SupplySearch_TextChanged
+            supplymanagementsearchbar.Text = "Search supplies..."
+            supplymanagementsearchbar.ForeColor = Drawing.Color.Gray
+            
             ' Add placeholder text handling
             AddHandler supplymanagementsearchbar.GotFocus, Sub()
                                                                If supplymanagementsearchbar.ForeColor = Drawing.Color.Gray Then
@@ -177,10 +227,9 @@ Public Class UC_SupplyManagement
                                                                 End If
                                                             End Sub
             
-            ' Wire up search handler
-            RemoveHandler supplymanagementsearchbar.TextChanged, AddressOf SupplySearch_TextChanged
+            ' Wire up search handler AFTER setting placeholder
             AddHandler supplymanagementsearchbar.TextChanged, AddressOf SupplySearch_TextChanged
-            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Wired search handler directly to supplymanagementsearchbar")
+            System.Diagnostics.Debug.WriteLine("[v0] UC_SupplyManagement - Wired search handler (placeholder set first)")
         End If
         
         ' Also try to find search field by name as fallback
@@ -200,7 +249,10 @@ Public Class UC_SupplyManagement
     ' Added method to load supplies from database
     Public Sub LoadSuppliesData()
         Try
+            ' Clear existing rows
             pm_table.Rows.Clear()
+            System.Diagnostics.Debug.WriteLine("[v0] LoadSuppliesData - Table cleared")
+            
             Dim categoryFilter As String = ""
             Dim statusFilter As String = ""
 
@@ -225,13 +277,17 @@ Public Class UC_SupplyManagement
 
             System.Diagnostics.Debug.WriteLine($"[v0] LoadSuppliesData - Category Filter: '{categoryFilter}', Status Filter: '{statusFilter}'")
             Dim dt As DataTable = modDB.GetAllSupplies(categoryFilter, statusFilter)
+            System.Diagnostics.Debug.WriteLine($"[v0] LoadSuppliesData - Received {If(dt IsNot Nothing, dt.Rows.Count, 0)} rows from database")
             If dt Is Nothing Then
                 originalData = Nothing
                 Return
             End If
             originalData = dt.Copy()
 
+            System.Diagnostics.Debug.WriteLine($"[v0] LoadSuppliesData - Starting to populate {dt.Rows.Count} rows into table")
+            
             If dt.Rows.Count > 0 Then
+                Dim rowsAdded As Integer = 0
                 For Each row As DataRow In dt.Rows
                     ' Use safe column access with correct camelCase column names from database
                     ' Designer column order: supplyId, itemName, category, description, quantity, supplier, location, stockStatus, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt
@@ -279,15 +335,30 @@ Public Class UC_SupplyManagement
 
                     ' Add row matching Designer column order: supplyId, itemName, category, description, quantity, supplier, assignedTo, location, stockStatus, unitOfMeasure, dateReceived, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt
                     Dim rowIndex As Integer = pm_table.Rows.Add(supplyID, supplyName, categoryVal, descriptionVal, quantityVal, supplierVal, assignedToName, locationVal, status, unitOfMeasure, acqDate, unitCost, totalCost, sourceOfFunds, createdAt, updatedAt)
+                    rowsAdded += 1
                 Next
 
+                System.Diagnostics.Debug.WriteLine($"[v0] LoadSuppliesData - Successfully added {rowsAdded} rows to table")
+                System.Diagnostics.Debug.WriteLine($"[v0] LoadSuppliesData - Table now has {pm_table.Rows.Count} rows")
+                
                 ' Update total count
                 If ttlSupplymanagement IsNot Nothing Then
                     ttlSupplymanagement.Text = dt.Rows.Count.ToString()
+                    System.Diagnostics.Debug.WriteLine($"[v0] LoadSuppliesData - Updated count label to: {dt.Rows.Count}")
+                Else
+                    System.Diagnostics.Debug.WriteLine("[v0] LoadSuppliesData - WARNING: ttlSupplymanagement label is Nothing!")
                 End If
+                
+                ' Force UI refresh
+                pm_table.Refresh()
+                Me.Refresh()
+                
                 System.Diagnostics.Debug.WriteLine("[v0] Supply Management - Loaded " & dt.Rows.Count & " supplies")
             Else
                 System.Diagnostics.Debug.WriteLine("[v0] Supply Management - No supplies found")
+                If ttlSupplymanagement IsNot Nothing Then
+                    ttlSupplymanagement.Text = "0"
+                End If
             End If
         Catch ex As Exception
             MessageBox.Show("Error loading supplies: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -431,21 +502,14 @@ Public Class UC_SupplyManagement
     End Sub
 
     Private Sub Filter_Changed(sender As Object, e As EventArgs)
+        System.Diagnostics.Debug.WriteLine("[v0] Filter_Changed - Event triggered")
+        
         ' Reload data with filters
         LoadSuppliesData()
-        ' Reapply search if there's search text
-        ' find any search textbox and reapply
-        Dim searchNames As String() = {"pm_search", "pm_searchbar", "supplysearch", "supplymanagementsearchbar", "txtSearch", "txtbox_search", "searchBox", "admin_txtbox_search"}
-        For Each nm As String In searchNames
-            Dim found() As Control = Me.Controls.Find(nm, True)
-            If found IsNot Nothing AndAlso found.Length > 0 AndAlso TypeOf found(0) Is TextBox Then
-                Dim tb As TextBox = CType(found(0), TextBox)
-                If Not String.IsNullOrWhiteSpace(tb.Text) Then
-                    ApplySupplySearch(tb.Text)
-                End If
-                Exit For
-            End If
-        Next
+        
+        ' DON'T reapply search automatically - it causes the table to clear
+        ' The search will be applied when user types in the search box
+        System.Diagnostics.Debug.WriteLine("[v0] Filter_Changed - Completed, table should now show filtered data")
     End Sub
     ' Super Admin bypasses all restrictions
 
@@ -453,13 +517,21 @@ Public Class UC_SupplyManagement
         Dim tb As TextBox = TryCast(sender, TextBox)
         If tb Is Nothing Then Return
         
-        ' Skip placeholder text
-        If tb.ForeColor = Drawing.Color.Gray AndAlso (tb.Text = "Search supplies..." OrElse String.IsNullOrWhiteSpace(tb.Text)) Then
-            ' Clear search and show all
-            ApplySupplySearch("")
+        System.Diagnostics.Debug.WriteLine($"[v0] SupplySearch_TextChanged - Text: '{tb.Text}', ForeColor: {tb.ForeColor.Name}")
+        
+        ' Skip placeholder text - DON'T trigger search
+        If tb.ForeColor = Drawing.Color.Gray OrElse tb.Text = "Search supplies..." Then
+            System.Diagnostics.Debug.WriteLine("[v0] SupplySearch_TextChanged - Skipping placeholder text")
             Return
         End If
         
+        ' Only apply search if there's actual text
+        If String.IsNullOrWhiteSpace(tb.Text) Then
+            System.Diagnostics.Debug.WriteLine("[v0] SupplySearch_TextChanged - Empty search, ignoring")
+            Return
+        End If
+        
+        System.Diagnostics.Debug.WriteLine($"[v0] SupplySearch_TextChanged - Applying search for: '{tb.Text}'")
         ApplySupplySearch(tb.Text)
     End Sub
 

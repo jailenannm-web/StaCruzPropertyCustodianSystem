@@ -65,7 +65,7 @@ Public Class UC_MaintenanceManagement
             .AllowUserToDeleteRows = False
             .SelectionMode = DataGridViewSelectionMode.FullRowSelect
             .MultiSelect = False
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None ' Use explicit widths
             .RowHeadersVisible = True
             .RowHeadersWidth = 50
             .EnableHeadersVisualStyles = False
@@ -136,18 +136,18 @@ Public Class UC_MaintenanceManagement
                 End If
             Next
             
-            ' Configure column visibility and appearance - Optimized for database structure
+            ' Configure column visibility and appearance - HIDDEN: ID, Req ID, Serial Number
             Select Case colNameLower
                 Case "maintenanceid"
                     col.HeaderText = "ID"
-                    col.Visible = True
+                    col.Visible = False ' HIDDEN per user request
                     col.Width = 60
                     col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
                     col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
                     
                 Case "requestid"
                     col.HeaderText = "Req ID"
-                    col.Visible = True
+                    col.Visible = False ' HIDDEN per user request
                     col.Width = 70
                     col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
                     col.DefaultCellStyle.ForeColor = Color.FromArgb(13, 110, 253) ' Blue for links
@@ -155,50 +155,50 @@ Public Class UC_MaintenanceManagement
                 Case "propertyitemname"
                     col.HeaderText = "Property Item"
                     col.Visible = True
-                    col.MinimumWidth = 180
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                    col.Width = 200 ' Wider to show full item names
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                     col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
                     
                 Case "serialnumber"
                     col.HeaderText = "Serial Number"
-                    col.Visible = True
+                    col.Visible = False ' HIDDEN per user request
                     col.Width = 110
                     col.DefaultCellStyle.Font = New Font("Consolas", 9) ' Monospace for serial numbers
                     
                 Case "location"
                     col.HeaderText = "Location"
                     col.Visible = True
-                    col.Width = 140
+                    col.Width = 120 ' Show full location names
                     
                 Case "departmentid"
                     col.HeaderText = "Department"
                     col.Visible = True
-                    col.Width = 140
+                    col.Width = 150 ' Wider to show full department names
                     
                 Case "conditionbeforemaint"
                     col.HeaderText = "Initial Condition"
                     col.Visible = True
-                    col.Width = 130
+                    col.Width = 120 ' Show full condition
                     col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
                     
                 Case "typeofmaintenance"
                     col.HeaderText = "Type"
                     col.Visible = True
-                    col.Width = 90
+                    col.Width = 100 ' Show full type (Repair/Replace/Servicing)
                     col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
                     col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
                     
                 Case "assignedtechnician"
                     col.HeaderText = "Technician"
                     col.Visible = True
-                    col.Width = 150
+                    col.Width = 150 ' Show full technician names
                     col.DefaultCellStyle.ForeColor = Color.FromArgb(111, 66, 193) ' Purple for people
                     
                 Case "maintenancedate"
                     col.HeaderText = "Date"
                     col.Visible = True
-                    col.Width = 110
-                    col.DefaultCellStyle.Format = "MMM dd, yyyy"
+                    col.Width = 100
+                    col.DefaultCellStyle.Format = "MM/dd/yyyy"
                     col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
                     
                 Case "maintenancedetail"
@@ -208,7 +208,7 @@ Public Class UC_MaintenanceManagement
                 Case "costmaterialslabor"
                     col.HeaderText = "Cost (₱)"
                     col.Visible = True
-                    col.Width = 110
+                    col.Width = 100
                     col.DefaultCellStyle.Format = "#,##0.00"
                     col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
@@ -217,13 +217,13 @@ Public Class UC_MaintenanceManagement
                 Case "conditionaftermaint"
                     col.HeaderText = "After Condition"
                     col.Visible = True
-                    col.Width = 130
+                    col.Width = 120 ' Show full condition
                     col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
                     
                 Case "status"
                     col.HeaderText = "Status"
                     col.Visible = True
-                    col.Width = 110
+                    col.Width = 100
                     col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
                     col.DefaultCellStyle.Font = New Font("Poppins", 9, FontStyle.Bold)
                     

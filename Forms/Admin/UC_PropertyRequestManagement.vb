@@ -748,4 +748,56 @@ Public Class UC_PropertyRequestManagement
         End Try
     End Sub
 
+    Private Sub issueRequisition_Click(sender As Object, e As EventArgs) Handles issueRequisition.Click
+        ' Validate that a request is selected
+        If prm_table1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a property request to issue RIS.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim selectedRow As DataGridViewRow = prm_table1.SelectedRows(0)
+        Dim dt As DataTable = TryCast(prm_table1.DataSource, DataTable)
+
+        ' Get request ID from DataTable source
+        Dim requestIDValue As Object = Nothing
+        If dt IsNot Nothing Then
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim dataRow As DataRow = dt.Rows(rowIndex)
+            If dt.Columns.Contains("requestId") Then
+                requestIDValue = dataRow("requestId")
+            ElseIf dt.Columns.Contains("request_id") Then
+                requestIDValue = dataRow("request_id")
+            End If
+        End If
+
+        ' Fallback to DataGridView cells
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) Then
+            If prm_table1.Columns.Contains("request_id") Then
+                requestIDValue = selectedRow.Cells("request_id").Value
+            ElseIf prm_table1.Columns.Contains("RequestID") Then
+                requestIDValue = selectedRow.Cells("RequestID").Value
+            ElseIf prm_table1.Columns.Count > 0 Then
+                requestIDValue = selectedRow.Cells(0).Value
+            End If
+        End If
+
+        If requestIDValue Is Nothing OrElse IsDBNull(requestIDValue) OrElse String.IsNullOrEmpty(requestIDValue.ToString()) Then
+            MessageBox.Show("Invalid request selected. Please select a valid supply request.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim requestID As Integer = 0
+        If Not Integer.TryParse(requestIDValue.ToString(), requestID) Then
+            MessageBox.Show("Invalid request ID format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' Open RequisitionIssueSlip form with request ID
+        Try
+            Dim risForm As New RequisitionIssueSlip(requestID, "properties")
+            risForm.Show()
+        Catch ex As Exception
+            MessageBox.Show("Error opening Requisition Issue Slip: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 End Class
