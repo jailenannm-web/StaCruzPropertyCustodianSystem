@@ -1263,4 +1263,7 @@ Public Class UC_PropertyManagement1
         End Try
     End Sub
 
+    Private Sub ttlpropertymanagement_Click(sender As Object, e As EventArgs) Handles ttlpropertymanagement.Click
+
+    End Sub
 End Class

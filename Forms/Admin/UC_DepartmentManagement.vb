@@ -376,7 +376,7 @@ Public Class UC_DepartmentManagement
         End Try
     End Sub
 
-    Private Sub btnDepartmentReport_Click(sender As Object, e As EventArgs) Handles btnDepartmentReport.Click
+    Private Sub btnDepartmentReport_Click(sender As Object, e As EventArgs)
         Try
             System.Diagnostics.Debug.WriteLine("[v0] Opening Department Allocation Report")
             Dim reportForm As New DepartmentAllocationSummary_vb()
@@ -581,5 +581,9 @@ Public Class UC_DepartmentManagement
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles departmentmanagementsearchbar.TextChanged
         ' Real-time search: filter the DataGrid based on entered text and selected status
         ApplySearchFilter(departmentmanagementsearchbar.Text)
+    End Sub
+
+    Private Sub pm_cbobx_categ_SelectedIndexChanged(sender As Object, e As EventArgs) Handles pm_cbobx_categ.SelectedIndexChanged
+
     End Sub
 End Class
