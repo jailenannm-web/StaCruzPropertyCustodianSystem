@@ -107,7 +107,7 @@ Partial Class frmProfile
         Me.pnlMain.Controls.Add(Me.lblTitle)
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
-        Me.pnlMain.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlMain.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.Size = New System.Drawing.Size(1942, 1125)
         Me.pnlMain.TabIndex = 0
@@ -119,7 +119,7 @@ Partial Class frmProfile
         Me.txtBarangay.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtBarangay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtBarangay.Location = New System.Drawing.Point(1121, 667)
-        Me.txtBarangay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtBarangay.Margin = New System.Windows.Forms.Padding(4)
         Me.txtBarangay.Name = "txtBarangay"
         Me.txtBarangay.ReadOnly = True
         Me.txtBarangay.Size = New System.Drawing.Size(418, 32)
@@ -144,7 +144,7 @@ Partial Class frmProfile
         Me.txtMunicipality.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtMunicipality.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtMunicipality.Location = New System.Drawing.Point(1121, 617)
-        Me.txtMunicipality.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtMunicipality.Margin = New System.Windows.Forms.Padding(4)
         Me.txtMunicipality.Name = "txtMunicipality"
         Me.txtMunicipality.ReadOnly = True
         Me.txtMunicipality.Size = New System.Drawing.Size(418, 32)
@@ -169,7 +169,7 @@ Partial Class frmProfile
         Me.txtProvince.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtProvince.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtProvince.Location = New System.Drawing.Point(1121, 567)
-        Me.txtProvince.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtProvince.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProvince.Name = "txtProvince"
         Me.txtProvince.ReadOnly = True
         Me.txtProvince.Size = New System.Drawing.Size(418, 32)
@@ -195,9 +195,9 @@ Partial Class frmProfile
         Me.lblAddressInfo.Location = New System.Drawing.Point(902, 513)
         Me.lblAddressInfo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblAddressInfo.Name = "lblAddressInfo"
-        Me.lblAddressInfo.Size = New System.Drawing.Size(292, 32)
+        Me.lblAddressInfo.Size = New System.Drawing.Size(251, 32)
         Me.lblAddressInfo.TabIndex = 31
-        Me.lblAddressInfo.Text = "📍 Address Information"
+        Me.lblAddressInfo.Text = "Address Information"
         '
         'txtPassword
         '
@@ -206,7 +206,7 @@ Partial Class frmProfile
         Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtPassword.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtPassword.Location = New System.Drawing.Point(1121, 442)
-        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.ReadOnly = True
         Me.txtPassword.Size = New System.Drawing.Size(418, 32)
@@ -231,7 +231,7 @@ Partial Class frmProfile
         Me.txtUsername.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtUsername.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtUsername.Location = New System.Drawing.Point(1121, 392)
-        Me.txtUsername.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtUsername.Margin = New System.Windows.Forms.Padding(4)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.ReadOnly = True
         Me.txtUsername.Size = New System.Drawing.Size(418, 32)
@@ -257,9 +257,9 @@ Partial Class frmProfile
         Me.lblAccountInfo.Location = New System.Drawing.Point(902, 338)
         Me.lblAccountInfo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblAccountInfo.Name = "lblAccountInfo"
-        Me.lblAccountInfo.Size = New System.Drawing.Size(295, 32)
+        Me.lblAccountInfo.Size = New System.Drawing.Size(254, 32)
         Me.lblAccountInfo.TabIndex = 26
-        Me.lblAccountInfo.Text = "🔐 Account Information"
+        Me.lblAccountInfo.Text = "Account Information"
         '
         'txtEmail
         '
@@ -268,7 +268,7 @@ Partial Class frmProfile
         Me.txtEmail.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtEmail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtEmail.Location = New System.Drawing.Point(1121, 267)
-        Me.txtEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtEmail.Margin = New System.Windows.Forms.Padding(4)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.ReadOnly = True
         Me.txtEmail.Size = New System.Drawing.Size(418, 32)
@@ -293,7 +293,7 @@ Partial Class frmProfile
         Me.txtContactNumber.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtContactNumber.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtContactNumber.Location = New System.Drawing.Point(1121, 217)
-        Me.txtContactNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtContactNumber.Margin = New System.Windows.Forms.Padding(4)
         Me.txtContactNumber.Name = "txtContactNumber"
         Me.txtContactNumber.ReadOnly = True
         Me.txtContactNumber.Size = New System.Drawing.Size(418, 32)
@@ -319,9 +319,9 @@ Partial Class frmProfile
         Me.lblContactInfo.Location = New System.Drawing.Point(902, 163)
         Me.lblContactInfo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblContactInfo.Name = "lblContactInfo"
-        Me.lblContactInfo.Size = New System.Drawing.Size(288, 32)
+        Me.lblContactInfo.Size = New System.Drawing.Size(247, 32)
         Me.lblContactInfo.TabIndex = 21
-        Me.lblContactInfo.Text = "📞 Contact Information"
+        Me.lblContactInfo.Text = "Contact Information"
         '
         'txtDepartment
         '
@@ -330,7 +330,7 @@ Partial Class frmProfile
         Me.txtDepartment.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtDepartment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtDepartment.Location = New System.Drawing.Point(264, 642)
-        Me.txtDepartment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtDepartment.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDepartment.Name = "txtDepartment"
         Me.txtDepartment.ReadOnly = True
         Me.txtDepartment.Size = New System.Drawing.Size(562, 32)
@@ -355,7 +355,7 @@ Partial Class frmProfile
         Me.txtEmployeeId.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtEmployeeId.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtEmployeeId.Location = New System.Drawing.Point(264, 592)
-        Me.txtEmployeeId.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtEmployeeId.Margin = New System.Windows.Forms.Padding(4)
         Me.txtEmployeeId.Name = "txtEmployeeId"
         Me.txtEmployeeId.ReadOnly = True
         Me.txtEmployeeId.Size = New System.Drawing.Size(562, 32)
@@ -380,7 +380,7 @@ Partial Class frmProfile
         Me.txtPosition.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtPosition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtPosition.Location = New System.Drawing.Point(264, 542)
-        Me.txtPosition.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPosition.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPosition.Name = "txtPosition"
         Me.txtPosition.ReadOnly = True
         Me.txtPosition.Size = New System.Drawing.Size(562, 32)
@@ -406,9 +406,9 @@ Partial Class frmProfile
         Me.lblWorkInfo.Location = New System.Drawing.Point(21, 488)
         Me.lblWorkInfo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblWorkInfo.Name = "lblWorkInfo"
-        Me.lblWorkInfo.Size = New System.Drawing.Size(261, 32)
+        Me.lblWorkInfo.Size = New System.Drawing.Size(220, 32)
         Me.lblWorkInfo.TabIndex = 14
-        Me.lblWorkInfo.Text = "💼 Work Information"
+        Me.lblWorkInfo.Text = "Work Information"
         '
         'txtSuffix
         '
@@ -417,7 +417,7 @@ Partial Class frmProfile
         Me.txtSuffix.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtSuffix.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtSuffix.Location = New System.Drawing.Point(264, 417)
-        Me.txtSuffix.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSuffix.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSuffix.Name = "txtSuffix"
         Me.txtSuffix.ReadOnly = True
         Me.txtSuffix.Size = New System.Drawing.Size(562, 32)
@@ -442,7 +442,7 @@ Partial Class frmProfile
         Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtLastName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtLastName.Location = New System.Drawing.Point(264, 367)
-        Me.txtLastName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtLastName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.ReadOnly = True
         Me.txtLastName.Size = New System.Drawing.Size(562, 32)
@@ -467,7 +467,7 @@ Partial Class frmProfile
         Me.txtMiddleName.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtMiddleName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtMiddleName.Location = New System.Drawing.Point(264, 317)
-        Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.ReadOnly = True
         Me.txtMiddleName.Size = New System.Drawing.Size(562, 32)
@@ -492,7 +492,7 @@ Partial Class frmProfile
         Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtFirstName.Location = New System.Drawing.Point(264, 267)
-        Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.ReadOnly = True
         Me.txtFirstName.Size = New System.Drawing.Size(562, 32)
@@ -517,7 +517,7 @@ Partial Class frmProfile
         Me.txtUserId.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtUserId.ForeColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
         Me.txtUserId.Location = New System.Drawing.Point(264, 217)
-        Me.txtUserId.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtUserId.Margin = New System.Windows.Forms.Padding(4)
         Me.txtUserId.Name = "txtUserId"
         Me.txtUserId.ReadOnly = True
         Me.txtUserId.Size = New System.Drawing.Size(562, 32)
@@ -543,9 +543,9 @@ Partial Class frmProfile
         Me.lblPersonalInfo.Location = New System.Drawing.Point(21, 163)
         Me.lblPersonalInfo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPersonalInfo.Name = "lblPersonalInfo"
-        Me.lblPersonalInfo.Size = New System.Drawing.Size(298, 32)
+        Me.lblPersonalInfo.Size = New System.Drawing.Size(257, 32)
         Me.lblPersonalInfo.TabIndex = 3
-        Me.lblPersonalInfo.Text = "📋 Personal Information"
+        Me.lblPersonalInfo.Text = "Personal Information"
         '
         'btnRefresh
         '
@@ -556,11 +556,11 @@ Partial Class frmProfile
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.btnRefresh.ForeColor = System.Drawing.Color.White
         Me.btnRefresh.Location = New System.Drawing.Point(1114, 63)
-        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(200, 56)
         Me.btnRefresh.TabIndex = 2
-        Me.btnRefresh.Text = "🔄 Refresh"
+        Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = False
         '
         'btnEdit
@@ -572,11 +572,11 @@ Partial Class frmProfile
         Me.btnEdit.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.btnEdit.ForeColor = System.Drawing.Color.White
         Me.btnEdit.Location = New System.Drawing.Point(1340, 63)
-        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(200, 56)
         Me.btnEdit.TabIndex = 1
-        Me.btnEdit.Text = "✏️ Edit Profile"
+        Me.btnEdit.Text = "Edit Profile"
         Me.btnEdit.UseVisualStyleBackColor = False
         '
         'lblTitle
@@ -599,7 +599,7 @@ Partial Class frmProfile
         Me.ClientSize = New System.Drawing.Size(1942, 1125)
         Me.Controls.Add(Me.pnlMain)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmProfile"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "User Profile"

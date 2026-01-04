@@ -237,4 +237,8 @@ Public Class frmRequest
 
         RequisitionIssueSlip.Show()
     End Sub
+
+    Private Sub pm_cbobx_status_SelectedIndexChanged(sender As Object, e As EventArgs) Handles pm_cbobx_status.SelectedIndexChanged
+
+    End Sub
 End Class

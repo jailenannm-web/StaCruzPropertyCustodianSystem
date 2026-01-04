@@ -375,4 +375,12 @@ Partial Public Class MaintenanceRequest
         End If
         GenerateMaintenanceReport()
     End Sub
+
+    Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub btnGenerateMaintenance_Click(sender As Object, e As EventArgs) Handles btnGenerateMaintenance.Click
+
+    End Sub
 End Class

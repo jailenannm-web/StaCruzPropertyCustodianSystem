@@ -128,4 +128,8 @@ Public Class EditProfile
     Private Sub position_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
+
+    Private Sub txb_DepartmentID_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txb_DepartmentID.SelectedIndexChanged
+
+    End Sub
 End Class

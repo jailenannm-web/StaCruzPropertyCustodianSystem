@@ -424,7 +424,7 @@ Partial Class EditProfile
         Me.txb_DepartmentID.Font = New System.Drawing.Font("Poppins", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txb_DepartmentID.FormattingEnabled = True
         Me.txb_DepartmentID.Items.AddRange(New Object() {"Daet", "Basud", "Capalonga", "Jose Panganiban", "Labo", "Mercedes", "Paracale", "San Lorenzo Ruiz", "San Vicente", "Santa Elena", "Talisay", "Vinzons"})
-        Me.txb_DepartmentID.Location = New System.Drawing.Point(455, 818)
+        Me.txb_DepartmentID.Location = New System.Drawing.Point(469, 758)
         Me.txb_DepartmentID.Margin = New System.Windows.Forms.Padding(4)
         Me.txb_DepartmentID.Name = "txb_DepartmentID"
         Me.txb_DepartmentID.Size = New System.Drawing.Size(421, 44)

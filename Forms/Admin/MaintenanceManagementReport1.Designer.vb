@@ -64,10 +64,12 @@ Partial Class MaintenanceManagementReport1
         Me.btnBack = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.Panel11.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -492,7 +494,7 @@ Partial Class MaintenanceManagementReport1
         Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBack.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnBack.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnBack.Location = New System.Drawing.Point(623, 962)
+        Me.btnBack.Location = New System.Drawing.Point(19, 6)
         Me.btnBack.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(153, 34)
@@ -507,7 +509,7 @@ Partial Class MaintenanceManagementReport1
         Me.btnPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPDF.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnPDF.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnPDF.Location = New System.Drawing.Point(943, 962)
+        Me.btnPDF.Location = New System.Drawing.Point(342, 6)
         Me.btnPDF.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPDF.Name = "btnPDF"
         Me.btnPDF.Size = New System.Drawing.Size(153, 34)
@@ -522,7 +524,7 @@ Partial Class MaintenanceManagementReport1
         Me.btnCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCSV.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnCSV.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCSV.Location = New System.Drawing.Point(784, 962)
+        Me.btnCSV.Location = New System.Drawing.Point(180, 7)
         Me.btnCSV.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCSV.Name = "btnCSV"
         Me.btnCSV.Size = New System.Drawing.Size(153, 34)
@@ -530,13 +532,21 @@ Partial Class MaintenanceManagementReport1
         Me.btnCSV.Text = "Generate CSV File"
         Me.btnCSV.UseVisualStyleBackColor = False
         '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.btnBack)
+        Me.Panel3.Controls.Add(Me.btnPDF)
+        Me.Panel3.Controls.Add(Me.btnCSV)
+        Me.Panel3.Location = New System.Drawing.Point(589, 930)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(507, 40)
+        Me.Panel3.TabIndex = 384
+        '
         'MaintenanceManagementReport1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.btnBack)
-        Me.Controls.Add(Me.btnPDF)
-        Me.Controls.Add(Me.btnCSV)
+        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel1)
@@ -551,6 +561,7 @@ Partial Class MaintenanceManagementReport1
         Me.Panel2.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -596,4 +607,5 @@ Partial Class MaintenanceManagementReport1
     Friend WithEvents btnBack As Resources.Controls.RoundedButton
     Friend WithEvents btnPDF As Resources.Controls.RoundedButton
     Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents Panel3 As System.Windows.Forms.Panel
 End Class

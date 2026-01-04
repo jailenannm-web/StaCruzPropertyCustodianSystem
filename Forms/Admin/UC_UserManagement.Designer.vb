@@ -27,6 +27,9 @@ Partial Class UC_UserManagement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
         Me.pm_table = New System.Windows.Forms.DataGridView()
         Me.userId = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -112,11 +115,12 @@ Partial Class UC_UserManagement
         '
         'username
         '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.username.DefaultCellStyle = DataGridViewCellStyle1
         Me.username.HeaderText = "Username"
         Me.username.MinimumWidth = 6
         Me.username.Name = "username"
         Me.username.Width = 125
-        Me.username.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
         '
         'firstName
         '
@@ -162,11 +166,12 @@ Partial Class UC_UserManagement
         '
         'contactNumber
         '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.contactNumber.DefaultCellStyle = DataGridViewCellStyle2
         Me.contactNumber.HeaderText = "Contact Number"
         Me.contactNumber.MinimumWidth = 6
         Me.contactNumber.Name = "contactNumber"
         Me.contactNumber.Width = 125
-        Me.contactNumber.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
         '
         'email
         '
@@ -177,18 +182,18 @@ Partial Class UC_UserManagement
         '
         'fullAddress
         '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.fullAddress.DefaultCellStyle = DataGridViewCellStyle3
         Me.fullAddress.HeaderText = "Full Address"
         Me.fullAddress.MinimumWidth = 6
         Me.fullAddress.Name = "fullAddress"
         Me.fullAddress.Width = 200
-        Me.fullAddress.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
         '
         'role
         '
         Me.role.HeaderText = "Role"
         Me.role.MinimumWidth = 6
         Me.role.Name = "role"
-        Me.role.Width = 100
         '
         'passwordEncrypted
         '
@@ -256,7 +261,6 @@ Partial Class UC_UserManagement
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnRefresh.CornerRadius = 15
         Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -272,7 +276,6 @@ Partial Class UC_UserManagement
         '
         Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -288,7 +291,6 @@ Partial Class UC_UserManagement
         '
         Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnEdit.CornerRadius = 15
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -304,7 +306,6 @@ Partial Class UC_UserManagement
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -320,7 +321,6 @@ Partial Class UC_UserManagement
         '
         Me.btnUserReport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnUserReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnUserReport.CornerRadius = 15
         Me.btnUserReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUserReport.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnUserReport.ForeColor = System.Drawing.SystemColors.ControlLightLight

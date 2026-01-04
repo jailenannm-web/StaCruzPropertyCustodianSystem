@@ -24,6 +24,8 @@ Partial Class frmBorrowedItem
     Private Sub InitializeComponent()
         Me.pnlTop = New System.Windows.Forms.Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.btnBorrowReturn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Essuance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.pnlFilters = New System.Windows.Forms.Panel()
         Me.lblSearch = New System.Windows.Forms.Label()
@@ -38,9 +40,8 @@ Partial Class frmBorrowedItem
         Me.lblSupplyCount = New System.Windows.Forms.Label()
         Me.lblNeedsRepair = New System.Windows.Forms.Label()
         Me.pnlTransactionHistory = New System.Windows.Forms.Panel()
-        Me.lblTransactionTitle = New System.Windows.Forms.Label()
-        Me.btnToggleHistory = New System.Windows.Forms.Button()
         Me.btnGenerateSlipFromHistory = New System.Windows.Forms.Button()
+        Me.lblTransactionTitle = New System.Windows.Forms.Label()
         Me.dgvTransactionHistory = New System.Windows.Forms.DataGridView()
         Me.colHistBorrowId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colHistBorrowDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,6 +50,7 @@ Partial Class frmBorrowedItem
         Me.colHistCondition = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colHistReturnReason = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colHistRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnToggleHistory = New System.Windows.Forms.Button()
         Me.dgvBorrowedItems = New System.Windows.Forms.DataGridView()
         Me.colBorrowId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colItemType = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -60,8 +62,6 @@ Partial Class frmBorrowedItem
         Me.colRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colItemId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pnlBottom = New System.Windows.Forms.Panel()
-        Me.Essuance = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnBorrowReturn = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnViewMaintenanceStatus = New System.Windows.Forms.Button()
         Me.btnRequestMaintenance = New System.Windows.Forms.Button()
         Me.btnReturnItem = New System.Windows.Forms.Button()
@@ -102,6 +102,38 @@ Partial Class frmBorrowedItem
         Me.lblTitle.Size = New System.Drawing.Size(295, 41)
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "My Borrowed Items"
+        '
+        'btnBorrowReturn
+        '
+        Me.btnBorrowReturn.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnBorrowReturn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnBorrowReturn.CornerRadius = 30
+        Me.btnBorrowReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBorrowReturn.Font = New System.Drawing.Font("Poppins Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBorrowReturn.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnBorrowReturn.Location = New System.Drawing.Point(772, 24)
+        Me.btnBorrowReturn.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnBorrowReturn.Name = "btnBorrowReturn"
+        Me.btnBorrowReturn.Size = New System.Drawing.Size(223, 45)
+        Me.btnBorrowReturn.TabIndex = 5
+        Me.btnBorrowReturn.Text = "Borrow and Return Slip"
+        Me.btnBorrowReturn.UseVisualStyleBackColor = False
+        '
+        'Essuance
+        '
+        Me.Essuance.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.Essuance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Essuance.CornerRadius = 30
+        Me.Essuance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Essuance.Font = New System.Drawing.Font("Poppins Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Essuance.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Essuance.Location = New System.Drawing.Point(1003, 26)
+        Me.Essuance.Margin = New System.Windows.Forms.Padding(4)
+        Me.Essuance.Name = "Essuance"
+        Me.Essuance.Size = New System.Drawing.Size(375, 44)
+        Me.Essuance.TabIndex = 6
+        Me.Essuance.Text = "Propety Acknowledgement Receipt"
+        Me.Essuance.UseVisualStyleBackColor = False
         '
         'btnRefresh
         '
@@ -280,25 +312,13 @@ Partial Class frmBorrowedItem
         Me.pnlTransactionHistory.Controls.Add(Me.lblTransactionTitle)
         Me.pnlTransactionHistory.Controls.Add(Me.dgvTransactionHistory)
         Me.pnlTransactionHistory.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlTransactionHistory.Location = New System.Drawing.Point(0, 539)
+        Me.pnlTransactionHistory.Location = New System.Drawing.Point(0, 489)
         Me.pnlTransactionHistory.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlTransactionHistory.Name = "pnlTransactionHistory"
         Me.pnlTransactionHistory.Padding = New System.Windows.Forms.Padding(27, 12, 27, 12)
         Me.pnlTransactionHistory.Size = New System.Drawing.Size(1600, 250)
         Me.pnlTransactionHistory.TabIndex = 6
         Me.pnlTransactionHistory.Visible = False
-        '
-        'lblTransactionTitle
-        '
-        Me.lblTransactionTitle.AutoSize = True
-        Me.lblTransactionTitle.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.lblTransactionTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.lblTransactionTitle.Location = New System.Drawing.Point(27, 12)
-        Me.lblTransactionTitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblTransactionTitle.Name = "lblTransactionTitle"
-        Me.lblTransactionTitle.Size = New System.Drawing.Size(314, 28)
-        Me.lblTransactionTitle.TabIndex = 0
-        Me.lblTransactionTitle.Text = "📋 Transaction History for Item"
         '
         'btnGenerateSlipFromHistory
         '
@@ -316,22 +336,17 @@ Partial Class frmBorrowedItem
         Me.btnGenerateSlipFromHistory.Text = "📄 Generate Slip"
         Me.btnGenerateSlipFromHistory.UseVisualStyleBackColor = False
         '
-        'btnToggleHistory
+        'lblTransactionTitle
         '
-        Me.btnToggleHistory.BackColor = System.Drawing.Color.FromArgb(CType(CType(155, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(182, Byte), Integer))
-        Me.btnToggleHistory.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnToggleHistory.Dock = System.Windows.Forms.DockStyle.Left
-        Me.btnToggleHistory.FlatAppearance.BorderSize = 0
-        Me.btnToggleHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnToggleHistory.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.btnToggleHistory.ForeColor = System.Drawing.Color.White
-        Me.btnToggleHistory.Location = New System.Drawing.Point(27, 25)
-        Me.btnToggleHistory.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnToggleHistory.Name = "btnToggleHistory"
-        Me.btnToggleHistory.Size = New System.Drawing.Size(267, 48)
-        Me.btnToggleHistory.TabIndex = 8
-        Me.btnToggleHistory.Text = "📋 Show Transaction History"
-        Me.btnToggleHistory.UseVisualStyleBackColor = False
+        Me.lblTransactionTitle.AutoSize = True
+        Me.lblTransactionTitle.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTransactionTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.lblTransactionTitle.Location = New System.Drawing.Point(27, 12)
+        Me.lblTransactionTitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTransactionTitle.Name = "lblTransactionTitle"
+        Me.lblTransactionTitle.Size = New System.Drawing.Size(314, 28)
+        Me.lblTransactionTitle.TabIndex = 0
+        Me.lblTransactionTitle.Text = "📋 Transaction History for Item"
         '
         'dgvTransactionHistory
         '
@@ -384,7 +399,6 @@ Partial Class frmBorrowedItem
         Me.colHistStatus.MinimumWidth = 6
         Me.colHistStatus.Name = "colHistStatus"
         Me.colHistStatus.ReadOnly = True
-        Me.colHistStatus.Width = 100
         '
         'colHistCondition
         '
@@ -410,6 +424,23 @@ Partial Class frmBorrowedItem
         Me.colHistRemarks.Name = "colHistRemarks"
         Me.colHistRemarks.ReadOnly = True
         '
+        'btnToggleHistory
+        '
+        Me.btnToggleHistory.BackColor = System.Drawing.Color.FromArgb(CType(CType(155, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(182, Byte), Integer))
+        Me.btnToggleHistory.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnToggleHistory.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnToggleHistory.FlatAppearance.BorderSize = 0
+        Me.btnToggleHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnToggleHistory.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnToggleHistory.ForeColor = System.Drawing.Color.White
+        Me.btnToggleHistory.Location = New System.Drawing.Point(27, 25)
+        Me.btnToggleHistory.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnToggleHistory.Name = "btnToggleHistory"
+        Me.btnToggleHistory.Size = New System.Drawing.Size(267, 48)
+        Me.btnToggleHistory.TabIndex = 8
+        Me.btnToggleHistory.Text = "📋 Show Transaction History"
+        Me.btnToggleHistory.UseVisualStyleBackColor = False
+        '
         'dgvBorrowedItems
         '
         Me.dgvBorrowedItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -419,7 +450,7 @@ Partial Class frmBorrowedItem
         Me.dgvBorrowedItems.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvBorrowedItems.Name = "dgvBorrowedItems"
         Me.dgvBorrowedItems.RowHeadersWidth = 51
-        Me.dgvBorrowedItems.Size = New System.Drawing.Size(1600, 281)
+        Me.dgvBorrowedItems.Size = New System.Drawing.Size(1600, 231)
         Me.dgvBorrowedItems.TabIndex = 3
         '
         'colBorrowId
@@ -511,38 +542,6 @@ Partial Class frmBorrowedItem
         Me.pnlBottom.Size = New System.Drawing.Size(1600, 98)
         Me.pnlBottom.TabIndex = 4
         '
-        'Essuance
-        '
-        Me.Essuance.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Essuance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Essuance.CornerRadius = 30
-        Me.Essuance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Essuance.Font = New System.Drawing.Font("Poppins Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Essuance.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Essuance.Location = New System.Drawing.Point(1114, 26)
-        Me.Essuance.Margin = New System.Windows.Forms.Padding(4)
-        Me.Essuance.Name = "Essuance"
-        Me.Essuance.Size = New System.Drawing.Size(264, 44)
-        Me.Essuance.TabIndex = 6
-        Me.Essuance.Text = "Propety Acknowledgement Receipt"
-        Me.Essuance.UseVisualStyleBackColor = False
-        '
-        'btnBorrowReturn
-        '
-        Me.btnBorrowReturn.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnBorrowReturn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnBorrowReturn.CornerRadius = 30
-        Me.btnBorrowReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBorrowReturn.Font = New System.Drawing.Font("Poppins Light", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBorrowReturn.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnBorrowReturn.Location = New System.Drawing.Point(863, 24)
-        Me.btnBorrowReturn.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnBorrowReturn.Name = "btnBorrowReturn"
-        Me.btnBorrowReturn.Size = New System.Drawing.Size(223, 45)
-        Me.btnBorrowReturn.TabIndex = 5
-        Me.btnBorrowReturn.Text = "Borrow and Return Slip"
-        Me.btnBorrowReturn.UseVisualStyleBackColor = False
-        '
         'btnViewMaintenanceStatus
         '
         Me.btnViewMaintenanceStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(152, Byte), Integer), CType(CType(219, Byte), Integer))
@@ -603,7 +602,7 @@ Partial Class frmBorrowedItem
         Me.lblNoItems.Location = New System.Drawing.Point(0, 258)
         Me.lblNoItems.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNoItems.Name = "lblNoItems"
-        Me.lblNoItems.Size = New System.Drawing.Size(1600, 281)
+        Me.lblNoItems.Size = New System.Drawing.Size(1600, 231)
         Me.lblNoItems.TabIndex = 5
         Me.lblNoItems.Text = "No borrowed items found. Your approved requests will appear here."
         Me.lblNoItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter

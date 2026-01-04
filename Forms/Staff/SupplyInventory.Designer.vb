@@ -56,12 +56,12 @@ Partial Class SupplyInventory
         Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
         Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyno, Me.itemname, Me.category, Me.description, Me.unitofmeasure, Me.quantityavail, Me.location, Me.stockstatus})
-        Me.propertyManagementGrid.Location = New System.Drawing.Point(2, 2)
-        Me.propertyManagementGrid.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.propertyManagementGrid.Location = New System.Drawing.Point(3, 2)
+        Me.propertyManagementGrid.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
         Me.propertyManagementGrid.RowTemplate.Height = 24
-        Me.propertyManagementGrid.Size = New System.Drawing.Size(889, 459)
+        Me.propertyManagementGrid.Size = New System.Drawing.Size(1185, 566)
         Me.propertyManagementGrid.TabIndex = 167
         '
         'propertyno
@@ -125,9 +125,10 @@ Partial Class SupplyInventory
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Poppins", 18.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(15, 16)
+        Me.Label3.Location = New System.Drawing.Point(20, 20)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(227, 42)
+        Me.Label3.Size = New System.Drawing.Size(284, 53)
         Me.Label3.TabIndex = 169
         Me.Label3.Text = "Supply Inventory"
         '
@@ -139,25 +140,25 @@ Partial Class SupplyInventory
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.5!))
         Me.TableLayoutPanel1.Controls.Add(Me.propertyManagementGrid, 0, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(22, 171)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(29, 210)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(893, 463)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1191, 570)
         Me.TableLayoutPanel1.TabIndex = 171
         '
         'btnrequestsupply
         '
         Me.btnrequestsupply.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnrequestsupply.BackColor = System.Drawing.Color.Green
-        Me.btnrequestsupply.CornerRadius = 15
         Me.btnrequestsupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnrequestsupply.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnrequestsupply.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnrequestsupply.Location = New System.Drawing.Point(760, 646)
+        Me.btnrequestsupply.Location = New System.Drawing.Point(1013, 795)
+        Me.btnrequestsupply.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnrequestsupply.Name = "btnrequestsupply"
-        Me.btnrequestsupply.Size = New System.Drawing.Size(155, 32)
+        Me.btnrequestsupply.Size = New System.Drawing.Size(207, 39)
         Me.btnrequestsupply.TabIndex = 172
         Me.btnrequestsupply.Text = "Request"
         Me.btnrequestsupply.UseVisualStyleBackColor = False
@@ -165,9 +166,10 @@ Partial Class SupplyInventory
         'supplyinventorysearchbar
         '
         Me.supplyinventorysearchbar.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.supplyinventorysearchbar.Location = New System.Drawing.Point(15, 41)
+        Me.supplyinventorysearchbar.Location = New System.Drawing.Point(20, 50)
+        Me.supplyinventorysearchbar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.supplyinventorysearchbar.Name = "supplyinventorysearchbar"
-        Me.supplyinventorysearchbar.Size = New System.Drawing.Size(227, 25)
+        Me.supplyinventorysearchbar.Size = New System.Drawing.Size(301, 30)
         Me.supplyinventorysearchbar.TabIndex = 185
         '
         'pm_cbobx_status
@@ -175,10 +177,10 @@ Partial Class SupplyInventory
         Me.pm_cbobx_status.BackColor = System.Drawing.Color.White
         Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins Light", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.Black
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(420, 37)
-        Me.pm_cbobx_status.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(560, 46)
+        Me.pm_cbobx_status.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
-        Me.pm_cbobx_status.Size = New System.Drawing.Size(110, 27)
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 33)
         Me.pm_cbobx_status.TabIndex = 183
         Me.pm_cbobx_status.Text = "Status"
         '
@@ -187,10 +189,10 @@ Partial Class SupplyInventory
         Me.pm_cbobx_categ.BackColor = System.Drawing.Color.White
         Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins Light", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.Black
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(255, 37)
-        Me.pm_cbobx_categ.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(340, 46)
+        Me.pm_cbobx_categ.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
-        Me.pm_cbobx_categ.Size = New System.Drawing.Size(120, 27)
+        Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 33)
         Me.pm_cbobx_categ.TabIndex = 184
         Me.pm_cbobx_categ.Text = "Categories"
         '
@@ -207,11 +209,11 @@ Partial Class SupplyInventory
         Me.pnlFilters.Controls.Add(Me.lblStatus)
         Me.pnlFilters.Controls.Add(Me.lblCategory)
         Me.pnlFilters.Controls.Add(Me.lblSearch)
-        Me.pnlFilters.Location = New System.Drawing.Point(22, 73)
-        Me.pnlFilters.Margin = New System.Windows.Forms.Padding(2)
+        Me.pnlFilters.Location = New System.Drawing.Point(29, 90)
+        Me.pnlFilters.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlFilters.Name = "pnlFilters"
-        Me.pnlFilters.Padding = New System.Windows.Forms.Padding(11, 12, 11, 12)
-        Me.pnlFilters.Size = New System.Drawing.Size(891, 82)
+        Me.pnlFilters.Padding = New System.Windows.Forms.Padding(15, 15, 15, 15)
+        Me.pnlFilters.Size = New System.Drawing.Size(1187, 100)
         Me.pnlFilters.TabIndex = 187
         '
         'btnRefresh
@@ -222,10 +224,10 @@ Partial Class SupplyInventory
         Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefresh.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnRefresh.ForeColor = System.Drawing.Color.White
-        Me.btnRefresh.Location = New System.Drawing.Point(570, 37)
-        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnRefresh.Location = New System.Drawing.Point(760, 46)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(90, 32)
+        Me.btnRefresh.Size = New System.Drawing.Size(120, 39)
         Me.btnRefresh.TabIndex = 8
         Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = False
@@ -235,10 +237,9 @@ Partial Class SupplyInventory
         Me.lblStatus.AutoSize = True
         Me.lblStatus.Font = New System.Drawing.Font("Poppins", 8.0!)
         Me.lblStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.lblStatus.Location = New System.Drawing.Point(420, 16)
-        Me.lblStatus.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblStatus.Location = New System.Drawing.Point(560, 20)
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(43, 19)
+        Me.lblStatus.Size = New System.Drawing.Size(55, 25)
         Me.lblStatus.TabIndex = 6
         Me.lblStatus.Text = "Status"
         '
@@ -247,10 +248,9 @@ Partial Class SupplyInventory
         Me.lblCategory.AutoSize = True
         Me.lblCategory.Font = New System.Drawing.Font("Poppins", 8.0!)
         Me.lblCategory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.lblCategory.Location = New System.Drawing.Point(255, 16)
-        Me.lblCategory.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblCategory.Location = New System.Drawing.Point(340, 20)
         Me.lblCategory.Name = "lblCategory"
-        Me.lblCategory.Size = New System.Drawing.Size(59, 19)
+        Me.lblCategory.Size = New System.Drawing.Size(77, 25)
         Me.lblCategory.TabIndex = 2
         Me.lblCategory.Text = "Category"
         '
@@ -259,10 +259,9 @@ Partial Class SupplyInventory
         Me.lblSearch.AutoSize = True
         Me.lblSearch.Font = New System.Drawing.Font("Poppins", 8.0!)
         Me.lblSearch.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.lblSearch.Location = New System.Drawing.Point(13, 16)
-        Me.lblSearch.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblSearch.Location = New System.Drawing.Point(17, 20)
         Me.lblSearch.Name = "lblSearch"
-        Me.lblSearch.Size = New System.Drawing.Size(105, 19)
+        Me.lblSearch.Size = New System.Drawing.Size(134, 25)
         Me.lblSearch.TabIndex = 0
         Me.lblSearch.Text = "Search Properties"
         '
@@ -272,25 +271,24 @@ Partial Class SupplyInventory
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Poppins", 10.0!, System.Drawing.FontStyle.Bold)
         Me.lblTotal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.lblTotal.Location = New System.Drawing.Point(19, 651)
-        Me.lblTotal.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblTotal.Location = New System.Drawing.Point(25, 801)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(119, 25)
+        Me.lblTotal.Size = New System.Drawing.Size(143, 30)
         Me.lblTotal.TabIndex = 188
         Me.lblTotal.Text = "Total Supply: 0"
         '
         'SupplyInventory
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lblTotal)
         Me.Controls.Add(Me.pnlFilters)
         Me.Controls.Add(Me.btnrequestsupply)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.Label3)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "SupplyInventory"
-        Me.Size = New System.Drawing.Size(938, 722)
+        Me.Size = New System.Drawing.Size(1251, 889)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.pnlFilters.ResumeLayout(False)
