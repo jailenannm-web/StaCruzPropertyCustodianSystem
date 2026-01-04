@@ -38,8 +38,19 @@ Public Class AdminDashboard
     ' ----------------------
     Public Sub LoadUserControl(uc As UserControl)
         Try
-            ' Clear previous controls
-            admin_PanelMain.Controls.Clear()
+            ' Hide all existing dashboard controls first
+            For Each ctrl As Control In admin_PanelMain.Controls
+                If TypeOf ctrl IsNot UserControl Then
+                    ctrl.Visible = False
+                End If
+            Next
+            
+            ' Remove any previous UserControl
+            If currentUC IsNot Nothing Then
+                admin_PanelMain.Controls.Remove(currentUC)
+                currentUC.Dispose()
+            End If
+            
             currentUC = uc
 
             ' Add new UserControl
@@ -241,21 +252,28 @@ Public Class AdminDashboard
         LoadUserControl(New UC_PropertyRequestManagement())
     End Sub
 
-    ' Dashboard Button (optional example)
+    ' Dashboard Button - Remove user controls and show dashboard
     Private Async Sub admin_btn_dashboard_Click(sender As Object, e As EventArgs) Handles admin_btn_dashboard.Click
-        ' Clear any loaded user controls to show dashboard
-        ' admin_panel_container.Controls.Clear()
-        
-        ' Make sure dashboard stat panels are visible
-        ' If admin_panel_total IsNot Nothing Then admin_panel_total.Visible = True
-        ' If admin_panel_property IsNot Nothing Then admin_panel_property.Visible = True
-        ' If admin_panel_supply IsNot Nothing Then admin_panel_supply.Visible = True
-        ' If admin_panel_maintenance IsNot Nothing Then admin_panel_maintenance.Visible = True
-        
-        ' Reload dashboard statistics
-        Await LoadDashboardAsync()
-        
-        System.Diagnostics.Debug.WriteLine("[v0] AdminDashboard - Dashboard button clicked, showing dashboard")
+        Try
+            ' Remove any loaded UserControl
+            If currentUC IsNot Nothing Then
+                admin_PanelMain.Controls.Remove(currentUC)
+                currentUC.Dispose()
+                currentUC = Nothing
+            End If
+            
+            ' Show all dashboard controls
+            For Each ctrl As Control In admin_PanelMain.Controls
+                ctrl.Visible = True
+            Next
+            
+            System.Diagnostics.Debug.WriteLine("[v0] AdminDashboard - Dashboard button clicked, reloading dashboard")
+            
+            ' Reload the dashboard data
+            Await LoadDashboardAsync()
+        Catch ex As Exception
+            MessageBox.Show("Error loading dashboard: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     ' Properties Button
