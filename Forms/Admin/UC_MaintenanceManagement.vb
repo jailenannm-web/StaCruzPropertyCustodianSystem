@@ -592,6 +592,7 @@ Public Class UC_MaintenanceManagement
     ''' Generate Maintenance Report
     ''' </summary>
     Private Sub btnGenerateMaintenance_Click(sender As Object, e As EventArgs) Handles btnGenerateMaintenance.Click
+
         Try
             ' Get selected maintenance ID
             If DataGridView1.SelectedRows.Count = 0 Then
@@ -612,11 +613,11 @@ Public Class UC_MaintenanceManagement
             reportForm.Text = "Maintenance Management Report"
             reportForm.Size = New Size(1200, 900)
             reportForm.StartPosition = FormStartPosition.CenterScreen
-            
+
             Dim reportControl As New MaintenanceManagementReport1(maintenanceID)
             reportControl.Dock = DockStyle.Fill
             reportForm.Controls.Add(reportControl)
-            
+
             reportForm.ShowDialog()
 
         Catch ex As Exception
@@ -760,5 +761,18 @@ Public Class UC_MaintenanceManagement
         
         Return Nothing
     End Function
+
+    Private Sub btnSummary_Click(sender As Object, e As EventArgs) Handles btnSummary.Click
+        Try
+            Dim summaryReport As New MaintenanceRequestSummaryReport()
+            summaryReport.StartPosition = FormStartPosition.CenterScreen
+            summaryReport.ShowDialog() ' Use Show() if you want non-modal
+        Catch ex As Exception
+            MessageBox.Show("Unable to open Maintenance Summary Report: " & ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error)
+        End Try
+    End Sub
 
 End Class

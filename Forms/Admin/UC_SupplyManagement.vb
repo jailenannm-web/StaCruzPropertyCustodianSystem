@@ -742,4 +742,27 @@ Public Class UC_SupplyManagement
 
         MessageBox.Show("Print PAR/ICS clicked!")
     End Sub
+
+    Private Sub pm_cbobx_status_SelectedIndexChanged(sender As Object, e As EventArgs) Handles pm_cbobx_status.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub pm_cbobx_categ_SelectedIndexChanged(sender As Object, e As EventArgs) Handles pm_cbobx_categ.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub btnSummary_Click(sender As Object, e As EventArgs) Handles btnSummary.Click
+        Try
+            Dim summaryForm As New SupplyRequestSummary()
+            summaryForm.StartPosition = FormStartPosition.CenterScreen
+            summaryForm.ShowDialog()   ' Recommended for summary/report forms
+            ' summaryForm.Show()       ' Use this if you want non-modal
+        Catch ex As Exception
+            MessageBox.Show("Unable to open Supply Request Summary: " & ex.Message,
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error)
+        End Try
+    End Sub
+
 End Class

@@ -1248,4 +1248,19 @@ Public Class UC_PropertyManagement1
             System.Diagnostics.Debug.WriteLine("Error opening property slip on double-click: " & ex.Message)
         End Try
     End Sub
+
+    Private Sub btnSummary_Click(sender As Object, e As EventArgs) Handles btnSummary.Click
+        Try
+            Dim summaryForm As New PropertySummaryReport()
+            summaryForm.StartPosition = FormStartPosition.CenterScreen
+            summaryForm.ShowDialog()   ' Recommended for summary/report forms
+            ' summaryForm.Show()       ' Use this if you want non-modal
+        Catch ex As Exception
+            MessageBox.Show("Unable to open Property Request Summary: " & ex.Message,
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error)
+        End Try
+    End Sub
+
 End Class

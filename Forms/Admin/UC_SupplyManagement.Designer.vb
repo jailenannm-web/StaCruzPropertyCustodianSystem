@@ -15,21 +15,6 @@ Partial Class UC_SupplyManagement
         Me.pm_cbobx_categ = New System.Windows.Forms.ComboBox()
         Me.pm_cbobx_status = New System.Windows.Forms.ComboBox()
         Me.pm_table = New System.Windows.Forms.DataGridView()
-        Me.admin_label_PM = New System.Windows.Forms.Label()
-        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ttlSupplymanagement = New System.Windows.Forms.Label()
-        Me.cmsActions = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuAssign = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDispose = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.supplymanagementsearchbar = New System.Windows.Forms.TextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.supplyId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.itemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.category = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -46,6 +31,22 @@ Partial Class UC_SupplyManagement
         Me.sourceOfFunds = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.admin_label_PM = New System.Windows.Forms.Label()
+        Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ttlSupplymanagement = New System.Windows.Forms.Label()
+        Me.cmsActions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuAssign = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDispose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.supplymanagementsearchbar = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnSummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,7 +67,7 @@ Partial Class UC_SupplyManagement
         Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(1012, 82)
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(880, 82)
         Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
         Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
         Me.pm_cbobx_categ.TabIndex = 28
@@ -79,7 +80,7 @@ Partial Class UC_SupplyManagement
         Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(1187, 82)
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1055, 82)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
         Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
         Me.pm_cbobx_status.TabIndex = 27
@@ -90,10 +91,11 @@ Partial Class UC_SupplyManagement
         Me.pm_table.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pm_table.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.supplyId, Me.itemName, Me.category, Me.description, Me.quantity, Me.supplier, Me.assignedTo, Me.location, Me.stockStatus, Me.unitOfMeasure, Me.dateReceived, Me.unitCost, Me.totalCost, Me.sourceOfFunds, Me.createdAt, Me.updatedAt})
-        Me.pm_table.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None
+        Me.pm_table.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(62, 124)
         Me.pm_table.Name = "pm_table"
@@ -101,6 +103,122 @@ Partial Class UC_SupplyManagement
         Me.pm_table.RowTemplate.Height = 24
         Me.pm_table.Size = New System.Drawing.Size(1270, 573)
         Me.pm_table.TabIndex = 26
+        '
+        'supplyId
+        '
+        Me.supplyId.HeaderText = "Supply ID"
+        Me.supplyId.MinimumWidth = 6
+        Me.supplyId.Name = "supplyId"
+        Me.supplyId.Visible = False
+        Me.supplyId.Width = 80
+        '
+        'itemName
+        '
+        Me.itemName.HeaderText = "Item Name"
+        Me.itemName.MinimumWidth = 6
+        Me.itemName.Name = "itemName"
+        Me.itemName.Width = 93
+        '
+        'category
+        '
+        Me.category.HeaderText = "Category"
+        Me.category.MinimumWidth = 6
+        Me.category.Name = "category"
+        Me.category.Width = 91
+        '
+        'description
+        '
+        Me.description.HeaderText = "Description"
+        Me.description.MinimumWidth = 6
+        Me.description.Name = "description"
+        Me.description.Width = 104
+        '
+        'quantity
+        '
+        Me.quantity.HeaderText = "Quantity"
+        Me.quantity.MinimumWidth = 6
+        Me.quantity.Name = "quantity"
+        Me.quantity.Width = 84
+        '
+        'supplier
+        '
+        Me.supplier.HeaderText = "Supplier"
+        Me.supplier.MinimumWidth = 6
+        Me.supplier.Name = "supplier"
+        Me.supplier.Width = 86
+        '
+        'assignedTo
+        '
+        Me.assignedTo.HeaderText = "Assigned To"
+        Me.assignedTo.MinimumWidth = 6
+        Me.assignedTo.Name = "assignedTo"
+        Me.assignedTo.Width = 104
+        '
+        'location
+        '
+        Me.location.HeaderText = "Location"
+        Me.location.MinimumWidth = 6
+        Me.location.Name = "location"
+        Me.location.Width = 87
+        '
+        'stockStatus
+        '
+        Me.stockStatus.HeaderText = "Stock Status"
+        Me.stockStatus.MinimumWidth = 6
+        Me.stockStatus.Name = "stockStatus"
+        Me.stockStatus.Width = 101
+        '
+        'unitOfMeasure
+        '
+        Me.unitOfMeasure.HeaderText = "Unit"
+        Me.unitOfMeasure.MinimumWidth = 6
+        Me.unitOfMeasure.Name = "unitOfMeasure"
+        Me.unitOfMeasure.Width = 59
+        '
+        'dateReceived
+        '
+        Me.dateReceived.HeaderText = "Date Received"
+        Me.dateReceived.MinimumWidth = 6
+        Me.dateReceived.Name = "dateReceived"
+        Me.dateReceived.Visible = False
+        Me.dateReceived.Width = 110
+        '
+        'unitCost
+        '
+        Me.unitCost.HeaderText = "Unit Cost"
+        Me.unitCost.MinimumWidth = 6
+        Me.unitCost.Name = "unitCost"
+        Me.unitCost.Width = 83
+        '
+        'totalCost
+        '
+        Me.totalCost.HeaderText = "Total Cost"
+        Me.totalCost.MinimumWidth = 6
+        Me.totalCost.Name = "totalCost"
+        Me.totalCost.Width = 90
+        '
+        'sourceOfFunds
+        '
+        Me.sourceOfFunds.HeaderText = "Source Of Funds"
+        Me.sourceOfFunds.MinimumWidth = 6
+        Me.sourceOfFunds.Name = "sourceOfFunds"
+        Me.sourceOfFunds.Width = 91
+        '
+        'createdAt
+        '
+        Me.createdAt.HeaderText = "Created At"
+        Me.createdAt.MinimumWidth = 6
+        Me.createdAt.Name = "createdAt"
+        Me.createdAt.Visible = False
+        Me.createdAt.Width = 125
+        '
+        'updatedAt
+        '
+        Me.updatedAt.HeaderText = "Updated At"
+        Me.updatedAt.MinimumWidth = 6
+        Me.updatedAt.Name = "updatedAt"
+        Me.updatedAt.Visible = False
+        Me.updatedAt.Width = 125
         '
         'admin_label_PM
         '
@@ -116,7 +234,6 @@ Partial Class UC_SupplyManagement
         '
         Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnEdit.CornerRadius = 15
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -132,7 +249,6 @@ Partial Class UC_SupplyManagement
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnAdd.CornerRadius = 15
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -148,7 +264,6 @@ Partial Class UC_SupplyManagement
         '
         Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnDelete.CornerRadius = 15
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -237,7 +352,7 @@ Partial Class UC_SupplyManagement
         Me.supplymanagementsearchbar.Location = New System.Drawing.Point(527, 82)
         Me.supplymanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
         Me.supplymanagementsearchbar.Name = "supplymanagementsearchbar"
-        Me.supplymanagementsearchbar.Size = New System.Drawing.Size(410, 32)
+        Me.supplymanagementsearchbar.Size = New System.Drawing.Size(343, 32)
         Me.supplymanagementsearchbar.TabIndex = 178
         Me.supplymanagementsearchbar.Text = "Search supplies..."
         '
@@ -251,125 +366,25 @@ Partial Class UC_SupplyManagement
         Me.PictureBox1.TabIndex = 179
         Me.PictureBox1.TabStop = False
         '
-        'supplyId
+        'btnSummary
         '
-        Me.supplyId.HeaderText = "Supply ID"
-        Me.supplyId.MinimumWidth = 6
-        Me.supplyId.Name = "supplyId"
-        Me.supplyId.Visible = False
-        Me.supplyId.Width = 80
-        '
-        'itemName
-        '
-        Me.itemName.HeaderText = "Item Name"
-        Me.itemName.MinimumWidth = 6
-        Me.itemName.Name = "itemName"
-        Me.itemName.Width = 180
-        '
-        'category
-        '
-        Me.category.HeaderText = "Category"
-        Me.category.MinimumWidth = 6
-        Me.category.Name = "category"
-        Me.category.Width = 130
-        '
-        'description
-        '
-        Me.description.HeaderText = "Description"
-        Me.description.MinimumWidth = 6
-        Me.description.Name = "description"
-        Me.description.Width = 200
-        '
-        'quantity
-        '
-        Me.quantity.HeaderText = "Quantity"
-        Me.quantity.MinimumWidth = 6
-        Me.quantity.Name = "quantity"
-        Me.quantity.Width = 90
-        '
-        'supplier
-        '
-        Me.supplier.HeaderText = "Supplier"
-        Me.supplier.MinimumWidth = 6
-        Me.supplier.Name = "supplier"
-        Me.supplier.Width = 140
-        '
-        'assignedTo
-        '
-        Me.assignedTo.HeaderText = "Assigned To"
-        Me.assignedTo.MinimumWidth = 6
-        Me.assignedTo.Name = "assignedTo"
-        Me.assignedTo.Width = 125
-        '
-        'location
-        '
-        Me.location.HeaderText = "Location"
-        Me.location.MinimumWidth = 6
-        Me.location.Name = "location"
-        Me.location.Width = 140
-        '
-        'stockStatus
-        '
-        Me.stockStatus.HeaderText = "Stock Status"
-        Me.stockStatus.MinimumWidth = 6
-        Me.stockStatus.Name = "stockStatus"
-        Me.stockStatus.Width = 120
-        '
-        'unitOfMeasure
-        '
-        Me.unitOfMeasure.HeaderText = "Unit"
-        Me.unitOfMeasure.MinimumWidth = 6
-        Me.unitOfMeasure.Name = "unitOfMeasure"
-        Me.unitOfMeasure.Width = 90
-        '
-        'dateReceived
-        '
-        Me.dateReceived.HeaderText = "Date Received"
-        Me.dateReceived.MinimumWidth = 6
-        Me.dateReceived.Name = "dateReceived"
-        Me.dateReceived.Visible = False
-        Me.dateReceived.Width = 110
-        '
-        'unitCost
-        '
-        Me.unitCost.HeaderText = "Unit Cost"
-        Me.unitCost.MinimumWidth = 6
-        Me.unitCost.Name = "unitCost"
-        Me.unitCost.Width = 110
-        '
-        'totalCost
-        '
-        Me.totalCost.HeaderText = "Total Cost"
-        Me.totalCost.MinimumWidth = 6
-        Me.totalCost.Name = "totalCost"
-        Me.totalCost.Width = 110
-        '
-        'sourceOfFunds
-        '
-        Me.sourceOfFunds.HeaderText = "Source Of Funds"
-        Me.sourceOfFunds.MinimumWidth = 6
-        Me.sourceOfFunds.Name = "sourceOfFunds"
-        Me.sourceOfFunds.Width = 160
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "Created At"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Visible = False
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "Updated At"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Visible = False
-        Me.updatedAt.Width = 125
+        Me.btnSummary.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSummary.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSummary.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnSummary.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSummary.Location = New System.Drawing.Point(1207, 79)
+        Me.btnSummary.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSummary.Name = "btnSummary"
+        Me.btnSummary.Size = New System.Drawing.Size(125, 35)
+        Me.btnSummary.TabIndex = 180
+        Me.btnSummary.Text = "Summary"
+        Me.btnSummary.UseVisualStyleBackColor = False
         '
         'UC_SupplyManagement
         '
         Me.AutoScroll = True
+        Me.Controls.Add(Me.btnSummary)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.supplymanagementsearchbar)
@@ -422,7 +437,7 @@ Partial Class UC_SupplyManagement
     Friend WithEvents quantity As DataGridViewTextBoxColumn
     Friend WithEvents supplier As DataGridViewTextBoxColumn
     Friend WithEvents assignedTo As DataGridViewTextBoxColumn
-    Friend WithEvents Shadows location As DataGridViewTextBoxColumn
+    Friend Shadows WithEvents location As DataGridViewTextBoxColumn
     Friend WithEvents stockStatus As DataGridViewTextBoxColumn
     Friend WithEvents unitOfMeasure As DataGridViewTextBoxColumn
     Friend WithEvents dateReceived As DataGridViewTextBoxColumn
@@ -431,5 +446,6 @@ Partial Class UC_SupplyManagement
     Friend WithEvents sourceOfFunds As DataGridViewTextBoxColumn
     Friend WithEvents createdAt As DataGridViewTextBoxColumn
     Friend WithEvents updatedAt As DataGridViewTextBoxColumn
+    Friend WithEvents btnSummary As RoundedButton
     ' Removed duplicate search field: supplymanagementssearchbar
 End Class

@@ -55,6 +55,7 @@ Partial Class UC_MaintenanceManagement
         Me.lblStatusFilter = New System.Windows.Forms.Label()
         Me.lblTypeFilter = New System.Windows.Forms.Label()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnSummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -259,9 +260,9 @@ Partial Class UC_MaintenanceManagement
         Me.btnGenerateMaintenance.Location = New System.Drawing.Point(1139, 70)
         Me.btnGenerateMaintenance.Margin = New System.Windows.Forms.Padding(4)
         Me.btnGenerateMaintenance.Name = "btnGenerateMaintenance"
-        Me.btnGenerateMaintenance.Size = New System.Drawing.Size(193, 35)
+        Me.btnGenerateMaintenance.Size = New System.Drawing.Size(99, 35)
         Me.btnGenerateMaintenance.TabIndex = 167
-        Me.btnGenerateMaintenance.Text = "Generate Maintenance Report"
+        Me.btnGenerateMaintenance.Text = "Slip"
         Me.btnGenerateMaintenance.UseVisualStyleBackColor = False
         '
         'btnRefresh
@@ -366,11 +367,27 @@ Partial Class UC_MaintenanceManagement
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
         '
+        'btnSummary
+        '
+        Me.btnSummary.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSummary.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSummary.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnSummary.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSummary.Location = New System.Drawing.Point(1243, 70)
+        Me.btnSummary.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSummary.Name = "btnSummary"
+        Me.btnSummary.Size = New System.Drawing.Size(99, 35)
+        Me.btnSummary.TabIndex = 177
+        Me.btnSummary.Text = "Summary"
+        Me.btnSummary.UseVisualStyleBackColor = False
+        '
         'UC_MaintenanceManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.btnSummary)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.lblTypeFilter)
         Me.Controls.Add(Me.lblStatusFilter)
@@ -423,4 +440,5 @@ Partial Class UC_MaintenanceManagement
     Friend WithEvents costMaterialsLabor As DataGridViewTextBoxColumn
     Friend WithEvents conditionAfterMaint As DataGridViewTextBoxColumn
     Friend WithEvents status As DataGridViewTextBoxColumn
+    Friend WithEvents btnSummary As Resources.Controls.RoundedButton
 End Class

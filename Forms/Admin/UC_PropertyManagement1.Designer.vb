@@ -57,6 +57,7 @@ Partial Class UC_PropertyManagement1
         Me.btnDelete = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.generatePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.issuePropertySlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnSummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,7 +80,7 @@ Partial Class UC_PropertyManagement1
         Me.filter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.filter.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.filter.ForeColor = System.Drawing.Color.White
-        Me.filter.Location = New System.Drawing.Point(1181, 84)
+        Me.filter.Location = New System.Drawing.Point(1042, 75)
         Me.filter.Name = "filter"
         Me.filter.Size = New System.Drawing.Size(145, 31)
         Me.filter.TabIndex = 40
@@ -290,7 +291,7 @@ Partial Class UC_PropertyManagement1
         Me.propertymanagementsearchbar.Location = New System.Drawing.Point(549, 65)
         Me.propertymanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
         Me.propertymanagementsearchbar.Name = "propertymanagementsearchbar"
-        Me.propertymanagementsearchbar.Size = New System.Drawing.Size(367, 42)
+        Me.propertymanagementsearchbar.Size = New System.Drawing.Size(317, 42)
         Me.propertymanagementsearchbar.TabIndex = 172
         '
         'btnEdit
@@ -361,7 +362,7 @@ Partial Class UC_PropertyManagement1
         Me.issuePropertySlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.issuePropertySlip.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.issuePropertySlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertySlip.Location = New System.Drawing.Point(1002, 84)
+        Me.issuePropertySlip.Location = New System.Drawing.Point(887, 75)
         Me.issuePropertySlip.Margin = New System.Windows.Forms.Padding(4)
         Me.issuePropertySlip.Name = "issuePropertySlip"
         Me.issuePropertySlip.Size = New System.Drawing.Size(149, 31)
@@ -369,11 +370,28 @@ Partial Class UC_PropertyManagement1
         Me.issuePropertySlip.Text = "Issue Property Slip"
         Me.issuePropertySlip.UseVisualStyleBackColor = False
         '
+        'btnSummary
+        '
+        Me.btnSummary.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSummary.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSummary.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.btnSummary.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSummary.Location = New System.Drawing.Point(1194, 73)
+        Me.btnSummary.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSummary.Name = "btnSummary"
+        Me.btnSummary.Size = New System.Drawing.Size(132, 35)
+        Me.btnSummary.TabIndex = 178
+        Me.btnSummary.Text = "Summary"
+        Me.btnSummary.UseVisualStyleBackColor = False
+        Me.btnSummary.Visible = False
+        '
         'UC_PropertyManagement1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
+        Me.Controls.Add(Me.btnSummary)
         Me.Controls.Add(Me.issuePropertySlip)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
@@ -429,4 +447,5 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents condition As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents issuePropertySlip As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
+    Friend WithEvents btnSummary As Resources.Controls.RoundedButton
 End Class
