@@ -2413,7 +2413,7 @@ Public Class modDB
                 "(SELECT COUNT(*) FROM property_requests WHERE status = 'Rejected') AS declined_requests, " &
                 "(SELECT COUNT(*) FROM borrowed_items WHERE status = 'Borrowed') AS borrowed_items, " &
                 "(SELECT COUNT(*) FROM borrowed_items WHERE status = 'Returned') AS returned_items, " &
-                "(SELECT COUNT(*) FROM properties WHERE condition = 'Needs Repair') AS needs_repair, " &
+                "(SELECT COUNT(*) FROM properties WHERE `condition` = 'Needs Repair') AS needs_repair, " &
                 "(SELECT COUNT(*) FROM maintenance WHERE status IN ('Ongoing','For Review')) AS maintenance_alerts, " &
                 "(SELECT COUNT(*) FROM maintenance_requests WHERE status = 'Pending') AS warranty_alerts"
 

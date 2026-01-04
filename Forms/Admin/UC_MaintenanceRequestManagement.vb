@@ -615,11 +615,14 @@ Public Class UC_MaintenanceRequestManagement
         End Try
     End Sub
 
-    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs)
+    Private Sub prm_btn_update_Click(sender As Object, e As EventArgs) Handles prm_btn_update.Click
         ' No restrictions for Super Admin, Admin, and Custodian
-
-        LoadMaintenanceRequestData()
-        MessageBox.Show("Maintenance request list refreshed.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            LoadMaintenanceRequestData()
+            MessageBox.Show("Refresh maintenance request successfully!", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error refreshing maintenance request list: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub admin_label_DepartmentManagement_Click(sender As Object, e As EventArgs) Handles admin_label_DepartmentManagement.Click

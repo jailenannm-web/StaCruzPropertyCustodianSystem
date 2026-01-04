@@ -669,14 +669,13 @@ Public Class UC_PropertyRequestManagement
 
     ' Changed to NOT use Handles to avoid compile error when control not present in designer
     Private Sub prm_btn_update_Click(sender As Object, e As EventArgs)
-        Dim isSuperAdmin As Boolean = SessionContext.IsSuperAdmin()
-        If Not isSuperAdmin Then
-
-            Return
-        End If
-
-        LoadRequestData()
-        MessageBox.Show("Request list refreshed.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        ' Allow all users to refresh (not just SuperAdmin)
+        Try
+            LoadRequestData()
+            MessageBox.Show("Property request list refreshed successfully.", "Updated", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error refreshing property request list: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
