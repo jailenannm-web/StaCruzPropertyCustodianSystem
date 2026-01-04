@@ -98,7 +98,7 @@ Partial Class UC_PropertyManagement1
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
         Me.propertyManagementGrid.RowTemplate.Height = 24
-        Me.propertyManagementGrid.Size = New System.Drawing.Size(1270, 564)
+        Me.propertyManagementGrid.Size = New System.Drawing.Size(1239, 564)
         Me.propertyManagementGrid.TabIndex = 45
         '
         'propertyId

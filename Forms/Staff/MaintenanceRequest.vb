@@ -238,4 +238,141 @@ Partial Public Class MaintenanceRequest
         pm_cbobx_categ.SelectedIndex = 0
         maintenancerequestssearchbar.Clear()
     End Sub
+    
+    ''' <summary>
+    ''' Generate Maintenance Report - Right-click or button handler
+    ''' Based on UC_MaintenanceManagement implementation
+    ''' </summary>
+    Private Sub GenerateMaintenanceReport()
+        Try
+            System.Diagnostics.Debug.WriteLine("[v0] GenerateMaintenanceReport called")
+            
+            ' Get selected row
+            If DataGridView1.SelectedRows.Count = 0 Then
+                System.Diagnostics.Debug.WriteLine("[v0] No row selected")
+                MessageBox.Show("Please select a maintenance request first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            System.Diagnostics.Debug.WriteLine($"[v0] Selected row count: {DataGridView1.SelectedRows.Count}")
+
+            ' Get the maintenance request ID from the selected row
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            Dim dt As DataTable = TryCast(DataGridView1.DataSource, DataTable)
+            
+            System.Diagnostics.Debug.WriteLine($"[v0] DataSource type: {If(dt IsNot Nothing, dt.GetType().Name, "NULL")}")
+            
+            If dt Is Nothing OrElse selectedRow.Index >= dt.Rows.Count Then
+                System.Diagnostics.Debug.WriteLine("[v0] DataTable is null or index out of range")
+                MessageBox.Show("Unable to retrieve maintenance request data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            
+            System.Diagnostics.Debug.WriteLine($"[v0] DataTable has {dt.Rows.Count} rows, selected index: {selectedRow.Index}")
+            ' List all column names
+            Dim colNames As New System.Collections.Generic.List(Of String)
+            For Each col As DataColumn In dt.Columns
+                colNames.Add(col.ColumnName)
+            Next
+            System.Diagnostics.Debug.WriteLine($"[v0] DataTable columns: {String.Join(", ", colNames)}")
+            
+            Dim dataRow As DataRow = dt.Rows(selectedRow.Index)
+            
+            ' Get requestId from the data row
+            Dim requestId As Integer = 0
+            If dt.Columns.Contains("requestId") AndAlso Not IsDBNull(dataRow("requestId")) Then
+                Integer.TryParse(dataRow("requestId").ToString(), requestId)
+                System.Diagnostics.Debug.WriteLine($"[v0] Found requestId: {requestId}")
+            Else
+                System.Diagnostics.Debug.WriteLine("[v0] requestId column not found or is NULL")
+                ' Try to show what columns we have
+                For Each col As DataColumn In dt.Columns
+                    System.Diagnostics.Debug.WriteLine($"[v0] Available column: {col.ColumnName} = {If(IsDBNull(dataRow(col.ColumnName)), "NULL", dataRow(col.ColumnName).ToString())}")
+                Next
+            End If
+            
+            If requestId <= 0 Then
+                System.Diagnostics.Debug.WriteLine("[v0] Invalid requestId")
+                MessageBox.Show("Invalid maintenance request ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            System.Diagnostics.Debug.WriteLine($"[v0] Opening report for request ID: {requestId}")
+
+            ' Check if this request has been converted to maintenance
+            Dim maintenanceId As Integer = GetMaintenanceIdFromRequest(requestId)
+            
+            System.Diagnostics.Debug.WriteLine($"[v0] Found maintenanceId: {maintenanceId}")
+            
+            If maintenanceId > 0 Then
+                ' Open detailed maintenance report with the maintenance record
+                System.Diagnostics.Debug.WriteLine("[v0] Opening MaintenanceManagementReport1")
+                Dim reportForm As New Form()
+                reportForm.Text = "Maintenance Management Report"
+                reportForm.Size = New Size(1200, 900)
+                reportForm.StartPosition = FormStartPosition.CenterScreen
+                
+                Dim reportControl As New MaintenanceManagementReport1(maintenanceId)
+                reportControl.Dock = DockStyle.Fill
+                reportForm.Controls.Add(reportControl)
+                
+                reportForm.ShowDialog()
+            Else
+                ' No maintenance record yet, show message
+                System.Diagnostics.Debug.WriteLine("[v0] No maintenance record found for this request")
+                MessageBox.Show("This maintenance request has not been processed yet. A maintenance record must be created first before generating a report.", 
+                               "No Maintenance Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[v0] GenerateMaintenanceReport Error: {ex.Message}")
+            System.Diagnostics.Debug.WriteLine($"[v0] Stack trace: {ex.StackTrace}")
+            MessageBox.Show("Error opening maintenance report: " & ex.Message & Environment.NewLine & Environment.NewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+    
+    ''' <summary>
+    ''' Get maintenance ID from request ID
+    ''' </summary>
+    Private Function GetMaintenanceIdFromRequest(requestId As Integer) As Integer
+        Try
+            Dim conn As MySql.Data.MySqlClient.MySqlConnection = modDB.GetConnection()
+            If conn Is Nothing Then Return 0
+            
+            If Not modDB.SafeOpenConnection(conn) Then Return 0
+            
+            Dim query As String = "SELECT maintenanceId FROM maintenance WHERE requestId = @requestId LIMIT 1"
+            
+            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@requestId", requestId)
+                
+                Dim result = cmd.ExecuteScalar()
+                If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                    Dim maintenanceId As Integer = 0
+                    If Integer.TryParse(result.ToString(), maintenanceId) Then
+                        Return maintenanceId
+                    End If
+                End If
+            End Using
+            
+            If conn.State = ConnectionState.Open Then conn.Close()
+            
+        Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine($"[GetMaintenanceIdFromRequest] Error: {ex.Message}")
+        End Try
+        
+        Return 0
+    End Function
+    
+    ''' <summary>
+    ''' Handle double-click to generate report
+    ''' </summary>
+    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
+        System.Diagnostics.Debug.WriteLine($"[v0] DataGridView1_CellDoubleClick fired - RowIndex: {e.RowIndex}, ColumnIndex: {e.ColumnIndex}")
+        If e.RowIndex < 0 Then
+            System.Diagnostics.Debug.WriteLine("[v0] Header clicked, ignoring")
+            Return ' Ignore header clicks
+        End If
+        GenerateMaintenanceReport()
+    End Sub
 End Class

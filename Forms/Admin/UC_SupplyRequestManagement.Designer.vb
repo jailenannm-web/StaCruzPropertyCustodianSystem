@@ -62,13 +62,14 @@ Partial Class UC_SupplyRequestManagement
         Me.printPAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.printPAR.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.printPAR.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.printPAR.Location = New System.Drawing.Point(1184, 707)
+        Me.printPAR.Location = New System.Drawing.Point(1001, 707)
         Me.printPAR.Margin = New System.Windows.Forms.Padding(4)
         Me.printPAR.Name = "printPAR"
         Me.printPAR.Size = New System.Drawing.Size(153, 33)
         Me.printPAR.TabIndex = 170
         Me.printPAR.Text = "Print PAR/ICS"
         Me.printPAR.UseVisualStyleBackColor = False
+        Me.printPAR.Visible = False
         '
         'issueRequisition
         '
@@ -77,7 +78,7 @@ Partial Class UC_SupplyRequestManagement
         Me.issueRequisition.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.issueRequisition.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.issueRequisition.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issueRequisition.Location = New System.Drawing.Point(1023, 707)
+        Me.issueRequisition.Location = New System.Drawing.Point(1184, 707)
         Me.issueRequisition.Margin = New System.Windows.Forms.Padding(4)
         Me.issueRequisition.Name = "issueRequisition"
         Me.issueRequisition.Size = New System.Drawing.Size(153, 33)

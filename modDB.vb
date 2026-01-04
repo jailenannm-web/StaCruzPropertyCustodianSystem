@@ -8822,14 +8822,17 @@ Public Class modDB
             query.Append("LEFT JOIN users u ON s.assignedTo = u.userId ")
             query.Append("LEFT JOIN departments d ON u.departmentId = d.departmentId ")
             query.Append("WHERE 1=1 ")
-            ' Filter out soft-deleted supplies (those with stockStatus = 'Out of Stock' and quantity = 0)
-            query.Append("AND NOT (s.stockStatus = 'Out of Stock' AND s.quantity = 0)")
-
+            
+            ' Apply filters
             If Not String.IsNullOrEmpty(category) Then
                 query.Append(" AND s.category = @category")
             End If
             If Not String.IsNullOrEmpty(status) Then
                 query.Append(" AND s.stockStatus = @status")
+            Else
+                ' Only filter out soft-deleted supplies if no status filter is applied
+                ' This allows "Out of Stock" items to show when specifically filtered
+                query.Append(" AND NOT (s.stockStatus = 'Out of Stock' AND s.quantity = 0)")
             End If
 
             query.Append(" ORDER BY s.createdAt DESC, s.dateReceived DESC")
@@ -10566,7 +10569,8 @@ Public Class modDB
 
             Dim query As String = ""
             
-            If requestType.ToLower() = "property" Then
+            ' Handle both "property" and "properties" for backward compatibility
+            If requestType.ToLower() = "property" OrElse requestType.ToLower() = "properties" Then
                 query = "SELECT " &
                     "pr.requestId AS request_id, " &
                     "pr.requestId, " &
