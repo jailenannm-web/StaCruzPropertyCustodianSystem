@@ -1,4 +1,4 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class MaintenanceRequestSummaryReport
     Inherits System.Windows.Forms.Form
 
@@ -47,16 +47,6 @@ Partial Class MaintenanceRequestSummaryReport
         Me.departmentId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.conditionBeforeMaintenance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.typeOfMaintenance = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.assignedTechnician = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.maintenanceDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.costMaterialsLabor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.conditionAfterMaintenance = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.diagnosis = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.actionTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.partsReplaced = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.createdAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.updatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dateReport = New System.Windows.Forms.DateTimePicker()
         Me.school = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -72,6 +62,13 @@ Partial Class MaintenanceRequestSummaryReport
         Me.btn_Back = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
+        Me.cboTypeFilter = New System.Windows.Forms.ComboBox()
+        Me.chkDateFilter = New System.Windows.Forms.CheckBox()
+        Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDateTo = New System.Windows.Forms.DateTimePicker()
+        Me.btnApplyFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnClearFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.maintenanceRequest.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -275,7 +272,7 @@ Partial Class MaintenanceRequestSummaryReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.maintenanceId, Me.requestId, Me.propertyItemName, Me.serialNumber, Me.location, Me.departmentId, Me.conditionBeforeMaintenance, Me.typeOfMaintenance, Me.assignedTechnician, Me.maintenanceDetails, Me.costMaterialsLabor, Me.conditionAfterMaintenance, Me.status, Me.diagnosis, Me.actionTaken, Me.partsReplaced, Me.createdAt, Me.updatedAt})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.maintenanceId, Me.requestId, Me.propertyItemName, Me.serialNumber, Me.location, Me.departmentId, Me.conditionBeforeMaintenance, Me.typeOfMaintenance})
         Me.DataGridView1.Location = New System.Drawing.Point(-1, -1)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
@@ -338,78 +335,6 @@ Partial Class MaintenanceRequestSummaryReport
         Me.typeOfMaintenance.MinimumWidth = 6
         Me.typeOfMaintenance.Name = "typeOfMaintenance"
         Me.typeOfMaintenance.Width = 125
-        '
-        'assignedTechnician
-        '
-        Me.assignedTechnician.HeaderText = "Assigned Technician"
-        Me.assignedTechnician.MinimumWidth = 6
-        Me.assignedTechnician.Name = "assignedTechnician"
-        Me.assignedTechnician.Width = 125
-        '
-        'maintenanceDetails
-        '
-        Me.maintenanceDetails.HeaderText = "Maintenance Details"
-        Me.maintenanceDetails.MinimumWidth = 6
-        Me.maintenanceDetails.Name = "maintenanceDetails"
-        Me.maintenanceDetails.Width = 125
-        '
-        'costMaterialsLabor
-        '
-        Me.costMaterialsLabor.HeaderText = "Cost Materials Labor"
-        Me.costMaterialsLabor.MinimumWidth = 6
-        Me.costMaterialsLabor.Name = "costMaterialsLabor"
-        Me.costMaterialsLabor.Width = 125
-        '
-        'conditionAfterMaintenance
-        '
-        Me.conditionAfterMaintenance.HeaderText = "Condition After Maintenance"
-        Me.conditionAfterMaintenance.MinimumWidth = 6
-        Me.conditionAfterMaintenance.Name = "conditionAfterMaintenance"
-        Me.conditionAfterMaintenance.Width = 125
-        '
-        'status
-        '
-        Me.status.HeaderText = "Status"
-        Me.status.MinimumWidth = 6
-        Me.status.Name = "status"
-        Me.status.Width = 125
-        '
-        'diagnosis
-        '
-        Me.diagnosis.HeaderText = "Diagnosis"
-        Me.diagnosis.MinimumWidth = 6
-        Me.diagnosis.Name = "diagnosis"
-        Me.diagnosis.Width = 125
-        '
-        'actionTaken
-        '
-        Me.actionTaken.HeaderText = "Action Taken"
-        Me.actionTaken.MinimumWidth = 6
-        Me.actionTaken.Name = "actionTaken"
-        Me.actionTaken.Width = 125
-        '
-        'partsReplaced
-        '
-        Me.partsReplaced.HeaderText = "Parts Replaced"
-        Me.partsReplaced.MinimumWidth = 6
-        Me.partsReplaced.Name = "partsReplaced"
-        Me.partsReplaced.Width = 125
-        '
-        'createdAt
-        '
-        Me.createdAt.HeaderText = "Created At"
-        Me.createdAt.MinimumWidth = 6
-        Me.createdAt.Name = "createdAt"
-        Me.createdAt.Visible = False
-        Me.createdAt.Width = 125
-        '
-        'updatedAt
-        '
-        Me.updatedAt.HeaderText = "Updated At"
-        Me.updatedAt.MinimumWidth = 6
-        Me.updatedAt.Name = "updatedAt"
-        Me.updatedAt.Visible = False
-        Me.updatedAt.Width = 125
         '
         'dateReport
         '
@@ -596,12 +521,83 @@ Partial Class MaintenanceRequestSummaryReport
         Me.btnCSV.Text = "Generate CSV File"
         Me.btnCSV.UseVisualStyleBackColor = False
         '
+        'cboStatusFilter
+        '
+        Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatusFilter.Location = New System.Drawing.Point(20, 100)
+        Me.cboStatusFilter.Name = "cboStatusFilter"
+        Me.cboStatusFilter.Size = New System.Drawing.Size(100, 24)
+        Me.cboStatusFilter.TabIndex = 400
+        '
+        'cboTypeFilter
+        '
+        Me.cboTypeFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboTypeFilter.Location = New System.Drawing.Point(20, 130)
+        Me.cboTypeFilter.Name = "cboTypeFilter"
+        Me.cboTypeFilter.Size = New System.Drawing.Size(100, 24)
+        Me.cboTypeFilter.TabIndex = 401
+        '
+        'chkDateFilter
+        '
+        Me.chkDateFilter.AutoSize = True
+        Me.chkDateFilter.Location = New System.Drawing.Point(20, 160)
+        Me.chkDateFilter.Name = "chkDateFilter"
+        Me.chkDateFilter.TabIndex = 402
+        Me.chkDateFilter.Text = "Date Filter"
+        '
+        'dtpDateFrom
+        '
+        Me.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateFrom.Location = New System.Drawing.Point(20, 190)
+        Me.dtpDateFrom.Name = "dtpDateFrom"
+        Me.dtpDateFrom.Size = New System.Drawing.Size(100, 22)
+        Me.dtpDateFrom.TabIndex = 403
+        '
+        'dtpDateTo
+        '
+        Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateTo.Location = New System.Drawing.Point(20, 220)
+        Me.dtpDateTo.Name = "dtpDateTo"
+        Me.dtpDateTo.Size = New System.Drawing.Size(100, 22)
+        Me.dtpDateTo.TabIndex = 404
+        '
+        'btnApplyFilters
+        '
+        Me.btnApplyFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnApplyFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnApplyFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnApplyFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnApplyFilters.Location = New System.Drawing.Point(20, 250)
+        Me.btnApplyFilters.Name = "btnApplyFilters"
+        Me.btnApplyFilters.Size = New System.Drawing.Size(100, 30)
+        Me.btnApplyFilters.TabIndex = 405
+        Me.btnApplyFilters.Text = "Apply"
+        '
+        'btnClearFilters
+        '
+        Me.btnClearFilters.BackColor = System.Drawing.Color.Gray
+        Me.btnClearFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClearFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnClearFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnClearFilters.Location = New System.Drawing.Point(20, 285)
+        Me.btnClearFilters.Name = "btnClearFilters"
+        Me.btnClearFilters.Size = New System.Drawing.Size(100, 30)
+        Me.btnClearFilters.TabIndex = 406
+        Me.btnClearFilters.Text = "Clear"
+        '
         'MaintenanceRequestSummaryReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.ClientSize = New System.Drawing.Size(1435, 1055)
+        Me.Controls.Add(Me.cboStatusFilter)
+        Me.Controls.Add(Me.cboTypeFilter)
+        Me.Controls.Add(Me.chkDateFilter)
+        Me.Controls.Add(Me.dtpDateFrom)
+        Me.Controls.Add(Me.dtpDateTo)
+        Me.Controls.Add(Me.btnApplyFilters)
+        Me.Controls.Add(Me.btnClearFilters)
         Me.Controls.Add(Me.btn_Back)
         Me.Controls.Add(Me.btnPDF)
         Me.Controls.Add(Me.btnCSV)
@@ -659,18 +655,15 @@ Partial Class MaintenanceRequestSummaryReport
     Friend WithEvents departmentId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents conditionBeforeMaintenance As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents typeOfMaintenance As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents assignedTechnician As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents maintenanceDetails As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents costMaterialsLabor As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents conditionAfterMaintenance As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents diagnosis As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents actionTaken As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents partsReplaced As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents createdAt As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents updatedAt As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents btn_Back As Resources.Controls.RoundedButton
     Friend WithEvents btnPDF As Resources.Controls.RoundedButton
     Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents cboStatusFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents cboTypeFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents chkDateFilter As System.Windows.Forms.CheckBox
+    Friend WithEvents dtpDateFrom As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpDateTo As System.Windows.Forms.DateTimePicker
+    Friend WithEvents btnApplyFilters As Resources.Controls.RoundedButton
+    Friend WithEvents btnClearFilters As Resources.Controls.RoundedButton
 End Class

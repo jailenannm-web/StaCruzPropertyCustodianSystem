@@ -37,23 +37,16 @@ Public Class PropertySummaryReport
             cboStatusFilter.Items.Add("All Status")
             cboStatusFilter.Items.Add("Active")
             cboStatusFilter.Items.Add("Inactive")
-            cboStatusFilter.Items.Add("Under Maintenance")
             cboStatusFilter.Items.Add("Disposed")
-            
+
             ' Load Conditions
             cboConditionFilter.Items.Clear()
             cboConditionFilter.Items.Add("All Conditions")
-            cboConditionFilter.Items.Add("Excellent")
             cboConditionFilter.Items.Add("Good")
-            cboConditionFilter.Items.Add("Fair")
-            cboConditionFilter.Items.Add("Poor")
+            cboConditionFilter.Items.Add("Needs Repair")
             cboConditionFilter.Items.Add("Damaged")
-            
-            ' Load Departments
-            cboDepartmentFilter.Items.Clear()
-            cboDepartmentFilter.Items.Add("All Departments")
-            
-            ' Load categories and departments from database
+
+            ' Load categories from database
             Try
                 Dim conn As MySqlConnection = modDB.GetConnection()
                 If conn IsNot Nothing AndAlso conn.State = ConnectionState.Open Then
@@ -65,21 +58,9 @@ Public Class PropertySummaryReport
                                 adapter.Fill(dt)
                             End Using
                         End Using
-                        
+
                         For Each row As DataRow In dt.Rows
                             cboCategoryFilter.Items.Add(row("category").ToString())
-                        Next
-                        
-                        ' Load departments
-                        dt.Clear()
-                        Using cmd As New MySqlCommand("SELECT departmentName FROM departments WHERE status = 'Active' ORDER BY departmentName", conn)
-                            Using adapter As New MySqlDataAdapter(cmd)
-                                adapter.Fill(dt)
-                            End Using
-                        End Using
-                        
-                        For Each row As DataRow In dt.Rows
-                            cboDepartmentFilter.Items.Add(row("departmentName").ToString())
                         Next
                     Finally
                         If conn.State = ConnectionState.Open Then
@@ -91,20 +72,19 @@ Public Class PropertySummaryReport
                 System.Diagnostics.Debug.WriteLine("Error loading filter dropdown data: " & ex.Message)
                 ' Continue with empty dropdowns if database load fails
             End Try
-            
+
             ' Set default selections
             cboCategoryFilter.SelectedIndex = 0
             cboStatusFilter.SelectedIndex = 0
             cboConditionFilter.SelectedIndex = 0
-            cboDepartmentFilter.SelectedIndex = 0
-            
+
             ' Initialize date filters
             chkDateFilter.Checked = False
             dtpDateFrom.Value = DateTime.Now.AddMonths(-1)
             dtpDateTo.Value = DateTime.Now
             dtpDateFrom.Enabled = False
             dtpDateTo.Enabled = False
-            
+
         Catch ex As Exception
             MessageBox.Show("Error loading filter options: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -132,43 +112,37 @@ Public Class PropertySummaryReport
             LEFT JOIN users u ON p.assignedTo = u.userId
             LEFT JOIN departments d ON p.departmentId = d.departmentId
             WHERE 1=1"
-            
+
             ' Apply filters
             Dim params As New List(Of MySqlParameter)()
-            
+
             ' Category filter
             If cboCategoryFilter.SelectedIndex > 0 Then
                 query &= " AND p.category = @category"
                 params.Add(New MySqlParameter("@category", cboCategoryFilter.SelectedItem.ToString()))
             End If
-            
+
             ' Status filter
             If cboStatusFilter.SelectedIndex > 0 Then
                 query &= " AND p.status = @status"
                 params.Add(New MySqlParameter("@status", cboStatusFilter.SelectedItem.ToString()))
             End If
-            
+
             ' Condition filter
             If cboConditionFilter.SelectedIndex > 0 Then
                 query &= " AND p.condition = @condition"
                 params.Add(New MySqlParameter("@condition", cboConditionFilter.SelectedItem.ToString()))
             End If
-            
-            ' Department filter
-            If cboDepartmentFilter.SelectedIndex > 0 Then
-                query &= " AND d.departmentName = @department"
-                params.Add(New MySqlParameter("@department", cboDepartmentFilter.SelectedItem.ToString()))
-            End If
-            
+
             ' Date filter (acquisition date)
             If chkDateFilter.Checked Then
                 query &= " AND DATE(p.acquisitionDate) BETWEEN @dateFrom AND @dateTo"
                 params.Add(New MySqlParameter("@dateFrom", dtpDateFrom.Value.Date))
                 params.Add(New MySqlParameter("@dateTo", dtpDateTo.Value.Date))
             End If
-            
+
             query &= " ORDER BY p.propertyId"
-            
+
             Dim conn As MySqlConnection = Nothing
             Try
                 conn = modDB.GetConnection()
@@ -178,14 +152,14 @@ Public Class PropertySummaryReport
                         For Each param As MySqlParameter In params
                             cmd.Parameters.Add(param)
                         Next
-                        
+
                         Using adapter As New MySqlDataAdapter(cmd)
                             Dim dt As New DataTable()
                             adapter.Fill(dt)
-                            
+
                             ' Clear existing rows
                             DataGridView1.Rows.Clear()
-                            
+
                             ' Populate DataGridView with the correct columns
                             For Each row As DataRow In dt.Rows
                                 DataGridView1.Rows.Add(
@@ -200,7 +174,7 @@ Public Class PropertySummaryReport
                                     If(row.IsNull("propertyStatus"), "", row("propertyStatus"))
                                 )
                             Next
-                            
+
                             ' Auto-resize columns
                             DataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
                         End Using
@@ -227,7 +201,7 @@ Public Class PropertySummaryReport
             dialog.FileName = $"Property_Management_Summary_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"
             dialog.AddExtension = True
             dialog.DefaultExt = "pdf"
-            
+
             If dialog.ShowDialog() = DialogResult.OK Then
                 Try
                     ExportToPDF(dialog.FileName)
@@ -250,7 +224,7 @@ Public Class PropertySummaryReport
             dialog.FileName = $"Property_Management_Summary_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
             dialog.AddExtension = True
             dialog.DefaultExt = "csv"
-            
+
             If dialog.ShowDialog() = DialogResult.OK Then
                 Try
                     ExportToCSV(dialog.FileName)
@@ -267,12 +241,12 @@ Public Class PropertySummaryReport
             ' Create PDF using iTextSharp
             Dim doc As New iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 20, 20, 40, 40)
             Dim writer As iTextSharp.text.pdf.PdfWriter = iTextSharp.text.pdf.PdfWriter.GetInstance(doc, New FileStream(filePath, FileMode.Create))
-            
+
             doc.Open()
-            
+
             ' Add header
             AddPDFHeader(doc)
-        
+
             ' Add school and date info
             Dim infoFont As New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 10, iTextSharp.text.Font.NORMAL)
             Dim schoolPara As New iTextSharp.text.Paragraph($"School: {school.Text}     Date: {dateReport.Value:dddd, dd MMMM yyyy}", infoFont)
@@ -280,18 +254,18 @@ Public Class PropertySummaryReport
             schoolPara.SpacingBefore = 15
             schoolPara.SpacingAfter = 10
             doc.Add(schoolPara)
-            
+
             ' Create table with 9 columns
             Dim pdfTable As New iTextSharp.text.pdf.PdfPTable(9)
             pdfTable.WidthPercentage = 100
             pdfTable.SetWidths(New Single() {1.5F, 1.0F, 1.5F, 0.8F, 1.0F, 1.2F, 1.0F, 0.8F, 0.8F})
-            
+
             ' Add table headers
             Dim headerFont As New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 8, iTextSharp.text.Font.BOLD)
             Dim cellFont As New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 7, iTextSharp.text.Font.NORMAL)
-            
+
             Dim headers() As String = {"Item Name", "Category", "Description", "Unit", "Total Cost", "Assigned To", "Location", "Condition", "Status"}
-            
+
             For Each header As String In headers
                 Dim cell As New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(header, headerFont))
                 cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY
@@ -300,58 +274,58 @@ Public Class PropertySummaryReport
                 cell.Padding = 4
                 pdfTable.AddCell(cell)
             Next
-            
+
             ' Add data rows
             Dim rowCount As Integer = 1
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If Not row.IsNewRow Then
                     ' Item Name
                     pdfTable.AddCell(New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(If(row.Cells(0).Value?.ToString(), ""), cellFont)) With {.Padding = 3})
-                    
+
                     ' Category
                     pdfTable.AddCell(New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(If(row.Cells(1).Value?.ToString(), ""), cellFont)) With {.Padding = 3})
-                    
+
                     ' Description
                     pdfTable.AddCell(New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(If(row.Cells(2).Value?.ToString(), ""), cellFont)) With {.Padding = 3})
-                    
+
                     ' Unit
                     pdfTable.AddCell(New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(If(row.Cells(3).Value?.ToString(), ""), cellFont)) With {.Padding = 3, .HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER})
-                    
+
                     ' Total Cost
                     pdfTable.AddCell(New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(If(row.Cells(4).Value?.ToString(), "0.00"), cellFont)) With {.Padding = 3, .HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT})
-                    
+
                     ' Assigned To
                     pdfTable.AddCell(New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(If(row.Cells(5).Value?.ToString(), ""), cellFont)) With {.Padding = 3})
-                    
+
                     ' Location
                     pdfTable.AddCell(New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(If(row.Cells(6).Value?.ToString(), ""), cellFont)) With {.Padding = 3})
-                    
+
                     ' Condition
                     pdfTable.AddCell(New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(If(row.Cells(7).Value?.ToString(), ""), cellFont)) With {.Padding = 3, .HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER})
-                    
+
                     ' Status
                     pdfTable.AddCell(New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(If(row.Cells(8).Value?.ToString(), ""), cellFont)) With {.Padding = 3, .HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER})
-                    
+
                     rowCount += 1
                 End If
             Next
-            
+
             doc.Add(pdfTable)
-            
+
             ' Add signature section
             doc.Add(New iTextSharp.text.Paragraph(" "))
             doc.Add(New iTextSharp.text.Paragraph(" "))
-            
+
             Dim signatureTable As New iTextSharp.text.pdf.PdfPTable(2)
             signatureTable.WidthPercentage = 100
             signatureTable.SetWidths(New Single() {1.0F, 1.0F})
             signatureTable.SpacingBefore = 20
-            
+
             ' Received by
             Dim receivedCell As New iTextSharp.text.pdf.PdfPCell()
             receivedCell.Border = iTextSharp.text.Rectangle.BOX
             receivedCell.Padding = 10
-            
+
             Dim receivedPara As New iTextSharp.text.Paragraph()
             receivedPara.Add(New iTextSharp.text.Phrase("Received by:" & vbCrLf, infoFont))
             receivedPara.Add(New iTextSharp.text.Phrase(vbCrLf & receivedBy.Text & vbCrLf, New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 10, iTextSharp.text.Font.BOLD)))
@@ -359,12 +333,12 @@ Public Class PropertySummaryReport
             receivedPara.Add(New iTextSharp.text.Phrase($"Date: {receivedDate.Value:dddd, dd MMMM yyyy}", infoFont))
             receivedCell.AddElement(receivedPara)
             signatureTable.AddCell(receivedCell)
-            
+
             ' Issued by
             Dim issuedCell As New iTextSharp.text.pdf.PdfPCell()
             issuedCell.Border = iTextSharp.text.Rectangle.BOX
             issuedCell.Padding = 10
-            
+
             Dim issuedPara As New iTextSharp.text.Paragraph()
             issuedPara.Add(New iTextSharp.text.Phrase("Issued by:" & vbCrLf, infoFont))
             issuedPara.Add(New iTextSharp.text.Phrase(vbCrLf & issuedBy.Text & vbCrLf, New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 10, iTextSharp.text.Font.BOLD)))
@@ -372,11 +346,11 @@ Public Class PropertySummaryReport
             issuedPara.Add(New iTextSharp.text.Phrase($"Date: {issuedDate.Value:dddd, dd MMMM yyyy}", infoFont))
             issuedCell.AddElement(issuedPara)
             signatureTable.AddCell(issuedCell)
-            
+
             doc.Add(signatureTable)
-            
+
             doc.Close()
-            
+
         Catch ex As Exception
             Throw New Exception("Error generating PDF: " & ex.Message, ex)
         End Try
@@ -385,7 +359,7 @@ Public Class PropertySummaryReport
     Private Function FindLogoPath(possibleNames() As String) As String
         ' Get base directory
         Dim baseDir As String = Application.StartupPath
-        
+
         ' Try multiple base paths
         Dim basePaths() As String = {
             baseDir,
@@ -393,7 +367,7 @@ Public Class PropertySummaryReport
             Path.GetFullPath(Path.Combine(baseDir, "..\..\..")),
             Directory.GetCurrentDirectory()
         }
-        
+
         ' Try each combination
         For Each basePath In basePaths
             For Each fileName In possibleNames
@@ -402,7 +376,7 @@ Public Class PropertySummaryReport
                     Path.Combine(basePath, "Resources", "Images", fileName),
                     Path.Combine(basePath, fileName)
                 }
-                
+
                 For Each testPath In testPaths
                     Try
                         Dim fullPath As String = Path.GetFullPath(testPath)
@@ -415,7 +389,7 @@ Public Class PropertySummaryReport
                 Next
             Next
         Next
-        
+
         Return Nothing
     End Function
 
@@ -423,7 +397,7 @@ Public Class PropertySummaryReport
         Dim headerTable As New iTextSharp.text.pdf.PdfPTable(3)
         headerTable.WidthPercentage = 100
         headerTable.SetWidths(New Single() {1.5F, 5.0F, 1.5F})
-        
+
         ' Left logo
         Try
             Dim leftLogoNames() As String = {
@@ -431,9 +405,9 @@ Public Class PropertySummaryReport
                 "logo1-removebg-preview.png",
                 "logo2-removebg-preview.png"
             }
-            
+
             Dim leftLogoPath As String = FindLogoPath(leftLogoNames)
-            
+
             If Not String.IsNullOrEmpty(leftLogoPath) Then
                 Dim leftLogo As iTextSharp.text.Image = iTextSharp.text.Image.GetInstance(leftLogoPath)
                 leftLogo.ScaleToFit(60.0F, 60.0F)
@@ -448,13 +422,13 @@ Public Class PropertySummaryReport
         Catch ex As Exception
             headerTable.AddCell(New iTextSharp.text.pdf.PdfPCell() With {.Border = iTextSharp.text.Rectangle.NO_BORDER})
         End Try
-        
+
         ' Center text
         Dim centerCell As New iTextSharp.text.pdf.PdfPCell()
         centerCell.Border = iTextSharp.text.Rectangle.NO_BORDER
         centerCell.HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER
         centerCell.VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE
-        
+
         Dim headerPara As New iTextSharp.text.Paragraph()
         headerPara.Add(New iTextSharp.text.Chunk("Republic of the Philippines" & vbCrLf, New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 11, iTextSharp.text.Font.NORMAL)))
         headerPara.Add(New iTextSharp.text.Chunk("Department of Education" & vbCrLf, New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 11, iTextSharp.text.Font.NORMAL)))
@@ -464,16 +438,16 @@ Public Class PropertySummaryReport
         headerPara.Alignment = iTextSharp.text.Element.ALIGN_CENTER
         centerCell.AddElement(headerPara)
         headerTable.AddCell(centerCell)
-        
+
         ' Right logo
         Try
             Dim rightLogoNames() As String = {
                 "574641165_841620561884149_5934190666791988971_n-removebg-preview (1)1.png",
                 "574641165_841620561884149_5934190666791988971_n-removebg-preview (1).png"
             }
-            
+
             Dim rightLogoPath As String = FindLogoPath(rightLogoNames)
-            
+
             If Not String.IsNullOrEmpty(rightLogoPath) Then
                 Dim rightLogo As iTextSharp.text.Image = iTextSharp.text.Image.GetInstance(rightLogoPath)
                 rightLogo.ScaleToFit(60.0F, 60.0F)
@@ -488,9 +462,9 @@ Public Class PropertySummaryReport
         Catch ex As Exception
             headerTable.AddCell(New iTextSharp.text.pdf.PdfPCell() With {.Border = iTextSharp.text.Rectangle.NO_BORDER})
         End Try
-        
+
         doc.Add(headerTable)
-        
+
         ' Add title
         Dim title As New iTextSharp.text.Paragraph("PROPERTY MANAGEMENT SUMMARY", New iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 14, iTextSharp.text.Font.BOLD))
         title.Alignment = iTextSharp.text.Element.ALIGN_CENTER
@@ -517,14 +491,14 @@ Public Class PropertySummaryReport
             writer.WriteLine()
             writer.WriteLine("=" & New String("="c, 120))
             writer.WriteLine()
-            
+
             ' Write headers
             Dim headers As New List(Of String) From {
-                "Item Name", "Category", "Description", "Unit", "Total Cost", 
+                "Item Name", "Category", "Description", "Unit", "Total Cost",
                 "Assigned To", "Location", "Condition", "Status"
             }
             writer.WriteLine(String.Join(",", headers))
-            
+
             ' Write data
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If Not row.IsNewRow Then
@@ -542,7 +516,7 @@ Public Class PropertySummaryReport
                     writer.WriteLine(String.Join(",", values))
                 End If
             Next
-            
+
             ' Signature section
             writer.WriteLine()
             writer.WriteLine("=" & New String("="c, 120))
@@ -567,11 +541,11 @@ Public Class PropertySummaryReport
 
     Private Function EscapeCSV(value As String) As String
         If String.IsNullOrEmpty(value) Then Return ""
-        
+
         If value.Contains(",") OrElse value.Contains("""") OrElse value.Contains(vbCrLf) OrElse value.Contains(vbCr) OrElse value.Contains(vbLf) Then
             Return """" & value.Replace("""", """""") & """"
         End If
-        
+
         Return value
     End Function
 
@@ -593,7 +567,6 @@ Public Class PropertySummaryReport
         cboCategoryFilter.SelectedIndex = 0
         cboStatusFilter.SelectedIndex = 0
         cboConditionFilter.SelectedIndex = 0
-        cboDepartmentFilter.SelectedIndex = 0
         chkDateFilter.Checked = False
         dtpDateFrom.Value = DateTime.Now.AddMonths(-1)
         dtpDateTo.Value = DateTime.Now

@@ -70,6 +70,13 @@ Partial Class SupplyRequestSummary
         Me.btn_Back = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.cboCategoryFilter = New System.Windows.Forms.ComboBox()
+        Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
+        Me.chkDateFilter = New System.Windows.Forms.CheckBox()
+        Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDateTo = New System.Windows.Forms.DateTimePicker()
+        Me.btnApplyFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnClearFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.maintenanceRequest.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -273,7 +280,7 @@ Partial Class SupplyRequestSummary
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.supplyId, Me.itemName, Me.category, Me.description, Me.unitOfMeasure, Me.quantity, Me.dateReceived, Me.unitCost, Me.totalCost, Me.supplier, Me.sourceOfFunds, Me.assignedTo, Me.location, Me.stocksStatus, Me.createdAt, Me.updatedAt})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.itemName, Me.category, Me.description, Me.quantity, Me.assignedTo, Me.location, Me.stocksStatus})
         Me.DataGridView1.Location = New System.Drawing.Point(-1, -1)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
@@ -421,13 +428,6 @@ Partial Class SupplyRequestSummary
         Me.Label1.Text = "Republic of the Philippines"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'supplyId
-        '
-        Me.supplyId.HeaderText = "Supply ID"
-        Me.supplyId.MinimumWidth = 6
-        Me.supplyId.Name = "supplyId"
-        Me.supplyId.Width = 125
-        '
         'itemName
         '
         Me.itemName.HeaderText = "Item Name"
@@ -449,54 +449,12 @@ Partial Class SupplyRequestSummary
         Me.description.Name = "description"
         Me.description.Width = 125
         '
-        'unitOfMeasure
-        '
-        Me.unitOfMeasure.HeaderText = "Unit"
-        Me.unitOfMeasure.MinimumWidth = 6
-        Me.unitOfMeasure.Name = "unitOfMeasure"
-        Me.unitOfMeasure.Width = 125
-        '
         'quantity
         '
         Me.quantity.HeaderText = "Quantity"
         Me.quantity.MinimumWidth = 6
         Me.quantity.Name = "quantity"
         Me.quantity.Width = 125
-        '
-        'dateReceived
-        '
-        Me.dateReceived.HeaderText = "Date Received"
-        Me.dateReceived.MinimumWidth = 6
-        Me.dateReceived.Name = "dateReceived"
-        Me.dateReceived.Width = 125
-        '
-        'unitCost
-        '
-        Me.unitCost.HeaderText = "Unit Cost"
-        Me.unitCost.MinimumWidth = 6
-        Me.unitCost.Name = "unitCost"
-        Me.unitCost.Width = 125
-        '
-        'totalCost
-        '
-        Me.totalCost.HeaderText = "Total Cost"
-        Me.totalCost.MinimumWidth = 6
-        Me.totalCost.Name = "totalCost"
-        Me.totalCost.Width = 125
-        '
-        'supplier
-        '
-        Me.supplier.HeaderText = "Supplier"
-        Me.supplier.MinimumWidth = 6
-        Me.supplier.Name = "supplier"
-        Me.supplier.Width = 125
-        '
-        'sourceOfFunds
-        '
-        Me.sourceOfFunds.HeaderText = "Source Of Funds"
-        Me.sourceOfFunds.MinimumWidth = 6
-        Me.sourceOfFunds.Name = "sourceOfFunds"
-        Me.sourceOfFunds.Width = 125
         '
         'assignedTo
         '
@@ -580,11 +538,90 @@ Partial Class SupplyRequestSummary
         Me.btnCSV.Text = "Generate CSV File"
         Me.btnCSV.UseVisualStyleBackColor = False
         '
+        'cboCategoryFilter
+        '
+        Me.cboCategoryFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCategoryFilter.Location = New System.Drawing.Point(20, 100)
+        Me.cboCategoryFilter.Name = "cboCategoryFilter"
+        Me.cboCategoryFilter.Size = New System.Drawing.Size(100, 24)
+        Me.cboCategoryFilter.TabIndex = 400
+        Me.cboCategoryFilter.Visible = True
+        '
+        'cboStatusFilter
+        '
+        Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatusFilter.Location = New System.Drawing.Point(20, 130)
+        Me.cboStatusFilter.Name = "cboStatusFilter"
+        Me.cboStatusFilter.Size = New System.Drawing.Size(100, 24)
+        Me.cboStatusFilter.TabIndex = 401
+        Me.cboStatusFilter.Visible = True
+        '
+        'chkDateFilter
+        '
+        Me.chkDateFilter.AutoSize = True
+        Me.chkDateFilter.Location = New System.Drawing.Point(20, 160)
+        Me.chkDateFilter.Name = "chkDateFilter"
+        Me.chkDateFilter.Size = New System.Drawing.Size(100, 21)
+        Me.chkDateFilter.TabIndex = 402
+        Me.chkDateFilter.Text = "Date Filter"
+        Me.chkDateFilter.Visible = True
+        '
+        'dtpDateFrom
+        '
+        Me.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateFrom.Location = New System.Drawing.Point(20, 190)
+        Me.dtpDateFrom.Name = "dtpDateFrom"
+        Me.dtpDateFrom.Size = New System.Drawing.Size(100, 22)
+        Me.dtpDateFrom.TabIndex = 403
+        Me.dtpDateFrom.Visible = True
+        '
+        'dtpDateTo
+        '
+        Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateTo.Location = New System.Drawing.Point(20, 220)
+        Me.dtpDateTo.Name = "dtpDateTo"
+        Me.dtpDateTo.Size = New System.Drawing.Size(100, 22)
+        Me.dtpDateTo.TabIndex = 404
+        Me.dtpDateTo.Visible = True
+        '
+        'btnApplyFilters
+        '
+        Me.btnApplyFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnApplyFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnApplyFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnApplyFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnApplyFilters.Location = New System.Drawing.Point(20, 250)
+        Me.btnApplyFilters.Name = "btnApplyFilters"
+        Me.btnApplyFilters.Size = New System.Drawing.Size(100, 30)
+        Me.btnApplyFilters.TabIndex = 405
+        Me.btnApplyFilters.Text = "Apply"
+        Me.btnApplyFilters.Visible = True
+        '
+        'btnClearFilters
+        '
+        Me.btnClearFilters.BackColor = System.Drawing.Color.Gray
+        Me.btnClearFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClearFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnClearFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnClearFilters.Location = New System.Drawing.Point(20, 285)
+        Me.btnClearFilters.Name = "btnClearFilters"
+        Me.btnClearFilters.Size = New System.Drawing.Size(100, 30)
+        Me.btnClearFilters.TabIndex = 406
+        Me.btnClearFilters.Text = "Clear"
+        Me.btnClearFilters.Visible = True
+        '
         'SupplyRequestSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1440, 1041)
+        Me.Controls.Add(Me.cboCategoryFilter)
+        Me.Controls.Add(Me.cboStatusFilter)
+        Me.Controls.Add(Me.chkDateFilter)
+        Me.Controls.Add(Me.dtpDateFrom)
+        Me.Controls.Add(Me.dtpDateTo)
+        Me.Controls.Add(Me.btnApplyFilters)
+        Me.Controls.Add(Me.btnClearFilters)
         Me.Controls.Add(Me.btn_Back)
         Me.Controls.Add(Me.btnPDF)
         Me.Controls.Add(Me.btnCSV)
@@ -654,4 +691,11 @@ Partial Class SupplyRequestSummary
     Friend WithEvents btn_Back As Resources.Controls.RoundedButton
     Friend WithEvents btnPDF As Resources.Controls.RoundedButton
     Friend WithEvents btnCSV As Resources.Controls.RoundedButton
+    Friend WithEvents cboCategoryFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents cboStatusFilter As System.Windows.Forms.ComboBox
+    Friend WithEvents chkDateFilter As System.Windows.Forms.CheckBox
+    Friend WithEvents dtpDateFrom As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpDateTo As System.Windows.Forms.DateTimePicker
+    Friend WithEvents btnApplyFilters As Resources.Controls.RoundedButton
+    Friend WithEvents btnClearFilters As Resources.Controls.RoundedButton
 End Class

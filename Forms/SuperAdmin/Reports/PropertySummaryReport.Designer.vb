@@ -60,27 +60,24 @@ Partial Class PropertySummaryReport
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btn_Back = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnApplyFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.btnClearFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.chkDateFilter = New System.Windows.Forms.CheckBox()
         Me.dtpDateTo = New System.Windows.Forms.DateTimePicker()
         Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.cboDepartmentFilter = New System.Windows.Forms.ComboBox()
         Me.cboConditionFilter = New System.Windows.Forms.ComboBox()
         Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
         Me.cboCategoryFilter = New System.Windows.Forms.ComboBox()
-        Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.btnApplyFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnClearFilters = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btn_Back = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnPDF = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.btnCSV = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.maintenanceRequest.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -88,6 +85,7 @@ Partial Class PropertySummaryReport
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'maintenanceRequest
@@ -324,7 +322,6 @@ Partial Class PropertySummaryReport
         Me.totalCost.HeaderText = "Total Cost"
         Me.totalCost.MinimumWidth = 6
         Me.totalCost.Name = "totalCost"
-        Me.totalCost.Width = 100
         '
         'assignedTo
         '
@@ -345,14 +342,12 @@ Partial Class PropertySummaryReport
         Me.condition.HeaderText = "Condition"
         Me.condition.MinimumWidth = 6
         Me.condition.Name = "condition"
-        Me.condition.Width = 100
         '
         'status
         '
         Me.status.HeaderText = "Status"
         Me.status.MinimumWidth = 6
         Me.status.Name = "status"
-        Me.status.Width = 100
         '
         'dateReport
         '
@@ -494,6 +489,164 @@ Partial Class PropertySummaryReport
         Me.Label1.Text = "Republic of the Philippines"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnApplyFilters)
+        Me.GroupBox1.Controls.Add(Me.btnClearFilters)
+        Me.GroupBox1.Controls.Add(Me.chkDateFilter)
+        Me.GroupBox1.Controls.Add(Me.dtpDateTo)
+        Me.GroupBox1.Controls.Add(Me.dtpDateFrom)
+        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.Label15)
+        Me.GroupBox1.Controls.Add(Me.cboConditionFilter)
+        Me.GroupBox1.Controls.Add(Me.cboStatusFilter)
+        Me.GroupBox1.Controls.Add(Me.cboCategoryFilter)
+        Me.GroupBox1.Controls.Add(Me.Label18)
+        Me.GroupBox1.Controls.Add(Me.Label19)
+        Me.GroupBox1.Controls.Add(Me.Label20)
+        Me.GroupBox1.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 53)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(118, 873)
+        Me.GroupBox1.TabIndex = 389
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Filters"
+        '
+        'chkDateFilter
+        '
+        Me.chkDateFilter.AutoSize = True
+        Me.chkDateFilter.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.chkDateFilter.Location = New System.Drawing.Point(8, 315)
+        Me.chkDateFilter.Name = "chkDateFilter"
+        Me.chkDateFilter.Size = New System.Drawing.Size(103, 29)
+        Me.chkDateFilter.TabIndex = 13
+        Me.chkDateFilter.Text = "Date Filter"
+        Me.chkDateFilter.UseVisualStyleBackColor = True
+        '
+        'dtpDateTo
+        '
+        Me.dtpDateTo.Font = New System.Drawing.Font("Poppins", 7.0!)
+        Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateTo.Location = New System.Drawing.Point(10, 436)
+        Me.dtpDateTo.Name = "dtpDateTo"
+        Me.dtpDateTo.Size = New System.Drawing.Size(98, 25)
+        Me.dtpDateTo.TabIndex = 12
+        '
+        'dtpDateFrom
+        '
+        Me.dtpDateFrom.Font = New System.Drawing.Font("Poppins", 7.0!)
+        Me.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDateFrom.Location = New System.Drawing.Point(11, 375)
+        Me.dtpDateFrom.Name = "dtpDateFrom"
+        Me.dtpDateFrom.Size = New System.Drawing.Size(98, 25)
+        Me.dtpDateFrom.TabIndex = 11
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.Label16.Location = New System.Drawing.Point(6, 412)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(32, 25)
+        Me.Label16.TabIndex = 10
+        Me.Label16.Text = "To:"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.Label15.Location = New System.Drawing.Point(3, 347)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(50, 25)
+        Me.Label15.TabIndex = 9
+        Me.Label15.Text = "From:"
+        '
+        'cboConditionFilter
+        '
+        Me.cboConditionFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboConditionFilter.Font = New System.Drawing.Font("Poppins", 7.0!)
+        Me.cboConditionFilter.FormattingEnabled = True
+        Me.cboConditionFilter.Location = New System.Drawing.Point(8, 265)
+        Me.cboConditionFilter.Name = "cboConditionFilter"
+        Me.cboConditionFilter.Size = New System.Drawing.Size(98, 30)
+        Me.cboConditionFilter.TabIndex = 7
+        '
+        'cboStatusFilter
+        '
+        Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatusFilter.Font = New System.Drawing.Font("Poppins", 7.0!)
+        Me.cboStatusFilter.FormattingEnabled = True
+        Me.cboStatusFilter.Location = New System.Drawing.Point(7, 189)
+        Me.cboStatusFilter.Name = "cboStatusFilter"
+        Me.cboStatusFilter.Size = New System.Drawing.Size(98, 30)
+        Me.cboStatusFilter.TabIndex = 6
+        '
+        'cboCategoryFilter
+        '
+        Me.cboCategoryFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCategoryFilter.Font = New System.Drawing.Font("Poppins", 7.0!)
+        Me.cboCategoryFilter.FormattingEnabled = True
+        Me.cboCategoryFilter.Location = New System.Drawing.Point(6, 118)
+        Me.cboCategoryFilter.Name = "cboCategoryFilter"
+        Me.cboCategoryFilter.Size = New System.Drawing.Size(98, 30)
+        Me.cboCategoryFilter.TabIndex = 5
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.Label18.Location = New System.Drawing.Point(5, 237)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(82, 25)
+        Me.Label18.TabIndex = 3
+        Me.Label18.Text = "Condition:"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.Label19.Location = New System.Drawing.Point(3, 163)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(58, 25)
+        Me.Label19.TabIndex = 2
+        Me.Label19.Text = "Status:"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.Label20.Location = New System.Drawing.Point(2, 92)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(80, 25)
+        Me.Label20.TabIndex = 1
+        Me.Label20.Text = "Category:"
+        '
+        'btnApplyFilters
+        '
+        Me.btnApplyFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.btnApplyFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnApplyFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnApplyFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnApplyFilters.Location = New System.Drawing.Point(10, 620)
+        Me.btnApplyFilters.Name = "btnApplyFilters"
+        Me.btnApplyFilters.Size = New System.Drawing.Size(98, 30)
+        Me.btnApplyFilters.TabIndex = 14
+        Me.btnApplyFilters.Text = "Apply"
+        Me.btnApplyFilters.UseVisualStyleBackColor = False
+        '
+        'btnClearFilters
+        '
+        Me.btnClearFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.btnClearFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClearFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnClearFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnClearFilters.Location = New System.Drawing.Point(10, 656)
+        Me.btnClearFilters.Name = "btnClearFilters"
+        Me.btnClearFilters.Size = New System.Drawing.Size(98, 30)
+        Me.btnClearFilters.TabIndex = 15
+        Me.btnClearFilters.Text = "Clear"
+        Me.btnClearFilters.UseVisualStyleBackColor = False
+        '
         'btn_Back
         '
         Me.btn_Back.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -539,186 +692,6 @@ Partial Class PropertySummaryReport
         Me.btnCSV.Text = "Generate CSV File"
         Me.btnCSV.UseVisualStyleBackColor = False
         '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.btnApplyFilters)
-        Me.GroupBox1.Controls.Add(Me.btnClearFilters)
-        Me.GroupBox1.Controls.Add(Me.chkDateFilter)
-        Me.GroupBox1.Controls.Add(Me.dtpDateTo)
-        Me.GroupBox1.Controls.Add(Me.dtpDateFrom)
-        Me.GroupBox1.Controls.Add(Me.Label16)
-        Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.cboDepartmentFilter)
-        Me.GroupBox1.Controls.Add(Me.cboConditionFilter)
-        Me.GroupBox1.Controls.Add(Me.cboStatusFilter)
-        Me.GroupBox1.Controls.Add(Me.cboCategoryFilter)
-        Me.GroupBox1.Controls.Add(Me.Label17)
-        Me.GroupBox1.Controls.Add(Me.Label18)
-        Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Controls.Add(Me.Label20)
-        Me.GroupBox1.Font = New System.Drawing.Font("Poppins", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 53)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(118, 873)
-        Me.GroupBox1.TabIndex = 389
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Filters"
-        '
-        'btnApplyFilters
-        '
-        Me.btnApplyFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.btnApplyFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnApplyFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
-        Me.btnApplyFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnApplyFilters.Location = New System.Drawing.Point(10, 750)
-        Me.btnApplyFilters.Name = "btnApplyFilters"
-        Me.btnApplyFilters.Size = New System.Drawing.Size(98, 30)
-        Me.btnApplyFilters.TabIndex = 14
-        Me.btnApplyFilters.Text = "Apply"
-        Me.btnApplyFilters.UseVisualStyleBackColor = False
-        '
-        'btnClearFilters
-        '
-        Me.btnClearFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
-        Me.btnClearFilters.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnClearFilters.Font = New System.Drawing.Font("Poppins SemiBold", 7.0!, System.Drawing.FontStyle.Bold)
-        Me.btnClearFilters.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnClearFilters.Location = New System.Drawing.Point(10, 786)
-        Me.btnClearFilters.Name = "btnClearFilters"
-        Me.btnClearFilters.Size = New System.Drawing.Size(98, 30)
-        Me.btnClearFilters.TabIndex = 15
-        Me.btnClearFilters.Text = "Clear"
-        Me.btnClearFilters.UseVisualStyleBackColor = False
-        '
-        'chkDateFilter
-        '
-        Me.chkDateFilter.AutoSize = True
-        Me.chkDateFilter.Font = New System.Drawing.Font("Poppins", 8.0!)
-        Me.chkDateFilter.Location = New System.Drawing.Point(10, 595)
-        Me.chkDateFilter.Name = "chkDateFilter"
-        Me.chkDateFilter.Size = New System.Drawing.Size(100, 27)
-        Me.chkDateFilter.TabIndex = 13
-        Me.chkDateFilter.Text = "Date Filter"
-        Me.chkDateFilter.UseVisualStyleBackColor = True
-        '
-        'dtpDateTo
-        '
-        Me.dtpDateTo.Font = New System.Drawing.Font("Poppins", 7.0!)
-        Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDateTo.Location = New System.Drawing.Point(10, 703)
-        Me.dtpDateTo.Name = "dtpDateTo"
-        Me.dtpDateTo.Size = New System.Drawing.Size(98, 26)
-        Me.dtpDateTo.TabIndex = 12
-        '
-        'dtpDateFrom
-        '
-        Me.dtpDateFrom.Font = New System.Drawing.Font("Poppins", 7.0!)
-        Me.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDateFrom.Location = New System.Drawing.Point(10, 650)
-        Me.dtpDateFrom.Name = "dtpDateFrom"
-        Me.dtpDateFrom.Size = New System.Drawing.Size(98, 26)
-        Me.dtpDateFrom.TabIndex = 11
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Poppins", 8.0!)
-        Me.Label16.Location = New System.Drawing.Point(6, 679)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(29, 23)
-        Me.Label16.TabIndex = 10
-        Me.Label16.Text = "To:"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Poppins", 8.0!)
-        Me.Label15.Location = New System.Drawing.Point(6, 624)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(48, 23)
-        Me.Label15.TabIndex = 9
-        Me.Label15.Text = "From:"
-        '
-        'cboDepartmentFilter
-        '
-        Me.cboDepartmentFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboDepartmentFilter.Font = New System.Drawing.Font("Poppins", 7.0!)
-        Me.cboDepartmentFilter.FormattingEnabled = True
-        Me.cboDepartmentFilter.Location = New System.Drawing.Point(10, 555)
-        Me.cboDepartmentFilter.Name = "cboDepartmentFilter"
-        Me.cboDepartmentFilter.Size = New System.Drawing.Size(98, 28)
-        Me.cboDepartmentFilter.TabIndex = 8
-        '
-        'cboConditionFilter
-        '
-        Me.cboConditionFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboConditionFilter.Font = New System.Drawing.Font("Poppins", 7.0!)
-        Me.cboConditionFilter.FormattingEnabled = True
-        Me.cboConditionFilter.Location = New System.Drawing.Point(10, 470)
-        Me.cboConditionFilter.Name = "cboConditionFilter"
-        Me.cboConditionFilter.Size = New System.Drawing.Size(98, 28)
-        Me.cboConditionFilter.TabIndex = 7
-        '
-        'cboStatusFilter
-        '
-        Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboStatusFilter.Font = New System.Drawing.Font("Poppins", 7.0!)
-        Me.cboStatusFilter.FormattingEnabled = True
-        Me.cboStatusFilter.Location = New System.Drawing.Point(10, 385)
-        Me.cboStatusFilter.Name = "cboStatusFilter"
-        Me.cboStatusFilter.Size = New System.Drawing.Size(98, 28)
-        Me.cboStatusFilter.TabIndex = 6
-        '
-        'cboCategoryFilter
-        '
-        Me.cboCategoryFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboCategoryFilter.Font = New System.Drawing.Font("Poppins", 7.0!)
-        Me.cboCategoryFilter.FormattingEnabled = True
-        Me.cboCategoryFilter.Location = New System.Drawing.Point(10, 300)
-        Me.cboCategoryFilter.Name = "cboCategoryFilter"
-        Me.cboCategoryFilter.Size = New System.Drawing.Size(98, 28)
-        Me.cboCategoryFilter.TabIndex = 5
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Poppins", 8.0!)
-        Me.Label17.Location = New System.Drawing.Point(6, 529)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(97, 23)
-        Me.Label17.TabIndex = 4
-        Me.Label17.Text = "Department:"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Poppins", 8.0!)
-        Me.Label18.Location = New System.Drawing.Point(6, 444)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(78, 23)
-        Me.Label18.TabIndex = 3
-        Me.Label18.Text = "Condition:"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Poppins", 8.0!)
-        Me.Label19.Location = New System.Drawing.Point(6, 359)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(57, 23)
-        Me.Label19.TabIndex = 2
-        Me.Label19.Text = "Status:"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Poppins", 8.0!)
-        Me.Label20.Location = New System.Drawing.Point(6, 274)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(76, 23)
-        Me.Label20.TabIndex = 1
-        Me.Label20.Text = "Category:"
-        '
         'PropertySummaryReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -735,8 +708,6 @@ Partial Class PropertySummaryReport
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.maintenanceRequest.ResumeLayout(False)
         Me.maintenanceRequest.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
@@ -746,6 +717,8 @@ Partial Class PropertySummaryReport
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -798,11 +771,9 @@ Partial Class PropertySummaryReport
     Friend WithEvents dtpDateFrom As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents cboDepartmentFilter As System.Windows.Forms.ComboBox
     Friend WithEvents cboConditionFilter As System.Windows.Forms.ComboBox
     Friend WithEvents cboStatusFilter As System.Windows.Forms.ComboBox
     Friend WithEvents cboCategoryFilter As System.Windows.Forms.ComboBox
-    Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
