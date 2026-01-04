@@ -266,7 +266,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnRefresh.Location = New System.Drawing.Point(590, 642)
+        Me.btnRefresh.Location = New System.Drawing.Point(671, 642)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(74, 28)
         Me.btnRefresh.TabIndex = 166
@@ -294,7 +294,7 @@ Partial Class UC_MaintenanceManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(671, 642)
+        Me.btnDelete.Location = New System.Drawing.Point(837, 676)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(74, 28)
         Me.btnDelete.TabIndex = 153

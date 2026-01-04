@@ -93,7 +93,7 @@ Partial Class UC_MaintenanceRequestManagement
         Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.requestId, Me.dateRequested, Me.itemName, Me.location, Me.propertyNumber, Me.serialNumber, Me.departmentId, Me.conditionBefore, Me.typeOfIssue, Me.problemDescription, Me.status, Me.assignedTechnician, Me.targetDate, Me.completionDate, Me.requestedBy, Me.createdAt, Me.updatedAt})
         Me.propertyManagementGrid.Location = New System.Drawing.Point(22, 171)
-        Me.propertyManagementGrid.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.propertyManagementGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
         Me.propertyManagementGrid.RowTemplate.Height = 24
@@ -250,6 +250,7 @@ Partial Class UC_MaintenanceRequestManagement
         Me.printPAR.TabIndex = 170
         Me.printPAR.Text = "Print PAR/ICS"
         Me.printPAR.UseVisualStyleBackColor = False
+        Me.printPAR.Visible = False
         '
         'btnApprove
         '
@@ -286,12 +287,13 @@ Partial Class UC_MaintenanceRequestManagement
         Me.Delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Delete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.Delete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Delete.Location = New System.Drawing.Point(596, 649)
+        Me.Delete.Location = New System.Drawing.Point(837, 684)
         Me.Delete.Name = "Delete"
         Me.Delete.Size = New System.Drawing.Size(74, 28)
         Me.Delete.TabIndex = 174
         Me.Delete.Text = "Delete"
         Me.Delete.UseVisualStyleBackColor = False
+        Me.Delete.Visible = False
         '
         'btnAdd
         '
@@ -314,7 +316,7 @@ Partial Class UC_MaintenanceRequestManagement
         Me.prm_btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.prm_btn_update.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.prm_btn_update.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.prm_btn_update.Location = New System.Drawing.Point(519, 650)
+        Me.prm_btn_update.Location = New System.Drawing.Point(600, 650)
         Me.prm_btn_update.Name = "prm_btn_update"
         Me.prm_btn_update.Size = New System.Drawing.Size(70, 28)
         Me.prm_btn_update.TabIndex = 178
@@ -335,7 +337,7 @@ Partial Class UC_MaintenanceRequestManagement
         Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.Black
         Me.pm_cbobx_status.Location = New System.Drawing.Point(259, 35)
-        Me.pm_cbobx_status.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.pm_cbobx_status.Margin = New System.Windows.Forms.Padding(2)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
         Me.pm_cbobx_status.Size = New System.Drawing.Size(151, 30)
         Me.pm_cbobx_status.TabIndex = 179
@@ -397,7 +399,7 @@ Partial Class UC_MaintenanceRequestManagement
         Me.Controls.Add(Me.propertyManagementGrid)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
         Me.Controls.Add(Me.btnAdd)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "UC_MaintenanceRequestManagement"
         Me.Size = New System.Drawing.Size(938, 722)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()

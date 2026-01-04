@@ -191,6 +191,7 @@ Partial Class MaintenanceRequest
         Me.btnGenerateMaintenance.TabIndex = 183
         Me.btnGenerateMaintenance.Text = "Generate Maintenance Report"
         Me.btnGenerateMaintenance.UseVisualStyleBackColor = False
+        Me.btnGenerateMaintenance.Visible = False
         '
         'pnlFilters
         '

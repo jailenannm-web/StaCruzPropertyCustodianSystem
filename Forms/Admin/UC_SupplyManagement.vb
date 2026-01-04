@@ -765,4 +765,7 @@ Public Class UC_SupplyManagement
         End Try
     End Sub
 
+    Private Sub ttlSupplymanagement_Click(sender As Object, e As EventArgs) Handles ttlSupplymanagement.Click
+
+    End Sub
 End Class

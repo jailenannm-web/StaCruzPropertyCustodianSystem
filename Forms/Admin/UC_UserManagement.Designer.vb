@@ -8,7 +8,7 @@ Partial Class UC_UserManagement
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,11 +25,11 @@ Partial Class UC_UserManagement
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.admin_label_Dashboard = New System.Windows.Forms.Label()
         Me.pm_table = New System.Windows.Forms.DataGridView()
         Me.userId = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -57,19 +57,24 @@ Partial Class UC_UserManagement
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnUserReport = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.usermanagementsearchbar = New System.Windows.Forms.TextBox()
+        Me.pnlFilters = New System.Windows.Forms.Panel()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.lblCategory = New System.Windows.Forms.Label()
+        Me.lblSearch = New System.Windows.Forms.Label()
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlFilters.SuspendLayout()
         Me.SuspendLayout()
         '
         'admin_label_Dashboard
         '
         Me.admin_label_Dashboard.AutoSize = True
-        Me.admin_label_Dashboard.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_Dashboard.Location = New System.Drawing.Point(43, 53)
+        Me.admin_label_Dashboard.Font = New System.Drawing.Font("Poppins", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.admin_label_Dashboard.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_label_Dashboard.Location = New System.Drawing.Point(15, 16)
+        Me.admin_label_Dashboard.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.admin_label_Dashboard.Name = "admin_label_Dashboard"
-        Me.admin_label_Dashboard.Size = New System.Drawing.Size(342, 58)
+        Me.admin_label_Dashboard.Size = New System.Drawing.Size(245, 42)
         Me.admin_label_Dashboard.TabIndex = 21
         Me.admin_label_Dashboard.Text = "User Management"
         '
@@ -83,11 +88,12 @@ Partial Class UC_UserManagement
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.userId, Me.createdAt, Me.updatedAt, Me.username, Me.firstName, Me.middleName, Me.lastName, Me.fullName, Me.departmentId, Me.employeeId, Me.contactNumber, Me.email, Me.fullAddress, Me.role, Me.passwordEncrypted, Me.lastLogin})
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
-        Me.pm_table.Location = New System.Drawing.Point(53, 114)
+        Me.pm_table.Location = New System.Drawing.Point(22, 171)
+        Me.pm_table.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.pm_table.Name = "pm_table"
         Me.pm_table.RowHeadersWidth = 51
         Me.pm_table.RowTemplate.Height = 24
-        Me.pm_table.Size = New System.Drawing.Size(1270, 573)
+        Me.pm_table.Size = New System.Drawing.Size(889, 460)
         Me.pm_table.TabIndex = 27
         '
         'userId
@@ -115,8 +121,8 @@ Partial Class UC_UserManagement
         '
         'username
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.username.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.username.DefaultCellStyle = DataGridViewCellStyle22
         Me.username.HeaderText = "Username"
         Me.username.MinimumWidth = 6
         Me.username.Name = "username"
@@ -166,8 +172,8 @@ Partial Class UC_UserManagement
         '
         'contactNumber
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.contactNumber.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.contactNumber.DefaultCellStyle = DataGridViewCellStyle23
         Me.contactNumber.HeaderText = "Contact Number"
         Me.contactNumber.MinimumWidth = 6
         Me.contactNumber.Name = "contactNumber"
@@ -182,8 +188,8 @@ Partial Class UC_UserManagement
         '
         'fullAddress
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.fullAddress.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.fullAddress.DefaultCellStyle = DataGridViewCellStyle24
         Me.fullAddress.HeaderText = "Full Address"
         Me.fullAddress.MinimumWidth = 6
         Me.fullAddress.Name = "fullAddress"
@@ -213,24 +219,24 @@ Partial Class UC_UserManagement
         '
         'cboRoleFilter
         '
-        Me.cboRoleFilter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cboRoleFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboRoleFilter.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.cboRoleFilter.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.cboRoleFilter.FormattingEnabled = True
-        Me.cboRoleFilter.Location = New System.Drawing.Point(883, 64)
+        Me.cboRoleFilter.Location = New System.Drawing.Point(259, 38)
+        Me.cboRoleFilter.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.cboRoleFilter.Name = "cboRoleFilter"
-        Me.cboRoleFilter.Size = New System.Drawing.Size(164, 31)
+        Me.cboRoleFilter.Size = New System.Drawing.Size(151, 30)
         Me.cboRoleFilter.TabIndex = 163
         '
         'cboStatusFilter
         '
-        Me.cboStatusFilter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboStatusFilter.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
+        Me.cboStatusFilter.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.cboStatusFilter.FormattingEnabled = True
-        Me.cboStatusFilter.Location = New System.Drawing.Point(1053, 64)
+        Me.cboStatusFilter.Location = New System.Drawing.Point(446, 38)
+        Me.cboStatusFilter.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.cboStatusFilter.Name = "cboStatusFilter"
-        Me.cboStatusFilter.Size = New System.Drawing.Size(164, 31)
+        Me.cboStatusFilter.Size = New System.Drawing.Size(136, 30)
         Me.cboStatusFilter.TabIndex = 164
         '
         'Label1
@@ -239,9 +245,10 @@ Partial Class UC_UserManagement
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(43, 709)
+        Me.Label1.Location = New System.Drawing.Point(19, 633)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.Size = New System.Drawing.Size(119, 48)
         Me.Label1.TabIndex = 167
         Me.Label1.Text = "TOTAL:"
         '
@@ -251,9 +258,10 @@ Partial Class UC_UserManagement
         Me.ttlusermanagement.AutoSize = True
         Me.ttlusermanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ttlusermanagement.ForeColor = System.Drawing.Color.Black
-        Me.ttlusermanagement.Location = New System.Drawing.Point(194, 709)
+        Me.ttlusermanagement.Location = New System.Drawing.Point(133, 633)
+        Me.ttlusermanagement.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.ttlusermanagement.Name = "ttlusermanagement"
-        Me.ttlusermanagement.Size = New System.Drawing.Size(47, 58)
+        Me.ttlusermanagement.Size = New System.Drawing.Size(38, 48)
         Me.ttlusermanagement.TabIndex = 166
         Me.ttlusermanagement.Text = "0"
         '
@@ -264,10 +272,9 @@ Partial Class UC_UserManagement
         Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefresh.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnRefresh.Location = New System.Drawing.Point(1224, 64)
-        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRefresh.Location = New System.Drawing.Point(805, 37)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(99, 34)
+        Me.btnRefresh.Size = New System.Drawing.Size(74, 28)
         Me.btnRefresh.TabIndex = 165
         Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = False
@@ -279,10 +286,9 @@ Partial Class UC_UserManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1011, 709)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Location = New System.Drawing.Point(677, 646)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(99, 34)
+        Me.btnDelete.Size = New System.Drawing.Size(74, 28)
         Me.btnDelete.TabIndex = 161
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
@@ -294,10 +300,9 @@ Partial Class UC_UserManagement
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(1118, 709)
-        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEdit.Location = New System.Drawing.Point(757, 646)
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(99, 34)
+        Me.btnEdit.Size = New System.Drawing.Size(74, 28)
         Me.btnEdit.TabIndex = 160
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
@@ -309,10 +314,9 @@ Partial Class UC_UserManagement
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1224, 709)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Location = New System.Drawing.Point(837, 646)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(99, 34)
+        Me.btnAdd.Size = New System.Drawing.Size(74, 28)
         Me.btnAdd.TabIndex = 158
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
@@ -324,56 +328,97 @@ Partial Class UC_UserManagement
         Me.btnUserReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUserReport.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnUserReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUserReport.Location = New System.Drawing.Point(879, 709)
-        Me.btnUserReport.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnUserReport.Location = New System.Drawing.Point(578, 646)
         Me.btnUserReport.Name = "btnUserReport"
-        Me.btnUserReport.Size = New System.Drawing.Size(124, 34)
+        Me.btnUserReport.Size = New System.Drawing.Size(93, 28)
         Me.btnUserReport.TabIndex = 391
         Me.btnUserReport.Text = "User Report"
         Me.btnUserReport.UseVisualStyleBackColor = False
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(403, 63)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(62, 32)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 179
-        Me.PictureBox2.TabStop = False
-        '
         'usermanagementsearchbar
         '
-        Me.usermanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.usermanagementsearchbar.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.usermanagementsearchbar.Location = New System.Drawing.Point(472, 64)
-        Me.usermanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.usermanagementsearchbar.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.usermanagementsearchbar.Location = New System.Drawing.Point(14, 40)
         Me.usermanagementsearchbar.Name = "usermanagementsearchbar"
-        Me.usermanagementsearchbar.Size = New System.Drawing.Size(404, 27)
+        Me.usermanagementsearchbar.Size = New System.Drawing.Size(226, 25)
         Me.usermanagementsearchbar.TabIndex = 178
+        '
+        'pnlFilters
+        '
+        Me.pnlFilters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(248, Byte), Integer), CType(CType(249, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.pnlFilters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlFilters.Controls.Add(Me.lblStatus)
+        Me.pnlFilters.Controls.Add(Me.usermanagementsearchbar)
+        Me.pnlFilters.Controls.Add(Me.lblCategory)
+        Me.pnlFilters.Controls.Add(Me.btnRefresh)
+        Me.pnlFilters.Controls.Add(Me.lblSearch)
+        Me.pnlFilters.Controls.Add(Me.cboStatusFilter)
+        Me.pnlFilters.Controls.Add(Me.cboRoleFilter)
+        Me.pnlFilters.Location = New System.Drawing.Point(22, 73)
+        Me.pnlFilters.Margin = New System.Windows.Forms.Padding(2)
+        Me.pnlFilters.Name = "pnlFilters"
+        Me.pnlFilters.Padding = New System.Windows.Forms.Padding(11, 12, 11, 12)
+        Me.pnlFilters.Size = New System.Drawing.Size(895, 82)
+        Me.pnlFilters.TabIndex = 402
+        '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.lblStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblStatus.Location = New System.Drawing.Point(442, 17)
+        Me.lblStatus.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(43, 19)
+        Me.lblStatus.TabIndex = 6
+        Me.lblStatus.Text = "Status"
+        '
+        'lblCategory
+        '
+        Me.lblCategory.AutoSize = True
+        Me.lblCategory.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.lblCategory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblCategory.Location = New System.Drawing.Point(255, 16)
+        Me.lblCategory.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblCategory.Name = "lblCategory"
+        Me.lblCategory.Size = New System.Drawing.Size(33, 19)
+        Me.lblCategory.TabIndex = 2
+        Me.lblCategory.Text = "Role"
+        '
+        'lblSearch
+        '
+        Me.lblSearch.AutoSize = True
+        Me.lblSearch.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.lblSearch.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblSearch.Location = New System.Drawing.Point(15, 16)
+        Me.lblSearch.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblSearch.Name = "lblSearch"
+        Me.lblSearch.Size = New System.Drawing.Size(50, 19)
+        Me.lblSearch.TabIndex = 0
+        Me.lblSearch.Text = "Search "
         '
         'UC_UserManagement
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.usermanagementsearchbar)
+        Me.Controls.Add(Me.pnlFilters)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlusermanagement)
-        Me.Controls.Add(Me.btnRefresh)
-        Me.Controls.Add(Me.cboStatusFilter)
-        Me.Controls.Add(Me.cboRoleFilter)
         Me.Controls.Add(Me.btnUserReport)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.pm_table)
         Me.Controls.Add(Me.admin_label_Dashboard)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "UC_UserManagement"
-        Me.Size = New System.Drawing.Size(1394, 803)
+        Me.Size = New System.Drawing.Size(938, 722)
         CType(Me.pm_table, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlFilters.ResumeLayout(False)
+        Me.pnlFilters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -405,6 +450,9 @@ Partial Class UC_UserManagement
     Friend WithEvents role As DataGridViewTextBoxColumn
     Friend WithEvents passwordEncrypted As DataGridViewTextBoxColumn
     Friend WithEvents lastLogin As DataGridViewTextBoxColumn
-    Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents usermanagementsearchbar As TextBox
+    Friend WithEvents pnlFilters As Panel
+    Friend WithEvents lblStatus As Label
+    Friend WithEvents lblCategory As Label
+    Friend WithEvents lblSearch As Label
 End Class

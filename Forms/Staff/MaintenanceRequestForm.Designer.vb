@@ -66,10 +66,9 @@ Partial Class MaintenanceRequestForm
         Me.pnlHeader.Controls.Add(Me.lblSubtitle)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
-        Me.pnlHeader.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Padding = New System.Windows.Forms.Padding(40, 25, 40, 25)
-        Me.pnlHeader.Size = New System.Drawing.Size(1600, 148)
+        Me.pnlHeader.Padding = New System.Windows.Forms.Padding(30, 20, 30, 20)
+        Me.pnlHeader.Size = New System.Drawing.Size(1200, 120)
         Me.pnlHeader.TabIndex = 0
         '
         'lblTitle
@@ -78,10 +77,9 @@ Partial Class MaintenanceRequestForm
         Me.lblTitle.Dock = System.Windows.Forms.DockStyle.Top
         Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 20.0!, System.Drawing.FontStyle.Bold)
         Me.lblTitle.ForeColor = System.Drawing.Color.White
-        Me.lblTitle.Location = New System.Drawing.Point(40, 25)
-        Me.lblTitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTitle.Location = New System.Drawing.Point(30, 20)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(420, 46)
+        Me.lblTitle.Size = New System.Drawing.Size(338, 37)
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "🔧 Maintenance Request"
         '
@@ -90,10 +88,9 @@ Partial Class MaintenanceRequestForm
         Me.lblSubtitle.AutoSize = True
         Me.lblSubtitle.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(189, Byte), Integer), CType(CType(195, Byte), Integer), CType(CType(199, Byte), Integer))
-        Me.lblSubtitle.Location = New System.Drawing.Point(40, 80)
-        Me.lblSubtitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSubtitle.Location = New System.Drawing.Point(30, 65)
         Me.lblSubtitle.Name = "lblSubtitle"
-        Me.lblSubtitle.Size = New System.Drawing.Size(655, 23)
+        Me.lblSubtitle.Size = New System.Drawing.Size(524, 19)
         Me.lblSubtitle.TabIndex = 1
         Me.lblSubtitle.Text = "Submit a maintenance request for repair, replacement, or servicing of property it" &
     "ems"
@@ -105,11 +102,10 @@ Partial Class MaintenanceRequestForm
         Me.pnlMain.Controls.Add(Me.grpItemDetails)
         Me.pnlMain.Controls.Add(Me.grpRequestDetails)
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMain.Location = New System.Drawing.Point(0, 148)
-        Me.pnlMain.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlMain.Location = New System.Drawing.Point(0, 120)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Padding = New System.Windows.Forms.Padding(40, 25, 40, 25)
-        Me.pnlMain.Size = New System.Drawing.Size(1600, 714)
+        Me.pnlMain.Padding = New System.Windows.Forms.Padding(30, 20, 30, 20)
+        Me.pnlMain.Size = New System.Drawing.Size(1200, 580)
         Me.pnlMain.TabIndex = 1
         '
         'grpItemDetails
@@ -126,11 +122,10 @@ Partial Class MaintenanceRequestForm
         Me.grpItemDetails.Controls.Add(Me.txtLocation)
         Me.grpItemDetails.Dock = System.Windows.Forms.DockStyle.Top
         Me.grpItemDetails.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.grpItemDetails.Location = New System.Drawing.Point(40, 493)
-        Me.grpItemDetails.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpItemDetails.Location = New System.Drawing.Point(30, 400)
         Me.grpItemDetails.Name = "grpItemDetails"
-        Me.grpItemDetails.Padding = New System.Windows.Forms.Padding(27, 25, 27, 25)
-        Me.grpItemDetails.Size = New System.Drawing.Size(1499, 345)
+        Me.grpItemDetails.Padding = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.grpItemDetails.Size = New System.Drawing.Size(1123, 280)
         Me.grpItemDetails.TabIndex = 0
         Me.grpItemDetails.TabStop = False
         Me.grpItemDetails.Text = "Item/Property Details"
@@ -139,10 +134,9 @@ Partial Class MaintenanceRequestForm
         '
         Me.lblItemName.AutoSize = True
         Me.lblItemName.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblItemName.Location = New System.Drawing.Point(31, 49)
-        Me.lblItemName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblItemName.Location = New System.Drawing.Point(23, 40)
         Me.lblItemName.Name = "lblItemName"
-        Me.lblItemName.Size = New System.Drawing.Size(182, 23)
+        Me.lblItemName.Size = New System.Drawing.Size(146, 19)
         Me.lblItemName.TabIndex = 0
         Me.lblItemName.Text = "Item Name / Property:"
         '
@@ -150,60 +144,54 @@ Partial Class MaintenanceRequestForm
         '
         Me.cboItemName.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.cboItemName.FormattingEnabled = True
-        Me.cboItemName.Location = New System.Drawing.Point(36, 80)
-        Me.cboItemName.Margin = New System.Windows.Forms.Padding(4)
+        Me.cboItemName.Location = New System.Drawing.Point(27, 65)
         Me.cboItemName.Name = "cboItemName"
-        Me.cboItemName.Size = New System.Drawing.Size(692, 31)
+        Me.cboItemName.Size = New System.Drawing.Size(520, 25)
         Me.cboItemName.TabIndex = 1
         '
         'lblPropertyNumber
         '
         Me.lblPropertyNumber.AutoSize = True
         Me.lblPropertyNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblPropertyNumber.Location = New System.Drawing.Point(760, 49)
-        Me.lblPropertyNumber.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPropertyNumber.Location = New System.Drawing.Point(570, 40)
         Me.lblPropertyNumber.Name = "lblPropertyNumber"
-        Me.lblPropertyNumber.Size = New System.Drawing.Size(147, 23)
+        Me.lblPropertyNumber.Size = New System.Drawing.Size(119, 19)
         Me.lblPropertyNumber.TabIndex = 2
         Me.lblPropertyNumber.Text = "Property Number:"
         '
         'txtPropertyNumber
         '
         Me.txtPropertyNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.txtPropertyNumber.Location = New System.Drawing.Point(765, 80)
-        Me.txtPropertyNumber.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPropertyNumber.Location = New System.Drawing.Point(574, 65)
         Me.txtPropertyNumber.Name = "txtPropertyNumber"
-        Me.txtPropertyNumber.Size = New System.Drawing.Size(332, 30)
+        Me.txtPropertyNumber.Size = New System.Drawing.Size(250, 25)
         Me.txtPropertyNumber.TabIndex = 3
         '
         'lblSerialNumber
         '
         Me.lblSerialNumber.AutoSize = True
         Me.lblSerialNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblSerialNumber.Location = New System.Drawing.Point(1120, 49)
-        Me.lblSerialNumber.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSerialNumber.Location = New System.Drawing.Point(840, 40)
         Me.lblSerialNumber.Name = "lblSerialNumber"
-        Me.lblSerialNumber.Size = New System.Drawing.Size(123, 23)
+        Me.lblSerialNumber.Size = New System.Drawing.Size(98, 19)
         Me.lblSerialNumber.TabIndex = 4
         Me.lblSerialNumber.Text = "Serial Number:"
         '
         'txtSerialNumber
         '
         Me.txtSerialNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.txtSerialNumber.Location = New System.Drawing.Point(1125, 80)
-        Me.txtSerialNumber.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtSerialNumber.Location = New System.Drawing.Point(844, 65)
         Me.txtSerialNumber.Name = "txtSerialNumber"
-        Me.txtSerialNumber.Size = New System.Drawing.Size(332, 30)
+        Me.txtSerialNumber.Size = New System.Drawing.Size(250, 25)
         Me.txtSerialNumber.TabIndex = 5
         '
         'lblDepartment
         '
         Me.lblDepartment.AutoSize = True
         Me.lblDepartment.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblDepartment.Location = New System.Drawing.Point(31, 135)
-        Me.lblDepartment.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDepartment.Location = New System.Drawing.Point(23, 110)
         Me.lblDepartment.Name = "lblDepartment"
-        Me.lblDepartment.Size = New System.Drawing.Size(106, 23)
+        Me.lblDepartment.Size = New System.Drawing.Size(86, 19)
         Me.lblDepartment.TabIndex = 6
         Me.lblDepartment.Text = "Department:"
         '
@@ -212,30 +200,27 @@ Partial Class MaintenanceRequestForm
         Me.cboDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboDepartment.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.cboDepartment.FormattingEnabled = True
-        Me.cboDepartment.Location = New System.Drawing.Point(36, 166)
-        Me.cboDepartment.Margin = New System.Windows.Forms.Padding(4)
+        Me.cboDepartment.Location = New System.Drawing.Point(27, 135)
         Me.cboDepartment.Name = "cboDepartment"
-        Me.cboDepartment.Size = New System.Drawing.Size(692, 31)
+        Me.cboDepartment.Size = New System.Drawing.Size(520, 25)
         Me.cboDepartment.TabIndex = 7
         '
         'lblLocation
         '
         Me.lblLocation.AutoSize = True
         Me.lblLocation.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblLocation.Location = New System.Drawing.Point(31, 222)
-        Me.lblLocation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLocation.Location = New System.Drawing.Point(23, 180)
         Me.lblLocation.Name = "lblLocation"
-        Me.lblLocation.Size = New System.Drawing.Size(79, 23)
+        Me.lblLocation.Size = New System.Drawing.Size(64, 19)
         Me.lblLocation.TabIndex = 8
         Me.lblLocation.Text = "Location:"
         '
         'txtLocation
         '
         Me.txtLocation.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.txtLocation.Location = New System.Drawing.Point(36, 252)
-        Me.txtLocation.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtLocation.Location = New System.Drawing.Point(27, 205)
         Me.txtLocation.Name = "txtLocation"
-        Me.txtLocation.Size = New System.Drawing.Size(692, 30)
+        Me.txtLocation.Size = New System.Drawing.Size(520, 25)
         Me.txtLocation.TabIndex = 9
         '
         'grpRequestDetails
@@ -252,11 +237,10 @@ Partial Class MaintenanceRequestForm
         Me.grpRequestDetails.Controls.Add(Me.txtProblemDescription)
         Me.grpRequestDetails.Dock = System.Windows.Forms.DockStyle.Top
         Me.grpRequestDetails.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.grpRequestDetails.Location = New System.Drawing.Point(40, 25)
-        Me.grpRequestDetails.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpRequestDetails.Location = New System.Drawing.Point(30, 20)
         Me.grpRequestDetails.Name = "grpRequestDetails"
-        Me.grpRequestDetails.Padding = New System.Windows.Forms.Padding(27, 25, 27, 25)
-        Me.grpRequestDetails.Size = New System.Drawing.Size(1499, 468)
+        Me.grpRequestDetails.Padding = New System.Windows.Forms.Padding(20, 20, 20, 20)
+        Me.grpRequestDetails.Size = New System.Drawing.Size(1123, 380)
         Me.grpRequestDetails.TabIndex = 1
         Me.grpRequestDetails.TabStop = False
         Me.grpRequestDetails.Text = "Maintenance Request Details"
@@ -265,10 +249,9 @@ Partial Class MaintenanceRequestForm
         '
         Me.lblDateRequested.AutoSize = True
         Me.lblDateRequested.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblDateRequested.Location = New System.Drawing.Point(31, 49)
-        Me.lblDateRequested.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDateRequested.Location = New System.Drawing.Point(23, 40)
         Me.lblDateRequested.Name = "lblDateRequested"
-        Me.lblDateRequested.Size = New System.Drawing.Size(135, 23)
+        Me.lblDateRequested.Size = New System.Drawing.Size(109, 19)
         Me.lblDateRequested.TabIndex = 0
         Me.lblDateRequested.Text = "Date Requested:"
         '
@@ -276,20 +259,18 @@ Partial Class MaintenanceRequestForm
         '
         Me.dtpDateRequested.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.dtpDateRequested.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDateRequested.Location = New System.Drawing.Point(36, 80)
-        Me.dtpDateRequested.Margin = New System.Windows.Forms.Padding(4)
+        Me.dtpDateRequested.Location = New System.Drawing.Point(27, 65)
         Me.dtpDateRequested.Name = "dtpDateRequested"
-        Me.dtpDateRequested.Size = New System.Drawing.Size(332, 30)
+        Me.dtpDateRequested.Size = New System.Drawing.Size(250, 25)
         Me.dtpDateRequested.TabIndex = 1
         '
         'lblConditionBefore
         '
         Me.lblConditionBefore.AutoSize = True
         Me.lblConditionBefore.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblConditionBefore.Location = New System.Drawing.Point(396, 49)
-        Me.lblConditionBefore.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblConditionBefore.Location = New System.Drawing.Point(297, 40)
         Me.lblConditionBefore.Name = "lblConditionBefore"
-        Me.lblConditionBefore.Size = New System.Drawing.Size(143, 23)
+        Me.lblConditionBefore.Size = New System.Drawing.Size(115, 19)
         Me.lblConditionBefore.TabIndex = 2
         Me.lblConditionBefore.Text = "Condition Before:"
         '
@@ -298,20 +279,18 @@ Partial Class MaintenanceRequestForm
         Me.cboConditionBefore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboConditionBefore.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.cboConditionBefore.FormattingEnabled = True
-        Me.cboConditionBefore.Location = New System.Drawing.Point(401, 80)
-        Me.cboConditionBefore.Margin = New System.Windows.Forms.Padding(4)
+        Me.cboConditionBefore.Location = New System.Drawing.Point(301, 65)
         Me.cboConditionBefore.Name = "cboConditionBefore"
-        Me.cboConditionBefore.Size = New System.Drawing.Size(332, 31)
+        Me.cboConditionBefore.Size = New System.Drawing.Size(250, 25)
         Me.cboConditionBefore.TabIndex = 3
         '
         'lblTypeOfIssue
         '
         Me.lblTypeOfIssue.AutoSize = True
         Me.lblTypeOfIssue.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblTypeOfIssue.Location = New System.Drawing.Point(761, 49)
-        Me.lblTypeOfIssue.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTypeOfIssue.Location = New System.Drawing.Point(571, 40)
         Me.lblTypeOfIssue.Name = "lblTypeOfIssue"
-        Me.lblTypeOfIssue.Size = New System.Drawing.Size(112, 23)
+        Me.lblTypeOfIssue.Size = New System.Drawing.Size(91, 19)
         Me.lblTypeOfIssue.TabIndex = 4
         Me.lblTypeOfIssue.Text = "Type of Issue:"
         '
@@ -320,20 +299,18 @@ Partial Class MaintenanceRequestForm
         Me.cboTypeOfIssue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTypeOfIssue.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.cboTypeOfIssue.FormattingEnabled = True
-        Me.cboTypeOfIssue.Location = New System.Drawing.Point(767, 80)
-        Me.cboTypeOfIssue.Margin = New System.Windows.Forms.Padding(4)
+        Me.cboTypeOfIssue.Location = New System.Drawing.Point(575, 65)
         Me.cboTypeOfIssue.Name = "cboTypeOfIssue"
-        Me.cboTypeOfIssue.Size = New System.Drawing.Size(332, 31)
+        Me.cboTypeOfIssue.Size = New System.Drawing.Size(250, 25)
         Me.cboTypeOfIssue.TabIndex = 5
         '
         'lblTargetDate
         '
         Me.lblTargetDate.AutoSize = True
         Me.lblTargetDate.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblTargetDate.Location = New System.Drawing.Point(1125, 49)
-        Me.lblTargetDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTargetDate.Location = New System.Drawing.Point(844, 40)
         Me.lblTargetDate.Name = "lblTargetDate"
-        Me.lblTargetDate.Size = New System.Drawing.Size(102, 23)
+        Me.lblTargetDate.Size = New System.Drawing.Size(82, 19)
         Me.lblTargetDate.TabIndex = 6
         Me.lblTargetDate.Text = "Target Date:"
         '
@@ -341,32 +318,29 @@ Partial Class MaintenanceRequestForm
         '
         Me.dtpTargetDate.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.dtpTargetDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpTargetDate.Location = New System.Drawing.Point(1131, 80)
-        Me.dtpTargetDate.Margin = New System.Windows.Forms.Padding(4)
+        Me.dtpTargetDate.Location = New System.Drawing.Point(848, 65)
         Me.dtpTargetDate.Name = "dtpTargetDate"
-        Me.dtpTargetDate.Size = New System.Drawing.Size(332, 30)
+        Me.dtpTargetDate.Size = New System.Drawing.Size(250, 25)
         Me.dtpTargetDate.TabIndex = 7
         '
         'lblProblemDescription
         '
         Me.lblProblemDescription.AutoSize = True
         Me.lblProblemDescription.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblProblemDescription.Location = New System.Drawing.Point(31, 135)
-        Me.lblProblemDescription.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblProblemDescription.Location = New System.Drawing.Point(23, 110)
         Me.lblProblemDescription.Name = "lblProblemDescription"
-        Me.lblProblemDescription.Size = New System.Drawing.Size(264, 23)
+        Me.lblProblemDescription.Size = New System.Drawing.Size(212, 19)
         Me.lblProblemDescription.TabIndex = 8
         Me.lblProblemDescription.Text = "Problem Description (Required): *"
         '
         'txtProblemDescription
         '
         Me.txtProblemDescription.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.txtProblemDescription.Location = New System.Drawing.Point(36, 166)
-        Me.txtProblemDescription.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtProblemDescription.Location = New System.Drawing.Point(27, 135)
         Me.txtProblemDescription.Multiline = True
         Me.txtProblemDescription.Name = "txtProblemDescription"
         Me.txtProblemDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtProblemDescription.Size = New System.Drawing.Size(1439, 245)
+        Me.txtProblemDescription.Size = New System.Drawing.Size(1080, 200)
         Me.txtProblemDescription.TabIndex = 9
         '
         'pnlFooter
@@ -376,11 +350,10 @@ Partial Class MaintenanceRequestForm
         Me.pnlFooter.Controls.Add(Me.btnCancel)
         Me.pnlFooter.Controls.Add(Me.btnSubmit)
         Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlFooter.Location = New System.Drawing.Point(0, 862)
-        Me.pnlFooter.Margin = New System.Windows.Forms.Padding(4)
+        Me.pnlFooter.Location = New System.Drawing.Point(0, 700)
         Me.pnlFooter.Name = "pnlFooter"
-        Me.pnlFooter.Padding = New System.Windows.Forms.Padding(40, 25, 40, 25)
-        Me.pnlFooter.Size = New System.Drawing.Size(1600, 123)
+        Me.pnlFooter.Padding = New System.Windows.Forms.Padding(30, 20, 30, 20)
+        Me.pnlFooter.Size = New System.Drawing.Size(1200, 100)
         Me.pnlFooter.TabIndex = 2
         '
         'lblRequestedBy
@@ -389,11 +362,10 @@ Partial Class MaintenanceRequestForm
         Me.lblRequestedBy.Dock = System.Windows.Forms.DockStyle.Left
         Me.lblRequestedBy.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.lblRequestedBy.ForeColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.lblRequestedBy.Location = New System.Drawing.Point(40, 25)
-        Me.lblRequestedBy.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblRequestedBy.Location = New System.Drawing.Point(30, 20)
         Me.lblRequestedBy.Name = "lblRequestedBy"
-        Me.lblRequestedBy.Padding = New System.Windows.Forms.Padding(0, 18, 0, 0)
-        Me.lblRequestedBy.Size = New System.Drawing.Size(117, 41)
+        Me.lblRequestedBy.Padding = New System.Windows.Forms.Padding(0, 15, 0, 0)
+        Me.lblRequestedBy.Size = New System.Drawing.Size(95, 34)
         Me.lblRequestedBy.TabIndex = 0
         Me.lblRequestedBy.Text = "Requested By:"
         '
@@ -406,10 +378,9 @@ Partial Class MaintenanceRequestForm
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.btnCancel.ForeColor = System.Drawing.Color.White
-        Me.btnCancel.Location = New System.Drawing.Point(1173, 25)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnCancel.Location = New System.Drawing.Point(880, 20)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(187, 73)
+        Me.btnCancel.Size = New System.Drawing.Size(140, 60)
         Me.btnCancel.TabIndex = 1
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
@@ -423,24 +394,22 @@ Partial Class MaintenanceRequestForm
         Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSubmit.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.btnSubmit.ForeColor = System.Drawing.Color.White
-        Me.btnSubmit.Location = New System.Drawing.Point(1360, 25)
-        Me.btnSubmit.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSubmit.Location = New System.Drawing.Point(1020, 20)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(200, 73)
+        Me.btnSubmit.Size = New System.Drawing.Size(150, 60)
         Me.btnSubmit.TabIndex = 2
         Me.btnSubmit.Text = "✓ Submit Request"
         Me.btnSubmit.UseVisualStyleBackColor = False
         '
         'MaintenanceRequestForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.pnlFooter)
         Me.Controls.Add(Me.pnlHeader)
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "MaintenanceRequestForm"
-        Me.Size = New System.Drawing.Size(1600, 985)
+        Me.Size = New System.Drawing.Size(1200, 800)
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
         Me.pnlMain.ResumeLayout(False)
