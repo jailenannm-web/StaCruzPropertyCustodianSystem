@@ -687,32 +687,52 @@ Public Class DepartmentAllocationSummary_vb
                 End Using
             End Using
 
-            ' Get supply counts for all departments in one query (match by location)
-            Dim supplyCounts As New Dictionary(Of Integer, Integer)()
+            ' Get supply counts - use a batch query approach
+            ' First get all departments info
+            Dim deptInfo As New Dictionary(Of Integer, Tuple(Of String, String))()
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If Not row.IsNewRow Then
-                    Dim deptId As Integer = Convert.ToInt32(row.Cells(0).Value)      ' departmentID
-                    Dim deptName As String = row.Cells(1).Value?.ToString()          ' departmentName
-                    Dim location As String = row.Cells(5).Value?.ToString()          ' location
-
-                    If Not String.IsNullOrEmpty(deptName) Then
-                        ' Count supplies matching this department's name or location
-                        Dim supplyQuery As String = "SELECT COUNT(*) as supplyCount FROM supplies WHERE location LIKE @deptName OR location LIKE @location"
-                        Using cmd As New MySqlCommand(supplyQuery, conn)
-                            cmd.Parameters.AddWithValue("@deptName", "%" & deptName & "%")
-                            cmd.Parameters.AddWithValue("@location", "%" & location & "%")
-
-                            Dim count As Object = cmd.ExecuteScalar()
-                            supplyCounts(deptId) = If(count IsNot Nothing AndAlso Not IsDBNull(count), Convert.ToInt32(count), 0)
-                        End Using
-                    End If
+                    Dim deptId As Integer = Convert.ToInt32(row.Cells(0).Value)
+                    Dim deptName As String = If(row.Cells(1).Value?.ToString(), "")
+                    Dim location As String = If(row.Cells(5).Value?.ToString(), "")
+                    deptInfo(deptId) = New Tuple(Of String, String)(deptName, location)
                 End If
+            Next
+
+            ' Get all supplies with their locations in one query
+            Dim allSupplies As New List(Of String)()
+            Dim supplyQuery As String = "SELECT COALESCE(location, '') as location FROM supplies"
+            Using cmd As New MySqlCommand(supplyQuery, conn)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        allSupplies.Add(reader.GetString("location"))
+                    End While
+                End Using
+            End Using
+
+            ' Count supplies for each department in memory
+            Dim supplyCounts As New Dictionary(Of Integer, Integer)()
+            For Each kvp In deptInfo
+                Dim deptId As Integer = kvp.Key
+                Dim deptName As String = kvp.Value.Item1
+                Dim location As String = kvp.Value.Item2
+                
+                Dim count As Integer = 0
+                For Each supplyLoc As String In allSupplies
+                    If Not String.IsNullOrEmpty(supplyLoc) Then
+                        If (Not String.IsNullOrEmpty(deptName) AndAlso supplyLoc.IndexOf(deptName, StringComparison.OrdinalIgnoreCase) >= 0) OrElse
+                           (Not String.IsNullOrEmpty(location) AndAlso supplyLoc.IndexOf(location, StringComparison.OrdinalIgnoreCase) >= 0) Then
+                            count += 1
+                        End If
+                    End If
+                Next
+                supplyCounts(deptId) = count
             Next
 
             ' Update DataGridView with calculated counts
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If Not row.IsNewRow Then
-                    Dim deptId As Integer = Convert.ToInt32(row.Cells(0).Value)      ' departmentID
+                    Dim deptId As Integer = Convert.ToInt32(row.Cells(0).Value)
 
                     ' Update property count (column index 6)
                     If propCounts.ContainsKey(deptId) Then

@@ -67,7 +67,7 @@ Partial Class UC_SupplyManagement
         Me.pm_cbobx_categ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(880, 82)
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(1019, 78)
         Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
         Me.pm_cbobx_categ.Size = New System.Drawing.Size(159, 31)
         Me.pm_cbobx_categ.TabIndex = 28
@@ -80,7 +80,7 @@ Partial Class UC_SupplyManagement
         Me.pm_cbobx_status.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.White
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(1055, 82)
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(1187, 78)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
         Me.pm_cbobx_status.Size = New System.Drawing.Size(145, 31)
         Me.pm_cbobx_status.TabIndex = 27
@@ -95,7 +95,6 @@ Partial Class UC_SupplyManagement
         Me.pm_table.BackgroundColor = System.Drawing.Color.White
         Me.pm_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.pm_table.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.supplyId, Me.itemName, Me.category, Me.description, Me.quantity, Me.supplier, Me.assignedTo, Me.location, Me.stockStatus, Me.unitOfMeasure, Me.dateReceived, Me.unitCost, Me.totalCost, Me.sourceOfFunds, Me.createdAt, Me.updatedAt})
-        Me.pm_table.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.pm_table.GridColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(116, Byte), Integer))
         Me.pm_table.Location = New System.Drawing.Point(62, 124)
         Me.pm_table.Name = "pm_table"
@@ -373,7 +372,7 @@ Partial Class UC_SupplyManagement
         Me.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSummary.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnSummary.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSummary.Location = New System.Drawing.Point(1207, 79)
+        Me.btnSummary.Location = New System.Drawing.Point(878, 79)
         Me.btnSummary.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSummary.Name = "btnSummary"
         Me.btnSummary.Size = New System.Drawing.Size(125, 35)

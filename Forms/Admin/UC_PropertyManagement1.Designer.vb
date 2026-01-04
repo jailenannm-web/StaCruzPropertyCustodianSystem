@@ -80,7 +80,7 @@ Partial Class UC_PropertyManagement1
         Me.filter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.filter.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.filter.ForeColor = System.Drawing.Color.White
-        Me.filter.Location = New System.Drawing.Point(1042, 75)
+        Me.filter.Location = New System.Drawing.Point(1173, 75)
         Me.filter.Name = "filter"
         Me.filter.Size = New System.Drawing.Size(145, 31)
         Me.filter.TabIndex = 40
@@ -362,7 +362,7 @@ Partial Class UC_PropertyManagement1
         Me.issuePropertySlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.issuePropertySlip.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.issuePropertySlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertySlip.Location = New System.Drawing.Point(887, 75)
+        Me.issuePropertySlip.Location = New System.Drawing.Point(874, 75)
         Me.issuePropertySlip.Margin = New System.Windows.Forms.Padding(4)
         Me.issuePropertySlip.Name = "issuePropertySlip"
         Me.issuePropertySlip.Size = New System.Drawing.Size(149, 31)
@@ -377,14 +377,13 @@ Partial Class UC_PropertyManagement1
         Me.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSummary.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnSummary.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSummary.Location = New System.Drawing.Point(1194, 73)
+        Me.btnSummary.Location = New System.Drawing.Point(1034, 73)
         Me.btnSummary.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSummary.Name = "btnSummary"
         Me.btnSummary.Size = New System.Drawing.Size(132, 35)
         Me.btnSummary.TabIndex = 178
         Me.btnSummary.Text = "Summary"
         Me.btnSummary.UseVisualStyleBackColor = False
-        Me.btnSummary.Visible = False
         '
         'UC_PropertyManagement1
         '
