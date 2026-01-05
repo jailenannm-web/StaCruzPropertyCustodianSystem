@@ -51,10 +51,9 @@ Partial Class MaintenanceRequest
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Poppins", 18.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(20, 20)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Location = New System.Drawing.Point(15, 16)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(374, 53)
+        Me.Label3.Size = New System.Drawing.Size(301, 42)
         Me.Label3.TabIndex = 174
         Me.Label3.Text = "Maintenance Requests"
         '
@@ -66,11 +65,10 @@ Partial Class MaintenanceRequest
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PropertID, Me.PropertyName, Me.Category, Me.Description, Me.SerialNumber, Me.AcquisitionDate, Me.AcquisitionCost, Me.Supplier, Me.ConditionStatus})
-        Me.DataGridView1.Location = New System.Drawing.Point(29, 210)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
+        Me.DataGridView1.Location = New System.Drawing.Point(22, 171)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 51
-        Me.DataGridView1.Size = New System.Drawing.Size(1185, 566)
+        Me.DataGridView1.Size = New System.Drawing.Size(889, 460)
         Me.DataGridView1.TabIndex = 173
         '
         'PropertID
@@ -143,10 +141,9 @@ Partial Class MaintenanceRequest
         Me.RoundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.RoundedButton1.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RoundedButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.RoundedButton1.Location = New System.Drawing.Point(943, 790)
-        Me.RoundedButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.RoundedButton1.Location = New System.Drawing.Point(707, 642)
         Me.RoundedButton1.Name = "RoundedButton1"
-        Me.RoundedButton1.Size = New System.Drawing.Size(276, 39)
+        Me.RoundedButton1.Size = New System.Drawing.Size(207, 32)
         Me.RoundedButton1.TabIndex = 177
         Me.RoundedButton1.Text = "Add Maintenance Request"
         Me.RoundedButton1.UseVisualStyleBackColor = False
@@ -154,10 +151,9 @@ Partial Class MaintenanceRequest
         'maintenancerequestssearchbar
         '
         Me.maintenancerequestssearchbar.Font = New System.Drawing.Font("Poppins", 9.0!)
-        Me.maintenancerequestssearchbar.Location = New System.Drawing.Point(20, 51)
-        Me.maintenancerequestssearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.maintenancerequestssearchbar.Location = New System.Drawing.Point(15, 41)
         Me.maintenancerequestssearchbar.Name = "maintenancerequestssearchbar"
-        Me.maintenancerequestssearchbar.Size = New System.Drawing.Size(300, 30)
+        Me.maintenancerequestssearchbar.Size = New System.Drawing.Size(226, 25)
         Me.maintenancerequestssearchbar.TabIndex = 181
         '
         'pm_cbobx_status
@@ -165,9 +161,10 @@ Partial Class MaintenanceRequest
         Me.pm_cbobx_status.BackColor = System.Drawing.Color.White
         Me.pm_cbobx_status.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.pm_cbobx_status.ForeColor = System.Drawing.Color.Black
-        Me.pm_cbobx_status.Location = New System.Drawing.Point(597, 51)
+        Me.pm_cbobx_status.Location = New System.Drawing.Point(448, 41)
+        Me.pm_cbobx_status.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.pm_cbobx_status.Name = "pm_cbobx_status"
-        Me.pm_cbobx_status.Size = New System.Drawing.Size(180, 34)
+        Me.pm_cbobx_status.Size = New System.Drawing.Size(136, 30)
         Me.pm_cbobx_status.TabIndex = 179
         '
         'pm_cbobx_categ
@@ -175,9 +172,10 @@ Partial Class MaintenanceRequest
         Me.pm_cbobx_categ.BackColor = System.Drawing.Color.White
         Me.pm_cbobx_categ.Font = New System.Drawing.Font("Poppins", 9.0!)
         Me.pm_cbobx_categ.ForeColor = System.Drawing.Color.Black
-        Me.pm_cbobx_categ.Location = New System.Drawing.Point(347, 51)
+        Me.pm_cbobx_categ.Location = New System.Drawing.Point(260, 41)
+        Me.pm_cbobx_categ.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.pm_cbobx_categ.Name = "pm_cbobx_categ"
-        Me.pm_cbobx_categ.Size = New System.Drawing.Size(200, 34)
+        Me.pm_cbobx_categ.Size = New System.Drawing.Size(151, 30)
         Me.pm_cbobx_categ.TabIndex = 180
         '
         'btnGenerateMaintenance
@@ -187,13 +185,13 @@ Partial Class MaintenanceRequest
         Me.btnGenerateMaintenance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnGenerateMaintenance.Font = New System.Drawing.Font("Poppins SemiBold", 10.2!, System.Drawing.FontStyle.Bold)
         Me.btnGenerateMaintenance.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnGenerateMaintenance.Location = New System.Drawing.Point(627, 790)
-        Me.btnGenerateMaintenance.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnGenerateMaintenance.Location = New System.Drawing.Point(470, 642)
         Me.btnGenerateMaintenance.Name = "btnGenerateMaintenance"
-        Me.btnGenerateMaintenance.Size = New System.Drawing.Size(296, 39)
+        Me.btnGenerateMaintenance.Size = New System.Drawing.Size(222, 32)
         Me.btnGenerateMaintenance.TabIndex = 183
         Me.btnGenerateMaintenance.Text = "Generate Maintenance Report"
         Me.btnGenerateMaintenance.UseVisualStyleBackColor = False
+        Me.btnGenerateMaintenance.Visible = False
         '
         'pnlFilters
         '
@@ -207,11 +205,11 @@ Partial Class MaintenanceRequest
         Me.pnlFilters.Controls.Add(Me.pm_cbobx_status)
         Me.pnlFilters.Controls.Add(Me.lblSearch)
         Me.pnlFilters.Controls.Add(Me.pm_cbobx_categ)
-        Me.pnlFilters.Location = New System.Drawing.Point(29, 90)
-        Me.pnlFilters.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.pnlFilters.Location = New System.Drawing.Point(23, 74)
+        Me.pnlFilters.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.pnlFilters.Name = "pnlFilters"
-        Me.pnlFilters.Padding = New System.Windows.Forms.Padding(15)
-        Me.pnlFilters.Size = New System.Drawing.Size(1193, 100)
+        Me.pnlFilters.Padding = New System.Windows.Forms.Padding(11, 12, 11, 12)
+        Me.pnlFilters.Size = New System.Drawing.Size(895, 82)
         Me.pnlFilters.TabIndex = 184
         '
         'lblStatus
@@ -219,9 +217,10 @@ Partial Class MaintenanceRequest
         Me.lblStatus.AutoSize = True
         Me.lblStatus.Font = New System.Drawing.Font("Poppins", 8.0!)
         Me.lblStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.lblStatus.Location = New System.Drawing.Point(590, 21)
+        Me.lblStatus.Location = New System.Drawing.Point(442, 17)
+        Me.lblStatus.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(55, 25)
+        Me.lblStatus.Size = New System.Drawing.Size(43, 19)
         Me.lblStatus.TabIndex = 6
         Me.lblStatus.Text = "Status"
         '
@@ -230,9 +229,10 @@ Partial Class MaintenanceRequest
         Me.lblCategory.AutoSize = True
         Me.lblCategory.Font = New System.Drawing.Font("Poppins", 8.0!)
         Me.lblCategory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.lblCategory.Location = New System.Drawing.Point(340, 20)
+        Me.lblCategory.Location = New System.Drawing.Point(255, 16)
+        Me.lblCategory.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblCategory.Name = "lblCategory"
-        Me.lblCategory.Size = New System.Drawing.Size(77, 25)
+        Me.lblCategory.Size = New System.Drawing.Size(59, 19)
         Me.lblCategory.TabIndex = 2
         Me.lblCategory.Text = "Category"
         '
@@ -241,23 +241,25 @@ Partial Class MaintenanceRequest
         Me.lblSearch.AutoSize = True
         Me.lblSearch.Font = New System.Drawing.Font("Poppins", 8.0!)
         Me.lblSearch.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
-        Me.lblSearch.Location = New System.Drawing.Point(20, 20)
+        Me.lblSearch.Location = New System.Drawing.Point(15, 16)
+        Me.lblSearch.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblSearch.Name = "lblSearch"
-        Me.lblSearch.Size = New System.Drawing.Size(157, 25)
+        Me.lblSearch.Size = New System.Drawing.Size(122, 19)
         Me.lblSearch.TabIndex = 0
         Me.lblSearch.Text = "Search Maintenance"
         '
         'MaintenanceRequest
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.pnlFilters)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnGenerateMaintenance)
         Me.Controls.Add(Me.RoundedButton1)
         Me.Controls.Add(Me.Label3)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "MaintenanceRequest"
-        Me.Size = New System.Drawing.Size(1251, 889)
+        Me.Size = New System.Drawing.Size(938, 722)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlFilters.ResumeLayout(False)
         Me.pnlFilters.PerformLayout()

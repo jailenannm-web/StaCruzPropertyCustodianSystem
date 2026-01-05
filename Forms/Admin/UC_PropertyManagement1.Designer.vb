@@ -50,7 +50,6 @@ Partial Class UC_PropertyManagement1
         Me.mnuLostDamaged = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDetails = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrintPARICS = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.propertymanagementsearchbar = New System.Windows.Forms.TextBox()
         Me.btnEdit = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnAdd = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
@@ -58,33 +57,36 @@ Partial Class UC_PropertyManagement1
         Me.generatePropertyCard = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.issuePropertySlip = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
         Me.btnSummary = New StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton()
+        Me.pnlFilters = New System.Windows.Forms.Panel()
+        Me.lblCategory = New System.Windows.Forms.Label()
+        Me.lblSearch = New System.Windows.Forms.Label()
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsActions.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlFilters.SuspendLayout()
         Me.SuspendLayout()
         '
         'admin_label_DepartmentManagement
         '
         Me.admin_label_DepartmentManagement.AutoSize = True
-        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(46, 65)
+        Me.admin_label_DepartmentManagement.Font = New System.Drawing.Font("Poppins", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.admin_label_DepartmentManagement.ForeColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
+        Me.admin_label_DepartmentManagement.Location = New System.Drawing.Point(15, 16)
+        Me.admin_label_DepartmentManagement.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.admin_label_DepartmentManagement.Name = "admin_label_DepartmentManagement"
-        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(414, 58)
+        Me.admin_label_DepartmentManagement.Size = New System.Drawing.Size(296, 42)
         Me.admin_label_DepartmentManagement.TabIndex = 42
         Me.admin_label_DepartmentManagement.Text = "Property Management"
         '
         'filter
         '
-        Me.filter.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.filter.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(83, Byte), Integer))
-        Me.filter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.filter.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
-        Me.filter.ForeColor = System.Drawing.Color.White
-        Me.filter.Location = New System.Drawing.Point(1173, 75)
+        Me.filter.BackColor = System.Drawing.Color.White
+        Me.filter.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.filter.ForeColor = System.Drawing.Color.Black
+        Me.filter.Location = New System.Drawing.Point(259, 35)
+        Me.filter.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.filter.Name = "filter"
-        Me.filter.Size = New System.Drawing.Size(145, 31)
+        Me.filter.Size = New System.Drawing.Size(151, 30)
         Me.filter.TabIndex = 40
-        Me.filter.Text = "Status"
         '
         'propertyManagementGrid
         '
@@ -94,11 +96,12 @@ Partial Class UC_PropertyManagement1
         Me.propertyManagementGrid.BackgroundColor = System.Drawing.Color.White
         Me.propertyManagementGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.propertyManagementGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.propertyId, Me.itemName, Me.category, Me.description, Me.unitOfMeasure, Me.propertyNumber, Me.serialNumber, Me.acquisitionDate, Me.acqusitionCost, Me.totalCost, Me.sourceOfFunds, Me.assignedTo, Me.departmentId, Me.location, Me.condition, Me.status})
-        Me.propertyManagementGrid.Location = New System.Drawing.Point(56, 126)
+        Me.propertyManagementGrid.Location = New System.Drawing.Point(22, 171)
+        Me.propertyManagementGrid.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.propertyManagementGrid.Name = "propertyManagementGrid"
         Me.propertyManagementGrid.RowHeadersWidth = 51
         Me.propertyManagementGrid.RowTemplate.Height = 24
-        Me.propertyManagementGrid.Size = New System.Drawing.Size(1239, 564)
+        Me.propertyManagementGrid.Size = New System.Drawing.Size(895, 460)
         Me.propertyManagementGrid.TabIndex = 45
         '
         'propertyId
@@ -219,9 +222,10 @@ Partial Class UC_PropertyManagement1
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(46, 701)
+        Me.Label1.Location = New System.Drawing.Point(14, 637)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(145, 58)
+        Me.Label1.Size = New System.Drawing.Size(119, 48)
         Me.Label1.TabIndex = 159
         Me.Label1.Text = "TOTAL:"
         '
@@ -231,9 +235,10 @@ Partial Class UC_PropertyManagement1
         Me.ttlpropertymanagement.AutoSize = True
         Me.ttlpropertymanagement.Font = New System.Drawing.Font("Poppins Black", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ttlpropertymanagement.ForeColor = System.Drawing.Color.Black
-        Me.ttlpropertymanagement.Location = New System.Drawing.Point(197, 701)
+        Me.ttlpropertymanagement.Location = New System.Drawing.Point(130, 637)
+        Me.ttlpropertymanagement.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.ttlpropertymanagement.Name = "ttlpropertymanagement"
-        Me.ttlpropertymanagement.Size = New System.Drawing.Size(38, 58)
+        Me.ttlpropertymanagement.Size = New System.Drawing.Size(31, 48)
         Me.ttlpropertymanagement.TabIndex = 158
         Me.ttlpropertymanagement.Text = "1"
         '
@@ -242,56 +247,44 @@ Partial Class UC_PropertyManagement1
         Me.cmsActions.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cmsActions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.msuAssign, Me.mnuDispose, Me.mnuLostDamaged, Me.mnuViewDetails, Me.mnuPrintPARICS})
         Me.cmsActions.Name = "cmsActions"
-        Me.cmsActions.Size = New System.Drawing.Size(191, 124)
+        Me.cmsActions.Size = New System.Drawing.Size(165, 114)
         '
         'msuAssign
         '
         Me.msuAssign.Name = "msuAssign"
-        Me.msuAssign.Size = New System.Drawing.Size(190, 24)
+        Me.msuAssign.Size = New System.Drawing.Size(164, 22)
         Me.msuAssign.Text = "Transfer Property"
         '
         'mnuDispose
         '
         Me.mnuDispose.Name = "mnuDispose"
-        Me.mnuDispose.Size = New System.Drawing.Size(190, 24)
+        Me.mnuDispose.Size = New System.Drawing.Size(164, 22)
         Me.mnuDispose.Text = "Dispose"
         '
         'mnuLostDamaged
         '
         Me.mnuLostDamaged.Name = "mnuLostDamaged"
-        Me.mnuLostDamaged.Size = New System.Drawing.Size(190, 24)
+        Me.mnuLostDamaged.Size = New System.Drawing.Size(164, 22)
         Me.mnuLostDamaged.Text = "Lost/Damaged"
         '
         'mnuViewDetails
         '
         Me.mnuViewDetails.Name = "mnuViewDetails"
-        Me.mnuViewDetails.Size = New System.Drawing.Size(190, 24)
+        Me.mnuViewDetails.Size = New System.Drawing.Size(164, 22)
         Me.mnuViewDetails.Text = "View Details"
         '
         'mnuPrintPARICS
         '
         Me.mnuPrintPARICS.Name = "mnuPrintPARICS"
-        Me.mnuPrintPARICS.Size = New System.Drawing.Size(190, 24)
+        Me.mnuPrintPARICS.Size = New System.Drawing.Size(164, 22)
         Me.mnuPrintPARICS.Text = "Print PAR/ICS"
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.StaCruzPropertyCustodianSystem.My.Resources.Resources.icon_search1
-        Me.PictureBox2.Location = New System.Drawing.Point(484, 65)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(58, 42)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 173
-        Me.PictureBox2.TabStop = False
         '
         'propertymanagementsearchbar
         '
-        Me.propertymanagementsearchbar.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.propertymanagementsearchbar.Font = New System.Drawing.Font("Poppins", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.propertymanagementsearchbar.Location = New System.Drawing.Point(549, 65)
-        Me.propertymanagementsearchbar.Margin = New System.Windows.Forms.Padding(4)
+        Me.propertymanagementsearchbar.Font = New System.Drawing.Font("Poppins", 9.0!)
+        Me.propertymanagementsearchbar.Location = New System.Drawing.Point(19, 38)
         Me.propertymanagementsearchbar.Name = "propertymanagementsearchbar"
-        Me.propertymanagementsearchbar.Size = New System.Drawing.Size(317, 42)
+        Me.propertymanagementsearchbar.Size = New System.Drawing.Size(225, 25)
         Me.propertymanagementsearchbar.TabIndex = 172
         '
         'btnEdit
@@ -301,10 +294,9 @@ Partial Class UC_PropertyManagement1
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEdit.Location = New System.Drawing.Point(1126, 701)
-        Me.btnEdit.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnEdit.Location = New System.Drawing.Point(764, 660)
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(99, 34)
+        Me.btnEdit.Size = New System.Drawing.Size(74, 28)
         Me.btnEdit.TabIndex = 174
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
@@ -316,10 +308,9 @@ Partial Class UC_PropertyManagement1
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Location = New System.Drawing.Point(1233, 701)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAdd.Location = New System.Drawing.Point(845, 660)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(99, 34)
+        Me.btnAdd.Size = New System.Drawing.Size(74, 28)
         Me.btnAdd.TabIndex = 173
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
@@ -331,10 +322,9 @@ Partial Class UC_PropertyManagement1
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Location = New System.Drawing.Point(1019, 701)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Location = New System.Drawing.Point(684, 660)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(99, 35)
+        Me.btnDelete.Size = New System.Drawing.Size(74, 28)
         Me.btnDelete.TabIndex = 175
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
@@ -346,10 +336,9 @@ Partial Class UC_PropertyManagement1
         Me.generatePropertyCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.generatePropertyCard.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.generatePropertyCard.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.generatePropertyCard.Location = New System.Drawing.Point(785, 701)
-        Me.generatePropertyCard.Margin = New System.Windows.Forms.Padding(4)
+        Me.generatePropertyCard.Location = New System.Drawing.Point(509, 660)
         Me.generatePropertyCard.Name = "generatePropertyCard"
-        Me.generatePropertyCard.Size = New System.Drawing.Size(226, 35)
+        Me.generatePropertyCard.Size = New System.Drawing.Size(170, 28)
         Me.generatePropertyCard.TabIndex = 176
         Me.generatePropertyCard.Text = "Generate Property Codes"
         Me.generatePropertyCard.UseVisualStyleBackColor = False
@@ -362,10 +351,9 @@ Partial Class UC_PropertyManagement1
         Me.issuePropertySlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.issuePropertySlip.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.issuePropertySlip.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.issuePropertySlip.Location = New System.Drawing.Point(874, 75)
-        Me.issuePropertySlip.Margin = New System.Windows.Forms.Padding(4)
+        Me.issuePropertySlip.Location = New System.Drawing.Point(660, 37)
         Me.issuePropertySlip.Name = "issuePropertySlip"
-        Me.issuePropertySlip.Size = New System.Drawing.Size(149, 31)
+        Me.issuePropertySlip.Size = New System.Drawing.Size(112, 28)
         Me.issuePropertySlip.TabIndex = 177
         Me.issuePropertySlip.Text = "Issue Property Slip"
         Me.issuePropertySlip.UseVisualStyleBackColor = False
@@ -377,37 +365,77 @@ Partial Class UC_PropertyManagement1
         Me.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSummary.Font = New System.Drawing.Font("Poppins SemiBold", 7.8!, System.Drawing.FontStyle.Bold)
         Me.btnSummary.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSummary.Location = New System.Drawing.Point(1034, 73)
-        Me.btnSummary.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSummary.Location = New System.Drawing.Point(780, 37)
         Me.btnSummary.Name = "btnSummary"
-        Me.btnSummary.Size = New System.Drawing.Size(132, 35)
+        Me.btnSummary.Size = New System.Drawing.Size(99, 28)
         Me.btnSummary.TabIndex = 178
         Me.btnSummary.Text = "Summary"
         Me.btnSummary.UseVisualStyleBackColor = False
         '
+        'pnlFilters
+        '
+        Me.pnlFilters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlFilters.BackColor = System.Drawing.Color.FromArgb(CType(CType(248, Byte), Integer), CType(CType(249, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.pnlFilters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlFilters.Controls.Add(Me.lblCategory)
+        Me.pnlFilters.Controls.Add(Me.lblSearch)
+        Me.pnlFilters.Controls.Add(Me.btnSummary)
+        Me.pnlFilters.Controls.Add(Me.issuePropertySlip)
+        Me.pnlFilters.Controls.Add(Me.propertymanagementsearchbar)
+        Me.pnlFilters.Controls.Add(Me.filter)
+        Me.pnlFilters.Location = New System.Drawing.Point(22, 73)
+        Me.pnlFilters.Margin = New System.Windows.Forms.Padding(2)
+        Me.pnlFilters.Name = "pnlFilters"
+        Me.pnlFilters.Padding = New System.Windows.Forms.Padding(11, 12, 11, 12)
+        Me.pnlFilters.Size = New System.Drawing.Size(895, 82)
+        Me.pnlFilters.TabIndex = 404
+        '
+        'lblCategory
+        '
+        Me.lblCategory.AutoSize = True
+        Me.lblCategory.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.lblCategory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblCategory.Location = New System.Drawing.Point(255, 16)
+        Me.lblCategory.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblCategory.Name = "lblCategory"
+        Me.lblCategory.Size = New System.Drawing.Size(43, 19)
+        Me.lblCategory.TabIndex = 2
+        Me.lblCategory.Text = "Status"
+        '
+        'lblSearch
+        '
+        Me.lblSearch.AutoSize = True
+        Me.lblSearch.Font = New System.Drawing.Font("Poppins", 8.0!)
+        Me.lblSearch.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(105, Byte), Integer))
+        Me.lblSearch.Location = New System.Drawing.Point(15, 16)
+        Me.lblSearch.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblSearch.Name = "lblSearch"
+        Me.lblSearch.Size = New System.Drawing.Size(50, 19)
+        Me.lblSearch.TabIndex = 0
+        Me.lblSearch.Text = "Search "
+        '
         'UC_PropertyManagement1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.Controls.Add(Me.btnSummary)
-        Me.Controls.Add(Me.issuePropertySlip)
+        Me.Controls.Add(Me.pnlFilters)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.generatePropertyCard)
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.propertymanagementsearchbar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ttlpropertymanagement)
         Me.Controls.Add(Me.propertyManagementGrid)
         Me.Controls.Add(Me.admin_label_DepartmentManagement)
-        Me.Controls.Add(Me.filter)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "UC_PropertyManagement1"
-        Me.Size = New System.Drawing.Size(1394, 803)
+        Me.Size = New System.Drawing.Size(938, 722)
         CType(Me.propertyManagementGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsActions.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlFilters.ResumeLayout(False)
+        Me.pnlFilters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -427,7 +455,6 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents mnuViewDetails As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuPrintPARICS As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents generatePropertyCard As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
-    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents propertymanagementsearchbar As System.Windows.Forms.TextBox
     Friend WithEvents propertyId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents itemName As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -447,4 +474,7 @@ Partial Class UC_PropertyManagement1
     Friend WithEvents status As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents issuePropertySlip As StaCruzPropertyCustodianSystem.Resources.Controls.RoundedButton
     Friend WithEvents btnSummary As Resources.Controls.RoundedButton
+    Friend WithEvents pnlFilters As System.Windows.Forms.Panel
+    Friend WithEvents lblCategory As System.Windows.Forms.Label
+    Friend WithEvents lblSearch As System.Windows.Forms.Label
 End Class
