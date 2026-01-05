@@ -788,7 +788,12 @@ Public Class frmBorrowedItem
     ''' Refresh button
     ''' </summary>
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        LoadApprovedRequests()
+        Try
+            LoadApprovedRequests()
+            MessageBox.Show("Borrowed items successfully refreshed!", "Refresh Complete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error refreshing borrowed items: " & ex.Message, "Refresh Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     ''' <summary>

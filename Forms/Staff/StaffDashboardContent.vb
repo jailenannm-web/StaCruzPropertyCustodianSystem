@@ -395,23 +395,26 @@ Public Class StaffDashboardContent
         Try
             If dgvActivity Is Nothing Then Return
             
-            ' Get the user's full name for matching requests
-            Dim userFullName As String = SessionContext.CurrentFullName
-            If String.IsNullOrEmpty(userFullName) Then
-                System.Diagnostics.Debug.WriteLine("[v0] LoadRecentActivity: No user full name available")
-                Return
+            ' Get user's full name
+            Dim fullName As String = SessionContext.CurrentFullName
+            If String.IsNullOrEmpty(fullName) Then
+                Dim userQuery As String = "SELECT CONCAT(firstName, ' ', lastName) AS fullName FROM users WHERE userId = @staffId"
+                Dim dtUser = ExecuteQuery(userQuery, New Dictionary(Of String, Object) From {{"@staffId", staffId}})
+                If dtUser IsNot Nothing AndAlso dtUser.Rows.Count > 0 Then
+                    fullName = dtUser.Rows(0)("fullName").ToString()
+                End If
             End If
             
             dgvActivity.Rows.Clear()
-            System.Diagnostics.Debug.WriteLine($"[v0] Loading recent activity for staffId: {staffId}, fullName: {userFullName}")
+            System.Diagnostics.Debug.WriteLine($"[v0] Loading recent activity for staffId: {staffId}, fullName: {fullName}")
             
-            ' Get recent property requests with TRIM for exact match
+            ' Get recent property requests by requesterName
             Dim propQuery As String = "SELECT dateOfRequest as date, 'Property Request' as type, itemName as item, " &
                                      "status, CONCAT('Requested ', quantityRequested, ' ', unit) as action " &
-                                     "FROM property_requests WHERE TRIM(requesterName) = TRIM(@fullName) " &
+                                     "FROM property_requests WHERE LOWER(TRIM(requesterName)) LIKE LOWER(TRIM(@fullName)) " &
                                      "ORDER BY dateOfRequest DESC LIMIT 5"
             
-            Dim dtProp = ExecuteQuery(propQuery, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
+            Dim dtProp = ExecuteQuery(propQuery, New Dictionary(Of String, Object) From {{"@fullName", "%" & fullName & "%"}})
             If dtProp IsNot Nothing AndAlso dtProp.Rows.Count > 0 Then
                 For Each row As DataRow In dtProp.Rows
                     Dim dateValue As String = Convert.ToDateTime(row("date")).ToString("MM/dd/yyyy")
@@ -420,13 +423,13 @@ Public Class StaffDashboardContent
                 System.Diagnostics.Debug.WriteLine($"[v0] Added {dtProp.Rows.Count} property requests to activity")
             End If
             
-            ' Get recent supply requests with TRIM for exact match
+            ' Get recent supply requests by requesterName
             Dim supQuery As String = "SELECT dateOfRequest as date, 'Supply Request' as type, itemName as item, " &
                                     "status, CONCAT('Requested ', quantityRequested, ' ', unit) as action " &
-                                    "FROM supplies_requests WHERE TRIM(requesterName) = TRIM(@fullName) " &
+                                    "FROM supplies_requests WHERE LOWER(TRIM(requesterName)) LIKE LOWER(TRIM(@fullName)) " &
                                     "ORDER BY dateOfRequest DESC LIMIT 5"
             
-            Dim dtSup = ExecuteQuery(supQuery, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
+            Dim dtSup = ExecuteQuery(supQuery, New Dictionary(Of String, Object) From {{"@fullName", "%" & fullName & "%"}})
             If dtSup IsNot Nothing AndAlso dtSup.Rows.Count > 0 Then
                 For Each row As DataRow In dtSup.Rows
                     Dim dateValue As String = Convert.ToDateTime(row("date")).ToString("MM/dd/yyyy")
@@ -435,17 +438,18 @@ Public Class StaffDashboardContent
                 System.Diagnostics.Debug.WriteLine($"[v0] Added {dtSup.Rows.Count} supply requests to activity")
             End If
             
-            ' Get recent borrowed items with TRIM for exact match
+            ' Get recent borrowed items by userId
             Dim borrowQuery As String = "SELECT bi.borrowDate as date, 'Borrowed Item' as type, " &
                                        "CASE WHEN bi.itemType = 'property' THEN p.itemName ELSE s.itemName END as item, " &
                                        "bi.status, CONCAT('Borrowed on ', DATE_FORMAT(bi.borrowDate, '%m/%d/%Y')) as action " &
                                        "FROM borrowed_items bi " &
+                                       "INNER JOIN users u ON TRIM(bi.borrowerName) = TRIM(CONCAT(u.firstName, ' ', u.lastName)) " &
                                        "LEFT JOIN properties p ON bi.itemId = p.propertyId AND bi.itemType = 'property' " &
                                        "LEFT JOIN supplies s ON bi.itemId = s.supplyId AND bi.itemType = 'supply' " &
-                                       "WHERE TRIM(bi.borrowerName) = TRIM(@fullName) " &
+                                       "WHERE u.userId = @staffId " &
                                        "ORDER BY bi.borrowDate DESC LIMIT 5"
             
-            Dim dtBorrow = ExecuteQuery(borrowQuery, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
+            Dim dtBorrow = ExecuteQuery(borrowQuery, New Dictionary(Of String, Object) From {{"@staffId", staffId}})
             If dtBorrow IsNot Nothing AndAlso dtBorrow.Rows.Count > 0 Then
                 For Each row As DataRow In dtBorrow.Rows
                     Dim dateValue As String = Convert.ToDateTime(row("date")).ToString("MM/dd/yyyy")
@@ -525,52 +529,53 @@ Public Class StaffDashboardContent
     
     Private Sub LoadStatistics(staffId As Integer)
         Try
-            ' Get the user's full name for matching requests
-            Dim userFullName As String = SessionContext.CurrentFullName
-            If String.IsNullOrEmpty(userFullName) Then
-                System.Diagnostics.Debug.WriteLine("[v0] LoadStatistics: No user full name available")
-                ' Set all to 0 if no user info
-                lblTotalRequestsValue.Text = "0"
-                lblBorrowedItemsValue.Text = "0"
-                lblMaintenanceValue.Text = "0"
-                lblPendingValue.Text = "0"
-                Return
+            ' Get user's full name from session to match with requesterName
+            Dim fullName As String = SessionContext.CurrentFullName
+            If String.IsNullOrEmpty(fullName) Then
+                ' Fallback: Get from database
+                Dim userQuery As String = "SELECT CONCAT(firstName, ' ', lastName) AS fullName FROM users WHERE userId = @staffId"
+                Dim dtUser = ExecuteQuery(userQuery, New Dictionary(Of String, Object) From {{"@staffId", staffId}})
+                If dtUser IsNot Nothing AndAlso dtUser.Rows.Count > 0 Then
+                    fullName = dtUser.Rows(0)("fullName").ToString()
+                End If
             End If
             
-            System.Diagnostics.Debug.WriteLine($"[v0] LoadStatistics for staffId={staffId}, fullName={userFullName}")
+            System.Diagnostics.Debug.WriteLine($"[v0] LoadStatistics for staffId={staffId}, fullName={fullName}")
             
-            ' Total Requests (Property + Supply) - Match by requesterName (full name stored in requests)
+            ' Total Requests (Property + Supply) - Match by requesterName since userId column doesn't exist
             Dim totalRequests As Integer = 0
-            Dim query1 As String = "SELECT COUNT(*) FROM property_requests WHERE TRIM(requesterName) = TRIM(@fullName)"
-            Dim query2 As String = "SELECT COUNT(*) FROM supplies_requests WHERE TRIM(requesterName) = TRIM(@fullName)"
+            Dim query1 As String = "SELECT COUNT(*) FROM property_requests WHERE LOWER(TRIM(requesterName)) LIKE LOWER(TRIM(@fullName))"
+            Dim query2 As String = "SELECT COUNT(*) FROM supplies_requests WHERE LOWER(TRIM(requesterName)) LIKE LOWER(TRIM(@fullName))"
             
-            Dim dt1 = ExecuteQuery(query1, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
-            Dim dt2 = ExecuteQuery(query2, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
+            Dim dt1 = ExecuteQuery(query1, New Dictionary(Of String, Object) From {{"@fullName", "%" & fullName & "%"}})
+            Dim dt2 = ExecuteQuery(query2, New Dictionary(Of String, Object) From {{"@fullName", "%" & fullName & "%"}})
             
             If dt1 IsNot Nothing AndAlso dt1.Rows.Count > 0 Then
                 totalRequests += Convert.ToInt32(dt1.Rows(0)(0))
                 System.Diagnostics.Debug.WriteLine($"[v0] Property requests: {dt1.Rows(0)(0)}")
             Else
-                System.Diagnostics.Debug.WriteLine("[v0] Property requests: 0 (query returned no results)")
+                System.Diagnostics.Debug.WriteLine("[v0] Property requests: 0")
             End If
             If dt2 IsNot Nothing AndAlso dt2.Rows.Count > 0 Then
                 totalRequests += Convert.ToInt32(dt2.Rows(0)(0))
                 System.Diagnostics.Debug.WriteLine($"[v0] Supply requests: {dt2.Rows(0)(0)}")
             Else
-                System.Diagnostics.Debug.WriteLine("[v0] Supply requests: 0 (query returned no results)")
+                System.Diagnostics.Debug.WriteLine("[v0] Supply requests: 0")
             End If
             lblTotalRequestsValue.Text = totalRequests.ToString()
             System.Diagnostics.Debug.WriteLine($"[v0] Total requests: {totalRequests}")
             
-            ' Borrowed Items - Match by borrowerName
-            Dim borrowedQuery As String = "SELECT COUNT(*) FROM borrowed_items WHERE TRIM(borrowerName) = TRIM(@fullName) AND status = 'Borrowed'"
-            Dim dtBorrowed = ExecuteQuery(borrowedQuery, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
+            ' Borrowed Items - Match by userId via properties/supplies assignment
+            Dim borrowedQuery As String = "SELECT COUNT(*) FROM borrowed_items bi " &
+                                         "INNER JOIN users u ON TRIM(bi.borrowerName) = TRIM(CONCAT(u.firstName, ' ', u.lastName)) " &
+                                         "WHERE u.userId = @staffId AND bi.status = 'Borrowed'"
+            Dim dtBorrowed = ExecuteQuery(borrowedQuery, New Dictionary(Of String, Object) From {{"@staffId", staffId}})
             If dtBorrowed IsNot Nothing AndAlso dtBorrowed.Rows.Count > 0 Then
                 lblBorrowedItemsValue.Text = dtBorrowed.Rows(0)(0).ToString()
                 System.Diagnostics.Debug.WriteLine($"[v0] Borrowed items: {dtBorrowed.Rows(0)(0)}")
             Else
                 lblBorrowedItemsValue.Text = "0"
-                System.Diagnostics.Debug.WriteLine("[v0] Borrowed items: 0 (query returned no results)")
+                System.Diagnostics.Debug.WriteLine("[v0] Borrowed items: 0")
             End If
             
             ' Maintenance Requests - Match by requestedBy (user ID)
@@ -581,28 +586,28 @@ Public Class StaffDashboardContent
                 System.Diagnostics.Debug.WriteLine($"[v0] Maintenance requests: {dtMaint.Rows(0)(0)}")
             Else
                 lblMaintenanceValue.Text = "0"
-                System.Diagnostics.Debug.WriteLine("[v0] Maintenance requests: 0 (query returned no results)")
+                System.Diagnostics.Debug.WriteLine("[v0] Maintenance requests: 0")
             End If
             
-            ' Pending Approvals (Property + Supply with Pending status)
+            ' Pending Approvals (Property + Supply with Pending status) - Match by requesterName
             Dim pendingCount As Integer = 0
-            Dim pendingQuery1 As String = "SELECT COUNT(*) FROM property_requests WHERE TRIM(requesterName) = TRIM(@fullName) AND status = 'Pending'"
-            Dim pendingQuery2 As String = "SELECT COUNT(*) FROM supplies_requests WHERE TRIM(requesterName) = TRIM(@fullName) AND status = 'Pending'"
+            Dim pendingQuery1 As String = "SELECT COUNT(*) FROM property_requests WHERE LOWER(TRIM(requesterName)) LIKE LOWER(TRIM(@fullName)) AND status = 'Pending'"
+            Dim pendingQuery2 As String = "SELECT COUNT(*) FROM supplies_requests WHERE LOWER(TRIM(requesterName)) LIKE LOWER(TRIM(@fullName)) AND status = 'Pending'"
             
-            Dim dtPending1 = ExecuteQuery(pendingQuery1, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
-            Dim dtPending2 = ExecuteQuery(pendingQuery2, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
+            Dim dtPending1 = ExecuteQuery(pendingQuery1, New Dictionary(Of String, Object) From {{"@fullName", "%" & fullName & "%"}})
+            Dim dtPending2 = ExecuteQuery(pendingQuery2, New Dictionary(Of String, Object) From {{"@fullName", "%" & fullName & "%"}})
             
             If dtPending1 IsNot Nothing AndAlso dtPending1.Rows.Count > 0 Then
                 pendingCount += Convert.ToInt32(dtPending1.Rows(0)(0))
                 System.Diagnostics.Debug.WriteLine($"[v0] Pending property requests: {dtPending1.Rows(0)(0)}")
             Else
-                System.Diagnostics.Debug.WriteLine("[v0] Pending property requests: 0 (query returned no results)")
+                System.Diagnostics.Debug.WriteLine("[v0] Pending property requests: 0")
             End If
             If dtPending2 IsNot Nothing AndAlso dtPending2.Rows.Count > 0 Then
                 pendingCount += Convert.ToInt32(dtPending2.Rows(0)(0))
                 System.Diagnostics.Debug.WriteLine($"[v0] Pending supply requests: {dtPending2.Rows(0)(0)}")
             Else
-                System.Diagnostics.Debug.WriteLine("[v0] Pending supply requests: 0 (query returned no results)")
+                System.Diagnostics.Debug.WriteLine("[v0] Pending supply requests: 0")
             End If
             lblPendingValue.Text = pendingCount.ToString()
             System.Diagnostics.Debug.WriteLine($"[v0] Total pending: {pendingCount}")
@@ -619,14 +624,17 @@ Public Class StaffDashboardContent
     
     Private Sub LoadChartData(staffId As Integer)
         Try
-            ' Get the user's full name for matching requests
-            Dim userFullName As String = SessionContext.CurrentFullName
-            If String.IsNullOrEmpty(userFullName) Then
-                System.Diagnostics.Debug.WriteLine("[v0] LoadChartData: No user full name available")
-                Return
+            ' Get user's full name to match with requesterName
+            Dim fullName As String = SessionContext.CurrentFullName
+            If String.IsNullOrEmpty(fullName) Then
+                Dim userQuery As String = "SELECT CONCAT(firstName, ' ', lastName) AS fullName FROM users WHERE userId = @staffId"
+                Dim dtUser = ExecuteQuery(userQuery, New Dictionary(Of String, Object) From {{"@staffId", staffId}})
+                If dtUser IsNot Nothing AndAlso dtUser.Rows.Count > 0 Then
+                    fullName = dtUser.Rows(0)("fullName").ToString()
+                End If
             End If
             
-            System.Diagnostics.Debug.WriteLine($"[v0] LoadChartData started for staffId: {staffId}, fullName: {userFullName}")
+            System.Diagnostics.Debug.WriteLine($"[v0] LoadChartData started for staffId: {staffId}, fullName: {fullName}")
             
             ' ========== Chart 1: Requests Status ==========
             chartRequestsStatus.Series(0).Points.Clear()
@@ -637,9 +645,9 @@ Public Class StaffDashboardContent
             statusCounts.Add("Approved", 0)
             statusCounts.Add("Rejected", 0)
             
-            ' Get property requests with TRIM for exact match
-            Dim propQuery As String = "SELECT status, COUNT(*) as count FROM property_requests WHERE TRIM(requesterName) = TRIM(@fullName) GROUP BY status"
-            Dim dtProp = ExecuteQuery(propQuery, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
+            ' Get property requests by requesterName (userId column doesn't exist)
+            Dim propQuery As String = "SELECT status, COUNT(*) as count FROM property_requests WHERE LOWER(TRIM(requesterName)) LIKE LOWER(TRIM(@fullName)) GROUP BY status"
+            Dim dtProp = ExecuteQuery(propQuery, New Dictionary(Of String, Object) From {{"@fullName", "%" & fullName & "%"}})
             If dtProp IsNot Nothing AndAlso dtProp.Rows.Count > 0 Then
                 System.Diagnostics.Debug.WriteLine($"[v0] Property requests found: {dtProp.Rows.Count} status groups")
                 For Each row As DataRow In dtProp.Rows
@@ -656,9 +664,9 @@ Public Class StaffDashboardContent
                 System.Diagnostics.Debug.WriteLine("[v0] No property requests found for this user")
             End If
             
-            ' Get supply requests with TRIM for exact match
-            Dim supQuery As String = "SELECT status, COUNT(*) as count FROM supplies_requests WHERE TRIM(requesterName) = TRIM(@fullName) GROUP BY status"
-            Dim dtSup = ExecuteQuery(supQuery, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
+            ' Get supply requests by requesterName
+            Dim supQuery As String = "SELECT status, COUNT(*) as count FROM supplies_requests WHERE LOWER(TRIM(requesterName)) LIKE LOWER(TRIM(@fullName)) GROUP BY status"
+            Dim dtSup = ExecuteQuery(supQuery, New Dictionary(Of String, Object) From {{"@fullName", "%" & fullName & "%"}})
             If dtSup IsNot Nothing AndAlso dtSup.Rows.Count > 0 Then
                 System.Diagnostics.Debug.WriteLine($"[v0] Supply requests found: {dtSup.Rows.Count} status groups")
                 For Each row As DataRow In dtSup.Rows
@@ -715,14 +723,15 @@ Public Class StaffDashboardContent
             ' ========== Chart 2: Borrowed Items Timeline ==========
             chartBorrowedItems.Series(0).Points.Clear()
             
-            ' Get borrowed items by month for last 6 months with TRIM for exact match
-            Dim borrowedQuery As String = "SELECT MONTH(borrowDate) as month, MONTHNAME(borrowDate) as monthName, COUNT(*) as count " &
-                                         "FROM borrowed_items " &
-                                         "WHERE TRIM(borrowerName) = TRIM(@fullName) AND borrowDate >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) " &
-                                         "GROUP BY MONTH(borrowDate), MONTHNAME(borrowDate) " &
-                                         "ORDER BY MONTH(borrowDate)"
+            ' Get borrowed items by month for last 6 months by userId
+            Dim borrowedQuery As String = "SELECT MONTH(bi.borrowDate) as month, MONTHNAME(bi.borrowDate) as monthName, COUNT(*) as count " &
+                                         "FROM borrowed_items bi " &
+                                         "INNER JOIN users u ON TRIM(bi.borrowerName) = TRIM(CONCAT(u.firstName, ' ', u.lastName)) " &
+                                         "WHERE u.userId = @staffId AND bi.borrowDate >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) " &
+                                         "GROUP BY MONTH(bi.borrowDate), MONTHNAME(bi.borrowDate) " &
+                                         "ORDER BY MONTH(bi.borrowDate)"
             
-            Dim dtBorrowed = ExecuteQuery(borrowedQuery, New Dictionary(Of String, Object) From {{"@fullName", userFullName}})
+            Dim dtBorrowed = ExecuteQuery(borrowedQuery, New Dictionary(Of String, Object) From {{"@staffId", staffId}})
             If dtBorrowed IsNot Nothing AndAlso dtBorrowed.Rows.Count > 0 Then
                 System.Diagnostics.Debug.WriteLine($"[v0] Borrowed items timeline: {dtBorrowed.Rows.Count} months")
                 For Each row As DataRow In dtBorrowed.Rows
