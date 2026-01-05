@@ -8012,11 +8012,11 @@ Public Class modDB
     ' =====================================================
 
     ''' <summary>
-    ''' Get all properties with optional filtering (ENHANCED)
+    ''' Get all properties with optional filtering (ENHANCED with PAGINATION)
     ''' </summary>
     Public Shared Function GetAllProperties(Optional custodianID As Integer? = Nothing, Optional conditionStatus As String = "",
                                            Optional category As String = "", Optional departmentID As Integer? = Nothing,
-                                           Optional status As String = "") As DataTable
+                                           Optional status As String = "", Optional limit As Integer = 0, Optional offset As Integer = 0) As DataTable
         Dim dt As New DataTable()
         Dim conn As MySqlConnection = Nothing
         Try
@@ -8027,6 +8027,7 @@ Public Class modDB
 
             ' Build query with optional filters - includes all required fields including description and internalCodes
             ' Enhanced to show assigned user's name, department name, and department location
+            ' PERFORMANCE: Use indexed columns in WHERE and ORDER BY clauses
             Dim query As String = "SELECT p.propertyId, p.itemName, p.category, p.propertyNumber, p.serialNumber, " &
                                  "p.description, p.condition, p.acquisitionCost, p.acquisitionDate, " &
                                  "COALESCE(p.totalCost, p.acquisitionCost) AS totalCost, " &
@@ -8064,7 +8065,12 @@ Public Class modDB
                 query &= " AND p.status = @status"
             End If
 
-            query &= " ORDER BY p.createdAt DESC, p.acquisitionDate DESC"
+            query &= " ORDER BY p.propertyId DESC"
+            
+            ' Add pagination if limit specified (for large datasets)
+            If limit > 0 Then
+                query &= " LIMIT @limit OFFSET @offset"
+            End If
 
             Using cmd As New MySqlCommand(query, conn)
                 If custodianID.HasValue Then
@@ -8081,6 +8087,10 @@ Public Class modDB
                 End If
                 If Not String.IsNullOrEmpty(status) Then
                     cmd.Parameters.AddWithValue("@status", status)
+                End If
+                If limit > 0 Then
+                    cmd.Parameters.AddWithValue("@limit", limit)
+                    cmd.Parameters.AddWithValue("@offset", offset)
                 End If
 
                 cmd.CommandTimeout = 30

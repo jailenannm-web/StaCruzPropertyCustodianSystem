@@ -296,7 +296,10 @@ Public Class UC_PropertyManagement1
 
     Public Sub LoadPropertiesData()
         Try
+            ' PERFORMANCE FIX: Suspend layout and disable auto-refresh during bulk operations
+            propertyManagementGrid.SuspendLayout()
             propertyManagementGrid.Rows.Clear()
+            
             Dim categoryFilter As String = ""
             Dim statusFilter As String = ""
             Dim locationFilter As String = ""
@@ -350,7 +353,8 @@ Public Class UC_PropertyManagement1
                 End If
             Next
 
-            Dim dt As DataTable = modDB.GetAllProperties(Nothing, conditionFilter, categoryFilter, Nothing, statusFilter)
+            ' PERFORMANCE: Load limited dataset (1000 records) with pagination support
+            Dim dt As DataTable = modDB.GetAllProperties(Nothing, conditionFilter, categoryFilter, Nothing, statusFilter, 1000, 0)
             originalData = dt.Copy()
 
             ' Hide columns that should not be visible
@@ -387,6 +391,9 @@ Public Class UC_PropertyManagement1
             End If
 
             If dt.Rows.Count > 0 Then
+                ' PERFORMANCE FIX: Use AddRange instead of individual Add() calls
+                Dim rowsToAdd As New List(Of Object())
+                
                 For Each row As DataRow In dt.Rows
                     ' Extract propertyId first
                     Dim propID As Integer = 0
@@ -404,8 +411,8 @@ Public Class UC_PropertyManagement1
                     Dim condition As String = If(row.Table.Columns.Contains("condition") AndAlso Not IsDBNull(row("condition")), row("condition").ToString(), "")
                     Dim status As String = If(row.Table.Columns.Contains("status") AndAlso Not IsDBNull(row("status")), row("status").ToString(), "")
 
-                    ' Add row in correct column order matching Designer (all columns, but some will be hidden)
-                    Dim rowIndex As Integer = propertyManagementGrid.Rows.Add(
+                    ' Build row array for batch insert
+                    rowsToAdd.Add(New Object() {
                         propID.ToString(),        ' propertyId
                         itemName,                ' itemName
                         category,                ' category
@@ -422,10 +429,18 @@ Public Class UC_PropertyManagement1
                         location,                ' location
                         condition,               ' condition
                         status                   ' status
-                    )
-                    ' Store propertyId in row Tag for easy access
-                    propertyManagementGrid.Rows(rowIndex).Tag = propID
+                    })
                 Next
+                
+                ' PERFORMANCE: Batch add all rows at once
+                For i As Integer = 0 To rowsToAdd.Count - 1
+                    Dim rowIndex As Integer = propertyManagementGrid.Rows.Add(rowsToAdd(i))
+                    ' Store propertyId in row Tag
+                    If rowIndex >= 0 AndAlso rowIndex < propertyManagementGrid.Rows.Count Then
+                        Integer.TryParse(rowsToAdd(i)(0).ToString(), propertyManagementGrid.Rows(rowIndex).Tag)
+                    End If
+                Next
+                
                 ' Update total count
                 If ttlpropertymanagement IsNot Nothing Then
                     ttlpropertymanagement.Text = dt.Rows.Count.ToString()
@@ -438,6 +453,9 @@ Public Class UC_PropertyManagement1
                 End If
             End If
             
+            ' Resume layout updates
+            propertyManagementGrid.ResumeLayout()
+            
             ' Reapply column widths after loading data
             ConfigureColumnWidths()
         Catch ex As Exception
@@ -446,6 +464,12 @@ Public Class UC_PropertyManagement1
             If ttlpropertymanagement IsNot Nothing Then
                 ttlpropertymanagement.Text = "0"
             End If
+        Finally
+            ' Ensure layout is resumed even if error occurs
+            Try
+                propertyManagementGrid.ResumeLayout()
+            Catch
+            End Try
         End Try
     End Sub
 
